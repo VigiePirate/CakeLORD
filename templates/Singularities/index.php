@@ -12,7 +12,7 @@
     <?php foreach ($singularities as $singularity): ?>
     <tr>
         <td>
-            <?= $this->Html->link($singularity->title, ['action' => 'view', $singularity->slug]) ?>
+            <?= $this->Html->link($singularity->picture, ['action' => 'view', $singularity->name_fr]) ?>
         </td>
         <td>
             <?= $singularity->created->format(DATE_RFC850) ?>
