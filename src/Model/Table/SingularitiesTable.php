@@ -18,7 +18,7 @@ class SingularitiesTable extends Table
     if ($entity->isNew() && !$entity->name_en) {
         $sluggedName = Text::slug($entity->name_fr);
         // trim slug to maximum length defined in schema
-        $entity->name_en = (int) substr($sluggedName, 0, 255);
+        $entity->name_en = substr($sluggedName, 0, 255);
     }
 }
 }
