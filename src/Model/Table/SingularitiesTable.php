@@ -3,6 +3,8 @@
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
+use Cake\Utility\Text;
+
 
 class SingularitiesTable extends Table
 {
