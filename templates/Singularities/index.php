@@ -6,7 +6,10 @@
 
 <table>
     <tr>
-        <th>Title</th>
+        <th>Id</th>
+        <th>Name FR</th>
+        <th>Name EN</th>
+        <th>Picture</th>
         <th>Created</th>
     </tr>
 
@@ -15,7 +18,16 @@
     <?php foreach ($singularities as $singularity): ?>
     <tr>
         <td>
-            <?= $this->Html->link($singularity->picture, ['action' => 'view', $singularity->name_fr]) ?>
+            <?= $this->Html->link($singularity->id, ['action' => 'view', $singularity->id]) ?>
+        </td>
+        <td>
+            <?= $this->name_fr ?>
+        </td>
+        <td>
+            <?= $this->name_en ?>
+        </td>
+        <td>
+            <?= $this->name_picture ?>
         </td>
         <td>
             <?= $singularity->created->format(DATE_RFC850) ?>
