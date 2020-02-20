@@ -107,7 +107,8 @@ class Application extends BaseApplication
     }
 
 
-    // Authenticationpublic function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    // Authentication
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
 {
     $middlewareQueue
         // ... other middleware added before
