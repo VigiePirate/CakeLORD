@@ -9,8 +9,8 @@ class Singularity extends Entity
     protected $_accessible = [
         '*' => true,
         'id' => false,
-        'name_fr' => false,
-        'name_en' => false,
-        'picture' => false,
+        'name_fr' => true,
+        'name_en' => true,
+        'picture' => true,
     ];
 }
