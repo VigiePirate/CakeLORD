@@ -21,13 +21,13 @@
             <?= $this->Html->link($singularity->id, ['action' => 'view', $singularity->id]) ?>
         </td>
         <td>
-            <?= $this->name_fr ?>
+            <?= $singularity->name_fr ?>
         </td>
         <td>
-            <?= $this->name_en ?>
+            <?= $singularity->name_en ?>
         </td>
         <td>
-            <?= $this->name_picture ?>
+            <?= $singularity->picture ?>
         </td>
         <td>
             <?= $singularity->created->format(DATE_RFC850) ?>
