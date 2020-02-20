@@ -2,6 +2,7 @@
 // src/Controller/SingularitiesController.php
 
 namespace App\Controller;
+use App\Controller\AppController;
 
 class SingularitiesController extends AppController
 {
