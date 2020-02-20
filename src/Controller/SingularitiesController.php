@@ -11,4 +11,10 @@ class SingularitiesController extends AppController
         $articles = $this->Paginator->paginate($this->Singularities->find());
         $this->set(compact('singularities'));
     }
+
+    public function view($id = null)
+    {
+        $singularity = $this->Singularities->findById($id)->firstOrFail();
+        $this->set(compact('singularity'));
+    }
 }
