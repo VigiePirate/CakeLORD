@@ -27,11 +27,11 @@ class SingularitiesTable extends Table
     {
     $validator
         ->allowEmptyString('name_fr', false)
-        ->minLength('name_fr', 10)
+        ->minLength('name_fr', 1)
         ->maxLength('name_fr', 255)
 
         ->allowEmptyString('picture', false)
-        ->minLength('picture', 10);
+        ->minLength('picture', 1);
 
     return $validator;
     }
