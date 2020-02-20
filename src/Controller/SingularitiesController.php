@@ -69,7 +69,7 @@ class SingularitiesController extends AppController
 {
     $this->request->allowMethod(['post', 'delete']);
 
-    $article = $this->Articles->findById($id)->firstOrFail();
+    $article = $this->Singularities->findById($id)->firstOrFail();
     if ($this->Singularities->delete($singularity)) {
         $this->Flash->success(__('The {0} singularity has been deleted.', $singularity->name_fr));
         return $this->redirect(['action' => 'index']);
