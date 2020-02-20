@@ -23,14 +23,13 @@
                 <legend><?= __('Edit User') ?></legend>
                 <?php
                     echo $this->Form->control('email');
-                    echo $this->Form->control('password');
                     echo $this->Form->control('sex');
                     echo $this->Form->control('name_first');
                     echo $this->Form->control('name_last');
                     echo $this->Form->control('login');
                     echo $this->Form->control('date_birth', ['empty' => true]);
                     echo $this->Form->control('newsletter');
-                    echo $this->Form->control('role._ids', ['options' => $roles]);
+                    echo $this->Form->control('role_id', ['options' => $roles, 'empty' => true]);
                     echo $this->Form->control('is_locked');
                     echo $this->Form->control('failed_login_attempts');
                 ?>

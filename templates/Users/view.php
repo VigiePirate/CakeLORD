@@ -23,10 +23,6 @@
                     <td><?= h($user->email) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Password') ?></th>
-                    <td><?= h($user->password) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Sex') ?></th>
                     <td><?= h($user->sex) ?></td>
                 </tr>
