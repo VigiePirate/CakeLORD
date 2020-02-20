@@ -29,9 +29,9 @@ class SingularitiesController extends AppController
 
     public function add()
     {
-        $article = $this->Singularities->newEmptyEntity();
+        $singularity = $this->Singularities->newEmptyEntity();
         if ($this->request->is('post')) {
-            $article = $this->Singularities->patchEntity($singularity, $this->request->getData());
+            $singularity = $this->Singularities->patchEntity($singularity, $this->request->getData());
 
             // Hardcoding the user_id is temporary, and will be removed later
             // when we build authentication out.
