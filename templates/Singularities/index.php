@@ -11,6 +11,7 @@
         <th>Name EN</th>
         <th>Picture</th>
         <th>Created</th>
+        <th>Action</th>
     </tr>
 
     <!-- Here is where we iterate through our $articles query object, printing out article info -->
@@ -31,6 +32,9 @@
         </td>
         <td>
             <?= $singularity->created->format(DATE_RFC850) ?>
+        </td>
+        <td>
+            <?= $this->Html->link('Edit', ['action' => 'edit', $singularity->id]) ?>
         </td>
     </tr>
     <?php endforeach; ?>
