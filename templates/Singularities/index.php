@@ -35,6 +35,11 @@
         </td>
         <td>
             <?= $this->Html->link('Edit', ['action' => 'edit', $singularity->id]) ?>
+            <?= $this->Form->postLink(
+                'Delete',
+                ['action' => 'delete', $singularity->id],
+                ['confirm' => 'Are you sure?'])
+            ?>
         </td>
     </tr>
     <?php endforeach; ?>
