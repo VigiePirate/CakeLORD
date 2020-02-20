@@ -10,4 +10,13 @@ class SingularitiesTable extends Table
     {
         $this->addBehavior('Timestamp');
     }
+
+    public function beforeSave($event, $entity, $options)
+{
+    if ($entity->isNew() && !$entity->id) {
+        $sluggedTitle = Text::slug($entity->name_fr);
+        // trim slug to maximum length defined in schema
+        $entity->id = substr($sluggedTitle, 0, 191);
+    }
+}
 }
