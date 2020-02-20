@@ -83,6 +83,10 @@ class Application extends BaseApplication
             // `new RoutingMiddleware($this, '_cake_routes_')`
             ->add(new RoutingMiddleware($this));
 
+            ->add(new RoutingMiddleware($this))
+            // add Authentication after RoutingMiddleware
+            ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth()));
+
         return $middlewareQueue;
     }
 
@@ -108,16 +112,6 @@ class Application extends BaseApplication
 
 
     // Authentication
-    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
-{
-    $middlewareQueue
-        // ... other middleware added before
-        ->add(new RoutingMiddleware($this))
-        // add Authentication after RoutingMiddleware
-        ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth()));
-
-    return $middlewareQueue;
-}
 
   protected function configAuth(): \Authentication\AuthenticationService
   {
