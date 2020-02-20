@@ -25,7 +25,7 @@
                     echo $this->Form->control('login');
                     echo $this->Form->control('date_birth', ['empty' => true]);
                     echo $this->Form->control('newsletter');
-                    echo $this->Form->control('role_id', ['options' => $roles, 'empty' => true]);
+                    echo $this->Form->control('roles._ids', ['options' => $roles, 'empty' => true]);
                     echo $this->Form->control('is_locked');
                     echo $this->Form->control('failed_login_attempts');
                 ?>
