@@ -1,6 +1,9 @@
 <!-- File: templates/Singularities/index.php -->
 
 <h1>Singularities</h1>
+
+<?= $this->Html->link('Add Singularity', ['action' => 'add']) ?>
+
 <table>
     <tr>
         <th>Title</th>
