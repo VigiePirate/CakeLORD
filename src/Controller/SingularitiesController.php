@@ -18,7 +18,7 @@ class SingularitiesController extends AppController
   public function index()
     {
         $this->loadComponent('Paginator');
-        $articles = $this->Paginator->paginate($this->Singularities->find());
+        $singularities = $this->Paginator->paginate($this->Singularities->find());
         $this->set(compact('singularities'));
     }
 
