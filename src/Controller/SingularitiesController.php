@@ -46,4 +46,22 @@ class SingularitiesController extends AppController
         }
         $this->set('singularity', $singularity);
     }
+
+    public function edit($id)
+    {
+    $singularity = $this->Singularities
+        ->findById($id)
+        ->firstOrFail();
+
+    if ($this->request->is(['post', 'put'])) {
+        $this->Singularities->patchEntity($singularity, $this->request->getData());
+        if ($this->Singularities->save($singularity)) {
+            $this->Flash->success(__('Your singularity has been updated.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('Unable to update your singularity.'));
+    }
+
+    $this->set('singularity', $singularity);
+  }
 }
