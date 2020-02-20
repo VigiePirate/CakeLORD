@@ -6,6 +6,9 @@
  * into source code version control.
  */
 return [
+    'App' => [
+	    'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
+    ],
     /*
      * Debug Level:
      *
@@ -16,9 +19,6 @@ return [
      * true: Errors and warnings shown.
      */
     'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
-    'debug_kit' => [
-	    'forceEnable' => true,
-    ],
 
     /*
      * Security and encryption configuration

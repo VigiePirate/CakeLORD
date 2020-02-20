@@ -65,8 +65,6 @@ class UsersTable extends Table
             ->notEmptyString('email');
 
         $validator
-            ->scalar('password')
-            ->maxLength('password', 32)
             ->allowEmptyString('password');
 
         $validator

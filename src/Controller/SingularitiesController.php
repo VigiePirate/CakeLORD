@@ -1,78 +1,106 @@
 <?php
-// src/Controller/SingularitiesController.php
+declare(strict_types=1);
 
 namespace App\Controller;
-use App\Controller\AppController;
 
+/**
+ * Singularities Controller
+ *
+ * @property \App\Model\Table\SingularitiesTable $Singularities
+ *
+ * @method \App\Model\Entity\Singularity[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ */
 class SingularitiesController extends AppController
 {
-
-  public function initialize(): void
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function index()
     {
-        parent::initialize();
+        $singularities = $this->paginate($this->Singularities);
 
-        $this->loadComponent('Paginator');
-        $this->loadComponent('Flash'); // Include the FlashComponent
-    }
-
-  public function index()
-    {
-        $this->loadComponent('Paginator');
-        $singularities = $this->Paginator->paginate($this->Singularities->find());
         $this->set(compact('singularities'));
     }
 
+    /**
+     * View method
+     *
+     * @param string|null $id Singularity id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
     public function view($id = null)
     {
-        $singularity = $this->Singularities->findById($id)->firstOrFail();
-        $this->set(compact('singularity'));
+        $singularity = $this->Singularities->get($id, [
+            'contain' => [],
+        ]);
+
+        $this->set('singularity', $singularity);
     }
 
+    /**
+     * Add method
+     *
+     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     */
     public function add()
     {
         $singularity = $this->Singularities->newEmptyEntity();
         if ($this->request->is('post')) {
             $singularity = $this->Singularities->patchEntity($singularity, $this->request->getData());
-
-            // Hardcoding the user_id is temporary, and will be removed later
-            // when we build authentication out.
-            $singularity->user_id = 1;
-
             if ($this->Singularities->save($singularity)) {
-                $this->Flash->success(__('Your singularity has been saved.'));
+                $this->Flash->success(__('The singularity has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Unable to add your singularity.'));
+            $this->Flash->error(__('The singularity could not be saved. Please, try again.'));
         }
-        $this->set('singularity', $singularity);
+        $this->set(compact('singularity'));
     }
 
-    public function edit($id)
+    /**
+     * Edit method
+     *
+     * @param string|null $id Singularity id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function edit($id = null)
     {
-    $singularity = $this->Singularities
-        ->findById($id)
-        ->firstOrFail();
+        $singularity = $this->Singularities->get($id, [
+            'contain' => [],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $singularity = $this->Singularities->patchEntity($singularity, $this->request->getData());
+            if ($this->Singularities->save($singularity)) {
+                $this->Flash->success(__('The singularity has been saved.'));
 
-    if ($this->request->is(['post', 'put'])) {
-        $this->Singularities->patchEntity($singularity, $this->request->getData());
-        if ($this->Singularities->save($singularity)) {
-            $this->Flash->success(__('Your singularity has been updated.'));
-            return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The singularity could not be saved. Please, try again.'));
         }
-        $this->Flash->error(__('Unable to update your singularity.'));
+        $this->set(compact('singularity'));
     }
 
-    $this->set('singularity', $singularity);
-  }
+    /**
+     * Delete method
+     *
+     * @param string|null $id Singularity id.
+     * @return \Cake\Http\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $singularity = $this->Singularities->get($id);
+        if ($this->Singularities->delete($singularity)) {
+            $this->Flash->success(__('The singularity has been deleted.'));
+        } else {
+            $this->Flash->error(__('The singularity could not be deleted. Please, try again.'));
+        }
 
-  public function delete($id)
-{
-    $this->request->allowMethod(['post', 'delete']);
-
-    $singularity = $this->Singularities->findById($id)->firstOrFail();
-    if ($this->Singularities->delete($singularity)) {
-        $this->Flash->success(__('The {0} singularity has been deleted.', $singularity->name_fr));
         return $this->redirect(['action' => 'index']);
     }
-}
 }

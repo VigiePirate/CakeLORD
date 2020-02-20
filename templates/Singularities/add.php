@@ -1,15 +1,29 @@
-<!-- File: templates/Singularities/add.php -->
-
-<h1>Add Singularity</h1>
 <?php
-    echo $this->Form->create($singularity);
-    // Hard code the user for now.
-    echo $this->Form->control('user_id', ['type' => 'hidden', 'value' => 1]);
-    echo $this->Form->control('id');
-    // echo $this->Form->control('body', ['rows' => '3']);
-    echo $this->Form->control('name_fr');
-    echo $this->Form->control('name_en');
-    echo $this->Form->control('picture');
-    echo $this->Form->button(__('Save Singularity'));
-    echo $this->Form->end();
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\Singularity $singularity
+ */
 ?>
+<div class="row">
+    <aside class="column">
+        <div class="side-nav">
+            <h4 class="heading"><?= __('Actions') ?></h4>
+            <?= $this->Html->link(__('List Singularities'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+        </div>
+    </aside>
+    <div class="column-responsive column-80">
+        <div class="singularities form content">
+            <?= $this->Form->create($singularity) ?>
+            <fieldset>
+                <legend><?= __('Add Singularity') ?></legend>
+                <?php
+                    echo $this->Form->control('name_fr');
+                    echo $this->Form->control('name_en');
+                    echo $this->Form->control('picture');
+                ?>
+            </fieldset>
+            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->end() ?>
+        </div>
+    </div>
+</div>
