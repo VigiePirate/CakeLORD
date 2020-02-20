@@ -9,7 +9,7 @@
     // echo $this->Form->control('body', ['rows' => '3']);
     echo $this->Form->control('name_fr');
     echo $this->Form->control('name_en');
-    echo $this->Form->control('singularity');
+    echo $this->Form->control('picture');
     echo $this->Form->button(__('Save Singularity'));
     echo $this->Form->end();
 ?>
