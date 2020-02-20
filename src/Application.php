@@ -81,7 +81,10 @@ class Application extends BaseApplication
             // creating the middleware instance specify the cache config name by
             // using it's second constructor argument:
             // `new RoutingMiddleware($this, '_cake_routes_')`
-            ->add(new RoutingMiddleware($this));
+            ->add(new RoutingMiddleware($this))
+
+            // add Authentication after RoutingMiddleware
+            ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth()));
 
         return $middlewareQueue;
     }
@@ -105,4 +108,36 @@ class Application extends BaseApplication
 
         // Load more plugins here
     }
+
+
+    // Authentication
+
+  protected function configAuth(): \Authentication\AuthenticationService
+  {
+    $authenticationService = new \Authentication\AuthenticationService([
+        'unauthenticatedRedirect' => '/users/login',
+        'queryParam' => 'redirect',
+    ]);
+
+    // Load identifiers, ensure we check email and password fields
+    $authenticationService->loadIdentifier('Authentication.Password', [
+        'fields' => [
+            'username' => 'email',
+            'password' => 'password',
+        ]
+    ]);
+
+    // Load the authenticators, you want session first
+    $authenticationService->loadAuthenticator('Authentication.Session');
+    // Configure form data check to pick email and password
+    $authenticationService->loadAuthenticator('Authentication.Form', [
+        'fields' => [
+            'username' => 'email',
+            'password' => 'password',
+        ],
+        'loginUrl' => '/users/login',
+    ]);
+
+    return $authenticationService;
+  }
 }
