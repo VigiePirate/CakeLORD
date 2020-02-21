@@ -59,6 +59,8 @@ class SingularityPolicy
      */
     public function canView(IdentityInterface $user, Singularity $singularity)
     {
+      // All logged in users can create articles.
+        return true;
     }
 
     protected function isAuthor(IdentityInterface $user, Article $article)
