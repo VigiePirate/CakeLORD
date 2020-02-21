@@ -14,6 +14,8 @@ use Cake\ORM\Entity;
  * @property string|null $picture
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
+ *
+ * @property \App\Model\Entity\Rat[] $rats
  */
 class Singularity extends Entity
 {
@@ -32,5 +34,6 @@ class Singularity extends Entity
         'picture' => true,
         'created' => true,
         'modified' => true,
+        'rats' => true,
     ];
 }

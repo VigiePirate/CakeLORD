@@ -105,8 +105,8 @@ class RatsFixture extends TestFixture
                 'name_pup' => 'Lorem ipsum dolor sit amet',
                 'sex' => '',
                 'pedigree_identifier' => 'Lorem ip',
-                'date_birth' => '2020-02-20',
-                'date_death' => '2020-02-20',
+                'date_birth' => '2020-02-21',
+                'date_death' => '2020-02-21',
                 'death_cause_primary_id' => 1,
                 'death_cause_secondary_id' => 1,
                 'death_euthanized' => 1,
@@ -129,8 +129,8 @@ class RatsFixture extends TestFixture
                 'coat_id' => 1,
                 'marking_id' => 1,
                 'user_creator_id' => 1,
-                'created' => '2020-02-20 20:02:56',
-                'modified' => '2020-02-20 20:02:56',
+                'created' => '2020-02-21 15:10:28',
+                'modified' => '2020-02-21 15:10:28',
             ],
         ];
         parent::init();

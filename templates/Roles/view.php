@@ -39,7 +39,7 @@
                             <th><?= __('Sex') ?></th>
                             <th><?= __('Name First') ?></th>
                             <th><?= __('Name Last') ?></th>
-                            <th><?= __('Login') ?></th>
+                            <th><?= __('Username') ?></th>
                             <th><?= __('Date Birth') ?></th>
                             <th><?= __('Newsletter') ?></th>
                             <th><?= __('Created') ?></th>
@@ -57,7 +57,7 @@
                             <td><?= h($users->sex) ?></td>
                             <td><?= h($users->name_first) ?></td>
                             <td><?= h($users->name_last) ?></td>
-                            <td><?= h($users->login) ?></td>
+                            <td><?= h($users->username) ?></td>
                             <td><?= h($users->date_birth) ?></td>
                             <td><?= h($users->newsletter) ?></td>
                             <td><?= h($users->created) ?></td>

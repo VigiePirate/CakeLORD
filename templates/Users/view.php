@@ -39,8 +39,8 @@
                     <td><?= h($user->name_last) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Login') ?></th>
-                    <td><?= h($user->login) ?></td>
+                    <th><?= __('Username') ?></th>
+                    <td><?= h($user->username) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Role') ?></th>

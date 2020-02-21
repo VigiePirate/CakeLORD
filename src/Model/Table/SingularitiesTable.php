@@ -11,6 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Singularities Model
  *
+ * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsToMany $Rats
+ *
  * @method \App\Model\Entity\Singularity get($primaryKey, $options = [])
  * @method \App\Model\Entity\Singularity newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Singularity[] newEntities(array $data, array $options = [])

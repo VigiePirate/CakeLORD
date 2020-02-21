@@ -23,6 +23,8 @@ class SingularitiesControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Singularities',
+        'app.Rats',
+        'app.RatsSingularities',
     ];
 
     /**

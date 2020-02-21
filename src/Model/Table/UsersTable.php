@@ -85,9 +85,9 @@ class UsersTable extends Table
             ->allowEmptyString('name_last');
 
         $validator
-            ->scalar('login')
-            ->maxLength('login', 45)
-            ->allowEmptyString('login');
+            ->scalar('username')
+            ->maxLength('username', 45)
+            ->allowEmptyString('username');
 
         $validator
             ->date('date_birth')
@@ -117,7 +117,7 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->isUnique(['login']));
+        $rules->add($rules->isUnique(['username']));
         $rules->add($rules->existsIn(['role_id'], 'Roles'));
 
         return $rules;

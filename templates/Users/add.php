@@ -22,7 +22,7 @@
                     echo $this->Form->control('sex');
                     echo $this->Form->control('name_first');
                     echo $this->Form->control('name_last');
-                    echo $this->Form->control('login');
+                    echo $this->Form->control('username');
                     echo $this->Form->control('date_birth', ['empty' => true]);
                     echo $this->Form->control('newsletter');
                     echo $this->Form->control('role_id', ['options' => $roles, 'empty' => true]);

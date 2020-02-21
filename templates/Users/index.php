@@ -17,7 +17,7 @@
                     <th><?= $this->Paginator->sort('sex') ?></th>
                     <th><?= $this->Paginator->sort('name_first') ?></th>
                     <th><?= $this->Paginator->sort('name_last') ?></th>
-                    <th><?= $this->Paginator->sort('login') ?></th>
+                    <th><?= $this->Paginator->sort('username') ?></th>
                     <th><?= $this->Paginator->sort('date_birth') ?></th>
                     <th><?= $this->Paginator->sort('newsletter') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
@@ -37,7 +37,7 @@
                     <td><?= h($user->sex) ?></td>
                     <td><?= h($user->name_first) ?></td>
                     <td><?= h($user->name_last) ?></td>
-                    <td><?= h($user->login) ?></td>
+                    <td><?= h($user->username) ?></td>
                     <td><?= h($user->date_birth) ?></td>
                     <td><?= h($user->newsletter) ?></td>
                     <td><?= h($user->created) ?></td>
