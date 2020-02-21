@@ -38,7 +38,7 @@ use Cake\Routing\Middleware\RoutingMiddleware;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication implements AuthorizationServiceProviderInterface
+class Application extends BaseApplication //implements AuthorizationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
