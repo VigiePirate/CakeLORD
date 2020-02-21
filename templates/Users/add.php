@@ -18,6 +18,7 @@
                 <legend><?= __('Add User') ?></legend>
                 <?php
                     echo $this->Form->control('email');
+                    echo $this->Form->control('password');
                     echo $this->Form->control('sex');
                     echo $this->Form->control('name_first');
                     echo $this->Form->control('name_last');
