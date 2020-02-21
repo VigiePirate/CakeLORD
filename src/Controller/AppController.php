@@ -45,7 +45,7 @@ class AppController extends Controller
         $this->loadComponent('Flash');
 
         // add this like to check authentication result and lock your site
-        // temp comment : $this->loadComponent('Authentication.Authentication');
+        $this->loadComponent('Authentication.Authentication');
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
