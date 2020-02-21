@@ -34,7 +34,7 @@ class SingularityPolicy
     public function canEdit(IdentityInterface $user, Singularity $singularity)
     {
       // logged in users can edit their own articles.
-        return $this->isAuthor($user, $article);
+        return $this->isAuthor($user, $singularity);
     }
 
     /**
@@ -47,7 +47,7 @@ class SingularityPolicy
     public function canDelete(IdentityInterface $user, Singularity $singularity)
     {
       // logged in users can delete their own articles.
-        return $this->isAuthor($user, $article);
+        return $this->isAuthor($user, $singularity);
     }
 
     /**
@@ -63,8 +63,8 @@ class SingularityPolicy
         return true;
     }
 
-    protected function isAuthor(IdentityInterface $user, Article $article)
+    protected function isAuthor(IdentityInterface $user, Singularity $singularity)
     {
-        return $article->user_id === $user->getIdentifier();
+        return $singularity->user_id === $user->getIdentifier();
     }
 }
