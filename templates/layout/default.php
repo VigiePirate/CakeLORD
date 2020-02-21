@@ -39,9 +39,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
     <nav class="top-nav">
-        <div>
-          <img src='webroot/img/LogoLord2.png'>
-        </div>
         <div class="top-nav-title">
             <a href="/"><span>Cake</span>PHP</a>
         </div>
