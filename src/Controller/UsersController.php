@@ -114,7 +114,7 @@ class UsersController extends AppController
     parent::beforeFilter($event);
     // configure the login action to don't require authentication, preventing
     // the infinite redirect loop issue
-    $this->Authentication->addUnauthenticatedActions(['login']);
+    $this->Authentication->addUnauthenticatedActions(['login','add']);
 }
 
     public function login() {
