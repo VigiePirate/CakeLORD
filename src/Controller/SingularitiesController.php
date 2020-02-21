@@ -19,6 +19,7 @@ class SingularitiesController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
         $singularities = $this->paginate($this->Singularities);
 
         $this->set(compact('singularities'));
@@ -33,6 +34,7 @@ class SingularitiesController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $singularity = $this->Singularities->get($id, [
             'contain' => [],
         ]);
@@ -48,6 +50,7 @@ class SingularitiesController extends AppController
     public function add()
     {
         $singularity = $this->Singularities->newEmptyEntity();
+        $this->Authorization->authorize($singularity);
         if ($this->request->is('post')) {
             $singularity = $this->Singularities->patchEntity($singularity, $this->request->getData());
             if ($this->Singularities->save($singularity)) {
@@ -72,6 +75,7 @@ class SingularitiesController extends AppController
         $singularity = $this->Singularities->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->authorize($singularity);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $singularity = $this->Singularities->patchEntity($singularity, $this->request->getData());
             if ($this->Singularities->save($singularity)) {
@@ -95,6 +99,7 @@ class SingularitiesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $singularity = $this->Singularities->get($id);
+        $this->Authorization->authorize($singularity);
         if ($this->Singularities->delete($singularity)) {
             $this->Flash->success(__('The singularity has been deleted.'));
         } else {

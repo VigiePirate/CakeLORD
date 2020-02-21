@@ -59,7 +59,7 @@ class SingularityPolicy
      */
     public function canView(IdentityInterface $user, Singularity $singularity)
     {
-      // All logged in users can create articles.
+      // All logged in users can view singularities.
         return true;
     }
 
