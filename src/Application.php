@@ -24,13 +24,13 @@ use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 
-use Authorization\AuthorizationService;
-use Authorization\AuthorizationServiceInterface;
-use Authorization\AuthorizationServiceProviderInterface;
-use Authorization\Middleware\AuthorizationMiddleware;
-use Authorization\Policy\OrmResolver;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+// use Authorization\AuthorizationService;
+// use Authorization\AuthorizationServiceInterface;
+// use Authorization\AuthorizationServiceProviderInterface;
+// use Authorization\Middleware\AuthorizationMiddleware;
+// use Authorization\Policy\OrmResolver;
+// use Psr\Http\Message\ResponseInterface;
+// use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Application setup class.
@@ -63,7 +63,7 @@ class Application extends BaseApplication implements AuthorizationServiceProvide
         }
 
         // Load more plugins here
-        $this->addPlugin('Authorization');
+        // $this->addPlugin('Authorization');
     }
 
     /**
@@ -90,10 +90,10 @@ class Application extends BaseApplication implements AuthorizationServiceProvide
             // creating the middleware instance specify the cache config name by
             // using it's second constructor argument:
             // `new RoutingMiddleware($this, '_cake_routes_')`
-            ->add(new RoutingMiddleware($this))
+            ->add(new RoutingMiddleware($this));
             // add Authentication after RoutingMiddleware
-            ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth()))
-            ->add(new AuthorizationMiddleware($this));
+            // ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth()))
+            // ->add(new AuthorizationMiddleware($this));
 
         return $middlewareQueue;
     }
@@ -118,39 +118,39 @@ class Application extends BaseApplication implements AuthorizationServiceProvide
         // Load more plugins here
     }
 
-    protected function configAuth(): \Authentication\AuthenticationService
-    {
-        $authenticationService = new \Authentication\AuthenticationService([
-            'unauthenticatedRedirect' => '/users/login',
-            'queryParam' => 'redirect',
-        ]);
-
-        // Load identifiers, ensure we check email and password fields
-        $authenticationService->loadIdentifier('Authentication.Password', [
-            'fields' => [
-                'username' => 'email',
-                'password' => 'password',
-            ]
-        ]);
-
-        // Load the authenticators, you want session first
-        $authenticationService->loadAuthenticator('Authentication.Session');
-        // Configure form data check to pick email and password
-        $authenticationService->loadAuthenticator('Authentication.Form', [
-            'fields' => [
-                'username' => 'email',
-                'password' => 'password',
-            ],
-            'loginUrl' => '/users/login',
-        ]);
-
-        return $authenticationService;
-    }
-
-    public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
-    {
-        $resolver = new OrmResolver();
-
-        return new AuthorizationService($resolver);
-    }
+    // /** protected function configAuth(): \Authentication\AuthenticationService
+    // {
+    //     $authenticationService = new \Authentication\AuthenticationService([
+    //         'unauthenticatedRedirect' => '/users/login',
+    //         'queryParam' => 'redirect',
+    //     ]);
+    //
+    //     // Load identifiers, ensure we check email and password fields
+    //     $authenticationService->loadIdentifier('Authentication.Password', [
+    //         'fields' => [
+    //             'username' => 'email',
+    //             'password' => 'password',
+    //         ]
+    //     ]);
+    //
+    //     // Load the authenticators, you want session first
+    //     $authenticationService->loadAuthenticator('Authentication.Session');
+    //     // Configure form data check to pick email and password
+    //     $authenticationService->loadAuthenticator('Authentication.Form', [
+    //         'fields' => [
+    //             'username' => 'email',
+    //             'password' => 'password',
+    //         ],
+    //         'loginUrl' => '/users/login',
+    //     ]);
+    //
+    //     return $authenticationService;
+    // }
+    //
+    // public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
+    // {
+    //     $resolver = new OrmResolver();
+    //
+    //     return new AuthorizationService($resolver);
+    // } **/
 }
