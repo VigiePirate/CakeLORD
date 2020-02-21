@@ -18,8 +18,10 @@ class SingularityPolicy
      * @param App\Model\Entity\Singularity $singularity
      * @return bool
      */
-    public function canCreate(IdentityInterface $user, Singularity $singularity)
+    public function canAdd(IdentityInterface $user, Singularity $singularity)
     {
+      // All logged in users can create articles.
+        return true;
     }
 
     /**
@@ -29,8 +31,10 @@ class SingularityPolicy
      * @param App\Model\Entity\Singularity $singularity
      * @return bool
      */
-    public function canUpdate(IdentityInterface $user, Singularity $singularity)
+    public function canEdit(IdentityInterface $user, Singularity $singularity)
     {
+      // logged in users can edit their own articles.
+        return $this->isAuthor($user, $article);
     }
 
     /**
@@ -42,6 +46,8 @@ class SingularityPolicy
      */
     public function canDelete(IdentityInterface $user, Singularity $singularity)
     {
+      // logged in users can delete their own articles.
+        return $this->isAuthor($user, $article);
     }
 
     /**
@@ -53,5 +59,10 @@ class SingularityPolicy
      */
     public function canView(IdentityInterface $user, Singularity $singularity)
     {
+    }
+
+    protected function isAuthor(IdentityInterface $user, Article $article)
+    {
+        return $article->user_id === $user->getIdentifier();
     }
 }
