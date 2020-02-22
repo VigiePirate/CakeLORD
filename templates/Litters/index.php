@@ -12,13 +12,13 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('date_mating') ?></th>
-                    <th><?= $this->Paginator->sort('date_birth') ?></th>
-                    <th><?= $this->Paginator->sort('number_pups') ?></th>
-                    <th><?= $this->Paginator->sort('number_pups_stillborn') ?></th>
-                    <th><?= $this->Paginator->sort('rat_mother_id') ?></th>
-                    <th><?= $this->Paginator->sort('rat_father_id') ?></th>
-                    <th><?= $this->Paginator->sort('owner_id') ?></th>
+                    <th><?= $this->Paginator->sort('mating_date') ?></th>
+                    <th><?= $this->Paginator->sort('birth_date') ?></th>
+                    <th><?= $this->Paginator->sort('pups_number') ?></th>
+                    <th><?= $this->Paginator->sort('pups_number_stillborn') ?></th>
+                    <th><?= $this->Paginator->sort('mother_rat_id') ?></th>
+                    <th><?= $this->Paginator->sort('father_rat_id') ?></th>
+                    <th><?= $this->Paginator->sort('breeder_user_id') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -28,12 +28,12 @@
                 <?php foreach ($litters as $litter): ?>
                 <tr>
                     <td><?= $this->Number->format($litter->id) ?></td>
-                    <td><?= h($litter->date_mating) ?></td>
-                    <td><?= h($litter->date_birth) ?></td>
-                    <td><?= $this->Number->format($litter->number_pups) ?></td>
-                    <td><?= $this->Number->format($litter->number_pups_stillborn) ?></td>
-                    <td><?= $this->Number->format($litter->rat_mother_id) ?></td>
-                    <td><?= $this->Number->format($litter->rat_father_id) ?></td>
+                    <td><?= h($litter->mating_date) ?></td>
+                    <td><?= h($litter->birth_date) ?></td>
+                    <td><?= $this->Number->format($litter->pups_number) ?></td>
+                    <td><?= $this->Number->format($litter->pups_number_stillborn) ?></td>
+                    <td><?= $this->Number->format($litter->mother_rat_id) ?></td>
+                    <td><?= $this->Number->format($litter->father_rat_id) ?></td>
                     <td><?= $litter->has('user') ? $this->Html->link($litter->user->id, ['controller' => 'Users', 'action' => 'view', $litter->user->id]) : '' ?></td>
                     <td><?= h($litter->created) ?></td>
                     <td><?= h($litter->modified) ?></td>

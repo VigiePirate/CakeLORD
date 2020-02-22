@@ -24,17 +24,24 @@ class BackofficeRatEntriesControllerTest extends TestCase
     protected $fixtures = [
         'app.BackofficeRatEntries',
         'app.Rats',
-        'app.DeathCausesPrimary',
-        'app.DeathCausesSecondary',
-        'app.Ratteries',
-        'app.Users',
+        'app.PrimaryDeathCauses',
+        'app.SecondaryDeathCauses',
+        'app.MotherRatteries',
+        'app.FatherRatteries',
+        'app.MotherRats',
+        'app.FatherRats',
+        'app.OwnerUsers',
         'app.Colors',
         'app.Earsets',
         'app.Eyecolors',
         'app.Dilutions',
         'app.Coats',
         'app.Markings',
+        'app.CreatorUsers',
+        'app.States',
         'app.BackofficeRatMessages',
+        'app.Singularities',
+        'app.BackofficeRatEntriesSingularities',
     ];
 
     /**

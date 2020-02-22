@@ -12,16 +12,17 @@ use Cake\ORM\Entity;
  * @property string $email
  * @property string|null $password
  * @property string|null $sex
- * @property string|null $name_first
- * @property string|null $name_last
+ * @property string|null $firstname
+ * @property string|null $lastname
  * @property string|null $username
- * @property \Cake\I18n\FrozenDate|null $date_birth
+ * @property \Cake\I18n\FrozenDate|null $birth_date
  * @property bool|null $newsletter
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property int|null $role_id
  * @property bool|null $is_locked
  * @property int|null $failed_login_attempts
+ * @property \Cake\I18n\FrozenTime|null $failed_login_date
  *
  * @property \App\Model\Entity\Role $role
  */
@@ -40,16 +41,17 @@ class User extends Entity
         'email' => true,
         'password' => true,
         'sex' => true,
-        'name_first' => true,
-        'name_last' => true,
+        'firstname' => true,
+        'lastname' => true,
         'username' => true,
-        'date_birth' => true,
+        'birth_date' => true,
         'newsletter' => true,
         'created' => true,
         'modified' => true,
         'role_id' => true,
         'is_locked' => true,
         'failed_login_attempts' => true,
+        'failed_login_date' => true,
         'role' => true,
     ];
 

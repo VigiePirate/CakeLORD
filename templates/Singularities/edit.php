@@ -25,6 +25,7 @@
                     echo $this->Form->control('name_fr');
                     echo $this->Form->control('name_en');
                     echo $this->Form->control('picture');
+                    echo $this->Form->control('backoffice_rat_entries._ids', ['options' => $backofficeRatEntries]);
                     echo $this->Form->control('rats._ids', ['options' => $rats]);
                 ?>
             </fieldset>

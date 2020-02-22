@@ -35,12 +35,12 @@
                     <td><?= h($rat->pedigree_identifier) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Death Causes Primary') ?></th>
-                    <td><?= $rat->has('death_causes_primary') ? $this->Html->link($rat->death_causes_primary->id, ['controller' => 'DeathCausesPrimary', 'action' => 'view', $rat->death_causes_primary->id]) : '' ?></td>
+                    <th><?= __('Death Primary Cause') ?></th>
+                    <td><?= $rat->has('death_primary_cause') ? $this->Html->link($rat->death_primary_cause->id, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $rat->death_primary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Death Causes Secondary') ?></th>
-                    <td><?= $rat->has('death_causes_secondary') ? $this->Html->link($rat->death_causes_secondary->id, ['controller' => 'DeathCausesSecondary', 'action' => 'view', $rat->death_causes_secondary->id]) : '' ?></td>
+                    <th><?= __('Death Secondary Cause') ?></th>
+                    <td><?= $rat->has('death_secondary_cause') ? $this->Html->link($rat->death_secondary_cause->id, ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $rat->death_secondary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Picture') ?></th>
@@ -49,14 +49,6 @@
                 <tr>
                     <th><?= __('Picture Thumbnail') ?></th>
                     <td><?= h($rat->picture_thumbnail) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Rattery') ?></th>
-                    <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->name, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Rat') ?></th>
-                    <td><?= $rat->has('rat') ? $this->Html->link($rat->rat->id, ['controller' => 'Rats', 'action' => 'view', $rat->rat->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Litter') ?></th>
@@ -87,32 +79,44 @@
                     <td><?= $rat->has('marking') ? $this->Html->link($rat->marking->id, ['controller' => 'Markings', 'action' => 'view', $rat->marking->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('User') ?></th>
-                    <td><?= $rat->has('user') ? $this->Html->link($rat->user->id, ['controller' => 'Users', 'action' => 'view', $rat->user->id]) : '' ?></td>
+                    <th><?= __('State') ?></th>
+                    <td><?= $rat->has('state') ? $this->Html->link($rat->state->name, ['controller' => 'States', 'action' => 'view', $rat->state->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($rat->id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Rattery Mother Id') ?></th>
-                    <td><?= $this->Number->format($rat->rattery_mother_id) ?></td>
+                    <th><?= __('Mother Rattery Id') ?></th>
+                    <td><?= $this->Number->format($rat->mother_rattery_id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Mother Id') ?></th>
-                    <td><?= $this->Number->format($rat->mother_id) ?></td>
+                    <th><?= __('Father Rattery Id') ?></th>
+                    <td><?= $this->Number->format($rat->father_rattery_id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Owner Id') ?></th>
-                    <td><?= $this->Number->format($rat->owner_id) ?></td>
+                    <th><?= __('Mother Rat Id') ?></th>
+                    <td><?= $this->Number->format($rat->mother_rat_id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Date Birth') ?></th>
-                    <td><?= h($rat->date_birth) ?></td>
+                    <th><?= __('Father Rat Id') ?></th>
+                    <td><?= $this->Number->format($rat->father_rat_id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Date Death') ?></th>
-                    <td><?= h($rat->date_death) ?></td>
+                    <th><?= __('Owner User Id') ?></th>
+                    <td><?= $this->Number->format($rat->owner_user_id) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Creator User Id') ?></th>
+                    <td><?= $this->Number->format($rat->creator_user_id) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Birth Date') ?></th>
+                    <td><?= h($rat->birth_date) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Death Date') ?></th>
+                    <td><?= h($rat->death_date) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>
@@ -185,75 +189,73 @@
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Status') ?></th>
                             <th><?= __('Rat Id') ?></th>
-                            <th><?= __('Rat Name Owner') ?></th>
-                            <th><?= __('Rat Name Pup') ?></th>
-                            <th><?= __('Rat Sex') ?></th>
-                            <th><?= __('Rat Pedigree Identifier') ?></th>
-                            <th><?= __('Rat Date Birth') ?></th>
-                            <th><?= __('Rat Date Death') ?></th>
-                            <th><?= __('Death Cause Primary Id') ?></th>
-                            <th><?= __('Death Cause Secondary Id') ?></th>
-                            <th><?= __('Rat Death Euthanized') ?></th>
-                            <th><?= __('Rat Death Diagnosed') ?></th>
-                            <th><?= __('Rat Death Necropsied') ?></th>
-                            <th><?= __('Rat Picture') ?></th>
-                            <th><?= __('Rat Picture Thumbnail') ?></th>
-                            <th><?= __('Rat Comments') ?></th>
-                            <th><?= __('Rat Validated') ?></th>
-                            <th><?= __('Rattery Mother Id') ?></th>
-                            <th><?= __('Rattery Father Id') ?></th>
-                            <th><?= __('Rat Mother Id') ?></th>
-                            <th><?= __('Rat Father Id') ?></th>
-                            <th><?= __('User Owner Id') ?></th>
+                            <th><?= __('Owner Name') ?></th>
+                            <th><?= __('Pup Name') ?></th>
+                            <th><?= __('Sex') ?></th>
+                            <th><?= __('Pedigree Identifier') ?></th>
+                            <th><?= __('Birth Date') ?></th>
+                            <th><?= __('Death Date') ?></th>
+                            <th><?= __('Primary Death Cause Id') ?></th>
+                            <th><?= __('Secondary Death Cause Id') ?></th>
+                            <th><?= __('Death Euthanized') ?></th>
+                            <th><?= __('Death Diagnosed') ?></th>
+                            <th><?= __('Death Necropsied') ?></th>
+                            <th><?= __('Picture') ?></th>
+                            <th><?= __('Picture Thumbnail') ?></th>
+                            <th><?= __('Comments') ?></th>
+                            <th><?= __('Validated') ?></th>
+                            <th><?= __('Mother Rattery Id') ?></th>
+                            <th><?= __('Father Rattery Id') ?></th>
+                            <th><?= __('Mother Rat Id') ?></th>
+                            <th><?= __('Father Rat Id') ?></th>
+                            <th><?= __('Owner User Id') ?></th>
                             <th><?= __('Color Id') ?></th>
                             <th><?= __('Earset Id') ?></th>
                             <th><?= __('Eyecolor Id') ?></th>
                             <th><?= __('Dilution Id') ?></th>
                             <th><?= __('Coat Id') ?></th>
                             <th><?= __('Marking Id') ?></th>
-                            <th><?= __('Singularity Id List') ?></th>
-                            <th><?= __('User Creator Id') ?></th>
-                            <th><?= __('Rat Date Create') ?></th>
-                            <th><?= __('Rat Date Last Update') ?></th>
+                            <th><?= __('Creator User Id') ?></th>
+                            <th><?= __('Created') ?></th>
+                            <th><?= __('Modified') ?></th>
+                            <th><?= __('State Id') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($rat->backoffice_rat_entries as $backofficeRatEntries) : ?>
                         <tr>
                             <td><?= h($backofficeRatEntries->id) ?></td>
-                            <td><?= h($backofficeRatEntries->status) ?></td>
                             <td><?= h($backofficeRatEntries->rat_id) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_name_owner) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_name_pup) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_sex) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_pedigree_identifier) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_date_birth) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_date_death) ?></td>
-                            <td><?= h($backofficeRatEntries->death_cause_primary_id) ?></td>
-                            <td><?= h($backofficeRatEntries->death_cause_secondary_id) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_death_euthanized) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_death_diagnosed) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_death_necropsied) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_picture) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_picture_thumbnail) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_comments) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_validated) ?></td>
-                            <td><?= h($backofficeRatEntries->rattery_mother_id) ?></td>
-                            <td><?= h($backofficeRatEntries->rattery_father_id) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_mother_id) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_father_id) ?></td>
-                            <td><?= h($backofficeRatEntries->user_owner_id) ?></td>
+                            <td><?= h($backofficeRatEntries->owner_name) ?></td>
+                            <td><?= h($backofficeRatEntries->pup_name) ?></td>
+                            <td><?= h($backofficeRatEntries->sex) ?></td>
+                            <td><?= h($backofficeRatEntries->pedigree_identifier) ?></td>
+                            <td><?= h($backofficeRatEntries->birth_date) ?></td>
+                            <td><?= h($backofficeRatEntries->death_date) ?></td>
+                            <td><?= h($backofficeRatEntries->primary_death_cause_id) ?></td>
+                            <td><?= h($backofficeRatEntries->secondary_death_cause_id) ?></td>
+                            <td><?= h($backofficeRatEntries->death_euthanized) ?></td>
+                            <td><?= h($backofficeRatEntries->death_diagnosed) ?></td>
+                            <td><?= h($backofficeRatEntries->death_necropsied) ?></td>
+                            <td><?= h($backofficeRatEntries->picture) ?></td>
+                            <td><?= h($backofficeRatEntries->picture_thumbnail) ?></td>
+                            <td><?= h($backofficeRatEntries->comments) ?></td>
+                            <td><?= h($backofficeRatEntries->validated) ?></td>
+                            <td><?= h($backofficeRatEntries->mother_rattery_id) ?></td>
+                            <td><?= h($backofficeRatEntries->father_rattery_id) ?></td>
+                            <td><?= h($backofficeRatEntries->mother_rat_id) ?></td>
+                            <td><?= h($backofficeRatEntries->father_rat_id) ?></td>
+                            <td><?= h($backofficeRatEntries->owner_user_id) ?></td>
                             <td><?= h($backofficeRatEntries->color_id) ?></td>
                             <td><?= h($backofficeRatEntries->earset_id) ?></td>
                             <td><?= h($backofficeRatEntries->eyecolor_id) ?></td>
                             <td><?= h($backofficeRatEntries->dilution_id) ?></td>
                             <td><?= h($backofficeRatEntries->coat_id) ?></td>
                             <td><?= h($backofficeRatEntries->marking_id) ?></td>
-                            <td><?= h($backofficeRatEntries->singularity_id_list) ?></td>
-                            <td><?= h($backofficeRatEntries->user_creator_id) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_date_create) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_date_last_update) ?></td>
+                            <td><?= h($backofficeRatEntries->creator_user_id) ?></td>
+                            <td><?= h($backofficeRatEntries->created) ?></td>
+                            <td><?= h($backofficeRatEntries->modified) ?></td>
+                            <td><?= h($backofficeRatEntries->state_id) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'BackofficeRatEntries', 'action' => 'view', $backofficeRatEntries->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'BackofficeRatEntries', 'action' => 'edit', $backofficeRatEntries->id]) ?>

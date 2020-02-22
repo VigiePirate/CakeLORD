@@ -22,14 +22,14 @@
             <fieldset>
                 <legend><?= __('Edit Litter') ?></legend>
                 <?php
-                    echo $this->Form->control('date_mating', ['empty' => true]);
-                    echo $this->Form->control('date_birth', ['empty' => true]);
-                    echo $this->Form->control('number_pups');
-                    echo $this->Form->control('number_pups_stillborn');
+                    echo $this->Form->control('mating_date', ['empty' => true]);
+                    echo $this->Form->control('birth_date', ['empty' => true]);
+                    echo $this->Form->control('pups_number');
+                    echo $this->Form->control('pups_number_stillborn');
                     echo $this->Form->control('comments');
-                    echo $this->Form->control('rat_mother_id');
-                    echo $this->Form->control('rat_father_id');
-                    echo $this->Form->control('owner_id', ['options' => $users]);
+                    echo $this->Form->control('mother_rat_id');
+                    echo $this->Form->control('father_rat_id');
+                    echo $this->Form->control('breeder_user_id', ['options' => $users]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

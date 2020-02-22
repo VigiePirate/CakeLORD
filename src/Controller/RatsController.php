@@ -20,7 +20,7 @@ class RatsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['DeathCausesPrimary', 'DeathCausesSecondary', 'Ratteries', 'Rats', 'Litters', 'Users', 'Colors', 'Earsets', 'Eyecolors', 'Dilutions', 'Coats', 'Markings'],
+            'contain' => ['DeathPrimaryCauses', 'DeathSecondaryCauses', 'MotherRatteries', 'FatherRatteries', 'MotherRats', 'FatherRats', 'Litters', 'OwnerUsers', 'Colors', 'Earsets', 'Eyecolors', 'Dilutions', 'Coats', 'Markings', 'CreatorUsers', 'States'],
         ];
         $rats = $this->paginate($this->Rats);
 
@@ -37,7 +37,7 @@ class RatsController extends AppController
     public function view($id = null)
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['DeathCausesPrimary', 'DeathCausesSecondary', 'Ratteries', 'Rats', 'Litters', 'Users', 'Colors', 'Earsets', 'Eyecolors', 'Dilutions', 'Coats', 'Markings', 'Singularities', 'BackofficeRatEntries'],
+            'contain' => ['DeathPrimaryCauses', 'DeathSecondaryCauses', 'MotherRatteries', 'FatherRatteries', 'MotherRats', 'FatherRats', 'Litters', 'OwnerUsers', 'Colors', 'Earsets', 'Eyecolors', 'Dilutions', 'Coats', 'Markings', 'CreatorUsers', 'States', 'Singularities', 'BackofficeRatEntries'],
         ]);
 
         $this->set('rat', $rat);
@@ -60,20 +60,24 @@ class RatsController extends AppController
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
         }
-        $deathCausesPrimary = $this->Rats->DeathCausesPrimary->find('list', ['limit' => 200]);
-        $deathCausesSecondary = $this->Rats->DeathCausesSecondary->find('list', ['limit' => 200]);
-        $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
-        $rats = $this->Rats->Rats->find('list', ['limit' => 200]);
+        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list', ['limit' => 200]);
+        $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
+        $motherRatteries = $this->Rats->MotherRatteries->find('list', ['limit' => 200]);
+        $fatherRatteries = $this->Rats->FatherRatteries->find('list', ['limit' => 200]);
+        $motherRats = $this->Rats->MotherRats->find('list', ['limit' => 200]);
+        $fatherRats = $this->Rats->FatherRats->find('list', ['limit' => 200]);
         $litters = $this->Rats->Litters->find('list', ['limit' => 200]);
-        $users = $this->Rats->Users->find('list', ['limit' => 200]);
+        $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 200]);
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
         $earsets = $this->Rats->Earsets->find('list', ['limit' => 200]);
         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
         $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
         $markings = $this->Rats->Markings->find('list', ['limit' => 200]);
+        $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
+        $states = $this->Rats->States->find('list', ['limit' => 200]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        $this->set(compact('rat', 'deathCausesPrimary', 'deathCausesSecondary', 'ratteries', 'rats', 'litters', 'users', 'colors', 'earsets', 'eyecolors', 'dilutions', 'coats', 'markings', 'singularities'));
+        $this->set(compact('rat', 'deathPrimaryCauses', 'deathSecondaryCauses', 'motherRatteries', 'fatherRatteries', 'motherRats', 'fatherRats', 'litters', 'ownerUsers', 'colors', 'earsets', 'eyecolors', 'dilutions', 'coats', 'markings', 'creatorUsers', 'states', 'singularities'));
     }
 
     /**
@@ -97,20 +101,24 @@ class RatsController extends AppController
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
         }
-        $deathCausesPrimary = $this->Rats->DeathCausesPrimary->find('list', ['limit' => 200]);
-        $deathCausesSecondary = $this->Rats->DeathCausesSecondary->find('list', ['limit' => 200]);
-        $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
-        $rats = $this->Rats->Rats->find('list', ['limit' => 200]);
+        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list', ['limit' => 200]);
+        $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
+        $motherRatteries = $this->Rats->MotherRatteries->find('list', ['limit' => 200]);
+        $fatherRatteries = $this->Rats->FatherRatteries->find('list', ['limit' => 200]);
+        $motherRats = $this->Rats->MotherRats->find('list', ['limit' => 200]);
+        $fatherRats = $this->Rats->FatherRats->find('list', ['limit' => 200]);
         $litters = $this->Rats->Litters->find('list', ['limit' => 200]);
-        $users = $this->Rats->Users->find('list', ['limit' => 200]);
+        $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 200]);
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
         $earsets = $this->Rats->Earsets->find('list', ['limit' => 200]);
         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
         $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
         $markings = $this->Rats->Markings->find('list', ['limit' => 200]);
+        $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
+        $states = $this->Rats->States->find('list', ['limit' => 200]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        $this->set(compact('rat', 'deathCausesPrimary', 'deathCausesSecondary', 'ratteries', 'rats', 'litters', 'users', 'colors', 'earsets', 'eyecolors', 'dilutions', 'coats', 'markings', 'singularities'));
+        $this->set(compact('rat', 'deathPrimaryCauses', 'deathSecondaryCauses', 'motherRatteries', 'fatherRatteries', 'motherRats', 'fatherRats', 'litters', 'ownerUsers', 'colors', 'earsets', 'eyecolors', 'dilutions', 'coats', 'markings', 'creatorUsers', 'states', 'singularities'));
     }
 
     /**

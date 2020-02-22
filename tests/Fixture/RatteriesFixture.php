@@ -59,8 +59,8 @@ class RatteriesFixture extends TestFixture
                 'status' => 1,
                 'validated' => 1,
                 'date_birth' => 'Lorem ipsum dolor sit amet',
-                'created' => '2020-02-21 15:10:30',
-                'modified' => '2020-02-21 15:10:30',
+                'created' => '2020-02-22 11:39:55',
+                'modified' => '2020-02-22 11:39:55',
             ],
         ];
         parent::init();

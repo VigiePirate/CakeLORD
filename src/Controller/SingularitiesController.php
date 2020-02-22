@@ -34,7 +34,7 @@ class SingularitiesController extends AppController
     public function view($id = null)
     {
         $singularity = $this->Singularities->get($id, [
-            'contain' => ['Rats'],
+            'contain' => ['BackofficeRatEntries', 'Rats'],
         ]);
 
         $this->set('singularity', $singularity);
@@ -57,8 +57,9 @@ class SingularitiesController extends AppController
             }
             $this->Flash->error(__('The singularity could not be saved. Please, try again.'));
         }
+        $backofficeRatEntries = $this->Singularities->BackofficeRatEntries->find('list', ['limit' => 200]);
         $rats = $this->Singularities->Rats->find('list', ['limit' => 200]);
-        $this->set(compact('singularity', 'rats'));
+        $this->set(compact('singularity', 'backofficeRatEntries', 'rats'));
     }
 
     /**
@@ -71,7 +72,7 @@ class SingularitiesController extends AppController
     public function edit($id = null)
     {
         $singularity = $this->Singularities->get($id, [
-            'contain' => ['Rats'],
+            'contain' => ['BackofficeRatEntries', 'Rats'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $singularity = $this->Singularities->patchEntity($singularity, $this->request->getData());
@@ -82,8 +83,9 @@ class SingularitiesController extends AppController
             }
             $this->Flash->error(__('The singularity could not be saved. Please, try again.'));
         }
+        $backofficeRatEntries = $this->Singularities->BackofficeRatEntries->find('list', ['limit' => 200]);
         $rats = $this->Singularities->Rats->find('list', ['limit' => 200]);
-        $this->set(compact('singularity', 'rats'));
+        $this->set(compact('singularity', 'backofficeRatEntries', 'rats'));
     }
 
     /**

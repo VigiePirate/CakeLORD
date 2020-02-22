@@ -11,21 +11,13 @@ use Cake\Validation\Validator;
 /**
  * Rats Model
  *
- * @property \App\Model\Table\DeathCausesPrimaryTable&\Cake\ORM\Association\BelongsTo $DeathCausesPrimary
- * @property \App\Model\Table\DeathCausesSecondaryTable&\Cake\ORM\Association\BelongsTo $DeathCausesSecondary
- * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
- * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
- * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsTo $Rats
- * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsTo $Rats
  * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsTo $Litters
- * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\ColorsTable&\Cake\ORM\Association\BelongsTo $Colors
  * @property \App\Model\Table\EarsetsTable&\Cake\ORM\Association\BelongsTo $Earsets
  * @property \App\Model\Table\EyecolorsTable&\Cake\ORM\Association\BelongsTo $Eyecolors
  * @property \App\Model\Table\DilutionsTable&\Cake\ORM\Association\BelongsTo $Dilutions
  * @property \App\Model\Table\CoatsTable&\Cake\ORM\Association\BelongsTo $Coats
  * @property \App\Model\Table\MarkingsTable&\Cake\ORM\Association\BelongsTo $Markings
- * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\BackofficeRatEntriesTable&\Cake\ORM\Association\HasMany $BackofficeRatEntries
  * @property \App\Model\Table\SingularitiesTable&\Cake\ORM\Association\BelongsToMany $Singularities
  *
@@ -58,29 +50,29 @@ class RatsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('DeathCausesPrimary', [
-            'foreignKey' => 'death_cause_primary_id',
+        $this->belongsTo('DeathPrimaryCauses', [
+            'foreignKey' => 'death_primary_cause_id',
         ]);
-        $this->belongsTo('DeathCausesSecondary', [
-            'foreignKey' => 'death_cause_secondary_id',
+        $this->belongsTo('DeathSecondaryCauses', [
+            'foreignKey' => 'death_secondary_cause_id',
         ]);
-        $this->belongsTo('Ratteries', [
-            'foreignKey' => 'rattery_mother_id',
+        $this->belongsTo('MotherRatteries', [
+            'foreignKey' => 'mother_rattery_id',
         ]);
-        $this->belongsTo('Ratteries', [
-            'foreignKey' => 'rattery_father_id',
+        $this->belongsTo('FatherRatteries', [
+            'foreignKey' => 'father_rattery_id',
         ]);
-        $this->belongsTo('Rats', [
-            'foreignKey' => 'mother_id',
+        $this->belongsTo('MotherRats', [
+            'foreignKey' => 'mother_rat_id',
         ]);
-        $this->belongsTo('Rats', [
-            'foreignKey' => 'father_id',
+        $this->belongsTo('FatherRats', [
+            'foreignKey' => 'father_rat_id',
         ]);
         $this->belongsTo('Litters', [
             'foreignKey' => 'litter_id',
         ]);
-        $this->belongsTo('Users', [
-            'foreignKey' => 'owner_id',
+        $this->belongsTo('OwnerUsers', [
+            'foreignKey' => 'owner_user_id',
         ]);
         $this->belongsTo('Colors', [
             'foreignKey' => 'color_id',
@@ -100,8 +92,12 @@ class RatsTable extends Table
         $this->belongsTo('Markings', [
             'foreignKey' => 'marking_id',
         ]);
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_creator_id',
+        $this->belongsTo('CreatorUsers', [
+            'foreignKey' => 'creator_user_id',
+            'joinType' => 'INNER',
+        ]);
+        $this->belongsTo('States', [
+            'foreignKey' => 'state_id',
             'joinType' => 'INNER',
         ]);
         $this->hasMany('BackofficeRatEntries', [
@@ -124,8 +120,7 @@ class RatsTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmptyString('id', null, 'create')
-            ->add('id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->allowEmptyString('id', null, 'create');
 
         $validator
             ->scalar('name_owner')
@@ -150,12 +145,12 @@ class RatsTable extends Table
             ->add('pedigree_identifier', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->date('date_birth')
-            ->allowEmptyDate('date_birth');
+            ->date('birth_date')
+            ->allowEmptyDate('birth_date');
 
         $validator
-            ->date('date_death')
-            ->allowEmptyDate('date_death');
+            ->date('death_date')
+            ->allowEmptyDate('death_date');
 
         $validator
             ->boolean('death_euthanized')
@@ -199,23 +194,23 @@ class RatsTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->isUnique(['id']));
         $rules->add($rules->isUnique(['pedigree_identifier']));
-        $rules->add($rules->existsIn(['death_cause_primary_id'], 'DeathCausesPrimary'));
-        $rules->add($rules->existsIn(['death_cause_secondary_id'], 'DeathCausesSecondary'));
-        $rules->add($rules->existsIn(['rattery_mother_id'], 'Ratteries'));
-        $rules->add($rules->existsIn(['rattery_father_id'], 'Ratteries'));
-        $rules->add($rules->existsIn(['mother_id'], 'Rats'));
-        $rules->add($rules->existsIn(['father_id'], 'Rats'));
+        $rules->add($rules->existsIn(['death_primary_cause_id'], 'DeathPrimaryCauses'));
+        $rules->add($rules->existsIn(['death_secondary_cause_id'], 'DeathSecondaryCauses'));
+        $rules->add($rules->existsIn(['mother_rattery_id'], 'MotherRatteries'));
+        $rules->add($rules->existsIn(['father_rattery_id'], 'FatherRatteries'));
+        $rules->add($rules->existsIn(['mother_rat_id'], 'MotherRats'));
+        $rules->add($rules->existsIn(['father_rat_id'], 'FatherRats'));
         $rules->add($rules->existsIn(['litter_id'], 'Litters'));
-        $rules->add($rules->existsIn(['owner_id'], 'Users'));
+        $rules->add($rules->existsIn(['owner_user_id'], 'OwnerUsers'));
         $rules->add($rules->existsIn(['color_id'], 'Colors'));
         $rules->add($rules->existsIn(['earset_id'], 'Earsets'));
         $rules->add($rules->existsIn(['eyecolor_id'], 'Eyecolors'));
         $rules->add($rules->existsIn(['dilution_id'], 'Dilutions'));
         $rules->add($rules->existsIn(['coat_id'], 'Coats'));
         $rules->add($rules->existsIn(['marking_id'], 'Markings'));
-        $rules->add($rules->existsIn(['user_creator_id'], 'Users'));
+        $rules->add($rules->existsIn(['creator_user_id'], 'CreatorUsers'));
+        $rules->add($rules->existsIn(['state_id'], 'States'));
 
         return $rules;
     }

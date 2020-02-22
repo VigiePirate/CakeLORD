@@ -42,6 +42,11 @@ class SingularitiesTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsToMany('BackofficeRatEntries', [
+            'foreignKey' => 'singularity_id',
+            'targetForeignKey' => 'backoffice_rat_entry_id',
+            'joinTable' => 'backoffice_rat_entries_singularities',
+        ]);
         $this->belongsToMany('Rats', [
             'foreignKey' => 'singularity_id',
             'targetForeignKey' => 'rat_id',

@@ -55,10 +55,10 @@ class BackofficeRatMessagesFixture extends TestFixture
                 'staff_id' => 1,
                 'staff_comments' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'owner_comments' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'date_staff_comments' => '2020-02-21',
-                'date_owner_comments' => '2020-02-21',
-                'created' => '2020-02-21 15:10:25',
-                'modified' => '2020-02-21 15:10:25',
+                'date_staff_comments' => '2020-02-22',
+                'date_owner_comments' => '2020-02-22',
+                'created' => '2020-02-22 11:39:55',
+                'modified' => '2020-02-22 11:39:55',
             ],
         ];
         parent::init();

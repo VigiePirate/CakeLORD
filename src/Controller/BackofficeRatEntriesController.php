@@ -20,7 +20,7 @@ class BackofficeRatEntriesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Rats', 'DeathCausesPrimary', 'DeathCausesSecondary', 'Ratteries', 'BackofficeRatEntries', 'Users', 'Colors', 'Earsets', 'Eyecolors', 'Dilutions', 'Coats', 'Markings'],
+            'contain' => ['Rats', 'PrimaryDeathCauses', 'SecondaryDeathCauses', 'MotherRatteries', 'FatherRatteries', 'MotherRats', 'FatherRats', 'OwnerUsers', 'Colors', 'Earsets', 'Eyecolors', 'Dilutions', 'Coats', 'Markings', 'CreatorUsers', 'States'],
         ];
         $backofficeRatEntries = $this->paginate($this->BackofficeRatEntries);
 
@@ -37,7 +37,7 @@ class BackofficeRatEntriesController extends AppController
     public function view($id = null)
     {
         $backofficeRatEntry = $this->BackofficeRatEntries->get($id, [
-            'contain' => ['Rats', 'DeathCausesPrimary', 'DeathCausesSecondary', 'Ratteries', 'BackofficeRatEntries', 'Users', 'Colors', 'Earsets', 'Eyecolors', 'Dilutions', 'Coats', 'Markings', 'BackofficeRatMessages'],
+            'contain' => ['Rats', 'PrimaryDeathCauses', 'SecondaryDeathCauses', 'MotherRatteries', 'FatherRatteries', 'MotherRats', 'FatherRats', 'OwnerUsers', 'Colors', 'Earsets', 'Eyecolors', 'Dilutions', 'Coats', 'Markings', 'CreatorUsers', 'States', 'Singularities', 'BackofficeRatMessages'],
         ]);
 
         $this->set('backofficeRatEntry', $backofficeRatEntry);
@@ -61,18 +61,23 @@ class BackofficeRatEntriesController extends AppController
             $this->Flash->error(__('The backoffice rat entry could not be saved. Please, try again.'));
         }
         $rats = $this->BackofficeRatEntries->Rats->find('list', ['limit' => 200]);
-        $deathCausesPrimary = $this->BackofficeRatEntries->DeathCausesPrimary->find('list', ['limit' => 200]);
-        $deathCausesSecondary = $this->BackofficeRatEntries->DeathCausesSecondary->find('list', ['limit' => 200]);
-        $ratteries = $this->BackofficeRatEntries->Ratteries->find('list', ['limit' => 200]);
-        $backofficeRatEntries = $this->BackofficeRatEntries->BackofficeRatEntries->find('list', ['limit' => 200]);
-        $users = $this->BackofficeRatEntries->Users->find('list', ['limit' => 200]);
+        $primaryDeathCauses = $this->BackofficeRatEntries->PrimaryDeathCauses->find('list', ['limit' => 200]);
+        $secondaryDeathCauses = $this->BackofficeRatEntries->SecondaryDeathCauses->find('list', ['limit' => 200]);
+        $motherRatteries = $this->BackofficeRatEntries->MotherRatteries->find('list', ['limit' => 200]);
+        $fatherRatteries = $this->BackofficeRatEntries->FatherRatteries->find('list', ['limit' => 200]);
+        $motherRats = $this->BackofficeRatEntries->MotherRats->find('list', ['limit' => 200]);
+        $fatherRats = $this->BackofficeRatEntries->FatherRats->find('list', ['limit' => 200]);
+        $ownerUsers = $this->BackofficeRatEntries->OwnerUsers->find('list', ['limit' => 200]);
         $colors = $this->BackofficeRatEntries->Colors->find('list', ['limit' => 200]);
         $earsets = $this->BackofficeRatEntries->Earsets->find('list', ['limit' => 200]);
         $eyecolors = $this->BackofficeRatEntries->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->BackofficeRatEntries->Dilutions->find('list', ['limit' => 200]);
         $coats = $this->BackofficeRatEntries->Coats->find('list', ['limit' => 200]);
         $markings = $this->BackofficeRatEntries->Markings->find('list', ['limit' => 200]);
-        $this->set(compact('backofficeRatEntry', 'rats', 'deathCausesPrimary', 'deathCausesSecondary', 'ratteries', 'backofficeRatEntries', 'users', 'colors', 'earsets', 'eyecolors', 'dilutions', 'coats', 'markings'));
+        $creatorUsers = $this->BackofficeRatEntries->CreatorUsers->find('list', ['limit' => 200]);
+        $states = $this->BackofficeRatEntries->States->find('list', ['limit' => 200]);
+        $singularities = $this->BackofficeRatEntries->Singularities->find('list', ['limit' => 200]);
+        $this->set(compact('backofficeRatEntry', 'rats', 'primaryDeathCauses', 'secondaryDeathCauses', 'motherRatteries', 'fatherRatteries', 'motherRats', 'fatherRats', 'ownerUsers', 'colors', 'earsets', 'eyecolors', 'dilutions', 'coats', 'markings', 'creatorUsers', 'states', 'singularities'));
     }
 
     /**
@@ -85,7 +90,7 @@ class BackofficeRatEntriesController extends AppController
     public function edit($id = null)
     {
         $backofficeRatEntry = $this->BackofficeRatEntries->get($id, [
-            'contain' => [],
+            'contain' => ['Singularities'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $backofficeRatEntry = $this->BackofficeRatEntries->patchEntity($backofficeRatEntry, $this->request->getData());
@@ -97,18 +102,23 @@ class BackofficeRatEntriesController extends AppController
             $this->Flash->error(__('The backoffice rat entry could not be saved. Please, try again.'));
         }
         $rats = $this->BackofficeRatEntries->Rats->find('list', ['limit' => 200]);
-        $deathCausesPrimary = $this->BackofficeRatEntries->DeathCausesPrimary->find('list', ['limit' => 200]);
-        $deathCausesSecondary = $this->BackofficeRatEntries->DeathCausesSecondary->find('list', ['limit' => 200]);
-        $ratteries = $this->BackofficeRatEntries->Ratteries->find('list', ['limit' => 200]);
-        $backofficeRatEntries = $this->BackofficeRatEntries->BackofficeRatEntries->find('list', ['limit' => 200]);
-        $users = $this->BackofficeRatEntries->Users->find('list', ['limit' => 200]);
+        $primaryDeathCauses = $this->BackofficeRatEntries->PrimaryDeathCauses->find('list', ['limit' => 200]);
+        $secondaryDeathCauses = $this->BackofficeRatEntries->SecondaryDeathCauses->find('list', ['limit' => 200]);
+        $motherRatteries = $this->BackofficeRatEntries->MotherRatteries->find('list', ['limit' => 200]);
+        $fatherRatteries = $this->BackofficeRatEntries->FatherRatteries->find('list', ['limit' => 200]);
+        $motherRats = $this->BackofficeRatEntries->MotherRats->find('list', ['limit' => 200]);
+        $fatherRats = $this->BackofficeRatEntries->FatherRats->find('list', ['limit' => 200]);
+        $ownerUsers = $this->BackofficeRatEntries->OwnerUsers->find('list', ['limit' => 200]);
         $colors = $this->BackofficeRatEntries->Colors->find('list', ['limit' => 200]);
         $earsets = $this->BackofficeRatEntries->Earsets->find('list', ['limit' => 200]);
         $eyecolors = $this->BackofficeRatEntries->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->BackofficeRatEntries->Dilutions->find('list', ['limit' => 200]);
         $coats = $this->BackofficeRatEntries->Coats->find('list', ['limit' => 200]);
         $markings = $this->BackofficeRatEntries->Markings->find('list', ['limit' => 200]);
-        $this->set(compact('backofficeRatEntry', 'rats', 'deathCausesPrimary', 'deathCausesSecondary', 'ratteries', 'backofficeRatEntries', 'users', 'colors', 'earsets', 'eyecolors', 'dilutions', 'coats', 'markings'));
+        $creatorUsers = $this->BackofficeRatEntries->CreatorUsers->find('list', ['limit' => 200]);
+        $states = $this->BackofficeRatEntries->States->find('list', ['limit' => 200]);
+        $singularities = $this->BackofficeRatEntries->Singularities->find('list', ['limit' => 200]);
+        $this->set(compact('backofficeRatEntry', 'rats', 'primaryDeathCauses', 'secondaryDeathCauses', 'motherRatteries', 'fatherRatteries', 'motherRats', 'fatherRats', 'ownerUsers', 'colors', 'earsets', 'eyecolors', 'dilutions', 'coats', 'markings', 'creatorUsers', 'states', 'singularities'));
     }
 
     /**

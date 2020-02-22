@@ -75,14 +75,14 @@ class UsersTable extends Table
             ->allowEmptyString('sex');
 
         $validator
-            ->scalar('name_first')
-            ->maxLength('name_first', 45)
-            ->allowEmptyString('name_first');
+            ->scalar('firstname')
+            ->maxLength('firstname', 45)
+            ->allowEmptyString('firstname');
 
         $validator
-            ->scalar('name_last')
-            ->maxLength('name_last', 45)
-            ->allowEmptyString('name_last');
+            ->scalar('lastname')
+            ->maxLength('lastname', 45)
+            ->allowEmptyString('lastname');
 
         $validator
             ->scalar('username')
@@ -90,8 +90,8 @@ class UsersTable extends Table
             ->allowEmptyString('username');
 
         $validator
-            ->date('date_birth')
-            ->allowEmptyDate('date_birth');
+            ->date('birth_date')
+            ->allowEmptyDate('birth_date');
 
         $validator
             ->boolean('newsletter')
@@ -103,6 +103,10 @@ class UsersTable extends Table
 
         $validator
             ->allowEmptyString('failed_login_attempts');
+
+        $validator
+            ->dateTime('failed_login_date')
+            ->allowEmptyDateTime('failed_login_date');
 
         return $validator;
     }

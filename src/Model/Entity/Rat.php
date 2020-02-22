@@ -13,10 +13,10 @@ use Cake\ORM\Entity;
  * @property string|null $name_pup
  * @property string $sex
  * @property string|null $pedigree_identifier
- * @property \Cake\I18n\FrozenDate|null $date_birth
- * @property \Cake\I18n\FrozenDate|null $date_death
- * @property int|null $death_cause_primary_id
- * @property int|null $death_cause_secondary_id
+ * @property \Cake\I18n\FrozenDate|null $birth_date
+ * @property \Cake\I18n\FrozenDate|null $death_date
+ * @property int|null $death_primary_cause_id
+ * @property int|null $death_secondary_cause_id
  * @property bool|null $death_euthanized
  * @property bool|null $death_diagnosed
  * @property bool|null $death_necropsied
@@ -24,21 +24,22 @@ use Cake\ORM\Entity;
  * @property string|null $picture_thumbnail
  * @property string|null $comments
  * @property bool|null $validated
- * @property int|null $rattery_mother_id
- * @property int|null $rattery_father_id
- * @property int|null $mother_id
- * @property int|null $father_id
+ * @property int|null $mother_rattery_id
+ * @property int|null $father_rattery_id
+ * @property int|null $mother_rat_id
+ * @property int|null $father_rat_id
  * @property int|null $litter_id
- * @property int|null $owner_id
+ * @property int|null $owner_user_id
  * @property int|null $color_id
  * @property int|null $earset_id
  * @property int|null $eyecolor_id
  * @property int|null $dilution_id
  * @property int|null $coat_id
  * @property int|null $marking_id
- * @property int $user_creator_id
+ * @property int $creator_user_id
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
+ * @property int $state_id
  *
  * @property \App\Model\Entity\DeathCausesPrimary $death_causes_primary
  * @property \App\Model\Entity\DeathCausesSecondary $death_causes_secondary
@@ -71,10 +72,10 @@ class Rat extends Entity
         'name_pup' => true,
         'sex' => true,
         'pedigree_identifier' => true,
-        'date_birth' => true,
-        'date_death' => true,
-        'death_cause_primary_id' => true,
-        'death_cause_secondary_id' => true,
+        'birth_date' => true,
+        'death_date' => true,
+        'death_primary_cause_id' => true,
+        'death_secondary_cause_id' => true,
         'death_euthanized' => true,
         'death_diagnosed' => true,
         'death_necropsied' => true,
@@ -82,21 +83,22 @@ class Rat extends Entity
         'picture_thumbnail' => true,
         'comments' => true,
         'validated' => true,
-        'rattery_mother_id' => true,
-        'rattery_father_id' => true,
-        'mother_id' => true,
-        'father_id' => true,
+        'mother_rattery_id' => true,
+        'father_rattery_id' => true,
+        'mother_rat_id' => true,
+        'father_rat_id' => true,
         'litter_id' => true,
-        'owner_id' => true,
+        'owner_user_id' => true,
         'color_id' => true,
         'earset_id' => true,
         'eyecolor_id' => true,
         'dilution_id' => true,
         'coat_id' => true,
         'marking_id' => true,
-        'user_creator_id' => true,
+        'creator_user_id' => true,
         'created' => true,
         'modified' => true,
+        'state_id' => true,
         'death_causes_primary' => true,
         'death_causes_secondary' => true,
         'rattery' => true,

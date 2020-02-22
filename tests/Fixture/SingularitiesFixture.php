@@ -45,8 +45,8 @@ class SingularitiesFixture extends TestFixture
                 'name_fr' => 'Lorem ipsum dolor sit amet',
                 'name_en' => 'Lorem ipsum dolor sit amet',
                 'picture' => 'Lorem ipsum dolor sit amet',
-                'created' => '2020-02-21 15:10:34',
-                'modified' => '2020-02-21 15:10:34',
+                'created' => '2020-02-22 11:39:55',
+                'modified' => '2020-02-22 11:39:55',
             ],
         ];
         parent::init();

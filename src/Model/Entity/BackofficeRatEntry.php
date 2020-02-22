@@ -9,38 +9,37 @@ use Cake\ORM\Entity;
  * BackofficeRatEntry Entity
  *
  * @property int $id
- * @property int|null $status
  * @property int|null $rat_id
- * @property string|null $rat_name_owner
- * @property string|null $rat_name_pup
- * @property string|null $rat_sex
- * @property string|null $rat_pedigree_identifier
- * @property \Cake\I18n\FrozenDate|null $rat_date_birth
- * @property \Cake\I18n\FrozenDate|null $rat_date_death
- * @property int|null $death_cause_primary_id
- * @property int|null $death_cause_secondary_id
- * @property bool|null $rat_death_euthanized
- * @property bool|null $rat_death_diagnosed
- * @property bool|null $rat_death_necropsied
- * @property string|null $rat_picture
- * @property string|null $rat_picture_thumbnail
- * @property string|null $rat_comments
- * @property int|null $rat_validated
- * @property int|null $rattery_mother_id
- * @property int|null $rattery_father_id
- * @property int|null $rat_mother_id
- * @property int|null $rat_father_id
- * @property int|null $user_owner_id
+ * @property string|null $owner_name
+ * @property string|null $pup_name
+ * @property string|null $sex
+ * @property string|null $pedigree_identifier
+ * @property \Cake\I18n\FrozenDate|null $birth_date
+ * @property \Cake\I18n\FrozenDate|null $death_date
+ * @property int|null $primary_death_cause_id
+ * @property int|null $secondary_death_cause_id
+ * @property bool|null $death_euthanized
+ * @property bool|null $death_diagnosed
+ * @property bool|null $death_necropsied
+ * @property string|null $picture
+ * @property string|null $picture_thumbnail
+ * @property string|null $comments
+ * @property bool|null $validated
+ * @property int|null $mother_rattery_id
+ * @property int|null $father_rattery_id
+ * @property int|null $mother_rat_id
+ * @property int|null $father_rat_id
+ * @property int|null $owner_user_id
  * @property int|null $color_id
  * @property int|null $earset_id
  * @property int|null $eyecolor_id
  * @property int|null $dilution_id
  * @property int|null $coat_id
  * @property int|null $marking_id
- * @property string|null $singularity_id_list
- * @property int|null $user_creator_id
- * @property \Cake\I18n\FrozenDate|null $rat_date_create
- * @property \Cake\I18n\FrozenDate|null $rat_date_last_update
+ * @property int|null $creator_user_id
+ * @property \Cake\I18n\FrozenDate|null $created
+ * @property \Cake\I18n\FrozenDate|null $modified
+ * @property int $state_id
  *
  * @property \App\Model\Entity\Rat $rat
  * @property \App\Model\Entity\DeathCausesPrimary $death_causes_primary
@@ -68,38 +67,37 @@ class BackofficeRatEntry extends Entity
      * @var array
      */
     protected $_accessible = [
-        'status' => true,
         'rat_id' => true,
-        'rat_name_owner' => true,
-        'rat_name_pup' => true,
-        'rat_sex' => true,
-        'rat_pedigree_identifier' => true,
-        'rat_date_birth' => true,
-        'rat_date_death' => true,
-        'death_cause_primary_id' => true,
-        'death_cause_secondary_id' => true,
-        'rat_death_euthanized' => true,
-        'rat_death_diagnosed' => true,
-        'rat_death_necropsied' => true,
-        'rat_picture' => true,
-        'rat_picture_thumbnail' => true,
-        'rat_comments' => true,
-        'rat_validated' => true,
-        'rattery_mother_id' => true,
-        'rattery_father_id' => true,
-        'rat_mother_id' => true,
-        'rat_father_id' => true,
-        'user_owner_id' => true,
+        'owner_name' => true,
+        'pup_name' => true,
+        'sex' => true,
+        'pedigree_identifier' => true,
+        'birth_date' => true,
+        'death_date' => true,
+        'primary_death_cause_id' => true,
+        'secondary_death_cause_id' => true,
+        'death_euthanized' => true,
+        'death_diagnosed' => true,
+        'death_necropsied' => true,
+        'picture' => true,
+        'picture_thumbnail' => true,
+        'comments' => true,
+        'validated' => true,
+        'mother_rattery_id' => true,
+        'father_rattery_id' => true,
+        'mother_rat_id' => true,
+        'father_rat_id' => true,
+        'owner_user_id' => true,
         'color_id' => true,
         'earset_id' => true,
         'eyecolor_id' => true,
         'dilution_id' => true,
         'coat_id' => true,
         'marking_id' => true,
-        'singularity_id_list' => true,
-        'user_creator_id' => true,
-        'rat_date_create' => true,
-        'rat_date_last_update' => true,
+        'creator_user_id' => true,
+        'created' => true,
+        'modified' => true,
+        'state_id' => true,
         'rat' => true,
         'death_causes_primary' => true,
         'death_causes_secondary' => true,

@@ -21,10 +21,10 @@
                     echo $this->Form->control('name_pup');
                     echo $this->Form->control('sex');
                     echo $this->Form->control('pedigree_identifier');
-                    echo $this->Form->control('date_birth', ['empty' => true]);
-                    echo $this->Form->control('date_death', ['empty' => true]);
-                    echo $this->Form->control('death_cause_primary_id', ['options' => $deathCausesPrimary, 'empty' => true]);
-                    echo $this->Form->control('death_cause_secondary_id', ['options' => $deathCausesSecondary, 'empty' => true]);
+                    echo $this->Form->control('birth_date', ['empty' => true]);
+                    echo $this->Form->control('death_date', ['empty' => true]);
+                    echo $this->Form->control('death_primary_cause_id', ['options' => $deathPrimaryCauses, 'empty' => true]);
+                    echo $this->Form->control('death_secondary_cause_id', ['options' => $deathSecondaryCauses, 'empty' => true]);
                     echo $this->Form->control('death_euthanized');
                     echo $this->Form->control('death_diagnosed');
                     echo $this->Form->control('death_necropsied');
@@ -32,19 +32,20 @@
                     echo $this->Form->control('picture_thumbnail');
                     echo $this->Form->control('comments');
                     echo $this->Form->control('validated');
-                    echo $this->Form->control('rattery_mother_id');
-                    echo $this->Form->control('rattery_father_id', ['options' => $ratteries, 'empty' => true]);
-                    echo $this->Form->control('mother_id');
-                    echo $this->Form->control('father_id', ['options' => $rats, 'empty' => true]);
+                    echo $this->Form->control('mother_rattery_id');
+                    echo $this->Form->control('father_rattery_id');
+                    echo $this->Form->control('mother_rat_id');
+                    echo $this->Form->control('father_rat_id');
                     echo $this->Form->control('litter_id', ['options' => $litters, 'empty' => true]);
-                    echo $this->Form->control('owner_id');
+                    echo $this->Form->control('owner_user_id');
                     echo $this->Form->control('color_id', ['options' => $colors, 'empty' => true]);
                     echo $this->Form->control('earset_id', ['options' => $earsets, 'empty' => true]);
                     echo $this->Form->control('eyecolor_id', ['options' => $eyecolors, 'empty' => true]);
                     echo $this->Form->control('dilution_id', ['options' => $dilutions, 'empty' => true]);
                     echo $this->Form->control('coat_id', ['options' => $coats, 'empty' => true]);
                     echo $this->Form->control('marking_id', ['options' => $markings, 'empty' => true]);
-                    echo $this->Form->control('user_creator_id', ['options' => $users]);
+                    echo $this->Form->control('creator_user_id');
+                    echo $this->Form->control('state_id', ['options' => $states]);
                     echo $this->Form->control('singularities._ids', ['options' => $singularities]);
                 ?>
             </fieldset>

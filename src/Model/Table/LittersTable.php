@@ -46,14 +46,14 @@ class LittersTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Rats', [
-            'foreignKey' => 'rat_mother_id',
+            'foreignKey' => 'mother_rat_id',
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('Rats', [
-            'foreignKey' => 'rat_father_id',
+            'foreignKey' => 'father_rat_id',
         ]);
         $this->belongsTo('Users', [
-            'foreignKey' => 'owner_id',
+            'foreignKey' => 'breeder_user_id',
             'joinType' => 'INNER',
         ]);
         $this->hasMany('Rats', [
@@ -74,18 +74,18 @@ class LittersTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->date('date_mating')
-            ->allowEmptyDate('date_mating');
+            ->date('mating_date')
+            ->allowEmptyDate('mating_date');
 
         $validator
-            ->date('date_birth')
-            ->allowEmptyDate('date_birth');
+            ->date('birth_date')
+            ->allowEmptyDate('birth_date');
 
         $validator
-            ->allowEmptyString('number_pups');
+            ->allowEmptyString('pups_number');
 
         $validator
-            ->allowEmptyString('number_pups_stillborn');
+            ->allowEmptyString('pups_number_stillborn');
 
         $validator
             ->scalar('comments')
@@ -103,9 +103,9 @@ class LittersTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['rat_mother_id'], 'Rats'));
-        $rules->add($rules->existsIn(['rat_father_id'], 'Rats'));
-        $rules->add($rules->existsIn(['owner_id'], 'Users'));
+        $rules->add($rules->existsIn(['mother_rat_id'], 'Rats'));
+        $rules->add($rules->existsIn(['father_rat_id'], 'Rats'));
+        $rules->add($rules->existsIn(['breeder_user_id'], 'Users'));
 
         return $rules;
     }

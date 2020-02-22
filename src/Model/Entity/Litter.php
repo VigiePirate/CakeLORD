@@ -9,14 +9,14 @@ use Cake\ORM\Entity;
  * Litter Entity
  *
  * @property int $id
- * @property \Cake\I18n\FrozenDate|null $date_mating
- * @property \Cake\I18n\FrozenDate|null $date_birth
- * @property int|null $number_pups
- * @property int|null $number_pups_stillborn
+ * @property \Cake\I18n\FrozenDate|null $mating_date
+ * @property \Cake\I18n\FrozenDate|null $birth_date
+ * @property int|null $pups_number
+ * @property int|null $pups_number_stillborn
  * @property string|null $comments
- * @property int $rat_mother_id
- * @property int|null $rat_father_id
- * @property int $owner_id
+ * @property int $mother_rat_id
+ * @property int|null $father_rat_id
+ * @property int $breeder_user_id
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
  *
@@ -35,14 +35,14 @@ class Litter extends Entity
      * @var array
      */
     protected $_accessible = [
-        'date_mating' => true,
-        'date_birth' => true,
-        'number_pups' => true,
-        'number_pups_stillborn' => true,
+        'mating_date' => true,
+        'birth_date' => true,
+        'pups_number' => true,
+        'pups_number_stillborn' => true,
         'comments' => true,
-        'rat_mother_id' => true,
-        'rat_father_id' => true,
-        'owner_id' => true,
+        'mother_rat_id' => true,
+        'father_rat_id' => true,
+        'breeder_user_id' => true,
         'created' => true,
         'modified' => true,
         'rats' => true,

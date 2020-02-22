@@ -31,12 +31,12 @@
                     <td><?= h($user->sex) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Name First') ?></th>
-                    <td><?= h($user->name_first) ?></td>
+                    <th><?= __('Firstname') ?></th>
+                    <td><?= h($user->firstname) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Name Last') ?></th>
-                    <td><?= h($user->name_last) ?></td>
+                    <th><?= __('Lastname') ?></th>
+                    <td><?= h($user->lastname) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Username') ?></th>
@@ -55,8 +55,8 @@
                     <td><?= $this->Number->format($user->failed_login_attempts) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Date Birth') ?></th>
-                    <td><?= h($user->date_birth) ?></td>
+                    <th><?= __('Birth Date') ?></th>
+                    <td><?= h($user->birth_date) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>
@@ -65,6 +65,10 @@
                 <tr>
                     <th><?= __('Modified') ?></th>
                     <td><?= h($user->modified) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Failed Login Date') ?></th>
+                    <td><?= h($user->failed_login_date) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Newsletter') ?></th>
