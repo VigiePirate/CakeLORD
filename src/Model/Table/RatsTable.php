@@ -58,22 +58,23 @@ class RatsTable extends Table
         ]);
         $this->belongsTo('MotherRatteries', [
             'className' => 'Ratteries',
-            'foreignKey' => 'rattery_id',
-            'propertyName' => 'mother_rattery_id'
+            'foreignKey' => 'id',
+            'propertyName' => 'mother_rattery_id',
+            // 'bindingKey' => 'mother_rattery_id'
         ]);
         $this->belongsTo('FatherRatteries', [
             'className' => 'Ratteries',
-            'foreignKey' => 'rattery_id',
+            'foreignKey' => 'id',
             'propertyName' => 'father_rattery_id'
         ]);
         $this->belongsTo('MotherRats', [
             'className' => 'Rats',
-            'foreignKey' => 'rat_id',
+            'foreignKey' => 'id',
             'propertyName' => 'mother_rat_id'
         ]);
         $this->belongsTo('FatherRats', [
             'className' => 'Rats',
-            'foreignKey' => 'rat_id',
+            'foreignKey' => 'id',
             'propertyName' => 'father_rat_id'
         ]);
         $this->belongsTo('Litters', [
@@ -81,7 +82,7 @@ class RatsTable extends Table
         ]);
         $this->belongsTo('OwnerUsers', [
             'className' => 'Users',
-            'foreignKey' => 'user_id',
+            'foreignKey' => 'id',
             'propertyName' => 'owner_user_id'
         ]);
         $this->belongsTo('Colors', [
