@@ -39,7 +39,7 @@
                     echo $this->Form->control('litter_id', ['options' => $litters, 'empty' => true]);
                     echo $this->Form->control('owner_user_id');
                     echo $this->Form->control('color_id', ['options' => $colors, 'empty' => true]);
-                    echo $this->Form->control('earset_name_fr', ['options' => $earsets, 'empty' => true]);
+                    echo $this->Form->control('earset_id', ['options' => $earsets->name_fr, 'empty' => true]);
                     echo $this->Form->control('eyecolor_id', ['options' => $eyecolors, 'empty' => true]);
                     echo $this->Form->control('dilution_id', ['options' => $dilutions, 'empty' => true]);
                     echo $this->Form->control('coat_id', ['options' => $coats, 'empty' => true]);
