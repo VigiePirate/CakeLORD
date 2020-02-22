@@ -67,7 +67,9 @@ class RatsTable extends Table
             'propertyName' => 'father_rattery_id'
         ]);
         $this->belongsTo('MotherRats', [
-            'foreignKey' => 'rat_id', // mother_rat_id
+            'className' => 'Rats',
+            'foreignKey' => 'rat_id',
+            'propertyName' => 'mother_rat_id'
         ]);
         $this->belongsTo('FatherRats', [
             'className' => 'Rats',
