@@ -61,20 +61,26 @@ class RatsTable extends Table
             'foreignKey' => 'rattery_id',
             'propertyName' => 'mother_rattery_id'
         ]);
-        $this->belongsTo('Ratteries', [
-            'foreignKey' => 'father_rattery_id',
+        $this->belongsTo('FatherRatteries', [
+            'className' => 'Ratteries',
+            'foreignKey' => 'rattery_id',
+            'propertyName' => 'father_rattery_id'
         ]);
-        $this->belongsTo('Rats', [
+        $this->belongsTo('MotherRats', [
             'foreignKey' => 'rat_id', // mother_rat_id
         ]);
-        $this->belongsTo('Rats', [
-            'foreignKey' => 'father_rat_id',
+        $this->belongsTo('FatherRats', [
+            'className' => 'Rats',
+            'foreignKey' => 'rat_id',
+            'propertyName' => 'father_rat_id'
         ]);
         $this->belongsTo('Litters', [
             'foreignKey' => 'litter_id',
         ]);
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id', // owner_user_id
+        $this->belongsTo('OwnerUsers', [
+            'className' => 'Users',
+            'foreignKey' => 'user_id',
+            'propertyName' => 'owner_user_id'
         ]);
         $this->belongsTo('Colors', [
             'foreignKey' => 'color_id',
@@ -94,8 +100,10 @@ class RatsTable extends Table
         $this->belongsTo('Markings', [
             'foreignKey' => 'marking_id',
         ]);
-        $this->belongsTo('Users', [
-            'foreignKey' => 'creator_user_id',
+        $this->belongsTo('CreatorUsers', [
+            'className' => 'Users',
+            'foreignKey' => 'user_id',
+            'propertyName' => 'creator_user_id',
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('States', [
