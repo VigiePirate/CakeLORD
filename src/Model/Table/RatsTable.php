@@ -56,23 +56,23 @@ class RatsTable extends Table
         $this->belongsTo('DeathSecondaryCauses', [
             'foreignKey' => 'death_secondary_cause_id',
         ]);
-        $this->belongsTo('MotherRatteries', [
+        $this->belongsTo('Ratteries', [
             'foreignKey' => 'mother_rattery_id',
         ]);
-        $this->belongsTo('FatherRatteries', [
+        $this->belongsTo('Ratteries', [
             'foreignKey' => 'father_rattery_id',
         ]);
-        $this->belongsTo('MotherRats', [
-            'foreignKey' => 'mother_rat_id',
+        $this->belongsTo('Rats', [
+            'foreignKey' => 'rat_id', // mother_rat_id
         ]);
-        $this->belongsTo('FatherRats', [
+        $this->belongsTo('Rats', [
             'foreignKey' => 'father_rat_id',
         ]);
         $this->belongsTo('Litters', [
             'foreignKey' => 'litter_id',
         ]);
-        $this->belongsTo('OwnerUsers', [
-            'foreignKey' => 'owner_user_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id', // owner_user_id
         ]);
         $this->belongsTo('Colors', [
             'foreignKey' => 'color_id',
