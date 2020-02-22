@@ -92,7 +92,7 @@ class RatsTable extends Table
         $this->belongsTo('Markings', [
             'foreignKey' => 'marking_id',
         ]);
-        $this->belongsTo('CreatorUsers', [
+        $this->belongsTo('Users', [
             'foreignKey' => 'creator_user_id',
             'joinType' => 'INNER',
         ]);
