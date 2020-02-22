@@ -105,7 +105,7 @@ class RatsTable extends Table
         ]);
         $this->belongsTo('CreatorUsers', [
             'className' => 'Users',
-            'foreignKey' => 'user_id',
+            'foreignKey' => 'id',
             'propertyName' => 'creator_user_id',
             'joinType' => 'INNER',
         ]);
