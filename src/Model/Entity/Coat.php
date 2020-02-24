@@ -12,7 +12,6 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property string $picture
  *
- * @property \App\Model\Entity\BackofficeRatEntry[] $backoffice_rat_entries
  * @property \App\Model\Entity\Rat[] $rats
  */
 class Coat extends Entity
@@ -29,7 +28,6 @@ class Coat extends Entity
     protected $_accessible = [
         'name' => true,
         'picture' => true,
-        'backoffice_rat_entries' => true,
         'rats' => true,
     ];
 }

@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * Messages Controller
  *
+ * @property \App\Model\Table\MessagesTable $Messages
  *
  * @method \App\Model\Entity\Message[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -18,6 +19,9 @@ class MessagesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Conversations', 'Users'],
+        ];
         $messages = $this->paginate($this->Messages);
 
         $this->set(compact('messages'));
@@ -33,7 +37,7 @@ class MessagesController extends AppController
     public function view($id = null)
     {
         $message = $this->Messages->get($id, [
-            'contain' => [],
+            'contain' => ['Conversations', 'Users'],
         ]);
 
         $this->set('message', $message);
@@ -56,7 +60,9 @@ class MessagesController extends AppController
             }
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
-        $this->set(compact('message'));
+        $conversations = $this->Messages->Conversations->find('list', ['limit' => 200]);
+        $users = $this->Messages->Users->find('list', ['limit' => 200]);
+        $this->set(compact('message', 'conversations', 'users'));
     }
 
     /**
@@ -80,7 +86,9 @@ class MessagesController extends AppController
             }
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
-        $this->set(compact('message'));
+        $conversations = $this->Messages->Conversations->find('list', ['limit' => 200]);
+        $users = $this->Messages->Users->find('list', ['limit' => 200]);
+        $this->set(compact('message', 'conversations', 'users'));
     }
 
     /**

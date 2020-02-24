@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $message
+ * @var \App\Model\Entity\Message $message
  */
 ?>
 <div class="row">
@@ -19,16 +19,16 @@
             <h3><?= h($message->id) ?></h3>
             <table>
                 <tr>
+                    <th><?= __('Conversation') ?></th>
+                    <td><?= $message->has('conversation') ? $this->Html->link($message->conversation->id, ['controller' => 'Conversations', 'action' => 'view', $message->conversation->id]) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('User') ?></th>
+                    <td><?= $message->has('user') ? $this->Html->link($message->user->id, ['controller' => 'Users', 'action' => 'view', $message->user->id]) : '' ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($message->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Conversation Id') ?></th>
-                    <td><?= $this->Number->format($message->conversation_id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('User Id') ?></th>
-                    <td><?= $this->Number->format($message->user_id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>

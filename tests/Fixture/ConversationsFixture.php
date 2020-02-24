@@ -54,8 +54,8 @@ class ConversationsFixture extends TestFixture
                 'rattery_id' => 1,
                 'litter_id' => 1,
                 'rat_id' => 1,
-                'created' => '2020-02-24 17:46:25',
-                'modified' => '2020-02-24 17:46:25',
+                'created' => '2020-02-24 20:26:19',
+                'modified' => '2020-02-24 20:26:19',
                 'is_active' => 1,
             ],
         ];

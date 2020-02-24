@@ -15,7 +15,6 @@ use Cake\ORM\Entity;
  * @property int|null $eyecolor_id
  *
  * @property \App\Model\Entity\Eyecolor $eyecolor
- * @property \App\Model\Entity\BackofficeRatEntry[] $backoffice_rat_entries
  * @property \App\Model\Entity\Rat[] $rats
  */
 class Color extends Entity
@@ -35,7 +34,6 @@ class Color extends Entity
         'picture' => true,
         'eyecolor_id' => true,
         'eyecolor' => true,
-        'backoffice_rat_entries' => true,
         'rats' => true,
     ];
 }

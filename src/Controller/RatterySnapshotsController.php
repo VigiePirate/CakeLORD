@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * RatterySnapshots Controller
  *
+ * @property \App\Model\Table\RatterySnapshotsTable $RatterySnapshots
  *
  * @method \App\Model\Entity\RatterySnapshot[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -18,6 +19,9 @@ class RatterySnapshotsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Ratteries', 'States'],
+        ];
         $ratterySnapshots = $this->paginate($this->RatterySnapshots);
 
         $this->set(compact('ratterySnapshots'));
@@ -33,7 +37,7 @@ class RatterySnapshotsController extends AppController
     public function view($id = null)
     {
         $ratterySnapshot = $this->RatterySnapshots->get($id, [
-            'contain' => [],
+            'contain' => ['Ratteries', 'States'],
         ]);
 
         $this->set('ratterySnapshot', $ratterySnapshot);
@@ -56,7 +60,9 @@ class RatterySnapshotsController extends AppController
             }
             $this->Flash->error(__('The rattery snapshot could not be saved. Please, try again.'));
         }
-        $this->set(compact('ratterySnapshot'));
+        $ratteries = $this->RatterySnapshots->Ratteries->find('list', ['limit' => 200]);
+        $states = $this->RatterySnapshots->States->find('list', ['limit' => 200]);
+        $this->set(compact('ratterySnapshot', 'ratteries', 'states'));
     }
 
     /**
@@ -80,7 +86,9 @@ class RatterySnapshotsController extends AppController
             }
             $this->Flash->error(__('The rattery snapshot could not be saved. Please, try again.'));
         }
-        $this->set(compact('ratterySnapshot'));
+        $ratteries = $this->RatterySnapshots->Ratteries->find('list', ['limit' => 200]);
+        $states = $this->RatterySnapshots->States->find('list', ['limit' => 200]);
+        $this->set(compact('ratterySnapshot', 'ratteries', 'states'));
     }
 
     /**

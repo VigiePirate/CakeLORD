@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * Logs Controller
  *
+ * @property \App\Model\Table\LogsTable $Logs
  *
  * @method \App\Model\Entity\Log[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */

@@ -34,7 +34,7 @@ class DilutionsController extends AppController
     public function view($id = null)
     {
         $dilution = $this->Dilutions->get($id, [
-            'contain' => ['BackofficeRatEntries', 'Rats'],
+            'contain' => ['Rats'],
         ]);
 
         $this->set('dilution', $dilution);

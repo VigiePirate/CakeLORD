@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $ratSnapshot
+ * @var \App\Model\Entity\RatSnapshot $ratSnapshot
  */
 ?>
 <div class="row">
@@ -19,16 +19,16 @@
             <h3><?= h($ratSnapshot->id) ?></h3>
             <table>
                 <tr>
+                    <th><?= __('Rat') ?></th>
+                    <td><?= $ratSnapshot->has('rat') ? $this->Html->link($ratSnapshot->rat->id, ['controller' => 'Rats', 'action' => 'view', $ratSnapshot->rat->id]) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('State') ?></th>
+                    <td><?= $ratSnapshot->has('state') ? $this->Html->link($ratSnapshot->state->name, ['controller' => 'States', 'action' => 'view', $ratSnapshot->state->id]) : '' ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($ratSnapshot->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Rat Id') ?></th>
-                    <td><?= $this->Number->format($ratSnapshot->rat_id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('State Id') ?></th>
-                    <td><?= $this->Number->format($ratSnapshot->state_id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>

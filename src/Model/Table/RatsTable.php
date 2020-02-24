@@ -13,14 +13,23 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\DeathPrimaryCausesTable&\Cake\ORM\Association\BelongsTo $DeathPrimaryCauses
  * @property \App\Model\Table\DeathSecondaryCausesTable&\Cake\ORM\Association\BelongsTo $DeathSecondaryCauses
+ * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
+ * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
+ * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsTo $Rats
+ * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsTo $Rats
  * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsTo $Litters
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\ColorsTable&\Cake\ORM\Association\BelongsTo $Colors
  * @property \App\Model\Table\EarsetsTable&\Cake\ORM\Association\BelongsTo $Earsets
  * @property \App\Model\Table\EyecolorsTable&\Cake\ORM\Association\BelongsTo $Eyecolors
  * @property \App\Model\Table\DilutionsTable&\Cake\ORM\Association\BelongsTo $Dilutions
  * @property \App\Model\Table\CoatsTable&\Cake\ORM\Association\BelongsTo $Coats
  * @property \App\Model\Table\MarkingsTable&\Cake\ORM\Association\BelongsTo $Markings
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
+ * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
+ * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\HasMany $Conversations
+ * @property \App\Model\Table\RatSnapshotsTable&\Cake\ORM\Association\HasMany $RatSnapshots
  * @property \App\Model\Table\SingularitiesTable&\Cake\ORM\Association\BelongsToMany $Singularities
  *
  * @method \App\Model\Entity\Rat get($primaryKey, $options = [])
@@ -198,7 +207,6 @@ class RatsTable extends Table
 
         $validator
             ->boolean('is_alive')
-            ->requirePresence('is_alive', 'create')
             ->notEmptyString('is_alive');
 
         return $validator;

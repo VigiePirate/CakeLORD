@@ -36,11 +36,11 @@
                     <td><?= $this->Number->format($litter->pups_number_stillborn) ?></td>
                     <td><?= $this->Number->format($litter->mother_rat_id) ?></td>
                     <td><?= $this->Number->format($litter->father_rat_id) ?></td>
-                    <td><?= $this->Number->format($litter->creator_user_id) ?></td>
+                    <td><?= $litter->has('user') ? $this->Html->link($litter->user->id, ['controller' => 'Users', 'action' => 'view', $litter->user->id]) : '' ?></td>
                     <td><?= h($litter->created) ?></td>
                     <td><?= h($litter->modified) ?></td>
-                    <td><?= $this->Number->format($litter->state_id) ?></td>
-                    <td><?= $this->Number->format($litter->rattery_id) ?></td>
+                    <td><?= $litter->has('state') ? $this->Html->link($litter->state->name, ['controller' => 'States', 'action' => 'view', $litter->state->id]) : '' ?></td>
+                    <td><?= $litter->has('rattery') ? $this->Html->link($litter->rattery->name, ['controller' => 'Ratteries', 'action' => 'view', $litter->rattery->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $litter->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $litter->id]) ?>

@@ -24,9 +24,9 @@
                     echo $this->Form->control('comments');
                     echo $this->Form->control('mother_rat_id');
                     echo $this->Form->control('father_rat_id');
-                    echo $this->Form->control('creator_user_id');
-                    echo $this->Form->control('state_id');
-                    echo $this->Form->control('rattery_id');
+                    echo $this->Form->control('creator_user_id', ['options' => $users]);
+                    echo $this->Form->control('state_id', ['options' => $states]);
+                    echo $this->Form->control('rattery_id', ['options' => $ratteries]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

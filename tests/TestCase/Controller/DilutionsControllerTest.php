@@ -23,7 +23,6 @@ class DilutionsControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Dilutions',
-        'app.BackofficeRatEntries',
         'app.Rats',
     ];
 

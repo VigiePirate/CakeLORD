@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * UsersConversations Controller
  *
+ * @property \App\Model\Table\UsersConversationsTable $UsersConversations
  *
  * @method \App\Model\Entity\UsersConversation[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -18,6 +19,9 @@ class UsersConversationsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Users', 'Conversations'],
+        ];
         $usersConversations = $this->paginate($this->UsersConversations);
 
         $this->set(compact('usersConversations'));
@@ -33,7 +37,7 @@ class UsersConversationsController extends AppController
     public function view($id = null)
     {
         $usersConversation = $this->UsersConversations->get($id, [
-            'contain' => [],
+            'contain' => ['Users', 'Conversations'],
         ]);
 
         $this->set('usersConversation', $usersConversation);
@@ -56,7 +60,9 @@ class UsersConversationsController extends AppController
             }
             $this->Flash->error(__('The users conversation could not be saved. Please, try again.'));
         }
-        $this->set(compact('usersConversation'));
+        $users = $this->UsersConversations->Users->find('list', ['limit' => 200]);
+        $conversations = $this->UsersConversations->Conversations->find('list', ['limit' => 200]);
+        $this->set(compact('usersConversation', 'users', 'conversations'));
     }
 
     /**
@@ -80,7 +86,9 @@ class UsersConversationsController extends AppController
             }
             $this->Flash->error(__('The users conversation could not be saved. Please, try again.'));
         }
-        $this->set(compact('usersConversation'));
+        $users = $this->UsersConversations->Users->find('list', ['limit' => 200]);
+        $conversations = $this->UsersConversations->Conversations->find('list', ['limit' => 200]);
+        $this->set(compact('usersConversation', 'users', 'conversations'));
     }
 
     /**

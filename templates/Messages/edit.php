@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $message
+ * @var \App\Model\Entity\Message $message
  */
 ?>
 <div class="row">
@@ -23,7 +23,7 @@
                 <legend><?= __('Edit Message') ?></legend>
                 <?php
                     echo $this->Form->control('content');
-                    echo $this->Form->control('user_id');
+                    echo $this->Form->control('user_id', ['options' => $users]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

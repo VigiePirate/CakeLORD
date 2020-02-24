@@ -12,8 +12,12 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property string $color
  *
- * @property \App\Model\Entity\BackofficeRatEntry[] $backoffice_rat_entries
+ * @property \App\Model\Entity\LitterSnapshot[] $litter_snapshots
+ * @property \App\Model\Entity\Litter[] $litters
+ * @property \App\Model\Entity\RatSnapshot[] $rat_snapshots
  * @property \App\Model\Entity\Rat[] $rats
+ * @property \App\Model\Entity\Rattery[] $ratteries
+ * @property \App\Model\Entity\RatterySnapshot[] $rattery_snapshots
  */
 class State extends Entity
 {
@@ -29,7 +33,11 @@ class State extends Entity
     protected $_accessible = [
         'name' => true,
         'color' => true,
-        'backoffice_rat_entries' => true,
+        'litter_snapshots' => true,
+        'litters' => true,
+        'rat_snapshots' => true,
         'rats' => true,
+        'ratteries' => true,
+        'rattery_snapshots' => true,
     ];
 }

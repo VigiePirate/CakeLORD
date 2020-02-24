@@ -36,7 +36,7 @@
                     <td><?= h($rattery->birth_year) ?></td>
                     <td><?= h($rattery->created) ?></td>
                     <td><?= h($rattery->modified) ?></td>
-                    <td><?= $this->Number->format($rattery->state_id) ?></td>
+                    <td><?= $rattery->has('state') ? $this->Html->link($rattery->state->name, ['controller' => 'States', 'action' => 'view', $rattery->state->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $rattery->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rattery->id]) ?>

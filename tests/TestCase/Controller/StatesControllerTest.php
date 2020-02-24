@@ -23,8 +23,12 @@ class StatesControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.States',
-        'app.BackofficeRatEntries',
+        'app.LitterSnapshots',
+        'app.Litters',
+        'app.RatSnapshots',
         'app.Rats',
+        'app.Ratteries',
+        'app.RatterySnapshots',
     ];
 
     /**

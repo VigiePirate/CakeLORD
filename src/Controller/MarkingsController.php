@@ -34,7 +34,7 @@ class MarkingsController extends AppController
     public function view($id = null)
     {
         $marking = $this->Markings->get($id, [
-            'contain' => ['BackofficeRatEntries', 'Rats'],
+            'contain' => ['Rats'],
         ]);
 
         $this->set('marking', $marking);

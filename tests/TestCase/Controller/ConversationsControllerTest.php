@@ -23,6 +23,12 @@ class ConversationsControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Conversations',
+        'app.Ratteries',
+        'app.Litters',
+        'app.Rats',
+        'app.Messages',
+        'app.Users',
+        'app.UsersConversations',
     ];
 
     /**

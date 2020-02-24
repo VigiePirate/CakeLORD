@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $usersConversation
+ * @var \App\Model\Entity\UsersConversation $usersConversation
  */
 ?>
 <div class="row">
@@ -19,12 +19,12 @@
             <h3><?= h($usersConversation->user_id) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('User Id') ?></th>
-                    <td><?= $this->Number->format($usersConversation->user_id) ?></td>
+                    <th><?= __('User') ?></th>
+                    <td><?= $usersConversation->has('user') ? $this->Html->link($usersConversation->user->id, ['controller' => 'Users', 'action' => 'view', $usersConversation->user->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Conversation Id') ?></th>
-                    <td><?= $this->Number->format($usersConversation->conversation_id) ?></td>
+                    <th><?= __('Conversation') ?></th>
+                    <td><?= $usersConversation->has('conversation') ? $this->Html->link($usersConversation->conversation->id, ['controller' => 'Conversations', 'action' => 'view', $usersConversation->conversation->id]) : '' ?></td>
                 </tr>
             </table>
         </div>

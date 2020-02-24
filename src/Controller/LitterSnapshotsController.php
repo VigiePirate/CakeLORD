@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * LitterSnapshots Controller
  *
+ * @property \App\Model\Table\LitterSnapshotsTable $LitterSnapshots
  *
  * @method \App\Model\Entity\LitterSnapshot[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -18,6 +19,9 @@ class LitterSnapshotsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Litters', 'States'],
+        ];
         $litterSnapshots = $this->paginate($this->LitterSnapshots);
 
         $this->set(compact('litterSnapshots'));
@@ -33,7 +37,7 @@ class LitterSnapshotsController extends AppController
     public function view($id = null)
     {
         $litterSnapshot = $this->LitterSnapshots->get($id, [
-            'contain' => [],
+            'contain' => ['Litters', 'States'],
         ]);
 
         $this->set('litterSnapshot', $litterSnapshot);
@@ -56,7 +60,9 @@ class LitterSnapshotsController extends AppController
             }
             $this->Flash->error(__('The litter snapshot could not be saved. Please, try again.'));
         }
-        $this->set(compact('litterSnapshot'));
+        $litters = $this->LitterSnapshots->Litters->find('list', ['limit' => 200]);
+        $states = $this->LitterSnapshots->States->find('list', ['limit' => 200]);
+        $this->set(compact('litterSnapshot', 'litters', 'states'));
     }
 
     /**
@@ -80,7 +86,9 @@ class LitterSnapshotsController extends AppController
             }
             $this->Flash->error(__('The litter snapshot could not be saved. Please, try again.'));
         }
-        $this->set(compact('litterSnapshot'));
+        $litters = $this->LitterSnapshots->Litters->find('list', ['limit' => 200]);
+        $states = $this->LitterSnapshots->States->find('list', ['limit' => 200]);
+        $this->set(compact('litterSnapshot', 'litters', 'states'));
     }
 
     /**

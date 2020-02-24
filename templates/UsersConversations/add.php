@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $usersConversation
+ * @var \App\Model\Entity\UsersConversation $usersConversation
  */
 ?>
 <div class="row">

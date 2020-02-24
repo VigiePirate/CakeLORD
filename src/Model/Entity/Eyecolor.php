@@ -12,7 +12,6 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property string $picture
  *
- * @property \App\Model\Entity\BackofficeRatEntry[] $backoffice_rat_entries
  * @property \App\Model\Entity\Color[] $colors
  * @property \App\Model\Entity\Rat[] $rats
  */
@@ -30,7 +29,6 @@ class Eyecolor extends Entity
     protected $_accessible = [
         'name' => true,
         'picture' => true,
-        'backoffice_rat_entries' => true,
         'colors' => true,
         'rats' => true,
     ];

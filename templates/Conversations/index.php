@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface[]|\Cake\Collection\CollectionInterface $conversations
+ * @var \App\Model\Entity\Conversation[]|\Cake\Collection\CollectionInterface $conversations
  */
 ?>
 <div class="conversations index content">
@@ -25,9 +25,9 @@
                 <?php foreach ($conversations as $conversation): ?>
                 <tr>
                     <td><?= $this->Number->format($conversation->id) ?></td>
-                    <td><?= $this->Number->format($conversation->rattery_id) ?></td>
-                    <td><?= $this->Number->format($conversation->litter_id) ?></td>
-                    <td><?= $this->Number->format($conversation->rat_id) ?></td>
+                    <td><?= $conversation->has('rattery') ? $this->Html->link($conversation->rattery->name, ['controller' => 'Ratteries', 'action' => 'view', $conversation->rattery->id]) : '' ?></td>
+                    <td><?= $conversation->has('litter') ? $this->Html->link($conversation->litter->id, ['controller' => 'Litters', 'action' => 'view', $conversation->litter->id]) : '' ?></td>
+                    <td><?= $conversation->has('rat') ? $this->Html->link($conversation->rat->id, ['controller' => 'Rats', 'action' => 'view', $conversation->rat->id]) : '' ?></td>
                     <td><?= h($conversation->created) ?></td>
                     <td><?= h($conversation->modified) ?></td>
                     <td><?= h($conversation->is_active) ?></td>

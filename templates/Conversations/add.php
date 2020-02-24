@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $conversation
+ * @var \App\Model\Entity\Conversation $conversation
  */
 ?>
 <div class="row">
@@ -17,10 +17,11 @@
             <fieldset>
                 <legend><?= __('Add Conversation') ?></legend>
                 <?php
-                    echo $this->Form->control('rattery_id');
-                    echo $this->Form->control('litter_id');
-                    echo $this->Form->control('rat_id');
+                    echo $this->Form->control('rattery_id', ['options' => $ratteries]);
+                    echo $this->Form->control('litter_id', ['options' => $litters]);
+                    echo $this->Form->control('rat_id', ['options' => $rats]);
                     echo $this->Form->control('is_active');
+                    echo $this->Form->control('users._ids', ['options' => $users]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

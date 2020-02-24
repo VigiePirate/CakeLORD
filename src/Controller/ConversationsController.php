@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * Conversations Controller
  *
+ * @property \App\Model\Table\ConversationsTable $Conversations
  *
  * @method \App\Model\Entity\Conversation[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -18,6 +19,9 @@ class ConversationsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Ratteries', 'Litters', 'Rats'],
+        ];
         $conversations = $this->paginate($this->Conversations);
 
         $this->set(compact('conversations'));
@@ -33,7 +37,7 @@ class ConversationsController extends AppController
     public function view($id = null)
     {
         $conversation = $this->Conversations->get($id, [
-            'contain' => [],
+            'contain' => ['Ratteries', 'Litters', 'Rats', 'Users', 'Messages'],
         ]);
 
         $this->set('conversation', $conversation);
@@ -56,7 +60,11 @@ class ConversationsController extends AppController
             }
             $this->Flash->error(__('The conversation could not be saved. Please, try again.'));
         }
-        $this->set(compact('conversation'));
+        $ratteries = $this->Conversations->Ratteries->find('list', ['limit' => 200]);
+        $litters = $this->Conversations->Litters->find('list', ['limit' => 200]);
+        $rats = $this->Conversations->Rats->find('list', ['limit' => 200]);
+        $users = $this->Conversations->Users->find('list', ['limit' => 200]);
+        $this->set(compact('conversation', 'ratteries', 'litters', 'rats', 'users'));
     }
 
     /**
@@ -69,7 +77,7 @@ class ConversationsController extends AppController
     public function edit($id = null)
     {
         $conversation = $this->Conversations->get($id, [
-            'contain' => [],
+            'contain' => ['Users'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $conversation = $this->Conversations->patchEntity($conversation, $this->request->getData());
@@ -80,7 +88,11 @@ class ConversationsController extends AppController
             }
             $this->Flash->error(__('The conversation could not be saved. Please, try again.'));
         }
-        $this->set(compact('conversation'));
+        $ratteries = $this->Conversations->Ratteries->find('list', ['limit' => 200]);
+        $litters = $this->Conversations->Litters->find('list', ['limit' => 200]);
+        $rats = $this->Conversations->Rats->find('list', ['limit' => 200]);
+        $users = $this->Conversations->Users->find('list', ['limit' => 200]);
+        $this->set(compact('conversation', 'ratteries', 'litters', 'rats', 'users'));
     }
 
     /**

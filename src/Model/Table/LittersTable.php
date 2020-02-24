@@ -14,6 +14,10 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsTo $Rats
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsTo $Rats
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
+ * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
+ * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\HasMany $Conversations
+ * @property \App\Model\Table\LitterSnapshotsTable&\Cake\ORM\Association\HasMany $LitterSnapshots
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  *
  * @method \App\Model\Entity\Litter get($primaryKey, $options = [])

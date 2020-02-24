@@ -26,7 +26,6 @@ class SingularitiesTableTest extends TestCase
      */
     protected $fixtures = [
         'app.Singularities',
-        'app.BackofficeRatEntries',
         'app.Rats',
     ];
 
@@ -70,6 +69,16 @@ class SingularitiesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

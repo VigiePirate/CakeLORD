@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $log
+ * @var \App\Model\Entity\Log $log
  */
 ?>
 <div class="row">

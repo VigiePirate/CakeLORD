@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface[]|\Cake\Collection\CollectionInterface $ratSnapshots
+ * @var \App\Model\Entity\RatSnapshot[]|\Cake\Collection\CollectionInterface $ratSnapshots
  */
 ?>
 <div class="ratSnapshots index content">
@@ -23,8 +23,8 @@
                 <tr>
                     <td><?= $this->Number->format($ratSnapshot->id) ?></td>
                     <td><?= h($ratSnapshot->created) ?></td>
-                    <td><?= $this->Number->format($ratSnapshot->rat_id) ?></td>
-                    <td><?= $this->Number->format($ratSnapshot->state_id) ?></td>
+                    <td><?= $ratSnapshot->has('rat') ? $this->Html->link($ratSnapshot->rat->id, ['controller' => 'Rats', 'action' => 'view', $ratSnapshot->rat->id]) : '' ?></td>
+                    <td><?= $ratSnapshot->has('state') ? $this->Html->link($ratSnapshot->state->name, ['controller' => 'States', 'action' => 'view', $ratSnapshot->state->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $ratSnapshot->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $ratSnapshot->id]) ?>

@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface[]|\Cake\Collection\CollectionInterface $usersConversations
+ * @var \App\Model\Entity\UsersConversation[]|\Cake\Collection\CollectionInterface $usersConversations
  */
 ?>
 <div class="usersConversations index content">
@@ -19,8 +19,8 @@
             <tbody>
                 <?php foreach ($usersConversations as $usersConversation): ?>
                 <tr>
-                    <td><?= $this->Number->format($usersConversation->user_id) ?></td>
-                    <td><?= $this->Number->format($usersConversation->conversation_id) ?></td>
+                    <td><?= $usersConversation->has('user') ? $this->Html->link($usersConversation->user->id, ['controller' => 'Users', 'action' => 'view', $usersConversation->user->id]) : '' ?></td>
+                    <td><?= $usersConversation->has('conversation') ? $this->Html->link($usersConversation->conversation->id, ['controller' => 'Conversations', 'action' => 'view', $usersConversation->conversation->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $usersConversation->user_id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $usersConversation->user_id]) ?>

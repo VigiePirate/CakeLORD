@@ -24,27 +24,30 @@ use Cake\ORM\Entity;
  * @property string|null $picture_thumbnail
  * @property string|null $comments
  * @property bool $is_alive
+ * @property int|null $mother_rattery_id
+ * @property int|null $father_rattery_id
+ * @property int|null $mother_rat_id
+ * @property int|null $father_rat_id
  * @property int|null $litter_id
+ * @property int|null $owner_user_id
  * @property int $color_id
  * @property int $earset_id
  * @property int $eyecolor_id
  * @property int $dilution_id
  * @property int $coat_id
  * @property int $marking_id
+ * @property int $creator_user_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  * @property int $state_id
  * @property int $rattery_id
  *
- * @property \App\Model\Entity\Rattery $mother_rattery_id
- * @property \App\Model\Entity\Rattery $father_rattery_id
- * @property \App\Model\Entity\Rat $mother_rat_id
- * @property \App\Model\Entity\Rat $father_rat_id
- * @property \App\Model\Entity\User $owner_user_id
- * @property \App\Model\Entity\User $creator_user_id
  * @property \App\Model\Entity\DeathPrimaryCause $death_primary_cause
  * @property \App\Model\Entity\DeathSecondaryCause $death_secondary_cause
+ * @property \App\Model\Entity\Rattery $rattery
+ * @property \App\Model\Entity\Rat $rat
  * @property \App\Model\Entity\Litter $litter
+ * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Color $color
  * @property \App\Model\Entity\Earset $earset
  * @property \App\Model\Entity\Eyecolor $eyecolor
@@ -52,7 +55,8 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Coat $coat
  * @property \App\Model\Entity\Marking $marking
  * @property \App\Model\Entity\State $state
- * @property \App\Model\Entity\BackofficeRatEntry[] $backoffice_rat_entries
+ * @property \App\Model\Entity\Conversation[] $conversations
+ * @property \App\Model\Entity\RatSnapshot[] $rat_snapshots
  * @property \App\Model\Entity\Singularity[] $singularities
  */
 class Rat extends Entity
@@ -101,7 +105,10 @@ class Rat extends Entity
         'rattery_id' => true,
         'death_primary_cause' => true,
         'death_secondary_cause' => true,
+        'rattery' => true,
+        'rat' => true,
         'litter' => true,
+        'user' => true,
         'color' => true,
         'earset' => true,
         'eyecolor' => true,
@@ -109,7 +116,8 @@ class Rat extends Entity
         'coat' => true,
         'marking' => true,
         'state' => true,
-        'backoffice_rat_entries' => true,
+        'conversations' => true,
+        'rat_snapshots' => true,
         'singularities' => true,
     ];
 }

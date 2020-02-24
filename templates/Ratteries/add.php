@@ -24,7 +24,7 @@
                     echo $this->Form->control('picture');
                     echo $this->Form->control('is_alive');
                     echo $this->Form->control('birth_year');
-                    echo $this->Form->control('state_id');
+                    echo $this->Form->control('state_id', ['options' => $states]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

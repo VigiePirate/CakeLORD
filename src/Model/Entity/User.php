@@ -19,12 +19,14 @@ use Cake\ORM\Entity;
  * @property bool $newsletter
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
- * @property int|null $role_id
+ * @property int $role_id
  * @property bool $is_locked
  * @property int $failed_login_attempts
  * @property \Cake\I18n\FrozenTime $failed_login_last_date
  *
  * @property \App\Model\Entity\Role $role
+ * @property \App\Model\Entity\Message[] $messages
+ * @property \App\Model\Entity\Conversation[] $conversations
  */
 class User extends Entity
 {
@@ -53,6 +55,8 @@ class User extends Entity
         'failed_login_attempts' => true,
         'failed_login_last_date' => true,
         'role' => true,
+        'messages' => true,
+        'conversations' => true,
     ];
 
     /**

@@ -12,6 +12,11 @@ use Cake\Validation\Validator;
  * Ratteries Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
+ * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\HasMany $Conversations
+ * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\HasMany $Litters
+ * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
+ * @property \App\Model\Table\RatterySnapshotsTable&\Cake\ORM\Association\HasMany $RatterySnapshots
  *
  * @method \App\Model\Entity\Rattery get($primaryKey, $options = [])
  * @method \App\Model\Entity\Rattery newEntity($data = null, array $options = [])

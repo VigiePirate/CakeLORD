@@ -11,7 +11,12 @@ use Cake\Validation\Validator;
 /**
  * States Model
  *
+ * @property \App\Model\Table\LitterSnapshotsTable&\Cake\ORM\Association\HasMany $LitterSnapshots
+ * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\HasMany $Litters
+ * @property \App\Model\Table\RatSnapshotsTable&\Cake\ORM\Association\HasMany $RatSnapshots
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
+ * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\HasMany $Ratteries
+ * @property \App\Model\Table\RatterySnapshotsTable&\Cake\ORM\Association\HasMany $RatterySnapshots
  *
  * @method \App\Model\Entity\State get($primaryKey, $options = [])
  * @method \App\Model\Entity\State newEntity($data = null, array $options = [])

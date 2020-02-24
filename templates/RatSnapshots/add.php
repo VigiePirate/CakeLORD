@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $ratSnapshot
+ * @var \App\Model\Entity\RatSnapshot $ratSnapshot
  */
 ?>
 <div class="row">
@@ -18,8 +18,8 @@
                 <legend><?= __('Add Rat Snapshot') ?></legend>
                 <?php
                     echo $this->Form->control('data');
-                    echo $this->Form->control('rat_id');
-                    echo $this->Form->control('state_id');
+                    echo $this->Form->control('rat_id', ['options' => $rats]);
+                    echo $this->Form->control('state_id', ['options' => $states]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

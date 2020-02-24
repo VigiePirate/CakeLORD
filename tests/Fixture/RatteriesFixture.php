@@ -25,9 +25,9 @@ class RatteriesFixture extends TestFixture
         'picture' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'is_alive' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '1', 'comment' => '', 'precision' => null],
         'birth_year' => ['type' => 'string', 'length' => null, 'null' => true, 'default' => null, 'collate' => null, 'comment' => '', 'precision' => null],
-        'created' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => null, 'comment' => ''],
-        'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => null, 'comment' => ''],
-        'state_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'created' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => '1981-08-01 00:00:00', 'comment' => ''],
+        'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => '1981-08-01 00:00:00', 'comment' => ''],
+        'state_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => '1', 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
             'fk_lord_ratteries_lord_users1' => ['type' => 'index', 'columns' => ['owner_id'], 'length' => []],
             'fk_ratteries_states1' => ['type' => 'index', 'columns' => ['state_id'], 'length' => []],
@@ -62,8 +62,8 @@ class RatteriesFixture extends TestFixture
                 'picture' => 'Lorem ipsum dolor sit amet',
                 'is_alive' => 1,
                 'birth_year' => 'Lorem ipsum dolor sit amet',
-                'created' => '2020-02-24 17:46:25',
-                'modified' => '2020-02-24 17:46:25',
+                'created' => '2020-02-24 20:26:19',
+                'modified' => '2020-02-24 20:26:19',
                 'state_id' => 1,
             ],
         ];

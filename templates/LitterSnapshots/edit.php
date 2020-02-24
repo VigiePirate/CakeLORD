@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $litterSnapshot
+ * @var \App\Model\Entity\LitterSnapshot $litterSnapshot
  */
 ?>
 <div class="row">
@@ -23,8 +23,8 @@
                 <legend><?= __('Edit Litter Snapshot') ?></legend>
                 <?php
                     echo $this->Form->control('data');
-                    echo $this->Form->control('litter_id');
-                    echo $this->Form->control('state_id');
+                    echo $this->Form->control('litter_id', ['options' => $litters]);
+                    echo $this->Form->control('state_id', ['options' => $states]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

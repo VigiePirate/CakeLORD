@@ -23,7 +23,6 @@ class EarsetsControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Earsets',
-        'app.BackofficeRatEntries',
         'app.Rats',
     ];
 

@@ -37,7 +37,7 @@ class ColorsController extends AppController
     public function view($id = null)
     {
         $color = $this->Colors->get($id, [
-            'contain' => ['Eyecolors', 'BackofficeRatEntries', 'Rats'],
+            'contain' => ['Eyecolors', 'Rats'],
         ]);
 
         $this->set('color', $color);

@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $ratterySnapshot
+ * @var \App\Model\Entity\RatterySnapshot $ratterySnapshot
  */
 ?>
 <div class="row">
@@ -19,16 +19,16 @@
             <h3><?= h($ratterySnapshot->id) ?></h3>
             <table>
                 <tr>
+                    <th><?= __('Rattery') ?></th>
+                    <td><?= $ratterySnapshot->has('rattery') ? $this->Html->link($ratterySnapshot->rattery->name, ['controller' => 'Ratteries', 'action' => 'view', $ratterySnapshot->rattery->id]) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('State') ?></th>
+                    <td><?= $ratterySnapshot->has('state') ? $this->Html->link($ratterySnapshot->state->name, ['controller' => 'States', 'action' => 'view', $ratterySnapshot->state->id]) : '' ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($ratterySnapshot->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Rattery Id') ?></th>
-                    <td><?= $this->Number->format($ratterySnapshot->rattery_id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('State Id') ?></th>
-                    <td><?= $this->Number->format($ratterySnapshot->state_id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>

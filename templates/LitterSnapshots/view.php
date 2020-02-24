@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $litterSnapshot
+ * @var \App\Model\Entity\LitterSnapshot $litterSnapshot
  */
 ?>
 <div class="row">
@@ -19,16 +19,16 @@
             <h3><?= h($litterSnapshot->id) ?></h3>
             <table>
                 <tr>
+                    <th><?= __('Litter') ?></th>
+                    <td><?= $litterSnapshot->has('litter') ? $this->Html->link($litterSnapshot->litter->id, ['controller' => 'Litters', 'action' => 'view', $litterSnapshot->litter->id]) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('State') ?></th>
+                    <td><?= $litterSnapshot->has('state') ? $this->Html->link($litterSnapshot->state->name, ['controller' => 'States', 'action' => 'view', $litterSnapshot->state->id]) : '' ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($litterSnapshot->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Litter Id') ?></th>
-                    <td><?= $this->Number->format($litterSnapshot->litter_id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('State Id') ?></th>
-                    <td><?= $this->Number->format($litterSnapshot->state_id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>

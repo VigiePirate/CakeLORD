@@ -34,7 +34,7 @@ class CoatsController extends AppController
     public function view($id = null)
     {
         $coat = $this->Coats->get($id, [
-            'contain' => ['BackofficeRatEntries', 'Rats'],
+            'contain' => ['Rats'],
         ]);
 
         $this->set('coat', $coat);

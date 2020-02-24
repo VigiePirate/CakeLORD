@@ -32,6 +32,115 @@
                 </tr>
             </table>
             <div class="related">
+                <h4><?= __('Related Litter Snapshots') ?></h4>
+                <?php if (!empty($state->litter_snapshots)) : ?>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Data') ?></th>
+                            <th><?= __('Created') ?></th>
+                            <th><?= __('Litter Id') ?></th>
+                            <th><?= __('State Id') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($state->litter_snapshots as $litterSnapshots) : ?>
+                        <tr>
+                            <td><?= h($litterSnapshots->id) ?></td>
+                            <td><?= h($litterSnapshots->data) ?></td>
+                            <td><?= h($litterSnapshots->created) ?></td>
+                            <td><?= h($litterSnapshots->litter_id) ?></td>
+                            <td><?= h($litterSnapshots->state_id) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['controller' => 'LitterSnapshots', 'action' => 'view', $litterSnapshots->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'LitterSnapshots', 'action' => 'edit', $litterSnapshots->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'LitterSnapshots', 'action' => 'delete', $litterSnapshots->id], ['confirm' => __('Are you sure you want to delete # {0}?', $litterSnapshots->id)]) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+            </div>
+            <div class="related">
+                <h4><?= __('Related Litters') ?></h4>
+                <?php if (!empty($state->litters)) : ?>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Mating Date') ?></th>
+                            <th><?= __('Birth Date') ?></th>
+                            <th><?= __('Pups Number') ?></th>
+                            <th><?= __('Pups Number Stillborn') ?></th>
+                            <th><?= __('Comments') ?></th>
+                            <th><?= __('Mother Rat Id') ?></th>
+                            <th><?= __('Father Rat Id') ?></th>
+                            <th><?= __('Creator User Id') ?></th>
+                            <th><?= __('Created') ?></th>
+                            <th><?= __('Modified') ?></th>
+                            <th><?= __('State Id') ?></th>
+                            <th><?= __('Rattery Id') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($state->litters as $litters) : ?>
+                        <tr>
+                            <td><?= h($litters->id) ?></td>
+                            <td><?= h($litters->mating_date) ?></td>
+                            <td><?= h($litters->birth_date) ?></td>
+                            <td><?= h($litters->pups_number) ?></td>
+                            <td><?= h($litters->pups_number_stillborn) ?></td>
+                            <td><?= h($litters->comments) ?></td>
+                            <td><?= h($litters->mother_rat_id) ?></td>
+                            <td><?= h($litters->father_rat_id) ?></td>
+                            <td><?= h($litters->creator_user_id) ?></td>
+                            <td><?= h($litters->created) ?></td>
+                            <td><?= h($litters->modified) ?></td>
+                            <td><?= h($litters->state_id) ?></td>
+                            <td><?= h($litters->rattery_id) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['controller' => 'Litters', 'action' => 'view', $litters->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Litters', 'action' => 'edit', $litters->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Litters', 'action' => 'delete', $litters->id], ['confirm' => __('Are you sure you want to delete # {0}?', $litters->id)]) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+            </div>
+            <div class="related">
+                <h4><?= __('Related Rat Snapshots') ?></h4>
+                <?php if (!empty($state->rat_snapshots)) : ?>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Data') ?></th>
+                            <th><?= __('Created') ?></th>
+                            <th><?= __('Rat Id') ?></th>
+                            <th><?= __('State Id') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($state->rat_snapshots as $ratSnapshots) : ?>
+                        <tr>
+                            <td><?= h($ratSnapshots->id) ?></td>
+                            <td><?= h($ratSnapshots->data) ?></td>
+                            <td><?= h($ratSnapshots->created) ?></td>
+                            <td><?= h($ratSnapshots->rat_id) ?></td>
+                            <td><?= h($ratSnapshots->state_id) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['controller' => 'RatSnapshots', 'action' => 'view', $ratSnapshots->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'RatSnapshots', 'action' => 'edit', $ratSnapshots->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'RatSnapshots', 'action' => 'delete', $ratSnapshots->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratSnapshots->id)]) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+            </div>
+            <div class="related">
                 <h4><?= __('Related Rats') ?></h4>
                 <?php if (!empty($state->rats)) : ?>
                 <div class="table-responsive">
@@ -111,6 +220,80 @@
                                 <?= $this->Html->link(__('View'), ['controller' => 'Rats', 'action' => 'view', $rats->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Rats', 'action' => 'edit', $rats->id]) ?>
                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Rats', 'action' => 'delete', $rats->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rats->id)]) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+            </div>
+            <div class="related">
+                <h4><?= __('Related Ratteries') ?></h4>
+                <?php if (!empty($state->ratteries)) : ?>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Name') ?></th>
+                            <th><?= __('Prefix') ?></th>
+                            <th><?= __('Owner Id') ?></th>
+                            <th><?= __('Comments') ?></th>
+                            <th><?= __('Picture') ?></th>
+                            <th><?= __('Is Alive') ?></th>
+                            <th><?= __('Birth Year') ?></th>
+                            <th><?= __('Created') ?></th>
+                            <th><?= __('Modified') ?></th>
+                            <th><?= __('State Id') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($state->ratteries as $ratteries) : ?>
+                        <tr>
+                            <td><?= h($ratteries->id) ?></td>
+                            <td><?= h($ratteries->name) ?></td>
+                            <td><?= h($ratteries->prefix) ?></td>
+                            <td><?= h($ratteries->owner_id) ?></td>
+                            <td><?= h($ratteries->comments) ?></td>
+                            <td><?= h($ratteries->picture) ?></td>
+                            <td><?= h($ratteries->is_alive) ?></td>
+                            <td><?= h($ratteries->birth_year) ?></td>
+                            <td><?= h($ratteries->created) ?></td>
+                            <td><?= h($ratteries->modified) ?></td>
+                            <td><?= h($ratteries->state_id) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['controller' => 'Ratteries', 'action' => 'view', $ratteries->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Ratteries', 'action' => 'edit', $ratteries->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Ratteries', 'action' => 'delete', $ratteries->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratteries->id)]) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+            </div>
+            <div class="related">
+                <h4><?= __('Related Rattery Snapshots') ?></h4>
+                <?php if (!empty($state->rattery_snapshots)) : ?>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Data') ?></th>
+                            <th><?= __('Created') ?></th>
+                            <th><?= __('Rattery Id') ?></th>
+                            <th><?= __('State Id') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($state->rattery_snapshots as $ratterySnapshots) : ?>
+                        <tr>
+                            <td><?= h($ratterySnapshots->id) ?></td>
+                            <td><?= h($ratterySnapshots->data) ?></td>
+                            <td><?= h($ratterySnapshots->created) ?></td>
+                            <td><?= h($ratterySnapshots->rattery_id) ?></td>
+                            <td><?= h($ratterySnapshots->state_id) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['controller' => 'RatterySnapshots', 'action' => 'view', $ratterySnapshots->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'RatterySnapshots', 'action' => 'edit', $ratterySnapshots->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'RatterySnapshots', 'action' => 'delete', $ratterySnapshots->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratterySnapshots->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

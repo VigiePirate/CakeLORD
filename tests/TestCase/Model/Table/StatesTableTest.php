@@ -26,8 +26,12 @@ class StatesTableTest extends TestCase
      */
     protected $fixtures = [
         'app.States',
-        'app.BackofficeRatEntries',
+        'app.LitterSnapshots',
+        'app.Litters',
+        'app.RatSnapshots',
         'app.Rats',
+        'app.Ratteries',
+        'app.RatterySnapshots',
     ];
 
     /**
@@ -70,6 +74,16 @@ class StatesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

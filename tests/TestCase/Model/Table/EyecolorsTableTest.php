@@ -26,7 +26,6 @@ class EyecolorsTableTest extends TestCase
      */
     protected $fixtures = [
         'app.Eyecolors',
-        'app.BackofficeRatEntries',
         'app.Colors',
         'app.Rats',
     ];
@@ -71,6 +70,16 @@ class EyecolorsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

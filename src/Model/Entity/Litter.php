@@ -24,6 +24,10 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Rat[] $rats
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\State $state
+ * @property \App\Model\Entity\Rattery $rattery
+ * @property \App\Model\Entity\Conversation[] $conversations
+ * @property \App\Model\Entity\LitterSnapshot[] $litter_snapshots
  */
 class Litter extends Entity
 {
@@ -51,5 +55,9 @@ class Litter extends Entity
         'rattery_id' => true,
         'rats' => true,
         'user' => true,
+        'state' => true,
+        'rattery' => true,
+        'conversations' => true,
+        'litter_snapshots' => true,
     ];
 }

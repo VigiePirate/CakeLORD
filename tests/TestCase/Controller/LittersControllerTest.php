@@ -25,6 +25,10 @@ class LittersControllerTest extends TestCase
         'app.Litters',
         'app.Rats',
         'app.Users',
+        'app.States',
+        'app.Ratteries',
+        'app.Conversations',
+        'app.LitterSnapshots',
     ];
 
     /**

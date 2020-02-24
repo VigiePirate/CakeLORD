@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * RatSnapshots Controller
  *
+ * @property \App\Model\Table\RatSnapshotsTable $RatSnapshots
  *
  * @method \App\Model\Entity\RatSnapshot[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -18,6 +19,9 @@ class RatSnapshotsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Rats', 'States'],
+        ];
         $ratSnapshots = $this->paginate($this->RatSnapshots);
 
         $this->set(compact('ratSnapshots'));
@@ -33,7 +37,7 @@ class RatSnapshotsController extends AppController
     public function view($id = null)
     {
         $ratSnapshot = $this->RatSnapshots->get($id, [
-            'contain' => [],
+            'contain' => ['Rats', 'States'],
         ]);
 
         $this->set('ratSnapshot', $ratSnapshot);
@@ -56,7 +60,9 @@ class RatSnapshotsController extends AppController
             }
             $this->Flash->error(__('The rat snapshot could not be saved. Please, try again.'));
         }
-        $this->set(compact('ratSnapshot'));
+        $rats = $this->RatSnapshots->Rats->find('list', ['limit' => 200]);
+        $states = $this->RatSnapshots->States->find('list', ['limit' => 200]);
+        $this->set(compact('ratSnapshot', 'rats', 'states'));
     }
 
     /**
@@ -80,7 +86,9 @@ class RatSnapshotsController extends AppController
             }
             $this->Flash->error(__('The rat snapshot could not be saved. Please, try again.'));
         }
-        $this->set(compact('ratSnapshot'));
+        $rats = $this->RatSnapshots->Rats->find('list', ['limit' => 200]);
+        $states = $this->RatSnapshots->States->find('list', ['limit' => 200]);
+        $this->set(compact('ratSnapshot', 'rats', 'states'));
     }
 
     /**

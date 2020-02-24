@@ -25,10 +25,11 @@
                     echo $this->Form->control('username');
                     echo $this->Form->control('birth_date', ['empty' => true]);
                     echo $this->Form->control('newsletter');
-                    echo $this->Form->control('role_id', ['options' => $roles, 'empty' => true]);
+                    echo $this->Form->control('role_id', ['options' => $roles]);
                     echo $this->Form->control('is_locked');
                     echo $this->Form->control('failed_login_attempts');
                     echo $this->Form->control('failed_login_last_date');
+                    echo $this->Form->control('conversations._ids', ['options' => $conversations]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

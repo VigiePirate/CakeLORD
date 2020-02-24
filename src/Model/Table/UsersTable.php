@@ -12,6 +12,8 @@ use Cake\Validation\Validator;
  * Users Model
  *
  * @property \App\Model\Table\RolesTable&\Cake\ORM\Association\BelongsTo $Roles
+ * @property \App\Model\Table\MessagesTable&\Cake\ORM\Association\HasMany $Messages
+ * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\BelongsToMany $Conversations
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -44,6 +46,7 @@ class UsersTable extends Table
 
         $this->belongsTo('Roles', [
             'foreignKey' => 'role_id',
+            'joinType' => 'INNER',
         ]);
         $this->hasMany('Messages', [
             'foreignKey' => 'user_id',
@@ -117,7 +120,6 @@ class UsersTable extends Table
 
         $validator
             ->dateTime('failed_login_last_date')
-            ->requirePresence('failed_login_last_date', 'create')
             ->notEmptyDateTime('failed_login_last_date');
 
         return $validator;

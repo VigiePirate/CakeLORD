@@ -21,7 +21,11 @@ use Cake\ORM\Entity;
  * @property int $state_id
  *
  * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\BackofficeRatteryMessage[] $backoffice_rattery_messages
+ * @property \App\Model\Entity\State $state
+ * @property \App\Model\Entity\Conversation[] $conversations
+ * @property \App\Model\Entity\Litter[] $litters
+ * @property \App\Model\Entity\Rat[] $rats
+ * @property \App\Model\Entity\RatterySnapshot[] $rattery_snapshots
  */
 class Rattery extends Entity
 {
@@ -46,6 +50,10 @@ class Rattery extends Entity
         'modified' => true,
         'state_id' => true,
         'user' => true,
-        'backoffice_rattery_messages' => true,
+        'state' => true,
+        'conversations' => true,
+        'litters' => true,
+        'rats' => true,
+        'rattery_snapshots' => true,
     ];
 }

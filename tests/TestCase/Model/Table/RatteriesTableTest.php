@@ -27,7 +27,11 @@ class RatteriesTableTest extends TestCase
     protected $fixtures = [
         'app.Ratteries',
         'app.Users',
-        'app.BackofficeRatteryMessages',
+        'app.States',
+        'app.Conversations',
+        'app.Litters',
+        'app.Rats',
+        'app.RatterySnapshots',
     ];
 
     /**

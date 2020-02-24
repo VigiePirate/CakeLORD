@@ -26,7 +26,6 @@ class CoatsTableTest extends TestCase
      */
     protected $fixtures = [
         'app.Coats',
-        'app.BackofficeRatEntries',
         'app.Rats',
     ];
 
@@ -70,6 +69,16 @@ class CoatsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

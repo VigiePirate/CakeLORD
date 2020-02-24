@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $ratterySnapshot
+ * @var \App\Model\Entity\RatterySnapshot $ratterySnapshot
  */
 ?>
 <div class="row">
@@ -18,8 +18,8 @@
                 <legend><?= __('Add Rattery Snapshot') ?></legend>
                 <?php
                     echo $this->Form->control('data');
-                    echo $this->Form->control('rattery_id');
-                    echo $this->Form->control('state_id');
+                    echo $this->Form->control('rattery_id', ['options' => $ratteries]);
+                    echo $this->Form->control('state_id', ['options' => $states]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

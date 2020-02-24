@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface[]|\Cake\Collection\CollectionInterface $messages
+ * @var \App\Model\Entity\Message[]|\Cake\Collection\CollectionInterface $messages
  */
 ?>
 <div class="messages index content">
@@ -22,8 +22,8 @@
                 <?php foreach ($messages as $message): ?>
                 <tr>
                     <td><?= $this->Number->format($message->id) ?></td>
-                    <td><?= $this->Number->format($message->conversation_id) ?></td>
-                    <td><?= $this->Number->format($message->user_id) ?></td>
+                    <td><?= $message->has('conversation') ? $this->Html->link($message->conversation->id, ['controller' => 'Conversations', 'action' => 'view', $message->conversation->id]) : '' ?></td>
+                    <td><?= $message->has('user') ? $this->Html->link($message->user->id, ['controller' => 'Users', 'action' => 'view', $message->user->id]) : '' ?></td>
                     <td><?= h($message->created) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $message->id]) ?>

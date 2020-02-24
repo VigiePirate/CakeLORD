@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface[]|\Cake\Collection\CollectionInterface $logs
+ * @var \App\Model\Entity\Log[]|\Cake\Collection\CollectionInterface $logs
  */
 ?>
 <div class="logs index content">

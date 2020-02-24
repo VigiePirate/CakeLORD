@@ -40,7 +40,7 @@
                     echo $this->Form->control('mother_rattery_id');
                     echo $this->Form->control('father_rattery_id');
                     echo $this->Form->control('mother_rat_id');
-                    echo $this->Form->control('father_rat_id');
+                    echo $this->Form->control('father_rat_id', ['options' => $rats, 'empty' => true]);
                     echo $this->Form->control('litter_id', ['options' => $litters, 'empty' => true]);
                     echo $this->Form->control('owner_user_id');
                     echo $this->Form->control('color_id', ['options' => $colors]);
@@ -49,9 +49,9 @@
                     echo $this->Form->control('dilution_id', ['options' => $dilutions]);
                     echo $this->Form->control('coat_id', ['options' => $coats]);
                     echo $this->Form->control('marking_id', ['options' => $markings]);
-                    echo $this->Form->control('creator_user_id');
+                    echo $this->Form->control('creator_user_id', ['options' => $users]);
                     echo $this->Form->control('state_id', ['options' => $states]);
-                    echo $this->Form->control('rattery_id');
+                    echo $this->Form->control('rattery_id', ['options' => $ratteries]);
                     echo $this->Form->control('singularities._ids', ['options' => $singularities]);
                 ?>
             </fieldset>

@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface[]|\Cake\Collection\CollectionInterface $litterSnapshots
+ * @var \App\Model\Entity\LitterSnapshot[]|\Cake\Collection\CollectionInterface $litterSnapshots
  */
 ?>
 <div class="litterSnapshots index content">
@@ -23,8 +23,8 @@
                 <tr>
                     <td><?= $this->Number->format($litterSnapshot->id) ?></td>
                     <td><?= h($litterSnapshot->created) ?></td>
-                    <td><?= $this->Number->format($litterSnapshot->litter_id) ?></td>
-                    <td><?= $this->Number->format($litterSnapshot->state_id) ?></td>
+                    <td><?= $litterSnapshot->has('litter') ? $this->Html->link($litterSnapshot->litter->id, ['controller' => 'Litters', 'action' => 'view', $litterSnapshot->litter->id]) : '' ?></td>
+                    <td><?= $litterSnapshot->has('state') ? $this->Html->link($litterSnapshot->state->name, ['controller' => 'States', 'action' => 'view', $litterSnapshot->state->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $litterSnapshot->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $litterSnapshot->id]) ?>
