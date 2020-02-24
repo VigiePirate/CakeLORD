@@ -9,8 +9,7 @@ use Cake\ORM\Entity;
  * DeathPrimaryCause Entity
  *
  * @property int $id
- * @property string|null $name_fr
- * @property string|null $name_en
+ * @property string $name
  *
  * @property \App\Model\Entity\DeathSecondaryCause[] $death_secondary_causes
  * @property \App\Model\Entity\Rat[] $rats
@@ -27,8 +26,7 @@ class DeathPrimaryCause extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name_fr' => true,
-        'name_en' => true,
+        'name' => true,
         'death_secondary_causes' => true,
         'rats' => true,
     ];

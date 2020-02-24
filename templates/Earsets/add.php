@@ -17,8 +17,7 @@
             <fieldset>
                 <legend><?= __('Add Earset') ?></legend>
                 <?php
-                    echo $this->Form->control('name_fr');
-                    echo $this->Form->control('name_en');
+                    echo $this->Form->control('name');
                     echo $this->Form->control('picture');
                 ?>
             </fieldset>

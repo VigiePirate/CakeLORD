@@ -16,11 +16,11 @@
                     <th><?= $this->Paginator->sort('prefix') ?></th>
                     <th><?= $this->Paginator->sort('owner_id') ?></th>
                     <th><?= $this->Paginator->sort('picture') ?></th>
-                    <th><?= $this->Paginator->sort('status') ?></th>
-                    <th><?= $this->Paginator->sort('validated') ?></th>
-                    <th><?= $this->Paginator->sort('date_birth') ?></th>
+                    <th><?= $this->Paginator->sort('is_alive') ?></th>
+                    <th><?= $this->Paginator->sort('birth_year') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
+                    <th><?= $this->Paginator->sort('state_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -32,11 +32,11 @@
                     <td><?= h($rattery->prefix) ?></td>
                     <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->id, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
                     <td><?= h($rattery->picture) ?></td>
-                    <td><?= h($rattery->status) ?></td>
-                    <td><?= h($rattery->validated) ?></td>
-                    <td><?= h($rattery->date_birth) ?></td>
+                    <td><?= h($rattery->is_alive) ?></td>
+                    <td><?= h($rattery->birth_year) ?></td>
                     <td><?= h($rattery->created) ?></td>
                     <td><?= h($rattery->modified) ?></td>
+                    <td><?= $this->Number->format($rattery->state_id) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $rattery->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rattery->id]) ?>

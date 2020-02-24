@@ -9,8 +9,8 @@ use Cake\ORM\Entity;
  * State Entity
  *
  * @property int $id
- * @property string|null $name
- * @property string|null $color
+ * @property string $name
+ * @property string $color
  *
  * @property \App\Model\Entity\BackofficeRatEntry[] $backoffice_rat_entries
  * @property \App\Model\Entity\Rat[] $rats

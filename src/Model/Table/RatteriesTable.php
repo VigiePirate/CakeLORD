@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Ratteries Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\BackofficeRatteryMessagesTable&\Cake\ORM\Association\HasMany $BackofficeRatteryMessages
  *
  * @method \App\Model\Entity\Rattery get($primaryKey, $options = [])
  * @method \App\Model\Entity\Rattery newEntity($data = null, array $options = [])
@@ -47,7 +46,20 @@ class RatteriesTable extends Table
             'foreignKey' => 'owner_id',
             'joinType' => 'INNER',
         ]);
-        $this->hasMany('BackofficeRatteryMessages', [
+        $this->belongsTo('States', [
+            'foreignKey' => 'state_id',
+            'joinType' => 'INNER',
+        ]);
+        $this->hasMany('Conversations', [
+            'foreignKey' => 'rattery_id',
+        ]);
+        $this->hasMany('Litters', [
+            'foreignKey' => 'rattery_id',
+        ]);
+        $this->hasMany('Rats', [
+            'foreignKey' => 'rattery_id',
+        ]);
+        $this->hasMany('RatterySnapshots', [
             'foreignKey' => 'rattery_id',
         ]);
     }
@@ -67,12 +79,16 @@ class RatteriesTable extends Table
         $validator
             ->scalar('name')
             ->maxLength('name', 70)
-            ->allowEmptyString('name');
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name')
+            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('prefix')
             ->maxLength('prefix', 3)
-            ->allowEmptyString('prefix');
+            ->requirePresence('prefix', 'create')
+            ->notEmptyString('prefix')
+            ->add('prefix', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('comments')
@@ -84,16 +100,12 @@ class RatteriesTable extends Table
             ->allowEmptyString('picture');
 
         $validator
-            ->boolean('status')
-            ->allowEmptyString('status');
+            ->boolean('is_alive')
+            ->notEmptyString('is_alive');
 
         $validator
-            ->boolean('validated')
-            ->allowEmptyString('validated');
-
-        $validator
-            ->scalar('date_birth')
-            ->allowEmptyString('date_birth');
+            ->scalar('birth_year')
+            ->allowEmptyString('birth_year');
 
         return $validator;
     }
@@ -107,7 +119,10 @@ class RatteriesTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
+        $rules->add($rules->isUnique(['name']));
+        $rules->add($rules->isUnique(['prefix']));
         $rules->add($rules->existsIn(['owner_id'], 'Users'));
+        $rules->add($rules->existsIn(['state_id'], 'States'));
 
         return $rules;
     }

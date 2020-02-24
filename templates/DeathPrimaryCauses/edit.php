@@ -22,8 +22,7 @@
             <fieldset>
                 <legend><?= __('Edit Death Primary Cause') ?></legend>
                 <?php
-                    echo $this->Form->control('name_fr');
-                    echo $this->Form->control('name_en');
+                    echo $this->Form->control('name');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

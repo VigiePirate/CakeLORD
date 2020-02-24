@@ -26,6 +26,7 @@ class SingularitiesTableTest extends TestCase
      */
     protected $fixtures = [
         'app.Singularities',
+        'app.BackofficeRatEntries',
         'app.Rats',
     ];
 

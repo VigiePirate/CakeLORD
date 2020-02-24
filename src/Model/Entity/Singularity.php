@@ -9,12 +9,10 @@ use Cake\ORM\Entity;
  * Singularity Entity
  *
  * @property int $id
- * @property string|null $name_fr
- * @property string|null $name_en
- * @property string|null $picture
- * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property string $name
+ * @property string $picture
  *
+ * @property \App\Model\Entity\BackofficeRatEntry[] $backoffice_rat_entries
  * @property \App\Model\Entity\Rat[] $rats
  */
 class Singularity extends Entity
@@ -29,11 +27,9 @@ class Singularity extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name_fr' => true,
-        'name_en' => true,
+        'name' => true,
         'picture' => true,
-        'created' => true,
-        'modified' => true,
+        'backoffice_rat_entries' => true,
         'rats' => true,
     ];
 }

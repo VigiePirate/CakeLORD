@@ -9,10 +9,10 @@ use Cake\ORM\Entity;
  * Rat Entity
  *
  * @property int $id
- * @property string|null $name_owner
- * @property string|null $name_pup
+ * @property string $name
+ * @property string|null $pup_name
  * @property string $sex
- * @property string|null $pedigree_identifier
+ * @property string $pedigree_identifier
  * @property \Cake\I18n\FrozenDate|null $birth_date
  * @property \Cake\I18n\FrozenDate|null $death_date
  * @property int|null $death_primary_cause_id
@@ -23,36 +23,35 @@ use Cake\ORM\Entity;
  * @property string|null $picture
  * @property string|null $picture_thumbnail
  * @property string|null $comments
- * @property bool|null $validated
- * @property int|null $mother_rattery_id
- * @property int|null $father_rattery_id
- * @property int|null $mother_rat_id
- * @property int|null $father_rat_id
+ * @property bool $is_alive
  * @property int|null $litter_id
- * @property int|null $owner_user_id
- * @property int|null $color_id
- * @property int|null $earset_id
- * @property int|null $eyecolor_id
- * @property int|null $dilution_id
- * @property int|null $coat_id
- * @property int|null $marking_id
- * @property int $creator_user_id
- * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property int $color_id
+ * @property int $earset_id
+ * @property int $eyecolor_id
+ * @property int $dilution_id
+ * @property int $coat_id
+ * @property int $marking_id
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime $modified
  * @property int $state_id
+ * @property int $rattery_id
  *
- * @property \App\Model\Entity\DeathCausesPrimary $death_causes_primary
- * @property \App\Model\Entity\DeathCausesSecondary $death_causes_secondary
- * @property \App\Model\Entity\Rattery $rattery
- * @property \App\Model\Entity\Rat $rat
+ * @property \App\Model\Entity\Rattery $mother_rattery_id
+ * @property \App\Model\Entity\Rattery $father_rattery_id
+ * @property \App\Model\Entity\Rat $mother_rat_id
+ * @property \App\Model\Entity\Rat $father_rat_id
+ * @property \App\Model\Entity\User $owner_user_id
+ * @property \App\Model\Entity\User $creator_user_id
+ * @property \App\Model\Entity\DeathPrimaryCause $death_primary_cause
+ * @property \App\Model\Entity\DeathSecondaryCause $death_secondary_cause
  * @property \App\Model\Entity\Litter $litter
- * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Color $color
  * @property \App\Model\Entity\Earset $earset
  * @property \App\Model\Entity\Eyecolor $eyecolor
  * @property \App\Model\Entity\Dilution $dilution
  * @property \App\Model\Entity\Coat $coat
  * @property \App\Model\Entity\Marking $marking
+ * @property \App\Model\Entity\State $state
  * @property \App\Model\Entity\BackofficeRatEntry[] $backoffice_rat_entries
  * @property \App\Model\Entity\Singularity[] $singularities
  */
@@ -68,8 +67,8 @@ class Rat extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name_owner' => true,
-        'name_pup' => true,
+        'name' => true,
+        'pup_name' => true,
         'sex' => true,
         'pedigree_identifier' => true,
         'birth_date' => true,
@@ -82,7 +81,7 @@ class Rat extends Entity
         'picture' => true,
         'picture_thumbnail' => true,
         'comments' => true,
-        'validated' => true,
+        'is_alive' => true,
         'mother_rattery_id' => true,
         'father_rattery_id' => true,
         'mother_rat_id' => true,
@@ -99,18 +98,17 @@ class Rat extends Entity
         'created' => true,
         'modified' => true,
         'state_id' => true,
-        'death_causes_primary' => true,
-        'death_causes_secondary' => true,
-        'rattery' => true,
-        'rat' => true,
+        'rattery_id' => true,
+        'death_primary_cause' => true,
+        'death_secondary_cause' => true,
         'litter' => true,
-        'user' => true,
         'color' => true,
         'earset' => true,
         'eyecolor' => true,
         'dilution' => true,
         'coat' => true,
         'marking' => true,
+        'state' => true,
         'backoffice_rat_entries' => true,
         'singularities' => true,
     ];

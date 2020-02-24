@@ -9,16 +9,16 @@ use Cake\ORM\Entity;
  * Rattery Entity
  *
  * @property int $id
- * @property string|null $name
- * @property string|null $prefix
+ * @property string $name
+ * @property string $prefix
  * @property int $owner_id
  * @property string|null $comments
  * @property string|null $picture
- * @property bool|null $status
- * @property bool|null $validated
- * @property string|null $date_birth
- * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property bool $is_alive
+ * @property string|null $birth_year
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime $modified
+ * @property int $state_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\BackofficeRatteryMessage[] $backoffice_rattery_messages
@@ -40,11 +40,11 @@ class Rattery extends Entity
         'owner_id' => true,
         'comments' => true,
         'picture' => true,
-        'status' => true,
-        'validated' => true,
-        'date_birth' => true,
+        'is_alive' => true,
+        'birth_year' => true,
         'created' => true,
         'modified' => true,
+        'state_id' => true,
         'user' => true,
         'backoffice_rattery_messages' => true,
     ];

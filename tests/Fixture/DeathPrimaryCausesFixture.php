@@ -18,10 +18,10 @@ class DeathPrimaryCausesFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'name_fr' => ['type' => 'string', 'length' => 100, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
-        'name_en' => ['type' => 'string', 'length' => 100, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
+        'name' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'name_UNIQUE' => ['type' => 'unique', 'columns' => ['name'], 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -39,8 +39,7 @@ class DeathPrimaryCausesFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'name_fr' => 'Lorem ipsum dolor sit amet',
-                'name_en' => 'Lorem ipsum dolor sit amet',
+                'name' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();

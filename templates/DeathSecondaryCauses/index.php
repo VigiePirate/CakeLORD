@@ -12,8 +12,7 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('name_fr') ?></th>
-                    <th><?= $this->Paginator->sort('name_en') ?></th>
+                    <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('death_primary_cause_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -22,8 +21,7 @@
                 <?php foreach ($deathSecondaryCauses as $deathSecondaryCause): ?>
                 <tr>
                     <td><?= $this->Number->format($deathSecondaryCause->id) ?></td>
-                    <td><?= h($deathSecondaryCause->name_fr) ?></td>
-                    <td><?= h($deathSecondaryCause->name_en) ?></td>
+                    <td><?= h($deathSecondaryCause->name) ?></td>
                     <td><?= $deathSecondaryCause->has('death_primary_cause') ? $this->Html->link($deathSecondaryCause->death_primary_cause->id, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $deathSecondaryCause->death_primary_cause->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $deathSecondaryCause->id]) ?>

@@ -17,9 +17,8 @@
             <fieldset>
                 <legend><?= __('Add Color') ?></legend>
                 <?php
-                    echo $this->Form->control('name_fr');
+                    echo $this->Form->control('name');
                     echo $this->Form->control('genotype');
-                    echo $this->Form->control('name_en');
                     echo $this->Form->control('picture');
                     echo $this->Form->control('eyecolor_id', ['options' => $eyecolors, 'empty' => true]);
                 ?>

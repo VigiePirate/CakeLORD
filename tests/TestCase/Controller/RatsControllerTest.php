@@ -27,8 +27,6 @@ class RatsControllerTest extends TestCase
         'app.DeathSecondaryCauses',
         'app.MotherRatteries',
         'app.FatherRatteries',
-        'app.MotherRats',
-        'app.FatherRats',
         'app.Litters',
         'app.OwnerUsers',
         'app.Colors',

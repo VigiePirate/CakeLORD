@@ -21,8 +21,6 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Singularity patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Singularity[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Singularity findOrCreate($search, callable $callback = null, $options = [])
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class SingularitiesTable extends Table
 {
@@ -40,13 +38,6 @@ class SingularitiesTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->addBehavior('Timestamp');
-
-        $this->belongsToMany('BackofficeRatEntries', [
-            'foreignKey' => 'singularity_id',
-            'targetForeignKey' => 'backoffice_rat_entry_id',
-            'joinTable' => 'backoffice_rat_entries_singularities',
-        ]);
         $this->belongsToMany('Rats', [
             'foreignKey' => 'singularity_id',
             'targetForeignKey' => 'rat_id',
@@ -67,20 +58,31 @@ class SingularitiesTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('name_fr')
-            ->maxLength('name_fr', 70)
-            ->allowEmptyString('name_fr');
-
-        $validator
-            ->scalar('name_en')
-            ->maxLength('name_en', 70)
-            ->allowEmptyString('name_en');
+            ->scalar('name')
+            ->maxLength('name', 70)
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name')
+            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('picture')
             ->maxLength('picture', 255)
-            ->allowEmptyString('picture');
+            ->notEmptyString('picture');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        $rules->add($rules->isUnique(['name']));
+
+        return $rules;
     }
 }

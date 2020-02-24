@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Colors Model
  *
  * @property \App\Model\Table\EyecolorsTable&\Cake\ORM\Association\BelongsTo $Eyecolors
- * @property \App\Model\Table\BackofficeRatEntriesTable&\Cake\ORM\Association\HasMany $BackofficeRatEntries
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  *
  * @method \App\Model\Entity\Color get($primaryKey, $options = [])
@@ -43,9 +42,6 @@ class ColorsTable extends Table
         $this->belongsTo('Eyecolors', [
             'foreignKey' => 'eyecolor_id',
         ]);
-        $this->hasMany('BackofficeRatEntries', [
-            'foreignKey' => 'color_id',
-        ]);
         $this->hasMany('Rats', [
             'foreignKey' => 'color_id',
         ]);
@@ -64,9 +60,11 @@ class ColorsTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('name_fr')
-            ->maxLength('name_fr', 70)
-            ->allowEmptyString('name_fr');
+            ->scalar('name')
+            ->maxLength('name', 70)
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name')
+            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('genotype')
@@ -74,14 +72,9 @@ class ColorsTable extends Table
             ->allowEmptyString('genotype');
 
         $validator
-            ->scalar('name_en')
-            ->maxLength('name_en', 70)
-            ->allowEmptyString('name_en');
-
-        $validator
             ->scalar('picture')
             ->maxLength('picture', 255)
-            ->allowEmptyString('picture');
+            ->notEmptyString('picture');
 
         return $validator;
     }
@@ -95,6 +88,7 @@ class ColorsTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
+        $rules->add($rules->isUnique(['name']));
         $rules->add($rules->existsIn(['eyecolor_id'], 'Eyecolors'));
 
         return $rules;

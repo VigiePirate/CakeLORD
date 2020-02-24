@@ -11,7 +11,6 @@ use Cake\Validation\Validator;
 /**
  * Coats Model
  *
- * @property \App\Model\Table\BackofficeRatEntriesTable&\Cake\ORM\Association\HasMany $BackofficeRatEntries
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  *
  * @method \App\Model\Entity\Coat get($primaryKey, $options = [])
@@ -39,9 +38,6 @@ class CoatsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->hasMany('BackofficeRatEntries', [
-            'foreignKey' => 'coat_id',
-        ]);
         $this->hasMany('Rats', [
             'foreignKey' => 'coat_id',
         ]);
@@ -60,20 +56,31 @@ class CoatsTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('name_fr')
-            ->maxLength('name_fr', 70)
-            ->allowEmptyString('name_fr');
-
-        $validator
-            ->scalar('name_en')
-            ->maxLength('name_en', 70)
-            ->allowEmptyString('name_en');
+            ->scalar('name')
+            ->maxLength('name', 70)
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name')
+            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('picture')
             ->maxLength('picture', 255)
-            ->allowEmptyString('picture');
+            ->notEmptyString('picture');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        $rules->add($rules->isUnique(['name']));
+
+        return $rules;
     }
 }

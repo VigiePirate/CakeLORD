@@ -9,9 +9,8 @@ use Cake\ORM\Entity;
  * Eyecolor Entity
  *
  * @property int $id
- * @property string|null $name_fr
- * @property string|null $name_en
- * @property string|null $picture
+ * @property string $name
+ * @property string $picture
  *
  * @property \App\Model\Entity\BackofficeRatEntry[] $backoffice_rat_entries
  * @property \App\Model\Entity\Color[] $colors
@@ -29,8 +28,7 @@ class Eyecolor extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name_fr' => true,
-        'name_en' => true,
+        'name' => true,
         'picture' => true,
         'backoffice_rat_entries' => true,
         'colors' => true,

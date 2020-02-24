@@ -47,7 +47,7 @@
                             <th><?= __('Role Id') ?></th>
                             <th><?= __('Is Locked') ?></th>
                             <th><?= __('Failed Login Attempts') ?></th>
-                            <th><?= __('Failed Login Date') ?></th>
+                            <th><?= __('Failed Login Last Date') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($role->users as $users) : ?>
@@ -66,7 +66,7 @@
                             <td><?= h($users->role_id) ?></td>
                             <td><?= h($users->is_locked) ?></td>
                             <td><?= h($users->failed_login_attempts) ?></td>
-                            <td><?= h($users->failed_login_date) ?></td>
+                            <td><?= h($users->failed_login_last_date) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Users', 'action' => 'view', $users->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Users', 'action' => 'edit', $users->id]) ?>

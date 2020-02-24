@@ -22,9 +22,9 @@
                     echo $this->Form->control('owner_id', ['options' => $users]);
                     echo $this->Form->control('comments');
                     echo $this->Form->control('picture');
-                    echo $this->Form->control('status');
-                    echo $this->Form->control('validated');
-                    echo $this->Form->control('date_birth');
+                    echo $this->Form->control('is_alive');
+                    echo $this->Form->control('birth_year');
+                    echo $this->Form->control('state_id');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

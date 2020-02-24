@@ -67,8 +67,8 @@
                     <td><?= h($user->modified) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Failed Login Date') ?></th>
-                    <td><?= h($user->failed_login_date) ?></td>
+                    <th><?= __('Failed Login Last Date') ?></th>
+                    <td><?= h($user->failed_login_last_date) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Newsletter') ?></th>

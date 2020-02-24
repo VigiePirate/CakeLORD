@@ -61,14 +61,11 @@ class DeathSecondaryCausesTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('name_fr')
-            ->maxLength('name_fr', 100)
-            ->allowEmptyString('name_fr');
-
-        $validator
-            ->scalar('name_en')
-            ->maxLength('name_en', 100)
-            ->allowEmptyString('name_en');
+            ->scalar('name')
+            ->maxLength('name', 100)
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name')
+            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         return $validator;
     }
@@ -82,6 +79,7 @@ class DeathSecondaryCausesTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
+        $rules->add($rules->isUnique(['name']));
         $rules->add($rules->existsIn(['death_primary_cause_id'], 'DeathPrimaryCauses'));
 
         return $rules;

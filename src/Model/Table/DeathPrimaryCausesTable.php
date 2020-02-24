@@ -60,15 +60,26 @@ class DeathPrimaryCausesTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('name_fr')
-            ->maxLength('name_fr', 100)
-            ->allowEmptyString('name_fr');
-
-        $validator
-            ->scalar('name_en')
-            ->maxLength('name_en', 100)
-            ->allowEmptyString('name_en');
+            ->scalar('name')
+            ->maxLength('name', 100)
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name')
+            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        $rules->add($rules->isUnique(['name']));
+
+        return $rules;
     }
 }

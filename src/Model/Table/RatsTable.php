@@ -11,6 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Rats Model
  *
+ * @property \App\Model\Table\DeathPrimaryCausesTable&\Cake\ORM\Association\BelongsTo $DeathPrimaryCauses
+ * @property \App\Model\Table\DeathSecondaryCausesTable&\Cake\ORM\Association\BelongsTo $DeathSecondaryCauses
  * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsTo $Litters
  * @property \App\Model\Table\ColorsTable&\Cake\ORM\Association\BelongsTo $Colors
  * @property \App\Model\Table\EarsetsTable&\Cake\ORM\Association\BelongsTo $Earsets
@@ -18,7 +20,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\DilutionsTable&\Cake\ORM\Association\BelongsTo $Dilutions
  * @property \App\Model\Table\CoatsTable&\Cake\ORM\Association\BelongsTo $Coats
  * @property \App\Model\Table\MarkingsTable&\Cake\ORM\Association\BelongsTo $Markings
- * @property \App\Model\Table\BackofficeRatEntriesTable&\Cake\ORM\Association\HasMany $BackofficeRatEntries
+ * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
  * @property \App\Model\Table\SingularitiesTable&\Cake\ORM\Association\BelongsToMany $Singularities
  *
  * @method \App\Model\Entity\Rat get($primaryKey, $options = [])
@@ -56,64 +58,64 @@ class RatsTable extends Table
         $this->belongsTo('DeathSecondaryCauses', [
             'foreignKey' => 'death_secondary_cause_id',
         ]);
-        $this->belongsTo('MotherRatteries', [
-            'className' => 'Ratteries',
-            'foreignKey' => 'id',
-            'propertyName' => 'mother_rattery_id',
-            // 'bindingKey' => 'mother_rattery_id'
+        $this->belongsTo('Ratteries', [
+            'foreignKey' => 'mother_rattery_id',
         ]);
-        $this->belongsTo('FatherRatteries', [
-            'className' => 'Ratteries',
-            'foreignKey' => 'id',
-            'propertyName' => 'father_rattery_id'
+        $this->belongsTo('Ratteries', [
+            'foreignKey' => 'father_rattery_id',
         ]);
-        $this->belongsTo('MotherRats', [
-            'className' => 'Rats',
-            'foreignKey' => 'id',
-            'propertyName' => 'mother_rat_id'
+        $this->belongsTo('Rats', [
+            'foreignKey' => 'mother_rat_id',
         ]);
-        $this->belongsTo('FatherRats', [
-            'className' => 'Rats',
-            'foreignKey' => 'id',
-            'propertyName' => 'father_rat_id'
+        $this->belongsTo('Rats', [
+            'foreignKey' => 'father_rat_id',
         ]);
         $this->belongsTo('Litters', [
             'foreignKey' => 'litter_id',
         ]);
-        $this->belongsTo('OwnerUsers', [
-            'className' => 'Users',
-            'foreignKey' => 'id',
-            'propertyName' => 'owner_user_id'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'owner_user_id',
         ]);
         $this->belongsTo('Colors', [
             'foreignKey' => 'color_id',
+            'joinType' => 'INNER',
         ]);
         $this->belongsTo('Earsets', [
             'foreignKey' => 'earset_id',
+            'joinType' => 'INNER',
         ]);
         $this->belongsTo('Eyecolors', [
             'foreignKey' => 'eyecolor_id',
+            'joinType' => 'INNER',
         ]);
         $this->belongsTo('Dilutions', [
             'foreignKey' => 'dilution_id',
+            'joinType' => 'INNER',
         ]);
         $this->belongsTo('Coats', [
             'foreignKey' => 'coat_id',
+            'joinType' => 'INNER',
         ]);
         $this->belongsTo('Markings', [
             'foreignKey' => 'marking_id',
+            'joinType' => 'INNER',
         ]);
-        $this->belongsTo('CreatorUsers', [
-            'className' => 'Users',
-            'foreignKey' => 'id',
-            'propertyName' => 'creator_user_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'creator_user_id',
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('States', [
             'foreignKey' => 'state_id',
             'joinType' => 'INNER',
         ]);
-        $this->hasMany('BackofficeRatEntries', [
+        $this->belongsTo('Ratteries', [
+            'foreignKey' => 'rattery_id',
+            'joinType' => 'INNER',
+        ]);
+        $this->hasMany('Conversations', [
+            'foreignKey' => 'rat_id',
+        ]);
+        $this->hasMany('RatSnapshots', [
             'foreignKey' => 'rat_id',
         ]);
         $this->belongsToMany('Singularities', [
@@ -133,17 +135,19 @@ class RatsTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmptyString('id', null, 'create');
+            ->allowEmptyString('id', null, 'create')
+            ->add('id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->scalar('name_owner')
-            ->maxLength('name_owner', 70)
-            ->allowEmptyString('name_owner');
+            ->scalar('name')
+            ->maxLength('name', 70)
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name');
 
         $validator
-            ->scalar('name_pup')
-            ->maxLength('name_pup', 70)
-            ->allowEmptyString('name_pup');
+            ->scalar('pup_name')
+            ->maxLength('pup_name', 70)
+            ->allowEmptyString('pup_name');
 
         $validator
             ->scalar('sex')
@@ -154,7 +158,8 @@ class RatsTable extends Table
         $validator
             ->scalar('pedigree_identifier')
             ->maxLength('pedigree_identifier', 10)
-            ->allowEmptyString('pedigree_identifier')
+            ->requirePresence('pedigree_identifier', 'create')
+            ->notEmptyString('pedigree_identifier')
             ->add('pedigree_identifier', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
@@ -192,8 +197,9 @@ class RatsTable extends Table
             ->allowEmptyString('comments');
 
         $validator
-            ->boolean('validated')
-            ->allowEmptyString('validated');
+            ->boolean('is_alive')
+            ->requirePresence('is_alive', 'create')
+            ->notEmptyString('is_alive');
 
         return $validator;
     }
@@ -207,23 +213,25 @@ class RatsTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
+        $rules->add($rules->isUnique(['id']));
         $rules->add($rules->isUnique(['pedigree_identifier']));
         $rules->add($rules->existsIn(['death_primary_cause_id'], 'DeathPrimaryCauses'));
         $rules->add($rules->existsIn(['death_secondary_cause_id'], 'DeathSecondaryCauses'));
-        $rules->add($rules->existsIn(['mother_rattery_id'], 'MotherRatteries'));
-        $rules->add($rules->existsIn(['father_rattery_id'], 'FatherRatteries'));
-        $rules->add($rules->existsIn(['mother_rat_id'], 'MotherRats'));
-        $rules->add($rules->existsIn(['father_rat_id'], 'FatherRats'));
+        $rules->add($rules->existsIn(['mother_rattery_id'], 'Ratteries'));
+        $rules->add($rules->existsIn(['father_rattery_id'], 'Ratteries'));
+        $rules->add($rules->existsIn(['mother_rat_id'], 'Rats'));
+        $rules->add($rules->existsIn(['father_rat_id'], 'Rats'));
         $rules->add($rules->existsIn(['litter_id'], 'Litters'));
-        $rules->add($rules->existsIn(['owner_user_id'], 'OwnerUsers'));
+        $rules->add($rules->existsIn(['owner_user_id'], 'Users'));
         $rules->add($rules->existsIn(['color_id'], 'Colors'));
         $rules->add($rules->existsIn(['earset_id'], 'Earsets'));
         $rules->add($rules->existsIn(['eyecolor_id'], 'Eyecolors'));
         $rules->add($rules->existsIn(['dilution_id'], 'Dilutions'));
         $rules->add($rules->existsIn(['coat_id'], 'Coats'));
         $rules->add($rules->existsIn(['marking_id'], 'Markings'));
-        $rules->add($rules->existsIn(['creator_user_id'], 'CreatorUsers'));
+        $rules->add($rules->existsIn(['creator_user_id'], 'Users'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
+        $rules->add($rules->existsIn(['rattery_id'], 'Ratteries'));
 
         return $rules;
     }

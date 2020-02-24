@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * Role Entity
  *
  * @property int $id
- * @property string|null $name
+ * @property string $name
  *
  * @property \App\Model\Entity\User[] $users
  */

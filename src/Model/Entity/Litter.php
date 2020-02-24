@@ -10,15 +10,17 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property \Cake\I18n\FrozenDate|null $mating_date
- * @property \Cake\I18n\FrozenDate|null $birth_date
- * @property int|null $pups_number
+ * @property \Cake\I18n\FrozenDate $birth_date
+ * @property int $pups_number
  * @property int|null $pups_number_stillborn
  * @property string|null $comments
  * @property int $mother_rat_id
  * @property int|null $father_rat_id
- * @property int $breeder_user_id
- * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property int $creator_user_id
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime $modified
+ * @property int $state_id
+ * @property int $rattery_id
  *
  * @property \App\Model\Entity\Rat[] $rats
  * @property \App\Model\Entity\User $user
@@ -42,9 +44,11 @@ class Litter extends Entity
         'comments' => true,
         'mother_rat_id' => true,
         'father_rat_id' => true,
-        'breeder_user_id' => true,
+        'creator_user_id' => true,
         'created' => true,
         'modified' => true,
+        'state_id' => true,
+        'rattery_id' => true,
         'rats' => true,
         'user' => true,
     ];

@@ -12,9 +12,8 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('name_fr') ?></th>
+                    <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('genotype') ?></th>
-                    <th><?= $this->Paginator->sort('name_en') ?></th>
                     <th><?= $this->Paginator->sort('picture') ?></th>
                     <th><?= $this->Paginator->sort('eyecolor_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -24,9 +23,8 @@
                 <?php foreach ($colors as $color): ?>
                 <tr>
                     <td><?= $this->Number->format($color->id) ?></td>
-                    <td><?= h($color->name_fr) ?></td>
+                    <td><?= h($color->name) ?></td>
                     <td><?= h($color->genotype) ?></td>
-                    <td><?= h($color->name_en) ?></td>
                     <td><?= h($color->picture) ?></td>
                     <td><?= $color->has('eyecolor') ? $this->Html->link($color->eyecolor->id, ['controller' => 'Eyecolors', 'action' => 'view', $color->eyecolor->id]) : '' ?></td>
                     <td class="actions">

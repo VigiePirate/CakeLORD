@@ -11,7 +11,6 @@ use Cake\Validation\Validator;
 /**
  * States Model
  *
- * @property \App\Model\Table\BackofficeRatEntriesTable&\Cake\ORM\Association\HasMany $BackofficeRatEntries
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  *
  * @method \App\Model\Entity\State get($primaryKey, $options = [])
@@ -39,10 +38,22 @@ class StatesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        $this->hasMany('BackofficeRatEntries', [
+        $this->hasMany('LitterSnapshots', [
+            'foreignKey' => 'state_id',
+        ]);
+        $this->hasMany('Litters', [
+            'foreignKey' => 'state_id',
+        ]);
+        $this->hasMany('RatSnapshots', [
             'foreignKey' => 'state_id',
         ]);
         $this->hasMany('Rats', [
+            'foreignKey' => 'state_id',
+        ]);
+        $this->hasMany('Ratteries', [
+            'foreignKey' => 'state_id',
+        ]);
+        $this->hasMany('RatterySnapshots', [
             'foreignKey' => 'state_id',
         ]);
     }
@@ -62,13 +73,30 @@ class StatesTable extends Table
         $validator
             ->scalar('name')
             ->maxLength('name', 45)
-            ->allowEmptyString('name');
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name')
+            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('color')
             ->maxLength('color', 6)
-            ->allowEmptyString('color');
+            ->requirePresence('color', 'create')
+            ->notEmptyString('color');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        $rules->add($rules->isUnique(['name']));
+
+        return $rules;
     }
 }

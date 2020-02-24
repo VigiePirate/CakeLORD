@@ -45,6 +45,14 @@ class UsersTable extends Table
         $this->belongsTo('Roles', [
             'foreignKey' => 'role_id',
         ]);
+        $this->hasMany('Messages', [
+            'foreignKey' => 'user_id',
+        ]);
+        $this->belongsToMany('Conversations', [
+            'foreignKey' => 'user_id',
+            'targetForeignKey' => 'conversation_id',
+            'joinTable' => 'users_conversations',
+        ]);
     }
 
     /**
@@ -67,7 +75,8 @@ class UsersTable extends Table
         $validator
             ->scalar('password')
             ->maxLength('password', 70)
-            ->allowEmptyString('password');
+            ->requirePresence('password', 'create')
+            ->notEmptyString('password');
 
         $validator
             ->scalar('sex')
@@ -87,7 +96,9 @@ class UsersTable extends Table
         $validator
             ->scalar('username')
             ->maxLength('username', 45)
-            ->allowEmptyString('username');
+            ->requirePresence('username', 'create')
+            ->notEmptyString('username')
+            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->date('birth_date')
@@ -95,18 +106,19 @@ class UsersTable extends Table
 
         $validator
             ->boolean('newsletter')
-            ->allowEmptyString('newsletter');
+            ->notEmptyString('newsletter');
 
         $validator
             ->boolean('is_locked')
-            ->allowEmptyString('is_locked');
+            ->notEmptyString('is_locked');
 
         $validator
-            ->allowEmptyString('failed_login_attempts');
+            ->notEmptyString('failed_login_attempts');
 
         $validator
-            ->dateTime('failed_login_date')
-            ->allowEmptyDateTime('failed_login_date');
+            ->dateTime('failed_login_last_date')
+            ->requirePresence('failed_login_last_date', 'create')
+            ->notEmptyDateTime('failed_login_last_date');
 
         return $validator;
     }

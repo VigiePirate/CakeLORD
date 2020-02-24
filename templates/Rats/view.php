@@ -19,12 +19,16 @@
             <h3><?= h($rat->id) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('Name Owner') ?></th>
-                    <td><?= h($rat->name_owner) ?></td>
+                    <th><?= __('Mother Rattery Id') ?></th>
+                    <td><?= $rat->has('mother_rattery_id') ? $this->Html->link($rat->mother_rattery_id->name, ['controller' => 'Ratteries', 'action' => 'view', $rat->mother_rattery_id->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Name Pup') ?></th>
-                    <td><?= h($rat->name_pup) ?></td>
+                    <th><?= __('Name') ?></th>
+                    <td><?= h($rat->name) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Pup Name') ?></th>
+                    <td><?= h($rat->pup_name) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Sex') ?></th>
@@ -83,10 +87,6 @@
                     <td><?= $rat->has('state') ? $this->Html->link($rat->state->name, ['controller' => 'States', 'action' => 'view', $rat->state->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($rat->id) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Mother Rattery Id') ?></th>
                     <td><?= $this->Number->format($rat->mother_rattery_id) ?></td>
                 </tr>
@@ -109,6 +109,10 @@
                 <tr>
                     <th><?= __('Creator User Id') ?></th>
                     <td><?= $this->Number->format($rat->creator_user_id) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Rattery Id') ?></th>
+                    <td><?= $this->Number->format($rat->rattery_id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Birth Date') ?></th>
@@ -139,8 +143,8 @@
                     <td><?= $rat->death_necropsied ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Validated') ?></th>
-                    <td><?= $rat->validated ? __('Yes') : __('No'); ?></td>
+                    <th><?= __('Is Alive') ?></th>
+                    <td><?= $rat->is_alive ? __('Yes') : __('No'); ?></td>
                 </tr>
             </table>
             <div class="text">
@@ -156,110 +160,19 @@
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Name Fr') ?></th>
-                            <th><?= __('Name En') ?></th>
+                            <th><?= __('Name') ?></th>
                             <th><?= __('Picture') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($rat->singularities as $singularities) : ?>
                         <tr>
                             <td><?= h($singularities->id) ?></td>
-                            <td><?= h($singularities->name_fr) ?></td>
-                            <td><?= h($singularities->name_en) ?></td>
+                            <td><?= h($singularities->name) ?></td>
                             <td><?= h($singularities->picture) ?></td>
-                            <td><?= h($singularities->created) ?></td>
-                            <td><?= h($singularities->modified) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Singularities', 'action' => 'view', $singularities->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Singularities', 'action' => 'edit', $singularities->id]) ?>
                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Singularities', 'action' => 'delete', $singularities->id], ['confirm' => __('Are you sure you want to delete # {0}?', $singularities->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
-            <div class="related">
-                <h4><?= __('Related Backoffice Rat Entries') ?></h4>
-                <?php if (!empty($rat->backoffice_rat_entries)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Rat Id') ?></th>
-                            <th><?= __('Owner Name') ?></th>
-                            <th><?= __('Pup Name') ?></th>
-                            <th><?= __('Sex') ?></th>
-                            <th><?= __('Pedigree Identifier') ?></th>
-                            <th><?= __('Birth Date') ?></th>
-                            <th><?= __('Death Date') ?></th>
-                            <th><?= __('Primary Death Cause Id') ?></th>
-                            <th><?= __('Secondary Death Cause Id') ?></th>
-                            <th><?= __('Death Euthanized') ?></th>
-                            <th><?= __('Death Diagnosed') ?></th>
-                            <th><?= __('Death Necropsied') ?></th>
-                            <th><?= __('Picture') ?></th>
-                            <th><?= __('Picture Thumbnail') ?></th>
-                            <th><?= __('Comments') ?></th>
-                            <th><?= __('Validated') ?></th>
-                            <th><?= __('Mother Rattery Id') ?></th>
-                            <th><?= __('Father Rattery Id') ?></th>
-                            <th><?= __('Mother Rat Id') ?></th>
-                            <th><?= __('Father Rat Id') ?></th>
-                            <th><?= __('Owner User Id') ?></th>
-                            <th><?= __('Color Id') ?></th>
-                            <th><?= __('Earset Id') ?></th>
-                            <th><?= __('Eyecolor Id') ?></th>
-                            <th><?= __('Dilution Id') ?></th>
-                            <th><?= __('Coat Id') ?></th>
-                            <th><?= __('Marking Id') ?></th>
-                            <th><?= __('Creator User Id') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th><?= __('State Id') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($rat->backoffice_rat_entries as $backofficeRatEntries) : ?>
-                        <tr>
-                            <td><?= h($backofficeRatEntries->id) ?></td>
-                            <td><?= h($backofficeRatEntries->rat_id) ?></td>
-                            <td><?= h($backofficeRatEntries->owner_name) ?></td>
-                            <td><?= h($backofficeRatEntries->pup_name) ?></td>
-                            <td><?= h($backofficeRatEntries->sex) ?></td>
-                            <td><?= h($backofficeRatEntries->pedigree_identifier) ?></td>
-                            <td><?= h($backofficeRatEntries->birth_date) ?></td>
-                            <td><?= h($backofficeRatEntries->death_date) ?></td>
-                            <td><?= h($backofficeRatEntries->primary_death_cause_id) ?></td>
-                            <td><?= h($backofficeRatEntries->secondary_death_cause_id) ?></td>
-                            <td><?= h($backofficeRatEntries->death_euthanized) ?></td>
-                            <td><?= h($backofficeRatEntries->death_diagnosed) ?></td>
-                            <td><?= h($backofficeRatEntries->death_necropsied) ?></td>
-                            <td><?= h($backofficeRatEntries->picture) ?></td>
-                            <td><?= h($backofficeRatEntries->picture_thumbnail) ?></td>
-                            <td><?= h($backofficeRatEntries->comments) ?></td>
-                            <td><?= h($backofficeRatEntries->validated) ?></td>
-                            <td><?= h($backofficeRatEntries->mother_rattery_id) ?></td>
-                            <td><?= h($backofficeRatEntries->father_rattery_id) ?></td>
-                            <td><?= h($backofficeRatEntries->mother_rat_id) ?></td>
-                            <td><?= h($backofficeRatEntries->father_rat_id) ?></td>
-                            <td><?= h($backofficeRatEntries->owner_user_id) ?></td>
-                            <td><?= h($backofficeRatEntries->color_id) ?></td>
-                            <td><?= h($backofficeRatEntries->earset_id) ?></td>
-                            <td><?= h($backofficeRatEntries->eyecolor_id) ?></td>
-                            <td><?= h($backofficeRatEntries->dilution_id) ?></td>
-                            <td><?= h($backofficeRatEntries->coat_id) ?></td>
-                            <td><?= h($backofficeRatEntries->marking_id) ?></td>
-                            <td><?= h($backofficeRatEntries->creator_user_id) ?></td>
-                            <td><?= h($backofficeRatEntries->created) ?></td>
-                            <td><?= h($backofficeRatEntries->modified) ?></td>
-                            <td><?= h($backofficeRatEntries->state_id) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'BackofficeRatEntries', 'action' => 'view', $backofficeRatEntries->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'BackofficeRatEntries', 'action' => 'edit', $backofficeRatEntries->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'BackofficeRatEntries', 'action' => 'delete', $backofficeRatEntries->id], ['confirm' => __('Are you sure you want to delete # {0}?', $backofficeRatEntries->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

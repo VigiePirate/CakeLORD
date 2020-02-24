@@ -12,8 +12,8 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('name_owner') ?></th>
-                    <th><?= $this->Paginator->sort('name_pup') ?></th>
+                    <th><?= $this->Paginator->sort('name') ?></th>
+                    <th><?= $this->Paginator->sort('pup_name') ?></th>
                     <th><?= $this->Paginator->sort('sex') ?></th>
                     <th><?= $this->Paginator->sort('pedigree_identifier') ?></th>
                     <th><?= $this->Paginator->sort('birth_date') ?></th>
@@ -25,7 +25,7 @@
                     <th><?= $this->Paginator->sort('death_necropsied') ?></th>
                     <th><?= $this->Paginator->sort('picture') ?></th>
                     <th><?= $this->Paginator->sort('picture_thumbnail') ?></th>
-                    <th><?= $this->Paginator->sort('validated') ?></th>
+                    <th><?= $this->Paginator->sort('is_alive') ?></th>
                     <th><?= $this->Paginator->sort('mother_rattery_id') ?></th>
                     <th><?= $this->Paginator->sort('father_rattery_id') ?></th>
                     <th><?= $this->Paginator->sort('mother_rat_id') ?></th>
@@ -42,15 +42,21 @@
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th><?= $this->Paginator->sort('state_id') ?></th>
+                    <th><?= $this->Paginator->sort('rattery_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($rats as $rat): ?>
                 <tr>
-                    <td><?= $this->Number->format($rat->id) ?></td>
-                    <td><?= h($rat->name_owner) ?></td>
-                    <td><?= h($rat->name_pup) ?></td>
+                    <td><?= $rat->has('mother_rattery_id') ? $this->Html->link($rat->mother_rattery_id->name, ['controller' => 'Ratteries', 'action' => 'view', $rat->mother_rattery_id->id]) : '' ?></td>
+                    <td><?= $rat->has('father_rattery_id') ? $this->Html->link($rat->father_rattery_id->name, ['controller' => 'Ratteries', 'action' => 'view', $rat->father_rattery_id->id]) : '' ?></td>
+                    <td><?= $rat->has('mother_rat_id') ? $this->Html->link($rat->mother_rat_id->id, ['controller' => 'Rats', 'action' => 'view', $rat->mother_rat_id->id]) : '' ?></td>
+                    <td><?= $rat->has('father_rat_id') ? $this->Html->link($rat->father_rat_id->id, ['controller' => 'Rats', 'action' => 'view', $rat->father_rat_id->id]) : '' ?></td>
+                    <td><?= $rat->has('owner_user_id') ? $this->Html->link($rat->owner_user_id->id, ['controller' => 'Users', 'action' => 'view', $rat->owner_user_id->id]) : '' ?></td>
+                    <td><?= $rat->has('creator_user_id') ? $this->Html->link($rat->creator_user_id->id, ['controller' => 'Users', 'action' => 'view', $rat->creator_user_id->id]) : '' ?></td>
+                    <td><?= h($rat->name) ?></td>
+                    <td><?= h($rat->pup_name) ?></td>
                     <td><?= h($rat->sex) ?></td>
                     <td><?= h($rat->pedigree_identifier) ?></td>
                     <td><?= h($rat->birth_date) ?></td>
@@ -62,7 +68,7 @@
                     <td><?= h($rat->death_necropsied) ?></td>
                     <td><?= h($rat->picture) ?></td>
                     <td><?= h($rat->picture_thumbnail) ?></td>
-                    <td><?= h($rat->validated) ?></td>
+                    <td><?= h($rat->is_alive) ?></td>
                     <td><?= $this->Number->format($rat->mother_rattery_id) ?></td>
                     <td><?= $this->Number->format($rat->father_rattery_id) ?></td>
                     <td><?= $this->Number->format($rat->mother_rat_id) ?></td>
@@ -79,6 +85,7 @@
                     <td><?= h($rat->created) ?></td>
                     <td><?= h($rat->modified) ?></td>
                     <td><?= $rat->has('state') ? $this->Html->link($rat->state->name, ['controller' => 'States', 'action' => 'view', $rat->state->id]) : '' ?></td>
+                    <td><?= $this->Number->format($rat->rattery_id) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $rat->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rat->id]) ?>

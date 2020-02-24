@@ -12,8 +12,7 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('name_fr') ?></th>
-                    <th><?= $this->Paginator->sort('name_en') ?></th>
+                    <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('picture') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -22,8 +21,7 @@
                 <?php foreach ($coats as $coat): ?>
                 <tr>
                     <td><?= $this->Number->format($coat->id) ?></td>
-                    <td><?= h($coat->name_fr) ?></td>
-                    <td><?= h($coat->name_en) ?></td>
+                    <td><?= h($coat->name) ?></td>
                     <td><?= h($coat->picture) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $coat->id]) ?>
