@@ -37,7 +37,7 @@ class RatsController extends AppController
     public function view($id = null)
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['DeathPrimaryCauses', 'DeathSecondaryCauses', 'MotherRatteries', 'FatherRatteries', 'MotherRats', 'FatherRats', 'Litters', 'OwnerUsers', 'Colors', 'Earsets', 'Eyecolors', 'Dilutions', 'Coats', 'Markings', 'Users', 'States', 'Ratteries', 'Singularities', 'Rats', 'Conversations', 'RatSnapshots'],
+            'contain' => ['DeathPrimaryCauses', 'DeathSecondaryCauses', 'MotherRatteries', 'FatherRatteries', 'MotherRats', 'FatherRats', 'Litters', 'OwnerUsers', 'Colors', 'Earsets', 'Eyecolors', 'Dilutions', 'Coats', 'Markings', 'Users', 'States', 'Ratteries', 'Singularities', 'MChildrenRats', 'FChildrenRats', 'Conversations', 'RatSnapshots'],
         ]);
 
         $this->set('rat', $rat);

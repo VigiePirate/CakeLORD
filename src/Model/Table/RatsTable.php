@@ -75,14 +75,16 @@ class RatsTable extends Table
             'className' => 'Ratteries',			
             'foreignKey' => 'father_rattery_id',
         ]);
-        $this->hasMany('Rats', [
+        $this->hasMany('MChildrenRats', [
+            'className' => 'Rats',			
             'foreignKey' => 'mother_rat_id',
         ]);
         $this->belongsTo('MotherRats', [
             'className' => 'Rats',			
             'foreignKey' => 'mother_rat_id',
         ]);
-        $this->hasMany('Rats', [
+        $this->hasMany('FChildrenRats', [
+            'className' => 'Rats',			
             'foreignKey' => 'father_rat_id',
         ]);
         $this->belongsTo('FatherRats', [

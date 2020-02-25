@@ -64,11 +64,11 @@ class RatteriesTable extends Table
         $this->hasMany('Rats', [
             'foreignKey' => 'rattery_id',
         ]);
-        $this->hasMany('ChildrenRats', [
+        $this->hasMany('MChildrenRats', [
             'className' => 'Rats',
             'foreignKey' => 'mother_rattery_id',
         ]);
-        $this->hasMany('ChildrenRats', [
+        $this->hasMany('FChildrenRats', [
             'className' => 'Rats',
             'foreignKey' => 'father_rattery_id',
         ]);

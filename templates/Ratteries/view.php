@@ -236,7 +236,7 @@
             </div>
             <div class="related">
                 <h4><?= __('Related Rats') ?></h4>
-                <?php if (!empty($rattery->children_rats)) : ?>
+                <?php if (!empty($rattery->m_children_rats)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -275,45 +275,132 @@
                             <th><?= __('Rattery Id') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($rattery->children_rats as $childrenRats) : ?>
+                        <?php foreach ($rattery->m_children_rats as $mChildrenRats) : ?>
                         <tr>
-                            <td><?= h($childrenRats->id) ?></td>
-                            <td><?= h($childrenRats->name) ?></td>
-                            <td><?= h($childrenRats->pup_name) ?></td>
-                            <td><?= h($childrenRats->sex) ?></td>
-                            <td><?= h($childrenRats->pedigree_identifier) ?></td>
-                            <td><?= h($childrenRats->birth_date) ?></td>
-                            <td><?= h($childrenRats->death_date) ?></td>
-                            <td><?= h($childrenRats->death_primary_cause_id) ?></td>
-                            <td><?= h($childrenRats->death_secondary_cause_id) ?></td>
-                            <td><?= h($childrenRats->death_euthanized) ?></td>
-                            <td><?= h($childrenRats->death_diagnosed) ?></td>
-                            <td><?= h($childrenRats->death_necropsied) ?></td>
-                            <td><?= h($childrenRats->picture) ?></td>
-                            <td><?= h($childrenRats->picture_thumbnail) ?></td>
-                            <td><?= h($childrenRats->comments) ?></td>
-                            <td><?= h($childrenRats->is_alive) ?></td>
-                            <td><?= h($childrenRats->mother_rattery_id) ?></td>
-                            <td><?= h($childrenRats->father_rattery_id) ?></td>
-                            <td><?= h($childrenRats->mother_rat_id) ?></td>
-                            <td><?= h($childrenRats->father_rat_id) ?></td>
-                            <td><?= h($childrenRats->litter_id) ?></td>
-                            <td><?= h($childrenRats->owner_user_id) ?></td>
-                            <td><?= h($childrenRats->color_id) ?></td>
-                            <td><?= h($childrenRats->earset_id) ?></td>
-                            <td><?= h($childrenRats->eyecolor_id) ?></td>
-                            <td><?= h($childrenRats->dilution_id) ?></td>
-                            <td><?= h($childrenRats->coat_id) ?></td>
-                            <td><?= h($childrenRats->marking_id) ?></td>
-                            <td><?= h($childrenRats->creator_user_id) ?></td>
-                            <td><?= h($childrenRats->created) ?></td>
-                            <td><?= h($childrenRats->modified) ?></td>
-                            <td><?= h($childrenRats->state_id) ?></td>
-                            <td><?= h($childrenRats->rattery_id) ?></td>
+                            <td><?= h($mChildrenRats->id) ?></td>
+                            <td><?= h($mChildrenRats->name) ?></td>
+                            <td><?= h($mChildrenRats->pup_name) ?></td>
+                            <td><?= h($mChildrenRats->sex) ?></td>
+                            <td><?= h($mChildrenRats->pedigree_identifier) ?></td>
+                            <td><?= h($mChildrenRats->birth_date) ?></td>
+                            <td><?= h($mChildrenRats->death_date) ?></td>
+                            <td><?= h($mChildrenRats->death_primary_cause_id) ?></td>
+                            <td><?= h($mChildrenRats->death_secondary_cause_id) ?></td>
+                            <td><?= h($mChildrenRats->death_euthanized) ?></td>
+                            <td><?= h($mChildrenRats->death_diagnosed) ?></td>
+                            <td><?= h($mChildrenRats->death_necropsied) ?></td>
+                            <td><?= h($mChildrenRats->picture) ?></td>
+                            <td><?= h($mChildrenRats->picture_thumbnail) ?></td>
+                            <td><?= h($mChildrenRats->comments) ?></td>
+                            <td><?= h($mChildrenRats->is_alive) ?></td>
+                            <td><?= h($mChildrenRats->mother_rattery_id) ?></td>
+                            <td><?= h($mChildrenRats->father_rattery_id) ?></td>
+                            <td><?= h($mChildrenRats->mother_rat_id) ?></td>
+                            <td><?= h($mChildrenRats->father_rat_id) ?></td>
+                            <td><?= h($mChildrenRats->litter_id) ?></td>
+                            <td><?= h($mChildrenRats->owner_user_id) ?></td>
+                            <td><?= h($mChildrenRats->color_id) ?></td>
+                            <td><?= h($mChildrenRats->earset_id) ?></td>
+                            <td><?= h($mChildrenRats->eyecolor_id) ?></td>
+                            <td><?= h($mChildrenRats->dilution_id) ?></td>
+                            <td><?= h($mChildrenRats->coat_id) ?></td>
+                            <td><?= h($mChildrenRats->marking_id) ?></td>
+                            <td><?= h($mChildrenRats->creator_user_id) ?></td>
+                            <td><?= h($mChildrenRats->created) ?></td>
+                            <td><?= h($mChildrenRats->modified) ?></td>
+                            <td><?= h($mChildrenRats->state_id) ?></td>
+                            <td><?= h($mChildrenRats->rattery_id) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Rats', 'action' => 'view', $childrenRats->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Rats', 'action' => 'edit', $childrenRats->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Rats', 'action' => 'delete', $childrenRats->id], ['confirm' => __('Are you sure you want to delete # {0}?', $childrenRats->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Rats', 'action' => 'view', $mChildrenRats->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Rats', 'action' => 'edit', $mChildrenRats->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Rats', 'action' => 'delete', $mChildrenRats->id], ['confirm' => __('Are you sure you want to delete # {0}?', $mChildrenRats->id)]) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+            </div>
+            <div class="related">
+                <h4><?= __('Related Rats') ?></h4>
+                <?php if (!empty($rattery->f_children_rats)) : ?>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Name') ?></th>
+                            <th><?= __('Pup Name') ?></th>
+                            <th><?= __('Sex') ?></th>
+                            <th><?= __('Pedigree Identifier') ?></th>
+                            <th><?= __('Birth Date') ?></th>
+                            <th><?= __('Death Date') ?></th>
+                            <th><?= __('Death Primary Cause Id') ?></th>
+                            <th><?= __('Death Secondary Cause Id') ?></th>
+                            <th><?= __('Death Euthanized') ?></th>
+                            <th><?= __('Death Diagnosed') ?></th>
+                            <th><?= __('Death Necropsied') ?></th>
+                            <th><?= __('Picture') ?></th>
+                            <th><?= __('Picture Thumbnail') ?></th>
+                            <th><?= __('Comments') ?></th>
+                            <th><?= __('Is Alive') ?></th>
+                            <th><?= __('Mother Rattery Id') ?></th>
+                            <th><?= __('Father Rattery Id') ?></th>
+                            <th><?= __('Mother Rat Id') ?></th>
+                            <th><?= __('Father Rat Id') ?></th>
+                            <th><?= __('Litter Id') ?></th>
+                            <th><?= __('Owner User Id') ?></th>
+                            <th><?= __('Color Id') ?></th>
+                            <th><?= __('Earset Id') ?></th>
+                            <th><?= __('Eyecolor Id') ?></th>
+                            <th><?= __('Dilution Id') ?></th>
+                            <th><?= __('Coat Id') ?></th>
+                            <th><?= __('Marking Id') ?></th>
+                            <th><?= __('Creator User Id') ?></th>
+                            <th><?= __('Created') ?></th>
+                            <th><?= __('Modified') ?></th>
+                            <th><?= __('State Id') ?></th>
+                            <th><?= __('Rattery Id') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($rattery->f_children_rats as $fChildrenRats) : ?>
+                        <tr>
+                            <td><?= h($fChildrenRats->id) ?></td>
+                            <td><?= h($fChildrenRats->name) ?></td>
+                            <td><?= h($fChildrenRats->pup_name) ?></td>
+                            <td><?= h($fChildrenRats->sex) ?></td>
+                            <td><?= h($fChildrenRats->pedigree_identifier) ?></td>
+                            <td><?= h($fChildrenRats->birth_date) ?></td>
+                            <td><?= h($fChildrenRats->death_date) ?></td>
+                            <td><?= h($fChildrenRats->death_primary_cause_id) ?></td>
+                            <td><?= h($fChildrenRats->death_secondary_cause_id) ?></td>
+                            <td><?= h($fChildrenRats->death_euthanized) ?></td>
+                            <td><?= h($fChildrenRats->death_diagnosed) ?></td>
+                            <td><?= h($fChildrenRats->death_necropsied) ?></td>
+                            <td><?= h($fChildrenRats->picture) ?></td>
+                            <td><?= h($fChildrenRats->picture_thumbnail) ?></td>
+                            <td><?= h($fChildrenRats->comments) ?></td>
+                            <td><?= h($fChildrenRats->is_alive) ?></td>
+                            <td><?= h($fChildrenRats->mother_rattery_id) ?></td>
+                            <td><?= h($fChildrenRats->father_rattery_id) ?></td>
+                            <td><?= h($fChildrenRats->mother_rat_id) ?></td>
+                            <td><?= h($fChildrenRats->father_rat_id) ?></td>
+                            <td><?= h($fChildrenRats->litter_id) ?></td>
+                            <td><?= h($fChildrenRats->owner_user_id) ?></td>
+                            <td><?= h($fChildrenRats->color_id) ?></td>
+                            <td><?= h($fChildrenRats->earset_id) ?></td>
+                            <td><?= h($fChildrenRats->eyecolor_id) ?></td>
+                            <td><?= h($fChildrenRats->dilution_id) ?></td>
+                            <td><?= h($fChildrenRats->coat_id) ?></td>
+                            <td><?= h($fChildrenRats->marking_id) ?></td>
+                            <td><?= h($fChildrenRats->creator_user_id) ?></td>
+                            <td><?= h($fChildrenRats->created) ?></td>
+                            <td><?= h($fChildrenRats->modified) ?></td>
+                            <td><?= h($fChildrenRats->state_id) ?></td>
+                            <td><?= h($fChildrenRats->rattery_id) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['controller' => 'Rats', 'action' => 'view', $fChildrenRats->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Rats', 'action' => 'edit', $fChildrenRats->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Rats', 'action' => 'delete', $fChildrenRats->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fChildrenRats->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
