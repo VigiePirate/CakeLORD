@@ -90,7 +90,8 @@ class RatsTable extends Table
         $this->belongsTo('Litters', [
             'foreignKey' => 'litter_id',
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('OwnerUsers', [
+            'className' => 'Users',
             'foreignKey' => 'owner_user_id',
         ]);
         $this->belongsTo('Colors', [
