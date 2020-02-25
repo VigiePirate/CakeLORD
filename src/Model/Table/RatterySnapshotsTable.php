@@ -38,7 +38,7 @@ class RatterySnapshotsTable extends Table
         parent::initialize($config);
 
         $this->setTable('rattery_snapshots');
-        $this->setDisplayField('id');
+        $this->setDisplayField('created');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');

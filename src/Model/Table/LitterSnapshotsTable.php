@@ -38,7 +38,7 @@ class LitterSnapshotsTable extends Table
         parent::initialize($config);
 
         $this->setTable('litter_snapshots');
-        $this->setDisplayField('id');
+        $this->setDisplayField('created');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');

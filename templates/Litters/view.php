@@ -20,7 +20,7 @@
             <table>
                 <tr>
                     <th><?= __('User') ?></th>
-                    <td><?= $litter->has('user') ? $this->Html->link($litter->user->id, ['controller' => 'Users', 'action' => 'view', $litter->user->id]) : '' ?></td>
+                    <td><?= $litter->has('user') ? $this->Html->link($litter->user->username, ['controller' => 'Users', 'action' => 'view', $litter->user->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('State') ?></th>
@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Rattery') ?></th>
-                    <td><?= $litter->has('rattery') ? $this->Html->link($litter->rattery->name, ['controller' => 'Ratteries', 'action' => 'view', $litter->rattery->id]) : '' ?></td>
+                    <td><?= $litter->has('rattery') ? $this->Html->link($litter->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $litter->rattery->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>

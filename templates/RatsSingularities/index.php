@@ -19,8 +19,8 @@
             <tbody>
                 <?php foreach ($ratsSingularities as $ratsSingularity): ?>
                 <tr>
-                    <td><?= $ratsSingularity->has('rat') ? $this->Html->link($ratsSingularity->rat->id, ['controller' => 'Rats', 'action' => 'view', $ratsSingularity->rat->id]) : '' ?></td>
-                    <td><?= $ratsSingularity->has('singularity') ? $this->Html->link($ratsSingularity->singularity->id, ['controller' => 'Singularities', 'action' => 'view', $ratsSingularity->singularity->id]) : '' ?></td>
+                    <td><?= $ratsSingularity->has('rat') ? $this->Html->link($ratsSingularity->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratsSingularity->rat->id]) : '' ?></td>
+                    <td><?= $ratsSingularity->has('singularity') ? $this->Html->link($ratsSingularity->singularity->name, ['controller' => 'Singularities', 'action' => 'view', $ratsSingularity->singularity->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $ratsSingularity->rats_id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $ratsSingularity->rats_id]) ?>

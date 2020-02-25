@@ -23,7 +23,7 @@
                 <tr>
                     <td><?= $this->Number->format($ratterySnapshot->id) ?></td>
                     <td><?= h($ratterySnapshot->created) ?></td>
-                    <td><?= $ratterySnapshot->has('rattery') ? $this->Html->link($ratterySnapshot->rattery->name, ['controller' => 'Ratteries', 'action' => 'view', $ratterySnapshot->rattery->id]) : '' ?></td>
+                    <td><?= $ratterySnapshot->has('rattery') ? $this->Html->link($ratterySnapshot->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $ratterySnapshot->rattery->id]) : '' ?></td>
                     <td><?= $ratterySnapshot->has('state') ? $this->Html->link($ratterySnapshot->state->name, ['controller' => 'States', 'action' => 'view', $ratterySnapshot->state->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $ratterySnapshot->id]) ?>

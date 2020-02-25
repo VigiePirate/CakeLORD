@@ -16,11 +16,11 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="ratSnapshots view content">
-            <h3><?= h($ratSnapshot->id) ?></h3>
+            <h3><?= h($ratSnapshot->created) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Rat') ?></th>
-                    <td><?= $ratSnapshot->has('rat') ? $this->Html->link($ratSnapshot->rat->id, ['controller' => 'Rats', 'action' => 'view', $ratSnapshot->rat->id]) : '' ?></td>
+                    <td><?= $ratSnapshot->has('rat') ? $this->Html->link($ratSnapshot->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratSnapshot->rat->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('State') ?></th>

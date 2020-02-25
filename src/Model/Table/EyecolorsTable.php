@@ -36,7 +36,7 @@ class EyecolorsTable extends Table
         parent::initialize($config);
 
         $this->setTable('eyecolors');
-        $this->setDisplayField('id');
+        $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->hasMany('Colors', [

@@ -56,7 +56,7 @@ class RatsTable extends Table
         parent::initialize($config);
 
         $this->setTable('rats');
-        $this->setDisplayField('id');
+        $this->setDisplayField('pedigree_identifier');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -73,10 +73,18 @@ class RatsTable extends Table
         $this->belongsTo('Ratteries', [
             'foreignKey' => 'father_rattery_id',
         ]);
-        $this->belongsTo('Rats', [
+        $this->hasMany('Rats', [
             'foreignKey' => 'mother_rat_id',
         ]);
-        $this->belongsTo('Rats', [
+        $this->belongsTo('MotherRats', [
+            'className' => 'Rats',			
+            'foreignKey' => 'mother_rat_id',
+        ]);
+        $this->hasMany('Rats', [
+            'foreignKey' => 'father_rat_id',
+        ]);
+        $this->belongsTo('FatherRats', [
+            'className' => 'Rats',			
             'foreignKey' => 'father_rat_id',
         ]);
         $this->belongsTo('Litters', [

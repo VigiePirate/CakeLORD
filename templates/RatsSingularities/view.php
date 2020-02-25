@@ -20,11 +20,11 @@
             <table>
                 <tr>
                     <th><?= __('Rat') ?></th>
-                    <td><?= $ratsSingularity->has('rat') ? $this->Html->link($ratsSingularity->rat->id, ['controller' => 'Rats', 'action' => 'view', $ratsSingularity->rat->id]) : '' ?></td>
+                    <td><?= $ratsSingularity->has('rat') ? $this->Html->link($ratsSingularity->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratsSingularity->rat->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Singularity') ?></th>
-                    <td><?= $ratsSingularity->has('singularity') ? $this->Html->link($ratsSingularity->singularity->id, ['controller' => 'Singularities', 'action' => 'view', $ratsSingularity->singularity->id]) : '' ?></td>
+                    <td><?= $ratsSingularity->has('singularity') ? $this->Html->link($ratsSingularity->singularity->name, ['controller' => 'Singularities', 'action' => 'view', $ratsSingularity->singularity->id]) : '' ?></td>
                 </tr>
             </table>
         </div>

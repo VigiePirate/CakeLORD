@@ -35,7 +35,7 @@ class EarsetsTable extends Table
         parent::initialize($config);
 
         $this->setTable('earsets');
-        $this->setDisplayField('id');
+        $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->hasMany('Rats', [

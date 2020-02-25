@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="litterSnapshots view content">
-            <h3><?= h($litterSnapshot->id) ?></h3>
+            <h3><?= h($litterSnapshot->created) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Litter') ?></th>

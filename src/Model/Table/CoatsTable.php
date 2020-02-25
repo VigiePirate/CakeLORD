@@ -35,7 +35,7 @@ class CoatsTable extends Table
         parent::initialize($config);
 
         $this->setTable('coats');
-        $this->setDisplayField('id');
+        $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->hasMany('Rats', [

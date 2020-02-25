@@ -22,7 +22,7 @@
                 <tr>
                     <td><?= $this->Number->format($deathSecondaryCause->id) ?></td>
                     <td><?= h($deathSecondaryCause->name) ?></td>
-                    <td><?= $deathSecondaryCause->has('death_primary_cause') ? $this->Html->link($deathSecondaryCause->death_primary_cause->id, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $deathSecondaryCause->death_primary_cause->id]) : '' ?></td>
+                    <td><?= $deathSecondaryCause->has('death_primary_cause') ? $this->Html->link($deathSecondaryCause->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $deathSecondaryCause->death_primary_cause->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $deathSecondaryCause->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $deathSecondaryCause->id]) ?>

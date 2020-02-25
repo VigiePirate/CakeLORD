@@ -19,7 +19,7 @@
             <tbody>
                 <?php foreach ($usersConversations as $usersConversation): ?>
                 <tr>
-                    <td><?= $usersConversation->has('user') ? $this->Html->link($usersConversation->user->id, ['controller' => 'Users', 'action' => 'view', $usersConversation->user->id]) : '' ?></td>
+                    <td><?= $usersConversation->has('user') ? $this->Html->link($usersConversation->user->username, ['controller' => 'Users', 'action' => 'view', $usersConversation->user->id]) : '' ?></td>
                     <td><?= $usersConversation->has('conversation') ? $this->Html->link($usersConversation->conversation->id, ['controller' => 'Conversations', 'action' => 'view', $usersConversation->conversation->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $usersConversation->user_id]) ?>

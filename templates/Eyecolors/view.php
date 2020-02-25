@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="eyecolors view content">
-            <h3><?= h($eyecolor->id) ?></h3>
+            <h3><?= h($eyecolor->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Name') ?></th>

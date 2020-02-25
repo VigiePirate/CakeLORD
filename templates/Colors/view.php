@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="colors view content">
-            <h3><?= h($color->id) ?></h3>
+            <h3><?= h($color->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Name') ?></th>
@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Eyecolor') ?></th>
-                    <td><?= $color->has('eyecolor') ? $this->Html->link($color->eyecolor->id, ['controller' => 'Eyecolors', 'action' => 'view', $color->eyecolor->id]) : '' ?></td>
+                    <td><?= $color->has('eyecolor') ? $this->Html->link($color->eyecolor->name, ['controller' => 'Eyecolors', 'action' => 'view', $color->eyecolor->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>

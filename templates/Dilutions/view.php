@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="dilutions view content">
-            <h3><?= h($dilution->id) ?></h3>
+            <h3><?= h($dilution->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Name') ?></th>

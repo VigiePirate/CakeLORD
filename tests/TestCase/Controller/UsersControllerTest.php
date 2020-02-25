@@ -24,6 +24,9 @@ class UsersControllerTest extends TestCase
     protected $fixtures = [
         'app.Users',
         'app.Roles',
+        'app.Ratteries',
+        'app.OwnedRats',
+        'app.CreatedRats',
         'app.Messages',
         'app.Conversations',
         'app.UsersConversations',

@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="deathPrimaryCauses view content">
-            <h3><?= h($deathPrimaryCause->id) ?></h3>
+            <h3><?= h($deathPrimaryCause->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Name') ?></th>

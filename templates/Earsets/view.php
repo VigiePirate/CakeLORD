@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="earsets view content">
-            <h3><?= h($earset->id) ?></h3>
+            <h3><?= h($earset->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Name') ?></th>

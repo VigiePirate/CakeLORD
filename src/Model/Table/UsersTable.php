@@ -39,7 +39,7 @@ class UsersTable extends Table
         parent::initialize($config);
 
         $this->setTable('users');
-        $this->setDisplayField('id');
+        $this->setDisplayField('username');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -47,6 +47,17 @@ class UsersTable extends Table
         $this->belongsTo('Roles', [
             'foreignKey' => 'role_id',
             'joinType' => 'INNER',
+        ]);
+        $this->hasMany('Ratteries', [
+            'foreignKey' => 'owner_id',
+        ]);
+        $this->hasMany('OwnedRats', [
+            'className' => 'Rats',
+            'foreignKey' => 'owner_user_id',
+        ]);
+        $this->hasMany('CreatedRats', [
+            'className' => 'Rats',
+            'foreignKey' => 'creator_user_id',
         ]);
         $this->hasMany('Messages', [
             'foreignKey' => 'user_id',

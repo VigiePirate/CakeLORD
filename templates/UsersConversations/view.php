@@ -20,7 +20,7 @@
             <table>
                 <tr>
                     <th><?= __('User') ?></th>
-                    <td><?= $usersConversation->has('user') ? $this->Html->link($usersConversation->user->id, ['controller' => 'Users', 'action' => 'view', $usersConversation->user->id]) : '' ?></td>
+                    <td><?= $usersConversation->has('user') ? $this->Html->link($usersConversation->user->username, ['controller' => 'Users', 'action' => 'view', $usersConversation->user->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Conversation') ?></th>

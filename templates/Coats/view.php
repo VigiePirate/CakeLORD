@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="coats view content">
-            <h3><?= h($coat->id) ?></h3>
+            <h3><?= h($coat->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Name') ?></th>

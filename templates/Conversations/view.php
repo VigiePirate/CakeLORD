@@ -20,7 +20,7 @@
             <table>
                 <tr>
                     <th><?= __('Rattery') ?></th>
-                    <td><?= $conversation->has('rattery') ? $this->Html->link($conversation->rattery->name, ['controller' => 'Ratteries', 'action' => 'view', $conversation->rattery->id]) : '' ?></td>
+                    <td><?= $conversation->has('rattery') ? $this->Html->link($conversation->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $conversation->rattery->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Litter') ?></th>
@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Rat') ?></th>
-                    <td><?= $conversation->has('rat') ? $this->Html->link($conversation->rat->id, ['controller' => 'Rats', 'action' => 'view', $conversation->rat->id]) : '' ?></td>
+                    <td><?= $conversation->has('rat') ? $this->Html->link($conversation->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $conversation->rat->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>
