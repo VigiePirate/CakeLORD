@@ -35,7 +35,7 @@ class SingularitiesTable extends Table
         parent::initialize($config);
 
         $this->setTable('singularities');
-        $this->setDisplayField('id');
+        $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->belongsToMany('Rats', [

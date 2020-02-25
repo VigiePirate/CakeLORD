@@ -35,7 +35,7 @@ class MarkingsTable extends Table
         parent::initialize($config);
 
         $this->setTable('markings');
-        $this->setDisplayField('id');
+        $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->hasMany('Rats', [

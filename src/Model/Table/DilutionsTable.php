@@ -35,7 +35,7 @@ class DilutionsTable extends Table
         parent::initialize($config);
 
         $this->setTable('dilutions');
-        $this->setDisplayField('id');
+        $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->hasMany('Rats', [

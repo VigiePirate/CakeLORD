@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="deathSecondaryCauses view content">
-            <h3><?= h($deathSecondaryCause->id) ?></h3>
+            <h3><?= h($deathSecondaryCause->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Name') ?></th>
@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Death Primary Cause') ?></th>
-                    <td><?= $deathSecondaryCause->has('death_primary_cause') ? $this->Html->link($deathSecondaryCause->death_primary_cause->id, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $deathSecondaryCause->death_primary_cause->id]) : '' ?></td>
+                    <td><?= $deathSecondaryCause->has('death_primary_cause') ? $this->Html->link($deathSecondaryCause->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $deathSecondaryCause->death_primary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>

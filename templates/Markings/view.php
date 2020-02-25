@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="markings view content">
-            <h3><?= h($marking->id) ?></h3>
+            <h3><?= h($marking->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Name') ?></th>

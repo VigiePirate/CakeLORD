@@ -42,7 +42,7 @@ class RatteriesTable extends Table
         parent::initialize($config);
 
         $this->setTable('ratteries');
-        $this->setDisplayField('name');
+        $this->setDisplayField('prefix');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');

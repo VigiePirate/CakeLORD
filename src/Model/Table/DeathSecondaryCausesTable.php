@@ -36,7 +36,7 @@ class DeathSecondaryCausesTable extends Table
         parent::initialize($config);
 
         $this->setTable('death_secondary_causes');
-        $this->setDisplayField('id');
+        $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('DeathPrimaryCauses', [

@@ -26,7 +26,7 @@
                     <td><?= h($color->name) ?></td>
                     <td><?= h($color->genotype) ?></td>
                     <td><?= h($color->picture) ?></td>
-                    <td><?= $color->has('eyecolor') ? $this->Html->link($color->eyecolor->id, ['controller' => 'Eyecolors', 'action' => 'view', $color->eyecolor->id]) : '' ?></td>
+                    <td><?= $color->has('eyecolor') ? $this->Html->link($color->eyecolor->name, ['controller' => 'Eyecolors', 'action' => 'view', $color->eyecolor->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $color->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $color->id]) ?>

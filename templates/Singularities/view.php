@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="singularities view content">
-            <h3><?= h($singularity->id) ?></h3>
+            <h3><?= h($singularity->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Name') ?></th>

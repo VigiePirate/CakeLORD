@@ -23,7 +23,7 @@
                 <tr>
                     <td><?= $this->Number->format($message->id) ?></td>
                     <td><?= $message->has('conversation') ? $this->Html->link($message->conversation->id, ['controller' => 'Conversations', 'action' => 'view', $message->conversation->id]) : '' ?></td>
-                    <td><?= $message->has('user') ? $this->Html->link($message->user->id, ['controller' => 'Users', 'action' => 'view', $message->user->id]) : '' ?></td>
+                    <td><?= $message->has('user') ? $this->Html->link($message->user->username, ['controller' => 'Users', 'action' => 'view', $message->user->id]) : '' ?></td>
                     <td><?= h($message->created) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $message->id]) ?>

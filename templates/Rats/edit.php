@@ -39,8 +39,8 @@
                     echo $this->Form->control('is_alive');
                     echo $this->Form->control('mother_rattery_id');
                     echo $this->Form->control('father_rattery_id');
-                    echo $this->Form->control('mother_rat_id');
-                    echo $this->Form->control('father_rat_id', ['options' => $rats, 'empty' => true]);
+                    echo $this->Form->control('mother_rat_id', ['options' => $motherRats, 'empty' => true]);
+                    echo $this->Form->control('father_rat_id', ['options' => $fatherRats, 'empty' => true]);
                     echo $this->Form->control('litter_id', ['options' => $litters, 'empty' => true]);
                     echo $this->Form->control('owner_user_id');
                     echo $this->Form->control('color_id', ['options' => $colors]);

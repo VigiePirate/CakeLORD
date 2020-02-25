@@ -30,7 +30,7 @@
                     <td><?= $this->Number->format($rattery->id) ?></td>
                     <td><?= h($rattery->name) ?></td>
                     <td><?= h($rattery->prefix) ?></td>
-                    <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->id, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
+                    <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->username, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
                     <td><?= h($rattery->picture) ?></td>
                     <td><?= h($rattery->is_alive) ?></td>
                     <td><?= h($rattery->birth_year) ?></td>

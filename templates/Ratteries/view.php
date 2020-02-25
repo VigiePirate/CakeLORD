@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="ratteries view content">
-            <h3><?= h($rattery->name) ?></h3>
+            <h3><?= h($rattery->prefix) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Name') ?></th>
@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <th><?= __('User') ?></th>
-                    <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->id, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
+                    <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->username, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Picture') ?></th>
