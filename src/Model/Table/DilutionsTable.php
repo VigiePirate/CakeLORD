@@ -13,14 +13,19 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  *
- * @method \App\Model\Entity\Dilution get($primaryKey, $options = [])
- * @method \App\Model\Entity\Dilution newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Dilution newEmptyEntity()
+ * @method \App\Model\Entity\Dilution newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Dilution[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Dilution get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Dilution findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Dilution patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Dilution[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\Dilution|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Dilution saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Dilution patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Dilution[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Dilution findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Dilution[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Dilution[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Dilution[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Dilution[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class DilutionsTable extends Table
 {
@@ -66,6 +71,21 @@ class DilutionsTable extends Table
             ->scalar('picture')
             ->maxLength('picture', 255)
             ->notEmptyString('picture');
+
+        $validator
+            ->scalar('genotype')
+            ->maxLength('genotype', 70)
+            ->requirePresence('genotype', 'create')
+            ->notEmptyString('genotype');
+
+        $validator
+            ->scalar('description')
+            ->requirePresence('description', 'create')
+            ->notEmptyString('description');
+
+        $validator
+            ->boolean('is_picture_mandatory')
+            ->notEmptyString('is_picture_mandatory');
 
         return $validator;
     }

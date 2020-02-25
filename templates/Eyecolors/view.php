@@ -27,10 +27,24 @@
                     <td><?= h($eyecolor->picture) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Genotype') ?></th>
+                    <td><?= h($eyecolor->genotype) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($eyecolor->id) ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Is Picture Mandatory') ?></th>
+                    <td><?= $eyecolor->is_picture_mandatory ? __('Yes') : __('No'); ?></td>
+                </tr>
             </table>
+            <div class="text">
+                <strong><?= __('Description') ?></strong>
+                <blockquote>
+                    <?= $this->Text->autoParagraph(h($eyecolor->description)); ?>
+                </blockquote>
+            </div>
             <div class="related">
                 <h4><?= __('Related Colors') ?></h4>
                 <?php if (!empty($eyecolor->colors)) : ?>
@@ -42,6 +56,8 @@
                             <th><?= __('Genotype') ?></th>
                             <th><?= __('Picture') ?></th>
                             <th><?= __('Eyecolor Id') ?></th>
+                            <th><?= __('Description') ?></th>
+                            <th><?= __('Is Picture Mandatory') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($eyecolor->colors as $colors) : ?>
@@ -51,6 +67,8 @@
                             <td><?= h($colors->genotype) ?></td>
                             <td><?= h($colors->picture) ?></td>
                             <td><?= h($colors->eyecolor_id) ?></td>
+                            <td><?= h($colors->description) ?></td>
+                            <td><?= h($colors->is_picture_mandatory) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Colors', 'action' => 'view', $colors->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Colors', 'action' => 'edit', $colors->id]) ?>

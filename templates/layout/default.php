@@ -31,7 +31,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
 
     <?= $this->Html->css('milligram.min.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('lord.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

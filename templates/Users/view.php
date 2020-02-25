@@ -47,6 +47,10 @@
                     <td><?= $user->has('role') ? $this->Html->link($user->role->name, ['controller' => 'Roles', 'action' => 'view', $user->role->id]) : '' ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Avatar') ?></th>
+                    <td><?= h($user->avatar) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($user->id) ?></td>
                 </tr>
@@ -71,14 +75,26 @@
                     <td><?= h($user->failed_login_last_date) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Newsletter') ?></th>
-                    <td><?= $user->newsletter ? __('Yes') : __('No'); ?></td>
+                    <th><?= __('Wants Newsletter') ?></th>
+                    <td><?= $user->wants_newsletter ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Is Locked') ?></th>
                     <td><?= $user->is_locked ? __('Yes') : __('No'); ?></td>
                 </tr>
             </table>
+            <div class="text">
+                <strong><?= __('About Me') ?></strong>
+                <blockquote>
+                    <?= $this->Text->autoParagraph(h($user->about_me)); ?>
+                </blockquote>
+            </div>
+            <div class="text">
+                <strong><?= __('Staff Comments') ?></strong>
+                <blockquote>
+                    <?= $this->Text->autoParagraph(h($user->staff_comments)); ?>
+                </blockquote>
+            </div>
             <div class="related">
                 <h4><?= __('Related Conversations') ?></h4>
                 <?php if (!empty($user->conversations)) : ?>

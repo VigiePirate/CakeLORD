@@ -17,15 +17,15 @@ class RatsSingularitiesFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'rats_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'singularities_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'rat_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'singularity_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
-            'singularities_key' => ['type' => 'index', 'columns' => ['singularities_id'], 'length' => []],
+            'singularities_key' => ['type' => 'index', 'columns' => ['singularity_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['rats_id', 'singularities_id'], 'length' => []],
-            'rats_key' => ['type' => 'foreign', 'columns' => ['rats_id'], 'references' => ['rats', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
-            'singularities_key' => ['type' => 'foreign', 'columns' => ['singularities_id'], 'references' => ['singularities', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['rat_id', 'singularity_id'], 'length' => []],
+            'rats_key' => ['type' => 'foreign', 'columns' => ['rat_id'], 'references' => ['rats', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'singularities_key' => ['type' => 'foreign', 'columns' => ['singularity_id'], 'references' => ['singularities', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -42,8 +42,8 @@ class RatsSingularitiesFixture extends TestFixture
     {
         $this->records = [
             [
-                'rats_id' => 1,
-                'singularities_id' => 1,
+                'rat_id' => 1,
+                'singularity_id' => 1,
             ],
         ];
         parent::init();

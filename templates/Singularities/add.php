@@ -19,6 +19,9 @@
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('picture');
+                    echo $this->Form->control('genotype');
+                    echo $this->Form->control('description');
+                    echo $this->Form->control('is_picture_mandatory');
                     echo $this->Form->control('rats._ids', ['options' => $rats]);
                 ?>
             </fieldset>

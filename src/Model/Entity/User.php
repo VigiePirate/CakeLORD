@@ -16,15 +16,21 @@ use Cake\ORM\Entity;
  * @property string|null $lastname
  * @property string $username
  * @property \Cake\I18n\FrozenDate|null $birth_date
- * @property bool $newsletter
+ * @property bool $wants_newsletter
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  * @property int $role_id
  * @property bool $is_locked
  * @property int $failed_login_attempts
  * @property \Cake\I18n\FrozenTime $failed_login_last_date
+ * @property string $about_me
+ * @property string $staff_comments
+ * @property string $avatar
  *
  * @property \App\Model\Entity\Role $role
+ * @property \App\Model\Entity\Rattery[] $ratteries
+ * @property \App\Model\Entity\Rat[] $owned_rats
+ * @property \App\Model\Entity\Rat[] $created_rats
  * @property \App\Model\Entity\Message[] $messages
  * @property \App\Model\Entity\Conversation[] $conversations
  */
@@ -47,14 +53,20 @@ class User extends Entity
         'lastname' => true,
         'username' => true,
         'birth_date' => true,
-        'newsletter' => true,
+        'wants_newsletter' => true,
         'created' => true,
         'modified' => true,
         'role_id' => true,
         'is_locked' => true,
         'failed_login_attempts' => true,
         'failed_login_last_date' => true,
+        'about_me' => true,
+        'staff_comments' => true,
+        'avatar' => true,
         'role' => true,
+        'ratteries' => true,
+        'owned_rats' => true,
+        'created_rats' => true,
         'messages' => true,
         'conversations' => true,
     ];

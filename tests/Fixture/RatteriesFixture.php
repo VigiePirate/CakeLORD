@@ -28,6 +28,9 @@ class RatteriesFixture extends TestFixture
         'created' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => '1981-08-01 00:00:00', 'comment' => ''],
         'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => '1981-08-01 00:00:00', 'comment' => ''],
         'state_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => '1', 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'website' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => '', 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
+        'district' => ['type' => 'string', 'length' => 45, 'null' => false, 'default' => '', 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
+        'zip_code' => ['type' => 'string', 'length' => 12, 'null' => false, 'default' => '', 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         '_indexes' => [
             'fk_lord_ratteries_lord_users1' => ['type' => 'index', 'columns' => ['owner_id'], 'length' => []],
             'fk_ratteries_states1' => ['type' => 'index', 'columns' => ['state_id'], 'length' => []],
@@ -62,9 +65,12 @@ class RatteriesFixture extends TestFixture
                 'picture' => 'Lorem ipsum dolor sit amet',
                 'is_alive' => 1,
                 'birth_year' => 'Lorem ipsum dolor sit amet',
-                'created' => '2020-02-24 20:26:19',
-                'modified' => '2020-02-24 20:26:19',
+                'created' => '2020-02-25 19:24:00',
+                'modified' => '2020-02-25 19:24:00',
                 'state_id' => 1,
+                'website' => 'Lorem ipsum dolor sit amet',
+                'district' => 'Lorem ipsum dolor sit amet',
+                'zip_code' => 'Lorem ipsu',
             ],
         ];
         parent::init();

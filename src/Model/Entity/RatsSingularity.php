@@ -8,8 +8,8 @@ use Cake\ORM\Entity;
 /**
  * RatsSingularity Entity
  *
- * @property int $rats_id
- * @property int $singularities_id
+ * @property int $rat_id
+ * @property int $singularity_id
  *
  * @property \App\Model\Entity\Rat $rat
  * @property \App\Model\Entity\Singularity $singularity

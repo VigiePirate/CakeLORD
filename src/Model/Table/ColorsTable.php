@@ -14,14 +14,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\EyecolorsTable&\Cake\ORM\Association\BelongsTo $Eyecolors
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  *
- * @method \App\Model\Entity\Color get($primaryKey, $options = [])
- * @method \App\Model\Entity\Color newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Color newEmptyEntity()
+ * @method \App\Model\Entity\Color newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Color[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Color get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Color findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Color patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Color[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\Color|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Color saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Color patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Color[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Color findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Color[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Color[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Color[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Color[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class ColorsTable extends Table
 {
@@ -75,6 +80,15 @@ class ColorsTable extends Table
             ->scalar('picture')
             ->maxLength('picture', 255)
             ->notEmptyString('picture');
+
+        $validator
+            ->scalar('description')
+            ->requirePresence('description', 'create')
+            ->notEmptyString('description');
+
+        $validator
+            ->boolean('is_picture_mandatory')
+            ->notEmptyString('is_picture_mandatory');
 
         return $validator;
     }

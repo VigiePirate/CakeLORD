@@ -13,14 +13,19 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsToMany $Rats
  *
- * @method \App\Model\Entity\Singularity get($primaryKey, $options = [])
- * @method \App\Model\Entity\Singularity newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Singularity newEmptyEntity()
+ * @method \App\Model\Entity\Singularity newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Singularity[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Singularity get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Singularity findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Singularity patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Singularity[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\Singularity|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Singularity saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Singularity patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Singularity[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Singularity findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Singularity[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Singularity[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Singularity[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Singularity[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class SingularitiesTable extends Table
 {
@@ -68,6 +73,21 @@ class SingularitiesTable extends Table
             ->scalar('picture')
             ->maxLength('picture', 255)
             ->notEmptyString('picture');
+
+        $validator
+            ->scalar('genotype')
+            ->maxLength('genotype', 70)
+            ->requirePresence('genotype', 'create')
+            ->notEmptyString('genotype');
+
+        $validator
+            ->scalar('description')
+            ->requirePresence('description', 'create')
+            ->notEmptyString('description');
+
+        $validator
+            ->boolean('is_picture_mandatory')
+            ->notEmptyString('is_picture_mandatory');
 
         return $validator;
     }

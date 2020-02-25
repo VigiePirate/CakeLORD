@@ -27,10 +27,24 @@
                     <td><?= h($earset->picture) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Genotype') ?></th>
+                    <td><?= h($earset->genotype) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($earset->id) ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Is Picture Mandatory') ?></th>
+                    <td><?= $earset->is_picture_mandatory ? __('Yes') : __('No'); ?></td>
+                </tr>
             </table>
+            <div class="text">
+                <strong><?= __('Description') ?></strong>
+                <blockquote>
+                    <?= $this->Text->autoParagraph(h($earset->description)); ?>
+                </blockquote>
+            </div>
             <div class="related">
                 <h4><?= __('Related Rats') ?></h4>
                 <?php if (!empty($earset->rats)) : ?>
