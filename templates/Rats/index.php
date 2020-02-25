@@ -64,12 +64,12 @@
                     <td><?= h($rat->picture) ?></td>
                     <td><?= h($rat->picture_thumbnail) ?></td>
                     <td><?= h($rat->is_alive) ?></td>
-                    <td><?= $this->Number->format($rat->mother_rattery_id) ?></td>
-                    <td><?= $this->Number->format($rat->father_rattery_id) ?></td>
+                    <td><?= $rat->has('mother_rattery') ? $this->Html->link($rat->mother_rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->mother_rattery->id]) : '' ?></td>
+                    <td><?= $rat->has('father_rattery') ? $this->Html->link($rat->father_rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->father_rattery->id]) : '' ?></td>
                     <td><?= $rat->has('mother_rat') ? $this->Html->link($rat->mother_rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $rat->mother_rat->id]) : '' ?></td>
                     <td><?= $rat->has('father_rat') ? $this->Html->link($rat->father_rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $rat->father_rat->id]) : '' ?></td>
                     <td><?= $rat->has('litter') ? $this->Html->link($rat->litter->id, ['controller' => 'Litters', 'action' => 'view', $rat->litter->id]) : '' ?></td>
-                    <td><?= $this->Number->format($rat->owner_user_id) ?></td>
+                    <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                     <td><?= $rat->has('color') ? $this->Html->link($rat->color->name, ['controller' => 'Colors', 'action' => 'view', $rat->color->id]) : '' ?></td>
                     <td><?= $rat->has('earset') ? $this->Html->link($rat->earset->name, ['controller' => 'Earsets', 'action' => 'view', $rat->earset->id]) : '' ?></td>
                     <td><?= $rat->has('eyecolor') ? $this->Html->link($rat->eyecolor->name, ['controller' => 'Eyecolors', 'action' => 'view', $rat->eyecolor->id]) : '' ?></td>
