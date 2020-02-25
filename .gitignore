@@ -41,3 +41,10 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+/docs/cdc/cdclord2.0.pdf
+/docs/cdc/cdclord2.0.toc
+/docs/cdc/cdclord2.0.aux
+/docs/cdc/cdclord2.0.bbl
+/docs/cdc/cdclord2.0.blg
+/docs/cdc/cdclord2.0.log
+/docs/cdc/cdclord2.0.out
