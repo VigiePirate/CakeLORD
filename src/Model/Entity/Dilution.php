@@ -11,6 +11,8 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $picture
+ * @property string $genotype
+ * @property string $description
  *
  * @property \App\Model\Entity\Rat[] $rats
  */
@@ -28,6 +30,8 @@ class Dilution extends Entity
     protected $_accessible = [
         'name' => true,
         'picture' => true,
+        'genotype' => true,
+        'description' => true,
         'rats' => true,
     ];
 }

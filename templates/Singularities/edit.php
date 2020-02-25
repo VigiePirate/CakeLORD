@@ -24,7 +24,9 @@
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('picture');
-                    echo $this->Form->control('rats._ids', ['options' => $rats]);
+                    echo $this->Form->control('genotype');
+                    echo $this->Form->control('description');
+                    //echo $this->Form->control('rats._ids', ['options' => $rats]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

@@ -13,14 +13,19 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  *
- * @method \App\Model\Entity\Coat get($primaryKey, $options = [])
- * @method \App\Model\Entity\Coat newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Coat newEmptyEntity()
+ * @method \App\Model\Entity\Coat newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Coat[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Coat get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Coat findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Coat patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Coat[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\Coat|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Coat saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Coat patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Coat[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Coat findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Coat[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Coat[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Coat[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Coat[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class CoatsTable extends Table
 {
@@ -66,6 +71,17 @@ class CoatsTable extends Table
             ->scalar('picture')
             ->maxLength('picture', 255)
             ->notEmptyString('picture');
+
+        $validator
+            ->scalar('genotype')
+            ->maxLength('genotype', 70)
+            ->requirePresence('genotype', 'create')
+            ->notEmptyString('genotype');
+
+        $validator
+            ->scalar('description')
+            ->requirePresence('description', 'create')
+            ->notEmptyString('description');
 
         return $validator;
     }

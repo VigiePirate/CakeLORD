@@ -14,6 +14,7 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('picture') ?></th>
+                    <th><?= $this->Paginator->sort('genotype') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                     <td><?= $this->Number->format($singularity->id) ?></td>
                     <td><?= h($singularity->name) ?></td>
                     <td><?= h($singularity->picture) ?></td>
+                    <td><?= h($singularity->genotype) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $singularity->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $singularity->id]) ?>

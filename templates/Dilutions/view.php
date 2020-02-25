@@ -27,10 +27,20 @@
                     <td><?= h($dilution->picture) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Genotype') ?></th>
+                    <td><?= h($dilution->genotype) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($dilution->id) ?></td>
                 </tr>
             </table>
+            <div class="text">
+                <strong><?= __('Description') ?></strong>
+                <blockquote>
+                    <?= $this->Text->autoParagraph(h($dilution->description)); ?>
+                </blockquote>
+            </div>
             <div class="related">
                 <h4><?= __('Related Rats') ?></h4>
                 <?php if (!empty($dilution->rats)) : ?>

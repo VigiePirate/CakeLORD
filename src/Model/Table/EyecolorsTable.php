@@ -14,14 +14,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\ColorsTable&\Cake\ORM\Association\HasMany $Colors
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  *
- * @method \App\Model\Entity\Eyecolor get($primaryKey, $options = [])
- * @method \App\Model\Entity\Eyecolor newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Eyecolor newEmptyEntity()
+ * @method \App\Model\Entity\Eyecolor newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Eyecolor[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Eyecolor get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Eyecolor findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Eyecolor patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Eyecolor[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\Eyecolor|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Eyecolor saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Eyecolor patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Eyecolor[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Eyecolor findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Eyecolor[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Eyecolor[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Eyecolor[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Eyecolor[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class EyecolorsTable extends Table
 {
@@ -70,6 +75,17 @@ class EyecolorsTable extends Table
             ->scalar('picture')
             ->maxLength('picture', 255)
             ->notEmptyString('picture');
+
+        $validator
+            ->scalar('genotype')
+            ->maxLength('genotype', 70)
+            ->requirePresence('genotype', 'create')
+            ->notEmptyString('genotype');
+
+        $validator
+            ->scalar('description')
+            ->requirePresence('description', 'create')
+            ->notEmptyString('description');
 
         return $validator;
     }

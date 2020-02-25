@@ -6,17 +6,14 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Earset Entity
+ * Incompatibility Entity
  *
  * @property int $id
- * @property string $name
- * @property string $picture
- * @property string $genotype
- * @property string $description
- *
- * @property \App\Model\Entity\Rat[] $rats
+ * @property string $genotype1
+ * @property string $genotype2
+ * @property string $comments
  */
-class Earset extends Entity
+class Incompatibility extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -28,10 +25,8 @@ class Earset extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name' => true,
-        'picture' => true,
-        'genotype' => true,
-        'description' => true,
-        'rats' => true,
+        'genotype1' => true,
+        'genotype2' => true,
+        'comments' => true,
     ];
 }

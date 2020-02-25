@@ -39,6 +39,12 @@
                     <td><?= $this->Number->format($color->id) ?></td>
                 </tr>
             </table>
+            <div class="text">
+                <strong><?= __('Description') ?></strong>
+                <blockquote>
+                    <?= $this->Text->autoParagraph(h($color->description)); ?>
+                </blockquote>
+            </div>
             <div class="related">
                 <h4><?= __('Related Rats') ?></h4>
                 <?php if (!empty($color->rats)) : ?>

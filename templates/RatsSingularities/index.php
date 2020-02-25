@@ -11,8 +11,8 @@
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('rats_id') ?></th>
-                    <th><?= $this->Paginator->sort('singularities_id') ?></th>
+                    <th><?= $this->Paginator->sort('rat_id') ?></th>
+                    <th><?= $this->Paginator->sort('singularity_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -22,9 +22,9 @@
                     <td><?= $ratsSingularity->has('rat') ? $this->Html->link($ratsSingularity->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratsSingularity->rat->id]) : '' ?></td>
                     <td><?= $ratsSingularity->has('singularity') ? $this->Html->link($ratsSingularity->singularity->name, ['controller' => 'Singularities', 'action' => 'view', $ratsSingularity->singularity->id]) : '' ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $ratsSingularity->rats_id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $ratsSingularity->rats_id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $ratsSingularity->rats_id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratsSingularity->rats_id)]) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $ratsSingularity->rat_id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $ratsSingularity->rat_id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $ratsSingularity->rat_id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratsSingularity->rat_id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

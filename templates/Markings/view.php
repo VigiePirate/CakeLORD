@@ -27,10 +27,20 @@
                     <td><?= h($marking->picture) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Genotype') ?></th>
+                    <td><?= h($marking->genotype) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($marking->id) ?></td>
                 </tr>
             </table>
+            <div class="text">
+                <strong><?= __('Description') ?></strong>
+                <blockquote>
+                    <?= $this->Text->autoParagraph(h($marking->description)); ?>
+                </blockquote>
+            </div>
             <div class="related">
                 <h4><?= __('Related Rats') ?></h4>
                 <?php if (!empty($marking->rats)) : ?>

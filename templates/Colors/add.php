@@ -21,6 +21,7 @@
                     echo $this->Form->control('genotype');
                     echo $this->Form->control('picture');
                     echo $this->Form->control('eyecolor_id', ['options' => $eyecolors, 'empty' => true]);
+                    echo $this->Form->control('description');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
