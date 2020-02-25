@@ -34,6 +34,10 @@
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($eyecolor->id) ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Is Picture Mandatory') ?></th>
+                    <td><?= $eyecolor->is_picture_mandatory ? __('Yes') : __('No'); ?></td>
+                </tr>
             </table>
             <div class="text">
                 <strong><?= __('Description') ?></strong>
@@ -53,6 +57,7 @@
                             <th><?= __('Picture') ?></th>
                             <th><?= __('Eyecolor Id') ?></th>
                             <th><?= __('Description') ?></th>
+                            <th><?= __('Is Picture Mandatory') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($eyecolor->colors as $colors) : ?>
@@ -63,6 +68,7 @@
                             <td><?= h($colors->picture) ?></td>
                             <td><?= h($colors->eyecolor_id) ?></td>
                             <td><?= h($colors->description) ?></td>
+                            <td><?= h($colors->is_picture_mandatory) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Colors', 'action' => 'view', $colors->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Colors', 'action' => 'edit', $colors->id]) ?>

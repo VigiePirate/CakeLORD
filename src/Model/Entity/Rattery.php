@@ -19,12 +19,17 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  * @property int $state_id
+ * @property string $website
+ * @property string $district
+ * @property string $zip_code
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\State $state
  * @property \App\Model\Entity\Conversation[] $conversations
  * @property \App\Model\Entity\Litter[] $litters
  * @property \App\Model\Entity\Rat[] $rats
+ * @property \App\Model\Entity\Rat[] $m_children_rats
+ * @property \App\Model\Entity\Rat[] $f_children_rats
  * @property \App\Model\Entity\RatterySnapshot[] $rattery_snapshots
  */
 class Rattery extends Entity
@@ -49,11 +54,16 @@ class Rattery extends Entity
         'created' => true,
         'modified' => true,
         'state_id' => true,
+        'website' => true,
+        'district' => true,
+        'zip_code' => true,
         'user' => true,
         'state' => true,
         'conversations' => true,
         'litters' => true,
         'rats' => true,
+        'm_children_rats' => true,
+        'f_children_rats' => true,
         'rattery_snapshots' => true,
     ];
 }

@@ -15,14 +15,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\MessagesTable&\Cake\ORM\Association\HasMany $Messages
  * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\BelongsToMany $Conversations
  *
- * @method \App\Model\Entity\User get($primaryKey, $options = [])
- * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\User newEmptyEntity()
+ * @method \App\Model\Entity\User newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\User[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\User get($primaryKey, $options = [])
+ * @method \App\Model\Entity\User findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\User patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\User[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\User|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\User saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\User patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\User[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\User findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
@@ -47,17 +52,6 @@ class UsersTable extends Table
         $this->belongsTo('Roles', [
             'foreignKey' => 'role_id',
             'joinType' => 'INNER',
-        ]);
-        $this->hasMany('Ratteries', [
-            'foreignKey' => 'owner_id',
-        ]);
-        $this->hasMany('OwnedRats', [
-            'className' => 'Rats',
-            'foreignKey' => 'owner_user_id',
-        ]);
-        $this->hasMany('CreatedRats', [
-            'className' => 'Rats',
-            'foreignKey' => 'creator_user_id',
         ]);
         $this->hasMany('Messages', [
             'foreignKey' => 'user_id',
@@ -119,8 +113,8 @@ class UsersTable extends Table
             ->allowEmptyDate('birth_date');
 
         $validator
-            ->boolean('newsletter')
-            ->notEmptyString('newsletter');
+            ->boolean('wants_newsletter')
+            ->notEmptyString('wants_newsletter');
 
         $validator
             ->boolean('is_locked')
@@ -132,6 +126,19 @@ class UsersTable extends Table
         $validator
             ->dateTime('failed_login_last_date')
             ->notEmptyDateTime('failed_login_last_date');
+
+        $validator
+            ->scalar('about_me')
+            ->notEmptyString('about_me');
+
+        $validator
+            ->scalar('staff_comments')
+            ->notEmptyString('staff_comments');
+
+        $validator
+            ->scalar('avatar')
+            ->maxLength('avatar', 255)
+            ->notEmptyString('avatar');
 
         return $validator;
     }

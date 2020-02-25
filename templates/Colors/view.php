@@ -38,6 +38,10 @@
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($color->id) ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Is Picture Mandatory') ?></th>
+                    <td><?= $color->is_picture_mandatory ? __('Yes') : __('No'); ?></td>
+                </tr>
             </table>
             <div class="text">
                 <strong><?= __('Description') ?></strong>

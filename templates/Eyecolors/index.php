@@ -15,6 +15,7 @@
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('picture') ?></th>
                     <th><?= $this->Paginator->sort('genotype') ?></th>
+                    <th><?= $this->Paginator->sort('is_picture_mandatory') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -25,6 +26,7 @@
                     <td><?= h($eyecolor->name) ?></td>
                     <td><?= h($eyecolor->picture) ?></td>
                     <td><?= h($eyecolor->genotype) ?></td>
+                    <td><?= h($eyecolor->is_picture_mandatory) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $eyecolor->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $eyecolor->id]) ?>

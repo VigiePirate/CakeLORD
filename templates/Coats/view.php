@@ -34,6 +34,10 @@
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($coat->id) ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Is Picture Mandatory') ?></th>
+                    <td><?= $coat->is_picture_mandatory ? __('Yes') : __('No'); ?></td>
+                </tr>
             </table>
             <div class="text">
                 <strong><?= __('Description') ?></strong>

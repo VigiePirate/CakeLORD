@@ -21,6 +21,7 @@
                     echo $this->Form->control('picture');
                     echo $this->Form->control('genotype');
                     echo $this->Form->control('description');
+                    echo $this->Form->control('is_picture_mandatory');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

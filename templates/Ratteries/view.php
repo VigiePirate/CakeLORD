@@ -43,6 +43,18 @@
                     <td><?= $rattery->has('state') ? $this->Html->link($rattery->state->name, ['controller' => 'States', 'action' => 'view', $rattery->state->id]) : '' ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Website') ?></th>
+                    <td><?= h($rattery->website) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('District') ?></th>
+                    <td><?= h($rattery->district) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Zip Code') ?></th>
+                    <td><?= h($rattery->zip_code) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($rattery->id) ?></td>
                 </tr>

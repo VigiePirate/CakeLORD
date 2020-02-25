@@ -3,21 +3,21 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\RatteriesTable;
+use App\Model\Table\ArticlesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\RatteriesTable Test Case
+ * App\Model\Table\ArticlesTable Test Case
  */
-class RatteriesTableTest extends TestCase
+class ArticlesTableTest extends TestCase
 {
     /**
      * Test subject
      *
-     * @var \App\Model\Table\RatteriesTable
+     * @var \App\Model\Table\ArticlesTable
      */
-    protected $Ratteries;
+    protected $Articles;
 
     /**
      * Fixtures
@@ -25,15 +25,7 @@ class RatteriesTableTest extends TestCase
      * @var array
      */
     protected $fixtures = [
-        'app.Ratteries',
-        'app.Users',
-        'app.States',
-        'app.Conversations',
-        'app.Litters',
-        'app.Rats',
-        'app.MChildrenRats',
-        'app.FChildrenRats',
-        'app.RatterySnapshots',
+        'app.Articles',
     ];
 
     /**
@@ -44,8 +36,8 @@ class RatteriesTableTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('Ratteries') ? [] : ['className' => RatteriesTable::class];
-        $this->Ratteries = TableRegistry::getTableLocator()->get('Ratteries', $config);
+        $config = TableRegistry::getTableLocator()->exists('Articles') ? [] : ['className' => ArticlesTable::class];
+        $this->Articles = TableRegistry::getTableLocator()->get('Articles', $config);
     }
 
     /**
@@ -55,7 +47,7 @@ class RatteriesTableTest extends TestCase
      */
     public function tearDown(): void
     {
-        unset($this->Ratteries);
+        unset($this->Articles);
 
         parent::tearDown();
     }
@@ -76,16 +68,6 @@ class RatteriesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

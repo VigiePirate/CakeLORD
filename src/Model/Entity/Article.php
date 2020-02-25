@@ -6,18 +6,16 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Earset Entity
+ * Article Entity
  *
  * @property int $id
- * @property string $name
- * @property string $picture
- * @property string $genotype
- * @property string $description
- * @property bool $is_picture_mandatory
- *
- * @property \App\Model\Entity\Rat[] $rats
+ * @property string $title
+ * @property string $subtitle
+ * @property string $content
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime $modified
  */
-class Earset extends Entity
+class Article extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -29,11 +27,10 @@ class Earset extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name' => true,
-        'picture' => true,
-        'genotype' => true,
-        'description' => true,
-        'is_picture_mandatory' => true,
-        'rats' => true,
+        'title' => true,
+        'subtitle' => true,
+        'content' => true,
+        'created' => true,
+        'modified' => true,
     ];
 }

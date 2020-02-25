@@ -83,6 +83,10 @@ class EarsetsTable extends Table
             ->requirePresence('description', 'create')
             ->notEmptyString('description');
 
+        $validator
+            ->boolean('is_picture_mandatory')
+            ->notEmptyString('is_picture_mandatory');
+
         return $validator;
     }
 

@@ -21,6 +21,9 @@
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th><?= $this->Paginator->sort('state_id') ?></th>
+                    <th><?= $this->Paginator->sort('website') ?></th>
+                    <th><?= $this->Paginator->sort('district') ?></th>
+                    <th><?= $this->Paginator->sort('zip_code') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -37,6 +40,9 @@
                     <td><?= h($rattery->created) ?></td>
                     <td><?= h($rattery->modified) ?></td>
                     <td><?= $rattery->has('state') ? $this->Html->link($rattery->state->name, ['controller' => 'States', 'action' => 'view', $rattery->state->id]) : '' ?></td>
+                    <td><?= h($rattery->website) ?></td>
+                    <td><?= h($rattery->district) ?></td>
+                    <td><?= h($rattery->zip_code) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $rattery->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rattery->id]) ?>

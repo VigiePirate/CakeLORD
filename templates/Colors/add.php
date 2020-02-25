@@ -22,6 +22,7 @@
                     echo $this->Form->control('picture');
                     echo $this->Form->control('eyecolor_id', ['options' => $eyecolors, 'empty' => true]);
                     echo $this->Form->control('description');
+                    echo $this->Form->control('is_picture_mandatory');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

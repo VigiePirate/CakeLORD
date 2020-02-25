@@ -18,14 +18,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  * @property \App\Model\Table\RatterySnapshotsTable&\Cake\ORM\Association\HasMany $RatterySnapshots
  *
- * @method \App\Model\Entity\Rattery get($primaryKey, $options = [])
- * @method \App\Model\Entity\Rattery newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Rattery newEmptyEntity()
+ * @method \App\Model\Entity\Rattery newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Rattery[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Rattery get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Rattery findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Rattery patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Rattery[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\Rattery|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Rattery saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Rattery patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Rattery[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Rattery findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Rattery[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Rattery[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Rattery[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Rattery[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
@@ -63,14 +68,6 @@ class RatteriesTable extends Table
         ]);
         $this->hasMany('Rats', [
             'foreignKey' => 'rattery_id',
-        ]);
-        $this->hasMany('MChildrenRats', [
-            'className' => 'Rats',
-            'foreignKey' => 'mother_rattery_id',
-        ]);
-        $this->hasMany('FChildrenRats', [
-            'className' => 'Rats',
-            'foreignKey' => 'father_rattery_id',
         ]);
         $this->hasMany('RatterySnapshots', [
             'foreignKey' => 'rattery_id',
@@ -119,6 +116,21 @@ class RatteriesTable extends Table
         $validator
             ->scalar('birth_year')
             ->allowEmptyString('birth_year');
+
+        $validator
+            ->scalar('website')
+            ->maxLength('website', 255)
+            ->notEmptyString('website');
+
+        $validator
+            ->scalar('district')
+            ->maxLength('district', 45)
+            ->notEmptyString('district');
+
+        $validator
+            ->scalar('zip_code')
+            ->maxLength('zip_code', 12)
+            ->notEmptyString('zip_code');
 
         return $validator;
     }

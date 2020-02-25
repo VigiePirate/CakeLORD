@@ -13,6 +13,7 @@ use Cake\ORM\Entity;
  * @property string $picture
  * @property string $genotype
  * @property string $description
+ * @property bool $is_picture_mandatory
  *
  * @property \App\Model\Entity\Color[] $colors
  * @property \App\Model\Entity\Rat[] $rats
@@ -33,6 +34,7 @@ class Eyecolor extends Entity
         'picture' => true,
         'genotype' => true,
         'description' => true,
+        'is_picture_mandatory' => true,
         'colors' => true,
         'rats' => true,
     ];
