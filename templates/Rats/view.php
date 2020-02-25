@@ -51,6 +51,14 @@
                     <td><?= h($rat->picture_thumbnail) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Mother Rattery') ?></th>
+                    <td><?= $rat->has('mother_rattery') ? $this->Html->link($rat->mother_rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->mother_rattery->id]) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Father Rattery') ?></th>
+                    <td><?= $rat->has('father_rattery') ? $this->Html->link($rat->father_rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->father_rattery->id]) : '' ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Mother Rat') ?></th>
                     <td><?= $rat->has('mother_rat') ? $this->Html->link($rat->mother_rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $rat->mother_rat->id]) : '' ?></td>
                 </tr>
@@ -61,6 +69,10 @@
                 <tr>
                     <th><?= __('Litter') ?></th>
                     <td><?= $rat->has('litter') ? $this->Html->link($rat->litter->id, ['controller' => 'Litters', 'action' => 'view', $rat->litter->id]) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Owner User') ?></th>
+                    <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Color') ?></th>
@@ -101,18 +113,6 @@
                 <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($rat->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Mother Rattery Id') ?></th>
-                    <td><?= $this->Number->format($rat->mother_rattery_id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Father Rattery Id') ?></th>
-                    <td><?= $this->Number->format($rat->father_rattery_id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Owner User Id') ?></th>
-                    <td><?= $this->Number->format($rat->owner_user_id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Birth Date') ?></th>

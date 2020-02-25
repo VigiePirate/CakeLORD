@@ -37,7 +37,7 @@ class RatteriesController extends AppController
     public function view($id = null)
     {
         $rattery = $this->Ratteries->get($id, [
-            'contain' => ['Users', 'States', 'Conversations', 'Litters', 'Rats', 'RatterySnapshots'],
+            'contain' => ['Users', 'States', 'Conversations', 'Litters', 'Rats', 'ChildrenRats', 'RatterySnapshots'],
         ]);
 
         $this->set('rattery', $rattery);

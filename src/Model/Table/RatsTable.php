@@ -67,10 +67,12 @@ class RatsTable extends Table
         $this->belongsTo('DeathSecondaryCauses', [
             'foreignKey' => 'death_secondary_cause_id',
         ]);
-        $this->belongsTo('Ratteries', [
+        $this->belongsTo('MotherRatteries', [
+            'className' => 'Ratteries',			
             'foreignKey' => 'mother_rattery_id',
         ]);
-        $this->belongsTo('Ratteries', [
+        $this->belongsTo('FatherRatteries', [
+            'className' => 'Ratteries',			
             'foreignKey' => 'father_rattery_id',
         ]);
         $this->hasMany('Rats', [

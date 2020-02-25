@@ -53,7 +53,7 @@
                     <td><?= h($rat->name) ?></td>
                     <td><?= h($rat->pup_name) ?></td>
                     <td><?= h($rat->sex) ?></td>
-                    <td><?= $this->Html->link(h($rat->pedigree_identifier), ['action' => 'view', $rat->id]) ?></td>
+                    <td><?= h($rat->pedigree_identifier) ?></td>
                     <td><?= h($rat->birth_date) ?></td>
                     <td><?= h($rat->death_date) ?></td>
                     <td><?= $rat->has('death_primary_cause') ? $this->Html->link($rat->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $rat->death_primary_cause->id]) : '' ?></td>
@@ -64,8 +64,8 @@
                     <td><?= h($rat->picture) ?></td>
                     <td><?= h($rat->picture_thumbnail) ?></td>
                     <td><?= h($rat->is_alive) ?></td>
-                    <td><?= $this->Number->format($rat->mother_rattery_id) ?></td>
-                    <td><?= $this->Number->format($rat->father_rattery_id) ?></td>
+                    <td><?= $rat->has('mother_rattery') ? $this->Html->link($rat->mother_rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->mother_rattery->id]) : '' ?></td>
+                    <td><?= $rat->has('father_rattery') ? $this->Html->link($rat->father_rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->father_rattery->id]) : '' ?></td>
                     <td><?= $rat->has('mother_rat') ? $this->Html->link($rat->mother_rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $rat->mother_rat->id]) : '' ?></td>
                     <td><?= $rat->has('father_rat') ? $this->Html->link($rat->father_rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $rat->father_rat->id]) : '' ?></td>
                     <td><?= $rat->has('litter') ? $this->Html->link($rat->litter->id, ['controller' => 'Litters', 'action' => 'view', $rat->litter->id]) : '' ?></td>

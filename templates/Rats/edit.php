@@ -37,12 +37,12 @@
                     echo $this->Form->control('picture_thumbnail');
                     echo $this->Form->control('comments');
                     echo $this->Form->control('is_alive');
-                    echo $this->Form->control('mother_rattery_id');
-                    echo $this->Form->control('father_rattery_id');
+                    echo $this->Form->control('mother_rattery_id', ['options' => $motherRatteries, 'empty' => true]);
+                    echo $this->Form->control('father_rattery_id', ['options' => $fatherRatteries, 'empty' => true]);
                     echo $this->Form->control('mother_rat_id', ['options' => $motherRats, 'empty' => true]);
                     echo $this->Form->control('father_rat_id', ['options' => $fatherRats, 'empty' => true]);
                     echo $this->Form->control('litter_id', ['options' => $litters, 'empty' => true]);
-                    echo $this->Form->control('owner_user_id');
+                    echo $this->Form->control('owner_user_id', ['options' => $ownerUsers, 'empty' => true]);
                     echo $this->Form->control('color_id', ['options' => $colors]);
                     echo $this->Form->control('earset_id', ['options' => $earsets]);
                     echo $this->Form->control('eyecolor_id', ['options' => $eyecolors]);
