@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $conversation_id
  * @property string $content
- * @property int $user_id
+ * @property int $from_user_id
  * @property \Cake\I18n\FrozenTime $created
  *
  * @property \App\Model\Entity\Conversation $conversation
@@ -30,7 +30,7 @@ class Message extends Entity
      */
     protected $_accessible = [
         'content' => true,
-        'user_id' => true,
+        'from_user_id' => true,
         'created' => true,
         'conversation' => true,
         'user' => true,

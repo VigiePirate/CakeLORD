@@ -9,19 +9,20 @@ use Cake\ORM\Entity;
  * Rattery Entity
  *
  * @property int $id
- * @property string $name
  * @property string $prefix
- * @property int $owner_id
- * @property string|null $comments
- * @property string|null $picture
- * @property bool $is_alive
+ * @property string $name
+ * @property int $owner_user_id
  * @property string|null $birth_year
+ * @property bool $is_alive
+ * @property string|null $district
+ * @property string|null $zip_code
+ * @property string|null $website
+ * @property string|null $comments
+ * @property string $picture
+ * @property int $state_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
- * @property int $state_id
- * @property string $website
- * @property string $district
- * @property string $zip_code
+ * @property int $countries_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\State $state
@@ -44,19 +45,20 @@ class Rattery extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name' => true,
         'prefix' => true,
-        'owner_id' => true,
-        'comments' => true,
-        'picture' => true,
-        'is_alive' => true,
+        'name' => true,
+        'owner_user_id' => true,
         'birth_year' => true,
-        'created' => true,
-        'modified' => true,
-        'state_id' => true,
-        'website' => true,
+        'is_alive' => true,
         'district' => true,
         'zip_code' => true,
+        'website' => true,
+        'comments' => true,
+        'picture' => true,
+        'state_id' => true,
+        'created' => true,
+        'modified' => true,
+        'countries_id' => true,
         'user' => true,
         'state' => true,
         'conversations' => true,

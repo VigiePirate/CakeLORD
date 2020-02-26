@@ -36,18 +36,22 @@
                             <th><?= __('Id') ?></th>
                             <th><?= __('Email') ?></th>
                             <th><?= __('Password') ?></th>
-                            <th><?= __('Sex') ?></th>
+                            <th><?= __('Username') ?></th>
                             <th><?= __('Firstname') ?></th>
                             <th><?= __('Lastname') ?></th>
-                            <th><?= __('Username') ?></th>
                             <th><?= __('Birth Date') ?></th>
-                            <th><?= __('Newsletter') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
+                            <th><?= __('Sex') ?></th>
+                            <th><?= __('Localization') ?></th>
+                            <th><?= __('Avatar') ?></th>
+                            <th><?= __('About Me') ?></th>
+                            <th><?= __('Wants Newsletter') ?></th>
                             <th><?= __('Role Id') ?></th>
-                            <th><?= __('Is Locked') ?></th>
                             <th><?= __('Failed Login Attempts') ?></th>
                             <th><?= __('Failed Login Last Date') ?></th>
+                            <th><?= __('Is Locked') ?></th>
+                            <th><?= __('Staff Comments') ?></th>
+                            <th><?= __('Created') ?></th>
+                            <th><?= __('Modified') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($role->users as $users) : ?>
@@ -55,18 +59,22 @@
                             <td><?= h($users->id) ?></td>
                             <td><?= h($users->email) ?></td>
                             <td><?= h($users->password) ?></td>
-                            <td><?= h($users->sex) ?></td>
+                            <td><?= h($users->username) ?></td>
                             <td><?= h($users->firstname) ?></td>
                             <td><?= h($users->lastname) ?></td>
-                            <td><?= h($users->username) ?></td>
                             <td><?= h($users->birth_date) ?></td>
-                            <td><?= h($users->newsletter) ?></td>
-                            <td><?= h($users->created) ?></td>
-                            <td><?= h($users->modified) ?></td>
+                            <td><?= h($users->sex) ?></td>
+                            <td><?= h($users->localization) ?></td>
+                            <td><?= h($users->avatar) ?></td>
+                            <td><?= h($users->about_me) ?></td>
+                            <td><?= h($users->wants_newsletter) ?></td>
                             <td><?= h($users->role_id) ?></td>
-                            <td><?= h($users->is_locked) ?></td>
                             <td><?= h($users->failed_login_attempts) ?></td>
                             <td><?= h($users->failed_login_last_date) ?></td>
+                            <td><?= h($users->is_locked) ?></td>
+                            <td><?= h($users->staff_comments) ?></td>
+                            <td><?= h($users->created) ?></td>
+                            <td><?= h($users->modified) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Users', 'action' => 'view', $users->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Users', 'action' => 'edit', $users->id]) ?>

@@ -10,9 +10,9 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
- * @property string|null $genotype
+ * @property string $genotype
  * @property string $picture
- * @property int|null $eyecolor_id
+ * @property int $eyecolor_id
  * @property string $description
  * @property bool $is_picture_mandatory
  *

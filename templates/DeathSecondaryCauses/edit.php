@@ -24,6 +24,7 @@
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('death_primary_cause_id', ['options' => $deathPrimaryCauses]);
+                    echo $this->Form->control('description');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

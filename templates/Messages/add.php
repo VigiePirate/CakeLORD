@@ -18,7 +18,7 @@
                 <legend><?= __('Add Message') ?></legend>
                 <?php
                     echo $this->Form->control('content');
-                    echo $this->Form->control('user_id', ['options' => $users]);
+                    echo $this->Form->control('from_user_id');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

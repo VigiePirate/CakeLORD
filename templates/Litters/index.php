@@ -12,17 +12,17 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('rattery_id') ?></th>
+                    <th><?= $this->Paginator->sort('mother_rat_id') ?></th>
+                    <th><?= $this->Paginator->sort('father_rat_id') ?></th>
                     <th><?= $this->Paginator->sort('mating_date') ?></th>
                     <th><?= $this->Paginator->sort('birth_date') ?></th>
                     <th><?= $this->Paginator->sort('pups_number') ?></th>
                     <th><?= $this->Paginator->sort('pups_number_stillborn') ?></th>
-                    <th><?= $this->Paginator->sort('mother_rat_id') ?></th>
-                    <th><?= $this->Paginator->sort('father_rat_id') ?></th>
                     <th><?= $this->Paginator->sort('creator_user_id') ?></th>
+                    <th><?= $this->Paginator->sort('state_id') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th><?= $this->Paginator->sort('state_id') ?></th>
-                    <th><?= $this->Paginator->sort('rattery_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -30,17 +30,17 @@
                 <?php foreach ($litters as $litter): ?>
                 <tr>
                     <td><?= $this->Number->format($litter->id) ?></td>
+                    <td><?= $litter->has('rattery') ? $this->Html->link($litter->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $litter->rattery->id]) : '' ?></td>
+                    <td><?= $this->Number->format($litter->mother_rat_id) ?></td>
+                    <td><?= $this->Number->format($litter->father_rat_id) ?></td>
                     <td><?= h($litter->mating_date) ?></td>
                     <td><?= h($litter->birth_date) ?></td>
                     <td><?= $this->Number->format($litter->pups_number) ?></td>
                     <td><?= $this->Number->format($litter->pups_number_stillborn) ?></td>
-                    <td><?= $this->Number->format($litter->mother_rat_id) ?></td>
-                    <td><?= $this->Number->format($litter->father_rat_id) ?></td>
                     <td><?= $litter->has('user') ? $this->Html->link($litter->user->username, ['controller' => 'Users', 'action' => 'view', $litter->user->id]) : '' ?></td>
+                    <td><?= $litter->has('state') ? $this->Html->link($litter->state->name, ['controller' => 'States', 'action' => 'view', $litter->state->id]) : '' ?></td>
                     <td><?= h($litter->created) ?></td>
                     <td><?= h($litter->modified) ?></td>
-                    <td><?= $litter->has('state') ? $this->Html->link($litter->state->name, ['controller' => 'States', 'action' => 'view', $litter->state->id]) : '' ?></td>
-                    <td><?= $litter->has('rattery') ? $this->Html->link($litter->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $litter->rattery->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $litter->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $litter->id]) ?>

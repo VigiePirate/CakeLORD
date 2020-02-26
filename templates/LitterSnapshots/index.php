@@ -12,9 +12,9 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('litter_id') ?></th>
                     <th><?= $this->Paginator->sort('state_id') ?></th>
+                    <th><?= $this->Paginator->sort('created') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -22,9 +22,9 @@
                 <?php foreach ($litterSnapshots as $litterSnapshot): ?>
                 <tr>
                     <td><?= $this->Number->format($litterSnapshot->id) ?></td>
-                    <td><?= h($litterSnapshot->created) ?></td>
                     <td><?= $litterSnapshot->has('litter') ? $this->Html->link($litterSnapshot->litter->id, ['controller' => 'Litters', 'action' => 'view', $litterSnapshot->litter->id]) : '' ?></td>
                     <td><?= $litterSnapshot->has('state') ? $this->Html->link($litterSnapshot->state->name, ['controller' => 'States', 'action' => 'view', $litterSnapshot->state->id]) : '' ?></td>
+                    <td><?= h($litterSnapshot->created) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $litterSnapshot->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $litterSnapshot->id]) ?>

@@ -18,14 +18,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\HasMany $Ratteries
  * @property \App\Model\Table\RatterySnapshotsTable&\Cake\ORM\Association\HasMany $RatterySnapshots
  *
- * @method \App\Model\Entity\State get($primaryKey, $options = [])
- * @method \App\Model\Entity\State newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\State newEmptyEntity()
+ * @method \App\Model\Entity\State newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\State[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\State get($primaryKey, $options = [])
+ * @method \App\Model\Entity\State findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\State patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\State[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\State|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\State saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\State patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\State[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\State findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class StatesTable extends Table
 {
@@ -72,9 +77,8 @@ class StatesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
-            ->allowEmptyString('id', null, 'create')
-            ->add('id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->nonNegativeInteger('id')
+            ->allowEmptyString('id', null, 'create');
 
         $validator
             ->scalar('name')

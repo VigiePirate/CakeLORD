@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Users Model
  *
  * @property \App\Model\Table\RolesTable&\Cake\ORM\Association\BelongsTo $Roles
- * @property \App\Model\Table\MessagesTable&\Cake\ORM\Association\HasMany $Messages
  * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\BelongsToMany $Conversations
  *
  * @method \App\Model\Entity\User newEmptyEntity()
@@ -53,8 +52,19 @@ class UsersTable extends Table
             'foreignKey' => 'role_id',
             'joinType' => 'INNER',
         ]);
+        $this->hasMany('Ratteries', [
+            'foreignKey' => 'owner_user_id',
+        ]);
+        $this->hasMany('OwnedRats', [
+            'className' => 'Rats',
+            'foreignKey' => 'owner_user_id',
+        ]);
+        $this->hasMany('CreatedRats', [
+            'className' => 'Rats',
+            'foreignKey' => 'creator_user_id',
+        ]);
         $this->hasMany('Messages', [
-            'foreignKey' => 'user_id',
+            'foreignKey' => 'from_user_id',
         ]);
         $this->belongsToMany('Conversations', [
             'foreignKey' => 'user_id',
@@ -72,7 +82,7 @@ class UsersTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
+            ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
 
         $validator
@@ -87,9 +97,11 @@ class UsersTable extends Table
             ->notEmptyString('password');
 
         $validator
-            ->scalar('sex')
-            ->maxLength('sex', 1)
-            ->allowEmptyString('sex');
+            ->scalar('username')
+            ->maxLength('username', 45)
+            ->requirePresence('username', 'create')
+            ->notEmptyString('username')
+            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('firstname')
@@ -102,43 +114,45 @@ class UsersTable extends Table
             ->allowEmptyString('lastname');
 
         $validator
-            ->scalar('username')
-            ->maxLength('username', 45)
-            ->requirePresence('username', 'create')
-            ->notEmptyString('username')
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
-        $validator
             ->date('birth_date')
             ->allowEmptyDate('birth_date');
+
+        $validator
+            ->scalar('sex')
+            ->allowEmptyString('sex');
+
+        $validator
+            ->scalar('localization')
+            ->maxLength('localization', 255)
+            ->allowEmptyString('localization');
+
+        $validator
+            ->scalar('avatar')
+            ->maxLength('avatar', 255)
+            ->notEmptyString('avatar');
+
+        $validator
+            ->scalar('about_me')
+            ->allowEmptyString('about_me');
 
         $validator
             ->boolean('wants_newsletter')
             ->notEmptyString('wants_newsletter');
 
         $validator
-            ->boolean('is_locked')
-            ->notEmptyString('is_locked');
-
-        $validator
             ->notEmptyString('failed_login_attempts');
 
         $validator
             ->dateTime('failed_login_last_date')
-            ->notEmptyDateTime('failed_login_last_date');
+            ->allowEmptyDateTime('failed_login_last_date');
 
         $validator
-            ->scalar('about_me')
-            ->notEmptyString('about_me');
+            ->boolean('is_locked')
+            ->notEmptyString('is_locked');
 
         $validator
             ->scalar('staff_comments')
             ->notEmptyString('staff_comments');
-
-        $validator
-            ->scalar('avatar')
-            ->maxLength('avatar', 255)
-            ->notEmptyString('avatar');
 
         return $validator;
     }
