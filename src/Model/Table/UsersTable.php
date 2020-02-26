@@ -52,6 +52,20 @@ class UsersTable extends Table
             'foreignKey' => 'role_id',
             'joinType' => 'INNER',
         ]);
+        $this->hasMany('Ratteries', [
+            'foreignKey' => 'owner_user_id',
+        ]);
+        $this->hasMany('OwnedRats', [
+            'className' => 'Rats',
+            'foreignKey' => 'owner_user_id',
+        ]);
+        $this->hasMany('CreatedRats', [
+            'className' => 'Rats',
+            'foreignKey' => 'creator_user_id',
+        ]);
+        $this->hasMany('Messages', [
+            'foreignKey' => 'from_user_id',
+        ]);
         $this->belongsToMany('Conversations', [
             'foreignKey' => 'user_id',
             'targetForeignKey' => 'conversation_id',

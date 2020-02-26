@@ -64,26 +64,31 @@ class RatsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Users', [
+        $this->belongsTo('OwnerUsers', [
+            'className' => 'Users',
             'foreignKey' => 'owner_user_id',
         ]);
         $this->belongsTo('Ratteries', [
             'foreignKey' => 'rattery_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Rats', [
+        $this->belongsTo('MotherRats', [
+            'className' => 'Rats',
             'foreignKey' => 'mother_rat_id',
         ]);
-        $this->belongsTo('Rats', [
+        $this->belongsTo('FatherRats', [
+            'className' => 'Rats',
             'foreignKey' => 'father_rat_id',
         ]);
         $this->belongsTo('Litters', [
             'foreignKey' => 'litter_id',
         ]);
-        $this->belongsTo('Ratteries', [
+        $this->belongsTo('MotherRatteries', [
+            'className' => 'Ratteries',
             'foreignKey' => 'mother_rattery_id',
         ]);
-        $this->belongsTo('Ratteries', [
+        $this->belongsTo('FatherRatteries', [
+            'className' => 'Ratteries',
             'foreignKey' => 'father_rattery_id',
         ]);
         $this->belongsTo('Colors', [
@@ -123,6 +128,14 @@ class RatsTable extends Table
         $this->belongsTo('States', [
             'foreignKey' => 'state_id',
             'joinType' => 'INNER',
+        ]);
+        $this->hasMany('MChildrenRats', [
+            'className' => 'Rats',
+            'foreignKey' => 'mother_rat_id',
+        ]);
+        $this->hasMany('FChildrenRats', [
+            'className' => 'Rats',
+            'foreignKey' => 'father_rat_id',
         ]);
         $this->hasMany('Conversations', [
             'foreignKey' => 'rat_id',
