@@ -12,9 +12,9 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('rattery_id') ?></th>
                     <th><?= $this->Paginator->sort('state_id') ?></th>
+                    <th><?= $this->Paginator->sort('created') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -22,9 +22,9 @@
                 <?php foreach ($ratterySnapshots as $ratterySnapshot): ?>
                 <tr>
                     <td><?= $this->Number->format($ratterySnapshot->id) ?></td>
-                    <td><?= h($ratterySnapshot->created) ?></td>
                     <td><?= $ratterySnapshot->has('rattery') ? $this->Html->link($ratterySnapshot->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $ratterySnapshot->rattery->id]) : '' ?></td>
                     <td><?= $ratterySnapshot->has('state') ? $this->Html->link($ratterySnapshot->state->name, ['controller' => 'States', 'action' => 'view', $ratterySnapshot->state->id]) : '' ?></td>
+                    <td><?= h($ratterySnapshot->created) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $ratterySnapshot->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $ratterySnapshot->id]) ?>

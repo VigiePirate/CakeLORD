@@ -14,14 +14,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
  *
- * @method \App\Model\Entity\RatterySnapshot get($primaryKey, $options = [])
- * @method \App\Model\Entity\RatterySnapshot newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\RatterySnapshot newEmptyEntity()
+ * @method \App\Model\Entity\RatterySnapshot newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\RatterySnapshot[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\RatterySnapshot get($primaryKey, $options = [])
+ * @method \App\Model\Entity\RatterySnapshot findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\RatterySnapshot patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\RatterySnapshot[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\RatterySnapshot|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\RatterySnapshot saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\RatterySnapshot patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\RatterySnapshot[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\RatterySnapshot findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\RatterySnapshot[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\RatterySnapshot[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\RatterySnapshot[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\RatterySnapshot[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
@@ -62,7 +67,7 @@ class RatterySnapshotsTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
+            ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
 
         $validator

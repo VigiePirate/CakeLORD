@@ -14,14 +14,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\BelongsTo $Conversations
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  *
- * @method \App\Model\Entity\Message get($primaryKey, $options = [])
- * @method \App\Model\Entity\Message newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Message newEmptyEntity()
+ * @method \App\Model\Entity\Message newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Message[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Message get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Message findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Message patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Message[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\Message|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Message saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Message patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Message[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Message findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Message[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Message[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Message[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Message[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
@@ -48,7 +53,7 @@ class MessagesTable extends Table
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
+            'foreignKey' => 'from_user_id',
             'joinType' => 'INNER',
         ]);
     }
@@ -62,7 +67,7 @@ class MessagesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
+            ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
 
         $validator
@@ -83,7 +88,7 @@ class MessagesTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn(['conversation_id'], 'Conversations'));
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['from_user_id'], 'Users'));
 
         return $rules;
     }

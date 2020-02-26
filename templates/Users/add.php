@@ -19,19 +19,20 @@
                 <?php
                     echo $this->Form->control('email');
                     echo $this->Form->control('password');
-                    echo $this->Form->control('sex');
+                    echo $this->Form->control('username');
                     echo $this->Form->control('firstname');
                     echo $this->Form->control('lastname');
-                    echo $this->Form->control('username');
                     echo $this->Form->control('birth_date', ['empty' => true]);
+                    echo $this->Form->control('sex');
+                    echo $this->Form->control('localization');
+                    echo $this->Form->control('avatar');
+                    echo $this->Form->control('about_me');
                     echo $this->Form->control('wants_newsletter');
                     echo $this->Form->control('role_id', ['options' => $roles]);
-                    echo $this->Form->control('is_locked');
                     echo $this->Form->control('failed_login_attempts');
-                    echo $this->Form->control('failed_login_last_date');
-                    echo $this->Form->control('about_me');
+                    echo $this->Form->control('failed_login_last_date', ['empty' => true]);
+                    echo $this->Form->control('is_locked');
                     echo $this->Form->control('staff_comments');
-                    echo $this->Form->control('avatar');
                     echo $this->Form->control('conversations._ids', ['options' => $conversations]);
                 ?>
             </fieldset>

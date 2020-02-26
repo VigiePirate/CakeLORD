@@ -22,9 +22,9 @@
             <fieldset>
                 <legend><?= __('Edit Conversation') ?></legend>
                 <?php
-                    echo $this->Form->control('rattery_id', ['options' => $ratteries]);
-                    echo $this->Form->control('litter_id', ['options' => $litters]);
-                    echo $this->Form->control('rat_id', ['options' => $rats]);
+                    echo $this->Form->control('rat_id', ['options' => $rats, 'empty' => true]);
+                    echo $this->Form->control('rattery_id', ['options' => $ratteries, 'empty' => true]);
+                    echo $this->Form->control('litter_id', ['options' => $litters, 'empty' => true]);
                     echo $this->Form->control('is_active');
                     echo $this->Form->control('users._ids', ['options' => $users]);
                 ?>

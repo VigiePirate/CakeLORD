@@ -23,12 +23,12 @@
                     <td><?= $message->has('conversation') ? $this->Html->link($message->conversation->id, ['controller' => 'Conversations', 'action' => 'view', $message->conversation->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('User') ?></th>
-                    <td><?= $message->has('user') ? $this->Html->link($message->user->username, ['controller' => 'Users', 'action' => 'view', $message->user->id]) : '' ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($message->id) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('From User Id') ?></th>
+                    <td><?= $this->Number->format($message->from_user_id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>

@@ -22,17 +22,18 @@
             <fieldset>
                 <legend><?= __('Edit Rattery') ?></legend>
                 <?php
-                    echo $this->Form->control('name');
                     echo $this->Form->control('prefix');
-                    echo $this->Form->control('owner_id', ['options' => $users]);
-                    echo $this->Form->control('comments');
-                    echo $this->Form->control('picture');
-                    echo $this->Form->control('is_alive');
+                    echo $this->Form->control('name');
+                    echo $this->Form->control('owner_user_id', ['options' => $users]);
                     echo $this->Form->control('birth_year');
-                    echo $this->Form->control('state_id', ['options' => $states]);
-                    echo $this->Form->control('website');
+                    echo $this->Form->control('is_alive');
                     echo $this->Form->control('district');
                     echo $this->Form->control('zip_code');
+                    echo $this->Form->control('website');
+                    echo $this->Form->control('comments');
+                    echo $this->Form->control('picture');
+                    echo $this->Form->control('state_id', ['options' => $states]);
+                    echo $this->Form->control('countries_id');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

@@ -13,7 +13,7 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('conversation_id') ?></th>
-                    <th><?= $this->Paginator->sort('user_id') ?></th>
+                    <th><?= $this->Paginator->sort('from_user_id') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -23,7 +23,7 @@
                 <tr>
                     <td><?= $this->Number->format($message->id) ?></td>
                     <td><?= $message->has('conversation') ? $this->Html->link($message->conversation->id, ['controller' => 'Conversations', 'action' => 'view', $message->conversation->id]) : '' ?></td>
-                    <td><?= $message->has('user') ? $this->Html->link($message->user->username, ['controller' => 'Users', 'action' => 'view', $message->user->id]) : '' ?></td>
+                    <td><?= $this->Number->format($message->from_user_id) ?></td>
                     <td><?= h($message->created) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $message->id]) ?>

@@ -46,6 +46,7 @@ class ColorsTable extends Table
 
         $this->belongsTo('Eyecolors', [
             'foreignKey' => 'eyecolor_id',
+            'joinType' => 'INNER',
         ]);
         $this->hasMany('Rats', [
             'foreignKey' => 'color_id',
@@ -61,7 +62,7 @@ class ColorsTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
+            ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
 
         $validator
@@ -74,7 +75,8 @@ class ColorsTable extends Table
         $validator
             ->scalar('genotype')
             ->maxLength('genotype', 70)
-            ->allowEmptyString('genotype');
+            ->requirePresence('genotype', 'create')
+            ->notEmptyString('genotype');
 
         $validator
             ->scalar('picture')

@@ -14,14 +14,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\BelongsTo $Conversations
  *
- * @method \App\Model\Entity\UsersConversation get($primaryKey, $options = [])
- * @method \App\Model\Entity\UsersConversation newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\UsersConversation newEmptyEntity()
+ * @method \App\Model\Entity\UsersConversation newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\UsersConversation[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\UsersConversation get($primaryKey, $options = [])
+ * @method \App\Model\Entity\UsersConversation findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\UsersConversation patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\UsersConversation[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\UsersConversation|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\UsersConversation saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\UsersConversation patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\UsersConversation[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\UsersConversation findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\UsersConversation[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\UsersConversation[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\UsersConversation[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\UsersConversation[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class UsersConversationsTable extends Table
 {

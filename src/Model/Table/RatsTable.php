@@ -11,35 +11,38 @@ use Cake\Validation\Validator;
 /**
  * Rats Model
  *
- * @property \App\Model\Table\DeathPrimaryCausesTable&\Cake\ORM\Association\BelongsTo $DeathPrimaryCauses
- * @property \App\Model\Table\DeathSecondaryCausesTable&\Cake\ORM\Association\BelongsTo $DeathSecondaryCauses
- * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
- * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
- * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsTo $Rats
- * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsTo $Rats
- * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsTo $Litters
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
+ * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsTo $Litters
+ * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
+ * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
  * @property \App\Model\Table\ColorsTable&\Cake\ORM\Association\BelongsTo $Colors
- * @property \App\Model\Table\EarsetsTable&\Cake\ORM\Association\BelongsTo $Earsets
  * @property \App\Model\Table\EyecolorsTable&\Cake\ORM\Association\BelongsTo $Eyecolors
  * @property \App\Model\Table\DilutionsTable&\Cake\ORM\Association\BelongsTo $Dilutions
- * @property \App\Model\Table\CoatsTable&\Cake\ORM\Association\BelongsTo $Coats
  * @property \App\Model\Table\MarkingsTable&\Cake\ORM\Association\BelongsTo $Markings
+ * @property \App\Model\Table\EarsetsTable&\Cake\ORM\Association\BelongsTo $Earsets
+ * @property \App\Model\Table\CoatsTable&\Cake\ORM\Association\BelongsTo $Coats
+ * @property \App\Model\Table\DeathPrimaryCausesTable&\Cake\ORM\Association\BelongsTo $DeathPrimaryCauses
+ * @property \App\Model\Table\DeathSecondaryCausesTable&\Cake\ORM\Association\BelongsTo $DeathSecondaryCauses
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
- * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
  * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\HasMany $Conversations
  * @property \App\Model\Table\RatSnapshotsTable&\Cake\ORM\Association\HasMany $RatSnapshots
  * @property \App\Model\Table\SingularitiesTable&\Cake\ORM\Association\BelongsToMany $Singularities
  *
- * @method \App\Model\Entity\Rat get($primaryKey, $options = [])
- * @method \App\Model\Entity\Rat newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Rat newEmptyEntity()
+ * @method \App\Model\Entity\Rat newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Rat[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Rat get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Rat findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Rat patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Rat[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\Rat|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Rat saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Rat patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Rat[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Rat findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Rat[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Rat[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Rat[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Rat[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
@@ -61,49 +64,30 @@ class RatsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('DeathPrimaryCauses', [
-            'foreignKey' => 'death_primary_cause_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'owner_user_id',
         ]);
-        $this->belongsTo('DeathSecondaryCauses', [
-            'foreignKey' => 'death_secondary_cause_id',
+        $this->belongsTo('Ratteries', [
+            'foreignKey' => 'rattery_id',
+            'joinType' => 'INNER',
         ]);
-        $this->belongsTo('MotherRatteries', [
-            'className' => 'Ratteries',			
-            'foreignKey' => 'mother_rattery_id',
-        ]);
-        $this->belongsTo('FatherRatteries', [
-            'className' => 'Ratteries',			
-            'foreignKey' => 'father_rattery_id',
-        ]);
-        $this->hasMany('MChildrenRats', [
-            'className' => 'Rats',			
+        $this->belongsTo('Rats', [
             'foreignKey' => 'mother_rat_id',
         ]);
-        $this->belongsTo('MotherRats', [
-            'className' => 'Rats',			
-            'foreignKey' => 'mother_rat_id',
-        ]);
-        $this->hasMany('FChildrenRats', [
-            'className' => 'Rats',			
-            'foreignKey' => 'father_rat_id',
-        ]);
-        $this->belongsTo('FatherRats', [
-            'className' => 'Rats',			
+        $this->belongsTo('Rats', [
             'foreignKey' => 'father_rat_id',
         ]);
         $this->belongsTo('Litters', [
             'foreignKey' => 'litter_id',
         ]);
-        $this->belongsTo('OwnerUsers', [
-            'className' => 'Users',
-            'foreignKey' => 'owner_user_id',
+        $this->belongsTo('Ratteries', [
+            'foreignKey' => 'mother_rattery_id',
+        ]);
+        $this->belongsTo('Ratteries', [
+            'foreignKey' => 'father_rattery_id',
         ]);
         $this->belongsTo('Colors', [
             'foreignKey' => 'color_id',
-            'joinType' => 'INNER',
-        ]);
-        $this->belongsTo('Earsets', [
-            'foreignKey' => 'earset_id',
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('Eyecolors', [
@@ -114,13 +98,23 @@ class RatsTable extends Table
             'foreignKey' => 'dilution_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Markings', [
+            'foreignKey' => 'marking_id',
+            'joinType' => 'INNER',
+        ]);
+        $this->belongsTo('Earsets', [
+            'foreignKey' => 'earset_id',
+            'joinType' => 'INNER',
+        ]);
         $this->belongsTo('Coats', [
             'foreignKey' => 'coat_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Markings', [
-            'foreignKey' => 'marking_id',
-            'joinType' => 'INNER',
+        $this->belongsTo('DeathPrimaryCauses', [
+            'foreignKey' => 'death_primary_cause_id',
+        ]);
+        $this->belongsTo('DeathSecondaryCauses', [
+            'foreignKey' => 'death_secondary_cause_id',
         ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'creator_user_id',
@@ -128,10 +122,6 @@ class RatsTable extends Table
         ]);
         $this->belongsTo('States', [
             'foreignKey' => 'state_id',
-            'joinType' => 'INNER',
-        ]);
-        $this->belongsTo('Ratteries', [
-            'foreignKey' => 'rattery_id',
             'joinType' => 'INNER',
         ]);
         $this->hasMany('Conversations', [
@@ -156,9 +146,16 @@ class RatsTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
+            ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create')
             ->add('id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->scalar('pedigree_identifier')
+            ->maxLength('pedigree_identifier', 10)
+            ->requirePresence('pedigree_identifier', 'create')
+            ->notEmptyString('pedigree_identifier')
+            ->add('pedigree_identifier', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('name')
@@ -178,15 +175,12 @@ class RatsTable extends Table
             ->notEmptyString('sex');
 
         $validator
-            ->scalar('pedigree_identifier')
-            ->maxLength('pedigree_identifier', 10)
-            ->requirePresence('pedigree_identifier', 'create')
-            ->notEmptyString('pedigree_identifier')
-            ->add('pedigree_identifier', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
-        $validator
             ->date('birth_date')
             ->allowEmptyDate('birth_date');
+
+        $validator
+            ->boolean('is_alive')
+            ->notEmptyString('is_alive');
 
         $validator
             ->date('death_date')
@@ -205,6 +199,10 @@ class RatsTable extends Table
             ->allowEmptyString('death_necropsied');
 
         $validator
+            ->scalar('comments')
+            ->allowEmptyString('comments');
+
+        $validator
             ->scalar('picture')
             ->maxLength('picture', 255)
             ->allowEmptyString('picture');
@@ -213,14 +211,6 @@ class RatsTable extends Table
             ->scalar('picture_thumbnail')
             ->maxLength('picture_thumbnail', 255)
             ->allowEmptyString('picture_thumbnail');
-
-        $validator
-            ->scalar('comments')
-            ->allowEmptyString('comments');
-
-        $validator
-            ->boolean('is_alive')
-            ->notEmptyString('is_alive');
 
         return $validator;
     }
@@ -236,23 +226,23 @@ class RatsTable extends Table
     {
         $rules->add($rules->isUnique(['id']));
         $rules->add($rules->isUnique(['pedigree_identifier']));
-        $rules->add($rules->existsIn(['death_primary_cause_id'], 'DeathPrimaryCauses'));
-        $rules->add($rules->existsIn(['death_secondary_cause_id'], 'DeathSecondaryCauses'));
-        $rules->add($rules->existsIn(['mother_rattery_id'], 'Ratteries'));
-        $rules->add($rules->existsIn(['father_rattery_id'], 'Ratteries'));
+        $rules->add($rules->existsIn(['owner_user_id'], 'Users'));
+        $rules->add($rules->existsIn(['rattery_id'], 'Ratteries'));
         $rules->add($rules->existsIn(['mother_rat_id'], 'Rats'));
         $rules->add($rules->existsIn(['father_rat_id'], 'Rats'));
         $rules->add($rules->existsIn(['litter_id'], 'Litters'));
-        $rules->add($rules->existsIn(['owner_user_id'], 'Users'));
+        $rules->add($rules->existsIn(['mother_rattery_id'], 'Ratteries'));
+        $rules->add($rules->existsIn(['father_rattery_id'], 'Ratteries'));
         $rules->add($rules->existsIn(['color_id'], 'Colors'));
-        $rules->add($rules->existsIn(['earset_id'], 'Earsets'));
         $rules->add($rules->existsIn(['eyecolor_id'], 'Eyecolors'));
         $rules->add($rules->existsIn(['dilution_id'], 'Dilutions'));
-        $rules->add($rules->existsIn(['coat_id'], 'Coats'));
         $rules->add($rules->existsIn(['marking_id'], 'Markings'));
+        $rules->add($rules->existsIn(['earset_id'], 'Earsets'));
+        $rules->add($rules->existsIn(['coat_id'], 'Coats'));
+        $rules->add($rules->existsIn(['death_primary_cause_id'], 'DeathPrimaryCauses'));
+        $rules->add($rules->existsIn(['death_secondary_cause_id'], 'DeathSecondaryCauses'));
         $rules->add($rules->existsIn(['creator_user_id'], 'Users'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
-        $rules->add($rules->existsIn(['rattery_id'], 'Ratteries'));
 
         return $rules;
     }

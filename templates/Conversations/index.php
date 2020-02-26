@@ -12,9 +12,9 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('rat_id') ?></th>
                     <th><?= $this->Paginator->sort('rattery_id') ?></th>
                     <th><?= $this->Paginator->sort('litter_id') ?></th>
-                    <th><?= $this->Paginator->sort('rat_id') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th><?= $this->Paginator->sort('is_active') ?></th>
@@ -25,9 +25,9 @@
                 <?php foreach ($conversations as $conversation): ?>
                 <tr>
                     <td><?= $this->Number->format($conversation->id) ?></td>
+                    <td><?= $conversation->has('rat') ? $this->Html->link($conversation->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $conversation->rat->id]) : '' ?></td>
                     <td><?= $conversation->has('rattery') ? $this->Html->link($conversation->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $conversation->rattery->id]) : '' ?></td>
                     <td><?= $conversation->has('litter') ? $this->Html->link($conversation->litter->id, ['controller' => 'Litters', 'action' => 'view', $conversation->litter->id]) : '' ?></td>
-                    <td><?= $conversation->has('rat') ? $this->Html->link($conversation->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $conversation->rat->id]) : '' ?></td>
                     <td><?= h($conversation->created) ?></td>
                     <td><?= h($conversation->modified) ?></td>
                     <td><?= h($conversation->is_active) ?></td>

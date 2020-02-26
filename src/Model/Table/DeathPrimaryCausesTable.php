@@ -14,14 +14,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\DeathSecondaryCausesTable&\Cake\ORM\Association\HasMany $DeathSecondaryCauses
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  *
- * @method \App\Model\Entity\DeathPrimaryCause get($primaryKey, $options = [])
- * @method \App\Model\Entity\DeathPrimaryCause newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\DeathPrimaryCause newEmptyEntity()
+ * @method \App\Model\Entity\DeathPrimaryCause newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\DeathPrimaryCause[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\DeathPrimaryCause get($primaryKey, $options = [])
+ * @method \App\Model\Entity\DeathPrimaryCause findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\DeathPrimaryCause patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\DeathPrimaryCause[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\DeathPrimaryCause|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\DeathPrimaryCause saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\DeathPrimaryCause patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\DeathPrimaryCause[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\DeathPrimaryCause findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\DeathPrimaryCause[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\DeathPrimaryCause[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\DeathPrimaryCause[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\DeathPrimaryCause[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class DeathPrimaryCausesTable extends Table
 {
@@ -56,7 +61,7 @@ class DeathPrimaryCausesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
+            ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
 
         $validator
@@ -65,6 +70,10 @@ class DeathPrimaryCausesTable extends Table
             ->requirePresence('name', 'create')
             ->notEmptyString('name')
             ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->scalar('description')
+            ->notEmptyString('description');
 
         return $validator;
     }

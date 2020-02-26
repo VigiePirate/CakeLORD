@@ -55,13 +55,14 @@ class ArticlesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
+            ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
 
         $validator
             ->scalar('title')
             ->maxLength('title', 255)
-            ->notEmptyString('title');
+            ->notEmptyString('title')
+            ->add('title', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('subtitle')
@@ -73,5 +74,19 @@ class ArticlesTable extends Table
             ->notEmptyString('content');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        $rules->add($rules->isUnique(['title']));
+
+        return $rules;
     }
 }

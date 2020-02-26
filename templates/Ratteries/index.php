@@ -12,18 +12,19 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('prefix') ?></th>
-                    <th><?= $this->Paginator->sort('owner_id') ?></th>
-                    <th><?= $this->Paginator->sort('picture') ?></th>
-                    <th><?= $this->Paginator->sort('is_alive') ?></th>
+                    <th><?= $this->Paginator->sort('name') ?></th>
+                    <th><?= $this->Paginator->sort('owner_user_id') ?></th>
                     <th><?= $this->Paginator->sort('birth_year') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th><?= $this->Paginator->sort('state_id') ?></th>
-                    <th><?= $this->Paginator->sort('website') ?></th>
+                    <th><?= $this->Paginator->sort('is_alive') ?></th>
                     <th><?= $this->Paginator->sort('district') ?></th>
                     <th><?= $this->Paginator->sort('zip_code') ?></th>
+                    <th><?= $this->Paginator->sort('website') ?></th>
+                    <th><?= $this->Paginator->sort('picture') ?></th>
+                    <th><?= $this->Paginator->sort('state_id') ?></th>
+                    <th><?= $this->Paginator->sort('created') ?></th>
+                    <th><?= $this->Paginator->sort('modified') ?></th>
+                    <th><?= $this->Paginator->sort('countries_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -31,18 +32,19 @@
                 <?php foreach ($ratteries as $rattery): ?>
                 <tr>
                     <td><?= $this->Number->format($rattery->id) ?></td>
-                    <td><?= h($rattery->name) ?></td>
                     <td><?= h($rattery->prefix) ?></td>
+                    <td><?= h($rattery->name) ?></td>
                     <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->username, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
-                    <td><?= h($rattery->picture) ?></td>
-                    <td><?= h($rattery->is_alive) ?></td>
                     <td><?= h($rattery->birth_year) ?></td>
-                    <td><?= h($rattery->created) ?></td>
-                    <td><?= h($rattery->modified) ?></td>
-                    <td><?= $rattery->has('state') ? $this->Html->link($rattery->state->name, ['controller' => 'States', 'action' => 'view', $rattery->state->id]) : '' ?></td>
-                    <td><?= h($rattery->website) ?></td>
+                    <td><?= h($rattery->is_alive) ?></td>
                     <td><?= h($rattery->district) ?></td>
                     <td><?= h($rattery->zip_code) ?></td>
+                    <td><?= h($rattery->website) ?></td>
+                    <td><?= h($rattery->picture) ?></td>
+                    <td><?= $rattery->has('state') ? $this->Html->link($rattery->state->name, ['controller' => 'States', 'action' => 'view', $rattery->state->id]) : '' ?></td>
+                    <td><?= h($rattery->created) ?></td>
+                    <td><?= h($rattery->modified) ?></td>
+                    <td><?= $this->Number->format($rattery->countries_id) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $rattery->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rattery->id]) ?>

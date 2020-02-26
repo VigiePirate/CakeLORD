@@ -53,11 +53,15 @@ class RatteriesTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Users', [
-            'foreignKey' => 'owner_id',
+            'foreignKey' => 'owner_user_id',
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('States', [
             'foreignKey' => 'state_id',
+            'joinType' => 'INNER',
+        ]);
+        $this->belongsTo('Countries', [
+            'foreignKey' => 'countries_id',
             'joinType' => 'INNER',
         ]);
         $this->hasMany('Conversations', [
@@ -68,14 +72,6 @@ class RatteriesTable extends Table
         ]);
         $this->hasMany('Rats', [
             'foreignKey' => 'rattery_id',
-        ]);
-        $this->hasMany('MChildrenRats', [
-            'className' => 'Rats',
-            'foreignKey' => 'mother_rattery_id',
-        ]);
-        $this->hasMany('FChildrenRats', [
-            'className' => 'Rats',
-            'foreignKey' => 'father_rattery_id',
         ]);
         $this->hasMany('RatterySnapshots', [
             'foreignKey' => 'rattery_id',
@@ -91,15 +87,8 @@ class RatteriesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
+            ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
-
-        $validator
-            ->scalar('name')
-            ->maxLength('name', 70)
-            ->requirePresence('name', 'create')
-            ->notEmptyString('name')
-            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('prefix')
@@ -109,36 +98,43 @@ class RatteriesTable extends Table
             ->add('prefix', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->scalar('comments')
-            ->allowEmptyString('comments');
-
-        $validator
-            ->scalar('picture')
-            ->maxLength('picture', 255)
-            ->allowEmptyString('picture');
-
-        $validator
-            ->boolean('is_alive')
-            ->notEmptyString('is_alive');
+            ->scalar('name')
+            ->maxLength('name', 70)
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name')
+            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('birth_year')
             ->allowEmptyString('birth_year');
 
         $validator
-            ->scalar('website')
-            ->maxLength('website', 255)
-            ->notEmptyString('website');
+            ->boolean('is_alive')
+            ->notEmptyString('is_alive');
 
         $validator
             ->scalar('district')
-            ->maxLength('district', 45)
-            ->notEmptyString('district');
+            ->maxLength('district', 70)
+            ->allowEmptyString('district');
 
         $validator
             ->scalar('zip_code')
             ->maxLength('zip_code', 12)
-            ->notEmptyString('zip_code');
+            ->allowEmptyString('zip_code');
+
+        $validator
+            ->scalar('website')
+            ->maxLength('website', 255)
+            ->allowEmptyString('website');
+
+        $validator
+            ->scalar('comments')
+            ->allowEmptyString('comments');
+
+        $validator
+            ->scalar('picture')
+            ->maxLength('picture', 255)
+            ->notEmptyString('picture');
 
         return $validator;
     }
@@ -154,8 +150,9 @@ class RatteriesTable extends Table
     {
         $rules->add($rules->isUnique(['name']));
         $rules->add($rules->isUnique(['prefix']));
-        $rules->add($rules->existsIn(['owner_id'], 'Users'));
+        $rules->add($rules->existsIn(['owner_user_id'], 'Users'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
+        $rules->add($rules->existsIn(['countries_id'], 'Countries'));
 
         return $rules;
     }

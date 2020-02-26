@@ -9,9 +9,9 @@ use Cake\ORM\Entity;
  * Conversation Entity
  *
  * @property int $id
- * @property int $rattery_id
- * @property int $litter_id
- * @property int $rat_id
+ * @property int|null $rat_id
+ * @property int|null $rattery_id
+ * @property int|null $litter_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  * @property bool $is_active
@@ -34,9 +34,9 @@ class Conversation extends Entity
      * @var array
      */
     protected $_accessible = [
+        'rat_id' => true,
         'rattery_id' => true,
         'litter_id' => true,
-        'rat_id' => true,
         'created' => true,
         'modified' => true,
         'is_active' => true,

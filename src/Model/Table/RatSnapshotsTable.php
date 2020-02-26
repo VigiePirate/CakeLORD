@@ -14,14 +14,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsTo $Rats
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
  *
- * @method \App\Model\Entity\RatSnapshot get($primaryKey, $options = [])
- * @method \App\Model\Entity\RatSnapshot newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\RatSnapshot newEmptyEntity()
+ * @method \App\Model\Entity\RatSnapshot newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\RatSnapshot[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\RatSnapshot get($primaryKey, $options = [])
+ * @method \App\Model\Entity\RatSnapshot findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\RatSnapshot patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\RatSnapshot[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\RatSnapshot|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\RatSnapshot saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\RatSnapshot patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\RatSnapshot[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\RatSnapshot findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\RatSnapshot[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\RatSnapshot[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\RatSnapshot[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\RatSnapshot[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
@@ -62,7 +67,7 @@ class RatSnapshotsTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
+            ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
 
         $validator

@@ -11,21 +11,22 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $email
  * @property string $password
- * @property string|null $sex
+ * @property string $username
  * @property string|null $firstname
  * @property string|null $lastname
- * @property string $username
  * @property \Cake\I18n\FrozenDate|null $birth_date
+ * @property string|null $sex
+ * @property string|null $localization
+ * @property string $avatar
+ * @property string|null $about_me
  * @property bool $wants_newsletter
+ * @property int $role_id
+ * @property int $failed_login_attempts
+ * @property \Cake\I18n\FrozenTime|null $failed_login_last_date
+ * @property bool $is_locked
+ * @property string $staff_comments
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
- * @property int $role_id
- * @property bool $is_locked
- * @property int $failed_login_attempts
- * @property \Cake\I18n\FrozenTime $failed_login_last_date
- * @property string $about_me
- * @property string $staff_comments
- * @property string $avatar
  *
  * @property \App\Model\Entity\Role $role
  * @property \App\Model\Entity\Rattery[] $ratteries
@@ -48,21 +49,22 @@ class User extends Entity
     protected $_accessible = [
         'email' => true,
         'password' => true,
-        'sex' => true,
+        'username' => true,
         'firstname' => true,
         'lastname' => true,
-        'username' => true,
         'birth_date' => true,
+        'sex' => true,
+        'localization' => true,
+        'avatar' => true,
+        'about_me' => true,
         'wants_newsletter' => true,
-        'created' => true,
-        'modified' => true,
         'role_id' => true,
-        'is_locked' => true,
         'failed_login_attempts' => true,
         'failed_login_last_date' => true,
-        'about_me' => true,
+        'is_locked' => true,
         'staff_comments' => true,
-        'avatar' => true,
+        'created' => true,
+        'modified' => true,
         'role' => true,
         'ratteries' => true,
         'owned_rats' => true,

@@ -10,9 +10,9 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $data
- * @property \Cake\I18n\FrozenTime $created
  * @property int $litter_id
  * @property int $state_id
+ * @property \Cake\I18n\FrozenTime $created
  *
  * @property \App\Model\Entity\Litter $litter
  * @property \App\Model\Entity\State $state
@@ -30,9 +30,9 @@ class LitterSnapshot extends Entity
      */
     protected $_accessible = [
         'data' => true,
-        'created' => true,
         'litter_id' => true,
         'state_id' => true,
+        'created' => true,
         'litter' => true,
         'state' => true,
     ];

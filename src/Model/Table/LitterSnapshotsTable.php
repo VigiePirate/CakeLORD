@@ -14,14 +14,19 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsTo $Litters
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
  *
- * @method \App\Model\Entity\LitterSnapshot get($primaryKey, $options = [])
- * @method \App\Model\Entity\LitterSnapshot newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\LitterSnapshot newEmptyEntity()
+ * @method \App\Model\Entity\LitterSnapshot newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\LitterSnapshot[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\LitterSnapshot get($primaryKey, $options = [])
+ * @method \App\Model\Entity\LitterSnapshot findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\LitterSnapshot patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\LitterSnapshot[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\LitterSnapshot|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\LitterSnapshot saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\LitterSnapshot patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\LitterSnapshot[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\LitterSnapshot findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\LitterSnapshot[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\LitterSnapshot[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\LitterSnapshot[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\LitterSnapshot[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
@@ -62,7 +67,7 @@ class LitterSnapshotsTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
+            ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
 
         $validator
