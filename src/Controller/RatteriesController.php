@@ -20,7 +20,7 @@ class RatteriesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'States'],
+            'contain' => ['Users', 'Countries', 'States'],
         ];
         $ratteries = $this->paginate($this->Ratteries);
 
@@ -37,7 +37,7 @@ class RatteriesController extends AppController
     public function view($id = null)
     {
         $rattery = $this->Ratteries->get($id, [
-            'contain' => ['Users', 'States', 'Conversations', 'Litters', 'Rats', 'MChildrenRats', 'FChildrenRats', 'RatterySnapshots'],
+            'contain' => ['Users', 'Countries', 'States', 'Conversations', 'Litters', 'Rats', 'MchildrenRats', 'FChildrenRats', 'RatterySnapshots'],
         ]);
 
         $this->set('rattery', $rattery);
@@ -61,8 +61,9 @@ class RatteriesController extends AppController
             $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
         }
         $users = $this->Ratteries->Users->find('list', ['limit' => 200]);
+        $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
         $states = $this->Ratteries->States->find('list', ['limit' => 200]);
-        $this->set(compact('rattery', 'users', 'states'));
+        $this->set(compact('rattery', 'users', 'countries', 'states'));
     }
 
     /**
@@ -87,8 +88,9 @@ class RatteriesController extends AppController
             $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
         }
         $users = $this->Ratteries->Users->find('list', ['limit' => 200]);
+        $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
         $states = $this->Ratteries->States->find('list', ['limit' => 200]);
-        $this->set(compact('rattery', 'users', 'states'));
+        $this->set(compact('rattery', 'users', 'countries', 'states'));
     }
 
     /**

@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `cakelord`.`users` (
   `failed_login_attempts` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `failed_login_last_date` DATETIME NULL,
   `is_locked` TINYINT(1) NOT NULL DEFAULT 0,
-  `staff_comments` TEXT NOT NULL DEFAULT '',
+  `staff_comments` TEXT,
   `created` DATETIME NOT NULL DEFAULT '1981-08-01',
   `modified` DATETIME NOT NULL DEFAULT '1981-08-01',
   PRIMARY KEY (`id`),
@@ -109,13 +109,13 @@ CREATE TABLE IF NOT EXISTS `cakelord`.`ratteries` (
   `is_alive` TINYINT(1) NOT NULL DEFAULT 1,
   `district` VARCHAR(70) NULL,
   `zip_code` VARCHAR(12) NULL,
+  `country_id` INT UNSIGNED NOT NULL DEFAULT 1,
   `website` VARCHAR(255) NULL,
   `comments` TEXT NULL,
   `picture` VARCHAR(255) NOT NULL DEFAULT 'Unknown.png',
   `state_id` INT UNSIGNED NOT NULL DEFAULT 1,
   `created` DATETIME NOT NULL DEFAULT "1981-08-01",
   `modified` DATETIME NOT NULL DEFAULT "1981-08-01",
-  `countries_id` INT UNSIGNED NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC),
   UNIQUE INDEX `prefix_UNIQUE` (`prefix` ASC),
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `cakelord`.`ratteries` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ratteries_countries1`
-    FOREIGN KEY (`countries_id`)
+    FOREIGN KEY (`country_id`)
     REFERENCES `cakelord`.`countries` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * Ratteries Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
  * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\HasMany $Conversations
  * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\HasMany $Litters
@@ -56,12 +57,12 @@ class RatteriesTable extends Table
             'foreignKey' => 'owner_user_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('States', [
-            'foreignKey' => 'state_id',
+        $this->belongsTo('Countries', [
+            'foreignKey' => 'country_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Countries', [
-            'foreignKey' => 'countries_id',
+        $this->belongsTo('States', [
+            'foreignKey' => 'state_id',
             'joinType' => 'INNER',
         ]);
         $this->hasMany('Conversations', [
@@ -73,7 +74,7 @@ class RatteriesTable extends Table
         $this->hasMany('Rats', [
             'foreignKey' => 'rattery_id',
         ]);
-        $this->hasMany('MChildrenRats', [
+        $this->hasMany('MchildrenRats', [
             'className' => 'Rats',
             'foreignKey' => 'mother_rattery_id',
         ]);
@@ -159,8 +160,8 @@ class RatteriesTable extends Table
         $rules->add($rules->isUnique(['name']));
         $rules->add($rules->isUnique(['prefix']));
         $rules->add($rules->existsIn(['owner_user_id'], 'Users'));
+        $rules->add($rules->existsIn(['country_id'], 'Countries'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
-        $rules->add($rules->existsIn(['countries_id'], 'Countries'));
 
         return $rules;
     }

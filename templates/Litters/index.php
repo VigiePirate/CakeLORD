@@ -31,8 +31,8 @@
                 <tr>
                     <td><?= $this->Number->format($litter->id) ?></td>
                     <td><?= $litter->has('rattery') ? $this->Html->link($litter->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $litter->rattery->id]) : '' ?></td>
-                    <td><?= $this->Number->format($litter->mother_rat_id) ?></td>
-                    <td><?= $this->Number->format($litter->father_rat_id) ?></td>
+                    <td><?= $litter->has('mother_rat') ? $this->Html->link($litter->mother_rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $litter->mother_rat->id]) : '' ?></td>
+                    <td><?= $litter->has('father_rat') ? $this->Html->link($litter->father_rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $litter->father_rat->id]) : '' ?></td>
                     <td><?= h($litter->mating_date) ?></td>
                     <td><?= h($litter->birth_date) ?></td>
                     <td><?= $this->Number->format($litter->pups_number) ?></td>

@@ -23,8 +23,8 @@
                 <legend><?= __('Edit Litter') ?></legend>
                 <?php
                     echo $this->Form->control('rattery_id', ['options' => $ratteries]);
-                    echo $this->Form->control('mother_rat_id');
-                    echo $this->Form->control('father_rat_id');
+                    echo $this->Form->control('mother_rat_id', ['options' => $motherRats]);
+                    echo $this->Form->control('father_rat_id', ['options' => $fatherRats, 'empty' => true]);
                     echo $this->Form->control('mating_date', ['empty' => true]);
                     echo $this->Form->control('birth_date');
                     echo $this->Form->control('pups_number');

@@ -129,12 +129,22 @@ class RatsTable extends Table
             'foreignKey' => 'state_id',
             'joinType' => 'INNER',
         ]);
-        $this->hasMany('MChildrenRats', [
+        $this->hasMany('Rats', [
             'className' => 'Rats',
             'foreignKey' => 'mother_rat_id',
+            'bindingKey' => 'id',
         ]);
         $this->hasMany('FChildrenRats', [
             'className' => 'Rats',
+            'foreignKey' => 'father_rat_id',
+            'bindingKey' => 'id',
+        ]);
+        $this->hasMany('MotherLitters', [
+            'className' => 'Litters',
+            'foreignKey' => 'mother_rat_id',
+        ]);
+        $this->hasMany('FatherLitters', [
+            'className' => 'Litters',
             'foreignKey' => 'father_rat_id',
         ]);
         $this->hasMany('Conversations', [

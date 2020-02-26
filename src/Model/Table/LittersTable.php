@@ -58,11 +58,13 @@ class LittersTable extends Table
             'foreignKey' => 'rattery_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Rats', [
+        $this->belongsTo('MotherRats', [
+            'className'=> 'Rats',
             'foreignKey' => 'mother_rat_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Rats', [
+        $this->belongsTo('FatherRats', [
+            'className'=> 'Rats',
             'foreignKey' => 'father_rat_id',
         ]);
         $this->belongsTo('Users', [

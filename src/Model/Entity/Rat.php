@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\I18n\FrozenTime;
 
 /**
  * Rat Entity
@@ -131,5 +132,16 @@ class Rat extends Entity
         'conversations' => true,
         'rat_snapshots' => true,
         'singularities' => true,
+        // Computed fields
+        'age' => true,
     ];
+
+    protected function _getAge()
+    {
+        $agedate = FrozenTime::now(); 
+        if (! $this->is_alive && isset($this->death_date)) {
+            $agedate = $this->death_date;
+        }
+        return $agedate->diffForHumans($this->birth_date, true);
+    }
 }

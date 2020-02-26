@@ -16,16 +16,17 @@ use Cake\ORM\Entity;
  * @property bool $is_alive
  * @property string|null $district
  * @property string|null $zip_code
+ * @property int $country_id
  * @property string|null $website
  * @property string|null $comments
  * @property string $picture
  * @property int $state_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
- * @property int $countries_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\State $state
+ * @property \App\Model\Entity\Country $country
  * @property \App\Model\Entity\Conversation[] $conversations
  * @property \App\Model\Entity\Litter[] $litters
  * @property \App\Model\Entity\Rat[] $rats
@@ -52,15 +53,16 @@ class Rattery extends Entity
         'is_alive' => true,
         'district' => true,
         'zip_code' => true,
+        'country_id' => true,
         'website' => true,
         'comments' => true,
         'picture' => true,
         'state_id' => true,
         'created' => true,
         'modified' => true,
-        'countries_id' => true,
         'user' => true,
         'state' => true,
+        'country' => true,
         'conversations' => true,
         'litters' => true,
         'rats' => true,

@@ -28,6 +28,7 @@ class RatteriesTableTest extends TestCase
         'app.Ratteries',
         'app.Users',
         'app.States',
+        'app.Countries',
         'app.Conversations',
         'app.Litters',
         'app.Rats',

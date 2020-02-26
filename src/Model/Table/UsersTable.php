@@ -152,7 +152,7 @@ class UsersTable extends Table
 
         $validator
             ->scalar('staff_comments')
-            ->notEmptyString('staff_comments');
+            ->allowEmptyString('staff_comments');
 
         return $validator;
     }
