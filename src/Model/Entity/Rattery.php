@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property int $owner_user_id
  * @property string|null $birth_year
  * @property bool $is_alive
+ * @property bool $is_generic
  * @property string|null $district
  * @property string|null $zip_code
  * @property int $country_id
@@ -25,14 +26,12 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $modified
  *
  * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\State $state
  * @property \App\Model\Entity\Country $country
+ * @property \App\Model\Entity\State $state
  * @property \App\Model\Entity\Conversation[] $conversations
- * @property \App\Model\Entity\Litter[] $litters
  * @property \App\Model\Entity\Rat[] $rats
- * @property \App\Model\Entity\Rat[] $m_children_rats
- * @property \App\Model\Entity\Rat[] $f_children_rats
  * @property \App\Model\Entity\RatterySnapshot[] $rattery_snapshots
+ * @property \App\Model\Entity\Litter[] $litters
  */
 class Rattery extends Entity
 {
@@ -51,6 +50,7 @@ class Rattery extends Entity
         'owner_user_id' => true,
         'birth_year' => true,
         'is_alive' => true,
+        'is_generic' => true,
         'district' => true,
         'zip_code' => true,
         'country_id' => true,
@@ -61,13 +61,11 @@ class Rattery extends Entity
         'created' => true,
         'modified' => true,
         'user' => true,
-        'state' => true,
         'country' => true,
+        'state' => true,
         'conversations' => true,
-        'litters' => true,
         'rats' => true,
-        'm_children_rats' => true,
-        'f_children_rats' => true,
         'rattery_snapshots' => true,
+        'litters' => true,
     ];
 }

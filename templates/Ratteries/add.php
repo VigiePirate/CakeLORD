@@ -22,6 +22,7 @@
                     echo $this->Form->control('owner_user_id', ['options' => $users]);
                     echo $this->Form->control('birth_year');
                     echo $this->Form->control('is_alive');
+                    echo $this->Form->control('is_generic');
                     echo $this->Form->control('district');
                     echo $this->Form->control('zip_code');
                     echo $this->Form->control('country_id', ['options' => $countries]);
@@ -29,6 +30,7 @@
                     echo $this->Form->control('comments');
                     echo $this->Form->control('picture');
                     echo $this->Form->control('state_id', ['options' => $states]);
+                    echo $this->Form->control('litters._ids', ['options' => $litters]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

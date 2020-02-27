@@ -23,14 +23,14 @@ class LittersControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Litters',
-        'app.Ratteries',
-        'app.MotherRats',
-        'app.FatherRats',
         'app.Users',
         'app.States',
         'app.Conversations',
         'app.LitterSnapshots',
         'app.Rats',
+        'app.Ratteries',
+        'app.RatsLitters',
+        'app.RatteriesLitters',
     ];
 
     /**

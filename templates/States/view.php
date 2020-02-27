@@ -69,9 +69,6 @@
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Rattery Id') ?></th>
-                            <th><?= __('Mother Rat Id') ?></th>
-                            <th><?= __('Father Rat Id') ?></th>
                             <th><?= __('Mating Date') ?></th>
                             <th><?= __('Birth Date') ?></th>
                             <th><?= __('Pups Number') ?></th>
@@ -86,9 +83,6 @@
                         <?php foreach ($state->litters as $litters) : ?>
                         <tr>
                             <td><?= h($litters->id) ?></td>
-                            <td><?= h($litters->rattery_id) ?></td>
-                            <td><?= h($litters->mother_rat_id) ?></td>
-                            <td><?= h($litters->father_rat_id) ?></td>
                             <td><?= h($litters->mating_date) ?></td>
                             <td><?= h($litters->birth_date) ?></td>
                             <td><?= h($litters->pups_number) ?></td>
@@ -148,17 +142,13 @@
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Pedigree Identifier') ?></th>
+                            <th><?= __('Is Pedigree Custom') ?></th>
                             <th><?= __('Owner User Id') ?></th>
                             <th><?= __('Name') ?></th>
                             <th><?= __('Pup Name') ?></th>
                             <th><?= __('Sex') ?></th>
                             <th><?= __('Birth Date') ?></th>
                             <th><?= __('Rattery Id') ?></th>
-                            <th><?= __('Mother Rat Id') ?></th>
-                            <th><?= __('Father Rat Id') ?></th>
-                            <th><?= __('Litter Id') ?></th>
-                            <th><?= __('Mother Rattery Id') ?></th>
-                            <th><?= __('Father Rattery Id') ?></th>
                             <th><?= __('Color Id') ?></th>
                             <th><?= __('Eyecolor Id') ?></th>
                             <th><?= __('Dilution Id') ?></th>
@@ -185,17 +175,13 @@
                         <tr>
                             <td><?= h($rats->id) ?></td>
                             <td><?= h($rats->pedigree_identifier) ?></td>
+                            <td><?= h($rats->is_pedigree_custom) ?></td>
                             <td><?= h($rats->owner_user_id) ?></td>
                             <td><?= h($rats->name) ?></td>
                             <td><?= h($rats->pup_name) ?></td>
                             <td><?= h($rats->sex) ?></td>
                             <td><?= h($rats->birth_date) ?></td>
                             <td><?= h($rats->rattery_id) ?></td>
-                            <td><?= h($rats->mother_rat_id) ?></td>
-                            <td><?= h($rats->father_rat_id) ?></td>
-                            <td><?= h($rats->litter_id) ?></td>
-                            <td><?= h($rats->mother_rattery_id) ?></td>
-                            <td><?= h($rats->father_rattery_id) ?></td>
                             <td><?= h($rats->color_id) ?></td>
                             <td><?= h($rats->eyecolor_id) ?></td>
                             <td><?= h($rats->dilution_id) ?></td>
@@ -239,15 +225,16 @@
                             <th><?= __('Owner User Id') ?></th>
                             <th><?= __('Birth Year') ?></th>
                             <th><?= __('Is Alive') ?></th>
+                            <th><?= __('Is Generic') ?></th>
                             <th><?= __('District') ?></th>
                             <th><?= __('Zip Code') ?></th>
+                            <th><?= __('Country Id') ?></th>
                             <th><?= __('Website') ?></th>
                             <th><?= __('Comments') ?></th>
                             <th><?= __('Picture') ?></th>
                             <th><?= __('State Id') ?></th>
                             <th><?= __('Created') ?></th>
                             <th><?= __('Modified') ?></th>
-                            <th><?= __('Countries Id') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($state->ratteries as $ratteries) : ?>
@@ -258,15 +245,16 @@
                             <td><?= h($ratteries->owner_user_id) ?></td>
                             <td><?= h($ratteries->birth_year) ?></td>
                             <td><?= h($ratteries->is_alive) ?></td>
+                            <td><?= h($ratteries->is_generic) ?></td>
                             <td><?= h($ratteries->district) ?></td>
                             <td><?= h($ratteries->zip_code) ?></td>
+                            <td><?= h($ratteries->country_id) ?></td>
                             <td><?= h($ratteries->website) ?></td>
                             <td><?= h($ratteries->comments) ?></td>
                             <td><?= h($ratteries->picture) ?></td>
                             <td><?= h($ratteries->state_id) ?></td>
                             <td><?= h($ratteries->created) ?></td>
                             <td><?= h($ratteries->modified) ?></td>
-                            <td><?= h($ratteries->countries_id) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Ratteries', 'action' => 'view', $ratteries->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Ratteries', 'action' => 'edit', $ratteries->id]) ?>

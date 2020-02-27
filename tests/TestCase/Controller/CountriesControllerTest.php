@@ -23,6 +23,7 @@ class CountriesControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Countries',
+        'app.Ratteries',
     ];
 
     /**

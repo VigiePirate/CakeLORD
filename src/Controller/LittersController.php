@@ -20,7 +20,7 @@ class LittersController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Ratteries', 'MotherRats', 'FatherRats', 'Users', 'States'],
+            'contain' => ['Users', 'States'],
         ];
         $litters = $this->paginate($this->Litters);
 
@@ -37,7 +37,7 @@ class LittersController extends AppController
     public function view($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['Ratteries', 'MotherRats', 'FatherRats', 'Users', 'States', 'Conversations', 'LitterSnapshots', 'Rats'],
+            'contain' => ['Users', 'States', 'Rats', 'Ratteries', 'Conversations', 'LitterSnapshots'],
         ]);
 
         $this->set('litter', $litter);
@@ -60,12 +60,11 @@ class LittersController extends AppController
             }
             $this->Flash->error(__('The litter could not be saved. Please, try again.'));
         }
-        $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $motherRats = $this->Litters->MotherRats->find('list', ['limit' => 200]);
-        $fatherRats = $this->Litters->FatherRats->find('list', ['limit' => 200]);
         $users = $this->Litters->Users->find('list', ['limit' => 200]);
         $states = $this->Litters->States->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'ratteries', 'motherRats', 'fatherRats', 'users', 'states'));
+        $rats = $this->Litters->Rats->find('list', ['limit' => 200]);
+        $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
+        $this->set(compact('litter', 'users', 'states', 'rats', 'ratteries'));
     }
 
     /**
@@ -78,7 +77,7 @@ class LittersController extends AppController
     public function edit($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => [],
+            'contain' => ['Rats', 'Ratteries'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData());
@@ -89,12 +88,11 @@ class LittersController extends AppController
             }
             $this->Flash->error(__('The litter could not be saved. Please, try again.'));
         }
-        $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $motherRats = $this->Litters->MotherRats->find('list', ['limit' => 200]);
-        $fatherRats = $this->Litters->FatherRats->find('list', ['limit' => 200]);
         $users = $this->Litters->Users->find('list', ['limit' => 200]);
         $states = $this->Litters->States->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'ratteries', 'motherRats', 'fatherRats', 'users', 'states'));
+        $rats = $this->Litters->Rats->find('list', ['limit' => 200]);
+        $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
+        $this->set(compact('litter', 'users', 'states', 'rats', 'ratteries'));
     }
 
     /**

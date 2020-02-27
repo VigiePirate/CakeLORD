@@ -23,6 +23,7 @@ class RatteriesFixture extends TestFixture
         'owner_user_id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'birth_year' => ['type' => 'string', 'length' => null, 'null' => true, 'default' => null, 'collate' => null, 'comment' => '', 'precision' => null],
         'is_alive' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '1', 'comment' => '', 'precision' => null],
+        'is_generic' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '0', 'comment' => '', 'precision' => null],
         'district' => ['type' => 'string', 'length' => 70, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'zip_code' => ['type' => 'string', 'length' => 12, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'country_id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => '1', 'comment' => '', 'precision' => null, 'autoIncrement' => null],
@@ -30,8 +31,8 @@ class RatteriesFixture extends TestFixture
         'comments' => ['type' => 'text', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'picture' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => 'Unknown.png', 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'state_id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => '1', 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'created' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => '1981-08-01 00:00:00', 'comment' => ''],
-        'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => '1981-08-01 00:00:00', 'comment' => ''],
+        'created' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => null, 'comment' => ''],
+        'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => null, 'comment' => ''],
         '_indexes' => [
             'fk_lord_ratteries_lord_users1' => ['type' => 'index', 'columns' => ['owner_user_id'], 'length' => []],
             'fk_ratteries_states1' => ['type' => 'index', 'columns' => ['state_id'], 'length' => []],
@@ -66,6 +67,7 @@ class RatteriesFixture extends TestFixture
                 'owner_user_id' => 1,
                 'birth_year' => 'Lorem ipsum dolor sit amet',
                 'is_alive' => 1,
+                'is_generic' => 1,
                 'district' => 'Lorem ipsum dolor sit amet',
                 'zip_code' => 'Lorem ipsu',
                 'country_id' => 1,
@@ -73,8 +75,8 @@ class RatteriesFixture extends TestFixture
                 'comments' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'picture' => 'Lorem ipsum dolor sit amet',
                 'state_id' => 1,
-                'created' => '2020-02-26 17:32:29',
-                'modified' => '2020-02-26 17:32:29',
+                'created' => '2020-02-27 19:10:20',
+                'modified' => '2020-02-27 19:10:20',
             ],
         ];
         parent::init();

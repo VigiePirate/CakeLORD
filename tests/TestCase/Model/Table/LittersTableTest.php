@@ -26,12 +26,12 @@ class LittersTableTest extends TestCase
      */
     protected $fixtures = [
         'app.Litters',
-        'app.Rats',
         'app.Users',
         'app.States',
-        'app.Ratteries',
         'app.Conversations',
         'app.LitterSnapshots',
+        'app.Rats',
+        'app.Ratteries',
     ];
 
     /**

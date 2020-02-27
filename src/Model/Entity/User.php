@@ -24,15 +24,11 @@ use Cake\ORM\Entity;
  * @property int $failed_login_attempts
  * @property \Cake\I18n\FrozenTime|null $failed_login_last_date
  * @property bool $is_locked
- * @property string $staff_comments
+ * @property string|null $staff_comments
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
  * @property \App\Model\Entity\Role $role
- * @property \App\Model\Entity\Rattery[] $ratteries
- * @property \App\Model\Entity\Rat[] $owned_rats
- * @property \App\Model\Entity\Rat[] $created_rats
- * @property \App\Model\Entity\Message[] $messages
  * @property \App\Model\Entity\Conversation[] $conversations
  */
 class User extends Entity
@@ -66,10 +62,6 @@ class User extends Entity
         'created' => true,
         'modified' => true,
         'role' => true,
-        'ratteries' => true,
-        'owned_rats' => true,
-        'created_rats' => true,
-        'messages' => true,
         'conversations' => true,
     ];
 

@@ -27,11 +27,10 @@ class RatteriesControllerTest extends TestCase
         'app.Countries',
         'app.States',
         'app.Conversations',
-        'app.Litters',
         'app.Rats',
-        'app.MchildrenRats',
-        'app.FChildrenRats',
         'app.RatterySnapshots',
+        'app.Litters',
+        'app.RatteriesLitters',
     ];
 
     /**

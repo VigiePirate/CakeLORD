@@ -26,7 +26,6 @@ class EyecolorsTableTest extends TestCase
      */
     protected $fixtures = [
         'app.Eyecolors',
-        'app.Colors',
         'app.Rats',
     ];
 

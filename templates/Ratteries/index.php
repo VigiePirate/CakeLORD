@@ -17,6 +17,7 @@
                     <th><?= $this->Paginator->sort('owner_user_id') ?></th>
                     <th><?= $this->Paginator->sort('birth_year') ?></th>
                     <th><?= $this->Paginator->sort('is_alive') ?></th>
+                    <th><?= $this->Paginator->sort('is_generic') ?></th>
                     <th><?= $this->Paginator->sort('district') ?></th>
                     <th><?= $this->Paginator->sort('zip_code') ?></th>
                     <th><?= $this->Paginator->sort('country_id') ?></th>
@@ -37,6 +38,7 @@
                     <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->username, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
                     <td><?= h($rattery->birth_year) ?></td>
                     <td><?= h($rattery->is_alive) ?></td>
+                    <td><?= h($rattery->is_generic) ?></td>
                     <td><?= h($rattery->district) ?></td>
                     <td><?= h($rattery->zip_code) ?></td>
                     <td><?= $rattery->has('country') ? $this->Html->link($rattery->country->name, ['controller' => 'Countries', 'action' => 'view', $rattery->country->id]) : '' ?></td>

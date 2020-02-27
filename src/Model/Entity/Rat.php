@@ -4,24 +4,19 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-use Cake\I18n\FrozenTime;
 
 /**
  * Rat Entity
  *
  * @property int $id
- * @property string $pedigree_identifier
+ * @property string|null $pedigree_identifier
+ * @property bool $is_pedigree_custom
  * @property int|null $owner_user_id
  * @property string $name
  * @property string|null $pup_name
  * @property string $sex
- * @property \Cake\I18n\FrozenDate|null $birth_date
+ * @property \Cake\I18n\FrozenDate $birth_date
  * @property int $rattery_id
- * @property int|null $mother_rat_id
- * @property int|null $father_rat_id
- * @property int|null $litter_id
- * @property int|null $mother_rattery_id
- * @property int|null $father_rattery_id
  * @property int $color_id
  * @property int $eyecolor_id
  * @property int $dilution_id
@@ -43,27 +38,21 @@ use Cake\I18n\FrozenTime;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\DeathPrimaryCause $death_primary_cause
- * @property \App\Model\Entity\DeathSecondaryCause $death_secondary_cause
- * @property \App\Model\Entity\Rattery $mother_rattery
- * @property \App\Model\Entity\Rattery $father_rattery
- * @property \App\Model\Entity\Rat[] $m_children_rats
- * @property \App\Model\Entity\Rat $mother_rat
- * @property \App\Model\Entity\Rat[] $f_children_rats
- * @property \App\Model\Entity\Rat $father_rat
- * @property \App\Model\Entity\Litter $litter
  * @property \App\Model\Entity\User $owner_user
+ * @property \App\Model\Entity\Rattery $rattery
  * @property \App\Model\Entity\Color $color
- * @property \App\Model\Entity\Earset $earset
  * @property \App\Model\Entity\Eyecolor $eyecolor
  * @property \App\Model\Entity\Dilution $dilution
- * @property \App\Model\Entity\Coat $coat
  * @property \App\Model\Entity\Marking $marking
+ * @property \App\Model\Entity\Earset $earset
+ * @property \App\Model\Entity\Coat $coat
+ * @property \App\Model\Entity\DeathPrimaryCause $death_primary_cause
+ * @property \App\Model\Entity\DeathSecondaryCause $death_secondary_cause
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\State $state
- * @property \App\Model\Entity\Rattery $rattery
  * @property \App\Model\Entity\Conversation[] $conversations
  * @property \App\Model\Entity\RatSnapshot[] $rat_snapshots
+ * @property \App\Model\Entity\Litter[] $litters
  * @property \App\Model\Entity\Singularity[] $singularities
  */
 class Rat extends Entity
@@ -79,17 +68,13 @@ class Rat extends Entity
      */
     protected $_accessible = [
         'pedigree_identifier' => true,
+        'is_pedigree_custom' => true,
         'owner_user_id' => true,
         'name' => true,
         'pup_name' => true,
         'sex' => true,
         'birth_date' => true,
         'rattery_id' => true,
-        'mother_rat_id' => true,
-        'father_rat_id' => true,
-        'litter_id' => true,
-        'mother_rattery_id' => true,
-        'father_rattery_id' => true,
         'color_id' => true,
         'eyecolor_id' => true,
         'dilution_id' => true,
@@ -110,63 +95,57 @@ class Rat extends Entity
         'state_id' => true,
         'created' => true,
         'modified' => true,
-        'death_primary_cause' => true,
-        'death_secondary_cause' => true,
-        'mother_rattery' => true,
-        'father_rattery' => true,
-        'm_children_rats' => true,
-        'mother_rat' => true,
-        'f_children_rats' => true,
-        'father_rat' => true,
-        'litter' => true,
         'owner_user' => true,
+        'rattery' => true,
         'color' => true,
-        'earset' => true,
         'eyecolor' => true,
         'dilution' => true,
-        'coat' => true,
         'marking' => true,
+        'earset' => true,
+        'coat' => true,
+        'death_primary_cause' => true,
+        'death_secondary_cause' => true,
         'user' => true,
         'state' => true,
-        'rattery' => true,
         'conversations' => true,
         'rat_snapshots' => true,
+        'litters' => true,
         'singularities' => true,
     ];
 
-    /*
-    protected function _getPedigreeIdentifier()
-    {
-        if (isset($this->_fields['pedigree_identifier'])) {
-            return $this->_fields['pedigree_identifier'];
-        } else if (isset ($this->_fields['rattery_id'])) {
-                return $this->rattery->prefix . $this->id . $this->sex ;
-        } else {
-            return '';
-        }
-    }
-     */
-
-    protected function _setPedigreeIdentifier()
-    {
-        if (isset($this->_fields['pedigree_identifier'])) {
-            return $this->_fields['pedigree_identifier'];
-        } else if (isset($this->_fields['id']) && isset($this->_fields['rattery_id'])) {
-                return $this->rattery->prefix . $this->id . $this->sex ;
-        } else {
-            return '';
-        }
-    }
-
-    /*
-    protected function _getAge()
-    {
-        $agedate = FrozenTime::now(); 
-        if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
-            $agedate = $this->_fields['death_date'];
-        }
-        return $agedate->diffForHumans($this->_fields['birth_date'], true);
-    }
-     */
+     /*
+     protected function _getPedigreeIdentifier()
+     {
+         if (isset($this->_fields['pedigree_identifier'])) {
+             return $this->_fields['pedigree_identifier'];
+         } else if (isset ($this->_fields['rattery_id'])) {
+                 return $this->rattery->prefix . $this->id . $this->sex ;
+         } else {
+             return '';
+         }
+     }
+      */
+ 
+     protected function _setPedigreeIdentifier()
+     {
+         if (isset($this->_fields['pedigree_identifier'])) {
+             return $this->_fields['pedigree_identifier'];
+         } else if (isset($this->_fields['id']) && isset($this->_fields['rattery_id'])) {
+                 return $this->rattery->prefix . $this->id . $this->sex ;
+         } else {
+             return '';
+         }
+     }
+ 
+     /*
+     protected function _getAge()
+     {
+         $agedate = FrozenTime::now(); 
+         if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
+             $agedate = $this->_fields['death_date'];
+         }
+         return $agedate->diffForHumans($this->_fields['birth_date'], true);
+     }
+      */
 
 }

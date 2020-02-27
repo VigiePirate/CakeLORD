@@ -15,7 +15,6 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property bool $is_picture_mandatory
  *
- * @property \App\Model\Entity\Eyecolor $eyecolor
  * @property \App\Model\Entity\Rat[] $rats
  */
 class Color extends Entity
@@ -35,7 +34,6 @@ class Color extends Entity
         'picture' => true,
         'description' => true,
         'is_picture_mandatory' => true,
-        'eyecolor' => true,
         'rats' => true,
     ];
 }

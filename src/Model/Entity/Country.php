@@ -11,6 +11,8 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $iso3166
+ *
+ * @property \App\Model\Entity\Rattery[] $ratteries
  */
 class Country extends Entity
 {
@@ -26,5 +28,6 @@ class Country extends Entity
     protected $_accessible = [
         'name' => true,
         'iso3166' => true,
+        'ratteries' => true,
     ];
 }

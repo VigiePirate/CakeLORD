@@ -6,20 +6,17 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * BackofficeRatteryMessage Entity
+ * RatteriesLitter Entity
  *
- * @property int $id
  * @property int $rattery_id
- * @property int|null $staff_id
- * @property string|null $staff_comments
- * @property string|null $owner_comments
- * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property int $litter_id
+ * @property int $litters_contributions_id
  *
  * @property \App\Model\Entity\Rattery $rattery
- * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Litter $litter
+ * @property \App\Model\Entity\LittersContribution $litters_contribution
  */
-class BackofficeRatteryMessage extends Entity
+class RatteriesLitter extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -31,13 +28,9 @@ class BackofficeRatteryMessage extends Entity
      * @var array
      */
     protected $_accessible = [
-        'rattery_id' => true,
-        'staff_id' => true,
-        'staff_comments' => true,
-        'owner_comments' => true,
-        'created' => true,
-        'modified' => true,
+        'litters_contributions_id' => true,
         'rattery' => true,
-        'user' => true,
+        'litter' => true,
+        'litters_contribution' => true,
     ];
 }

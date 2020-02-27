@@ -16,9 +16,9 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $modified
  * @property bool $is_active
  *
+ * @property \App\Model\Entity\Rat $rat
  * @property \App\Model\Entity\Rattery $rattery
  * @property \App\Model\Entity\Litter $litter
- * @property \App\Model\Entity\Rat $rat
  * @property \App\Model\Entity\Message[] $messages
  * @property \App\Model\Entity\User[] $users
  */
@@ -40,9 +40,9 @@ class Conversation extends Entity
         'created' => true,
         'modified' => true,
         'is_active' => true,
+        'rat' => true,
         'rattery' => true,
         'litter' => true,
-        'rat' => true,
         'messages' => true,
         'users' => true,
     ];
