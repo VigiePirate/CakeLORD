@@ -21,16 +21,11 @@ class ColorsFixture extends TestFixture
         'name' => ['type' => 'string', 'length' => 70, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'genotype' => ['type' => 'string', 'length' => 70, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'picture' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => 'Unknown.png', 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
-        'eyecolor_id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'description' => ['type' => 'text', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'is_picture_mandatory' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '0', 'comment' => '', 'precision' => null],
-        '_indexes' => [
-            'fk_colors_eyecolors1' => ['type' => 'index', 'columns' => ['eyecolor_id'], 'length' => []],
-        ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'name_UNIQUE' => ['type' => 'unique', 'columns' => ['name'], 'length' => []],
-            'fk_colors_eyecolors1' => ['type' => 'foreign', 'columns' => ['eyecolor_id'], 'references' => ['eyecolors', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -51,7 +46,6 @@ class ColorsFixture extends TestFixture
                 'name' => 'Lorem ipsum dolor sit amet',
                 'genotype' => 'Lorem ipsum dolor sit amet',
                 'picture' => 'Lorem ipsum dolor sit amet',
-                'eyecolor_id' => 1,
                 'description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'is_picture_mandatory' => 1,
             ],

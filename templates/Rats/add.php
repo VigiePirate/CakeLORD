@@ -17,7 +17,7 @@
             <fieldset>
                 <legend><?= __('Add Rat') ?></legend>
                 <?php
-                    echo $this->Form->control('pedigree_identifier');
+                    // echo $this->Form->control('pedigree_identifier');
                     echo $this->Form->control('owner_user_id', ['options' => $ownerUsers, 'empty' => true]);
                     echo $this->Form->control('name');
                     echo $this->Form->control('pup_name');

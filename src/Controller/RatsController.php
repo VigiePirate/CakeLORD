@@ -34,10 +34,26 @@ class RatsController extends AppController
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function viewAll($id = null)
     {
         $rat = $this->Rats->get($id, [
             'contain' => ['OwnerUsers', 'Ratteries', 'MotherRats', 'FatherRats', 'Litters', 'MotherRatteries', 'FatherRatteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'Users', 'States', 'Singularities', 'Rats', 'FChildrenRats', 'MotherLitters', 'FatherLitters', 'Conversations', 'RatSnapshots'],
+        ]);
+
+        $this->set('rat', $rat);
+    }
+
+    /**
+     * View method
+     *
+     * @param string|null $id Rat id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function view($id = null)
+    {
+        $rat = $this->Rats->get($id, [
+            'contain' => ['OwnerUsers', 'Ratteries', 'MotherRats', 'FatherRats', 'Litters', 'MotherRatteries', 'FatherRatteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'Users', 'States', 'Singularities', 'Conversations', 'RatSnapshots'],
         ]);
 
         $this->set('rat', $rat);
@@ -91,7 +107,7 @@ class RatsController extends AppController
     public function edit($id = null)
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['Singularities'],
+            'contain' => ['Singularities', 'Ratteries'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());

@@ -132,16 +132,41 @@ class Rat extends Entity
         'conversations' => true,
         'rat_snapshots' => true,
         'singularities' => true,
-        // Computed fields
-        'age' => true,
     ];
 
+    /*
+    protected function _getPedigreeIdentifier()
+    {
+        if (isset($this->_fields['pedigree_identifier'])) {
+            return $this->_fields['pedigree_identifier'];
+        } else if (isset ($this->_fields['rattery_id'])) {
+                return $this->rattery->prefix . $this->id . $this->sex ;
+        } else {
+            return '';
+        }
+    }
+     */
+
+    protected function _setPedigreeIdentifier()
+    {
+        if (isset($this->_fields['pedigree_identifier'])) {
+            return $this->_fields['pedigree_identifier'];
+        } else if (isset($this->_fields['id']) && isset($this->_fields['rattery_id'])) {
+                return $this->rattery->prefix . $this->id . $this->sex ;
+        } else {
+            return '';
+        }
+    }
+
+    /*
     protected function _getAge()
     {
         $agedate = FrozenTime::now(); 
-        if (! $this->is_alive && isset($this->death_date)) {
-            $agedate = $this->death_date;
+        if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
+            $agedate = $this->_fields['death_date'];
         }
-        return $agedate->diffForHumans($this->birth_date, true);
+        return $agedate->diffForHumans($this->_fields['birth_date'], true);
     }
+     */
+
 }

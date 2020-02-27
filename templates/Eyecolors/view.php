@@ -55,7 +55,6 @@
                             <th><?= __('Name') ?></th>
                             <th><?= __('Genotype') ?></th>
                             <th><?= __('Picture') ?></th>
-                            <th><?= __('Eyecolor Id') ?></th>
                             <th><?= __('Description') ?></th>
                             <th><?= __('Is Picture Mandatory') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -66,7 +65,6 @@
                             <td><?= h($colors->name) ?></td>
                             <td><?= h($colors->genotype) ?></td>
                             <td><?= h($colors->picture) ?></td>
-                            <td><?= h($colors->eyecolor_id) ?></td>
                             <td><?= h($colors->description) ?></td>
                             <td><?= h($colors->is_picture_mandatory) ?></td>
                             <td class="actions">

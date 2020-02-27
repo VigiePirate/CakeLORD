@@ -31,10 +31,6 @@
                     <td><?= h($color->picture) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Eyecolor') ?></th>
-                    <td><?= $color->has('eyecolor') ? $this->Html->link($color->eyecolor->name, ['controller' => 'Eyecolors', 'action' => 'view', $color->eyecolor->id]) : '' ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($color->id) ?></td>
                 </tr>

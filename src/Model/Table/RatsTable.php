@@ -130,14 +130,11 @@ class RatsTable extends Table
             'joinType' => 'INNER',
         ]);
         $this->hasMany('Rats', [
-            'className' => 'Rats',
             'foreignKey' => 'mother_rat_id',
-            'bindingKey' => 'id',
         ]);
         $this->hasMany('FChildrenRats', [
             'className' => 'Rats',
             'foreignKey' => 'father_rat_id',
-            'bindingKey' => 'id',
         ]);
         $this->hasMany('MotherLitters', [
             'className' => 'Litters',
@@ -175,9 +172,9 @@ class RatsTable extends Table
 
         $validator
             ->scalar('pedigree_identifier')
-            ->maxLength('pedigree_identifier', 10)
-            ->requirePresence('pedigree_identifier', 'create')
-            ->notEmptyString('pedigree_identifier')
+            ->maxLength('pedigree_identifier', 16)
+            //->requirePresence('pedigree_identifier', 'create')
+            ->allowEmptyString('pedigree_identifier')
             ->add('pedigree_identifier', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
@@ -199,7 +196,7 @@ class RatsTable extends Table
 
         $validator
             ->date('birth_date')
-            ->allowEmptyDate('birth_date');
+            ->notEmptyDate('birth_date');
 
         $validator
             ->boolean('is_alive')

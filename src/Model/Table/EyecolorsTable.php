@@ -11,7 +11,6 @@ use Cake\Validation\Validator;
 /**
  * Eyecolors Model
  *
- * @property \App\Model\Table\ColorsTable&\Cake\ORM\Association\HasMany $Colors
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  *
  * @method \App\Model\Entity\Eyecolor newEmptyEntity()
@@ -44,9 +43,6 @@ class EyecolorsTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        $this->hasMany('Colors', [
-            'foreignKey' => 'eyecolor_id',
-        ]);
         $this->hasMany('Rats', [
             'foreignKey' => 'eyecolor_id',
         ]);
