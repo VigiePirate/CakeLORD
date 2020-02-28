@@ -224,4 +224,32 @@ class RatsController extends AppController
 
         $this->set(compact('rats', 'owners'));
     }
+
+    /**
+     * sex method
+     *
+     * Search rats by sex.
+     *
+     * @param 
+     * @return 
+     */
+    public function sex()
+    {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
+        $sex = $this->request->getParam('pass');
+        //
+        // Use the RatsTable to find named rats.
+        $rats = $this->Rats->find('sex', [
+            'sex' => $sex
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+        ];
+        $rats = $this->paginate($rats);
+
+        $this->set(compact('rats', 'sex'));
+    }
 }

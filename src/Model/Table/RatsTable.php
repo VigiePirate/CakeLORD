@@ -327,4 +327,24 @@ class RatsTable extends Table
         return $query->group(['Rats.id']);
     }
 
+    public function findSex(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['sex'])) {
+            $query->where([
+                'Rats.sex IS' => null,
+            ]);
+        } else {
+            // Find rats with parts of the string in that name
+            $query->where([
+                    'Rats.sex IN' => ($options['sex']),
+            ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
 }
