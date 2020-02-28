@@ -134,4 +134,36 @@ class RatsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * Names method
+     *
+     * @param 
+     * @return \Cake\Http\Response|null Redirects to index.
+     */
+    public function names()
+    {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
+        $names = $this->request->getParam('pass');
+        //
+        // Use the RatsTable to find named rats.
+        $rats = $this->Rats->find('named', [
+            'names' => $names
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+        ];
+        $rats = $this->paginate($rats);
+
+        $this->set(compact('rats', 'names'));
+        /*
+        $this->set([
+            'rats' => $rats,
+            'names' => $names
+        ]);
+         */
+    }
 }

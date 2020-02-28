@@ -69,6 +69,10 @@ $routes->scope('/', function (RouteBuilder $builder) {
      */
     $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
+    $builder->scope('/rats', function (RouteBuilder $builder) {
+        $builder->connect('/named/*', ['controller' => 'Rats', 'action' => 'names']);
+    });
+
     /*
      * Connect catchall routes for all controllers.
      *
@@ -96,3 +100,4 @@ $routes->scope('/', function (RouteBuilder $builder) {
  * });
  * ```
  */
+

@@ -246,4 +246,34 @@ class RatsTable extends Table
 
         return $rules;
     }
+
+    /*
+     * Finder functions
+     */
+    public function findNamed(Query $query, array $options)
+    {
+        $columns = [
+            'Rats.id', 'Rats.pedigree_identifier', 'Rats.is_pedigree_custom', 'Rats.name', 'Rats.pup_name', 'Rats.sex', 'Rats.is_alive',
+            'Rats.rattery_id', 'Rats.owner_user_id', 'Rats.state_id', 'Rats.birth_date',
+        ];
+
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['names'])) {
+            $query->where([
+                'OR' => ['Rats.names IS' => null, 'Rats.pup_names IS' => NULL],
+            ]);
+        } else {
+            // Find articles that have one or more of the provided tags.
+            $query->where([
+                'OR' => ['Rats.name LIKE' => '%'.implode($options['names']).'%',
+                        'Rats.pup_name LIKE' => '%'.implode($options['names']).'%',
+                    ],
+            ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
 }
