@@ -48,3 +48,10 @@ nbproject/*
 /docs/cdc/cdclord2.0.blg
 /docs/cdc/cdclord2.0.log
 /docs/cdc/cdclord2.0.out
+/docs/cdc/*.log
+/docs/cdc/*.out
+/docs/cdc/*.pdf
+/docs/cdc/*.toc
+/docs/cdc/*.aux
+/docs/cdc/*.bbl
+/docs/cdc/*.blg
