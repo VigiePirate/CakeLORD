@@ -46,7 +46,7 @@
                 <?php foreach ($rats as $rat): ?>
                 <tr>
                     <td><?= $this->Number->format($rat->id) ?></td>
-                    <td><?= h($rat->pedigree_identifier) ?></td>
+                    <td><?= $this->Html->link(h($rat->pedigree_identifier), ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?></td>
                     <td><?= h($rat->is_pedigree_custom) ?></td>
                     <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                     <td><?= h($rat->name) ?></td>

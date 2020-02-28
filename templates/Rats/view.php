@@ -38,6 +38,8 @@
                     <th><?= __('Sex') ?></th>
                     <td><?= h($rat->sex) ?></td>
                 </tr>
+                    <th><?= __('Age') ?></th>
+                    <td><?= h($rat->age_string) ?></td>
                 <tr>
                     <th><?= __('Rattery') ?></th>
                     <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>

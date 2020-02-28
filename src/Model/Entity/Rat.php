@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\I18n\FrozenTime;
 
 /**
  * Rat Entity
@@ -113,7 +114,6 @@ class Rat extends Entity
         'singularities' => true,
     ];
 
-     /*
      protected function _getPedigreeIdentifier()
      {
          if (isset($this->_fields['pedigree_identifier'])) {
@@ -124,7 +124,6 @@ class Rat extends Entity
              return '';
          }
      }
-      */
  
      protected function _setPedigreeIdentifier()
      {
@@ -137,15 +136,29 @@ class Rat extends Entity
          }
      }
  
-     /*
      protected function _getAge()
      {
          $agedate = FrozenTime::now(); 
          if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
              $agedate = $this->_fields['death_date'];
          }
-         return $agedate->diffForHumans($this->_fields['birth_date'], true);
+         if (isset($this->birth_date)) {
+             return $agedate->diffInMonths($this->_fields['birth_date'], true);
+         } else {
+             return 0; // Should raise exception
+         }
      }
-      */
+
+     protected function _getAgeString()
+     {
+         $age = $this->age . ' months';
+         if (! $age) {
+             $age .= '(birth date unknown)'; // Should raise exception
+         }
+         if (! $this->_fields['is_alive']) {
+             isset($this->_fields['death_date']) ? $age .= ' † (deceased)' : $age .= ' † (deceased at unknown date)';
+         }
+         return $age;
+     }
 
 }
