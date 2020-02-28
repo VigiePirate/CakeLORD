@@ -270,9 +270,10 @@ class RatsTable extends Table
         } else {
             // Find rats with parts of the string in that name
             $query->where([
-                'OR' => ['Rats.name LIKE' => '%'.implode($options['names']).'%',
-                        'Rats.pup_name LIKE' => '%'.implode($options['names']).'%',
-                    ],
+                'OR' => [
+                    'Rats.name LIKE' => '%'.implode($options['names']).'%',
+                    'Rats.pup_name LIKE' => '%'.implode($options['names']).'%',
+                ],
             ]);
         }
 
@@ -288,16 +289,39 @@ class RatsTable extends Table
         if (empty($options['ratteries'])) {
             $query->leftJoinWith('Ratteries')
                   ->where([
-                'OR' => ['Ratteries.name IS' => null, 'Ratteries.prefix IS' => NULL],
-            ]);
+                      'OR' => ['Ratteries.name IS' => null, 'Ratteries.prefix IS' => NULL],
+                  ]);
         } else {
             // Find articles that have one or more of the provided tags.
             $query->innerJoinWith('Ratteries')
                   ->where([
-                'OR' => ['Ratteries.name LIKE' => '%'.implode($options['ratteries']).'%',
-                        'Ratteries.prefix LIKE' => '%'.implode($options['ratteries']).'%',
-                    ],
-            ]);
+                      'OR' => [
+                          'Ratteries.name LIKE' => '%'.implode($options['ratteries']).'%',
+                          'Ratteries.prefix LIKE' => '%'.implode($options['ratteries']).'%',
+                      ],
+                  ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
+    public function findOwnedBy(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['owners'])) {
+            $query->leftJoinWith('OwnerUsers')
+                  ->where([
+                      'OwnerUsers.username IS' => null,
+                  ]);
+        } else {
+            // Find articles that have one or more of the provided tags.
+            $query->innerJoinWith('OwnerUsers')
+                  ->where([
+                          'OwnerUsers.username LIKE' => '%'.implode($options['owners']).'%',
+                ]);
         }
 
         return $query->group(['Rats.id']);

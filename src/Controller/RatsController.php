@@ -170,7 +170,7 @@ class RatsController extends AppController
     }
 
     /**
-     * Ratteries method
+     * fromRattery method
      *
      * Search rats by ratteries.
      *
@@ -195,5 +195,33 @@ class RatsController extends AppController
         $rats = $this->paginate($rats);
 
         $this->set(compact('rats', 'ratteries'));
+    }
+
+    /**
+     * ownedBy method
+     *
+     * Search rats by ratteries.
+     *
+     * @param 
+     * @return 
+     */
+    public function ownedBy()
+    {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
+        $owners = $this->request->getParam('pass');
+        //
+        // Use the RatsTable to find named rats.
+        $rats = $this->Rats->find('ownedBy', [
+            'owners' => $owners
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+        ];
+        $rats = $this->paginate($rats);
+
+        $this->set(compact('rats', 'owners'));
     }
 }

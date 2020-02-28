@@ -72,6 +72,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->scope('/rats', function (RouteBuilder $builder) {
         $builder->connect('/named/*', ['controller' => 'Rats', 'action' => 'named']);
         $builder->connect('/from-rattery/*', ['controller' => 'Rats', 'action' => 'fromRattery']);
+        $builder->connect('/owned-by/*', ['controller' => 'Rats', 'action' => 'ownedBy']);
     });
 
     /*
