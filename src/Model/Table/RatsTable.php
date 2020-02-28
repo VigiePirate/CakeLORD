@@ -170,7 +170,8 @@ class RatsTable extends Table
             ->scalar('sex')
             ->maxLength('sex', 1)
             ->requirePresence('sex', 'create')
-            ->notEmptyString('sex');
+            ->notEmptyString('sex')
+            ->add('sex', 'validSex', ['rule' => 'isValidSex', 'message' => __('Sex must be either M or F'), 'provider' => 'table']);
 
         $validator
             ->date('birth_date')
@@ -212,6 +213,11 @@ class RatsTable extends Table
             ->allowEmptyString('picture_thumbnail');
 
         return $validator;
+    }
+
+    public function isValidSex($value, array $context)
+    {
+        return in_array($value, ['M', 'F'], true);
     }
 
     /**
