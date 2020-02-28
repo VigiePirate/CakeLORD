@@ -12,9 +12,6 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('rattery_id') ?></th>
-                    <th><?= $this->Paginator->sort('mother_rat_id') ?></th>
-                    <th><?= $this->Paginator->sort('father_rat_id') ?></th>
                     <th><?= $this->Paginator->sort('mating_date') ?></th>
                     <th><?= $this->Paginator->sort('birth_date') ?></th>
                     <th><?= $this->Paginator->sort('pups_number') ?></th>
@@ -30,9 +27,6 @@
                 <?php foreach ($litters as $litter): ?>
                 <tr>
                     <td><?= $this->Number->format($litter->id) ?></td>
-                    <td><?= $litter->has('rattery') ? $this->Html->link($litter->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $litter->rattery->id]) : '' ?></td>
-                    <td><?= $this->Number->format($litter->mother_rat_id) ?></td>
-                    <td><?= $this->Number->format($litter->father_rat_id) ?></td>
                     <td><?= h($litter->mating_date) ?></td>
                     <td><?= h($litter->birth_date) ?></td>
                     <td><?= $this->Number->format($litter->pups_number) ?></td>

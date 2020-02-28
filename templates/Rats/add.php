@@ -18,17 +18,13 @@
                 <legend><?= __('Add Rat') ?></legend>
                 <?php
                     echo $this->Form->control('pedigree_identifier');
+                    echo $this->Form->control('is_pedigree_custom');
                     echo $this->Form->control('owner_user_id', ['options' => $ownerUsers, 'empty' => true]);
                     echo $this->Form->control('name');
                     echo $this->Form->control('pup_name');
                     echo $this->Form->control('sex');
-                    echo $this->Form->control('birth_date', ['empty' => true]);
+                    echo $this->Form->control('birth_date');
                     echo $this->Form->control('rattery_id', ['options' => $ratteries]);
-                    echo $this->Form->control('mother_rat_id', ['options' => $motherRats, 'empty' => true]);
-                    echo $this->Form->control('father_rat_id', ['options' => $fatherRats, 'empty' => true]);
-                    echo $this->Form->control('litter_id', ['options' => $litters, 'empty' => true]);
-                    echo $this->Form->control('mother_rattery_id', ['options' => $motherRatteries, 'empty' => true]);
-                    echo $this->Form->control('father_rattery_id', ['options' => $fatherRatteries, 'empty' => true]);
                     echo $this->Form->control('color_id', ['options' => $colors]);
                     echo $this->Form->control('eyecolor_id', ['options' => $eyecolors]);
                     echo $this->Form->control('dilution_id', ['options' => $dilutions]);
@@ -47,6 +43,7 @@
                     echo $this->Form->control('picture_thumbnail');
                     echo $this->Form->control('creator_user_id', ['options' => $users]);
                     echo $this->Form->control('state_id', ['options' => $states]);
+                    echo $this->Form->control('litters._ids', ['options' => $litters]);
                     echo $this->Form->control('singularities._ids', ['options' => $singularities]);
                 ?>
             </fieldset>

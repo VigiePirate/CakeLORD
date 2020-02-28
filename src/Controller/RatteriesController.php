@@ -20,7 +20,7 @@ class RatteriesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'States'],
+            'contain' => ['Users', 'Countries', 'States'],
         ];
         $ratteries = $this->paginate($this->Ratteries);
 
@@ -37,7 +37,7 @@ class RatteriesController extends AppController
     public function view($id = null)
     {
         $rattery = $this->Ratteries->get($id, [
-            'contain' => ['Users', 'States', 'Conversations', 'Litters', 'Rats', 'MChildrenRats', 'FChildrenRats', 'RatterySnapshots'],
+            'contain' => ['Users', 'Countries', 'States', 'Litters', 'Conversations', 'Rats', 'RatterySnapshots'],
         ]);
 
         $this->set('rattery', $rattery);
@@ -61,8 +61,10 @@ class RatteriesController extends AppController
             $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
         }
         $users = $this->Ratteries->Users->find('list', ['limit' => 200]);
+        $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
         $states = $this->Ratteries->States->find('list', ['limit' => 200]);
-        $this->set(compact('rattery', 'users', 'states'));
+        $litters = $this->Ratteries->Litters->find('list', ['limit' => 200]);
+        $this->set(compact('rattery', 'users', 'countries', 'states', 'litters'));
     }
 
     /**
@@ -75,7 +77,7 @@ class RatteriesController extends AppController
     public function edit($id = null)
     {
         $rattery = $this->Ratteries->get($id, [
-            'contain' => [],
+            'contain' => ['Litters'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
@@ -87,8 +89,10 @@ class RatteriesController extends AppController
             $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
         }
         $users = $this->Ratteries->Users->find('list', ['limit' => 200]);
+        $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
         $states = $this->Ratteries->States->find('list', ['limit' => 200]);
-        $this->set(compact('rattery', 'users', 'states'));
+        $litters = $this->Ratteries->Litters->find('list', ['limit' => 200]);
+        $this->set(compact('rattery', 'users', 'countries', 'states', 'litters'));
     }
 
     /**

@@ -9,9 +9,6 @@ use Cake\ORM\Entity;
  * Litter Entity
  *
  * @property int $id
- * @property int $rattery_id
- * @property int $mother_rat_id
- * @property int|null $father_rat_id
  * @property \Cake\I18n\FrozenDate|null $mating_date
  * @property \Cake\I18n\FrozenDate $birth_date
  * @property int $pups_number
@@ -22,12 +19,12 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\Rat[] $rats
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\State $state
- * @property \App\Model\Entity\Rattery $rattery
  * @property \App\Model\Entity\Conversation[] $conversations
  * @property \App\Model\Entity\LitterSnapshot[] $litter_snapshots
+ * @property \App\Model\Entity\Rat[] $rats
+ * @property \App\Model\Entity\Rattery[] $ratteries
  */
 class Litter extends Entity
 {
@@ -41,9 +38,6 @@ class Litter extends Entity
      * @var array
      */
     protected $_accessible = [
-        'rattery_id' => true,
-        'mother_rat_id' => true,
-        'father_rat_id' => true,
         'mating_date' => true,
         'birth_date' => true,
         'pups_number' => true,
@@ -53,11 +47,11 @@ class Litter extends Entity
         'state_id' => true,
         'created' => true,
         'modified' => true,
-        'rats' => true,
         'user' => true,
         'state' => true,
-        'rattery' => true,
         'conversations' => true,
         'litter_snapshots' => true,
+        'rats' => true,
+        'ratteries' => true,
     ];
 }

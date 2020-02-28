@@ -19,9 +19,6 @@ class ColorsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Eyecolors'],
-        ];
         $colors = $this->paginate($this->Colors);
 
         $this->set(compact('colors'));
@@ -37,7 +34,7 @@ class ColorsController extends AppController
     public function view($id = null)
     {
         $color = $this->Colors->get($id, [
-            'contain' => ['Eyecolors', 'Rats'],
+            'contain' => ['Rats'],
         ]);
 
         $this->set('color', $color);
@@ -60,8 +57,7 @@ class ColorsController extends AppController
             }
             $this->Flash->error(__('The color could not be saved. Please, try again.'));
         }
-        $eyecolors = $this->Colors->Eyecolors->find('list', ['limit' => 200]);
-        $this->set(compact('color', 'eyecolors'));
+        $this->set(compact('color'));
     }
 
     /**
@@ -85,8 +81,7 @@ class ColorsController extends AppController
             }
             $this->Flash->error(__('The color could not be saved. Please, try again.'));
         }
-        $eyecolors = $this->Colors->Eyecolors->find('list', ['limit' => 200]);
-        $this->set(compact('color', 'eyecolors'));
+        $this->set(compact('color'));
     }
 
     /**

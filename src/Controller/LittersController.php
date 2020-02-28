@@ -20,7 +20,7 @@ class LittersController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'States', 'Ratteries'],
+            'contain' => ['Users', 'States'],
         ];
         $litters = $this->paginate($this->Litters);
 
@@ -37,7 +37,7 @@ class LittersController extends AppController
     public function view($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['Users', 'States', 'Ratteries', 'Rats', 'Conversations', 'LitterSnapshots'],
+            'contain' => ['Users', 'States', 'Rats', 'Ratteries', 'Conversations', 'LitterSnapshots'],
         ]);
 
         $this->set('litter', $litter);
@@ -62,8 +62,9 @@ class LittersController extends AppController
         }
         $users = $this->Litters->Users->find('list', ['limit' => 200]);
         $states = $this->Litters->States->find('list', ['limit' => 200]);
+        $rats = $this->Litters->Rats->find('list', ['limit' => 200]);
         $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'users', 'states', 'ratteries'));
+        $this->set(compact('litter', 'users', 'states', 'rats', 'ratteries'));
     }
 
     /**
@@ -76,7 +77,7 @@ class LittersController extends AppController
     public function edit($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => [],
+            'contain' => ['Rats', 'Ratteries'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData());
@@ -89,8 +90,9 @@ class LittersController extends AppController
         }
         $users = $this->Litters->Users->find('list', ['limit' => 200]);
         $states = $this->Litters->States->find('list', ['limit' => 200]);
+        $rats = $this->Litters->Rats->find('list', ['limit' => 200]);
         $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'users', 'states', 'ratteries'));
+        $this->set(compact('litter', 'users', 'states', 'rats', 'ratteries'));
     }
 
     /**

@@ -20,7 +20,7 @@ class ConversationsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Ratteries', 'Litters', 'Rats'],
+            'contain' => ['Rats', 'Ratteries', 'Litters'],
         ];
         $conversations = $this->paginate($this->Conversations);
 
@@ -37,7 +37,7 @@ class ConversationsController extends AppController
     public function view($id = null)
     {
         $conversation = $this->Conversations->get($id, [
-            'contain' => ['Ratteries', 'Litters', 'Rats', 'Users', 'Messages'],
+            'contain' => ['Rats', 'Ratteries', 'Litters', 'Users', 'Messages'],
         ]);
 
         $this->set('conversation', $conversation);
@@ -60,11 +60,11 @@ class ConversationsController extends AppController
             }
             $this->Flash->error(__('The conversation could not be saved. Please, try again.'));
         }
+        $rats = $this->Conversations->Rats->find('list', ['limit' => 200]);
         $ratteries = $this->Conversations->Ratteries->find('list', ['limit' => 200]);
         $litters = $this->Conversations->Litters->find('list', ['limit' => 200]);
-        $rats = $this->Conversations->Rats->find('list', ['limit' => 200]);
         $users = $this->Conversations->Users->find('list', ['limit' => 200]);
-        $this->set(compact('conversation', 'ratteries', 'litters', 'rats', 'users'));
+        $this->set(compact('conversation', 'rats', 'ratteries', 'litters', 'users'));
     }
 
     /**
@@ -88,11 +88,11 @@ class ConversationsController extends AppController
             }
             $this->Flash->error(__('The conversation could not be saved. Please, try again.'));
         }
+        $rats = $this->Conversations->Rats->find('list', ['limit' => 200]);
         $ratteries = $this->Conversations->Ratteries->find('list', ['limit' => 200]);
         $litters = $this->Conversations->Litters->find('list', ['limit' => 200]);
-        $rats = $this->Conversations->Rats->find('list', ['limit' => 200]);
         $users = $this->Conversations->Users->find('list', ['limit' => 200]);
-        $this->set(compact('conversation', 'ratteries', 'litters', 'rats', 'users'));
+        $this->set(compact('conversation', 'rats', 'ratteries', 'litters', 'users'));
     }
 
     /**

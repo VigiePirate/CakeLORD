@@ -46,41 +46,6 @@
                 </blockquote>
             </div>
             <div class="related">
-                <h4><?= __('Related Colors') ?></h4>
-                <?php if (!empty($eyecolor->colors)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Name') ?></th>
-                            <th><?= __('Genotype') ?></th>
-                            <th><?= __('Picture') ?></th>
-                            <th><?= __('Eyecolor Id') ?></th>
-                            <th><?= __('Description') ?></th>
-                            <th><?= __('Is Picture Mandatory') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($eyecolor->colors as $colors) : ?>
-                        <tr>
-                            <td><?= h($colors->id) ?></td>
-                            <td><?= h($colors->name) ?></td>
-                            <td><?= h($colors->genotype) ?></td>
-                            <td><?= h($colors->picture) ?></td>
-                            <td><?= h($colors->eyecolor_id) ?></td>
-                            <td><?= h($colors->description) ?></td>
-                            <td><?= h($colors->is_picture_mandatory) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Colors', 'action' => 'view', $colors->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Colors', 'action' => 'edit', $colors->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Colors', 'action' => 'delete', $colors->id], ['confirm' => __('Are you sure you want to delete # {0}?', $colors->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
-            <div class="related">
                 <h4><?= __('Related Rats') ?></h4>
                 <?php if (!empty($eyecolor->rats)) : ?>
                 <div class="table-responsive">
@@ -88,17 +53,13 @@
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Pedigree Identifier') ?></th>
+                            <th><?= __('Is Pedigree Custom') ?></th>
                             <th><?= __('Owner User Id') ?></th>
                             <th><?= __('Name') ?></th>
                             <th><?= __('Pup Name') ?></th>
                             <th><?= __('Sex') ?></th>
                             <th><?= __('Birth Date') ?></th>
                             <th><?= __('Rattery Id') ?></th>
-                            <th><?= __('Mother Rat Id') ?></th>
-                            <th><?= __('Father Rat Id') ?></th>
-                            <th><?= __('Litter Id') ?></th>
-                            <th><?= __('Mother Rattery Id') ?></th>
-                            <th><?= __('Father Rattery Id') ?></th>
                             <th><?= __('Color Id') ?></th>
                             <th><?= __('Eyecolor Id') ?></th>
                             <th><?= __('Dilution Id') ?></th>
@@ -125,17 +86,13 @@
                         <tr>
                             <td><?= h($rats->id) ?></td>
                             <td><?= h($rats->pedigree_identifier) ?></td>
+                            <td><?= h($rats->is_pedigree_custom) ?></td>
                             <td><?= h($rats->owner_user_id) ?></td>
                             <td><?= h($rats->name) ?></td>
                             <td><?= h($rats->pup_name) ?></td>
                             <td><?= h($rats->sex) ?></td>
                             <td><?= h($rats->birth_date) ?></td>
                             <td><?= h($rats->rattery_id) ?></td>
-                            <td><?= h($rats->mother_rat_id) ?></td>
-                            <td><?= h($rats->father_rat_id) ?></td>
-                            <td><?= h($rats->litter_id) ?></td>
-                            <td><?= h($rats->mother_rattery_id) ?></td>
-                            <td><?= h($rats->father_rattery_id) ?></td>
                             <td><?= h($rats->color_id) ?></td>
                             <td><?= h($rats->eyecolor_id) ?></td>
                             <td><?= h($rats->dilution_id) ?></td>

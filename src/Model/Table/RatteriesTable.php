@@ -12,11 +12,12 @@ use Cake\Validation\Validator;
  * Ratteries Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
  * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\HasMany $Conversations
- * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\HasMany $Litters
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  * @property \App\Model\Table\RatterySnapshotsTable&\Cake\ORM\Association\HasMany $RatterySnapshots
+ * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsToMany $Litters
  *
  * @method \App\Model\Entity\Rattery newEmptyEntity()
  * @method \App\Model\Entity\Rattery newEntity(array $data, array $options = [])
@@ -56,33 +57,27 @@ class RatteriesTable extends Table
             'foreignKey' => 'owner_user_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('States', [
-            'foreignKey' => 'state_id',
+        $this->belongsTo('Countries', [
+            'foreignKey' => 'country_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Countries', [
-            'foreignKey' => 'countries_id',
+        $this->belongsTo('States', [
+            'foreignKey' => 'state_id',
             'joinType' => 'INNER',
         ]);
         $this->hasMany('Conversations', [
             'foreignKey' => 'rattery_id',
         ]);
-        $this->hasMany('Litters', [
-            'foreignKey' => 'rattery_id',
-        ]);
         $this->hasMany('Rats', [
             'foreignKey' => 'rattery_id',
         ]);
-        $this->hasMany('MChildrenRats', [
-            'className' => 'Rats',
-            'foreignKey' => 'mother_rattery_id',
-        ]);
-        $this->hasMany('FChildrenRats', [
-            'className' => 'Rats',
-            'foreignKey' => 'father_rattery_id',
-        ]);
         $this->hasMany('RatterySnapshots', [
             'foreignKey' => 'rattery_id',
+        ]);
+        $this->belongsToMany('Litters', [
+            'foreignKey' => 'rattery_id',
+            'targetForeignKey' => 'litter_id',
+            'joinTable' => 'ratteries_litters',
         ]);
     }
 
@@ -119,6 +114,10 @@ class RatteriesTable extends Table
         $validator
             ->boolean('is_alive')
             ->notEmptyString('is_alive');
+
+        $validator
+            ->boolean('is_generic')
+            ->notEmptyString('is_generic');
 
         $validator
             ->scalar('district')
@@ -159,8 +158,8 @@ class RatteriesTable extends Table
         $rules->add($rules->isUnique(['name']));
         $rules->add($rules->isUnique(['prefix']));
         $rules->add($rules->existsIn(['owner_user_id'], 'Users'));
+        $rules->add($rules->existsIn(['country_id'], 'Countries'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
-        $rules->add($rules->existsIn(['countries_id'], 'Countries'));
 
         return $rules;
     }

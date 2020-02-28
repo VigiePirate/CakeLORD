@@ -40,7 +40,7 @@ class LogsFixture extends TestFixture
             [
                 'id' => 1,
                 'event' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'created' => '2020-02-26 14:20:57',
+                'created' => '2020-02-27 19:10:20',
             ],
         ];
         parent::init();

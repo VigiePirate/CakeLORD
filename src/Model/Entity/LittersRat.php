@@ -6,15 +6,15 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * BackofficeRatEntriesSingularity Entity
+ * LittersRat Entity
  *
- * @property int $backoffice_rat_entries_id
- * @property int $singularities_id
+ * @property int $litters_id
+ * @property int $rats_id
  *
- * @property \App\Model\Entity\BackofficeRatEntry $backoffice_rat_entry
- * @property \App\Model\Entity\Singularity $singularity
+ * @property \App\Model\Entity\Litter $litter
+ * @property \App\Model\Entity\Rat $rat
  */
-class BackofficeRatEntriesSingularity extends Entity
+class LittersRat extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -26,7 +26,7 @@ class BackofficeRatEntriesSingularity extends Entity
      * @var array
      */
     protected $_accessible = [
-        'backoffice_rat_entry' => true,
-        'singularity' => true,
+        'litter' => true,
+        'rat' => true,
     ];
 }

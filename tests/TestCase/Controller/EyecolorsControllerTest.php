@@ -23,7 +23,6 @@ class EyecolorsControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Eyecolors',
-        'app.Colors',
         'app.Rats',
     ];
 

@@ -11,14 +11,13 @@ use Cake\Validation\Validator;
 /**
  * Litters Model
  *
- * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
- * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsTo $Rats
- * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsTo $Rats
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
  * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\HasMany $Conversations
  * @property \App\Model\Table\LitterSnapshotsTable&\Cake\ORM\Association\HasMany $LitterSnapshots
- * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
+ * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsToMany $Rats
+ * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsToMany $Rats
+ * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsToMany $Ratteries
  *
  * @method \App\Model\Entity\Litter newEmptyEntity()
  * @method \App\Model\Entity\Litter newEntity(array $data, array $options = [])
@@ -54,17 +53,6 @@ class LittersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Ratteries', [
-            'foreignKey' => 'rattery_id',
-            'joinType' => 'INNER',
-        ]);
-        $this->belongsTo('Rats', [
-            'foreignKey' => 'mother_rat_id',
-            'joinType' => 'INNER',
-        ]);
-        $this->belongsTo('Rats', [
-            'foreignKey' => 'father_rat_id',
-        ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'creator_user_id',
             'joinType' => 'INNER',
@@ -79,8 +67,20 @@ class LittersTable extends Table
         $this->hasMany('LitterSnapshots', [
             'foreignKey' => 'litter_id',
         ]);
-        $this->hasMany('Rats', [
+        $this->belongsToMany('Rats', [
             'foreignKey' => 'litter_id',
+            'targetForeignKey' => 'rat_id',
+            'joinTable' => 'litters_rats',
+        ]);
+        $this->belongsToMany('Rats', [
+            'foreignKey' => 'litter_id',
+            'targetForeignKey' => 'rat_id',
+            'joinTable' => 'rats_litters',
+        ]);
+        $this->belongsToMany('Ratteries', [
+            'foreignKey' => 'litter_id',
+            'targetForeignKey' => 'rattery_id',
+            'joinTable' => 'ratteries_litters',
         ]);
     }
 
@@ -128,9 +128,6 @@ class LittersTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['rattery_id'], 'Ratteries'));
-        $rules->add($rules->existsIn(['mother_rat_id'], 'Rats'));
-        $rules->add($rules->existsIn(['father_rat_id'], 'Rats'));
         $rules->add($rules->existsIn(['creator_user_id'], 'Users'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
 

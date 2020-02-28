@@ -17,9 +17,6 @@
             <fieldset>
                 <legend><?= __('Add Litter') ?></legend>
                 <?php
-                    echo $this->Form->control('rattery_id', ['options' => $ratteries]);
-                    echo $this->Form->control('mother_rat_id');
-                    echo $this->Form->control('father_rat_id');
                     echo $this->Form->control('mating_date', ['empty' => true]);
                     echo $this->Form->control('birth_date');
                     echo $this->Form->control('pups_number');
@@ -27,6 +24,8 @@
                     echo $this->Form->control('comments');
                     echo $this->Form->control('creator_user_id', ['options' => $users]);
                     echo $this->Form->control('state_id', ['options' => $states]);
+                    echo $this->Form->control('rats._ids', ['options' => $rats]);
+                    echo $this->Form->control('ratteries._ids', ['options' => $ratteries]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

@@ -11,6 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Countries Model
  *
+ * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\HasMany $Ratteries
+ *
  * @method \App\Model\Entity\Country newEmptyEntity()
  * @method \App\Model\Entity\Country newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Country[] newEntities(array $data, array $options = [])
@@ -40,6 +42,10 @@ class CountriesTable extends Table
         $this->setTable('countries');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
+
+        $this->hasMany('Ratteries', [
+            'foreignKey' => 'country_id',
+        ]);
     }
 
     /**

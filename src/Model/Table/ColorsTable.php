@@ -11,7 +11,6 @@ use Cake\Validation\Validator;
 /**
  * Colors Model
  *
- * @property \App\Model\Table\EyecolorsTable&\Cake\ORM\Association\BelongsTo $Eyecolors
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  *
  * @method \App\Model\Entity\Color newEmptyEntity()
@@ -44,10 +43,6 @@ class ColorsTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Eyecolors', [
-            'foreignKey' => 'eyecolor_id',
-            'joinType' => 'INNER',
-        ]);
         $this->hasMany('Rats', [
             'foreignKey' => 'color_id',
         ]);
@@ -105,7 +100,6 @@ class ColorsTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['name']));
-        $rules->add($rules->existsIn(['eyecolor_id'], 'Eyecolors'));
 
         return $rules;
     }
