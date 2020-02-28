@@ -57,6 +57,14 @@ class UsersTable extends Table
             'targetForeignKey' => 'conversation_id',
             'joinTable' => 'users_conversations',
         ]);
+        $this->hasMany('OwnerRats', [
+            'className' => 'Rats',
+            'foreignKey' => 'owner_user_id',
+        ]);
+        $this->hasMany('CreatorRats', [
+            'className' => 'Rats',
+            'foreignKey' => 'creator_user_id',
+        ]);
     }
 
     /**

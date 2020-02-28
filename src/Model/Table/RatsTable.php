@@ -66,6 +66,7 @@ class RatsTable extends Table
         $this->belongsTo('OwnerUsers', [
             'className' => 'Users',
             'foreignKey' => 'owner_user_id',
+            'joinType' => 'INNER',
         ]);
         $this->belongsTo('Ratteries', [
             'foreignKey' => 'rattery_id',
@@ -101,7 +102,8 @@ class RatsTable extends Table
         $this->belongsTo('DeathSecondaryCauses', [
             'foreignKey' => 'death_secondary_cause_id',
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('CreatorUsers', [
+            'className' => 'Users',
             'foreignKey' => 'creator_user_id',
             'joinType' => 'INNER',
         ]);
@@ -231,7 +233,7 @@ class RatsTable extends Table
     {
         $rules->add($rules->isUnique(['id']));
         $rules->add($rules->isUnique(['pedigree_identifier']));
-        $rules->add($rules->existsIn(['owner_user_id'], 'Users'));
+        $rules->add($rules->existsIn(['owner_user_id'], 'OwnerUsers'));
         $rules->add($rules->existsIn(['rattery_id'], 'Ratteries'));
         $rules->add($rules->existsIn(['color_id'], 'Colors'));
         $rules->add($rules->existsIn(['eyecolor_id'], 'Eyecolors'));
@@ -241,7 +243,7 @@ class RatsTable extends Table
         $rules->add($rules->existsIn(['coat_id'], 'Coats'));
         $rules->add($rules->existsIn(['death_primary_cause_id'], 'DeathPrimaryCauses'));
         $rules->add($rules->existsIn(['death_secondary_cause_id'], 'DeathSecondaryCauses'));
-        $rules->add($rules->existsIn(['creator_user_id'], 'Users'));
+        $rules->add($rules->existsIn(['creator_user_id'], 'CreatorUsers'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
 
         return $rules;
@@ -263,10 +265,10 @@ class RatsTable extends Table
 
         if (empty($options['names'])) {
             $query->where([
-                'OR' => ['Rats.names IS' => null, 'Rats.pup_names IS' => NULL],
+                'OR' => ['Rats.name IS' => null, 'Rats.pup_name IS' => NULL],
             ]);
         } else {
-            // Find articles that have one or more of the provided tags.
+            // Find rats with parts of the string in that name
             $query->where([
                 'OR' => ['Rats.name LIKE' => '%'.implode($options['names']).'%',
                         'Rats.pup_name LIKE' => '%'.implode($options['names']).'%',
@@ -276,4 +278,29 @@ class RatsTable extends Table
 
         return $query->group(['Rats.id']);
     }
+
+    public function findFromRattery(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['ratteries'])) {
+            $query->leftJoinWith('Ratteries')
+                  ->where([
+                'OR' => ['Ratteries.name IS' => null, 'Ratteries.prefix IS' => NULL],
+            ]);
+        } else {
+            // Find articles that have one or more of the provided tags.
+            $query->innerJoinWith('Ratteries')
+                  ->where([
+                'OR' => ['Ratteries.name LIKE' => '%'.implode($options['ratteries']).'%',
+                        'Ratteries.prefix LIKE' => '%'.implode($options['ratteries']).'%',
+                    ],
+            ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
 }

@@ -70,7 +70,8 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
     $builder->scope('/rats', function (RouteBuilder $builder) {
-        $builder->connect('/named/*', ['controller' => 'Rats', 'action' => 'names']);
+        $builder->connect('/named/*', ['controller' => 'Rats', 'action' => 'named']);
+        $builder->connect('/from-rattery/*', ['controller' => 'Rats', 'action' => 'fromRattery']);
     });
 
     /*

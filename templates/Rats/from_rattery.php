@@ -5,18 +5,18 @@
  */
 ?>
 <div class="rats index content">
-<h3><?= __('Rats named') ?> "<?= h(implode('"',$names)) ?>"</h3>
+<h3><?= __('Rats from rattery') ?> "<?= h(implode('"',$ratteries)) ?>"</h3>
     <div class="table-responsive">
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= __('Picture') ?></th>
                     <th><?= $this->Paginator->sort('pedigree_identifier') ?></th>
-                    <th><?= $this->Paginator->sort('owner_user_id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('pup_name') ?></th>
                     <th><?= $this->Paginator->sort('sex') ?></th>
-                    <th><?= $this->Paginator->sort('age') ?></th>
+                    <th><?= $this->Paginator->sort('birth_date') ?></th>
+                    <th><?= $this->Paginator->sort('owner_user_id') ?></th>
                     <th><?= $this->Paginator->sort('rattery_id') ?></th>
                     <th><?= $this->Paginator->sort('state_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -25,15 +25,15 @@
             <tbody>
                 <?php foreach ($rats as $rat): ?>
                 <tr>
-                    <td><?= $this->Number->format($rat->id) ?></td>
-                    <td><?= $this->Html->link(h($rat->pedigree_identifier), ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?></td>
-                    <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
+                    <td><?= $this->Html->image($rat->picture_thumbnail) ?></td>
+                    <td><?= $this->Html->link(h($rat->pedigree_identifier), ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?> <?= $rat->is_alive ? '†' : ''  ?></td>
                     <td><?= h($rat->name) ?></td>
                     <td><?= h($rat->pup_name) ?></td>
                     <td><?= h($rat->sex) ?></td>
-                    <td><?= h($rat->age_string) ?></td>
+                    <td><?= h($rat->birth_date) ?></td>
+                    <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                     <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
-                    <td><?= $rat->has('state') ? $this->Html->link($rat->state->name, ['controller' => 'States', 'action' => 'view', $rat->state->id]) : '' ?></td>
+                    <td><?= h($rat->state->name) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $rat->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rat->id]) ?>

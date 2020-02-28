@@ -25,6 +25,8 @@ class UsersControllerTest extends TestCase
         'app.Users',
         'app.Roles',
         'app.Conversations',
+        'app.OwnerRats',
+        'app.CreatorRats',
         'app.UsersConversations',
     ];
 

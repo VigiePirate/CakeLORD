@@ -20,7 +20,7 @@ class RatsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'Users', 'States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
         ];
         $rats = $this->paginate($this->Rats);
 
@@ -37,7 +37,7 @@ class RatsController extends AppController
     public function view($id = null)
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['OwnerUsers', 'Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'Users', 'States', 'Litters', 'Singularities', 'Conversations', 'RatSnapshots'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'Litters', 'Singularities', 'Conversations', 'RatSnapshots'],
         ]);
 
         $this->set('rat', $rat);
@@ -70,11 +70,11 @@ class RatsController extends AppController
         $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
         $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list', ['limit' => 200]);
         $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
-        $users = $this->Rats->Users->find('list', ['limit' => 200]);
+        $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
         $litters = $this->Rats->Litters->find('list', ['limit' => 200]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'users', 'states', 'litters', 'singularities'));
+        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'litters', 'singularities'));
     }
 
     /**
@@ -108,11 +108,11 @@ class RatsController extends AppController
         $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
         $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list', ['limit' => 200]);
         $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
-        $users = $this->Rats->Users->find('list', ['limit' => 200]);
+        $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
         $litters = $this->Rats->Litters->find('list', ['limit' => 200]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'users', 'states', 'litters', 'singularities'));
+        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'litters', 'singularities'));
     }
 
     /**
@@ -138,10 +138,12 @@ class RatsController extends AppController
     /**
      * Names method
      *
+     * Search rats by name.
+     *
      * @param 
-     * @return \Cake\Http\Response|null Redirects to index.
+     * @return 
      */
-    public function names()
+    public function named()
     {
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
@@ -165,5 +167,33 @@ class RatsController extends AppController
             'names' => $names
         ]);
          */
+    }
+
+    /**
+     * Ratteries method
+     *
+     * Search rats by ratteries.
+     *
+     * @param 
+     * @return 
+     */
+    public function fromRattery()
+    {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
+        $ratteries = $this->request->getParam('pass');
+        //
+        // Use the RatsTable to find named rats.
+        $rats = $this->Rats->find('fromRattery', [
+            'ratteries' => $ratteries
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+        ];
+        $rats = $this->paginate($rats);
+
+        $this->set(compact('rats', 'ratteries'));
     }
 }

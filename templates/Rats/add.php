@@ -41,7 +41,7 @@
                     echo $this->Form->control('comments');
                     echo $this->Form->control('picture');
                     echo $this->Form->control('picture_thumbnail');
-                    echo $this->Form->control('creator_user_id', ['options' => $users]);
+                    echo $this->Form->control('creator_user_id', ['options' => $creatorUsers]);
                     echo $this->Form->control('state_id', ['options' => $states]);
                     echo $this->Form->control('litters._ids', ['options' => $litters]);
                     echo $this->Form->control('singularities._ids', ['options' => $singularities]);

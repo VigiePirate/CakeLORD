@@ -69,7 +69,7 @@
                     <td><?= h($rat->death_necropsied) ?></td>
                     <td><?= h($rat->picture) ?></td>
                     <td><?= h($rat->picture_thumbnail) ?></td>
-                    <td><?= $rat->has('user') ? $this->Html->link($rat->user->username, ['controller' => 'Users', 'action' => 'view', $rat->user->id]) : '' ?></td>
+                    <td><?= $rat->has('creator_user') ? $this->Html->link($rat->creator_user->username, ['controller' => 'Users', 'action' => 'view', $rat->creator_user->id]) : '' ?></td>
                     <td><?= $rat->has('state') ? $this->Html->link($rat->state->name, ['controller' => 'States', 'action' => 'view', $rat->state->id]) : '' ?></td>
                     <td><?= h($rat->created) ?></td>
                     <td><?= h($rat->modified) ?></td>
