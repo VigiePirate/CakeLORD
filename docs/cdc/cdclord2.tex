@@ -4,8 +4,12 @@
 \usepackage{lmodern}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
+
 \usepackage{array,tabularx}
+\newcolumntype{R}{>{\raggedright\arraybackslash}X}%
+
 \usepackage{graphicx,epstopdf}
+\usepackage{ulem}
 
 \usepackage{pdflscape}
 \usepackage{geometry}
@@ -32,13 +36,27 @@
 
 \title{Livre des Origines du Rat Domestique}
 \author{Cahier des Charges Fonctionnel}
-\date{Version 2.0 -- \today}
+\date{Version 2.1 -- \today}
 
 \begin{document}
 \maketitle
 
+\section*{Historique des modifications}
+
+\large
+\noindent\begin{tabularx}{\textwidth}{|l|l|X|}\hline
+\textbf{2.1} & \textbf{27/01/2020} & \textbf{Ajout et abandon de fonctionnalités, modifications de listes}\\\hline
+2.0 & 25/02/2020 & Adaptation pour CakeLORD\\\hline
+1.1 & 22/08/2018 & Anonymisation des données et mots de passe pour la mise en ligne.\\\hline
+1.0 & 03/08/2018 & Version initiale pour SymfonyLORD.\\\hline
+\end{tabularx}
+\normalsize
+
+\vfill
+
 \tableofcontents
 
+%\setlength{\parskip}{0.5em}
 \section{Présentation}
 Le Livre des Origines du Rat Domestique est un service web gratuit permettant d'enregistrer et de consulter des fiches d'identification d'animaux domestiques, comportant notamment des informations généalogiques. Le site a été développé en 2006 en PHP/MySQL à partir d'une plateforme de e-commerce modifiée pour les besoins du projet. Il est actuellement en production à l'adresse : \url{http://lord-rat.org}. Il comporte environ 4400 utilisateurs inscrits et plus de 40.000 fiches. Il est administré par une équipe de bénévoles et est la propriété légale de l'association Ratibus, représentée par sa présidente, M\up{me} Alexia Siné.
 
@@ -66,16 +84,18 @@ Secondairement, de nouvelles fonctionnalités pourraient être ajoutées :
 \item Calcul et affichage de statistiques...
 \end{itemize}
 
-Le développement d'une deuxième version, initié en 2014, a été abandonné. Elle est consultable sur une preprod dont l'adresse n'est pas actuellement publique (me demander si besoin) et offre un aperçu de l'apparence souhaitée. Le code de cette version, incomplète, a été déposé sous licence GPL dans le projet GitHub à l'adresse :
-\url{https://github.com/VigiePirate/LORD}.
+\subsection{Historique du développement de la deuxième version}
 
-%La suite de ce document décrit la base et les fonctionnalités du site (existantes ou désirées).
+Le développement d’une deuxième version désignée ci-après par « KerLORD », initié en 2014, a été abandonné. Son déploiement local offre un aperçu de l’apparence souhaitée. Le code de cette version, incomplète, a été
+déposé sous licence GPL dans le projet GitHub à l’adresse : \url{https://github.com/VigiePirate/LORD} (tag « ker » dans les releases.) Le développement a été repris de zéro dans le framework Symfony et constitue la branche master du même dépôt Github. Enfin, une version alternative construite sur le framework CakePHP est en cours de développement (projet privé déposé sur https://github.com/VigiePirate/CakeLORD. Ce document
+concerne le projet CakeLORD.
+
+La suite de ce document décrit la base de données et les fonctionnalités du site (existantes ou désirées).
 
 
 \section{Base de données}
 \subsection{Base existante}
 Base SQL, serveur : MySQL 5.5.60-0+deb8u1-log, encodage UTF-8, interclassement utf8mb4\_unicode\_ci. Schéma des tables fonctionnelles et techniques en annexe. Contient également des tables inutilisées, à supprimer (tables vides de fonctionnalités de e-commerce : tarifs, stocks, paiement...). Schéma en annexe~\ref{app:dbv1}.
-
 
 \subsection{Schéma proposé pour la V2}
 
@@ -85,13 +105,13 @@ Schéma en annexe~\ref{app:dbv2}.
 \subsection{S'enregistrer}
 
 \existant{Disponible en V1.} Champs obligatoires : pseudo, mail, mot de passe, code postal, ville, pays, acceptation des conditions générales d'utilisation du service. Le pseudonyme et l'adresse mail doivent être uniques. Le mail est enregistré en minuscules. 
-\desire{Amélioration V2.} Gestion des caractères spéciaux dans les pseudonymes : apostrophes, tirets... (soit les interdire, soit vérifier qu'ils ne posent plus de problèmes d'affichage, recherche etc.) Preview : \url{http://preview.domaine.ext/index.php?page=article&load=register}
+\desire{Amélioration V2.} Gestion des caractères spéciaux dans les pseudonymes : apostrophes, tirets... (soit les interdire, soit vérifier qu'ils ne posent plus de problèmes d'affichage, recherche etc.) 
 
 \subsection{S'identifier}
 
 \existant{Disponible en V1.} Identification par mail + mot de passe. Mail insensible à la casse.
-\desire{Preview V2.} \url{http://preview.domaine.ext/index.php?page=article&load=login}
-\desire{Ajout V2 : Lors de la connexion, si l'utilisateur possède des fiches en attente d'action de sa part, un popup, une notification en ligne ou un texte voyant s'affiche pour lui signaler.}
+
+\desire{Ajout V2.} Lors de la connexion, si l'utilisateur possède des fiches en attente d'action de sa part, un popup, une notification en ligne ou un texte voyant s'affiche pour lui signaler. Changement du système de chiffrement (bcrypt). Les anciens mots de passe seront supprimés et les utilisateurs invités à utiliser la récupération de mot de passe lors de leur première connexion au nouveau site.
 
 \subsection{Modifier son compte}
 
@@ -108,7 +128,7 @@ Schéma en annexe~\ref{app:dbv2}.
 
 \subsection{Afficher un utilisateur}
 
-\desire{Ajout / preview V2.} Afficher son avatar, son site, sa description, son nombre de rats enregistrés. Liens vers sa fiche raterie si existante.
+\desire{Ajout / preview V2.} Afficher son avatar, son site, sa description, son nombre de rats enregistrés. Liens vers sa fiche raterie si existante. \desire{Liste précise et ordonnée à établir.}
 
 \section{Fonctionnalités rats}
 
@@ -123,13 +143,13 @@ Schéma en annexe~\ref{app:dbv2}.
 \item Suppression du champ « Disponible à la reproduction »
 \item Ajout de bulles d'aides (type « point d'interrogation » affichant un texte au survol ou ouvrant un pop up si cliqué ?) pour tous les champs.
 \item Fusion des champs Affixe et Origine en un unique menu déroulant (chaque item de la liste se présentant sous la forme [XXX - Origine en toutes lettres]).
-\item Ajout d'un menu déroulant : Portée réalisée en partenariat avec (« double affixe »), optionnel, sous le champ « Origine ». Si renseigné, lors de la consultation d'une fiche, le nom complet à afficher sera XXX-YYY Nom (XXX étant l'affixe d'origine obligatoire et YYY le double affixe optionnel.)
+\item Ajout d'un menu déroulant : Portée réalisée en partenariat avec (« double affixe »), optionnel, sous le champ « Origine ». Si renseigné, lors de la consultation d'une fiche, le nom complet à afficher sera XXX-YYY Nom (XXX étant l'affixe d'origine obligatoire et YYY le double affixe optionnel.) \desire{Ne sera disponible que si le rat est rattaché à une portée.}
 \item Modification du champ cause de décès (duplication en 2 menus déroulants pour le niveau 1 (obligatoire) et le niveau 2 (optionnel) ; le niveau 2 n'apparaît qu'une fois le niveau 1 sélectionné et seules les causes attachées à ce premier niveau sont affichées.)
 \item Ajout de cases à cocher optionnelles sous la cause de décès : « Euthanasie », « Diagnostic confirmé par un vétérinaire », « Diagnostic confirmé par autopsie ou analyses ».       
 \item (Optionnel, si facilement réalisable : redimensionnement automatique de la photographie si elle dépasse 100 ko / 640 x 480 pixels)
 \end{itemize}
 
-Les modifications à apporter côté back-office sont décrites dans la section~\ref{sec:backoffice}. La liste des champs à renseigner est visible via la preview « Consulter une fiche » et sera à reproduire dans le même ordre.  
+Les modifications à apporter côté back-office sont décrites dans la section~\ref{sec:backoffice}. La liste des champs à renseigner est visible sur la figure~\ref{fig:kerfiche} et sera à reproduire dans le même ordre, sauf spécifications contraires ultérieures (envisagé : création d'une rubrique « Décès » pour toutes les informations ayant trait au décès.)     
 
 \subsection{Modifier une fiche}
 
@@ -139,11 +159,12 @@ Les modifications à apporter côté back-office sont décrites dans la section~
 
 \subsection{Consulter une fiche}
 \existant{Fonctionnalités V1 à préserver.}
-Consulter une fiche (depuis un lien externe, depuis la liste des rats de l'utilisateur accessible depuis son compte, depuis une liste renvoyée par la fonction de recherche.) Afficher les informations sur le rat, sa photo, la liste de ses descendants, le lien vers sa généalogie.
+Consulter une fiche (depuis un lien externe, depuis la liste des rats de l'utilisateur accessible depuis son compte, depuis une liste renvoyée par la fonction de recherche.) Afficher les informations sur le rat, sa photo, la liste de ses descendants, le lien vers sa généalogie. Première maquette : figure~\ref{fig:kerfiche}. \desire{Liste précise et ordonnée à spécifier.}
 
-\desire{Preview V2.} \url{http://preview.domaine.ext/index.php?page=fiche&rat=9387}
-
+\begin{figure}[htbp!]
 \begin{center}\includegraphics[width=0.8\linewidth]{FicheRat.jpg}\end{center}
+\caption{Aperçu de la consultation d'une fiche rat (KerLORD).\label{fig:kerfiche}}
+\end{figure}
 
 \desire{Modifications V2.}
 \begin{itemize}
@@ -154,13 +175,14 @@ Consulter une fiche (depuis un lien externe, depuis la liste des rats de l'utili
 \subsection{Lister les fiches}
 \existant{Fonctionnalités V1 à préserver.}
 \begin{itemize}
-\item Lister ses rats depuis son compte (onglets « Tous mes rats », « Mes femelles », « Mes mâles », « Mes rats décédés », « Mes fiches à corriger »)   
-\item Lister les enfants d'un rat (à insérer lors de la consultation de la fiche) 
+\item Lister ses rats depuis son compte (onglets « Tous mes rats », « Mes femelles », « Mes mâles », « Mes rats décédés », « Mes fiches à corriger »). Maquette : figure~\ref{fig:kerdashuser}.   
+\item Lister les enfants d'un rat (à insérer lors de la consultation de la fiche)  -- visible sur la maquette de la figure~\ref{fig:kerfiche}.
 \end{itemize}
 
-Maquette indicative :
-
+\begin{figure}[htbp!]
 \begin{center}\includegraphics[width=0.8\linewidth]{DashboardUser.jpg}\end{center}
+\caption{Aperçu du panneau de la liste des rats d'un utilisateur (KerLORD).\label{fig:kerdashuser}}
+\end{figure}
 
 \desire{Modifications V2.}
 \begin{itemize}
@@ -172,7 +194,7 @@ Maquette indicative :
 \end{itemize}
 
 \subsection{Générer la généalogie}
-\existant{V1.} Un tableau hmtl est généré par la lecture récursive des parents, dans une limite de 5 générations. Chaque case reprend les informations principales de l'ascendant et peut être cliquée pour revenir à sa fiche individuelle. Exemple : \url{http://www.domaine.ext/rats/modeles/genealogie.php?id=14590}
+\existant{V1.} Un tableau hmtl est généré par la lecture récursive des parents, dans une limite de 5 générations. Chaque case reprend les informations principales de l'ascendant et peut être cliquée pour revenir à sa fiche individuelle. 
 \desire{Ajout de fonctionnalités en V2 :} 
 \begin{itemize}
 \item Colorier les rats apparaissant plusieurs fois dans la généalogie (couleur unique par individu sur la généalogie affichée.)
@@ -182,7 +204,7 @@ Maquette indicative :
 
 \subsection{Rechercher un ou des rats}
 
-\existant{V1.} Maintien des possibilités actuelles de recherche. \url{http://preview.domaine.ext/index.php?page=recherche&extendedsearch=1} sauf champ « reproductible ».  
+\existant{V1.} Maintien des possibilités actuelles de recherche, sauf champ « reproductible ».  
 \desire{V2.} Ajout d'une recherche par fourchette de date de naissance (né avant le..., après le...).
 
 \section{Fonctionnalités rateries}
@@ -226,19 +248,20 @@ Réservé aux utilisateurs enregistrés.
 \subsection{Se connecter au back office}
 \desire{Ajout V2.} 
 \begin{itemize}
-\item Réauthentification de l'utilisateur. 
+\item \sout{Réauthentification de l'utilisateur.} abandonné 
 \item Affichage d'un « dashboard ».
 \begin{itemize}
-\item Infos synthétiques (nombre de fiches au SAV, dont nombre de fiches non traitées, nombre de fiches prises en charge par ce modérateur et qui attendent une action de sa part, date de la dernière action du modérateur...)
+\item Infos synthétiques (nombre de fiches au SAV, dont nombre de fiches non traitées, nombre de fiches prises en charge par ce modérateur et qui attendent une action de sa part, date de la dernière action du modérateur...) Maquette indicative : figure~\ref{fig:kerdashback}. \desire{Liste précise et ordonnée à spécifier.}
 \item Previews des fiches en attente par catégorie : fiches non traitées, fiches en attente de réponse utilisateur, fiches en attente de réponse SAV.
 \end{itemize}
 \item Accéder aux listes de chaque catégorie.
 \item Fonctions de tri (toutes les fiches d'un même utilisateur, toutes les fiches attachées à une même portée...)
 \end{itemize}
 
-Exemple de maquette envisageable :
-
+\begin{figure}[htbp]%
 \begin{center}\includegraphics[width=0.8\linewidth]{MaquetteSAV.jpg}\end{center}
+\caption{Maquette indicative du dashboard back-office.\label{fig:kerdashback}}
+\end{figure}
 
 \subsection{Lister les fiches jamais traitées (premier passage au SAV)}
 Afficher la date d'arrivée de la fiche au SAV.
@@ -261,17 +284,21 @@ Idem.
 Idem.
 
 \subsection{Intervenir sur un utilisateur}
-Editer les informations de la fiche (pseudo, mail, etc.), déclencher une procédure de régénération de mot de passe.
-
-\desire{V2.} Ajout d'un commentaire consultable uniquement par les modérateurs. (Informations confidentielles, avertissements...)
+\desire{V2.} Editer les informations de la fiche (pseudo, mail, etc.), déclencher une procédure de régénération de mot de passe. Ajout d'un commentaire consultable uniquement par les modérateurs. (Informations confidentielles, avertissements...)
 
 \subsection{Communiquer avec un utilisateur}
 Envoyer un message privé ou un mail à l'utilisateur depuis une de ses fiches en attente, depuis son profil.
 
+\subsection{Déclencher des actions de masse}
+\begin{itemize}
+\item « Tuer » tous les rats âgés de plus de xx mois et encore vivants (positionner le champ \texttt{is\_alive} à 0 et les causes de décès à Cause inconnue / Aucune info)
+\item « Désactiver » toutes les rateries n'ayant pas enregistré de portées depuis yy mois (positionner le champ \texttt{is\_alive} à 0, ne plus afficher dans la carte des rateries)
+\end{itemize}
+
 
 \section{Fonctionnalités secondaires}
 \subsection{Messagerie interne}
-Possibilité d'envoyer un message privé à un autre utilisateur depuis sa fiche. Consultation des messages reçus, suppression d'un message, etc.
+Possibilité d'envoyer un message privé à un autre utilisateur depuis sa fiche. Consultation des messages reçus, suppression d'un message, etc. \desire{Sera limité aux conversations dont un des participants est un membre du staff (rôles root, admin, staff).}
 
 \subsection{Calcul et affichage de statistiques}
 Onglet statistiques du site, voir annexe~\ref{app:stats}.
@@ -279,11 +306,14 @@ Onglet statistiques du site, voir annexe~\ref{app:stats}.
 \subsection{Responsiveness}
 Version mobile du site ou application.
 
-\subsection{Edition des pages statiques depuis le SAV}
-(Ebauchée dans la V2 actuelle, voir \url{admin.domaine.ext}, onglet « gestion du site ».)
+\subsection{Edition des pages « statiques » depuis le SAV}
+Notices d'utilisation, mentions légales, message sur la page d'accueil...
 
 \subsection{Courbe de poids}
-(Pas prioritaire, garder la possibilité de le faire un jour.)
+\desire{Abandonné pour l'instant.} Pas prioritaire, garder la possibilité de le faire un jour.
+
+\subsection{Internationalisation / gestion multilingue}
+Trois langues prévues : anglais (langue du développement), français (dont les anglicismes en usage ; sera la langue par défaut pour la locale fr\_FR), « québécois » (traduction de tous les termes anglais en français).  
 
 \subsection{Autres fonctionnalités mineures}
 \begin{itemize}
@@ -291,10 +321,12 @@ Version mobile du site ou application.
 \item 8.6.2 Génération d'un PDF pour les généalogies
 \item 8.6.3 Impression d'une fiche
 \item 8.6.4 Conserver des brouillons de fiches avant envoi au SAV
+\item 8.6.5 Calcul du taux de consanguinité d'un rat
 \end{itemize}
 
 \newpage
 \appendix
+\setlength{\parskip}{0pt}
 \section{Annexes}
 
 \subsection{Schémas des bases de données}
@@ -310,84 +342,84 @@ Tables techniques :
 \begin{center}\includegraphics[width=0.75\textwidth]{LORDv1_Tables_techniques.png}\end{center}
 
 
-%\begin{landscape}
-%\subsubsection{Base V2 CakeLORD}
-%\label{app:dbv2}
-%\vspace*{\stretch{1}}
+\begin{landscape}
+\subsubsection{Base V2 CakeLORD}
+\label{app:dbv2}
+\vspace*{\stretch{1}}
+\noindent\includegraphics[width=\linewidth]{cakelord.eps}
+\vspace*{\stretch{1}}
+\end{landscape}
 
-\newpage
-\thispagestyle{empty}
-\begin{center}
-\rotatebox{90}{%
-\includegraphics[width=\textheight]{cakelord.eps}
-}
-\end{center}
-%\vspace*{\stretch{1}}
-%\end{landscape}
+%\newpage
+%\thispagestyle{empty}
+%\begin{center}
+%\rotatebox{90}{%
+%\includegraphics[width=\textheight]{cakelord.eps}
+%}
 
 \subsection{Liste des vérifications à l'enregistrement d'une fiche rat}
 \label{app:verifs}
 \small
-\noindent\begin{tabular}{|p{0.35cm}|p{1.35cm}|p{5cm}|p{8.5cm}|}\hline
+%\noindent\begin{tabularx}{\textwidth}{|p{0.35cm}|p{1.35cm}|p{5cm}|X|}\hline
+\noindent\begin{tabularx}{\textwidth}{|l|l|R|R|}\hline
 \textbf{\#} & \textbf{Champ} & \textbf{Vérification} & \textbf{Message d'erreur}\\\hline
 
-1 & Sexe & Vérifier qu'un sexe a été entré. & (Veuillez choisir le sexe du rat, c'est obligatoire.) \\\hline
+1 & Sexe & Vérifier qu'un sexe a été entré. & Veuillez choisir le sexe du rat, c'est obligatoire. \\\hline
 
-2 & Nom & Vérifier qu'un nom a été entré. &(Veuillez entrer un nom pour le rat, c'est obligatoire.) \\\hline
+2 & Nom & Vérifier qu'un nom a été entré. &Veuillez entrer un nom pour le rat, c'est obligatoire. \\\hline
 
-3 & Nom & Vérifier que le nom n'est pas de la forme F+chiffre ou M+chiffre. & (Les noms de type F1, M2... ne sont pas acceptés. Veuillez entrer un nom pour le rat ou attendre qu'il en ait un pour l'enregistrer.) \\\hline
+3 & Nom & Vérifier que le nom n'est pas de la forme F+chiffre ou M+chiffre. & Les noms de type F1, M2... ne sont pas acceptés. Veuillez entrer un nom pour le rat ou attendre qu'il en ait un pour l'enregistrer. \\\hline
 
-4 & Origine & Vérifier qu'au moins une fiche parent a été entrée, sauf si l'origine n'est pas dans la liste le permettant (INC, SOS) & (L'enregistrement d'un rat avec cet affixe n'est possible que si au moins un de ses parents possède une fiche. Merci de vérifier que vous avez choisi le bon affixe, et si oui, saisir le numéro d'identification du père ou de la mère.) \\\hline
+4 & Origine & Vérifier qu'au moins une fiche parent a été entrée, sauf si l'origine est une raterie générique & L'enregistrement d'un rat avec cet affixe n'est possible que si au moins un de ses parents possède une fiche. Merci de vérifier que vous avez choisi le bon affixe, et si oui, saisir le numéro d'identification du père ou de la mère. \\\hline
 
-5 & ID père & Vérifier qu'il existe & (Le numéro entré pour le père ne correspond pas à une fiche existante. Merci de vérifier votre saisie ou de créer la fiche du père si elle n'existe pas.) \\\hline
-
-
-6 & ID père & Vérifier qu'il s'agit d'un mâle & (Le numéro entré pour le père correspond à une femelle. Merci de vérifier votre saisie.)\\\hline
+5 & ID père & Vérifier qu'il existe & Le numéro entré pour le père ne correspond pas à une fiche existante. Merci de vérifier votre saisie ou de créer la fiche du père si elle n'existe pas. \\\hline
 
 
-7 & ID mère & Vérifier qu'il existe & (Le numéro entré pour la mère ne correspond pas à une fiche existante. Merci de vérifier votre saisie ou de créer la fiche de la mère si elle n'existe pas.)\\\hline
+6 & ID père & Vérifier qu'il s'agit d'un mâle & Le numéro entré pour le père correspond à une femelle. Merci de vérifier votre saisie.\\\hline
 
 
-8 & ID mère & Vérifier qu'il s'agit d'une femelle & (Le numéro entré pour la mère correspond à un mâle. Merci de vérifier votre saisie.) \\\hline
+7 & ID mère & Vérifier qu'il existe & Le numéro entré pour la mère ne correspond pas à une fiche existante. Merci de vérifier votre saisie ou de créer la fiche de la mère si elle n'existe pas.\\\hline
 
 
-9 & DDN & Vérifier le format & (La date de naissance doit être saisie au format JJ/MM/AAAA.)\\\hline
+8 & ID mère & Vérifier qu'il s'agit d'une femelle & Le numéro entré pour la mère correspond à un mâle. Merci de vérifier votre saisie. \\\hline
 
 
-10 & DDN & Vérifier que l'année n'est pas antérieure à 1900. & (Pour des raisons de fiabilité des données, nous n'acceptons pas l'enregistrement de rats nés avant 1900. Merci de vérifier votre saisie.)\\\hline
+9 & DDN & Vérifier le format & La date de naissance doit être saisie au format JJ/MM/AAAA.\\\hline
 
 
-11 & DDN & Vérifier que la date de naissance n'est pas postérieure à la date du jour.& (La date de naissance est impossible : ce jour n'a pas encore eu lieu.)\\\hline
+10 & DDN & Vérifier que l'année n'est pas antérieure à 1900. & Pour des raisons de fiabilité des données, nous n'acceptons pas l'enregistrement de rats nés avant 1900. Merci de vérifier votre saisie.\\\hline
 
 
-12 & DDN & S'il y a des fiches parents, vérifier que la date de naissance est postérieure à celle des parents & (La date de naissance est impossible : rat né avant l'un de ses parents. Merci de vérifier votre saisie.)\\\hline
+11 & DDN & Vérifier que la date de naissance n'est pas postérieure à la date du jour.& La date de naissance est impossible : ce jour n'a pas encore eu lieu.\\\hline
 
 
-13 & DDN & S'il y a une fiche pour la mère, vérifier que la date de naissance n'est pas postérieure à la date de décès de la mère. & (La date de naissance est impossible : rat né après la mort de sa mère. Merci de vérifier votre saisie.)\\\hline
+12 & DDN & S'il y a des fiches parents, vérifier que la date de naissance est postérieure à celle des parents & La date de naissance est impossible : rat né avant l'un de ses parents. Merci de vérifier votre saisie.\\\hline
 
 
-14 & DDN & S'il y a une fiche pour le père, vérifier que la date de naissance n'est pas postérieure à la date de décès du père MOINS 24 jours. & (La date de naissance est impossible : rat conçu après la mort de son père. Merci de vérifier votre saisie.)\\\hline
+13 & DDN & S'il y a une fiche pour la mère, vérifier que la date de naissance n'est pas postérieure à la date de décès de la mère. & La date de naissance est impossible : rat né après la mort de sa mère. Merci de vérifier votre saisie.\\\hline
 
 
-15 & DDD & Vérifier le format & (La date de décès doit être saisie au format JJ/MM/AAAA.)\\\hline
+14 & DDN & S'il y a une fiche pour le père, vérifier que la date de naissance n'est pas postérieure à la date de décès du père MOINS 24 jours. & La date de naissance est impossible : rat conçu après la mort de son père. Merci de vérifier votre saisie.\\\hline
 
 
-16 & DDD & Vérifier qu'elle est postérieure à la date de naissance. & (La date de décès est impossible : rat mort avant d'être né. Merci de vérifier votre saisie.)\\\hline
+15 & DDD & Vérifier le format & La date de décès doit être saisie au format JJ/MM/AAAA.\\\hline
 
 
-17 & DDD & Vérifier qu'elle est antérieure à la date du jour. & (La date de décès est impossible : ce jour n'a pas encore eu lieu. Merci de vérifier votre saisie.)\\\hline
+16 & DDD & Vérifier qu'elle est postérieure à la date de naissance. & La date de décès est impossible : rat mort avant d'être né. Merci de vérifier votre saisie.\\\hline
 
 
-18 & CDD & Si la cause est « vieillesse », vérifier que l'âge de décès est supérieur à 2 ans. & (Vous avez indiqué que votre rat est mort de vieillesse, mais il n'avait que xxx mois. Merci de vérifier la date et la cause de décès.)\\\hline
+17 & DDD & Vérifier qu'elle est antérieure à la date du jour. & La date de décès est impossible : ce jour n'a pas encore eu lieu. Merci de vérifier votre saisie.\\\hline
 
 
-19 & CDD & Si la cause est dans la catégorie mortalité infantile, vérifier que l'âge de décès est inférieur à 6 semaines. & (Vous avez indiqué que votre rat est mort d'une cause infantile, mais il avait plus de 6 semaines. Merci de vérifier la date et la cause de décès.)\\\hline
+18 & CDD & Si la cause est « vieillesse », vérifier que l'âge de décès est supérieur à 2 ans. & Vous avez indiqué que votre rat est mort de vieillesse, mais il n'avait que xxx mois. Merci de vérifier la date et la cause de décès.\\\hline
 
 
-20 & CDD & Si la cause est un des items « Autre problème... », vérifier la présence d'un commentaire. & (Pour toute cause de décès de type « Autre problème », merci de préciser la cause exacte en commentaires. Si vous l'ignorez, ne choisissez pas de niveau 2 de cause de décès.)\\\hline
+19 & CDD & Si la cause est dans la catégorie mortalité infantile, vérifier que l'âge de décès est inférieur à 6 semaines. & Vous avez indiqué que votre rat est mort d'une cause infantile, mais il avait plus de 6 semaines. Merci de vérifier la date et la cause de décès.\\\hline
 
 
-\end{tabular}
+20 & CDD & Si la cause est un des items « Autre problème... », vérifier la présence d'un commentaire. & Pour toute cause de décès de type « Autre problème », merci de préciser la cause exacte en commentaires. Si vous l'ignorez, ne choisissez pas de niveau 2 de cause de décès.\\\hline
+
+\end{tabularx}
 \normalsize
 
 \subsubsection{Vérifications supplémentaires}
@@ -395,15 +427,16 @@ Tables techniques :
 Si le temps le permet : 
 
 \begin{itemize}
-\item Etablir une liste de couleurs pour lesquelles la photographie est obligatoire. Si cette couleur est sélectionnée et qu'il n'y a pas eu de photos, envoyer le message d'erreur : (Vous avez choisi une couleur rare pour ce rat. Pour des raisons de fiabilité des données, merci d'ajouter une photographie permettant de bien apprécier sa couleur.)
-\item Etablir une liste de combos impossibles, par exemple "siamois beige" ou "bleu perle". (Vous avez choisi un phénotype impossible. Merci de corriger votre saisie. En cas de doute sur le phénotype du rat, merci de contacter l'équipe à l'adresse ... - compléter ici avec l'endroit où se trouvera le forum SAV.)
-\item Etablir deux listes des couleurs, base noire et base agoutie, et vérifier que les deux parents ne sont pas de base noire si la couleur entrée est de base agoutie. (Vous avez choisi un phénotype impossible : deux parents de base noire ne peuvent engendrer des enfants de base agoutie. Merci de corriger votre saisie. En cas de doute sur le phénotype du rat, merci de contacter l'équipe à l'adresse ... - compléter ici avec l'endroit où se trouvera le forum SAV.)
+\item Etablir une liste de couleurs pour lesquelles la photographie est obligatoire. Si cette couleur est sélectionnée et qu'il n'y a pas eu de photos, envoyer le message d'erreur : (Vous avez choisi une couleur rare pour ce rat. Pour des raisons de fiabilité des données, merci d'ajouter une photographie permettant de bien apprécier sa couleur.) \desire{Mis en place par un champ \texttt{is\_picture\_mandatory} dans les tables techniques de traits physiques, liste à spécifier.}
+\item Etablir une liste de combos impossibles, par exemple "siamois beige" ou "bleu perle". (Vous avez choisi un phénotype impossible. Merci de corriger votre saisie. En cas de doute sur le phénotype du rat, merci de contacter l'équipe à l'adresse ... - compléter ici avec l'endroit où se trouvera le forum SAV.) \desire{Mis en place par la table technique \texttt{compatibilities}, liste à spécifier.}
+\item \sout{Etablir deux listes des couleurs, base noire et base agoutie, et vérifier que les deux parents ne sont pas de base noire si la couleur entrée est de base agoutie. (Vous avez choisi un phénotype impossible : deux parents de base noire ne peuvent engendrer des enfants de base agoutie. Merci de corriger votre saisie. En cas de doute sur le phénotype du rat, merci de contacter l'équipe à l'adresse ... - compléter ici avec l'endroit où se trouvera le forum SAV.)} \desire{Sera difficile sans modélisation complète de la génétique, abandonné pour l'instant.}
 \end{itemize}
 
-Champs nom / date de naissance / oreilles / yeux/ poils obligatoires pour valider une fiche. J'ai également demandé que Couleur et Marquage le soient, en liant des exceptions comme l'albi/hima/siamois et leur variantes BE + nu (genre quand tu coches albi ou hima t'es pas obligé de mettre une couleur et un marquage, si tu les coches pas t'es obligé).
+Champs nom / date de naissance / oreilles / yeux/ poils obligatoires pour valider une fiche. Couleur et Marquage obligatoires sauf exceptions à gérer comme certaines dilutions (par exemple, si albinos, marquage inconnu autorisé.) \desire{Mis en place par la table technique \texttt{compatibilities}, liste à spécifier.}
 
 \subsection{Nouvelle liste des couleurs et correspondance}
 \subsubsection{Nouvelle liste}
+
 Agouti
 
 Ambre (Agouti + PED)
@@ -596,6 +629,8 @@ Topaze mock (Agouti + RED + Mock)
  
 Topaze russe (Agouti + RED + Br)
 
+\desire{Warning ergonomie.} Cette liste est très longue, l'ergonomie pour l'entrée d'un rat par menu déroulant sera mauvaise. Il faudrait envisager une saisie en plusieurs étapes comme pour les causes de décès, par exemple : choisir d'abord si base agoutie ou noire, puis une famille de couleurs (« tous les ambres », « tous les topazes »...), puis les variantes attachées (« ambre », « ambre bleu », « ambre dove »...)         
+
 \subsubsection{Correspondance}
 
 \begin{center}\begin{tabular}{|l|l|}\hline
@@ -658,23 +693,27 @@ Topaze mock& Topaze mock (Agouti + Mock + RED)\\\hline
 Dilutions : 
 \begin{itemize}
 \item Albinos
-\item BED - Black Eyed Devil
-\item BEH - Black Eyed Himalayan
-\item BES - Black Eyed Siamese
+\item \sout{BED - Black Eyed Devil}
+\item \sout{BEH - Black Eyed Himalayan}
+\item \sout{BES - Black Eyed Siamese}
 \item Burmese himalayen
 \item Burmese sable himalayen
 \item Burmese sable siamois
 \item Burmese siamois
 \item Biscuit (burmese albinos)
+\item \desire{Ajout : Devil}
 \item Himalayen
-\item Ivory (albinos yeux noirs)
-\item RED - Red Eyed Devil
+\item \sout{Ivory (albinos yeux noirs)}
+\item \sout{RED - Red Eyed Devil}
 \item Siamois
 \item Aucune
 \end{itemize}
-(Toutes les dilutions existantes sont gardées avec le même nom. Ajout de la dilution Biscuit et ajout d'une précision pour Ivory.)
 
-Marquages : aucun changement. Particularités : aucun changement.
+\desire{NB.} Suppression de toutes les dilutions contenant une notion de couleur d’yeux, qui sera exclusivement gérée par le champ couleur des yeux. Ajout de la dilution Biscuit.
+
+Marquages : suppression de tous les marquages contenant une notion de couleur d’yeux (BEW/PEW/REW), seront fusionnés dans un marquage « Blanc surmarqué ». 
+
+Particularités : suppression de la particularité Black-Eyed (sera gérée par la couleur des yeux.) \desire{Liste à spécifier avec ses incompatibilités.}
 
 \subsection{Nouvelle liste des décès et correspondance}
 \subsubsection{Liste des catégories de décès (cause de décès niveau 1)}
@@ -831,15 +870,18 @@ Marquages : aucun changement. Particularités : aucun changement.
 \end{enumerate}
 \end{enumerate}
 
+\desire{NB.} Sur la liste de correspondances suivante, l'astérisque désigne les fiches qui devront être repassées en « à valider par un modérateur » lors de la migration, pour vérification de la cause réelle de décès si possible. (En principe, nombre relativement réduit de fiches.)  
+
 \subsubsection{Correspondance anciennes causes vers nouvelles causes}
 \small
-\noindent\begin{tabular}{|l|p{6cm}|p{5.75cm}|}\hline
+
+\noindent\begin{tabularx}{\textwidth}{|l|R|R|}\hline
 \textbf{Ancienne cause} & \textbf{Nouvelle cause niveau 1} & \textbf{Nouvelle cause niveau 2}\\\hline
-Accident domestique & 2. Accidents, traumatismes, intoxications & 2.1 Accident domestique \\\hline
+Accident domestique & 2. Accidents, traumatismes & 2.1 Accident domestique \\\hline
 Accident Vasculaire Cérébral & 7. Neurologique (cerveau, moelle épinière, nerfs) & 7.1. Accident vasculaire cérébral\\\hline
-* Accident vétérinaire & 2. Accidents, traumatismes, intoxications & 2.2. Accident vétérinaire (anesthésie lors d’une opération mineure, erreur médicale…)\\\hline
+* Accident vétérinaire & 2. Accidents, traumatismes & 2.2. Accident vétérinaire (anesthésie lors d’une opération mineure, erreur médicale…)\\\hline
 Allergie & 14. Autres & 14.1 Allergie, choc anaphylactique\\\hline
-* Anesthésie & 2. Accidents, traumatismes, intoxications & 2.2. Accident vétérinaire (anesthésie lors d’une opération mineure, erreur médicale…)\\\hline
+* Anesthésie & 2. Accidents, traumatismes & 2.2. Accident vétérinaire (anesthésie lors d’une opération mineure, erreur médicale…)\\\hline
 Arret cardiaque & 1. Cause inconnue & Cause indéterminée (date connue)\\\hline
 Atteinte neurologique & 7. Neurologique (cerveau, moelle épinière, nerfs) & pas de niveau 2\\\hline
 Aucune information & 1. Cause inconnue & 1.1. Aucune information (présumé mort)\\\hline
@@ -849,8 +891,8 @@ Deficience immunitaire 29 & 14. Autres & 14.10. Virus, épidémie, déficience i
 Diabète & 14. Autres & 14.3 Diabète\\\hline
 * Dégénérescence & 1. Cause inconnue & 1.2 Cause indéterminée (date connue)\\\hline
 Epilepsie & 7. Neurologique & 7.3 Epilepsie\\\hline
-* Hémorragie externe & 2. Accidents et traumatismes & 2.3. Bagarres, blessures, morsures graves, hémorragie consécutive (hors hémorragie anormale)\\\hline
-** Hémorragie interne & 2. Accidents et traumatismes & 2.3. Bagarres, blessures, morsures graves, hémorragie consécutive (hors hémorragie anormale)\\\hline
+* Hémorragie externe & 2. Accidents, traumatismes & 2.3. Bagarres, blessures, morsures graves, hémorragie consécutive (hors hémorragie anormale)\\\hline
+** Hémorragie interne & 2. Accidents, traumatismes & 2.3. Bagarres, blessures, morsures graves, hémorragie consécutive (hors hémorragie anormale)\\\hline
 inconnue moins de 6 semaines & 5. Mortalité infantile & pas de niveau 2\\\hline
 inconnue suite naissance & 5. Mortalité infantile & pas de niveau 2\\\hline
 Inconnue & 1. Cause inconnue & 1.2 Cause indéterminée (date connue)\\\hline
@@ -860,7 +902,7 @@ Insuffisance hépatique & 4. Digestif & 4.4 Insuffisance hépatique\\\hline
 Insuffisance respiratoire & 10. Respiratoire & pas de niveau 2\\\hline
 Insuffisance rénale & 12. Système urinaire (reins, vessie) & 12.2. Insuffisance rénale\\\hline
 * Insuffisance urinaire & 12. Système urinaire (reins, vessie) & pas de niveau 2\\\hline
-* Intoxication & 2. Accidents, traumatismes, intoxications & pas de niveau 2\\\hline
+* Intoxication & 2. Accidents, traumatismes & pas de niveau 2\\\hline
 Maladie de peau & 9. Peau & pas de niveau 2\\\hline
 * Malformation & 6. Mortalité infantile & 6.1.   	Malformation, hydrocéphalie\\\hline
 Manque de lait & 6. Mortalité infantile & 6.2. Manque de lait\\\hline
@@ -877,12 +919,14 @@ Pyomètre & 11. Système reproducteur & 11.2.  Infection de l'utérus (métrite,
 Septicémie/Abcès & 14. Autres & 14.5 Infection / abcès indéterminé\\\hline
 Tumeur & 14. Autres & 14.9 Tumeur indéterminée (organe atteint inconnu)\\\hline
 Virus (SDA, Sendaï, Tyzzer...) & 14. Autres & 14.10. Virus, épidémie, déficience immunitaire (SDA, Sendaï, Tyzzer...)\\\hline
-\end{tabular}
+\end{tabularx}
 \normalsize
 
 \subsection{Statistiques}
 \label{app:stats}
 
+\subsubsection{Onglet statistiques}
+ 
 \begin{enumerate}
 \item Statistiques du site
 \begin{itemize}
@@ -931,5 +975,15 @@ Virus (SDA, Sendaï, Tyzzer...) & 14. Autres & 14.10. Virus, épidémie, défici
 \end{itemize}
 \end{itemize}
 \end{enumerate}
+
+\subsubsection{Statistiques de fiches}
+
+Compte-tenu des facilités offertes par le nouvel outil, d'autres statistiques sont envisageables à faible coût de développement pour les fiches (utilisateur, rat, portée, raterie...), par exemple :
+\begin{itemize}
+\item Âge moyen au décès de tous les rats d'une portée, de tous les rats portant l'affixe de la raterie, nombre de portées de la raterie, nombre de rats nés à la raterie...
+\item Nombre de rats d'un utilisateur, âge moyen au décès des rats d'un utilisateur...
+\item Fiche « cause de décès » donnant des statistiques sur les rats décédés de cette cause...  
+\end{itemize}
+
 
 \end{document}
