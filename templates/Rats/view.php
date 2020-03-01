@@ -85,8 +85,8 @@
                     <td><?= h($rat->picture_thumbnail) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('User') ?></th>
-                    <td><?= $rat->has('user') ? $this->Html->link($rat->user->username, ['controller' => 'Users', 'action' => 'view', $rat->user->id]) : '' ?></td>
+                    <th><?= __('Creator User') ?></th>
+                    <td><?= $rat->has('creator_user') ? $this->Html->link($rat->creator_user->username, ['controller' => 'Users', 'action' => 'view', $rat->creator_user->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('State') ?></th>

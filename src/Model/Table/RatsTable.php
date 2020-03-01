@@ -7,6 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\EventInterface;
 
 /**
  * Rats Model
@@ -66,6 +67,7 @@ class RatsTable extends Table
         $this->belongsTo('OwnerUsers', [
             'className' => 'Users',
             'foreignKey' => 'owner_user_id',
+            'joinType' => 'INNER',
         ]);
         $this->belongsTo('Ratteries', [
             'foreignKey' => 'rattery_id',
@@ -101,7 +103,8 @@ class RatsTable extends Table
         $this->belongsTo('DeathSecondaryCauses', [
             'foreignKey' => 'death_secondary_cause_id',
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('CreatorUsers', [
+            'className' => 'Users',
             'foreignKey' => 'creator_user_id',
             'joinType' => 'INNER',
         ]);
@@ -231,7 +234,7 @@ class RatsTable extends Table
     {
         $rules->add($rules->isUnique(['id']));
         $rules->add($rules->isUnique(['pedigree_identifier']));
-        $rules->add($rules->existsIn(['owner_user_id'], 'Users'));
+        $rules->add($rules->existsIn(['owner_user_id'], 'OwnerUsers'));
         $rules->add($rules->existsIn(['rattery_id'], 'Ratteries'));
         $rules->add($rules->existsIn(['color_id'], 'Colors'));
         $rules->add($rules->existsIn(['eyecolor_id'], 'Eyecolors'));
@@ -241,9 +244,126 @@ class RatsTable extends Table
         $rules->add($rules->existsIn(['coat_id'], 'Coats'));
         $rules->add($rules->existsIn(['death_primary_cause_id'], 'DeathPrimaryCauses'));
         $rules->add($rules->existsIn(['death_secondary_cause_id'], 'DeathSecondaryCauses'));
-        $rules->add($rules->existsIn(['creator_user_id'], 'Users'));
+        $rules->add($rules->existsIn(['creator_user_id'], 'CreatorUsers'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
 
         return $rules;
     }
+
+    /*
+     * BAD IDEA : We can't get the auto-incremented id of the entity before the first save.
+     *
+    public function beforeSave(EventInterface $event, $entity, $options)
+    {
+        if ($entity->rattery_id) {
+            $entity->pedigree_identifier = $this->_buildPrefixIdentifier($entity->rattery_id);
+        }
+    }
+
+    protected function _buildPrefixIdentifier($ratteryId)
+    {
+        $rattery = $this->Ratteries->get($ratteryId);
+        debug($this);
+        return $rattery->prefix . $this->id . $this->sex ;
+    }
+     */
+
+    /*
+     * Finder functions
+     */
+    public function findNamed(Query $query, array $options)
+    {
+        $columns = [
+            'Rats.id', 'Rats.pedigree_identifier', 'Rats.is_pedigree_custom', 'Rats.name', 'Rats.pup_name', 'Rats.sex', 'Rats.is_alive',
+            'Rats.rattery_id', 'Rats.owner_user_id', 'Rats.state_id', 'Rats.birth_date',
+        ];
+
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['names'])) {
+            $query->where([
+                'OR' => ['Rats.name IS' => null, 'Rats.pup_name IS' => NULL],
+            ]);
+        } else {
+            // Find rats with parts of the string in that name
+            $query->where([
+                'OR' => [
+                    'Rats.name LIKE' => '%'.implode($options['names']).'%',
+                    'Rats.pup_name LIKE' => '%'.implode($options['names']).'%',
+                ],
+            ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
+    public function findFromRattery(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['ratteries'])) {
+            $query->leftJoinWith('Ratteries')
+                  ->where([
+                      'OR' => ['Ratteries.name IS' => null, 'Ratteries.prefix IS' => NULL],
+                  ]);
+        } else {
+            // Find articles that have one or more of the provided tags.
+            $query->innerJoinWith('Ratteries')
+                  ->where([
+                      'OR' => [
+                          'Ratteries.name LIKE' => '%'.implode($options['ratteries']).'%',
+                          'Ratteries.prefix LIKE' => '%'.implode($options['ratteries']).'%',
+                      ],
+                  ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
+    public function findOwnedBy(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['owners'])) {
+            $query->leftJoinWith('OwnerUsers')
+                  ->where([
+                      'OwnerUsers.username IS' => null,
+                  ]);
+        } else {
+            // Find articles that have one or more of the provided tags.
+            $query->innerJoinWith('OwnerUsers')
+                  ->where([
+                          'OwnerUsers.username LIKE' => '%'.implode($options['owners']).'%',
+                ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
+    public function findSex(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['sex'])) {
+            $query->where([
+                'Rats.sex IS' => null,
+            ]);
+        } else {
+            // Find rats with parts of the string in that name
+            $query->where([
+                    'Rats.sex IN' => ($options['sex']),
+            ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
 }

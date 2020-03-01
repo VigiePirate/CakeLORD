@@ -106,7 +106,7 @@ class Rat extends Entity
         'coat' => true,
         'death_primary_cause' => true,
         'death_secondary_cause' => true,
-        'user' => true,
+        'creator_user' => true,
         'state' => true,
         'conversations' => true,
         'rat_snapshots' => true,
@@ -114,9 +114,18 @@ class Rat extends Entity
         'singularities' => true,
     ];
 
+     protected function _getPictureThumbnail()
+     {
+         if (isset($this->_fields['picture_thumbnails'])) {
+             return $this->_fields['picture_thumbnails'];
+         } else {
+             return 'thumbnails/Unknown.png';
+         }
+     }
+ 
      protected function _getPedigreeIdentifier()
      {
-         if ($this->_fields['is_pedigree_custom'] && isset($this->_fields['pedigree_identifier'])) {
+         if (isset($this->_fields['pedigree_identifier'])) {
              return $this->_fields['pedigree_identifier'];
          } else if (isset ($this->_fields['rattery_id'])) {
              return $this->rattery->prefix . $this->id . $this->sex ;
