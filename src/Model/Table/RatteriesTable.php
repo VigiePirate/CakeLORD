@@ -95,7 +95,7 @@ class RatteriesTable extends Table
 
         $validator
             ->scalar('prefix')
-            ->maxLength('prefix', 3)
+            ->maxLength('prefix', 4)
             ->requirePresence('prefix', 'create')
             ->notEmptyString('prefix')
             ->add('prefix', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);

@@ -1,11 +1,12 @@
 /* Miligram overrides */
 a {
     font-family: "Raleway", sans-serif;
-    color: #996633;
+    color: #7b4d35;
 }
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
-    background-color: #996633;
+    background-color: #7b4d35;
+    border-color: #663e1b;
 }
 
 /* Utility */
@@ -47,7 +48,7 @@ th {
 }
 .top-nav-title a {
     font-size: 2.4rem;
-    color: #996633;
+    color: #7b4d35;
 }
 .top-nav-title span {
     color: #404041;
