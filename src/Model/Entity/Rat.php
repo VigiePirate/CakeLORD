@@ -122,7 +122,7 @@ class Rat extends Entity
              return 'thumbnails/Unknown.png';
          }
      }
- 
+
      protected function _getPedigreeIdentifier()
      {
          if (isset($this->_fields['pedigree_identifier'])) {
@@ -133,21 +133,21 @@ class Rat extends Entity
              return '';
          }
      }
- 
+
      protected function _setPedigreeIdentifier($pedigree_identifier)
      {
          if ($this->is_pedigree_custom) {
              return $pedigree_identifier;
-         } else if (isset($this->_fields['id']) && isset($this->rattery)) {
+         } else if (isset($this->id) && isset($this->rattery)) {
              return $this->rattery->prefix . $this->id . $this->sex ;
          } else {
              return '';
          }
      }
- 
+
      protected function _getAge()
      {
-         $agedate = FrozenTime::now(); 
+         $agedate = FrozenTime::now();
          if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
              $agedate = $this->_fields['death_date'];
          }
