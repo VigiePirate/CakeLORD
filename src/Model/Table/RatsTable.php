@@ -251,24 +251,6 @@ class RatsTable extends Table
     }
 
     /*
-     * BAD IDEA : We can't get the auto-incremented id of the entity before the first save.
-     *
-    public function beforeSave(EventInterface $event, $entity, $options)
-    {
-        if ($entity->rattery_id) {
-            $entity->pedigree_identifier = $this->_buildPrefixIdentifier($entity->rattery_id);
-        }
-    }
-
-    protected function _buildPrefixIdentifier($ratteryId)
-    {
-        $rattery = $this->Ratteries->get($ratteryId);
-        debug($this);
-        return $rattery->prefix . $this->id . $this->sex ;
-    }
-     */
-
-    /*
      * Finder functions
      */
     public function findNamed(Query $query, array $options)
