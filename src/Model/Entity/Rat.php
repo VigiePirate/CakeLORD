@@ -136,9 +136,9 @@ class Rat extends Entity
  
      protected function _setPedigreeIdentifier($pedigree_identifier)
      {
-         if ($this->is_pedigree_custom) {
+         if ($this->is_pedigree_custom && isset($this->_fields['pedigree_identifier'])) {
              return $pedigree_identifier;
-         } else if (isset($this->_fields['id']) && isset($this->rattery)) {
+         } else if (isset($this->id) && isset($this->rattery)) {
              return $this->rattery->prefix . $this->id . $this->sex ;
          } else {
              return '';
