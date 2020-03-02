@@ -65,6 +65,10 @@ class UsersTable extends Table
             'className' => 'Rats',
             'foreignKey' => 'creator_user_id',
         ]);
+        $this->hasMany('Ratteries', [
+            'className' => 'Ratteries',
+            'foreignKey' => 'owner_user_id',
+        ]);
     }
 
     /**
