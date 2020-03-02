@@ -91,6 +91,7 @@ class RatsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+            $rat->set('pedigree_identifier', $this->request->getData('pedigree_identifier'));
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
 
