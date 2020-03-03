@@ -163,4 +163,27 @@ class RatteriesTable extends Table
 
         return $rules;
     }
+
+    // Finder Functions
+
+    public function findPrefixed(Query $query, array $options)
+{
+    $query = $query
+        ->select()
+        ->distinct();
+
+    /**
+*    if (empty($options['prefixes'])) {
+*        // If there are no tags provided, find articles that have no tags.
+*        $query->leftJoinWith('Tags')
+*            ->where(['Tags.title IS' => null]);
+*    } else {
+*        // Find articles that have one or more of the provided tags.
+*        $query->innerJoinWith('Tags')
+*            ->where(['Tags.title IN' => $options['tags']]);
+*    }
+    */
+    
+    return $query->group(['Ratteries.prefix']);
+}
 }

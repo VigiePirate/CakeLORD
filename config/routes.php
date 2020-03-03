@@ -69,11 +69,17 @@ $routes->scope('/', function (RouteBuilder $builder) {
      */
     $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
+    // routes for search in rats table
     $builder->scope('/rats', function (RouteBuilder $builder) {
         $builder->connect('/named/*', ['controller' => 'Rats', 'action' => 'named']);
         $builder->connect('/from-rattery/*', ['controller' => 'Rats', 'action' => 'fromRattery']);
         $builder->connect('/owned-by/*', ['controller' => 'Rats', 'action' => 'ownedBy']);
         $builder->connect('/sex/*', ['controller' => 'Rats', 'action' => 'sex']);
+    });
+
+    // routes for search in ratteries
+    $builder->scope('/ratteries', function (RouteBuilder $builder) {
+        $builder->connect('/prefixed/*', ['controller' => 'Ratteries', 'action' => 'prefixed']);
     });
 
     /*
@@ -103,4 +109,3 @@ $routes->scope('/', function (RouteBuilder $builder) {
  * });
  * ```
  */
-
