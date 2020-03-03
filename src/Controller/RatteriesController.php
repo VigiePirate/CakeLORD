@@ -126,7 +126,7 @@ class RatteriesController extends AppController
         $tags = $this->request->getParam('pass');
 
         // Use the ArticlesTable to find tagged articles.
-        $articles = $this->Ratteries->find('prefixed', [
+        $ratteries = $this->Ratteries->find('prefixed', [
             'prefixes' => $prefixes
         ]);
 
