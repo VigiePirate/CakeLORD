@@ -177,7 +177,7 @@ class RatteriesTable extends Table
         $query->where(['Ratteries.prefix IS' => null]);
     } else {
         // Find ratteries with this prefix
-        $query->where(['Tags.prefix IS' => $options['prefixes']]);
+        $query->where(['Ratteries.prefix IS' => $options['prefixes']]);
     }
 
     return $query->group(['Ratteries.prefix']);
