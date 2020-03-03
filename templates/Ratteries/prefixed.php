@@ -1,7 +1,7 @@
 <!-- In templates/Articles/tags.php -->
 <h1>
     Ratteries by prefix
-    <?= $this->Text->toList(h($prefixed), 'or') ?>
+    <?= $this->Text->toList(h($prefixes), 'or') ?>
 </h1>
 
 <section>
