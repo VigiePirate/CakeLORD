@@ -172,18 +172,14 @@ class RatteriesTable extends Table
         ->select()
         ->distinct();
 
-    /**
-*    if (empty($options['prefixes'])) {
-*        // If there are no tags provided, find articles that have no tags.
-*        $query->leftJoinWith('Tags')
-*            ->where(['Tags.title IS' => null]);
-*    } else {
-*        // Find articles that have one or more of the provided tags.
-*        $query->innerJoinWith('Tags')
-*            ->where(['Tags.title IN' => $options['tags']]);
-*    }
-    */
-    
+    if (empty($options['prefixes'])) {
+        // If there are no prefixes provided, return ratteries without prefix (there should be none...)
+        $query->where(['Ratteries.prefix IS' => null]);
+    } else {
+        // Find ratteries with this prefix
+        $query->where(['Tags.prefix IS' => $options['prefixes']]);
+    }
+
     return $query->group(['Ratteries.prefix']);
 }
 }
