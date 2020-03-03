@@ -127,7 +127,7 @@ class RatteriesController extends AppController
 
         // Use the RAtteriesTable to find prefixed articles.
         $ratteries = $this->Ratteries->find('prefixed', [
-            'prefix' => $prefixes
+            'prefixes' => $prefix
         ]);
 
         // Pass variables into the view template context.
