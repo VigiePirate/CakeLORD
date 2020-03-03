@@ -1,7 +1,7 @@
 <!-- In templates/Articles/tags.php -->
 <h1>
     Ratteries by prefix
-    <?= $this->Text->h($prefixes) ?>
+    <?= h($prefixes) ?>
 </h1>
 
 <section>
