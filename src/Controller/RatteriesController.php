@@ -127,13 +127,13 @@ class RatteriesController extends AppController
 
         // Use the ArticlesTable to find tagged articles.
         $articles = $this->Ratteries->find('prefixed', [
-            'prefix' => $prefix
+            'prefixes' => $prefixes
         ]);
 
         // Pass variables into the view template context.
         $this->set([
             'ratteries' => $ratteries,
-            'prefix' => $prefix
+            'prefixes' => $prefixes
         ]);
     }
 
