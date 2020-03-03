@@ -125,7 +125,7 @@ class RatteriesController extends AppController
         // the passed URL path segments in the request.
         $tags = $this->request->getParam('pass');
 
-        // Use the ArticlesTable to find tagged articles.
+        // Use the RAtteriesTable to find prefixed articles.
         $ratteries = $this->Ratteries->find('prefixed', [
             'prefixes' => $prefixes
         ]);
