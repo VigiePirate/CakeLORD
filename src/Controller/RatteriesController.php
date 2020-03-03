@@ -123,11 +123,11 @@ class RatteriesController extends AppController
     {
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
-        $tags = $this->request->getParam('pass');
+        $prefixes = $this->request->getParam('pass');
 
         // Use the RAtteriesTable to find prefixed articles.
         $ratteries = $this->Ratteries->find('prefixed', [
-            'prefixes' => $prefix
+            'prefixes' => $prefixes
         ]);
 
         // Pass variables into the view template context.
