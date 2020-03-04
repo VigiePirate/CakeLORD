@@ -132,7 +132,8 @@ class RatteriesController extends AppController
 
         // Pass variables into the view template context.
         $this->set([
-            'ratteries' => $ratteries
+            'ratteries' => $ratteries,
+            'prefixes' => $prefixes
         ]);
     }
 
