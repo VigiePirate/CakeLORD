@@ -134,7 +134,7 @@ class RatteriesController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'Countries', 'States'],
         ];
-        $ratteries = $this->paginate($this->Ratteries);
+        $ratteries = $this->paginate($ratteries);
 
         $this->set([
             'ratteries' => $ratteries,
