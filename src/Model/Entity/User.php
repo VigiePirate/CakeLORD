@@ -85,4 +85,27 @@ class User extends Entity
             return (new DefaultPasswordHasher())->hash($password);
         }
     }
+
+    /**
+     * We create those fields based upon the numeric value of the role_id field
+     * as it enables simple comparisons. The Roles Table is more of a reminder
+     * as we don't expect roles to change much.
+     *
+     * @return bool
+     */
+    protected function _getIsRoot()
+    {
+        return $this->role_id === 1;
+    }
+
+    protected function _getIsAdmin()
+    {
+        return $this->role_id <= 2;
+    }
+
+    protected function _getIsStaff()
+    {
+        return $this->role_id <= 3;
+    }
+
 }
