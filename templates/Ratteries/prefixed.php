@@ -11,7 +11,7 @@
                     <th><?= $this->Paginator->sort('owner_id') ?></th>
                     <th><?= $this->Paginator->sort('country_id') ?></th>
                     <th><?= $this->Paginator->sort('zip_code') ?></th>
-                    <td><?= h($rattery->state->name) ?></td>
+                    <th><?= $this->Paginator->sort('state_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
