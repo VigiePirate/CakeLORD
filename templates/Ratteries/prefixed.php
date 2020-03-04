@@ -1,30 +1,52 @@
 <!-- In templates/Ratteries/prefixed.php -->
-
-<h3><?= __('Rats named') ?> "<?= h(implode('"',$prefixes)) ?>"</h3>
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\Rattery[]|\Cake\Collection\CollectionInterface $ratteries
+ */
+?>
+<div class="ratteries index content">
+    <h3><?= __('Ratteries with prefix like') ?> "<?= h(implode('"',$prefixes)) ?>"</h3>
     <div class="table-responsive">
         <table>
             <thead>
                 <tr>
-                    <th><?= __('Picture') ?></th>
+                    <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('prefix') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
-                    <th><?= $this->Paginator->sort('owner_id') ?></th>
-                    <th><?= $this->Paginator->sort('country_id') ?></th>
+                    <th><?= $this->Paginator->sort('owner_user_id') ?></th>
+                    <th><?= $this->Paginator->sort('birth_year') ?></th>
+                    <th><?= $this->Paginator->sort('is_alive') ?></th>
+                    <th><?= $this->Paginator->sort('is_generic') ?></th>
+                    <th><?= $this->Paginator->sort('district') ?></th>
                     <th><?= $this->Paginator->sort('zip_code') ?></th>
+                    <th><?= $this->Paginator->sort('country_id') ?></th>
+                    <th><?= $this->Paginator->sort('website') ?></th>
+                    <th><?= $this->Paginator->sort('picture') ?></th>
                     <th><?= $this->Paginator->sort('state_id') ?></th>
+                    <th><?= $this->Paginator->sort('created') ?></th>
+                    <th><?= $this->Paginator->sort('modified') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($ratteries as $rattery): ?>
                 <tr>
-                    <td><?= $this->Html->image($rattery->picture) ?></td>
-                    <td><?= $this->Html->link(h($rattery->prefix), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id]) ?> <?= $rattery->is_alive ? '†' : ''  ?></td>
+                    <td><?= $this->Number->format($rattery->id) ?></td>
+                    <td><?= h($rattery->prefix) ?></td>
                     <td><?= h($rattery->name) ?></td>
-                    <td><?= $rattery->has('owner') ? $this->Html->link($rattery->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rattery->owner_user->id]) : '' ?></td>
-                    <td><?= h($rattery->country_id) ?></td>
+                    <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->username, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
+                    <td><?= h($rattery->birth_year) ?></td>
+                    <td><?= h($rattery->is_alive) ?></td>
+                    <td><?= h($rattery->is_generic) ?></td>
+                    <td><?= h($rattery->district) ?></td>
                     <td><?= h($rattery->zip_code) ?></td>
-                    <td><?= h($rattery->state->name) ?></td>
+                    <td><?= $rattery->has('country') ? $this->Html->link($rattery->country->name, ['controller' => 'Countries', 'action' => 'view', $rattery->country->id]) : '' ?></td>
+                    <td><?= h($rattery->website) ?></td>
+                    <td><?= h($rattery->picture) ?></td>
+                    <td><?= $rattery->has('state') ? $this->Html->link($rattery->state->name, ['controller' => 'States', 'action' => 'view', $rattery->state->id]) : '' ?></td>
+                    <td><?= h($rattery->created) ?></td>
+                    <td><?= h($rattery->modified) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $rattery->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rattery->id]) ?>
