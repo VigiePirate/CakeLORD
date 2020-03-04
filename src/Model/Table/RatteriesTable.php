@@ -175,7 +175,8 @@ class RatteriesTable extends Table
     if (empty($options['prefixes'])) {
         $query->where(['Ratteries.prefix IS' => null]);
     } else {
-        $query->where(['Ratteries.prefix LIKE' => '%'.($options['prefixes']).'%']);
+        $query->where(['Ratteries.prefix LIKE' => '%'.implode($options['prefixes']).'%',
+      ]);
     }
 
     return $query->group(['Ratteries.prefix']);
