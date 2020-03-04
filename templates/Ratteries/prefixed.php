@@ -18,17 +18,17 @@
             <tbody>
                 <?php foreach ($ratteries as $rattery): ?>
                 <tr>
-                    <td><?= $this->Html->image($rattery->picture_thumbnail) ?></td>
+                    <td><?= $this->Html->image($rattery->picture) ?></td>
                     <td><?= $this->Html->link(h($rattery->prefix), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id]) ?> <?= $rattery->is_alive ? '†' : ''  ?></td>
                     <td><?= h($rattery->name) ?></td>
-                    <td><?= $rat->has('owner') ? $this->Html->link($rattery->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rattery->owner_user->id]) : '' ?></td>
+                    <td><?= $rattery->has('owner') ? $this->Html->link($rattery->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rattery->owner_user->id]) : '' ?></td>
                     <td><?= h($rattery->country_id) ?></td>
                     <td><?= h($rattery->zip_code) ?></td>
-                    <td><?= h($rat->state->name) ?></td>
+                    <td><?= h($rattery->state->name) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $rat->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rat->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $rat->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rat->id)]) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $rattery->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rattery->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $rattery->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rattery->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
