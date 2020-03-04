@@ -173,11 +173,9 @@ class RatteriesTable extends Table
         ->distinct();
 
     if (empty($options['prefixes'])) {
-        // If there are no prefixes provided, return ratteries without prefix (there should be none...)
         $query->where(['Ratteries.prefix IS' => null]);
     } else {
-        // Find ratteries with this prefix
-        $query->where(['Ratteries.prefix LIKE' => "%".$options['prefixes']."%"]);
+        $query->where(['Ratteries.prefix LIKE' => '%'.($options['prefixes']).'%']);
     }
 
     return $query->group(['Ratteries.prefix']);
