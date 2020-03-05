@@ -6,7 +6,7 @@
  */
 ?>
 <div class="ratteries index content">
-    <h3><?= __('Ratteries with prefix like') ?> "<?= h(implode('"',$prefixes)) ?>"</h3>
+    <h3><?= __('Ratteries with name or prefix like') ?> "<?= h(implode('"',$names)) ?>"</h3>
     <div class="table-responsive">
         <table>
             <thead>
