@@ -165,17 +165,23 @@ class RatteriesTable extends Table
     }
 
     // Finder Functions
-
-    public function findPrefixed(Query $query, array $options)
+    // Search rattery by name or prefix
+    public function findNamed(Query $query, array $options)
 {
     $query = $query
         ->select()
         ->distinct();
 
-    if (empty($options['prefixes'])) {
-        $query->where(['Ratteries.prefix IS' => null]);
+    if (empty($options['names'])) {
+        $query->where([
+          'OR' => ['Ratteries.prefix IS' => null, 'Ratteries.name IS' => null],
+        ]);
     } else {
-        $query->where(['Ratteries.prefix LIKE' => '%'.implode($options['prefixes']).'%',
+        $query->where([
+          'OR' => [
+            'Ratteries.prefix LIKE' => '%'.implode($options['names']).'%',
+            'Ratteries.name LIKE' => '%'.implode($options['names']).'%',
+          ],
       ]);
     }
 

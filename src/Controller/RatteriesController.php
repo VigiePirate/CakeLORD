@@ -119,14 +119,14 @@ class RatteriesController extends AppController
     * Prefix method (search rattery by prefix)
     **/
 
-    public function prefixed()
+    public function named()
     {
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
         $prefixes = $this->request->getParam('pass');
 
         // Use the RatteriesTable to find prefixed ratteries.
-        $ratteries = $this->Ratteries->find('prefixed', [
+        $ratteries = $this->Ratteries->find('named', [
             'prefixes' => $prefixes
         ]);
 
