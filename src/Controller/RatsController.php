@@ -12,6 +12,14 @@ namespace App\Controller;
  */
 class RatsController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // Configure the login action to not require authentication, preventing
+        // the infinite redirect loop issue
+        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'named', 'fromRattery', 'ownedBy', 'sex']);
+    }
+
     /**
      * Index method
      *
@@ -19,6 +27,7 @@ class RatsController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
         $this->paginate = [
             'contain' => ['OwnerUsers', 'Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
         ];
@@ -36,6 +45,7 @@ class RatsController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
             'contain' => ['OwnerUsers', 'Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'Litters', 'Singularities', 'Conversations', 'RatSnapshots'],
         ]);
@@ -51,6 +61,7 @@ class RatsController extends AppController
     public function add()
     {
         $rat = $this->Rats->newEmptyEntity();
+        $this->Authorization->authorize($rat);
         if ($this->request->is('post')) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
             if ($this->Rats->save($rat)) {
@@ -89,6 +100,7 @@ class RatsController extends AppController
         $rat = $this->Rats->get($id, [
             'contain' => ['Litters', 'Singularities', 'Ratteries'],
         ]);
+        $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
             // Force setting pedigree_identifier to save the computed value
@@ -128,6 +140,7 @@ class RatsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $rat = $this->Rats->get($id);
+        $this->Authorization->authorize($rat);
         if ($this->Rats->delete($rat)) {
             $this->Flash->success(__('The rat has been deleted.'));
         } else {
@@ -147,6 +160,7 @@ class RatsController extends AppController
      */
     public function named()
     {
+        $this->Authorization->skipAuthorization();
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
         $names = $this->request->getParam('pass');
@@ -181,6 +195,7 @@ class RatsController extends AppController
      */
     public function fromRattery()
     {
+        $this->Authorization->skipAuthorization();
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
         $ratteries = $this->request->getParam('pass');
@@ -209,6 +224,7 @@ class RatsController extends AppController
      */
     public function ownedBy()
     {
+        $this->Authorization->skipAuthorization();
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
         $owners = $this->request->getParam('pass');
@@ -237,6 +253,7 @@ class RatsController extends AppController
      */
     public function sex()
     {
+        $this->Authorization->skipAuthorization();
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
         $sex = $this->request->getParam('pass');
