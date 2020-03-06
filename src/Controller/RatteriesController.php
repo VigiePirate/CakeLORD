@@ -12,13 +12,21 @@ namespace App\Controller;
  */
 class RatteriesController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // No authentication needed on consultation
+        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
+    }
+
     /**
      * Index method
      *
      * @return \Cake\Http\Response|null
-     */
+     *
     public function index()
     {
+        $this->Authorization->skipAuthorization();
         $this->paginate = [
             'contain' => ['Users', 'Countries', 'States'],
         ];
@@ -36,6 +44,7 @@ class RatteriesController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $rattery = $this->Ratteries->get($id, [
             'contain' => ['Users', 'Countries', 'States', 'Litters', 'Conversations', 'Rats', 'RatterySnapshots'],
         ]);
@@ -51,6 +60,7 @@ class RatteriesController extends AppController
     public function add()
     {
         $rattery = $this->Ratteries->newEmptyEntity();
+        $this->Authorization->authorize($rattery);
         if ($this->request->is('post')) {
             $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
             if ($this->Ratteries->save($rattery)) {
@@ -79,6 +89,7 @@ class RatteriesController extends AppController
         $rattery = $this->Ratteries->get($id, [
             'contain' => ['Litters'],
         ]);
+        $this->Authorization->authorize($rattery);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
             if ($this->Ratteries->save($rattery)) {
@@ -106,6 +117,7 @@ class RatteriesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $rattery = $this->Ratteries->get($id);
+        $this->Authorization->authorize($rattery);
         if ($this->Ratteries->delete($rattery)) {
             $this->Flash->success(__('The rattery has been deleted.'));
         } else {
