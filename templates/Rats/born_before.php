@@ -5,6 +5,7 @@
  */
 ?>
 <div class="rats index content">
+<? debug($bornBefore) ?>
 <h3><?= __('Rats born before') ?> "<?= h(implode('"',$bornBefore)) ?>"</h3>
     <div class="table-responsive">
         <table>
