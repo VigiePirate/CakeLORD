@@ -157,7 +157,7 @@ class RatteriesTable extends Table
     {
         $rules->add($rules->isUnique(['name']));
         $rules->add($rules->isUnique(['prefix']));
-        $rules->add($rules->existsIn(['owner_user_id'], 'Users'));
+        $rules->add($rules->existsIn(['owner_user_id'], 'OwnerUsers'));
         $rules->add($rules->existsIn(['country_id'], 'Countries'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
 
