@@ -5,7 +5,7 @@
  */
 ?>
 <div class="rats index content">
-<h3><?= __('Rats owned by ') ?> "<?= h(implode('"',$owners)) ?>"</h3>
+<h3><?= __('Rats owned by ') ?> "<?= h(implode('"',$users)) ?>"</h3>
     <div class="table-responsive">
         <table>
             <thead>
