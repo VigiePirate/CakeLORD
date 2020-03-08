@@ -158,16 +158,16 @@ class RatteriesController extends AppController
         //
         // Use the RatsTable to find named rats.
         $ratteries = $this->Ratteries->find('ownedBy', [
-            'owners' => $owners
+            'users' => $users
         ]);
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+            'contain' => ['Users', 'Ratteries', 'States'],
         ];
         $ratteries = $this->paginate($ratteries);
 
-        $this->set(compact('ratteries', 'owners'));
+        $this->set(compact('ratteries', 'users'));
     }
 
 }

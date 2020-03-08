@@ -194,15 +194,15 @@ class RatteriesTable extends Table
             ->select()
             ->distinct();
 
-        if (empty($options['owners'])) {
-            $query->leftJoinWith('OwnerUsers')
+        if (empty($options['users'])) {
+            $query->leftJoinWith('Users')
                   ->where([
-                      'OwnerUsers.username IS' => null,
+                      'Users.username IS' => null,
                   ]);
         } else {
-            $query->innerJoinWith('OwnerUsers')
+            $query->innerJoinWith('Users')
                   ->where([
-                          'OwnerUsers.username LIKE' => '%'.implode($options['owners']).'%',
+                          'Users.username LIKE' => '%'.implode($options['users']).'%',
                 ]);
         }
 
