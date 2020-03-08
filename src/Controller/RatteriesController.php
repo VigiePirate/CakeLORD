@@ -154,11 +154,11 @@ class RatteriesController extends AppController
     {
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
-        $owners = $this->request->getParam('pass');
+        $users = $this->request->getParam('pass');
         //
         // Use the RatsTable to find named rats.
         $ratteries = $this->Ratteries->find('ownedBy', [
-            'ownerUsers' => $users
+            'users' => $users
         ]);
 
         // Pass variables into the view template context.
