@@ -354,7 +354,7 @@ class RatsTable extends Table
             ->select()
             ->distinct();
 
-        if (empty($options['birth_dates'])) {
+        if (empty($options['bornBefore'])) {
             $query->where([
                 'Rats.birth_date IS' => null,
             ]);
