@@ -31,7 +31,7 @@
                     <td><?= h($rat->pup_name) ?></td>
                     <td><?= h($rat->sex) ?></td>
                     <td><?= h($rat->birth_date) ?></td>
-                    <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'OwnerUsers', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
+                    <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                     <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
                     <td><?= h($rat->state->name) ?></td>
                     <td class="actions">
