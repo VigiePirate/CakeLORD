@@ -1,4 +1,4 @@
-<!-- In templates/Ratteries/prefixed.php -->
+<!-- In templates/Ratteries/owned_by.php -->
 <?php
 /**
  * @var \App\View\AppView $this
