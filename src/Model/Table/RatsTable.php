@@ -360,7 +360,7 @@ class RatsTable extends Table
             ]);
         } else {
             // Find rats with birthdates before passed parameter
-            $bornBefore = ($options['bornBefore']) . " 00:00:00.000";
+            $bornBefore = implode($options['bornBefore']) . " 00:00:00.000");
             $query->where([
                     'Rats.birth_date <=' => $bornBefore,
             ]);
