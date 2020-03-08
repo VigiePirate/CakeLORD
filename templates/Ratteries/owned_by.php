@@ -35,8 +35,7 @@
                     <td><?= $this->Number->format($rattery->id) ?></td>
                     <td><?= h($rattery->prefix) ?></td>
                     <td><?= h($rattery->name) ?></td>
-                    <td><?= $rattery->has('owner_user') ? $this->Html->link($rattery->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rattery->owner_user->id]) : '' ?></td>
-                    <td><?= $this->Html->link($rattery->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rattery->owner_user->id]) ?></td>
+                    <td><?= $rattery->has('user') ? $this->Html->link($rattery->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rattery->owner_user->id]) : '' ?></td>
                     <td><?= h($rattery->birth_year) ?></td>
                     <td><?= h($rattery->is_alive) ?></td>
                     <td><?= h($rattery->is_generic) ?></td>
