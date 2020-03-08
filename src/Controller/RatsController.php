@@ -270,7 +270,7 @@ class RatsController extends AppController
         //
         // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('bornBefore', [
-            'rats' => $rats
+            'bornBefore' => $bornBefore
         ]);
 
         // Pass variables into the view template context.
