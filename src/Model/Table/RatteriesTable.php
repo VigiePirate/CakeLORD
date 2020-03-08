@@ -200,7 +200,6 @@ class RatteriesTable extends Table
                       'OwnerUsers.username IS' => null,
                   ]);
         } else {
-            // Find articles that have one or more of the provided tags.
             $query->innerJoinWith('OwnerUsers')
                   ->where([
                           'OwnerUsers.username LIKE' => '%'.implode($options['owners']).'%',
