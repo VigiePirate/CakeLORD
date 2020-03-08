@@ -167,24 +167,48 @@ class RatteriesTable extends Table
     // Finder Functions
     // Search rattery by name or prefix
     public function findNamed(Query $query, array $options)
-{
-    $query = $query
-        ->select()
-        ->distinct();
+    {
+      $query = $query
+      ->select()
+      ->distinct();
 
-    if (empty($options['names'])) {
+      if (empty($options['names'])) {
         $query->where([
           'OR' => ['Ratteries.prefix IS' => null, 'Ratteries.name IS' => null],
         ]);
-    } else {
+      } else {
         $query->where([
           'OR' => [
             'Ratteries.prefix LIKE' => '%'.implode($options['names']).'%',
             'Ratteries.name LIKE' => '%'.implode($options['names']).'%',
           ],
-      ]);
+        ]);
+      }
+
+      return $query;
     }
 
-    return $query;
-}
+    public function findOwnedBy(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['owners'])) {
+            $query->leftJoinWith('OwnerUsers')
+                  ->where([
+                      'OwnerUsers.username IS' => null,
+                  ]);
+        } else {
+            // Find articles that have one or more of the provided tags.
+            $query->innerJoinWith('OwnerUsers')
+                  ->where([
+                          'OwnerUsers.username LIKE' => '%'.implode($options['owners']).'%',
+                ]);
+        }
+
+        return $query->group(['Ratteries.id']);
+    }
+
+
 }
