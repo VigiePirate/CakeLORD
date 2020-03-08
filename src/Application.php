@@ -23,6 +23,7 @@ use Cake\Http\BaseApplication;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Cake\Chronos\Chronos;
 
 // use Authorization\AuthorizationService;
 // use Authorization\AuthorizationServiceInterface;
