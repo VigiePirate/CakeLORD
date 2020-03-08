@@ -267,9 +267,9 @@ class RatsController extends AppController
     {
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
-        $bornBeforeString = $this->request->getParam('pass');
-        $bornBeforeString = $bornBeforeString . " 00:00:00.000";
-        $bornBefore = new Chronos::Chronos($bornBeforeString);
+        $bornBefore = $this->request->getParam('pass');
+        // $bornBefore = $bornBefore . " 00:00:00.000";
+        // $bornBefore = new Chronos::Chronos($bornBeforeString);
         //
         // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('bornBefore', [
