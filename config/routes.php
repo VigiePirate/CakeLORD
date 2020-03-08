@@ -80,6 +80,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
     // routes for search in ratteries
     $builder->scope('/ratteries', function (RouteBuilder $builder) {
         $builder->connect('/prefixed/*', ['controller' => 'Ratteries', 'action' => 'prefixed']);
+        $builder->connect('/owned-by/*', ['controller' => 'Ratteries', 'action' => 'ownedBy']);
     });
 
     /*
