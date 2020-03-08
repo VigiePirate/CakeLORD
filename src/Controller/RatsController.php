@@ -286,7 +286,7 @@ class RatsController extends AppController
 
         $this->set([
             'rats' => $rats,
-            'birth_dates' => $bornBefore
+            'bornBefore' => $bornBefore
         ]);
     }
 }
