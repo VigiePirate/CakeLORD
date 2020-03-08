@@ -163,7 +163,7 @@ class RatteriesController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['Users', 'Ratteries', 'States'],
+            'contain' => ['Users', 'States'],
         ];
         $ratteries = $this->paginate($ratteries);
 
