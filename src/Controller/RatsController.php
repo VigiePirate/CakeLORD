@@ -266,7 +266,7 @@ class RatsController extends AppController
     {
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
-        $dates = $this->request->getParam('pass');
+        $bornBefore = $this->request->getParam('pass');
         //
         // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('bornBefore', [
@@ -277,8 +277,8 @@ class RatsController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'States'],
         ];
-        $ratteries = $this->paginate($rats);
+        $rats = $this->paginate($rats);
 
-        $this->set(compact('rats', 'users', 'dates'));
+        $this->set(compact('rats', 'OwnerUsers', 'bornBefore'));
     }
 }
