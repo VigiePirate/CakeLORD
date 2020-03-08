@@ -282,6 +282,11 @@ class RatsController extends AppController
         ];
         $rats = $this->paginate($rats);
 
-        $this->set(compact('rats', 'bornBefore'));
+        // $this->set(compact('rats', 'birth_dates'));
+
+        $this->set([
+            'rats' => $rats,
+            'birth_dates' => $bornBefore
+        ]);
     }
 }
