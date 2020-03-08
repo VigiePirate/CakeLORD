@@ -141,8 +141,8 @@ class RatsController extends AppController
      *
      * Search rats by name.
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      */
     public function named()
     {
@@ -175,8 +175,8 @@ class RatsController extends AppController
      *
      * Search rats by ratteries.
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      */
     public function fromRattery()
     {
@@ -203,8 +203,8 @@ class RatsController extends AppController
      *
      * Search rats by ratteries.
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      */
     public function ownedBy()
     {
@@ -231,8 +231,8 @@ class RatsController extends AppController
      *
      * Search rats by sex.
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      */
     public function sex()
     {
@@ -252,5 +252,33 @@ class RatsController extends AppController
         $rats = $this->paginate($rats);
 
         $this->set(compact('rats', 'sex'));
+    }
+
+    /**
+     * bornBefore method
+     *
+     * Search rats by birthdate.
+     *
+     * @param
+     * @return
+     */
+    public function bornBefore()
+    {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
+        $dates = $this->request->getParam('pass');
+        //
+        // Use the RatsTable to find named rats.
+        $rats = $this->Rats->find('bornBefore', [
+            'rats' => $rats
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['Users', 'States'],
+        ];
+        $ratteries = $this->paginate($rats);
+
+        $this->set(compact('rats', 'users', 'dates'));
     }
 }

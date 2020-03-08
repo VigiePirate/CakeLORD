@@ -348,4 +348,24 @@ class RatsTable extends Table
         return $query->group(['Rats.id']);
     }
 
+    public function findBornBefore(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['birth_dates'])) {
+            $query->where([
+                'Rats.birth_date IS' => null,
+            ]);
+        } else {
+            // Find rats with parts of the string in that name
+            $query->where([
+                    'Rats.birth_date <=' => ($options['bornBefore']),
+            ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
 }
