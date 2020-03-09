@@ -76,6 +76,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
         $builder->connect('/owned-by/*', ['controller' => 'Rats', 'action' => 'ownedBy']);
         $builder->connect('/sex/*', ['controller' => 'Rats', 'action' => 'sex']);
         $builder->connect('/born-before/*', ['controller' => 'Rats', 'action' => 'bornBefore']);
+        $builder->connect('/born-after/*', ['controller' => 'Rats', 'action' => 'bornAfter']);
     });
 
     // routes for search in ratteries

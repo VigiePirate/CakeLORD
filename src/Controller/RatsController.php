@@ -289,4 +289,27 @@ class RatsController extends AppController
             'bornBefore' => $bornBefore
         ]);
     }
+
+    public function bornAfter()
+    {
+        $bornAfter = $this->request->getParam('pass');
+
+        // Use the RatsTable to find named rats.
+        $rats = $this->Rats->find('bornAfter', [
+            'bornAfter' => $bornAfter
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['OwnerUsers', 'Ratteries','States'],
+        ];
+        $rats = $this->paginate($rats);
+
+        // $this->set(compact('rats', 'birth_dates'));
+
+        $this->set([
+            'rats' => $rats,
+            'bornAfter' => $bornAfter
+        ]);
+    }
 }
