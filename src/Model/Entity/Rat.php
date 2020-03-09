@@ -125,23 +125,23 @@ class Rat extends Entity
 
      protected function _getPedigreeIdentifier()
      {
-         if (isset($this->_fields['pedigree_identifier'])) {
+         if ($this->is_pedigree_custom || isset($this->_fields['pedigree_identifier'])) {
              return $this->_fields['pedigree_identifier'];
-         } else if (isset ($this->_fields['rattery_id'])) {
+         } else if (isset ($this->rattery)) {
              return $this->rattery->prefix . $this->id . $this->sex ;
          } else {
-             return '';
+             return '???';
          }
      }
 
      protected function _setPedigreeIdentifier($pedigree_identifier)
      {
          if ($this->is_pedigree_custom) {
-             return $pedigree_identifier;
-         } else if (isset($this->id) && isset($this->rattery)) {
+             return $pedigree_identifier ;
+         } else if (isset($this->_fields['id']) && isset($this->rattery)) {
              return $this->rattery->prefix . $this->id . $this->sex ;
          } else {
-             return '';
+             return '' ;
          }
      }
 

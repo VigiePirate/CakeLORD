@@ -251,24 +251,6 @@ class RatsTable extends Table
     }
 
     /*
-     * BAD IDEA : We can't get the auto-incremented id of the entity before the first save.
-     *
-    public function beforeSave(EventInterface $event, $entity, $options)
-    {
-        if ($entity->rattery_id) {
-            $entity->pedigree_identifier = $this->_buildPrefixIdentifier($entity->rattery_id);
-        }
-    }
-
-    protected function _buildPrefixIdentifier($ratteryId)
-    {
-        $rattery = $this->Ratteries->get($ratteryId);
-        debug($this);
-        return $rattery->prefix . $this->id . $this->sex ;
-    }
-     */
-
-    /*
      * Finder functions
      */
     public function findNamed(Query $query, array $options)
@@ -360,6 +342,50 @@ class RatsTable extends Table
             // Find rats with parts of the string in that name
             $query->where([
                     'Rats.sex IN' => ($options['sex']),
+            ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
+    public function findBornBefore(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['bornBefore'])) {
+            $query->where([
+                'Rats.birth_date IS' => null,
+            ]);
+        } else {
+            // Find rats with birthdates before passed parameter
+            $bornBefore = implode($options['bornBefore']);
+            // concatenate with  . " 00:00:00.000" ??
+            $query->where([
+                    'Rats.birth_date <=' => $bornBefore,
+            ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
+    public function findBornAfter(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['bornAfter'])) {
+            $query->where([
+                'Rats.birth_date IS' => null,
+            ]);
+        } else {
+            // Find rats with birthdates posterior to passed parameter
+            $bornAfter = implode($options['bornAfter']);
+            // concatenate with  . " 00:00:00.000" ??
+            $query->where([
+                    'Rats.birth_date >=' => $bornAfter,
             ]);
         }
 
