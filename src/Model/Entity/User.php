@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
+use Authentication\PasswordHasher\DefaultPasswordHasher;
+use Authentication\IdentityInterface;
 use Cake\ORM\Entity;
 
 /**
@@ -31,7 +33,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Role $role
  * @property \App\Model\Entity\Conversation[] $conversations
  */
-class User extends Entity
+class User extends Entity implements IdentityInterface
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -66,6 +68,22 @@ class User extends Entity
     ];
 
     /**
+     * Authentication\IdentityInterface method
+     */
+    public function getIdentifier()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Authentication\IdentityInterface method
+     */
+    public function getOriginalData()
+    {
+        return $this;
+    }
+
+    /**
      * Fields that are excluded from JSON versions of the entity.
      *
      * @var array
@@ -73,4 +91,38 @@ class User extends Entity
     protected $_hidden = [
         'password',
     ];
+
+    /**
+     * Hash passwords with bcrypt.
+     *
+     */
+    protected function _setPassword(string $password) : ?string
+    {
+        if (strlen($password) > 0) {
+            return (new DefaultPasswordHasher())->hash($password);
+        }
+    }
+
+    /**
+     * We create those fields based upon the numeric value of the role_id field
+     * as it enables simple comparisons. The Roles Table is more of a reminder
+     * as we don't expect roles to change much.
+     *
+     * @return bool
+     */
+    protected function _getIsRoot()
+    {
+        return $this->role_id === 1;
+    }
+
+    protected function _getIsAdmin()
+    {
+        return $this->role_id <= 2;
+    }
+
+    protected function _getIsStaff()
+    {
+        return $this->role_id <= 3;
+    }
+
 }

@@ -139,6 +139,10 @@ class RatteriesTable extends Table
             ->allowEmptyString('comments');
 
         $validator
+            ->boolean('wants_statistic')
+            ->notEmptyString('wants_statistic');
+
+        $validator
             ->scalar('picture')
             ->maxLength('picture', 255)
             ->notEmptyString('picture');

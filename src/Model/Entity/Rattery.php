@@ -20,6 +20,7 @@ use Cake\ORM\Entity;
  * @property int $country_id
  * @property string|null $website
  * @property string|null $comments
+ * @property bool $wants_statistic
  * @property string $picture
  * @property int $state_id
  * @property \Cake\I18n\FrozenTime $created
@@ -56,6 +57,7 @@ class Rattery extends Entity
         'country_id' => true,
         'website' => true,
         'comments' => true,
+        'wants_statistic' => true,
         'picture' => true,
         'state_id' => true,
         'created' => true,

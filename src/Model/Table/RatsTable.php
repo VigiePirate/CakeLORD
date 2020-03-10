@@ -14,6 +14,7 @@ use Cake\Event\EventInterface;
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsTo $Ratteries
+ * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsTo $BirthLitters
  * @property \App\Model\Table\ColorsTable&\Cake\ORM\Association\BelongsTo $Colors
  * @property \App\Model\Table\EyecolorsTable&\Cake\ORM\Association\BelongsTo $Eyecolors
  * @property \App\Model\Table\DilutionsTable&\Cake\ORM\Association\BelongsTo $Dilutions
@@ -26,8 +27,7 @@ use Cake\Event\EventInterface;
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
  * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\HasMany $Conversations
  * @property \App\Model\Table\RatSnapshotsTable&\Cake\ORM\Association\HasMany $RatSnapshots
- * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsToMany $Litters
- * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsToMany $Litters
+ * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsToMany $BredLitters
  * @property \App\Model\Table\SingularitiesTable&\Cake\ORM\Association\BelongsToMany $Singularities
  *
  * @method \App\Model\Entity\Rat newEmptyEntity()
@@ -59,7 +59,7 @@ class RatsTable extends Table
         parent::initialize($config);
 
         $this->setTable('rats');
-        $this->setDisplayField('pedigree_identifier');
+        $this->setDisplayField('full_name');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -72,6 +72,10 @@ class RatsTable extends Table
         $this->belongsTo('Ratteries', [
             'foreignKey' => 'rattery_id',
             'joinType' => 'INNER',
+        ]);
+        $this->belongsTo('BirthLitters', [
+            'className' => 'Litters',
+            'foreignKey' => 'litter_id',
         ]);
         $this->belongsTo('Colors', [
             'foreignKey' => 'color_id',
@@ -118,12 +122,8 @@ class RatsTable extends Table
         $this->hasMany('RatSnapshots', [
             'foreignKey' => 'rat_id',
         ]);
-        $this->belongsToMany('Litters', [
-            'foreignKey' => 'rat_id',
-            'targetForeignKey' => 'litter_id',
-            'joinTable' => 'litters_rats',
-        ]);
-        $this->belongsToMany('Litters', [
+        $this->belongsToMany('BredLitters', [
+            'className' => 'Litters',
             'foreignKey' => 'rat_id',
             'targetForeignKey' => 'litter_id',
             'joinTable' => 'rats_litters',
@@ -236,6 +236,7 @@ class RatsTable extends Table
         $rules->add($rules->isUnique(['pedigree_identifier']));
         $rules->add($rules->existsIn(['owner_user_id'], 'OwnerUsers'));
         $rules->add($rules->existsIn(['rattery_id'], 'Ratteries'));
+        $rules->add($rules->existsIn(['litter_id'], 'BirthLitters'));
         $rules->add($rules->existsIn(['color_id'], 'Colors'));
         $rules->add($rules->existsIn(['eyecolor_id'], 'Eyecolors'));
         $rules->add($rules->existsIn(['dilution_id'], 'Dilutions'));

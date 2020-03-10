@@ -78,6 +78,10 @@
                     <th><?= __('Is Generic') ?></th>
                     <td><?= $rattery->is_generic ? __('Yes') : __('No'); ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Wants Statistic') ?></th>
+                    <td><?= $rattery->wants_statistic ? __('Yes') : __('No'); ?></td>
+                </tr>
             </table>
             <div class="text">
                 <strong><?= __('Comments') ?></strong>

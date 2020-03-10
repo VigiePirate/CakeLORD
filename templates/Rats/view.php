@@ -38,11 +38,13 @@
                     <th><?= __('Sex') ?></th>
                     <td><?= h($rat->sex) ?></td>
                 </tr>
-                    <th><?= __('Age') ?></th>
-                    <td><?= h($rat->age_string) ?></td>
                 <tr>
                     <th><?= __('Rattery') ?></th>
                     <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Birth Litter') ?></th>
+                    <td><?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->id, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Color') ?></th>
@@ -141,7 +143,7 @@
             </div>
             <div class="related">
                 <h4><?= __('Related Litters') ?></h4>
-                <?php if (!empty($rat->litters)) : ?>
+                <?php if (!empty($rat->bred_litters)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -157,22 +159,22 @@
                             <th><?= __('Modified') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($rat->litters as $litters) : ?>
+                        <?php foreach ($rat->bred_litters as $bredLitters) : ?>
                         <tr>
-                            <td><?= h($litters->id) ?></td>
-                            <td><?= h($litters->mating_date) ?></td>
-                            <td><?= h($litters->birth_date) ?></td>
-                            <td><?= h($litters->pups_number) ?></td>
-                            <td><?= h($litters->pups_number_stillborn) ?></td>
-                            <td><?= h($litters->comments) ?></td>
-                            <td><?= h($litters->creator_user_id) ?></td>
-                            <td><?= h($litters->state_id) ?></td>
-                            <td><?= h($litters->created) ?></td>
-                            <td><?= h($litters->modified) ?></td>
+                            <td><?= h($bredLitters->id) ?></td>
+                            <td><?= h($bredLitters->mating_date) ?></td>
+                            <td><?= h($bredLitters->birth_date) ?></td>
+                            <td><?= h($bredLitters->pups_number) ?></td>
+                            <td><?= h($bredLitters->pups_number_stillborn) ?></td>
+                            <td><?= h($bredLitters->comments) ?></td>
+                            <td><?= h($bredLitters->creator_user_id) ?></td>
+                            <td><?= h($bredLitters->state_id) ?></td>
+                            <td><?= h($bredLitters->created) ?></td>
+                            <td><?= h($bredLitters->modified) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Litters', 'action' => 'view', $litters->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Litters', 'action' => 'edit', $litters->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Litters', 'action' => 'delete', $litters->id], ['confirm' => __('Are you sure you want to delete # {0}?', $litters->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Litters', 'action' => 'view', $bredLitters->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Litters', 'action' => 'edit', $bredLitters->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Litters', 'action' => 'delete', $bredLitters->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bredLitters->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

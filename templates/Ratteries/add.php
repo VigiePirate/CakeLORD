@@ -28,6 +28,7 @@
                     echo $this->Form->control('country_id', ['options' => $countries]);
                     echo $this->Form->control('website');
                     echo $this->Form->control('comments');
+                    echo $this->Form->control('wants_statistic');
                     echo $this->Form->control('picture');
                     echo $this->Form->control('state_id', ['options' => $states]);
                     echo $this->Form->control('litters._ids', ['options' => $litters]);

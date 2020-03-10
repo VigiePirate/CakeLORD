@@ -10,7 +10,7 @@ use Cake\ORM\Entity;
  *
  * @property int $rattery_id
  * @property int $litter_id
- * @property int $litters_contributions_id
+ * @property int $litters_contribution_id
  *
  * @property \App\Model\Entity\Rattery $rattery
  * @property \App\Model\Entity\Litter $litter
@@ -28,7 +28,7 @@ class RatteriesLitter extends Entity
      * @var array
      */
     protected $_accessible = [
-        'litters_contributions_id' => true,
+        'litters_contribution_id' => true,
         'rattery' => true,
         'litter' => true,
         'litters_contribution' => true,

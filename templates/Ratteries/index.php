@@ -22,6 +22,7 @@
                     <th><?= $this->Paginator->sort('zip_code') ?></th>
                     <th><?= $this->Paginator->sort('country_id') ?></th>
                     <th><?= $this->Paginator->sort('website') ?></th>
+                    <th><?= $this->Paginator->sort('wants_statistic') ?></th>
                     <th><?= $this->Paginator->sort('picture') ?></th>
                     <th><?= $this->Paginator->sort('state_id') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
@@ -43,6 +44,7 @@
                     <td><?= h($rattery->zip_code) ?></td>
                     <td><?= $rattery->has('country') ? $this->Html->link($rattery->country->name, ['controller' => 'Countries', 'action' => 'view', $rattery->country->id]) : '' ?></td>
                     <td><?= h($rattery->website) ?></td>
+                    <td><?= h($rattery->wants_statistic) ?></td>
                     <td><?= h($rattery->picture) ?></td>
                     <td><?= $rattery->has('state') ? $this->Html->link($rattery->state->name, ['controller' => 'States', 'action' => 'view', $rattery->state->id]) : '' ?></td>
                     <td><?= h($rattery->created) ?></td>

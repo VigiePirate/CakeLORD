@@ -12,6 +12,14 @@ namespace App\Controller;
  */
 class LittersController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // Configure the login action to not require authentication, preventing
+        // the infinite redirect loop issue
+        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
+    }
+
     /**
      * Index method
      *
@@ -19,6 +27,7 @@ class LittersController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
         $this->paginate = [
             'contain' => ['Users', 'States'],
         ];
@@ -36,8 +45,9 @@ class LittersController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $litter = $this->Litters->get($id, [
-            'contain' => ['Users', 'States', 'Rats', 'Ratteries', 'Conversations', 'LitterSnapshots'],
+            'contain' => ['Users', 'States', 'OffspringRats', 'ParentRats', 'Ratteries', 'Conversations', 'LitterSnapshots'],
         ]);
 
         $this->set('litter', $litter);
@@ -51,6 +61,7 @@ class LittersController extends AppController
     public function add()
     {
         $litter = $this->Litters->newEmptyEntity();
+        $this->Authorization->authorize($litter);
         if ($this->request->is('post')) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData());
             if ($this->Litters->save($litter)) {
@@ -62,9 +73,9 @@ class LittersController extends AppController
         }
         $users = $this->Litters->Users->find('list', ['limit' => 200]);
         $states = $this->Litters->States->find('list', ['limit' => 200]);
-        $rats = $this->Litters->Rats->find('list', ['limit' => 200]);
+        $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
         $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'users', 'states', 'rats', 'ratteries'));
+        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries'));
     }
 
     /**
@@ -77,8 +88,9 @@ class LittersController extends AppController
     public function edit($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['Rats', 'Ratteries'],
+            'contain' => ['ParentRats', 'Ratteries'],
         ]);
+        $this->Authorization->authorize($litter);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData());
             if ($this->Litters->save($litter)) {
@@ -90,9 +102,9 @@ class LittersController extends AppController
         }
         $users = $this->Litters->Users->find('list', ['limit' => 200]);
         $states = $this->Litters->States->find('list', ['limit' => 200]);
-        $rats = $this->Litters->Rats->find('list', ['limit' => 200]);
+        $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
         $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'users', 'states', 'rats', 'ratteries'));
+        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries'));
     }
 
     /**
@@ -106,6 +118,7 @@ class LittersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $litter = $this->Litters->get($id);
+        $this->Authorization->authorize($litter);
         if ($this->Litters->delete($litter)) {
             $this->Flash->success(__('The litter has been deleted.'));
         } else {

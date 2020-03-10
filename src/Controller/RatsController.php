@@ -13,6 +13,14 @@ use Cake\Chronos\Chronos;
  */
 class RatsController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // Configure the login action to not require authentication, preventing
+        // the infinite redirect loop issue
+        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'named', 'fromRattery', 'ownedBy', 'sex']);
+    }
+
     /**
      * Index method
      *
@@ -20,6 +28,7 @@ class RatsController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
         $this->paginate = [
             'contain' => ['OwnerUsers', 'Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
         ];
@@ -37,8 +46,9 @@ class RatsController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['OwnerUsers', 'Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'Litters', 'Singularities', 'Conversations', 'RatSnapshots'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'BredLitters', 'Singularities', 'Conversations', 'RatSnapshots'],
         ]);
 
         $this->set('rat', $rat);
@@ -52,6 +62,7 @@ class RatsController extends AppController
     public function add()
     {
         $rat = $this->Rats->newEmptyEntity();
+        $this->Authorization->authorize($rat);
         if ($this->request->is('post')) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
             if ($this->Rats->save($rat)) {
@@ -63,6 +74,7 @@ class RatsController extends AppController
         }
         $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 200]);
         $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
+        $birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200]);
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
@@ -73,9 +85,9 @@ class RatsController extends AppController
         $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
         $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
-        $litters = $this->Rats->Litters->find('list', ['limit' => 200]);
+        $bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'litters', 'singularities'));
+        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters','colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
     }
 
     /**
@@ -88,10 +100,12 @@ class RatsController extends AppController
     public function edit($id = null)
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['Litters', 'Singularities', 'Ratteries'],
+            'contain' => ['BirthLitters', 'BredLitters', 'Singularities', 'Ratteries'],
         ]);
+        $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+            // Force setting pedigree_identifier to save the computed value
             $rat->set('pedigree_identifier', $this->request->getData('pedigree_identifier'));
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
@@ -102,6 +116,7 @@ class RatsController extends AppController
         }
         $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 200]);
         $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
+        $birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
@@ -112,9 +127,9 @@ class RatsController extends AppController
         $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
         $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
-        $litters = $this->Rats->Litters->find('list', ['limit' => 200]);
+        $bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'litters', 'singularities'));
+        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
     }
 
     /**
@@ -128,6 +143,7 @@ class RatsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $rat = $this->Rats->get($id);
+        $this->Authorization->authorize($rat);
         if ($this->Rats->delete($rat)) {
             $this->Flash->success(__('The rat has been deleted.'));
         } else {
@@ -147,6 +163,7 @@ class RatsController extends AppController
      */
     public function named()
     {
+        $this->Authorization->skipAuthorization();
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
         $names = $this->request->getParam('pass');
@@ -181,6 +198,7 @@ class RatsController extends AppController
      */
     public function fromRattery()
     {
+        $this->Authorization->skipAuthorization();
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
         $ratteries = $this->request->getParam('pass');
@@ -209,6 +227,7 @@ class RatsController extends AppController
      */
     public function ownedBy()
     {
+        $this->Authorization->skipAuthorization();
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
         $owners = $this->request->getParam('pass');
@@ -237,6 +256,7 @@ class RatsController extends AppController
      */
     public function sex()
     {
+        $this->Authorization->skipAuthorization();
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
         $sex = $this->request->getParam('pass');

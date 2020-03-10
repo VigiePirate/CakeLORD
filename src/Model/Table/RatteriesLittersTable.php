@@ -54,7 +54,7 @@ class RatteriesLittersTable extends Table
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('LittersContributions', [
-            'foreignKey' => 'litters_contributions_id',
+            'foreignKey' => 'litters_contribution_id',
             'joinType' => 'INNER',
         ]);
     }
@@ -70,7 +70,7 @@ class RatteriesLittersTable extends Table
     {
         $rules->add($rules->existsIn(['rattery_id'], 'Ratteries'));
         $rules->add($rules->existsIn(['litter_id'], 'Litters'));
-        $rules->add($rules->existsIn(['litters_contributions_id'], 'LittersContributions'));
+        $rules->add($rules->existsIn(['litters_contribution_id'], 'LittersContributions'));
 
         return $rules;
     }
