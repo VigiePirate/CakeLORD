@@ -26,18 +26,6 @@ class RolePolicy
     }
 
     /**
-     * Check if $user can list Role
-     *
-     * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Role $role
-     * @return bool
-     */
-    public function canList(IdentityInterface $user, Role $role)
-    {
-        return $user->is_admin;
-    }
-
-    /**
      * Check if $user can create Role
      *
      * @param Authorization\IdentityInterface $user The user.

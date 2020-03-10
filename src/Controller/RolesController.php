@@ -28,6 +28,7 @@ class RolesController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $roles = $this->paginate($this->Roles);
+        //$this->Authorization->authorize($roles, 'view');
 
         $this->set(compact('roles'));
     }

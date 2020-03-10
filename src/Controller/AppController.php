@@ -55,9 +55,8 @@ class AppController extends Controller
         $this->loadComponent('FormProtection');
     }
 
-    /*
     public function isAuthorized($user) {
-        // Admin peut accéder à toute action
+        // Admins can access anything anywhere
         if ($user->is_admin) {
             return true;
         }
@@ -65,5 +64,4 @@ class AppController extends Controller
         // Refus par défaut
         return false;
     }
-     */
 }
