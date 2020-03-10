@@ -126,4 +126,60 @@ class RatteriesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+    * Prefix method (search rattery by prefix)
+    **/
+
+    public function named()
+    {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
+        $names = $this->request->getParam('pass');
+
+        // Use the RatteriesTable to find prefixed ratteries.
+        $ratteries = $this->Ratteries->find('named', [
+            'names' => $names
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['Users', 'Countries', 'States'],
+        ];
+        $ratteries = $this->paginate($ratteries);
+
+        $this->set([
+            'ratteries' => $ratteries,
+            'names' => $names
+        ]);
+    }
+
+    /**
+     * ownedBy method
+     *
+     * Search ratteries by owners.
+     *
+     * @param
+     * @return
+     */
+    public function ownedBy()
+    {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
+        $users = $this->request->getParam('pass');
+        //
+        // Use the RatsTable to find named rats.
+        $ratteries = $this->Ratteries->find('ownedBy', [
+            'users' => $users
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['Users', 'States'],
+        ];
+        $ratteries = $this->paginate($ratteries);
+
+        $this->set(compact('ratteries', 'users'));
+    }
+
 }

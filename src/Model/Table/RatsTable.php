@@ -349,4 +349,48 @@ class RatsTable extends Table
         return $query->group(['Rats.id']);
     }
 
+    public function findBornBefore(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['bornBefore'])) {
+            $query->where([
+                'Rats.birth_date IS' => null,
+            ]);
+        } else {
+            // Find rats with birthdates before passed parameter
+            $bornBefore = implode($options['bornBefore']);
+            // concatenate with  . " 00:00:00.000" ??
+            $query->where([
+                    'Rats.birth_date <=' => $bornBefore,
+            ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
+    public function findBornAfter(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['bornAfter'])) {
+            $query->where([
+                'Rats.birth_date IS' => null,
+            ]);
+        } else {
+            // Find rats with birthdates posterior to passed parameter
+            $bornAfter = implode($options['bornAfter']);
+            // concatenate with  . " 00:00:00.000" ??
+            $query->where([
+                    'Rats.birth_date >=' => $bornAfter,
+            ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
 }

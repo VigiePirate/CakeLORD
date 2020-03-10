@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Chronos\Chronos;
 
 /**
  * Rats Controller
@@ -157,8 +158,8 @@ class RatsController extends AppController
      *
      * Search rats by name.
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      */
     public function named()
     {
@@ -192,8 +193,8 @@ class RatsController extends AppController
      *
      * Search rats by ratteries.
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      */
     public function fromRattery()
     {
@@ -221,8 +222,8 @@ class RatsController extends AppController
      *
      * Search rats by ratteries.
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      */
     public function ownedBy()
     {
@@ -250,8 +251,8 @@ class RatsController extends AppController
      *
      * Search rats by sex.
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      */
     public function sex()
     {
@@ -272,5 +273,63 @@ class RatsController extends AppController
         $rats = $this->paginate($rats);
 
         $this->set(compact('rats', 'sex'));
+    }
+
+    /**
+     * bornBefore method
+     *
+     * Search rats by birthdate.
+     *
+     * @param
+     * @return
+     */
+    public function bornBefore()
+    {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
+        $bornBefore = $this->request->getParam('pass');
+        // $bornBefore = $bornBefore . " 00:00:00.000";
+        // $bornBefore = new Chronos::Chronos($bornBeforeString);
+        //
+        // Use the RatsTable to find named rats.
+        $rats = $this->Rats->find('bornBefore', [
+            'bornBefore' => $bornBefore
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['OwnerUsers', 'Ratteries','States'],
+        ];
+        $rats = $this->paginate($rats);
+
+        // $this->set(compact('rats', 'birth_dates'));
+
+        $this->set([
+            'rats' => $rats,
+            'bornBefore' => $bornBefore
+        ]);
+    }
+
+    public function bornAfter()
+    {
+        $bornAfter = $this->request->getParam('pass');
+
+        // Use the RatsTable to find named rats.
+        $rats = $this->Rats->find('bornAfter', [
+            'bornAfter' => $bornAfter
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['OwnerUsers', 'Ratteries','States'],
+        ];
+        $rats = $this->paginate($rats);
+
+        // $this->set(compact('rats', 'birth_dates'));
+
+        $this->set([
+            'rats' => $rats,
+            'bornAfter' => $bornAfter
+        ]);
     }
 }

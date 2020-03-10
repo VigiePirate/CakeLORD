@@ -167,4 +167,51 @@ class RatteriesTable extends Table
 
         return $rules;
     }
+
+    // Finder Functions
+    // Search rattery by name or prefix
+    public function findNamed(Query $query, array $options)
+    {
+      $query = $query
+      ->select()
+      ->distinct();
+
+      if (empty($options['names'])) {
+        $query->where([
+          'OR' => ['Ratteries.prefix IS' => null, 'Ratteries.name IS' => null],
+        ]);
+      } else {
+        $query->where([
+          'OR' => [
+            'Ratteries.prefix LIKE' => '%'.implode($options['names']).'%',
+            'Ratteries.name LIKE' => '%'.implode($options['names']).'%',
+          ],
+        ]);
+      }
+
+      return $query;
+    }
+
+    public function findOwnedBy(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['users'])) {
+            $query->leftJoinWith('Users')
+                  ->where([
+                      'Users.username IS' => null,
+                  ]);
+        } else {
+            $query->innerJoinWith('Users')
+                  ->where([
+                          'Users.username LIKE' => '%'.implode($options['users']).'%',
+                ]);
+        }
+
+        return $query->group(['Ratteries.id']);
+    }
+
+
 }
