@@ -20,6 +20,7 @@
                     <th><?= $this->Paginator->sort('sex') ?></th>
                     <th><?= $this->Paginator->sort('birth_date') ?></th>
                     <th><?= $this->Paginator->sort('rattery_id') ?></th>
+                    <th><?= $this->Paginator->sort('litter_id') ?></th>
                     <th><?= $this->Paginator->sort('color_id') ?></th>
                     <th><?= $this->Paginator->sort('eyecolor_id') ?></th>
                     <th><?= $this->Paginator->sort('dilution_id') ?></th>
@@ -46,7 +47,7 @@
                 <?php foreach ($rats as $rat): ?>
                 <tr>
                     <td><?= $this->Number->format($rat->id) ?></td>
-                    <td><?= $this->Html->link(h($rat->pedigree_identifier), ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?></td>
+                    <td><?= $this->Html->link($rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?></td>
                     <td><?= h($rat->is_pedigree_custom) ?></td>
                     <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                     <td><?= h($rat->name) ?></td>
@@ -54,6 +55,7 @@
                     <td><?= h($rat->sex) ?></td>
                     <td><?= h($rat->birth_date) ?></td>
                     <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
+                    <td><?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->id, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : '' ?></td>
                     <td><?= $rat->has('color') ? $this->Html->link($rat->color->name, ['controller' => 'Colors', 'action' => 'view', $rat->color->id]) : '' ?></td>
                     <td><?= $rat->has('eyecolor') ? $this->Html->link($rat->eyecolor->name, ['controller' => 'Eyecolors', 'action' => 'view', $rat->eyecolor->id]) : '' ?></td>
                     <td><?= $rat->has('dilution') ? $this->Html->link($rat->dilution->name, ['controller' => 'Dilutions', 'action' => 'view', $rat->dilution->id]) : '' ?></td>

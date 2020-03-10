@@ -23,7 +23,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\State $state
  * @property \App\Model\Entity\Conversation[] $conversations
  * @property \App\Model\Entity\LitterSnapshot[] $litter_snapshots
- * @property \App\Model\Entity\Rat[] $rats
+ * @property \App\Model\Entity\Rat[] $parent_rats
  * @property \App\Model\Entity\Rattery[] $ratteries
  */
 class Litter extends Entity
@@ -51,7 +51,35 @@ class Litter extends Entity
         'state' => true,
         'conversations' => true,
         'litter_snapshots' => true,
-        'rats' => true,
+        'parent_rats' => true,
         'ratteries' => true,
     ];
+
+    protected function _getDam()
+    {
+        foreach ($this->parent_rats as $parent) {
+            if ($parent->sex == 'F') {
+                return $parent;
+            }
+        }
+    }
+
+    protected function _getSire()
+    {
+        foreach ($this->parent_rats as $parent) {
+            if ($parent->sex == 'M') {
+                return $parent;
+            }
+        }
+    }
+
+    protected function _getFullName()
+    {
+        $fullname = $this->birth_date . ' ' . $this->dam->full_name;
+        if (isset ($this->sire)) {
+            $fullname .= ' ' . $this->sire->full_name;
+        }
+        return $fullname;
+    }
+
 }

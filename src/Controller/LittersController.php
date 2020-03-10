@@ -47,7 +47,7 @@ class LittersController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $litter = $this->Litters->get($id, [
-            'contain' => ['Users', 'States', 'Rats', 'Ratteries', 'Conversations', 'LitterSnapshots'],
+            'contain' => ['Users', 'States', 'OffspringRats', 'ParentRats', 'Ratteries', 'Conversations', 'LitterSnapshots'],
         ]);
 
         $this->set('litter', $litter);
@@ -73,9 +73,9 @@ class LittersController extends AppController
         }
         $users = $this->Litters->Users->find('list', ['limit' => 200]);
         $states = $this->Litters->States->find('list', ['limit' => 200]);
-        $rats = $this->Litters->Rats->find('list', ['limit' => 200]);
+        $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
         $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'users', 'states', 'rats', 'ratteries'));
+        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries'));
     }
 
     /**
@@ -88,7 +88,7 @@ class LittersController extends AppController
     public function edit($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['Rats', 'Ratteries'],
+            'contain' => ['ParentRats', 'Ratteries'],
         ]);
         $this->Authorization->authorize($litter);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -102,9 +102,9 @@ class LittersController extends AppController
         }
         $users = $this->Litters->Users->find('list', ['limit' => 200]);
         $states = $this->Litters->States->find('list', ['limit' => 200]);
-        $rats = $this->Litters->Rats->find('list', ['limit' => 200]);
+        $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
         $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'users', 'states', 'rats', 'ratteries'));
+        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries'));
     }
 
     /**

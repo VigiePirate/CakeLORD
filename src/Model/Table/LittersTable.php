@@ -15,8 +15,8 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
  * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\HasMany $Conversations
  * @property \App\Model\Table\LitterSnapshotsTable&\Cake\ORM\Association\HasMany $LitterSnapshots
- * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsToMany $Rats
- * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsToMany $Rats
+ * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $OffspringRats
+ * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsToMany $ParentRats
  * @property \App\Model\Table\RatteriesTable&\Cake\ORM\Association\BelongsToMany $Ratteries
  *
  * @method \App\Model\Entity\Litter newEmptyEntity()
@@ -48,7 +48,7 @@ class LittersTable extends Table
         parent::initialize($config);
 
         $this->setTable('litters');
-        $this->setDisplayField('id');
+        $this->setDisplayField('full_name');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -67,12 +67,12 @@ class LittersTable extends Table
         $this->hasMany('LitterSnapshots', [
             'foreignKey' => 'litter_id',
         ]);
-        $this->belongsToMany('Rats', [
+        $this->hasMany('OffspringRats', [
+            'className' => 'Rats',
             'foreignKey' => 'litter_id',
-            'targetForeignKey' => 'rat_id',
-            'joinTable' => 'litters_rats',
         ]);
-        $this->belongsToMany('Rats', [
+        $this->belongsToMany('ParentRats', [
+            'className' => 'Rats',
             'foreignKey' => 'litter_id',
             'targetForeignKey' => 'rat_id',
             'joinTable' => 'rats_litters',

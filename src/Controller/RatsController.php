@@ -47,7 +47,7 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['OwnerUsers', 'Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'Litters', 'Singularities', 'Conversations', 'RatSnapshots'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'BredLitters', 'Singularities', 'Conversations', 'RatSnapshots'],
         ]);
 
         $this->set('rat', $rat);
@@ -73,6 +73,7 @@ class RatsController extends AppController
         }
         $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 200]);
         $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
+        $birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200]);
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
@@ -83,9 +84,9 @@ class RatsController extends AppController
         $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
         $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
-        $litters = $this->Rats->Litters->find('list', ['limit' => 200]);
+        $bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'litters', 'singularities'));
+        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters','colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
     }
 
     /**
@@ -98,7 +99,7 @@ class RatsController extends AppController
     public function edit($id = null)
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['Litters', 'Singularities', 'Ratteries'],
+            'contain' => ['BirthLitters', 'BredLitters', 'Singularities', 'Ratteries'],
         ]);
         $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -114,6 +115,7 @@ class RatsController extends AppController
         }
         $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 200]);
         $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
+        $birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
@@ -124,9 +126,9 @@ class RatsController extends AppController
         $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
         $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
-        $litters = $this->Rats->Litters->find('list', ['limit' => 200]);
+        $bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'litters', 'singularities'));
+        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
     }
 
     /**

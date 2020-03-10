@@ -18,6 +18,7 @@ use Cake\I18n\FrozenTime;
  * @property string $sex
  * @property \Cake\I18n\FrozenDate $birth_date
  * @property int $rattery_id
+ * @property int $litter_id
  * @property int $color_id
  * @property int $eyecolor_id
  * @property int $dilution_id
@@ -76,6 +77,7 @@ class Rat extends Entity
         'sex' => true,
         'birth_date' => true,
         'rattery_id' => true,
+        'litter_id' => true,
         'color_id' => true,
         'eyecolor_id' => true,
         'dilution_id' => true,
@@ -113,6 +115,11 @@ class Rat extends Entity
         'litters' => true,
         'singularities' => true,
     ];
+
+     protected function _getFullName()
+     {
+         return $this->pedigree_identifier . ' ' . $this->name;
+     }
 
      protected function _getPictureThumbnail()
      {
@@ -161,8 +168,8 @@ class Rat extends Entity
      protected function _getAgeString()
      {
          $age = $this->age . ' months';
-         if (! $age) {
-             $age .= '(birth date unknown)'; // Should raise exception
+         if (! $this->age) {
+             $age .= ' (birth date unknown)'; // Should raise exception
          }
          if (! $this->_fields['is_alive']) {
              isset($this->_fields['death_date']) ? $age .= ' † (deceased)' : $age .= ' † (deceased at unknown date)';
