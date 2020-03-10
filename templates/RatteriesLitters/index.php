@@ -13,7 +13,7 @@
                 <tr>
                     <th><?= $this->Paginator->sort('rattery_id') ?></th>
                     <th><?= $this->Paginator->sort('litter_id') ?></th>
-                    <th><?= $this->Paginator->sort('litters_contributions_id') ?></th>
+                    <th><?= $this->Paginator->sort('litters_contribution_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>

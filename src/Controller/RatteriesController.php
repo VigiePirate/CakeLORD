@@ -23,7 +23,7 @@ class RatteriesController extends AppController
      * Index method
      *
      * @return \Cake\Http\Response|null
-     *
+     */
     public function index()
     {
         $this->Authorization->skipAuthorization();
@@ -60,7 +60,7 @@ class RatteriesController extends AppController
     public function add()
     {
         $rattery = $this->Ratteries->newEmptyEntity();
-        $this->Authorization->authorize($rattery);
+        $this->Authorization->authorize($rattery, 'create');
         if ($this->request->is('post')) {
             $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
             if ($this->Ratteries->save($rattery)) {

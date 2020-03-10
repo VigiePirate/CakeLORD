@@ -243,7 +243,7 @@ DROP TABLE IF EXISTS `cakelord`.`ratteries` ;
 
 CREATE TABLE IF NOT EXISTS `cakelord`.`ratteries` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `prefix` VARCHAR(3) NOT NULL,
+  `prefix` VARCHAR(6) NOT NULL,
   `name` VARCHAR(70) NOT NULL,
   `owner_user_id` INT UNSIGNED NOT NULL,
   `birth_year` YEAR NULL,

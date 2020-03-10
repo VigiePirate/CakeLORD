@@ -22,7 +22,7 @@
             <fieldset>
                 <legend><?= __('Edit Ratteries Litter') ?></legend>
                 <?php
-                    echo $this->Form->control('litters_contributions_id', ['options' => $littersContributions]);
+                    echo $this->Form->control('litters_contribution_id', ['options' => $littersContributions]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

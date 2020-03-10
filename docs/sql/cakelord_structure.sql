@@ -529,7 +529,7 @@ DROP TABLE IF EXISTS `ratteries`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ratteries` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `prefix` varchar(3) NOT NULL,
+  `prefix` varchar(6) NOT NULL,
   `name` varchar(70) NOT NULL,
   `owner_user_id` int(10) unsigned NOT NULL,
   `birth_year` year(4) DEFAULT NULL,
