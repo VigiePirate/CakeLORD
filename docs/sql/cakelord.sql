@@ -376,6 +376,34 @@ CREATE TABLE `litter_snapshots` (
   `litter_id` int(10) unsigned NOT NULL,
   `state_id` int(10) unsigned NOT NULL,
   `created` datetime NOT NULL,
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC),
+  UNIQUE INDEX `iso3166_UNIQUE` (`iso3166` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `cakelord`.`ratteries`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `cakelord`.`ratteries` ;
+
+CREATE TABLE IF NOT EXISTS `cakelord`.`ratteries` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `prefix` VARCHAR(6) NOT NULL,
+  `name` VARCHAR(70) NOT NULL,
+  `owner_user_id` INT UNSIGNED NOT NULL,
+  `birth_year` YEAR NULL,
+  `is_alive` TINYINT(1) NOT NULL DEFAULT 1,
+  `is_generic` TINYINT(1) NOT NULL DEFAULT 0,
+  `district` VARCHAR(70) NULL,
+  `zip_code` VARCHAR(12) NULL,
+  `country_id` INT UNSIGNED NOT NULL DEFAULT 1,
+  `website` VARCHAR(255) NULL,
+  `comments` TEXT NULL,
+  `wants_statistic` TINYINT(1) NOT NULL DEFAULT 1,
+  `picture` VARCHAR(255) NOT NULL DEFAULT 'Unknown.png',
+  `state_id` INT UNSIGNED NOT NULL DEFAULT 1,
+  `created` DATETIME NOT NULL DEFAULT '1981-08-01',
+  `modified` DATETIME NOT NULL DEFAULT '1981-08-01',
   PRIMARY KEY (`id`),
   KEY `fk_litter_snapshots_litters1` (`litter_id`),
   KEY `fk_litter_snapshots_states1` (`state_id`),
