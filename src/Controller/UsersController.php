@@ -24,8 +24,16 @@ class UsersController extends AppController
         $this->Authorization->skipAuthorization();
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
+
         // regardless of POST or GET, redirect if user is logged in
         if ($result->isValid()) {
+            // check if password needs a rehash
+            if ($authentication->identifiers()->get('Password')->needsPasswordRehash()) {
+                // Rehash happens on save.
+                $user = $this->Users->get($this->Auth->user('id'));
+                $user->password = $this->request->getData('password');
+                $this->Users->save($user);
+            }
             // redirect to /rats after login success
             $redirect = $this->request->getQuery('redirect', [
                 'controller' => 'Rats',

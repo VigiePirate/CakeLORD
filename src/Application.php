@@ -160,6 +160,17 @@ class Application extends BaseApplication
                 'password' => 'password',
             ],
             'loginUrl' => '/users/login',
+            'passwordHasher' => [
+                'className' => 'Authentication.Fallback',
+                'hashers' => [
+                    'Authentication.Default',
+                    [
+                        'className' => 'Authentication.Legacy',
+                        'hashType' => 'md5',
+                        'salt' => false // turn off default usage of salt
+                    ],
+                ]
+            ]
         ]);
     
         return $authenticationService;
