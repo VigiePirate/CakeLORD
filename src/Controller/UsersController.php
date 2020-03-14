@@ -27,12 +27,14 @@ class UsersController extends AppController
 
         // regardless of POST or GET, redirect if user is logged in
         if ($result->isValid()) {
+            $authService = $this->Authentication->getAuthenticationService();
             // check if password needs a rehash
-            if ($authentication->identifiers()->get('Password')->needsPasswordRehash()) {
+            if ($authService->identifiers()->get('Password')->needsPasswordRehash()) {
                 // Rehash happens on save.
-                $user = $this->Users->get($this->Auth->user('id'));
+                $user = $this->Users->get($this->Authentication->getIdentityData('id'));
                 $user->password = $this->request->getData('password');
                 $this->Users->save($user);
+                $this->Flash->set(__('Your password has been rehashed.'));
             }
             // redirect to /rats after login success
             $redirect = $this->request->getQuery('redirect', [
