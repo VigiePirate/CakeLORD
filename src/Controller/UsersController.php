@@ -37,12 +37,14 @@ class UsersController extends AppController
                 $this->Flash->set(__('Your password has been rehashed.'));
             }
             // redirect to /rats after login success
-            $redirect = $this->request->getQuery('redirect', [
-                'controller' => 'Rats',
-                'action' => 'index',
-            ]);
+            //$redirect = $this->request->getQuery('redirect', [
+            //   'controller' => 'Rats',
+            //    'action' => 'index',
+            //]);
+            //return $this->redirect($redirect);
 
-            return $this->redirect($redirect);
+            $target = $this->Authentication->getLoginRedirect();
+            return $this->redirect($target);
         }
         // display error if user submitted and authentication failed
         if ($this->request->is('post') && !$result->isValid()) {

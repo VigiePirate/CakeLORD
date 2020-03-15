@@ -68,6 +68,7 @@ class Application extends BaseApplication
         }
 
         // Load more plugins here
+        $this->addPlugin('Authentication');
         $this->addPlugin('Authorization');
     }
 
@@ -134,10 +135,15 @@ class Application extends BaseApplication
         // Load more plugins here
     }
 
-    #protected function configAuth(): \Authentication\AuthenticationService
+    /**
+     * Returns a service provider instance.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request Request
+     * @param \Psr\Http\Message\ResponseInterface $response Response
+     * @return \Authentication\AuthenticationServiceInterface
+     */
     public function getAuthenticationService(ServerRequestInterface $request) : AuthenticationServiceInterface
     {
-        //$authenticationService = new \Authentication\AuthenticationService([
         $authenticationService = new AuthenticationService([
             'unauthenticatedRedirect' => '/users/login',
             'queryParam' => 'redirect',
@@ -171,6 +177,10 @@ class Application extends BaseApplication
                 'password' => 'password',
             ],
             'loginUrl' => '/users/login',
+            'loginRedirect' => [
+                'controller' => 'Rats',
+                'action' => 'index',
+            ],
         ]);
     
         return $authenticationService;
