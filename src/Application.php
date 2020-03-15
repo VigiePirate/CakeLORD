@@ -100,7 +100,10 @@ class Application extends BaseApplication
             // add Authentication after RoutingMiddleware
             //->add(new AuthenticationMiddleware($this->configAuth()));
             ->add(new AuthenticationMiddleware($this))
-            ->add(new AuthorizationMiddleware($this));
+            ->add(new AuthorizationMiddleware($this, [
+                // FOR DEV PHASE ONLY !!!!!
+                'requireAuthorizationCheck' => false
+            ]));
             
         if (Configure::read('debug')) {
             // Disable authz for debugkit
