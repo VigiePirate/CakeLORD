@@ -177,10 +177,6 @@ class Application extends BaseApplication
                 'password' => 'password',
             ],
             'loginUrl' => '/users/login',
-            'loginRedirect' => [
-                'controller' => 'Rats',
-                'action' => 'index',
-            ],
         ]);
     
         return $authenticationService;
