@@ -55,3 +55,4 @@ nbproject/*
 /docs/cdc/*.aux
 /docs/cdc/*.bbl
 /docs/cdc/*.blg
+/docs/sql/migration_users_pa.sql
