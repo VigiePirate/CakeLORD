@@ -21,6 +21,11 @@ a {
 body {
     background: #f5f7fa;
 }
+
+.container {
+    padding-top: 2rem;
+}
+
 .content {
     padding: 2rem;
     background: #ffffff;
@@ -39,22 +44,31 @@ th {
 
 /* Nav bar */
 .top-nav {
+    background: #7b4d35;
     display: flex;
+    /* display: block; */
     align-items: center;
     justify-content: space-between;
     max-width: 112rem;
+    /*
+    max-width: 100%;
+    */
     padding: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
     margin: 0 auto 2rem;
 }
 .top-nav-title a {
     font-size: 2.4rem;
-    color: #7b4d35;
+    color: #f5f7fa;
 }
 .top-nav-title span {
     color: #404041;
 }
 .top-nav-links a {
     margin: 0 0.5rem;
+    color: #f5f7fa;
 }
 .top-nav-title a,
 .top-nav-links a {
