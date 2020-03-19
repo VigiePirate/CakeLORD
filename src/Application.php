@@ -68,6 +68,7 @@ class Application extends BaseApplication
         }
 
         // Load more plugins here
+        $this->addPlugin('Authentication');
         $this->addPlugin('Authorization');
     }
 
@@ -99,7 +100,10 @@ class Application extends BaseApplication
             // add Authentication after RoutingMiddleware
             //->add(new AuthenticationMiddleware($this->configAuth()));
             ->add(new AuthenticationMiddleware($this))
-            ->add(new AuthorizationMiddleware($this));
+            ->add(new AuthorizationMiddleware($this, [
+                // FOR DEV PHASE ONLY !!!!!
+                'requireAuthorizationCheck' => false
+            ]));
             
         if (Configure::read('debug')) {
             // Disable authz for debugkit
@@ -134,10 +138,15 @@ class Application extends BaseApplication
         // Load more plugins here
     }
 
-    #protected function configAuth(): \Authentication\AuthenticationService
+    /**
+     * Returns a service provider instance.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request Request
+     * @param \Psr\Http\Message\ResponseInterface $response Response
+     * @return \Authentication\AuthenticationServiceInterface
+     */
     public function getAuthenticationService(ServerRequestInterface $request) : AuthenticationServiceInterface
     {
-        //$authenticationService = new \Authentication\AuthenticationService([
         $authenticationService = new AuthenticationService([
             'unauthenticatedRedirect' => '/users/login',
             'queryParam' => 'redirect',
@@ -148,6 +157,17 @@ class Application extends BaseApplication
             'fields' => [
                 'username' => 'email',
                 'password' => 'password',
+            ],
+            'passwordHasher' => [
+                'className' => 'Authentication.Fallback',
+                'hashers' => [
+                    'Authentication.Default',
+                    [
+                        'className' => 'Authentication.Legacy',
+                        'hashType' => 'md5',
+                        'salt' => false // turn off default usage of salt
+                    ],
+                ]
             ]
         ]);
     

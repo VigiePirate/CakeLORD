@@ -14,7 +14,7 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'CakeLORD';
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,11 +40,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="/"><span>Cake</span>PHP</a>
+            <a href="/"><span>Cake</span>LORD</a>
         </div>
         <div class="top-nav-links">
-            <a target="_blank" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" href="https://api.cakephp.org/4/">API</a>
+            <a target="_self" href="/rats"><?= __('Rats') ?></a>
+            <a target="_self" href="/litters"><?= __('Litters') ?></a>
+            <a target="_self" href="/ratteries"><?= __('Ratteries') ?></a>
+            <a target="_self" href="/users"><?= __('Users') ?></a>
+            <a target="_blank" href="https://book.cakephp.org/4/">CakeDocs</a>
         </div>
     </nav>
     <main class="main">
