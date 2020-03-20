@@ -19,8 +19,10 @@ header {
 img {
     margin-bottom: 30px;
 }
-h1 {
+h1, h2, h3, h4 {
     font-weight: bold;
+    font-family: "Imprima";
+    color: #9faede;
 }
 ul {
     list-style-type: none;
