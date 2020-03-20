@@ -40,7 +40,7 @@ $cakeDescription = 'CakeLORD';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="/"><span>Cake</span>LORD</a>
+            <img alt="CakeLORD" src="/img/lord.icon.png" width="48" /><a href="/"><span>Cake</span>LORD</a>
         </div>
         <div class="top-nav-links">
             <a target="_self" href="/rats"><?= __('Rats') ?></a>
