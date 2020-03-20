@@ -187,10 +187,9 @@ class UsersController extends AppController
         {
             $this->Authorization->skipAuthorization();
             if ($this->request->is('post')) {
-                $user = $this->Users->findByEmail($this->request->getData());
-                // $query = $this->Users->findByEmail($this->request->data['email']);
-                // $user = $query->first();
-                if (is_null($user)) {
+                $query = $this->Users->findByEmail($this->request->getData());
+                $user = $query->firstOrFail();
+                if (1) {
                     $this->Flash->error('Email address does not exist. Please try again');
                 } else {
                     $passkey = uniqid();
@@ -208,7 +207,7 @@ class UsersController extends AppController
 
     private function sendResetEmail($url, $user) {
             $email = new Email();
-            $email->template('resetpasswd');
+            $email->template('reset-password');
             $email->emailFormat('both');
             $email->from('no-reply@lord-rat.org');
             $email->to($user->email, $user->full_name);
