@@ -203,6 +203,7 @@ class UsersController extends AppController
                     }
                 }
             }
+            return $this->redirect(['action' => 'lostPassword']);
         }
 
     private function sendResetEmail($url, $user) {
