@@ -23,6 +23,15 @@ h1 {
     font-weight: bold;
     font-family: "Imprima";
 }
+
+h2 {
+    font-family: "Imprima";
+}
+
+h1 {
+    font-family: "Imprima";
+}
+
 ul {
     list-style-type: none;
     margin: 0 0 30px 0;
