@@ -1,7 +1,7 @@
 /* Miligram overrides */
 a {
     font-family: "Raleway", sans-serif;
-    color: #7b4d35;
+    color: #552200;
 }
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
@@ -44,7 +44,7 @@ th {
 
 /* Nav bar */
 .top-nav {
-    background: #7b4d35;
+    background: #552200;
     display: flex;
     /* display: block; */
     align-items: center;
