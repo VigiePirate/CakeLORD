@@ -190,20 +190,19 @@ class UsersController extends AppController
                 $query = $this->Users->findByEmail($this->request->getData());
                 $user = $query->firstOrFail();
                 if (1) {
-                    $this->Flash->error('Email address does not exist. Please try again');
+                    return $this->Flash->error('Email address does not exist. Please try again');
                 } else {
                     $passkey = uniqid();
                     $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
                     $timeout = time() + DAY;
                      if ($this->Users->updateAll(['passkey' => $passkey, 'timeout' => $timeout], ['id' => $user->id])){
                         $this->sendResetEmail($url, $user);
-                        $this->redirect(['action' => 'login']);
+                        return $this->redirect(['action' => 'login']);
                     } else {
-                        $this->Flash->error('Error saving reset passkey/timeout');
+                        return $this->Flash->error('Error saving reset passkey/timeout');
                     }
                 }
             }
-            return $this->redirect(['action' => 'login']);
         }
 
     private function sendResetEmail($url, $user) {
