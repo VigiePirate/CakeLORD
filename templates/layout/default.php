@@ -44,6 +44,14 @@ $cakeDescription = 'CakeLORD';
             <a href="/"><img alt="CakeLORD" src="/img/lord.icon.png" width="20" /><span>&nbsp;Cake</span>LORD</a>
         </div>
         <div class="top-nav-links">
+            <?= $this->Html->Link(
+                $this->getRequest()->getSession()->read('Auth.username'),
+                [
+                    'controller' => 'Users',
+                    'action' => 'view',
+                    $this->getRequest()->getSession()->read('Auth.id')
+                ])
+            ?>
             <a target="_self" href="/rats"><?= __('Rats') ?></a>
             <a target="_self" href="/litters"><?= __('Litters') ?></a>
             <a target="_self" href="/ratteries"><?= __('Ratteries') ?></a>
