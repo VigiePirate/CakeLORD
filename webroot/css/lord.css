@@ -11,7 +11,7 @@ h1, h2, h3, h4 {
 }
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
-    background-color: #552200;
+    background-color: #663a15;
     border-color: #552200;
 }
 
@@ -50,7 +50,7 @@ th {
 
 /* Nav bar */
 .top-nav {
-    background: #552200;
+    background: #663e1b;
     display: flex;
     /* display: block; */
     align-items: center;
