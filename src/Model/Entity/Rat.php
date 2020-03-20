@@ -129,7 +129,7 @@ class Rat extends Entity
              return 'thumbnails/Unknown.png';
          }
      }
- 
+
      protected function _getPedigreeIdentifier()
      {
          if ($this->is_pedigree_custom || isset($this->_fields['pedigree_identifier'])) {
@@ -140,7 +140,7 @@ class Rat extends Entity
              return '???';
          }
      }
- 
+
      protected function _setPedigreeIdentifier($pedigree_identifier)
      {
          if ($this->is_pedigree_custom) {
@@ -151,10 +151,10 @@ class Rat extends Entity
              return '' ;
          }
      }
- 
+
      protected function _getAge()
      {
-         $agedate = FrozenTime::now(); 
+         $agedate = FrozenTime::now();
          if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
              $agedate = $this->_fields['death_date'];
          }
