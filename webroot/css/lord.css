@@ -4,6 +4,12 @@ a {
     color: #7b4d35;
 }
 
+h1, h2, h3 {
+    font-weight: bold;
+    font-family: "Imprima";
+    color: #bbc8e7;
+}
+
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
     background-color: #7b4d35;
     border-color: #663e1b;
