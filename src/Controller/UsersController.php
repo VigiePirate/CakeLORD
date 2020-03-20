@@ -190,7 +190,8 @@ class UsersController extends AppController
 
             if ($this->request->is('post')) {
                 $query = $this->Users->findByEmail($this->request->getData('email'));
-                $user = $query->firstOrFail();
+                // $user = $query->firstOrFail();
+                $user = $query->first();            
                 if (true) {
                     return $this->Flash->error('Email address does not exist. Please try again');
                 } else {
