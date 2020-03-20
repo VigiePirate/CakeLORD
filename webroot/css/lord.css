@@ -1,17 +1,17 @@
 /* Miligram overrides */
 a {
-    font-family: "Raleway", sans-serif;
-    color: #552200;
+    font-family: "Imprima", sans-serif;
+    color: #663300;
 }
 
 h1, h2, h3, h4 {
     font-weight: bold;
     font-family: "Imprima";
-    color: #8795E8;
+    color: #9faede;
 }
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
-    background-color: #663a15;
+    background-color: #663300;
     border-color: #552200;
 }
 
@@ -50,7 +50,7 @@ th {
 
 /* Nav bar */
 .top-nav {
-    background: #663e1b;
+    background: #663300;
     display: flex;
     /* display: block; */
     align-items: center;
@@ -71,9 +71,10 @@ th {
     color: #f5f7fa;
 }
 .top-nav-title span {
-    color: #8795E8;
+    color: #9faede;
 }
 .top-nav-links a {
+    font-family: "Imprima";
     margin: 0 0.5rem;
     color: #f5f7fa;
 }
