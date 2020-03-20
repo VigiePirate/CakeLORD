@@ -186,12 +186,12 @@ class UsersController extends AppController
     public function lostPassword($email = null)
         {
             $this->Authorization->skipAuthorization();
-            $this->request->allowMethod(['post']);
+            // $this->request->allowMethod(['post']);
 
             if ($this->request->is('post')) {
                 $query = $this->Users->findByEmail($this->request->getData('email'));
                 // $user = $query->firstOrFail();
-                $user = $query->first();            
+                $user = $query->first();
                 if (true) {
                     return $this->Flash->error('Email address does not exist. Please try again');
                 } else {
