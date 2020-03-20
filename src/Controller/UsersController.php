@@ -185,14 +185,16 @@ class UsersController extends AppController
 
     public function lostPassword()
         {
+            $this->Authorization->skipAuthorization();
             if ($this->request->is('post')) {
-                $query = $this->Users->findByEmail($this->request->data['email']);
-                $user = $query->first();
+                $user = $this->Users->findByEmail($this->request->getData());
+                // $query = $this->Users->findByEmail($this->request->data['email']);
+                // $user = $query->first();
                 if (is_null($user)) {
                     $this->Flash->error('Email address does not exist. Please try again');
                 } else {
                     $passkey = uniqid();
-                    $url = Router::Url(['controller' => 'users', 'action' => 'reset'], true) . '/' . $passkey;
+                    $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
                     $timeout = time() + DAY;
                      if ($this->Users->updateAll(['passkey' => $passkey, 'timeout' => $timeout], ['id' => $user->id])){
                         $this->sendResetEmail($url, $user);
