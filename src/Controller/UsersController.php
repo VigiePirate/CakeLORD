@@ -192,7 +192,7 @@ class UsersController extends AppController
                 $user = $query->first();
                 //$user = $query->firstOrFail();
 
-                if (empty(user)) {
+                if (empty($user)) {
                     return $this->Flash->error('Email address does not exist. Please try again');
                 } else {
                     $passkey = uniqid();
