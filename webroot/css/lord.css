@@ -7,7 +7,7 @@ a {
 h1, h2, h3, h4 {
     font-weight: bold;
     font-family: "Imprima";
-    color: #9faede;
+    color: #8795E8;
 }
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
@@ -71,7 +71,7 @@ th {
     color: #f5f7fa;
 }
 .top-nav-title span {
-    color: #9faede;
+    color: #8795E8;
 }
 .top-nav-links a {
     margin: 0 0.5rem;
