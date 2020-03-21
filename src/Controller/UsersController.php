@@ -213,8 +213,9 @@ class UsersController extends AppController
     private function sendResetEmail($url, $user) {
             $mailer = new Mailer(); // fixme: 'default' + define mailer configuration
             $mailer
+              ->setTransport(new \Cake\Mailer\Transport\DebugTransport())
               ->setFrom(['lord@example.com' => 'Livre des Origines du Rat Domestique'])
-              ->setSender('lord@example.com', 'MyApp emailer') // fixme
+              // ->setSender('lord@example.com', 'MyApp emailer') // fixme
               ->setTo($user->email)
               ->setSubject('Reset your Password')
               ->setViewVars(['url' => $url, 'username' => $user->username])
@@ -227,22 +228,6 @@ class UsersController extends AppController
             } else {
                 $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
             }
-
-            /*
-            // Old from Cake 3 tutorial
-            $email->template('reset-password');
-            $email->emailFormat('both');
-            $email->from('no-reply@lord-rat.org');
-            $email->to($user->email, $user->full_name);
-            $email->subject('Reset your password');
-            $email->viewVars(['url' => $url, 'username' => $user->username]);
-            if ($email->send()) {
-                $this->Flash->success(__('Check your email for your reset password link'));
-            } else {
-                $this->Flash->error(__('Error sending email: ') . $email->smtpError);
-            }
-
-            */
         }
 
     public function resetPassword($passkey = null) {
