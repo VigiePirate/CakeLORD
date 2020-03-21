@@ -195,7 +195,7 @@ class UsersController extends AppController
                 if (empty($user)) {
                     return $this->Flash->error('Email address does not exist. Please try again');
                 } else {
-                    $passkey = uniqid();
+                    $passkey = uniqid('', true);
                     $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
                     $timeout = time() + DAY;
                      if ($this->Users->updateAll(['passkey' => $passkey, 'timeout' => $timeout], ['id' => $user->id])){
