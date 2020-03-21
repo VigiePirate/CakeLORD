@@ -195,8 +195,8 @@ class UsersController extends AppController
                 if (empty($user)) {
                     return $this->Flash->error('Email address does not exist. Please try again');
                 } else {
-                    return $this->Flash->success('We have found your email address');
-                    /*$passkey = uniqid('', true);
+                    /* return $this->Flash->success('We have found your email address'); */
+                    $passkey = uniqid('', true);
                     $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
                     $timeout = time() + DAY;
                      if ($this->Users->updateAll(['passkey' => $passkey, 'timeout' => $timeout], ['id' => $user->id])){
@@ -205,7 +205,7 @@ class UsersController extends AppController
                     }
                     else {
                         return $this->Flash->error('Error saving reset passkey/timeout');
-                    }*/
+                    }
                 }
             }
         }
