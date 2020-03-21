@@ -198,13 +198,13 @@ class UsersController extends AppController
                     /* return $this->Flash->success('We have found your email address'); */
                     $passkey = uniqid('', true);
                     $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
-                    $timeout = time() + DAY;
-                     if ($this->Users->updateAll(['passkey' => $passkey, 'timeout' => $timeout], ['id' => $user->id])){
+                    /* $timeout = time() + DAY; */
+                     if ($this->Users->updateAll(['passkey' => $passkey], ['id' => $user->id])){
                         $this->sendResetEmail($url, $user);
                         return $this->redirect(['action' => 'login']);
                     }
                     else {
-                        return $this->Flash->error('Error saving reset passkey/timeout');
+                        return $this->Flash->error('Error saving reset passkey');
                     }
                 }
             }
