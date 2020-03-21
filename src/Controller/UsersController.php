@@ -217,9 +217,9 @@ class UsersController extends AppController
               ->setSender('lord@example.com', 'MyApp emailer') // fixme
               ->setTo($user->email)
               ->setSubject('Reset your Password')
+              ->viewVars(['url' => $url, 'username' => $user->username])
               ->viewBuilder()
-              ->setTemplate('reset-password')
-              ->viewVars(['url' => $url, 'username' => $user->username]);
+                ->setTemplate('reset-password');
               // ->setDomain('www.example.org');
 
             if ($mailer->deliver()) {
