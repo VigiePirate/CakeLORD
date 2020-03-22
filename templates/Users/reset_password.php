@@ -1,16 +1,15 @@
 <!-- copied from a cake 3 tutorial, to be fixed -->
 
-<div class="users form large-9 medium-8 columns content">
-    <?php echo $this->Form->create($user) ?>
+<?= $this->Flash->render() ?>
+
+<div class="users form index content">
+    <?= $this->Form->create($user) ?>
     <fieldset>
-        <legend><?php echo __('Reset Password') ?>
-    <?php
-        echo $this->Form->input('password', ['required' => true, 'autofocus' => true]); ?>
-        <p class="helper">Passwords must be at least 8 characters and contain at least 1 number, 1 uppercase, 1 lowercase and 1 special character</p>
-    <?php
-        echo $this->Form->input('confirm_password', ['type' => 'password', 'required' => true]);
-    ?>
+        <legend><?= echo __('Enter New Password') ?></legend>
+        <?= $this->Form->control('password', ['required' => true, 'autofocus' => true]) ?>
+        <p class="helper">We recommend you to chose a password ofat least 12 characters with alphanumeric, lowercase, uppercase and/or special characters</p>
+        <?= $this->Form->control('confirm_password', ['type' => 'password', 'required' => true]) ?>
     </fieldset>
- 	<?php echo $this->Form->button(__('Submit')); ?>
-    <?php echo $this->Form->end(); ?>
+    <?= $this->Form->submit(__('Submit new password')); ?>
+    <?= $this->Form->end() ?>
 </div>
