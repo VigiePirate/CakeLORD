@@ -244,8 +244,8 @@ class UsersController extends AppController
               if ($this->Users->updateAll(
                   ['passkey' => null,
                   'failed_login_attempts' => 0,
-                  'failed_login_last_date' => Chronos::now()],
-                  'password' => $this->request->getData('password'),
+                  'failed_login_last_date' => Chronos::now(),
+                  'password' => $this->request->getData('password')],
                   ['id' => $user->id]
                   )
                 ) {
