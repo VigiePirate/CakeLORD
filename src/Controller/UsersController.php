@@ -192,7 +192,6 @@ class UsersController extends AppController
                 $query = $this->Users->findByEmail($this->request->getData('email'));
                 $user = $query->first();
                 //$user = $query->firstOrFail();
-
                 if (empty($user)) {
                     return $this->Flash->error('Email address does not exist. Please try again');
                 } else {
@@ -201,11 +200,12 @@ class UsersController extends AppController
                     $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
                     $timeout = Chronos::now();
                     if ($this->Users->updateAll(
-                      ['passkey' => $passkey],
-                      ['id' => $user->id],
-                      ['failed_login_attempts' => $user->failed_login_attempts++],
-                      ['timeout' => $user->$failed_login_last_date],
-                    )){
+                      ['passkey' => $passkey,
+                      'failed_login_attempts' => $user->failed_login_attempts++,
+                      'failed_login_last_date' => $timeout],
+                      ['id' => $user->id]
+                      )
+                    ) {
                       $this->sendResetEmail($url, $user);
                       return $this->redirect(['action' => 'login']);
                     }
