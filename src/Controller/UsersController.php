@@ -246,6 +246,7 @@ class UsersController extends AppController
         } else {
           $query = $this->Users->findByPasskey($this->request->getData('passkey'));
           $user = $query->first();
+          $this->redirect('/rats/');
           // if (empty($user)) {
             //if($this->request('is_post')) {
             //  if ($this->Users->updateAll(
