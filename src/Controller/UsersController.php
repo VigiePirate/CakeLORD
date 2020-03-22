@@ -239,7 +239,9 @@ class UsersController extends AppController
 
         $this->Authorization->skipAuthorization();
 
-        if ($passkey) {
+        if (is_null($passkey)) {
+          $this->redirect('/');
+        } else {
           $query = $this->Users->findByPasskey($this->request->getData('passkey'));
           $user = $query->first();
           // if (empty($user)) {
@@ -278,8 +280,5 @@ class UsersController extends AppController
             // }
             // unset($user->password);
             // $this->set(compact('user'));
-        } else {
-            $this->redirect('/');
-        }
-    }
+          }
 }
