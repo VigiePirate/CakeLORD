@@ -1,6 +1,9 @@
 <!-- in /templates/Users/lost-password.php -->
+
+<?= $this->Flash->render() ?>
+
 <div class="users form index content">
-    <?= $this->Flash->render() ?>
+
     <h3>Lost Password</h3>
     <?= $this->Form->create() ?>
     <fieldset>

@@ -1,5 +1,5 @@
 <!-- in /templates/Users/login.php -->
-<div class="users form">
+<div class="users form content">
     <?= $this->Flash->render() ?>
     <h3>Login</h3>
     <?= $this->Form->create() ?>
