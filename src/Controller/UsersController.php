@@ -246,7 +246,7 @@ class UsersController extends AppController
           $user = $query->first();
 
           if (empty($user)) {
-            $this->Flash->error('We haven''t found the user');
+            $this->Flash->error('We have not found the user');
             $this->redirect('/users/');
           } else {
             $this->redirect('/rats/view/' . $user->id);
