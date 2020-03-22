@@ -254,7 +254,7 @@ class UsersController extends AppController
                 }
             } else {
                 $this->Flash->error('Invalid or expired passkey. Please check your email or try again');
-                $this->redirect(['action' => 'password']);
+                $this->redirect(['action' => 'lostPassword']);
             }
             unset($user->password);
             $this->set(compact('user'));
