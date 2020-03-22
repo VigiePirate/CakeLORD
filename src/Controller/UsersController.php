@@ -265,8 +265,9 @@ class UsersController extends AppController
                   $this->redirect('/users/reset-password/' . $passkey);
                 } else {
                   $user->password = $newPassword;
+                  $user->passkey = null;
                   $this->Users->save($user);
-                  $this->Flash->success('Your password has been updated.)');
+                  $this->Flash->success('Your password has been updated.');
                   $this->redirect('/users/login/');
                   }
               }
