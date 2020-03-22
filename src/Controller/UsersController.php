@@ -200,7 +200,7 @@ class UsersController extends AppController
                     $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
                     if ($this->Users->updateAll(
                       ['passkey' => $passkey,
-                      'failed_login_attempts' => $user->failed_login_attempts++,
+                      'failed_login_attempts' => ++$user->failed_login_attempts,
                       'failed_login_last_date' => Chronos::now()],
                       ['id' => $user->id]
                       )
