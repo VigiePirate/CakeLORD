@@ -239,7 +239,7 @@ class UsersController extends AppController
 
         $this->Authorization->skipAuthorization();
 
-        $passkey = $this->request->getData('pass');
+        // $passkey = $this->request->getData('pass');
 
         if (empty($passkey)) {
           $this->redirect('/');
