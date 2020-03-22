@@ -198,11 +198,10 @@ class UsersController extends AppController
                     /* return $this->Flash->success('We have found your email address'); */
                     $passkey = uniqid('', true);
                     $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
-                    $timeout = Chronos::now();
                     if ($this->Users->updateAll(
                       ['passkey' => $passkey,
                       'failed_login_attempts' => $user->failed_login_attempts++,
-                      'failed_login_last_date' => $timeout],
+                      'failed_login_last_date' => Chronos::now()],
                       ['id' => $user->id]
                       )
                     ) {
