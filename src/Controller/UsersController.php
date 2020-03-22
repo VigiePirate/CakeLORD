@@ -281,4 +281,5 @@ class UsersController extends AppController
             // unset($user->password);
             // $this->set(compact('user'));
           }
+        }
 }
