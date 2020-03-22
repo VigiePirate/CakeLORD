@@ -199,9 +199,13 @@ class UsersController extends AppController
                     $passkey = uniqid('', true);
                     $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
                     /* $timeout = time() + DAY; */
-                     if ($this->Users->updateAll(['passkey' => $passkey], ['id' => $user->id])){
+                     if ($this->Users->updateAll(
+                          ['passkey' => $passkey],
+                          ['id' => $user->id],
+                          ['failed_login_attempts' => $user->failed_login_attempts++],
+                          ['failed_login_last_date'] => now()],
+                        )){
                         $this->sendResetEmail($url, $user);
-                        $this->Flash->success('We have found your email address');
                         return $this->redirect(['action' => 'login']);
                     }
                     else {
@@ -233,7 +237,7 @@ class UsersController extends AppController
 
     public function resetPassword($passkey = null) {
         if ($passkey) {
-            $query = $this->Users->find('all', ['conditions' => ['passkey' => $passkey, 'timeout >' => time()]]);
+            $query = $this->Users->find('all', ['conditions' => ['passkey' => $passkey]]); //, 'timeout >' => time()]]);
             $user = $query->first();
             if ($user) {
                 if (!empty($this->request->data)) {
