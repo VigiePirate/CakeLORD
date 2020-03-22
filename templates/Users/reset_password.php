@@ -2,7 +2,7 @@
 
 <div class="users form index content">
     <h3>Reset Password</h3>
-    <?= $this->Form->create($user) ?>
+    <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('Enter New Password') ?></legend>
         <?= $this->Form->control('password', ['required' => true, 'autofocus' => true]) ?>

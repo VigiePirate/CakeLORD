@@ -256,8 +256,10 @@ class UsersController extends AppController
             } else {
               // check if password were sent by submit button
               if ($this->request->is('post')) {
-                $this->Flash->success('We have found the user. (Should be later: Your password has been updated.)');
-                return $this->redirect(['action' => 'login']);
+                $newPasswords = $this->request->getData());
+                // $this->Flash->success('We have found the user. (Should be later: Your password has been updated.)');
+                $this->Flash->success('We have the data. (Should be later: Your password has been updated.)');
+                $this->redirect(['action' => 'resetPassword']);
                 }
               }
             }
