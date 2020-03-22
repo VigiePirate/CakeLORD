@@ -258,7 +258,7 @@ class UsersController extends AppController
               //  else {
                     return $this->Flash->error('Error saving reset passkey');
               //  }
-              }
+              // }
               /* from cake 3
                 if (!empty($this->request->data)) {
                     // Clear passkey and timeout
