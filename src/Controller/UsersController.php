@@ -201,6 +201,7 @@ class UsersController extends AppController
                     /* $timeout = time() + DAY; */
                      if ($this->Users->updateAll(['passkey' => $passkey], ['id' => $user->id])){
                         $this->sendResetEmail($url, $user);
+                        $this->Flash->success('We have found your email address');
                         return $this->redirect(['action' => 'login']);
                     }
                     else {
