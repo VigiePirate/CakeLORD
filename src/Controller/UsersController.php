@@ -235,12 +235,12 @@ class UsersController extends AppController
             }
         }
 
-    public function resetPassword($passkey = null) {
+    public function resetPassword($passkey = null, $password=null) {
         if ($passkey) {
           $query = $this->Users->findByPasskey($this->request->getData('passkey'));
           $user = $query->first();
           if (!empty($user)) {
-            if($this->request('is_pass')) {
+            if($this->request('is_post')) {
               if ($this->Users->updateAll(
                   ['passkey' => null,
                   'failed_login_attempts' => 0,
