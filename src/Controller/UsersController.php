@@ -203,7 +203,7 @@ class UsersController extends AppController
                       ['passkey' => $passkey],
                       ['id' => $user->id],
                       ['failed_login_attempts' => $user->failed_login_attempts++],
-                      ['failed_login_last_date' => Chronos::now()],
+                      ['failed_login_last_date' => App\Cake\Chronos::now()],
                     )){
                       $this->sendResetEmail($url, $user);
                       return $this->redirect(['action' => 'login']);
