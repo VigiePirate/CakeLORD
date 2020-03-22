@@ -258,8 +258,8 @@ class UsersController extends AppController
               if ($this->request->is('post')) {
                 $newPassword = $this->request->getData('password');
                 $confirmPassword = $this->request->getData('confirm_password');
-                if (!strcmp($newPassword,$confirmPassword)) {
-                  $this->Flash->error('Passwords are different. Please retry)');
+                if (strcmp($newPassword,$confirmPassword)) {
+                  $this->Flash->error('Passwords are different. Please retry.');
                   $this->redirect('/users/reset-password/' . $passkey);
                 } else {
                   $this->Flash->success('We have the data. (Should be later: Your password has been updated.)');
