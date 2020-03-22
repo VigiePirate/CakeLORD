@@ -5,7 +5,7 @@ namespace App\Controller;
 
 use Cake\Routing\Router;
 use Cake\Mailer\Mailer;
-use Cake\Chronos;
+use Cake\Chronos\Chronos;
 
 /**
  * Users Controller
