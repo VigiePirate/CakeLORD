@@ -244,8 +244,13 @@ class UsersController extends AppController
         } else {
           $query = $this->Users->findByPasskey($passkey);
           $user = $query->first();
-          $this->redirect('/rats/view/' . $user->id);
-          // if (empty($user)) {
+
+          if (empty($user)) {
+            $this->Flash->error('We haven''t found the user');
+            $this->redirect('/users/');
+          } else {
+            $this->redirect('/rats/view/' . $user->id);
+          }
             //if($this->request('is_post')) {
             //  if ($this->Users->updateAll(
               //    ['passkey' => null,
