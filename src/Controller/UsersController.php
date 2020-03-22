@@ -244,7 +244,7 @@ class UsersController extends AppController
         if (empty($passkey)) {
           $this->redirect('/');
         } else {
-          $query = $this->Users->findByPasskey($this->request->getData('passkey'));
+          $query = $this->Users->findByPasskey($passkey);
           $user = $query->first();
           $this->redirect('/rats/');
           // if (empty($user)) {
