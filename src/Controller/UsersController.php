@@ -242,14 +242,14 @@ class UsersController extends AppController
 
         if (empty($passkey)) {
           $this->Flash->error('Invalid or expired passkey. Please check your email or try again');
-          $this->redirect('/users/lost-password/');
+          // $this->redirect(['action' => 'lostPassword']);
         } else {
           $query = $this->Users->findByPasskey($passkey);
           $user = $query->first();
 
           if (empty($user)) {
             $this->Flash->error('Invalid or expired passkey. Please check your email or try again');
-            $this->redirect('/users/lost-password/');
+            $this->redirect(['action' => 'lostPassword']);
           } else {
             // check if user is locked
             if ($user->is_locked) {
@@ -268,7 +268,7 @@ class UsersController extends AppController
                   $user->passkey = null;
                   $this->Users->save($user);
                   $this->Flash->success('Your password has been updated.');
-                  $this->redirect('/users/login/');
+                  $this->redirect(['action' => 'login']);
                   }
               }
             }
