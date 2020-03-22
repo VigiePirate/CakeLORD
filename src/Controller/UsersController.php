@@ -252,11 +252,11 @@ class UsersController extends AppController
               //    ['id' => $user->id]
               //    )
               //  ) {
-                  $this->Flash->success('We have found the user. (Should be later: Your password has been updated.)');
-                  return $this->redirect(['action' => 'login']);
+              //    $this->Flash->success('We have found the user. (Should be later: Your password has been updated.)');
+              //    return $this->redirect(['action' => 'login']);
               //  }
               //  else {
-                    return $this->Flash->error('Error saving reset passkey');
+              //      return $this->Flash->error('Error saving reset passkey');
               //  }
               // }
               /* from cake 3
