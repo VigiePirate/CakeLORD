@@ -254,12 +254,14 @@ class UsersController extends AppController
             if ($user->is_locked) {
               $this->Flash->error('Your account is locked. Please contact an administrator');
             } else {
-              if ($user->updateAll(
+              if ($this->Users->updateAll(
                 ['passkey' => null,
                 'failed_login_attempts' => 0,
                 'failed_login_last_date' => Chronos::now(),
-                'password' => $this->request->getData('password'),
-              ]) {
+                'password' => $this->request->getData('password')],
+                ['id' => $user->id]
+                )
+              ) {
                 $this->Flash->success('We have found the user. (Should be later: Your password has been updated.)');
                 return $this->redirect(['action' => 'login']);
                 }
