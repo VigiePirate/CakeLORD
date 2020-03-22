@@ -235,7 +235,7 @@ class UsersController extends AppController
             }
         }
 
-    public function resetPassword($passkey = null, $password=null) {
+    public function resetPassword($passkey = null) {
 
         $this->Authorization->skipAuthorization();
 
