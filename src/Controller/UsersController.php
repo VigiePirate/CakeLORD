@@ -199,12 +199,12 @@ class UsersController extends AppController
                     /* return $this->Flash->success('We have found your email address'); */
                     $passkey = uniqid('', true);
                     $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
-                    /* $timeout = time() + DAY; */
+                    $timeout = Chronos::now();
                     if ($this->Users->updateAll(
                       ['passkey' => $passkey],
                       ['id' => $user->id],
                       ['failed_login_attempts' => $user->failed_login_attempts++],
-                      ['failed_login_last_date' => Chronos::now()],
+                      ['failed_login_last_date' => $timeout],
                     )){
                       $this->sendResetEmail($url, $user);
                       return $this->redirect(['action' => 'login']);
