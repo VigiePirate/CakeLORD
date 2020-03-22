@@ -240,7 +240,7 @@ class UsersController extends AppController
           $query = $this->Users->findByPasskey($this->request->getData('passkey'));
           $user = $query->first();
           if (!empty($user)) {
-            if($this->request('is_post')) {
+            if($this->request('is_pass')) {
               if ($this->Users->updateAll(
                   ['passkey' => null,
                   'failed_login_attempts' => 0,
