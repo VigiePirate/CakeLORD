@@ -269,10 +269,9 @@ class UsersController extends AppController
                   $this->Flash->success('Your password has been updated.)');
                   $this->redirect('/users/login/');
                   }
-              } else {
-                }
               }
             }
           }
         }
+      }
 }
