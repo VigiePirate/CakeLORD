@@ -185,6 +185,7 @@ class UsersController extends AppController
     */
 
     public function lostPassword($email = null)
+    // fixme: add check for is_locked account (if locked, do not sent mail)
         {
             $this->Authorization->skipAuthorization();
 
@@ -254,15 +255,18 @@ class UsersController extends AppController
             if ($user->is_locked) {
               $this->Flash->error('Your account is locked. Please contact an administrator');
             } else {
-              // check if password were sent by submit button
+              // check if passwords were sent by submit button
               if ($this->request->is('post')) {
                 $newPassword = $this->request->getData('password');
                 $confirmPassword = $this->request->getData('confirm_password');
+                // check if the two passwords are identical
                 if (strcmp($newPassword,$confirmPassword)) {
                   $this->Flash->error('Passwords are different. Please retry.');
                   $this->redirect('/users/reset-password/' . $passkey);
                 } else {
-                  $this->Flash->success('We have the data. (Should be later: Your password has been updated.)');
+                  $user->password = $newPassword;
+                  $this->Users->save($user);
+                  $this->Flash->success('Your password has been updated.)');
                   $this->redirect('/users/login/');
                   }
               } else {
@@ -272,48 +276,3 @@ class UsersController extends AppController
           }
         }
 }
-
-      //      if ($this->request('is_post')) {
-      //        $this->redirect('/users/view/' . $user->id); // debug redirect, to be deleted later
-      //      } else {
-      //           return $this->Flash->error('Error saving reset passkey');
-      //      }
-
-
-
-          // }
-            //if($this->request('is_post')) {
-            //  if ($this->Users->updateAll(
-              //    ['passkey' => null,
-              //    'failed_login_attempts' => 0,
-              //    'failed_login_last_date' => Chronos::now(),
-              //    'password' => $this->request->getData('password')],
-              //    ['id' => $user->id]
-              //    )
-              //  ) {
-              //    $this->Flash->success('We have found the user. (Should be later: Your password has been updated.)');
-              //    return $this->redirect(['action' => 'login']);
-              //  }
-              //  else {
-              //      return $this->Flash->error('Error saving reset passkey');
-              //  }
-              // }
-              /* from cake 3
-                if (!empty($this->request->data)) {
-                    // Clear passkey and timeout
-                    $this->request->data['passkey'] = null;
-                    $this->request->data['timeout'] = null;
-                    $user = $this->Users->patchEntity($user, $this->request->data);
-                    if ($this->Users->save($user)) {
-                        $this->Flash->set(__('Your password has been updated.'));
-                        return $this->redirect(array('action' => 'login'));
-                    } else {
-                        $this->Flash->error(__('The password could not be updated. Please, try again.'));
-                    }
-                } */
-            // } else {
-            //    $this->Flash->error('Invalid or expired passkey. Please check your email or try again');
-            //    $this->redirect(['action' => 'lostPassword']);
-            // }
-            // unset($user->password);
-            // $this->set(compact('user'));
