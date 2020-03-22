@@ -236,22 +236,25 @@ class UsersController extends AppController
         }
 
     public function resetPassword($passkey = null, $password=null) {
+
+        $this->Authorization->skipAuthorization();
+
         if ($passkey) {
           $query = $this->Users->findByPasskey($this->request->getData('passkey'));
           $user = $query->first();
           if (!empty($user)) {
-            if($this->request('is_post')) {
-              if ($this->Users->updateAll(
-                  ['passkey' => null,
-                  'failed_login_attempts' => 0,
-                  'failed_login_last_date' => Chronos::now(),
-                  'password' => $this->request->getData('password')],
-                  ['id' => $user->id]
-                  )
-                ) {
-                  $this->Flash->success('Your password has been updated.');
+            //if($this->request('is_post')) {
+            //  if ($this->Users->updateAll(
+              //    ['passkey' => null,
+              //    'failed_login_attempts' => 0,
+              //    'failed_login_last_date' => Chronos::now(),
+              //    'password' => $this->request->getData('password')],
+              //    ['id' => $user->id]
+              //    )
+              //  ) {
+                  $this->Flash->success('We have found the user. (Should be later: Your password has been updated.)');
                   return $this->redirect(['action' => 'login']);
-                }
+              //  }
                 else {
                     return $this->Flash->error('Error saving reset passkey');
                 }
