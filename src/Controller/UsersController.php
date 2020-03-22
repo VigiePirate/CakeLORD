@@ -237,9 +237,26 @@ class UsersController extends AppController
 
     public function resetPassword($passkey = null) {
         if ($passkey) {
-            $query = $this->Users->find('all', ['conditions' => ['passkey' => $passkey]]); //, 'timeout >' => time()]]);
-            $user = $query->first();
-            if ($user) {
+          $query = $this->Users->findByPasskey($this->request->getData('passkey'));
+          $user = $query->first();
+          if (!empty($user)) {
+            if($this->request('is_post')) {
+              if ($this->Users->updateAll(
+                  ['passkey' => null,
+                  'failed_login_attempts' => 0,
+                  'failed_login_last_date' => Chronos::now()],
+                  'password' => $this->request->getData('password'),
+                  ['id' => $user->id]
+                  )
+                ) {
+                  $this->Flash->success('Your password has been updated.');
+                  return $this->redirect(['action' => 'login']);
+                }
+                else {
+                    return $this->Flash->error('Error saving reset passkey');
+                }
+              }
+              /* from cake 3
                 if (!empty($this->request->data)) {
                     // Clear passkey and timeout
                     $this->request->data['passkey'] = null;
@@ -251,7 +268,7 @@ class UsersController extends AppController
                     } else {
                         $this->Flash->error(__('The password could not be updated. Please, try again.'));
                     }
-                }
+                } */
             } else {
                 $this->Flash->error('Invalid or expired passkey. Please check your email or try again');
                 $this->redirect(['action' => 'lostPassword']);
