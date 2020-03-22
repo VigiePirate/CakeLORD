@@ -239,7 +239,7 @@ class UsersController extends AppController
 
         $this->Authorization->skipAuthorization();
 
-        if ($passkey) {
+        if (!empty($passkey)) {
           $query = $this->Users->findByPasskey($this->request->getData('passkey'));
           $user = $query->first();
           if (!empty($user)) {
