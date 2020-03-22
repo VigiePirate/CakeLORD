@@ -204,7 +204,7 @@ class UsersController extends AppController
                       ['passkey' => $passkey],
                       ['id' => $user->id],
                       ['failed_login_attempts' => $user->failed_login_attempts++],
-                      ['failed_login_last_date' => $timeout],
+                      ['timeout' => $user->$failed_login_last_date],
                     )){
                       $this->sendResetEmail($url, $user);
                       return $this->redirect(['action' => 'login']);
