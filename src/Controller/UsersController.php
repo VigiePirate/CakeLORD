@@ -239,14 +239,12 @@ class UsersController extends AppController
 
         $this->Authorization->skipAuthorization();
 
-        // $passkey = $this->request->getData('pass');
-
         if (empty($passkey)) {
           $this->redirect('/');
         } else {
           $query = $this->Users->findByPasskey($passkey);
           $user = $query->first();
-          $this->redirect('/rats/');
+          $this->redirect('/rats/view/' . $user->id);
           // if (empty($user)) {
             //if($this->request('is_post')) {
             //  if ($this->Users->updateAll(
