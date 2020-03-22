@@ -254,19 +254,30 @@ class UsersController extends AppController
             if ($user->is_locked) {
               $this->Flash->error('Your account is locked. Please contact an administrator');
             } else {
-              if ($this->request('is_post')) {
-                $this->redirect('/users/view/' . $user->id); // debug redirect, to be deleted later
-              } else {
-                   return $this->Flash->error('Error saving reset passkey');
+              if ($user->updateAll(
+                ['passkey' => null,
+                'failed_login_attempts' => 0,
+                'failed_login_last_date' => Chronos::now(),
+                'password' => $this->request->getData('password'),
+              ]) {
+                $this->Flash->success('We have found the user. (Should be later: Your password has been updated.)');
+                return $this->redirect(['action' => 'login']);
+                }
               }
             }
-
-
-
-
-
-
           }
+        }
+}
+
+      //      if ($this->request('is_post')) {
+      //        $this->redirect('/users/view/' . $user->id); // debug redirect, to be deleted later
+      //      } else {
+      //           return $this->Flash->error('Error saving reset passkey');
+      //      }
+
+
+
+          // }
             //if($this->request('is_post')) {
             //  if ($this->Users->updateAll(
               //    ['passkey' => null,
@@ -302,6 +313,3 @@ class UsersController extends AppController
             // }
             // unset($user->password);
             // $this->set(compact('user'));
-          }
-        }
-}
