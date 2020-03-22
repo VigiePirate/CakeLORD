@@ -242,7 +242,7 @@ class UsersController extends AppController
         if ($passkey) {
           $query = $this->Users->findByPasskey($this->request->getData('passkey'));
           $user = $query->first();
-          if (!empty($user)) {
+          // if (empty($user)) {
             //if($this->request('is_post')) {
             //  if ($this->Users->updateAll(
               //    ['passkey' => null,
@@ -272,10 +272,10 @@ class UsersController extends AppController
                         $this->Flash->error(__('The password could not be updated. Please, try again.'));
                     }
                 } */
-            } else {
-                $this->Flash->error('Invalid or expired passkey. Please check your email or try again');
-                $this->redirect(['action' => 'lostPassword']);
-            }
+            // } else {
+            //    $this->Flash->error('Invalid or expired passkey. Please check your email or try again');
+            //    $this->redirect(['action' => 'lostPassword']);
+            // }
             // unset($user->password);
             // $this->set(compact('user'));
         } else {
