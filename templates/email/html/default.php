@@ -14,7 +14,6 @@
  * @var \App\View\AppView $this
  */
 
-$title = ('Gru');
 $content = explode("\n", $content);
 
 foreach ($content as $line) :
