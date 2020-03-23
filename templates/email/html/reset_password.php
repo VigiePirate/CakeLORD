@@ -4,5 +4,4 @@
 
 <p><a href="<?= $url; ?>">Click here to Reset Your Password</a></p>
 
-<pre>or Visit this Link</pre><br/>
-<p><a href=""><?= $url; ?></a></p>
+<p>or Visit this Link : <a href=""><?= $url; ?></a></p>
