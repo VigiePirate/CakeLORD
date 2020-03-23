@@ -1,8 +1,8 @@
-<p>Your username is <?php echo $username; ?></p>
+<p>Your username is <?= $username; ?></p>
 
 <p>Click on the link below to Reset Your Password.</p>
 
-<p><a href="<?php echo $url; ?>">Click here to Reset Your Password</a></p>
+<p><a href="<?= $url; ?>">Click here to Reset Your Password</a></p>
 
 <pre>or Visit this Link</pre><br/>
-<p><a href=""><?php echo $url; ?></a></p>
+<p><a href=""><?= $url; ?></a></p>
