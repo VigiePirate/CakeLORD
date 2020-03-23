@@ -8,7 +8,6 @@ class PasswordMailPreview extends MailPreview
 {
     public function sendResetEmail()
     {
-        // $this->getMailer('sendResetEmail');
         $this->loadModel("Users");
         $user = $this->Users->find()->first();
         $url = $this->Html->link(['controller' => 'users', 'action' => 'resetPassword', $passkey]);
