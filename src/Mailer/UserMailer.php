@@ -4,8 +4,9 @@ namespace App\Mailer;
 
 use Cake\Mailer\Mailer;
 
-class UserMailer extends Mailer
+class App\Mailer\UserMailer extends Mailer
 {
+    /* from tutorial
     public function welcome($user)
     {
         $this
@@ -22,4 +23,28 @@ class UserMailer extends Mailer
             ->setSubject('Reset password')
             ->setViewVars(['token' => $user->token]);
     }
+    */
+
+    public function sendResetEmail($url, $user) {
+            $this
+              ->setTransport(new \Cake\Mailer\Transport\DebugTransport())
+              ->setFrom(['lord@example.com' => 'Livre des Origines du Rat Domestique'])
+              // ->setSender('lord@example.com', 'MyApp emailer') // fixme
+              ->setTo($user->email)
+              ->setSubject('Reset your Password')
+              ->setViewVars(['url' => $url, 'username' => $user->username])
+              ->viewBuilder()
+                ->setTemplate('reset-password');
+              // ->setDomain('www.example.org');
+
+            /* from UsersController, should become useless here
+            if ($mailer->deliver()) {
+                $this->Flash->success(__('Check your email for your reset password link'));
+            } else {
+                $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
+            }
+            return $mailer;
+            */
+        }
+
 }
