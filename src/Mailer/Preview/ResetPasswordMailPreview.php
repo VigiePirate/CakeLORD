@@ -1,4 +1,3 @@
-// in src/Mailer/MailPreview/PasswordMailPreview.php
 <?php
 
 namespace App\Mailer\Preview;

@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Routing\Router;
-use Cake\Mailer\Mailer;
+// use Cake\Mailer\Mailer;
+use Cake\Mailer\MailerAwareTrait;
 use Cake\Chronos\Chronos;
 
 /**
@@ -206,7 +207,8 @@ class UsersController extends AppController
                       ['id' => $user->id]
                       )
                     ) {
-                      $this->sendResetEmail($url, $user);
+                      // $this->sendResetEmail($url, $user);
+                      $this->getMailer('User')->send('sendResetEmail', [$url,$user]);
                       return $this->redirect(['action' => 'login']);
                     }
                     else {
@@ -216,26 +218,32 @@ class UsersController extends AppController
             }
         }
 
-    private function sendResetEmail($url, $user) {
-            $mailer = new Mailer(); // fixme: 'default' + define mailer configuration
-            $mailer
-              ->setTransport(new \Cake\Mailer\Transport\DebugTransport())
-              ->setFrom(['lord@example.com' => 'Livre des Origines du Rat Domestique'])
-              // ->setSender('lord@example.com', 'MyApp emailer') // fixme
-              ->setTo($user->email)
-              ->setSubject('Reset your Password')
-              ->setViewVars(['url' => $url, 'username' => $user->username])
-              ->viewBuilder()
-                ->setTemplate('reset-password');
-              // ->setDomain('www.example.org');
+/* moved function to src/Mailer/UserMailer.php - kept here if something goes really wrong
+        private function sendResetEmail($url, $user) {
+                $mailer = new Mailer(); // fixme: 'default' + define mailer configuration
+                $mailer
+                  ->setTransport(new \Cake\Mailer\Transport\DebugTransport())
+                  ->setFrom(['lord@example.com' => 'Livre des Origines du Rat Domestique'])
+                  // ->setSender('lord@example.com', 'MyApp emailer') // fixme
+                  ->setTo($user->email)
+                  ->setSubject('Reset your Password')
+                  ->setViewVars(['url' => $url, 'username' => $user->username])
+                  ->viewBuilder()
+                    ->setTemplate('reset-password');
+                  // ->setDomain('www.example.org');
 
-            if ($mailer->deliver()) {
-                $this->Flash->success(__('Check your email for your reset password link'));
-            } else {
-                $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
+                if ($mailer->deliver()) {
+                    $this->Flash->success(__('Check your email for your reset password link'));
+                } else {
+                    $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
+                }
+                return $mailer;
             }
-            return $mailer;
-        }
+            */
+
+
+
+
 
     public function resetPassword($passkey = null) {
 
