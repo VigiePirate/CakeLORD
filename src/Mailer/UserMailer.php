@@ -29,7 +29,7 @@ class UserMailer extends Mailer
             return $this
               //->setTransport(new \Cake\Mailer\Transport\DebugTransport())
               ->setTransport('default')
-              ->setHeaders('')
+              ->setHeaders('X-Mailer: PHP/7.3.14-1~deb10u1')
               ->setParams('')
               ->setFrom(['lord@example.com' => 'Livre des Origines du Rat Domestique'])
               // ->setSender('lord@example.com', 'MyApp emailer') // fixme
