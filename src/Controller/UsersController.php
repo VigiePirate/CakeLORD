@@ -217,7 +217,7 @@ class UsersController extends AppController
         }
 
     private function sendResetEmail($url, $user) {
-            $mailer = new Mailer(); // fixme: 'default' + define mailer configuration
+            $mailer = new Mailer('preview'); // fixme: 'default' + define mailer configuration
             $mailer
               ->setTransport(new \Cake\Mailer\Transport\DebugTransport())
               ->setFrom(['lord@example.com' => 'Livre des Origines du Rat Domestique'])
