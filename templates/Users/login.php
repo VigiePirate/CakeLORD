@@ -1,6 +1,7 @@
 <!-- in /templates/Users/login.php -->
-<div class="users form content">
-    <?= $this->Flash->render() ?>
+<?= $this->Flash->render() ?>
+
+<div class="users form content">    
     <h3>Login</h3>
     <?= $this->Form->create() ?>
     <fieldset>
