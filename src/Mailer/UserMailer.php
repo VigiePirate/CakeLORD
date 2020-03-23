@@ -37,7 +37,7 @@ class UserMailer extends Mailer
               ->setViewVars(['url' => $url, 'username' => $user->username])
               ->setEmailFormat('both')
               ->viewBuilder()
-              ->setTemplate('reset_password')
+              ->setTemplate('reset_password');
 
               // ->setDomain('www.example.org');
 
