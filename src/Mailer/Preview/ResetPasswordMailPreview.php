@@ -12,6 +12,7 @@ class PasswordMailPreview extends MailPreview
         // set any template variables receipients for the mailer.
         $this->loadModel("Users");
         $user = $this->Users->find()->first();
+        $this->Html->link(['controller' => 'users', 'action' => 'resetPassword', $passkey]);
         return $this->getMailer("User")
                     ->sendResetEmail($url,$user)
     }
