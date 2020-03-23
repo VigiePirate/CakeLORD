@@ -38,7 +38,6 @@ class UserMailer extends Mailer
               ->setEmailFormat('both')
               ->viewBuilder()
               ->setTemplate('reset_password')
-              ->send();
 
               // ->setDomain('www.example.org');
 
