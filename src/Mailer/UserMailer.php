@@ -36,7 +36,7 @@ class UserMailer extends Mailer
               ->setSubject('Reset your Password')
               ->setViewVars(['url' => $url, 'username' => $user->username])
               ->setEmailFormat('both')
-              // ->viewBuilder()
+              ->viewBuilder()
               ->setTemplate('reset_password');
 
               // ->setDomain('www.example.org');
