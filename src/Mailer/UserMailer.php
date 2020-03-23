@@ -38,6 +38,8 @@ class UserMailer extends Mailer
               ->setEmailFormat('both')
               ->viewBuilder()
                 ->setTemplate('reset_password');
+
+              $this->deliver();
               // ->setDomain('www.example.org');
 
             /* from UsersController, should become useless here
