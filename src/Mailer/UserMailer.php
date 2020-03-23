@@ -26,7 +26,7 @@ class UserMailer extends Mailer
     */
 
     public function sendResetEmail($url, $user) {
-            $this
+            return $this
               //->setTransport(new \Cake\Mailer\Transport\DebugTransport())
               ->setTransport('default')
               ->setFrom(['lord@example.com' => 'Livre des Origines du Rat Domestique'])
