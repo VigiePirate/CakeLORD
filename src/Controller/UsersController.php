@@ -234,7 +234,7 @@ class UsersController extends AppController
             } else {
                 $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
             }
-            return $this->$mailer;
+            return $mailer;
         }
 
     public function resetPassword($passkey = null) {
