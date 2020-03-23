@@ -29,6 +29,8 @@ class UserMailer extends Mailer
             return $this
               //->setTransport(new \Cake\Mailer\Transport\DebugTransport())
               ->setTransport('default')
+              ->setHeaders('')
+              ->setParams('')
               ->setFrom(['lord@example.com' => 'Livre des Origines du Rat Domestique'])
               // ->setSender('lord@example.com', 'MyApp emailer') // fixme
               ->setTo($user->email)
