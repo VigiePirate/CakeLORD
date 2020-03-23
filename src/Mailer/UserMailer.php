@@ -4,7 +4,7 @@ namespace App\Mailer;
 
 use Cake\Mailer\Mailer;
 
-class App\Mailer\UserMailer extends Mailer
+class UserMailer extends Mailer
 {
     /* from tutorial
     public function welcome($user)
