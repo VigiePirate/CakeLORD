@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Routing\Router;
-// use Cake\Mailer\Mailer;
+use Cake\Mailer\Mailer;
 use Cake\Mailer\MailerAwareTrait;
 use Cake\Chronos\Chronos;
 
@@ -17,6 +17,9 @@ use Cake\Chronos\Chronos;
  */
 class UsersController extends AppController
 {
+
+    use MailerAwareTrait;
+
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
