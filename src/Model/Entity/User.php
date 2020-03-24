@@ -26,6 +26,7 @@ use Cake\ORM\Entity;
  * @property int $failed_login_attempts
  * @property \Cake\I18n\FrozenTime|null $failed_login_last_date
  * @property bool $is_locked
+ * @property string|null $passkey
  * @property string|null $staff_comments
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
@@ -60,6 +61,7 @@ class User extends Entity implements IdentityInterface
         'failed_login_attempts' => true,
         'failed_login_last_date' => true,
         'is_locked' => true,
+        'passkey' => false,
         'staff_comments' => true,
         'created' => true,
         'modified' => true,
@@ -90,6 +92,7 @@ class User extends Entity implements IdentityInterface
      */
     protected $_hidden = [
         'password',
+        'passkey',
     ];
 
     /**

@@ -205,11 +205,12 @@ return [
      */
     'EmailTransport' => [
         'default' => [
-            'className' => MailTransport::class,
+            'className' => 'Smtp',
+            // 'className' => MailTransport::class,
             /*
              * The keys host, port, timeout, username, password, client and tls
              * are used in SMTP transports
-             */
+             */        
             'host' => 'localhost',
             'port' => 25,
             'timeout' => 30,
@@ -218,9 +219,9 @@ return [
              */
             //'username' => null,
             //'password' => null,
-            'client' => null,
-            'tls' => false,
-            'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
+            //'client' => null,
+            //'tls' => false,
+            //'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
     ],
 
