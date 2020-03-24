@@ -10,7 +10,7 @@ class UserMailPreview extends MailPreview
     {
         $this->loadModel("Users");
         $user = $this->Users->find()->first();
-        $url = $this->Html->link(['controller' => 'users', 'action' => 'resetPassword', $passkey]);
+        $url = $this->Html->link(['controller' => 'users', 'action' => 'resetPassword', $user->$passkey]);
         return $this->getMailer("User")
                     ->sendResetEmail($url,$user);
     }
