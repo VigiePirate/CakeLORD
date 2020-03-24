@@ -1,5 +1,7 @@
-Your username is <?= $username; ?>
+Hi! Your username is: <?= $username; ?>
 
-Click on the link below or copy and paste it into your web browser to reset your password:
+You have asked for a password reset link. Please copy and paste this link in your browser to reset your password:
 
 <?= $url; ?>
+
+If you haven't asked for a password reset, please ignore this message or contact an administrator.
