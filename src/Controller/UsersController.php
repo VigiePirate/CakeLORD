@@ -279,7 +279,7 @@ class UsersController extends AppController
         $this->Authorization->skipAuthorization();
 
         if (empty($passkey)) {
-          $this->Flash->error('Invalid passkey. Please check your email or try again');
+          return $this->Flash->error('Invalid passkey. Please check your email or try again');
           // $this->redirect(['action' => 'lostPassword']);
         } else {
           $query = $this->Users->findByPasskey($passkey);
