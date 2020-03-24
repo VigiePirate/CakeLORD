@@ -16,7 +16,6 @@ class UserMailer extends Mailer
                 ->setTemplate('welcome_mail'); // By default template with same name as method name is used.
     }
     */
-
     public function sendResetEmail($url, $user) {
             return $this
               //->setTransport(new \Cake\Mailer\Transport\DebugTransport())

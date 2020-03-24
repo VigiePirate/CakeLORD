@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace App\Mailer\Preview;
 
 use DebugKit\Mailer\MailPreview;
@@ -15,3 +15,4 @@ class PasswordMailPreview extends MailPreview
                     ->sendResetEmail($url,$user);
     }
 }
+*/
