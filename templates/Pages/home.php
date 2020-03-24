@@ -41,7 +41,8 @@ $cakeDescription = 'CakeLORD: Just Taste it';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Railway:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Imprima:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
 
     <?= $this->Html->css('milligram.min.css') ?>
