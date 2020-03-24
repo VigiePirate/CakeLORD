@@ -43,9 +43,9 @@ class UsersController extends AppController
                 if ($user->is_locked) {
                  return $this->Flash->error(__('Your account is locked, please contact an administrator.'));
                } else {
-                if ($user->failed_login_attempts > 5) { //& $user->failed_login_last_date < Chronos::now()
+                if ($user->failed_login_attempts > 5 & $user->failed_login_last_date->modify('+15 minutes')->isFuture()) { //& $user->failed_login_last_date->modify('+15 minutes')->isFuture() < Chronos::now()
                   $user->failed_login_last_date = Chronos::now();
-                return $this->Flash->error(__('You have failed too many times to log in, please wait 15 minutes before retry.'));
+                return $this->Flash->error(__('You have failed too many times to log in recently. Please wait 15 minutes before retry.'));
               }
             }
           }
