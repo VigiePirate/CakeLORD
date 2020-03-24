@@ -300,7 +300,6 @@ class UsersController extends AppController
                 $this->Users->save($user);
                 $this->Flash->success('Your password has been updated.');
                 $this->redirect(['action' => 'login']);
-                return $this;
               }
             }
           }
