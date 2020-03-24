@@ -152,6 +152,11 @@ class UsersTable extends Table
             ->scalar('staff_comments')
             ->allowEmptyString('staff_comments');
 
+        $validator
+            ->scalar('passkey')
+            ->maxLength('passkey', 23)
+            ->allowEmptyString('passkey');
+
         return $validator;
     }
 

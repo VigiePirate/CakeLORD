@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Routing\Router;
+use Cake\Mailer\Mailer;
+use Cake\Mailer\MailerAwareTrait;
+use Cake\Chronos\Chronos;
+
 /**
  * Users Controller
  *
@@ -12,12 +17,17 @@ namespace App\Controller;
  */
 class UsersController extends AppController
 {
+
+    use MailerAwareTrait;
+
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions(['login']);
+        $this->Authentication->addUnauthenticatedActions(['lostPassword']);
+        $this->Authentication->addUnauthenticatedActions(['resetPassword']);
     }
 
     public function login() {
@@ -172,4 +182,97 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+    *
+    * Series of functions to deal with forgotten passwords
+    */
+
+    public function lostPassword($email = null)
+    // fixme: add check for is_locked account (if locked, do not sent mail)
+        {
+            $this->Authorization->skipAuthorization();
+
+            if ($this->request->is('post')) {
+                $query = $this->Users->findByEmail($this->request->getData('email'));
+                $user = $query->first();
+                //$user = $query->firstOrFail();
+                if (empty($user)) {
+                    return $this->Flash->error('Email address does not exist. Please try again');
+                } else {
+                    /* return $this->Flash->success('We have found your email address'); */
+                    $passkey = uniqid('', true);
+                    $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
+                    if ($this->Users->updateAll(
+                      ['passkey' => $passkey,
+                      'failed_login_attempts' => ++$user->failed_login_attempts,
+                      'failed_login_last_date' => Chronos::now()],
+                      ['id' => $user->id]
+                      )
+                    ) {
+
+                    if ($this->getMailer('User')->send('sendResetEmail', [$url, $user])) {
+                          $this->Flash->success(__('Check your email for your reset password link'));
+                      } else {
+                          $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
+                      }
+                      return $this->redirect(['action' => 'login']);
+                    }
+
+                    /*
+                    try {
+                      $this->getMailer('User')->send('sendResetEmail', [$url, $user]);
+                      $this->Flash->success(__('Check your email for your reset password link'));
+                    } catch (Exception $e) {
+                      $this->Flash->error(__('Error sending email'));
+                    }
+                    return $this->redirect(['action' => 'login']);
+                  }
+                    else {
+                        return $this->Flash->error('Error saving reset passkey');
+                    }
+                    */
+                }
+            }
+        }
+
+    public function resetPassword($passkey = null) {
+
+        $this->Authorization->skipAuthorization();
+
+        if (empty($passkey)) {
+          $this->Flash->error('Invalid or expired passkey. Please check your email or try again');
+          // $this->redirect(['action' => 'lostPassword']);
+        } else {
+          $query = $this->Users->findByPasskey($passkey);
+          $user = $query->first();
+
+          if (empty($user)) {
+            $this->Flash->error('Invalid or expired passkey. Please check your email or try again');
+            $this->redirect(['action' => 'lostPassword']);
+          } else {
+            // check if user is locked
+            if ($user->is_locked) {
+              $this->Flash->error('Your account is locked. Please contact an administrator');
+            } else {
+              // check if passwords were sent by submit button
+              if ($this->request->is('post')) {
+                $newPassword = $this->request->getData('password');
+                $confirmPassword = $this->request->getData('confirm_password');
+                // check if the two passwords are identical
+                if (strcmp($newPassword,$confirmPassword)) {
+                  $this->Flash->error('Passwords are different. Please retry.');
+                  $this->redirect('/users/reset-password/' . $passkey);
+                } else {
+                  $user->password = $newPassword;
+                  $user->passkey = null;
+                  $this->Users->save($user);
+                  $this->Flash->success('Your password has been updated.');
+                  $this->redirect(['action' => 'login']);
+                  }
+              }
+            }
+          }
+        }
+      }
 }
