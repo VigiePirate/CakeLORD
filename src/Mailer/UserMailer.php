@@ -15,14 +15,6 @@ class UserMailer extends Mailer
             ->viewBuilder()
                 ->setTemplate('welcome_mail'); // By default template with same name as method name is used.
     }
-
-    public function resetPassword($user)
-    {
-        $this
-            ->setTo($user->email)
-            ->setSubject('Reset password')
-            ->setViewVars(['token' => $user->token]);
-    }
     */
 
     public function sendResetEmail($url, $user) {
@@ -38,25 +30,6 @@ class UserMailer extends Mailer
               ->setEmailFormat('both')
               ->viewBuilder()
                 ->setTemplate('reset_password');
-
               // ->setDomain('www.example.org');
-
-            /* from UsersController, should become useless here
-            if ($mailer->deliver()) {
-                $this->Flash->success(__('Check your email for your reset password link'));
-            } else {
-                $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
-            }
-            return $mailer;
-            */
-
-/* doc
-$this
-            ->setTo($user->email)
-            ->setSubject('Reset password')
-            ->setViewVars(['token' => $user->token]);
-            */
-
-
         }
 }
