@@ -254,7 +254,7 @@ class UsersController extends AppController
                       } else {
                           $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
                       }
-                      return $this->redirect(['action' => 'resetPassword']);
+                      return $this->redirect(['action' => 'login']);
                     }
                 }
             }
