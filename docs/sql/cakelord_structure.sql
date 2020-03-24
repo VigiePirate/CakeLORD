@@ -148,7 +148,7 @@ CREATE TABLE `death_primary_causes` (
   `description` text NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Table référençant la liste des causes de décès';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='Table référençant la liste des causes de décès';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,7 +167,7 @@ CREATE TABLE `death_secondary_causes` (
   UNIQUE KEY `name_UNIQUE` (`name`),
   KEY `fk_deces_secondaire_deces_principal1` (`death_primary_cause_id`),
   CONSTRAINT `fk_deces_secondaire_deces_principal1` FOREIGN KEY (`death_primary_cause_id`) REFERENCES `death_primary_causes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +186,7 @@ CREATE TABLE `dilutions` (
   `is_picture_mandatory` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Table référençant la liste des dilutions';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='Table référençant la liste des dilutions';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +205,7 @@ CREATE TABLE `earsets` (
   `is_picture_mandatory` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,7 +224,7 @@ CREATE TABLE `eyecolors` (
   `is_picture_mandatory` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Table contenant la liste des yeux';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='Table contenant la liste des yeux';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,14 +284,14 @@ CREATE TABLE `litters` (
   `comments` text DEFAULT NULL,
   `creator_user_id` int(10) unsigned NOT NULL,
   `state_id` int(10) unsigned NOT NULL DEFAULT 1,
-  `created` datetime NOT NULL,
-  `modified` datetime NOT NULL,
+  `created` datetime NOT NULL DEFAULT '1981-08-01 00:00:00',
+  `modified` datetime NOT NULL DEFAULT '1981-08-01 00:00:00',
   PRIMARY KEY (`id`),
   KEY `fk_itter_breeder_user` (`creator_user_id`),
   KEY `fk_litters_states1` (`state_id`),
   CONSTRAINT `fk_itter_breeder_user` FOREIGN KEY (`creator_user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_litters_states1` FOREIGN KEY (`state_id`) REFERENCES `states` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,24 +308,7 @@ CREATE TABLE `litters_contributions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`),
   UNIQUE KEY `priority_UNIQUE` (`priority`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `litters_rats`
---
-
-DROP TABLE IF EXISTS `litters_rats`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `litters_rats` (
-  `litters_id` int(10) unsigned NOT NULL,
-  `rats_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`litters_id`,`rats_id`),
-  KEY `fk_litters_rats_rats1` (`rats_id`),
-  CONSTRAINT `fk_litters_rats_litters1` FOREIGN KEY (`litters_id`) REFERENCES `litters` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_litters_rats_rats1` FOREIGN KEY (`rats_id`) REFERENCES `rats` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='These litters gave birth to these rats.';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -359,7 +342,7 @@ CREATE TABLE `markings` (
   `is_picture_mandatory` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Table référençant la liste des marquages';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='Table référençant la liste des marquages';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -436,13 +419,14 @@ CREATE TABLE `rats` (
   `sex` enum('M','F') NOT NULL,
   `birth_date` date NOT NULL,
   `rattery_id` int(10) unsigned NOT NULL DEFAULT 1,
+  `litter_id` int(10) unsigned DEFAULT NULL,
   `color_id` int(10) unsigned NOT NULL DEFAULT 1,
   `eyecolor_id` int(10) unsigned NOT NULL DEFAULT 1,
   `dilution_id` int(10) unsigned NOT NULL DEFAULT 1,
   `marking_id` int(10) unsigned NOT NULL DEFAULT 1,
   `earset_id` int(10) unsigned NOT NULL DEFAULT 1,
   `coat_id` int(10) unsigned NOT NULL DEFAULT 1,
-  `is_alive` tinyint(1) NOT NULL DEFAULT 0,
+  `is_alive` tinyint(1) NOT NULL DEFAULT 1,
   `death_date` date DEFAULT NULL,
   `death_primary_cause_id` int(10) unsigned DEFAULT NULL,
   `death_secondary_cause_id` int(10) unsigned DEFAULT NULL,
@@ -450,12 +434,12 @@ CREATE TABLE `rats` (
   `death_diagnosed` tinyint(1) DEFAULT NULL,
   `death_necropsied` tinyint(1) DEFAULT NULL,
   `comments` text DEFAULT NULL,
-  `picture` varchar(255) DEFAULT NULL,
+  `picture` varchar(255) DEFAULT 'Unknown.png',
   `picture_thumbnail` varchar(255) DEFAULT NULL,
   `creator_user_id` int(10) unsigned NOT NULL,
   `state_id` int(10) unsigned NOT NULL DEFAULT 1,
-  `created` datetime NOT NULL,
-  `modified` datetime NOT NULL,
+  `created` datetime NOT NULL DEFAULT '1981-08-01 00:00:00',
+  `modified` datetime NOT NULL DEFAULT '1981-08-01 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `Pedigree_identifier_UNIQUE` (`pedigree_identifier`),
@@ -471,6 +455,7 @@ CREATE TABLE `rats` (
   KEY `fk_death_secondary_cause` (`death_secondary_cause_id`),
   KEY `fk_state` (`state_id`),
   KEY `fk_rats_ratteries1` (`rattery_id`),
+  KEY `fk_rats_litters1` (`litter_id`),
   CONSTRAINT `FK_color` FOREIGN KEY (`color_id`) REFERENCES `colors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_creator` FOREIGN KEY (`creator_user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_death_primary_cause` FOREIGN KEY (`death_primary_cause_id`) REFERENCES `death_primary_causes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -481,9 +466,10 @@ CREATE TABLE `rats` (
   CONSTRAINT `fk_death_secondary_cause` FOREIGN KEY (`death_secondary_cause_id`) REFERENCES `death_secondary_causes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_dilution` FOREIGN KEY (`dilution_id`) REFERENCES `dilutions` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_marking` FOREIGN KEY (`marking_id`) REFERENCES `markings` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rats_litters1` FOREIGN KEY (`litter_id`) REFERENCES `litters` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_rats_ratteries1` FOREIGN KEY (`rattery_id`) REFERENCES `ratteries` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_state` FOREIGN KEY (`state_id`) REFERENCES `states` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Table centrale, qui contient l''ensemble des rats enregistrés\n';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='Table centrale, qui contient l''ensemble des rats enregistrés\n';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -540,20 +526,22 @@ CREATE TABLE `ratteries` (
   `country_id` int(10) unsigned NOT NULL DEFAULT 1,
   `website` varchar(255) DEFAULT NULL,
   `comments` text DEFAULT NULL,
+  `wants_statistic` tinyint(1) NOT NULL DEFAULT 1,
   `picture` varchar(255) NOT NULL DEFAULT 'Unknown.png',
   `state_id` int(10) unsigned NOT NULL DEFAULT 1,
-  `created` datetime NOT NULL,
-  `modified` datetime NOT NULL,
+  `created` datetime NOT NULL DEFAULT '1981-08-01 00:00:00',
+  `modified` datetime NOT NULL DEFAULT '1981-08-01 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`),
   UNIQUE KEY `prefix_UNIQUE` (`prefix`),
+  UNIQUE KEY `prefix` (`prefix`),
   KEY `fk_lord_ratteries_lord_users1` (`owner_user_id`),
   KEY `fk_ratteries_states1` (`state_id`),
   KEY `fk_ratteries_countries1` (`country_id`),
   CONSTRAINT `fk_lord_ratteries_lord_users1` FOREIGN KEY (`owner_user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ratteries_countries1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ratteries_states1` FOREIGN KEY (`state_id`) REFERENCES `states` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -566,13 +554,13 @@ DROP TABLE IF EXISTS `ratteries_litters`;
 CREATE TABLE `ratteries_litters` (
   `rattery_id` int(10) unsigned NOT NULL,
   `litter_id` int(10) unsigned NOT NULL,
-  `litters_contributions_id` int(10) unsigned NOT NULL DEFAULT 1,
+  `litters_contribution_id` int(10) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`rattery_id`,`litter_id`),
   KEY `fk_ratteries_has_litters_litters1` (`litter_id`),
-  KEY `fk_ratteries_litters_litters_contributions1` (`litters_contributions_id`),
+  KEY `fk_ratteries_litters_litters_contributions1` (`litters_contribution_id`),
   CONSTRAINT `fk_ratteries_has_litters_litters1` FOREIGN KEY (`litter_id`) REFERENCES `litters` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ratteries_has_litters_ratteries1` FOREIGN KEY (`rattery_id`) REFERENCES `ratteries` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ratteries_litters_litters_contributions1` FOREIGN KEY (`litters_contributions_id`) REFERENCES `litters_contributions` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_ratteries_litters_litters_contributions1` FOREIGN KEY (`litters_contribution_id`) REFERENCES `litters_contributions` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -609,7 +597,7 @@ CREATE TABLE `roles` (
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -628,7 +616,7 @@ CREATE TABLE `singularities` (
   `is_picture_mandatory` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Table référençant la liste des particularités';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='Table référençant la liste des particularités';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -644,7 +632,7 @@ CREATE TABLE `states` (
   `color` char(6) NOT NULL COMMENT 'Codage hexadécimal de la composition RVB (par exemple f8d345)',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -671,14 +659,15 @@ CREATE TABLE `users` (
   `failed_login_attempts` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `failed_login_last_date` datetime DEFAULT NULL,
   `is_locked` tinyint(1) NOT NULL DEFAULT 0,
+  `passkey` char(23) DEFAULT NULL,
   `staff_comments` text DEFAULT NULL,
-  `created` datetime NOT NULL,
-  `modified` datetime NOT NULL,
+  `created` datetime NOT NULL DEFAULT '1981-08-01 00:00:00',
+  `modified` datetime NOT NULL DEFAULT '1981-08-01 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `fk_users_roles` (`role_id`),
   CONSTRAINT `fk_users_roles` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -707,4 +696,4 @@ CREATE TABLE `users_conversations` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-28 18:00:32
+-- Dump completed on 2020-03-21 19:52:18
