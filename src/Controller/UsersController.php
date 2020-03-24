@@ -52,8 +52,9 @@ class UsersController extends AppController
                 $user->password = $this->request->getData('password');
                 $this->Users->save($user);
                 $this->Flash->set(__('Your password has been rehashed.'));
+            } else { // just save user for last login updates
+              $this->Users->save($user);
             }
-            $this->Users->save($user);
 
             //$redirect = $this->request->getQuery('redirect', [
             //   'controller' => 'Pages',
@@ -75,6 +76,13 @@ class UsersController extends AppController
         if ($this->request->is('post') && !$result->isValid()) {
             $this->Flash->error(__('Invalid username or password'));
             // $this->log($result->getStatus());
+
+            // if user exists but invalid password, update failed login fields
+            if ($user = $this->Users->get($this->Authentication->getIdentityData('id'))) {
+                ++$user->failed_login_attempts;
+                $user->failed_login_last_date = Chronos::now();
+                $this->Users->save($user);
+            }
         }
     }
 
