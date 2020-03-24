@@ -294,7 +294,7 @@ class UsersController extends AppController
               return $this->Flash->error('Your account is locked. Please contact an administrator');
             }
             // check if passkey is expired
-            if (!$user->failed_login_last_date->wasWithinLast('24 hours'))) {
+            if (!$user->failed_login_last_date->wasWithinLast('24 hours')) {
               $this->Flash->error('Expired passkey. Please generate a new one, check your email and try again');
               return $this->redirect(['action' => 'lostPassword']);
             }
