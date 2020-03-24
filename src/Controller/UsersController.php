@@ -71,7 +71,7 @@ class UsersController extends AppController
                 $this->Users->save($user);
                 $this->Flash->set(__('Your password has been rehashed.'));
             } else { // just save user for last login updates
-              $this->Users->save($user);
+                $this->Users->save($user);
             }
 
             //$redirect = $this->request->getQuery('redirect', [
@@ -254,22 +254,8 @@ class UsersController extends AppController
                       } else {
                           $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
                       }
-                      return $this->redirect(['action' => 'login']);
+                      return $this->redirect(['action' => 'resetPassword']);
                     }
-
-                    /*
-                    try {
-                      $this->getMailer('User')->send('sendResetEmail', [$url, $user]);
-                      $this->Flash->success(__('Check your email for your reset password link'));
-                    } catch (Exception $e) {
-                      $this->Flash->error(__('Error sending email'));
-                    }
-                    return $this->redirect(['action' => 'login']);
-                  }
-                    else {
-                        return $this->Flash->error('Error saving reset passkey');
-                    }
-                    */
                 }
             }
         }
@@ -279,19 +265,20 @@ class UsersController extends AppController
         $this->Authorization->skipAuthorization();
 
         if (empty($passkey)) {
-          return $this->Flash->error('Invalid passkey. Please check your email or try again');
-          // $this->redirect(['action' => 'lostPassword']);
+          $this->Flash->error('Invalid passkey. Please check your email or try again');
+          return $this->redirect(['action' => 'lostPassword']);
         } else {
           $query = $this->Users->findByPasskey($passkey);
           $user = $query->first();
 
           if (empty($user)) {
             $this->Flash->error('Invalid passkey. Please check your email or try again');
-            $this->redirect(['action' => 'lostPassword']);
+            return $this->redirect(['action' => 'lostPassword']);
           } else {
             // check if user is locked
             if ($user->is_locked) {
-              return $this->Flash->error('Your account is locked. Please contact an administrator');
+              $this->Flash->error('Your account is locked. Please contact an administrator');
+              return $this->redirect(['action' => 'login']); // fixme: retdirect to a contact form
             }
             // check if passkey is expired
             if (!$user->failed_login_last_date->wasWithinLast('24 hours')) {
