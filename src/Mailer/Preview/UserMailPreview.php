@@ -4,7 +4,7 @@ namespace App\Mailer\Preview;
 
 use DebugKit\Mailer\MailPreview;
 
-class resetPasswordMailPreview extends MailPreview
+class UserMailPreview extends MailPreview
 {
     public function sendResetEmail()
     {
