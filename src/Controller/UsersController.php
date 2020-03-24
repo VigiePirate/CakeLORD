@@ -278,12 +278,12 @@ class UsersController extends AppController
             // check if user is locked
             if ($user->is_locked) {
               $this->Flash->error('Your account is locked. Please contact an administrator');
-              return $this->redirect(['action' => 'login']); // fixme: retdirect to a contact form
+              $this->redirect(['action' => 'login']); // fixme: retdirect to a contact form
             }
             // check if passkey is expired
             if (!$user->failed_login_last_date->wasWithinLast('24 hours')) {
               $this->Flash->error('Expired passkey. Please generate a new one, check your email and try again');
-              return $this->redirect(['action' => 'lostPassword']);
+              $this->redirect(['action' => 'lostPassword']);
             }
 
             // check if passwords were sent by submit button
