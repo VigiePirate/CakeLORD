@@ -211,18 +211,15 @@ class UsersController extends AppController
                       )
                     ) {
 
-                    // $mailer = $this->getMailer('User');//->sendResetEmail($url,$user);
-                    // $mailer = $this->getMailer('User')->send('sendResetEmail', [$url, $user]);
-
-/*
                     if ($this->getMailer('User')->send('sendResetEmail', [$url, $user])) {
                           $this->Flash->success(__('Check your email for your reset password link'));
                       } else {
                           $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
                       }
                       return $this->redirect(['action' => 'login']);
-                    } */
+                    }
 
+                    /*
                     try {
                       $this->getMailer('User')->send('sendResetEmail', [$url, $user]);
                       $this->Flash->success(__('Check your email for your reset password link'));
@@ -234,6 +231,7 @@ class UsersController extends AppController
                     else {
                         return $this->Flash->error('Error saving reset passkey');
                     }
+                    */
                 }
             }
         }
