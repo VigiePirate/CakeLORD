@@ -29,9 +29,9 @@ class UserMailer extends Mailer
             return $this
               //->setTransport(new \Cake\Mailer\Transport\DebugTransport())
               ->setTransport('default')
-              // ->setHeaders(['X-Mailer' => 'PHP/' . phpversion()])
+              ->setHeaders(['X-Mailer' => 'PHP/' . phpversion()])
               ->setFrom(['lord@example.com' => 'Livre des Origines du Rat Domestique'])
-              // ->setSender('lord@example.com', 'MyApp emailer') // fixme
+              ->setSender('lord@example.com', 'Livre des Origines du Rat Domestique')
               ->setTo($user->email)
               ->setSubject('Reset your Password')
               ->setViewVars(['url' => $url, 'username' => $user->username])
