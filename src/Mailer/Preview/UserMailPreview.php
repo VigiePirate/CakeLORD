@@ -3,6 +3,7 @@
 namespace App\Mailer\Preview;
 
 use DebugKit\Mailer\MailPreview;
+use Cake\Routing\Router;
 
 class UserMailPreview extends MailPreview
 {
