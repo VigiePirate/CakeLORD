@@ -78,7 +78,9 @@ class UsersController extends AppController
             // $this->log($result->getStatus());
 
             // if user exists but invalid password, update failed login fields
-            if ($user = $this->Users->get($this->Authentication->getIdentityData('id'))) {
+            $query = $this->Users->findByEmail($this->request->getData('email'));
+            $user = $query->first();
+            if (!empty($user) {
                 ++$user->failed_login_attempts;
                 $user->failed_login_last_date = Chronos::now();
                 $this->Users->save($user);
