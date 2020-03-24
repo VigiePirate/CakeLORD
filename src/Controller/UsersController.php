@@ -18,7 +18,7 @@ use Cake\Chronos\Chronos;
 class UsersController extends AppController
 {
 
-    // use MailerAwareTrait;
+    use MailerAwareTrait;
 
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
