@@ -211,8 +211,11 @@ class UsersController extends AppController
                       )
                     ) {
 
-                    if ($this->getMailer('User')->send('sendResetEmail', [$url, $user])) {
-                          $this->Flash->success(__('Check your email for your reset password link'));
+                    $mailer = $this->getMailer('User')->send('sendResetEmail', [$url, $user]);
+                    if ($mailer) {
+                      $mailer->viewBuilder()
+                        ->setTemplate('reset_password');
+                      $this->Flash->success(__('Check your email for your reset password link'));
                       } else {
                           $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
                       }
