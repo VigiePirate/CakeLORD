@@ -53,7 +53,7 @@ class UsersController extends AppController
             //return $this->redirect($redirect);
 
             // update last failed login fields
-            $user->failed_login_attempts = 0,
+            $user->failed_login_attempts = 0;
             $user->failed_login_last_date = null;
             $this->Users->save($user);
 
