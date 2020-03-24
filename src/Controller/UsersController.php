@@ -38,24 +38,28 @@ class UsersController extends AppController
         // regardless of POST or GET, redirect if user is logged in
         if ($result->isValid()) {
             $authService = $this->Authentication->getAuthenticationService();
+
+            // get user
+            $user = $this->Users->get($this->Authentication->getIdentityData('id'));
+
+            // update last failed login fields
+            $user->failed_login_attempts = 0;
+            $user->failed_login_last_date = null;
+
             // check if password needs a rehash
             if ($authService->identifiers()->get('Password')->needsPasswordRehash()) {
                 // Rehash happens on save.
-                $user = $this->Users->get($this->Authentication->getIdentityData('id'));
                 $user->password = $this->request->getData('password');
                 $this->Users->save($user);
                 $this->Flash->set(__('Your password has been rehashed.'));
             }
+            $this->Users->save($user);
+
             //$redirect = $this->request->getQuery('redirect', [
             //   'controller' => 'Pages',
             //    'action' => 'display',
             //]);
             //return $this->redirect($redirect);
-
-            // update last failed login fields
-            $user->failed_login_attempts = 0;
-            $user->failed_login_last_date = null;
-            $this->Users->save($user);
 
             $target = $this->Authentication->getLoginRedirect();
             if (! $target) {
