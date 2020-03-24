@@ -17,18 +17,17 @@ class UserMailer extends Mailer
     }
     */
     public function sendResetEmail($url, $user) {
-            return $this
-              //->setTransport(new \Cake\Mailer\Transport\DebugTransport())
+            $this
               ->setTransport('default')
-              ->setHeaders(['X-Mailer' => 'PHP/' . phpversion()])
               ->setFrom(['lord@example.com' => 'Livre des Origines du Rat Domestique'])
               ->setSender('lord@example.com', 'Livre des Origines du Rat Domestique')
               ->setTo($user->email)
               ->setSubject('Reset your Password')
               ->setViewVars(['url' => $url, 'username' => $user->username])
               ->setEmailFormat('both')
-              //->viewBuilder()
+              ->viewBuilder()
               ->setTemplate('reset_password');
               // ->setDomain('www.example.org');
+            return $this;
         }
 }
