@@ -48,6 +48,7 @@ class UsersController extends AppController
                 return $this->Flash->error(__('You have failed too many times to log in, please wait 15 minutes before retry.'));
               }
             }
+          }
         }
 
         $result = $this->Authentication->getResult();
