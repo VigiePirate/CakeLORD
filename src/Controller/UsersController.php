@@ -226,7 +226,7 @@ class UsersController extends AppController
                     try {
                       $this->getMailer('User')->send('sendResetEmail', [$url, $user]);
                       $this->Flash->success(__('Check your email for your reset password link'));
-                    } catch {
+                    } catch (Exception $e) {
                       $this->Flash->error(__('Error sending email'));
                     }
                     return $this->redirect(['action' => 'login']);
