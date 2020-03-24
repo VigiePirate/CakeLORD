@@ -33,6 +33,23 @@ class UsersController extends AppController
     public function login() {
         $this->Authorization->skipAuthorization();
         $this->request->allowMethod(['get', 'post']);
+
+        // check first if user is blocked or too many failed attempts
+        if ($this->request->is('post')) {
+
+            $query = $this->Users->findByEmail($this->request->getData('email'));
+            $user = $query->first();
+            if (!empty($user)) {
+                if ($user->is_locked) {
+                 return $this->Flash->error(__('Your account is locked, please contact an administrator.'));
+               } else {
+                if ($user->failed_login_attempts > 5) { //& $user->failed_login_last_date < Chronos::now()
+                  $user->failed_login_last_date = Chronos::now();
+                return $this->Flash->error(__('You have failed too many times to log in, please wait 15 minutes before retry.'));
+              }
+            }
+        }
+
         $result = $this->Authentication->getResult();
 
         // regardless of POST or GET, redirect if user is logged in
