@@ -6,7 +6,7 @@ a {
 
 h1, h2, h3, h4 {
     font-weight: bold;
-    font-family: "Imprima";
+    font-family: "Imprima", cursive;
     color: #9faede;
 }
 
@@ -25,6 +25,7 @@ h1, h2, h3, h4 {
 
 /* Main */
 body {
+    font-family: 'Roboto', sans-serif;
     background: #f5f7fa;
 }
 

@@ -1,5 +1,3 @@
-<!-- in /templates/Users/lost-password.php -->
-
 <?= $this->Flash->render() ?>
 
 <div class="users form index content">

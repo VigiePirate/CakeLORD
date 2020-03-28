@@ -11,8 +11,17 @@ class UserMailPreview extends MailPreview
     {
         $this->loadModel("Users");
         $user = $this->Users->find()->first();
-        $url = '/lost-password/';
+        $url = '/users/lost-password/';
         return $this->getMailer("User")
                     ->sendResetEmail($url,$user);
+    }
+
+    public function sendActivationEmail()
+    {
+      $this->loadModel("Users");
+      $user = $this->Users->find()->first();
+      $url = '/users/register/';
+      return $this->getMailer("User")
+                  ->sendActivationEmail($url,$user);
     }
 }
