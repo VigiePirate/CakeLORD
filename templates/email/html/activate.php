@@ -6,4 +6,6 @@
 
 <p>or copy and paste this link in your browser : <?= $url; ?></p>
 
+<p>Please, take action promptly: your activation link is only valid for 24 hours. If not activated within this delay, your account will be deleted.</p>
+
 <p>If you haven't created an account, please ignore this message or contact an administrator.</p>
