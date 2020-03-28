@@ -147,7 +147,7 @@ class UsersController extends AppController
 
           $passkey = uniqid('', true);
           $user->passkey = $passkey;
-          $user->is_blocked = true;
+          $user->is_locked = true;
           $user->failed_login_last_date = Chronos::now();
           $user->failed_login_attempts = 1;
 
