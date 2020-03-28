@@ -26,8 +26,11 @@ class UsersController extends AppController
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions(['login']);
+        $this->Authentication->addUnauthenticatedActions(['register']);
+        $this->Authentication->addUnauthenticatedActions(['activate']);
         $this->Authentication->addUnauthenticatedActions(['lostPassword']);
         $this->Authentication->addUnauthenticatedActions(['resetPassword']);
+
     }
 
     public function login() {
@@ -41,7 +44,7 @@ class UsersController extends AppController
             $user = $query->first();
             if (!empty($user)) {
                 if ($user->is_locked) {
-                 return $this->Flash->error(__('Your account is locked, please contact an administrator.'));
+                 return $this->Flash->error(__('Your account is locked, please activate it or contact an administrator.'));
                } else {
                 if ($user->failed_login_attempts > 5 && $user->failed_login_last_date->wasWithinLast('15 minutes')) {
                   $user->failed_login_last_date = Chronos::now();
@@ -115,6 +118,94 @@ class UsersController extends AppController
             return $this->redirect($this->Authentication->logout());
         }
     }
+
+    /**
+    * Registration methods
+    *
+    **/
+
+    public function register()
+    {
+      $this->Authorization->skipAuthorization();
+
+      // regardless of anything, redirect if user is logged in
+      $result = $this->Authentication->getResult();
+      if ($result->isValid()) {
+          $this->Flash->error('You already have an account, on which you are logged in.');
+          return $this->redirect(['controller' => 'users','action' => 'index']);
+      }
+
+      if ($this->request->is('post')) {
+
+        // check captcha  (fixme: place captcha question/answer in app local config?
+        if (strtolower($this->request->getData('captcha'))=='rat') {
+          // $this->Flash->default(__('Congratulations, you are not a Replicant.'));
+
+          // create user and activation link and mail
+          $user = $this->Users->newEmptyEntity();
+          $user = $this->Users->patchEntity($user, $this->request->getData());
+
+          $passkey = uniqid('', true);
+          $user->passkey = $passkey;
+          $user->is_blocked = true;
+          $user->failed_login_last_date = Chronos::now();
+          $user->failed_login_attempts = 1;
+
+          if ($this->Users->save($user)) {
+            $url = Router::Url(['controller' => 'users', 'action' => 'activate'], true) . '/' . $passkey;
+            $mailer = $this->getMailer('User')->send('sendActivationEmail', [$url, $user]);
+            if ($mailer) {
+              $this->Flash->success(__('Your account has been created, but must be activated before you can log in. Check your email for your activation link'));
+              } else {
+                $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
+              }
+            return $this->redirect(['action' => 'login']);
+          } else {
+            return $this->Flash->error(__('Something went wrong. Please, try again or contact an administrator.'));
+          // return $this->redirect(['action' => 'register']);
+          }
+      } else {
+      return $this->Flash->error(__('This was not the expected answer! Please, retry if you are not a Replicant.'));
+      }
+    }
+  }
+
+    public function activate($passkey = null)
+    {
+      $this->Authorization->skipAuthorization();
+
+      if (empty($passkey)) {
+        $this->Flash->error('Invalid activation link. Please check your email or try again');
+        return $this->redirect(['action' => 'register']);
+      } else {
+        $query = $this->Users->findByPasskey($passkey);
+        $user = $query->first();
+
+        if (empty($user)) {
+          $this->Flash->error('Invalid activation link. Please check your email or try again');
+          return $this->redirect(['action' => 'register']);
+        } else {
+          // check if activation link is expired; if so, delete account
+          if (!$user->failed_login_last_date->wasWithinLast('24 hours')) {
+            $this->Users->delete($user);
+            $this->Flash->error('Expired activation link. Your account has been deleted. Please, register again and check your email right away.');
+            return $this->redirect(['action' => 'register']);
+          } else {
+          // activate
+          $user->is_locked = 0;
+          $user->passkey = null;
+          $user->failed_login_attempts = 0;
+          $user->failed_login_last_date = null;
+          if($this->Users->save($user)) {
+            $this->Flash->success('Your account has been activated. Welcome on LORD!');
+            return $this->redirect(['action' => 'login']);
+          } else {
+            return $this->Flash->error(__('Something went wrong. Please, try again or contact an administrator.'));
+          }
+        }
+      }
+    }
+  }
 
     /**
      * Index method
@@ -230,6 +321,13 @@ class UsersController extends AppController
         {
             $this->Authorization->skipAuthorization();
 
+            // regardless of anything, redirect if user is logged in
+            $result = $this->Authentication->getResult();
+            if ($result->isValid()) {
+                $this->Flash->default('You are logged in, you can change your password from your dashboard.');
+                return $this->redirect(['controller' => 'users','action' => 'index']);
+            }
+
             if ($this->request->is('post')) {
                 $query = $this->Users->findByEmail($this->request->getData('email'));
                 $user = $query->first();
@@ -237,10 +335,15 @@ class UsersController extends AppController
                 if (empty($user)) {
                     return $this->Flash->error('Email address does not exist. Please try again');
                 } else {
-                    /* return $this->Flash->success('We have found your email address'); */
-                    $passkey = uniqid('', true);
-                    $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
-                    if ($this->Users->updateAll(
+
+                  if ($user->is_locked) {
+                    $this->Flash->error('Your account is locked. Please activate it or contact an administrator');
+                    return $this->redirect(['action' => 'login']); // fixme: redirect to a contact form
+                  }
+
+                  $passkey = uniqid('', true);
+                  $url = Router::Url(['controller' => 'users', 'action' => 'resetPassword'], true) . '/' . $passkey;
+                  if ($this->Users->updateAll(
                       ['passkey' => $passkey,
                       'failed_login_attempts' => ++$user->failed_login_attempts,
                       'failed_login_last_date' => Chronos::now()],
@@ -265,12 +368,19 @@ class UsersController extends AppController
         $this->Authorization->skipAuthorization();
 
         if (empty($passkey)) {
-          $this->Flash->error('Invalid passkey. Please check your email or try again');
-          return $this->redirect(['action' => 'lostPassword']);
+            // check if user is logged
+            $result = $this->Authentication->getResult();
+            if ($result->isValid()) {
+                $this->Flash->default('You are logged in, you can change your password from your dashboard.');
+                return $this->redirect(['controller' => 'users','action' => 'index']);
+              } else {
+                $this->Flash->error('Invalid passkey. Please check your email or try again');
+                return $this->redirect(['action' => 'lostPassword']);
+              }
         } else {
           $query = $this->Users->findByPasskey($passkey);
           $user = $query->first();
-
+          // check if user exists
           if (empty($user)) {
             $this->Flash->error('Invalid passkey. Please check your email or try again');
             return $this->redirect(['action' => 'lostPassword']);
@@ -278,12 +388,12 @@ class UsersController extends AppController
             // check if user is locked
             if ($user->is_locked) {
               $this->Flash->error('Your account is locked. Please contact an administrator');
-              $this->redirect(['action' => 'login']); // fixme: retdirect to a contact form
+              return $this->redirect(['action' => 'login']); // fixme: redirect to a contact form
             }
             // check if passkey is expired
             if (!$user->failed_login_last_date->wasWithinLast('24 hours')) {
               $this->Flash->error('Expired passkey. Please generate a new one, check your email and try again');
-              $this->redirect(['action' => 'lostPassword']);
+              return $this->redirect(['action' => 'lostPassword']);
             }
 
             // check if passwords were sent by submit button
@@ -291,15 +401,15 @@ class UsersController extends AppController
               $newPassword = $this->request->getData('password');
               $confirmPassword = $this->request->getData('confirm_password');
               // check if the two passwords are identical
-              if (strcmp($newPassword,$confirmPassword)) {
+              if ($newPassword != $confirmPassword) {
                 $this->Flash->error('Passwords are different. Please retry.');
-                $this->redirect('/users/reset-password/' . $passkey);
+                return $this->redirect('/users/reset-password/' . $passkey);
               } else {
                 $user->password = $newPassword;
                 $user->passkey = null;
                 $this->Users->save($user);
                 $this->Flash->success('Your password has been updated.');
-                $this->redirect(['action' => 'login']);
+                return $this->redirect(['action' => 'login']);
               }
             }
           }
