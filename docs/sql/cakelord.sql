@@ -425,7 +425,7 @@ CREATE TABLE `litters` (
 
 LOCK TABLES `litters` WRITE;
 /*!40000 ALTER TABLE `litters` DISABLE KEYS */;
-INSERT INTO `litters` VALUES (1,'2010-06-01','2010-06-22',12,1,'',3,1,'2020-03-02 21:04:18','2020-03-02 21:04:18'),(2,'2011-06-01','2011-06-22',5,0,'',3,1,'2020-03-02 21:18:01','2020-03-02 21:18:01');
+INSERT INTO `litters` VALUES (1,'2010-06-01','2010-06-22',12,1,'',3,1,'2020-03-02 21:04:18','2020-03-21 19:26:23'),(2,'2011-06-01','2011-06-22',5,0,'',3,1,'2020-03-02 21:18:01','2020-03-21 19:32:10');
 /*!40000 ALTER TABLE `litters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -669,7 +669,7 @@ CREATE TABLE `rats` (
 
 LOCK TABLES `rats` WRITE;
 /*!40000 ALTER TABLE `rats` DISABLE KEYS */;
-INSERT INTO `rats` VALUES (1,'INC1F',0,5,'Grandmother','','F','2010-01-01',1,NULL,2,2,1,4,2,2,1,NULL,NULL,NULL,0,0,0,'','','',3,1,'2020-02-29 21:48:06','2020-03-14 12:12:43'),(2,'IND2M',0,2,'Grandfather','','M','2010-01-01',2,NULL,3,5,1,4,3,3,0,'2012-01-01',2,4,0,1,0,'','','',3,2,'2020-02-29 21:49:10','2020-03-02 21:20:16'),(3,'INC3M',0,2,'Father','','M','2010-06-22',1,NULL,1,2,2,3,3,3,1,NULL,NULL,NULL,0,0,0,'','',NULL,3,1,'2020-03-02 21:09:04','2020-03-02 21:13:55'),(4,'LAB4F',0,7,'Mother','','F','2011-01-01',4,NULL,1,5,2,1,3,2,1,NULL,NULL,NULL,0,0,0,'','',NULL,7,1,'2020-03-02 21:15:42','2020-03-02 21:17:28'),(5,NULL,0,3,'Child','Jean-Merguez','M','2011-06-22',7,NULL,2,2,1,5,3,2,1,NULL,NULL,NULL,0,0,0,'','',NULL,3,1,'2020-03-02 21:19:17','2020-03-02 21:19:17'),(6,'HELL666F',1,4,'Girlfriend','','F','2012-01-01',9,NULL,3,5,1,4,3,2,1,NULL,NULL,NULL,0,0,0,'','',NULL,3,1,'2020-03-02 21:37:21','2020-03-02 21:37:53');
+INSERT INTO `rats` VALUES (1,'INC1F',0,5,'Grandmother','','F','2010-01-01',1,NULL,2,2,1,4,2,2,1,NULL,NULL,NULL,0,0,0,'','','',3,1,'2020-02-29 21:48:06','2020-03-14 12:12:43'),(2,'IND2M',0,2,'Grandfather','','M','2010-01-01',2,NULL,3,5,1,4,3,3,0,'2012-01-01',2,4,0,1,0,'','','',3,2,'2020-02-29 21:49:10','2020-03-02 21:20:16'),(3,'INC3M',0,2,'Father','','M','2010-06-22',1,1,1,2,2,3,3,3,1,NULL,NULL,NULL,0,0,0,'','',NULL,3,1,'2020-03-02 21:09:04','2020-03-21 19:22:34'),(4,'LAB4F',0,7,'Mother','','F','2011-01-01',4,NULL,1,5,2,1,3,2,1,NULL,NULL,NULL,0,0,0,'','',NULL,7,1,'2020-03-02 21:15:42','2020-03-02 21:17:28'),(5,'ARN5M',0,3,'Child','Jean-Merguez','M','2011-06-22',7,2,2,2,1,5,3,2,1,NULL,NULL,NULL,0,0,0,'','',NULL,3,1,'2020-03-02 21:19:17','2020-03-21 19:23:47'),(6,'HELL666F',1,4,'Girlfriend','','F','2012-01-01',9,NULL,3,5,1,4,3,2,1,NULL,NULL,NULL,0,0,0,'','',NULL,3,1,'2020-03-02 21:37:21','2020-03-02 21:37:53');
 /*!40000 ALTER TABLE `rats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -696,7 +696,7 @@ CREATE TABLE `rats_litters` (
 
 LOCK TABLES `rats_litters` WRITE;
 /*!40000 ALTER TABLE `rats_litters` DISABLE KEYS */;
-INSERT INTO `rats_litters` VALUES (1,1),(2,1),(3,1),(3,2),(4,2),(5,2);
+INSERT INTO `rats_litters` VALUES (1,1),(2,1),(3,2),(4,2);
 /*!40000 ALTER TABLE `rats_litters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -942,6 +942,7 @@ CREATE TABLE `users` (
   `staff_comments` text DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT '1981-08-01 00:00:00',
   `modified` datetime NOT NULL DEFAULT '1981-08-01 00:00:00',
+  `passkey` char(23) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `fk_users_roles` (`role_id`),
@@ -955,7 +956,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'lord@example.com','$2y$10$Qxn8Jd3S9ZaD/oLobGuxi.McdeRsJVXJxpjvZRfp9gO0R6wefOrl.','LORD','','','1981-08-01','','','LogoLord.png','',1,1,0,NULL,0,'','2020-02-28 17:00:33','2020-03-14 12:08:33'),(2,'unregistered@example.com','$2y$10$bK54f/ZiYS3OiiSnnIxzIOdeXmR0LP7F07.UeuigaeHnhiBvF6Wbu','Unregistered','','',NULL,'','','Unknown.png','Generic account for ownership of generic ratteries and rats without registered owners.',0,4,0,NULL,0,'','2020-02-28 17:08:52','2020-03-14 12:10:08'),(3,'admin@example.com','$2y$10$Z9xazIIqXxFnvqXXbathsO7yZhdgEgOxg92j6r0HWvhCAQ568RnKu','Admin','Prénom','Nom','1981-08-01','F','99','Unknown.png','',1,2,0,NULL,0,'','2020-02-28 17:17:42','2020-03-14 12:16:16'),(4,'staff@example.com','$2y$10$Ys0kKEfNGl2xRqlc9//WCeIDn7LR9oObePr92HBZMn0vkBvThIhnG','Staff','Staff','Member',NULL,'','','Unknown.png','',0,3,0,NULL,0,'','2020-02-28 17:20:07','2020-03-14 12:14:51'),(5,'user@example.com','$2y$10$6g5qWSe6KnokjrXJBAdkuOiXCBudtQn08UGDdDVJ/3ou3OLLCTNHa','User','User','Lambda',NULL,'','','Unknown.png','',0,4,0,NULL,0,'','2020-02-28 17:22:31','2020-03-14 12:11:58'),(6,'anotheruser@example.com','$2y$10$WTovz1alU6LGoIgUKTwyAufAiuauNo4i1bVkgnhpKr0xSYmdDEK3y','AnotherUser','Another','User',NULL,'M','','Unknown.png','',0,4,0,NULL,0,'','2020-02-28 17:26:03','2020-03-14 12:14:22'),(7,'yetanotheruser@example.com','$2y$10$LX.hNVWCLpFHBB4DoNx83e65DETVePySQZ8EsynHIZeR3DTZhZyDK','Yet Another User','Yet','Another User',NULL,'M','Some place','Unknown.png','',0,2,0,NULL,0,'This user is a pain in the *ss!','2020-02-28 19:53:20','2020-03-14 12:28:43');
+INSERT INTO `users` VALUES (1,'lord@example.com','$2y$10$Qxn8Jd3S9ZaD/oLobGuxi.McdeRsJVXJxpjvZRfp9gO0R6wefOrl.','LORD','','','1981-08-01','','','LogoLord.png','',1,1,0,NULL,0,'','2020-02-28 17:00:33','2020-03-14 12:08:33','5e760c2a046250.91135739'),(2,'unregistered@example.com','$2y$10$bK54f/ZiYS3OiiSnnIxzIOdeXmR0LP7F07.UeuigaeHnhiBvF6Wbu','Unregistered','','',NULL,'','','Unknown.png','Generic account for ownership of generic ratteries and rats without registered owners.',0,4,0,NULL,0,'','2020-02-28 17:08:52','2020-03-14 12:10:08',NULL),(3,'admin@example.com','$2y$10$Z9xazIIqXxFnvqXXbathsO7yZhdgEgOxg92j6r0HWvhCAQ568RnKu','Admin','Prénom','Nom','1981-08-01','F','99','Unknown.png','',1,2,0,NULL,0,'','2020-02-28 17:17:42','2020-03-14 12:16:16',NULL),(4,'staff@example.com','$2y$10$Ys0kKEfNGl2xRqlc9//WCeIDn7LR9oObePr92HBZMn0vkBvThIhnG','Staff','Staff','Member',NULL,'','','Unknown.png','',0,3,0,NULL,0,'','2020-02-28 17:20:07','2020-03-14 12:14:51',NULL),(5,'user@example.com','$2y$10$6g5qWSe6KnokjrXJBAdkuOiXCBudtQn08UGDdDVJ/3ou3OLLCTNHa','User','User','Lambda',NULL,'','','Unknown.png','',0,4,0,NULL,0,'','2020-02-28 17:22:31','2020-03-14 12:11:58','5e7660dace3693.77666803'),(6,'anotheruser@example.com','$2y$10$WTovz1alU6LGoIgUKTwyAufAiuauNo4i1bVkgnhpKr0xSYmdDEK3y','AnotherUser','Another','User',NULL,'M','','Unknown.png','',0,4,0,NULL,0,'','2020-02-28 17:26:03','2020-03-14 12:14:22',NULL),(7,'yetanotheruser@example.com','$2y$10$LX.hNVWCLpFHBB4DoNx83e65DETVePySQZ8EsynHIZeR3DTZhZyDK','Yet Another User','Yet','Another User',NULL,'M','Some place','Unknown.png','',0,2,0,NULL,0,'This user is a pain in the *ss!','2020-02-28 19:53:20','2020-03-14 12:28:43',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -994,4 +995,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-14 13:07:16
+-- Dump completed on 2020-03-21 19:47:32
