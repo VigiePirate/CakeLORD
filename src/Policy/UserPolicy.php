@@ -28,6 +28,19 @@ class UserPolicy implements BeforePolicyInterface
     }
 
     /**
+     * Check if $user can see its home
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canHome(IdentityInterface $user, User $resource)
+    {
+        // Can see self home
+        return $user->get('id') === $resource->get('id');
+    }
+
+    /**
      * Check if $user can create User
      *
      * @param Authorization\IdentityInterface $user The user.
