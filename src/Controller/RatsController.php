@@ -44,6 +44,23 @@ class RatsController extends AppController
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    public function glimpse($id = null)
+    {
+        $this->Authorization->skipAuthorization();
+        $rat = $this->Rats->get($id, [
+            'contain' => ['OwnerUsers', 'CreatorUsers','Ratteries', 'BirthLitters', 'BirthLitters.ParentRats', 'BirthLitters.ParentRats.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'BredLitters', 'Singularities', 'Conversations', 'RatSnapshots'],
+        ]);
+
+        $this->set('rat', $rat);
+    }
+
+    /**
+     * View method
+     *
+     * @param string|null $id Rat id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
     public function view($id = null)
     {
         $this->Authorization->skipAuthorization();
@@ -74,7 +91,7 @@ class RatsController extends AppController
         }
         $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 200]);
         $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
-        $birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200]);
+        $birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
@@ -85,7 +102,7 @@ class RatsController extends AppController
         $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
         $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
-        $bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200]);
+        $bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
         $this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters','colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
     }

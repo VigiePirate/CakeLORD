@@ -1,8 +1,8 @@
 <!-- in /templates/Users/login.php -->
 <?= $this->Flash->render() ?>
 
-<div class="users form content">    
-    <h3>Login</h3>
+<div class="users form content">
+    <h1>Login</h1>
     <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('Please enter your username and password') ?></legend>
