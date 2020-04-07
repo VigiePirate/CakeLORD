@@ -479,7 +479,7 @@ footer {
     .top-nav {
       margin: 0 auto;
     }
-    .hide-on-mobile {
+    .footer_center, .hide-on-mobile {
       display:none;
     }
     .side-nav {
