@@ -1,18 +1,18 @@
 <?php
 /**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- * @var \App\View\AppView $this
- */
+* CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+* Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+*
+* Licensed under The MIT License
+* For full copyright and license information, please see the LICENSE.txt
+* Redistributions of files must retain the above copyright notice.
+*
+* @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+* @link          https://cakephp.org CakePHP(tm) Project
+* @since         0.10.0
+* @license       https://opensource.org/licenses/mit-license.php MIT License
+* @var \App\View\AppView $this
+*/
 
 $cakeDescription = 'CakeLORD';
 ?>
@@ -27,8 +27,7 @@ $cakeDescription = 'CakeLORD';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya:400,400i,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Imprima:400" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
 
@@ -42,16 +41,30 @@ $cakeDescription = 'CakeLORD';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="/"><img alt="CakeLORD" src="/img/lord.icon.png" width="20" /><span>&nbsp;Cake</span>LORD</a>
+            <a href="/"><img alt="LORD Logo: Book with a Rat Tail" src="/img/lord.icon.svg" /></a>
+            <a href="/" class="hide-on-mobile">Livre des Origines <br>du <span>Rat</span> Domestique</td></a>
         </div>
         <div class="top-nav-links">
-            <a target="_self" href="/rats"><?= __('Rats') ?></a>
-            <a target="_self" href="/litters"><?= __('Litters') ?></a>
-            <a target="_self" href="/ratteries"><?= __('Ratteries') ?></a>
-            <a target="_self" href="/users"><?= __('Users') ?></a>
-            <a target="_blank" href="https://book.cakephp.org/4/">CakeDocs</a>
+            <img alt="Mock Search Bar" src="/img/mock-search-bar.png"/>
+            <?=
+            ($this->getRequest()->getSession()->check('Auth.id')) ?
+            $this->Html->Link(
+                $this->getRequest()->getSession()->read('Auth.username'),
+                [
+                    'controller' => 'Users',
+                    'action' => 'view',
+                    $this->getRequest()->getSession()->read('Auth.id')
+                ])
+                :
+                $this->Html->Link(
+                    'Login',
+                    [
+                        'controller' => 'Users',
+                        'action' => 'login'
+                    ])
+            ?>
         </div>
-    </nav>
+        </nav>
     <main class="main">
         <div class="container">
             <?= $this->Flash->render() ?>
@@ -59,6 +72,56 @@ $cakeDescription = 'CakeLORD';
         </div>
     </main>
     <footer>
-    </footer>
+        <div class="footer_section">
+            <h5>Guides</h5>
+            <a href="/articles">F.A.Q.</a>
+            <a href="/articles">Full guides</a>
+            <a href="/articles">Code of conduct</a>
+            <a href="/articles">Contributing</a>
+            <a href="/articles">I want a LORD</a>
+        </div>
+        <div class="footer_section">
+            <h5>About</h5>
+            <a href="/articles">History</a>
+            <a href="/articles">What's New?</a>
+            <a href="/articles">Staff</a>
+            <a href="/articles">Credits</a>
+            <a href="/articles">Legal Notice</a>
+        </div>
+        <div class="footer_section">
+            <h5>Statistics</h5>
+            <div class="footer_subsection">
+            <a href="/articles">Site statistics</a>
+            <a href="/articles">Rat statistics</a>
+        </div>
+            <h5>Rattery map</h5>
+            <h5>Contact</h5>
+        </div>
+        <div class="footer_center hide-on-mobile">
+            <img src="/img/lord-shield.png" width="118"/>
+            <div class="creditline shieldline">Version 2.2 – “Cake”</div>
+        </div>
+        <div class="footer_section">
+            <div class="footer_subsection">
+                <h5>Links</h5>
+                <a href="/articles">Websites</a>
+                <a href="/articles">Forums</a>
+                <a href="/articles">Associations</a>
+                <a href="/articles">Social</a>
+                <a href="/articles">Partners</a>
+            </div>
+        </div>
+        <div class="footer_largersection">
+            <div class="logoblock">
+                <a href="https://cakephp.org/"><img src="/img/logo-cake.png" width="100"/></a><a href="https://github.com/VigiePirate/CakeLORD"><img src="/img/logo-github.png" width="68"/></a><a href="https://www.srfa.info"><img src="/img/logo-srfa.png" width="95"/></a>
+            </div>
+        <div class="creditline">
+            © 2020 – Tous droits réservés<br>
+            Textes et images non libres de droits<br>
+            Code de l'application distribué sous licence GPL<br>
+            Service gratuit hébergé et maintenu par l'association SRFA
+        </div>
+    </div>
+</footer>
 </body>
 </html>
