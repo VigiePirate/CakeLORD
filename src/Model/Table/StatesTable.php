@@ -93,6 +93,12 @@ class StatesTable extends Table
             ->requirePresence('color', 'create')
             ->notEmptyString('color');
 
+        $validator
+            ->scalar('symbol')
+            ->maxLength('symbol', 1)
+            ->requirePresence('symbol', 'create')
+            ->notEmptyString('symbol');
+
         return $validator;
     }
 
