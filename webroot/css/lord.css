@@ -471,6 +471,9 @@ footer {
       grid-column-start: 2;
       grid-column-end: 4;
   }
+  .footer_center, .hide-on-mobile {
+    display:none;
+  }
 
 @media screen and (max-width: 640px) {
     html {
@@ -478,9 +481,6 @@ footer {
     }
     .top-nav {
       margin: 0 auto;
-    }
-    .footer_center, .hide-on-mobile {
-      display:none;
     }
     .side-nav {
       margin-bottom: 1rem;
