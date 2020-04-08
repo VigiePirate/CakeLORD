@@ -471,12 +471,9 @@ footer {
       grid-column-start: 2;
       grid-column-end: 4;
   }
-<<<<<<< HEAD
-=======
   .footer_center, .hide-on-mobile {
     display:none;
   }
->>>>>>> master
 
 @media screen and (max-width: 640px) {
     html {
