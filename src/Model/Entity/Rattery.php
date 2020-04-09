@@ -70,4 +70,9 @@ class Rattery extends Entity
         'rattery_snapshots' => true,
         'litters' => true,
     ];
+
+    protected function _getFullName()
+    {
+        return $this->prefix . ' – ' . $this->name;
+    }
 }

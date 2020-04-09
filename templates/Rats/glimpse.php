@@ -7,8 +7,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Glimpse Rat'), ['action' => 'glimpse', $rat->id], ['class' => 'side-nav-item']) ?>
+            <h3 class="heading"><?= __('Actions') ?></h3>
             <?= $this->Html->link(__('View Rat'), ['action' => 'view', $rat->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('Edit Rat'), ['action' => 'edit', $rat->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Rat'), ['action' => 'delete', $rat->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rat->id), 'class' => 'side-nav-item']) ?>
@@ -18,15 +17,16 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="rats view content">
-            <h3><?= h($rat->pedigree_identifier) ?></h3>
-            <table>
+
+            <div class="float-right statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+            <div class="float-right sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
+            <h1><?= h($rat->usual_name) . '&#8239;' . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
+
+            <h2>Identity</h2>
+            <table class="condensed">
                 <tr>
                     <th><?= __('Pedigree Identifier') ?></th>
                     <td><?= h($rat->pedigree_identifier) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Owner User') ?></th>
-                    <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Name') ?></th>
@@ -37,17 +37,53 @@
                     <td><?= h($rat->pup_name) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Birth Date') ?></th>
+                    <td><?= h($rat->birth_date->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE])) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Sex') ?></th>
-                    <td><?= h($rat->sex) ?></td>
+                    <td><?= h($rat->sex_name) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Rattery') ?></th>
-                    <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
+                    <th><?= __('Owner User') ?></th>
+                    <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                 </tr>
-                <tr>
-                    <th><?= __('Birth Litter') ?></th>
-                    <td><?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->id, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : '' ?></td>
-                </tr>
+            </table>
+
+            <h2>Origins</h2>
+                <table class="condensed">
+                    <tr>
+                        <th><?= __('Rattery') ?></th>
+                        <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= __('Birth Litter') ?></th>
+                        <td><?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->full_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : 'Not attached to any litter' ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= __('Dam') ?></th>
+                        <td><?= $rat->has('birth_litter') ? $this->Html->link(
+                            $rat->birth_litter->dam->usual_name,
+                            ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->dam->id])
+                            : 'Unknown or unregistered' ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->dam->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->dam->age_string . ')' : '' ?>
+                            </td>
+                    </tr>
+                    <tr>
+                        <th><?= __('Sire') ?></th>
+                        <td><?= $rat->has('birth_litter') ? $this->Html->link(
+                            $rat->birth_litter->sire->usual_name,
+                            ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire->id])
+                            : 'Unknown or unregistered' ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->sire->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->sire->age_string  . ')' : '' ?>
+                            </td>
+                    </tr>
+                    <tr>
+                        <th><?= __('Genealogy') ?></th>
+                        <td>See interactive family tree (unavailable)</td>
+                    </tr>
+                </table>
+
+            <h2>Description</h2>
+            <table class="condensed">
                 <tr>
                     <th><?= __('Color') ?></th>
                     <td><?= $rat->has('color') ? $this->Html->link($rat->color->name, ['controller' => 'Colors', 'action' => 'view', $rat->color->id]) : '' ?></td>
@@ -73,56 +109,33 @@
                     <td><?= $rat->has('coat') ? $this->Html->link($rat->coat->name, ['controller' => 'Coats', 'action' => 'view', $rat->coat->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Death Primary Cause') ?></th>
+                    <th><?= __('Singularities') ?></th>
+                    <td><?= $rat->singularity_string ?></td>
+                </tr>
+            </table>
+
+            <h2>Health</h2>
+            <table class="condensed">
+                <tr>
+                    <th><?= __('Is Alive') ?></th>
+                    <td><?= $rat->is_alive ? __('Yes') : __('No'); ?></td>
+                </tr>
+                <tr>
+                    <th><?= $rat->is_alive ? __('Age') : __('Age at death'); ?></th>
+                    <td><?= h($rat->age) ?> months</td>
+                </tr>
+                <?php if (!$rat->is_alive) : ?>
+                <tr>
+                    <th><?= __('Death Date') ?></th>
+                    <td><?= h($rat->death_date->i18nFormat('dd/MM/yyyy')) ?></td>
+                    </tr>
+                <tr>
+                <th><?= __('Death Primary Cause') ?></th>
                     <td><?= $rat->has('death_primary_cause') ? $this->Html->link($rat->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $rat->death_primary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Death Secondary Cause') ?></th>
                     <td><?= $rat->has('death_secondary_cause') ? $this->Html->link($rat->death_secondary_cause->name, ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $rat->death_secondary_cause->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Picture') ?></th>
-                    <td><?= h($rat->picture) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Picture Thumbnail') ?></th>
-                    <td><?= h($rat->picture_thumbnail) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Creator User') ?></th>
-                    <td><?= $rat->has('creator_user') ? $this->Html->link($rat->creator_user->username, ['controller' => 'Users', 'action' => 'view', $rat->creator_user->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('State') ?></th>
-                    <td><?= $rat->has('state') ? $this->Html->link($rat->state->name, ['controller' => 'States', 'action' => 'view', $rat->state->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($rat->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Birth Date') ?></th>
-                    <td><?= h($rat->birth_date) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Death Date') ?></th>
-                    <td><?= h($rat->death_date) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($rat->created) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($rat->modified) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Is Pedigree Custom') ?></th>
-                    <td><?= $rat->is_pedigree_custom ? __('Yes') : __('No'); ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Is Alive') ?></th>
-                    <td><?= $rat->is_alive ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Death Euthanized') ?></th>
@@ -131,20 +144,24 @@
                 <tr>
                     <th><?= __('Death Diagnosed') ?></th>
                     <td><?= $rat->death_diagnosed ? __('Yes') : __('No'); ?></td>
-                </tr>
+                    </tr>
                 <tr>
                     <th><?= __('Death Necropsied') ?></th>
                     <td><?= $rat->death_necropsied ? __('Yes') : __('No'); ?></td>
                 </tr>
+                <?php endif; ?>
             </table>
+
+            <h2>Comments</h2>
             <div class="text">
-                <strong><?= __('Comments') ?></strong>
                 <blockquote>
                     <?= $this->Text->autoParagraph(h($rat->comments)); ?>
                 </blockquote>
             </div>
+
+            <h2>Related information</h2>
             <div class="related">
-                <h4><?= __('Related Litters') ?></h4>
+                <h3><?= __('Bred Litters') ?></h3>
                 <?php if (!empty($rat->bred_litters)) : ?>
                 <div class="table-responsive">
                     <table>
@@ -184,41 +201,9 @@
                 </div>
                 <?php endif; ?>
             </div>
+
             <div class="related">
-                <h4><?= __('Related Singularities') ?></h4>
-                <?php if (!empty($rat->singularities)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Name') ?></th>
-                            <th><?= __('Picture') ?></th>
-                            <th><?= __('Genotype') ?></th>
-                            <th><?= __('Description') ?></th>
-                            <th><?= __('Is Picture Mandatory') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($rat->singularities as $singularities) : ?>
-                        <tr>
-                            <td><?= h($singularities->id) ?></td>
-                            <td><?= h($singularities->name) ?></td>
-                            <td><?= h($singularities->picture) ?></td>
-                            <td><?= h($singularities->genotype) ?></td>
-                            <td><?= h($singularities->description) ?></td>
-                            <td><?= h($singularities->is_picture_mandatory) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Singularities', 'action' => 'view', $singularities->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Singularities', 'action' => 'edit', $singularities->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Singularities', 'action' => 'delete', $singularities->id], ['confirm' => __('Are you sure you want to delete # {0}?', $singularities->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
-            <div class="related">
-                <h4><?= __('Related Conversations') ?></h4>
+                <h3><?= __('Related Conversations') ?></h3>
                 <?php if (!empty($rat->conversations)) : ?>
                 <div class="table-responsive">
                     <table>
@@ -253,7 +238,7 @@
                 <?php endif; ?>
             </div>
             <div class="related">
-                <h4><?= __('Related Rat Snapshots') ?></h4>
+                <h3><?= __('Related Rat Snapshots') ?></h3>
                 <?php if (!empty($rat->rat_snapshots)) : ?>
                 <div class="table-responsive">
                     <table>
@@ -282,6 +267,9 @@
                     </table>
                 </div>
                 <?php endif; ?>
+            </div>
+            <div class="signature">
+                &mdash; Created on <?= $rat->created->i18nFormat('dd/MM/yyyy') ?> by <?= $rat->creator_user->username ?>. <?= ($rat->modified != $rat->created) ? 'Last modified on ' . $rat->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
             </div>
         </div>
     </div>

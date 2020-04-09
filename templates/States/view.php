@@ -27,6 +27,10 @@
                     <td><?= h($state->color) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Symbol') ?></th>
+                    <td><?= h($state->symbol) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($state->id) ?></td>
                 </tr>
@@ -149,6 +153,7 @@
                             <th><?= __('Sex') ?></th>
                             <th><?= __('Birth Date') ?></th>
                             <th><?= __('Rattery Id') ?></th>
+                            <th><?= __('Litter Id') ?></th>
                             <th><?= __('Color Id') ?></th>
                             <th><?= __('Eyecolor Id') ?></th>
                             <th><?= __('Dilution Id') ?></th>
@@ -182,6 +187,7 @@
                             <td><?= h($rats->sex) ?></td>
                             <td><?= h($rats->birth_date) ?></td>
                             <td><?= h($rats->rattery_id) ?></td>
+                            <td><?= h($rats->litter_id) ?></td>
                             <td><?= h($rats->color_id) ?></td>
                             <td><?= h($rats->eyecolor_id) ?></td>
                             <td><?= h($rats->dilution_id) ?></td>
@@ -231,6 +237,7 @@
                             <th><?= __('Country Id') ?></th>
                             <th><?= __('Website') ?></th>
                             <th><?= __('Comments') ?></th>
+                            <th><?= __('Wants Statistic') ?></th>
                             <th><?= __('Picture') ?></th>
                             <th><?= __('State Id') ?></th>
                             <th><?= __('Created') ?></th>
@@ -251,6 +258,7 @@
                             <td><?= h($ratteries->country_id) ?></td>
                             <td><?= h($ratteries->website) ?></td>
                             <td><?= h($ratteries->comments) ?></td>
+                            <td><?= h($ratteries->wants_statistic) ?></td>
                             <td><?= h($ratteries->picture) ?></td>
                             <td><?= h($ratteries->state_id) ?></td>
                             <td><?= h($ratteries->created) ?></td>
