@@ -630,6 +630,7 @@ CREATE TABLE `states` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `color` char(6) NOT NULL COMMENT 'Codage hexadécimal de la composition RVB (par exemple f8d345)',
+  `symbol` char(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
