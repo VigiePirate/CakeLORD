@@ -65,7 +65,7 @@ So let's say you worked on `yourbranch` and you are ready to push your modificat
         * `git commit -m 'message about the feature included in the squash'`
         * `git push`
         
-1. Repeat steps 2 and 3 as long as you work on your feature.
+1. Repeat steps 3 and 4 as long as you work on your feature.
 
 1. When your ready, create a pull request on master, with a message describing all the shipped features. Typically, there should be a small number of commits (such as a dozen - not hundreds!) to merge from your main branch to the master branch, if you squashed wisely between your feature branch and your main branch. 
 
