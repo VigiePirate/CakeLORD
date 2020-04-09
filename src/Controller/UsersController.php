@@ -210,14 +210,33 @@ class UsersController extends AppController
     /**
      * Home method
      *
-     * @param string|null $id User id.
+     * @param null
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function home($id = null)
+    public function home()
     {
         $user = $this->Users->get($this->Authentication->getIdentity()->get('id'), [
             'contain' => ['Roles', 'Conversations', 'OwnerRats', 'CreatorRats', 'Ratteries'],
+        ]);
+        $this->Authorization->authorize($user);
+
+        $this->set('user', $user);
+    }
+
+    /**
+     * My method
+     *
+     * Detailed sheet of user
+     *
+     * @param null
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function my()
+    {
+        $user = $this->Users->get($this->Authentication->getIdentity()->get('id'), [
+            'contain' => ['Roles'],
         ]);
         $this->Authorization->authorize($user);
 
