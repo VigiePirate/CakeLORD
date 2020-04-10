@@ -36,6 +36,25 @@ class RatteriesController extends AppController
     }
 
     /**
+     * My method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function my()
+    {
+        $user = $this->Authentication->getIdentity();
+        $this->Ratteries->find('ownedBy')
+            ->where(['owner_user_id' => $user->id])
+        ;
+        $this->paginate = [
+            'contain' => ['Users', 'Countries', 'States'],
+        ];
+        $ratteries = $this->paginate($this->Ratteries);
+
+        $this->set(compact('ratteries', 'user'));
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Rattery id.
