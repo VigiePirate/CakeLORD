@@ -356,10 +356,11 @@ INSERT INTO `singularities` (`name`, `picture`, `genotype`, `description`, `is_p
 
 LOCK TABLES `states` WRITE;
 /*!40000 ALTER TABLE `states` DISABLE KEYS */;
-INSERT INTO `states` (`id`, `name`, `color`) VALUES (1,'OK','90e40c'),
-(2,'Pending Staff Action','fab109'),
-(3,'Pending User Action','e62c18'),
-(4,'Unverified','393939');
+INSERT INTO `states` (`id`, `name`, `color`,`symbol`) VALUES
+(1,'OK','1f9d55','✓'),
+(2,'Pending Staff Action','ff8c1b','✗'),
+(3,'Pending User Action','cc1f1a','✗'),
+(4,'Unverified','663300','✗');
 /*!40000 ALTER TABLE `states` ENABLE KEYS */;
 UNLOCK TABLES;
 
