@@ -272,13 +272,18 @@ INSERT INTO `death_secondary_causes` (`name`, `death_primary_cause_id`, `descrip
 INSERT INTO `dilutions` (`name`, `picture`, `genotype`, `description`, `is_picture_mandatory`) VALUES
 ('Aucune', 'Unknown.png', 'C/C', 'No dilution', 0),
 ('Albinos', 'Unknown.png', 'c/c', 'Unpigmented. Usually with pink or red eyes.', 0),
-('Burmese himalayen', 'Unknown.png', '', '', 0),
-('Burmese sable himalayen', 'Unknown.png', '', '', 0),
-('Burmese sable siamois', 'Unknown.png', '', '', 0),
-('Burmese siamois', 'Unknown.png', '', '', 0),
 ('Biscuit', 'Unknown.png', '', '', 0),
+('Burmese himalayen', 'Unknown.png', '', '', 0),
+('Burmese marbré', 'Unknown.png', '', '', 0),
+('Burmese marbré pointé', 'Unknown.png', '', '', 0),
+('Burmese siamois', 'Unknown.png', '', '', 0),
 ('Devil', 'Unknown.png', '', '', 0),
+('Devil pointé', 'Unknown.png', '', '', 0),
 ('Himalayen', 'Unknown.png', '', '', 0),
+('Sable himalayen', 'Unknown.png', '', '', 0),
+('Sable marbré', 'Unknown.png', '', '', 0),
+('Sable marbré pointé', 'Unknown.png', '', '', 0),
+('Sable siamois', 'Unknown.png', '', '', 0),
 ('Siamois', 'Unknown.png', '', '', 0);
 
 --
@@ -342,7 +347,6 @@ INSERT INTO `singularities` (`name`, `picture`, `genotype`, `description`, `is_p
 ('Golden', 'Unknown.png', 'TBD', 'Golden', 1),
 ('Stippel', 'Unknown.png', 'He/hi', 'Stippel', 1),
 ('Silvermane', 'Unknown.png', 'TBD', 'Silvermane', 0),
-('Marbré', 'Unknown.png', 'TBD', 'Marbré', 0),
 ('Marble', 'Unknown.png', 'TBD', 'Marble', 0);
 
 
@@ -403,12 +407,12 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `firstname`, `lastna
 LOCK TABLES `ratteries` WRITE;
 /*!40000 ALTER TABLE `ratteries` DISABLE KEYS */;
 INSERT INTO `ratteries` (`id`, `prefix`, `name`, `owner_user_id`, `birth_year`, `is_alive`, `is_generic`, `district`, `zip_code`, `country_id`, `website`, `comments`, `wants_statistic`, `picture`, `state_id`, `created`, `modified`) VALUES
-(1, 'INC', '*Animalerie*', 1, 1956, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:25:58', '2020-02-28 19:25:58'),
-(2, 'IND', '* Eleveur indépendant *', 1, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:29:09', '2020-02-28 19:38:18'),
-(3, 'ETR', '* Eleveur étranger *', 1, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:31:14', '2020-02-28 19:39:30'),
-(4, 'LAB', '* Lignée de laboratoire *', 1, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:31:45', '2020-02-28 19:38:37'),
-(5, 'SOS', '*Sauvetage*', 1, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:33:50', '2020-02-28 19:33:50'),
-(6, 'SVG', '* Rat Sauvage *', 1, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:37:41', '2020-02-28 19:37:41');
+(1, 'INC', '*Animalerie*', 2, 1956, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:25:58', '2020-02-28 19:25:58'),
+(2, 'IND', '* Eleveur indépendant *', 2, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:29:09', '2020-02-28 19:38:18'),
+(3, 'ETR', '* Eleveur étranger *', 2, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:31:14', '2020-02-28 19:39:30'),
+(4, 'LAB', '* Lignée de laboratoire *', 2, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:31:45', '2020-02-28 19:38:37'),
+(5, 'SOS', '*Sauvetage*', 2, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:33:50', '2020-02-28 19:33:50'),
+(6, 'SVG', '* Rat Sauvage *', 2, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:37:41', '2020-02-28 19:37:41');
 /*!40000 ALTER TABLE `ratteries` ENABLE KEYS */;
 UNLOCK TABLES;
 
