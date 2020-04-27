@@ -417,6 +417,14 @@ INSERT INTO `ratteries` (`id`, `prefix`, `name`, `owner_user_id`, `birth_year`, 
 /*!40000 ALTER TABLE `ratteries` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Déchargement des données de la table `rats`
+--
+
+INSERT INTO `rats` (`id`, `pedigree_identifier`, `is_pedigree_custom`, `owner_user_id`, `name`, `pup_name`, `sex`, `birth_date`, `rattery_id`, `litter_id`, `color_id`, `eyecolor_id`, `dilution_id`, `marking_id`, `earset_id`, `coat_id`, `is_alive`, `death_date`, `death_primary_cause_id`, `death_secondary_cause_id`, `death_euthanized`, `death_diagnosed`, `death_necropsied`, `comments`, `picture`, `picture_thumbnail`, `creator_user_id`, `state_id`, `created`, `modified`) VALUES
+(1, 'INC1F', 0, 1, 'Mère inconnue', NULL, 'F', '2020-04-26', 1, NULL, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Femelle générique - Maman inconnue', 'Unknown.png', NULL, 1, 1, '2020-04-26 00:00:00', '2020-04-26 00:00:00'),
+(2, 'INC2M', 0, 1, 'Père inconnu', NULL, 'M', '2020-04-26', 1, NULL, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Mâle générique - Papa inconnu', 'Unknown.png', NULL, 1, 1, '2020-04-26 00:00:00', '2020-04-26 00:00:00');
+COMMIT;
 
 COMMIT;
 
