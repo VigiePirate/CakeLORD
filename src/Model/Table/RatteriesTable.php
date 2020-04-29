@@ -213,6 +213,4 @@ class RatteriesTable extends Table
 
         return $query->group(['Ratteries.id']);
     }
-
-
 }

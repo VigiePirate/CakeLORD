@@ -20,7 +20,7 @@
 
             <div class="float-right statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
             <div class="float-right sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
-            <h1><?= h($rat->usual_name) . '&#8239;' . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
+            <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '&#8239;' . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
             <h2>Identity</h2>
             <table class="condensed">
@@ -57,11 +57,8 @@
                         <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
                     </tr>
                     <tr>
-                        <th><?= __('Birth Litter') ?></th>
-                        <td><?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->full_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : 'Not attached to any litter' ?></td>
-                    </tr>
-                    <tr>
                         <th><?= __('Dam') ?></th>
+                        <!-- Display field should be better managed (dagger and age in a "full name with age" field) -->
                         <td><?= $rat->has('birth_litter') ? $this->Html->link(
                             $rat->birth_litter->dam->usual_name,
                             ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->dam->id])
@@ -78,6 +75,10 @@
                     </tr>
                     <tr>
                         <th><?= __('Genealogy') ?></th>
+                        <td><?= $rat->has('birth_litter') ? $this->Html->link('See birth litter sheet', ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) . ' (parents and siblings)' : 'Not attached to any litter' ?></td>
+                    </tr>
+                    <tr>
+                        <th></th>
                         <td>See interactive family tree (unavailable)</td>
                     </tr>
                 </table>

@@ -42,11 +42,24 @@ $cakeDescription = 'CakeLORD';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="/"><img alt="LORD Logo: Book with a Rat Tail" src="/img/lord.icon.svg" /></a>
+            <a href="/"><img alt="LORD Logo: Book with a Rat Tail" src="/img/lord.icon.contour.svg" /></a>
             <a href="/" class="hide-on-mobile">Livre des Origines <br>du <span>Rat</span> Domestique</td></a>
         </div>
         <div class="top-nav-links">
-            <img alt="Mock Search Bar" src="/img/mock-search-bar.png"/>
+            <!-- Search form -->
+            <?= $this->Form->create(
+                null,
+                ['url' => [
+                    'controller' => 'Rats',
+                    'action' => 'named'],
+                'type' => 'post',
+                'method' => 'post',
+                'class' => 'searchbar'],
+            ); ?>
+                <?= $this->Form->control('name', ['type' => 'text','label' => false,'placeholder' => 'Search...']); ?>
+                <?= $this->Form->submit('search.icon.clean.svg'); ?>
+            <?= $this->Form->end(); ?>
+            <!-- Login or access dashboard -->
             <?=
             ($this->getRequest()->getSession()->check('Auth.id')) ?
             $this->Html->Link(
@@ -98,8 +111,8 @@ $cakeDescription = 'CakeLORD';
             <h5>Rattery map</h5>
             <h5>Contact</h5>
         </div>
-        <div class="footer_center hide-on-mobile">
-            <img src="/img/lord-shield.png" width="118"/>
+        <div class="footer_center hide-on-tablet">
+            <img src="/img/lord.shield.clean.svg" width="120"/>
             <div class="creditline shieldline">Version 2.2 – “Cake”</div>
         </div>
         <div class="footer_section">
@@ -114,7 +127,7 @@ $cakeDescription = 'CakeLORD';
         </div>
         <div class="footer_largersection">
             <div class="logoblock">
-                <a href="https://cakephp.org/"><img src="/img/logo-cake.png" width="100"/></a><a href="https://github.com/VigiePirate/CakeLORD"><img src="/img/logo-github.png" width="68"/></a><a href="https://www.srfa.info"><img src="/img/logo-srfa.png" width="95"/></a>
+                <div class="hide-on-tablet"></div><a href="https://cakephp.org/"><img src="/img/logo-cake.svg" width="100"/></a><a href="https://github.com/VigiePirate/CakeLORD"><img src="/img/logo-github.svg" width="60"/></a><a href="https://www.srfa.info"><img src="/img/logo-srfa.svg" width="80"/></a>
             </div>
         <div class="creditline">
             © 2020 – Tous droits réservés<br>

@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\I18n\FrozenTime;
+use Cake\I18n\Time;
 
 /**
  * Rattery Entity
@@ -74,5 +76,360 @@ class Rattery extends Entity
     protected function _getFullName()
     {
         return $this->prefix . ' – ' . $this->name;
+    }
+
+    /* Statistics */
+
+    protected function _getChampion() {
+    /* should return usual name with double prefix instead of name */
+
+        $candidate = null;
+        $maxAge = 0;
+        foreach($this->rats as $rat) {
+            if ($rat->death_date != null) {
+                if($rat->precise_age > $maxAge) {
+                    $maxAge = $rat->precise_age;
+                    $candidate = $rat;
+                }
+            }
+        }
+
+        if($candidate==null) {
+            return $champion = ['id' => null, 'name' => 'Could not find champion', 'ageInWords' => ''];
+        } else {
+            return $champion = ['id' => $candidate->id, 'name' => $candidate->name, 'ageInWords' => $candidate->champion_age_string];
+        }
+    }
+
+    protected function _getRatStat() {
+        $ratCount = count($this->rats);
+        if($ratCount>0) {
+            $femaleCount = 0;
+            $maleCount = 0;
+            foreach($this->rats as $rat) {
+                if ($rat->sex==='M') {
+                    $maleCount++;
+                } else {
+                    $femaleCount++;
+                }
+            }
+            $stats = [
+                'ratCount' => $ratCount,
+                'femaleCount' => $femaleCount,
+                'maleCount' => $maleCount,
+                'femaleProportion' => round($femaleCount/$ratCount*100,1),
+                'maleProportion' => round($maleCount/$ratCount*100,1),
+            ];
+        }
+        else {
+            $stats = [
+                'ratCount' => 0,
+                'femaleCount' => 0,
+                'maleCount' => 0,
+                'femaleProportion' => 0,
+                'maleProportion' => 0,
+            ];
+        }
+        return $stats;
+    }
+
+    protected function _getBreedingStat()
+    {
+        /* counter for activity stats, will be updated in appropriate loops later */
+        $firstYear = FrozenTime::maxValue();
+        $lastYear = FrozenTime::minValue();
+
+        /* litter stats */
+        $inLitter = 0;
+        $outLitter = 0;
+        $inRats = 0;
+        $outRats = 0;
+        foreach($this->litters as $litter)
+        {
+            if ($litter->_joinData['litters_contribution_id']  == 1)
+            {
+                $inLitter++;
+                $inRats += $litter->pups_number;
+            } else {
+                $outLitter++;
+                $outRats += $litter->pups_number;
+            }
+
+            if($litter->birth_date->lessThan($firstYear)) {
+                $firstYear = $litter->birth_date;
+            }
+            if($lastYear->lessThan($litter->birth_date)) {
+                $lastYear = $litter->birth_date;
+            }
+        }
+        $litterstats = [
+            'inLitterCount' => $inLitter,
+            'outLitterCount' => $outLitter,
+            'inRatCount' => $inRats,
+            'outRatCount' => $outRats,
+        ];
+
+
+        /* rat stats */
+        $ratCount = count($this->rats);
+        if($ratCount>0) {
+            $femaleCount = 0;
+            $maleCount = 0;
+            foreach($this->rats as $rat) {
+                if ($rat->sex==='M') {
+                    $maleCount++;
+                } else {
+                    $femaleCount++;
+                }
+            }
+            $stats = [
+                'ratCount' => $ratCount,
+                'femaleCount' => $femaleCount,
+                'maleCount' => $maleCount,
+                'femaleProportion' => round($femaleCount/$ratCount*100,1),
+                'maleProportion' => round($maleCount/$ratCount*100,1),
+            ];
+        }
+        else {
+            $stats = [
+                'ratCount' => 0,
+                'femaleCount' => 0,
+                'maleCount' => 0,
+                'femaleProportion' => 0,
+                'maleProportion' => 0,
+            ];
+        }
+
+        // update activity years from rats birthdates when no recorded litter
+        // (this should not happen since ratteries must have litters, but...)
+        // if($outLitter==0) {
+        foreach($this->rats as $rat) {
+            if($rat->birth_date->lessThan($firstYear)) {
+                $firstYear = $rat->birth_date;
+            }
+            if($lastYear->lessThan($rat->birth_date)) {
+                $lastYear = $rat->birth_date;
+            }
+        }
+        //}
+
+        /* finalize activity stats */
+
+        /* option 1 with diffInYears :
+        * Needs to add one year to difference, which is "floored" instead of "ceiled" by diffInYears function
+        * Needs also to treats plural and add "years" to final string
+        *
+        * $duration = $firstYear->diffInYears($lastYear)+1;
+        * $plural = ( $duration > 1 ) ? 's' : '';
+        * $activitystats['activityYears'] = $firstYear->year . '–' . $lastYear->year . ' (' . $duration . ' year' . $plural . ')';
+        */
+
+        /* option 2 with timeAgoInWords :
+        * call to timeAgoInWords in the "wrong" date order to avoid "ago" to be added to the string
+        */
+        if(($inLitter+$outLitter)==1) {
+            $activitystats['activityYears'] = $firstYear->year . ' (one-shot rattery)';
+        } else {
+            $duration = $lastYear->timeAgoInWords(['from' => $firstYear, 'accuracy' => ['year' => 'month', 'month => week', 'week' => 'week']]);
+            if($firstYear->year==$lastYear->year) {
+                $activitystats['activityYears'] = $firstYear->year . ' (' . $duration . ')';
+            } else {
+                $activitystats['activityYears'] = $firstYear->year . '–' . $lastYear->year . ' (' . $duration . ')';
+            }
+        }
+
+        return $stats = array_merge($litterstats,$activitystats,$stats);
+    }
+
+    protected function _getHealthStat()
+    {
+        $breedingstats = $this->breeding_stat;
+
+        /* counter for presumed dead rats */
+        $lostRatCount = 0;
+
+        /* counters for global lifespan (stillborn excluded) */
+        $deadFCount = 0;
+        $deadMCount = 0;
+        $cumFAge = 0;
+        $cumMAge = 0;
+
+        /* counters for adult lifespan (infant mortality excluded) */
+        $deadFCountAdult = 0;
+        $deadMCountAdult = 0;
+        $cumFAgeAdult = 0;
+        $cumMAgeAdult = 0;
+
+        /* counters for healthy lifespan (infant mortality and accidents excluded) */
+        $deadFCountHealthy = 0;
+        $deadMCountHealthy = 0;
+        $cumFAgeHealthy = 0;
+        $cumMAgeHealthy = 0;
+
+        /* variables for death causes */
+        /* death causes stats */
+        /* death causes stats */
+        $deathprimarystats = array();
+        $deathsecondarystats = array();
+
+        if($breedingstats['ratCount']>0) {
+            foreach($this->rats as $rat)
+            {
+                //if(!$rat->is_alive) : to be debugged later, not used now (all is relying on death date)
+
+                // first, process rats who are presumed dead
+                if(
+                    (isset($rat->_fields['primary_death_cause']) && $rat->death_primary_cause['id'] == 1 && isset($rat->_fields['secondary_death_cause']) && $rat->death_secondary_cause['id'] == 1)
+                    or ($rat->age>54)) {
+                    $lostRatCount++;
+                }
+
+                // then, process all rats with death date and cause
+                if (isset($rat->_fields['death_date'])) {
+                    // count all dead rats -- fixme: stillborn will have to be removed in any case
+                    if($rat->sex==='M') {
+                        $deadMCount++;
+                        $cumMAge += $rat->precise_age;
+                    } else {
+                        $deadFCount++;
+                        $cumFAge += $rat->precise_age;
+                    }
+
+                    // count only rats dead after weaning
+                    // alternative condition: infant mortality : isset($rat->_fields['secondary_death_cause']) && $rat->death_secondary_cause['id'] != 30)
+                    if ($rat->precise_age > 42) {
+                        if($rat->sex==='M') {
+                            $deadMCountAdult++;
+                            $cumMAgeAdult += $rat->precise_age;
+                        } else {
+                            $deadFCountAdult++;
+                            $cumFAgeAdult += $rat->precise_age;
+                        }
+                    }
+
+                    // exclude accidental death
+                    if ($rat->precise_age > 42 && $rat->death_primary_cause['id'] != 2) {
+                        if($rat->sex==='M') {
+                            $deadMCountHealthy++;
+                            $cumMAgeHealthy += $rat->precise_age;
+                        } else {
+                            $deadFCountHealthy++;
+                            $cumFAgeHealthy += $rat->precise_age;
+                        }
+                    }
+
+                    // update death causes counters
+                    if(isset($rat->death_primary_cause)) {
+                        if (isset($deathprimarystats[$rat->death_primary_cause->name])) {
+                            $deathprimarystats[$rat->death_primary_cause->name]++;
+                        } else {
+                            $deathprimarystats[$rat->death_primary_cause->name] = 1;
+                        }
+
+                        if(isset($rat->death_secondary_cause)) {
+                            if (isset($deathsecondarystats[$rat->death_secondary_cause->name])) {
+                                $deathsecondarystats[$rat->death_secondary_cause->name]++;
+                            } else {
+                                $deathsecondarystats[$rat->death_secondary_cause->name] = 1;
+                            }
+                        // if secondary cause is not set, record primary cause as secondary
+                        } else {
+                            if (isset($deathsecondarystats[$rat->death_primary_cause->name])) {
+                                $deathsecondarystats[$rat->death_primary_cause->name]++;
+                            } else {
+                                $deathsecondarystats[$rat->death_primary_cause->name] = 1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /* package results */
+            $presumedDeadRatCount = $deadMCount+$deadFCount+$lostRatCount;
+            $deadRatCount = $deadMCount+$deadFCount;
+            $deadAdultCount = $deadMCountAdult+$deadFCountAdult;
+            $deadHealthyCount = $deadMCountHealthy+$deadFCountHealthy;
+            $healthstats = [
+                'presumedDeadRatCount' => $presumedDeadRatCount,
+                'deadRatCount' => $deadRatCount,
+                'lostRatCount' => $lostRatCount,
+                'lostRatProportion' => round($lostRatCount/$presumedDeadRatCount*100,1),
+                'followedRatProportion' => 100-round($lostRatCount/$presumedDeadRatCount*100,1),
+                'deadRatProportion' => round($presumedDeadRatCount/$breedingstats['ratCount']*100,1),
+                'deadRatAge' => 'N/A',
+                'deadMaleCount' => $deadMCount,
+                'deadMaleAge' => 'N/A',
+                'deadFemaleCount' => $deadFCount,
+                'deadFemaleAge' => 'N/A',
+            ];
+
+            if($deadRatCount>0) {
+                $healthstats['deadRatAge'] = round(2*($cumMAge+$cumFAge)/$deadRatCount/30.5)/2;
+            }
+            if($deadMCount>0) {
+                $healthstats['deadMaleAge'] = round(2*$cumMAge/$deadMCount/30.5)/2;
+            }
+            if($deadFCount>0) {
+                $healthstats['deadFemaleAge'] = round(2*$cumFAge/$deadFCount/30.5)/2;
+            }
+
+            if($deadAdultCount>0) {
+                $healthstats['deadRatAgeAdult'] = round(2*($cumMAgeAdult+$cumFAgeAdult)/$deadAdultCount/30.5)/2;
+            }
+            if($deadMCountAdult>0) {
+                $healthstats['deadMaleAgeAdult'] = round(2*$cumMAgeAdult/$deadMCountAdult/30.5)/2;
+            }
+            if($deadFCountAdult>0) {
+                $healthstats['deadFemaleAgeAdult'] = round(2*$cumFAgeAdult/$deadFCountAdult/30.5)/2;
+            }
+
+            if($deadHealthyCount>0) {
+                $healthstats['deadRatAgeHealthy'] = round(2*($cumMAgeHealthy+$cumFAgeHealthy)/$deadHealthyCount/30.5)/2;
+            }
+            if($deadMCountHealthy>0) {
+                $healthstats['deadMaleAgeHealthy'] = round(2*$cumMAgeHealthy/$deadMCountHealthy/30.5)/2;
+            }
+            if($deadFCountHealthy>0) {
+                $healthstats['deadFemaleAgeHealthy'] = round(2*$cumFAgeHealthy/$deadFCountHealthy/30.5)/2;
+            }
+
+            arsort($deathprimarystats);
+            arsort($deathsecondarystats);
+
+            $deathprimarystats = array_map(function($count) use ($deadRatCount){return round($count/$deadRatCount*100,1);},$deathprimarystats);
+            $deathsecondarystats = array_map(function($count) use ($deadRatCount){return round($count/$deadRatCount*100,1);},$deathsecondarystats);
+
+            $deathstats = [
+                'deathPrimary' => $deathprimarystats,
+                'deathSecondary' => $deathsecondarystats,
+            ];
+
+            $stats = array_merge($breedingstats,$healthstats,$deathstats);
+            return $stats;
+        }
+        else {
+            $healthstats = [
+                'deadRatCount' => 0,
+                'deadRatProportion' => 'N/A',
+                'deadRatAge' => 'N/A',
+                'deadMaleCount' => 'N/A',
+                'deadMaleAge' => 'N/A',
+                'deadFemaleCount' => 'N/A',
+                'deadFemaleAge' => 'N/A',
+                'deadRatAgeAdult' => 'N/A',
+                'deadMaleCountAdult' => 'N/A',
+                'deadMaleAgeAdult' => 'N/A',
+                'deadFemaleCountAdult' => 'N/A',
+                'deadFemaleAgeAdult' => 'N/A',
+                'deadRatAgeHealthy' => 'N/A',
+                'deadMaleCountHealthy' => 'N/A',
+                'deadMaleAgeHealthy' => 'N/A',
+                'deadFemaleCountHealthy' => 'N/A',
+                'deadFemaleAgeHealthy' => 'N/A',
+            ];
+        }
+
+        $stats = array_merge($breedingstats,$healthstats);
+        return $stats;
     }
 }

@@ -392,5 +392,4 @@ class RatsTable extends Table
 
         return $query->group(['Rats.id']);
     }
-
 }

@@ -16,7 +16,7 @@ class RatteriesController extends AppController
     {
         parent::beforeFilter($event);
         // No authentication needed on consultation
-        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'view','glimpse']);
     }
 
     /**
@@ -33,6 +33,26 @@ class RatteriesController extends AppController
         $ratteries = $this->paginate($this->Ratteries);
 
         $this->set(compact('ratteries'));
+    }
+
+    public function glimpse($id = null)
+    {
+        $this->Authorization->skipAuthorization();
+
+        $rattery = $this->Ratteries->get($id, [
+            'contain' => ['Users', 'Countries', 'States', 'Litters', 'Conversations', 'Rats',
+            // contains for double prefix... 'Rats.BirthLitters', 'Rats.BirthLitters.Ratteries','Rats.BirthLitters.ParentRats','Rats.BirthLitters.ParentRats.Ratteries','Rats.BirthLitters.ParentRats.BirthLitters.Ratteries',
+            'Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses',
+            'RatterySnapshots'],
+        ]);
+
+        // fixme: for statistics, probably does not belong here
+        // $count = $rattery->Rats->find('all')->count();
+        // $this->set('count', $count);
+
+        $stats = ($rattery->is_generic) ? $rattery->rat_stat : $rattery->health_stat;
+        $champion = $rattery->champion;
+        $this->set(compact('rattery','stats','champion'));
     }
 
     /**
@@ -182,4 +202,11 @@ class RatteriesController extends AppController
         $this->set(compact('ratteries', 'users'));
     }
 
+    // Functions for statistics
+    // Compute the number of rats born in the rattery
+    // not used and probably bugged
+    public function countRats()
+    {
+        $this->Rats->find('all')->count();
+    }
 }
