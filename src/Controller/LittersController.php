@@ -37,6 +37,24 @@ class LittersController extends AppController
     }
 
     /**
+     * My method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function my()
+    {
+        $user = $this->Authentication->getIdentity();
+        $this->paginate = [
+            'contain' => ['Users', 'ParentRats', 'States'],
+        ];
+        $litters = $this->paginate($this->Litters->find()->where([
+            'creator_user_id' => $user->id,
+        ]));
+
+        $this->set(compact('litters', 'user'));
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Litter id.

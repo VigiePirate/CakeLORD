@@ -45,13 +45,10 @@ class RatsController extends AppController
     public function my()
     {
         $user = $this->Authentication->getIdentity();
-        $this->Rats->find('ownedBy')
-            ->where(['owner_user_id' => $user->id])
-        ;
         $this->paginate = [
             'contain' => ['OwnerUsers', 'States'],
         ];
-        $rats = $this->paginate($this->Rats);
+        $rats = $this->paginate($this->Rats->find()->where(['owner_user_id' => $user->id]));
 
         $this->set(compact('rats', 'user'));
     }

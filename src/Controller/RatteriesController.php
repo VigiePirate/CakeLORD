@@ -43,15 +43,20 @@ class RatteriesController extends AppController
     public function my()
     {
         $user = $this->Authentication->getIdentity();
-        $this->Ratteries->find('ownedBy')
-            ->where(['owner_user_id' => $user->id])
-        ;
         $this->paginate = [
             'contain' => ['Users', 'Countries', 'States'],
         ];
-        $ratteries = $this->paginate($this->Ratteries);
+        $ratteries = $this->paginate($this->Ratteries->find()->where([
+            'owner_user_id' => $user->id,
+            'is_alive' => true,
+        ]));
+        $closed_ratteries = $this->paginate($this->Ratteries->find()->where([
+            'owner_user_id' => $user->id,
+            'is_alive' => false,
+        ]));
 
-        $this->set(compact('ratteries', 'user'));
+
+        $this->set(compact('ratteries', 'closed_ratteries', 'user'));
     }
 
     /**

@@ -66,6 +66,12 @@ class UserPolicy implements BeforePolicyInterface
         return $user->get('id') === $resource->get('id');
     }
 
+    public function canMy(IdentityInterface $user, User $resource)
+    {
+        // Can update self
+        return $user->get('id') === $resource->get('id');
+    }
+
     /**
      * Check if $user can delete User
      *
