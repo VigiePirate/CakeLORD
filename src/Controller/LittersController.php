@@ -65,7 +65,7 @@ class LittersController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $litter = $this->Litters->get($id, [
-            'contain' => ['Users', 'States', 'OffspringRats', 'ParentRats', 'Ratteries', 'Conversations', 'LitterSnapshots'],
+            'contain' => ['Users', 'States', 'OffspringRats', 'ParentRats', 'ParentRats.Ratteries', 'Ratteries', 'Conversations', 'LitterSnapshots'],
         ]);
 
         $this->set('litter', $litter);

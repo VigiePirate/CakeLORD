@@ -14,6 +14,7 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('color') ?></th>
+                    <th><?= $this->Paginator->sort('symbol') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                     <td><?= $this->Number->format($state->id) ?></td>
                     <td><?= h($state->name) ?></td>
                     <td><?= h($state->color) ?></td>
+                    <td><?= h($state->symbol) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $state->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $state->id]) ?>

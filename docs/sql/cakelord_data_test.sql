@@ -71,18 +71,6 @@ INSERT INTO `litters` (`id`, `mating_date`, `birth_date`, `pups_number`, `pups_n
 UNLOCK TABLES;
 
 --
--- Dumping data for table `litters_contributions`
---
-
-LOCK TABLES `litters_contributions` WRITE;
-/*!40000 ALTER TABLE `litters_contributions` DISABLE KEYS */;
-INSERT INTO `litters_contributions` (`id`, `name`, `priority`) VALUES (1,'Main',1),
-(2,'Mother',2),
-(3,'Father',3);
-/*!40000 ALTER TABLE `litters_contributions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `logs`
 --
 

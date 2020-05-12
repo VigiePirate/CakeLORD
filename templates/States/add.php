@@ -19,6 +19,7 @@
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('color');
+                    echo $this->Form->control('symbol');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
