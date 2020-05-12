@@ -105,6 +105,8 @@ class Application extends BaseApplication
                 'requireAuthorizationCheck' => false
             ]));
             
+        /*
+         * Not necessary as the DebugKit.ignoreAuthorization in bootstrap.php already does this
         if (Configure::read('debug')) {
             // Disable authz for debugkit
             $middlewareQueue->add(function ($req, $res, $next) {
@@ -114,6 +116,7 @@ class Application extends BaseApplication
                 return $next($req, $res);
             });
         }
+         */
 
         return $middlewareQueue;
     }
