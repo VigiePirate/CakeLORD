@@ -38,6 +38,22 @@ class RatsController extends AppController
     }
 
     /**
+     * My method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function my()
+    {
+        $user = $this->Authentication->getIdentity();
+        $this->paginate = [
+            'contain' => ['OwnerUsers', 'States'],
+        ];
+        $rats = $this->paginate($this->Rats->find()->where(['owner_user_id' => $user->id]));
+
+        $this->set(compact('rats', 'user'));
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Rat id.
