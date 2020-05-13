@@ -103,4 +103,17 @@ class StatesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * Summary method
+     * A twin of view method with less information, for migration debug
+     */
+    public function summary($id = null)
+    {
+        $state = $this->States->get($id, [
+            'contain' => ['LitterSnapshots', 'Litters', 'RatSnapshots', 'Rats', 'Ratteries', 'RatterySnapshots'],
+        ]);
+
+        $this->set('state', $state);
+    }
 }
