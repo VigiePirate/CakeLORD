@@ -77,10 +77,27 @@ class LittersTable extends Table
             'targetForeignKey' => 'rat_id',
             'joinTable' => 'rats_litters',
         ]);
-        $this->belongsToMany('Ratteries', [
+        $this->belongsToMany('Sire', [
+            'className' => 'Rats',
             'foreignKey' => 'litter_id',
-            'targetForeignKey' => 'rattery_id',
-            'joinTable' => 'ratteries_litters',
+            'targetForeignKey' => 'rat_id',
+            'joinTable' => 'rats_litters',
+            'finder' => 'Males',
+        ]);
+        $this->belongsToMany('Dam', [
+            'className' => 'Rats',
+            'foreignKey' => 'litter_id',
+            'targetForeignKey' => 'rat_id',
+            'joinTable' => 'rats_litters',
+            'finder' => 'Females',
+        ]);
+        $this->belongsToMany('Ratteries', [
+            'through' => 'RatteriesLitters',
+        ]);
+        $this->belongsToMany('Contributions', [
+            'className' => 'LittersContributions',
+            'through' => 'RatteriesLitters',
+            'finder' => 'Ordered',
         ]);
     }
 
@@ -133,4 +150,5 @@ class LittersTable extends Table
 
         return $rules;
     }
+
 }
