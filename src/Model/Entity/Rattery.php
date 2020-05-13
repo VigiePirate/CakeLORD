@@ -86,7 +86,7 @@ class Rattery extends Entity
         $candidate = null;
         $maxAge = 0;
         foreach($this->rats as $rat) {
-            if ($rat->death_date != null) {
+            if (!$rat->is_alive & isset($rat->death_date) & ($rat->death_primary_cause_id != '1')) {
                 if($rat->precise_age > $maxAge) {
                     $maxAge = $rat->precise_age;
                     $candidate = $rat;
@@ -155,11 +155,13 @@ class Rattery extends Entity
                 $outRats += $litter->pups_number;
             }
 
-            if($litter->birth_date->lessThan($firstYear)) {
-                $firstYear = $litter->birth_date;
-            }
-            if($lastYear->lessThan($litter->birth_date)) {
-                $lastYear = $litter->birth_date;
+            if($litter->has('birth_date')) { // for debug: this should not be possible
+                if($litter->birth_date->lessThan($firstYear)) {
+                    $firstYear = $litter->birth_date;
+                }
+                if($lastYear->lessThan($litter->birth_date)) {
+                    $lastYear = $litter->birth_date;
+                }
             }
         }
         $litterstats = [
@@ -272,72 +274,70 @@ class Rattery extends Entity
         $deathprimarystats = array();
         $deathsecondarystats = array();
 
-        if($breedingstats['ratCount']>0) {
-            foreach($this->rats as $rat)
-            {
-                //if(!$rat->is_alive) : to be debugged later, not used now (all is relying on death date)
-
-                // first, process rats who are presumed dead
+        if($breedingstats['ratCount'] > 0) {
+            foreach($this->rats as $rat) {
+                // first, process rats who are lost and presumed dead
                 if(
-                    (isset($rat->_fields['primary_death_cause']) && $rat->death_primary_cause['id'] == 1 && isset($rat->_fields['secondary_death_cause']) && $rat->death_secondary_cause['id'] == 1)
-                    or ($rat->age>54)) {
+                    (!$rat->is_alive && !isset($rat->_fields['death_primary_cause']))
+                    || (!$rat->is_alive && isset($rat->_fields['death_primary_cause']) && $rat->death_primary_cause_id == 1 && !isset($rat->_fields['death_secondary_cause']))
+                    || (!$rat->is_alive && isset($rat->_fields['death_primary_cause']) && $rat->death_primary_cause_id == 1 && isset($rat->_fields['death_primary_cause']) && $rat->death_secondary_cause_id == 1)
+                    || ($rat->is_alive && $rat->age>54)
+                ) {
                     $lostRatCount++;
-                }
-
-                // then, process all rats with death date and cause
-                if (isset($rat->_fields['death_date'])) {
-                    // count all dead rats -- fixme: stillborn will have to be removed in any case
-                    if($rat->sex==='M') {
-                        $deadMCount++;
-                        $cumMAge += $rat->precise_age;
-                    } else {
-                        $deadFCount++;
-                        $cumFAge += $rat->precise_age;
-                    }
-
-                    // count only rats dead after weaning
-                    // alternative condition: infant mortality : isset($rat->_fields['secondary_death_cause']) && $rat->death_secondary_cause['id'] != 30)
-                    if ($rat->precise_age > 42) {
-                        if($rat->sex==='M') {
-                            $deadMCountAdult++;
-                            $cumMAgeAdult += $rat->precise_age;
+                } else {
+                    if(!$rat->is_alive) {
+                        if($rat->sex === 'M') {
+                            $deadMCount++;
+                            $cumMAge += $rat->precise_age;
                         } else {
-                            $deadFCountAdult++;
-                            $cumFAgeAdult += $rat->precise_age;
-                        }
-                    }
-
-                    // exclude accidental death
-                    if ($rat->precise_age > 42 && $rat->death_primary_cause['id'] != 2) {
-                        if($rat->sex==='M') {
-                            $deadMCountHealthy++;
-                            $cumMAgeHealthy += $rat->precise_age;
-                        } else {
-                            $deadFCountHealthy++;
-                            $cumFAgeHealthy += $rat->precise_age;
-                        }
-                    }
-
-                    // update death causes counters
-                    if(isset($rat->death_primary_cause)) {
-                        if (isset($deathprimarystats[$rat->death_primary_cause->name])) {
-                            $deathprimarystats[$rat->death_primary_cause->name]++;
-                        } else {
-                            $deathprimarystats[$rat->death_primary_cause->name] = 1;
+                            $deadFCount++;
+                            $cumFAge += $rat->precise_age;
                         }
 
-                        if(isset($rat->death_secondary_cause)) {
-                            if (isset($deathsecondarystats[$rat->death_secondary_cause->name])) {
-                                $deathsecondarystats[$rat->death_secondary_cause->name]++;
+                        // count only rats dead after weaning
+                        // alternative condition: infant mortality : isset($rat->_fields['secondary_death_cause']) && $rat->death_secondary_cause['id'] != 30)
+                        if ($rat->precise_age > 42) {
+                            if($rat->sex === 'M') {
+                                $deadMCountAdult++;
+                                $cumMAgeAdult += $rat->precise_age;
                             } else {
-                                $deathsecondarystats[$rat->death_secondary_cause->name] = 1;
+                                $deadFCountAdult++;
+                                $cumFAgeAdult += $rat->precise_age;
                             }
-                        // if secondary cause is not set, record primary cause as secondary
-                        } else {
-                            if (isset($deathsecondarystats[$rat->death_primary_cause->name])) {
-                                $deathsecondarystats[$rat->death_primary_cause->name]++;
+                        }
+
+                        // exclude accidental death
+                        if ($rat->precise_age > 42 && $rat->death_primary_cause_id != 2) {
+                            if($rat->sex==='M') {
+                                $deadMCountHealthy++;
+                                $cumMAgeHealthy += $rat->precise_age;
                             } else {
-                                $deathsecondarystats[$rat->death_primary_cause->name] = 1;
+                                $deadFCountHealthy++;
+                                $cumFAgeHealthy += $rat->precise_age;
+                            }
+                        }
+
+                        // update death causes counters
+                        if(isset($rat->death_primary_cause)) {
+                            if (isset($deathprimarystats[$rat->death_primary_cause->name])) {
+                                $deathprimarystats[$rat->death_primary_cause->name]++;
+                            } else {
+                                $deathprimarystats[$rat->death_primary_cause->name] = 1;
+                            }
+
+                            if(isset($rat->death_secondary_cause)) {
+                                if (isset($deathsecondarystats[$rat->death_secondary_cause->name])) {
+                                    $deathsecondarystats[$rat->death_secondary_cause->name]++;
+                                } else {
+                                    $deathsecondarystats[$rat->death_secondary_cause->name] = 1;
+                                }
+                            // if secondary cause is not set, record primary cause as secondary
+                            } else {
+                                if (isset($deathsecondarystats[$rat->death_primary_cause->name])) {
+                                    $deathsecondarystats[$rat->death_primary_cause->name]++;
+                                } else {
+                                    $deathsecondarystats[$rat->death_primary_cause->name] = 1;
+                                }
                             }
                         }
                     }
@@ -353,8 +353,6 @@ class Rattery extends Entity
                 'presumedDeadRatCount' => $presumedDeadRatCount,
                 'deadRatCount' => $deadRatCount,
                 'lostRatCount' => $lostRatCount,
-                'lostRatProportion' => round($lostRatCount/$presumedDeadRatCount*100,1),
-                'followedRatProportion' => 100-round($lostRatCount/$presumedDeadRatCount*100,1),
                 'deadRatProportion' => round($presumedDeadRatCount/$breedingstats['ratCount']*100,1),
                 'deadRatAge' => 'N/A',
                 'deadMaleCount' => $deadMCount,
@@ -365,6 +363,12 @@ class Rattery extends Entity
 
             if($deadRatCount>0) {
                 $healthstats['deadRatAge'] = round(2*($cumMAge+$cumFAge)/$deadRatCount/30.5)/2;
+                $healthstats['lostRatProportion'] = round($lostRatCount/$presumedDeadRatCount*100,1);
+                $healthstats['followedRatProportion'] = 100-round($lostRatCount/$presumedDeadRatCount*100,1);
+            } else {
+                $healthstats['deadRatAge'] = 'N/A';
+                $healthstats['lostRatProportion'] = 'N/A';
+                $healthstats['followedRatProportion'] = 'N/A';
             }
             if($deadMCount>0) {
                 $healthstats['deadMaleAge'] = round(2*$cumMAge/$deadMCount/30.5)/2;

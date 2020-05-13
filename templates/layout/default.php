@@ -57,25 +57,25 @@ $cakeDescription = 'CakeLORD';
                 'class' => 'searchbar'],
             ); ?>
                 <?= $this->Form->control('name', ['type' => 'text','label' => false,'placeholder' => 'Search...']); ?>
-                <?= $this->Form->submit('search.icon.clean.svg'); ?>
+                <?= $this->Form->submit(); ?>
             <?= $this->Form->end(); ?>
             <!-- Login or access dashboard -->
             <?=
             ($this->getRequest()->getSession()->check('Auth.id')) ?
-            $this->Html->Link(
-                $this->getRequest()->getSession()->read('Auth.username'),
-                [
-                    'controller' => 'Users',
-                    'action' => 'view',
-                    $this->getRequest()->getSession()->read('Auth.id')
-                ])
+                $this->Html->Link(
+                // $this->getRequest()->getSession()->read('Auth.username'),
+                    $this->Html->image("/img/icon-user.svg", ["alt" => "Dashboard", "width" => "40"]),
+                    ['controller' => 'Users', 'action' => 'home'],
+                    ['escape' => false]) .
+                $this->Html->Link(
+                    $this->Html->image("/img/icon-logout.svg", ["alt" => "Logout", "width" => "40"]),
+                    ['controller' => 'Users', 'action' => 'logout', $this->getRequest()->getSession()->read('Auth.id')],
+                    ['escape' => false])
                 :
                 $this->Html->Link(
-                    'Login',
-                    [
-                        'controller' => 'Users',
-                        'action' => 'login'
-                    ])
+                    $this->Html->image("/img/icon-login.svg", ["alt" => "Login", "width" => "40"]),
+                    ['controller' => 'Users', 'action' => 'login'],
+                    ['escape' => false])
             ?>
         </div>
         </nav>
@@ -112,8 +112,10 @@ $cakeDescription = 'CakeLORD';
             <h5>Contact</h5>
         </div>
         <div class="footer_center hide-on-tablet">
-            <img src="/img/lord.shield.clean.svg" width="120"/>
-            <div class="creditline shieldline">Version 2.2 – “Cake”</div>
+            <!--<img src="/img/lord.footer.svg" width="105"/>-->
+            <img src="/img/lord.shield.clean.svg" width="110"/>
+            <div class="shieldline">Livre des Origines<br>du <span>Rat</span> Domestique</div> <!-- LORD v2.2 – “Cake” -->
+            <div class="versionline">Version 2.2 – “Cake”</div>
         </div>
         <div class="footer_section">
             <div class="footer_subsection">
@@ -127,6 +129,7 @@ $cakeDescription = 'CakeLORD';
         </div>
         <div class="footer_largersection">
             <div class="logoblock">
+                <!-- <div class="hide-on-tablet"></div><a href="https://cakephp.org/"><img src="/img/logo-cake.svg" width="100"/></a><a href="https://github.com/VigiePirate/CakeLORD"><img src="/img/logo-github.black.svg" width="60"/></a><a href="https://www.srfa.info"><img src="/img/logo-srfa.black.svg" width="80"/></a> -->
                 <div class="hide-on-tablet"></div><a href="https://cakephp.org/"><img src="/img/logo-cake.svg" width="100"/></a><a href="https://github.com/VigiePirate/CakeLORD"><img src="/img/logo-github.svg" width="60"/></a><a href="https://www.srfa.info"><img src="/img/logo-srfa.svg" width="80"/></a>
             </div>
         <div class="creditline">

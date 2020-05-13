@@ -144,14 +144,17 @@ class Rat extends Entity
 
     protected function _getUsualName()
     {
-        return $this->double_prefix . ' ' . $this->name;
-        // return $this->rattery->prefix . ' ' . $this->name;
+        if($this->id>2) {
+            return $this->double_prefix . ' ' . $this->name;
+        } else { // don't return prefix for unknown mother and unknown father special rats
+            return '???';
+        }
     }
 
     protected function _getIsAliveSymbol()
     {
         // dagger is preceded with a non breakable fine space, do not edit!
-        return (!$this->is_alive ? ' †' : '');
+        return ($this->is_alive ? '' : ' †');
     }
 
     protected function _getSexName()
@@ -201,7 +204,7 @@ class Rat extends Entity
         /* debug while waiting for data conformity:
         there shouldn't be a death date if the rat is alive, but... */
         // if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
-        if (isset($this->_fields['death_date'])) {
+        if (!$this->is_alive && isset($this->_fields['death_date'])) {
             $agedate = $this->_fields['death_date'];
         }
         if (isset($this->birth_date)) {
@@ -213,14 +216,24 @@ class Rat extends Entity
 
     protected function _getAgeString()
     {
-        $age = $this->age . ' months';
-        if (! $this->age) {
-            $age .= ' (birth date unknown)'; // Should raise exception
+        /* if(
+            (!$this->is_alive && !isset($this->_fields['death_primary_cause']))
+            || (!$this->is_alive && isset($this->_fields['death_primary_cause']) && $this->death_primary_cause_id == 1 && !isset($this->_fields['death_secondary_cause']))
+            || (!$this->is_alive && isset($this->_fields['death_primary_cause']) && $this->death_primary_cause_id == 1 && isset($this->_fields['death_primary_cause']) && $this->death_secondary_cause_id == 1)
+            || ($this->is_alive && $this->age>54)
+        ) {
+            return $age = 'Unknown (supposed deceased)';
+        } */
+
+        if (! $this->age) { // Should raise exception
+            return $age = 'Unknown (birth or death date unknown)';
         }
-        if (! $this->_fields['is_alive']) {
-            isset($this->_fields['death_date']) ? $age = 'deceased at ' . $age : $age = 'supposed deceased at ' . $age;
+        if (! $this->_fields['is_alive'] ) {
+            $age = $this->has('death_date') ?  ($this->age . ' months') : ('supposed deceased, unknown age');
+            return $age;
+        }  else {
+            return $age = $this->age . ' months';
         }
-        return $age;
     }
 
     protected function _getPreciseAge()
@@ -229,7 +242,7 @@ class Rat extends Entity
         /* debug while waiting for data conformity:
         there shouldn't be a death date if the rat is alive, but... */
         // if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
-        if (isset($this->_fields['death_date'])) {
+        if (!$this->is_alive && isset($this->_fields['death_date'])) {
             $agedate = $this->_fields['death_date'];
         }
         if (isset($this->birth_date)) {
@@ -241,7 +254,12 @@ class Rat extends Entity
 
     protected function _getChampionAgeString()
     {
-        if (isset($this->birth_date) && isset($this->_fields['death_date'])) {
+        if (!$this->is_alive
+            && isset($this->birth_date)
+            && isset($this->_fields['death_date'])
+            && isset($this->_fields['death_primary_cause'])
+            && (!isset($this->_fields['death_secondary_cause']) || (isset($this->_fields['death_primary_cause']) && $this->death_secondary_cause_id != 1))
+        ) {
             //return $agedate->diffInDays($this->_fields['birth_date'], true);
             // timeAgoInWords? diffForHumans?
             $birthdate = $this->birth_date;

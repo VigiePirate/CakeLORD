@@ -70,11 +70,35 @@ $cakeDescription = 'CakeLORD: Just Taste it';
             <div class="content">
                 <div class="row">
                     <div class="column">
-                        <p>Go to...</p>
+                        <h4>Go to...</h4>
                         <p><?= $this->Html->link('Users', '/users') ?></p>
                         <p><?= $this->Html->link('Ratteries', '/ratteries') ?></p>
                         <p><?= $this->Html->link('Rats', '/rats') ?></p>
                         <p><?= $this->Html->link('Litters', '/litters') ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="content">
+                <div class="row">
+                    <div class="column">
+                        <h4>Available finders (copy and edit end of url to customize your search)</h4>
+                        <p>Rats:
+                            <ul>
+                                <li>• By name or pup name: <?= $this->Html->link('https://artefact.kubrick.srfa.info/rats/named/super', '/rats/named/super') ?></li>
+                                <li>• By owner username: <?= $this->Html->link('https://artefact.kubrick.srfa.info/rats/owned-by/arte', '/rats/owned-by/arte') ?></li>
+                                <li>• By rattery name or prefix: <?= $this->Html->link('https://artefact.kubrick.srfa.info/rats/from-rattery/del', '/rats/from-rattery/del') ?></li>
+                                <li>• Born before some date: <?= $this->Html->link('https://artefact.kubrick.srfa.info/rats/born-before/2000-01-01', '/rats/born-before/2000-01-01') ?></li>
+                                <li>• Born after some date: <?= $this->Html->link('https://artefact.kubrick.srfa.info/rats/born-after/2020-01-01', '/rats/born-after/2020-01-01') ?></li>
+                            </ul>
+                        </p>
+                        <p>Ratteries:
+                            <ul>
+                                <li>• By name or prefix: <?= $this->Html->link('https://artefact.kubrick.srfa.info/ratteries/named/aa', '/ratteries/named/aa') ?></li>
+                                <li>• By owner username: <?= $this->Html->link('https://artefact.kubrick.srfa.info/ratteries/owned-by/ee', '/ratteries/owned-by/ee') ?></li>
+                            </ul>
+                        </p>
                     </div>
                 </div>
             </div>

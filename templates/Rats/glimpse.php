@@ -18,9 +18,15 @@
     <div class="column-responsive column-80">
         <div class="rats view content">
 
-            <div class="float-right statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
-            <div class="float-right sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
-            <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '&#8239;' . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle">Rat</div>
+                <div class="sheet-markers">
+                    <div class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
+                    <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                </div>
+            </div>
+
+            <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
             <h2>Identity</h2>
             <table class="condensed">
@@ -123,12 +129,12 @@
                 </tr>
                 <tr>
                     <th><?= $rat->is_alive ? __('Age') : __('Age at death'); ?></th>
-                    <td><?= h($rat->age) ?> months</td>
+                    <td><?= h($rat->age_string) ?></td>
                 </tr>
                 <?php if (!$rat->is_alive) : ?>
                 <tr>
                     <th><?= __('Death Date') ?></th>
-                    <td><?= h($rat->death_date->i18nFormat('dd/MM/yyyy')) ?></td>
+                    <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : 'Unknown' ?></td>
                     </tr>
                 <tr>
                 <th><?= __('Death Primary Cause') ?></th>
