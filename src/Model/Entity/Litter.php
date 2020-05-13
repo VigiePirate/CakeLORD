@@ -55,29 +55,11 @@ class Litter extends Entity
         'ratteries' => true,
     ];
 
-    protected function _getDam()
-    {
-        foreach ($this->parent_rats as $parent) {
-            if ($parent->sex == 'F') {
-                return $parent;
-            }
-        }
-    }
-
-    protected function _getSire()
-    {
-        foreach ($this->parent_rats as $parent) {
-            if ($parent->sex == 'M') {
-                return $parent;
-            }
-        }
-    }
-
     protected function _getFullName()
     {
-        $fullname = $this->birth_date . ' ' . $this->dam->full_name;
+        $fullname = $this->birth_date . ' ' . $this->dam[0]->full_name;
         if (isset ($this->sire)) {
-            $fullname .= ' ' . $this->sire->full_name;
+            $fullname .= ' ' . $this->sire[0]->full_name;
         }
         return $fullname;
     }

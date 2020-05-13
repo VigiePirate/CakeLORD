@@ -38,6 +38,18 @@ class LitterPolicy
     }
 
     /**
+     * Check if $user can create Litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canAdd(IdentityInterface $user, Litter $litter)
+    {
+        return true;
+    }
+
+    /**
      * Check if $user can edit Litter
      *
      * @param Authorization\IdentityInterface $user The user.

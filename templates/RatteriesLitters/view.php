@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Litter') ?></th>
-                    <td><?= $ratteriesLitter->has('litter') ? $this->Html->link($ratteriesLitter->litter->id, ['controller' => 'Litters', 'action' => 'view', $ratteriesLitter->litter->id]) : '' ?></td>
+                    <td><?= $ratteriesLitter->has('litter') ? $this->Html->link($ratteriesLitter->litter->full_name, ['controller' => 'Litters', 'action' => 'view', $ratteriesLitter->litter->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Litters Contribution') ?></th>
