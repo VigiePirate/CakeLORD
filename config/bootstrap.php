@@ -102,6 +102,7 @@ if (Configure::read('debug')) {
     // NE PAS CONSERVER EN PROD
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     Configure::write('DebugKit.forceEnable', true);
+    Configure::write('DebugKit.ignoreAuthorization', true);
 }
 
 /*
