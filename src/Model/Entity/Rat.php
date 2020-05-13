@@ -5,6 +5,8 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
+use Cake\Collection\Collection;
+use Cake\View\Helper\HtmlHelper;
 
 /**
  * Rat Entity
@@ -118,7 +120,28 @@ class Rat extends Entity
 
      protected function _getFullName()
      {
-         return $this->pedigree_identifier . ' ' . $this->name;
+         return $this->pedigree_identifier . ' ' . $this->name . $this->is_alive_symbol;
+     }
+
+     protected function _getUsualName()
+     {
+         return $this->rattery->prefix . ' ' . $this->name;
+     }
+
+     protected function _getIsAliveSymbol()
+     {
+         // dagger is preceded with a non breakable fine space, do not edit!
+         return (!$this->is_alive ? ' †' : '');
+     }
+
+     protected function _getSexName()
+     {
+         return $this->sex=='M' ? 'Male' : 'Female';
+     }
+
+     protected function _getSexSymbol()
+     {
+         return $this->sex=='M' ? '♂' : '♀';
      }
 
      protected function _getPictureThumbnail()
@@ -172,9 +195,26 @@ class Rat extends Entity
              $age .= ' (birth date unknown)'; // Should raise exception
          }
          if (! $this->_fields['is_alive']) {
-             isset($this->_fields['death_date']) ? $age .= ' † (deceased)' : $age .= ' † (deceased at unknown date)';
+             isset($this->_fields['death_date']) ? $age = 'deceased at ' . $age : $age = 'supposed deceased at ' . $age;
          }
          return $age;
+     }
+
+     protected function _getSingularityString()
+     {
+         if (isset($this->_fields['singularity_string'])) {
+             return $this->_fields['singularity_string'];
+         }
+         if (empty($this->singularities)) {
+             return '';
+         }
+         $singularities = new Collection($this->singularities);
+         $str = $singularities->reduce(function ($string, $singularity) {
+             return $string . $singularity->name . ', ';
+             // this might be improved through a cell, to add links on singularity lists ; the following does not work at the moment
+             // return $string . $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]) . ', ';
+         }, '');
+         return trim($str, ', ');
      }
 
 }

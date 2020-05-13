@@ -36,7 +36,7 @@ class LittersController extends AppController
     public function view($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['Users', 'States', 'ParentRats', 'Contributions', 'Conversations', 'LitterSnapshots', 'OffspringRats'],
+            'contain' => ['Users', 'States', 'OffspringRats', 'ParentRats', 'ParentRats.Ratteries', 'Contributions', 'Conversations', 'LitterSnapshots'],
         ]);
 
         $this->set('litter', $litter);

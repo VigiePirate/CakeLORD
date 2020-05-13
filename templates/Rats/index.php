@@ -76,6 +76,7 @@
                     <td><?= h($rat->created) ?></td>
                     <td><?= h($rat->modified) ?></td>
                     <td class="actions">
+                        <?= $this->Html->link(__('Glimpse'), ['action' => 'glimpse', $rat->id]) ?>
                         <?= $this->Html->link(__('View'), ['action' => 'view', $rat->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rat->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $rat->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rat->id)]) ?>

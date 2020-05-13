@@ -48,7 +48,8 @@ class RatteriesTable extends Table
         parent::initialize($config);
 
         $this->setTable('ratteries');
-        $this->setDisplayField('prefix');
+        $this->setDisplayField('full_name');
+        // $this->setDisplayField('prefix');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');

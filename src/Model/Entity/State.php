@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $color
+ * @property string $symbol
  *
  * @property \App\Model\Entity\LitterSnapshot[] $litter_snapshots
  * @property \App\Model\Entity\Litter[] $litters
@@ -39,5 +40,6 @@ class State extends Entity
         'rats' => true,
         'ratteries' => true,
         'rattery_snapshots' => true,
+        'symbol' => true,
     ];
 }
