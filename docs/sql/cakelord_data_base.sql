@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 INSERT INTO `countries` (`name`, `iso3166`) VALUES
 ('Zombie Zone', 'ZZ'),
 ('France', 'FR'),
-('Switzerland', 'CH');
+('Suisse', 'CH'),
+('Belgique', 'BE');
 
 --
 -- Déchargement des données de la table `coats`
@@ -152,21 +153,21 @@ INSERT INTO `colors` (`name`, `genotype`, `picture`, `description`, `is_picture_
 -- Déchargement des données de la table `death_primary_causes`
 --
 
-INSERT INTO `death_primary_causes` (`name`, `description`) VALUES
-('Cause inconnue', ''),
-('Accidents, traumatismes, intoxications', ''),
-('Cardio-vasculaire', ''),
-('Digestif', ''),
-('Mortalité infantile (moins de 6 semaines)', ''),
-('Muscles et squelette', ''),
-('Neurologique (cerveau, moelle épinière, nerfs)', ''),
-('Œil, oreille, bouche, face', ''),
-('Peau', ''),
-('Respiratoire', ''),
-('Système reproducteur', ''),
-('Système urinaire (reins, vessie)', ''),
-('Vieillesse, mort naturelle (24 mois minimum)', ''),
-('Autres', '');
+INSERT INTO `death_primary_causes` (`id`,`name`, `description`) VALUES
+(1,'Cause inconnue', ''),
+(2,'Accidents, traumatismes, intoxications', ''),
+(3,'Cardio-vasculaire', ''),
+(4,'Digestif', ''),
+(5,'Mortalité infantile (moins de 6 semaines)', ''),
+(6,'Muscles et squelette', ''),
+(7,'Neurologique (cerveau, moelle épinière, nerfs)', ''),
+(8,'Œil, oreille, bouche, face', ''),
+(9,'Peau', ''),
+(10,'Respiratoire', ''),
+(11,'Système reproducteur', ''),
+(12,'Système urinaire (reins, vessie)', ''),
+(13,'Vieillesse, mort naturelle (24 mois minimum)', ''),
+(14,'Autres', '');
 
 --
 -- Déchargement des données de la table `death_secondary_causes`
@@ -269,15 +270,20 @@ INSERT INTO `death_secondary_causes` (`name`, `death_primary_cause_id`, `descrip
 --
 
 INSERT INTO `dilutions` (`name`, `picture`, `genotype`, `description`, `is_picture_mandatory`) VALUES
-('None', 'Unknown.png', 'C/C', 'No dilution', 0),
+('Aucune', 'Unknown.png', 'C/C', 'No dilution', 0),
 ('Albinos', 'Unknown.png', 'c/c', 'Unpigmented. Usually with pink or red eyes.', 0),
-('Burmese himalayen', 'Unknown.png', '', '', 0),
-('Burmese sable himalayen', 'Unknown.png', '', '', 0),
-('Burmese sable siamois', 'Unknown.png', '', '', 0),
-('Burmese siamois', 'Unknown.png', '', '', 0),
 ('Biscuit', 'Unknown.png', '', '', 0),
+('Burmese himalayen', 'Unknown.png', '', '', 0),
+('Burmese marbré', 'Unknown.png', '', '', 0),
+('Burmese marbré pointé', 'Unknown.png', '', '', 0),
+('Burmese siamois', 'Unknown.png', '', '', 0),
 ('Devil', 'Unknown.png', '', '', 0),
+('Devil pointé', 'Unknown.png', '', '', 0),
 ('Himalayen', 'Unknown.png', '', '', 0),
+('Sable himalayen', 'Unknown.png', '', '', 0),
+('Sable marbré', 'Unknown.png', '', '', 0),
+('Sable marbré pointé', 'Unknown.png', '', '', 0),
+('Sable siamois', 'Unknown.png', '', '', 0),
 ('Siamois', 'Unknown.png', '', '', 0);
 
 --
@@ -323,9 +329,7 @@ INSERT INTO `markings` (`name`, `picture`, `genotype`, `description`, `is_pictur
 ('Husky', 'Unknown.png', 'TBD', 'Husky', 0),
 ('Essex', 'Unknown.png', 'H/Hro', 'Essex', 1),
 ('Baldie', 'Unknown.png', 'Hro/h', 'Baldie', 1),
-('PEW', 'Unknown.png', 'TBD', 'PEW', 1),
-('REW', 'Unknown.png', 'TBD', 'REW', 1),
-('BEW', 'Unknown.png', 'He/He', 'BEW', 1);
+('Surmarqué', 'Unknown.png', 'He/He', 'Surmarqué', 1);
 
 --
 -- Déchargement des données de la table `singularities`
@@ -337,7 +341,13 @@ INSERT INTO `singularities` (`name`, `picture`, `genotype`, `description`, `is_p
 ('Etoilé', 'Unknown.png', 'hs/hs', 'White spot on the head', 0),
 ('Fléché', 'Unknown.png', '', '', 0),
 ('Gants', 'Unknown.png', '', '', 0),
-('Perle', 'Unknown.png', '', '', 0);
+('Perle', 'Unknown.png', '', '', 0),
+('Merle', 'Unknown.png', 'TBD', 'Merle', 0),
+('Manx', 'Unknown.png', 'TBD', 'Manx', 1),
+('Golden', 'Unknown.png', 'TBD', 'Golden', 1),
+('Stippel', 'Unknown.png', 'He/hi', 'Stippel', 1),
+('Silvermane', 'Unknown.png', 'TBD', 'Silvermane', 0),
+('Marble', 'Unknown.png', 'TBD', 'Marble', 0);
 
 
 --
@@ -346,10 +356,11 @@ INSERT INTO `singularities` (`name`, `picture`, `genotype`, `description`, `is_p
 
 LOCK TABLES `states` WRITE;
 /*!40000 ALTER TABLE `states` DISABLE KEYS */;
-INSERT INTO `states` (`id`, `name`, `color`) VALUES (1,'OK','90e40c'),
-(2,'Pending Staff Action','fab109'),
-(3,'Pending User Action','e62c18'),
-(4,'Unverified','393939');
+INSERT INTO `states` (`id`, `name`, `color`,`symbol`) VALUES
+(1,'OK','1f9d55','✓'),
+(2,'Pending Staff Action','ff8c1b','✗'),
+(3,'Pending User Action','cc1f1a','✗'),
+(4,'Unverified','663300','✗');
 /*!40000 ALTER TABLE `states` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,6 +380,20 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 UNLOCK TABLES;
 
 --
+-- Déchargement des données de la table `litters_contributions`
+--
+
+LOCK TABLES `litters_contributions` WRITE;
+/*!40000 ALTER TABLE `litters_contributions` DISABLE KEYS */;
+INSERT INTO `litters_contributions` (`id`, `name`, `priority`) VALUES
+(1, 'Lieu de naissance', 1),
+(2, 'Propriétaire de la mère (portée externe)', 2),
+(3, 'Propriétaire du père (portée externe)', 3),
+(4, 'Association ayant géré le sauvetage', 4);
+/*!40000 ALTER TABLE `litters_contributions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping data for table `users`
 --
 
@@ -383,15 +408,23 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `firstname`, `lastna
 LOCK TABLES `ratteries` WRITE;
 /*!40000 ALTER TABLE `ratteries` DISABLE KEYS */;
 INSERT INTO `ratteries` (`id`, `prefix`, `name`, `owner_user_id`, `birth_year`, `is_alive`, `is_generic`, `district`, `zip_code`, `country_id`, `website`, `comments`, `wants_statistic`, `picture`, `state_id`, `created`, `modified`) VALUES
-(1,'INC','Petshop',1,1956,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:25:58','2020-02-28 19:25:58'),
-(2,'IND','Freelance',1,2006,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:29:09','2020-02-28 19:38:18'),
-(3,'ETR','Foreign',1,2006,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:31:14','2020-02-28 19:39:30'),
-(4,'LAB','Laboratory',1,2006,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:31:45','2020-02-28 19:38:37'),
-(5,'SOS','Rescue',1,2006,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:33:50','2020-02-28 19:33:50'),
-(6,'SVG','Wild',1,2006,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:37:41','2020-02-28 19:37:41');
+(1, 'INC', '*Animalerie*', 2, 1956, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:25:58', '2020-02-28 19:25:58'),
+(2, 'IND', '* Eleveur indépendant *', 2, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:29:09', '2020-02-28 19:38:18'),
+(3, 'ETR', '* Eleveur étranger *', 2, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:31:14', '2020-02-28 19:39:30'),
+(4, 'LAB', '* Lignée de laboratoire *', 2, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:31:45', '2020-02-28 19:38:37'),
+(5, 'SOS', '*Sauvetage*', 2, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:33:50', '2020-02-28 19:33:50'),
+(6, 'SVG', '* Rat Sauvage *', 2, 2006, 1, 1, '', '', 1, '', '', 1, 'Unknown.png', 1, '2020-02-28 19:37:41', '2020-02-28 19:37:41');
 /*!40000 ALTER TABLE `ratteries` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Déchargement des données de la table `rats`
+--
+
+INSERT INTO `rats` (`id`, `pedigree_identifier`, `is_pedigree_custom`, `owner_user_id`, `name`, `pup_name`, `sex`, `birth_date`, `rattery_id`, `litter_id`, `color_id`, `eyecolor_id`, `dilution_id`, `marking_id`, `earset_id`, `coat_id`, `is_alive`, `death_date`, `death_primary_cause_id`, `death_secondary_cause_id`, `death_euthanized`, `death_diagnosed`, `death_necropsied`, `comments`, `picture`, `picture_thumbnail`, `creator_user_id`, `state_id`, `created`, `modified`) VALUES
+(1, 'INC1F', 0, 1, 'Mère inconnue', NULL, 'F', '2020-04-26', 1, NULL, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Femelle générique - Maman inconnue', 'Unknown.png', NULL, 1, 1, '2020-04-26 00:00:00', '2020-04-26 00:00:00'),
+(2, 'INC2M', 0, 1, 'Père inconnu', NULL, 'M', '2020-04-26', 1, NULL, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Mâle générique - Papa inconnu', 'Unknown.png', NULL, 1, 1, '2020-04-26 00:00:00', '2020-04-26 00:00:00');
+COMMIT;
 
 COMMIT;
 

@@ -21,7 +21,7 @@
                 <?php foreach ($ratteriesLitters as $ratteriesLitter): ?>
                 <tr>
                     <td><?= $ratteriesLitter->has('rattery') ? $this->Html->link($ratteriesLitter->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $ratteriesLitter->rattery->id]) : '' ?></td>
-                    <td><?= $ratteriesLitter->has('litter') ? $this->Html->link($ratteriesLitter->litter->id, ['controller' => 'Litters', 'action' => 'view', $ratteriesLitter->litter->id]) : '' ?></td>
+                    <td><?= $ratteriesLitter->has('litter') ? $this->Html->link($ratteriesLitter->litter->full_name, ['controller' => 'Litters', 'action' => 'view', $ratteriesLitter->litter->id]) : '' ?></td>
                     <td><?= $ratteriesLitter->has('litters_contribution') ? $this->Html->link($ratteriesLitter->litters_contribution->name, ['controller' => 'LittersContributions', 'action' => 'view', $ratteriesLitter->litters_contribution->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $ratteriesLitter->rattery_id]) ?>

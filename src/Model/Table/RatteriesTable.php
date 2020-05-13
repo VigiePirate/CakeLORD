@@ -48,7 +48,8 @@ class RatteriesTable extends Table
         parent::initialize($config);
 
         $this->setTable('ratteries');
-        $this->setDisplayField('prefix');
+        $this->setDisplayField('full_name');
+        // $this->setDisplayField('prefix');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -75,9 +76,11 @@ class RatteriesTable extends Table
             'foreignKey' => 'rattery_id',
         ]);
         $this->belongsToMany('Litters', [
-            'foreignKey' => 'rattery_id',
-            'targetForeignKey' => 'litter_id',
-            'joinTable' => 'ratteries_litters',
+            'through' => 'RatteriesLitters',
+        ]);
+        $this->belongsToMany('Contributions', [
+            'className' => 'LittersContributions',
+            'through' => 'RatteriesLitters',
         ]);
     }
 

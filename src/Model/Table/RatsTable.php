@@ -393,4 +393,21 @@ class RatsTable extends Table
         return $query->group(['Rats.id']);
     }
 
+    public function findMales(Query $query, array $options)
+    {
+        return $query
+            ->where([
+                'sex' => 'M'
+            ])
+            ->contain(['Ratteries']);
+    }
+
+    public function findFemales(Query $query, array $options)
+    {
+        return $query
+            ->where([
+                'sex' => 'F'
+            ])
+            ->contain(['Ratteries']);
+    }
 }
