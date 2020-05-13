@@ -18,9 +18,15 @@
     <div class="column-responsive column-80">
         <div class="rats view content">
 
-            <div class="float-right statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
-            <div class="float-right sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
-            <h1><?= h($rat->usual_name) . '&#8239;' . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle">Rat</div>
+                <div class="sheet-markers">
+                    <div class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
+                    <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                </div>
+            </div>
+
+            <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
             <h2>Identity</h2>
             <table class="condensed">
@@ -57,11 +63,8 @@
                         <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
                     </tr>
                     <tr>
-                        <th><?= __('Birth Litter') ?></th>
-                        <td><?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->full_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : 'Not attached to any litter' ?></td>
-                    </tr>
-                    <tr>
                         <th><?= __('Dam') ?></th>
+                        <!-- Display field should be better managed (dagger and age in a "full name with age" field) -->
                         <td><?= $rat->has('birth_litter') ? $this->Html->link(
                             $rat->birth_litter->dam->usual_name,
                             ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->dam->id])
@@ -78,6 +81,10 @@
                     </tr>
                     <tr>
                         <th><?= __('Genealogy') ?></th>
+                        <td><?= $rat->has('birth_litter') ? $this->Html->link('See birth litter sheet', ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) . ' (parents and siblings)' : 'Not attached to any litter' ?></td>
+                    </tr>
+                    <tr>
+                        <th></th>
                         <td>See interactive family tree (unavailable)</td>
                     </tr>
                 </table>
@@ -122,12 +129,12 @@
                 </tr>
                 <tr>
                     <th><?= $rat->is_alive ? __('Age') : __('Age at death'); ?></th>
-                    <td><?= h($rat->age) ?> months</td>
+                    <td><?= h($rat->age_string) ?></td>
                 </tr>
                 <?php if (!$rat->is_alive) : ?>
                 <tr>
                     <th><?= __('Death Date') ?></th>
-                    <td><?= h($rat->death_date->i18nFormat('dd/MM/yyyy')) ?></td>
+                    <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : 'Unknown' ?></td>
                     </tr>
                 <tr>
                 <th><?= __('Death Primary Cause') ?></th>

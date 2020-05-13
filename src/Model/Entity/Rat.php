@@ -5,6 +5,7 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
+use Cake\I18n\Time;
 use Cake\Collection\Collection;
 use Cake\View\Helper\HtmlHelper;
 
@@ -118,103 +119,171 @@ class Rat extends Entity
         'singularities' => true,
     ];
 
-     protected function _getFullName()
-     {
-         return $this->pedigree_identifier . ' ' . $this->name . $this->is_alive_symbol;
-     }
+    protected function _getDoublePrefix()
+    {
+        $doublePrefix = $this->rattery->prefix;
 
-     protected function _getUsualName()
-     {
-         return $this->rattery->prefix . ' ' . $this->name;
-     }
+        if(isset($this->birth_litter)) {
+            /* fixme: the priority range should not be hardcoded */
+            for($priority = 2; $priority < 5; $priority++) {
+                foreach($this->birth_litter->ratteries as $rattery) {
+                    if ($rattery->_joinData['litters_contribution_id'] === $priority) {
+                        $doublePrefix = $this->rattery->prefix . '-' . $rattery->prefix;
+                        break;
+                    }
+                }
+            }
+        }
+        return $doublePrefix;
+    }
 
-     protected function _getIsAliveSymbol()
-     {
-         // dagger is preceded with a non breakable fine space, do not edit!
-         return (!$this->is_alive ? ' †' : '');
-     }
+    protected function _getFullName()
+    {
+        return $this->pedigree_identifier . ' ' . $this->name . $this->is_alive_symbol;
+    }
 
-     protected function _getSexName()
-     {
-         return $this->sex=='M' ? 'Male' : 'Female';
-     }
+    protected function _getUsualName()
+    {
+        if($this->id>2) {
+            return $this->double_prefix . ' ' . $this->name;
+        } else { // don't return prefix for unknown mother and unknown father special rats
+            return '???';
+        }
+    }
 
-     protected function _getSexSymbol()
-     {
-         return $this->sex=='M' ? '♂' : '♀';
-     }
+    protected function _getIsAliveSymbol()
+    {
+        // dagger is preceded with a non breakable fine space, do not edit!
+        return ($this->is_alive ? '' : ' †');
+    }
 
-     protected function _getPictureThumbnail()
-     {
-         if (isset($this->_fields['picture_thumbnails'])) {
-             return $this->_fields['picture_thumbnails'];
-         } else {
-             return 'thumbnails/Unknown.png';
-         }
-     }
+    protected function _getSexName()
+    {
+        return $this->sex=='M' ? 'Male' : 'Female';
+    }
 
-     protected function _getPedigreeIdentifier()
-     {
-         if ($this->is_pedigree_custom || isset($this->_fields['pedigree_identifier'])) {
-             return $this->_fields['pedigree_identifier'];
-         } else if (isset ($this->rattery)) {
-             return $this->rattery->prefix . $this->id . $this->sex ;
-         } else {
-             return '???';
-         }
-     }
+    protected function _getSexSymbol()
+    {
+        return $this->sex=='M' ? '♂' : '♀';
+    }
 
-     protected function _setPedigreeIdentifier($pedigree_identifier)
-     {
-         if ($this->is_pedigree_custom) {
-             return $pedigree_identifier ;
-         } else if (isset($this->_fields['id']) && isset($this->rattery)) {
-             return $this->rattery->prefix . $this->id . $this->sex ;
-         } else {
-             return '' ;
-         }
-     }
+    protected function _getPictureThumbnail()
+    {
+        if (isset($this->_fields['picture_thumbnails'])) {
+            return $this->_fields['picture_thumbnails'];
+        } else {
+            return 'thumbnails/Unknown.png';
+        }
+    }
 
-     protected function _getAge()
-     {
-         $agedate = FrozenTime::now();
-         if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
-             $agedate = $this->_fields['death_date'];
-         }
-         if (isset($this->birth_date)) {
-             return $agedate->diffInMonths($this->_fields['birth_date'], true);
-         } else {
-             return 0; // Should raise exception
-         }
-     }
+    protected function _getPedigreeIdentifier()
+    {
+        if ($this->is_pedigree_custom || isset($this->_fields['pedigree_identifier'])) {
+            return $this->_fields['pedigree_identifier'];
+        } else if (isset ($this->rattery)) {
+            return $this->rattery->prefix . $this->id . $this->sex ;
+        } else {
+            return '???';
+        }
+    }
 
-     protected function _getAgeString()
-     {
-         $age = $this->age . ' months';
-         if (! $this->age) {
-             $age .= ' (birth date unknown)'; // Should raise exception
-         }
-         if (! $this->_fields['is_alive']) {
-             isset($this->_fields['death_date']) ? $age = 'deceased at ' . $age : $age = 'supposed deceased at ' . $age;
-         }
-         return $age;
-     }
+    protected function _setPedigreeIdentifier($pedigree_identifier)
+    {
+        if ($this->is_pedigree_custom) {
+            return $pedigree_identifier ;
+        } else if (isset($this->_fields['id']) && isset($this->rattery)) {
+            return $this->rattery->prefix . $this->id . $this->sex ;
+        } else {
+            return '' ;
+        }
+    }
 
-     protected function _getSingularityString()
-     {
-         if (isset($this->_fields['singularity_string'])) {
-             return $this->_fields['singularity_string'];
-         }
-         if (empty($this->singularities)) {
-             return '';
-         }
-         $singularities = new Collection($this->singularities);
-         $str = $singularities->reduce(function ($string, $singularity) {
-             return $string . $singularity->name . ', ';
-             // this might be improved through a cell, to add links on singularity lists ; the following does not work at the moment
-             // return $string . $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]) . ', ';
-         }, '');
-         return trim($str, ', ');
-     }
+    protected function _getAge()
+    {
+        $agedate = FrozenTime::now();
+        /* debug while waiting for data conformity:
+        there shouldn't be a death date if the rat is alive, but... */
+        // if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
+        if (!$this->is_alive && isset($this->_fields['death_date'])) {
+            $agedate = $this->_fields['death_date'];
+        }
+        if (isset($this->birth_date)) {
+            return $agedate->diffInMonths($this->_fields['birth_date'], true);
+        } else {
+            return 0; // Should raise exception
+        }
+    }
+
+    protected function _getAgeString()
+    {
+        /* if(
+            (!$this->is_alive && !isset($this->_fields['death_primary_cause']))
+            || (!$this->is_alive && isset($this->_fields['death_primary_cause']) && $this->death_primary_cause_id == 1 && !isset($this->_fields['death_secondary_cause']))
+            || (!$this->is_alive && isset($this->_fields['death_primary_cause']) && $this->death_primary_cause_id == 1 && isset($this->_fields['death_primary_cause']) && $this->death_secondary_cause_id == 1)
+            || ($this->is_alive && $this->age>54)
+        ) {
+            return $age = 'Unknown (supposed deceased)';
+        } */
+
+        if (! $this->age) { // Should raise exception
+            return $age = 'Unknown (birth or death date unknown)';
+        }
+        if (! $this->_fields['is_alive'] ) {
+            $age = $this->has('death_date') ?  ($this->age . ' months') : ('supposed deceased, unknown age');
+            return $age;
+        }  else {
+            return $age = $this->age . ' months';
+        }
+    }
+
+    protected function _getPreciseAge()
+    {
+        $agedate = FrozenTime::now();
+        /* debug while waiting for data conformity:
+        there shouldn't be a death date if the rat is alive, but... */
+        // if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
+        if (!$this->is_alive && isset($this->_fields['death_date'])) {
+            $agedate = $this->_fields['death_date'];
+        }
+        if (isset($this->birth_date)) {
+            return $agedate->diffInDays($this->_fields['birth_date'], true);
+        } else {
+            return 0; // Should raise exception
+        }
+    }
+
+    protected function _getChampionAgeString()
+    {
+        if (!$this->is_alive
+            && isset($this->birth_date)
+            && isset($this->_fields['death_date'])
+            && isset($this->_fields['death_primary_cause'])
+            && (!isset($this->_fields['death_secondary_cause']) || (isset($this->_fields['death_primary_cause']) && $this->death_secondary_cause_id != 1))
+        ) {
+            //return $agedate->diffInDays($this->_fields['birth_date'], true);
+            // timeAgoInWords? diffForHumans?
+            $birthdate = $this->birth_date;
+            $deathdate = $this->death_date;
+            /* call to timeAgoInWords in the "wrong" date order to avoid "ago" to be added to the string */
+            /* could be improved with option "relativeString" to skip number of weeks and convert them to days */
+            return $ageInWords =  $deathdate->timeAgoInWords(['from' => $birthdate, 'accuracy' => ['year' => 'day']]);
+        } else {
+            return 0; // Should raise exception
+        }
+    }
+
+    protected function _getSingularityString()
+    {
+        if (empty($this->singularities)) {
+            return '';
+        }
+        $singularities = new Collection($this->singularities);
+        $str = $singularities->reduce(function ($string, $singularity) {
+            return $string . $singularity->name . ', ';
+            // this might be improved through a cell, to add links on singularity lists ; the following does not work at the moment
+            // return $string . $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]) . ', ';
+        }, '');
+        return trim($str, ', ');
+    }
 
 }
