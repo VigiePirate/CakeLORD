@@ -10,6 +10,8 @@
                     'rubric' => __('My Litters'),
                     'litters' => $litters,
                     'exceptions' => [
+                        'mating_date',
+                        'pups_number_stillborn',
                     ],
                 ]) ?>
         </div>

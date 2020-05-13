@@ -76,9 +76,11 @@ class RatteriesTable extends Table
             'foreignKey' => 'rattery_id',
         ]);
         $this->belongsToMany('Litters', [
-            'foreignKey' => 'rattery_id',
-            'targetForeignKey' => 'litter_id',
-            'joinTable' => 'ratteries_litters',
+            'through' => 'RatteriesLitters',
+        ]);
+        $this->belongsToMany('Contributions', [
+            'className' => 'LittersContributions',
+            'through' => 'RatteriesLitters',
         ]);
     }
 
