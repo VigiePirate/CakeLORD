@@ -16,7 +16,7 @@ class RatteriesController extends AppController
     {
         parent::beforeFilter($event);
         // No authentication needed on consultation
-        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'view','glimpse']);
     }
 
     /**
@@ -33,6 +33,30 @@ class RatteriesController extends AppController
         $ratteries = $this->paginate($this->Ratteries);
 
         $this->set(compact('ratteries'));
+    }
+
+    /**
+     * My method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function my()
+    {
+        $user = $this->Authentication->getIdentity();
+        $this->paginate = [
+            'contain' => ['Users', 'Countries', 'States'],
+        ];
+        $ratteries = $this->paginate($this->Ratteries->find()->where([
+            'owner_user_id' => $user->id,
+            'is_alive' => true,
+        ]));
+        $closed_ratteries = $this->paginate($this->Ratteries->find()->where([
+            'owner_user_id' => $user->id,
+            'is_alive' => false,
+        ]));
+
+
+        $this->set(compact('ratteries', 'closed_ratteries', 'user'));
     }
 
     /**
@@ -87,7 +111,7 @@ class RatteriesController extends AppController
     public function edit($id = null)
     {
         $rattery = $this->Ratteries->get($id, [
-            'contain' => ['Litters'],
+            'contain' => ['Litters', 'Litters.ParentRats'],
         ]);
         $this->Authorization->authorize($rattery);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -99,10 +123,10 @@ class RatteriesController extends AppController
             }
             $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
         }
-        $users = $this->Ratteries->Users->find('list', ['limit' => 200]);
+        $users = $this->Ratteries->Users->find('list', ['limit' => 500]);
         $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
         $states = $this->Ratteries->States->find('list', ['limit' => 200]);
-        $litters = $this->Ratteries->Litters->find('list', ['limit' => 200]);
+        $litters = $this->Ratteries->Litters->find('list', ['limit' => 500]);
         $this->set(compact('rattery', 'users', 'countries', 'states', 'litters'));
     }
 
@@ -126,6 +150,93 @@ class RatteriesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /** front end user methdods **/
+
+    /* rattery sheet for all users, including statistics */
+    public function glimpse($id = null)
+    {
+        $this->Authorization->skipAuthorization();
+
+        $rattery = $this->Ratteries->get($id, [
+            'contain' => ['Users', 'Countries', 'States',
+            'Litters', 'Litters.ParentRats', 'Litters.States', 'Litters.Ratteries', 'Litters.ParentRats', 'Litters.ParentRats.Ratteries','Litters.ParentRats.BirthLitters.Ratteries',
+            'Conversations', 'Rats',
+            'Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses',
+            'RatterySnapshots'],
+        ]);
+
+        // fixme: for statistics, probably does not belong here
+        // $count = $rattery->Rats->find('all')->count();
+        // $this->set('count', $count);
+
+        // $stats = ($rattery->is_generic) ? $rattery->rat_stat : $rattery->health_stat;
+        $stats = $rattery->health_stat;
+        $champion = $rattery->champion;
+
+        /* copied from index, to adapt for pagination
+        $this->paginate = [
+            'contain' => ['Users', 'Countries', 'States'],
+        ];
+        $ratteries = $this->paginate($this->Ratteries);
+        */
+
+        $this->set(compact('rattery','stats','champion'));
+    }
+
+    /* create a rattery, reserved to logged in users (with any role) */
+    public function register($id = null)
+    {
+        $result = $this->Authentication->getResult();
+        if ($result->isValid()) {
+            $user = $this->Authentication->getIdentityData('id');
+            // check if user has an alive rattery
+            $query = $this->Ratteries->find()
+                ->where(['owner_user_id' => $user, 'is_alive' => true])
+                ->toList();
+            if( count($query) !=0 ) {
+                $this->Flash->error(__('You already have an active rattery. Declare your previous ratteries as inactive if you want to register a new one.'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $rattery = $this->Ratteries->newEmptyEntity();
+                $this->Authorization->authorize($rattery, 'create');
+                if ($this->request->is('post')) {
+                    // fill non form-controlled info
+                    $rattery->owner_user_id = $this->Authentication->getIdentityData('id');
+                    $rattery->is_alive = false;
+                    $rattery->is_generic = false;
+                    $rattery->state_id = 2;
+                    // process and save picture
+                    // fixme: we should check that the file is actually an image before doing anything!
+                    $picture_file = $this->request->getData('picture_file');
+                    $picture_name = 'Rattery_' . $this->request->getData('prefix') . '_' . $picture_file->getClientFilename();
+                    $picture_file->moveTo(UPLOADS . $picture_name);
+                    $type = exif_imagetype($picture_name);
+                    if($type == false){
+                        $this->Flash->error(__('Your picture cannot be processed. Please, try with another picture.'));
+                    } else {
+                        $rattery->picture = $type . '_' . $picture_name;
+                        // save rattery
+                        $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
+                        if ($this->Ratteries->save($rattery)) {
+                            $this->Flash->warning(__('The rattery has been saved. Please note it will be validated only once you have recorded a rat, a litter, or a litter contribution under this prefix.'));
+                            return $this->redirect(['action' => 'index']);
+                        } else {
+                            $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
+                        }
+                    }
+                }
+                // $litters = $this->Ratteries->Litters->find('list', ['limit' => 200]);
+                $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
+                $this->set(compact('rattery', 'countries')); //'litters'));
+            }
+        } else {
+            $this->Flash->error(__('Only registered users are allowed to register a new rattery. Please sign in or sign up before proceeding.')); // . $email->smtpError);
+            return $this->redirect(['action' => 'login']);
+        }
+    }
+
+    /** Search methods **/
 
     /**
     * Prefix method (search rattery by prefix)
@@ -182,4 +293,11 @@ class RatteriesController extends AppController
         $this->set(compact('ratteries', 'users'));
     }
 
+    // Functions for statistics
+    // Compute the number of rats born in the rattery
+    // not used and probably bugged
+    public function countRats()
+    {
+        $this->Rats->find('all')->count();
+    }
 }

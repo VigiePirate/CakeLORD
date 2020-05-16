@@ -26,7 +26,7 @@
                 <?php foreach ($rats as $rat): ?>
                 <tr>
                     <td><?= $this->Html->image($rat->picture_thumbnail) ?></td>
-                    <td><?= $this->Html->link(h($rat->pedigree_identifier), ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?> <?= $rat->is_alive ? '†' : ''  ?></td>
+                    <td><?= $this->Html->link(h($rat->pedigree_identifier), ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?><?= $rat->is_alive ? '' : ' †'  ?></td>
                     <td><?= h($rat->name) ?></td>
                     <td><?= h($rat->pup_name) ?></td>
                     <td><?= h($rat->sex) ?></td>

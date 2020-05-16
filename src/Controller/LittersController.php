@@ -7,29 +7,19 @@ namespace App\Controller;
  * Litters Controller
  *
  * @property \App\Model\Table\LittersTable $Litters
- *
  * @method \App\Model\Entity\Litter[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class LittersController extends AppController
 {
-    public function beforeFilter(\Cake\Event\EventInterface $event)
-    {
-        parent::beforeFilter($event);
-        // Configure the login action to not require authentication, preventing
-        // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
-    }
-
     /**
      * Index method
      *
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|null|void Renders view
      */
     public function index()
     {
-        $this->Authorization->skipAuthorization();
         $this->paginate = [
-            'contain' => ['Users', 'States'],
+            'contain' => ['Users', 'States', 'Sire', 'Dam'],
         ];
         $litters = $this->paginate($this->Litters);
 
@@ -40,14 +30,13 @@ class LittersController extends AppController
      * View method
      *
      * @param string|null $id Litter id.
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $this->Authorization->skipAuthorization();
         $litter = $this->Litters->get($id, [
-            'contain' => ['Users', 'States', 'OffspringRats', 'ParentRats', 'ParentRats.Ratteries', 'Ratteries', 'Conversations', 'LitterSnapshots'],
+            'contain' => ['Users', 'States', 'OffspringRats', 'ParentRats', 'ParentRats.Ratteries', 'Contributions', 'Conversations', 'LitterSnapshots'],
         ]);
 
         $this->set('litter', $litter);
@@ -56,12 +45,11 @@ class LittersController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
         $litter = $this->Litters->newEmptyEntity();
-        $this->Authorization->authorize($litter);
         if ($this->request->is('post')) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData());
             if ($this->Litters->save($litter)) {
@@ -75,22 +63,22 @@ class LittersController extends AppController
         $states = $this->Litters->States->find('list', ['limit' => 200]);
         $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
         $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries'));
+        $contributions = $this->Litters->Contributions->find('list', ['limit' => 200]);
+        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries', 'contributions'));
     }
 
     /**
      * Edit method
      *
      * @param string|null $id Litter id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['ParentRats', 'Ratteries'],
+            'contain' => ['ParentRats', 'Ratteries', 'Contributions'],
         ]);
-        $this->Authorization->authorize($litter);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData());
             if ($this->Litters->save($litter)) {
@@ -104,21 +92,21 @@ class LittersController extends AppController
         $states = $this->Litters->States->find('list', ['limit' => 200]);
         $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
         $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries'));
+        $contributions = $this->Litters->Contributions->find('list', ['limit' => 200]);
+        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries', 'contributions'));
     }
 
     /**
      * Delete method
      *
      * @param string|null $id Litter id.
-     * @return \Cake\Http\Response|null Redirects to index.
+     * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $litter = $this->Litters->get($id);
-        $this->Authorization->authorize($litter);
         if ($this->Litters->delete($litter)) {
             $this->Flash->success(__('The litter has been deleted.'));
         } else {

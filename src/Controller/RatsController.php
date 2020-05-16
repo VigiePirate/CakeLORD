@@ -18,7 +18,7 @@ class RatsController extends AppController
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'named', 'fromRattery', 'ownedBy', 'sex']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'glimpse','named', 'fromRattery', 'ownedBy', 'sex']);
     }
 
     /**
@@ -38,6 +38,22 @@ class RatsController extends AppController
     }
 
     /**
+     * My method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function my()
+    {
+        $user = $this->Authentication->getIdentity();
+        $this->paginate = [
+            'contain' => ['OwnerUsers', 'States'],
+        ];
+        $rats = $this->paginate($this->Rats->find()->where(['owner_user_id' => $user->id]));
+
+        $this->set(compact('rats', 'user'));
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Rat id.
@@ -48,7 +64,7 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['OwnerUsers', 'CreatorUsers','Ratteries', 'BirthLitters', 'BirthLitters.ParentRats', 'BirthLitters.ParentRats.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'BredLitters', 'Singularities', 'Conversations', 'RatSnapshots'],
+            'contain' => ['OwnerUsers', 'CreatorUsers','Ratteries', 'BirthLitters', 'BirthLitters.Ratteries','BirthLitters.ParentRats','BirthLitters.ParentRats.Ratteries','BirthLitters.ParentRats.BirthLitters.Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'BredLitters', 'Singularities', 'Conversations', 'RatSnapshots'],
         ]);
 
         $this->set('rat', $rat);
@@ -181,9 +197,17 @@ class RatsController extends AppController
     public function named()
     {
         $this->Authorization->skipAuthorization();
-        // The 'pass' key is provided by CakePHP and contains all
-        // the passed URL path segments in the request.
-        $names = $this->request->getParam('pass');
+
+        if($this->request->is(['post']))
+        {
+            $names = [$this->request->getData('name')];
+        } else
+            {
+                // The 'pass' key is provided by CakePHP and contains all
+                // the passed URL path segments in the request.
+                $names = $this->request->getParam('pass');
+        }
+
         //
         // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('named', [

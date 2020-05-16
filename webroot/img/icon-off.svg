@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0beta1 (fe3e306, 2019-09-17)"
+   sodipodi:docname="icon-off.svg"
+   id="SVGRoot"
+   version="1.1"
+   viewBox="0 0 20 10"
+   height="10px"
+   width="20px">
+  <sodipodi:namedview
+     inkscape:current-layer="SVGRoot"
+     inkscape:window-maximized="0"
+     inkscape:window-y="0"
+     inkscape:window-x="0"
+     inkscape:cy="7.5121492"
+     inkscape:cx="12.227599"
+     inkscape:zoom="23.6"
+     showgrid="false"
+     id="namedview7"
+     inkscape:window-height="991"
+     inkscape:window-width="1494"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     inkscape:document-rotation="0"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <defs
+     id="defs840" />
+  <metadata
+     id="metadata843">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1">
+    <path
+       d="M 15,0 H 5.0000002 a 5,5 0 0 0 -5,5 5,5 0 0 0 5,5 H 15 A 5,5 0 0 0 20,5 5,5 0 0 0 15,0 M 5.0000002,8 a 3,3 0 0 1 -3,-3 3,3 0 0 1 3,-3 3,3 0 0 1 3,3 3,3 0 0 1 -3,3 z"
+       id="path2"
+       style="fill:#606c76;fill-opacity:1" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:semi-condensed;font-size:5.0934px;line-height:1.25;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold Semi-Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke-width:0.636675"
+     x="12.731111"
+     y="5.6592617"
+     id="text1454"
+     transform="scale(0.76103888,1.3139933)"><tspan
+       sodipodi:role="line"
+       id="tspan1456"
+       x="12.731111"
+       y="5.6592617"
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.636675">OFF</tspan></text>
+</svg>

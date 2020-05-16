@@ -38,6 +38,18 @@ class LitterPolicy
     }
 
     /**
+     * Check if $user can create Litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canAdd(IdentityInterface $user, Litter $litter)
+    {
+        return true;
+    }
+
+    /**
      * Check if $user can edit Litter
      *
      * @param Authorization\IdentityInterface $user The user.
@@ -62,6 +74,18 @@ class LitterPolicy
             return true;
         }
         // Can update owned litters
+        return $user->get('id') === $resource->get('creator_user_id');
+    }
+
+    /**
+     * Check if $user can list own Litters
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canMy(IdentityInterface $user, Litter $litter)
+    {
         return $user->get('id') === $resource->get('creator_user_id');
     }
 

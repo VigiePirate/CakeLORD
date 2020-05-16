@@ -40,6 +40,15 @@ class LittersContributionsTable extends Table
         $this->setTable('litters_contributions');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
+
+        $this->hasMany('RatteriesLitters', [
+        ]);
+        $this->belongsToMany('Ratteries', [
+            'joinTable' => 'ratteries_litters',
+        ]);
+        $this->belongsToMany('Litters', [
+            'joinTable' => 'ratteries_litters',
+        ]);
     }
 
     /**
@@ -83,4 +92,12 @@ class LittersContributionsTable extends Table
 
         return $rules;
     }
+
+    public function findOrdered(Query $query, array $options)
+    {
+        return $query
+            ->contain(['Ratteries'])
+            ->order(['priority' => 'ASC']);
+    }
+
 }
