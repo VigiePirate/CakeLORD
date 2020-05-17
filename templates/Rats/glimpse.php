@@ -66,17 +66,17 @@
                         <th><?= __('Dam') ?></th>
                         <!-- Display field should be better managed (dagger and age in a "full name with age" field) -->
                         <td><?= $rat->has('birth_litter') ? $this->Html->link(
-                            $rat->birth_litter->dam->usual_name,
-                            ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->dam->id])
-                            : 'Unknown or unregistered' ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->dam->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->dam->age_string . ')' : '' ?>
+                            $rat->birth_litter->dam[0]->usual_name,
+                            ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->dam[0]->id])
+                            : 'Unknown or unregistered' ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->dam[0]->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->dam[0]->age_string . ')' : '' ?>
                             </td>
                     </tr>
                     <tr>
                         <th><?= __('Sire') ?></th>
                         <td><?= $rat->has('birth_litter') ? $this->Html->link(
-                            $rat->birth_litter->sire->usual_name,
-                            ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire->id])
-                            : 'Unknown or unregistered' ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->sire->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->sire->age_string  . ')' : '' ?>
+                            $rat->birth_litter->sire[0]->usual_name,
+                            ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire[0]->id])
+                            : 'Unknown or unregistered' ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->sire[0]->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->sire[0]->age_string  . ')' : '' ?>
                             </td>
                     </tr>
                     <tr>

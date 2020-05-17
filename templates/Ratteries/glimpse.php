@@ -258,8 +258,8 @@
                         <tr>
                             <td><span class="statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></span></td>
                             <td><?= $litter->has('birth_date') ? h($litter->birth_date->i18nFormat('dd/MM/yyyy')) : __('Unknown date') ?></td>
-                            <td><?= $litter->has('sire') ? h($litter->sire->usual_name) : __('???') ?></td>
-                            <td><?= $litter->has('dam') ? h($litter->dam->usual_name) : __('???') ?></td>
+                            <td><?= true ? h($litter->sire[0]->usual_name) : __('???') ?></td>
+                            <td><?= $litter->has('dam') ? h($litter->dam[0]->usual_name) : __('???') ?></td>
                             <td><?= $this->Number->format($litter->pups_number) ?></td>
                             <td class="actions">
                                 <?= $this->Html->image('/img/icon-fa-eye.svg', [

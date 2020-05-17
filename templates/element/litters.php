@@ -40,7 +40,7 @@
                         <td><?= h($litter->birth_date) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('full_name', $exceptions)): ?>
-                        <td><?= $this->Html->link($litter->full_name, ['controller' => 'litter', 'action' => 'view', $litter->id]) ?></td>
+                        <td><?= $this->Html->link($litter->full_name, ['controller' => 'Litters', 'action' => 'view', $litter->id]) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('dam', $exceptions)): ?>
                         <td><?= $this->Html->link(h($litter->dam[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]) ?></td>

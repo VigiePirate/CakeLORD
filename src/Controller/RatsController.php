@@ -64,7 +64,10 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['OwnerUsers', 'CreatorUsers','Ratteries', 'BirthLitters', 'BirthLitters.Ratteries','BirthLitters.ParentRats','BirthLitters.ParentRats.Ratteries','BirthLitters.ParentRats.BirthLitters.Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'BredLitters', 'Singularities', 'Conversations', 'RatSnapshots'],
+            'contain' => ['OwnerUsers', 'CreatorUsers','Ratteries', 'BirthLitters', 'BirthLitters.Ratteries',
+            //'BirthLitters.ParentRats','BirthLitters.ParentRats.Ratteries','BirthLitters.ParentRats.BirthLitters.Ratteries',
+            'BirthLitters.Sire','BirthLitters.Dam',
+            'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'BredLitters', 'Singularities', 'Conversations', 'RatSnapshots'],
         ]);
 
         $this->set('rat', $rat);

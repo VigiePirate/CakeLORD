@@ -411,7 +411,7 @@ th {
     margin: 0;
     padding-right: 1.5rem;
     text-indent: 100px; /* this seems like a dirty trick */
-    width: 36px;
+    width: 3.6rem;
   }
 
 ::placeholder {
