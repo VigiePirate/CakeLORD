@@ -62,7 +62,7 @@
                 </blockquote>
             </div>
             <div class="related">
-                <h4><?= __('Related Rats') ?></h4>
+                <h4><?= __('Parent Rats') ?></h4>
                 <?php if (!empty($litter->parent_rats)) : ?>
                 <div class="table-responsive">
                     <table>
@@ -143,80 +143,27 @@
                 <?php endif; ?>
             </div>
             <div class="related">
-                <h4><?= __('Related Ratteries') ?></h4>
-                <?php if (!empty($litter->ratteries)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Prefix') ?></th>
-                            <th><?= __('Name') ?></th>
-                            <th><?= __('Owner User Id') ?></th>
-                            <th><?= __('Birth Year') ?></th>
-                            <th><?= __('Is Alive') ?></th>
-                            <th><?= __('Is Generic') ?></th>
-                            <th><?= __('District') ?></th>
-                            <th><?= __('Zip Code') ?></th>
-                            <th><?= __('Country Id') ?></th>
-                            <th><?= __('Website') ?></th>
-                            <th><?= __('Comments') ?></th>
-                            <th><?= __('Wants Statistic') ?></th>
-                            <th><?= __('Picture') ?></th>
-                            <th><?= __('State Id') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($litter->ratteries as $ratteries) : ?>
-                        <tr>
-                            <td><?= h($ratteries->id) ?></td>
-                            <td><?= h($ratteries->prefix) ?></td>
-                            <td><?= h($ratteries->name) ?></td>
-                            <td><?= h($ratteries->owner_user_id) ?></td>
-                            <td><?= h($ratteries->birth_year) ?></td>
-                            <td><?= h($ratteries->is_alive) ?></td>
-                            <td><?= h($ratteries->is_generic) ?></td>
-                            <td><?= h($ratteries->district) ?></td>
-                            <td><?= h($ratteries->zip_code) ?></td>
-                            <td><?= h($ratteries->country_id) ?></td>
-                            <td><?= h($ratteries->website) ?></td>
-                            <td><?= h($ratteries->comments) ?></td>
-                            <td><?= h($ratteries->wants_statistic) ?></td>
-                            <td><?= h($ratteries->picture) ?></td>
-                            <td><?= h($ratteries->state_id) ?></td>
-                            <td><?= h($ratteries->created) ?></td>
-                            <td><?= h($ratteries->modified) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Ratteries', 'action' => 'view', $ratteries->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Ratteries', 'action' => 'edit', $ratteries->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Ratteries', 'action' => 'delete', $ratteries->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratteries->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
-            <div class="related">
-                <h4><?= __('Related Litters Contributions') ?></h4>
+                <h4><?= __('Contributions') ?></h4>
                 <?php if (!empty($litter->contributions)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Name') ?></th>
-                            <th><?= __('Priority') ?></th>
+                            <th><?= __('Contribution Priority') ?></th>
+                            <th><?= __('Contribution Type') ?></th>
+                            <th><?= __('Rattery Prefix') ?></th>
+                            <th><?= __('Rattery Name') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($litter->contributions as $contributions) : ?>
+                        <?php foreach ($litter->contributions as $contribution) : ?>
                         <tr>
-                            <td><?= h($contributions->id) ?></td>
-                            <td><?= h($contributions->name) ?></td>
-                            <td><?= h($contributions->priority) ?></td>
+                            <td><?= h($contribution->litters_contribution->priority) ?></td>
+                            <td><?= h($contribution->litters_contribution->name) ?></td>
+                            <td><?= $this->Html->link(h($contribution->rattery->prefix), ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id]) ?></td>
+                            <td><?= h($contribution->rattery->name) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'LittersContributions', 'action' => 'view', $contributions->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'LittersContributions', 'action' => 'edit', $contributions->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'LittersContributions', 'action' => 'delete', $contributions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $contributions->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'RatteriesLitters', 'action' => 'view', $contribution->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'RatteriesLitters', 'action' => 'edit', $contribution->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'RatteriesLitters', 'action' => 'delete', $contribution->id], ['confirm' => __('Are you sure you want to delete # {0}?', $contribution->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -291,84 +238,17 @@
                 <?php endif; ?>
             </div>
             <div class="related">
-                <h4><?= __('Related Rats') ?></h4>
                 <?php if (!empty($litter->offspring_rats)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Pedigree Identifier') ?></th>
-                            <th><?= __('Is Pedigree Custom') ?></th>
-                            <th><?= __('Owner User Id') ?></th>
-                            <th><?= __('Name') ?></th>
-                            <th><?= __('Pup Name') ?></th>
-                            <th><?= __('Sex') ?></th>
-                            <th><?= __('Birth Date') ?></th>
-                            <th><?= __('Rattery Id') ?></th>
-                            <th><?= __('Litter Id') ?></th>
-                            <th><?= __('Color Id') ?></th>
-                            <th><?= __('Eyecolor Id') ?></th>
-                            <th><?= __('Dilution Id') ?></th>
-                            <th><?= __('Marking Id') ?></th>
-                            <th><?= __('Earset Id') ?></th>
-                            <th><?= __('Coat Id') ?></th>
-                            <th><?= __('Is Alive') ?></th>
-                            <th><?= __('Death Date') ?></th>
-                            <th><?= __('Death Primary Cause Id') ?></th>
-                            <th><?= __('Death Secondary Cause Id') ?></th>
-                            <th><?= __('Death Euthanized') ?></th>
-                            <th><?= __('Death Diagnosed') ?></th>
-                            <th><?= __('Death Necropsied') ?></th>
-                            <th><?= __('Comments') ?></th>
-                            <th><?= __('Picture') ?></th>
-                            <th><?= __('Picture Thumbnail') ?></th>
-                            <th><?= __('Creator User Id') ?></th>
-                            <th><?= __('State Id') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($litter->offspring_rats as $offspringRats) : ?>
-                        <tr>
-                            <td><?= h($offspringRats->id) ?></td>
-                            <td><?= h($offspringRats->pedigree_identifier) ?></td>
-                            <td><?= h($offspringRats->is_pedigree_custom) ?></td>
-                            <td><?= h($offspringRats->owner_user_id) ?></td>
-                            <td><?= h($offspringRats->name) ?></td>
-                            <td><?= h($offspringRats->pup_name) ?></td>
-                            <td><?= h($offspringRats->sex) ?></td>
-                            <td><?= h($offspringRats->birth_date) ?></td>
-                            <td><?= h($offspringRats->rattery_id) ?></td>
-                            <td><?= h($offspringRats->litter_id) ?></td>
-                            <td><?= h($offspringRats->color_id) ?></td>
-                            <td><?= h($offspringRats->eyecolor_id) ?></td>
-                            <td><?= h($offspringRats->dilution_id) ?></td>
-                            <td><?= h($offspringRats->marking_id) ?></td>
-                            <td><?= h($offspringRats->earset_id) ?></td>
-                            <td><?= h($offspringRats->coat_id) ?></td>
-                            <td><?= h($offspringRats->is_alive) ?></td>
-                            <td><?= h($offspringRats->death_date) ?></td>
-                            <td><?= h($offspringRats->death_primary_cause_id) ?></td>
-                            <td><?= h($offspringRats->death_secondary_cause_id) ?></td>
-                            <td><?= h($offspringRats->death_euthanized) ?></td>
-                            <td><?= h($offspringRats->death_diagnosed) ?></td>
-                            <td><?= h($offspringRats->death_necropsied) ?></td>
-                            <td><?= h($offspringRats->comments) ?></td>
-                            <td><?= h($offspringRats->picture) ?></td>
-                            <td><?= h($offspringRats->picture_thumbnail) ?></td>
-                            <td><?= h($offspringRats->creator_user_id) ?></td>
-                            <td><?= h($offspringRats->state_id) ?></td>
-                            <td><?= h($offspringRats->created) ?></td>
-                            <td><?= h($offspringRats->modified) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Rats', 'action' => 'view', $offspringRats->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Rats', 'action' => 'edit', $offspringRats->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Rats', 'action' => 'delete', $offspringRats->id], ['confirm' => __('Are you sure you want to delete # {0}?', $offspringRats->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
+                    <?= $this->element('rats', [
+                        'rubric' => __('Offspring Rats'),
+                        'rats' => $offsprings,
+                        'exceptions' => [
+                            'picture',
+                            'owner_user',
+                            'death_primary_cause',
+                            'death_secondary_cause',
+                        ],
+                    ]) ?>
                 <?php endif; ?>
             </div>
         </div>

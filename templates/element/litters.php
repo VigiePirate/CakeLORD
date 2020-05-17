@@ -43,10 +43,10 @@
                         <td><?= $this->Html->link($litter->full_name, ['controller' => 'Litters', 'action' => 'view', $litter->id]) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('dam', $exceptions)): ?>
-                        <td><?= $this->Html->link(h($litter->dam[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]) ?></td>
+                        <td><?= isset($litter->dam[0]) ? $this->Html->link(h($litter->dam[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]) : '-' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('sire', $exceptions)): ?>
-                        <td><?= $this->Html->link(h($litter->sire[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id]) ?></td>
+                        <td><?= isset($litter->sire[0]) ? $this->Html->link(h($litter->sire[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id]) : '-' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('pups_number', $exceptions)): ?>
                         <td><?= h($litter->pups_number) ?></td>

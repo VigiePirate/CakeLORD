@@ -74,4 +74,12 @@ class RatteriesLittersTable extends Table
 
         return $rules;
     }
+
+    public function findOrdered(Query $query, array $options)
+    {
+        return $query
+            ->contain(['LittersContributions', 'Ratteries'])
+            ->order(['LittersContributions.priority' => 'ASC']);
+    }
+
 }

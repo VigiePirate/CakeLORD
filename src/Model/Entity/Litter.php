@@ -58,7 +58,7 @@ class Litter extends Entity
     protected function _getFullName()
     {
         $fullname = $this->birth_date->i18nFormat('dd/MM/yyyy') . ' – ' . $this->dam[0]->full_name;
-        if (isset ($this->sire)) {
+        if (isset ($this->sire[0])) {
             $fullname .= ' × ' . $this->sire[0]->full_name;
         }
         return $fullname;
