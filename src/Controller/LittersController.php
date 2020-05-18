@@ -27,6 +27,29 @@ class LittersController extends AppController
     }
 
     /**
+     * My method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function my()
+    {
+        $user = $this->Authentication->getIdentity();
+        $this->paginate = [
+            'contain' => ['Users', 'States', 'Sire', 'Dam', 'Contributions'],
+        ];
+        $litters = $this->paginate($this->Litters->find()
+                        ->matching('Contributions.Ratteries', function (\Cake\ORM\Query $q) use ($user) {
+                            return $q->where([
+                                'Ratteries.owner_user_id' => $user->id,
+                            ]);
+                        })
+                        ->order(['Contributions.litters_contribution_id' => 'ASC', 'Litters.birth_date' => 'DESC'])
+                );
+
+        $this->set(compact('litters', 'user'));
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Litter id.
