@@ -360,4 +360,18 @@ class RatsController extends AppController
             'bornAfter' => $bornAfter
         ]);
     }
+
+    public function pedigree($id = null)
+    {
+        $this->Authorization->skipAuthorization();
+        $rat = $this->Rats->get($id, [
+            'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries',
+            'BirthLitters.Sire','BirthLitters.Dam','BirthLitters.Sire.BirthLitters.Ratteries','BirthLitters.Dam.BirthLitters.Ratteries',
+            'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States',
+            'BredLitters','BredLitters.Sire','BredLitters.Dam','BredLitters.OffspringRats','BredLitters.OffspringRats.OwnerUsers','BredLitters.OffspringRats.States','BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
+            'Singularities'],
+        ]);
+
+        $this->set('rat', $rat);
+    }
 }
