@@ -5,7 +5,6 @@
 /logs/*
 /tmp/*
 /vendor/*
-/webroot/img/uploads/*
 
 # OS generated files #
 ######################
@@ -42,6 +41,9 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+
+# Others #
+##########
 /docs/cdc/cdclord2.0.pdf
 /docs/cdc/cdclord2.0.toc
 /docs/cdc/cdclord2.0.aux
@@ -56,5 +58,8 @@ nbproject/*
 /docs/cdc/*.aux
 /docs/cdc/*.bbl
 /docs/cdc/*.blg
+/docs/cdc/*.png
+/docs/cdc/*.svg
 /migrate/*.sql
 /docs/sql/migration_users_pa.sql
+/webroot/img/uploads/*
