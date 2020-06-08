@@ -53,6 +53,15 @@ $cakeDescription = 'CakeLORD: Just Taste it';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#663300">
+    <meta name="msapplication-TileColor" content="#663300">
+    <meta name="theme-color" content="#663300">
+    <link rel="manifest" href="/manifest.webmanifest">
 </head>
 <body>
     <header>
@@ -71,10 +80,13 @@ $cakeDescription = 'CakeLORD: Just Taste it';
                 <div class="row">
                     <div class="column">
                         <h4>Go to...</h4>
+                        <p><?= $this->Html->link('Login and go to dashboard', '/users/home') ?></p>
                         <p><?= $this->Html->link('Users', '/users') ?></p>
                         <p><?= $this->Html->link('Ratteries', '/ratteries') ?></p>
                         <p><?= $this->Html->link('Rats', '/rats') ?></p>
                         <p><?= $this->Html->link('Litters', '/litters') ?></p>
+                        <p><?= $this->Html->link('Colors', '/colors') ?> (all physical traits: markings, coats, etc. work the same)</p>
+                        <p><?= $this->Html->link('Pending staff action', '/states/view/3') ?> (all objects needing staff action; change number to see sheets in other states, but avoid n°2, there are a lot of them)</p>
                     </div>
                 </div>
             </div>
@@ -99,6 +111,22 @@ $cakeDescription = 'CakeLORD: Just Taste it';
                                 <li>• By owner username: <?= $this->Html->link('https://artefact.kubrick.srfa.info/ratteries/owned-by/ee', '/ratteries/owned-by/ee') ?></li>
                             </ul>
                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="content">
+                <div class="row">
+                    <div class="column">
+                        <h4>Some other available functions</h4>
+                        <p> Attention, en mode debug les fonctions notées avec une * n'envoient pas "vraiment" les mails, ce qui fait pour l'instant bugguer ces fonctions (mais elles marchent quand on fait vraiment envoyer un mail.) </p>
+                        <p> Pour accéder aux liens générés et tester la fonction jusqu'au bout, depuis la page d'erreur il faut appuyer sur le gateau en bas à droite, puis sur l'onglet "mail" pour voir le mail qui serait envoyé en environnement de production, copier le lien et l'ouvrir dans une autre page.</p>
+                        <p><ul>
+                            <li>• <?= $this->Html->link('*Register', '/users/register') ?></li>
+                            <li>• <?= $this->Html->link('*Reset Password', '/users/lost-password') ?></li>
+                            <li>• <?= $this->Html->link('Register Rattery', '/ratteries/register') ?></li>
+                        </ul></p>
                     </div>
                 </div>
             </div>
@@ -258,4 +286,15 @@ $cakeDescription = 'CakeLORD: Just Taste it';
         </div>
     </main>
 </body>
+<script>
+  if ('serviceWorker' in navigator) {
+    console.log("Will the service worker register?");
+    navigator.serviceWorker.register('service-worker.js')
+      .then(function(reg){
+        console.log("Yes, it did.");
+      }).catch(function(err) {
+        console.log("No it didn't. This happened: ", err)
+      });
+  }
+</script>
 </html>

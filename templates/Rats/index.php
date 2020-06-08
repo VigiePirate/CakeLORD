@@ -6,94 +6,14 @@
 ?>
 <div class="rats index content">
     <?= $this->Html->link(__('New Rat'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Rats') ?></h3>
-    <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('pedigree_identifier') ?></th>
-                    <th><?= $this->Paginator->sort('is_pedigree_custom') ?></th>
-                    <th><?= $this->Paginator->sort('owner_user_id') ?></th>
-                    <th><?= $this->Paginator->sort('name') ?></th>
-                    <th><?= $this->Paginator->sort('pup_name') ?></th>
-                    <th><?= $this->Paginator->sort('sex') ?></th>
-                    <th><?= $this->Paginator->sort('birth_date') ?></th>
-                    <th><?= $this->Paginator->sort('rattery_id') ?></th>
-                    <th><?= $this->Paginator->sort('litter_id') ?></th>
-                    <th><?= $this->Paginator->sort('color_id') ?></th>
-                    <th><?= $this->Paginator->sort('eyecolor_id') ?></th>
-                    <th><?= $this->Paginator->sort('dilution_id') ?></th>
-                    <th><?= $this->Paginator->sort('marking_id') ?></th>
-                    <th><?= $this->Paginator->sort('earset_id') ?></th>
-                    <th><?= $this->Paginator->sort('coat_id') ?></th>
-                    <th><?= $this->Paginator->sort('is_alive') ?></th>
-                    <th><?= $this->Paginator->sort('death_date') ?></th>
-                    <th><?= $this->Paginator->sort('death_primary_cause_id') ?></th>
-                    <th><?= $this->Paginator->sort('death_secondary_cause_id') ?></th>
-                    <th><?= $this->Paginator->sort('death_euthanized') ?></th>
-                    <th><?= $this->Paginator->sort('death_diagnosed') ?></th>
-                    <th><?= $this->Paginator->sort('death_necropsied') ?></th>
-                    <th><?= $this->Paginator->sort('picture') ?></th>
-                    <th><?= $this->Paginator->sort('picture_thumbnail') ?></th>
-                    <th><?= $this->Paginator->sort('creator_user_id') ?></th>
-                    <th><?= $this->Paginator->sort('state_id') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($rats as $rat): ?>
-                <tr>
-                    <td><?= $this->Number->format($rat->id) ?></td>
-                    <td><?= $this->Html->link($rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?></td>
-                    <td><?= h($rat->is_pedigree_custom) ?></td>
-                    <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
-                    <td><?= h($rat->name) ?></td>
-                    <td><?= h($rat->pup_name) ?></td>
-                    <td><?= h($rat->sex) ?></td>
-                    <td><?= h($rat->birth_date) ?></td>
-                    <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
-                    <td><?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->id, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : '' ?></td>
-                    <td><?= $rat->has('color') ? $this->Html->link($rat->color->name, ['controller' => 'Colors', 'action' => 'view', $rat->color->id]) : '' ?></td>
-                    <td><?= $rat->has('eyecolor') ? $this->Html->link($rat->eyecolor->name, ['controller' => 'Eyecolors', 'action' => 'view', $rat->eyecolor->id]) : '' ?></td>
-                    <td><?= $rat->has('dilution') ? $this->Html->link($rat->dilution->name, ['controller' => 'Dilutions', 'action' => 'view', $rat->dilution->id]) : '' ?></td>
-                    <td><?= $rat->has('marking') ? $this->Html->link($rat->marking->name, ['controller' => 'Markings', 'action' => 'view', $rat->marking->id]) : '' ?></td>
-                    <td><?= $rat->has('earset') ? $this->Html->link($rat->earset->name, ['controller' => 'Earsets', 'action' => 'view', $rat->earset->id]) : '' ?></td>
-                    <td><?= $rat->has('coat') ? $this->Html->link($rat->coat->name, ['controller' => 'Coats', 'action' => 'view', $rat->coat->id]) : '' ?></td>
-                    <td><?= h($rat->is_alive) ?></td>
-                    <td><?= h($rat->death_date) ?></td>
-                    <td><?= $rat->has('death_primary_cause') ? $this->Html->link($rat->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $rat->death_primary_cause->id]) : '' ?></td>
-                    <td><?= $rat->has('death_secondary_cause') ? $this->Html->link($rat->death_secondary_cause->name, ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $rat->death_secondary_cause->id]) : '' ?></td>
-                    <td><?= h($rat->death_euthanized) ?></td>
-                    <td><?= h($rat->death_diagnosed) ?></td>
-                    <td><?= h($rat->death_necropsied) ?></td>
-                    <td><?= h($rat->picture) ?></td>
-                    <td><?= h($rat->picture_thumbnail) ?></td>
-                    <td><?= $rat->has('creator_user') ? $this->Html->link($rat->creator_user->username, ['controller' => 'Users', 'action' => 'view', $rat->creator_user->id]) : '' ?></td>
-                    <td><?= $rat->has('state') ? $this->Html->link($rat->state->name, ['controller' => 'States', 'action' => 'view', $rat->state->id]) : '' ?></td>
-                    <td><?= h($rat->created) ?></td>
-                    <td><?= h($rat->modified) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('Glimpse'), ['action' => 'glimpse', $rat->id]) ?>
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $rat->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rat->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $rat->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rat->id)]) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
+    <h1><?= __('All Rats') ?></h1>
+    <?= $this->element('rats', [ //rats
+        'rubric' => __(''),
+        'exceptions' => [
+            'picture',
+            'birth_date',
+            'age_string',
+            'death_cause',
+        ],
+    ]) ?>
 </div>

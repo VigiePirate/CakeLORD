@@ -5,8 +5,8 @@
  */
 ?>
 <div class="countries index content">
-    <?= $this->Html->link(__('New Country'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Countries') ?></h3>
+    <?= $this->Html->link(__('New Country'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('All Available Countries') ?></h1>
     <div class="table-responsive">
         <table>
             <thead>

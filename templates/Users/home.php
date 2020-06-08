@@ -4,7 +4,7 @@
             <?= $this->element('my/sidebar') ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="users view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle">User Dashboard</div>

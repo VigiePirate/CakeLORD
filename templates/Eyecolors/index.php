@@ -5,8 +5,8 @@
  */
 ?>
 <div class="eyecolors index content">
-    <?= $this->Html->link(__('New Eyecolor'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Eyecolors') ?></h3>
+    <?= $this->Html->link(__('New Eyecolor'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('All Eyecolors') ?></h1>
     <div class="table-responsive">
         <table>
             <thead>

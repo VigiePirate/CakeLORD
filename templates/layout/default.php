@@ -14,7 +14,7 @@
 * @var \App\View\AppView $this
 */
 
-$cakeDescription = 'CakeLORD';
+$cakeDescription = 'LORD';
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,11 +22,10 @@ $cakeDescription = 'CakeLORD';
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
+        <?= $this->fetch('title') ?> -
+        <?= $cakeDescription ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-
 
     <link href="https://fonts.googleapis.com/css?family=Alegreya:400,400i,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Imprima:400" rel="stylesheet">
@@ -38,6 +37,15 @@ $cakeDescription = 'CakeLORD';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#663300">
+    <meta name="msapplication-TileColor" content="#663300">
+    <meta name="theme-color" content="#663300">
+    <link rel="manifest" href="/manifest.webmanifest">
 </head>
 <body>
     <nav class="top-nav">
@@ -69,7 +77,7 @@ $cakeDescription = 'CakeLORD';
                     ['escape' => false]) .
                 $this->Html->Link(
                     $this->Html->image("/img/icon-logout.svg", ["alt" => "Logout", "width" => "40"]),
-                    ['controller' => 'Users', 'action' => 'logout', $this->getRequest()->getSession()->read('Auth.id')],
+                    ['controller' => 'Users', 'action' => 'logout'],
                     ['escape' => false])
                 :
                 $this->Html->Link(
@@ -141,4 +149,15 @@ $cakeDescription = 'CakeLORD';
     </div>
 </footer>
 </body>
+<script>
+  if ('serviceWorker' in navigator) {
+    console.log("Will the service worker register?");
+    navigator.serviceWorker.register('service-worker.js')
+      .then(function(reg){
+        console.log("Yes, it did.");
+      }).catch(function(err) {
+        console.log("No it didn't. This happened: ", err)
+      });
+  }
+</script>
 </html>

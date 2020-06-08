@@ -7,17 +7,28 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
+            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+          'url' => ['controller' => 'Conversations', 'action' => 'add'],
+          'class' => 'side-nav-icon',
+          'alt' => __('Report')]) ?>
+      <?= $this->Html->image('/img/icon-help.svg', [
+              'url' => ['controller' => 'Articles', 'action' => 'index'],
+              'class' => 'side-nav-icon',
+              'alt' => __('Help')]) ?>
             <?= $this->Html->link(__('Edit Country'), ['action' => 'edit', $country->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Country'), ['action' => 'delete', $country->id], ['confirm' => __('Are you sure you want to delete # {0}?', $country->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Countries'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('New Country'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="countries view content">
-            <h3><?= h($country->name) ?></h3>
-            <table>
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Countries') ?></div>
+            </div>
+            <h1><?= h($country->name) ?></h1>
+            <h2><?= __('Information') ?></h2>
+            <table class="condensed">
                 <tr>
                     <th><?= __('Name') ?></th>
                     <td><?= h($country->name) ?></td>
@@ -32,56 +43,16 @@
                 </tr>
             </table>
             <div class="related">
-                <h4><?= __('Related Ratteries') ?></h4>
+                <h2><?= __('Ratteries registered in this country') ?></h2>
                 <?php if (!empty($country->ratteries)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Prefix') ?></th>
-                            <th><?= __('Name') ?></th>
-                            <th><?= __('Owner User Id') ?></th>
-                            <th><?= __('Birth Year') ?></th>
-                            <th><?= __('Is Alive') ?></th>
-                            <th><?= __('Is Generic') ?></th>
-                            <th><?= __('District') ?></th>
-                            <th><?= __('Zip Code') ?></th>
-                            <th><?= __('Country Id') ?></th>
-                            <th><?= __('Website') ?></th>
-                            <th><?= __('Comments') ?></th>
-                            <th><?= __('Picture') ?></th>
-                            <th><?= __('State Id') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($country->ratteries as $ratteries) : ?>
-                        <tr>
-                            <td><?= h($ratteries->id) ?></td>
-                            <td><?= h($ratteries->prefix) ?></td>
-                            <td><?= h($ratteries->name) ?></td>
-                            <td><?= h($ratteries->owner_user_id) ?></td>
-                            <td><?= h($ratteries->birth_year) ?></td>
-                            <td><?= h($ratteries->is_alive) ?></td>
-                            <td><?= h($ratteries->is_generic) ?></td>
-                            <td><?= h($ratteries->district) ?></td>
-                            <td><?= h($ratteries->zip_code) ?></td>
-                            <td><?= h($ratteries->country_id) ?></td>
-                            <td><?= h($ratteries->website) ?></td>
-                            <td><?= h($ratteries->comments) ?></td>
-                            <td><?= h($ratteries->picture) ?></td>
-                            <td><?= h($ratteries->state_id) ?></td>
-                            <td><?= h($ratteries->created) ?></td>
-                            <td><?= h($ratteries->modified) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Ratteries', 'action' => 'view', $ratteries->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Ratteries', 'action' => 'edit', $ratteries->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Ratteries', 'action' => 'delete', $ratteries->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratteries->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
+                    <?= $this->element('simple_ratteries', [
+                        'rubric' => __(''),
+                        'ratteries' => $country->ratteries,
+                        'exceptions' => [
+                            'picture',
+                            'country',
+                        ],
+                    ]) ?>
                 <?php endif; ?>
             </div>
         </div>
