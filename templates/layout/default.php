@@ -77,7 +77,7 @@ $cakeDescription = 'LORD';
                     ['escape' => false]) .
                 $this->Html->Link(
                     $this->Html->image("/img/icon-logout.svg", ["alt" => "Logout", "width" => "40"]),
-                    ['controller' => 'Users', 'action' => 'logout', $this->getRequest()->getSession()->read('Auth.id')],
+                    ['controller' => 'Users', 'action' => 'logout'],
                     ['escape' => false])
                 :
                 $this->Html->Link(

@@ -27,6 +27,29 @@ class LittersController extends AppController
     }
 
     /**
+     * My method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function my()
+    {
+        $user = $this->Authentication->getIdentity();
+        $this->paginate = [
+            'contain' => ['Users', 'States', 'Sire', 'Dam', 'Contributions'],
+        ];
+        $litters = $this->paginate($this->Litters->find()
+                        ->matching('Contributions.Ratteries', function (\Cake\ORM\Query $q) use ($user) {
+                            return $q->where([
+                                'Ratteries.owner_user_id' => $user->id,
+                            ]);
+                        })
+                        ->order(['Contributions.litters_contribution_id' => 'ASC', 'Litters.birth_date' => 'DESC'])
+                );
+
+        $this->set(compact('litters', 'user'));
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Litter id.
@@ -36,10 +59,21 @@ class LittersController extends AppController
     public function view($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['Users', 'States', 'OffspringRats', 'ParentRats', 'ParentRats.Ratteries', 'Contributions', 'Conversations', 'LitterSnapshots'],
+            'contain' => ['Users', 'States', 'OffspringRats', 'OffspringRats.States',
+            'Sire', 'Sire.Dilutions', 'Sire.Colors', 'Sire.Coats', 'Sire.Earsets','Sire.DeathPrimaryCauses','Sire.DeathSecondaryCauses',
+            'Dam', 'Dam.Dilutions', 'Dam.Colors', 'Dam.Coats', 'Dam.Earsets','Dam.DeathPrimaryCauses','Dam.DeathSecondaryCauses',
+            'ParentRats', 'ParentRats.Ratteries', 'Contributions', 'Conversations', 'LitterSnapshots'],
         ]);
+        $offspringsQuery = $this->Litters->OffspringRats
+                                ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses','OwnerUsers']])
+                                ->matching('BirthLitters', function (\Cake\ORM\Query $query) use ($litter) {
+                                    return $query->where([
+                                        'BirthLitters.id' => $litter->id
+                                    ]);
+                                });
+        $offsprings = $this->paginate($offspringsQuery);
 
-        $this->set('litter', $litter);
+        $this->set(compact('litter', 'offsprings'));
     }
 
     /**

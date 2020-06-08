@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\I18n\FrozenTime;
+use Cake\I18n\Time;
 
 /**
  * Litter Entity
@@ -57,11 +59,54 @@ class Litter extends Entity
 
     protected function _getFullName()
     {
-        $fullname = $this->birth_date->i18nFormat('dd/MM/yyyy') . ' – ' . $this->dam[0]->full_name;
-        if (isset ($this->sire)) {
-            $fullname .= ' × ' . $this->sire[0]->full_name;
+        $fullname = $this->birth_date->i18nFormat('dd/MM/yyyy') . ' – ' . $this->dam[0]->usual_name;
+        if (isset ($this->sire[0])) {
+            $fullname .= ' × ' . $this->sire[0]->usual_name;
         }
         return $fullname;
     }
 
+    protected function _getNameFromSire()
+    {
+        $partname = $this->birth_date->i18nFormat('dd/MM/yyyy') . ' – ' . $this->pups_number . ' pups';
+        if (isset ($this->dam[0]) && $this->dam[0]['name'] != 'Mère inconnue') {
+            $partname .= ' with ' . $this->dam[0]->usual_name;
+        } else {
+            $partname .= ' with unknown mother';
+        }
+        return $partname;
+    }
+
+    protected function _getNameFromDam()
+    {
+        $partname = $this->birth_date->i18nFormat('dd/MM/yyyy') . ' – ' . $this->pups_number . ' pups';
+        if (isset ($this->sire[0]) && $this->sire[0]['name'] != 'Père inconnu') {
+            $partname .= ' with ' . $this->sire[0]->usual_name;
+        } else {
+            $partname .= ' with unknown father';
+        }
+        return $partname;
+    }
+
+    protected function _getSireAge() // now with litter birth date, should be with mating date?
+    {
+        if (isset($this->birth_date)) {
+            $agedate = $this->birth_date;
+            return $agedate->diffInMonths($this->sire[0]->birth_date, true) .' months';
+        } else { // should raise exception
+            return __('Unknown');
+            //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
+        }
+    }
+
+    protected function _getDamAge() // now with litter birth date, should be with mating date?
+    {
+        if (isset($this->birth_date)) {
+            $agedate = $this->birth_date;
+            return $agedate->diffInMonths($this->dam[0]->birth_date, true) .' months';
+        } else { // should raise exception
+            return __('Unknown');
+            //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
+        }
+    }
 }

@@ -33,11 +33,13 @@ class CoatsController extends AppController
      */
     public function view($id = null)
     {
+        /* From bake, but associated rats are too many */
         $coat = $this->Coats->get($id, [
             'contain' => ['Rats'],
         ]);
 
-        $this->set('coat', $coat);
+        /* $coat = $this->Coats->get($id); */
+        $this->set(compact('coat'));
     }
 
     /**

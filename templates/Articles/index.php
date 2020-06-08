@@ -5,8 +5,8 @@
  */
 ?>
 <div class="articles index content">
-    <?= $this->Html->link(__('New Article'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Articles') ?></h3>
+    <?= $this->Html->link(__('New Article'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('All Articles') ?></h1>
     <div class="table-responsive">
         <table>
             <thead>

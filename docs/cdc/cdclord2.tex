@@ -5,7 +5,7 @@
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 
-\usepackage{array,tabularx}
+\usepackage{array,tabularx,longtable}
 \newcolumntype{R}{>{\raggedright\arraybackslash}X}%
 
 \usepackage{graphicx,epstopdf}
@@ -36,7 +36,7 @@
 
 \title{Livre des Origines du Rat Domestique}
 \author{Cahier des Charges Fonctionnel}
-\date{Version 2.2 -- \today}
+\date{Version 2.3 -- \today}
 
 \begin{document}
 \maketitle
@@ -45,7 +45,8 @@
 
 \large
 \noindent\begin{tabularx}{\textwidth}{|l|l|X|}\hline
-\textbf{2.2} & \textbf{10/03/2020} & \textbf{Modification schéma de base (rats\_litters, wants\_statistics.}\\\hline
+\textbf{2.3} & \textbf{29/05/2020} & Ajout de spécifications, workflow des fiches.\\\hline
+2.2 & 10/03/2020 & Modification schéma de base (rats\_litters, wants\_statistics.)\\\hline
 2.1 & 27/01/2020 & Ajout et abandon de fonctionnalités, modifications de listes\\\hline
 2.0 & 25/02/2020 & Adaptation pour CakeLORD\\\hline
 1.1 & 22/08/2018 & Anonymisation des données et mots de passe pour la mise en ligne.\\\hline
@@ -106,13 +107,13 @@ Schéma en annexe~\ref{app:dbv2}.
 \subsection{S'enregistrer}
 
 \existant{Disponible en V1.} Champs obligatoires : pseudo, mail, mot de passe, code postal, ville, pays, acceptation des conditions générales d'utilisation du service. Le pseudonyme et l'adresse mail doivent être uniques. Le mail est enregistré en minuscules. 
-\desire{Amélioration V2.} Gestion des caractères spéciaux dans les pseudonymes : apostrophes, tirets... (soit les interdire, soit vérifier qu'ils ne posent plus de problèmes d'affichage, recherche etc.) 
+\desire{Amélioration V2.} Champs obligatoires : pseudo, mail, mot de passe uniquement. Ajout d'une captcha. Envoi d'un mail avec un lien d'activation ; le compte est bloqué jusqu'à sa première activation. Ajout des champs optionnels (avatar, prénom, nom, localisation...) via édition du profil après sa création. Gestion des caractères spéciaux dans les pseudonymes : apostrophes, tirets... (soit les interdire, soit vérifier qu'ils ne posent plus de problèmes d'affichage, recherche etc.) 
 
 \subsection{S'identifier}
 
 \existant{Disponible en V1.} Identification par mail + mot de passe. Mail insensible à la casse.
 
-\desire{Ajout V2.} Lors de la connexion, si l'utilisateur possède des fiches en attente d'action de sa part, un popup, une notification en ligne ou un texte voyant s'affiche pour lui signaler. Changement du système de chiffrement (bcrypt). Les anciens mots de passe seront supprimés et les utilisateurs invités à utiliser la récupération de mot de passe lors de leur première connexion au nouveau site.
+\desire{Ajout V2.} Enregistrement en base des tentatives ratées de login, mécanisme de protection (période réfractaire de 15 minutes à partir de 5 échecs). Lors de la connexion, si l'utilisateur possède des fiches en attente d'action de sa part, un popup, une notification en ligne ou un texte voyant s'affiche pour lui signaler. Changement du système de chiffrement (bcrypt). Les anciens mots de passe seront supprimés et les utilisateurs invités à utiliser la récupération de mot de passe lors de leur première connexion au nouveau site.
 
 \subsection{Modifier son compte}
 
@@ -125,7 +126,7 @@ Schéma en annexe~\ref{app:dbv2}.
 \end{itemize}
 
 \subsection{Réinitialiser son mot de passe}
-\desire{Fonctionnalité à créer.} Procédure à proposer (envoi de mail avec un lien ?). Pas d'envoi de mot de passe en clair !
+\desire{Fonctionnalité à créer.} Envoi d'un mail contenant un lien à usage unique vers le formulaire de changement de mot de passe. Expiration du lien sous 24 heures. Double saisie du nouveau mot de passe.
 
 \subsection{Afficher un utilisateur}
 
@@ -144,23 +145,24 @@ Schéma en annexe~\ref{app:dbv2}.
 \item Suppression du champ « Disponible à la reproduction »
 \item Ajout de bulles d'aides (type « point d'interrogation » affichant un texte au survol ou ouvrant un pop up si cliqué ?) pour tous les champs.
 \item Fusion des champs Affixe et Origine en un unique menu déroulant (chaque item de la liste se présentant sous la forme [XXX - Origine en toutes lettres]).
-\item Ajout d'un menu déroulant : Portée réalisée en partenariat avec (« double affixe »), optionnel, sous le champ « Origine ». Si renseigné, lors de la consultation d'une fiche, le nom complet à afficher sera XXX-YYY Nom (XXX étant l'affixe d'origine obligatoire et YYY le double affixe optionnel.) \desire{Ne sera disponible que si le rat est rattaché à une portée.}
+\item Ajout d'un menu déroulant : Portée réalisée en partenariat avec (« double affixe »), optionnel, sous le champ « Origine ». Si renseigné, lors de la consultation d'une fiche, le nom complet à afficher sera XXX-YYY Nom (XXX étant l'affixe d'origine obligatoire et YYY le double affixe optionnel.) \desire{Ne sera disponible que si le rat est rattaché à une portée, ce qui sera automatiquement le cas si au moins un de ses deux parents est connu.}
 \item Modification du champ cause de décès (duplication en 2 menus déroulants pour le niveau 1 (obligatoire) et le niveau 2 (optionnel) ; le niveau 2 n'apparaît qu'une fois le niveau 1 sélectionné et seules les causes attachées à ce premier niveau sont affichées.)
 \item Ajout de cases à cocher optionnelles sous la cause de décès : « Euthanasie », « Diagnostic confirmé par un vétérinaire », « Diagnostic confirmé par autopsie ou analyses ».       
-\item (Optionnel, si facilement réalisable : redimensionnement automatique de la photographie si elle dépasse 100 ko / 640 x 480 pixels)
+\item Redimensionnement et compression automatique de la photographie si elle dépasse 600 pixels de large ou 400 pixels de haut. Préservation de l'aspect ratio. 
+\item Tout rat ayant au moins un parent connu doit être rattaché à une portée. Suivant le mode de déclenchement de l'action (depuis la fiche du parent, depuis la fiche d'une portée existante, etc.), la portée correspondante sera automatiquement identifiée (si existante) ou créée (si aucune portée correspondante déjà dans la liste.)
 \end{itemize}
 
-Les modifications à apporter côté back-office sont décrites dans la section~\ref{sec:backoffice}. La liste des champs à renseigner est visible sur la figure~\ref{fig:kerfiche} et sera à reproduire dans le même ordre, sauf spécifications contraires ultérieures (envisagé : création d'une rubrique « Décès » pour toutes les informations ayant trait au décès.)     
+Les modifications à apporter côté back-office sont décrites dans la section~\ref{sec:backoffice}. Une première liste des champs à renseigner est visible sur la figure~\ref{fig:kerfiche} et sera modifiée en fonction de la forme finale de la fiche rat ; les champs devront être dans le même ordre sur la vue et sur le formulaire de création.    
 
 \subsection{Modifier une fiche}
 
 \existant{V1.} Tous les champs peuvent être modifiés par l'utilisateur. En particulier la fiche peut être cédée à un autre utilisateur (modification du champ « propriétaire ».)  
 
-\desire{Modification à apporter en V2.} Les modifications apportées par l'utilisateur n'écrasent pas les valeurs précédentes de la fiche tant qu'elles n'ont pas été validées au SAV (protection contre le vandalisme.) Appliquer les mêmes vérifications automatiques qu'à l'enregistrement d'une nouvelle fiche.
+\desire{Modification à apporter en V2.} Les modifications apportées par l'utilisateur n'écrasent pas les valeurs précédentes de la fiche tant qu'elles n'ont pas été validées au SAV (protection contre le vandalisme) via un mécanisme de snapshot. Appliquer les mêmes vérifications automatiques qu'à l'enregistrement d'une nouvelle fiche. Certains champs ne sont visibles / éditables que par le staff (liste à établir.) Certaines éditions déclenchent un changement d'état de la fiche avec un retour au back-office (exemple : déclaration de décès), d'autres sont autorisés « en place » (exemple : changement de propriétaire.)
 
 \subsection{Consulter une fiche}
 \existant{Fonctionnalités V1 à préserver.}
-Consulter une fiche (depuis un lien externe, depuis la liste des rats de l'utilisateur accessible depuis son compte, depuis une liste renvoyée par la fonction de recherche.) Afficher les informations sur le rat, sa photo, la liste de ses descendants, le lien vers sa généalogie. Première maquette : figure~\ref{fig:kerfiche}. \desire{Liste précise et ordonnée à spécifier.}
+Consulter une fiche (depuis un lien externe, depuis la liste des rats de l'utilisateur accessible depuis son compte, depuis une liste renvoyée par la fonction de recherche.) Afficher les informations sur le rat, sa photo, la liste de ses descendants, le lien vers sa généalogie. Première maquette : figure~\ref{fig:kerfiche}. Création d'une rubrique « Décès » pour toutes les informations ayant trait au décès. \desire{Liste précise et ordonnée à spécifier.}
 
 \begin{figure}[htbp!]
 \begin{center}\includegraphics[width=0.8\linewidth]{FicheRat.jpg}\end{center}
@@ -169,7 +171,7 @@ Consulter une fiche (depuis un lien externe, depuis la liste des rats de l'utili
 
 \desire{Modifications V2.}
 \begin{itemize}
-\item Calculer et afficher l'âge en mois (âge actuel si vivant, âge au décès si mort) du rat dans la catégorie Identité (par exemple après « Statut » : Vivant ajouter « (xx mois) »).  
+\item Calculer et afficher l'âge en mois (âge actuel si vivant, âge au décès si mort, signalement des rats considérés comme « perdus / plus de nouvelles ») du rat dans la catégorie Identité (par exemple après « Statut » : Vivant, ajouter « (xx mois) »).  
 \item Liens pour consulter la fiche du propriétaire, la fiche de l'éleveur.
 \end{itemize}
 
@@ -177,7 +179,7 @@ Consulter une fiche (depuis un lien externe, depuis la liste des rats de l'utili
 \existant{Fonctionnalités V1 à préserver.}
 \begin{itemize}
 \item Lister ses rats depuis son compte (onglets « Tous mes rats », « Mes femelles », « Mes mâles », « Mes rats décédés », « Mes fiches à corriger »). Maquette : figure~\ref{fig:kerdashuser}.   
-\item Lister les enfants d'un rat (à insérer lors de la consultation de la fiche)  -- visible sur la maquette de la figure~\ref{fig:kerfiche}.
+\item Lister les enfants d'un rat (à insérer lors de la consultation de la fiche)  -- visible sur la maquette de la figure~\ref{fig:kerfiche}. \desire{V2: trier les descendants par portée lorsque le rat en a engendré plusieurs.}
 \end{itemize}
 
 \begin{figure}[htbp!]
@@ -199,13 +201,13 @@ Consulter une fiche (depuis un lien externe, depuis la liste des rats de l'utili
 \desire{Ajout de fonctionnalités en V2 :} 
 \begin{itemize}
 \item Colorier les rats apparaissant plusieurs fois dans la généalogie (couleur unique par individu sur la généalogie affichée.)
-\item Générer un pdf téléchargeable
-\item Améliorer la visualisation (aspect ratio des cases, informations affichées, proposer une généalogie circulaire ?).
+\item Générer un pdf téléchargeable et imprimable.
+\item Améliorer la visualisation (aspect ratio des cases, informations affichées, proposer une généalogie circulaire, voire une généalogie interactive).
 \end{itemize}
 
 \subsection{Rechercher un ou des rats}
 
-\existant{V1.} Maintien des possibilités actuelles de recherche, sauf champ « reproductible ».  
+\existant{V1.} Maintien des possibilités actuelles de recherche, sauf champ « reproductible » : recherche par nom ou nom de naissance, par pseudo du propriétaire, par origine, par traits physiques, par sexe, par statut vivant/mort.
 \desire{V2.} Ajout d'une recherche par fourchette de date de naissance (né avant le..., après le...).
 
 \section{Fonctionnalités rateries}
@@ -215,28 +217,28 @@ Consulter une fiche (depuis un lien externe, depuis la liste des rats de l'utili
 \desire{\`A ajouter en V2.} 
 \begin{itemize}
 \item Afficher un texte d'avertissement rappelant que l'enregistrement d'une raterie n'est possible que si l'utilisateur a déjà eu une portée née chez lui, ou une portée en collaboration.
+\item Enregistrement autorisé uniquement si les éventuelles autres rateries de l'utilisateur sont déclarées inactives.
 \item Vérification que l'affixe et le nom sont disponibles. 
 \item Prise en charge des caractères spéciaux (apostrophes, tirets)
 \end{itemize}
 
 \subsection{Modifier une raterie}
-Réservé aux utilisateurs enregistrés.
+Réservé au propriétaire de la raterie et/ou au staff (variable suivant les champs, génère ou pas un changement d'état de la fiche, listes à établir.) Raccourci pour déclarer une raterie inactive.
 
 \subsection{Afficher une raterie}
-Afficher nom du propriétaire, site web, localisation (département ou code postal), présentation. Boutons pour lister les portées, lister les rats nés sous cet affixe.
-\subsection{S'enregistrer dans l'annuaire}
-Réservé aux utilisateurs enregistrés.
-
-Signaler que le code postal est obligatoire si la raterie souhaite être affichée dans la carte des rateries.
+Afficher nom du propriétaire, site web, localisation (champ « libre » département/ville/région, champ « contraint » code postal), présentation. Boutons pour lister les portées, lister les rats nés sous cet affixe. Statistiques si la raterie a choisi cette option lors de son enregistrement (champ wants\_statistic.)
+\subsection{S'enregistrer dans l'annuaire / la carte}
+Via l'enregistrement du code postal (le code postal est obligatoire si la raterie souhaite être affichée dans la carte des rateries ; si elle ne veut pas l'être, elle remplit « localisation » avec le degré de précision qu'elle souhaite, mais pas le code postal.)   
 
 \section{Fonctionnalités portées}
 
 \subsection{Enregistrer une portée}
-Réservé aux utilisateurs enregistrés.
+Réservé aux utilisateurs enregistrés. Disponible depuis la fiche d'un rat (enregistrer une portée née de ce rat), d'une raterie (enregistrer une portée née dans cette raterie), ou depuis son dashboard user « mes portées » et « ma raterie ». \desire{Ajout V2 : rateries contributrices.} Plusieurs rateries peuvent être rattachées à une portée (une par type de contribution : lieu de naissance, propriétaire de la mère, propriétaire du père, association ayant géré le sauvetage). Cette information est utilisée pour construire le double affixe (lieu de naissance + affixe de la raterie contributrice non générique de plus haute priorité.)  
 
 \subsection{Modifier une de ses portées} 
 
 \subsection{Afficher une portée} 
+Inclut la liste des descendants avec leur âge et leur cause de décès. Eventuellement statistiques.
 
 \subsection{Ajouter un raton à une de ses portées}
  
@@ -246,6 +248,25 @@ Réservé aux utilisateurs enregistrés.
 \label{sec:backoffice}
 \existant{Fonctionnalités existant en V1 et problèmes.} Le back office offre essentiellement la liste de toutes les fiches en attente, les affichages sont (une ligne par fiche) : bouton suppression, ID du rat, nom du rat, propriétaire de la fiche, date de dernière modification de la fiche. Problème : pas de fonctions de tri, pas de différence visible entre fiche en attente d'action utilisateur et fiche en attente d'action modérateur, pas de notion de « modérateur en charge ».  
 
+\subsection{Etats des fiches et cycle de vie}
+Pour faciliter l'affichage et la gestion des fiches, 6 états sont définis ainsi que le flux de changement d'état en fonction des actions effectuées (figure~\ref{fig:lifecycle}).
+Liste des états :
+\begin{enumerate}
+\item Validé => Fiche définitivement correcte, gelée
+\item Vérifié => Fiche correcte pour l'instant, encore susceptible de modifications futures
+\item En attente d'action staff => Fiche devant être revue par le staff après modifications
+\item En attente d'action user => Fiche incorrecte devant être modifiée par l'utilisateur
+\item Non vérifié => Fiche encore jamais vue et présumée incorrecte
+\item Invalide => Fiche définitivement incorrecte et conservée pour archive, gelée
+\end{enumerate}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{SheetLifecycle.png}
+\end{center}
+\caption{Flux des changements d'état au cours de la vie d'une fiche.\label{fig:lifecycle}}
+\end{figure}
+
 \subsection{Se connecter au back office}
 \desire{Ajout V2.} 
 \begin{itemize}
@@ -253,7 +274,7 @@ Réservé aux utilisateurs enregistrés.
 \item Affichage d'un « dashboard ».
 \begin{itemize}
 \item Infos synthétiques (nombre de fiches au SAV, dont nombre de fiches non traitées, nombre de fiches prises en charge par ce modérateur et qui attendent une action de sa part, date de la dernière action du modérateur...) Maquette indicative : figure~\ref{fig:kerdashback}. \desire{Liste précise et ordonnée à spécifier.}
-\item Previews des fiches en attente par catégorie : fiches non traitées, fiches en attente de réponse utilisateur, fiches en attente de réponse SAV.
+\item Previews des fiches en attente par état, notamment : fiches non traitées, fiches en attente de réponse utilisateur, fiches en attente de réponse SAV.
 \end{itemize}
 \item Accéder aux listes de chaque catégorie.
 \item Fonctions de tri (toutes les fiches d'un même utilisateur, toutes les fiches attachées à une même portée...)
@@ -276,7 +297,7 @@ Afficher la date d'arrivée de la fiche au SAV, la date de la dernière interven
 \subsection{Intervenir sur une fiche rat}
 \existant{Fonctions V1 à préserver.} Editer la fiche, la valider, laisser un commentaire à l'utilisateur (commentaire sur la fiche), la supprimer.
 
-\desire{Ajouts V2.} Changer le statut d'une fiche (« en attente d'action d'un modérateur », « en attente de modification par l'utilisateur ».) Déclencher une communication avec l'utilisateur (envoi d'un mail et/ou d'un message privé.) Les actions déclenchent la mise à jour de la « date de dernière modification. »   
+\desire{Ajouts V2.} Changer le statut d'une fiche (« en attente d'action d'un modérateur », « en attente de modification par l'utilisateur ».) Déclencher une communication avec l'utilisateur (envoi d'un mail et/ou d'un message privé.) Les actions déclenchent le changement d'état et la mise à jour de la « date de dernière modification. »  Possibilité de « geler » une fiche (états 1 et 6).  
 
 \subsection{Intervenir sur une fiche portée}
 Idem.
@@ -302,10 +323,10 @@ Envoyer un message privé ou un mail à l'utilisateur depuis une de ses fiches e
 Possibilité d'envoyer un message privé à un autre utilisateur depuis sa fiche. Consultation des messages reçus, suppression d'un message, etc. \desire{Sera limité aux conversations dont un des participants est un membre du staff (rôles root, admin, staff).}
 
 \subsection{Calcul et affichage de statistiques}
-Onglet statistiques du site, voir annexe~\ref{app:stats}.
+Onglet statistiques du site, voir annexe~\ref{app:stats}. Ajout de « statistiques de fiche » sur les vues de certains objets.
 
 \subsection{Responsiveness}
-Version mobile du site ou application.
+Version mobile du site ou application (CSS, « progressive web app », ajout d'un webmanifest...)
 
 \subsection{Edition des pages « statiques » depuis le SAV}
 Notices d'utilisation, mentions légales, message sur la page d'accueil...
@@ -316,13 +337,13 @@ Notices d'utilisation, mentions légales, message sur la page d'accueil...
 \subsection{Internationalisation / gestion multilingue}
 Trois langues prévues : anglais (langue du développement), français (dont les anglicismes en usage ; sera la langue par défaut pour la locale fr\_FR), « québécois » (traduction de tous les termes anglais en français).  
 
-\subsection{Autres fonctionnalités mineures}
+\subsection{Autres fonctionnalités « mineures »}
 \begin{itemize}
-\item 8.6.1 Redimensionnement auto des photos (avec imagemagick ?)
-\item 8.6.2 Génération d'un PDF pour les généalogies
-\item 8.6.3 Impression d'une fiche
-\item 8.6.4 Conserver des brouillons de fiches avant envoi au SAV
-\item 8.6.5 Calcul du taux de consanguinité d'un rat
+\item 8.6.1 Redimensionnement auto des photos avec GD.
+\item 8.6.2 Génération d'un PDF pour les généalogies.
+\item 8.6.3 Impression d'une fiche.
+\item 8.6.4 Conserver des brouillons de fiches avant envoi au SAV.
+\item 8.6.5 Calcul du taux de consanguinité d'un rat.
 \end{itemize}
 
 \newpage
@@ -435,207 +456,121 @@ Si le temps le permet :
 
 Champs nom / date de naissance / oreilles / yeux/ poils obligatoires pour valider une fiche. Couleur et Marquage obligatoires sauf exceptions à gérer comme certaines dilutions (par exemple, si albinos, marquage inconnu autorisé.) \desire{Mis en place par la table technique \texttt{compatibilities}, liste à spécifier.}
 
-\subsection{Nouvelle liste des couleurs et correspondance}
-\subsubsection{Nouvelle liste}
+\subsection{Nouvelles listes des traits physiques, génotypes et correspondances}
 
-Agouti
+\subsubsection{Nouvelle liste de couleur et génotypes}
+\desire{Warning ergonomie.} Cette liste est très longue, l'ergonomie pour l'entrée d'un rat par menu déroulant sera mauvaise. Il faudrait envisager une saisie en plusieurs étapes comme pour les causes de décès, par exemple : choisir d'abord si base agoutie ou noire, puis une famille de couleurs (« tous les ambres », « tous les topazes »...), puis les variantes attachées (« ambre », « ambre bleu », « ambre dove »...) ou un autre mécanisme (complétion automatique ?)   
 
-Ambre (Agouti + PED)
- 
-Ambre bleu   (Agouti + PED + Bus)
- 
-Ambre dove   (Agouti + PED + Mink + Br)
- 
-Ambre dove mock   (Agouti + PED + Mock + Br)
- 
-Ambre lavande (Agouti + PED + Mink +   Bus)
- 
-Ambre lavande mock (Agouti + PED + Mock   + Bus)
- 
-Ambre mink   (Agouti + PED + Mink)
- 
-Ambre mock (Agouti + PED + Mock)
- 
-Ambre russe (Agouti + PED + Br)
- 
-Beige (Noir + RED)
- 
-Beige dove (Noir   + RED + Mink + Br )
- 
-Beige dove mock (Noir + RED + Mock + Br)
- 
-Beige mink (Noir   + RED + Mink)
- 
-Beige mock (Noir + RED + Mock)
- 
-Beige russe (Noir + RED + Br)
- 
-Bleu russe
- 
-Bleu russe agouti (Agouti + Br)
- 
-Bleu us
- 
-Bleu us agouti   (Agouti + Bus)
- 
-Cannelle (Agouti + Mink)
- 
-Cannelle mock (Agouti + Mock)
- 
-Champagne (Noir + PED)
- 
-Champagne mink (Noir + PED + Mink)
+Génotypes : deux options sont possibles, un « vrai » génotype avec code standard, ou un génotype « vulgarisé ». Les génotypes seront à renseigner plus systématiquement lorsque ce choix aura été tranché. Les codes « vulgarisés » ont été proposés par Ancalimë. Les exemples de codes « standard » sont proposés par Artefact, sur la base des conventions de la NFRS et de l'AFRMA. Sera à compléter.  
 
-Champagne mock(Noir + PED + Mock)
- 
-Champagne russe (Noir + PED + Br)
- 
-Chocolat
- 
-Double bleu (Noir + Bus + Br)
- 
-Double bleu agouti (Agouti + Bus + Br)
- 
-Double canelle bleu (Agouti + Mink +   Mock + Bus)
- 
-Double canelle russe (Agouti + Mink + Mock + Br)
- 
-Double cannelle (Agouti + Mink + Mock)
- 
-Double havane ( Noir + Mink + Mock +   porteur RED)
- 
-Double havane agouti ( Agouti + Mink +   Mock + porteur RED)
- 
-Double havane russe (Noir + Mink + Mock   + Br + porteur RED)
- 
-Double havane russe agouti (Agouti +   Mink + Mock + Br + porteur RED)
- 
-Double lilas (Noir + Mink + Mock + Bus +   porteur RED)
- 
-Double lilas agouti (Agouti + Mink +   Mock + Bus + porteur RED)
- 
-Double mink (Noir + Mink + Mock)
- 
-Double mink bleu (Noir + Mink + Mock +   Bus)
- 
-Double mink russe (Noir + Mink + Mock +   Br)
- 
-Double moka (Noir + Mink + Mock +   porteur PED)
- 
-Double moka agouti (Agouti + Mink + Mock   + porteur PED)
- 
-Double moka bleu (Noir + Mink + Mock +   Bus + porteur PED)
- 
-Double moka bleu agouti (Agouti + Mink +   Mock + Bus + porteur PED)
- 
-Double moka russe (Noir + Mink + Mock +   Br + porteur PED)
- 
-Double moka russe agouti (Agouti + Mink   + Mock + Br + porteur PED)
- 
-Dove (Noir + Mink + Br)
- 
-Dove agouti   (Agouti + Mink + Br)
- 
-Dove mock (Noir + Mock + Br)
- 
-Dove mock agouti   (Agouti + Mock + Br)
- 
-Graphite
- 
-Havane (Noir + Mink + porteur RED)
- 
-Havane agouti (Agouti + Mink + porteur   RED)
- 
-Havane mock (Noir + Mock + porteur RED)
- 
-Havane mock agouti (Agouti + Mock +   porteur RED)
- 
-Havane russe (Noir + Mink + Br + porteur   RED)
- 
-Havane russe agouti (Agouti + Mink + Br   + porteur RED)
+Option M (« is picture mandatory ») : si cochée, l'utilisateur devra obligatoirement uploader une photo pour enregistrer un rat de cette couleur. (Version provisoire, à affiner / valider.)
 
-Havane russe mock (Noir + Mock + Br + porteur RED)
- 
-Havane russe mock agouti (Agouti + Mock + Br + porteur RED)
+\begin{longtable}{|c|l|l|l|}\hline
+\textbf{M} & \textbf{Nom} & \textbf{Génotype vulgarisé} & \textbf{Génotype standard} \\\hline
+\endhead
+& Agouti & & A/- \\\hline
+& Ambre & (Agouti + PED) & A/- p/p \\\hline
+x & Ambre bleu  & (Agouti + PED + Bus) & A/- d/d p/p \\\hline
+x & Ambre dove & (Agouti + PED + Mink + Br) & A/- m/m p/p rb/rb \\\hline
+x & Ambre dove mock  & (Agouti + PED + Mock + Br) & \\\hline
+x & Ambre lavande & (Agouti + PED + Mink + Bus) & \\\hline
+x & Ambre lavande mock & (Agouti + PED + Mock   + Bus) & \\\hline
+& Ambre mink &  (Agouti + PED + Mink) & \\\hline
+& Ambre mock & (Agouti + PED + Mock) & \\\hline
+& Ambre russe & (Agouti + PED + Br) & \\\hline
+& Beige & (Noir + RED) & \\\hline
+x & Beige dove & (Noir   + RED + Mink + Br )  & \\\hline
+x & Beige dove mock  & (Noir + RED + Mock + Br) & \\\hline
+& Beige mink  & (Noir   + RED + Mink) & \\\hline
+& Beige mock  & (Noir + RED + Mock) & \\\hline
+& Beige russe  & (Noir + RED + Br) & \\\hline
+& Bleu russe & & \\\hline
+& Bleu russe agouti  & (Agouti + Br) & \\\hline
+& Bleu us & & \\\hline
+& Bleu us agouti  & (Agouti + Bus) &  A/- d/d\\\hline
+& Cannelle  & (Agouti + Mink) & \\\hline
+& Cannelle mock  & (Agouti + Mock) & \\\hline
+& Champagne  & (Noir + PED) & \\\hline
+& Champagne mink  & (Noir + PED + Mink) & \\\hline
+& Champagne mock  & (Noir + PED + Mock) & \\\hline
+& Champagne russe  & (Noir + PED + Br) & \\\hline
+x & Chocolat & & a/a b/b\\\hline
+& Double bleu  & (Noir + Bus + Br) & \\\hline
+& Double bleu agouti  & (Agouti + Bus + Br) & \\\hline
+x & Double canelle bleu  & (Agouti + Mink +   Mock + Bus) & \\\hline
+x & Double canelle russe  & (Agouti + Mink + Mock + Br) & \\\hline
+& Double cannelle  & (Agouti + Mink + Mock) & \\\hline
+& Double havane  & ( Noir + Mink + Mock +   porteur RED) & \\\hline
+& Double havane agouti  & ( Agouti + Mink +   Mock + porteur RED) & \\\hline
+x & Double havane russe  & (Noir + Mink + Mock   + Br + porteur RED) & \\\hline
+x & Double havane russe agouti  & (Agouti +   Mink + Mock + Br + porteur RED) & \\\hline
+x & Double lilas  & (Noir + Mink + Mock + Bus +   porteur RED) & \\\hline
+x & Double lilas agouti  & (Agouti + Mink +   Mock + Bus + porteur RED) & \\\hline
+& Double mink  & (Noir + Mink + Mock) & \\\hline
+x & Double mink bleu  & (Noir + Mink + Mock +   Bus) & \\\hline
+x & Double mink russe  & (Noir + Mink + Mock +   Br) & \\\hline
+x & Double moka  & (Noir + Mink + Mock +   porteur PED) & \\\hline
+x & Double moka agouti  & (Agouti + Mink + Mock   + porteur PED) & \\\hline
+x & Double moka bleu  & (Noir + Mink + Mock +   Bus + porteur PED) & \\\hline
+x & Double moka bleu agouti  & (Agouti + Mink +   Mock + Bus + porteur PED) & \\\hline
+x & Double moka russe  & (Noir + Mink + Mock +   Br + porteur PED) & \\\hline
+x & Double moka russe agouti  & (Agouti + Mink   + Mock + Br + porteur PED) & \\\hline
+& Dove  & (Noir + Mink + Br) & \\\hline
+& Dove agouti    & (Agouti + Mink + Br) & \\\hline
+& Dove mock  & (Noir + Mock + Br) & \\\hline
+& Dove mock agouti    & (Agouti + Mock + Br) & \\\hline
+x & Graphite & & ?/? \\\hline
+& Havane  & (Noir + Mink + porteur RED) & \\\hline
+& Havane agouti  & (Agouti + Mink + porteur   RED) & \\\hline
+& Havane mock  & (Noir + Mock + porteur RED) & \\\hline
+& Havane mock agouti  & (Agouti + Mock + porteur RED) & \\\hline
+& Havane russe  & (Noir + Mink + Br + porteur RED) & \\\hline
+& Havane russe agouti  & (Agouti + Mink + Br + porteur RED) & \\\hline
+& Havane russe mock  & (Noir + Mock + Br + porteur RED) & \\\hline
+& Havane russe mock agouti  & (Agouti + Mock + Br + porteur RED) & \\\hline
+& Ice  & (Noir + PED + Bus) & a/a d/d p/p\\\hline
+x & Ice mink  & (Noir + PED + Mink + Bus) & \\\hline
+x & Ice mock  & (Noir + PED + Mock + Bus) & \\\hline
+& Lavande  & (Noir + Mink + Bus) & \\\hline
+& Lavande agouti & (Agouti + Mink + Bus) & \\\hline
+& Lavande mock  & (Noir + Mock + Bus) & \\\hline
+& Lavande mock agouti  & (Agouti + Mock + Bus) & \\\hline
+x & Lilas  & (Noir + Mink + Bus + porteur RED) & \\\hline
+x & Lilas agouti  & (Agouti + Mink + Bus +   porteur RED) & \\\hline
+x & Lilas mock  & (Noir + Mock + Bus + porteur RED) & \\\hline
+x & Lilas mock agouti  & (Agouti + Mock + Bus + porteur RED) & \\\hline
+& Mink & & \\\hline
+& Mock & & \\\hline
+& Moka  & (Noir + Mink + porteur PED) & \\\hline
+& Moka agouti  & (Agouti + Mink + porteur PED) & \\\hline
+& Moka bleu  & (Noir + Mink + Bus + porteur PED) & \\\hline
+& Moka bleu agouti  & (Agouti + Mink + Bus + porteur PED) & \\\hline
+& Moka bleu mock  & (Noir + Mock + Bus + porteur PED) & \\\hline
+& Moka bleu mock agouti  & (Agouti + Mock +   Bus + porteur PED) & \\\hline
+& Moka mock  & (Noir + Mock + porteur PED) & \\\hline
+& Moka mock agouti  & (Agouti + Mock +   porteur PED) & \\\hline
+& Moka russe  & (Noir + Mink + Br + porteur  PED) & \\\hline
+& Moka russe agouti  & (Agouti + Mink + Br +  porteur PED) & \\\hline
+& Moka russe mock  & (Noir + Mock + Br + porteur PED) & \\\hline
+& Moka russe mock agouti  & (Agouti + Mock +  Br + porteur PED) & \\\hline
+& Noir & & \\\hline
+& Platine  & (Noir + RED + Bus) & \\\hline
+x & Platine mink  & (Noir + RED + Mink + Bus) & \\\hline
+x & Platine mock  & (Noir + RED + Mock + Bus) & \\\hline
+& Topaze  & (Agouti + RED) & \\\hline
+& Topaze bleu  & (Agouti + RED + Bus)  & \\\hline
+x & Topaze dove  & (Agouti + RED + Mink + Br) & \\\hline
+x & Topaze dove mock  & (Agouti + RED + Mock + Br) & \\\hline
+& Topaze mink  & (Agouti + Mink + RED) & \\\hline
+& Topaze mock  & (Agouti + RED + Mock) & \\\hline
+& Topaze russe  & (Agouti + RED + Br) & \\\hline
+\end{longtable}
 
-Ice (Noir + PED + Bus)
- 
-Ice mink (Noir + PED + Mink + Bus)
- 
-Ice mock (Noir + PED + Mock + Bus)
- 
-Lavande (Noir + Mink + Bus)
- 
-Lavande agouti(Agouti + Mink + Bus)
- 
-Lavande mock (Noir + Mock + Bus)
- 
-Lavande mock agouti (Agouti + Mock + Bus)
- 
-Lilas (Noir + Mink + Bus + porteur RED)
- 
-Lilas agouti (Agouti + Mink + Bus +   porteur RED)
- 
-Lilas mock (Noir + Mock + Bus + porteur RED)
+\subsubsection{Correspondance couleurs}
 
-Lilas mock agouti (Agouti + Mock + Bus + porteur RED)
- 
-Mink
- 
-Mock
- 
-Moka (Noir + Mink + porteur PED)
- 
-Moka agouti (Agouti + Mink + porteur   PED)
- 
-Moka bleu (Noir + Mink + Bus + porteur   PED)
- 
-Moka bleu agouti (Agouti + Mink + Bus +   porteur PED)
- 
-Moka bleu mock (Noir + Mock + Bus + porteur PED)
- 
-Moka bleu mock agouti (Agouti + Mock +   Bus + porteur PED)
- 
-Moka mock (Noir + Mock + porteur PED)
- 
-Moka mock agouti (Agouti + Mock +   porteur PED)
- 
-Moka russe (Noir + Mink + Br + porteur  PED)
- 
-Moka russe agouti (Agouti + Mink + Br +  porteur PED)
- 
-Moka russe mock (Noir + Mock + Br + porteur PED)
- 
-Moka russe mock agouti (Agouti + Mock +  Br + porteur PED)
- 
-Noir
- 
-Platine (Noir + RED + Bus)
- 
-Platine mink (Noir + RED + Mink + Bus)
- 
-Platine mock (Noir + RED + Mock + Bus)
- 
-Topaze (Agouti + RED)
- 
-Topaze bleu (Agouti + RED + Bus)
- 
-Topaze dove (Agouti + RED + Mink + Br)
- 
-Topaze dove mock (Agouti + RED + Mock + Br)
- 
-Topaze mink (Agouti + Mink + RED)
- 
-Topaze mock (Agouti + RED + Mock)
- 
-Topaze russe (Agouti + RED + Br)
-
-\desire{Warning ergonomie.} Cette liste est très longue, l'ergonomie pour l'entrée d'un rat par menu déroulant sera mauvaise. Il faudrait envisager une saisie en plusieurs étapes comme pour les causes de décès, par exemple : choisir d'abord si base agoutie ou noire, puis une famille de couleurs (« tous les ambres », « tous les topazes »...), puis les variantes attachées (« ambre », « ambre bleu », « ambre dove »...)         
-
-\subsubsection{Correspondance}
-
-\begin{center}\begin{tabular}{|l|l|}\hline
+\begin{center}\begin{longtable}{|l|l|}\hline
 \textbf{Ancienne couleur} & \textbf{Nouvelle couleur} \\\hline
+\endhead
 Agouti& Agouti  \\\hline
 Agouti dove mock& Dove mock agouti (Agouti + Mock + Br) \\\hline
 Ambre& Ambre (Agouti + PED)\\\hline
@@ -687,34 +622,105 @@ Silver Fawn& Topaze mink (Agouti + Mink + RED)\\\hline
 Topaze& Topaze (Agouti + RED)\\\hline
 Topaze base mink& Topaze mink (Agouti + Mink + RED)\\\hline
 Topaze mock& Topaze mock (Agouti + Mock + RED)\\\hline
-\end{tabular}\end{center}
+\end{longtable}\end{center}
 
-\subsection{Autres listes de traits physiques}
+\subsubsection{Dilutions}
+\desire{NB.} Suppression de toutes les dilutions contenant une notion de couleur d’yeux, qui sera exclusivement gérée par le champ couleur des yeux (par exemple le type ivory n'est pas proposé en dilution et sera enregistré comme : « albinos aux yeux noirs ».) Ajout de la dilution Biscuit et de combinaisons manquantes.
 
-Dilutions : 
-\begin{itemize}
-\item Albinos
-\item \sout{BED - Black Eyed Devil}
-\item \sout{BEH - Black Eyed Himalayan}
-\item \sout{BES - Black Eyed Siamese}
-\item Burmese himalayen
-\item Burmese sable himalayen
-\item Burmese sable siamois
-\item Burmese siamois
-\item Biscuit (burmese albinos)
-\item \desire{Ajout : Devil}
-\item Himalayen
-\item \sout{Ivory (albinos yeux noirs)}
-\item \sout{RED - Red Eyed Devil}
-\item Siamois
-\item Aucune
-\end{itemize}
+\begin{longtable}{|c|l|l|}\hline
+\textbf{M} & \textbf{Nom} & \textbf{Génotype} \\\hline
+ &  Aucune & bu/bu C/C \\\hline
+ &  Albinos & bu/bu c/c \\\hline
+ &  Biscuit & Bu/bu c/c \\\hline
+ &  Burmese himalayen & Bu/bu c/ch \\\hline
+ &  Burmese marbré & Bu/bu c/cm, Bu/bu cm/cm  \\\hline
+ &  Burmese marbré pointé & Bu/bu ch/cm \\\hline
+ &  Burmese siamois & Bu/bu ch/ch \\\hline
+ &  Devil & bu/bu c/cm, bu/bu cm/cm \\\hline
+ &  Devil pointé & bu/bu ch/cm \\\hline
+ &  Himalayen & bu/bu c/ch \\\hline
+ &  Sable himalayen & Bu/Bu c/ch \\\hline
+ &  Sable marbré & Bu/Bu c/cm, Bu/Bu cm/cm \\\hline
+ &  Sable marbré pointé & Bu/Bu ch/cm \\\hline
+ &  Sable siamois & Bu/Bu ch/ch \\\hline
+ &  Siamois & bu/bu ch/ch \\\hline
+\end{longtable}
 
-\desire{NB.} Suppression de toutes les dilutions contenant une notion de couleur d’yeux, qui sera exclusivement gérée par le champ couleur des yeux. Ajout de la dilution Biscuit.
+\subsubsection{Marquages}
+\desire{NB.} Suppression de tous les marquages contenant une notion de couleur d’yeux (BEW/PEW/REW), seront fusionnés dans un marquage « Blanc surmarqué ». Le maintien du husky dans les marquages est à rediscuter (passage en « particularité » ?)  
 
-Marquages : suppression de tous les marquages contenant une notion de couleur d’yeux (BEW/PEW/REW), seront fusionnés dans un marquage « Blanc surmarqué ». 
+\begin{longtable}{|c|l|l|}\hline
+\textbf{M} & \textbf{Nom} & \textbf{Génotype} \\\hline
+\endhead
+ &  Aucun & \\\hline
+ &  Baldie & \\\hline
+ &  Bareback & \\\hline
+ &  Berkshire & \\\hline
+ &  Capé & \\\hline
+ &  Dalmatien & \\\hline
+ &  Essex & \\\hline
+ &  Hooded & \\\hline
+ &  Husky & \\\hline
+ &  Irish & \\\hline
+ &  Masqué & \\\hline
+ &  Oppossum & \\\hline
+ &  Patché & \\\hline
+ &  Surmarqué & \\\hline
+ &  Uni & \\\hline
+ &  Varieberk & \\\hline
+ &  Variegated & \\\hline
+ &  Varihooded & \\\hline
+\end{longtable}
 
-Particularités : suppression de la particularité Black-Eyed (sera gérée par la couleur des yeux.) \desire{Liste à spécifier avec ses incompatibilités.}
+\subsubsection{Particularités}
+\desire{NB.} Suppression de la particularité Black-Eyed (sera gérée par la couleur des yeux.) Contrairement aux autres traits physiques, un rat peut n'avoir aucune particularité, ou en avoir plusieurs.\desire{Incompatibilités à spécifier.} Par exemple : « gants » réservé au marquage uni, « golden » réservé aux rats ayant une dilution, « merle » réservé aux composés du mink, etc.
+
+\begin{longtable}{|c|l|l|}\hline
+\textbf{M} & \textbf{Nom} & \textbf{Génotype} \\\hline
+ &  Down Under & \\\hline
+ &  Dwarf & dw/dw\\\hline
+ &  Etoilé & \\\hline
+ &  Fléché & \\\hline
+ &  Gants & \\\hline
+ &  Golden& \\\hline
+ &  Manx& \\\hline
+ &  Marble& \\\hline
+ &  Merle& \\\hline
+ &  Perle& Pe/pe\\\hline
+ &  Stippel& \\\hline
+ &  Silvermane& Sm/-\\\hline
+\end{longtable}
+
+\subsubsection{Types de poils}
+\desire{NB.} Maintien de « velours » à discuter.
+   
+\begin{longtable}{|c|l|l|}\hline
+\textbf{M} & \textbf{Nom} & \textbf{Génotype}\\\hline
+ &  Inconnu &\\\hline
+ &  Lisse & re/re \\\hline
+ &  Rex & Re/re \\\hline
+ &  Double-rex & Re/Re\\\hline
+ &  Velours & Re/re ?\\\hline
+ &  Nu & n/n \\\hline
+ &  Satin & \\\hline
+ &  Harley & \\\hline
+\end{longtable}
+
+\subsubsection{Couleur des yeux}
+\desire{NB.} Suppression de l'option « rubis » jamais utilisée. La question se pose de renommer « dark rubis » en « rubis » simplement. Tables de compatibilités à prévoir (pas de topaze ou ambre aux yeux noirs, par exemple.)   
+   
+\begin{longtable}{|c|l|}\hline
+\textbf{M} & \textbf{Nom} \\\hline
+ & Inconnu \\\hline
+ & Noir \\\hline
+ & Dark rubis \\\hline
+ & Rouge \\\hline
+ & Rose \\\hline
+ & Vairon \\\hline
+\end{longtable}
+
+\subsubsection{Oreilles}
+Dumbo, standard, inconnu (pour les ratons morts avant détermination du type d'oreilles par exemple.)  
 
 \subsection{Nouvelle liste des décès et correspondance}
 \subsubsection{Liste des catégories de décès (cause de décès niveau 1)}
@@ -871,7 +877,7 @@ Particularités : suppression de la particularité Black-Eyed (sera gérée par 
 \end{enumerate}
 \end{enumerate}
 
-\desire{NB.} Sur la liste de correspondances suivante, l'astérisque désigne les fiches qui devront être repassées en « à valider par un modérateur » lors de la migration, pour vérification de la cause réelle de décès si possible. (En principe, nombre relativement réduit de fiches.)  
+\desire{NB.} Sur la liste de correspondances suivante, l'astérisque désigne les fiches qui devront être repassées si possible en « à valider par un modérateur » (état 5) lors de la migration, avec un commentaire « cause de décès à vérifier » (Cas les plus douteux ; en principe, nombre relativement réduit de fiches.)  
 
 \subsubsection{Correspondance anciennes causes vers nouvelles causes}
 \small
@@ -926,7 +932,9 @@ Virus (SDA, Sendaï, Tyzzer...) & 14. Autres & 14.10. Virus, épidémie, défici
 \subsection{Statistiques}
 \label{app:stats}
 
-\subsubsection{Onglet statistiques}
+Les statistiques envisagées sont pour l'instant les suivantes ; la liste pourra être modifiée en fonction de la facilité d'implémentation et du temps disponible (ne pas retarder la sortie de la bêta pour ces fonctionnalités).
+
+\subsubsection{Statistiques globales}
  
 \begin{enumerate}
 \item Statistiques du site
@@ -935,7 +943,9 @@ Virus (SDA, Sendaï, Tyzzer...) & 14. Autres & 14.10. Virus, épidémie, défici
 \item Nombre d'utilisateurs enregistrés
 \item Nombre de rateries
 \item Nombre de portées
+\item Autres possibilités à envisager : les précédentes « par année de naissance », nombre de rats par utilisateur, statistiques pays...
 \end{itemize}
+
 \item Statistiques démographiques
 \begin{itemize}
 \item Pourcentage de mâles
@@ -944,12 +954,25 @@ Virus (SDA, Sendaï, Tyzzer...) & 14. Autres & 14.10. Virus, épidémie, défici
 \item Âge Moyen Décès Mâles (en mois)
 \item Âge Moyen Décès Femelles (en mois)
 \item Âge Moyen Décès Total (en mois)
+\item Autres possibilités à envisager : évolution de l'âge au décès par année de naissance
 \end{itemize}
+
+\item Statistiques de reproduction
+\begin{itemize}
+\item Nombre de rateries, de raterie par année de création
+\item Durée d'activité moyenne des rateries
+\item Durée d'activité moyenne des rateries ?
+\item Nombre moyen/médian de rats par raterie (nés à la raterie) ?
+\item Nombre moyen/médian de petits par portée ?
+\item Âge moyen/médian des mères à la naissance de leurs petits ?
+\item Âge moyen/médian des pères à la naissance de leurs petits ?
+\end{itemize}
+
 \item Statistiques des causes de mortalité (à présenter sous forme d'histogramme, par proportion décroissante)
 \begin{itemize}
 \item Catégories de décès (causes de niveau 1)
 \item Les 10 causes les plus fréquentes (parmi les causes de niveau 2)
-\item Les tumeurs les plus fréquentes (extraire des causes de niveau 2 les causes suivantes)
+\item Les tumeurs les plus fréquentes (extraire des causes de niveau 2 les causes suivantes). \desire{NB.} Ajout d'un champ is\_tumor en base pour ne pas avoir à coder cette liste en dur dans les statistiques de site.
  \begin{itemize}
 \item[$\cdot$ 4.9.]Tumeur digestive (estomac, foie, pancréas, intestins…)
 \item[$\cdot$ 6.3.]Tumeur musculaire
@@ -985,6 +1008,80 @@ Compte-tenu des facilités offertes par le nouvel outil, d'autres statistiques s
 \item Nombre de rats d'un utilisateur, âge moyen au décès des rats d'un utilisateur...
 \item Fiche « cause de décès » donnant des statistiques sur les rats décédés de cette cause...  
 \end{itemize}
+
+Les statistiques envisagées sont pour l'instant les suivantes ; la liste pourra être modifiée en fonction de leur pertinence, la facilité d'implémentation et du temps disponible (ne pas retarder la sortie de la bêta pour ces fonctionnalités).
+
+\begin{enumerate}
+\item Statistiques sur une fiche raterie
+\begin{itemize}
+\item Durée d'activité (entre la première et la dernière portée née si raterie inactive, entre la première portée et la date du jour si raterie active) ?
+\item *Nombre de petits nés à la raterie (contribution niveau 1)
+\item Nombre de petits nés en collaboration avec cette raterie (contributions tous niveaux) ?
+\item *Nombre de portées nées à la raterie (contribution niveau 1)
+\item Nombre de portées nées en collaboration avec cette raterie (contributions tous niveaux) ?
+\item *Âge moyen au décès des petits, des femelles, des mâles nés à la raterie (contribution niveau 1)
+\item Causes de décès (10 causes les plus fréquentes avec leurs proportions) ?
+\end{itemize}
+\item Statistiques sur une fiche portée
+\begin{itemize}
+\item Proportion de petits encore en vie
+\item *Âge moyen/médian au décès (total, mâles, femelles)
+\end{itemize}
+\item Statistiques sur une fiche rat
+\begin{itemize}
+\item Nombre de rats engendrés ?
+\item Nombre de descendants toutes générations confondues ?
+\item Âge moyen/médian au décès des enfants de ce rat ?
+\item Âge moyen/médian au décès de tous les descendants de ce rat ?
+\end{itemize}
+\item Statistiques sur une fiche utilisateur (possiblement seulement en privé sur le dashboard)
+\begin{itemize}
+\item Nombre total de rats ?
+\item Nombre de rats vivants actuels ?
+\item Âge moyen/médian au décès des rats possédés ?
+\end{itemize}
+\item Statistiques sur une fiche « cause de décès »
+\begin{itemize}
+\item Proportion des rats décédés de cette cause parmi tous les rats ?
+\item Âge moyen/médian au décès des rats décédés de cette cause ? 
+\end{itemize} 
+\end{enumerate}
+
+\subsubsection{Actions contextuelles et icônes}
+\label{ssec:icons}
+
+\subsection{\'Etats}
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}{|c|l|l|l|l|}\hline
+\textbf{Icone} & \textbf{Objets associés} & \textbf{Signification} & \textbf{Commentaire}\\\hline
+\endhead
+ & Rats, Rateries, Portées, Utilisateurs & Fiche validée (gelée) & Symbole unicode \\\hline
+ & Rats, Rateries, Portées, Utilisateurs & Fiche vérifiée & Symbole unicode \\\hline
+ & Rats, Rateries, Portées, Utilisateurs & Fiche en attente d'action staff & Symbole unicode \\\hline
+ & Rats, Rateries, Portées, Utilisateurs & Fiche en attente d'action utilisateur & Symbole unicode \\\hline
+ & Rats, Rateries, Portées, Utilisateurs & Fiche non vérifiée & Symbole unicode \\\hline
+ & Rats, Rateries, Portées, Utilisateurs & Fiche invalide (gelée) & Symbole unicode \\\hline
+
+ & Rats & Femelle & Symbole unicode \\\hline
+ & Rats & Mâle & Symbole unicode \\\hline
+
+ & Rateries & Raterie en activité & \\\hline
+ & Rateries & Raterie en pause ou fermée & \\\hline
+ 
+\end{longtable}
+
+\subsubsection{Actions}
+Les icônes sont des hypothèses de travail provisoires, une homogénéisation devra être envisagée.
+
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}{|c|l|l|l|l|}\hline
+\textbf{Icone} & \textbf{Action} & \textbf{Visible depuis...} & \textbf{Visible par...} & \textbf{Commentaire}\\\hline\hline
+\endhead
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-report.eps}} & Signaler un problème & Partout & Tous & \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-help.eps}} & Voir l'aide & Partout & Tous & \\\hline\hline
+\raisebox{-3pt}{\includegraphics[width=10pt]{icon-delete.eps}} & Supprimer & Partout & Admin & \\\hline
+
+\end{longtable}
 
 
 \end{document}

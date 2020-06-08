@@ -2,6 +2,9 @@
 <div class="table-responsive">
     <table>
         <thead>
+                <?php if (! in_array('state', $exceptions)): ?>
+                    <th><?= $this->Paginator->sort('state',$this->Html->image('/img/icon-fa-state.svg', ['class' => 'action-icon']), ['escape' => false])?></th>
+                <?php endif; ?>
                 <?php if (! in_array('mating_date', $exceptions)): ?>
                     <th><?= $this->Paginator->sort('mating_date') ?></th>
                 <?php endif; ?>
@@ -18,35 +21,35 @@
                     <th><?= $this->Paginator->sort('sire') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('pups_number', $exceptions)): ?>
-                    <th><?= $this->Paginator->sort('pups_number') ?></th>
+                    <th><?= $this->Paginator->sort('pups_number','Size') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('pups_number_stillborn', $exceptions)): ?>
                     <th><?= $this->Paginator->sort('pups_number_stillborn') ?></th>
                 <?php endif; ?>
-                <?php if (! in_array('state', $exceptions)): ?>
-                    <th><?= $this->Paginator->sort('state') ?></th>
-                <?php endif; ?>
                 <?php if (! in_array('actions', $exceptions)): ?>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions-title"><?= $this->Html->image('/img/icon-fa-action.svg', ['class' => 'action-icon'])?></th>
                 <?php endif; ?>
         </thead>
         <tbody>
             <?php foreach($litters as $litter): ?>
                 <tr>
+                    <?php if (! in_array('state', $exceptions)): ?>
+                        <td><span class="statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></span></td>
+                    <?php endif; ?>
                     <?php if (! in_array('mating_date', $exceptions)): ?>
                         <td><?= h($litter->mating_date) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('birth_date', $exceptions)): ?>
-                        <td><?= h($litter->birth_date) ?></td>
+                        <td><?= h($litter->birth_date->i18nFormat('dd/MM/yyyy')) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('full_name', $exceptions)): ?>
                         <td><?= $this->Html->link($litter->full_name, ['controller' => 'Litters', 'action' => 'view', $litter->id]) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('dam', $exceptions)): ?>
-                        <td><?= $this->Html->link(h($litter->dam[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]) ?></td>
+                        <td><?= isset($litter->dam[0]) ? $this->Html->link(h($litter->dam[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]) : '-' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('sire', $exceptions)): ?>
-                        <td><?= $this->Html->link(h($litter->sire[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id]) ?></td>
+                        <td><?= isset($litter->sire[0]) ? $this->Html->link(h($litter->sire[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id]) : '-' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('pups_number', $exceptions)): ?>
                         <td><?= h($litter->pups_number) ?></td>
@@ -54,11 +57,12 @@
                     <?php if (! in_array('pups_number_stillborn', $exceptions)): ?>
                         <td><?= h($litter->pups_number_stillborn) ?></td>
                     <?php endif; ?>
-                    <?php if (! in_array('state', $exceptions)): ?>
-                        <td><?= $litter->has('state') ? $this->Html->link($litter->state->name, ['controller' => 'States', 'action' => 'view', $litter->state->id]) : '' ?></td>
-                    <?php endif; ?>
                     <?php if (! in_array('actions', $exceptions)): ?>
                         <td class="actions">
+                            <?= $this->Html->image('/img/icon-fa-eye.svg', [
+                                'url' => ['controller' => 'Litters', 'action' => 'view', $litter->id],
+                                'class' => 'action-icon',
+                                'alt' => __('See Litter')]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $litter->id]) ?>
                             <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $litter->id], ['confirm' => __('Are you sure you want to delete # {0}?', $litter->id)]) ?>
                         </td>

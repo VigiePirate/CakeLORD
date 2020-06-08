@@ -18,7 +18,7 @@ class RatsController extends AppController
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'glimpse','named', 'fromRattery', 'ownedBy', 'sex']);
+        $this->Authentication->addUnauthenticatedActions(['index','view','named', 'fromRattery', 'ownedBy', 'sex']);
     }
 
     /**
@@ -30,7 +30,7 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
         ];
         $rats = $this->paginate($this->Rats);
 
@@ -46,31 +46,11 @@ class RatsController extends AppController
     {
         $user = $this->Authentication->getIdentity();
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'States'],
+            'contain' => ['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Ratteries'],
         ];
-        $rats = $this->paginate($this->Rats->find()->where(['owner_user_id' => $user->id]));
+        $rats = $this->paginate($this->Rats->find()->where(['Rats.owner_user_id' => $user->id]));
 
         $this->set(compact('rats', 'user'));
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Rat id.
-     * @return \Cake\Http\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function glimpse($id = null)
-    {
-        $this->Authorization->skipAuthorization();
-        $rat = $this->Rats->get($id, [
-            'contain' => ['OwnerUsers', 'CreatorUsers','Ratteries', 'BirthLitters', 'BirthLitters.Ratteries',
-            //'BirthLitters.ParentRats','BirthLitters.ParentRats.Ratteries','BirthLitters.ParentRats.BirthLitters.Ratteries',
-            'BirthLitters.Sire','BirthLitters.Dam',
-            'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'BredLitters', 'Singularities', 'Conversations', 'RatSnapshots'],
-        ]);
-
-        $this->set('rat', $rat);
     }
 
     /**
@@ -84,7 +64,11 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States', 'BredLitters', 'Singularities', 'Conversations', 'RatSnapshots'],
+            'contain' => ['OwnerUsers', 'CreatorUsers','Ratteries', 'BirthLitters', 'BirthLitters.Ratteries',
+            'BirthLitters.Sire','BirthLitters.Dam','BirthLitters.Sire.BirthLitters.Ratteries','BirthLitters.Dam.BirthLitters.Ratteries',
+            'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States',
+            'BredLitters','BredLitters.Sire','BredLitters.Dam','BredLitters.OffspringRats','BredLitters.OffspringRats.OwnerUsers','BredLitters.OffspringRats.States','BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
+            'Singularities', 'Conversations', 'RatSnapshots'],
         ]);
 
         $this->set('rat', $rat);
@@ -219,7 +203,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'States', 'BirthLitters','BirthLitters.Ratteries'],
         ];
         $rats = $this->paginate($rats);
 

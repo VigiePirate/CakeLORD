@@ -7,11 +7,17 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Conversations'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+                'url' => ['controller' => 'Conversations', 'action' => 'add'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Report')]) ?>
+            <?= $this->Html->image('/img/icon-help.svg', [
+                'url' => ['controller' => 'Articles', 'action' => 'index'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Help')]) ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="conversations form content">
             <?= $this->Form->create($conversation) ?>
             <fieldset>

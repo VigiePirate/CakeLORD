@@ -34,7 +34,9 @@ class StatesController extends AppController
     public function view($id = null)
     {
         $state = $this->States->get($id, [
-            'contain' => ['LitterSnapshots', 'Litters', 'RatSnapshots', 'Rats', 'Ratteries', 'RatterySnapshots'],
+            'contain' => ['LitterSnapshots', 'Litters', 'Litters.States', 'Litters.Dam','Litters.Sire',
+            'RatSnapshots', 'Rats', 'Rats.States', 'Ratteries', 'RatterySnapshots',
+            'Rats.OwnerUsers','Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses'],
         ]);
 
         $this->set('state', $state);

@@ -5,8 +5,8 @@
  */
 ?>
 <div class="markings index content">
-    <?= $this->Html->link(__('New Marking'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Markings') ?></h3>
+    <?= $this->Html->link(__('New Marking'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('All Markings') ?></h1>
     <div class="table-responsive">
         <table>
             <thead>
