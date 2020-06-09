@@ -31,6 +31,8 @@
             </div>
             <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
+            <!-- d3.js  -->
+            <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
             <!-- script from github d3js-examples -->
             <script>
 
@@ -97,7 +99,7 @@
                 }
               });
 
-              d3.json('data/8gens.json', function(error, json){
+              d3.json('8gens.json', function(error, json){
 
                 if(error) {
                   return console.error(error);
@@ -433,10 +435,7 @@
             setup();
 
             </script>
-            <!-- end copy-paste example -->            
+            <!-- end copy-paste example -->
         </div>
     </div>
 </div>
-
-<!-- d3.js include near </body> -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
