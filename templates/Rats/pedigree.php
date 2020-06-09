@@ -47,7 +47,7 @@
     <div class="column-responsive column-90">
         <div class="rats view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle">Rat</div>
+                <div class="sheet-title pretitle">Rat Family Tree</div>
                 <div class="sheet-markers">
                     <div class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
                     <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
