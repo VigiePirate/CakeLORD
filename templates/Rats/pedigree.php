@@ -17,30 +17,7 @@
                     'class' => 'side-nav-icon',
                     'alt' => __('Help')]) ?>
                 <div class="spacer"> </div>
-                <?= $this->Html->image('/img/icon-file-edit.svg', [
-                    'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Modify Rat')]) ?>
-                    <?= $this->Html->image('/img/icon-fa-give.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'give', $rat->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Change Owner')]) ?>
-                <?= $this->Html->image('/img/icon-fa-baby.svg', [
-                    'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Declare Litter')]) ?>
-                    <?= $this->Html->image('/img/icon-rip.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'kill', $rat->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Declare Rat Death')]) ?>
-                <div class="spacer"> </div>
-                <?= $this->Html->image('/img/icon-edit-admin.svg', [
-                    'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Edit Rat as Admin')]) ?>
-                <?= $this->Html->image('/img/icon-fa-trash.svg', [
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Delete Rat')]) ?>
+
             </div>
         </div>
     </aside>
