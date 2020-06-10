@@ -1,5 +1,5 @@
-var boxWidth = 600,
-    boxHeight = 400,
+var boxWidth = 150,
+    boxHeight = 40,
     nodeWidth = 100,
     nodeHeight = 200,
 
@@ -61,7 +61,7 @@ function setup() {
     }
   });
 
-  d3.json('data/8gens.json', function(error, json){
+  d3.json('8gens.json', function(error, json){
 
     if(error) {
       return console.error(error);
