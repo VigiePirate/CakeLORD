@@ -33,8 +33,10 @@
 
             <!-- d3.js  -->
             <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-            <iframe src="http://justincy.github.io/d3-pedigree-examples/descendants-oop.html" width="100%">
-            </iframe>
+            <script src="/familytree.js" type="text/javascript"></script>
+            <div id="familytree">
+                <svg></svg>
+            </div>
             <!-- end copy-paste example -->
         </div>
     </div>
