@@ -29,7 +29,7 @@ function setup() {
     .translate([400, 200]);
 
   var svg = d3.select("#familytree").append("svg")
-    .attr('width', 1000)
+    .attr('width', 100%)
     .attr('height', 500)
     .call(zoom)
     .append('g')
