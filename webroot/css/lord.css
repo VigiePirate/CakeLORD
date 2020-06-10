@@ -752,8 +752,9 @@ footer {
 
 /* d3js pedigree */
 svg {
-  margin-top: 32px;
-  border: 1px solid #aaa;
+  margin-top: 0.5rem;
+  border: 2px solid #663300;
+  border-radius: 0.4rem;
   width: 100%;
 }
 
