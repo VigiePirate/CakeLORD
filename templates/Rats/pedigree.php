@@ -35,7 +35,7 @@
             <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
             <?= $this->Html->script('familytree'); ?>
             <div id="familytree">
-                <svg></svg>
+                
             </div>
             <!-- end copy-paste example -->
         </div>
