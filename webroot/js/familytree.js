@@ -28,7 +28,7 @@ function setup() {
     // Offset so that first pan and zoom does not jump back to the origin
     .translate([400, 200]);
 
-  var svg = d3.select("svg") // d3.select("body").append("svg")
+  var svg = d3.select("familytree").append("svg")
     .attr('width', 1000)
     .attr('height', 500)
     .call(zoom)
