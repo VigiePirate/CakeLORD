@@ -29,8 +29,9 @@ function setup() {
     .translate([400, 200]);
 
   var svg = d3.select("#familytree").append("svg")
-    .attr('width', window.innerWidth)
-    .attr('height', window.innerHeight)
+    //.attr('width', window.innerWidth)
+    //.attr('height', window.innerHeight)
+    .attr("viewBox", "0 0 " + w + " " + h )
     .call(zoom)
     .append('g')
 

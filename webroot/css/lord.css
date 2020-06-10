@@ -754,6 +754,7 @@ footer {
 svg {
   margin-top: 32px;
   border: 1px solid #aaa;
+  width: 85%;
 }
 
 .person rect {
