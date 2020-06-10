@@ -32,6 +32,7 @@
             <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
             <!-- d3.js  -->
+            <iframe>
             <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
             <!-- script from github d3js-examples -->
             <script>
@@ -435,6 +436,7 @@
             setup();
 
             </script>
+        </iframe>
             <!-- end copy-paste example -->
         </div>
     </div>
