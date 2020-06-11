@@ -2,4 +2,8 @@
   "name": "The rat I am looking at",
   "sex": "X",
   "id": "INC00001M",
+  "_parents": [
+  ],
+  "_children": [
+  ]
 }
