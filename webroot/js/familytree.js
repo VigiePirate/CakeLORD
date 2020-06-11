@@ -78,8 +78,8 @@ function setup() {
 
     // Start with only the first few generations of ancestors showing
     ancestorRoot._parents.forEach(function(parents){
-      //parents._parents.forEach(collapse);
-      parents._parents._parents.forEach(collapse);
+      parents._parents.forEach(collapse);
+      //parents._parents._parents.forEach(collapse);
     });
 
     // Start with only one generation of descendants showing
