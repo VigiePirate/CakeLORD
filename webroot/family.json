@@ -11,7 +11,19 @@
         {
           "name": "Maternal Grandmother",
           "sex": "F",
-          "id": "INC00004F"
+          "id": "INC00004F",
+          "_parents": [
+            {
+              "name": "M. Grandmother's mother",
+              "sex": "F",
+              "id": "INC000015F"
+            },
+            {
+              "name": "M. Grandmother's father",
+              "sex": "M",
+              "id": "INC000016M"
+            }
+          ]
         },
         {
           "name": "Maternal Grandfather",
@@ -19,12 +31,12 @@
           "id": "INC00005M",
           "_parents": [
             {
-              "name": "Maternal Grandfather's mother",
+              "name": "M. Grandfather's mother",
               "sex": "F",
               "id": "INC000013F"
             },
             {
-              "name": "Maternal Grandfather's father",
+              "name": "M. Grandfather's father",
               "sex": "M",
               "id": "INC000014M"
             }
