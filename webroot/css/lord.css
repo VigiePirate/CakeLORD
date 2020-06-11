@@ -759,7 +759,7 @@ svg {
 }
 
 .person rect {
-  fill: #99ccff;
+  /*fill: #99ccff;*/
   stroke: steelblue;
   stroke-width: 1px;
 }
