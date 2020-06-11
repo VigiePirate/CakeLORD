@@ -289,7 +289,6 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Move text to it's proper position
   nodeUpdate.select('text')
       .attr("dx", -(boxWidth/2) + 7) // +10
-      .attr("dy", -(boxWidth/2) + 1) // nothing
       .style('fill-opacity', 1)
       .style('fill',"#343b40");
 
