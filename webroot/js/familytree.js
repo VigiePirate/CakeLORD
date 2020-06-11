@@ -254,8 +254,7 @@ Tree.prototype.drawNodes = function(nodes, source){
         y: 0,
         width: 0,
         height: 0,
-      })
-      .style('fill', #99ccff);
+      });
 
   // Draw the person's name and position it inside the box
   nodeEnter.append("text")
@@ -273,14 +272,15 @@ Tree.prototype.drawNodes = function(nodes, source){
       .duration(duration)
       .attr("transform", function(d) { return "translate(" + (self.direction * d.y) + "," + d.x + ")"; });
 
-  // Grow boxes to their proper size
+  // Grow boxes to their proper size // fixme: and color them
   nodeUpdate.select('rect')
       .attr({
         x: -(boxWidth/2),
         y: -(boxHeight/2),
         width: boxWidth,
         height: boxHeight
-      });
+      })
+      .style('fill',d3.color("steelblue"));
 
   // Move text to it's proper position
   nodeUpdate.select('text')
