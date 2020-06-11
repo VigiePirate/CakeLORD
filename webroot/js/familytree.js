@@ -378,9 +378,9 @@ function collapse(person){
  */
 function elbow(d, direction) {
   var sourceX = d.source.x,
-      sourceY = d.source.y + (boxWidth / 2),
+      sourceY = d.source.y + (boxWidth / 4), //2
       targetX = d.target.x,
-      targetY = d.target.y - (boxWidth / 2);
+      targetY = d.target.y - (boxWidth / 4); //2
 
   return "M" + (direction * sourceY) + "," + sourceX
     + "H" + (direction * (sourceY + (targetY-sourceY)/2))
