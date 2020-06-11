@@ -63,7 +63,7 @@ function setup() {
     }
   });
 
-  d3.json('/family.json', function(error, json){
+  d3.json('/8gens.json', function(error, json){
 
     if(error) {
       return console.error(error);
