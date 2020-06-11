@@ -759,19 +759,19 @@ svg {
 }
 
 .person rect {
-  stroke-width: 1px;
+  stroke-width: 2px;
 }
 
 .person {
   font-family: "Imprima";
-  font-size: 10px;
+  font-size: 14px;
   cursor: pointer;
 }
 
 .link {
   fill: none;
-  stroke: #ccc;
-  stroke-width: 1.5px;
+  stroke: #606c76;
+  stroke-width: 2px;
 }
 
 /* responsiveness */
