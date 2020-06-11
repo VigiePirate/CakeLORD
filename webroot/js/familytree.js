@@ -26,12 +26,12 @@ function setup() {
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
     // Offset so that first pan and zoom does not jump back to the origin
-    .translate([300, 150]); // .translate([400, 200]);
+    .translate([400, 200]); // .translate([400, 200]);
 
   var svg = d3.select("#familytree").append("svg")
     //.attr('width', window.innerWidth)
     //.attr('height', window.innerHeight)
-    .attr("viewBox", "0 0 " + w + " " + h ) //.attr("viewBox", "0 0 900 600" )
+    .attr("viewBox", "0 0 810 540" )
     .attr("preserveAspectRatio", "xMidYMid meet")
     .call(zoom)
     .append('g')
