@@ -1,5 +1,5 @@
 {
-  "name": "The rat I'm looking at",
+  "name": "The rat I am looking at",
   "sex": "X",
   "id": "INC00001M",
   "_parents": [
@@ -11,12 +11,12 @@
         {
           "name": "Maternal Grandmother",
           "sex": "F",
-          "id": "INC00004F",
+          "id": "INC00004F"
         },
         {
           "name": "Maternal Grandfather",
-        "sex": "M",
-        "id": "INC00005M"
+          "sex": "M",
+          "id": "INC00005M"
         }
       ]
     },
