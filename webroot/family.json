@@ -18,7 +18,7 @@
         "sex": "M",
         "id": "INC00005M"
         }
-      ],
+      ]
     },
     {
       "name": "Father",
@@ -26,7 +26,7 @@
       "id": "INC00003M"
     }
   ],
-  "_children" : [
+  "_children": [
     {
       "name": "Child 1",
       "sex": "M",
