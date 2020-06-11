@@ -1,10 +1,10 @@
-var boxWidth = 150,
-    boxHeight = 40,
-    nodeWidth = 100,
-    nodeHeight = 200,
+var boxWidth = 200, //150
+    boxHeight = 40, //40
+    nodeWidth = 100, //100
+    nodeHeight = 200, //200
 
     // duration of transitions in ms
-    duration = 750,
+    duration = 500,
 
     // d3 multiplies the node size by this value
     // to calculate the distance between nodes
@@ -378,9 +378,9 @@ function collapse(person){
  */
 function elbow(d, direction) {
   var sourceX = d.source.x,
-      sourceY = d.source.y + (boxWidth / 4), //2
+      sourceY = d.source.y + (boxWidth / 2),
       targetX = d.target.x,
-      targetY = d.target.y - (boxWidth / 4); //2
+      targetY = d.target.y - (boxWidth / 2);
 
   return "M" + (direction * sourceY) + "," + sourceX
     + "H" + (direction * (sourceY + (targetY-sourceY)/2))
