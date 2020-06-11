@@ -3,20 +3,24 @@
   "sex": "X",
   "id": "INC00001M",
   "_parents": [
-    {"name": "Mother",
-    "sex": "M",
-    "id": "INC00002F",
-    "_parents": [
-      {},
-      {}
-    ]},
-    {"name": "Father",
-    "sex": "F",
-    "id": "INC00003M",
-    "_parents": [
-      {},
-      {}
-    ]}
+    {
+      "name": "Mother",
+      "sex": "M",
+      "id": "INC00002F",
+      "_parents": [
+        {},
+        {}
+      ]
+    },
+    {
+        "name": "Father",
+      "sex": "F",
+      "id": "INC00003M",
+      "_parents": [
+        {},
+        {}
+      ]
+    }
   ],
   "_children" : [
     {},
