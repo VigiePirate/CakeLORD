@@ -25,8 +25,16 @@
       "sex": "M",
       "id": "INC00003M",
       "_parents": [
-        {},
-        {}
+        {
+          "name": "Paternal Grandmother",
+          "sex": "F",
+          "id": "INC00006F"
+        },
+        {
+          "name": "Paternal Grandfather",
+          "sex": "M",
+          "id": "INC00007M"
+        }
       ]
     }
   ],
