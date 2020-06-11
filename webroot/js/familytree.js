@@ -289,10 +289,8 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Move text to it's proper position
   nodeUpdate.select('text')
       .attr("dx", -(boxWidth/2) + 10)
-      .style({
-        fill-opacity: "1",
-        fill: "#606c76"
-      });
+      .style('fill-opacity', 1)
+      .style('fill',"#606c76");
 
   // Remove nodes we aren't showing anymore
   var nodeExit = node.exit()
