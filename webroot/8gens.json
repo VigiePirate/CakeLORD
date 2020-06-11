@@ -9,10 +9,12 @@
       "_parents": [
         {
           "name": "Jared Evans",
+          "sex": "M",
           "id": "efa251bb-13f7-583d-b5ec-c16f8fcd109f",
           "_parents": [
             {
               "name": "Kathryn Hubbard",
+              "sex": "F",
               "id": "09b99030-aebb-576f-be3b-6b51a5ea03f7",
               "_parents": [
                 {
