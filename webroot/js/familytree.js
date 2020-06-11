@@ -281,7 +281,7 @@ Tree.prototype.drawNodes = function(nodes, source){
         height: boxHeight
       })
       .style('fill',function(d){
-        return d.data.sex === "M" ? "#cce6ff" : "#ffcce6";
+        return sexColour(d);
       });
 
   // Move text to it's proper position
@@ -398,5 +398,17 @@ function transitionElbow(d){
     + "V" + d.source.x
     + "H" + d.source.y;
 }
+
+/**
+ * Custom function for colors
+ */
+ function sexColour(d){
+	if(d.sex == "M"){
+		return "#cce6ff";
+	} else {
+		return "#ffcce6";
+	}
+}
+
 
 setup();
