@@ -3,6 +3,15 @@
   "sex": "X",
   "id": "INC00001M",
   "_parents": [
+    {
+      "name": "Mother",
+      "sex": "F",
+      "id": "INC00002F",
+      "_parents": [
+        {},
+        {}
+      ]
+    }
   ],
   "_children": [
   ]
