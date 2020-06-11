@@ -765,9 +765,13 @@ svg {
 }
 
 .person {
-  font-style: "Imprima";
-  font-weight: 1.4rem;
+  font-family: "Imprima";
+  font-size: 1.4rem;
   cursor: pointer;
+}
+
+.M {
+  background-color: #99ccff;
 }
 
 .link {
