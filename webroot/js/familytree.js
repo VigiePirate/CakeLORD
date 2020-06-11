@@ -281,8 +281,8 @@ Tree.prototype.drawNodes = function(nodes, source){
         width: boxWidth,
         height: boxHeight
       })
-      .style('fill',function(d){
-        return sexColour(d);
+      .style({
+        fill: function(d){return sexColour(d);}
       });
 
   // Move text to it's proper position
@@ -403,12 +403,20 @@ function transitionElbow(d){
 /**
  * Custom function for colors
  */
- function sexColour(d){
+function sexColour(d){
 	if(d.sex == "M"){
 		return "#cce6ff";
 	} else {
 		return "#ffcce6";
 	}
+}
+
+function sexBorder(d){
+ if(d.sex == "M"){
+   return "#66b3ff";
+ } else {
+   return "#ff66b3";
+ }
 }
 
 
