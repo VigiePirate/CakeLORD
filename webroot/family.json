@@ -8,8 +8,16 @@
       "sex": "F",
       "id": "INC00002F",
       "_parents": [
-        {},
-        {}
+        {
+          "name": "Maternal Grandmother",
+          "sex": "F",
+          "id": "INC00004F"
+        },
+        {
+          "name": "Maternal Grandfather",
+          "sex": "M",
+          "id": "INC00005M"
+        }
       ]
     },
     {
