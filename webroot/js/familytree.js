@@ -413,7 +413,7 @@ function transitionElbow(d){
      if (d.sex == "F") {
        return "#ffcce6";
      } else {
-       return "#a65400";
+       return "#e3fcec";
      }
    }
  }
@@ -425,7 +425,7 @@ function sexStroke(d){
     if (d.sex == "F") {
       return "#ff66b3";
     } else {
-      return "#663300";
+      return "#51d88a";
     }
   }
 }
