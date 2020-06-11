@@ -31,7 +31,7 @@ function setup() {
   var svg = d3.select("#familytree").append("svg")
     //.attr('width', window.innerWidth)
     //.attr('height', window.innerHeight)
-    .attr("viewBox", "0 0 810 540" )
+    .attr("viewBox", "0 0 1000 750" )
     .attr("preserveAspectRatio", "xMidYMid meet")
     .call(zoom)
     .append('g')
