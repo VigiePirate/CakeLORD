@@ -100,7 +100,14 @@
     {
       "name": "Child 4",
       "sex": "M",
-      "id": "INC00011M"
+      "id": "INC00011M",
+      "_children": [
+        {
+          "name": "Grandchild",
+          "sex": "M",
+          "id": "INC00020M"
+        }
+      ]
     },
     {
       "name": "Child 5",
