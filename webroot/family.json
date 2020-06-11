@@ -15,7 +15,11 @@
     {
       "name": "Father",
       "sex": "M",
-      "id": "INC00003M"
+      "id": "INC00003M",
+      "_parents": [
+        {},
+        {}
+      ]
     }
   ],
   "_children": [
