@@ -280,7 +280,9 @@ Tree.prototype.drawNodes = function(nodes, source){
         width: boxWidth,
         height: boxHeight
       })
-      .style('fill',"#cce6ff");
+      .style('fill',function(d){
+        return (d.sex == 'M') ? "#cce6ff" : "#ffcce6";
+      });
 
   // Move text to it's proper position
   nodeUpdate.select('text')
