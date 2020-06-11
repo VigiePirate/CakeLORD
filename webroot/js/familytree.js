@@ -254,8 +254,7 @@ Tree.prototype.drawNodes = function(nodes, source){
         y: 0,
         width: 0,
         height: 0,
-      })
-      .style('fill-opacity', 1);
+      });
 
   // Draw the person's name and position it inside the box
   nodeEnter.append("text")

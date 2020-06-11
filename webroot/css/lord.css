@@ -759,7 +759,7 @@ svg {
 }
 
 .person rect {
-  fill: #fff;
+  fill: #99ccff;
   stroke: steelblue;
   stroke-width: 1px;
 }
@@ -768,10 +768,6 @@ svg {
   font-family: "Imprima";
   font-size: 10px;
   cursor: pointer;
-}
-
-.M {
-  background-color: #99ccff;
 }
 
 .link {
