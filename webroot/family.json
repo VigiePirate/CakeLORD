@@ -6,6 +6,7 @@
     {
       "name": "Mother",
       "sex": "F",
+      "dates": "01/01/2012-02/02/2014",
       "id": "INC00002F",
       "_parents": [
         {

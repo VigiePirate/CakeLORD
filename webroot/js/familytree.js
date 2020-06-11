@@ -102,6 +102,7 @@ function rootProxy(root){
     name: root.name,
     id: root.id,
     sex: root.sex,
+    dates: root.dates,
     x0: 0,
     y0: 0,
     _children: root._children,
@@ -269,6 +270,17 @@ Tree.prototype.drawNodes = function(nodes, source){
       })
       .style('fill-opacity', 0);
 
+    // Draw additional text
+    nodeEnter.append("dates")
+        .attr("dx", 0)
+        .attr("dy", 14)
+        .attr("text-anchor", "start")
+        .attr('class', 'dates')
+        .text(function(d) {
+          return d.dates;
+        })
+        .style('fill-opacity', 0);
+
   // Update the position of both old and new nodes
   var nodeUpdate = node.transition()
       .duration(duration)
@@ -294,6 +306,13 @@ Tree.prototype.drawNodes = function(nodes, source){
       .style('fill-opacity', 1)
       .style('fill',"#343b40");
 
+  // Move dates to it's proper position
+  nodeUpdate.select('dates')
+      .attr("dx", -(boxWidth/2) + 10) // +10
+      .attr("dy", -10) // nothing initially
+      .style('fill-opacity', 1)
+      .style('fill',"#343b40");
+
   // Remove nodes we aren't showing anymore
   var nodeExit = node.exit()
       .transition()
@@ -314,6 +333,11 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   // Fade out the text as we remove it
   nodeExit.select('text')
+      .style('fill-opacity', 0)
+      .attr('dx', 0);
+
+  // Fade out the dates as we remove it
+  nodeExit.select('dates')
       .style('fill-opacity', 0)
       .attr('dx', 0);
 
