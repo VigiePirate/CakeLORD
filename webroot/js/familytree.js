@@ -280,7 +280,7 @@ Tree.prototype.drawNodes = function(nodes, source){
         width: boxWidth,
         height: boxHeight
       })
-      .style('fill',d3.color("steelblue"));
+      .style('fill',"#99ccff");
 
   // Move text to it's proper position
   nodeUpdate.select('text')
