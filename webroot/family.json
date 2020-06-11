@@ -57,7 +57,19 @@
         {
           "name": "Paternal Grandfather",
           "sex": "M",
-          "id": "INC00007M"
+          "id": "INC00007M",
+          "_parents": [
+            {
+              "name": "P. Grandfather's mother",
+              "sex": "F",
+              "id": "INC000017F"
+            },
+            {
+              "name": "P. Grandfather's father",
+              "sex": "M",
+              "id": "INC000018M"
+            }
+          ]
         }
       ]
     }
