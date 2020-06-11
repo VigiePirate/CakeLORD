@@ -1,7 +1,28 @@
 {
-  "name": "The rat I'm looking",
+  "name": "The rat I'm looking at",
   "sex": "X",
-  "id": "acd21329-2b99-5bdb-a080-ff15ad2fcaa6",
-  "_parents": [],
-  "_children" : []
+  "id": "INC00001M",
+  "_parents": [
+    {"name": "Mother",
+    "sex": "M",
+    "id": "INC00002F",
+    "_parents": [
+      {},
+      {}
+    ]},
+    {"name": "Father",
+    "sex": "F",
+    "id": "INC00003M",
+    "_parents": [
+      {},
+      {}
+    ]}
+  ],
+  "_children" : [
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
 }
