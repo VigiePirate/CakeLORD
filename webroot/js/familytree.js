@@ -234,7 +234,7 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   // Add any new nodes
   var nodeEnter = node.enter().append("g")
-      .attr("class", "person " + "M " + self.selector) // add class for sex color
+      .attr("class", "person " + self.selector)
 
       // Add new nodes at the right side of their child's box.
       // They will be transitioned into their proper position.
@@ -253,7 +253,8 @@ Tree.prototype.drawNodes = function(nodes, source){
         x: 0,
         y: 0,
         width: 0,
-        height: 0
+        height: 0,
+        fill: #99ccff,
       });
 
   // Draw the person's name and position it inside the box
