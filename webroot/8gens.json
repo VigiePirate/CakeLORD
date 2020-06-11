@@ -27,10 +27,12 @@
                       "_parents": [
                         {
                           "name": "Chad Dennis",
+                          "sex": "M",
                           "id": "5268a88e-3340-5768-81a0-8b50a8e2f387",
                           "_parents": [
                             {
                               "name": "Stephen Moore",
+                              "sex": "M",
                               "id": "3f35f34b-d00e-5563-b109-8cd053a0317a"
                             },
                             {
@@ -41,6 +43,7 @@
                         },
                         {
                           "name": "Frank Freeman",
+                          "sex": "M",
                           "id": "8b6285c3-f00b-5ca2-885d-b13e4c308ba3",
                           "_parents": [
                             {
@@ -49,6 +52,7 @@
                             },
                             {
                               "name": "Zachary Henry",
+                              "sex": "M",
                               "id": "f3740416-68cd-5c03-9bd3-50a9e79ce739"
                             }
                           ]
@@ -61,14 +65,17 @@
                       "_parents": [
                         {
                           "name": "Mitchell Ramsey",
+                          "sex": "M",
                           "id": "a11731d1-48e0-519a-bc8f-f084bd8fdb56",
                           "_parents": [
                             {
                               "name": "Isaiah Weaver",
+                              "sex": "M",
                               "id": "87c0ee57-0338-580a-aa9e-12e407411fcf"
                             },
                             {
                               "name": "Francis Sharp",
+                              "sex": "M",
                               "id": "273d95bd-5685-5b63-bf20-76cfe0ff4c42"
                             }
                           ]
@@ -83,6 +90,7 @@
                             },
                             {
                               "name": "Franklin Payne",
+                              "sex": "M",
                               "id": "cf6831cb-a9de-5fd9-afb4-0036cfd669ad"
                             }
                           ]
@@ -93,6 +101,7 @@
                 },
                 {
                   "name": "Paul Jackson",
+                  "sex": "M",
                   "id": "d63cdf36-08e7-544d-a42b-23ccae30e618",
                   "_parents": [
                     {
@@ -101,28 +110,34 @@
                       "_parents": [
                         {
                           "name": "Arthur Johnson",
+                          "sex": "M",
                           "id": "55f1d6ac-4603-5544-b392-5446c00990a4",
                           "_parents": [
                             {
                               "name": "Jerome Hamilton",
+                              "sex": "M",
                               "id": "882cb39d-2141-5c45-8879-a152d8075373"
                             },
                             {
                               "name": "Stephen Meyer",
+                              "sex": "M",
                               "id": "3b2c0f45-50e0-53c7-a436-2d9620fb937e"
                             }
                           ]
                         },
                         {
                           "name": "William Williamson",
+                          "sex": "M",
                           "id": "4c8195b4-d94e-5458-928f-798b54a969d6",
                           "_parents": [
                             {
                               "name": "Danny Figueroa",
+                              "sex": "M",
                               "id": "11faef12-690e-5445-9cf0-5d8dd42dbbda"
                             },
                             {
                               "name": "Victor Wheeler",
+                              "sex": "M",
                               "id": "a38cbd3d-2cc8-5d3e-81f4-0e42d71b397a"
                             }
                           ]
@@ -131,6 +146,7 @@
                     },
                     {
                       "name": "Austin Evans",
+                      "sex": "M",
                       "id": "add79696-f296-5a44-935b-a5990c3e9685",
                       "_parents": [
                         {
@@ -139,6 +155,7 @@
                           "_parents": [
                             {
                               "name": "Cole Farmer",
+                              "sex": "M",
                               "id": "0a99ad76-f600-5530-a1a4-2712dbdd483f"
                             },
                             {
@@ -149,6 +166,7 @@
                         },
                         {
                           "name": "Keith Atkins",
+                          "sex": "M",
                           "id": "ffd67861-6638-57c6-88ce-49c925835343",
                           "_parents": [
                             {
@@ -157,6 +175,7 @@
                             },
                             {
                               "name": "Ernest Morris",
+                              "sex": "M",
                               "id": "72817864-aa64-52ba-87c8-6fc932eea2f4"
                             }
                           ]
@@ -169,14 +188,17 @@
             },
             {
               "name": "Zachary Richards",
+              "sex": "M",
               "id": "277b4cdc-657e-5abf-acbd-d199fdd7673f",
               "_parents": [
                 {
                   "name": "Paul Allison",
+                  "sex": "M",
                   "id": "ce9871cd-539b-5010-9d37-26bc2b12ac51",
                   "_parents": [
                     {
                       "name": "Gerald Martin",
+                      "sex": "M",
                       "id": "5080e69f-42b4-5504-b50f-9269f54be17c",
                       "_parents": [
                         {
@@ -185,6 +207,7 @@
                           "_parents": [
                             {
                               "name": "Clyde Sandoval",
+                              "sex": "M",
                               "id": "11e7a7ad-1129-52f9-a1b1-84e6a873e0fe"
                             },
                             {
@@ -195,10 +218,12 @@
                         },
                         {
                           "name": "Leon Warner",
+                          "sex": "M",
                           "id": "bc7c0b8b-52c2-59d7-8c30-827d81e8334c",
                           "_parents": [
                             {
                               "name": "Leonard Pierce",
+                              "sex": "M",
                               "id": "38e752dc-7b31-55b1-95cb-b7dfe7f3361e"
                             },
                             {
@@ -215,14 +240,17 @@
                       "_parents": [
                         {
                           "name": "Juan Rogers",
+                          "sex": "M",
                           "id": "bd8a1d15-d0da-5d44-8784-15dd09fe0eb0",
                           "_parents": [
                             {
                               "name": "Roy Cummings",
+                              "sex": "M",
                               "id": "022e2586-e442-511d-bdbf-5f0982bf2a25"
                             },
                             {
                               "name": "Troy Stokes",
+                              "sex": "M",
                               "id": "8bd2028e-817f-5d82-bc21-de5ee7923110"
                             }
                           ]
@@ -233,10 +261,12 @@
                           "_parents": [
                             {
                               "name": "Seth Walters",
+                              "sex": "M",
                               "id": "ab76e4b6-856a-5333-8f75-7f2152508ee6"
                             },
                             {
                               "name": "Luis Pratt",
+                              "sex": "M",
                               "id": "70ddb222-073f-57b3-83d0-f9ad541123d9"
                             }
                           ]
@@ -255,14 +285,17 @@
                       "_parents": [
                         {
                           "name": "Alexander Torres",
+                          "sex": "M",
                           "id": "a66cebc1-7492-5ccc-a902-7581c6d9d1b2",
                           "_parents": [
                             {
                               "name": "Justin Romero",
+                              "sex": "M",
                               "id": "b67d2ee5-5a4b-5afb-91a4-0d56db298cb4"
                             },
                             {
                               "name": "Matthew Ramos",
+                              "sex": "M",
                               "id": "78f9b0dd-bfec-5e5b-a07d-f5f5dfee8d12"
                             }
                           ]
@@ -277,6 +310,7 @@
                             },
                             {
                               "name": "Todd Daniels",
+                              "sex": "M",
                               "id": "7257a073-38e4-59e5-8201-1ac58fc28de3"
                             }
                           ]
@@ -303,14 +337,17 @@
                         },
                         {
                           "name": "Richard Beck",
+                          "sex": "M",
                           "id": "43382fe8-060b-58e0-872e-28553a966e7b",
                           "_parents": [
                             {
                               "name": "Francis Gibson",
+                              "sex": "M",
                               "id": "60a4e3a2-6117-59f9-aa3c-f9fe1ca7eedb"
                             },
                             {
                               "name": "Dean Torres",
+                              "sex": "M",
                               "id": "477c4912-5773-5794-994f-19a26bd2a382"
                             }
                           ]
@@ -329,10 +366,12 @@
           "_parents": [
             {
               "name": "Benjamin Owens",
+              "sex": "M",
               "id": "bf9a8cf3-c132-5940-a894-7c0d5839d548",
               "_parents": [
                 {
                   "name": "Russell Pope",
+                  "sex": "M",
                   "id": "df7836ef-6584-57b4-af24-22795ad7b568",
                   "_parents": [
                     {
@@ -359,6 +398,7 @@
                           "_parents": [
                             {
                               "name": "Bernard Rose",
+                              "sex": "M",
                               "id": "269b5efb-5482-5425-ac00-56c257be40c8"
                             },
                             {
@@ -379,6 +419,7 @@
                           "_parents": [
                             {
                               "name": "Benjamin Cortez",
+                              "sex": "M",
                               "id": "7d08d74a-fb68-5117-a2ee-39d072c42b47"
                             },
                             {
@@ -393,10 +434,12 @@
                           "_parents": [
                             {
                               "name": "Garrett Obrien",
+                              "sex": "M",
                               "id": "aa22ac60-098d-551c-8386-bdc586a1fcda"
                             },
                             {
                               "name": "Owen Hudson",
+                              "sex": "M",
                               "id": "05370beb-9f72-5be1-949b-caaff34ee328"
                             }
                           ]
@@ -411,10 +454,12 @@
                   "_parents": [
                     {
                       "name": "Jared Wallace",
+                      "sex": "M",
                       "id": "4c342844-4733-5e5c-8858-37aed3e0c520",
                       "_parents": [
                         {
                           "name": "Francis Nash",
+                          "sex": "M",
                           "id": "ee4d3a21-4d63-53f9-b4c0-956049b52c5a",
                           "_parents": [
                             {
@@ -423,6 +468,7 @@
                             },
                             {
                               "name": "Tyler Jones",
+                              "sex": "M",
                               "id": "bd898037-96fa-5a1b-8146-e404c208a655"
                             }
                           ]
