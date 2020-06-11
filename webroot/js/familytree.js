@@ -282,7 +282,8 @@ Tree.prototype.drawNodes = function(nodes, source){
         height: boxHeight
       })
       .style({
-        fill: function(d){return sexColour(d);}
+        fill: function(d){return sexColour(d);},
+        stroke: function(d){return sexStroke(d);}
       });
 
   // Move text to it's proper position
@@ -411,7 +412,7 @@ function sexColour(d){
 	}
 }
 
-function sexBorder(d){
+function sexStroke(d){
  if(d.sex == "M"){
    return "#66b3ff";
  } else {
