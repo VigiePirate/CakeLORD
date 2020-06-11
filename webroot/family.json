@@ -16,41 +16,41 @@
         {
           "name": "Maternal Grandfather",
         "sex": "M",
-        "id": "INC00005M",
+        "id": "INC00005M"
         }
       ],
     },
     {
       "name": "Father",
       "sex": "M",
-      "id": "INC00003M",
+      "id": "INC00003M"
     }
   ],
   "_children" : [
     {
       "name": "Child 1",
       "sex": "M",
-      "id": "INC00006M",
+      "id": "INC00006M"
     },
     {
       "name": "Child 2",
       "sex": "M",
-      "id": "INC00007M",
+      "id": "INC00007M"
     },
     {
       "name": "Child 3",
       "sex": "F",
-      "id": "INC00008F",
+      "id": "INC00008F"
     },
     {
       "name": "Child 4",
       "sex": "M",
-      "id": "INC00009M",
+      "id": "INC00009M"
     },
     {
       "name": "Child 5",
       "sex": "F",
-      "id": "INC000010F",
+      "id": "INC000010F"
     }
   ]
 }
