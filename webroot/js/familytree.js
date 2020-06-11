@@ -100,6 +100,7 @@ function rootProxy(root){
   return {
     name: root.name,
     id: root.id,
+    sex: root.sex,
     x0: 0,
     y0: 0,
     _children: root._children,
