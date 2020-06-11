@@ -18,7 +18,7 @@
                     'alt' => __('Help')]) ?>
                 <div class="spacer"> </div>
                 <?= $this->Html->image('/img/icon-print.svg', [
-                    'url' => ['controller' => 'Rats', 'action' => 'print'],
+                    'url' => ['controller' => 'Rats', 'action' => 'print',$rat->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Print')]) ?>
             </div>

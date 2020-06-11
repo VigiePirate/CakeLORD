@@ -765,7 +765,8 @@ svg {
 }
 
 .person {
-  font: 14px sans-serif;
+  font-style: "Imprima";
+  font-weight: 1.4rem;
   cursor: pointer;
 }
 
