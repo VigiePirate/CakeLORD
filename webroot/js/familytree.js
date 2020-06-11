@@ -1,5 +1,5 @@
-var boxWidth = 200, //150
-    boxHeight = 40, //40
+var boxWidth = 180, //150
+    boxHeight = 80, //40
     nodeWidth = 100, //100
     nodeHeight = 200, //200
 
