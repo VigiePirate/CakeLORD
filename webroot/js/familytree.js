@@ -63,7 +63,7 @@ function setup() {
     }
   });
 
-  d3.json('/8gens.json', function(error, json){
+  d3.json('/family.json', function(error, json){
 
     if(error) {
       return console.error(error);
@@ -406,21 +406,28 @@ function transitionElbow(d){
 /**
  * Custom function for colors
  */
-function sexColour(d){
-	if(d.sex == "M"){
-		return "#cce6ff";
-	} else {
-		return "#ffcce6";
-	}
-}
+ function sexColour(d){
+   if(d.sex == "M"){
+     return "#cce6ff";
+   } else {
+     if (d.sex == "F") {
+       return "#ffcce6";
+     } else {
+       return "#ebf0fa";
+     }
+   }
+ }
 
 function sexStroke(d){
- if(d.sex == "M"){
-   return "#66b3ff";
- } else {
-   return "#ff66b3";
- }
+  if(d.sex == "M"){
+    return "#66b3ff";
+  } else {
+    if (d.sex == "F") {
+      return "#ff66b3";
+    } else {
+      return "#6f7db3";
+    }
+  }
 }
-
 
 setup();
