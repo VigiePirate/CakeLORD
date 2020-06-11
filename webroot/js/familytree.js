@@ -281,7 +281,7 @@ Tree.prototype.drawNodes = function(nodes, source){
         height: boxHeight
       })
       .style('fill',function(d){
-        return d.sex === "M" ? "#cce6ff" : "#ffcce6";
+        return d.data.sex === "M" ? "#cce6ff" : "#ffcce6";
       });
 
   // Move text to it's proper position
