@@ -39,5 +39,30 @@
     }
   ],
   "_children": [
+    {
+      "name": "Child 1",
+      "sex": "M",
+      "id": "INC00008M"
+    },
+    {
+      "name": "Child 2",
+      "sex": "M",
+      "id": "INC00009M"
+    },
+    {
+      "name": "Child 3",
+      "sex": "F",
+      "id": "INC00010F"
+    },
+    {
+      "name": "Child 4",
+      "sex": "M",
+      "id": "INC00011M"
+    },
+    {
+      "name": "Child 5",
+      "sex": "F",
+      "id": "INC000012F"
+    }
   ]
 }
