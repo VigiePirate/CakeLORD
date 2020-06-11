@@ -764,13 +764,15 @@ svg {
 
 .person {
   font-family: "Imprima";
+  font-weight: bold;
   font-size: 14px;
+  color: #606c76;
   cursor: pointer;
 }
 
 .link {
   fill: none;
-  stroke: #606c76;
+  stroke: #ccc;
   stroke-width: 2px;
 }
 
