@@ -26,7 +26,7 @@ function setup() {
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
     // Offset so that first pan and zoom does not jump back to the origin
-    .translate([400, 200]); // .translate([400, 200]);
+    .translate([300, 150]); // .translate([400, 200]);
 
   var svg = d3.select("#familytree").append("svg")
     //.attr('width', window.innerWidth)
