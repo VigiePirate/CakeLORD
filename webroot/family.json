@@ -10,16 +10,16 @@
       "_parents": [
         {},
         {}
-      ]
+      ],
     },
     {
-        "name": "Father",
+      "name": "Father",
       "sex": "F",
       "id": "INC00003M",
       "_parents": [
         {},
         {}
-      ]
+      ],
     }
   ],
   "_children" : [
