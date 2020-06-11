@@ -756,6 +756,7 @@ svg {
   border: 2px solid #663300;
   border-radius: 0.4rem;
   width: 100%;
+  text-align: center;
 }
 
 .person rect {
