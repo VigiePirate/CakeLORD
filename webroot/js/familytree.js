@@ -1,6 +1,6 @@
-var boxWidth = 210, //150 -> 180 
+var boxWidth = 210, //150 -> 180
     boxHeight = 70, //40 / 60
-    nodeWidth = 100, //100
+    nodeWidth = 130, //100 -> 130?
     nodeHeight = 210, //200
 
     // duration of transitions in ms
