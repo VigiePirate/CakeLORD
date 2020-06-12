@@ -309,7 +309,7 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   nodeUpdate.select('text.description')
       .attr("dx", -(boxWidth/2) + 10) // +10
-      .attr("dy", -5) // nothing initially
+      .attr("dy", 0) // nothing initially
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
