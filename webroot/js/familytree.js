@@ -100,6 +100,7 @@ function setup() {
 function rootProxy(root){
   return {
     name: root.name,
+    description: root.description,
     id: root.id,
     sex: root.sex,
     x0: 0,
@@ -268,6 +269,17 @@ Tree.prototype.drawNodes = function(nodes, source){
         return d.name;
       })
       .style('fill-opacity', 0);
+
+    // Draw the person's description and position it inside the box
+      nodeEnter.append("text")
+          .attr("dx", 0)
+          .attr("dy", 10)
+          .attr("text-anchor", "start")
+          .attr('class', 'description')
+          .text(function(d) {
+            return d.description;
+          })
+          .style('fill-opacity', 0);
 
   // Update the position of both old and new nodes
   var nodeUpdate = node.transition()

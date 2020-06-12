@@ -1,5 +1,6 @@
 {
-  "name": "The rat I am looking at<br/>With additional text",
+  "name": "The rat I am looking at",
+  "description": "Pink dotted blazed dumbo",
   "sex": "X",
   "id": "INC00001M",
   "_parents": [
