@@ -1,14 +1,14 @@
 var boxWidth = 210, //150 -> 180
     boxHeight = 70, //40 / 60
     nodeWidth = 100, //100 -> 130?
-    nodeHeight = 210, //200
+    nodeHeight = 220, //200 -> 210
 
     // duration of transitions in ms
     duration = 500,
 
     // d3 multiplies the node size by this value
     // to calculate the distance between nodes
-    separation = 1; // .5
+    separation = 0.8; // .5 -> 0.8
 
 /**
  * For the sake of the examples, I want the setup code to be at the top.
