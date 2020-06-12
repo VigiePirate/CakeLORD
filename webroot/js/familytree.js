@@ -409,10 +409,10 @@ function transitionElbow(d){
  */
  function sexColour(d){
    if(d.sex == "M"){
-     return "#cce6ff";
+     return "#e6f3ff"; // darker: cce6ff
    } else {
      if (d.sex == "F") {
-       return "#ffcce6";
+       return "#ffe6f2"; // darker: ffcce6
      } else {
        return "#e3fcec";
      }
