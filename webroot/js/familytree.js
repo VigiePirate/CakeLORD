@@ -1,7 +1,7 @@
 var boxWidth = 180, //150
     boxHeight = 70, //40 / 60
     nodeWidth = 100, //100
-    nodeHeight = 200, //200
+    nodeHeight = 210, //200
 
     // duration of transitions in ms
     duration = 750,
