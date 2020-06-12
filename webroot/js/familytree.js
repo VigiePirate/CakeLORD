@@ -101,6 +101,7 @@ function rootProxy(root){
   return {
     name: root.name,
     description: root.description,
+    death: root.death,
     id: root.id,
     sex: root.sex,
     x0: 0,
@@ -280,7 +281,19 @@ Tree.prototype.drawNodes = function(nodes, source){
       .text(function(d) {
         return d.description;
       })
-      .style('fill-opacity', 1) // should be zero once fixed
+      .style('fill-opacity', 0) // should be zero once fixed
+      .style('fill',"#606c76");
+
+  // Draw the person's description and position it inside the box
+  nodeEnter.append("text")
+      .attr("dx", 0)
+      .attr("dy", 0)
+      .attr("text-anchor", "start")
+      .attr('class', 'death')
+      .text(function(d) {
+        return d.death;
+      })
+      .style('fill-opacity', 0)
       .style('fill',"#606c76");
 
   // Update the position of both old and new nodes
@@ -303,13 +316,18 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   // Move text to it's proper position
   nodeUpdate.select('text.name')
-      .attr("dx", -(boxWidth/2) + 10) // +10
+      .attr("dx", -(boxWidth/2) + 10) 
       .attr("dy", -15) // nothing initially
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
-      .attr("dx", -(boxWidth/2) + 10) // +10
+      .attr("dx", -(boxWidth/2) + 10)
       .attr("dy", 0) // nothing initially
+      .style('fill-opacity', 1);
+
+  nodeUpdate.select('text.death')
+      .attr("dx", -(boxWidth/2) + 10)
+      .attr("dy", -15)
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
