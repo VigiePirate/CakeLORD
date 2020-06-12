@@ -773,6 +773,10 @@ svg {
   font-size: 14px;
 }
 
+.person text.description {
+  font-size: 12px;
+}
+
 .link {
   fill: none;
   stroke: #ccc;
