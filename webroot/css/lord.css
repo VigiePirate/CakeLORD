@@ -777,6 +777,10 @@ svg {
   font-size: 12px;
 }
 
+.person text.death {
+  font-size: 12px;
+}
+
 .link {
   fill: none;
   stroke: #ccc;
