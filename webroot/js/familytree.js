@@ -266,7 +266,18 @@ Tree.prototype.drawNodes = function(nodes, source){
       .attr("text-anchor", "start")
       .attr('class', 'name')
       .text(function(d) {
-        return d.name + "<br/>" + d.description;
+        return d.name;
+      })
+      .style('fill-opacity', 0);
+
+  // Draw the person's description and position it inside the box
+  nodeEnter.append("text")
+      .attr("dx", 0)
+      .attr("dy", -20)
+      .attr("text-anchor", "start")
+      .attr('class', 'name')
+      .text(function(d) {
+        return d.description;
       })
       .style('fill-opacity', 0);
 
@@ -292,8 +303,7 @@ Tree.prototype.drawNodes = function(nodes, source){
   nodeUpdate.select('text')
       .attr("dx", -(boxWidth/2) + 10) // +10
       .attr("dy", -10) // nothing initially
-      .style('fill-opacity', 1)
-      .style('fill',"#343b40");
+      .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
   var nodeExit = node.exit()
