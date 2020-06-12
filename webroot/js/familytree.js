@@ -1,14 +1,14 @@
-var boxWidth = 210, //150 -> 180
-    boxHeight = 70, //40 / 60
-    nodeWidth = 100, //100
-    nodeHeight = 240, //200 -> 210
+var boxWidth = 210,
+    boxHeight = 70,
+    nodeWidth = 100,
+    nodeHeight = 240,
 
     // duration of transitions in ms
     duration = 500,
 
     // d3 multiplies the node size by this value
     // to calculate the distance between nodes
-    separation = 0.8; // .5 -> 0.8
+    separation = 0.8;
 
 /**
  * For the sake of the examples, I want the setup code to be at the top.
@@ -21,25 +21,21 @@ function setup() {
 
   // Setup zoom and pan
   var zoom = d3.behavior.zoom()
-    .scaleExtent([.1,2]) // .scaleExtent([.1,1])
+    .scaleExtent([.1,2])
     .on('zoom', function(){
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
     // Offset so that first pan and zoom does not jump back to the origin
-    .translate([380, 330]); // .translate([400, 200]);
+    .translate([380, 330]);
 
   var svg = d3.select("#familytree").append("svg")
-    //.attr('width', window.innerWidth)
-    //.attr('height', window.innerHeight)
     .attr("viewBox", "0 0 1000 660" )
     .attr("preserveAspectRatio", "xMidYMid meet")
     .call(zoom)
     .append('g')
-
     // Left padding of tree so that the whole root node is on the screen.
     // TODO: find a better way
     .attr("transform", "translate(380,330)");
-
 
   // One tree to display the ancestors
   var ancestorTree = new Tree(svg, 'ancestor', 1);
@@ -181,7 +177,6 @@ Tree.prototype.drawLinks = function(links, source){
 
   // Update links
   var link = self.svg.selectAll("path.link." + self.selector)
-
       // The function we are passing provides d3 with an id
       // so that it can track when data is being added and removed.
       // This is not necessary if the tree will only be drawn once
@@ -218,7 +213,6 @@ Tree.prototype.drawLinks = function(links, source){
       })
       .remove();
 };
-
 
 /**
  * Draw/redraw the person boxes.
