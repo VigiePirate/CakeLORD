@@ -763,20 +763,14 @@ svg {
   stroke-width: 2px;
 }
 
-.person.name {
+.person {
   font-family: "Imprima";
-  font-weight: bold;
-  font-size: 14px;
-  color: #606c76;
   cursor: pointer;
 }
 
-.person.description {
-  font-family: "Imprima";
-  font-weight: 400;
-  font-size: 12px;
-  color: #606c76;
-  cursor: pointer;
+.person text.name {
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .link {
