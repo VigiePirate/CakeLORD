@@ -316,17 +316,17 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   // Move text to it's proper position
   nodeUpdate.select('text.name')
-      .attr("dx", -(boxWidth/2) + 7)
-      .attr("dy", -13)
+      .attr("dx", -(boxWidth/2) + 8)
+      .attr("dy", -14)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
-      .attr("dx", -(boxWidth/2) + 10)
+      .attr("dx", -(boxWidth/2) + 8)
       .attr("dy", 7)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.death')
-      .attr("dx", -(boxWidth/2) + 10)
+      .attr("dx", -(boxWidth/2) + 8)
       .attr("dy", 22)
       .style('fill-opacity', 1);
 
