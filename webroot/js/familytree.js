@@ -4,7 +4,7 @@ var boxWidth = 180, //150
     nodeHeight = 200, //200
 
     // duration of transitions in ms
-    duration = 500,
+    duration = 750,
 
     // d3 multiplies the node size by this value
     // to calculate the distance between nodes
@@ -21,7 +21,7 @@ function setup() {
 
   // Setup zoom and pan
   var zoom = d3.behavior.zoom()
-    .scaleExtent([.1,1])
+    .scaleExtent([.1,2]) // .scaleExtent([.1,2])
     .on('zoom', function(){
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
