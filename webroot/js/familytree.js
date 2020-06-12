@@ -1,5 +1,5 @@
 var boxWidth = 180, //150
-    boxHeight = 60, //40
+    boxHeight = 80, //40 / 60
     nodeWidth = 100, //100
     nodeHeight = 200, //200
 
@@ -21,7 +21,7 @@ function setup() {
 
   // Setup zoom and pan
   var zoom = d3.behavior.zoom()
-    .scaleExtent([.1,2]) // .scaleExtent([.1,2])
+    .scaleExtent([.1,2]) // .scaleExtent([.1,1])
     .on('zoom', function(){
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
