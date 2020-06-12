@@ -4,7 +4,7 @@ var boxWidth = 180, //150
     nodeHeight = 210, //200
 
     // duration of transitions in ms
-    duration = 2000,
+    duration = 500,
 
     // d3 multiplies the node size by this value
     // to calculate the distance between nodes
