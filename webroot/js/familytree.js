@@ -426,7 +426,7 @@ function sexStroke(d){
     if (d.sex == "F") {
       return "#ff66b3";
     } else {
-      return "#51d88a";
+      return "#56d88d";
     }
   }
 }
