@@ -303,13 +303,13 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   // Move text to it's proper position
   nodeUpdate.select('text.name')
-      .attr("dx", -(boxWidth/2) + 15) // +10
-      .attr("dy", -10) // nothing initially
+      .attr("dx", -(boxWidth/2) + 10) // +10
+      .attr("dy", -15) // nothing initially
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
-      .attr("dx", -(boxWidth/2) + 5) // +10
-      .attr("dy", -10) // nothing initially
+      .attr("dx", -(boxWidth/2) + 10) // +10
+      .attr("dy", -5) // nothing initially
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
