@@ -280,7 +280,7 @@ Tree.prototype.drawNodes = function(nodes, source){
       .text(function(d) {
         return d.description;
       })
-      .style('fill-opacity', 0);
+      .style('fill-opacity', 0)
       .style('fill',"#606c76");
 
   // Update the position of both old and new nodes
