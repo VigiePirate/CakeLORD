@@ -274,9 +274,9 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Draw the person's description and position it inside the box
   nodeEnter.append("text")
       .attr("dx", 0)
-      .attr("dy", 20)
+      .attr("dy", 0)
       .attr("text-anchor", "start")
-      .attr('class', 'name')
+      .attr('class', 'description')
       .text(function(d) {
         return d.description;
       })
@@ -288,7 +288,7 @@ Tree.prototype.drawNodes = function(nodes, source){
       .duration(duration)
       .attr("transform", function(d) { return "translate(" + (self.direction * d.y) + "," + d.x + ")"; });
 
-  // Grow boxes to their proper size // fixme: and color them
+  // Grow boxes to their proper size
   nodeUpdate.select('rect')
       .attr({
         x: -(boxWidth/2),
@@ -302,8 +302,13 @@ Tree.prototype.drawNodes = function(nodes, source){
       });
 
   // Move text to it's proper position
-  nodeUpdate.select('text')
-      .attr("dx", -(boxWidth/2) + 10) // +10
+  nodeUpdate.select('text.name')
+      .attr("dx", -(boxWidth/2) + 15) // +10
+      .attr("dy", -10) // nothing initially
+      .style('fill-opacity', 1);
+
+  nodeUpdate.select('text.description')
+      .attr("dx", -(boxWidth/2) + 5) // +10
       .attr("dy", -10) // nothing initially
       .style('fill-opacity', 1);
 
