@@ -266,7 +266,7 @@ Tree.prototype.drawNodes = function(nodes, source){
       .attr("text-anchor", "start")
       .attr('class', 'name')
       .text(function(d) {
-        return d.name + "<br/>" + d.descrition;
+        return d.name + "<br/>" + d.description;
       })
       .style('fill-opacity', 0);
 
