@@ -317,17 +317,17 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Move text to it's proper position
   nodeUpdate.select('text.name')
       .attr("dx", -(boxWidth/2) + 10)
-      .attr("dy", -15) 
+      .attr("dy", -14)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
       .attr("dx", -(boxWidth/2) + 10)
-      .attr("dy", 5)
+      .attr("dy", 6)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.death')
       .attr("dx", -(boxWidth/2) + 10)
-      .attr("dy", 20)
+      .attr("dy", 21)
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
