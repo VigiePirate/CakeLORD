@@ -8,7 +8,7 @@ var boxWidth = 180, //150
 
     // d3 multiplies the node size by this value
     // to calculate the distance between nodes
-    separation = .75; // .5
+    separation = 1; // .75
 
 /**
  * For the sake of the examples, I want the setup code to be at the top.
