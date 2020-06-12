@@ -268,7 +268,8 @@ Tree.prototype.drawNodes = function(nodes, source){
       .text(function(d) {
         return d.name;
       })
-      .style('fill-opacity', 0);
+      .style('fill-opacity', 0)
+      .style('fill',"#343b40");
 
   // Draw the person's description and position it inside the box
   nodeEnter.append("text")
@@ -280,6 +281,7 @@ Tree.prototype.drawNodes = function(nodes, source){
         return d.description;
       })
       .style('fill-opacity', 0);
+      .style('fill',"#606c76");
 
   // Update the position of both old and new nodes
   var nodeUpdate = node.transition()
