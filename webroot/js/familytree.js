@@ -274,13 +274,13 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Draw the person's description and position it inside the box
   nodeEnter.append("text")
       .attr("dx", 0)
-      .attr("dy", -20)
+      .attr("dy", 20)
       .attr("text-anchor", "start")
       .attr('class', 'name')
       .text(function(d) {
         return d.description;
       })
-      .style('fill-opacity', 0)
+      .style('fill-opacity', 1) // should be zero once fixed
       .style('fill',"#606c76");
 
   // Update the position of both old and new nodes

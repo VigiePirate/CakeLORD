@@ -6,21 +6,25 @@
   "_parents": [
     {
       "name": "Mother",
+      "description": "Description",
       "sex": "F",
       "id": "INC00002F",
       "_parents": [
         {
           "name": "Maternal Grandmother",
+          "description": "Description",
           "sex": "F",
           "id": "INC00004F",
           "_parents": [
             {
               "name": "M. Grandmother's mother",
+              "description": "Description",
               "sex": "F",
               "id": "INC000015F"
             },
             {
               "name": "M. Grandmother's father",
+              "description": "Description",
               "sex": "M",
               "id": "INC000016M"
             }
@@ -28,16 +32,19 @@
         },
         {
           "name": "Maternal Grandfather",
+          "description": "Description",
           "sex": "M",
           "id": "INC00005M",
           "_parents": [
             {
               "name": "M. Grandfather's mother",
+              "description": "Description",
               "sex": "F",
               "id": "INC000013F"
             },
             {
               "name": "M. Grandfather's father",
+              "description": "Description",
               "sex": "M",
               "id": "INC000014M"
             }
@@ -52,11 +59,13 @@
       "_parents": [
         {
           "name": "Paternal Grandmother",
+          "description": "Description",
           "sex": "F",
           "id": "INC00006F",
           "_parents": [
             {
               "name": "P. Grandmother's mother",
+              "description": "Description",
               "sex": "F",
               "id": "INC000019F"
             }
@@ -64,16 +73,19 @@
         },
         {
           "name": "Paternal Grandfather",
+          "description": "Description",
           "sex": "M",
           "id": "INC00007M",
           "_parents": [
             {
               "name": "P. Grandfather's mother",
+              "description": "Description",
               "sex": "F",
               "id": "INC000017F"
             },
             {
               "name": "P. Grandfather's father",
+              "description": "Description",
               "sex": "M",
               "id": "INC000018M"
             }
@@ -85,6 +97,7 @@
   "_children": [
     {
       "name": "Child 1",
+      "description": "Description",
       "sex": "M",
       "id": "INC00008M"
     },
@@ -95,6 +108,7 @@
     },
     {
       "name": "Child 3",
+      "description": "Description",
       "sex": "F",
       "id": "INC00010F"
     },
