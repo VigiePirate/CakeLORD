@@ -40,6 +40,19 @@
             </div>
             <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
             <?= $this->Html->script('familytree'); ?>
+            <script>
+            var boxWidth = 210,
+                boxHeight = 70,
+                nodeWidth = 100,
+                nodeHeight = 240,
+                // duration of transitions in ms
+                duration = 500,
+                // d3 multiplies the node size by this value
+                // to calculate the distance between nodes
+                separation = 0.8,
+                // data filename
+                file = "/js/" + "14590" + ".json";
+            </script>
             <!-- end family tree -->
         </div>
     </div>
