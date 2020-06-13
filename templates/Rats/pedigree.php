@@ -38,8 +38,8 @@
             <!-- d3.js  -->
             <div id="familytree">
             </div>
-            <?= $this->Html->script('//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js',['block' => true]); ?>
-            <?= $this->Html->script('familytree',['block' => true]); ?>
+            <?= $this->Html->script('//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
+            <?= $this->Html->script('familytree'); ?>
             <script>
                 var boxWidth = 210,
                     boxHeight = 70,
