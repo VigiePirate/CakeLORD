@@ -450,5 +450,3 @@ function sexStroke(d){
     }
   }
 }
-
-setup(file);
