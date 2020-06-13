@@ -58,7 +58,8 @@ function setup(file) {
     }
   });
 
-  d3.json(file, function(error, json){
+  //d3.json(file, function(error, json){
+  d3.json('/14590.json', function(error, json){
 
     if(error) {
       return console.error(error);
@@ -460,4 +461,5 @@ function sexStroke(d){
   }
 }
 
-setup("file");
+setup();
+//setup("file");
