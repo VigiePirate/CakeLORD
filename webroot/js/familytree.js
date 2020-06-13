@@ -48,11 +48,11 @@ function setup(file) {
     }
   });
 
-  d3.json(file, function(error, json){
+  //d3.json(file, function(error, json){
 
-    if(error) {
-      return console.error(error);
-    }
+  //  if(error) {
+  //    return console.error(error);
+  //  }
 
     // D3 modifies the objects by setting properties such as
     // coordinates, parent, and children. Thus the same node
@@ -78,7 +78,7 @@ function setup(file) {
     ancestorTree.draw(ancestorRoot);
     descendantsTree.draw(descendantRoot);
 
-  });
+  //});
 
 }
 
