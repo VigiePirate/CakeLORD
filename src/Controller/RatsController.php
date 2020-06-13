@@ -349,7 +349,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries','States'],
+            'contain' => ['OwnerUsers','Ratteries','States'],
         ];
         $rats = $this->paginate($rats);
 
@@ -372,7 +372,7 @@ class RatsController extends AppController
             'Singularities'],
         ]);
 
-        $json = json_encode($rat);
+        $json = json_encode($rat, JSON_PRETTY_PRINT);
         $this->set(compact('rat', 'json'));
     }
 }
