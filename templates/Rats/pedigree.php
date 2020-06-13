@@ -38,8 +38,8 @@
             <!-- d3.js  -->
             <div id="familytree">
             </div>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-            <?= $this->Html->script('familytree',['block' => 'script']); ?>
+            <?= $this->Html->script('//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js',['block' => true]); ?>
+            <?= $this->Html->script('familytree',['block' => true]); ?>
             <script>
                 var boxWidth = 210,
                     boxHeight = 70,
@@ -52,6 +52,7 @@
                     separation = 0.8;
                 setup('/' + $rat->id + '.json');
             </script>
+            <!-- end family tree -->
         </div>
     </div>
 </div>
