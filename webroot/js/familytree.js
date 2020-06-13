@@ -1,13 +1,14 @@
 var boxWidth = 210,
-            boxHeight = 70,
-            nodeWidth = 100,
-            nodeHeight = 240,
-            // duration of transitions in ms
-            duration = 500,
-            // d3 multiplies the node size by this value
-            // to calculate the distance between nodes
-            separation = 0.8;
-            file = '/' + $rat->id + '.json';
+    boxHeight = 70,
+    nodeWidth = 100,
+    nodeHeight = 240,
+    // duration of transitions in ms
+    duration = 500,
+    // d3 multiplies the node size by this value
+    // to calculate the distance between nodes
+    separation = 0.8,
+    // data filename
+    file = '/' + $rat->id + '.json';
 
 /**
  * For the sake of the examples, I want the setup code to be at the top.
