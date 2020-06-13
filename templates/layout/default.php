@@ -45,7 +45,7 @@ $cakeDescription = 'LORD';
     <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#663300">
     <meta name="msapplication-TileColor" content="#663300">
     <meta name="theme-color" content="#663300">
-    <link rel="manifest" href="/manifest.webmanifest">
+    <?= $this->Html->meta(['link' => '/manifest.webmanifest','rel' => 'manifest']); ?>
 </head>
 <body>
     <nav class="top-nav">
