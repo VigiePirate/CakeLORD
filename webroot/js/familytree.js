@@ -8,7 +8,7 @@ var boxWidth = 210,
     // to calculate the distance between nodes
     separation = 0.8,
     // data filename
-    file = "/" + $rat->id + ".json";
+    file = "/" + "14590" + ".json";
 
 /**
  * For the sake of the examples, I want the setup code to be at the top.
