@@ -372,6 +372,7 @@ class RatsController extends AppController
             'Singularities'],
         ]);
 
-        $this->set('rat', $rat);
+        $json = json_encode($rat);
+        $this->set(compact('rat', 'json'));
     }
 }
