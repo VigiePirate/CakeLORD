@@ -52,8 +52,8 @@
                 // to calculate the distance between nodes
                 separation = 0.8,
                 // data filename
-                file = "/js/" + <?= $rat->id ?> + ".json";
-            setup(file);
+                // file = "/js/" + <?= $rat->id ?> + ".json";
+            setup(); //setup(file)
             </script>
             <!-- end family tree -->
         </div>
