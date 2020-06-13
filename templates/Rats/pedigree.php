@@ -50,7 +50,7 @@
                     // d3 multiplies the node size by this value
                     // to calculate the distance between nodes
                     separation = 0.8;
-                setup(); //setup('/' + $rat->id + '.json');
+                setup('/' + $rat->id + '.json');
             </script>
             <!-- end family tree -->
         </div>
