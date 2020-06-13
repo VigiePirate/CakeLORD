@@ -54,32 +54,31 @@ function setup(file) {
   //    return console.error(error);
   //  }
 
-    // D3 modifies the objects by setting properties such as
-    // coordinates, parent, and children. Thus the same node
-    // node can't exist in two trees. But we need the root to
-    // be in both so we create proxy nodes for the root only.
-    var ancestorRoot = rootProxy(json);
-    var descendantRoot = rootProxy(json);
+  // D3 modifies the objects by setting properties such as
+  // coordinates, parent, and children. Thus the same node
+  // node can't exist in two trees. But we need the root to
+  // be in both so we create proxy nodes for the root only.
+  var ancestorRoot = rootProxy(json);
+  var descendantRoot = rootProxy(json);
 
-    // Start with only the first few generations of ancestors showing
-    ancestorRoot._parents.forEach(function(parents){
-      parents._parents.forEach(collapse);
-      //parents._parents._parents.forEach(collapse);
-    });
+  // Start with only the first few generations of ancestors showing
+  ancestorRoot._parents.forEach(function(parents){
+    parents._parents.forEach(collapse);
+    //parents._parents._parents.forEach(collapse);
+  });
 
-    // Start with only one generation of descendants showing
-    descendantRoot._children.forEach(collapse);
+  // Start with only one generation of descendants showing
+  descendantRoot._children.forEach(collapse);
 
-    // Set the root nodes
-    ancestorTree.data(ancestorRoot);
-    descendantsTree.data(descendantRoot);
+  // Set the root nodes
+  ancestorTree.data(ancestorRoot);
+  descendantsTree.data(descendantRoot);
 
-    // Draw the tree
-    ancestorTree.draw(ancestorRoot);
-    descendantsTree.draw(descendantRoot);
+  // Draw the tree
+  ancestorTree.draw(ancestorRoot);
+  descendantsTree.draw(descendantRoot);
 
   //});
-
 }
 
 function rootProxy(root){
