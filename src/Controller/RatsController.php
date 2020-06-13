@@ -373,7 +373,7 @@ class RatsController extends AppController
         ]);
 
         $json = json_encode($rat, JSON_PRETTY_PRINT);
-        $data = [{
+        $data = "{
           "name": "The rat I am looking at",
           "description": "Pink dotted blazed dumbo",
           "death": "Veillesse (24 mois)",
@@ -506,7 +506,7 @@ class RatsController extends AppController
               "id": "INC000012F"
             }
           ]
-      }];
+      }";
         $this->set(compact('rat', 'json','data'));
     }
 }
