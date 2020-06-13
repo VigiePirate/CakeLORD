@@ -1,15 +1,3 @@
-var boxWidth = 210,
-    boxHeight = 70,
-    nodeWidth = 100,
-    nodeHeight = 240,
-
-    // duration of transitions in ms
-    duration = 500,
-
-    // d3 multiplies the node size by this value
-    // to calculate the distance between nodes
-    separation = 0.8;
-
 /**
  * For the sake of the examples, I want the setup code to be at the top.
  * However, since it uses a class (Tree) which is defined later, I wrap
@@ -17,7 +5,7 @@ var boxWidth = 210,
  * Normally you would extract the entire Tree class defintion into a
  * separate file and include it before this script tag.
  */
-function setup($id='family') {
+function setup($file) {
 
   // Setup zoom and pan
   var zoom = d3.behavior.zoom()
@@ -59,7 +47,7 @@ function setup($id='family') {
     }
   });
 
-  d3.json('/' + $id + '.json', function(error, json){
+  d3.json($file, function(error, json){
 
     if(error) {
       return console.error(error);
@@ -460,5 +448,3 @@ function sexStroke(d){
     }
   }
 }
-
-setup($rat->id);

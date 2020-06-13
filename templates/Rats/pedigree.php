@@ -40,7 +40,20 @@
             </div>
             <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
             <?= $this->Html->script('familytree'); ?>
-            <!-- end copy-paste example -->
+            <script>
+                var boxWidth = 210,
+                boxHeight = 70,
+                nodeWidth = 100,
+                nodeHeight = 240,
+
+                // duration of transitions in ms
+                duration = 500,
+
+                // d3 multiplies the node size by this value
+                // to calculate the distance between nodes
+                separation = 0.8;
+                setup('/' + $rat->id + '.json');
+            </script>
         </div>
     </div>
 </div>
