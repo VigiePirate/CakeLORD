@@ -38,7 +38,7 @@
             <!-- d3.js  -->
             <div id="familytree">
             </div>
-            <?= $this->Html->script('//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
+            <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
             <?= $this->Html->script('familytree'); ?>
             <!-- end family tree -->
         </div>
