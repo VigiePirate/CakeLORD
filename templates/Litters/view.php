@@ -67,7 +67,7 @@
                         <?php if ($litter->sire[0]->picture != '') : ?>
                             <?= $this->Html->image('uploads/' . $litter->sire[0]->picture, ['alt' => $litter->sire[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id]]) ?>
                         <?php else : ?>
-                            <?= $this->Html->image('UnknownFather.png', ['alt' => $litter->dam[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]]) ?>
+                            <?= $this->Html->image('UnknownFather.png', ['alt' => $litter->dam[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id]]) ?>
                         <?php endif; ?>
                         <p><?= h($litter->sire[0]->variety) ?><p>
                         <table class="caption" align="center">

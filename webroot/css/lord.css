@@ -750,6 +750,43 @@ footer {
   height: auto !important;
 }
 
+/* d3js pedigree */
+svg {
+  margin-top: 0.5rem;
+  border: 2px solid #663300;
+  border-radius: 0.4rem;
+  width: 100%;
+  text-align: center;
+}
+
+.person rect {
+  stroke-width: 2px;
+}
+
+.person {
+  font-family: "Imprima";
+  cursor: pointer;
+}
+
+.person text.name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.person text.description {
+  font-size: 12px;
+}
+
+.person text.death {
+  font-size: 12px;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
 /* responsiveness */
 @media screen and (max-width: 810px) {
   .top-nav-title a {
