@@ -448,3 +448,5 @@ function sexStroke(d){
     }
   }
 }
+
+console.log(file);
