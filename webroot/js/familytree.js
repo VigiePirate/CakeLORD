@@ -48,8 +48,8 @@ function setup(file) {
     }
   });
 
+  d3.json('/js/raw.json', function(error, json){
   //d3.json(file, function(error, json){
-  d3.json(file, function(error, json){
 
     if(error) {
       return console.error(error);
