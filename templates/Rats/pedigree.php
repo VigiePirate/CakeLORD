@@ -41,7 +41,7 @@
             <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
             <?= $this->Html->script('familytree'); ?>
             <script>
-            var data = <?= $json ?>,
+            var json = <?= $json ?>,
                 boxWidth = 210,
                 boxHeight = 70,
                 nodeWidth = 100,
