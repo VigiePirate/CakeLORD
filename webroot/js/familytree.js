@@ -17,7 +17,7 @@ var boxWidth = 210,
  * Normally you would extract the entire Tree class defintion into a
  * separate file and include it before this script tag.
  */
-function setup() {
+function setup($id='family') {
 
   // Setup zoom and pan
   var zoom = d3.behavior.zoom()
@@ -59,7 +59,7 @@ function setup() {
     }
   });
 
-  d3.json('/family.json', function(error, json){
+  d3.json('/' + $id + '.json', function(error, json){
 
     if(error) {
       return console.error(error);
@@ -461,4 +461,4 @@ function sexStroke(d){
   }
 }
 
-setup();
+setup($rat->id);
