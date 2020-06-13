@@ -373,6 +373,11 @@ class RatsController extends AppController
         ]);
 
         $json = json_encode($rat, JSON_PRETTY_PRINT);
+        // write the file for debug
+        $fp = fopen('/results.json', 'w');
+        fwrite($fp, $json);
+        fclose($fp);
+
         $this->set(compact('rat', 'json'));
     }
 }
