@@ -377,9 +377,7 @@ class RatsController extends AppController
             'description' => $rat->variety,
             'death' => $rat->age_string,
             'sex' => $rat->sex,
-            'id' => $rat->pedigree_identifier,
-            '_parents' => [],
-            '_children' => []
+            'id' => $rat->pedigree_identifier
         ];
         //$rat; // should be replaced by creating an array with the proper format
         $json = json_encode($family); // option for readable files: JSON_PRETTY_PRINT
