@@ -420,9 +420,6 @@ class RatsController extends AppController
                             ]
                         ]
                     ] // will call dam's parents in recursive implementation ; fake data for display
-=======
-                '_parents' => [] // will call dam's parents in recursive implementation
->>>>>>> f35acc651b149a8cfde584d58011cbcdf89af2d4
             ],
             '1' => [
                 'name' => $rat->birth_litter->sire[0]->usual_name,
@@ -430,44 +427,6 @@ class RatsController extends AppController
                 'description' => '', //should be $sire->variety
                 'death'=> '', //should be short_death_cause
                 'id' => $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
-<<<<<<< HEAD
-                '_parents' => [
-                    '0' => [
-                        'id' => '3',
-                        'sex' => 'F',
-                        '_parents' => [
-                            '0' => [
-                                'id' => '9',
-                                'sex' => 'F',
-                                '_parents' => []
-                            ],
-                            '1' => [
-                                'id' => '10',
-                                'sex' => 'M',
-                                '_parents' => []
-                            ]
-                        ]
-                    ],
-                    '1' => [
-                        'id' => '4',
-                        'sex' => 'M',
-                        '_parents' => [
-                            '0' => [
-                                'id' => '11',
-                                'sex' => 'F',
-                                '_parents' => []
-                            ],
-                            '1' => [
-                                'id' => '12',
-                                'sex' => 'M',
-                                '_parents' => []
-                            ]
-                        ]
-                    ]
-                ] // will call sire's parents in recursive implementation ; fake data for display
-=======
-                '_parents' => [] // will call sire's parents in recursive implementation
->>>>>>> f35acc651b149a8cfde584d58011cbcdf89af2d4
             ]
         ];
 
@@ -491,14 +450,8 @@ class RatsController extends AppController
         /* assemble complete array */
         $family = [
             'name' => $rat->usual_name,
-<<<<<<< HEAD
-            'dates' => $rat->birth_date->i18nFormat('dd/MM/yyyy') . '-' . $rat->death_date->i18nFormat('dd/MM/yyyy') . ' (' . $rat->age_string . ')',
-            'description' => $rat->variety,
-            'death' => $rat->main_death_cause, // . ' (' . $rat->age_string . ')',
-=======
             'description' => $rat->variety,
             'death' => $rat->short_death_cause . ' (' . $rat->age_string . ')',
->>>>>>> f35acc651b149a8cfde584d58011cbcdf89af2d4
             'sex' => 'X', // we want a different color for the root of the tree
             'id' => $rat->pedigree_identifier,
             '_parents' => $parents,
