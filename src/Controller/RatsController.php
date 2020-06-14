@@ -384,7 +384,7 @@ class RatsController extends AppController
                 'id' => $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
                 '_parents' => [
                         'id' => "1",
-                        'parents' => [
+                        '_parents' => [
                             '0' => [],
                             '1' => []
                         ]
@@ -398,7 +398,7 @@ class RatsController extends AppController
                 'id' => $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
                 '_parents' => [
                         'id' => "2",
-                        'parents' => [
+                        '_parents' => [
                             '0' => [],
                             '1' => []
                         ]
