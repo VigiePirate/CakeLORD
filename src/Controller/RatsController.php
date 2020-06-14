@@ -414,7 +414,7 @@ class RatsController extends AppController
         /* assemble complete array */
         $family = [
             'name' => $rat->usual_name,
-            'dates' => $rat->birth_date->i18nFormat('dd/MM/yyyy') . '-' . $rat->death_date->i18nFormat('dd/MM/yyyy') . ' (' . $rat->age_string . ')'
+            'dates' => $rat->birth_date->i18nFormat('dd/MM/yyyy') . '-' . $rat->death_date->i18nFormat('dd/MM/yyyy') . ' (' . $rat->age_string . ')',
             'description' => $rat->variety,
             'death' => $rat->main_death_cause, // . ' (' . $rat->age_string . ')',
             'sex' => 'X', // we want a different color for the root of the tree
