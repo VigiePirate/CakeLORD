@@ -423,6 +423,6 @@ class RatsController extends AppController
         ];
 
         $json = json_encode($family);
-        $this->set(compact('rat', 'json');
+        $this->set(compact('rat', 'json'));
     }
 }
