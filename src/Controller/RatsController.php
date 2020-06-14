@@ -392,15 +392,12 @@ class RatsController extends AppController
         $child_no = 0;
         foreach($rat->bred_litters as $litter) {
             foreach ($litter->offspring_rats as $offspring) {
-                $child = [
-                    $child_no => [
-                        'name' => $offspring->name, // usual_name creates a problem with prefix
-                        'sex' => $offspring->sex,
-                        'id' => $offspring->pedigree_identifier,
-                        '_children' => []
-                    ]
+                $children['$child_no'] = [
+                    'name' => $offspring->name, // usual_name creates a problem with prefix
+                    'sex' => $offspring->sex,
+                    'id' => $offspring->pedigree_identifier,
+                    '_children' => []
                 ];
-                array_push($children,$child);
                 $child_no++;
             }
         }
@@ -417,6 +414,6 @@ class RatsController extends AppController
         ];
 
         $json = json_encode($family);
-        $this->set(compact('rat', 'json','family','parents','child','children'));
+        $this->set(compact('rat', 'json','family','parents','children'));
     }
 }
