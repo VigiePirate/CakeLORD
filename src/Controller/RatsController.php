@@ -404,7 +404,7 @@ class RatsController extends AppController
                 '_parents' => [
                     '0' => [
                         'id' => '3',
-                        'sex' => 'M',
+                        'sex' => 'F',
                         '_parents' => []
                     ],
                     '1' => [
