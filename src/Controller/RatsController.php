@@ -372,11 +372,15 @@ class RatsController extends AppController
             'Singularities'],
         ]);
 
+        /* TEMPORARY : build parents and children subarrays */
         // should be in the model with recursive calls to build all ascendants and descendants
+        // append id with some unique string (generation or path, like 0101 for mother's father's mother's father, for instance)
         $parents = [
             '0' => [
                 'name' => $rat->birth_litter->dam[0]->usual_name,
                 'sex' => 'F',
+                'description' => '', //should be variey
+                'death'=> '', //should be short_death_cause
                 'id' => '0_' . $rat->birth_litter->dam[0]->pedigree_identifier,
                 '_parents' => []
             ],
@@ -393,7 +397,9 @@ class RatsController extends AppController
         foreach($rat->bred_litters as $litter) {
             foreach ($litter->offspring_rats as $offspring) {
                 $children[$child_no] = [
-                    'name' => $offspring->name, // usual_name creates a problem with prefix
+                    'name' => $offspring->name, // should be $offspring->usual_name
+                    'death' => '', // should be $offspring->short_death_cause
+                    'description' => '', // should be $offspring->variety
                     'sex' => $offspring->sex,
                     'id' => $offspring->pedigree_identifier,
                     '_children' => []
@@ -401,8 +407,9 @@ class RatsController extends AppController
                 $child_no++;
             }
         }
+        /* END TEMPORARY */
 
-        // complete array
+        /* assemble complete array */
         $family = [
             'name' => $rat->usual_name,
             'description' => $rat->variety,
@@ -414,6 +421,6 @@ class RatsController extends AppController
         ];
 
         $json = json_encode($family);
-        $this->set(compact('rat', 'json','family','parents','children'));
+        $this->set(compact('rat', 'json');
     }
 }
