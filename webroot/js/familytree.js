@@ -1,15 +1,3 @@
-var boxWidth = 210,
-    boxHeight = 70,
-    nodeWidth = 100,
-    nodeHeight = 240,
-
-    // duration of transitions in ms
-    duration = 500,
-
-    // d3 multiplies the node size by this value
-    // to calculate the distance between nodes
-    separation = 0.8;
-
 /**
  * For the sake of the examples, I want the setup code to be at the top.
  * However, since it uses a class (Tree) which is defined later, I wrap
@@ -59,6 +47,7 @@ function setup() {
     }
   });
 
+<<<<<<< HEAD
   d3.json('/family.json', function(error, json){
 
     if(error) {
@@ -91,6 +80,39 @@ function setup() {
 
   });
 
+=======
+  //d3.json(file, function(error, json){
+
+  //  if(error) {
+  //    return console.error(error);
+  //  }
+
+  // D3 modifies the objects by setting properties such as
+  // coordinates, parent, and children. Thus the same node
+  // node can't exist in two trees. But we need the root to
+  // be in both so we create proxy nodes for the root only.
+  var ancestorRoot = rootProxy(json);
+  var descendantRoot = rootProxy(json);
+
+  // Start with only the first few generations of ancestors showing
+  ancestorRoot._parents.forEach(function(parents){
+    parents._parents.forEach(collapse);
+    //parents._parents._parents.forEach(collapse);
+  });
+
+  // Start with only one generation of descendants showing
+  descendantRoot._children.forEach(collapse);
+
+  // Set the root nodes
+  ancestorTree.data(ancestorRoot);
+  descendantsTree.data(descendantRoot);
+
+  // Draw the tree
+  ancestorTree.draw(ancestorRoot);
+  descendantsTree.draw(descendantRoot);
+
+  //});
+>>>>>>> pedigree
 }
 
 function rootProxy(root){
@@ -311,7 +333,11 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Move text to it's proper position
   nodeUpdate.select('text.name')
       .attr("dx", -(boxWidth/2) + 8)
+<<<<<<< HEAD
       .attr("dy", -14)
+=======
+      .attr("dy", -13)
+>>>>>>> pedigree
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
@@ -460,5 +486,8 @@ function sexStroke(d){
     }
   }
 }
+<<<<<<< HEAD
 
 setup();
+=======
+>>>>>>> pedigree
