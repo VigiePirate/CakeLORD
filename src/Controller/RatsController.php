@@ -392,7 +392,7 @@ class RatsController extends AppController
         $child_no = 0;
         foreach($rat->bred_litters as $litter) {
             foreach ($litter->offspring_rats as $offspring) {
-                $children['$child_no'] = [
+                $children[$child_no] = [
                     'name' => $offspring->name, // usual_name creates a problem with prefix
                     'sex' => $offspring->sex,
                     'id' => $offspring->pedigree_identifier,
