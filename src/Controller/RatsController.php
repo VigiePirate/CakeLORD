@@ -378,7 +378,16 @@ class RatsController extends AppController
             'death' => $rat->short_death_cause . ' (' . $rat->age_string . ')',
             'sex' => 'X', // we want a different color for the root of the tree
             'id' => $rat->pedigree_identifier,
-            '_parents' => [],
+            '_parents' => [
+                '0' => [
+                    'name' => $rat->birth_litter->dam[0]->usual_name,
+                    'sex' => 'F',
+                ],
+                '1' => [
+                    'name' => $rat->birth_litter->sire[0]->usual_name,
+                    'sex' => 'M',
+                ]
+            ],
             '_children' => []
         ];
 
