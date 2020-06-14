@@ -42,8 +42,8 @@
             <?= $this->Html->script('familytree'); ?>
             <script>
             var boxWidth = 210, //210
-                boxHeight = 80, //70
-                nodeWidth = 120, //100
+                boxHeight = 70, //70
+                nodeWidth = 100, //100
                 nodeHeight = 240, //240
                 // duration of transitions in ms
                 duration = 500,
