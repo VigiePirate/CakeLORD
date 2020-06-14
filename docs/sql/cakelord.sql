@@ -234,12 +234,36 @@ CREATE TABLE IF NOT EXISTS `states` (
   `is_visible` BOOLEAN NOT NULL DEFAULT 1,
   `is_searchable` BOOLEAN NOT NULL DEFAULT 1,
   `is_frozen` BOOLEAN NOT NULL DEFAULT 0,
-  `next_ok_state` INT UNSIGNED NULL,
-  `next_ko_state` INT UNSIGNED NULL,
-  `next_frozen_state` INT UNSIGNED NULL,
-  `next_thawed_state` INT UNSIGNED NULL,
+  `next_ok_state_id` INT UNSIGNED NULL,
+  `next_ko_state_id` INT UNSIGNED NULL,
+  `next_frozen_state_id` INT UNSIGNED NULL,
+  `next_thawed_state_id` INT UNSIGNED NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC))
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC),
+  INDEX `fk_states_states1_idx` (`next_ok_state_id` ASC),
+  INDEX `fk_states_states2_idx` (`next_ko_state_id` ASC),
+  INDEX `fk_states_states3_idx` (`next_frozen_state_id` ASC),
+  INDEX `fk_states_states4_idx` (`next_thawed_state_id` ASC),
+  CONSTRAINT `fk_states_states1`
+    FOREIGN KEY (`next_ok_state_id`)
+    REFERENCES `states` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_states_states2`
+    FOREIGN KEY (`next_ko_state_id`)
+    REFERENCES `states` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_states_states3`
+    FOREIGN KEY (`next_frozen_state_id`)
+    REFERENCES `states` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_states_states4`
+    FOREIGN KEY (`next_thawed_state_id`)
+    REFERENCES `states` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

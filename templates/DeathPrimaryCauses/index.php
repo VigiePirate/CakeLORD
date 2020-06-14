@@ -5,14 +5,17 @@
  */
 ?>
 <div class="deathPrimaryCauses index content">
-    <?= $this->Html->link(__('New Death Primary Cause'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
-    <h1><?= __('All Death Primary Causes') ?></h1>
+    <?= $this->Html->link(__('New Death Primary Cause'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Death Primary Causes') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
+                    <th><?= $this->Paginator->sort('is_infant') ?></th>
+                    <th><?= $this->Paginator->sort('is_accident') ?></th>
+                    <th><?= $this->Paginator->sort('is_oldster') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -21,6 +24,9 @@
                 <tr>
                     <td><?= $this->Number->format($deathPrimaryCause->id) ?></td>
                     <td><?= h($deathPrimaryCause->name) ?></td>
+                    <td><?= h($deathPrimaryCause->is_infant) ?></td>
+                    <td><?= h($deathPrimaryCause->is_accident) ?></td>
+                    <td><?= h($deathPrimaryCause->is_oldster) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $deathPrimaryCause->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $deathPrimaryCause->id]) ?>

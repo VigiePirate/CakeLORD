@@ -7,7 +7,6 @@ namespace App\Controller;
  * States Controller
  *
  * @property \App\Model\Table\StatesTable $States
- *
  * @method \App\Model\Entity\State[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class StatesController extends AppController
@@ -15,10 +14,13 @@ class StatesController extends AppController
     /**
      * Index method
      *
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|null|void Renders view
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['NextOkStates', 'NextKoStates', 'NextFrozenStates', 'NextThawedStates'],
+        ];
         $states = $this->paginate($this->States);
 
         $this->set(compact('states'));
@@ -28,24 +30,22 @@ class StatesController extends AppController
      * View method
      *
      * @param string|null $id State id.
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
         $state = $this->States->get($id, [
-            'contain' => ['LitterSnapshots', 'Litters', 'Litters.States', 'Litters.Dam','Litters.Sire',
-            'RatSnapshots', 'Rats', 'Rats.States', 'Ratteries', 'RatterySnapshots',
-            'Rats.OwnerUsers','Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses'],
+            'contain' => ['NextOkStates', 'NextKoStates', 'NextFrozenStates', 'NextThawedStates', 'LitterSnapshots', 'Litters', 'RatSnapshots', 'Rats', 'Ratteries', 'RatterySnapshots'],
         ]);
 
-        $this->set('state', $state);
+        $this->set(compact('state'));
     }
 
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
@@ -59,14 +59,18 @@ class StatesController extends AppController
             }
             $this->Flash->error(__('The state could not be saved. Please, try again.'));
         }
-        $this->set(compact('state'));
+        $nextOkStates = $this->States->NextOkStates->find('list', ['limit' => 200]);
+        $nextKoStates = $this->States->NextKoStates->find('list', ['limit' => 200]);
+        $nextFrozenStates = $this->States->NextFrozenStates->find('list', ['limit' => 200]);
+        $nextThawedStates = $this->States->NextThawedStates->find('list', ['limit' => 200]);
+        $this->set(compact('state', 'nextOkStates', 'nextKoStates', 'nextFrozenStates', 'nextThawedStates'));
     }
 
     /**
      * Edit method
      *
      * @param string|null $id State id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
@@ -83,14 +87,18 @@ class StatesController extends AppController
             }
             $this->Flash->error(__('The state could not be saved. Please, try again.'));
         }
-        $this->set(compact('state'));
+        $nextOkStates = $this->States->NextOkStates->find('list', ['limit' => 200]);
+        $nextKoStates = $this->States->NextKoStates->find('list', ['limit' => 200]);
+        $nextFrozenStates = $this->States->NextFrozenStates->find('list', ['limit' => 200]);
+        $nextThawedStates = $this->States->NextThawedStates->find('list', ['limit' => 200]);
+        $this->set(compact('state', 'nextOkStates', 'nextKoStates', 'nextFrozenStates', 'nextThawedStates'));
     }
 
     /**
      * Delete method
      *
      * @param string|null $id State id.
-     * @return \Cake\Http\Response|null Redirects to index.
+     * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
@@ -104,18 +112,5 @@ class StatesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
-    }
-
-    /**
-     * Summary method
-     * A twin of view method with less information, for migration debug
-     */
-    public function summary($id = null)
-    {
-        $state = $this->States->get($id, [
-            'contain' => ['LitterSnapshots', 'Litters', 'RatSnapshots', 'Rats', 'Ratteries', 'RatterySnapshots'],
-        ]);
-
-        $this->set('state', $state);
     }
 }

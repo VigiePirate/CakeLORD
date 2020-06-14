@@ -5,8 +5,8 @@
  */
 ?>
 <div class="deathSecondaryCauses index content">
-    <?= $this->Html->link(__('New Death Secondary Cause'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
-    <h1><?= __('All Death Secondary Causes') ?></h1>
+    <?= $this->Html->link(__('New Death Secondary Cause'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Death Secondary Causes') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
@@ -14,6 +14,7 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('death_primary_cause_id') ?></th>
+                    <th><?= $this->Paginator->sort('is_tumor') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                     <td><?= $this->Number->format($deathSecondaryCause->id) ?></td>
                     <td><?= h($deathSecondaryCause->name) ?></td>
                     <td><?= $deathSecondaryCause->has('death_primary_cause') ? $this->Html->link($deathSecondaryCause->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $deathSecondaryCause->death_primary_cause->id]) : '' ?></td>
+                    <td><?= h($deathSecondaryCause->is_tumor) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $deathSecondaryCause->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $deathSecondaryCause->id]) ?>

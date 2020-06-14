@@ -76,6 +76,10 @@ class DeathSecondaryCausesTable extends Table
             ->scalar('description')
             ->notEmptyString('description');
 
+        $validator
+            ->boolean('is_tumor')
+            ->notEmptyString('is_tumor');
+
         return $validator;
     }
 

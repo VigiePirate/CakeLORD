@@ -75,6 +75,18 @@ class DeathPrimaryCausesTable extends Table
             ->scalar('description')
             ->notEmptyString('description');
 
+        $validator
+            ->boolean('is_infant')
+            ->notEmptyString('is_infant');
+
+        $validator
+            ->boolean('is_accident')
+            ->notEmptyString('is_accident');
+
+        $validator
+            ->boolean('is_oldster')
+            ->notEmptyString('is_oldster');
+
         return $validator;
     }
 

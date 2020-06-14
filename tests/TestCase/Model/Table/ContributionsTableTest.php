@@ -3,21 +3,21 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\DeathSecondaryCausesTable;
+use App\Model\Table\ContributionsTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\DeathSecondaryCausesTable Test Case
+ * App\Model\Table\ContributionsTable Test Case
  */
-class DeathSecondaryCausesTableTest extends TestCase
+class ContributionsTableTest extends TestCase
 {
     /**
      * Test subject
      *
-     * @var \App\Model\Table\DeathSecondaryCausesTable
+     * @var \App\Model\Table\ContributionsTable
      */
-    protected $DeathSecondaryCauses;
+    protected $Contributions;
 
     /**
      * Fixtures
@@ -25,9 +25,10 @@ class DeathSecondaryCausesTableTest extends TestCase
      * @var array
      */
     protected $fixtures = [
-        'app.DeathSecondaryCauses',
-        'app.DeathPrimaryCauses',
-        'app.Rats',
+        'app.Contributions',
+        'app.Ratteries',
+        'app.Litters',
+        'app.ContributionTypes',
     ];
 
     /**
@@ -38,8 +39,8 @@ class DeathSecondaryCausesTableTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('DeathSecondaryCauses') ? [] : ['className' => DeathSecondaryCausesTable::class];
-        $this->DeathSecondaryCauses = TableRegistry::getTableLocator()->get('DeathSecondaryCauses', $config);
+        $config = TableRegistry::getTableLocator()->exists('Contributions') ? [] : ['className' => ContributionsTable::class];
+        $this->Contributions = TableRegistry::getTableLocator()->get('Contributions', $config);
     }
 
     /**
@@ -49,7 +50,7 @@ class DeathSecondaryCausesTableTest extends TestCase
      */
     public function tearDown(): void
     {
-        unset($this->DeathSecondaryCauses);
+        unset($this->Contributions);
 
         parent::tearDown();
     }

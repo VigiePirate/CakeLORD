@@ -959,12 +959,20 @@ CREATE TABLE `states` (
   `is_visible` tinyint(1) NOT NULL DEFAULT 1,
   `is_searchable` tinyint(1) NOT NULL DEFAULT 1,
   `is_frozen` tinyint(1) NOT NULL DEFAULT 0,
-  `next_ok_state` int(10) unsigned DEFAULT NULL,
-  `next_ko_state` int(10) unsigned DEFAULT NULL,
-  `next_frozen_state` int(10) unsigned DEFAULT NULL,
-  `next_thawed_state` int(10) unsigned DEFAULT NULL,
+  `next_ok_state_id` int(10) unsigned DEFAULT NULL,
+  `next_ko_state_id` int(10) unsigned DEFAULT NULL,
+  `next_frozen_state_id` int(10) unsigned DEFAULT NULL,
+  `next_thawed_state_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
+  UNIQUE KEY `name_UNIQUE` (`name`),
+  KEY `fk_states_states1_idx` (`next_ok_state_id`),
+  KEY `fk_states_states2_idx` (`next_ko_state_id`),
+  KEY `fk_states_states3_idx` (`next_frozen_state_id`),
+  KEY `fk_states_states4_idx` (`next_thawed_state_id`),
+  CONSTRAINT `fk_states_states1` FOREIGN KEY (`next_ok_state_id`) REFERENCES `states` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_states_states2` FOREIGN KEY (`next_ko_state_id`) REFERENCES `states` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_states_states3` FOREIGN KEY (`next_frozen_state_id`) REFERENCES `states` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_states_states4` FOREIGN KEY (`next_thawed_state_id`) REFERENCES `states` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1056,4 +1064,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-14 18:01:53
+-- Dump completed on 2020-06-14 22:34:36

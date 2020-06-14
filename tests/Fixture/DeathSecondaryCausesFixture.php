@@ -15,14 +15,15 @@ class DeathSecondaryCausesFixture extends TestFixture
      *
      * @var array
      */
-    // @codingStandardsIgnoreStart
+    // phpcs:disable
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'name' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'death_primary_cause_id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'description' => ['type' => 'text', 'length' => null, 'null' => false, 'default' => '\'\'', 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
+        'is_tumor' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '0', 'comment' => '', 'precision' => null],
         '_indexes' => [
-            'fk_deces_secondaire_deces_principal1' => ['type' => 'index', 'columns' => ['death_primary_cause_id'], 'length' => []],
+            'fk_deces_secondaire_deces_principal_idx' => ['type' => 'index', 'columns' => ['death_primary_cause_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
@@ -34,7 +35,7 @@ class DeathSecondaryCausesFixture extends TestFixture
             'collation' => 'utf8mb4_general_ci'
         ],
     ];
-    // @codingStandardsIgnoreEnd
+    // phpcs:enable
     /**
      * Init method
      *
@@ -48,6 +49,7 @@ class DeathSecondaryCausesFixture extends TestFixture
                 'name' => 'Lorem ipsum dolor sit amet',
                 'death_primary_cause_id' => 1,
                 'description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
+                'is_tumor' => 1,
             ],
         ];
         parent::init();

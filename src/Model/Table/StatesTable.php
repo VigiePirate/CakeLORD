@@ -48,6 +48,22 @@ class StatesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->belongsTo('NextOkStates', [
+            'className' => 'States',
+            'foreignKey' => 'next_ok_state_id',
+        ]);
+        $this->belongsTo('NextKoStates', [
+            'className' => 'States',
+            'foreignKey' => 'next_ko_state_id',
+        ]);
+        $this->belongsTo('NextFrozenStates', [
+            'className' => 'States',
+            'foreignKey' => 'next_frozen_state_id',
+        ]);
+        $this->belongsTo('NextThawedStates', [
+            'className' => 'States',
+            'foreignKey' => 'next_thawed_state_id',
+        ]);
         $this->hasMany('LitterSnapshots', [
             'foreignKey' => 'state_id',
         ]);
@@ -90,14 +106,46 @@ class StatesTable extends Table
         $validator
             ->scalar('color')
             ->maxLength('color', 6)
-            ->requirePresence('color', 'create')
-            ->notEmptyString('color');
+            ->allowEmptyString('color');
 
         $validator
             ->scalar('symbol')
             ->maxLength('symbol', 1)
             ->requirePresence('symbol', 'create')
             ->notEmptyString('symbol');
+
+        $validator
+            ->scalar('css_property')
+            ->maxLength('css_property', 45)
+            ->allowEmptyString('css_property');
+
+        $validator
+            ->boolean('is_default')
+            ->notEmptyString('is_default');
+
+        $validator
+            ->boolean('needs_user_action')
+            ->notEmptyString('needs_user_action');
+
+        $validator
+            ->boolean('needs_staff_action')
+            ->notEmptyString('needs_staff_action');
+
+        $validator
+            ->boolean('is_reliable')
+            ->notEmptyString('is_reliable');
+
+        $validator
+            ->boolean('is_visible')
+            ->notEmptyString('is_visible');
+
+        $validator
+            ->boolean('is_searchable')
+            ->notEmptyString('is_searchable');
+
+        $validator
+            ->boolean('is_frozen')
+            ->notEmptyString('is_frozen');
 
         return $validator;
     }
@@ -112,6 +160,10 @@ class StatesTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['name']));
+        $rules->add($rules->existsIn(['next_ok_state_id'], 'NextOkStates'));
+        $rules->add($rules->existsIn(['next_ko_state_id'], 'NextKoStates'));
+        $rules->add($rules->existsIn(['next_frozen_state_id'], 'NextFrozenStates'));
+        $rules->add($rules->existsIn(['next_thawed_state_id'], 'NextThawedStates'));
 
         return $rules;
     }

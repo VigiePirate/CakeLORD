@@ -7,28 +7,17 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->Html->image('/img/icon-fa-alert.svg', [
-          'url' => ['controller' => 'Conversations', 'action' => 'add'],
-          'class' => 'side-nav-icon',
-          'alt' => __('Report')]) ?>
-      <?= $this->Html->image('/img/icon-help.svg', [
-              'url' => ['controller' => 'Articles', 'action' => 'index'],
-              'class' => 'side-nav-icon',
-              'alt' => __('Help')]) ?>
+            <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('Edit Death Secondary Cause'), ['action' => 'edit', $deathSecondaryCause->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Death Secondary Cause'), ['action' => 'delete', $deathSecondaryCause->id], ['confirm' => __('Are you sure you want to delete # {0}?', $deathSecondaryCause->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Death Secondary Causes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('New Death Secondary Cause'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-90">
+    <div class="column-responsive column-80">
         <div class="deathSecondaryCauses view content">
-            <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Death Secondary Cause') ?></div>
-            </div>
-            <h1><?= h($deathSecondaryCause->name) ?></h1>
-            <h2><? __('Information') ?></h2>
-            <table class="condensed">
+            <h3><?= h($deathSecondaryCause->name) ?></h3>
+            <table>
                 <tr>
                     <th><?= __('Name') ?></th>
                     <td><?= h($deathSecondaryCause->name) ?></td>
@@ -41,33 +30,97 @@
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($deathSecondaryCause->id) ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Is Tumor') ?></th>
+                    <td><?= $deathSecondaryCause->is_tumor ? __('Yes') : __('No'); ?></td>
+                </tr>
             </table>
-            <h2><?= __('Description') ?></h2>
             <div class="text">
+                <strong><?= __('Description') ?></strong>
                 <blockquote>
                     <?= $this->Text->autoParagraph(h($deathSecondaryCause->description)); ?>
                 </blockquote>
             </div>
-            <div class="spacer"> </div>
-            <h2><?= __('Related information') ?></h2>
-
             <div class="related">
-                <h3><?= __('Statistics') ?></h3>
-            </div>
-
-            <div class="related">
-                <h3><?= __('Related rats') ?></h3>
-                <?= $this->element('simple_rats', [ //rats
-                    'rubric' => __(''),
-                    'rats' =>  $deathSecondaryCause->rats,//$offsprings,
-                    'exceptions' => [
-                        'picture',
-                        'pup_name',
-                        'death_primary_cause',
-                        'death_secondary_cause',
-                        'death_cause',
-                    ],
-                ]) ?>
+                <h4><?= __('Related Rats') ?></h4>
+                <?php if (!empty($deathSecondaryCause->rats)) : ?>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Pedigree Identifier') ?></th>
+                            <th><?= __('Is Pedigree Custom') ?></th>
+                            <th><?= __('Owner User Id') ?></th>
+                            <th><?= __('Name') ?></th>
+                            <th><?= __('Pup Name') ?></th>
+                            <th><?= __('Sex') ?></th>
+                            <th><?= __('Birth Date') ?></th>
+                            <th><?= __('Rattery Id') ?></th>
+                            <th><?= __('Litter Id') ?></th>
+                            <th><?= __('Color Id') ?></th>
+                            <th><?= __('Eyecolor Id') ?></th>
+                            <th><?= __('Dilution Id') ?></th>
+                            <th><?= __('Marking Id') ?></th>
+                            <th><?= __('Earset Id') ?></th>
+                            <th><?= __('Coat Id') ?></th>
+                            <th><?= __('Is Alive') ?></th>
+                            <th><?= __('Death Date') ?></th>
+                            <th><?= __('Death Primary Cause Id') ?></th>
+                            <th><?= __('Death Secondary Cause Id') ?></th>
+                            <th><?= __('Death Euthanized') ?></th>
+                            <th><?= __('Death Diagnosed') ?></th>
+                            <th><?= __('Death Necropsied') ?></th>
+                            <th><?= __('Comments') ?></th>
+                            <th><?= __('Picture') ?></th>
+                            <th><?= __('Picture Thumbnail') ?></th>
+                            <th><?= __('Creator User Id') ?></th>
+                            <th><?= __('State Id') ?></th>
+                            <th><?= __('Created') ?></th>
+                            <th><?= __('Modified') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($deathSecondaryCause->rats as $rats) : ?>
+                        <tr>
+                            <td><?= h($rats->id) ?></td>
+                            <td><?= h($rats->pedigree_identifier) ?></td>
+                            <td><?= h($rats->is_pedigree_custom) ?></td>
+                            <td><?= h($rats->owner_user_id) ?></td>
+                            <td><?= h($rats->name) ?></td>
+                            <td><?= h($rats->pup_name) ?></td>
+                            <td><?= h($rats->sex) ?></td>
+                            <td><?= h($rats->birth_date) ?></td>
+                            <td><?= h($rats->rattery_id) ?></td>
+                            <td><?= h($rats->litter_id) ?></td>
+                            <td><?= h($rats->color_id) ?></td>
+                            <td><?= h($rats->eyecolor_id) ?></td>
+                            <td><?= h($rats->dilution_id) ?></td>
+                            <td><?= h($rats->marking_id) ?></td>
+                            <td><?= h($rats->earset_id) ?></td>
+                            <td><?= h($rats->coat_id) ?></td>
+                            <td><?= h($rats->is_alive) ?></td>
+                            <td><?= h($rats->death_date) ?></td>
+                            <td><?= h($rats->death_primary_cause_id) ?></td>
+                            <td><?= h($rats->death_secondary_cause_id) ?></td>
+                            <td><?= h($rats->death_euthanized) ?></td>
+                            <td><?= h($rats->death_diagnosed) ?></td>
+                            <td><?= h($rats->death_necropsied) ?></td>
+                            <td><?= h($rats->comments) ?></td>
+                            <td><?= h($rats->picture) ?></td>
+                            <td><?= h($rats->picture_thumbnail) ?></td>
+                            <td><?= h($rats->creator_user_id) ?></td>
+                            <td><?= h($rats->state_id) ?></td>
+                            <td><?= h($rats->created) ?></td>
+                            <td><?= h($rats->modified) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['controller' => 'Rats', 'action' => 'view', $rats->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Rats', 'action' => 'edit', $rats->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Rats', 'action' => 'delete', $rats->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rats->id)]) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

@@ -7,26 +7,17 @@ namespace App\Controller;
  * Roles Controller
  *
  * @property \App\Model\Table\RolesTable $Roles
- *
  * @method \App\Model\Entity\Role[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class RolesController extends AppController
 {
-    public function beforeFilter(\Cake\Event\EventInterface $event)
-    {
-        parent::beforeFilter($event);
-        // No authentication needed on consultation
-        //$this->Authentication->addUnauthenticatedActions(['index', 'view']);
-    }
-
     /**
      * Index method
      *
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|null|void Renders view
      */
     public function index()
     {
-        $this->Authorization->skipAuthorization();
         $roles = $this->paginate($this->Roles);
 
         $this->set(compact('roles'));
@@ -36,7 +27,7 @@ class RolesController extends AppController
      * View method
      *
      * @param string|null $id Role id.
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
@@ -44,20 +35,18 @@ class RolesController extends AppController
         $role = $this->Roles->get($id, [
             'contain' => ['Users'],
         ]);
-        $this->Authorization->authorize($role);
 
-        $this->set('role', $role);
+        $this->set(compact('role'));
     }
 
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
         $role = $this->Roles->newEmptyEntity();
-        $this->Authorization->authorize($role);
         if ($this->request->is('post')) {
             $role = $this->Roles->patchEntity($role, $this->request->getData());
             if ($this->Roles->save($role)) {
@@ -74,7 +63,7 @@ class RolesController extends AppController
      * Edit method
      *
      * @param string|null $id Role id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
@@ -82,7 +71,6 @@ class RolesController extends AppController
         $role = $this->Roles->get($id, [
             'contain' => [],
         ]);
-        $this->Authorization->authorize($role);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $role = $this->Roles->patchEntity($role, $this->request->getData());
             if ($this->Roles->save($role)) {
@@ -99,14 +87,13 @@ class RolesController extends AppController
      * Delete method
      *
      * @param string|null $id Role id.
-     * @return \Cake\Http\Response|null Redirects to index.
+     * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $role = $this->Roles->get($id);
-        $this->Authorization->authorize($role);
         if ($this->Roles->delete($role)) {
             $this->Flash->success(__('The role has been deleted.'));
         } else {
