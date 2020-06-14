@@ -390,17 +390,19 @@ class RatsController extends AppController
 
         $children = [];
         $child_no = 0;
-        foreach($rat->bred_litters->offspring_rats as $offspring) {
-            $child = [
-                $child_no => [
-                    'name' => $offspring->usual_name,
-                    'sex' => $offspring->sex,
-                    'id' => $offspring->pedigree_identifier,
-                    '_children' => []
-                ]
-            ];
-            array_merge($children,$child);
-            $child_no++;
+        foreach($rat->bred_litters as $litter) {
+            foreach ($litter->offspring_rats as $offspring) {
+                $child = [
+                    $child_no => [
+                        'name' => $offspring->usual_name,
+                        'sex' => $offspring->sex,
+                        'id' => $offspring->pedigree_identifier,
+                        '_children' => []
+                    ]
+                ];
+                array_merge($children,$child);
+                $child_no++;
+            }
         }
 
         // complete array
