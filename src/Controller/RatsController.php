@@ -384,12 +384,6 @@ class RatsController extends AppController
                     'sex' => 'F',
                     'id' => "1",
                     '_parents' => []
-                ],
-                '1' => [
-                    'name' => $rat->birth_litter->sire[0]->usual_name,
-                    'sex' => 'M',
-                    'id' => "2",
-                    '_parents' => []
                 ]
             ],
             '_children' => []
