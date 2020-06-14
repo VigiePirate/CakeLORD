@@ -366,12 +366,130 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
             'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries',
-            'BirthLitters.Sire','BirthLitters.Dam','BirthLitters.Sire.BirthLitters.Ratteries','BirthLitters.Dam.BirthLitters.Ratteries',
+            'BirthLitters.Sire','BirthLitters.Dam','BirthLitters.Sire.BirthLitters.Ratteries','BirthLitters.Dam.BirthLitters.Ratteries','BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
             'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States',
             'BredLitters','BredLitters.Sire','BredLitters.Dam','BredLitters.OffspringRats','BredLitters.OffspringRats.OwnerUsers','BredLitters.OffspringRats.States','BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
             'Singularities'],
         ]);
 
-        $this->set('rat', $rat);
+        /* TEMPORARY : build parents and children subarrays */
+        // should be in the model with recursive calls to build all ascendants and descendants
+        // append id with some unique string (generation or path, like 0101 for mother's father's mother's father, for instance)
+        $parents = [
+            '0' => [
+                'name' => $rat->birth_litter->dam[0]->usual_name,
+                'sex' => 'F',
+                'description' => '', //should be $dam->variety
+                'death'=> '', //should be short_death_cause
+                'id' => $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
+                '_parents' => [
+                        '0' => [
+                            'id' => '1',
+                            'sex' => 'F',
+                            '_parents' => [
+                                '0' => [
+                                    'id' => '5',
+                                    'sex' => 'F',
+                                    '_parents' => []
+                                ],
+                                '1' => [
+                                    'id' => '6',
+                                    'sex' => 'M',
+                                    '_parents' => []
+                                ]
+                            ]
+                        ],
+                        '1' => [
+                            'id' => '2',
+                            'sex' => 'M',
+                            '_parents' => [
+                                '0' => [
+                                    'id' => '7',
+                                    'sex' => 'F',
+                                    '_parents' => []
+                                ],
+                                '1' => [
+                                    'id' => '8',
+                                    'sex' => 'M',
+                                    '_parents' => []
+                                ]
+                            ]
+                        ]
+                    ] // will call dam's parents in recursive implementation ; fake data for display
+            ],
+            '1' => [
+                'name' => $rat->birth_litter->sire[0]->usual_name,
+                'sex' => 'M',
+                'description' => '', //should be $sire->variety
+                'death'=> '', //should be short_death_cause
+                'id' => $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
+                '_parents' => [
+                    '0' => [
+                        'id' => '3',
+                        'sex' => 'F',
+                        '_parents' => [
+                            '0' => [
+                                'id' => '9',
+                                'sex' => 'F',
+                                '_parents' => []
+                            ],
+                            '1' => [
+                                'id' => '10',
+                                'sex' => 'M',
+                                '_parents' => []
+                            ]
+                        ]
+                    ],
+                    '1' => [
+                        'id' => '4',
+                        'sex' => 'M',
+                        '_parents' => [
+                            '0' => [
+                                'id' => '11',
+                                'sex' => 'F',
+                                '_parents' => []
+                            ],
+                            '1' => [
+                                'id' => '12',
+                                'sex' => 'M',
+                                '_parents' => []
+                            ]
+                        ]
+                    ]
+                ] // will call sire's parents in recursive implementation ; fake data for display
+            ]
+        ];
+
+        $children = [];
+        $child_no = 0;
+        foreach($rat->bred_litters as $litter) {
+            foreach ($litter->offspring_rats as $offspring) {
+                $children[$child_no] = [
+                    'name' => $offspring->name, // should be $offspring->usual_name
+                    'sex' => $offspring->sex,
+                    'death' => '', // should be $offspring->short_death_cause
+                    'description' => '', // should be $offspring->variety
+                    'id' => $offspring->pedigree_identifier, // should be modified to be unique in the tree
+                    '_children' => [] // will call child's children in recursive implementation
+                ];
+                $child_no++;
+            }
+        }
+        /* END TEMPORARY */
+
+        /* assemble complete array */
+        $family = [
+            'name' => $rat->usual_name,
+            'dates' => $rat->birth_date->i18nFormat('dd/MM/yyyy') . '-' . $rat->death_date->i18nFormat('dd/MM/yyyy') . ' (' . $rat->age_string . ')',
+            'description' => $rat->variety,
+            'death' => $rat->main_death_cause, // . ' (' . $rat->age_string . ')',
+            'sex' => 'X', // we want a different color for the root of the tree
+            'id' => $rat->pedigree_identifier,
+            '_parents' => $parents,
+            '_children' => $children
+        ];
+
+        $json = json_encode($family);
+        $this->set(compact('rat', 'json'));
     }
 }
