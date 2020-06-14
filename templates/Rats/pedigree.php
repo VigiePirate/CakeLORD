@@ -41,8 +41,7 @@
             <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
             <?= $this->Html->script('familytree'); ?>
             <script>
-            var json = <?= $json ?>,
-                boxWidth = 210,
+            var boxWidth = 210,
                 boxHeight = 70,
                 nodeWidth = 100,
                 nodeHeight = 240,
@@ -52,7 +51,7 @@
                 // to calculate the distance between nodes
                 separation = 0.8,
                 // data filename
-                json = <?= $json ?>;
+                json = <?= $json ?>,
             setup(); //setup(file)
             </script>
             <!-- end family tree -->
