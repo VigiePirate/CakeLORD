@@ -312,22 +312,22 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Move text to it's proper position
   nodeUpdate.select('text.name')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", -13)
+      .attr("dy", -15) //.attr("dy", -13)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", 7)
+      .attr("dy", 5) //.attr("dy", 7)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.death')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", 22)
+      .attr("dy", 20) //.attr("dy", 22)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.dates')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", 39)
+      .attr("dy", 35) //.attr("dy", 39)
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
