@@ -312,7 +312,7 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Move text to it's proper position
   nodeUpdate.select('text.name')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", -20) //.attr("dy", -13)
+      .attr("dy", -19) //.attr("dy", -13)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
@@ -327,7 +327,7 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   nodeUpdate.select('text.dates')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", 32) //.attr("dy", 39)
+      .attr("dy", 30) //.attr("dy", 39)
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
