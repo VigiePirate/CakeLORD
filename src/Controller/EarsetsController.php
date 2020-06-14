@@ -34,7 +34,7 @@ class EarsetsController extends AppController
     public function view($id = null)
     {
         $earset = $this->Earsets->get($id, [
-            'contain' => ['Rats'],
+            //'contain' => ['Rats'],
         ]);
 
         $this->set('earset', $earset);

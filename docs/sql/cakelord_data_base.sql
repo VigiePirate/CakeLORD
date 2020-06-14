@@ -27,7 +27,6 @@ SET time_zone = "+00:00";
 --
 
 INSERT INTO `countries` (`name`, `iso3166`) VALUES
-('Zombie Zone', 'ZZ'),
 ('France', 'FR'),
 ('Suisse', 'CH'),
 ('Belgique', 'BE');
@@ -357,10 +356,12 @@ INSERT INTO `singularities` (`name`, `picture`, `genotype`, `description`, `is_p
 LOCK TABLES `states` WRITE;
 /*!40000 ALTER TABLE `states` DISABLE KEYS */;
 INSERT INTO `states` (`id`, `name`, `color`,`symbol`) VALUES
-(1,'OK','1f9d55','✓'),
-(2,'Pending Staff Action','ff8c1b','✗'),
-(3,'Pending User Action','cc1f1a','✗'),
-(4,'Unverified','663300','✗');
+(1,'Certifié','1f9d55','✓'),
+(2,'Validé','1f9d55','✓'),
+(3,'En attente de validation par le staff','ff8c1b','✗'),
+(4,'En attente de modification par l\'utilisateur','cc1f1a','✗'),
+(5,'Non vérifié','663300','✗'),
+(6,'Invalide','663300','✗');
 /*!40000 ALTER TABLE `states` ENABLE KEYS */;
 UNLOCK TABLES;
 

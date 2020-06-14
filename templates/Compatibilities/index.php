@@ -5,8 +5,8 @@
  */
 ?>
 <div class="compatibilities index content">
-    <?= $this->Html->link(__('New Compatibility'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Compatibilities') ?></h3>
+    <?= $this->Html->link(__('New Compatibility'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('All Compatibility Rules') ?></h1>
     <div class="table-responsive">
         <table>
             <thead>

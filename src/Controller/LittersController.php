@@ -59,10 +59,13 @@ class LittersController extends AppController
     public function view($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['Users', 'States', 'OffspringRats', 'Dam', 'Sire', 'ParentRats', 'ParentRats.Ratteries', 'Contributions', 'Conversations', 'LitterSnapshots'],
+            'contain' => ['Users', 'States', 'OffspringRats', 'OffspringRats.States',
+            'Sire', 'Sire.Dilutions', 'Sire.Colors', 'Sire.Coats', 'Sire.Earsets','Sire.DeathPrimaryCauses','Sire.DeathSecondaryCauses',
+            'Dam', 'Dam.Dilutions', 'Dam.Colors', 'Dam.Coats', 'Dam.Earsets','Dam.DeathPrimaryCauses','Dam.DeathSecondaryCauses',
+            'ParentRats', 'ParentRats.Ratteries', 'Contributions', 'Conversations', 'LitterSnapshots'],
         ]);
         $offspringsQuery = $this->Litters->OffspringRats
-                                ->find()
+                                ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses','OwnerUsers']])
                                 ->matching('BirthLitters', function (\Cake\ORM\Query $query) use ($litter) {
                                     return $query->where([
                                         'BirthLitters.id' => $litter->id

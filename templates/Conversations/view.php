@@ -7,14 +7,21 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
+            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+          'url' => ['controller' => 'Conversations', 'action' => 'add'],
+          'class' => 'side-nav-icon',
+          'alt' => __('Report')]) ?>
+      <?= $this->Html->image('/img/icon-help.svg', [
+              'url' => ['controller' => 'Articles', 'action' => 'index'],
+              'class' => 'side-nav-icon',
+              'alt' => __('Help')]) ?>
             <?= $this->Html->link(__('Edit Conversation'), ['action' => 'edit', $conversation->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Conversation'), ['action' => 'delete', $conversation->id], ['confirm' => __('Are you sure you want to delete # {0}?', $conversation->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Conversations'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('New Conversation'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="conversations view content">
             <h3><?= h($conversation->id) ?></h3>
             <table>

@@ -86,15 +86,15 @@ class UsersController extends AppController
             $target = $this->Authentication->getLoginRedirect();
             if (! $target) {
                 $target = [
-                    'controller' => 'Pages',
-                    'action' => 'display',
+                    'controller' => 'Users',
+                    'action' => 'home',
                 ];
             }
             return $this->redirect($target);
         }
 
         // display error if user submitted and authentication failed
-        if ($this->request->is('post') && !$result->isValid()) {
+        if ( $this->request->is('post') && !$result->isValid() ) {
             $this->Flash->error(__('Invalid username or password'));
             // $this->log($result->getStatus());
 
@@ -269,7 +269,17 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Roles', 'Conversations', 'OwnerRats', 'CreatorRats', 'Ratteries'],
+            'contain' => ['Roles', 'Conversations',
+            'OwnerRats', 'OwnerRats.States','OwnerRats.DeathPrimaryCauses','OwnerRats.DeathSecondaryCauses',
+            'OwnerRats.BirthLitters','OwnerRats.Ratteries','OwnerRats.BirthLitters.Ratteries',
+            'OwnerRats.BirthLitters.Sire','OwnerRats.BirthLitters.Sire.BirthLitters','OwnerRats.BirthLitters.Sire.BirthLitters.Ratteries',
+            'OwnerRats.BirthLitters.Dam','OwnerRats.BirthLitters.Dam.BirthLitters','OwnerRats.BirthLitters.Dam.BirthLitters.Ratteries',
+            'CreatorRats','CreatorRats.States','CreatorRats.DeathPrimaryCauses','CreatorRats.DeathSecondaryCauses',
+            'CreatorRats.BirthLitters','CreatorRats.Ratteries','CreatorRats.BirthLitters.Ratteries',
+            'CreatorRats.BirthLitters.Sire','CreatorRats.BirthLitters.Sire.BirthLitters','CreatorRats.BirthLitters.Sire.BirthLitters.Ratteries',
+            'CreatorRats.BirthLitters.Dam','CreatorRats.BirthLitters.Dam.BirthLitters','CreatorRats.BirthLitters.Dam.BirthLitters.Ratteries',
+
+            'Ratteries', 'Ratteries.States','Ratteries.Countries'],
         ]);
         $this->Authorization->authorize($user);
 

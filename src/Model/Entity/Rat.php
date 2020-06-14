@@ -210,29 +210,35 @@ class Rat extends Entity
         if (isset($this->birth_date)) {
             return $agedate->diffInMonths($this->_fields['birth_date'], true);
         } else {
-            return 0; // Should raise exception
+            return -1; // Should raise exception
         }
     }
 
     protected function _getAgeString()
     {
-        /* if(
+        /* bugged code, consider everyone as lost -- should be a "is_lost" separate test
+        if(
             (!$this->is_alive && !isset($this->_fields['death_primary_cause']))
             || (!$this->is_alive && isset($this->_fields['death_primary_cause']) && $this->death_primary_cause_id == 1 && !isset($this->_fields['death_secondary_cause']))
             || (!$this->is_alive && isset($this->_fields['death_primary_cause']) && $this->death_primary_cause_id == 1 && isset($this->_fields['death_primary_cause']) && $this->death_secondary_cause_id == 1)
             || ($this->is_alive && $this->age>54)
         ) {
             return $age = 'Unknown (supposed deceased)';
-        } */
+        }
+        */
 
-        if (! $this->age) { // Should raise exception
-            return $age = 'Unknown (birth or death date unknown)';
+        if ($this->age < 0) { // Should raise exception
+            return $age = 'Unknown';
         }
         if (! $this->_fields['is_alive'] ) {
-            $age = $this->has('death_date') ?  ($this->age . ' months') : ('supposed deceased, unknown age');
+            $age = $this->has('death_date') ?  ($this->age . ' months') : ('Unknown') ;//('supposed deceased, unknown age');
             return $age;
         }  else {
-            return $age = $this->age . ' months';
+            if($this->age<1) {
+                return $age = $this->precise_age . ' days';
+            } else {
+                return $age = $this->age . ' months';
+            }
         }
     }
 
@@ -284,6 +290,61 @@ class Rat extends Entity
             // return $string . $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]) . ', ';
         }, '');
         return trim($str, ', ');
+    }
+
+    protected function _getMainDeathCause() // same as ShortDeathCause without the trim
+    {
+        if(!$this->is_alive) {
+            if(!isset($this->death_primary_cause)) {
+                return 'Unknown'; // should raise exception
+            }
+            if(isset($this->death_secondary_cause)) {
+                $cause = h($this->death_secondary_cause->name);
+            } else {
+                $cause = h($this->death_primary_cause->name);
+            }
+        } else {
+            if($this->age > 54) {
+                $cause = __('Unknown (presumably dead)'); // ndash and fine space, please edit carefully
+            } else {
+                $cause = '– ' . __('Alive') . ' –'; // ndash and fine space, please edit carefully
+            }
+        }
+        return $cause;
+    }
+
+    protected function _getShortDeathCause()
+    {
+        if(!$this->is_alive) {
+            if(!isset($this->death_primary_cause)) {
+                return 'Unknown'; // should raise exception
+            }
+            if(isset($this->death_secondary_cause)) {
+                $cause = h($this->death_secondary_cause->name);
+            } else {
+                $cause = h($this->death_primary_cause->name);
+            }
+            // trim cause to before first comma or parenthesis for concision
+            $cause = strpos($cause, "(") ? substr($cause, 0, strpos($cause, "(")) : $cause;
+            $cause = strpos($cause, ",") ? substr($cause, 0, strpos($cause, ",")) : $cause;
+        } else {
+            if($this->age > 54) {
+                $cause = '– ' . __('presumably dead') . ' –'; // ndash and fine space, please edit carefully
+            } else {
+                $cause = '– ' . __('alive') . ' –'; // ndash and fine space, please edit carefully
+            }
+        }
+        return $cause;
+    }
+
+    protected function _getVariety()
+    {
+        $dilution = ($this->dilution_id == 1) ? '' : $this->dilution->name;
+        $color = ($this->color_id == 1) ? '' : $this->color->name;
+        $coat = ($this->coat_id == 1) ? '' : $this->coat->name;
+        $earset = ($this->earset_id == 1) ? '' : $this->earset->name;
+        $variety = $dilution . ' ' . $color . ' ' . $earset . ' ' . $coat ;
+        return $variety;
     }
 
 }

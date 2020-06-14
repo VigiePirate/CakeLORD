@@ -5,8 +5,8 @@
  */
 ?>
 <div class="singularities index content">
-    <?= $this->Html->link(__('New Singularity'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Singularities') ?></h3>
+    <?= $this->Html->link(__('New Singularity'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('All Singularities') ?></h1>
     <div class="table-responsive">
         <table>
             <thead>

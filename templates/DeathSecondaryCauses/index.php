@@ -5,8 +5,8 @@
  */
 ?>
 <div class="deathSecondaryCauses index content">
-    <?= $this->Html->link(__('New Death Secondary Cause'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Death Secondary Causes') ?></h3>
+    <?= $this->Html->link(__('New Death Secondary Cause'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('All Death Secondary Causes') ?></h1>
     <div class="table-responsive">
         <table>
             <thead>
