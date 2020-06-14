@@ -381,13 +381,15 @@ class RatsController extends AppController
                 'sex' => 'F',
                 'description' => '', //should be variey
                 'death'=> '', //should be short_death_cause
-                'id' => '0_' . $rat->birth_litter->dam[0]->pedigree_identifier,
+                'id' => $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
                 '_parents' => [] // will call dam's parents in recursive implementation
             ],
             '1' => [
                 'name' => $rat->birth_litter->sire[0]->usual_name,
                 'sex' => 'M',
-                'id' => '1_' . $rat->birth_litter->sire[0]->pedigree_identifier,
+                'description' => '', //should be variey
+                'death'=> '', //should be short_death_cause
+                'id' => $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
                 '_parents' => [] // will call sire's parents in recursive implementation
             ]
         ];
@@ -398,10 +400,10 @@ class RatsController extends AppController
             foreach ($litter->offspring_rats as $offspring) {
                 $children[$child_no] = [
                     'name' => $offspring->name, // should be $offspring->usual_name
+                    'sex' => $offspring->sex,
                     'death' => '', // should be $offspring->short_death_cause
                     'description' => '', // should be $offspring->variety
-                    'sex' => $offspring->sex,
-                    'id' => $offspring->pedigree_identifier,
+                    'id' => $offspring->pedigree_identifier, // should be modified to be unique in the tree
                     '_children' => [] // will call child's children in recursive implementation
                 ];
                 $child_no++;
