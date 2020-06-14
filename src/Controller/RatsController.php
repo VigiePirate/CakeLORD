@@ -379,7 +379,7 @@ class RatsController extends AppController
             '0' => [
                 'name' => $rat->birth_litter->dam[0]->usual_name,
                 'sex' => 'F',
-                'description' => $rat->birth_litter->dam[0]->birth_datei18nFormat('dd/MM/yyyy') . '-' . $rat->birth_litter->dam[0]->death_datei18nFormat('dd/MM/yyyy'), //should be $dam->variety
+                'description' => $rat->birth_litter->dam[0]->birth_date->i18nFormat('dd/MM/yyyy') . '-' . $rat->birth_litter->dam[0]->death_date->i18nFormat('dd/MM/yyyy'), //should be $dam->variety
                 'death'=> $rat->birth_litter->dam[0]->primary_death_cause->name, //should be short_death_cause
                 'id' => $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
                 '_parents' => [] // will call dam's parents in recursive implementation
