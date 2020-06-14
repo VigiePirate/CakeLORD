@@ -376,13 +376,13 @@ class RatsController extends AppController
             'name' => $rat->usual_name,
             'description' => $rat->variety,
             'death' => $rat->age_string,
-            'sex' => $rat->sex,
+            'sex' => 'X', // we want a different color for the root of the tree
             'id' => $rat->pedigree_identifier,
             '_parents' => [],
             '_children' => []
         ];
-        //$rat; // should be replaced by creating an array with the proper format
-        $json = json_encode($family); // option for readable files: JSON_PRETTY_PRINT
+
+        $json = json_encode($family);
         $this->set(compact('rat', 'json'));
     }
 }
