@@ -372,27 +372,35 @@ class RatsController extends AppController
             'Singularities'],
         ]);
 
+        // should be in the model with recursive calls to build all ascendants and descendants
+        $parents = [
+            '0' => [
+                'name' => $rat->birth_litter->dam[0]->usual_name,
+                'sex' => 'F',
+                'id' => '0_' . $rat->birth_litter->dam[0]->pedigree_indentifier,
+                '_parents' => []
+            ],
+            '1' => [
+                'name' => $rat->birth_litter->sire[0]->usual_name,
+                'sex' => 'M',
+                'id' => '1_' . $rat->birth_litter->sire[0]->pedigree_indentifier,
+                '_parents' => []
+            ]
+        ];
+
+        $children = [
+
+        ];
+
+        // complete array
         $family = [
             'name' => $rat->usual_name,
             'description' => $rat->variety,
             'death' => $rat->short_death_cause . ' (' . $rat->age_string . ')',
             'sex' => 'X', // we want a different color for the root of the tree
             'id' => $rat->pedigree_identifier,
-            '_parents' => [
-                '0' => [
-                    'name' => $rat->birth_litter->dam[0]->usual_name,
-                    'sex' => 'F',
-                    'id' => "1",
-                    '_parents' => []
-                ],
-                '1' => [
-                    'name' => $rat->birth_litter->sire[0]->usual_name,
-                    'sex' => 'M',
-                    'id' => "2",
-                    '_parents' => []
-                ]
-            ],
-            '_children' => []
+            '_parents' => $parents,
+            '_children' => $children
         ];
 
         $json = json_encode($family);
