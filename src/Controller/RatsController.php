@@ -385,7 +385,6 @@ class RatsController extends AppController
                 '_parents' => [
                         '0' => [],
                         '1' => []
-                        ]
                     ] // will call dam's parents in recursive implementation ; fake data for display
             ],
             '1' => [
@@ -397,7 +396,6 @@ class RatsController extends AppController
                 '_parents' => [
                     '0' => [],
                     '1' => []
-                    ]
                 ] // will call sire's parents in recursive implementation ; fake data for display
             ]
         ];
