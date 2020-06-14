@@ -383,10 +383,8 @@ class RatsController extends AppController
                 'death'=> '', //should be short_death_cause
                 'id' => $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
                 '_parents' => [
-                        'id' => "1",
-                        '_parents' => [
-                            '0' => [],
-                            '1' => []
+                        '0' => [],
+                        '1' => []
                         ]
                     ] // will call dam's parents in recursive implementation ; fake data for display
             ],
@@ -397,12 +395,10 @@ class RatsController extends AppController
                 'death'=> '', //should be short_death_cause
                 'id' => $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
                 '_parents' => [
-                        'id' => "2",
-                        '_parents' => [
-                            '0' => [],
-                            '1' => []
-                        ]
-                    ] // will call sire's parents in recursive implementation ; fake data for display
+                    '0' => [],
+                    '1' => []
+                    ]
+                ] // will call sire's parents in recursive implementation ; fake data for display
             ]
         ];
 
