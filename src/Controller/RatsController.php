@@ -400,7 +400,7 @@ class RatsController extends AppController
                         '_children' => []
                     ]
                 ];
-                array_merge($children,$child);
+                array_push($children,$child);
                 $child_no++;
             }
         }
