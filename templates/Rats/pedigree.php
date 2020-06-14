@@ -52,7 +52,6 @@
                 // to calculate the distance between nodes
                 separation = 0.8,
                 // data filename
-                // file = "/js/" + <?= $rat->id ?> + ".json";
                 json = <?= $json ?>;
             setup(); //setup(file)
             </script>
