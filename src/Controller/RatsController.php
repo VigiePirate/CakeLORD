@@ -386,12 +386,34 @@ class RatsController extends AppController
                         '0' => [
                             'id' => '1',
                             'sex' => 'F',
-                            '_parents' => []
+                            '_parents' => [
+                                '0' => [
+                                    'id' => '5',
+                                    'sex' => 'F',
+                                    '_parents' => []
+                                ],
+                                '1' => [
+                                    'id' => '6',
+                                    'sex' => 'M',
+                                    '_parents' => []
+                                ]
+                            ]
                         ],
                         '1' => [
                             'id' => '2',
                             'sex' => 'M',
-                            '_parents' => []
+                            '_parents' => [
+                                '0' => [
+                                    'id' => '7',
+                                    'sex' => 'F',
+                                    '_parents' => []
+                                ],
+                                '1' => [
+                                    'id' => '8',
+                                    'sex' => 'M',
+                                    '_parents' => []
+                                ]
+                            ]
                         ]
                     ] // will call dam's parents in recursive implementation ; fake data for display
             ],
@@ -405,12 +427,34 @@ class RatsController extends AppController
                     '0' => [
                         'id' => '3',
                         'sex' => 'F',
-                        '_parents' => []
+                        '_parents' => [
+                            '0' => [
+                                'id' => '9',
+                                'sex' => 'F',
+                                '_parents' => []
+                            ],
+                            '1' => [
+                                'id' => '10',
+                                'sex' => 'M',
+                                '_parents' => []
+                            ]
+                        ]
                     ],
                     '1' => [
                         'id' => '4',
                         'sex' => 'M',
-                        '_parents' => []
+                        '_parents' => [
+                            '0' => [
+                                'id' => '11',
+                                'sex' => 'F',
+                                '_parents' => []
+                            ],
+                            '1' => [
+                                'id' => '12',
+                                'sex' => 'M',
+                                '_parents' => []
+                            ]
+                        ]
                     ]
                 ] // will call sire's parents in recursive implementation ; fake data for display
             ]
