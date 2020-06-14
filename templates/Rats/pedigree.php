@@ -42,14 +42,14 @@
             <?= $this->Html->script('familytree'); ?>
             <script>
             var boxWidth = 210, //210
-                boxHeight = 90, //70
-                nodeWidth = 130, //100
+                boxHeight = 80, //70
+                nodeWidth = 120, //100
                 nodeHeight = 240, //240
                 // duration of transitions in ms
                 duration = 500,
                 // d3 multiplies the node size by this value
                 // to calculate the distance between nodes
-                separation = 1, // 0.8
+                separation = 0.9, // 0.8
                 // data filename
                 json = <?= $json ?>;
             setup(); //setup(file)
