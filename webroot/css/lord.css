@@ -781,6 +781,10 @@ svg {
   font-size: 12px;
 }
 
+.person text.dates {
+  font-size: 12px;
+}
+
 .link {
   fill: none;
   stroke: #ccc;

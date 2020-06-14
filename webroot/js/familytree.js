@@ -14,16 +14,23 @@ function setup() {
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
     // Offset so that first pan and zoom does not jump back to the origin
+<<<<<<< HEAD
     .translate([380, 330]);
 
   var svg = d3.select("#familytree").append("svg")
     .attr("viewBox", "0 0 1000 660" )
+=======
+    .translate([380, 375]); //.translate([380, 330]);
+
+  var svg = d3.select("#familytree").append("svg")
+    .attr("viewBox", "0 0 1000 750" ) //.attr("viewBox", "0 0 1000 660" )
+>>>>>>> pedigree
     .attr("preserveAspectRatio", "xMidYMid meet")
     .call(zoom)
     .append('g')
     // Left padding of tree so that the whole root node is on the screen.
     // TODO: find a better way
-    .attr("transform", "translate(380,330)");
+    .attr("transform", "translate(380,375)"); //.attr("transform", "translate(380,330)");
 
   // One tree to display the ancestors
   var ancestorTree = new Tree(svg, 'ancestor', 1);
@@ -47,40 +54,6 @@ function setup() {
     }
   });
 
-<<<<<<< HEAD
-  d3.json('/family.json', function(error, json){
-
-    if(error) {
-      return console.error(error);
-    }
-
-    // D3 modifies the objects by setting properties such as
-    // coordinates, parent, and children. Thus the same node
-    // node can't exist in two trees. But we need the root to
-    // be in both so we create proxy nodes for the root only.
-    var ancestorRoot = rootProxy(json);
-    var descendantRoot = rootProxy(json);
-
-    // Start with only the first few generations of ancestors showing
-    ancestorRoot._parents.forEach(function(parents){
-      parents._parents.forEach(collapse);
-      //parents._parents._parents.forEach(collapse);
-    });
-
-    // Start with only one generation of descendants showing
-    descendantRoot._children.forEach(collapse);
-
-    // Set the root nodes
-    ancestorTree.data(ancestorRoot);
-    descendantsTree.data(descendantRoot);
-
-    // Draw the tree
-    ancestorTree.draw(ancestorRoot);
-    descendantsTree.draw(descendantRoot);
-
-  });
-
-=======
   //d3.json(file, function(error, json){
 
   //  if(error) {
@@ -112,12 +85,12 @@ function setup() {
   descendantsTree.draw(descendantRoot);
 
   //});
->>>>>>> pedigree
 }
 
 function rootProxy(root){
   return {
     name: root.name,
+    dates:root.dates,
     description: root.description,
     death: root.death,
     id: root.id,
@@ -312,6 +285,18 @@ Tree.prototype.drawNodes = function(nodes, source){
       .style('fill-opacity', 0)
       .style('fill',"#606c76");
 
+    // Draw a fourth line just to see
+      nodeEnter.append("text")
+          .attr("dx", 0)
+          .attr("dy", 0)
+          .attr("text-anchor", "start")
+          .attr('class', 'dates')
+          .text(function(d) {
+            return d.dates;
+          })
+          .style('fill-opacity', 0)
+          .style('fill',"#606c76");
+
   // Update the position of both old and new nodes
   var nodeUpdate = node.transition()
       .duration(duration)
@@ -333,21 +318,22 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Move text to it's proper position
   nodeUpdate.select('text.name')
       .attr("dx", -(boxWidth/2) + 8)
-<<<<<<< HEAD
-      .attr("dy", -14)
-=======
-      .attr("dy", -13)
->>>>>>> pedigree
+      .attr("dy", -19) //.attr("dy", -13)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", 7)
+      .attr("dy", 0) //.attr("dy", 7)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.death')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", 22)
+      .attr("dy", 15) //.attr("dy", 22)
+      .style('fill-opacity', 1);
+
+  nodeUpdate.select('text.dates')
+      .attr("dx", -(boxWidth/2) + 8)
+      .attr("dy", 30) //.attr("dy", 39)
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
@@ -486,8 +472,3 @@ function sexStroke(d){
     }
   }
 }
-<<<<<<< HEAD
-
-setup();
-=======
->>>>>>> pedigree
