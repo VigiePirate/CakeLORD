@@ -84,6 +84,7 @@ function setup() {
 function rootProxy(root){
   return {
     name: root.name,
+    dates:root.dates,
     description: root.description,
     death: root.death,
     id: root.id,
@@ -278,6 +279,18 @@ Tree.prototype.drawNodes = function(nodes, source){
       .style('fill-opacity', 0)
       .style('fill',"#606c76");
 
+    // Draw a fourth line just to see
+      nodeEnter.append("text")
+          .attr("dx", 0)
+          .attr("dy", 0)
+          .attr("text-anchor", "start")
+          .attr('class', 'dates')
+          .text(function(d) {
+            return d.dates;
+          })
+          .style('fill-opacity', 0)
+          .style('fill',"#606c76");
+
   // Update the position of both old and new nodes
   var nodeUpdate = node.transition()
       .duration(duration)
@@ -310,6 +323,11 @@ Tree.prototype.drawNodes = function(nodes, source){
   nodeUpdate.select('text.death')
       .attr("dx", -(boxWidth/2) + 8)
       .attr("dy", 22)
+      .style('fill-opacity', 1);
+
+  nodeUpdate.select('text.dates')
+      .attr("dx", -(boxWidth/2) + 8)
+      .attr("dy", 39)
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
