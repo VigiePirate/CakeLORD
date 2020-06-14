@@ -128,7 +128,7 @@
                     </tr>
                     <tr>
                         <th></th>
-                        <td><?= $this->Html->link('See interactive family tree', ['controller' => 'Rats', 'action' => 'pedigree', $rat->id]) ?></td>
+                        <td><?= $this->Html->link('See interactive family tree', ['controller' => 'Rats', 'action' => 'pedigree', $rat->id]) ?> (all generations included)</td>
                     </tr>
                 </table>
 
