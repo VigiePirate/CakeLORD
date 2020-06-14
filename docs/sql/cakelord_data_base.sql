@@ -380,17 +380,17 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 UNLOCK TABLES;
 
 --
--- Déchargement des données de la table `litters_contributions`
+-- Déchargement des données de la table `contribution_types`
 --
 
-LOCK TABLES `litters_contributions` WRITE;
-/*!40000 ALTER TABLE `litters_contributions` DISABLE KEYS */;
-INSERT INTO `litters_contributions` (`id`, `name`, `priority`) VALUES
+LOCK TABLES `contribution_types` WRITE;
+/*!40000 ALTER TABLE `contribution_types` DISABLE KEYS */;
+INSERT INTO `contribution_types` (`id`, `name`, `priority`) VALUES
 (1, 'Lieu de naissance', 1),
 (2, 'Propriétaire de la mère (portée externe)', 2),
 (3, 'Propriétaire du père (portée externe)', 3),
 (4, 'Association ayant géré le sauvetage', 4);
-/*!40000 ALTER TABLE `litters_contributions` ENABLE KEYS */;
+/*!40000 ALTER TABLE `contribution_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
