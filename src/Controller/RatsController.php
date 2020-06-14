@@ -382,13 +382,13 @@ class RatsController extends AppController
                 'description' => '', //should be variey
                 'death'=> '', //should be short_death_cause
                 'id' => '0_' . $rat->birth_litter->dam[0]->pedigree_identifier,
-                '_parents' => []
+                '_parents' => [] // will call dam's parents in recursive implementation
             ],
             '1' => [
                 'name' => $rat->birth_litter->sire[0]->usual_name,
                 'sex' => 'M',
                 'id' => '1_' . $rat->birth_litter->sire[0]->pedigree_identifier,
-                '_parents' => []
+                '_parents' => [] // will call sire's parents in recursive implementation
             ]
         ];
 
@@ -402,7 +402,7 @@ class RatsController extends AppController
                     'description' => '', // should be $offspring->variety
                     'sex' => $offspring->sex,
                     'id' => $offspring->pedigree_identifier,
-                    '_children' => []
+                    '_children' => [] // will call child's children in recursive implementation
                 ];
                 $child_no++;
             }
