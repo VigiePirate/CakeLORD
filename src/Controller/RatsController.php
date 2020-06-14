@@ -349,7 +349,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries','States'],
+            'contain' => ['OwnerUsers','Ratteries','States'],
         ];
         $rats = $this->paginate($rats);
 
@@ -366,7 +366,10 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
             'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries',
+<<<<<<< HEAD
             'BirthLitters.Sire','BirthLitters.Dam','BirthLitters.Sire.BirthLitters.Ratteries','BirthLitters.Dam.BirthLitters.Ratteries','BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
+=======
+>>>>>>> f35acc651b149a8cfde584d58011cbcdf89af2d4
             'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States',
             'BredLitters','BredLitters.Sire','BredLitters.Dam','BredLitters.OffspringRats','BredLitters.OffspringRats.OwnerUsers','BredLitters.OffspringRats.States','BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
             'Singularities'],
@@ -382,6 +385,7 @@ class RatsController extends AppController
                 'description' => '', //should be $dam->variety
                 'death'=> '', //should be short_death_cause
                 'id' => $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
+<<<<<<< HEAD
                 '_parents' => [
                         '0' => [
                             'id' => '1',
@@ -416,6 +420,9 @@ class RatsController extends AppController
                             ]
                         ]
                     ] // will call dam's parents in recursive implementation ; fake data for display
+=======
+                '_parents' => [] // will call dam's parents in recursive implementation
+>>>>>>> f35acc651b149a8cfde584d58011cbcdf89af2d4
             ],
             '1' => [
                 'name' => $rat->birth_litter->sire[0]->usual_name,
@@ -423,6 +430,7 @@ class RatsController extends AppController
                 'description' => '', //should be $sire->variety
                 'death'=> '', //should be short_death_cause
                 'id' => $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
+<<<<<<< HEAD
                 '_parents' => [
                     '0' => [
                         'id' => '3',
@@ -457,6 +465,9 @@ class RatsController extends AppController
                         ]
                     ]
                 ] // will call sire's parents in recursive implementation ; fake data for display
+=======
+                '_parents' => [] // will call sire's parents in recursive implementation
+>>>>>>> f35acc651b149a8cfde584d58011cbcdf89af2d4
             ]
         ];
 
@@ -480,9 +491,14 @@ class RatsController extends AppController
         /* assemble complete array */
         $family = [
             'name' => $rat->usual_name,
+<<<<<<< HEAD
             'dates' => $rat->birth_date->i18nFormat('dd/MM/yyyy') . '-' . $rat->death_date->i18nFormat('dd/MM/yyyy') . ' (' . $rat->age_string . ')',
             'description' => $rat->variety,
             'death' => $rat->main_death_cause, // . ' (' . $rat->age_string . ')',
+=======
+            'description' => $rat->variety,
+            'death' => $rat->short_death_cause . ' (' . $rat->age_string . ')',
+>>>>>>> f35acc651b149a8cfde584d58011cbcdf89af2d4
             'sex' => 'X', // we want a different color for the root of the tree
             'id' => $rat->pedigree_identifier,
             '_parents' => $parents,

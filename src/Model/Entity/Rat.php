@@ -326,7 +326,7 @@ class Rat extends Entity
             }
             // trim cause to before first comma or parenthesis for concision
             $cause = strpos($cause, "(") ? substr($cause, 0, strpos($cause, "(")) : $cause;
-            $cause = strpos($cause, ",") ? substr($cause, 0, strpos($cause, ",")) : $cause;
+            $cause = strpos($cause, ",") ? substr($cause, 0, strpos($cause, ",")) . ', etc.' : $cause;
         } else {
             if($this->age > 54) {
                 $cause = '– ' . __('presumably dead') . ' –'; // ndash and fine space, please edit carefully
@@ -343,8 +343,9 @@ class Rat extends Entity
         $color = ($this->color_id == 1) ? '' : $this->color->name;
         $coat = ($this->coat_id == 1) ? '' : $this->coat->name;
         $earset = ($this->earset_id == 1) ? '' : $this->earset->name;
-        $variety = $dilution . ' ' . $color . ' ' . $earset . ' ' . $coat ;
-        return $variety;
+        $marking = ($this->marking_id == 1) ? '' : $this->marking->name;
+        $variety = $dilution . ' ' . $color . ' ' . $marking . ' ' . $earset . ' ' . $coat ;
+        return trim($variety);
     }
 
 }
