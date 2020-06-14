@@ -325,7 +325,7 @@ class Rat extends Entity
                 $cause = h($this->death_primary_cause->name);
             }
             // trim cause to before first comma or parenthesis for concision
-            $cause = strpos($cause, "(") ? substr($cause, 0, strpos($cause, "(")) . ', etc.' : $cause;
+            $cause = strpos($cause, "(") ? substr($cause, 0, strpos($cause, "(")) : $cause;
             $cause = strpos($cause, ",") ? substr($cause, 0, strpos($cause, ",")) . ', etc.' : $cause;
         } else {
             if($this->age > 54) {
