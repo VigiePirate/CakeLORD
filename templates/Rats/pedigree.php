@@ -43,13 +43,13 @@
             <script>
             var boxWidth = 210, //210
                 boxHeight = 80, //70
-                nodeWidth = 120, //100
+                nodeWidth = 110, //100
                 nodeHeight = 240, //240
                 // duration of transitions in ms
                 duration = 500,
                 // d3 multiplies the node size by this value
                 // to calculate the distance between nodes
-                separation = 0.5, // 0.8
+                separation = 0.75, // 0.8
                 // data filename
                 json = <?= $json ?>;
             setup(); //setup(file)
