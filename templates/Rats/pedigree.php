@@ -53,6 +53,7 @@
                 separation = 0.8,
                 // data filename
                 // file = "/js/" + <?= $rat->id ?> + ".json";
+                json = <?= $rat->json ?>;
             setup(); //setup(file)
             </script>
             <!-- end family tree -->

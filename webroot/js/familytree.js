@@ -6,7 +6,7 @@
  * Normally you would extract the entire Tree class defintion into a
  * separate file and include it before this script tag.
  */
-function setup(file) {
+function setup() {
 
   // Setup zoom and pan
   var zoom = d3.behavior.zoom()
