@@ -366,7 +366,7 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
             'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries',
-            'BirthLitters.Sire','BirthLitters.Dam','BirthLitters.Sire.BirthLitters.Ratteries','BirthLitters.Dam.BirthLitters.Ratteries','BirthLitters.Dam.DeathPrimaryCauses',
+            'BirthLitters.Sire','BirthLitters.Dam','BirthLitters.Sire.BirthLitters.Ratteries','BirthLitters.Dam.BirthLitters.Ratteries','BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
             'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States',
             'BredLitters','BredLitters.Sire','BredLitters.Dam','BredLitters.OffspringRats','BredLitters.OffspringRats.OwnerUsers','BredLitters.OffspringRats.States','BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
             'Singularities'],
@@ -379,8 +379,8 @@ class RatsController extends AppController
             '0' => [
                 'name' => $rat->birth_litter->dam[0]->usual_name,
                 'sex' => 'F',
-                'description' => $rat->birth_litter->dam[0]->birth_date->i18nFormat('dd/MM/yyyy') . '-' . $rat->birth_litter->dam[0]->death_date->i18nFormat('dd/MM/yyyy'), //should be $dam->variety
-                'death'=> $rat->birth_litter->dam[0]->primary_death_cause->name, //should be short_death_cause
+                'description' => $rat->birth_litter->dam[0]->birth_date->i18nFormat('dd/MM/yyyy') . '-' . $rat->birth_litter->dam[0]->death_date->i18nFormat('dd/MM/yyyy') . ' (' . $rat->age_string . ')', //should be $dam->variety
+                'death'=> $rat->birth_litter->dam[0]->main_death_cause, //should be short_death_cause
                 'id' => $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
                 '_parents' => [] // will call dam's parents in recursive implementation
             ],
