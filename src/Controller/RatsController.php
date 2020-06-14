@@ -377,13 +377,13 @@ class RatsController extends AppController
             '0' => [
                 'name' => $rat->birth_litter->dam[0]->usual_name,
                 'sex' => 'F',
-                'id' => '0_' . $rat->birth_litter->dam[0]->pedigree_indentifier,
+                'id' => '0_' . $rat->birth_litter->dam[0]->pedigree_identifier,
                 '_parents' => []
             ],
             '1' => [
                 'name' => $rat->birth_litter->sire[0]->usual_name,
                 'sex' => 'M',
-                'id' => '1_' . $rat->birth_litter->sire[0]->pedigree_indentifier,
+                'id' => '1_' . $rat->birth_litter->sire[0]->pedigree_identifier,
                 '_parents' => []
             ]
         ];
