@@ -15,7 +15,7 @@ function setup() {
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
     // Offset so that first pan and zoom does not jump back to the origin
-    .translate([380, 375]); //.translate([380, 330]);
+    .translate([380, 360]); //.translate([380, 330]);
 
   var svg = d3.select("#familytree").append("svg")
     .attr("viewBox", "0 0 1000 720" ) //.attr("viewBox", "0 0 1000 660" )
@@ -24,7 +24,7 @@ function setup() {
     .append('g')
     // Left padding of tree so that the whole root node is on the screen.
     // TODO: find a better way
-    .attr("transform", "translate(380,375)"); //.attr("transform", "translate(380,330)");
+    .attr("transform", "translate(380,360)"); //.attr("transform", "translate(380,330)");
 
   // One tree to display the ancestors
   var ancestorTree = new Tree(svg, 'ancestor', 1);
