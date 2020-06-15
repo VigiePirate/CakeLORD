@@ -19,7 +19,7 @@ class ContributionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Ratteries', 'Litters', 'ContributionTypes'],
+            'contain' => ['Ratteries', 'Litters', 'Litters.Sire', 'Litters.Dam', 'ContributionTypes'],
         ];
         $contributions = $this->paginate($this->Contributions);
 
@@ -36,7 +36,7 @@ class ContributionsController extends AppController
     public function view($id = null)
     {
         $contribution = $this->Contributions->get($id, [
-            'contain' => ['Ratteries', 'Litters', 'ContributionTypes'],
+            'contain' => ['Ratteries', 'Litters', 'Litters.Sire', 'Litters.Dam', 'ContributionTypes'],
         ]);
 
         $this->set(compact('contribution'));
@@ -60,8 +60,8 @@ class ContributionsController extends AppController
             $this->Flash->error(__('The contribution could not be saved. Please, try again.'));
         }
         $ratteries = $this->Contributions->Ratteries->find('list', ['limit' => 200]);
-        $litters = $this->Contributions->Litters->find('list', ['limit' => 200]);
-        $contributionTypes = $this->Contributions->ContributionTypes->find('list', ['limit' => 200]);
+        $litters = $this->Contributions->Litters->find('list', ['limit' => 200, 'contain' => ['Sire', 'Dam']]);
+        $contributionTypes = $this->Contributions->ContributionTypes->find('list', ['limit' => 200, 'order' => ['priority' => 'ASC']]);
         $this->set(compact('contribution', 'ratteries', 'litters', 'contributionTypes'));
     }
 
@@ -87,8 +87,8 @@ class ContributionsController extends AppController
             $this->Flash->error(__('The contribution could not be saved. Please, try again.'));
         }
         $ratteries = $this->Contributions->Ratteries->find('list', ['limit' => 200]);
-        $litters = $this->Contributions->Litters->find('list', ['limit' => 200]);
-        $contributionTypes = $this->Contributions->ContributionTypes->find('list', ['limit' => 200]);
+        $litters = $this->Contributions->Litters->find('list', ['limit' => 200, 'contain' => ['Sire', 'Dam']]);
+        $contributionTypes = $this->Contributions->ContributionTypes->find('list', ['limit' => 200, 'order' => ['priority' => 'ASC']]);
         $this->set(compact('contribution', 'ratteries', 'litters', 'contributionTypes'));
     }
 

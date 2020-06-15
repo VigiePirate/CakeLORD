@@ -37,7 +37,7 @@
                     echo $this->Form->control('creator_user_id', ['options' => $users]);
                     echo $this->Form->control('state_id', ['options' => $states]);
                     echo $this->Form->control('parent_rats._ids', ['options' => $parentRats]);
-                    echo $this->Form->control('ratteries._ids', ['options' => $ratteries]);
+                    #echo $this->Form->control('ratteries._ids', ['options' => $ratteries]);
                     echo $this->Form->control('contributions._ids', ['options' => $contributions]);
                 ?>
             </fieldset>

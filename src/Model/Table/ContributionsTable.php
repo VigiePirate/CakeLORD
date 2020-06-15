@@ -56,6 +56,7 @@ class ContributionsTable extends Table
         $this->belongsTo('ContributionTypes', [
             'foreignKey' => 'contribution_type_id',
             'joinType' => 'INNER',
+            'finder' => 'Ordered',
         ]);
     }
 
@@ -88,5 +89,12 @@ class ContributionsTable extends Table
         $rules->add($rules->existsIn(['contribution_type_id'], 'ContributionTypes'));
 
         return $rules;
+    }
+
+    public function findOrdered(Query $query, array $options)
+    {
+        return $query
+            ->contain(['ContributionTypes', 'Ratteries'])
+            ->order(['ContributionTypes.priority' => 'ASC']);
     }
 }
