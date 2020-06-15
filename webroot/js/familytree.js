@@ -309,13 +309,14 @@ Tree.prototype.drawNodes = function(nodes, source){
         stroke: function(d){return sexStroke(d);}
       });
 
-  // Move text to it's proper position
+  // wrap text if necessary
   nodeUpdate.select('text.name')
       .call(wrap, boxWidth - 10);
 
+  // Move text to it's proper position
   nodeUpdate.select('text.tspan')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", -25) //.attr("dy", -13),
+      .attr("dy", 0) //.attr("dy", -13),
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.dates')
