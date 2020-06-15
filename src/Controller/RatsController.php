@@ -381,6 +381,7 @@ class RatsController extends AppController
                 'name' => $rat->birth_litter->dam[0]->usual_name,
                 'sex' => 'F',
                 'description' => '', //should be $dam->variety
+                'dates' => '',
                 'death'=> '', //should be short_death_cause
                 '_parents' => [] // will call dam's parents in recursive implementation ; fake data for display
             ],
@@ -389,6 +390,7 @@ class RatsController extends AppController
                 'name' => $rat->birth_litter->sire[0]->usual_name,
                 'sex' => 'M',
                 'description' => '', //should be $sire->variety
+                'dates' => '',
                 'death'=> '', //should be short_death_cause
                 '_parents' => [] // will call sire's parents in recursive implementation ; fake data for display
             ]
