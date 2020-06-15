@@ -312,15 +312,15 @@ Tree.prototype.drawNodes = function(nodes, source){
   // wrap text if necessary
   nodeUpdate.select('text.name')
       .call(wrap, boxWidth - 10)
-      .attr("dx", -(boxWidth/2)) //+8
+      .attr("dx", -(boxWidth/2) +8)
       .attr("dy", -19) //.attr("dy", -13),
       .style('fill-opacity', 1);
 
   // Move text to it's proper position
-  nodeUpdate.select('tspan')
-      .attr("dx", 0)
-      .attr("dy", 0) //.attr("dy", -13),
-      .style('fill-opacity', 1);
+  // nodeUpdate.select('tspan')
+  //    .attr("dx", 0)
+  //    .attr("dy", 0) //.attr("dy", -13),
+  //    .style('fill-opacity', 1);
 
   nodeUpdate.select('text.dates')
       .attr("dx", -(boxWidth/2) + 8)
