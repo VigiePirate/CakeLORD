@@ -317,10 +317,10 @@ Tree.prototype.drawNodes = function(nodes, source){
       .style('fill-opacity', 1);
 
   // Move text to it's proper position
-  // nodeUpdate.select('text.name.tspan')
-  //    .attr("dx", -(boxWidth/2) + 16)
-  //    .attr("dy", 0) //.attr("dy", -13),
-  //    .style('fill-opacity', 1);
+  nodeUpdate.select('text.tspan')
+      .attr("dx", -(boxWidth/2) + 16)
+      .attr("dy", -19) //.attr("dy", -13),
+      .style('fill-opacity', 1);
 
   nodeUpdate.select('text.dates')
       .attr("dx", -(boxWidth/2) + 8)
@@ -496,7 +496,7 @@ function sexStroke(d){
         line.pop();
         tspan.text(line.join(" "));
         line = [word];
-        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy - 1.1 + "em").text(word);
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
       }
     }
   });
