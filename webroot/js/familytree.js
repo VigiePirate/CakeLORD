@@ -311,10 +311,11 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   // Wrap name if it is too long
   nodeUpdate.select('text.name')
-      .call(wrap, (boxWidth-16))
+      .call(wrap, (boxWidth-20)) // 8u margin on left and right + border thickness
       //.attr("dx", -(boxWidth/2) + 8)
       // .attr("dy", -50) //.attr("dy", -13),
-      .style('fill-opacity', 1);
+      .style('fill-opacity', 1)
+      .style('anchor','middle');
 
   // Move text to it's proper position
   nodeUpdate.select('tspan')
