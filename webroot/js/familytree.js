@@ -315,7 +315,7 @@ Tree.prototype.drawNodes = function(nodes, source){
       //.attr("dx", -(boxWidth/2) + 8)
       // .attr("dy", -50) //.attr("dy", -13),
       .attr("text-anchor", "middle"),
-      .style('fill-opacity', 1),;
+      .style('fill-opacity', 1);
 
 
   // Move text to it's proper position
