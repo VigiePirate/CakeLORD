@@ -319,7 +319,7 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Move text to it's proper position
   nodeUpdate.select('tspan')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", -19) //.attr("dy", -13),
+      .attr("dy", -20) //.attr("dy", -13),
       .style('fill-opacity', 1);
 
   //nodeUpdate.select('text.dates')
@@ -485,7 +485,7 @@ function sexStroke(d){
         word,
         line = [],
         lineNumber = 0,
-        lineHeight = 1.1, // ems
+        lineHeight = 1.2, // ems
         y = text.attr("y"),
         dy = parseFloat(text.attr("dy")),
         tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
