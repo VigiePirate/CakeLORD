@@ -315,17 +315,17 @@ Tree.prototype.drawNodes = function(nodes, source){
       .attr("dy", -19) //.attr("dy", -13)
       .style('fill-opacity', 1);
 
-  nodeUpdate.select('text.description')
+  nodeUpdate.select('text.dates')
       .attr("dx", -(boxWidth/2) + 8)
       .attr("dy", 0) //.attr("dy", 7)
       .style('fill-opacity', 1);
 
-  nodeUpdate.select('text.death')
+  nodeUpdate.select('text.description')
       .attr("dx", -(boxWidth/2) + 8)
       .attr("dy", 15) //.attr("dy", 22)
       .style('fill-opacity', 1);
 
-  nodeUpdate.select('text.dates')
+  nodeUpdate.select('text.death')
       .attr("dx", -(boxWidth/2) + 8)
       .attr("dy", 30) //.attr("dy", 39)
       .style('fill-opacity', 1);
