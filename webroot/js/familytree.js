@@ -485,7 +485,7 @@ function sexStroke(d){
         word,
         line = [],
         lineNumber = 0,
-        lineHeight = 1.25, // ems
+        lineHeight = 1.1, // ems
         y = text.attr("y"),
         dy = parseFloat(text.attr("dy")),
         tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
@@ -496,7 +496,7 @@ function sexStroke(d){
         line.pop();
         tspan.text(line.join(" "));
         line = [word];
-        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").attr("dx", lineNumber++ * ((-boxWidth/2)+16)).text(word);
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").attr("dx", lineNumber++ * ((-boxWidth/2)+24)).text(word);
       }
     }
   });
