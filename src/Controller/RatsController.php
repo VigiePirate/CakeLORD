@@ -422,7 +422,7 @@ class RatsController extends AppController
             //'dates' => $rat->birth_date->i18nFormat('dd/MM/yyyy') . '-' . $rat->death_date->i18nFormat('dd/MM/yyyy') . ' (' . $rat->age_string . ')', // beware to check existence; should be in rat entity as $rat->dates?
             'dates' => $rat->birth_date->i18nFormat('dd/MM/yyyy') . ' (' . $rat->age_string . ')', // for debug
             'description' => $rat->variety,
-            'death' => $rat->main_death_cause, // . ' (' . $rat->age_string . ')',
+            'death' => $rat->short_death_cause . ' (' . $rat->age_string . ')',
             '_parents' => $parents,
             '_children' => $children
         ];
