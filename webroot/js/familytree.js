@@ -312,7 +312,7 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Wrap and move text to it's proper position
   nodeUpdate.select('text.name')
       .call(wrap, (boxWidth-16))
-      // .attr("dx", -(boxWidth/2) + 8)
+      .attr("dx", -(boxWidth/2) + 8)
       // .attr("dy", -50) //.attr("dy", -13),
       .style('fill-opacity', 1);
 
