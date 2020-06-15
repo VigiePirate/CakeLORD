@@ -317,10 +317,10 @@ Tree.prototype.drawNodes = function(nodes, source){
       .style('fill-opacity', 1);
 
   // Move text to it's proper position
-  // nodeUpdate.select('tspan')
-  //    .attr("dx", 0)
-  //    .attr("dy", 0) //.attr("dy", -13),
-  //    .style('fill-opacity', 1);
+  nodeUpdate.select('text.tspan')
+      .attr("dx", -(boxWidth/2) + 16)
+      .attr("dy", 0) //.attr("dy", -13),
+      .style('fill-opacity', 1);
 
   nodeUpdate.select('text.dates')
       .attr("dx", -(boxWidth/2) + 8)
