@@ -377,7 +377,7 @@ class RatsController extends AppController
         // append id with some unique string (generation or path, like 0101 for mother's father's mother's father, for instance)
         $parents = [
             '0' => [
-                'id' => $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
+                'id' => '0' . $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
                 'name' => $rat->birth_litter->dam[0]->usual_name,
                 'sex' => 'F',
                 'description' => '', //should be $dam->variety
@@ -386,7 +386,7 @@ class RatsController extends AppController
                 '_parents' => [] // will call dam's parents in recursive implementation ; fake data for display
             ],
             '1' => [
-                'id' => $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
+                'id' => '1' . $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
                 'name' => $rat->birth_litter->sire[0]->usual_name,
                 'sex' => 'M',
                 'description' => '', //should be $sire->variety
@@ -401,7 +401,7 @@ class RatsController extends AppController
         foreach($rat->bred_litters as $litter) {
             foreach ($litter->offspring_rats as $offspring) {
                 $children[$child_no] = [
-                    'id' => $offspring->pedigree_identifier, // should be modified to be unique in the tree
+                    'id' => $child_no . '_' . $offspring->pedigree_identifier, // should be modified to be unique in the tree
                     'name' => $offspring->name, // should be $offspring->usual_name
                     'sex' => $offspring->sex,
                     'dates' => '',
