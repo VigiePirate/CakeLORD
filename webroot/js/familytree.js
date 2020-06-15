@@ -18,8 +18,8 @@ function setup() {
     .translate([380, 360]); //.translate([380, 330]);
 
   var svg = d3.select("#familytree").append("svg")
-    .attr("viewBox", "0 0 1000 720" ) //.attr("viewBox", "0 0 1000 660" )
-    .attr("preserveAspectRatio", "xMidYMid meet")
+    //.attr("viewBox", "0 0 1000 720" ) //.attr("viewBox", "0 0 1000 660" )
+    //.attr("preserveAspectRatio", "xMidYMid meet")
     .call(zoom)
     .append('g')
     // Left padding of tree so that the whole root node is on the screen.
