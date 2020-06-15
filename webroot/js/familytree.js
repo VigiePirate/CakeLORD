@@ -244,9 +244,7 @@ Tree.prototype.drawNodes = function(nodes, source){
       });
 
   // Draw the person's name and position it inside the box
-  // With wrap if too long
   nodeEnter.append("text")
-      .call(wrap, boxWidth - 10)
       .attr("dx", 0)
       .attr("dy", 0)
       .attr("text-anchor", "start")
@@ -311,8 +309,9 @@ Tree.prototype.drawNodes = function(nodes, source){
         stroke: function(d){return sexStroke(d);}
       });
 
-  // Move text to it's proper position
+  // Wrap and move text to it's proper position
   nodeUpdate.select('text.name')
+      .call(wrap, boxWidth - 10)
       .attr("dx", -(boxWidth/2) + 8)
       .attr("dy", -19) //.attr("dy", -13),
       .style('fill-opacity', 1);
