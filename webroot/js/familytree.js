@@ -280,16 +280,16 @@ Tree.prototype.drawNodes = function(nodes, source){
       .style('fill',"#606c76");
 
     // Draw a fourth line just to see
-      nodeEnter.append("text")
-          .attr("dx", 0)
-          .attr("dy", 0)
-          .attr("text-anchor", "start")
-          .attr('class', 'dates')
-          .text(function(d) {
-            return d.dates;
-          })
-          .style('fill-opacity', 0)
-          .style('fill',"#606c76");
+      // nodeEnter.append("text")
+      //     .attr("dx", 0)
+      //     .attr("dy", 0)
+      //     .attr("text-anchor", "start")
+      //     .attr('class', 'dates')
+      //     .text(function(d) {
+      //       return d.dates;
+      //     })
+      //     .style('fill-opacity', 0)
+      //     .style('fill',"#606c76");
 
   // Update the position of both old and new nodes
   var nodeUpdate = node.transition()
@@ -322,10 +322,10 @@ Tree.prototype.drawNodes = function(nodes, source){
       .attr("dy", -19) //.attr("dy", -13),
       .style('fill-opacity', 1);
 
-  nodeUpdate.select('text.dates')
-      .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", 0) //.attr("dy", 7)
-      .style('fill-opacity', 1);
+  //nodeUpdate.select('text.dates')
+  //    .attr("dx", -(boxWidth/2) + 8)
+  //    .attr("dy", 0) //.attr("dy", 7)
+  //    .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
       .attr("dx", -(boxWidth/2) + 8)
