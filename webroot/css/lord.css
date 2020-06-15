@@ -771,6 +771,7 @@ svg {
 .person text.name {
   font-weight: bold;
   font-size: 14px;
+  width:30px;
   text-overflow: ellipsis;
 }
 
