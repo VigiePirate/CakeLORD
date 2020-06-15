@@ -319,8 +319,7 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   // Move text to it's proper position
   nodeUpdate.select('tspan')
-      // .attr("dx", -(boxWidth/2) + 8)
-      .attr("text-anchor", middle)
+      //.attr("dx", -(boxWidth/2) + 8)
       .attr("dy", -20) //.attr("dy", -13),
       .style('fill-opacity', 1);
 
