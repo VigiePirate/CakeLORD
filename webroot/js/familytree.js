@@ -312,9 +312,9 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Move text to it's proper position
   nodeUpdate.select('text.name')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", -19) //.attr("dy", -13)
+      .attr("dy", -25) //.attr("dy", -13)
       .style('fill-opacity', 1)
-      .call(wrap, boxWidth);
+      .call(wrap, boxWidth -1);
 
   nodeUpdate.select('text.dates')
       .attr("dx", -(boxWidth/2) + 8)
