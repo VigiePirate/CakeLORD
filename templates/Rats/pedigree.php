@@ -36,7 +36,7 @@
             <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
             <!-- d3.js  -->
-            <div id="fullscreen_container">
+            <div class="content" id="fullscreen_container">
                 <p>
                     <a href="#" id="toggle_fullscreen">Toggle full screen</a>
                 </p>
