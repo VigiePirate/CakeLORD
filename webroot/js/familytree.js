@@ -315,14 +315,11 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   // Truncate name and move it
   nodeUpdate.select('text.name')
-      .call(truncate, (boxWidth-20))
-      .attr("dx", -(boxWidth/2) + 8) ////
-      .attr("dy", -15)
-      .style('fill-opacity', 1);
+      .call(truncate, (boxWidth-20));
 
   nodeUpdate.select('tspan')
       .attr("dx", -(boxWidth/2) + 8) ////
-      .attr("dy", -15)
+      .attr("dy", -12)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
