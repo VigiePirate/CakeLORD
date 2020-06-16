@@ -51,7 +51,7 @@
             <?= $this->Html->script('fullscreen'); ?>
             <script>
             var boxWidth = 210, //210
-                boxHeight = 60, //80
+                boxHeight = 65, //80
                 nodeWidth = 100, //115
                 nodeHeight = 240, //240
                 // duration of transitions in ms
