@@ -319,17 +319,17 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   nodeUpdate.select('tspan')
       .attr("dx", -(boxWidth/2) + 8) ////
-      .attr("dy", -12)
+      .attr("dy", -11)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", 10) //.attr("dy", 22)
+      .attr("dy", 9) //.attr("dy", 22)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.death')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", 25) //.attr("dy", 39)
+      .attr("dy", 21) //.attr("dy", 39)
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
