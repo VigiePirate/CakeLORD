@@ -18,6 +18,10 @@
                     'alt' => __('Help')]) ?>
                 <div class="spacer"> </div>
                 <a href="#" id="toggle_fullscreen" class="button">Toggle full screen</a>
+                <?= $this->Html->image('/img/icon-fullscreen.svg', [
+                    'url' => '#',
+                    'class' => 'toggle_fullscreen side-nav-icon',
+                    'alt' => __('Full Screen')]) ?>
                 <?= $this->Html->image('/img/icon-print.svg', [
                     'url' => ['controller' => 'Rats', 'action' => 'print',$rat->id],
                     'class' => 'side-nav-icon',
