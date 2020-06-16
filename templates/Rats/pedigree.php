@@ -17,7 +17,6 @@
                     'class' => 'side-nav-icon',
                     'alt' => __('Help')]) ?>
                 <div class="spacer"> </div>
-                <a href="#" id="toggle_fullscreen" class="button">Toggle full screen</a>
                 <?= $this->Html->image('/img/icon-fullscreen.svg', [
                     'url' => '#',
                     'class' => 'toggle_fullscreen side-nav-icon',
