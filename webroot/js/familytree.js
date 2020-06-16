@@ -519,7 +519,7 @@ function truncate(text, width) {
         line = [],
         y = text.attr("y"),
         dy = parseFloat(text.attr("dy")),
-        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y); //.attr("dy", dy + "em");
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
     while (word = words.pop()) {
       line.push(word);
       if (tspan.node().getComputedTextLength() > width) {
