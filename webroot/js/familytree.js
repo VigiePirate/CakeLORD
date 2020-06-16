@@ -522,9 +522,9 @@ function truncate(text, width) {
         tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y); //.attr("dy", dy + "em");
     while (word = words.pop()) {
       line.push(word);
-      tspan.text(line.join(" "));
       if (tspan.node().getComputedTextLength() > width) {
-        tspan.text(line.join("..."));
+        line.push("...");
+        tspan.text(line.join(" "));
         tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", dy).text(word);
         break;
       }
