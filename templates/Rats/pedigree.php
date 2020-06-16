@@ -53,7 +53,7 @@
             var boxWidth = 210, //210
                 boxHeight = 70, //80
                 nodeWidth = 100, //115
-                nodeHeight = 240, //240
+                nodeHeight = 200, //240
                 // duration of transitions in ms
                 duration = 500,
                 // d3 multiplies the node size by this value
