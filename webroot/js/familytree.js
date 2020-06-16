@@ -313,27 +313,18 @@ Tree.prototype.drawNodes = function(nodes, source){
         stroke: function(d){return sexStroke(d);}
       });
 
-  // Wrap name if it is too long
+  // Truncate name if it is too long
   nodeUpdate.select('text.name')
       .call(truncate, (boxWidth-20))
       .attr("dx", -(boxWidth/2) + 8) ////
-      .attr("dy", -13) //.attr("dy", -13), ////
-      // .attr("text-anchor", "middle")
-      .style('fill-opacity', 1)
-      // .style("font-size", function(d) {
-      //  if (this.getComputedTextLength() > boxWidth) {
-      //    return Math.min(2 * boxWidth/2, (2 * boxWidth/2 - 8) / this.getComputedTextLength() * 14) + "px";
-      //  } else {
-      //    return "14px";
-      //  }
-      // })
-      ;
+      .attr("dy", -10)
+      .style('fill-opacity', 1);
 
   // Move text to it's proper position
-  nodeUpdate.select('tspan')
+  // nodeUpdate.select('tspan')
       //.attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", -20) //.attr("dy", -13),
-      .style('fill-opacity', 1);
+//      .attr("dy", -20) //.attr("dy", -13),
+//      .style('fill-opacity', 1);
 
   //nodeUpdate.select('text.dates')
   //    .attr("dx", -(boxWidth/2) + 8)
@@ -515,6 +506,11 @@ function wrap(text, width) {
   });
 }
 
+/**
+* Horribly complicated function to optimally truncate texts
+* Inspired from the previous
+*/
+
 function truncate(text, width) {
   text.each(function() {
     var text = d3.select(this),
@@ -536,3 +532,14 @@ function truncate(text, width) {
     }
   });
 }
+
+/*
+* Some unused code snippet to adapt font size of long texts
+*/
+// .style("font-size", function(d) {
+//  if (this.getComputedTextLength() > boxWidth) {
+//    return Math.min(2 * boxWidth/2, (2 * boxWidth/2 - 8) / this.getComputedTextLength() * 14) + "px";
+//  } else {
+//    return "14px";
+//  }
+// })
