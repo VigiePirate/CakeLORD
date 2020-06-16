@@ -114,7 +114,7 @@ class RatteriesController extends AppController
         $users = $this->Ratteries->Users->find('list', ['limit' => 200]);
         $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
         $states = $this->Ratteries->States->find('list', ['limit' => 200]);
-        $litters = $this->Ratteries->Litters->find('list', ['limit' => 200]);
+        $litters = $this->Ratteries->Litters->find('list', ['limit' => 500, 'contain' => ['Dam', 'Sire']]);
         $this->set(compact('rattery', 'users', 'countries', 'states', 'litters'));
     }
 
@@ -128,7 +128,7 @@ class RatteriesController extends AppController
     public function edit($id = null)
     {
         $rattery = $this->Ratteries->get($id, [
-            'contain' => ['Litters', 'Litters.ParentRats'],
+            'contain' => ['Litters', 'Litters.Sire', 'Litters.Dam'],
         ]);
         $this->Authorization->authorize($rattery);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -143,7 +143,7 @@ class RatteriesController extends AppController
         $users = $this->Ratteries->Users->find('list', ['limit' => 500]);
         $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
         $states = $this->Ratteries->States->find('list', ['limit' => 200]);
-        $litters = $this->Ratteries->Litters->find('list', ['limit' => 500]);
+        $litters = $this->Ratteries->Litters->find('list', ['limit' => 500, 'contain' => ['Dam', 'Sire']]);
         $this->set(compact('rattery', 'users', 'countries', 'states', 'litters'));
     }
 

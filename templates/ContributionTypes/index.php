@@ -1,12 +1,12 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\LittersContribution[]|\Cake\Collection\CollectionInterface $littersContributions
+ * @var \App\Model\Entity\ContributionType[]|\Cake\Collection\CollectionInterface $contributionTypes
  */
 ?>
-<div class="littersContributions index content">
-    <?= $this->Html->link(__('New Litters Contribution'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Litters Contributions') ?></h3>
+<div class="contributionTypes index content">
+    <?= $this->Html->link(__('New Contribution Type'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Contribution Types') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
@@ -18,15 +18,15 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($littersContributions as $littersContribution): ?>
+                <?php foreach ($contributionTypes as $contributionType): ?>
                 <tr>
-                    <td><?= $this->Number->format($littersContribution->id) ?></td>
-                    <td><?= h($littersContribution->name) ?></td>
-                    <td><?= $this->Number->format($littersContribution->priority) ?></td>
+                    <td><?= $this->Number->format($contributionType->id) ?></td>
+                    <td><?= h($contributionType->name) ?></td>
+                    <td><?= $this->Number->format($contributionType->priority) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $littersContribution->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $littersContribution->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $littersContribution->id], ['confirm' => __('Are you sure you want to delete # {0}?', $littersContribution->id)]) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $contributionType->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $contributionType->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $contributionType->id], ['confirm' => __('Are you sure you want to delete # {0}?', $contributionType->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

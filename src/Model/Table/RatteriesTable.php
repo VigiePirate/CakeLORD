@@ -76,11 +76,11 @@ class RatteriesTable extends Table
             'foreignKey' => 'rattery_id',
         ]);
         $this->belongsToMany('Litters', [
-            'through' => 'RatteriesLitters',
+            'through' => 'Contributions',
         ]);
-        $this->belongsToMany('Contributions', [
-            'className' => 'LittersContributions',
-            'through' => 'RatteriesLitters',
+        $this->hasMany('Contributions', [
+            'foreignKey' => 'rattery_id',
+            'finder' => 'Ordered',
         ]);
     }
 

@@ -11,6 +11,9 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $description
+ * @property bool $is_infant
+ * @property bool $is_accident
+ * @property bool $is_oldster
  *
  * @property \App\Model\Entity\DeathSecondaryCause[] $death_secondary_causes
  * @property \App\Model\Entity\Rat[] $rats
@@ -29,6 +32,9 @@ class DeathPrimaryCause extends Entity
     protected $_accessible = [
         'name' => true,
         'description' => true,
+        'is_infant' => true,
+        'is_accident' => true,
+        'is_oldster' => true,
         'death_secondary_causes' => true,
         'rats' => true,
     ];

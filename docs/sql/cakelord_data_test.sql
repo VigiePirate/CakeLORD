@@ -157,16 +157,6 @@ INSERT INTO `ratteries` (`id`, `prefix`, `name`, `owner_user_id`, `birth_year`, 
 /*!40000 ALTER TABLE `ratteries` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Dumping data for table `ratteries_litters`
---
-
-LOCK TABLES `ratteries_litters` WRITE;
-/*!40000 ALTER TABLE `ratteries_litters` DISABLE KEYS */;
-INSERT INTO `ratteries_litters` (`rattery_id`, `litter_id`, `litters_contribution_id`) VALUES (2,1,1),
-(7,2,1);
-/*!40000 ALTER TABLE `ratteries_litters` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Dumping data for table `rattery_snapshots`

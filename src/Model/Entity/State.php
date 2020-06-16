@@ -10,8 +10,20 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
- * @property string $color
+ * @property string|null $color
  * @property string $symbol
+ * @property string|null $css_property
+ * @property bool $is_default
+ * @property bool $needs_user_action
+ * @property bool $needs_staff_action
+ * @property bool $is_reliable
+ * @property bool $is_visible
+ * @property bool $is_searchable
+ * @property bool $is_frozen
+ * @property int|null $next_ok_state_id
+ * @property int|null $next_ko_state_id
+ * @property int|null $next_frozen_state_id
+ * @property int|null $next_thawed_state_id
  *
  * @property \App\Model\Entity\LitterSnapshot[] $litter_snapshots
  * @property \App\Model\Entity\Litter[] $litters
@@ -34,12 +46,24 @@ class State extends Entity
     protected $_accessible = [
         'name' => true,
         'color' => true,
+        'symbol' => true,
+        'css_property' => true,
+        'is_default' => true,
+        'needs_user_action' => true,
+        'needs_staff_action' => true,
+        'is_reliable' => true,
+        'is_visible' => true,
+        'is_searchable' => true,
+        'is_frozen' => true,
+        'next_ok_state_id' => true,
+        'next_ko_state_id' => true,
+        'next_frozen_state_id' => true,
+        'next_thawed_state_id' => true,
         'litter_snapshots' => true,
         'litters' => true,
         'rat_snapshots' => true,
         'rats' => true,
         'ratteries' => true,
         'rattery_snapshots' => true,
-        'symbol' => true,
     ];
 }

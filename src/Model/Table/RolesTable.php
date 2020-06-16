@@ -67,6 +67,42 @@ class RolesTable extends Table
             ->notEmptyString('name')
             ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
+        $validator
+            ->boolean('is_root')
+            ->notEmptyString('is_root');
+
+        $validator
+            ->boolean('is_admin')
+            ->notEmptyString('is_admin');
+
+        $validator
+            ->boolean('is_staff')
+            ->notEmptyString('is_staff');
+
+        $validator
+            ->boolean('can_change_state')
+            ->notEmptyString('can_change_state');
+
+        $validator
+            ->boolean('can_edit_others')
+            ->notEmptyString('can_edit_others');
+
+        $validator
+            ->boolean('can_edit_frozen')
+            ->notEmptyString('can_edit_frozen');
+
+        $validator
+            ->boolean('can_delete')
+            ->notEmptyString('can_delete');
+
+        $validator
+            ->boolean('can_configure')
+            ->notEmptyString('can_configure');
+
+        $validator
+            ->boolean('can_restore')
+            ->notEmptyString('can_restore');
+
         return $validator;
     }
 

@@ -92,17 +92,11 @@ class LittersTable extends Table
             'finder' => 'Females',
         ]);
         $this->belongsToMany('Ratteries', [
-            'through' => 'RatteriesLitters',
+            'through' => 'Contributions',
         ]);
         $this->hasMany('Contributions', [
-            'className' => 'RatteriesLitters',
             'finder' => 'Ordered',
         ]);
-        #$this->belongsToMany('Contributions', [
-        #    'className' => 'LittersContributions',
-        #    'through' => 'RatteriesLitters',
-        #    'finder' => 'Ordered',
-        #]);
     }
 
     /**

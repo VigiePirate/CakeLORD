@@ -6,17 +6,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * RatteriesLitter Entity
+ * Contribution Entity
  *
+ * @property int $id
  * @property int $rattery_id
  * @property int $litter_id
- * @property int $litters_contribution_id
+ * @property int $contribution_type_id
  *
  * @property \App\Model\Entity\Rattery $rattery
  * @property \App\Model\Entity\Litter $litter
- * @property \App\Model\Entity\LittersContribution $litters_contribution
+ * @property \App\Model\Entity\ContributionType $contribution_type
  */
-class RatteriesLitter extends Entity
+class Contribution extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -28,9 +29,11 @@ class RatteriesLitter extends Entity
      * @var array
      */
     protected $_accessible = [
-        'litters_contribution_id' => true,
+        'rattery_id' => true,
+        'litter_id' => true,
+        'contribution_type_id' => true,
         'rattery' => true,
         'litter' => true,
-        'litters_contribution' => true,
+        'contribution_type' => true,
     ];
 }
