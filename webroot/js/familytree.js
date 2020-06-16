@@ -527,6 +527,7 @@ function truncate(text, width) {
         line.pop();
         tspan.text(line.join("..."));
         tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", dy).text(word);
+        break;
       }
     }
   });
