@@ -793,6 +793,10 @@ svg {
   stroke-width: 2px;
 }
 
+#fullscreen_container {
+  background-color: #ffffff;
+}
+
 /* responsiveness */
 @media screen and (max-width: 810px) {
   .top-nav-title a {
