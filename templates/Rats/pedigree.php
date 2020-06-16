@@ -37,7 +37,7 @@
 
             <!-- d3.js  -->
             <div id="fullscreen_container">
-                <a href="#" id="toggle_fullscreen">Toggle full screen</a>
+                <a href="#" id="toggle_fullscreen" class="button float-right" style="margin-top:-20px;">Toggle full screen</a>
                 <div id="familytree">
                 </div>
             </div>
