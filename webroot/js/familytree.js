@@ -313,32 +313,26 @@ Tree.prototype.drawNodes = function(nodes, source){
         stroke: function(d){return sexStroke(d);}
       });
 
-  // Truncate name if it is too long
+  // Truncate name and move it
   nodeUpdate.select('text.name')
       .call(truncate, (boxWidth-20))
       .attr("dx", -(boxWidth/2) + 8) ////
-      .attr("dy", -10)
+      .attr("dy", -15)
       .style('fill-opacity', 1);
 
-  // Move text to it's proper position
-  // nodeUpdate.select('tspan')
-      //.attr("dx", -(boxWidth/2) + 8)
-//      .attr("dy", -20) //.attr("dy", -13),
-//      .style('fill-opacity', 1);
-
-  //nodeUpdate.select('text.dates')
-  //    .attr("dx", -(boxWidth/2) + 8)
-  //    .attr("dy", 0) //.attr("dy", 7)
-  //    .style('fill-opacity', 1);
+  nodeUpdate.select('tspan')
+      .attr("dx", -(boxWidth/2) + 8) ////
+      .attr("dy", -15)
+      .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", 15) //.attr("dy", 22)
+      .attr("dy", 10) //.attr("dy", 22)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.death')
       .attr("dx", -(boxWidth/2) + 8)
-      .attr("dy", 30) //.attr("dy", 39)
+      .attr("dy", 25) //.attr("dy", 39)
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
