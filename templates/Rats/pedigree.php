@@ -29,6 +29,7 @@
             <div class="sheet-heading">
                 <div class="sheet-title pretitle">Rat Family Tree</div>
                 <div class="sheet-markers">
+                    <div class="sexmark"><a href="#" id="toggle_fullscreen" class="button float-right">Toggle full screen</a></div>
                     <div class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
                     <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
                 </div>
@@ -37,7 +38,6 @@
 
             <!-- d3.js  -->
             <div id="fullscreen_container">
-                <a href="#" id="toggle_fullscreen" class="button float-right" style="margin-top:-20px;">Toggle full screen</a>
                 <div id="familytree">
                 </div>
             </div>
