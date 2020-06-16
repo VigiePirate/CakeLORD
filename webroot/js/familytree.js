@@ -311,10 +311,10 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   // Wrap name if it is too long
   nodeUpdate.select('text.name')
-      .call(wrap, (boxWidth-20)) // 8u margin on left and right + border thickness
-      // .attr("dx", -(boxWidth/2) + 8) ////
-      // .attr("dy", -13) //.attr("dy", -13), ////
-      .attr("text-anchor", "middle")
+      .call(truncate, (boxWidth-20))
+      .attr("dx", -(boxWidth/2) + 8) ////
+      .attr("dy", -13) //.attr("dy", -13), ////
+      // .attr("text-anchor", "middle")
       .style('fill-opacity', 1)
       // .style("font-size", function(d) {
       //  if (this.getComputedTextLength() > boxWidth) {
@@ -484,10 +484,10 @@ function sexStroke(d){
 }
 
 /**
- * Mike Bostock wrap text function
- */
+* Mike Bostock wrap text function
+*/
 
- function wrap(text, width) {
+function wrap(text, width) {
   text.each(function() {
     var text = d3.select(this),
         words = text.text().split(/\s+/).reverse(),
@@ -506,6 +506,27 @@ function sexStroke(d){
         tspan.text(line.join(" "));
         line = [word];
         tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      }
+    }
+  });
+}
+
+function truncate(text, width) {
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y); //.attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join("..."));
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", dy).text(word);
       }
     }
   });
