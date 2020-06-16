@@ -37,9 +37,7 @@
 
             <!-- d3.js  -->
             <div id="fullscreen_container">
-                <p>
-                    <a href="#" id="toggle_fullscreen" class="button">Toggle full screen</a>
-                </p>
+                <a href="#" id="toggle_fullscreen">Toggle full screen</a>
                 <div id="familytree">
                 </div>
             </div>
