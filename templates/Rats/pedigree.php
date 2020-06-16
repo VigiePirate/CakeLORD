@@ -50,7 +50,7 @@
             <?= $this->Html->script('familytree'); ?>
             <?= $this->Html->script('fullscreen'); ?>
             <script>
-            var boxWidth = 210, //210
+            var boxWidth = 212, //210
                 boxHeight = 60, //80
                 nodeWidth = 93, //115
                 nodeHeight = 240, //240
