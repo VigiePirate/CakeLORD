@@ -51,14 +51,14 @@
             <?= $this->Html->script('fullscreen'); ?>
             <script>
             var boxWidth = 210, //210
-                boxHeight = 65, //80
-                nodeWidth = 100, //115
+                boxHeight = 60, //80
+                nodeWidth = 90, //115
                 nodeHeight = 240, //240
                 // duration of transitions in ms
                 duration = 500,
                 // d3 multiplies the node size by this value
                 // to calculate the distance between nodes
-                separation = 0.8, // 0.775
+                separation = 0.75, // 0.775
                 // data filename
                 json = <?= $json ?>;
             setup(); //setup(file)
