@@ -322,9 +322,8 @@ Tree.prototype.drawNodes = function(nodes, source){
       //  } else {
       //    return "14px";
       //  }
-      // }
-      );
-
+      // })
+      ;
 
   // Move text to it's proper position
   nodeUpdate.select('tspan')
