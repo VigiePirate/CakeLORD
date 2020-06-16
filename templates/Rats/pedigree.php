@@ -36,9 +36,9 @@
             <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
             <!-- d3.js  -->
-            <div style="margin-top:3rem;"><a href="#" id="toggle_fullscreen" class="button float-right">Toggle full screen</a></div>
             <div id="fullscreen_container">
                 <div id="familytree">
+                    <a href="#" id="toggle_fullscreen" class="button float-right">Toggle full screen</a>
                 </div>
             </div>
             <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
