@@ -36,10 +36,17 @@
             <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
             <!-- d3.js  -->
-            <div id="familytree">
+            <div>
+                <p>
+                    <a href="#" id="toggle_fullscreen">Toggle full screen</a>
+                </p>
+                <div id="familytree">
+                </div>
             </div>
             <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
+            <?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'); ?>
             <?= $this->Html->script('familytree'); ?>
+            <?= $this->Html->script('fullscreen'); ?>
             <script>
             var boxWidth = 210, //210
                 boxHeight = 80, //70
