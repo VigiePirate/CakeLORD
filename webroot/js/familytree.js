@@ -525,10 +525,11 @@ function truncate(text, width) {
       tspan.text(line.join(" "));
       if (tspan.node().getComputedTextLength() > width) {
         line.pop();
+        line.push("...")
         tspan.text(line.join(" "));
-        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", dy).text("...");
+        //tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", dy).text("...");
         break;
-      } 
+      }
     }
   });
 }
