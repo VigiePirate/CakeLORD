@@ -19,7 +19,8 @@
                 <div class="spacer"> </div>
                 <?= $this->Html->image('/img/icon-fullscreen.svg', [
                     'url' => '#',
-                    'class' => 'toggle_fullscreen side-nav-icon',
+                    'class' => 'side-nav-icon',
+                    'id' => 'toggle_fullscreen',
                     'alt' => __('Full Screen')]) ?>
                 <?= $this->Html->image('/img/icon-print.svg', [
                     'url' => ['controller' => 'Rats', 'action' => 'print',$rat->id],
