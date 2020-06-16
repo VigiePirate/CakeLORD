@@ -24,7 +24,7 @@ function setup() {
     .append('g')
     // Left padding of tree so that the whole root node is on the screen.
     // TODO: find a better way
-    .attr("transform", "translate(" + window.screen.width/3 + "," + window.screen.height/2 + ")""); //.attr("transform", "translate(380,330)");
+    .attr("transform", "translate( + window.screen.width/3 + "," + window.screen.height/2 + )"); //.attr("transform", "translate(380,330)");
 
   // One tree to display the ancestors
   var ancestorTree = new Tree(svg, 'ancestor', 1);
