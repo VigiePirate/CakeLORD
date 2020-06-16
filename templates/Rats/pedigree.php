@@ -38,8 +38,8 @@
             <!-- d3.js  -->
             <div id="fullscreen_container">
                 <div id="familytree">
-                    <a href="#" id="toggle_fullscreen" class="button float-right">Toggle full screen</a>
                 </div>
+                <a href="#" id="toggle_fullscreen" class="button float-right">Toggle full screen</a>
             </div>
             <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
             <?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'); ?>
