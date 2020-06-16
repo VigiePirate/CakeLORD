@@ -316,7 +316,13 @@ Tree.prototype.drawNodes = function(nodes, source){
       .attr("dy", -13) //.attr("dy", -13), ////
       //.attr("text-anchor", "middle")
       .style('fill-opacity', 1)
-      .style("font-size", function(d) { return Math.min(2 * boxWidth/2, (2 * boxWidth/2 - 8) / this.getComputedTextLength() * 10) + "px"; });
+      .style("font-size", function(d) {
+        if (this.getComputedTextLength() > boxWidth) {
+          return Math.min(2 * boxWidth/2, (2 * boxWidth/2 - 8) / this.getComputedTextLength() * 14) + "px"; 
+        } else {
+          return "14px";
+        }
+      });
 
 
   // Move text to it's proper position
