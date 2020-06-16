@@ -17,7 +17,7 @@ $('#toggle_fullscreen').on('click', function(){
       document.msExitFullscreen();
     }
   } else {
-    element = $('#container').get(0);
+    element = $('#fullscreen_container').get(0);
     if (element.requestFullscreen) {
       element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {
