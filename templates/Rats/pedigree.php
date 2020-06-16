@@ -50,10 +50,10 @@
             <?= $this->Html->script('familytree'); ?>
             <?= $this->Html->script('fullscreen'); ?>
             <script>
-            var boxWidth = 224, //210
+            var boxWidth = 225, //210
                 boxHeight = 60, //80
                 nodeWidth = 93, //115
-                nodeHeight = 240, //240
+                nodeHeight = 255, //240
                 // duration of transitions in ms
                 duration = 500,
                 // d3 multiplies the node size by this value
