@@ -70,6 +70,7 @@ class RatteriesController extends AppController
             'Litters.Sire.BirthLitters.Ratteries', 'Litters.Dam.BirthLitters.Ratteries',
             'Litters.Sire.BirthLitters.Contributions', 'Litters.Dam.BirthLitters.Contributions',
             'Rats','Rats.States',
+            'Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions',
             'Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses',
             'RatterySnapshots'],
         ]);
