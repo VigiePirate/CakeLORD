@@ -380,86 +380,17 @@ class RatsController extends AppController
                 'id' => '0' . $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
                 'name' => $rat->birth_litter->dam[0]->usual_name,
                 'sex' => 'F',
-                'description' => '', //should be $dam->variety
-                'dates' => '',
-                'death'=> '', //should be short_death_cause
-                '_parents' => [
-                    '0' => [
-                            'id' => '1',
-                            'sex' => 'F',
-                            '_parents' => [
-                                '0' => [
-                                    'id' => '5',
-                                    'sex' => 'F',
-                                    '_parents' => []
-                                ],
-                                '1' => [
-                                    'id' => '6',
-                                    'sex' => 'M',
-                                    '_parents' => []
-                                ]
-                            ]
-                        ],
-                        '1' => [
-                            'id' => '2',
-                            'sex' => 'M',
-                            '_parents' => [
-                                '0' => [
-                                    'id' => '7',
-                                    'sex' => 'F',
-                                    '_parents' => []
-                                ],
-                                '1' => [
-                                    'id' => '8',
-                                    'sex' => 'M',
-                                    '_parents' => []
-                                ]
-                            ]
-                        ]
-                    ] // will call dam's parents in recursive implementation ; fake data for display
+                'description' => '', // should be $dam->variety
+                'death'=> '', // should be short_death_cause + age_string
+                '_parents' => [] // will call dam's parents in recursive implementation
             ],
             '1' => [
                 'id' => '1' . $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
                 'name' => $rat->birth_litter->sire[0]->usual_name,
                 'sex' => 'M',
-                'description' => '', //should be $sire->variety
-                'dates' => '',
-                'death'=> '', //should be short_death_cause
-                '_parents' => [
-                    '0' => [
-                        'id' => '3',
-                        'sex' => 'F',
-                        '_parents' => [
-                            '0' => [
-                                'id' => '9',
-                                'sex' => 'F',
-                                '_parents' => []
-                            ],
-                            '1' => [
-                                'id' => '10',
-                                'sex' => 'M',
-                                '_parents' => []
-                            ]
-                        ]
-                    ],
-                    '1' => [
-                        'id' => '4',
-                        'sex' => 'M',
-                        '_parents' => [
-                            '0' => [
-                                'id' => '11',
-                                'sex' => 'F',
-                                '_parents' => []
-                            ],
-                            '1' => [
-                                'id' => '12',
-                                'sex' => 'M',
-                                '_parents' => []
-                            ]
-                        ]
-                    ] // will call sire's parents in recursive implementation ; fake data for display
-                ]
-            ]
+                'description' => '',
+                'death'=> '',
+                '_parents' => []
         ];
 
         $children = [];
@@ -468,9 +399,8 @@ class RatsController extends AppController
             foreach ($litter->offspring_rats as $offspring) {
                 $children[$child_no] = [
                     'id' => $child_no . '_' . $offspring->pedigree_identifier, // should be modified to be unique in the tree
-                    'name' => $offspring->name, // should be $offspring->usual_name
+                    'name' => $offspring->name, // should be $offspring->usual_name when double prefix is repaired
                     'sex' => $offspring->sex,
-                    'dates' => '',
                     'description' => '', // should be $offspring->variety
                     'death' => '', // should be $offspring->main or short_death_cause
                     '_children' => [] // will call child's children in recursive implementation
@@ -485,8 +415,6 @@ class RatsController extends AppController
             'id' => $rat->pedigree_identifier,
             'name' => $rat->usual_name,
             'sex' => 'X', // we want a different color for the root of the tree
-            //'dates' => $rat->birth_date->i18nFormat('dd/MM/yyyy') . '-' . $rat->death_date->i18nFormat('dd/MM/yyyy') . ' (' . $rat->age_string . ')', // beware to check existence; should be in rat entity as $rat->dates?
-            'dates' => $rat->birth_date->i18nFormat('dd/MM/yyyy') . ' (' . $rat->age_string . ')', // for debug
             'description' => $rat->variety,
             'death' => $rat->short_death_cause . ' (' . $rat->age_string . ')',
             '_parents' => $parents,
