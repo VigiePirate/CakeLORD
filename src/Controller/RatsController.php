@@ -383,7 +383,40 @@ class RatsController extends AppController
                 'description' => '', //should be $dam->variety
                 'dates' => '',
                 'death'=> '', //should be short_death_cause
-                '_parents' => [] // will call dam's parents in recursive implementation ; fake data for display
+                '_parents' => [
+                    '0' => [
+                            'id' => '1',
+                            'sex' => 'F',
+                            '_parents' => [
+                                '0' => [
+                                    'id' => '5',
+                                    'sex' => 'F',
+                                    '_parents' => []
+                                ],
+                                '1' => [
+                                    'id' => '6',
+                                    'sex' => 'M',
+                                    '_parents' => []
+                                ]
+                            ]
+                        ],
+                        '1' => [
+                            'id' => '2',
+                            'sex' => 'M',
+                            '_parents' => [
+                                '0' => [
+                                    'id' => '7',
+                                    'sex' => 'F',
+                                    '_parents' => []
+                                ],
+                                '1' => [
+                                    'id' => '8',
+                                    'sex' => 'M',
+                                    '_parents' => []
+                                ]
+                            ]
+                        ]
+                    ] // will call dam's parents in recursive implementation ; fake data for display
             ],
             '1' => [
                 'id' => '1' . $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
@@ -431,4 +464,3 @@ class RatsController extends AppController
         $this->set(compact('rat', 'json'));
     }
 }
-
