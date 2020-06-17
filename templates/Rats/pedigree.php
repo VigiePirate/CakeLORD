@@ -40,7 +40,7 @@
             </div>
             <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
-            <!-- d3.js  -->
+            <!-- d3.js family tree -->
             <div id="fullscreen_container">
                 <div id="familytree">
                 </div>
@@ -50,18 +50,19 @@
             <?= $this->Html->script('familytree'); ?>
             <?= $this->Html->script('fullscreen'); ?>
             <script>
-            var boxWidth = 222, //210
-                boxHeight = 60, //80
-                nodeWidth = 93, //115
-                nodeHeight = 248, //240
+            // box sizes variables; should probably be in rem
+            var boxWidth = 222,
+                boxHeight = 60,
+                nodeWidth = 93,
+                nodeHeight = 248,
                 // duration of transitions in ms
                 duration = 500,
                 // d3 multiplies the node size by this value
                 // to calculate the distance between nodes
-                separation = 0.75, // 0.775
+                separation = 0.75,
                 // data filename
                 json = <?= $json ?>;
-            setup(); //setup(file)
+            setup();
             </script>
             <!-- end family tree -->
         </div>

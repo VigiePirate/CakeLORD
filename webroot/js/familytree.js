@@ -8,7 +8,7 @@
  */
 function setup() {
 
-  // local dimensions variables
+  // local dimensions variables - could be computed from box/node width/height
   w = 1000;
   h = 1000*window.screen.height/window.screen.width;
 
@@ -19,7 +19,7 @@ function setup() {
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
     // Offset so that first pan and zoom does not jump back to the origin
-    .translate([w/3+40, h/2]); //.translate([380, 330]);
+    .translate([w/3+40, h/2]);
 
   var svg = d3.select("#familytree").append("svg")
     .attr("viewBox", "0 0 " + w + ' ' + h ) //.attr("viewBox", "0 0 1000 750" ) //.attr("viewBox", "0 0 1000 660" )
@@ -54,7 +54,6 @@ function setup() {
 
   // loading data when they are written in a json file
   // d3.json(file, function(error, json){
-
   //  if(error) {
   //    return console.error(error);
   //  }
@@ -69,7 +68,6 @@ function setup() {
   // Start with only the first few generations of ancestors showing
   ancestorRoot._parents.forEach(function(parents){
     parents._parents.forEach(collapse);
-    //parents._parents._parents.forEach(collapse);
   });
 
   // Start with only one generation of descendants showing
@@ -82,8 +80,6 @@ function setup() {
   // Draw the tree
   ancestorTree.draw(ancestorRoot);
   descendantsTree.draw(descendantRoot);
-
-  //});
 }
 
 function rootProxy(root){
@@ -125,7 +121,7 @@ var Tree = function(svg, selector, direction){
 
       // By default, cousins are drawn further apart than siblings.
       // By returning the same value in all cases, we draw cousins
-      // the same distance apart as siblings.
+      // the same distance apart as siblings -> do we really want that?
       .separation(function(){
         return separation;
       });
