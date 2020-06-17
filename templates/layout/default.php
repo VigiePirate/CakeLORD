@@ -45,7 +45,7 @@ $cakeDescription = 'LORD';
     <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#663300">
     <meta name="msapplication-TileColor" content="#663300">
     <meta name="theme-color" content="#663300">
-    <link rel="manifest" href="/manifest.webmanifest">
+    <?= $this->Html->meta(['link' => '/manifest.webmanifest','rel' => 'manifest']); ?>
 </head>
 <body>
     <nav class="top-nav">
@@ -149,15 +149,4 @@ $cakeDescription = 'LORD';
     </div>
 </footer>
 </body>
-<script>
-  if ('serviceWorker' in navigator) {
-    console.log("Will the service worker register?");
-    navigator.serviceWorker.register('service-worker.js')
-      .then(function(reg){
-        console.log("Yes, it did.");
-      }).catch(function(err) {
-        console.log("No it didn't. This happened: ", err)
-      });
-  }
-</script>
 </html>

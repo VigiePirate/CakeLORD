@@ -128,7 +128,7 @@
                     </tr>
                     <tr>
                         <th></th>
-                        <td>See interactive family tree (unavailable)</td>
+                        <td><?= $this->Html->link('See interactive family tree', ['controller' => 'Rats', 'action' => 'pedigree', $rat->id]) ?> (all direct ascendants and descendants)</td>
                     </tr>
                 </table>
 
