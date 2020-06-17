@@ -122,9 +122,9 @@ var Tree = function(svg, selector, direction){
       // By default, cousins are drawn further apart than siblings.
       // By returning the same value in all cases, we draw cousins
       // the same distance apart as siblings -> do we really want that?
-      //.separation(function(){
-      //  return separation;
-      //});
+      .separation(function(){
+        return separation;
+      });
 };
 
 /**
