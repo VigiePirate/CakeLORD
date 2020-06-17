@@ -67,7 +67,8 @@ class RatteriesController extends AppController
         $rattery = $this->Ratteries->get($id, [
             'contain' => ['Users', 'Countries', 'States',
             'Litters', 'Litters.Sire', 'Litters.Dam', 'Litters.States', 'Litters.Ratteries',
-            'Litters.Sire.BirthLitters.Ratteries','Litters.Dam.BirthLitters.Ratteries',
+            'Litters.Sire.BirthLitters.Ratteries', 'Litters.Dam.BirthLitters.Ratteries',
+            'Litters.Sire.BirthLitters.Contributions', 'Litters.Dam.BirthLitters.Contributions',
             'Rats','Rats.States',
             'Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses',
             'RatterySnapshots'],
