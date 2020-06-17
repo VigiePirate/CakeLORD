@@ -388,8 +388,6 @@ class RatsController extends AppController
                 'id' => '1' . $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
                 'name' => $rat->birth_litter->sire[0]->usual_name,
                 'sex' => 'M',
-                'description' => '',
-                'death'=> '',
                 '_parents' => []
             ]
         ];
