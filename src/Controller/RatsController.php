@@ -72,7 +72,7 @@ class RatsController extends AppController
             'BredLitters', 'BredLitters.Contributions', 'BredLitters.Ratteries',
             'BredLitters.Sire', 'BredLitters.Sire.BirthLitters', 'BredLitters.Sire.BirthLitters.Contributions',
             'BredLitters.Dam', 'BredLitters.Dam.BirthLitters', 'BredLitters.Dam.BirthLitters.Contributions',
-            'BredLitters.OffspringRats',
+            'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
             'BredLitters.OffspringRats.BirthLitters', 'BredLitters.OffspringRats.BirthLitters.Contributions',
             'BredLitters.OffspringRats.OwnerUsers', 'BredLitters.OffspringRats.States', 'BredLitters.OffspringRats.DeathPrimaryCauses', 'BredLitters.OffspringRats.DeathSecondaryCauses',
              'Conversations', 'RatSnapshots'],
