@@ -391,6 +391,7 @@ class RatsController extends AppController
                 'description' => '',
                 'death'=> '',
                 '_parents' => []
+            ]
         ];
 
         $children = [];
