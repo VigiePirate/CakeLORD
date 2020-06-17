@@ -8,6 +8,13 @@
  */
 function setup() {
 
+<<<<<<< HEAD
+=======
+  // local dimensions variables - could be computed from box/node width/height
+  w = 1000;
+  h = 1000*window.screen.height/window.screen.width;
+
+>>>>>>> pedigree
   // Setup zoom and pan
   var zoom = d3.behavior.zoom()
     .scaleExtent([.1,2])
@@ -15,16 +22,27 @@ function setup() {
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
     // Offset so that first pan and zoom does not jump back to the origin
+<<<<<<< HEAD
     .translate([380, 330]);
 
   var svg = d3.select("#familytree").append("svg")
     .attr("viewBox", "0 0 1000 660" )
+=======
+    .translate([w/3+40, h/2]);
+
+  var svg = d3.select("#familytree").append("svg")
+    .attr("viewBox", "0 0 " + w + ' ' + h ) //.attr("viewBox", "0 0 1000 750" ) //.attr("viewBox", "0 0 1000 660" )
+>>>>>>> pedigree
     .attr("preserveAspectRatio", "xMidYMid meet")
     .call(zoom)
     .append('g')
     // Left padding of tree so that the whole root node is on the screen.
     // TODO: find a better way
+<<<<<<< HEAD
     .attr("transform", "translate(380,330)");
+=======
+    .attr("transform", "translate(" + (w/3+40) + "," + (h/2) + ")"); //.attr("transform", "translate(380,330)");
+>>>>>>> pedigree
 
   // One tree to display the ancestors
   var ancestorTree = new Tree(svg, 'ancestor', 1);
@@ -48,8 +66,13 @@ function setup() {
     }
   });
 
+<<<<<<< HEAD
   //d3.json(file, function(error, json){
 
+=======
+  // loading data when they are written in a json file
+  // d3.json(file, function(error, json){
+>>>>>>> pedigree
   //  if(error) {
   //    return console.error(error);
   //  }
@@ -64,7 +87,10 @@ function setup() {
   // Start with only the first few generations of ancestors showing
   ancestorRoot._parents.forEach(function(parents){
     parents._parents.forEach(collapse);
+<<<<<<< HEAD
     //parents._parents._parents.forEach(collapse);
+=======
+>>>>>>> pedigree
   });
 
   // Start with only one generation of descendants showing
@@ -77,8 +103,11 @@ function setup() {
   // Draw the tree
   ancestorTree.draw(ancestorRoot);
   descendantsTree.draw(descendantRoot);
+<<<<<<< HEAD
 
   //});
+=======
+>>>>>>> pedigree
 }
 
 function rootProxy(root){
@@ -120,7 +149,11 @@ var Tree = function(svg, selector, direction){
 
       // By default, cousins are drawn further apart than siblings.
       // By returning the same value in all cases, we draw cousins
+<<<<<<< HEAD
       // the same distance apart as siblings.
+=======
+      // the same distance apart as siblings -> do we really want that?
+>>>>>>> pedigree
       .separation(function(){
         return separation;
       });
@@ -279,6 +312,21 @@ Tree.prototype.drawNodes = function(nodes, source){
       .style('fill-opacity', 0)
       .style('fill',"#606c76");
 
+<<<<<<< HEAD
+=======
+    // Draw a fourth line just to see
+      // nodeEnter.append("text")
+      //     .attr("dx", 0)
+      //     .attr("dy", 0)
+      //     .attr("text-anchor", "start")
+      //     .attr('class', 'dates')
+      //     .text(function(d) {
+      //       return d.dates;
+      //     })
+      //     .style('fill-opacity', 0)
+      //     .style('fill',"#606c76");
+
+>>>>>>> pedigree
   // Update the position of both old and new nodes
   var nodeUpdate = node.transition()
       .duration(duration)
@@ -297,25 +345,43 @@ Tree.prototype.drawNodes = function(nodes, source){
         stroke: function(d){return sexStroke(d);}
       });
 
+<<<<<<< HEAD
   // Move text to it's proper position
   nodeUpdate.select('text.name')
       .attr("dx", -(boxWidth/2) + 8)
       .attr("dy", -13)
+=======
+  // Truncate name and move it
+  nodeUpdate.select('text.name')
+      .call(truncate, (boxWidth-20));
+
+  nodeUpdate.select('tspan')
+      .attr("dx", -(boxWidth/2) + 8) ////
+      .attr("dy", -11)
+>>>>>>> pedigree
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
       .attr("dx", -(boxWidth/2) + 8)
+<<<<<<< HEAD
       .attr("dy", 7)
+=======
+      .attr("dy", 8) //.attr("dy", 22)
+>>>>>>> pedigree
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.death')
       .attr("dx", -(boxWidth/2) + 8)
+<<<<<<< HEAD
       .attr("dy", 22)
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.dates')
       .attr("dx", -(boxWidth/2) + 8)
       .attr("dy", 39)
+=======
+      .attr("dy", 21) //.attr("dy", 39)
+>>>>>>> pedigree
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
@@ -454,3 +520,69 @@ function sexStroke(d){
     }
   }
 }
+
+/**
+* Mike Bostock wrap text function
+*/
+
+function wrap(text, width) {
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.2, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      }
+    }
+  });
+}
+
+/**
+* Horribly complicated function to optimally truncate texts
+* Inspired from the previous
+*/
+
+function truncate(text, width) {
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        line.push("...")
+        tspan.text(line.join(" "));
+        break;
+      }
+    }
+  });
+}
+
+/*
+* Some unused code snippet to adapt font size of long texts
+*/
+// .style("font-size", function(d) {
+//  if (this.getComputedTextLength() > boxWidth) {
+//    return Math.min(2 * boxWidth/2, (2 * boxWidth/2 - 8) / this.getComputedTextLength() * 14) + "px";
+//  } else {
+//    return "14px";
+//  }
+// })
