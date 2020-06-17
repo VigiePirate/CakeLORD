@@ -28,7 +28,7 @@ function setup() {
     .append('g')
     // Left padding of tree so that the whole root node is on the screen.
     // TODO: find a better way
-    .attr("transform", "translate(" + (w/3+40) + "," + (h/2) + ")"); 
+    .attr("transform", "translate(" + (w/3+40) + "," + (h/2) + ")");
 
   // One tree to display the ancestors
   var ancestorTree = new Tree(svg, 'ancestor', 1);
@@ -122,9 +122,9 @@ var Tree = function(svg, selector, direction){
       // By default, cousins are drawn further apart than siblings.
       // By returning the same value in all cases, we draw cousins
       // the same distance apart as siblings -> do we really want that?
-      .separation(function(){
-        return separation;
-      });
+      //.separation(function(){
+      //  return separation;
+      //});
 };
 
 /**
@@ -298,7 +298,7 @@ Tree.prototype.drawNodes = function(nodes, source){
         stroke: function(d){return sexStroke(d);}
       });
 
-  // Move text to it's proper position
+  // Truncate name and move it
   nodeUpdate.select('text.name')
       .call(truncate, (boxWidth-20));
 
