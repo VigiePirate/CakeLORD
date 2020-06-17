@@ -127,7 +127,7 @@ var Tree = function(svg, selector, direction){
       // });
 
       .separation(function(a,b){
-        return a.parent === b.parent ? separation : 2*separation;
+        return a.parent === b.parent ? separation : 1.1*separation;
       });
 };
 
