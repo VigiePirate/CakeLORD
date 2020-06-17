@@ -60,9 +60,11 @@ class LittersController extends AppController
     {
         $litter = $this->Litters->get($id, [
             'contain' => ['Users', 'States', 'OffspringRats', 'OffspringRats.States',
+            'Sire.Ratteries', 'Sire.BirthLitters', 'Sire.BirthLitters.Contributions',
+            'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions',
             'Sire', 'Sire.Markings', 'Sire.Dilutions', 'Sire.Colors', 'Sire.Coats', 'Sire.Earsets','Sire.DeathPrimaryCauses','Sire.DeathSecondaryCauses',
             'Dam', 'Dam.Markings', 'Dam.Dilutions', 'Dam.Colors', 'Dam.Coats', 'Dam.Earsets','Dam.DeathPrimaryCauses','Dam.DeathSecondaryCauses',
-            'ParentRats', 'ParentRats.Ratteries', 'Contributions', 'Conversations', 'LitterSnapshots'],
+            'Ratteries','Contributions', 'Conversations', 'LitterSnapshots'],
         ]);
         $offspringsQuery = $this->Litters->OffspringRats
                                 ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses','OwnerUsers']])
