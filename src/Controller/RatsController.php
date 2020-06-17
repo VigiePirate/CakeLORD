@@ -30,7 +30,7 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
         ];
         $rats = $this->paginate($this->Rats);
 
