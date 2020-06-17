@@ -64,11 +64,14 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['OwnerUsers', 'CreatorUsers','Ratteries', 'BirthLitters', 'BirthLitters.Ratteries',
-            'BirthLitters.Sire','BirthLitters.Dam','BirthLitters.Contributions',
-            'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States',
-            'BredLitters','BredLitters.Contributions','BredLitters.Sire','BredLitters.Dam','BredLitters.OffspringRats','BredLitters.OffspringRats.OwnerUsers','BredLitters.OffspringRats.States','BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
-            'Singularities', 'Conversations', 'RatSnapshots'],
+            'contain' => ['OwnerUsers', 'CreatorUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
+            'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
+            'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
+            'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'Singularities',
+            'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States',
+            'BredLitters', 'BredLitters.Contributions', 'BredLitters.Sire', 'BredLitters.Dam',
+            'BredLitters.OffspringRats', 'BredLitters.OffspringRats.OwnerUsers', 'BredLitters.OffspringRats.States', 'BredLitters.OffspringRats.DeathPrimaryCauses', 'BredLitters.OffspringRats.DeathSecondaryCauses',
+             'Conversations', 'RatSnapshots'],
         ]);
 
         $this->set('rat', $rat);
