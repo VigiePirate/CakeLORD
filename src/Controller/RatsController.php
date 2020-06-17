@@ -46,7 +46,7 @@ class RatsController extends AppController
     {
         $user = $this->Authentication->getIdentity();
         $this->paginate = [
-            'contain' => ['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Ratteries'],
+            'contain' => ['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
         ];
         $rats = $this->paginate($this->Rats->find()->where(['Rats.owner_user_id' => $user->id]));
 
@@ -210,7 +210,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'States', 'BirthLitters','BirthLitters.Ratteries'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'States', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
         ];
         $rats = $this->paginate($rats);
 
@@ -245,7 +245,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
 
@@ -274,7 +274,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
 
@@ -303,7 +303,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
 
@@ -333,7 +333,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries','States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
 
@@ -356,7 +356,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers','Ratteries','States'],
+            'contain' => ['OwnerUsers','Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
 
