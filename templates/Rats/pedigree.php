@@ -59,7 +59,8 @@
                 duration = 500,
                 // d3 multiplies the node size by this value
                 // to calculate the distance between nodes
-                separation = 0.75,
+                sibling_separation = 0.75,
+                cousin_separation = 0.825;
                 // data filename
                 json = <?= $json ?>;
             setup();
