@@ -458,6 +458,7 @@ class RatsController extends AppController
                             ]
                         ]
                     ] // will call sire's parents in recursive implementation ; fake data for display
+                ]
             ]
         ];
 
