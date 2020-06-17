@@ -19,6 +19,10 @@ function setup() {
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
     // Offset so that first pan and zoom does not jump back to the origin
+    .translate([380, 330]);
+
+  var svg = d3.select("#familytree").append("svg")
+    .attr("viewBox", "0 0 1000 660" )
     .translate([w/3+40, h/2]);
 
   var svg = d3.select("#familytree").append("svg")
@@ -280,18 +284,6 @@ Tree.prototype.drawNodes = function(nodes, source){
       .style('fill-opacity', 0)
       .style('fill',"#606c76");
 
-    // Draw a fourth line just to see
-      // nodeEnter.append("text")
-      //     .attr("dx", 0)
-      //     .attr("dy", 0)
-      //     .attr("text-anchor", "start")
-      //     .attr('class', 'dates')
-      //     .text(function(d) {
-      //       return d.dates;
-      //     })
-      //     .style('fill-opacity', 0)
-      //     .style('fill',"#606c76");
-
   // Update the position of both old and new nodes
   var nodeUpdate = node.transition()
       .duration(duration)
@@ -310,7 +302,7 @@ Tree.prototype.drawNodes = function(nodes, source){
         stroke: function(d){return sexStroke(d);}
       });
 
-  // Truncate name and move it
+  // Move text to it's proper position
   nodeUpdate.select('text.name')
       .call(truncate, (boxWidth-20));
 
