@@ -366,10 +366,7 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
             'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries',
-<<<<<<< HEAD
-=======
             'BirthLitters.Sire','BirthLitters.Dam','BirthLitters.Sire.BirthLitters.Ratteries','BirthLitters.Dam.BirthLitters.Ratteries','BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
->>>>>>> pedigree
             'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States',
             'BredLitters','BredLitters.Sire','BredLitters.Dam','BredLitters.OffspringRats','BredLitters.OffspringRats.OwnerUsers','BredLitters.OffspringRats.States','BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
             'Singularities'],
@@ -380,88 +377,6 @@ class RatsController extends AppController
         // append id with some unique string (generation or path, like 0101 for mother's father's mother's father, for instance)
         $parents = [
             '0' => [
-<<<<<<< HEAD
-                'name' => $rat->birth_litter->dam[0]->usual_name,
-                'sex' => 'F',
-                'description' => '', //should be $dam->variety
-                'death'=> '', //should be short_death_cause
-                'id' => $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
-                '_parents' => [
-                        '0' => [
-                            'id' => '1',
-                            'sex' => 'F',
-                            '_parents' => [
-                                '0' => [
-                                    'id' => '5',
-                                    'sex' => 'F',
-                                    '_parents' => []
-                                ],
-                                '1' => [
-                                    'id' => '6',
-                                    'sex' => 'M',
-                                    '_parents' => []
-                                ]
-                            ]
-                        ],
-                        '1' => [
-                            'id' => '2',
-                            'sex' => 'M',
-                            '_parents' => [
-                                '0' => [
-                                    'id' => '7',
-                                    'sex' => 'F',
-                                    '_parents' => []
-                                ],
-                                '1' => [
-                                    'id' => '8',
-                                    'sex' => 'M',
-                                    '_parents' => []
-                                ]
-                            ]
-                        ]
-                    ] // will call dam's parents in recursive implementation ; fake data for display
-            ],
-            '1' => [
-                'name' => $rat->birth_litter->sire[0]->usual_name,
-                'sex' => 'M',
-                'description' => '', //should be $sire->variety
-                'death'=> '', //should be short_death_cause
-                'id' => $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
-                '_parents' => [
-                    '0' => [
-                        'id' => '3',
-                        'sex' => 'F',
-                        '_parents' => [
-                            '0' => [
-                                'id' => '9',
-                                'sex' => 'F',
-                                '_parents' => []
-                            ],
-                            '1' => [
-                                'id' => '10',
-                                'sex' => 'M',
-                                '_parents' => []
-                            ]
-                        ]
-                    ],
-                    '1' => [
-                        'id' => '4',
-                        'sex' => 'M',
-                        '_parents' => [
-                            '0' => [
-                                'id' => '11',
-                                'sex' => 'F',
-                                '_parents' => []
-                            ],
-                            '1' => [
-                                'id' => '12',
-                                'sex' => 'M',
-                                '_parents' => []
-                            ]
-                        ]
-                    ]
-                ] // will call sire's parents in recursive implementation ; fake data for display
-=======
                 'id' => '0' . $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
                 'name' => $rat->birth_litter->dam[0]->usual_name,
                 'sex' => 'F',
@@ -478,7 +393,6 @@ class RatsController extends AppController
                 'dates' => '',
                 'death'=> '', //should be short_death_cause
                 '_parents' => [] // will call sire's parents in recursive implementation ; fake data for display
->>>>>>> pedigree
             ]
         ];
 

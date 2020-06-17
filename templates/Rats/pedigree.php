@@ -17,14 +17,11 @@
                     'class' => 'side-nav-icon',
                     'alt' => __('Help')]) ?>
                 <div class="spacer"> </div>
-<<<<<<< HEAD
-=======
                 <?= $this->Html->image('/img/icon-fullscreen.svg', [
                     'url' => '#',
                     'class' => 'side-nav-icon',
                     'id' => 'toggle_fullscreen',
                     'alt' => __('Full Screen')]) ?>
->>>>>>> pedigree
                 <?= $this->Html->image('/img/icon-print.svg', [
                     'url' => ['controller' => 'Rats', 'action' => 'print',$rat->id],
                     'class' => 'side-nav-icon',
