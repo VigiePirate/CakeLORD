@@ -52,7 +52,8 @@ function setup() {
     }
   });
 
-  //d3.json(file, function(error, json){
+  // loading data when they are written in a json file
+  // d3.json(file, function(error, json){
 
   //  if(error) {
   //    return console.error(error);
