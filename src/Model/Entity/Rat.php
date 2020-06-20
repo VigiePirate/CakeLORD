@@ -126,7 +126,7 @@ class Rat extends Entity
         if( isset($this->birth_litter)
             && !empty($this->birth_litter->contributions[1])
             && !$this->birth_litter->contributions[1]->rattery->is_generic
-            && ($this->birth_litter->contributions[0] != $this->birth_litter->contributions[1])
+            && ($this->rattery->prefix != $this->birth_litter->contributions[1])
         ) {
             $doublePrefix .= '-' . $this->birth_litter->contributions[1]->rattery->prefix;
         }
