@@ -113,7 +113,7 @@ Schéma en annexe~\ref{app:dbv2}.
 
 \existant{Disponible en V1.} Identification par mail + mot de passe. Mail insensible à la casse.
 
-\desire{Ajout V2.} Enregistrement en base des tentatives ratées de login, mécanisme de protection (période réfractaire de 15 minutes à partir de 5 échecs). Lors de la connexion, si l'utilisateur possède des fiches en attente d'action de sa part, un popup, une notification en ligne ou un texte voyant s'affiche pour lui signaler. Changement du système de chiffrement (bcrypt). Les anciens mots de passe seront supprimés et les utilisateurs invités à utiliser la récupération de mot de passe lors de leur première connexion au nouveau site.
+\desire{Ajout V2.} Enregistrement en base des tentatives ratées de login, mécanisme de protection (période réfractaire de 15 minutes à partir de 5 échecs). Lors de la connexion, si l'utilisateur possède des fiches en attente d'action de sa part, un popup, une notification en ligne ou un texte voyant s'affiche pour lui signaler. Changement du système de chiffrement (bcrypt). \sout{Les anciens mots de passe seront supprimés et les utilisateurs invités à utiliser la récupération de mot de passe lors de leur première connexion au nouveau site.} Le chiffrement MD5 restera supporté pour la première connexion et le mot de passe sera rehashé à cette occasion.
 
 \subsection{Modifier son compte}
 
@@ -158,7 +158,7 @@ Les modifications à apporter côté back-office sont décrites dans la section~
 
 \existant{V1.} Tous les champs peuvent être modifiés par l'utilisateur. En particulier la fiche peut être cédée à un autre utilisateur (modification du champ « propriétaire ».)  
 
-\desire{Modification à apporter en V2.} Les modifications apportées par l'utilisateur n'écrasent pas les valeurs précédentes de la fiche tant qu'elles n'ont pas été validées au SAV (protection contre le vandalisme) via un mécanisme de snapshot. Appliquer les mêmes vérifications automatiques qu'à l'enregistrement d'une nouvelle fiche. Certains champs ne sont visibles / éditables que par le staff (liste à établir.) Certaines éditions déclenchent un changement d'état de la fiche avec un retour au back-office (exemple : déclaration de décès), d'autres sont autorisés « en place » (exemple : changement de propriétaire.)
+\desire{Modification à apporter en V2.} Les modifications apportées par l'utilisateur n'écrasent pas les valeurs précédentes de la fiche tant qu'elles n'ont pas été validées au SAV (protection contre le vandalisme) via un mécanisme de snapshot. Appliquer les mêmes vérifications automatiques qu'à l'enregistrement d'une nouvelle fiche. Certains champs ne sont visibles / éditables que par le staff (liste à établir.) Certaines éditions déclenchent un changement d'état de la fiche avec un retour au back-office (exemple : déclaration de décès), d'autres sont autorisés « en place » (exemple : changement de propriétaire.) Les modifications autorisées se réalisent pas des micro-actions (« déclarer le décès », « changer de propriétaire ») plutôt que par une édition de toute la fiche.     
 
 \subsection{Consulter une fiche}
 \existant{Fonctionnalités V1 à préserver.}
