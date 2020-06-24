@@ -1,10 +1,10 @@
-\documentclass[a4paper,10pt]{article}
+﻿\documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
-
+\usepackage{pifont,arevmath,wasysym}
 \usepackage{array,tabularx,longtable}
 \newcolumntype{R}{>{\raggedright\arraybackslash}X}%
 
@@ -25,7 +25,13 @@
   marginparsep=4mm
 }
 
-\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{mygreen}{HTML}{1f9d55}
+\definecolor{myorange}{HTML}{ff8c1b}
+\definecolor{myred}{HTML}{cc1f1a}
+\definecolor{mybrown}{HTML}{663300}
+\definecolor{female}{HTML}{ff99cc}
+\definecolor{male}{HTML}{99ccff}
 \newcommand\existant[1]{\noindent\textbf{\textcolor{blue}{#1}}}
 \newcommand\desire[1]{\noindent\textbf{\textcolor{red}{#1}}}
 
@@ -882,7 +888,7 @@ Dumbo, standard, inconnu (pour les ratons morts avant détermination du type d'o
 \subsubsection{Correspondance anciennes causes vers nouvelles causes}
 \small
 
-\noindent\begin{tabularx}{\textwidth}{|l|R|R|}\hline
+\begin{tabularx}{\textwidth}{|l|R|R|}\hline
 \textbf{Ancienne cause} & \textbf{Nouvelle cause niveau 1} & \textbf{Nouvelle cause niveau 2}\\\hline
 Accident domestique & 2. Accidents, traumatismes & 2.1 Accident domestique \\\hline
 Accident Vasculaire Cérébral & 7. Neurologique (cerveau, moelle épinière, nerfs) & 7.1. Accident vasculaire cérébral\\\hline
@@ -895,6 +901,8 @@ Aucune information & 1. Cause inconnue & 1.1. Aucune information (présumé mort
 Autre & 14. Autres & pas de niveau 2\\\hline
 Complications de gestation & 11. Système reproducteur & 11.1. Complications de gestation ou de mise-bas\\\hline
 Deficience immunitaire 29 & 14. Autres & 14.10. Virus, épidémie, déficience immunitaire (SDA, Sendaï, Tyzzer...)\\\hline
+\end{tabularx}
+\begin{tabularx}{\textwidth}{|l|R|R|}\hline
 Diabète & 14. Autres & 14.3 Diabète\\\hline
 * Dégénérescence & 1. Cause inconnue & 1.2 Cause indéterminée (date connue)\\\hline
 Epilepsie & 7. Neurologique & 7.3 Epilepsie\\\hline
@@ -911,7 +919,7 @@ Insuffisance rénale & 12. Système urinaire (reins, vessie) & 12.2. Insuffisanc
 * Insuffisance urinaire & 12. Système urinaire (reins, vessie) & pas de niveau 2\\\hline
 * Intoxication & 2. Accidents, traumatismes & pas de niveau 2\\\hline
 Maladie de peau & 9. Peau & pas de niveau 2\\\hline
-* Malformation & 6. Mortalité infantile & 6.1.   	Malformation, hydrocéphalie\\\hline
+* Malformation & 6. Mortalité infantile & 6.1. Malformation, hydrocéphalie\\\hline
 Manque de lait & 6. Mortalité infantile & 6.2. Manque de lait\\\hline
 Mort naturelle / Vieillesse & 13. Vieillesse, mort naturelle &\\\hline
 Mort-né & 6. Mortalité infantile & 6.3. Mort-né\\\hline
@@ -1047,41 +1055,98 @@ Les statistiques envisagées sont pour l'instant les suivantes ; la liste pourra
 \end{itemize} 
 \end{enumerate}
 
-\subsubsection{Actions contextuelles et icônes}
+\subsection{Icônes}
 \label{ssec:icons}
 
-\subsection{\'Etats}
+\subsubsection{Page d'accueil et navigation}
+NB. Ces icônes apparaissent en tracé clair (blanc ou mauve) sur fond sombre (chocolat). La barre de navigation est présente sur toutes les pages. Les icônes de la page d'accueil servent à la proposition de valeur mais ne sont pas cliquables. 
+
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}{|c|l|l|l|l|}\hline
+\textbf{Icone} & \textbf{Emplacement} & \textbf{Signification} & \textbf{Commentaire}\\\hline
+\endhead
+ & Page d'accueil & Fiche individuelle &  \\\hline
+ & Page d'accueil & Arbre généalogique &  \\\hline
+ & Page d'accueil & Statistiques santé &  \\\hline\hline
+
+ & Barre de navigation & Recherche &  \\\hline
+ & Barre de navigation & Home user &  \\\hline
+ & Barre de navigation & Login &  \\\hline
+ & Barre de navigation & Logout &  \\\hline
+
+\end{longtable}
+
+\subsubsection{\'Etats}
 \renewcommand{\arraystretch}{1.5}
 \begin{longtable}{|c|l|l|l|l|}\hline
 \textbf{Icone} & \textbf{Objets associés} & \textbf{Signification} & \textbf{Commentaire}\\\hline
 \endhead
- & Rats, Rateries, Portées, Utilisateurs & Fiche validée (gelée) & Symbole unicode \\\hline
- & Rats, Rateries, Portées, Utilisateurs & Fiche vérifiée & Symbole unicode \\\hline
- & Rats, Rateries, Portées, Utilisateurs & Fiche en attente d'action staff & Symbole unicode \\\hline
- & Rats, Rateries, Portées, Utilisateurs & Fiche en attente d'action utilisateur & Symbole unicode \\\hline
- & Rats, Rateries, Portées, Utilisateurs & Fiche non vérifiée & Symbole unicode \\\hline
- & Rats, Rateries, Portées, Utilisateurs & Fiche invalide (gelée) & Symbole unicode \\\hline
+ \textcolor{mygreen}{\large \ding{74}} & Rats, Rateries, Portées, Utilisateurs & Fiche validée (gelée) & Symbole unicode \\\hline
+ \textcolor{mygreen}{\large \ding{51}} & Rats, Rateries, Portées, Utilisateurs & Fiche vérifiée & Symbole unicode \\\hline
+ \textcolor{myorange}{\large \ding{55}} & Rats, Rateries, Portées, Utilisateurs & Fiche en attente d'action staff & Symbole unicode \\\hline
+ \textcolor{myred}{\large \ding{55}} & Rats, Rateries, Portées, Utilisateurs & Fiche en attente d'action utilisateur & Symbole unicode \\\hline
+ \textcolor{mybrown}{\large \ding{55}} & Rats, Rateries, Portées, Utilisateurs & Fiche non vérifiée & Symbole unicode \\\hline
+ \textcolor{darkgray}{\large $\recycle$} & Rats, Rateries, Portées, Utilisateurs & Fiche invalide (gelée) & Symbole unicode \\\hline\hline
 
- & Rats & Femelle & Symbole unicode \\\hline
- & Rats & Mâle & Symbole unicode \\\hline
+\textcolor{female}{\large \bf \female} & Rats & Femelle & Symbole unicode \\\hline
+\textcolor{male}{\large \bf \male} & Rats & Mâle & Symbole unicode \\\hline\hline
 
- & Rateries & Raterie en activité & \\\hline
- & Rateries & Raterie en pause ou fermée & \\\hline
+\raisebox{-1pt}{\includegraphics[width=16pt]{icon-on.eps}} & Rateries & Raterie en activité & \\\hline
+\raisebox{-1pt}{\includegraphics[width=16pt]{icon-off.eps}} & Rateries & Raterie en pause ou fermée & \\\hline
  
 \end{longtable}
 
 \subsubsection{Actions}
-Les icônes sont des hypothèses de travail provisoires, une homogénéisation devra être envisagée.
+Travail en cours, liste et icônes provisoires. Colonne Cx pour icône complexe ou à créer (pour devis graphiste.)     
 
-\renewcommand{\arraystretch}{1.5}
+
 \begin{longtable}{|c|l|l|l|l|}\hline
-\textbf{Icone} & \textbf{Action} & \textbf{Visible depuis...} & \textbf{Visible par...} & \textbf{Commentaire}\\\hline\hline
+\textbf{Icone} & \textbf{Action} & \textbf{Visible depuis...} & \textbf{Visible par...} & \textbf{Cx}\\\hline\hline
 \endhead
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-report.eps}} & Signaler un problème & Partout & Tous & \\\hline
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-help.eps}} & Voir l'aide & Partout & Tous & \\\hline\hline
-\raisebox{-3pt}{\includegraphics[width=10pt]{icon-delete.eps}} & Supprimer & Partout & Admin & \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-report.eps}} & Signaler un problème & Fiches & Tous & \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-help.eps}} & Voir l'aide & Fiches & Tous & \\\hline\hline
+\raisebox{0pt}{\includegraphics[width=12pt]{icon-view.eps}} & Voir la fiche & Listes & Tous & \\\hline\hline
+ & Voir mon profil utilisateur & Dashboard user & Propriétaire de la fiche & \\\hline 
+ & Voir mes rats & Dashboard user & Propriétaire des rats & \\
+ & Voir mes femelles & Mes rats & Propriétaire des rats & \\
+ & Voir mes mâles & Mes rats & Propriétaire des rats & \\
+ & Voir mes disparus & Mes rats & Propriétaire des rats & \\\hline
+ & Voir mes rateries & Dashboard user & Propriétaire des rateries &  \\\hline
+ & Voir mes portées & Dashboard user & Propriétaires des rateries &  \\\hline 
+ & Aller au back-office & Dashboard user & Staff, Admin, Root &  \\\hline\hline
+
+ & Changer la photo & Fiches user, rat, raterie & Propriétaire, Staff & \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-give.eps}} & Changer de propriétaire & Fiche rat, raterie & Propriétaire, Créateur, Staff & \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Déclarer une descendance & Fiche rat & Tous & \\\hline
+ & Enregistrer un rat & Mes rats & Tous & \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-death.eps}} & Déclarer le décès & Fiche rat, Mes Rats & Propriétaire, Créateur, Staff & \\
+ &  & Mes Rats (liste) & Propriétaire, Créateur, Staff & \\\hline
+
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-print.eps}} & Imprimer & Pedigree rat & Tous & \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-fullscreen.eps}} & Voir en plein écran & Pedigree rat & Tous & \\\hline
+
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Ajouter un raton & Mes portées (liste) & Tous & \\
+ &  & Fiche portée (menu) & Tous & \\\hline
+ & Ajouter une contribution & Fiche portée & Tous & \\\hline
+
+ \raisebox{-3pt}{\includegraphics[width=12pt]{icon-map.eps}} & Voir sur la carte & Fiche raterie & Tous & \\\hline
+ \raisebox{-2pt}{\includegraphics[width=12pt]{icon-website.eps}} & Voir le site web & Liste de rateries & Tous & \\\hline
+ & Activer / désactiver la raterie & Fiche raterie & Propriétaire, Staff & \\
+ & & Mes rateries (liste) & Propriétaire, Staff & \\\hline
+ & Déménager & Mes rateries, fiche raterie & Propriétaire, Staff & \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Déclarer une portée & Fiche raterie & & \\
+ &  & Mes rateries (liste) & & \\
+ &  & Mes portées & & \\\hline \hline
+ 
+
+& Verrouiller / déverrouiller & Fiche utilisateur & Admin & \\\hline
+& Envoyer un mail au propriétaire & Fiche avec état, listes & & \\\hline 
+\raisebox{-1pt}{\includegraphics[width=12pt]{icon-next-ok.eps}} & Avancer au prochain état OK & Fiches avec état & Staff & \\\hline
+\raisebox{-1pt}{\includegraphics[width=12pt]{icon-next-ko.eps}} & Reculer au prochain état KO & Fiches avec état & Staff & \\\hline
+\raisebox{-3pt}{\includegraphics[width=12pt]{icon-frozen.eps}} & Geler / Dégeler & Fiches avec état & Staff & \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-edit-staff.eps}} & Editer en base & Fiches, listes & Admin & \\\hline
+\raisebox{-3pt}{\includegraphics[width=10pt]{icon-delete.eps}} & Supprimer & Fiches, listes & Admin & \\\hline
 
 \end{longtable}
-
 
 \end{document}
