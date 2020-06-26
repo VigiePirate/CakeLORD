@@ -97,7 +97,7 @@ class Rattery extends Entity
         if($candidate==null) {
             return $champion = ['id' => null, 'name' => 'Could not find champion', 'ageInWords' => ''];
         } else {
-            return $champion = ['id' => $candidate->id, 'name' => $candidate->name, 'ageInWords' => $candidate->champion_age_string];
+            return $champion = ['id' => $candidate->id, 'name' => $candidate->usual_name, 'ageInWords' => $candidate->champion_age_string];
         }
     }
 

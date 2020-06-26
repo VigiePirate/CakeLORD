@@ -123,16 +123,12 @@ class Rat extends Entity
     {
         $doublePrefix = $this->rattery->prefix;
 
-        if(isset($this->birth_litter)) {
-            /* fixme: the priority range should not be hardcoded */
-            for($priority = 2; $priority < 5; $priority++) {
-                foreach($this->birth_litter->ratteries as $rattery) {
-                    if ($rattery->_joinData['litters_contribution_id'] === $priority) {
-                        $doublePrefix = $this->rattery->prefix . '-' . $rattery->prefix;
-                        break;
-                    }
-                }
-            }
+        if( isset($this->birth_litter)
+            && !empty($this->birth_litter->contributions[1])
+            && !$this->birth_litter->contributions[1]->rattery->is_generic
+            && ($this->rattery->prefix != $this->birth_litter->contributions[1])
+        ) {
+            $doublePrefix .= '-' . $this->birth_litter->contributions[1]->rattery->prefix;
         }
         return $doublePrefix;
     }

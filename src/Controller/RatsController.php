@@ -30,7 +30,7 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
         ];
         $rats = $this->paginate($this->Rats);
 
@@ -46,7 +46,7 @@ class RatsController extends AppController
     {
         $user = $this->Authentication->getIdentity();
         $this->paginate = [
-            'contain' => ['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Ratteries'],
+            'contain' => ['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
         ];
         $rats = $this->paginate($this->Rats->find()->where(['Rats.owner_user_id' => $user->id]));
 
@@ -64,11 +64,18 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['OwnerUsers', 'CreatorUsers','Ratteries', 'BirthLitters', 'BirthLitters.Ratteries',
-            'BirthLitters.Sire','BirthLitters.Dam','BirthLitters.Sire.BirthLitters.Ratteries','BirthLitters.Dam.BirthLitters.Ratteries',
-            'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States',
-            'BredLitters','BredLitters.Sire','BredLitters.Dam','BredLitters.OffspringRats','BredLitters.OffspringRats.OwnerUsers','BredLitters.OffspringRats.States','BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
-            'Singularities', 'Conversations', 'RatSnapshots'],
+            'contain' => ['OwnerUsers', 'CreatorUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
+            'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
+            'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
+            'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'Singularities',
+            'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States',
+            'BredLitters', 'BredLitters.Contributions', 'BredLitters.Ratteries',
+            'BredLitters.Sire', 'BredLitters.Sire.BirthLitters', 'BredLitters.Sire.BirthLitters.Contributions',
+            'BredLitters.Dam', 'BredLitters.Dam.BirthLitters', 'BredLitters.Dam.BirthLitters.Contributions',
+            'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
+            'BredLitters.OffspringRats.BirthLitters', 'BredLitters.OffspringRats.BirthLitters.Contributions',
+            'BredLitters.OffspringRats.OwnerUsers', 'BredLitters.OffspringRats.States', 'BredLitters.OffspringRats.DeathPrimaryCauses', 'BredLitters.OffspringRats.DeathSecondaryCauses',
+             'Conversations', 'RatSnapshots'],
         ]);
 
         $this->set('rat', $rat);
@@ -203,7 +210,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'States', 'BirthLitters','BirthLitters.Ratteries'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'States', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
         ];
         $rats = $this->paginate($rats);
 
@@ -238,7 +245,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
 
@@ -267,7 +274,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
 
@@ -296,7 +303,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
 
@@ -326,7 +333,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries','States'],
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
 
@@ -349,7 +356,7 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers','Ratteries','States'],
+            'contain' => ['OwnerUsers','Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
 
@@ -365,8 +372,10 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries',
-            'BirthLitters.Sire','BirthLitters.Dam','BirthLitters.Sire.BirthLitters.Ratteries','BirthLitters.Dam.BirthLitters.Ratteries','BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
+            'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
+            'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
+            'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
+            'BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
             'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States',
             'BredLitters','BredLitters.Sire','BredLitters.Dam','BredLitters.OffspringRats','BredLitters.OffspringRats.OwnerUsers','BredLitters.OffspringRats.States','BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
             'Singularities'],

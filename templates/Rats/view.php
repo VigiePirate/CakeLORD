@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
+            <h1><?= h($rat->usual_name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
             <div class="row">
                 <?php if ($rat->picture != '') : ?>
