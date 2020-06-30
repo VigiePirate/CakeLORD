@@ -8,13 +8,13 @@
     <aside class="column">
         <div class="side-nav">
             <?= $this->Html->image('/img/icon-fa-alert.svg', [
-          'url' => ['controller' => 'Conversations', 'action' => 'add'],
-          'class' => 'side-nav-icon',
-          'alt' => __('Report')]) ?>
-      <?= $this->Html->image('/img/icon-help.svg', [
-              'url' => ['controller' => 'Articles', 'action' => 'index'],
-              'class' => 'side-nav-icon',
-              'alt' => __('Help')]) ?>
+                'url' => ['controller' => 'Conversations', 'action' => 'add'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Report')]) ?>
+            <?= $this->Html->image('/img/icon-help.svg', [
+                'url' => ['controller' => 'Articles', 'action' => 'index'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Help')]) ?>
             <?= $this->Html->link(__('Edit Country'), ['action' => 'edit', $country->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Country'), ['action' => 'delete', $country->id], ['confirm' => __('Are you sure you want to delete # {0}?', $country->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Countries'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>

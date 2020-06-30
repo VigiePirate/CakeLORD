@@ -16,6 +16,11 @@ p {
   color:#d33c44;
 }
 
+.row .column.column-90 {
+    flex: 0 0 90%;
+    max-width: 90%;
+}
+
 summary {
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
   font-weight: bold;
@@ -91,7 +96,7 @@ h3 {
 h4 {
   font-size:1.8rem;
   letter-spacing:0rem; /* -.05rem; */
-  line-height:1.5
+  line-height:1.5;
 }
 
 h5 {
@@ -382,7 +387,7 @@ th {
   padding-right:1.5rem;
 }
 .shieldline span {
-    color: #bfc4ff; /*gray footer: #6076bf */
+    color: #bfcaff; /*gray footer: #6076bf */
   }
 .shieldline {
   /* font-family:"Alegreya",serif;*/
@@ -454,7 +459,7 @@ th {
     }
 
 .top-nav-title span {
-    color: #bfc4ff;
+    color: #bfcaff;
   }
 
 .top-nav-links {
@@ -611,7 +616,7 @@ footer {
 
 /*gray: comment out here */
 .footer_section h5 {
-    color: #bfc4ff;
+    color: #bfcaff;
     font-weight:bold;
 }
 
@@ -839,6 +844,13 @@ svg {
     -moz-column-gap:      1rem;
     column-count:         3;
     column-gap:           1rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .row .column-responsive.column-90 {
+      flex: 0 0 90%;
+      max-width: 90%
   }
 }
 

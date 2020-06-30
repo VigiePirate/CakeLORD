@@ -8,13 +8,19 @@
     <aside class="column">
         <div class="side-nav">
             <?= $this->Html->image('/img/icon-fa-alert.svg', [
-          'url' => ['controller' => 'Conversations', 'action' => 'add'],
-          'class' => 'side-nav-icon',
-          'alt' => __('Report')]) ?>
-      <?= $this->Html->image('/img/icon-help.svg', [
-              'url' => ['controller' => 'Articles', 'action' => 'index'],
-              'class' => 'side-nav-icon',
-              'alt' => __('Help')]) ?>
+                'url' => ['controller' => 'Conversations', 'action' => 'add'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Report')]) ?>
+            <?= $this->Html->image('/img/icon-help.svg', [
+                'url' => ['controller' => 'Articles', 'action' => 'index'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Help')]) ?>
+            <div class="spacer"> </div>
+            <?= $this->Html->image('/img/icon-search-rats.svg', [
+                  'url' => ['controller' => 'Rats', 'action' => 'ownedBy', $user->username],
+                  'class' => 'side-nav-icon',
+                  'alt' => __('Find their rats')]) ?>
+            <div class="spacer"> </div>
             <?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>

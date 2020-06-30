@@ -2,7 +2,7 @@
     <h2><?= h($rubric) ?></h2>
 <?php endif; ?>
 <div class="table-responsive">
-    <table class="summary">
+    <table class="condensed">
         <thead>
             <?php if (! in_array('state_id', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('state_id',$this->Html->image('/img/icon-fa-state.svg', ['class' => 'action-icon']), ['escape' => false])?></th>
@@ -32,7 +32,7 @@
                 <th><?= __('Death cause') ?></th>
             <?php endif; ?>
             <?php if (! in_array('owner_user_id', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('owner_user_id') ?></th>
+                <th><?= $this->Paginator->sort('owner_user_id','Owner') ?></th>
             <?php endif; ?>
             <?php if (! in_array('sex', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('sex',$this->Html->image('/img/icon-fa-sex.svg', ['class' => 'action-icon']), ['escape' => false])?></th>
@@ -76,7 +76,7 @@
                         <td class="sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></td>
                     <?php endif; ?>
                     <td class="actions">
-                        <?= $this->Html->image('/img/icon-fa-eye.svg', [
+                        <?= $this->Html->image('/img/icon-view.svg', [
                             'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
                             'class' => 'action-icon',
                             'alt' => __('See Rat')]) ?>

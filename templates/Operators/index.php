@@ -5,8 +5,8 @@
  */
 ?>
 <div class="operators index content">
-    <?= $this->Html->link(__('New Operator'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Operators') ?></h3>
+    <?= $this->Html->link(__('New Operator'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('Operators') ?></h1>
     <div class="table-responsive">
         <table>
             <thead>

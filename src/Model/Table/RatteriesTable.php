@@ -215,4 +215,26 @@ class RatteriesTable extends Table
 
         return $query->group(['Ratteries.id']);
     }
+
+    public function findInState(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['inState'])) {
+            $query->where([
+                'Ratteries.state_id IS' => null,
+            ]);
+        } else {
+            // Find rats with birthdates posterior to passed parameter
+            $inState = implode($options['inState']);
+            // concatenate with  . " 00:00:00.000" ??
+            $query->where([
+                    'Ratteries.state_id IS' => $inState,
+            ]);
+        }
+
+        return $query->group(['Ratteries.id']);
+    }
 }

@@ -36,7 +36,7 @@ class DeathSecondaryCausesController extends AppController
     public function view($id = null)
     {
         $deathSecondaryCause = $this->DeathSecondaryCauses->get($id, [
-            'contain' => ['DeathPrimaryCauses', 'Rats'],
+            'contain' => ['DeathPrimaryCauses'],
         ]);
 
         $this->set(compact('deathSecondaryCause'));

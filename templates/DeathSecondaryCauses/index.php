@@ -5,17 +5,17 @@
  */
 ?>
 <div class="deathSecondaryCauses index content">
-    <?= $this->Html->link(__('New Death Secondary Cause'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Death Secondary Causes') ?></h3>
+    <?= $this->Html->link(__('New Death Secondary Cause'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('All Death Secondary Causes') ?></h1>
     <div class="table-responsive">
-        <table>
+        <table class="summary">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('death_primary_cause_id') ?></th>
                     <th><?= $this->Paginator->sort('is_tumor') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions-title"><?= $this->Html->image('/img/icon-fa-action.svg', ['class' => 'action-icon'])?></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,8 +26,14 @@
                     <td><?= $deathSecondaryCause->has('death_primary_cause') ? $this->Html->link($deathSecondaryCause->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $deathSecondaryCause->death_primary_cause->id]) : '' ?></td>
                     <td><?= h($deathSecondaryCause->is_tumor) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $deathSecondaryCause->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $deathSecondaryCause->id]) ?>
+                        <?= $this->Html->image('/img/icon-view.svg', [
+                            'url' => ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $deathSecondaryCause->id],
+                            'class' => 'action-icon',
+                            'alt' => __('See Rat')]) ?>
+                        <?= $this->Html->image('/img/icon-edit-admin.svg', [
+                            'url' => ['controller' => 'DeathSecondaryCauses', 'action' => 'edit', $deathSecondaryCause->id],
+                            'class' => 'action-icon',
+                            'alt' => __('See Rat')]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $deathSecondaryCause->id], ['confirm' => __('Are you sure you want to delete # {0}?', $deathSecondaryCause->id)]) ?>
                     </td>
                 </tr>

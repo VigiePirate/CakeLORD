@@ -368,6 +368,27 @@ class RatsController extends AppController
         ]);
     }
 
+    public function inState()
+    {
+        $inState = $this->request->getParam('pass');
+        $rats = $this->Rats->find('inState', [
+            'inState' => $inState
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['OwnerUsers','Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
+        ];
+        $rats = $this->paginate($rats);
+
+        // $this->set(compact('rats', 'birth_dates'));
+
+        $this->set([
+            'rats' => $rats,
+            'inState' => $inState
+        ]);
+    }
+
     public function pedigree($id = null)
     {
         $this->Authorization->skipAuthorization();

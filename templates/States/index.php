@@ -5,39 +5,33 @@
  */
 ?>
 <div class="states index content">
-    <?= $this->Html->link(__('New State'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('States') ?></h3>
+    <?= $this->Html->link(__('New State'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('All Sheet States') ?></h1>
     <div class="table-responsive">
-        <table>
+        <table class="summary">
             <thead>
                 <tr>
+                    <th><?= $this->Paginator->sort('state_id',$this->Html->image('/img/icon-fa-state.svg', ['class' => 'action-icon']), ['escape' => false])?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('name') ?></th>
-                    <th><?= $this->Paginator->sort('color') ?></th>
-                    <th><?= $this->Paginator->sort('symbol') ?></th>
-                    <th><?= $this->Paginator->sort('css_property') ?></th>
-                    <th><?= $this->Paginator->sort('is_default') ?></th>
-                    <th><?= $this->Paginator->sort('needs_user_action') ?></th>
-                    <th><?= $this->Paginator->sort('needs_staff_action') ?></th>
-                    <th><?= $this->Paginator->sort('is_reliable') ?></th>
-                    <th><?= $this->Paginator->sort('is_visible') ?></th>
-                    <th><?= $this->Paginator->sort('is_searchable') ?></th>
-                    <th><?= $this->Paginator->sort('is_frozen') ?></th>
-                    <th><?= $this->Paginator->sort('next_ok_state_id') ?></th>
-                    <th><?= $this->Paginator->sort('next_ko_state_id') ?></th>
-                    <th><?= $this->Paginator->sort('next_frozen_state_id') ?></th>
-                    <th><?= $this->Paginator->sort('next_thawed_state_id') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('is_default','Default?') ?></th>
+                    <th><?= $this->Paginator->sort('needs_user_action','User Action?') ?></th>
+                    <th><?= $this->Paginator->sort('needs_staff_action','Staff Action?') ?></th>
+                    <th><?= $this->Paginator->sort('is_reliable','Reliable?') ?></th>
+                    <th><?= $this->Paginator->sort('is_visible','Visible?') ?></th>
+                    <th><?= $this->Paginator->sort('is_searchable','Searchable?') ?></th>
+                    <th><?= $this->Paginator->sort('is_frozen','Frozen?') ?></th>
+                    <th><?= $this->Paginator->sort('next_ko_state_id','Next OK') ?></th>
+                    <th><?= $this->Paginator->sort('next_ko_state_id','Next KO') ?></th>
+                    <th><?= $this->Paginator->sort('next_frozen_state_id','Next Frozen') ?></th>
+                    <th><?= $this->Paginator->sort('next_thawed_state_id','Next Thawed') ?></th>
+                    <th class="actions"><?= $this->Html->image('/img/icon-fa-action.svg', ['class' => 'action-icon'])?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($states as $state): ?>
                 <tr>
+                    <td><span class="statecolor_<?= h($state->id) ?>"><?= h($state->symbol) ?></span></td>
                     <td><?= $this->Number->format($state->id) ?></td>
-                    <td><?= h($state->name) ?></td>
-                    <td><?= h($state->color) ?></td>
-                    <td><?= h($state->symbol) ?></td>
-                    <td><?= h($state->css_property) ?></td>
                     <td><?= h($state->is_default) ?></td>
                     <td><?= h($state->needs_user_action) ?></td>
                     <td><?= h($state->needs_staff_action) ?></td>
@@ -45,12 +39,15 @@
                     <td><?= h($state->is_visible) ?></td>
                     <td><?= h($state->is_searchable) ?></td>
                     <td><?= h($state->is_frozen) ?></td>
-                    <td><?= $state->has('next_ok_state') ? $this->Html->link($state->next_ok_state->name, ['controller' => 'States', 'action' => 'view', $state->next_ok_state->id]) : '' ?></td>
-                    <td><?= $state->has('next_ko_state') ? $this->Html->link($state->next_ko_state->name, ['controller' => 'States', 'action' => 'view', $state->next_ko_state->id]) : '' ?></td>
-                    <td><?= $state->has('next_frozen_state') ? $this->Html->link($state->next_frozen_state->name, ['controller' => 'States', 'action' => 'view', $state->next_frozen_state->id]) : '' ?></td>
-                    <td><?= $state->has('next_thawed_state') ? $this->Html->link($state->next_thawed_state->name, ['controller' => 'States', 'action' => 'view', $state->next_thawed_state->id]) : '' ?></td>
+                    <td><?= $state->has('next_ok_state') ? $state->next_ok_state->id : '' ?></td>
+                    <td><?= $state->has('next_ko_state') ? $state->next_ko_state->id : '' ?></td>
+                    <td><?= $state->has('next_frozen_state') ? $state->next_frozen_state->id : '' ?></td>
+                    <td><?= $state->has('next_thawed_state') ? $state->next_thawed_state->id : '' ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $state->id]) ?>
+                        <?= $this->Html->image('/img/icon-view.svg', [
+                            'url' => ['controller' => 'States', 'action' => 'view', $state->id],
+                            'class' => 'action-icon',
+                            'alt' => __('See State')]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $state->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $state->id], ['confirm' => __('Are you sure you want to delete # {0}?', $state->id)]) ?>
                     </td>

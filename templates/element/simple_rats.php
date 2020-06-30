@@ -32,7 +32,7 @@
                 <th><?= __('Death Cause') ?></th>
             <?php endif; ?>
             <?php if (! in_array('owner_user_id', $exceptions)): ?>
-                <th><?= __('Owner User') ?></th>
+                <th><?= __('Owner') ?></th>
             <?php endif; ?>
             <?php if (! in_array('sex', $exceptions)): ?>
                 <th><?= $this->Html->image('/img/icon-fa-sex.svg', ['class' => 'action-icon']) ?></th>
@@ -76,7 +76,7 @@
                         <td class="sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></td>
                     <?php endif; ?>
                     <td class="actions">
-                        <?= $this->Html->image('/img/icon-fa-eye.svg', [
+                        <?= $this->Html->image('/img/icon-view.svg', [
                             'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
                             'class' => 'action-icon',
                             'alt' => __('See Rat')]) ?>

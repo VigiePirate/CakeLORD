@@ -267,7 +267,7 @@
                             <td><?= !empty($litter->sire) ? h($litter->sire[0]->usual_name) : __('Unknown') ?></td>
                             <td><?= $this->Number->format($litter->pups_number) ?></td>
                             <td class="actions">
-                                <?= $this->Html->image('/img/icon-fa-eye.svg', [
+                                <?= $this->Html->image('/img/icon-view.svg', [
                                     'url' => ['controller' => 'Litters', 'action' => 'view', $litter->id],
                                     'class' => 'action-icon',
                                     'alt' => __('See Litter')]) ?>

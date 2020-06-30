@@ -39,14 +39,15 @@ $cakeDescription = 'LORD';
     <?= $this->fetch('script') ?>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="144x144" href="/img/lord.icon.144x144.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48x48.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#663300">
     <meta name="msapplication-TileColor" content="#663300">
     <meta name="theme-color" content="#663300">
-    <?= $this->Html->meta(['link' => '/manifest.webmanifest','rel' => 'manifest']); ?>
-</head>
+    <link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials">
+    </head>
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
@@ -86,7 +87,7 @@ $cakeDescription = 'LORD';
                     ['escape' => false])
             ?>
         </div>
-        </nav>
+    </nav>
     <main class="main">
         <div class="container">
             <?= $this->Flash->render() ?>
@@ -149,4 +150,15 @@ $cakeDescription = 'LORD';
     </div>
 </footer>
 </body>
+<script>
+  if ('serviceWorker' in navigator) {
+    console.log("Will the service worker register?");
+    navigator.serviceWorker.register('service-worker.js')
+      .then(function(reg){
+        console.log("Yes, it did.");
+      }).catch(function(err) {
+        console.log("No it didn't. This happened: ", err)
+      });
+  }
+</script>
 </html>
