@@ -306,6 +306,27 @@ class RatteriesController extends AppController
         $this->set(compact('ratteries', 'users'));
     }
 
+    public function inState()
+    {
+        $inState = $this->request->getParam('pass');
+        $ratteries = $this->Ratteries->find('inState', [
+            'inState' => $inState
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['Users', 'States','Countries'],
+        ];
+        $ratteries = $this->paginate($ratteries);
+
+        // $this->set(compact('rats', 'birth_dates'));
+
+        $this->set([
+            'ratteries' => $ratteries,
+            'inState' => $inState
+        ]);
+    }
+
     // Functions for statistics
     // Compute the number of rats born in the rattery
     // not used and probably bugged

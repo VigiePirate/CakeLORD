@@ -149,7 +149,7 @@
                             <td><?= h($contribution->rattery->name) ?></td>
                             <td><?= h($contribution->contribution_type->name) ?></td>
                             <td class="actions">
-                                <?= $this->Html->image('/img/icon-fa-eye.svg', [
+                                <?= $this->Html->image('/img/icon-view.svg', [
                                     'url' => ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id],
                                     'class' => 'action-icon',
                                     'alt' => __('See Rat')]) ?>

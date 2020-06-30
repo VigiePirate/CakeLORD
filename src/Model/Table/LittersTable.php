@@ -149,4 +149,23 @@ class LittersTable extends Table
         return $rules;
     }
 
+    public function findInState(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['inState'])) {
+            $query->where([
+                'Litters.state_id IS' => null,
+            ]);
+        } else {
+            $inState = implode($options['inState']);
+            $query->where([
+                    'Litters.state_id IS' => $inState,
+            ]);
+        }
+
+        return $query->group(['Litters.id']);
+    }
 }

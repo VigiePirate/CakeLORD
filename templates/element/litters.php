@@ -1,6 +1,6 @@
 <h3><?= h($rubric) ?></h3>
 <div class="table-responsive">
-    <table>
+    <table class="condensed">
         <thead>
                 <?php if (! in_array('state', $exceptions)): ?>
                     <th><?= $this->Paginator->sort('state',$this->Html->image('/img/icon-fa-state.svg', ['class' => 'action-icon']), ['escape' => false])?></th>
@@ -59,7 +59,7 @@
                     <?php endif; ?>
                     <?php if (! in_array('actions', $exceptions)): ?>
                         <td class="actions">
-                            <?= $this->Html->image('/img/icon-fa-eye.svg', [
+                            <?= $this->Html->image('/img/icon-view.svg', [
                                 'url' => ['controller' => 'Litters', 'action' => 'view', $litter->id],
                                 'class' => 'action-icon',
                                 'alt' => __('See Litter')]) ?>

@@ -64,12 +64,12 @@
                     <td class="actions">
                         <?php if (! in_array('website', $exceptions)): ?>
                             <?= $rattery->website ?
-                                $this->Html->image('/img/icon-web.svg', [
+                                $this->Html->image('/img/icon-website.svg', [
                                 'url' => h($rattery->website),
                                 'class' => 'action-icon',
                                 'alt' => __('See Rattery')]) : '' ?>
                         <?php endif; ?>
-                        <?= $this->Html->image('/img/icon-fa-eye.svg', [
+                        <?= $this->Html->image('/img/icon-view.svg', [
                             'url' => ['controller' => 'Ratteries', 'action' => 'view', $rattery->id],
                             'class' => 'action-icon',
                             'alt' => __('See Rattery')]) ?>

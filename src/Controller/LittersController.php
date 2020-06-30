@@ -151,4 +151,23 @@ class LittersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function inState()
+    {
+        $inState = $this->request->getParam('pass');
+        $litters = $this->Litters->find('inState', [
+            'inState' => $inState
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['Users', 'Sire', 'Dam', 'Contributions', 'States'],
+        ];
+        $litters = $this->paginate($litters);
+
+        $this->set([
+            'litters' => $litters,
+            'inState' => $inState
+        ]);
+    }
 }

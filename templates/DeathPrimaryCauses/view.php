@@ -7,68 +7,83 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
+            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+                'url' => ['controller' => 'Conversations', 'action' => 'add'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Report')]) ?>
+            <?= $this->Html->image('/img/icon-help.svg', [
+                'url' => ['controller' => 'Articles', 'action' => 'index'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Help')]) ?>
+            <div class="spacer"> </div>
+            <?= $this->Html->image('/img/icon-search-rats.svg', [
+                'url' => ['controller' => 'Rats', 'action' => 'findByPrimaryDeath'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Help')]) ?>
+            <div class="spacer"> </div>
             <?= $this->Html->link(__('Edit Death Primary Cause'), ['action' => 'edit', $deathPrimaryCause->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Death Primary Cause'), ['action' => 'delete', $deathPrimaryCause->id], ['confirm' => __('Are you sure you want to delete # {0}?', $deathPrimaryCause->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Death Primary Causes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('New Death Primary Cause'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="deathPrimaryCauses view content">
-            <h3><?= h($deathPrimaryCause->name) ?></h3>
-            <table>
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Primary Death Cause') ?></div>
+            </div>
+            <h1><?= h($deathPrimaryCause->name) ?></h1>
+
+            <h2><?= __('Reference information') ?></h2>
+
+            <table class="condensed">
                 <tr>
-                    <th><?= __('Name') ?></th>
-                    <td><?= h($deathPrimaryCause->name) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
+                    <th><?= __('Identification code') ?></th>
                     <td><?= $this->Number->format($deathPrimaryCause->id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Is Infant') ?></th>
+                    <th><?= __('Happens only to infant rats?') ?></th>
                     <td><?= $deathPrimaryCause->is_infant ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Is Accident') ?></th>
+                    <th><?= __('Accidental cause?') ?></th>
                     <td><?= $deathPrimaryCause->is_accident ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Is Oldster') ?></th>
+                    <th><?= __('Happens only to elderly rats?') ?></th>
                     <td><?= $deathPrimaryCause->is_oldster ? __('Yes') : __('No'); ?></td>
                 </tr>
             </table>
+
             <div class="text">
                 <strong><?= __('Description') ?></strong>
                 <blockquote>
                     <?= $this->Text->autoParagraph(h($deathPrimaryCause->description)); ?>
                 </blockquote>
             </div>
+
             <div class="related">
-                <h4><?= __('Related Death Secondary Causes') ?></h4>
+                <h2><?= __('Related information') ?></h2>
+                <h3><?= __('Related Death Secondary Causes') ?></h3>
                 <?php if (!empty($deathPrimaryCause->death_secondary_causes)) : ?>
                 <div class="table-responsive">
-                    <table>
+                    <table class="summary">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Name') ?></th>
-                            <th><?= __('Death Primary Cause Id') ?></th>
-                            <th><?= __('Description') ?></th>
-                            <th><?= __('Is Tumor') ?></th>
+                            <th><?= __('Tumor?') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($deathPrimaryCause->death_secondary_causes as $deathSecondaryCauses) : ?>
                         <tr>
                             <td><?= h($deathSecondaryCauses->id) ?></td>
                             <td><?= h($deathSecondaryCauses->name) ?></td>
-                            <td><?= h($deathSecondaryCauses->death_primary_cause_id) ?></td>
-                            <td><?= h($deathSecondaryCauses->description) ?></td>
                             <td><?= h($deathSecondaryCauses->is_tumor) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $deathSecondaryCauses->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'DeathSecondaryCauses', 'action' => 'edit', $deathSecondaryCauses->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'DeathSecondaryCauses', 'action' => 'delete', $deathSecondaryCauses->id], ['confirm' => __('Are you sure you want to delete # {0}?', $deathSecondaryCauses->id)]) ?>
+                                <?= $this->Html->image('/img/icon-view.svg', [
+                                    'url' => ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $deathSecondaryCauses->id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('See Rat')]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -77,85 +92,7 @@
                 <?php endif; ?>
             </div>
             <div class="related">
-                <h4><?= __('Related Rats') ?></h4>
-                <?php if (!empty($deathPrimaryCause->rats)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Pedigree Identifier') ?></th>
-                            <th><?= __('Is Pedigree Custom') ?></th>
-                            <th><?= __('Owner User Id') ?></th>
-                            <th><?= __('Name') ?></th>
-                            <th><?= __('Pup Name') ?></th>
-                            <th><?= __('Sex') ?></th>
-                            <th><?= __('Birth Date') ?></th>
-                            <th><?= __('Rattery Id') ?></th>
-                            <th><?= __('Litter Id') ?></th>
-                            <th><?= __('Color Id') ?></th>
-                            <th><?= __('Eyecolor Id') ?></th>
-                            <th><?= __('Dilution Id') ?></th>
-                            <th><?= __('Marking Id') ?></th>
-                            <th><?= __('Earset Id') ?></th>
-                            <th><?= __('Coat Id') ?></th>
-                            <th><?= __('Is Alive') ?></th>
-                            <th><?= __('Death Date') ?></th>
-                            <th><?= __('Death Primary Cause Id') ?></th>
-                            <th><?= __('Death Secondary Cause Id') ?></th>
-                            <th><?= __('Death Euthanized') ?></th>
-                            <th><?= __('Death Diagnosed') ?></th>
-                            <th><?= __('Death Necropsied') ?></th>
-                            <th><?= __('Comments') ?></th>
-                            <th><?= __('Picture') ?></th>
-                            <th><?= __('Picture Thumbnail') ?></th>
-                            <th><?= __('Creator User Id') ?></th>
-                            <th><?= __('State Id') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($deathPrimaryCause->rats as $rats) : ?>
-                        <tr>
-                            <td><?= h($rats->id) ?></td>
-                            <td><?= h($rats->pedigree_identifier) ?></td>
-                            <td><?= h($rats->is_pedigree_custom) ?></td>
-                            <td><?= h($rats->owner_user_id) ?></td>
-                            <td><?= h($rats->name) ?></td>
-                            <td><?= h($rats->pup_name) ?></td>
-                            <td><?= h($rats->sex) ?></td>
-                            <td><?= h($rats->birth_date) ?></td>
-                            <td><?= h($rats->rattery_id) ?></td>
-                            <td><?= h($rats->litter_id) ?></td>
-                            <td><?= h($rats->color_id) ?></td>
-                            <td><?= h($rats->eyecolor_id) ?></td>
-                            <td><?= h($rats->dilution_id) ?></td>
-                            <td><?= h($rats->marking_id) ?></td>
-                            <td><?= h($rats->earset_id) ?></td>
-                            <td><?= h($rats->coat_id) ?></td>
-                            <td><?= h($rats->is_alive) ?></td>
-                            <td><?= h($rats->death_date) ?></td>
-                            <td><?= h($rats->death_primary_cause_id) ?></td>
-                            <td><?= h($rats->death_secondary_cause_id) ?></td>
-                            <td><?= h($rats->death_euthanized) ?></td>
-                            <td><?= h($rats->death_diagnosed) ?></td>
-                            <td><?= h($rats->death_necropsied) ?></td>
-                            <td><?= h($rats->comments) ?></td>
-                            <td><?= h($rats->picture) ?></td>
-                            <td><?= h($rats->picture_thumbnail) ?></td>
-                            <td><?= h($rats->creator_user_id) ?></td>
-                            <td><?= h($rats->state_id) ?></td>
-                            <td><?= h($rats->created) ?></td>
-                            <td><?= h($rats->modified) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Rats', 'action' => 'view', $rats->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Rats', 'action' => 'edit', $rats->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Rats', 'action' => 'delete', $rats->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rats->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
+                <h3><?= __('Statistics') ?></h3>
             </div>
         </div>
     </div>
