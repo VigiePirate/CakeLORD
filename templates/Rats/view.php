@@ -22,7 +22,7 @@
                     'class' => 'side-nav-icon',
                     'alt' => __('Modify Rat')]) ?>
                     <?= $this->Html->image('/img/icon-fa-give.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'give', $rat->id],
+                        'url' => ['controller' => 'Rats', 'action' => 'transferOwnership', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Change Owner')]) ?>
                 <?= $this->Html->image('/img/icon-fa-baby.svg', [
@@ -57,7 +57,7 @@
 
             <h1><?= h($rat->usual_name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
-            <div class="row">
+            <div class="row row-reverse">
                 <?php if ($rat->picture != '') : ?>
                 <div class="column-responsive column-66">
                     <h2>Identity</h2>

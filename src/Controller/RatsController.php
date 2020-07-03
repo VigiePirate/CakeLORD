@@ -453,4 +453,31 @@ class RatsController extends AppController
         $json = json_encode($family);
         $this->set(compact('rat', 'json'));
     }
+
+    /**
+     * ChangeOwner method
+     *
+     * @param string|null $id Rat id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function transferOwnership($id = null)
+    // this change is authorized to owner and staff, and brings rat to next_ok_state
+    {
+        $rat = $this->Rats->get($id, [
+            'contain' => ['CreatorUsers','OwnerUsers','States','Ratteries','BirthLitters','BirthLitters.Contributions'],
+        ]);
+        $this->Authorization->authorize($rat);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+            if ($this->Rats->save($rat)) {
+                $this->Flash->success(__('The rat has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The rat could not be saved. Please, try again.'));
+        }
+        $ownerUsers = $this->Rats->OwnerUsers->find('list');
+        $this->set(compact('rat', 'ownerUsers'));
+    }
 }

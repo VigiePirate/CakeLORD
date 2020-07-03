@@ -861,6 +861,9 @@ svg {
     .hide-on-mobile {
       display:none;
     }
+    .row-reverse {
+      flex-direction:column-reverse;
+    }
     .top-nav {
       margin: 0 auto;
     }
@@ -892,6 +895,46 @@ svg {
     .spacer{
         width: 2rem;
     }
+
+    /* override all milligram transposition stuff */
+    table {
+        border-spacing: 0;
+        display: inherit;
+        width: 100%
+    }
+    table thead {
+        border-right: none
+    }
+    table thead td, table thead th {
+        padding-left: 0
+    }
+    table thead td:first-child, table thead th:first-child {
+        padding-left: 0
+    }
+    table thead td:last-child, table thead th:last-child {
+        padding-right: 1.2rem
+    }
+    table tbody {
+        display: inherit;
+        overflow-x: inherit;
+        white-space: inherit
+    }
+    table tbody tr {
+        border-right: solid 0rem #e1e1e1
+    }
+    table tbody tr:last-child {
+        border-right: none
+    }
+    table td, table th {
+        display: table-cell;
+    }
+    table td:first-child, table th:first-child {
+        padding-left: inherit
+    }
+    table td:last-child, table th:last-child {
+        padding-right: inherit
+    }
+
     #gallery {
       /* line-height: 1;*/
       -webkit-column-count: 2;
