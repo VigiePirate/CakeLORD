@@ -1,3 +1,8 @@
+/* Utils */
+.hide-everywhere {
+  display:none;
+}
+
 /* Miligram overrides */
 a {
   font-family: "Alegreya", serif;
@@ -103,6 +108,8 @@ h5 {
   margin-bottom: 0.5rem;
 }
 
+/* Forms */
+
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
     background: #663300;
     border-color: #663300;
@@ -119,6 +126,10 @@ h5 {
   color:#ffffff;
 }
 
+textarea {
+  height:auto;
+}
+
 legend {
     font-family: "Imprima", sans-serif;
     font-size: 2.8rem;
@@ -130,11 +141,11 @@ label {
     font-size: 2.0rem;
   }
 
+/* Tables */
+
 tr:hover {
     background-color:#ebeefa;
   }
-
-/* Tables */
 
 table {
   padding-left:1rem;

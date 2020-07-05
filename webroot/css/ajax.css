@@ -1,0 +1,34 @@
+.ui-widget-content {
+    border: 1px solid #606c76;
+    border-radius: 0.4rem;
+    background: #ffffff;
+    color: #606c76;
+}
+.ui-widget {
+    font-family: "Imprima",sans-serif;
+    font-size: 1.6rem;
+}
+.ui-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    outline: none;
+}
+.ui-front {
+    z-index: 100;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+	border: solid 1px #ebeefa;
+  border-radius: 0.4rem;
+	background: #ebeefa;
+	color: #606c76;
+}
+
+#jquery-owner-input::placeholder {
+  color: #707e8a;
+  opacity: 1;
+}

@@ -13,14 +13,20 @@ use Cake\Chronos\Chronos;
  */
 class RatsController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->loadComponent('Security');
+    }
+
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions(['index','view','named', 'fromRattery', 'ownedBy', 'sex']);
+        $this->Security->setConfig('unlockedActions', ['transferOwnership']);
     }
-
     /**
      * Index method
      *
@@ -472,12 +478,10 @@ class RatsController extends AppController
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $rat->id]);
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
         }
-        $ownerUsers = $this->Rats->OwnerUsers->find('list');
-        $this->set(compact('rat', 'ownerUsers'));
+        $this->set(compact('rat'));
     }
 }

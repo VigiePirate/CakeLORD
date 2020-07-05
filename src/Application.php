@@ -70,6 +70,7 @@ class Application extends BaseApplication
         // Load more plugins here
         $this->addPlugin('Authentication');
         $this->addPlugin('Authorization');
+        $this->addPlugin('Ajax', ['bootstrap' => true]);
     }
 
     /**
@@ -104,7 +105,7 @@ class Application extends BaseApplication
                 // FOR DEV PHASE ONLY !!!!!
                 'requireAuthorizationCheck' => false
             ]));
-            
+
         /*
          * Not necessary as the DebugKit.ignoreAuthorization in bootstrap.php already does this
         if (Configure::read('debug')) {
@@ -154,7 +155,7 @@ class Application extends BaseApplication
             'unauthenticatedRedirect' => '/users/login',
             'queryParam' => 'redirect',
         ]);
-    
+
         // Load identifiers, ensure we check email and password fields
         $authenticationService->loadIdentifier('Authentication.Password', [
             'fields' => [
@@ -173,7 +174,7 @@ class Application extends BaseApplication
                 ]
             ]
         ]);
-    
+
         // Load the authenticators, you want session first
         $authenticationService->loadAuthenticator('Authentication.Session');
         // Configure form data check to pick email and password
@@ -184,14 +185,14 @@ class Application extends BaseApplication
             ],
             'loginUrl' => '/users/login',
         ]);
-    
+
         return $authenticationService;
     }
-    
+
     public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
     {
         $resolver = new OrmResolver();
-    
+
         return new AuthorizationService($resolver);
     }
 }
