@@ -461,4 +461,23 @@ class UsersController extends AppController
             }
         }
     }
+
+    public function autocomplete() {
+        //if ($this->request->is(['ajax'])) {
+        //    $items = $this->Users->find('list', [
+        //            'conditions' => [
+        //                'username LIKE' => '%' . $this->request->getQuery('searchkey') . '%',
+        //            ],
+        //    ]);
+            $items = $this->Users->find('all')
+                ->select(['id', 'value' => 'username', 'label' => 'username'])
+                ->where([
+                            'username LIKE' => '%' . $this->request->getQuery('searchkey') . '%',
+                        ])
+                ->order(['username' => 'ASC'])
+            ;
+            $this->set('items', $items);
+            $this->viewBuilder()->setOption('serialize', ['items']);
+        //}
+    }
 }
