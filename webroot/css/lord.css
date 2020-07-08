@@ -141,6 +141,15 @@ label {
     font-size: 2.0rem;
   }
 
+/* styling checkbox? works only on Chrome for now...
+input[type='checkbox'] {
+  transform: scale(1.5) translate(+25%, 0%);
+}
+
+.input.checkbox label > input {
+    margin-right: 1.5rem;
+} */
+
 /* Tables */
 
 tr:hover {

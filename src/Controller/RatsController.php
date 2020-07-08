@@ -16,7 +16,7 @@ class RatsController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        $this->loadComponent('Security');
+        /* $this->loadComponent('Security'); */
     }
 
     public function beforeFilter(\Cake\Event\EventInterface $event)
@@ -25,7 +25,7 @@ class RatsController extends AppController
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions(['index','view','named', 'fromRattery', 'ownedBy', 'sex']);
-        $this->Security->setConfig('unlockedActions', ['transferOwnership']);
+        /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
     /**
      * Index method
@@ -483,5 +483,34 @@ class RatsController extends AppController
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
         }
         $this->set(compact('rat'));
+    }
+
+    /**
+     * DeclareDeath method
+     *
+     * @param string|null $id Rat id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function declareDeath($id = null)
+    // this change is authorized to owner and staff, and brings rat to next_ok_state
+    {
+        $rat = $this->Rats->get($id, [
+            'contain' => [
+                'CreatorUsers','OwnerUsers','States','Ratteries','BirthLitters','BirthLitters.Contributions',
+                'DeathPrimaryCauses','DeathSecondaryCauses',
+            ],
+        ]);
+        $this->Authorization->authorize($rat);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+            if ($this->Rats->save($rat)) {
+                $this->Flash->success(__('Sorry for your loss. The rat has been saved.'));
+                return $this->redirect(['action' => 'view', $rat->id]);
+            }
+            $this->Flash->error(__('The rat could not be saved. Please, try again.'));
+        }
+        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')->order(['id' => 'ASC']);
+        $this->set(compact('rat','deathPrimaryCauses'));
     }
 }

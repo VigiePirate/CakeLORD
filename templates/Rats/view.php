@@ -30,7 +30,7 @@
                     'class' => 'side-nav-icon',
                     'alt' => __('Declare Litter')]) ?>
                     <?= $this->Html->image('/img/icon-rip.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'kill', $rat->id],
+                        'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Declare Rat Death')]) ?>
                 <div class="spacer"> </div>
