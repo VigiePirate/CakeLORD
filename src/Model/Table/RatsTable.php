@@ -248,6 +248,48 @@ class RatsTable extends Table
         $rules->add($rules->existsIn(['creator_user_id'], 'CreatorUsers'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
 
+        /* Rules about death date and cause */
+        $timeline = function($rat) {
+            return !( !$rat->is_alive && $rat->birth_date->gte($rat->death_date) );
+        };
+        $rules->add($timeline, [
+            'errorField' => 'death_date',
+            'message' => 'Impossible: chosen death date is anterior to birth date. Please check and correct your entry.'
+        ]);
+
+        $future = function($rat) {
+            return !( !$rat->is_alive && $rat->death_date->isFuture() );
+        };
+        $rules->add($future, [
+            'errorField' => 'death_date',
+            'message' => 'Impossible: this date is in the future. Please check and correct your entry.'
+        ]);
+
+        $mathusalem = function($rat) {
+            return !( !$rat->is_alive && $rat->age > 54);
+        };
+        $rules->add($mathusalem, [
+            'errorField' => 'death_date',
+            'message' => 'Impossible: it means that your rat would have lived more than 4 years and a half, but rats do not live this long.'
+        ]);
+
+        // should test on is_infant property and not on id...
+        $infant = function($rat) {
+            return ! ( !$rat->is_alive && ($rat->death_primary_cause->is_infant) && ($rat->precise_age > 42) );
+        };
+        $rules->add($infant, [
+            'errorField' => 'death_primary_cause_id',
+            'message' => 'Impossible: your rat was too old at this date to die of “infant mortality”.'
+        ]);
+
+        $oldster = function($rat) {
+            return !( !$rat->is_alive && ($rat->death_primary_cause->is_oldster) && ($rat->age < 24) );
+        };
+        $rules->add($oldster, [
+            'errorField' => 'death_primary_cause_id',
+            'message' => 'Impossible: your rat was too young at this date to die “from old age”.'
+        ]);
+
         return $rules;
     }
 

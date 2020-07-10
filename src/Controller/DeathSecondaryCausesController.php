@@ -107,4 +107,32 @@ class DeathSecondaryCausesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function findByPrimary() {
+        //if ($this->request->is(['ajax'])) {
+            $items = $this->DeathSecondaryCauses->find('all')
+                ->select(['id' => 'id', 'value' => 'name'])
+                ->where([
+                            'death_primary_cause_id IS' => $this->request->getQuery('deathprimarykey'),
+                        ])
+                ->order(['id' => 'ASC'])
+            ;
+            $this->set('items', $items);
+            $this->viewBuilder()->setOption('serialize', ['items']);
+        //}
+    }
+
+    public function description() {
+        //if ($this->request->is(['ajax'])) {
+        $items = $this->DeathSecondaryCauses->find('all')
+            ->select(['id' => 'id', 'value' => 'description'])
+            ->where([
+                        'id IS' => $this->request->getQuery('id'),
+                    ])
+        ;
+        $this->set('items', $items);
+        $this->viewBuilder()->setOption('serialize', ['items']);
+        //}
+    }
+
 }

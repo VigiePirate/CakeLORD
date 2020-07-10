@@ -141,6 +141,15 @@ label {
     font-size: 2.0rem;
   }
 
+/* styling checkbox? works only on Chrome for now...
+input[type='checkbox'] {
+  transform: scale(1.5) translate(+25%, 0%);
+}
+
+.input.checkbox label > input {
+    margin-right: 1.5rem;
+} */
+
 /* Tables */
 
 tr:hover {
@@ -690,6 +699,17 @@ footer {
     background: #fcebea;
     color: #cc1f1a;
     border-color: #ef5753;
+}
+
+.error-message {
+    padding: 1rem;
+    background: #fcebea;
+    color: #cc1f1a;
+    border-color: #ef5753;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    margin-bottom: 2rem;
 }
 
   /* Forms */

@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Rat $rat
  */
 ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">

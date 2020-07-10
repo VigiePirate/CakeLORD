@@ -463,12 +463,8 @@ class UsersController extends AppController
     }
 
     public function autocomplete() {
-        //if ($this->request->is(['ajax'])) {
-        //    $items = $this->Users->find('list', [
-        //            'conditions' => [
-        //                'username LIKE' => '%' . $this->request->getQuery('searchkey') . '%',
-        //            ],
-        //    ]);
+        if ($this->request->is(['ajax'])) {
+
             $items = $this->Users->find('all')
                 ->select(['id', 'value' => 'username', 'label' => 'username'])
                 ->where([
@@ -478,6 +474,6 @@ class UsersController extends AppController
             ;
             $this->set('items', $items);
             $this->viewBuilder()->setOption('serialize', ['items']);
-        //}
+        }
     }
 }
