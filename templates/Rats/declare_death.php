@@ -27,10 +27,6 @@
 
             <h1><?= $rat->usual_name . ' (' . $rat->pedigree_identifier . ')' ?></h1>
 
-            <div class="message default">
-                We are sorry for your loss. Please fill the information below to record the rat death. Date and primary cause are mandatory.
-            </div>
-
             <?php
             echo $this->Form->create($rat, [
             	'id' => 'jquery-death-form',

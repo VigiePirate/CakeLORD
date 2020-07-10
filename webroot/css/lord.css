@@ -701,6 +701,17 @@ footer {
     border-color: #ef5753;
 }
 
+.error-message {
+    padding: 1rem;
+    background: #fcebea;
+    color: #cc1f1a;
+    border-color: #ef5753;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+}
+
   /* Forms */
 .input.radio,
 .input.checkbox {

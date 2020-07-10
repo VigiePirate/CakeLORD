@@ -147,9 +147,9 @@ class RatsController extends AppController
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
         }
-        $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 200]);
+        $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 500]);
         $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
-        $birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
+        //$birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
@@ -160,9 +160,10 @@ class RatsController extends AppController
         $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
         $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
-        $bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
+        //$bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
+        //$this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
+        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'singularities'));
     }
 
     /**
@@ -477,10 +478,10 @@ class RatsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
             if ($this->Rats->save($rat)) {
-                $this->Flash->success(__('The rat has been saved.'));
+                $this->Flash->success(__('The rat has been transferred to its new owner.'));
                 return $this->redirect(['action' => 'view', $rat->id]);
             }
-            $this->Flash->error(__('The rat could not be saved. Please, try again.'));
+            $this->Flash->error(__('The rat ownership could not be changed. Please, try again.'));
         }
         $this->set(compact('rat'));
     }
@@ -503,12 +504,18 @@ class RatsController extends AppController
         ]);
         $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $rat->is_alive = false;
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+            // load death causes model and append rat association with it for rules on is_oldster/is_infant
+            $this->loadModel('DeathPrimaryCauses');
+            $rat->death_primary_cause = $this->DeathPrimaryCauses->get($rat->death_primary_cause_id);
             if ($this->Rats->save($rat)) {
-                $this->Flash->success(__('Sorry for your loss. The rat has been saved.'));
+                $this->Flash->success(__('Sorry for your loss. Your rat’s death has been recorded.'));
                 return $this->redirect(['action' => 'view', $rat->id]);
             }
-            $this->Flash->error(__('The rat could not be saved. Please, try again.'));
+            $this->Flash->error(__('Your rat’s death could not be recorded. Please, try again.'));
+        } else {
+            $this->Flash->default(__('We are sorry for your loss. Please fill the information below to record the rat death. Date and primary cause are mandatory.'));
         }
         $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')->order(['id' => 'ASC']);
         $this->set(compact('rat','deathPrimaryCauses'));
