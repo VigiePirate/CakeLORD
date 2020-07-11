@@ -396,65 +396,75 @@ class RatsController extends AppController
         ]);
     }
 
-    public function pedigree($id = null)
-    {
-        $this->Authorization->skipAuthorization();
+    /* Pedigree functions */
+
+    public function parentsTree($id=null) {
+        //if ($this->request->is(['ajax'])) {
+
+        $id = $this->request->getQuery('id');
         $rat = $this->Rats->get($id, [
             'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
             'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
             'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
             'BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
-            'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States',
-            'BredLitters','BredLitters.Sire','BredLitters.Dam','BredLitters.OffspringRats','BredLitters.OffspringRats.OwnerUsers','BredLitters.OffspringRats.States','BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
+            'BirthLitters.Sire.Colors', 'BirthLitters.Sire.Dilutions', 'BirthLitters.Sire.Markings', 'BirthLitters.Sire.Earsets', 'BirthLitters.Sire.Coats', 'BirthLitters.Sire.DeathPrimaryCauses', 'BirthLitters.Sire.DeathSecondaryCauses',
+            'BirthLitters.Dam.Colors', 'BirthLitters.Dam.Dilutions', 'BirthLitters.Dam.Markings', 'BirthLitters.Dam.Earsets', 'BirthLitters.Dam.Coats', 'BirthLitters.Dam.DeathPrimaryCauses', 'BirthLitters.Dam.DeathSecondaryCauses',
+            'States'],
+        ]);
+
+        $parents = $rat->parents_array;
+        $this->set('_parents', $parents);
+        $this->viewBuilder()->setOption('serialize', ['_parents']);
+
+        //}
+    }
+
+    public function childrenTree(){
+        //if ($this->request->is(['ajax'])) {
+
+        $id = $this->request->getQuery('id');
+        $rat = $this->Rats->get($id, [
+            'contain' => ['BredLitters',
+            'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
+            'BredLitters.OffspringRats.Coats','BredLitters.OffspringRats.Colors','BredLitters.OffspringRats.Dilutions','BredLitters.OffspringRats.Markings','BredLitters.OffspringRats.Earsets',
+            'BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
+            'BredLitters.OffspringRats.BirthLitters','BredLitters.OffspringRats.BirthLitters.Contributions'],
+        ]);
+
+        $children = $rat->children_array;
+        $this->set('_children', $children);
+        $this->viewBuilder()->setOption('serialize', ['_children']);
+
+        //}
+    }
+
+    public function pedigree($id = null)
+    {
+        $this->Authorization->skipAuthorization();
+        $rat = $this->Rats->get($id, [
+            'contain' => ['Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States', 'Ratteries',
+            'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
+            'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
+            'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
+            'BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
+            'BirthLitters.Sire.Colors', 'BirthLitters.Sire.Dilutions', 'BirthLitters.Sire.Markings', 'BirthLitters.Sire.Earsets', 'BirthLitters.Sire.Coats', 'BirthLitters.Sire.DeathPrimaryCauses', 'BirthLitters.Sire.DeathSecondaryCauses',
+            'BirthLitters.Dam.Colors', 'BirthLitters.Dam.Dilutions', 'BirthLitters.Dam.Markings', 'BirthLitters.Dam.Earsets', 'BirthLitters.Dam.Coats', 'BirthLitters.Dam.DeathPrimaryCauses', 'BirthLitters.Dam.DeathSecondaryCauses',
+            'BredLitters',
+            'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
+            'BredLitters.OffspringRats.Coats','BredLitters.OffspringRats.Colors','BredLitters.OffspringRats.Dilutions','BredLitters.OffspringRats.Markings','BredLitters.OffspringRats.Earsets',
+            'BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
+            'BredLitters.OffspringRats.BirthLitters','BredLitters.OffspringRats.BirthLitters.Contributions',
             'Singularities'],
         ]);
 
-        /* TEMPORARY : build parents and children subarrays */
-        // should be in the model with recursive calls to build all ascendants and descendants
-        // append id with some unique string (generation or path, like 0101 for mother's father's mother's father, for instance)
-        $parents = [
-            '0' => [
-                'id' => '0' . $rat->birth_litter->dam[0]->pedigree_identifier, // should be modified to be unique in the tree
-                'name' => $rat->birth_litter->dam[0]->usual_name,
-                'sex' => 'F',
-                'description' => '', // should be $dam->variety
-                'death'=> '', // should be short_death_cause + age_string
-                '_parents' => [] // will call dam's parents in recursive implementation
-            ],
-            '1' => [
-                'id' => '1' . $rat->birth_litter->sire[0]->pedigree_identifier, // should be modified to be unique in the tree
-                'name' => $rat->birth_litter->sire[0]->usual_name,
-                'sex' => 'M',
-                '_parents' => []
-            ]
-        ];
-
-        $children = [];
-        $child_no = 0;
-        foreach($rat->bred_litters as $litter) {
-            foreach ($litter->offspring_rats as $offspring) {
-                $children[$child_no] = [
-                    'id' => $child_no . '_' . $offspring->pedigree_identifier, // should be modified to be unique in the tree
-                    'name' => $offspring->name, // should be $offspring->usual_name when double prefix is repaired
-                    'sex' => $offspring->sex,
-                    'description' => '', // should be $offspring->variety
-                    'death' => '', // should be $offspring->main or short_death_cause
-                    '_children' => [] // will call child's children in recursive implementation
-                ];
-                $child_no++;
-            }
-        }
-        /* END TEMPORARY */
-
-        /* assemble complete array */
         $family = [
             'id' => $rat->pedigree_identifier,
             'name' => $rat->usual_name,
             'sex' => 'X', // we want a different color for the root of the tree
             'description' => $rat->variety,
             'death' => $rat->short_death_cause . ' (' . $rat->age_string . ')',
-            '_parents' => $parents,
-            '_children' => $children
+            '_parents' => $rat->parents_array,
+            '_children' => $rat->children_array,
         ];
 
         $json = json_encode($family);

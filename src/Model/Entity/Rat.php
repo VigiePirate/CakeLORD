@@ -344,4 +344,46 @@ class Rat extends Entity
         return trim($variety);
     }
 
+    protected function _getParentsArray()
+    {
+        $parents = [
+            [
+                'id' => $this->id . '_' . $this->birth_litter->dam[0]->id,
+                'name' => $this->birth_litter->dam[0]->usual_name,
+                'sex' => 'F',
+                'description' => $this->birth_litter->dam[0]->variety,
+                'death'=> $this->birth_litter->dam[0]->short_death_cause . ' (' . $this->birth_litter->dam[0]->age_string . ')',
+                '_parents' => [],
+            ],
+            [
+                'id' => $this->id . '_' . $this->birth_litter->sire[0]->id,
+                'name' => $this->birth_litter->sire[0]->usual_name,
+                'sex' => 'M',
+                'description' => $this->birth_litter->sire[0]->variety,
+                'death'=> $this->birth_litter->sire[0]->short_death_cause . ' (' . $this->birth_litter->sire[0]->age_string . ')',
+                '_parents' => [],
+            ]
+        ];
+        return $parents;
+    }
+
+    protected function _getChildrenArray() {
+        $children = [];
+        $child_no = 0;
+        foreach($this->bred_litters as $litter) {
+            foreach ($litter->offspring_rats as $offspring) {
+                array_push($children, [
+                    'id' => $this->id . '_' . $offspring->id, // should be modified to be unique in the tree
+                    'name' => $offspring->usual_name,
+                    'sex' => $offspring->sex,
+                    'description' => $offspring->variety,
+                    'death' => $offspring->short_death_cause . ' (' . $offspring->age_string . ')',
+                    '_children' => []
+                ]);
+                $child_no++;
+            }
+        }
+        return $children;
+    }
+
 }

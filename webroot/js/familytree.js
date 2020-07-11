@@ -226,6 +226,7 @@ Tree.prototype.drawNodes = function(nodes, source){
         return 'translate(' + (self.direction * (source.y0 + boxWidth/2)) + ',' + source.x0 + ')';
       })
       .on('click', function(person){
+        console.log(person); // console debug
         self.togglePerson(person);
       });
 
@@ -357,6 +358,8 @@ Tree.prototype.togglePerson = function(person){
 
   // Non-root nodes
   else {
+
+    // ajax data should be loaded here?
 
     if(person.collapsed){
       person.collapsed = false;
