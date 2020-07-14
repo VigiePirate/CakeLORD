@@ -14,12 +14,12 @@ function setup() {
 
   // Setup zoom and pan
   var zoom = d3.behavior.zoom()
-    .scaleExtent([.1,2])
+    .scaleExtent([.05,4])
     .on('zoom', function(){
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
     // Offset so that first pan and zoom does not jump back to the origin
-    .translate([w/3+40, h/2]);
+    .translate([w/3+42, h/2]);
 
   var svg = d3.select("#familytree").append("svg")
     .attr("viewBox", "0 0 " + w + ' ' + h )
@@ -28,7 +28,7 @@ function setup() {
     .append('g')
     // Left padding of tree so that the whole root node is on the screen.
     // TODO: find a better way
-    .attr("transform", "translate(" + (w/3+40) + "," + (h/2) + ")");
+    .attr("transform", "translate(" + (w/3+42) + "," + (h/2) + ")");
 
   // One tree to display the ancestors
   var ancestorTree = new Tree(svg, 'ancestor', 1);
@@ -66,13 +66,11 @@ function setup() {
   var descendantRoot = rootProxy(json);
 
   // Start with only the first few generations of ancestors showing
-  //ancestorRoot._parents.forEach(function(parents){
-  //  parents._parents.forEach(collapse);
-  //});
-  ancestorRoot._parents.forEach(collapse);
-
+  // ancestorRoot._parents.forEach(function(parents){
+  //   parents._parents.forEach(collapse);
+  // });
   // Start with only one generation of descendants showing
-  descendantRoot._children.forEach(collapse);
+  // descendantRoot._children.forEach(collapse);
 
   // Set the root nodes
   ancestorTree.data(ancestorRoot);
@@ -81,6 +79,13 @@ function setup() {
   // Draw the tree
   ancestorTree.draw(ancestorRoot);
   descendantsTree.draw(descendantRoot);
+
+  // Simulate click on parents to make grandparents appear on load
+  d3.selectAll("g.ancestor")
+    .each(function(d, i) {
+      var onClickFunc = d3.select(this).on("click");
+      onClickFunc.apply(this, [d, i]);
+    });
 }
 
 function rootProxy(root){
@@ -281,6 +286,7 @@ Tree.prototype.drawNodes = function(nodes, source){
       .text(function(d) {
         return d.name;
       })
+      .call(truncate, (boxWidth-16))
       .style('fill-opacity', 0)
       .style('fill',"#343b40");
 
@@ -293,10 +299,11 @@ Tree.prototype.drawNodes = function(nodes, source){
       .text(function(d) {
         return d.description;
       })
+      .call(truncate, (boxWidth-16))
       .style('fill-opacity', 0) // should be zero once fixed
       .style('fill',"#606c76");
 
-  // Draw the person's description and position it inside the box
+  // Draw the person's death info and position it inside the box
   nodeEnter.append("text")
       .attr("dx", 0)
       .attr("dy", 0)
@@ -328,17 +335,24 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   // Truncate name and move it
   nodeUpdate.select('text.name')
-      .call(truncate, (boxWidth-20));
-
-  nodeUpdate.select('tspan')
       .attr("dx", -(boxWidth/2) + 8) ////
       .attr("dy", -11)
-      .style('fill-opacity', 1);
+      //.call(truncate, (boxWidth-20));
+
+  nodeUpdate.select('text.name > tspan')
+       .attr("dx", -(boxWidth/2) + 8) ////
+       .attr("dy", -11)
+       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.description')
       .attr("dx", -(boxWidth/2) + 8)
       .attr("dy", 8) //.attr("dy", 22)
       .style('fill-opacity', 1);
+
+  nodeUpdate.select('text.description > tspan')
+       .attr("dx", -(boxWidth/2) + 8) ////
+       .attr("dy", 8)
+       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.death')
       .attr("dx", -(boxWidth/2) + 8)
@@ -534,7 +548,6 @@ function truncate(text, width) {
     }
   });
 }
-
 /*
 * Some unused code snippet to adapt font size of long texts
 */

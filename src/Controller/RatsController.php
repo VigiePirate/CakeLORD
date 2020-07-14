@@ -399,43 +399,39 @@ class RatsController extends AppController
     /* Pedigree functions */
 
     public function parentsTree($id=null) {
-        //if ($this->request->is(['ajax'])) {
+        if ($this->request->is(['ajax'])) {
+            $id = $this->request->getQuery('id');
+            $rat = $this->Rats->get($id, [
+                'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
+                'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
+                'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
+                'BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
+                'BirthLitters.Sire.Colors', 'BirthLitters.Sire.Dilutions', 'BirthLitters.Sire.Markings', 'BirthLitters.Sire.Earsets', 'BirthLitters.Sire.Coats', 'BirthLitters.Sire.DeathPrimaryCauses', 'BirthLitters.Sire.DeathSecondaryCauses',
+                'BirthLitters.Dam.Colors', 'BirthLitters.Dam.Dilutions', 'BirthLitters.Dam.Markings', 'BirthLitters.Dam.Earsets', 'BirthLitters.Dam.Coats', 'BirthLitters.Dam.DeathPrimaryCauses', 'BirthLitters.Dam.DeathSecondaryCauses',
+                'States'],
+            ]);
 
-        $id = $this->request->getQuery('id');
-        $rat = $this->Rats->get($id, [
-            'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
-            'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
-            'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
-            'BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
-            'BirthLitters.Sire.Colors', 'BirthLitters.Sire.Dilutions', 'BirthLitters.Sire.Markings', 'BirthLitters.Sire.Earsets', 'BirthLitters.Sire.Coats', 'BirthLitters.Sire.DeathPrimaryCauses', 'BirthLitters.Sire.DeathSecondaryCauses',
-            'BirthLitters.Dam.Colors', 'BirthLitters.Dam.Dilutions', 'BirthLitters.Dam.Markings', 'BirthLitters.Dam.Earsets', 'BirthLitters.Dam.Coats', 'BirthLitters.Dam.DeathPrimaryCauses', 'BirthLitters.Dam.DeathSecondaryCauses',
-            'States'],
-        ]);
-
-        $parents = $rat->parents_array;
-        $this->set('_parents', $parents);
-        $this->viewBuilder()->setOption('serialize', ['_parents']);
-
-        //}
+            $parents = $rat->parents_array;
+            $this->set('_parents', $parents);
+            $this->viewBuilder()->setOption('serialize', ['_parents']);
+        }
     }
 
     public function childrenTree(){
-        //if ($this->request->is(['ajax'])) {
+        if ($this->request->is(['ajax'])) {
+            $id = $this->request->getQuery('id');
+            $rat = $this->Rats->get($id, [
+                'contain' => ['BredLitters',
+                'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
+                'BredLitters.OffspringRats.Coats','BredLitters.OffspringRats.Colors','BredLitters.OffspringRats.Dilutions','BredLitters.OffspringRats.Markings','BredLitters.OffspringRats.Earsets',
+                'BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
+                'BredLitters.OffspringRats.BirthLitters','BredLitters.OffspringRats.BirthLitters.Contributions'],
+            ]);
 
-        $id = $this->request->getQuery('id');
-        $rat = $this->Rats->get($id, [
-            'contain' => ['BredLitters',
-            'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
-            'BredLitters.OffspringRats.Coats','BredLitters.OffspringRats.Colors','BredLitters.OffspringRats.Dilutions','BredLitters.OffspringRats.Markings','BredLitters.OffspringRats.Earsets',
-            'BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
-            'BredLitters.OffspringRats.BirthLitters','BredLitters.OffspringRats.BirthLitters.Contributions'],
-        ]);
-
-        $children = $rat->children_array;
-        $this->set('_children', $children);
-        $this->viewBuilder()->setOption('serialize', ['_children']);
-
-        //}
+            $children = $rat->children_array;
+            $this->set('_children', $children);
+            $this->viewBuilder()->setOption('serialize', ['_children']);
+        }
     }
 
     public function pedigree($id = null)
