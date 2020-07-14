@@ -56,7 +56,7 @@
                 nodeWidth = 93,
                 nodeHeight = 248,
                 // duration of transitions in ms
-                duration = 500,
+                duration = 500, //500 is fine, 3000 for debug
                 // d3 multiplies the node size by this value
                 // to calculate the distance between nodes
                 sibling_separation = 0.75,

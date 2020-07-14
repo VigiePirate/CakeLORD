@@ -66,9 +66,10 @@ function setup() {
   var descendantRoot = rootProxy(json);
 
   // Start with only the first few generations of ancestors showing
-  ancestorRoot._parents.forEach(function(parents){
-    parents._parents.forEach(collapse);
-  });
+  //ancestorRoot._parents.forEach(function(parents){
+  //  parents._parents.forEach(collapse);
+  //});
+  ancestorRoot._parents.forEach(collapse);
 
   // Start with only one generation of descendants showing
   descendantRoot._children.forEach(collapse);
@@ -214,7 +215,9 @@ Tree.prototype.drawNodes = function(nodes, source){
       // so that it can track when data is being added and removed.
       // This is not necessary if the tree will only be drawn once
       // as in the basic example.
-      .data(nodes, function(person){ return person.id; });
+      .data(nodes, function(person){
+        return person.id;
+      });
 
   // Add any new nodes
   var nodeEnter = node.enter().append("g")
@@ -226,8 +229,36 @@ Tree.prototype.drawNodes = function(nodes, source){
         return 'translate(' + (self.direction * (source.y0 + boxWidth/2)) + ',' + source.x0 + ')';
       })
       .on('click', function(person){
-        console.log(person); // console debug
+        if(Array.isArray(person._parents) && ! person._parents.length) {
+          $.ajax({
+            url: '/rats/parents-tree.json',
+            dataType: 'json',
+            data: {
+                'id': person.true_id,
+            },
+            success: function(data) {
+                person._parents = data._parents;
+		            collapse(person);
+                self.togglePerson(person);
+            },
+          });
+        }
+        if(Array.isArray(person._children) && ! person._children.length) {
+          $.ajax({
+            url: '/rats/children-tree.json',
+            dataType: 'json',
+            data: {
+                'id': person.true_id,
+            },
+            success: function(data) {
+                person._children = data._children;
+		            collapse(person);
+		            self.togglePerson(person);
+            },
+          });
+        }
         self.togglePerson(person);
+	      console.log(person._parents);
       });
 
   // Draw the rectangle person boxes.
@@ -358,15 +389,11 @@ Tree.prototype.togglePerson = function(person){
 
   // Non-root nodes
   else {
-
-    // ajax data should be loaded here?
-
     if(person.collapsed){
       person.collapsed = false;
     } else {
       collapse(person);
     }
-
     this.draw(person);
   }
 };

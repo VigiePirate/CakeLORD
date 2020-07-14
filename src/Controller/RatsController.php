@@ -458,7 +458,9 @@ class RatsController extends AppController
         ]);
 
         $family = [
-            'id' => $rat->pedigree_identifier,
+            //'id' => $rat->pedigree_identifier,
+            'id' => $rat->id,
+            'true_id' => $id,
             'name' => $rat->usual_name,
             'sex' => 'X', // we want a different color for the root of the tree
             'description' => $rat->variety,
