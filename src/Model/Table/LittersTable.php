@@ -70,6 +70,7 @@ class LittersTable extends Table
         $this->hasMany('OffspringRats', [
             'className' => 'Rats',
             'foreignKey' => 'litter_id',
+            'sort' => ['OffspringRats.name' => 'ASC'],
         ]);
         $this->belongsToMany('ParentRats', [
             'className' => 'Rats',

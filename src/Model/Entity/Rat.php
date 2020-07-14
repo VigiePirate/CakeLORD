@@ -339,9 +339,61 @@ class Rat extends Entity
         $color = ($this->color_id == 1) ? '' : $this->color->name;
         $coat = ($this->coat_id == 1) ? '' : $this->coat->name;
         $earset = ($this->earset_id == 1) ? '' : $this->earset->name;
-        $marking = ($this->marking_id == 1) ? '' : $this->marking->name;
+        // don't write marking if rat has a dilution
+        $marking = ($this->marking_id == 1 || $dilution != '') ? '' : $this->marking->name;
         $variety = $dilution . ' ' . $color . ' ' . $marking . ' ' . $earset . ' ' . $coat ;
         return trim($variety);
+    }
+
+    protected function _getParentsArray()
+    {
+        $parents = [];
+
+        if(!empty($this->birth_litter->dam[0])) {
+            array_push($parents,
+            [
+                'id' => rand() . '_' . $this->birth_litter->dam[0]->id,
+                'true_id' => $this->birth_litter->dam[0]->id,
+                'name' => $this->birth_litter->dam[0]->usual_name,
+                'sex' => 'F',
+                'description' => $this->birth_litter->dam[0]->variety,
+                'death'=> $this->birth_litter->dam[0]->short_death_cause . ' (' . $this->birth_litter->dam[0]->age_string . ')',
+                '_parents' => [],
+            ]);
+        }
+
+        if(!empty($this->birth_litter->sire[0])) {
+            array_push($parents,
+            [
+                'id' => rand() . '_' . $this->birth_litter->sire[0]->id,
+                'true_id' => $this->birth_litter->sire[0]->id,
+                'name' => $this->birth_litter->sire[0]->usual_name,
+                'sex' => 'M',
+                'description' => $this->birth_litter->sire[0]->variety,
+                'death'=> $this->birth_litter->sire[0]->short_death_cause . ' (' . $this->birth_litter->sire[0]->age_string . ')',
+                '_parents' => [],
+            ]);
+        }
+        return $parents;
+    }
+
+    protected function _getChildrenArray() {
+        $children = [];
+        foreach($this->bred_litters as $litter) {
+            foreach ($litter->offspring_rats as $offspring) {
+                array_push($children, [
+                    'id' => rand() . '_' . $offspring->id, // should be modified to be unique in the tree
+                    //'id' => $offspring->id, // should be modified to be unique in the tree
+                    'true_id' => $offspring->id,
+                    'name' => $offspring->usual_name,
+                    'sex' => $offspring->sex,
+                    'description' => $offspring->variety,
+                    'death' => $offspring->short_death_cause . ' (' . $offspring->age_string . ')',
+                    '_children' => [],
+                ]);
+            }
+        }
+        return $children;
     }
 
 }

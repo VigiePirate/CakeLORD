@@ -147,7 +147,7 @@ INSERT INTO `death_secondary_causes` VALUES
 (29,'Manque de lait',5,'-',0),
 (30,'Mort-né',5,'-',0),
 (31,'Autre cause de mort infantile',5,'Réservé aux cas où vous connaissez la cause du décès, mais que celle-ci n’est disponible nulle part dans la liste. Si vous ne savez pas ce qui a tué votre rat, choisissez Cause inconnue (si vous ne savez pas du tout) ou ne choisissez pas de niveau 2 (si vous savez qu’il s’agit d’une mort en bas âge sans savoir précisément choisir un item dans la liste détaillée.)',0),
-(32,'Infection / abcès musculaire',6,'-',0),
+(32,'Infection, abcès musculaire',6,'-',0),
 (33,'Infection articulaire ou osseuse, arthrite septique',6,'-',0),
 (34,'Tumeur musculaire',6,'-',1),
 (35,'Tumeur osseuse',6,'-',1),
@@ -394,7 +394,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `states` WRITE;
 /*!40000 ALTER TABLE `states` DISABLE KEYS */;
-INSERT INTO `states` VALUES (1,'Certifié','1f9d55','✓','',0,0,0,1,1,1,1,NULL,NULL,NULL,3),(2,'Validé','1f9d55','✓','',0,0,0,1,1,1,0,2,3,1,NULL),(3,'En attente de validation par le staff','ff8c1b','✗','',0,0,1,0,1,1,0,2,4,6,NULL),(4,'En attente de modification par l\'utilisateur','cc1f1a','✗','',0,1,0,0,1,1,0,3,3,NULL,NULL),(5,'Non vérifié','663300','✗','',1,0,1,0,1,1,0,2,4,NULL,NULL),(6,'Invalide','663300','✗','',0,0,0,0,1,1,1,NULL,NULL,NULL,3);
+INSERT INTO `states` VALUES (1,'Certifié','1f9d55','✪','',0,0,0,1,1,1,1,NULL,NULL,NULL,3),(2,'Validé','1f9d55','✓','',0,0,0,1,1,1,0,2,3,1,NULL),(3,'En attente de validation par le staff','ff8c1b','✗','',0,0,1,0,1,1,0,2,4,6,NULL),(4,'En attente de modification par l\'utilisateur','cc1f1a','✗','',0,1,0,0,1,1,0,3,3,NULL,NULL),(5,'Non vérifié','663300','✗','',1,0,1,0,1,1,0,2,4,NULL,NULL),(6,'Invalide','663300','♺','',0,0,0,0,1,1,1,NULL,NULL,NULL,3);
 /*!40000 ALTER TABLE `states` ENABLE KEYS */;
 UNLOCK TABLES;
 
