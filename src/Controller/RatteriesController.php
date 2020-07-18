@@ -334,4 +334,15 @@ class RatteriesController extends AppController
     {
         $this->Rats->find('all')->count();
     }
+
+    public function autocomplete() {
+        if ($this->request->is(['ajax'])) {
+            $searchkey = $this->request->getQuery('searchkey');
+            $items = $this->Ratteries->find('named', ['names' => [$searchkey]] )
+                ->select(['id', 'value' => "concat(prefix,' – ',name)", 'label' => "concat(prefix,' – ',name)"])
+            ;
+            $this->set('items', $items);
+            $this->viewBuilder()->setOption('serialize', ['items']);
+        }
+    }
 }

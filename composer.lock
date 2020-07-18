@@ -2373,16 +2373,16 @@
         },
         {
             "name": "cakephp/twig-view",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/twig-view.git",
-                "reference": "c5d6f038dcb326968524a6f4a1e88676130258ba"
+                "reference": "f498721620f57859b1b9818e52d2b08ec4250475"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/twig-view/zipball/c5d6f038dcb326968524a6f4a1e88676130258ba",
-                "reference": "c5d6f038dcb326968524a6f4a1e88676130258ba",
+                "url": "https://api.github.com/repos/cakephp/twig-view/zipball/f498721620f57859b1b9818e52d2b08ec4250475",
+                "reference": "f498721620f57859b1b9818e52d2b08ec4250475",
                 "shasum": ""
             },
             "require": {
@@ -2425,20 +2425,20 @@
                 "twig",
                 "view"
             ],
-            "time": "2020-05-01T03:06:15+00:00"
+            "time": "2020-07-16T07:01:38+00:00"
         },
         {
             "name": "composer/composer",
-            "version": "1.10.8",
+            "version": "1.10.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "56e0e094478f30935e9128552188355fa9712291"
+                "reference": "83c3250093d5491600a822e176b107a945baf95a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/56e0e094478f30935e9128552188355fa9712291",
-                "reference": "56e0e094478f30935e9128552188355fa9712291",
+                "url": "https://api.github.com/repos/composer/composer/zipball/83c3250093d5491600a822e176b107a945baf95a",
+                "reference": "83c3250093d5491600a822e176b107a945baf95a",
                 "shasum": ""
             },
             "require": {
@@ -2519,7 +2519,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-24T19:23:30+00:00"
+            "time": "2020-07-16T10:57:00+00:00"
         },
         {
             "name": "composer/semver",

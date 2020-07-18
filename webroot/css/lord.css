@@ -141,6 +141,11 @@ label {
     font-size: 2.0rem;
   }
 
+.input.radio label:not(:first-child) {
+    font-size: 1.6rem;
+    font-weight: normal;
+}
+
 /* styling checkbox? works only on Chrome for now...
 input[type='checkbox'] {
   transform: scale(1.5) translate(+25%, 0%);

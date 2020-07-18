@@ -87,7 +87,6 @@
                         'searchkey': $('#jquery-owner-input').val(),
                     },
                     success: function (data) {
-                        console.log(data.items);
                         response(data.items);
                     },
                     open: function () {
@@ -101,7 +100,6 @@
             select: function (event, ui) {
                 $("#jquery-owner-input").val(ui.item.value); // display the selected text
                 $("#jquery-owner-id").val(ui.item.id); // save selected id to hidden input
-                console.log(ui.item);
             }
         });
         $('#mybutton').click(function() {

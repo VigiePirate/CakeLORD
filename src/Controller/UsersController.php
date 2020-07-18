@@ -464,7 +464,6 @@ class UsersController extends AppController
 
     public function autocomplete() {
         if ($this->request->is(['ajax'])) {
-
             $items = $this->Users->find('all')
                 ->select(['id', 'value' => 'username', 'label' => 'username'])
                 ->where([

@@ -32,3 +32,8 @@
   color: #707e8a;
   opacity: 1;
 }
+
+#jquery-rattery-input::placeholder {
+  color: #707e8a;
+  opacity: 1;
+}
