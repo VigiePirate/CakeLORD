@@ -1,0 +1,81 @@
+/* Selectize override */
+
+.selectize-control.single .selectize-input, .selectize-dropdown.single {
+    border: 0.1rem solid #d1d1d1;
+    margin-bottom: 1.5rem;
+}
+
+.selectize-control.single .selectize-input {
+    /* -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8); */
+    /* box-shadow: 0 1px 0 rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8); */
+    background-color: #ffffff;
+    background-image: none;
+}
+
+.selectize-input {
+    border: 1px solid #606c76;
+    padding: .6rem 1.0rem;
+    display: inline-block;
+    width: 100%;
+    height: 3.8rem;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    /* -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px; */
+}
+.selectize-input, .selectize-control.single .selectize-input.input-active {
+    background: #fff;
+    cursor: text;
+    display: inline-block;
+}
+
+.selectize-dropdown {
+    position: absolute;
+    z-index: 10;
+    border: 1px solid #d1d1d1;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    /* margin: -1px 0 0 0;
+    border-top: 0 none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); */
+    box-shadow: none;
+    /* -webkit-border-radius: 0 0 3px 3px;
+    -moz-border-radius: 0 0 3px 3px;*/
+    border: 1px solid pink;
+  }
+
+.selectize-dropdown, .selectize-input, .selectize-input input {
+    color: #606c76;
+    font-family: inherit;
+    font-size: 1.6rem;
+    line-height: inherit;
+    -webkit-font-smoothing: inherit;
+}
+.selectize-dropdown .active {
+  background-color: #ebeefa;
+  color: #606c76;
+}
+
+.selectize-control.single .selectize-input:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 50%;
+    /*right: 15px;
+    margin-top: -3px;*/
+    width: 0;
+    height: 0;
+    border-width: 5px 0 -5px 5px;
+    border-color: #808080 transparent transparent transparent;
+}

@@ -1,0 +1,196 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{pifont,arevmath,wasysym,textcomp}
+\usepackage{array,tabularx,longtable}
+\newcolumntype{R}{>{\raggedright\arraybackslash}X}%
+\usepackage{geometry}
+\geometry{
+  top=19mm,           % 20
+  inner=17mm,	%18
+  outer=20mm, %21
+  bottom=21mm, %22
+  headheight=8ex,      
+  headsep=4ex,  
+  papersize={210mm,297mm},     % 180 240
+  marginparwidth=13mm, 
+  marginparsep=4mm
+}
+\usepackage{graphicx,epstopdf}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{mygreen}{HTML}{1f9d55}
+\definecolor{myorange}{HTML}{ff8c1b}
+\definecolor{myred}{HTML}{cc1f1a}
+\definecolor{mybrown}{HTML}{663300}
+\definecolor{female}{HTML}{ff99cc}
+\definecolor{male}{HTML}{99ccff}
+\newcommand\existant[1]{\noindent\textbf{\textcolor{blue}{#1}}}
+\newcommand\desire[1]{\noindent\textbf{\textcolor{red}{#1}}}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+\usepackage[french]{babel}
+
+\title{Livre des Origines du Rat Domestique}
+\author{Spécifications des pictogrammes}
+\date{Version 1.0 -- \today}
+
+\begin{document}
+\maketitle
+
+\section*{Historique des modifications}
+
+\large
+\noindent\begin{tabularx}{\textwidth}{|l|l|X|}\hline
+\textbf{1.0} & \textbf{21/07/2020} & Version originale du document (synchro : cahier des charges V2.4)\\\hline
+\end{tabularx}
+\normalsize
+
+\tableofcontents
+
+\setlength{\parskip}{10pt}
+\section{Présentation générale}
+
+\subsection{Projet et besoins}
+Le Livre des Origines du Rat Domestique (LORD) est un service web gratuit permettant d'enregistrer et de consulter des fiches d'identification d'animaux domestiques, comportant notamment des informations généalogiques. Pour le développement d'une nouvelle version du LORD, un jeu d'icônes « de travail » a été rassemblé manuellement au fur et à mesure de l'avancement du code depuis plusieurs sources (font-awesome, flaticon, material design...) sans cohérence particulière et sans attention portée aux droits d'utilisation (en principe, elles sont toutes sous licence libre, mais les attributions à prévoir n'ont pas été notées). Nous souhaitons l'améliorer, l'harmoniser, et nous assurer du respect des droits d'utilisation sur le futur site déployé en production.
+
+Certaines des icônes correspondent à des actions « classiques » pour un site web, d'autres sont plus spécifiques à l'application et difficiles à trouver au sein d'iconsets tout faits. Certaines icônes sont des combinaisons d'autres (« rechercher une raterie » = icône rechercher + icône raterie). Toutes les icônes présentées ci-après sont des hypothèses de travail (qui pourront être fournies en png, eps et svg si besoin) qui peuvent être conservées, redessinées ou remplacées\footnote{Dans les listes, colonne « ? » : case vide = à garder, (\texttimes) = à redessiner, \texttimes = à remplacer.}. Le besoin (approximatif, à revoir avec ton propre diagnostic) est estimé à :
+
+\begin{itemize}
+	\item Environ 18 icônes « communes » (se connecter, envoyer un mail, etc.)
+	\item Environ 12 icônes « complexes » (rateries, portées...)
+	\item Environ 6 icônes « combinées » à partir des précédentes (déclinaisons, changement de couleur...)
+\end{itemize}
+      
+\subsection{Principes généraux et éléments de charte graphique}
+L'interface principale de l'application se présente sous la forme d'une barre de navigation principale (en haut), une barre de navigation secondaire contenant des boutons d'\textbf{actions} (à gauche sur ordinateur, sous la barre principale sur tablette et portable) et une fiche principale éventuellement marquée d'indicateurs d'\textbf{états} dans son coin en haut à droite) :
+
+\begin{center}
+\includegraphics[width=0.6\linewidth]{apercu.png}
+\end{center}
+
+La fiche principale contient soit les informations sur un objet, soit une liste d'objets. Dans le cas des listes, des icônes d'état et d'action sont présentes respectivement à gauche et à droite de chaque ligne, et dans la légende :
+
+\begin{center}
+\includegraphics[width=0.7\linewidth]{aperculiste.png}
+\end{center}
+
+Globalement, les icônes d'état et d'action respectent les principes et spécifications suivantes :
+
+\begin{itemize}
+\item Icônes filled / flat, 1 couleur (icônes simples) ou 2 (composées, par ex: recherche + objet) 
+\item Format SVG, canevas 64 \texttimes 64
+\item Toutes les icônes doivent être lisibles en 40 \texttimes 40 px ; celles destinées à être affichées en listes doivent également être lisibles en 16 \texttimes 16
+\item Charte couleurs principales : 
+	\begin{itemize}
+	 \item Actions utilisateur : marron \#663300ff  (+ marron plus clair si double couleur \#a65400)
+	 \item Actions réservées au staff : rouge \#b1000c (+ rouge plus clair si double couleur \#d33c44)
+	 \item Légendes (pas d'action associée) : \#6076bf
+	 \item Titres : mauve \#b1000c (sur fond clair), \#d33c44 (sur fond sombre)
+	 \item Autres couleurs utilisées seulement ponctuellement (rouge/orange/vert pour les statuts, rose/bleu pour le sexe, etc.), dispo sur demande ou directement dans le CSS
+	\end{itemize}
+\end{itemize}
+
+\subsection{« Rat de base » }
+Le « rat de base » est décliné en plusieurs formats, couleurs et utilisations. Exemples : « photo » générique pour les fiches de rat n'en ayant pas, menu « Mes rats » et action « Voir mes femelles » :       
+\begin{center}
+\begin{tabularx}{12cm}{m{3cm}m{0.5cm}m{3cm}m{0.5cm}m{2.5cm}}
+\includegraphics[width=3cm]{icon-unknown-rat.eps} & & \includegraphics[width=3cm]{icon-three-rats.eps} & & \includegraphics[width=2.5cm]{icon-search-females.eps}
+\end{tabularx}
+\end{center}
+
+La version de travail est une image trouvée via Google sans pouvoir identifier formellement la source d'origine. Elle peut être conservée si la source est trouvée et si son utilisation dans le LORD est permise ; dans le cas contraire il faudrait la refaire.
+
+\section{Liste des icônes}
+\subsection{Page d'accueil et navigation principale}
+
+NB. Ces icônes apparaissent en tracé blanc sur fond sombre (violet pour la page d'accueil, marron pour la barre de navigation). La barre de navigation est présente sur toutes les pages. Les icônes de la page d'accueil (proposition de valeur) peuvent être plus grandes et plus « travaillées ».   
+
+\renewcommand{\arraystretch}{1.5}
+\noindent\begin{tabularx}{\textwidth}{|c|c|l|l|X|}\hline
+\textbf{?} & \textbf{Icone} & \textbf{Emplacement} & \textbf{Signification} & \textbf{Commentaire}\\\hline
+\texttimes & \raisebox{-3pt}{\includegraphics[width=14pt]{icon-fiche.eps}}  & Page d'accueil & Fiche individuelle & Affichage 64\texttimes64, complexe \\\hline
+\texttimes & \raisebox{-3pt}{\includegraphics[width=14pt]{icon-arbre.eps}}  & Page d'accueil & Arbre généalogique & Affichage 64\texttimes64, complexe \\\hline
+\texttimes & \raisebox{-3pt}{\includegraphics[width=14pt]{icon-stats.eps}}  & Page d'accueil & Statistiques santé & Affichage 64\texttimes64, complexe \\\hline\hline
+
+& \raisebox{-3pt}{\includegraphics[width=14pt]{icon-searchbar.eps}} & Barre de navigation & Recherche &  \\\hline
+\texttimes & \raisebox{-3pt}{\includegraphics[width=14pt]{icon-home.eps}} & Barre de navigation & Home user & Actuellement identique à « voir mon profil user » en sidebar : différencier ? \\\hline
+(\texttimes) & \raisebox{-3pt}{\includegraphics[width=14pt]{icon-login.eps}} & Barre de navigation & Login &  \\\hline
+(\texttimes) & \raisebox{-3pt}{\includegraphics[width=14pt]{icon-logout.eps}} & Barre de navigation & Logout &  \\\hline
+
+\end{tabularx}
+
+\subsection{\'Etats}
+
+Les icônes notées « Symbole unicode » sont présentées dans le tableau à titre informatif. Elles ont de préférence vocation à rester des symboles unicode donc si proposition de modification, cela impliquera de l'intégrer à la police de caractères via font-forge\footnote{Le site de développement utilise actuellement 2 fonts Google. \`A terme, il est prévu que l'une d'entre elle soit remplacée par une fonte dérivée « maison », sur laquelle je suis en train de travailler. Il est donc faisable que j'y intègre des glyphes pour ces symboles.} donc ces icônes sont à considérer comme de plus basse priorité. Les icônes mâle et femelle peuvent également être gardées sous cette forme, ou déclinées à partir du rat de base. Pour cette raison elles ne sont pas comptées dans le chiffrage.
+
+Les icônes « raterie en activité »  et « raterie en pause » posent actuellement un problème en raison de la confusion possible avec un toggle qui déclencherait l'action de déclarer la raterie en pause ou en activité. Elles sont chiffrées comme complexes, à voir si elles peuvent être dérivées de l'icône représentant une raterie.  
+
+\renewcommand{\arraystretch}{1.5}
+\noindent\begin{tabularx}{\textwidth}{|c|c|l|X|}\hline
+\textbf{?} & \textbf{Icone} & \textbf{Signification} & \textbf{Commentaire}\\\hline\hline
+\texttimes & \raisebox{-1pt}{\includegraphics[width=12pt]{icon-state.eps}} & Légende « état » dans les listes & L'actuel me semble mauvais, mais je n'ai pas d'autre idée, preneuse de toute proposition.\\\hline
+& \textcolor{mygreen}{\large \ding{74}}  & Fiche validée (gelée) & Symbole unicode \\\hline
+& \textcolor{mygreen}{\large \ding{51}}  & Fiche vérifiée & Symbole unicode \\\hline
+& \textcolor{myorange}{\large \ding{55}}  & Fiche en attente d'action staff & Symbole unicode \\\hline
+& \textcolor{myred}{\large \ding{55}}  & Fiche en attente d'action utilisateur & Symbole unicode \\\hline
+& \textcolor{mybrown}{\large \ding{55}}  & Fiche non vérifiée & Symbole unicode \\\hline
+& \textcolor{darkgray}{\large $\recycle$}  & Fiche invalide (gelée) & Symbole unicode \\\hline\hline
+
+(\texttimes) & \raisebox{-1pt}{\includegraphics[width=12pt]{icon-sex.eps}} & Légende « sexe » dans les listes & \\\hline
+ & \textcolor{female}{\large \bf \female} & Rat Femelle & Ou rat de base en rose ; non chiffré\\\hline
+& \textcolor{male}{\large \bf \male} & Rat Mâle & Ou rat de base en rose ; non chiffré\\\hline\hline
+
+\texttimes & \raisebox{-1pt}{\includegraphics[width=16pt]{icon-on.eps}} & Raterie en activité & Peut donner l'impression d'être cliquable ?\\\hline
+\texttimes & \raisebox{-1pt}{\includegraphics[width=16pt]{icon-off.eps}} & Raterie en pause ou fermée & Peut donner l'impression d'être cliquable ?\\\hline
+ 
+\end{tabularx}
+
+\subsection{Actions} 
+\noindent\begin{tabularx}{\textwidth}{|c|c|l|X|}\hline
+\textbf{?} & \textbf{Icone} & \textbf{Action} & \textbf{Commentaires}\\\hline\hline
+
+(\texttimes) & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-actions.eps}} & Légende « actions » & Listes uniquement (petit format) \\\hline
+
+(\texttimes) & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-report.eps}} & Signaler un problème & \\\hline
+(\texttimes) & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-help.eps}} & Voir l'aide & \\\hline\hline
+(\texttimes) & \raisebox{0pt}{\includegraphics[width=12pt]{icon-view.eps}} & Voir la fiche & Sidebar et liste \\\hline\hline
+\texttimes & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-profile.eps}}  & Voir mon profil utilisateur & Actuellement identique au « home » de la navigation principale : différencier ? \\\hline 
+
+\texttimes & \raisebox{-2pt}{\includegraphics[width=16pt]{icon-three-rats.eps}} & Voir tous mes rats & Déclinaison du rat de base \\
+(\texttimes) &  \raisebox{-2pt}{\includegraphics[width=14pt]{icon-search-females.eps}} / \raisebox{-2pt}{\includegraphics[width=14pt]{icon-search-males.eps}} & Voir mes femelles / mes mâles & Combinaison recherche + déclinaison rat de base\\
+\texttimes & \raisebox{-2pt}{\includegraphics[width=14pt]{icon-search-deceased.eps}} & Voir mes disparus & Combinaison recherche + déclaration décès\\\hline
+\texttimes & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-rattery.eps}} & Voir mes rateries & Complexe, pas d'idée, ouverte à toute proposition\\\hline
+\texttimes & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Voir mes portées & Icône sur-utilisée, il faudra peut-être différencier\\\hline 
+(\texttimes) & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-backoffice.eps}} & Aller au back-office & \\\hline\hline
+\texttimes & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Enregistrer un rat & Création de fiche rat hors contexte (pas depuis une portée ou la fiche d'un de ses parents.) Icône sur-utilisée, il faudra peut-être différencier \\\hline\hline
+(\texttimes) & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-picture.eps}} & Changer la photo & Différencier photo rat / raterie / avatar utilisateur ? \\\hline
+\texttimes & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-give.eps}} & Changer de propriétaire & A minima, flèche dans un seul sens\\\hline
+\texttimes & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Déclarer une descendance & Depuis fiche rat et liste\\\hline
+(\texttimes) & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-death.eps}} & Déclarer le décès & Depuis fiche rat et liste\\\hline
+
+& \raisebox{-2pt}{\includegraphics[width=12pt]{icon-print.eps}} & Imprimer & \\\hline
+(\texttimes) & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-fullscreen.eps}} & Voir en plein écran &\\\hline
+
+\texttimes & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Ajouter un raton à une portée & Icône sur-utilisée, à différencier (rat de base et + ?)\\\hline
+\texttimes & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-rattery.eps}} & Ajouter une raterie contributrice & Icône raterie finale avec un + ?\\\hline
+
+\texttimes & \raisebox{-2pt}{\includegraphics[width=10pt]{icon-map.eps}} & Voir la raterie sur la carte & Faire plutôt une déclinaison de raterie ?\\\hline
+& \raisebox{-2pt}{\includegraphics[width=12pt]{icon-website.eps}} & Voir le site web de la raterie & \\\hline
+(\texttimes) & \raisebox{-3pt}{\includegraphics[width=14pt]{icon-search-rats.eps}} & Voir les rats liés & Combinaison recherche + rat de base \\\hline
+\texttimes & & Activer / désactiver la raterie & Synchro avec l'icône d'état actif / non-actif ?\\\hline
+\texttimes & & Déménager &  Déclinaison de l'icône raterie ?\\\hline
+\texttimes & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Déclarer une portée & Icône sur-utilisée, à différencier ?\\\hline \hline
+ 
+(\texttimes) & \raisebox{-2pt}{\includegraphics[width=9pt]{icon-lock.eps}} / \raisebox{-1pt}{\includegraphics[width=9pt]{icon-unlock.eps}} & (Dé/)verrouiller un utilisateur & \\\hline
+(\texttimes) & \raisebox{-2pt}{\includegraphics[width=12pt]{icon-email.eps}} & Envoyer un mail au propriétaire & \\\hline 
+\texttimes & \raisebox{-1pt}{\includegraphics[width=12pt]{icon-next-ok.eps}} / \raisebox{-1pt}{\includegraphics[width=12pt]{icon-next-ko.eps}} & Avancer au prochain état OK / KO & \'Equivaut à peu près à « valider » / « invalider » (le workflow un peu spécial, me redemander si besoin)\\\hline
+(\texttimes) & \raisebox{-3pt}{\includegraphics[width=12pt]{icon-frozen.eps}} & (Dé/)geler une fiche & Il peut n'y avoir qu'une icône pour les 2 actions (jamais dispo simultanément)\\\hline
+& \raisebox{-2pt}{\includegraphics[width=12pt]{icon-edit-staff.eps}} & \'Editer en base & \\\hline
+\texttimes & \raisebox{-3pt}{\includegraphics[width=10pt]{icon-restore.eps}} & Restaurer le snapshot & Actuellement risque de confusion\\\hline
+(\texttimes) & \raisebox{-3pt}{\includegraphics[width=10pt]{icon-delete.eps}} & Supprimer & Suppression définitive (pas annulée par « restaurer ») \\\hline
+
+\end{tabularx}
+\end{document}

@@ -80,6 +80,10 @@
                             'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
                             'class' => 'action-icon',
                             'alt' => __('See Rat')]) ?>
+                        <?= $this->Html->image('/img/icon-rip.svg', [
+                            'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Declare Rat Death')]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

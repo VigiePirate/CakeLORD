@@ -65,7 +65,7 @@ $cakeDescription = 'LORD';
                 'method' => 'post',
                 'class' => 'searchbar'],
             ); ?>
-                <?= $this->Form->control('name', ['type' => 'text','label' => false,'placeholder' => 'Search...']); ?>
+                <?= $this->Form->control('name', ['id' => 'searchbarname', 'type' => 'text','label' => false,'placeholder' => 'Search...']); ?>
                 <?= $this->Form->submit(); ?>
             <?= $this->Form->end(); ?>
             <!-- Login or access dashboard -->

@@ -143,7 +143,7 @@ class RatsController extends AppController
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
         }
@@ -205,6 +205,7 @@ class RatsController extends AppController
 
          if ($this->request->is(['patch', 'post', 'put'])) {
              $criteria = $this->request->getData();
+             dd($criteria);
          }
 
          $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 500]);
@@ -224,6 +225,41 @@ class RatsController extends AppController
          $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
          //$this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
          $this->set(compact('rat', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'states', 'singularities'));
+     }
+
+     // could probably be fused with index
+     public function results()
+     {
+         $this->Authorization->skipAuthorization();
+
+         if($this->request->is(['post']))
+         {
+             $criteria = $this->request->getData();
+             dd($criteria);
+             // Use the RatsTable to find named rats.
+             $rats = $this->Rats->find('named', [
+                 'names' => $names
+             ]);
+
+             // Pass variables into the view template context.
+             $this->paginate = [
+                 'contain' => ['OwnerUsers', 'Ratteries', 'States', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
+             ];
+             $rats = $this->paginate($rats);
+
+             $this->set(compact('rats', 'names'));
+
+         } else {
+             // redirect to index
+         }
+
+         // from index
+         // $this->paginate = [
+         //     'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
+         // ];
+         // $rats = $this->paginate($this->Rats);
+         //
+         // $this->set(compact('rats'));
      }
 
     /**

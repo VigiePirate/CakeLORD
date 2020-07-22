@@ -26,7 +26,7 @@
             <h1><?= __('Advanced search') ?></h1>
 
             <div class="message default">
-                Please fill in your search criteria below. You can leave empty the criteria you do not want to use.
+                <?= __('Please fill in your search criteria below. You can leave empty the criteria you do not want to use.') ?>
             </div>
 
             <?php echo $this->Form->create($rat, [
@@ -82,7 +82,15 @@
                 ?>
                 <legend><?= __('Physical criteria') ?></legend>
                 <?php
-                    echo $this->Form->control('color_id', ['empty' => true, 'default' => 0,'options' => $colors]);
+                    echo $this->Form->control('color_id', [
+                        'id' => 'jquery-color-select',
+                        'empty' => true,
+                        'default' => 0,
+                        'label' => __('Color'),
+                        //'type' => 'dropdown',
+                        'options' => $colors
+                    ]);
+
                     echo $this->Form->control('eyecolor_id', ['empty' => true, 'default' => 0, 'options' => $eyecolors]);
                     echo $this->Form->control('dilution_id', ['empty' => true, 'default' => 0, 'options' => $dilutions]);
                     echo $this->Form->control('marking_id', ['empty' => true, 'default' => 0, 'options' => $markings]);
@@ -97,15 +105,22 @@
     </div>
 </div>
 
-<!-- Script for owner search -->
 <?php $this->append('css');?>
 	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" /> -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.default.css" />
 <?php $this->end();?>
 <?= $this->Html->css('ajax.css') ?>
+<?= $this->Html->css('selectize.milligram.css') ?>
+
 <?php $this->append('script');?>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!-- general select2 ; French version at: cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.min.js -->
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" type="text/javascript"></script> -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.js"></script>
     <script>
+    // autocomplete for owner
     $(function () {
         $('#jquery-owner-input').autocomplete({
             minLength: 3,
@@ -136,6 +151,7 @@
     });
     </script>
     <script>
+    // autocomplete for rattery
     $(function () {
         $('#jquery-rattery-input').autocomplete({
             minLength: 2,
@@ -164,5 +180,18 @@
             }
         });
     });
+    </script>
+    <script>
+    $(function () {
+        $("#jquery-color-select").selectize( {
+            // maxItems: 5,
+        });
+     });
+    // $(function () {
+    //     $("#jquery-color-select").select2( {
+    //      placeholder: " ",
+    //      allowClear: true,
+    //      } );
+    //  });
     </script>
 <?php $this->end();

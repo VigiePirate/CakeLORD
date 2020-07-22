@@ -42,7 +42,7 @@
 
 \title{Livre des Origines du Rat Domestique}
 \author{Cahier des Charges Fonctionnel}
-\date{Version 2.3 -- \today}
+\date{Version 2.4 -- \today}
 
 \begin{document}
 \maketitle
@@ -51,7 +51,8 @@
 
 \large
 \noindent\begin{tabularx}{\textwidth}{|l|l|X|}\hline
-\textbf{2.3} & \textbf{29/05/2020} & Ajout de spécifications, workflow des fiches.\\\hline
+\textbf{2.4} & \textbf{21/07/2020} & Spécifications actions et icônes.\\\hline
+2.3 & 29/05/2020 & Ajout de spécifications, workflow des fiches.\\\hline
 2.2 & 10/03/2020 & Modification schéma de base (rats\_litters, wants\_statistics.)\\\hline
 2.1 & 27/01/2020 & Ajout et abandon de fonctionnalités, modifications de listes\\\hline
 2.0 & 25/02/2020 & Adaptation pour CakeLORD\\\hline
@@ -1058,29 +1059,33 @@ Les statistiques envisagées sont pour l'instant les suivantes ; la liste pourra
 \subsection{Icônes}
 \label{ssec:icons}
 
-\subsubsection{Page d'accueil et navigation}
-NB. Ces icônes apparaissent en tracé clair (blanc ou mauve) sur fond sombre (chocolat). La barre de navigation est présente sur toutes les pages. Les icônes de la page d'accueil servent à la proposition de valeur mais ne sont pas cliquables. 
+Le document « spécifications icônes » complète cette annexe, le consulter pour détails supplémentaires. 
+  
+\subsubsection{Page d'accueil et header}
+NB. Ces icônes apparaissent en tracé blanc sur fond sombre. La barre de navigation est présente sur toutes les pages. Les icônes de la page d'accueil ne sont pas cliquables. 
 
 \renewcommand{\arraystretch}{1.5}
 \begin{longtable}{|c|l|l|l|l|}\hline
 \textbf{Icone} & \textbf{Emplacement} & \textbf{Signification} & \textbf{Commentaire}\\\hline
 \endhead
- & Page d'accueil & Fiche individuelle &  \\\hline
- & Page d'accueil & Arbre généalogique &  \\\hline
- & Page d'accueil & Statistiques santé &  \\\hline\hline
+\raisebox{-3pt}{\includegraphics[width=14pt]{icon-fiche.eps}} & Page d'accueil & Fiche individuelle &  \\\hline
+\raisebox{-3pt}{\includegraphics[width=14pt]{icon-arbre.eps}} & Page d'accueil & Arbre généalogique &  \\\hline
+\raisebox{-3pt}{\includegraphics[width=14pt]{icon-stats.eps}} & Page d'accueil & Statistiques santé &  \\\hline\hline
 
- & Barre de navigation & Recherche &  \\\hline
- & Barre de navigation & Home user &  \\\hline
- & Barre de navigation & Login &  \\\hline
- & Barre de navigation & Logout &  \\\hline
+\raisebox{-3pt}{\includegraphics[width=14pt]{icon-searchbar.eps}} & Barre de navigation & Recherche &  \\\hline
+\raisebox{-3pt}{\includegraphics[width=14pt]{icon-home.eps}} & Barre de navigation & Home user &  \\\hline
+\raisebox{-3pt}{\includegraphics[width=14pt]{icon-login.eps}} & Barre de navigation & Login &  \\\hline
+\raisebox{-3pt}{\includegraphics[width=14pt]{icon-logout.eps}} & Barre de navigation & Logout &  \\\hline
 
 \end{longtable}
 
 \subsubsection{\'Etats}
+Apparaissent dans le coin en haut à droite des fiches. Non cliquables.
 \renewcommand{\arraystretch}{1.5}
 \begin{longtable}{|c|l|l|l|l|}\hline
 \textbf{Icone} & \textbf{Objets associés} & \textbf{Signification} & \textbf{Commentaire}\\\hline
 \endhead
+\raisebox{-1pt}{\includegraphics[width=12pt]{icon-state.eps}} & Listes & Légende « état » & \\\hline
  \textcolor{mygreen}{\large \ding{74}} & Rats, Rateries, Portées, Utilisateurs & Fiche validée (gelée) & Symbole unicode \\\hline
  \textcolor{mygreen}{\large \ding{51}} & Rats, Rateries, Portées, Utilisateurs & Fiche vérifiée & Symbole unicode \\\hline
  \textcolor{myorange}{\large \ding{55}} & Rats, Rateries, Portées, Utilisateurs & Fiche en attente d'action staff & Symbole unicode \\\hline
@@ -1088,6 +1093,7 @@ NB. Ces icônes apparaissent en tracé clair (blanc ou mauve) sur fond sombre (c
  \textcolor{mybrown}{\large \ding{55}} & Rats, Rateries, Portées, Utilisateurs & Fiche non vérifiée & Symbole unicode \\\hline
  \textcolor{darkgray}{\large $\recycle$} & Rats, Rateries, Portées, Utilisateurs & Fiche invalide (gelée) & Symbole unicode \\\hline\hline
 
+\raisebox{-1pt}{\includegraphics[width=12pt]{icon-sex.eps}} & Légende « sexe » dans les listes & \\\hline
 \textcolor{female}{\large \bf \female} & Rats & Femelle & Symbole unicode \\\hline
 \textcolor{male}{\large \bf \male} & Rats & Mâle & Symbole unicode \\\hline\hline
 
@@ -1097,55 +1103,54 @@ NB. Ces icônes apparaissent en tracé clair (blanc ou mauve) sur fond sombre (c
 \end{longtable}
 
 \subsubsection{Actions}
-Travail en cours, liste et icônes provisoires. Colonne Cx pour icône complexe ou à créer (pour devis graphiste.)     
-
-
-\begin{longtable}{|c|l|l|l|l|}\hline
-\textbf{Icone} & \textbf{Action} & \textbf{Visible depuis...} & \textbf{Visible par...} & \textbf{Cx}\\\hline\hline
+Apparaissent dans la sidebar ou en bout de ligne dans les listes, déclenchent une action.
+    
+\begin{longtable}{|c|l|l|l|}\hline
+\textbf{Icone} & \textbf{Action} & \textbf{Visible depuis...} & \textbf{Visible par...}\\\hline\hline
 \endhead
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-report.eps}} & Signaler un problème & Fiches & Tous & \\\hline
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-help.eps}} & Voir l'aide & Fiches & Tous & \\\hline\hline
-\raisebox{0pt}{\includegraphics[width=12pt]{icon-view.eps}} & Voir la fiche & Listes & Tous & \\\hline\hline
- & Voir mon profil utilisateur & Dashboard user & Propriétaire de la fiche & \\\hline 
- & Voir mes rats & Dashboard user & Propriétaire des rats & \\
- & Voir mes femelles & Mes rats & Propriétaire des rats & \\
- & Voir mes mâles & Mes rats & Propriétaire des rats & \\
- & Voir mes disparus & Mes rats & Propriétaire des rats & \\\hline
- & Voir mes rateries & Dashboard user & Propriétaire des rateries &  \\\hline
- & Voir mes portées & Dashboard user & Propriétaires des rateries &  \\\hline 
- & Aller au back-office & Dashboard user & Staff, Admin, Root &  \\\hline\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-actions.eps}} & Légende « actions » & Listes & Tous\\\hline   
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-report.eps}} & Signaler un problème & Fiches & Tous \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-help.eps}} & Voir l'aide & Fiches & Tous \\\hline\hline
+\raisebox{0pt}{\includegraphics[width=12pt]{icon-view.eps}} & Voir la fiche & Listes & Tous \\\hline
+\raisebox{-3pt}{\includegraphics[width=14pt]{icon-search-rats.eps}} & Voir les rats liés & Objets ayant des rats & Tous\\\hline\hline
+ \raisebox{-2pt}{\includegraphics[width=12pt]{icon-profile.eps}} & Voir mon profil utilisateur & Dashboard user & Propriétaire de la fiche\\\hline 
+\raisebox{-2pt}{\includegraphics[width=16pt]{icon-three-rats.eps}} & Voir mes rats & Dashboard user & Propriétaire des rats \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Enregistrer un rat &  Mes rats & Tous\\\hline
+\raisebox{-2pt}{\includegraphics[width=14pt]{icon-search-females.eps}} & Voir mes femelles & Mes rats & Propriétaire des rats \\
+\raisebox{-2pt}{\includegraphics[width=14pt]{icon-search-males.eps}} & Voir mes mâles & Mes rats & Propriétaire des rats \\
+\raisebox{-2pt}{\includegraphics[width=14pt]{icon-search-deceased.eps}} & Voir mes disparus & Mes rats & Propriétaire des rats \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-rattery.eps}} & Voir mes rateries & Dashboard user & Propriétaire des rateries \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Voir mes portées & Dashboard user & Propriétaires des rateries \\\hline 
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-backoffice.eps}} & Aller au back-office & Dashboard user & Staff, Admin, Root\\\hline\hline
 
- & Changer la photo & Fiches user, rat, raterie & Propriétaire, Staff & \\\hline
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-give.eps}} & Changer de propriétaire & Fiche rat, raterie & Propriétaire, Créateur, Staff & \\\hline
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Déclarer une descendance & Fiche rat & Tous & \\\hline
- & Enregistrer un rat & Mes rats & Tous & \\\hline
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-death.eps}} & Déclarer le décès & Fiche rat, Mes Rats & Propriétaire, Créateur, Staff & \\
- &  & Mes Rats (liste) & Propriétaire, Créateur, Staff & \\\hline
 
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-print.eps}} & Imprimer & Pedigree rat & Tous & \\\hline
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-fullscreen.eps}} & Voir en plein écran & Pedigree rat & Tous & \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-picture.eps}} & Changer la photo & Fiches user, rat, raterie & Propriétaire, Staff \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-give.eps}} & Changer de propriétaire & Fiche rat, raterie & Propriétaire, Créateur, Staff \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Déclarer une descendance & Fiche rat & Tous \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-death.eps}} & Déclarer le décès & Fiche rat, Mes Rats & Propriétaire, Créateur, Staff \\
+ &  & Mes Rats (liste) & Propriétaire, Créateur, Staff \\\hline\hline
 
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Ajouter un raton & Mes portées (liste) & Tous & \\
- &  & Fiche portée (menu) & Tous & \\\hline
- & Ajouter une contribution & Fiche portée & Tous & \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-print.eps}} & Imprimer & Pedigree rat & Tous\\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-fullscreen.eps}} & Voir en plein écran & Pedigree rat & Tous \\\hline\hline
 
- \raisebox{-3pt}{\includegraphics[width=12pt]{icon-map.eps}} & Voir sur la carte & Fiche raterie & Tous & \\\hline
- \raisebox{-2pt}{\includegraphics[width=12pt]{icon-website.eps}} & Voir le site web & Liste de rateries & Tous & \\\hline
- & Activer / désactiver la raterie & Fiche raterie & Propriétaire, Staff & \\
- & & Mes rateries (liste) & Propriétaire, Staff & \\\hline
- & Déménager & Mes rateries, fiche raterie & Propriétaire, Staff & \\\hline
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Déclarer une portée & Fiche raterie & & \\
- &  & Mes rateries (liste) & & \\
- &  & Mes portées & & \\\hline \hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Ajouter un raton & Fiche \& listes portées & Tous \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-rattery.eps}} & Ajouter une contribution & Fiche portée & Propriétaire ? \\\hline
+ \raisebox{-3pt}{\includegraphics[width=12pt]{icon-map.eps}} & Voir sur la carte & Fiche raterie & Tous \\\hline
+ \raisebox{-2pt}{\includegraphics[width=12pt]{icon-website.eps}} & Voir le site web & Liste de rateries & Tous \\\hline
+
+ & Activer / désactiver la raterie & Fiche raterie, liste rateries & Propriétaire, Staff \\\hline
+ & Déménager & Mes rateries, fiche raterie & Propriétaire, Staff\\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-birth.eps}} & Déclarer une portée & Fiche \& liste rateries, mes portées & \\\hline \hline
  
-
-& Verrouiller / déverrouiller & Fiche utilisateur & Admin & \\\hline
-& Envoyer un mail au propriétaire & Fiche avec état, listes & & \\\hline 
-\raisebox{-1pt}{\includegraphics[width=12pt]{icon-next-ok.eps}} & Avancer au prochain état OK & Fiches avec état & Staff & \\\hline
-\raisebox{-1pt}{\includegraphics[width=12pt]{icon-next-ko.eps}} & Reculer au prochain état KO & Fiches avec état & Staff & \\\hline
-\raisebox{-3pt}{\includegraphics[width=12pt]{icon-frozen.eps}} & Geler / Dégeler & Fiches avec état & Staff & \\\hline
-\raisebox{-2pt}{\includegraphics[width=12pt]{icon-edit-staff.eps}} & Editer en base & Fiches, listes & Admin & \\\hline
-\raisebox{-3pt}{\includegraphics[width=10pt]{icon-delete.eps}} & Supprimer & Fiches, listes & Admin & \\\hline
+\raisebox{-2pt}{\includegraphics[width=9pt]{icon-lock.eps}} & Verrouiller  & Fiche utilisateur & Admin \\\hline
+\raisebox{-1pt}{\includegraphics[width=9pt]{icon-unlock.eps}} & Déverrouiller & Fiche utilisateur & Admin \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-email.eps}} & Envoyer un mail & Fiche avec état, listes & \\\hline 
+\raisebox{-1pt}{\includegraphics[width=12pt]{icon-next-ok.eps}} & Avancer au prochain état OK & Fiches avec état & Staff \\\hline
+\raisebox{-1pt}{\includegraphics[width=12pt]{icon-next-ko.eps}} & Reculer au prochain état KO & Fiches avec état & Staff \\\hline
+\raisebox{-3pt}{\includegraphics[width=12pt]{icon-frozen.eps}} & Geler / Dégeler & Fiches avec état & Staff \\\hline
+\raisebox{-2pt}{\includegraphics[width=12pt]{icon-edit-staff.eps}} & Editer en base & Fiches, listes & Admin \\\hline
+\raisebox{-3pt}{\includegraphics[width=10pt]{icon-restore.eps}} & Restaurer le snapshot & Fiche snapshot ?& Staff \\\hline
+\raisebox{-3pt}{\includegraphics[width=10pt]{icon-delete.eps}} & Supprimer & Fiches, listes & Admin \\\hline
 
 \end{longtable}
 

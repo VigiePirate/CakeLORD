@@ -250,7 +250,7 @@ class RatsTable extends Table
 
         /* Rules about death date and cause */
         $timeline = function($rat) {
-            return !( !$rat->is_alive && $rat->birth_date->gte($rat->death_date) );
+            return !( !$rat->is_alive && $rat->birth_date->gt($rat->death_date) );
         };
         $rules->add($timeline, [
             'errorField' => 'death_date',
