@@ -16,7 +16,7 @@ class RatteriesController extends AppController
     {
         parent::beforeFilter($event);
         // No authentication needed on consultation
-        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'view','autocomplete']);
     }
 
     /**

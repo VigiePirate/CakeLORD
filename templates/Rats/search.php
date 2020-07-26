@@ -15,7 +15,6 @@
               'url' => ['controller' => 'Articles', 'action' => 'index'],
               'class' => 'side-nav-icon',
               'alt' => __('Help')]) ?>
-            <?= $this->Html->link(__('List Rats'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-90">
@@ -23,84 +22,187 @@
             <div class="sheet-heading">
                 <div class="sheet-title pretitle">Rats</div>
             </div>
+
             <h1><?= __('Advanced search') ?></h1>
 
-            <div class="message default">
-                <?= __('Please fill in your search criteria below. You can leave empty the criteria you do not want to use.') ?>
-            </div>
+            <?php if( empty($rats) ) : ?>
+                <div class="message default">
+                    <?= __('Please fill in your search criteria below. You can leave empty the criteria you do not want to use.') ?>
+                </div>
+            <?php endif; ?>
 
-            <?php echo $this->Form->create($rat, [
-            	'id' => 'jquery-search-form',
-            ]); ?>
-            <fieldset>
-                <legend><?= __('Identity criteria') ?></legend>
-                <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('sex', ['type' => 'radio', 'options' => ['X' => 'Any', 'F' => 'Female', 'M' => 'Male']]);
+            <?php if( !empty($rats) ) : ?>
+            <details>
+            <summary class="h2"><?= __('New search') ?></summary>
+            <?php endif; ?>
 
-                    // Search rattery with autocomplete
-                    echo $this->Form->control('ratterykey', [
-                        'id' => 'jquery-rattery-input',
-                        'name' => 'rattery_name',
-                        'label' => __('Origin'),
-                        'type' => 'text',
-                        'placeholder' => __('Type here...')
-                    ]);
-                    echo $this->Form->control('ratteryid', [
-                        'id' => 'jquery-rattery-id',
-                        'name' => 'rattery_id',
-                        'label' => [
-                            'class' => 'hide-everywhere',
-                            'text' => 'Hidden field for rattery ID'
-                        ],
-                        'class' => 'hide-everywhere',
-                        'type' => 'text',
-                    ]);
+                <?php echo $this->Form->create($rat, [
+                	'id' => 'jquery-search-form',
+                ]); ?>
+                <fieldset>
+                    <legend><?= __('Identity criteria') ?></legend>
+                    <?php
+                        echo $this->Form->control('namekey', ['label' => __('Name')]);
+                    ?>
+                    <div class="row">
+                        <div class="column-responsive column-20">
+                            <label><?= __('Sex') ?></label>
+                            <!-- could be done with cake helper form type select, multiple => checkbox -->
+                            <?php
+                                echo $this->Form->control('sex_f', [
+                                    'type' => 'checkbox',
+                                    'default' => true,
+                                    'label' => [
+                                        'class' => 'minicheck',
+                                        'text' => 'Female',
+                                    ],
+                                ]);
+                                echo $this->Form->control('sex_m', [
+                                    'type' => 'checkbox',
+                                    'default' => true,
+                                    'label' => [
+                                        'class' => 'minicheck',
+                                        'text' => 'Male',
+                                    ],
+                                ]);
+                            ?>
+                        </div>
+                        <div class="column-responsive column-40">
+                            <?php
+                                echo $this->Form->control('ratterykey', [
+                                    'id' => 'jquery-rattery-input',
+                                    'name' => 'rattery_name',
+                                    'label' => __('Origin'),
+                                    'type' => 'text',
+                                    'placeholder' => __('Type here...')
+                                ]);
+                                echo $this->Form->control('ratteryid', [
+                                    'id' => 'jquery-rattery-id',
+                                    'name' => 'rattery_id',
+                                    'label' => [
+                                        'class' => 'hide-everywhere',
+                                        'text' => 'Hidden field for rattery ID'
+                                    ],
+                                    'class' => 'hide-everywhere',
+                                    'type' => 'text',
+                                ]);
+                            ?>
+                        </div>
+                        <div class="column-responsive column-40">
+                            <?php
+                                echo $this->Form->control('ownerkey', [
+                                    'id' => 'jquery-owner-input',
+                                    'name' => 'owner_user_name',
+                                    'label' => __('Owner'),
+                                    'type' => 'text',
+                                    'placeholder' => __('Type here...')
+                                ]);
+                                echo $this->Form->control('ownerid', [
+                                    'id' => 'jquery-owner-id',
+                                    'name' => 'owner_user_id',
+                                    'label' => [
+                                        'class' => 'hide-everywhere',
+                                        'text' => 'Hidden field for owner ID'
+                                    ],
+                                    'class' => 'hide-everywhere',
+                                    'type' => 'text',
+                                ]);
+                            ?>
+                        </div>
+                    </div>
 
-                    // Search owner with autocomplete
-                    echo $this->Form->control('ownerkey', [
-                        'id' => 'jquery-owner-input',
-                        'name' => 'owner_user_name',
-                        'label' => __('Owner'),
-                        'type' => 'text',
-                        'placeholder' => __('Type here...')
-                    ]);
-                    echo $this->Form->control('ownerid', [
-                        'id' => 'jquery-owner-id',
-                        'name' => 'owner_user_id',
-                        'label' => [
-                            'class' => 'hide-everywhere',
-                            'text' => 'Hidden field for owner ID'
-                        ],
-                        'class' => 'hide-everywhere',
-                        'type' => 'text',
-                    ]);
+                    <div class="row">
+                        <div class="column-responsive column-20">
+                            <label><?= __('State') ?></label>
+                            <?php
+                                echo $this->Form->control('alive', [
+                                    'type' => 'checkbox',
+                                    'default' => true,
+                                    'label' => [
+                                        'class' => 'minicheck',
+                                        'text' => __('Alive'),
+                                    ],
+                                ]);
+                                echo $this->Form->control('deceased', [
+                                    'type' => 'checkbox',
+                                    'default' => true,
+                                    'label' => [
+                                        'class' => 'minicheck',
+                                        'text' => __('Deceased'),
+                                    ],
+                                ]);
+                            ?>
+                        </div>
+                        <div class="column-responsive column-40">
+                            <?php
+                                echo $this->Form->control('birth_date_before', ['type' => 'date', 'label' => 'Born before...']);
+                            ?>
+                        </div>
+                        <div class="column-responsive column-40">
+                            <?php
+                                echo $this->Form->control('birth_date_after', ['type' => 'date', 'label' => 'Born after...']);
+                            ?>
+                        </div>
+                    </div>
 
-                    echo $this->Form->control('birth_date_before', ['type' => 'date', 'label' => 'Born before...']);
-                    echo $this->Form->control('birth_date_after', ['type' => 'date', 'label' => 'Born after...']);
-                    echo $this->Form->control('is_alive');
-                ?>
-                <legend><?= __('Physical criteria') ?></legend>
-                <?php
-                    echo $this->Form->control('color_id', [
-                        'id' => 'jquery-color-select',
-                        'empty' => true,
-                        'default' => 0,
-                        'label' => __('Color'),
-                        //'type' => 'dropdown',
-                        'options' => $colors
-                    ]);
 
-                    echo $this->Form->control('eyecolor_id', ['empty' => true, 'default' => 0, 'options' => $eyecolors]);
-                    echo $this->Form->control('dilution_id', ['empty' => true, 'default' => 0, 'options' => $dilutions]);
-                    echo $this->Form->control('marking_id', ['empty' => true, 'default' => 0, 'options' => $markings]);
-                    echo $this->Form->control('earset_id', ['empty' => true, 'default' => 0, 'options' => $earsets]);
-                    echo $this->Form->control('coat_id', ['empty' => true, 'default' => 0, 'options' => $coats]);
-                    echo $this->Form->control('singularities._ids', ['empty' => true, 'default' => 0, 'options' => $singularities, 'size' => '13', 'style' => 'height:auto;']);
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+                    <legend><?= __('Physical criteria') ?></legend>
+                    <?php
+                        echo $this->Form->control('colors', [
+                            'id' => 'jquery-color-select',
+                            'type' => 'select',
+                            'multiple' => 'true',
+                            'empty' => true,
+                            'default' => 0,
+                            'label' => __('Color'),
+                            'options' => $colors
+                        ]);
+                    ?>
+                    <div class="row">
+                        <div class="column-responsive column-50">
+                        <?php
+                            echo $this->Form->control('eyecolor_id', ['empty' => true, 'default' => 0, 'options' => $eyecolors]);
+                            echo $this->Form->control('dilution_id', ['empty' => true, 'default' => 0, 'options' => $dilutions]);
+                            echo $this->Form->control('marking_id', ['empty' => true, 'default' => 0, 'options' => $markings]);
+                        ?>
+                        </div>
+                        <div class="column-responsive column-50">
+                        <?php
+                            echo $this->Form->control('earset_id', ['empty' => true, 'default' => 0, 'options' => $earsets]);
+                            echo $this->Form->control('coat_id', ['empty' => true, 'default' => 0, 'options' => $coats]);
+                            /*echo $this->Form->control('singularities._ids', ['empty' => true, 'default' => 0, 'options' => $singularities, 'size' => '13', 'style' => 'height:auto;']);*/
+                            echo $this->Form->control('singularity_id', ['empty' => true, 'default' => 0, 'options' => $singularities]);
+                        ?>
+                        <div>
+                    </div>
+                </fieldset>
+                <?= $this->Form->button(__('Search')) ?>
+                <?= $this->Form->end() ?>
+
+            <?php if( !empty($rats) ) : ?>
+            </details>
+            <?php endif; ?>
+
+            <?php if( !empty($rats) ) : ?>
+                <div class="spacer"> </div>
+                <h2><?= __('Results') ?></h2>
+
+                <?php if ( empty($rats->toList()) ) : ?>
+                    <div class="message error"><?= __('Sorry, no rat matches your criteria. You can try again above.') ?></div>
+                <?php else : ?>
+
+                <?= $this->element('rats', [
+                    'rubric' => __(''),
+                    'exceptions' => [
+                        'picture',
+                        'age_string',
+                        'death_cause',
+                    ],
+                ]) ?>
+
+                <?php endif; ?>
+
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -184,7 +286,8 @@
     <script>
     $(function () {
         $("#jquery-color-select").selectize( {
-            // maxItems: 5,
+            placeholder : 'Type here...',
+            maxItems: 8,
         });
      });
     // $(function () {

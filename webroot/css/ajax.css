@@ -37,3 +37,16 @@
   color: #707e8a;
   opacity: 1;
 }
+
+.minicheck {
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+
+.checkbox + .checkbox {
+  margin-top: -2.2rem;
+}
+
+.checkbox {
+  margin-top: -0.6rem;
+}

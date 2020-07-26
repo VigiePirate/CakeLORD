@@ -1,7 +1,7 @@
 <?= $this->Flash->render() ?>
 
 <div class="users form index content">
-    <h3>Register</h3>
+    <h1>Register</h1>
     <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('In order to create your account, please fill in this form') ?></legend>

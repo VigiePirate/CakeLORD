@@ -31,6 +31,7 @@ class UsersController extends AppController
             'activate',
             'lostPassword',
             'resetPassword',
+            'autocomplete'
         ]);
     }
 

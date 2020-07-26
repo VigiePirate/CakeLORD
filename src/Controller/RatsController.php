@@ -24,7 +24,7 @@ class RatsController extends AppController
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['index','view','named', 'fromRattery', 'ownedBy', 'sex']);
+        $this->Authentication->addUnauthenticatedActions(['index','view','named', 'fromRattery', 'ownedBy', 'sex','search','pedigree','parentsTree', 'childrenTree']);
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
     /**
@@ -39,7 +39,6 @@ class RatsController extends AppController
             'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
         ];
         $rats = $this->paginate($this->Rats);
-
         $this->set(compact('rats'));
     }
 
@@ -200,66 +199,30 @@ class RatsController extends AppController
 
      public function search()
      {
+         $this->Authorization->skipAuthorization();
          $rat = $this->Rats->newEmptyEntity();
-         $this->Authorization->authorize($rat);
 
          if ($this->request->is(['patch', 'post', 'put'])) {
-             $criteria = $this->request->getData();
-             dd($criteria);
+            $options = $this->request->getData();
+            $rats = $this->Rats->find('multisearch', [
+                'options' => $options,
+            ]);
+            $this->paginate = [
+                'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
+            ];
+            $rats = $this->paginate($rats);
+            $this->set(compact('rats','options'));
          }
 
-         $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 500]);
-         $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
-         //$birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
          $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
          $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
          $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
          $markings = $this->Rats->Markings->find('list', ['limit' => 200]);
          $earsets = $this->Rats->Earsets->find('list', ['limit' => 200]);
          $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
-         //$deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list', ['limit' => 200]);
-         //$deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
-         //$creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
          $states = $this->Rats->States->find('list', ['limit' => 200]);
-         //$bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
          $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-         //$this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
-         $this->set(compact('rat', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'states', 'singularities'));
-     }
-
-     // could probably be fused with index
-     public function results()
-     {
-         $this->Authorization->skipAuthorization();
-
-         if($this->request->is(['post']))
-         {
-             $criteria = $this->request->getData();
-             dd($criteria);
-             // Use the RatsTable to find named rats.
-             $rats = $this->Rats->find('named', [
-                 'names' => $names
-             ]);
-
-             // Pass variables into the view template context.
-             $this->paginate = [
-                 'contain' => ['OwnerUsers', 'Ratteries', 'States', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
-             ];
-             $rats = $this->paginate($rats);
-
-             $this->set(compact('rats', 'names'));
-
-         } else {
-             // redirect to index
-         }
-
-         // from index
-         // $this->paginate = [
-         //     'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
-         // ];
-         // $rats = $this->paginate($this->Rats);
-         //
-         // $this->set(compact('rats'));
+         $this->set(compact('rat', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'states', 'singularities'));
      }
 
     /**
