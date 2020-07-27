@@ -14,7 +14,7 @@
                 <th><?= $this->Paginator->sort('pedigree_identifier','Identifier') ?></th>
             <?php endif; ?>
             <?php if (! in_array('prefix', $exceptions)): ?>
-                <th><?= __('Prefix  ') ?></th>
+                <th class="doubleprefix"><?= __('Prefix') ?></th>
             <?php endif; ?>
             <?php if (! in_array('name', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('name') ?></th>

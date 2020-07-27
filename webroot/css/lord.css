@@ -281,7 +281,12 @@ td,th {
 
 .actions, .actions-title {
     text-align:right;
+    min-width: 6ch;
   }
+
+.doubleprefix {
+    min-width: 10ch;
+}
 
 blockquote {
     font-family: "Alegreya", serif;

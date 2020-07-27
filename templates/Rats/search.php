@@ -25,19 +25,20 @@
 
             <h1><?= __('Advanced search') ?></h1>
 
-            <?php if( empty($rats) ) : ?>
+            <?php if( $new_search ) : ?>
                 <div class="message default">
                     <?= __('Please fill in your search criteria below. You can leave empty the criteria you do not want to use.') ?>
                 </div>
-            <?php endif; ?>
-
-            <?php if( !empty($rats) ) : ?>
+            <?php else : ?>
             <details>
             <summary class="h2"><?= __('New search') ?></summary>
             <?php endif; ?>
 
-                <?php echo $this->Form->create($rat, [
+                <?php echo $this->Form
+                    ->setValueSources(['query', 'context'])
+                    ->create($rat, [
                 	'id' => 'jquery-search-form',
+                    'url' => ['action' => 'results'],
                 ]); ?>
                 <fieldset>
                     <legend><?= __('Identity criteria') ?></legend>
@@ -135,12 +136,12 @@
                         </div>
                         <div class="column-responsive column-40">
                             <?php
-                                echo $this->Form->control('birth_date_before', ['type' => 'date', 'label' => 'Born before...']);
+                                echo $this->Form->control('birth_date_after', ['type' => 'date', 'label' => 'Born after...']);
                             ?>
                         </div>
                         <div class="column-responsive column-40">
                             <?php
-                                echo $this->Form->control('birth_date_after', ['type' => 'date', 'label' => 'Born after...']);
+                                echo $this->Form->control('birth_date_before', ['type' => 'date', 'label' => 'Born before...']);
                             ?>
                         </div>
                     </div>
@@ -179,13 +180,13 @@
                 <?= $this->Form->button(__('Search')) ?>
                 <?= $this->Form->end() ?>
 
-            <?php if( !empty($rats) ) : ?>
+            <?php if( !$new_search ) : ?>
             </details>
             <?php endif; ?>
 
-            <?php if( !empty($rats) ) : ?>
+            <?php if( !$new_search ) : ?>
                 <div class="spacer"> </div>
-                <h2><?= __('Results') ?></h2>
+                <h2><?= __('Results') ?> <?= ($this->Paginator->counter(__('{{pages}}'))== '1') ? '' : ' (' . $this->Paginator->counter(__('{{page}}/{{pages}}')) . ')' ?></h2>
 
                 <?php if ( empty($rats->toList()) ) : ?>
                     <div class="message error"><?= __('Sorry, no rat matches your criteria. You can try again above.') ?></div>

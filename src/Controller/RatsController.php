@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Chronos\Chronos;
+use Cake\Routing\Router;
 
 /**
  * Rats Controller
@@ -202,17 +203,22 @@ class RatsController extends AppController
          $this->Authorization->skipAuthorization();
          $rat = $this->Rats->newEmptyEntity();
 
-         if ($this->request->is(['patch', 'post', 'put'])) {
-            $options = $this->request->getData();
-            $rats = $this->Rats->find('multisearch', [
-                'options' => $options,
-            ]);
-            $this->paginate = [
-                'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
-            ];
-            $rats = $this->paginate($rats);
-            $this->set(compact('rats','options'));
+         $options = $this->request->getQueryParams();
+
+         if( empty($options) ) {
+             $new_search = true;
+         } else {
+             $new_search = false;
+             $rats = $this->Rats->find('multisearch', [
+                 'options' => $options,
+             ]);
+             $this->paginate = [
+                 'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
+             ];
+             $rats = $this->paginate($rats);
+             $this->set(compact('rats','options'));
          }
+         $this->set(compact('new_search'));
 
          $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
          $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
@@ -224,6 +230,19 @@ class RatsController extends AppController
          $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
          $this->set(compact('rat', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'states', 'singularities'));
      }
+
+    public function results() {
+        $url['action'] = 'search';
+        $options = $this->request->getData();
+        $foo = [];
+		foreach ($options as $k=>$v){
+			if ( $v != '' ) {
+                $foo[$k]=$v;
+            }
+		}
+        $url['?'] = $foo;
+		$this->redirect($url);
+    }
 
     /**
      * Names method
