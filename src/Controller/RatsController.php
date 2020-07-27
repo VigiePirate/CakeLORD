@@ -133,7 +133,7 @@ class RatsController extends AppController
     public function edit($id = null)
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['BirthLitters', 'BredLitters', 'Singularities', 'Ratteries'],
+            'contain' => ['BirthLitters', 'BredLitters', 'Singularities', 'Ratteries', 'DeathPrimaryCauses'],
         ]);
         $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {

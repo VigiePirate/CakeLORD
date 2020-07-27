@@ -63,6 +63,10 @@ class RatsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Snapshot', [
+            'repository' => 'RatSnapshots',
+            'entityField' => 'rat_id',
+        ]);
 
         $this->belongsTo('OwnerUsers', [
             'className' => 'Users',
