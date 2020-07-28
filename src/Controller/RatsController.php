@@ -81,7 +81,7 @@ class RatsController extends AppController
             'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
             'BredLitters.OffspringRats.BirthLitters', 'BredLitters.OffspringRats.BirthLitters.Contributions',
             'BredLitters.OffspringRats.OwnerUsers', 'BredLitters.OffspringRats.States', 'BredLitters.OffspringRats.DeathPrimaryCauses', 'BredLitters.OffspringRats.DeathSecondaryCauses',
-             'Conversations', 'RatSnapshots'],
+             'Conversations', 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
         ]);
 
         $this->set('rat', $rat);
@@ -185,6 +185,29 @@ class RatsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Restore method
+     *
+     * Restores a Rat from a previous snapshot.
+     *
+     * @param string|null $id Rat id.
+     * @param string|null $snapshot_id RatSnapshot id.
+     * @return \Cake\Http\Response|null Redirects to view.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function restore($id = null, $snapshot_id = null)
+    {
+        $rat = $this->Rats->get($id);
+        $this->Authorization->authorize($rat);
+        if ($this->Rats->snapRestore($rat, $snapshot_id)) {
+            $this->Flash->success(__('The snapshot has been restored.'));
+        } else {
+            $this->Flash->error(__('The snapshot could not be loaded. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'view', $rat->id]);
     }
 
     /**
