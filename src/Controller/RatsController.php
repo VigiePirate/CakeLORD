@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Chronos\Chronos;
+use Cake\Routing\Router;
 
 /**
  * Rats Controller
@@ -24,7 +25,7 @@ class RatsController extends AppController
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['index','view','named', 'fromRattery', 'ownedBy', 'sex']);
+        $this->Authentication->addUnauthenticatedActions(['index','view','named', 'fromRattery', 'ownedBy', 'sex','search','results', 'pedigree','parentsTree', 'childrenTree']);
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
     /**
@@ -39,7 +40,6 @@ class RatsController extends AppController
             'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
         ];
         $rats = $this->paginate($this->Rats);
-
         $this->set(compact('rats'));
     }
 
@@ -143,7 +143,7 @@ class RatsController extends AppController
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
         }
@@ -185,6 +185,63 @@ class RatsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /** Search functions **/
+
+    /**
+     * Search method
+     *
+     * Search rats by multiple criteria, from a form entry.
+     *
+     * @param
+     * @return
+     */
+
+     public function search()
+     {
+         $this->Authorization->skipAuthorization();
+         $rat = $this->Rats->newEmptyEntity();
+
+         $options = $this->request->getQueryParams();
+
+         if( empty($options) ) {
+             $new_search = true;
+         } else {
+             $new_search = false;
+             $rats = $this->Rats->find('multisearch', [
+                 'options' => $options,
+             ]);
+             $this->paginate = [
+                 'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','States'],
+             ];
+             $rats = $this->paginate($rats);
+             $this->set(compact('rats','options'));
+         }
+         $this->set(compact('new_search'));
+
+         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
+         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
+         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
+         $markings = $this->Rats->Markings->find('list', ['limit' => 200]);
+         $earsets = $this->Rats->Earsets->find('list', ['limit' => 200]);
+         $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
+         $states = $this->Rats->States->find('list', ['limit' => 200]);
+         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
+         $this->set(compact('rat', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'states', 'singularities'));
+     }
+
+    public function results() {
+        $url['action'] = 'search';
+        $options = $this->request->getData();
+        $query_string = [];
+		foreach ($options as $key => $value){
+			if ( $value != '' ) {
+                $query_string[$key] = $value;
+            }
+		}
+        $url['?'] = $query_string;
+		$this->redirect($url);
     }
 
     /**

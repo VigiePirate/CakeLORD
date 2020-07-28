@@ -250,7 +250,7 @@ class RatsTable extends Table
 
         /* Rules about death date and cause */
         $timeline = function($rat) {
-            return !( !$rat->is_alive && $rat->birth_date->gte($rat->death_date) );
+            return !( !$rat->is_alive && $rat->birth_date->gt($rat->death_date) );
         };
         $rules->add($timeline, [
             'errorField' => 'death_date',
@@ -296,6 +296,120 @@ class RatsTable extends Table
     /*
      * Finder functions
      */
+
+     public function findMultisearch(Query $query, array $options)
+     {
+         $query = $query
+            ->select()
+            ->distinct();
+
+         $options = $options['options'];
+
+         // name
+         if( !empty($options['namekey']) ) {
+             $query->where([
+                 'OR' => [
+                     'Rats.name LIKE' => '%'.h($options['namekey']).'%',
+                     'Rats.pup_name LIKE' => '%'.h($options['namekey']).'%',
+                 ],
+             ]);
+         }
+
+         // sex are checkboxes, cannot be empty
+         // the only case where you have to filter is when sex_m and sex_f are different
+         if( $options['sex_f'] xor $options['sex_m']) {
+             $sexOption = $options['sex_f'] ? 'F' : 'M';
+             $query->where([
+                 'Rats.sex IS' => $sexOption,
+             ]);
+         }
+
+         // rattery
+         if( !empty($options['rattery_id']) ) {
+             $query->where([
+                 'Rats.rattery_id IS' => $options['rattery_id'],
+             ]);
+         }
+
+         // owner
+         if( !empty($options['owner_user_id']) ) {
+             $query->where([
+                 'Rats.owner_user_id IS' => $options['owner_user_id'],
+             ]);
+         }
+
+         // alive/dead are checkboxes, cannot be empty
+         // the only case where you have to filter is when sex_m and sex_f are different
+         if( $options['alive'] xor $options['deceased']) {
+             $aliveOption = $options['alive'] ? true : false;
+             $query->where([
+                 'Rats.is_alive IS' => $aliveOption,
+             ]);
+         }
+
+         // dates
+         if( !empty($options['birth_date_before']) ) {
+             $query->where([
+                 'Rats.birth_date <=' => $options['birth_date_before'],
+             ]);
+         }
+
+         if( !empty($options['birth_date_after']) ) {
+             $query->where([
+                 'Rats.birth_date >=' => $options['birth_date_after'],
+             ]);
+         }
+
+         // Colors (multiple options authorized)
+         if( !empty($options['colors']) ) {
+             $query->where([
+                 'Rats.color_id IN' => $options['colors'],
+             ]);
+         }
+
+         // simple (hasOne) physical criteria
+         if( !empty($options['eyecolor_id']) ) {
+             $query->where([
+                 'Rats.eyecolor_id IS' => $options['eyecolor_id'],
+             ]);
+         }
+         if( !empty($options['dilution_id']) ) {
+             $query->where([
+                 'Rats.dilution_id IS' => $options['dilution_id'],
+             ]);
+         }
+         if( !empty($options['marking_id']) ) {
+             $query->where([
+                 'Rats.marking_id IS' => $options['marking_id'],
+             ]);
+         }
+         if( !empty($options['earset_id']) ) {
+             $query->where([
+                 'Rats.earset_id IS' => $options['earset_id'],
+             ]);
+         }
+         if( !empty($options['coat_id']) ) {
+             $query->where([
+                 'Rats.coat_id IS' => $options['coat_id'],
+             ]);
+         }
+
+         // singularities (belongToMany)
+         if( !empty($options['singularity_id']) ) {
+             $query->matching('Singularities', function (\Cake\ORM\Query $query) use ($options) {
+                 return $query->where([
+                     'Singularities.id' => $options['singularity_id'],
+                 ]);
+             });
+         }
+
+         return $query->group(['Rats.id']);
+     }
+
+/* queries */
+// colors
+// singularity_id
+
     public function findNamed(Query $query, array $options)
     {
         $columns = [

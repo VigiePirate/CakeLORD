@@ -16,7 +16,7 @@ class RatteriesController extends AppController
     {
         parent::beforeFilter($event);
         // No authentication needed on consultation
-        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'view','autocomplete']);
     }
 
     /**
@@ -333,5 +333,16 @@ class RatteriesController extends AppController
     public function countRats()
     {
         $this->Rats->find('all')->count();
+    }
+
+    public function autocomplete() {
+        if ($this->request->is(['ajax'])) {
+            $searchkey = $this->request->getQuery('searchkey');
+            $items = $this->Ratteries->find('named', ['names' => [$searchkey]] )
+                ->select(['id', 'value' => "concat(prefix,' – ',name)", 'label' => "concat(prefix,' – ',name)"])
+            ;
+            $this->set('items', $items);
+            $this->viewBuilder()->setOption('serialize', ['items']);
+        }
     }
 }

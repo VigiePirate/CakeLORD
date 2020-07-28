@@ -2,7 +2,7 @@
 
 <div class="users form index content">
 
-    <h3>Lost Password</h3>
+    <h1>Require new password</h1>
     <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('Please enter your email') ?></legend>

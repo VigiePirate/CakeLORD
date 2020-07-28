@@ -1,7 +1,7 @@
 <?= $this->Flash->render() ?>
 
 <div class="users form index content">
-    <h3>Reset Password</h3>
+    <h1>Reset Password</h1>
     <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('Enter New Password') ?></legend>

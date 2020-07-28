@@ -14,7 +14,7 @@
                 <th><?= $this->Paginator->sort('pedigree_identifier','Identifier') ?></th>
             <?php endif; ?>
             <?php if (! in_array('prefix', $exceptions)): ?>
-                <th><?= __('Prefix  ') ?></th>
+                <th class="doubleprefix"><?= __('Prefix') ?></th>
             <?php endif; ?>
             <?php if (! in_array('name', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('name') ?></th>
@@ -80,6 +80,10 @@
                             'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
                             'class' => 'action-icon',
                             'alt' => __('See Rat')]) ?>
+                        <?= $this->Html->image('/img/icon-rip.svg', [
+                            'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Declare Rat Death')]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

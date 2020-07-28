@@ -1,0 +1,157 @@
+/* Selectize override */
+
+.selectize-control.single .selectize-input, .selectize-dropdown.single {
+    border: 0.1rem solid #d1d1d1;
+    margin-bottom: 1.5rem;
+}
+
+.selectize-control.single .selectize-input {
+    /* -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8); */
+    /* box-shadow: 0 1px 0 rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8); */
+    box-shadow:none;
+    background-color: #ffffff;
+    background-image: none;
+}
+
+.selectize-input {
+    border: 1px solid #d1d1d1; /*#606c76;*/
+    padding: .6rem 1.0rem;
+    display: inline-block;
+    width: 100%;
+    height: 3.8rem;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    /* -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1); */
+    box-shadow: none;
+    /* -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px; */
+}
+.selectize-input, .selectize-control.single .selectize-input.input-active {
+    background: #fff;
+    cursor: text;
+    display: inline-block;
+}
+
+.selectize-dropdown {
+    position: absolute;
+    z-index: 10;
+    border: 1px solid #d1d1d1;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    /* margin: -1px 0 0 0;
+    border-top: 0 none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; */
+    box-sizing: border-box;
+    /* -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); */
+    box-shadow: none;
+    /* -webkit-border-radius: 0 0 3px 3px;
+    -moz-border-radius: 0 0 3px 3px;*/
+    border: 1px solid #d1d1d1;
+    border-radius: 0.4rem;
+  }
+
+.selectize-dropdown, .selectize-input, .selectize-input input {
+    color: #606c76;
+    font-family: inherit;
+    font-size: 1.6rem;
+    line-height: inherit;
+    -webkit-font-smoothing: none;
+    margin-bottom: 1.5rem;
+}
+.selectize-dropdown .active {
+  background-color: #ebeefa;
+  color: #606c76;
+}
+
+.selectize-control.multi .selectize-input.disabled [data-value],
+.selectize-control.multi .selectize-input.disabled [data-value] .remove {
+  border-color: #d1d1d1;
+}
+
+.selectize-control.multi .selectize-input [data-value] {
+    text-shadow: none;
+    -webkit-border-radius: 0.4rem;
+    -moz-border-radius: 0.4rem;
+    border-radius: 0.4rem;
+    background-color: #ebeefa;
+    /* background-image: -moz-linear-gradient(top, #1da7ee, #178ee9);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1da7ee), to(#178ee9));
+    background-image: -webkit-linear-gradient(top, #1da7ee, #178ee9);
+    background-image: -o-linear-gradient(top, #1da7ee, #178ee9);
+    background-image: linear-gradient(to bottom, #1da7ee, #178ee9);
+    background-repeat: repeat-x; */
+    background-image: none;
+    /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff1da7ee', endColorstr='#ff178ee9', GradientType=0);
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2), inset 0 1px rgba(255,255,255,0.03);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.2), inset 0 1px rgba(255,255,255,0.03); */
+    box-shadow: none;
+    font-size: 1.5rem;
+}
+
+.selectize-control.multi .selectize-input > div {
+    cursor: pointer;
+    margin: 2px;
+    padding: 0px 5px; /*should be in em */
+    background: #ebf0fa;
+    color: #6076bf;
+    border: 1px solid #6f7db3;
+}
+
+.selectize-control.multi .selectize-input input {
+    /* color: #606c76; */
+    font-family: inherit;
+    font-size: 1.6rem;
+    line-height: inherit;
+    -webkit-font-smoothing: none;
+}
+
+.selectize-control.multi .selectize-input.has-items {
+    padding: 3px 5px;
+}
+
+.selectize-control.multi .selectize-input [data-value].active {
+  text-shadow: none;
+  -webkit-border-radius: 0.4rem;
+  -moz-border-radius: 0.4rem;
+  border-radius: 0.4rem;
+  background-color: #ebeefa;
+  background-image: none;
+  box-shadow: none;
+  font-size: 1.6rem;
+}
+
+.selectize-input.focus {
+  /* -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15); */
+  box-shadow: none;
+}
+
+.selectize-dropdown [data-selectable] .highlight {
+  background: rgba(125, 144, 208, 0.3);
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+}
+
+.selectize-dropdown .option {
+    padding: 0px 8px;
+}
+
+#jquery-color-select-selectized::placeholder {
+  color: #707e8a;
+  opacity: 1;
+}
+
+/* bugfix for details' box-sizing inheritance */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;;
+}

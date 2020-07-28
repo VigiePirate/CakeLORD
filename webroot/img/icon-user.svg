@@ -5,17 +5,15 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0beta1 (fe3e306, 2019-09-17)"
-   sodipodi:docname="icon-user.svg"
-   id="svg4"
-   viewBox="0 0 24 24"
-   height="24"
-   width="24"
-   version="1.1">
+   width="64px"
+   height="64px"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="SVGRoot">
+  <defs
+     id="defs830" />
   <metadata
-     id="metadata10">
+     id="metadata833">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -26,32 +24,8 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <defs
-     id="defs8" />
-  <sodipodi:namedview
-     inkscape:current-layer="svg4"
-     inkscape:window-maximized="0"
-     inkscape:window-y="0"
-     inkscape:window-x="0"
-     inkscape:cy="12"
-     inkscape:cx="12"
-     inkscape:zoom="9.8333333"
-     showgrid="false"
-     id="namedview6"
-     inkscape:window-height="480"
-     inkscape:window-width="944"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0"
-     guidetolerance="10"
-     gridtolerance="10"
-     objecttolerance="10"
-     borderopacity="1"
-     inkscape:document-rotation="0"
-     bordercolor="#666666"
-     pagecolor="#ffffff" />
   <path
-     inkscape:connector-curvature="0"
-     style="fill:#ffffff;fill-opacity:1"
+     style="fill:#ffffff;fill-opacity:1;stroke-width:2.99428"
      id="path2"
-     d="m 12,20.318644 c -2.5,0 -4.71,-1.28 -6,-3.2 0.03,-2 4,-3.1 6,-3.1 2,0 5.97,1.1 6,3.1 -1.29,1.92 -3.5,3.2 -6,3.2 M 12,6.1186441 a 3,3 0 0 1 3,3 3,3 0 0 1 -3,2.9999999 3,3 0 0 1 -3,-2.9999999 3,3 0 0 1 3,-3 m 0,-3 a 10,10 0 0 0 -10,9.9999999 10,10 0 0 0 10,10 10,10 0 0 0 10,-10 C 22,7.5886441 17.5,3.1186441 12,3.1186441 Z" />
+     d="m 31.999997,53.558824 c -7.485702,0 -14.103063,-3.83268 -17.965686,-9.581699 0.08983,-5.988562 11.977124,-9.282271 17.965686,-9.282271 5.988562,0 17.875858,3.293709 17.965686,9.282271 -3.862622,5.749019 -10.479983,9.581699 -17.965686,9.581699 m 0,-42.518791 a 8.982843,8.982843 0 0 1 8.982843,8.982843 8.982843,8.982843 0 0 1 -8.982843,8.982844 8.982843,8.982843 0 0 1 -8.982843,-8.982844 8.982843,8.982843 0 0 1 8.982843,-8.982843 m 0,-8.9828437 A 29.94281,29.94281 0 0 0 2.057193,32.000001 a 29.94281,29.94281 0 0 0 29.942804,29.94281 29.94281,29.94281 0 0 0 29.94281,-29.94281 c 0,-16.558375 -13.474264,-29.9428117 -29.94281,-29.9428117 z" />
 </svg>
