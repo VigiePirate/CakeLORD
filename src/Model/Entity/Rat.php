@@ -187,7 +187,7 @@ class Rat extends Entity
     {
         if ($this->is_pedigree_custom) {
             return $pedigree_identifier ;
-        } else if (isset($this->_fields['id']) && isset($this->rattery)) {
+        } else if (isset($this->_fields['id']) && isset($this->_fields['rattery'])) {
             return $this->rattery->prefix . $this->id . $this->sex ;
         } else {
             return '' ;
