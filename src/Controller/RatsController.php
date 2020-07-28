@@ -234,13 +234,13 @@ class RatsController extends AppController
     public function results() {
         $url['action'] = 'search';
         $options = $this->request->getData();
-        $foo = [];
-		foreach ($options as $k=>$v){
-			if ( $v != '' ) {
-                $foo[$k]=$v;
+        $query_string = [];
+		foreach ($options as $key => $value){
+			if ( $value != '' ) {
+                $query_string[$key] = $value;
             }
 		}
-        $url['?'] = $foo;
+        $url['?'] = $query_string;
 		$this->redirect($url);
     }
 
