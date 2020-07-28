@@ -131,4 +131,25 @@ class SnapshotBehavior extends Behavior
         }
         return false;
     }
+
+    /**
+     * snapCompare method
+     *
+     * Compares a snapshot to the current entity.
+     *
+     * @param EntityInterface $entity
+     * @param Integer $snapshot_id
+     * @return array
+     */
+    public function snapCompare(EntityInterface $entity, $snapshot_id)
+    {
+        $snapshot = $this->SnapshotTable->get($snapshot_id);
+        if ($snapshot->{$this->config['entityField']} == $entity->id) {
+            $snapshot_data = $this->snapLoad($entity, $snapshot_id);
+            $raw_entity = $this->getTable()->get($entity->id);
+            $entity_data = json_decode(json_encode($raw_entity), true);
+            return array_diff_assoc($snapshot_data,$entity_data);
+        }
+        return false;
+    }
 }

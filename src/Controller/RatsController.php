@@ -84,7 +84,16 @@ class RatsController extends AppController
              'Conversations', 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
         ]);
 
-        $this->set('rat', $rat);
+        $snap_diffs = [];
+        foreach ($rat->rat_snapshots as $snapshot) {
+            $snap_diffs[$snapshot->id] = $this->Rats->snapCompare($rat, $snapshot->id);
+            $diff_string = '';
+            foreach ($snap_diffs[$snapshot->id] as $key => $value) {
+                $diff_string .= $key . ': ' . $value . ', ';
+            }
+            $snap_diffs[$snapshot->id]['summary'] = preg_replace('/, $/', '', $diff_string);
+        }
+        $this->set(compact('rat', 'snap_diffs'));
     }
 
     /**
