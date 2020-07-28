@@ -19,28 +19,33 @@ class SnapshotBehavior extends Behavior
 
     public function initialize(array $config): void
     {
+        $this->config = $this->getConfig();
+        $this->SnapshotTable = FactoryLocator::get('Table')->get($config['repository']);
         // Some initialization code here
-    }
-
-    public function snapshoot(EntityInterface $entity)
-    {
-        $config = $this->getConfig();
-        $snapshotTable = FactoryLocator::get('Table')->get($config['repository']);
-        $snapshot_values = [
-            'data' => json_encode($entity),
-            $config['entityField'] => $entity->id,
-            'state_id' => $entity->state_id,
-        ];
-        $new_snapshot = $snapshotTable->newEntity($snapshot_values);
-        if (! $snapshotTable->save($new_snapshot)) {
-            $event->stopPropagation();
-            $event->setResult(false);
-        }
-        return debug($new_snapshot);
     }
 
     public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        $this->snapshoot($entity);
+        $this->snapShoot($entity);
+    }
+
+    public function snapShoot(EntityInterface $entity)
+    {
+        $saved_entity = $this->getTable()->get($entity->id);
+        $snapshot_values = [
+            'data' => json_encode($saved_entity),
+            $this->config['entityField'] => $saved_entity->id,
+            'state_id' => $saved_entity->state_id,
+        ];
+        $new_snapshot = $this->SnapshotTable->newEntity($snapshot_values);
+        if (! $this->SnapshotTable->save($new_snapshot)) {
+            $event->stopPropagation();
+            $event->setResult(false);
+        }
+        return;
+    }
+
+    public function snapLoad(EntityInterface $entity, $snap_id = null)
+    {
     }
 }
