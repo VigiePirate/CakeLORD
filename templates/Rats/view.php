@@ -282,24 +282,21 @@
                     <div class="table-responsive">
                         <table>
                             <tr>
-                                <th><?= __('Id') ?></th>
-                                <th><?= __('Data') ?></th>
-                                <th><?= __('Rat Id') ?></th>
-                                <th><?= __('State Id') ?></th>
                                 <th><?= __('Created') ?></th>
+                                <th><?= __('Differences') ?></th>
+                                <!-- <th><?= __('Data') ?></th> -->
+                                <th><?= __('State') ?></th>
                                 <th class="actions"><?= __('Actions') ?></th>
                             </tr>
                             <?php foreach ($rat->rat_snapshots as $ratSnapshots) : ?>
                             <tr>
-                                <td><?= h($ratSnapshots->id) ?></td>
-                                <td><?= h($ratSnapshots->data) ?></td>
-                                <td><?= h($ratSnapshots->rat_id) ?></td>
-                                <td><?= h($ratSnapshots->state_id) ?></td>
                                 <td><?= h($ratSnapshots->created) ?></td>
+                                <td><?= h($snap_diffs[$ratSnapshots->id]['summary']) ?></td>
+                                <!-- <td><?= h($ratSnapshots->data) ?></td> -->
+                                <td><?= h($ratSnapshots->state->symbol) ?></td>
                                 <td class="actions">
                                     <?= $this->Html->link(__('View'), ['controller' => 'RatSnapshots', 'action' => 'view', $ratSnapshots->id]) ?>
-                                    <?= $this->Html->link(__('Edit'), ['controller' => 'RatSnapshots', 'action' => 'edit', $ratSnapshots->id]) ?>
-                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'RatSnapshots', 'action' => 'delete', $ratSnapshots->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratSnapshots->id)]) ?>
+                                    <?= $this->Html->link(__('Restore'), ['controller' => 'Rats', 'action' => 'restore', $rat->id, $ratSnapshots->id]) ?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

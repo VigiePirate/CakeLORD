@@ -81,10 +81,19 @@ class RatsController extends AppController
             'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
             'BredLitters.OffspringRats.BirthLitters', 'BredLitters.OffspringRats.BirthLitters.Contributions',
             'BredLitters.OffspringRats.OwnerUsers', 'BredLitters.OffspringRats.States', 'BredLitters.OffspringRats.DeathPrimaryCauses', 'BredLitters.OffspringRats.DeathSecondaryCauses',
-             'Conversations', 'RatSnapshots'],
+             'Conversations', 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
         ]);
 
-        $this->set('rat', $rat);
+        $snap_diffs = [];
+        foreach ($rat->rat_snapshots as $snapshot) {
+            $snap_diffs[$snapshot->id] = $this->Rats->snapCompare($rat, $snapshot->id);
+            $diff_string = '';
+            foreach ($snap_diffs[$snapshot->id] as $key => $value) {
+                $diff_string .= $key . ': ' . $value . ', ';
+            }
+            $snap_diffs[$snapshot->id]['summary'] = preg_replace('/, $/', '', $diff_string);
+        }
+        $this->set(compact('rat', 'snap_diffs'));
     }
 
     /**
@@ -133,7 +142,7 @@ class RatsController extends AppController
     public function edit($id = null)
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['BirthLitters', 'BredLitters', 'Singularities', 'Ratteries'],
+            'contain' => ['BirthLitters', 'BredLitters', 'Singularities', 'Ratteries', 'DeathPrimaryCauses'],
         ]);
         $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -242,6 +251,29 @@ class RatsController extends AppController
 		}
         $url['?'] = $query_string;
 		$this->redirect($url);
+    }
+
+    /**
+     * Restore method
+     *
+     * Restores a Rat from a previous snapshot.
+     *
+     * @param string|null $id Rat id.
+     * @param string|null $snapshot_id RatSnapshot id.
+     * @return \Cake\Http\Response|null Redirects to view.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function restore($id = null, $snapshot_id = null)
+    {
+        $rat = $this->Rats->get($id);
+        $this->Authorization->authorize($rat);
+        if ($this->Rats->snapRestore($rat, $snapshot_id)) {
+            $this->Flash->success(__('The snapshot has been restored.'));
+        } else {
+            $this->Flash->error(__('The snapshot could not be loaded. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'view', $rat->id]);
     }
 
     /**
