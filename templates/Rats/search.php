@@ -70,14 +70,14 @@
                         </div>
                         <div class="column-responsive column-40">
                             <?php
-                                echo $this->Form->control('ratterykey', [
+                                echo $this->Form->control('rattery_name', [
                                     'id' => 'jquery-rattery-input',
                                     'name' => 'rattery_name',
                                     'label' => __('Origin'),
                                     'type' => 'text',
-                                    'placeholder' => __('Type here...')
+                                    'placeholder' => __('Type here...'),
                                 ]);
-                                echo $this->Form->control('ratteryid', [
+                                echo $this->Form->control('rattery_id', [
                                     'id' => 'jquery-rattery-id',
                                     'name' => 'rattery_id',
                                     'label' => [
@@ -91,14 +91,15 @@
                         </div>
                         <div class="column-responsive column-40">
                             <?php
-                                echo $this->Form->control('ownerkey', [
+                                echo $this->Form->control('owner_username', [
                                     'id' => 'jquery-owner-input',
-                                    'name' => 'owner_user_name',
+                                    'name' => 'owner_username',
                                     'label' => __('Owner'),
                                     'type' => 'text',
-                                    'placeholder' => __('Type here...')
+                                    'placeholder' => __('Type here...'),
+                                    'empty' => true,
                                 ]);
-                                echo $this->Form->control('ownerid', [
+                                echo $this->Form->control('owner_user_id', [
                                     'id' => 'jquery-owner-id',
                                     'name' => 'owner_user_id',
                                     'label' => [
@@ -107,6 +108,7 @@
                                     ],
                                     'class' => 'hide-everywhere',
                                     'type' => 'text',
+                                    'empty' => true,
                                 ]);
                             ?>
                         </div>
@@ -223,7 +225,6 @@
     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" type="text/javascript"></script> -->
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.js"></script>
     <script>
-    // autocomplete for owner
     $(function () {
         $('#jquery-owner-input').autocomplete({
             minLength: 3,
@@ -250,6 +251,10 @@
                 $("#jquery-owner-input").val(ui.item.value); // display the selected text
                 $("#jquery-owner-id").val(ui.item.id); // save selected id to hidden input
             }
+        });
+
+        $("#jquery-owner-input").on("input", function(){
+            $("#jquery-owner-id").val('');
         });
     });
     </script>
@@ -282,6 +287,10 @@
                 $("#jquery-rattery-id").val(ui.item.id); // save selected id to hidden input
             }
         });
+
+        $("#jquery-rattery-input").on("input", function(){
+            $("#jquery-rattery-id").val('');
+        });
     });
     </script>
     <script>
@@ -291,11 +300,5 @@
             maxItems: 8,
         });
      });
-    // $(function () {
-    //     $("#jquery-color-select").select2( {
-    //      placeholder: " ",
-    //      allowClear: true,
-    //      } );
-    //  });
     </script>
 <?php $this->end();

@@ -25,7 +25,7 @@ class RatsController extends AppController
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['index','view','named', 'fromRattery', 'ownedBy', 'sex','search','pedigree','parentsTree', 'childrenTree']);
+        $this->Authentication->addUnauthenticatedActions(['index','view','named', 'fromRattery', 'ownedBy', 'sex','search','results', 'pedigree','parentsTree', 'childrenTree']);
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
     /**
@@ -213,7 +213,7 @@ class RatsController extends AppController
                  'options' => $options,
              ]);
              $this->paginate = [
-                 'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'CreatorUsers', 'States'],
+                 'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries','States'],
              ];
              $rats = $this->paginate($rats);
              $this->set(compact('rats','options'));

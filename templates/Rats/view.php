@@ -116,10 +116,12 @@
                     </tr>
                     <tr>
                         <th><?= __('Sire') ?></th>
-                        <td><?= $rat->has('birth_litter') ? $this->Html->link(
-                            $rat->birth_litter->sire[0]->usual_name,
-                            ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire[0]->id])
-                            : 'Unknown or unregistered' ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->sire[0]->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->sire[0]->age_string  . ')' : '' ?>
+                        <td><?= ( $rat->has('birth_litter') && !empty($rat->birth_litter->sire) )
+                            ? $this->Html->link(
+                                $rat->birth_litter->sire[0]->usual_name,
+                                ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire[0]->id]
+                                ) . '<sup>' . $rat->birth_litter->sire[0]->is_alive_symbol . '</sup>' . '(' . $rat->birth_litter->sire[0]->age_string  . ')'
+                            : 'Unknown or unregistered' ?>
                             </td>
                     </tr>
                     <tr>

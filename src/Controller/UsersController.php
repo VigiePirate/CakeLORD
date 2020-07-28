@@ -272,11 +272,11 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => ['Roles', 'Conversations',
             'OwnerRats', 'OwnerRats.States','OwnerRats.DeathPrimaryCauses','OwnerRats.DeathSecondaryCauses',
-            'OwnerRats.BirthLitters','OwnerRats.Ratteries','OwnerRats.BirthLitters.Ratteries',
+            'OwnerRats.BirthLitters','OwnerRats.Ratteries','OwnerRats.BirthLitters.Ratteries','OwnerRats.BirthLitters.Contributions',
             'OwnerRats.BirthLitters.Sire','OwnerRats.BirthLitters.Sire.BirthLitters','OwnerRats.BirthLitters.Sire.BirthLitters.Ratteries',
             'OwnerRats.BirthLitters.Dam','OwnerRats.BirthLitters.Dam.BirthLitters','OwnerRats.BirthLitters.Dam.BirthLitters.Ratteries',
             'CreatorRats','CreatorRats.States','CreatorRats.DeathPrimaryCauses','CreatorRats.DeathSecondaryCauses',
-            'CreatorRats.BirthLitters','CreatorRats.Ratteries','CreatorRats.BirthLitters.Ratteries',
+            'CreatorRats.BirthLitters','CreatorRats.Ratteries','CreatorRats.BirthLitters.Ratteries','CreatorRats.BirthLitters.Contributions',
             'CreatorRats.BirthLitters.Sire','CreatorRats.BirthLitters.Sire.BirthLitters','CreatorRats.BirthLitters.Sire.BirthLitters.Ratteries',
             'CreatorRats.BirthLitters.Dam','CreatorRats.BirthLitters.Dam.BirthLitters','CreatorRats.BirthLitters.Dam.BirthLitters.Ratteries',
 

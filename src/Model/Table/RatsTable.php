@@ -299,10 +299,9 @@ class RatsTable extends Table
 
      public function findMultisearch(Query $query, array $options)
      {
-
          $query = $query
-             ->select()
-             ->distinct();
+            ->select()
+            ->distinct();
 
          $options = $options['options'];
 
