@@ -291,7 +291,7 @@
                             <?php foreach ($rat->rat_snapshots as $ratSnapshots) : ?>
                             <tr>
                                 <td><?= h($ratSnapshots->created) ?></td>
-                                <td><?= h($snap_diffs[$ratSnapshots->id]['summary']) ?></td>
+                                <td><?= h($snap_diffs[$ratSnapshots->id]) ?></td>
                                 <!-- <td><?= h($ratSnapshots->data) ?></td> -->
                                 <td><?= h($ratSnapshots->state->symbol) ?></td>
                                 <td class="actions">

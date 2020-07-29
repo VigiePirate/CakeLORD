@@ -140,7 +140,7 @@ class Rat extends Entity
 
     protected function _getUsualName()
     {
-        if($this->id>2) {
+        if($this->id > 2) {
             return $this->double_prefix . ' ' . $this->name;
         } else { // don't return prefix for unknown mother and unknown father special rats
             return '???';
@@ -190,7 +190,7 @@ class Rat extends Entity
         } else if (isset($this->_fields['id']) && isset($this->_fields['rattery'])) {
             return $this->rattery->prefix . $this->id . $this->sex ;
         } else {
-            return '' ;
+            return '' ; // Should raise an exception
         }
     }
 
