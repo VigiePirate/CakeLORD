@@ -569,7 +569,8 @@ class RatsController extends AppController
     // this change is authorized to owner and staff, and brings rat to next_ok_state
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['CreatorUsers','OwnerUsers','States','Ratteries','BirthLitters','BirthLitters.Contributions'],
+            'contain' => ['CreatorUsers','OwnerUsers','States','Ratteries','BirthLitters','BirthLitters.Contributions',
+            'DeathPrimaryCauses','DeathSecondaryCauses'],
         ]);
         $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {
