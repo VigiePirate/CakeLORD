@@ -53,6 +53,10 @@ class RatteriesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Snapshot', [ 
+            'repository' => 'RatterySnapshots',
+            'entityField' => 'rattery_id',
+        ]);
 
         $this->belongsTo('Users', [
             'foreignKey' => 'owner_user_id',

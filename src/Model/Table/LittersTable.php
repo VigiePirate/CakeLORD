@@ -52,6 +52,10 @@ class LittersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Snapshot', [
+            'repository' => 'LitterSnapshots',
+            'entityField' => 'litter_id',
+        ]);
 
         $this->belongsTo('Users', [
             'foreignKey' => 'creator_user_id',

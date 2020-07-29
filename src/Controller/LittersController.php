@@ -152,6 +152,29 @@ class LittersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    /**
+     * Restore method
+     *
+     * Restores a Litter from a previous snapshot.
+     *
+     * @param string|null $id Litter id.
+     * @param string|null $snapshot_id LitterSnapshot id.
+     * @return \Cake\Http\Response|null Redirects to view.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function restore($id = null, $snapshot_id = null)
+    {
+        $litter = $this->Litters->get($id);
+        $this->Authorization->authorize($litter);
+        if ($this->Litters->snapRestore($litter, $snapshot_id)) {
+            $this->Flash->success(__('The snapshot has been restored.'));
+        } else {
+            $this->Flash->error(__('The snapshot could not be loaded. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'view', $litter->id]);
+    }
+
     public function inState()
     {
         $inState = $this->request->getParam('pass');
