@@ -59,16 +59,19 @@ class SnapshotBehavior extends Behavior
      */
     public function snapShoot(EntityInterface $entity)
     {
-        $saved_entity = $this->getTable()->get($entity->id);
-        $snapshot_values = [
-            'data' => json_encode($saved_entity),
-            $this->config['entityField'] => $saved_entity->id,
-            'state_id' => $saved_entity->state_id,
-        ];
-        $new_snapshot = $this->SnapshotTable->newEntity($snapshot_values);
-        if (! $this->SnapshotTable->save($new_snapshot)) {
-            $event->stopPropagation();
-            $event->setResult(false);
+        // Do nothing if our entity has no id yet: it's a creation
+        if ($entity->has('id')) {
+            $saved_entity = $this->getTable()->get($entity->id);
+            $snapshot_values = [
+                'data' => json_encode($saved_entity),
+                $this->config['entityField'] => $saved_entity->id,
+                'state_id' => $saved_entity->state_id,
+            ];
+            $new_snapshot = $this->SnapshotTable->newEntity($snapshot_values);
+            if (! $this->SnapshotTable->save($new_snapshot)) {
+                $event->stopPropagation();
+                $event->setResult(false);
+            }
         }
         return;
     }
