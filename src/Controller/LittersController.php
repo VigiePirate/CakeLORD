@@ -43,7 +43,7 @@ class LittersController extends AppController
                                 'Ratteries.owner_user_id' => $user->id,
                             ]);
                         })
-                        ->order(['Contributions.litters_contribution_id' => 'ASC', 'Litters.birth_date' => 'DESC'])
+                        ->order(['Contributions.litter_id' => 'ASC', 'Litters.birth_date' => 'DESC'])
                 );
 
         $this->set(compact('litters', 'user'));
