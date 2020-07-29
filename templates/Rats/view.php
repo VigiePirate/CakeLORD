@@ -120,7 +120,7 @@
                             ? $this->Html->link(
                                 $rat->birth_litter->sire[0]->usual_name,
                                 ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire[0]->id]
-                                ) . '<sup>' . $rat->birth_litter->sire[0]->is_alive_symbol . '</sup>' . '(' . $rat->birth_litter->sire[0]->age_string  . ')'
+                                ) . '<sup>' . $rat->birth_litter->sire[0]->is_alive_symbol . '</sup>' . ' (' . $rat->birth_litter->sire[0]->age_string  . ')'
                             : 'Unknown or unregistered' ?>
                             </td>
                     </tr>
@@ -182,7 +182,7 @@
                     <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : 'Unknown' ?></td>
                     </tr>
                 <tr>
-                <th><?= __('Death Primary Cause') ?></th>
+                    <th><?= __('Death Primary Cause') ?></th>
                     <td><?= $rat->has('death_primary_cause') ? $this->Html->link($rat->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $rat->death_primary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
