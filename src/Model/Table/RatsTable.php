@@ -67,6 +67,7 @@ class RatsTable extends Table
             'repository' => 'RatSnapshots',
             'entityField' => 'rat_id',
         ]);
+        $this->addBehavior('State');
 
         $this->belongsTo('OwnerUsers', [
             'className' => 'Users',

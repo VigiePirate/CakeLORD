@@ -30,7 +30,7 @@ class SnapshotBehavior extends Behavior
     public function initialize(array $config): void
     {
         $this->config = $this->getConfig();
-        $this->SnapshotTable = FactoryLocator::get('Table')->get($config['repository']);
+        $this->SnapshotsTable = FactoryLocator::get('Table')->get($config['repository']);
     }
 
     /**
@@ -59,16 +59,16 @@ class SnapshotBehavior extends Behavior
      */
     public function snapShoot(EntityInterface $entity)
     {
-        // Do nothing if our entity has no id yet: it's a creation
-        if ($entity->has('id')) {
+        // Do nothing if the entity is new
+        if (! $entity->isNew()) {
             $saved_entity = $this->getTable()->get($entity->id);
             $snapshot_values = [
                 'data' => json_encode($saved_entity),
                 $this->config['entityField'] => $saved_entity->id,
                 'state_id' => $saved_entity->state_id,
             ];
-            $new_snapshot = $this->SnapshotTable->newEntity($snapshot_values);
-            if (! $this->SnapshotTable->save($new_snapshot)) {
+            $new_snapshot = $this->SnapshotsTable->newEntity($snapshot_values);
+            if (! $this->SnapshotsTable->save($new_snapshot)) {
                 $event->stopPropagation();
                 $event->setResult(false);
             }
@@ -103,11 +103,11 @@ class SnapshotBehavior extends Behavior
      *
      * @param EntityInterface $entity
      * @param Integer $snapshot_id
-     * @return boolean
+     * @return array|boolean
      */
     public function snapLoad(EntityInterface $entity, $snapshot_id)
     {
-        $snapshot = $this->SnapshotTable->get($snapshot_id);
+        $snapshot = $this->SnapshotsTable->get($snapshot_id);
         if ($snapshot->{$this->config['entityField']} == $entity->id) {
             $data = json_decode($snapshot->data, true);
             unset($data['created'], $data['modified']);
@@ -127,9 +127,9 @@ class SnapshotBehavior extends Behavior
      */
     public function snapDelete(EntityInterface $entity, $snapshot_id)
     {
-        $snapshot = $this->SnapshotTable->get($snapshot_id);
+        $snapshot = $this->SnapshotsTable->get($snapshot_id);
         if ($snapshot->{$this->config['entityField']} == $entity->id) {
-            $this->SnapshotTable->delete($snapshot);
+            $this->SnapshotsTable->delete($snapshot);
             return true;
         }
         return false;
@@ -142,11 +142,11 @@ class SnapshotBehavior extends Behavior
      *
      * @param EntityInterface $entity
      * @param Integer $snapshot_id
-     * @return array
+     * @return array|boolean
      */
     public function snapCompare(EntityInterface $entity, $snapshot_id)
     {
-        $snapshot = $this->SnapshotTable->get($snapshot_id);
+        $snapshot = $this->SnapshotsTable->get($snapshot_id);
         if ($snapshot->{$this->config['entityField']} == $entity->id) {
             if ($snapshot_data = $this->snapLoad($entity, $snapshot_id)) {
                 $raw_entity = $this->getTable()->get($entity->id);

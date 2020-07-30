@@ -137,13 +137,15 @@ class RatsController extends AppController
     public function edit($id = null)
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['BirthLitters', 'BredLitters', 'Singularities', 'Ratteries', 'DeathPrimaryCauses'],
+            'contain' => ['BirthLitters', 'BredLitters', 'Singularities', 'Ratteries', 'DeathPrimaryCauses', 'States'],
         ]);
         $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
             // Force setting pedigree_identifier to save the computed value
             $rat->set('pedigree_identifier', $this->request->getData('pedigree_identifier'));
+            // Blame the rat
+            $this->Rats->blame($rat);
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
 
