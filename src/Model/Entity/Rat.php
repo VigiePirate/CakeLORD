@@ -188,6 +188,9 @@ class Rat extends Entity
         if ($this->is_pedigree_custom) {
             return $pedigree_identifier ;
         } else if (isset($this->_fields['id']) && isset($this->_fields['rattery'])) {
+            if ($pedigree_identifier == $this->getOriginal('pedigree_identifier')) {
+                $this->setDirty('pedigree_identifier', false);
+            }
             return $this->rattery->prefix . $this->id . $this->sex ;
         } else {
             return '' ; // Should raise an exception
@@ -200,7 +203,7 @@ class Rat extends Entity
         /* debug while waiting for data conformity:
         there shouldn't be a death date if the rat is alive, but... */
         // if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
-        if (!$this->is_alive && isset($this->_fields['death_date'])) {
+        if (! $this->is_alive && isset($this->_fields['death_date'])) {
             $agedate = $this->_fields['death_date'];
         }
         if (isset($this->birth_date)) {

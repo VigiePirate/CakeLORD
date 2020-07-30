@@ -14,6 +14,7 @@ class StateBehavior extends Behavior
 {
     protected $_defaultConfig = [
         'repository' => 'States',
+        'safe_properties' => ['modified'],
     ];
 
     /**
@@ -30,11 +31,34 @@ class StateBehavior extends Behavior
     {
         if (empty($config)) {
             $config = $this->_defaultConfig;
-        } else {
-            $config = array_merge($this->_defaultConfig, $config);
         }
         $this->config = $this->getConfig();
-        $this->StatesTable = FactoryLocator::get('Table')->get($config['repository']);
+        $this->States = FactoryLocator::get('Table')->get($this->config['repository']);
+    }
+
+    /**
+     * beforeSave method
+     *
+     * Generates a message about the state change.
+     *
+     * @param EventInterface $event
+     * @param EntityInterface $entity
+     * @param ArrayObject $options
+     * @return boolean
+     */
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
+        //dd(array_diff($entity->getDirty(), $this->config['safe_properties']));
+        if ($entity->isNew()) {
+            $initial_state = $this->States->find()->select('id')->where(['is_default' => true])->firstOrFail();
+            $entity->set('state_id', $initial_state->id);
+            return $entity->state_id;
+        } elseif (empty(array_diff($entity->getDirty(), $this->config['safe_properties']))) {
+            // All the changes are in the safe list
+            return $this->approve($entity);
+        } else {
+            return $this->blame($entity);
+        }
     }
 
     /**
@@ -61,7 +85,7 @@ class StateBehavior extends Behavior
      */
     public function approve(EntityInterface $entity)
     {
-        if ($entity->has('state') && $entity->state.next_ok_state_id) {
+        if ($entity->has('state') && $entity->state->next_ok_state_id) {
             $entity->state_id = $entity->state->next_ok_state_id;
             return true;
         }

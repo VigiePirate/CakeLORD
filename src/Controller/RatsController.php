@@ -144,8 +144,6 @@ class RatsController extends AppController
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
             // Force setting pedigree_identifier to save the computed value
             $rat->set('pedigree_identifier', $this->request->getData('pedigree_identifier'));
-            // Blame the rat
-            $this->Rats->blame($rat);
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
 
