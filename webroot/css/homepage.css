@@ -114,7 +114,7 @@ p {
     }
 
 .top-nav-title span {
-    color: #bfc4ff;
+    color: #bfceff;
   }
 
 .top-nav-links {
@@ -261,7 +261,7 @@ footer {
 
 /*gray: comment out here */
 .footer_section h5 {
-    color: #bfc4ff;
+    color: #bfceff;
     font-weight:bold;
 }
 
@@ -297,7 +297,7 @@ footer {
   padding-right:1.5rem;
 }
 .shieldline span {
-    color: #bfc4ff; /*gray footer: #6076bf */
+    color: #bfceff; /*gray footer: #6076bf */
   }
 .shieldline {
   /* font-family:"Alegreya",serif;*/
