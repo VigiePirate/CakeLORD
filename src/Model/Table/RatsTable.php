@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use ArrayObject;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\Datasource\EntityInterface;
 use Cake\Validation\Validator;
 use Cake\Event\EventInterface;
+use Cake\Collection\Collection;
 
 /**
  * Rats Model
@@ -66,6 +69,9 @@ class RatsTable extends Table
         $this->addBehavior('Snapshot', [
             'repository' => 'RatSnapshots',
             'entityField' => 'rat_id',
+        ]);
+        $this->addBehavior('State', [
+            'safe_properties' => ['name', 'pup_name'],
         ]);
 
         $this->belongsTo('OwnerUsers', [
@@ -295,6 +301,16 @@ class RatsTable extends Table
         ]);
 
         return $rules;
+    }
+
+    public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
+    {
+        if ($entity->hasUnchangedBirthDate()) {
+            $entity->setDirty('birth_date', false);
+        }
+        if ($entity->hasUnchangedSingularities()) {
+            $entity->setDirty('singularities', false);
+        }
     }
 
     /*

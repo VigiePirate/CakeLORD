@@ -20,7 +20,7 @@
                     <th><?= $this->Paginator->sort('is_visible','Visible?') ?></th>
                     <th><?= $this->Paginator->sort('is_searchable','Searchable?') ?></th>
                     <th><?= $this->Paginator->sort('is_frozen','Frozen?') ?></th>
-                    <th><?= $this->Paginator->sort('next_ko_state_id','Next OK') ?></th>
+                    <th><?= $this->Paginator->sort('next_ok_state_id','Next OK') ?></th>
                     <th><?= $this->Paginator->sort('next_ko_state_id','Next KO') ?></th>
                     <th><?= $this->Paginator->sort('next_frozen_state_id','Next Frozen') ?></th>
                     <th><?= $this->Paginator->sort('next_thawed_state_id','Next Thawed') ?></th>
