@@ -48,7 +48,6 @@ class StateBehavior extends Behavior
      */
     public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        //dd(array_diff($entity->getDirty(), $this->config['safe_properties']));
         if ($entity->isNew()) {
             $initial_state = $this->States->find()->select('id')->where(['is_default' => true])->firstOrFail();
             $entity->set('state_id', $initial_state->id);

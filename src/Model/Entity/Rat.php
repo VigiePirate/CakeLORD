@@ -74,7 +74,7 @@ class Rat extends Entity
     protected $_accessible = [
         'pedigree_identifier' => true,
         'is_pedigree_custom' => true,
-        'owner_user_id' => true,
+        'owner_user_id' => false,
         'name' => true,
         'pup_name' => true,
         'sex' => true,
@@ -97,8 +97,8 @@ class Rat extends Entity
         'comments' => true,
         'picture' => true,
         'picture_thumbnail' => true,
-        'creator_user_id' => true,
-        'state_id' => true,
+        'creator_user_id' => false,
+        'state_id' => false,
         'created' => true,
         'modified' => true,
         'owner_user' => true,
@@ -111,7 +111,7 @@ class Rat extends Entity
         'coat' => true,
         'death_primary_cause' => true,
         'death_secondary_cause' => true,
-        'creator_user' => true,
+        'creator_user' => false,
         'state' => true,
         'conversations' => true,
         'rat_snapshots' => true,
@@ -195,6 +195,34 @@ class Rat extends Entity
         } else {
             return '' ; // Should raise an exception
         }
+    }
+
+    public function hasUnchangedBirthDate()
+    {
+        return $this->birth_date->equals($this->_original['birth_date']);
+    }
+
+    public function hasUnchangedSingularities()
+    {
+        /*
+         * Checks if BTM field is actually unchanged by :
+         * - putting all the new and old ids in their respective array
+         * - sorting these
+         * - reducing each to a string and comparing the two
+         */
+        $new_ids = [];
+        $old_ids = [];
+
+        foreach($this->singularities as $singularity) {
+            $new_ids[] = $singularity->id;
+        }
+        foreach($this->_original['singularities'] as $singularity) {
+            $old_ids[] = $singularity->id;
+        }
+        sort($new_ids);
+        sort($old_ids);
+        return array_reduce($new_ids, function ($carry, $item) { return $carry . ',' . $item; }) ==
+            array_reduce($old_ids, function ($carry, $item) { return $carry . ',' .  $item; });
     }
 
     protected function _getAge()
