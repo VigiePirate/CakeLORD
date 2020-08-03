@@ -144,9 +144,10 @@ class Rattery extends Entity
         $outLitter = 0;
         $inRats = 0;
         $outRats = 0;
+
         foreach($this->litters as $litter)
         {
-            if ($litter->contributions['0']->contribution_type_id  == 1)
+            if ($litter->contributions['0']->rattery_id == $this->id)
             {
                 $inLitter++;
                 $inRats += $litter->pups_number;

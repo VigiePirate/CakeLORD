@@ -80,26 +80,24 @@
                     </div>
                 </th>
                 <td>
-                    <strong><?= __('Global inbreeding coefficient') ?></strong>
+                    <strong> = <?= __('Global inbreeding coefficient') ?></strong>
                 </td>
 
                 <?php foreach($coefficients['coancestry'] as $ancestor => $contrib) : ?>
                     <tr>
                         <th>
-                            <div style="opacity:<?= h(0.25+0.75*$contrib/$coefficients['coi']) ?>; width:<?= h(round(100*log(1+$contrib/$coefficients['coi'],2))) ?>%;">
-                                <?= h($contrib) ?> %
+                            <div style="opacity:<?= h(0.25+0.75*$contrib['coi']/$coefficients['coi']) ?>; width:<?= h(round(100*log(1+$contrib['coi']/$coefficients['coi'],2))) ?>%;">
+                                <?= h($contrib['coi']) ?> %
                             </div>
                         </th>
                         <td>
-                            <?= __('Ancestor id') . ':' . h($ancestor) ?>
+                             + <?= $this->Html->link(
+                                 $contrib['name'],
+                                 ['controller' => 'Rats', 'action' => 'view', $ancestor]) ?>
                         </td>
                     </tr>
                 <?php endforeach ?>
             </table>
-
-            <div class="signature">
-                &mdash; Estimations are given “as is”.
-            </div>
         </div>
     </div>
 </div>

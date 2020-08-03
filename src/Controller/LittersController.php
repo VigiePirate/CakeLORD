@@ -246,6 +246,9 @@ class LittersController extends AppController
 
         // compute supplementary stuff only if needed
         if ($flag) {
+            // will be needed later for common ancestors name
+            $this->loadModel('Rats');
+
             $coefficients['ancestor_number'] = count($genealogy);
             $coefficients['distinct_number'] = count(array_unique($genealogy));
 
@@ -269,12 +272,11 @@ class LittersController extends AppController
             $coefficients['avk'] = round(100 * count(array_unique($avk_genealogy)) / count($avk_genealogy),2);
         }
 
-        // for coi we need to list find and filter duplicates
-        // remove all x leaf markers, we don't need them anymore
-        // truncate to some number of generations
+        // find and filter duplicates in a limited number of generations (here:8)
         $short_gen = array();
         foreach ($genealogy as $key => $value) {
-            if (strlen($key) < 10) {
+            if (strlen($key) < 9) {
+                // fixme: different processing if last character is 'X' or not!
                 $short_gen[substr($key,0,8)] = $value;
             }
         }
@@ -351,7 +353,16 @@ class LittersController extends AppController
                 $coi += $contribution;
 
                 if($contribution > 0.0001) {
-                    $coancestry[$duplicate] = round(100 * $contribution,2);
+                    $coancestry[$duplicate] = ['coi' => round(100 * $contribution,2)];
+
+                    if ($flag) {
+                        $name = $this->Rats->get($duplicate, [
+                            'contain' => [
+                                'Ratteries','BirthLitters','BirthLitters.Contributions',
+                            ]
+                        ])->usual_name;
+                        $coancestry[$duplicate]['name'] = $name;
+                    }
                 }
             }
         }
