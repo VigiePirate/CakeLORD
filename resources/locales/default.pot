@@ -1,0 +1,4021 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-08-04 10:29+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /home/artefact/www/CakeLORD//Controller/ArticlesController.php:54
+#: /home/artefact/www/CakeLORD//Controller/ArticlesController.php:78
+msgid "The article has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ArticlesController.php:58
+#: /home/artefact/www/CakeLORD//Controller/ArticlesController.php:82
+msgid "The article could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ArticlesController.php:99
+msgid "The article has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ArticlesController.php:101
+msgid "The article could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CategoriesController.php:53
+#: /home/artefact/www/CakeLORD//Controller/CategoriesController.php:77
+msgid "The category has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CategoriesController.php:57
+#: /home/artefact/www/CakeLORD//Controller/CategoriesController.php:81
+msgid "The category could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CategoriesController.php:98
+msgid "The category has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CategoriesController.php:100
+msgid "The category could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CoatsController.php:56
+#: /home/artefact/www/CakeLORD//Controller/CoatsController.php:80
+msgid "The coat has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CoatsController.php:60
+#: /home/artefact/www/CakeLORD//Controller/CoatsController.php:84
+msgid "The coat could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CoatsController.php:101
+msgid "The coat has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CoatsController.php:103
+msgid "The coat could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ColorsController.php:54
+#: /home/artefact/www/CakeLORD//Controller/ColorsController.php:78
+msgid "The color has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ColorsController.php:58
+#: /home/artefact/www/CakeLORD//Controller/ColorsController.php:82
+msgid "The color could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ColorsController.php:99
+msgid "The color has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ColorsController.php:101
+msgid "The color could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CompatibilitiesController.php:57
+#: /home/artefact/www/CakeLORD//Controller/CompatibilitiesController.php:82
+msgid "The compatibility has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CompatibilitiesController.php:61
+#: /home/artefact/www/CakeLORD//Controller/CompatibilitiesController.php:86
+msgid "The compatibility could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CompatibilitiesController.php:104
+msgid "The compatibility has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CompatibilitiesController.php:106
+msgid "The compatibility could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ContributionTypesController.php:53
+#: /home/artefact/www/CakeLORD//Controller/ContributionTypesController.php:77
+msgid "The contribution type has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ContributionTypesController.php:57
+#: /home/artefact/www/CakeLORD//Controller/ContributionTypesController.php:81
+msgid "The contribution type could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ContributionTypesController.php:98
+msgid "The contribution type has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ContributionTypesController.php:100
+msgid "The contribution type could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ContributionsController.php:56
+#: /home/artefact/www/CakeLORD//Controller/ContributionsController.php:83
+msgid "The contribution has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ContributionsController.php:60
+#: /home/artefact/www/CakeLORD//Controller/ContributionsController.php:87
+msgid "The contribution could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ContributionsController.php:107
+msgid "The contribution has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ContributionsController.php:109
+msgid "The contribution could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ConversationsController.php:57
+#: /home/artefact/www/CakeLORD//Controller/ConversationsController.php:85
+msgid "The conversation has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ConversationsController.php:61
+#: /home/artefact/www/CakeLORD//Controller/ConversationsController.php:89
+msgid "The conversation could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ConversationsController.php:110
+msgid "The conversation has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/ConversationsController.php:112
+msgid "The conversation could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CountriesController.php:54
+#: /home/artefact/www/CakeLORD//Controller/CountriesController.php:78
+msgid "The country has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CountriesController.php:58
+#: /home/artefact/www/CakeLORD//Controller/CountriesController.php:82
+msgid "The country could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CountriesController.php:99
+msgid "The country has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/CountriesController.php:101
+msgid "The country could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DeathPrimaryCausesController.php:53
+#: /home/artefact/www/CakeLORD//Controller/DeathPrimaryCausesController.php:77
+msgid "The death primary cause has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DeathPrimaryCausesController.php:57
+#: /home/artefact/www/CakeLORD//Controller/DeathPrimaryCausesController.php:81
+msgid "The death primary cause could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DeathPrimaryCausesController.php:98
+msgid "The death primary cause has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DeathPrimaryCausesController.php:100
+msgid "The death primary cause could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DeathSecondaryCausesController.php:56
+#: /home/artefact/www/CakeLORD//Controller/DeathSecondaryCausesController.php:81
+msgid "The death secondary cause has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DeathSecondaryCausesController.php:60
+#: /home/artefact/www/CakeLORD//Controller/DeathSecondaryCausesController.php:85
+msgid "The death secondary cause could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DeathSecondaryCausesController.php:103
+msgid "The death secondary cause has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DeathSecondaryCausesController.php:105
+msgid "The death secondary cause could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DilutionsController.php:54
+#: /home/artefact/www/CakeLORD//Controller/DilutionsController.php:78
+msgid "The dilution has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DilutionsController.php:58
+#: /home/artefact/www/CakeLORD//Controller/DilutionsController.php:82
+msgid "The dilution could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DilutionsController.php:99
+msgid "The dilution has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/DilutionsController.php:101
+msgid "The dilution could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/EarsetsController.php:54
+#: /home/artefact/www/CakeLORD//Controller/EarsetsController.php:78
+msgid "The earset has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/EarsetsController.php:58
+#: /home/artefact/www/CakeLORD//Controller/EarsetsController.php:82
+msgid "The earset could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/EarsetsController.php:99
+msgid "The earset has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/EarsetsController.php:101
+msgid "The earset could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/EyecolorsController.php:54
+#: /home/artefact/www/CakeLORD//Controller/EyecolorsController.php:78
+msgid "The eyecolor has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/EyecolorsController.php:58
+#: /home/artefact/www/CakeLORD//Controller/EyecolorsController.php:82
+msgid "The eyecolor could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/EyecolorsController.php:99
+msgid "The eyecolor has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/EyecolorsController.php:101
+msgid "The eyecolor could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/FaqsController.php:56
+#: /home/artefact/www/CakeLORD//Controller/FaqsController.php:81
+msgid "The faq has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/FaqsController.php:60
+#: /home/artefact/www/CakeLORD//Controller/FaqsController.php:85
+msgid "The faq could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/FaqsController.php:103
+msgid "The faq has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/FaqsController.php:105
+msgid "The faq could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/IncompatibilitiesController.php:54
+#: /home/artefact/www/CakeLORD//Controller/IncompatibilitiesController.php:78
+msgid "The incompatibility has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/IncompatibilitiesController.php:58
+#: /home/artefact/www/CakeLORD//Controller/IncompatibilitiesController.php:82
+msgid "The incompatibility could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/IncompatibilitiesController.php:99
+msgid "The incompatibility has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/IncompatibilitiesController.php:101
+msgid "The incompatibility could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LitterSnapshotsController.php:57
+#: /home/artefact/www/CakeLORD//Controller/LitterSnapshotsController.php:83
+msgid "The litter snapshot has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LitterSnapshotsController.php:61
+#: /home/artefact/www/CakeLORD//Controller/LitterSnapshotsController.php:87
+msgid "The litter snapshot could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LitterSnapshotsController.php:106
+msgid "The litter snapshot has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LitterSnapshotsController.php:108
+msgid "The litter snapshot could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LittersController.php:93
+#: /home/artefact/www/CakeLORD//Controller/LittersController.php:122
+msgid "The litter has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LittersController.php:97
+#: /home/artefact/www/CakeLORD//Controller/LittersController.php:126
+msgid "The litter could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LittersController.php:148
+msgid "The litter has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LittersController.php:150
+msgid "The litter could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LittersController.php:171
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:266
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:188
+msgid "The snapshot has been restored."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LittersController.php:173
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:268
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:190
+msgid "The snapshot could not be loaded. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LogsController.php:54
+#: /home/artefact/www/CakeLORD//Controller/LogsController.php:78
+msgid "The log has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LogsController.php:58
+#: /home/artefact/www/CakeLORD//Controller/LogsController.php:82
+msgid "The log could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LogsController.php:99
+msgid "The log has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/LogsController.php:101
+msgid "The log could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/MarkingsController.php:54
+#: /home/artefact/www/CakeLORD//Controller/MarkingsController.php:78
+msgid "The marking has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/MarkingsController.php:58
+#: /home/artefact/www/CakeLORD//Controller/MarkingsController.php:82
+msgid "The marking could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/MarkingsController.php:99
+msgid "The marking has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/MarkingsController.php:101
+msgid "The marking could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/MessagesController.php:57
+#: /home/artefact/www/CakeLORD//Controller/MessagesController.php:83
+msgid "The message has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/MessagesController.php:61
+#: /home/artefact/www/CakeLORD//Controller/MessagesController.php:87
+msgid "The message could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/MessagesController.php:106
+msgid "The message has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/MessagesController.php:108
+msgid "The message could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/OperatorsController.php:54
+#: /home/artefact/www/CakeLORD//Controller/OperatorsController.php:78
+msgid "The operator has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/OperatorsController.php:58
+#: /home/artefact/www/CakeLORD//Controller/OperatorsController.php:82
+msgid "The operator could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/OperatorsController.php:99
+msgid "The operator has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/OperatorsController.php:101
+msgid "The operator could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatSnapshotsController.php:57
+#: /home/artefact/www/CakeLORD//Controller/RatSnapshotsController.php:83
+msgid "The rat snapshot has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatSnapshotsController.php:61
+#: /home/artefact/www/CakeLORD//Controller/RatSnapshotsController.php:87
+msgid "The rat snapshot could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatSnapshotsController.php:106
+msgid "The rat snapshot has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatSnapshotsController.php:108
+msgid "The rat snapshot could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:106
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:148
+msgid "The rat has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:110
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:152
+msgid "The rat could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:186
+msgid "The rat has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:188
+msgid "The rat could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:574
+msgid "The rat has been transferred to its new owner."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:577
+msgid "The rat ownership could not be changed. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:606
+msgid "Sorry for your loss. Your rat’s death has been recorded."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:609
+msgid "Your rat’s death could not be recorded. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsController.php:611
+msgid "We are sorry for your loss. Please fill the information below to record the rat death. Date and primary cause are mandatory."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsLittersController.php:57
+#: /home/artefact/www/CakeLORD//Controller/RatsLittersController.php:83
+msgid "The rats litter has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsLittersController.php:61
+#: /home/artefact/www/CakeLORD//Controller/RatsLittersController.php:87
+msgid "The rats litter could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsLittersController.php:106
+msgid "The rats litter has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsLittersController.php:108
+msgid "The rats litter could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsSingularitiesController.php:57
+#: /home/artefact/www/CakeLORD//Controller/RatsSingularitiesController.php:83
+msgid "The rats singularity has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsSingularitiesController.php:61
+#: /home/artefact/www/CakeLORD//Controller/RatsSingularitiesController.php:87
+msgid "The rats singularity could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsSingularitiesController.php:106
+msgid "The rats singularity has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatsSingularitiesController.php:108
+msgid "The rats singularity could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:110
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:139
+msgid "The rattery has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:114
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:143
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:263
+msgid "The rattery could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:165
+msgid "The rattery has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:167
+msgid "The rattery could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:208
+msgid "You already have an active rattery. Declare your previous ratteries as inactive if you want to register a new one."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:225
+msgid "Your picture cannot be processed. Please, try with another picture in jpeg format."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:260
+msgid "The rattery has been saved. Please note it will be validated only once you have recorded a rat, a litter, or a litter contribution under this prefix."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesController.php:271
+msgid "Only registered users are allowed to register a new rattery. Please sign in or sign up before proceeding."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesLittersController.php:56
+#: /home/artefact/www/CakeLORD//Controller/RatteriesLittersController.php:83
+msgid "The ratteries litter has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesLittersController.php:60
+#: /home/artefact/www/CakeLORD//Controller/RatteriesLittersController.php:87
+msgid "The ratteries litter could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesLittersController.php:107
+msgid "The ratteries litter has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatteriesLittersController.php:109
+msgid "The ratteries litter could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatterySnapshotsController.php:57
+#: /home/artefact/www/CakeLORD//Controller/RatterySnapshotsController.php:83
+msgid "The rattery snapshot has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatterySnapshotsController.php:61
+#: /home/artefact/www/CakeLORD//Controller/RatterySnapshotsController.php:87
+msgid "The rattery snapshot could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatterySnapshotsController.php:106
+msgid "The rattery snapshot has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RatterySnapshotsController.php:108
+msgid "The rattery snapshot could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RolesController.php:53
+#: /home/artefact/www/CakeLORD//Controller/RolesController.php:77
+msgid "The role has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RolesController.php:57
+#: /home/artefact/www/CakeLORD//Controller/RolesController.php:81
+msgid "The role could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RolesController.php:98
+msgid "The role has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/RolesController.php:100
+msgid "The role could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/SingularitiesController.php:54
+#: /home/artefact/www/CakeLORD//Controller/SingularitiesController.php:79
+msgid "The singularity has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/SingularitiesController.php:58
+#: /home/artefact/www/CakeLORD//Controller/SingularitiesController.php:83
+msgid "The singularity could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/SingularitiesController.php:101
+msgid "The singularity has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/SingularitiesController.php:103
+msgid "The singularity could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/StatesController.php:56
+#: /home/artefact/www/CakeLORD//Controller/StatesController.php:84
+msgid "The state has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/StatesController.php:60
+#: /home/artefact/www/CakeLORD//Controller/StatesController.php:88
+msgid "The state could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/StatesController.php:109
+msgid "The state has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/StatesController.php:111
+msgid "The state could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:48
+msgid "Your account is locked, please activate it or contact an administrator."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:52
+msgid "You have failed too many times to log in recently. Please wait 15 minutes before retry."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:76
+msgid "Your password has been rehashed."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:99
+msgid "Invalid username or password"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:159
+msgid "Your account has been created, but must be activated before you can log in. Check your email for your activation link"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:161
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:405
+msgid "Error sending email: "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:165
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:204
+msgid "Something went wrong. Please, try again or contact an administrator."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:169
+msgid "This was not the expected answer! Please, retry if you are not a Replicant."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:302
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:329
+msgid "The user has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:306
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:333
+msgid "The user could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:353
+msgid "The user has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:355
+msgid "The user could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersController.php:403
+msgid "Check your email for your reset password link"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersConversationsController.php:57
+#: /home/artefact/www/CakeLORD//Controller/UsersConversationsController.php:83
+msgid "The users conversation has been saved."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersConversationsController.php:61
+#: /home/artefact/www/CakeLORD//Controller/UsersConversationsController.php:87
+msgid "The users conversation could not be saved. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersConversationsController.php:106
+msgid "The users conversation has been deleted."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Controller/UsersConversationsController.php:108
+msgid "The users conversation could not be deleted. Please, try again."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Model/Entity/Litter.php:98
+#: /home/artefact/www/CakeLORD//Model/Entity/Litter.php:109
+#: /home/artefact/www/CakeLORD//Litters/view.php:88
+#: /home/artefact/www/CakeLORD//Litters/view.php:90
+#: /home/artefact/www/CakeLORD//Litters/view.php:94
+#: /home/artefact/www/CakeLORD//Litters/view.php:98
+#: /home/artefact/www/CakeLORD//Litters/view.php:102
+#: /home/artefact/www/CakeLORD//Litters/view.php:117
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:266
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:267
+msgid "Unknown"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Model/Entity/Rat.php:304
+msgid "Unknown (presumably dead)"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Model/Entity/Rat.php:306
+#: /home/artefact/www/CakeLORD//Rats/search.php:126
+msgid "Alive"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Model/Entity/Rat.php:330
+msgid "presumably dead"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Model/Entity/Rat.php:332
+msgid "alive"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Model/Table/RatsTable.php:181
+msgid "Sex must be either M or F"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/add.php:13
+#: /home/artefact/www/CakeLORD//Articles/edit.php:13
+#: /home/artefact/www/CakeLORD//Articles/view.php:13
+#: /home/artefact/www/CakeLORD//Coats/add.php:13
+#: /home/artefact/www/CakeLORD//Coats/edit.php:13
+#: /home/artefact/www/CakeLORD//Coats/view.php:13
+#: /home/artefact/www/CakeLORD//Colors/add.php:13
+#: /home/artefact/www/CakeLORD//Colors/edit.php:13
+#: /home/artefact/www/CakeLORD//Colors/view.php:13
+#: /home/artefact/www/CakeLORD//Compatibilities/add.php:13
+#: /home/artefact/www/CakeLORD//Compatibilities/edit.php:13
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:13
+#: /home/artefact/www/CakeLORD//Conversations/add.php:13
+#: /home/artefact/www/CakeLORD//Conversations/edit.php:13
+#: /home/artefact/www/CakeLORD//Conversations/view.php:13
+#: /home/artefact/www/CakeLORD//Countries/add.php:13
+#: /home/artefact/www/CakeLORD//Countries/edit.php:13
+#: /home/artefact/www/CakeLORD//Countries/view.php:13
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:13
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:13
+#: /home/artefact/www/CakeLORD//Dilutions/add.php:13
+#: /home/artefact/www/CakeLORD//Dilutions/edit.php:13
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:13
+#: /home/artefact/www/CakeLORD//Earsets/add.php:13
+#: /home/artefact/www/CakeLORD//Earsets/edit.php:13
+#: /home/artefact/www/CakeLORD//Earsets/view.php:13
+#: /home/artefact/www/CakeLORD//Eyecolors/add.php:13
+#: /home/artefact/www/CakeLORD//Eyecolors/edit.php:13
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:13
+#: /home/artefact/www/CakeLORD//LitterSnapshots/add.php:13
+#: /home/artefact/www/CakeLORD//LitterSnapshots/edit.php:13
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:13
+#: /home/artefact/www/CakeLORD//Litters/add.php:13
+#: /home/artefact/www/CakeLORD//Litters/edit.php:13
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:13
+#: /home/artefact/www/CakeLORD//Litters/view.php:13
+#: /home/artefact/www/CakeLORD//Logs/add.php:13
+#: /home/artefact/www/CakeLORD//Logs/edit.php:13
+#: /home/artefact/www/CakeLORD//Logs/view.php:13
+#: /home/artefact/www/CakeLORD//Markings/add.php:13
+#: /home/artefact/www/CakeLORD//Markings/edit.php:13
+#: /home/artefact/www/CakeLORD//Markings/view.php:13
+#: /home/artefact/www/CakeLORD//Messages/add.php:13
+#: /home/artefact/www/CakeLORD//Messages/edit.php:13
+#: /home/artefact/www/CakeLORD//Messages/view.php:13
+#: /home/artefact/www/CakeLORD//Operators/add.php:13
+#: /home/artefact/www/CakeLORD//Operators/edit.php:13
+#: /home/artefact/www/CakeLORD//Operators/view.php:13
+#: /home/artefact/www/CakeLORD//RatSnapshots/add.php:13
+#: /home/artefact/www/CakeLORD//RatSnapshots/edit.php:13
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:13
+#: /home/artefact/www/CakeLORD//Rats/add.php:13
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:14
+#: /home/artefact/www/CakeLORD//Rats/edit.php:13
+#: /home/artefact/www/CakeLORD//Rats/pedigree.php:14
+#: /home/artefact/www/CakeLORD//Rats/search.php:13
+#: /home/artefact/www/CakeLORD//Rats/transfer_ownership.php:14
+#: /home/artefact/www/CakeLORD//Rats/view.php:14
+#: /home/artefact/www/CakeLORD//RatsLitters/add.php:13
+#: /home/artefact/www/CakeLORD//RatsLitters/edit.php:13
+#: /home/artefact/www/CakeLORD//RatsLitters/view.php:13
+#: /home/artefact/www/CakeLORD//RatsSingularities/add.php:13
+#: /home/artefact/www/CakeLORD//RatsSingularities/edit.php:13
+#: /home/artefact/www/CakeLORD//RatsSingularities/view.php:13
+#: /home/artefact/www/CakeLORD//Ratteries/add.php:13
+#: /home/artefact/www/CakeLORD//Ratteries/edit.php:13
+#: /home/artefact/www/CakeLORD//Ratteries/register.php:7
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:14
+#: /home/artefact/www/CakeLORD//RatteriesLitters/add.php:13
+#: /home/artefact/www/CakeLORD//RatteriesLitters/edit.php:13
+#: /home/artefact/www/CakeLORD//RatteriesLitters/view.php:13
+#: /home/artefact/www/CakeLORD//RatterySnapshots/add.php:13
+#: /home/artefact/www/CakeLORD//RatterySnapshots/edit.php:13
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:13
+#: /home/artefact/www/CakeLORD//Singularities/add.php:13
+#: /home/artefact/www/CakeLORD//Singularities/edit.php:13
+#: /home/artefact/www/CakeLORD//Singularities/view.php:14
+#: /home/artefact/www/CakeLORD//States/summary.php:13
+#: /home/artefact/www/CakeLORD//States/view.php:13
+#: /home/artefact/www/CakeLORD//Users/add.php:13
+#: /home/artefact/www/CakeLORD//Users/edit.php:13
+#: /home/artefact/www/CakeLORD//Users/view.php:13
+#: /home/artefact/www/CakeLORD//UsersConversations/add.php:13
+#: /home/artefact/www/CakeLORD//UsersConversations/edit.php:13
+#: /home/artefact/www/CakeLORD//UsersConversations/view.php:13
+msgid "Report"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/add.php:17
+#: /home/artefact/www/CakeLORD//Articles/edit.php:17
+#: /home/artefact/www/CakeLORD//Articles/view.php:17
+#: /home/artefact/www/CakeLORD//Coats/add.php:17
+#: /home/artefact/www/CakeLORD//Coats/edit.php:17
+#: /home/artefact/www/CakeLORD//Coats/view.php:17
+#: /home/artefact/www/CakeLORD//Colors/add.php:17
+#: /home/artefact/www/CakeLORD//Colors/edit.php:17
+#: /home/artefact/www/CakeLORD//Colors/view.php:17
+#: /home/artefact/www/CakeLORD//Compatibilities/add.php:17
+#: /home/artefact/www/CakeLORD//Compatibilities/edit.php:17
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:17
+#: /home/artefact/www/CakeLORD//Conversations/add.php:17
+#: /home/artefact/www/CakeLORD//Conversations/edit.php:17
+#: /home/artefact/www/CakeLORD//Conversations/view.php:17
+#: /home/artefact/www/CakeLORD//Countries/add.php:17
+#: /home/artefact/www/CakeLORD//Countries/edit.php:17
+#: /home/artefact/www/CakeLORD//Countries/view.php:17
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:17
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:22
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:17
+#: /home/artefact/www/CakeLORD//Dilutions/add.php:17
+#: /home/artefact/www/CakeLORD//Dilutions/edit.php:17
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:17
+#: /home/artefact/www/CakeLORD//Earsets/add.php:17
+#: /home/artefact/www/CakeLORD//Earsets/edit.php:17
+#: /home/artefact/www/CakeLORD//Earsets/view.php:17
+#: /home/artefact/www/CakeLORD//Eyecolors/add.php:17
+#: /home/artefact/www/CakeLORD//Eyecolors/edit.php:17
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:17
+#: /home/artefact/www/CakeLORD//LitterSnapshots/add.php:17
+#: /home/artefact/www/CakeLORD//LitterSnapshots/edit.php:17
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:17
+#: /home/artefact/www/CakeLORD//Litters/add.php:17
+#: /home/artefact/www/CakeLORD//Litters/edit.php:17
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:17
+#: /home/artefact/www/CakeLORD//Litters/view.php:17
+#: /home/artefact/www/CakeLORD//Logs/add.php:17
+#: /home/artefact/www/CakeLORD//Logs/edit.php:17
+#: /home/artefact/www/CakeLORD//Logs/view.php:17
+#: /home/artefact/www/CakeLORD//Markings/add.php:17
+#: /home/artefact/www/CakeLORD//Markings/edit.php:17
+#: /home/artefact/www/CakeLORD//Markings/view.php:17
+#: /home/artefact/www/CakeLORD//Messages/add.php:17
+#: /home/artefact/www/CakeLORD//Messages/edit.php:17
+#: /home/artefact/www/CakeLORD//Messages/view.php:17
+#: /home/artefact/www/CakeLORD//Operators/add.php:17
+#: /home/artefact/www/CakeLORD//Operators/edit.php:17
+#: /home/artefact/www/CakeLORD//Operators/view.php:17
+#: /home/artefact/www/CakeLORD//RatSnapshots/add.php:17
+#: /home/artefact/www/CakeLORD//RatSnapshots/edit.php:17
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:17
+#: /home/artefact/www/CakeLORD//Rats/add.php:17
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:18
+#: /home/artefact/www/CakeLORD//Rats/edit.php:17
+#: /home/artefact/www/CakeLORD//Rats/pedigree.php:18
+#: /home/artefact/www/CakeLORD//Rats/search.php:17
+#: /home/artefact/www/CakeLORD//Rats/transfer_ownership.php:18
+#: /home/artefact/www/CakeLORD//Rats/view.php:18
+#: /home/artefact/www/CakeLORD//RatsLitters/add.php:17
+#: /home/artefact/www/CakeLORD//RatsLitters/edit.php:17
+#: /home/artefact/www/CakeLORD//RatsLitters/view.php:17
+#: /home/artefact/www/CakeLORD//RatsSingularities/add.php:17
+#: /home/artefact/www/CakeLORD//RatsSingularities/edit.php:17
+#: /home/artefact/www/CakeLORD//RatsSingularities/view.php:17
+#: /home/artefact/www/CakeLORD//Ratteries/add.php:17
+#: /home/artefact/www/CakeLORD//Ratteries/edit.php:17
+#: /home/artefact/www/CakeLORD//Ratteries/register.php:11
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:18
+#: /home/artefact/www/CakeLORD//RatteriesLitters/add.php:17
+#: /home/artefact/www/CakeLORD//RatteriesLitters/edit.php:17
+#: /home/artefact/www/CakeLORD//RatteriesLitters/view.php:17
+#: /home/artefact/www/CakeLORD//RatterySnapshots/add.php:17
+#: /home/artefact/www/CakeLORD//RatterySnapshots/edit.php:17
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:17
+#: /home/artefact/www/CakeLORD//Singularities/add.php:17
+#: /home/artefact/www/CakeLORD//Singularities/edit.php:17
+#: /home/artefact/www/CakeLORD//Singularities/view.php:18
+#: /home/artefact/www/CakeLORD//States/summary.php:17
+#: /home/artefact/www/CakeLORD//States/view.php:17
+#: /home/artefact/www/CakeLORD//Users/add.php:17
+#: /home/artefact/www/CakeLORD//Users/edit.php:17
+#: /home/artefact/www/CakeLORD//Users/view.php:17
+#: /home/artefact/www/CakeLORD//UsersConversations/add.php:17
+#: /home/artefact/www/CakeLORD//UsersConversations/edit.php:17
+#: /home/artefact/www/CakeLORD//UsersConversations/view.php:17
+msgid "Help"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/add.php:22
+#: /home/artefact/www/CakeLORD//Articles/edit.php:23
+#: /home/artefact/www/CakeLORD//Articles/view.php:20
+msgid "List Articles"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/add.php:29
+msgid "Add Article"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/add.php:36
+#: /home/artefact/www/CakeLORD//Articles/edit.php:37
+#: /home/artefact/www/CakeLORD//Categories/add.php:24
+#: /home/artefact/www/CakeLORD//Categories/edit.php:29
+#: /home/artefact/www/CakeLORD//Coats/add.php:35
+#: /home/artefact/www/CakeLORD//Coats/edit.php:39
+#: /home/artefact/www/CakeLORD//Colors/add.php:34
+#: /home/artefact/www/CakeLORD//Colors/edit.php:39
+#: /home/artefact/www/CakeLORD//Compatibilities/add.php:33
+#: /home/artefact/www/CakeLORD//Compatibilities/edit.php:38
+#: /home/artefact/www/CakeLORD//ContributionTypes/add.php:24
+#: /home/artefact/www/CakeLORD//ContributionTypes/edit.php:29
+#: /home/artefact/www/CakeLORD//Contributions/add.php:25
+#: /home/artefact/www/CakeLORD//Contributions/edit.php:30
+#: /home/artefact/www/CakeLORD//Conversations/add.php:33
+#: /home/artefact/www/CakeLORD//Conversations/edit.php:39
+#: /home/artefact/www/CakeLORD//Countries/add.php:31
+#: /home/artefact/www/CakeLORD//Countries/edit.php:36
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/add.php:27
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/edit.php:32
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/add.php:26
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/edit.php:31
+#: /home/artefact/www/CakeLORD//Dilutions/add.php:34
+#: /home/artefact/www/CakeLORD//Dilutions/edit.php:39
+#: /home/artefact/www/CakeLORD//Earsets/add.php:34
+#: /home/artefact/www/CakeLORD//Earsets/edit.php:39
+#: /home/artefact/www/CakeLORD//Eyecolors/add.php:34
+#: /home/artefact/www/CakeLORD//Eyecolors/edit.php:39
+#: /home/artefact/www/CakeLORD//Faqs/add.php:25
+#: /home/artefact/www/CakeLORD//Faqs/edit.php:30
+#: /home/artefact/www/CakeLORD//LitterSnapshots/add.php:32
+#: /home/artefact/www/CakeLORD//LitterSnapshots/edit.php:37
+#: /home/artefact/www/CakeLORD//Litters/add.php:39
+#: /home/artefact/www/CakeLORD//Litters/edit.php:44
+#: /home/artefact/www/CakeLORD//Logs/add.php:30
+#: /home/artefact/www/CakeLORD//Logs/edit.php:35
+#: /home/artefact/www/CakeLORD//Markings/add.php:34
+#: /home/artefact/www/CakeLORD//Markings/edit.php:39
+#: /home/artefact/www/CakeLORD//Messages/add.php:31
+#: /home/artefact/www/CakeLORD//Messages/edit.php:36
+#: /home/artefact/www/CakeLORD//Operators/add.php:31
+#: /home/artefact/www/CakeLORD//Operators/edit.php:36
+#: /home/artefact/www/CakeLORD//RatSnapshots/add.php:32
+#: /home/artefact/www/CakeLORD//RatSnapshots/edit.php:37
+#: /home/artefact/www/CakeLORD//Rats/add.php:58
+#: /home/artefact/www/CakeLORD//Rats/edit.php:63
+#: /home/artefact/www/CakeLORD//RatsLitters/add.php:29
+#: /home/artefact/www/CakeLORD//RatsLitters/edit.php:34
+#: /home/artefact/www/CakeLORD//RatsSingularities/add.php:29
+#: /home/artefact/www/CakeLORD//RatsSingularities/edit.php:34
+#: /home/artefact/www/CakeLORD//Ratteries/add.php:44
+#: /home/artefact/www/CakeLORD//Ratteries/edit.php:49
+#: /home/artefact/www/CakeLORD//Ratteries/register.php:35
+#: /home/artefact/www/CakeLORD//RatteriesLitters/add.php:30
+#: /home/artefact/www/CakeLORD//RatteriesLitters/edit.php:35
+#: /home/artefact/www/CakeLORD//RatterySnapshots/add.php:32
+#: /home/artefact/www/CakeLORD//RatterySnapshots/edit.php:37
+#: /home/artefact/www/CakeLORD//Roles/add.php:32
+#: /home/artefact/www/CakeLORD//Roles/edit.php:37
+#: /home/artefact/www/CakeLORD//Singularities/add.php:35
+#: /home/artefact/www/CakeLORD//Singularities/edit.php:40
+#: /home/artefact/www/CakeLORD//States/add.php:37
+#: /home/artefact/www/CakeLORD//States/edit.php:42
+#: /home/artefact/www/CakeLORD//Users/add.php:46
+#: /home/artefact/www/CakeLORD//Users/edit.php:51
+#: /home/artefact/www/CakeLORD//UsersConversations/add.php:29
+#: /home/artefact/www/CakeLORD//UsersConversations/edit.php:34
+msgid "Submit"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/edit.php:19
+#: /home/artefact/www/CakeLORD//Articles/index.php:33
+#: /home/artefact/www/CakeLORD//Categories/edit.php:12
+#: /home/artefact/www/CakeLORD//Categories/index.php:29
+#: /home/artefact/www/CakeLORD//Categories/view.php:61
+#: /home/artefact/www/CakeLORD//Categories/view.php:90
+#: /home/artefact/www/CakeLORD//Coats/edit.php:19
+#: /home/artefact/www/CakeLORD//Coats/index.php:33
+#: /home/artefact/www/CakeLORD//Colors/edit.php:19
+#: /home/artefact/www/CakeLORD//Colors/index.php:33
+#: /home/artefact/www/CakeLORD//Compatibilities/edit.php:19
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:31
+#: /home/artefact/www/CakeLORD//ContributionTypes/edit.php:12
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:29
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:55
+#: /home/artefact/www/CakeLORD//Contributions/edit.php:12
+#: /home/artefact/www/CakeLORD//Contributions/index.php:31
+#: /home/artefact/www/CakeLORD//Conversations/edit.php:19
+#: /home/artefact/www/CakeLORD//Conversations/index.php:37
+#: /home/artefact/www/CakeLORD//Conversations/view.php:108
+#: /home/artefact/www/CakeLORD//Conversations/view.php:139
+#: /home/artefact/www/CakeLORD//Countries/edit.php:19
+#: /home/artefact/www/CakeLORD//Countries/index.php:29
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/edit.php:12
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/index.php:39
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/edit.php:12
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/index.php:37
+#: /home/artefact/www/CakeLORD//Dilutions/edit.php:19
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:33
+#: /home/artefact/www/CakeLORD//Earsets/edit.php:19
+#: /home/artefact/www/CakeLORD//Earsets/index.php:33
+#: /home/artefact/www/CakeLORD//Eyecolors/edit.php:19
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:33
+#: /home/artefact/www/CakeLORD//Faqs/edit.php:12
+#: /home/artefact/www/CakeLORD//Faqs/index.php:29
+#: /home/artefact/www/CakeLORD//LitterSnapshots/edit.php:19
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:31
+#: /home/artefact/www/CakeLORD//Litters/edit.php:19
+#: /home/artefact/www/CakeLORD//Litters/view.php:219
+#: /home/artefact/www/CakeLORD//Litters/view.php:250
+#: /home/artefact/www/CakeLORD//Logs/edit.php:19
+#: /home/artefact/www/CakeLORD//Logs/index.php:27
+#: /home/artefact/www/CakeLORD//Markings/edit.php:19
+#: /home/artefact/www/CakeLORD//Markings/index.php:33
+#: /home/artefact/www/CakeLORD//Messages/edit.php:19
+#: /home/artefact/www/CakeLORD//Messages/index.php:31
+#: /home/artefact/www/CakeLORD//Operators/edit.php:19
+#: /home/artefact/www/CakeLORD//Operators/index.php:29
+#: /home/artefact/www/CakeLORD//Operators/view.php:64
+#: /home/artefact/www/CakeLORD//RatSnapshots/edit.php:19
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:31
+#: /home/artefact/www/CakeLORD//Rats/edit.php:19
+#: /home/artefact/www/CakeLORD//Rats/sex.php:40
+#: /home/artefact/www/CakeLORD//Rats/view.php:269
+#: /home/artefact/www/CakeLORD//RatsLitters/edit.php:19
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:27
+#: /home/artefact/www/CakeLORD//RatsSingularities/edit.php:19
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:27
+#: /home/artefact/www/CakeLORD//Ratteries/edit.php:19
+#: /home/artefact/www/CakeLORD//RatteriesLitters/edit.php:19
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:29
+#: /home/artefact/www/CakeLORD//RatterySnapshots/edit.php:19
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:31
+#: /home/artefact/www/CakeLORD//Roles/edit.php:12
+#: /home/artefact/www/CakeLORD//Roles/index.php:45
+#: /home/artefact/www/CakeLORD//Roles/view.php:119
+#: /home/artefact/www/CakeLORD//Singularities/edit.php:19
+#: /home/artefact/www/CakeLORD//Singularities/index.php:33
+#: /home/artefact/www/CakeLORD//States/edit.php:12
+#: /home/artefact/www/CakeLORD//States/index.php:52
+#: /home/artefact/www/CakeLORD//Users/edit.php:19
+#: /home/artefact/www/CakeLORD//Users/index.php:57
+#: /home/artefact/www/CakeLORD//Users/view.php:217
+#: /home/artefact/www/CakeLORD//UsersConversations/edit.php:19
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:27
+#: /home/artefact/www/CakeLORD//element/litters.php:67
+#: /home/artefact/www/CakeLORD//element/my/messages.php:27
+msgid "Delete"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/edit.php:21
+#: /home/artefact/www/CakeLORD//Articles/index.php:33
+#: /home/artefact/www/CakeLORD//Articles/view.php:19
+#: /home/artefact/www/CakeLORD//Categories/edit.php:14
+#: /home/artefact/www/CakeLORD//Categories/index.php:29
+#: /home/artefact/www/CakeLORD//Categories/view.php:12
+#: /home/artefact/www/CakeLORD//Categories/view.php:61
+#: /home/artefact/www/CakeLORD//Categories/view.php:90
+#: /home/artefact/www/CakeLORD//Coats/edit.php:21
+#: /home/artefact/www/CakeLORD//Coats/index.php:33
+#: /home/artefact/www/CakeLORD//Coats/view.php:25
+#: /home/artefact/www/CakeLORD//Colors/edit.php:21
+#: /home/artefact/www/CakeLORD//Colors/index.php:33
+#: /home/artefact/www/CakeLORD//Colors/view.php:25
+#: /home/artefact/www/CakeLORD//Compatibilities/edit.php:21
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:31
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:19
+#: /home/artefact/www/CakeLORD//ContributionTypes/edit.php:14
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:29
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:12
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:55
+#: /home/artefact/www/CakeLORD//Contributions/edit.php:14
+#: /home/artefact/www/CakeLORD//Contributions/index.php:31
+#: /home/artefact/www/CakeLORD//Contributions/view.php:12
+#: /home/artefact/www/CakeLORD//Conversations/edit.php:21
+#: /home/artefact/www/CakeLORD//Conversations/index.php:37
+#: /home/artefact/www/CakeLORD//Conversations/view.php:19
+#: /home/artefact/www/CakeLORD//Conversations/view.php:108
+#: /home/artefact/www/CakeLORD//Conversations/view.php:139
+#: /home/artefact/www/CakeLORD//Countries/edit.php:21
+#: /home/artefact/www/CakeLORD//Countries/index.php:29
+#: /home/artefact/www/CakeLORD//Countries/view.php:19
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/edit.php:14
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/index.php:39
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:25
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/edit.php:14
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/index.php:37
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:19
+#: /home/artefact/www/CakeLORD//Dilutions/edit.php:21
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:33
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:25
+#: /home/artefact/www/CakeLORD//Earsets/edit.php:21
+#: /home/artefact/www/CakeLORD//Earsets/index.php:33
+#: /home/artefact/www/CakeLORD//Earsets/view.php:19
+#: /home/artefact/www/CakeLORD//Eyecolors/edit.php:21
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:33
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:19
+#: /home/artefact/www/CakeLORD//Faqs/edit.php:14
+#: /home/artefact/www/CakeLORD//Faqs/index.php:29
+#: /home/artefact/www/CakeLORD//Faqs/view.php:12
+#: /home/artefact/www/CakeLORD//LitterSnapshots/edit.php:21
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:31
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:19
+#: /home/artefact/www/CakeLORD//Litters/edit.php:21
+#: /home/artefact/www/CakeLORD//Litters/view.php:219
+#: /home/artefact/www/CakeLORD//Litters/view.php:250
+#: /home/artefact/www/CakeLORD//Logs/edit.php:21
+#: /home/artefact/www/CakeLORD//Logs/index.php:27
+#: /home/artefact/www/CakeLORD//Logs/view.php:19
+#: /home/artefact/www/CakeLORD//Markings/edit.php:21
+#: /home/artefact/www/CakeLORD//Markings/index.php:33
+#: /home/artefact/www/CakeLORD//Markings/view.php:25
+#: /home/artefact/www/CakeLORD//Messages/edit.php:21
+#: /home/artefact/www/CakeLORD//Messages/index.php:31
+#: /home/artefact/www/CakeLORD//Messages/view.php:19
+#: /home/artefact/www/CakeLORD//Operators/edit.php:21
+#: /home/artefact/www/CakeLORD//Operators/index.php:29
+#: /home/artefact/www/CakeLORD//Operators/view.php:19
+#: /home/artefact/www/CakeLORD//Operators/view.php:64
+#: /home/artefact/www/CakeLORD//RatSnapshots/edit.php:21
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:31
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:19
+#: /home/artefact/www/CakeLORD//Rats/edit.php:21
+#: /home/artefact/www/CakeLORD//Rats/sex.php:40
+#: /home/artefact/www/CakeLORD//Rats/view.php:269
+#: /home/artefact/www/CakeLORD//RatsLitters/edit.php:21
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:27
+#: /home/artefact/www/CakeLORD//RatsLitters/view.php:19
+#: /home/artefact/www/CakeLORD//RatsSingularities/edit.php:21
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:27
+#: /home/artefact/www/CakeLORD//RatsSingularities/view.php:19
+#: /home/artefact/www/CakeLORD//Ratteries/edit.php:21
+#: /home/artefact/www/CakeLORD//RatteriesLitters/edit.php:21
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:29
+#: /home/artefact/www/CakeLORD//RatteriesLitters/view.php:19
+#: /home/artefact/www/CakeLORD//RatterySnapshots/edit.php:21
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:31
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:19
+#: /home/artefact/www/CakeLORD//Roles/edit.php:14
+#: /home/artefact/www/CakeLORD//Roles/index.php:45
+#: /home/artefact/www/CakeLORD//Roles/view.php:12
+#: /home/artefact/www/CakeLORD//Roles/view.php:119
+#: /home/artefact/www/CakeLORD//Singularities/edit.php:21
+#: /home/artefact/www/CakeLORD//Singularities/index.php:33
+#: /home/artefact/www/CakeLORD//Singularities/view.php:26
+#: /home/artefact/www/CakeLORD//States/edit.php:14
+#: /home/artefact/www/CakeLORD//States/index.php:52
+#: /home/artefact/www/CakeLORD//States/summary.php:19
+#: /home/artefact/www/CakeLORD//States/view.php:25
+#: /home/artefact/www/CakeLORD//Users/edit.php:21
+#: /home/artefact/www/CakeLORD//Users/index.php:57
+#: /home/artefact/www/CakeLORD//Users/view.php:25
+#: /home/artefact/www/CakeLORD//Users/view.php:217
+#: /home/artefact/www/CakeLORD//UsersConversations/edit.php:21
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:27
+#: /home/artefact/www/CakeLORD//UsersConversations/view.php:19
+#: /home/artefact/www/CakeLORD//element/litters.php:67
+#: /home/artefact/www/CakeLORD//element/my/messages.php:27
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/edit.php:30
+#: /home/artefact/www/CakeLORD//Articles/view.php:18
+msgid "Edit Article"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/index.php:8
+#: /home/artefact/www/CakeLORD//Articles/view.php:21
+msgid "New Article"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/index.php:9
+msgid "All Articles"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/index.php:19
+#: /home/artefact/www/CakeLORD//Categories/add.php:10
+#: /home/artefact/www/CakeLORD//Categories/edit.php:10
+#: /home/artefact/www/CakeLORD//Categories/index.php:17
+#: /home/artefact/www/CakeLORD//Categories/view.php:10
+#: /home/artefact/www/CakeLORD//Categories/view.php:47
+#: /home/artefact/www/CakeLORD//Categories/view.php:79
+#: /home/artefact/www/CakeLORD//Coats/index.php:19
+#: /home/artefact/www/CakeLORD//Colors/index.php:19
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:18
+#: /home/artefact/www/CakeLORD//ContributionTypes/add.php:10
+#: /home/artefact/www/CakeLORD//ContributionTypes/edit.php:10
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:17
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:10
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:44
+#: /home/artefact/www/CakeLORD//Contributions/add.php:10
+#: /home/artefact/www/CakeLORD//Contributions/edit.php:10
+#: /home/artefact/www/CakeLORD//Contributions/index.php:18
+#: /home/artefact/www/CakeLORD//Contributions/view.php:10
+#: /home/artefact/www/CakeLORD//Conversations/index.php:21
+#: /home/artefact/www/CakeLORD//Conversations/view.php:82
+#: /home/artefact/www/CakeLORD//Conversations/view.php:127
+#: /home/artefact/www/CakeLORD//Countries/index.php:17
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/add.php:10
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/edit.php:10
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:75
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/add.php:10
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/edit.php:10
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:19
+#: /home/artefact/www/CakeLORD//Earsets/index.php:19
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:19
+#: /home/artefact/www/CakeLORD//Faqs/add.php:10
+#: /home/artefact/www/CakeLORD//Faqs/edit.php:10
+#: /home/artefact/www/CakeLORD//Faqs/index.php:17
+#: /home/artefact/www/CakeLORD//Faqs/view.php:10
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:18
+#: /home/artefact/www/CakeLORD//Litters/view.php:205
+#: /home/artefact/www/CakeLORD//Litters/view.php:238
+#: /home/artefact/www/CakeLORD//Logs/index.php:16
+#: /home/artefact/www/CakeLORD//Markings/index.php:19
+#: /home/artefact/www/CakeLORD//Messages/index.php:18
+#: /home/artefact/www/CakeLORD//Operators/index.php:17
+#: /home/artefact/www/CakeLORD//Operators/view.php:52
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:18
+#: /home/artefact/www/CakeLORD//Rats/sex.php:22
+#: /home/artefact/www/CakeLORD//Rats/view.php:255
+#: /home/artefact/www/CakeLORD//Rats/view.php:289
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:16
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:16
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:17
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:18
+#: /home/artefact/www/CakeLORD//Roles/add.php:10
+#: /home/artefact/www/CakeLORD//Roles/edit.php:10
+#: /home/artefact/www/CakeLORD//Roles/index.php:25
+#: /home/artefact/www/CakeLORD//Roles/view.php:10
+#: /home/artefact/www/CakeLORD//Roles/view.php:92
+#: /home/artefact/www/CakeLORD//Singularities/index.php:19
+#: /home/artefact/www/CakeLORD//States/add.php:10
+#: /home/artefact/www/CakeLORD//States/edit.php:10
+#: /home/artefact/www/CakeLORD//States/summary.php:54
+#: /home/artefact/www/CakeLORD//States/summary.php:78
+#: /home/artefact/www/CakeLORD//States/summary.php:103
+#: /home/artefact/www/CakeLORD//Users/index.php:31
+#: /home/artefact/www/CakeLORD//Users/view.php:203
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:16
+#: /home/artefact/www/CakeLORD//element/my/messages.php:13
+msgid "Actions"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/index.php:31
+#: /home/artefact/www/CakeLORD//Categories/index.php:27
+#: /home/artefact/www/CakeLORD//Categories/view.php:59
+#: /home/artefact/www/CakeLORD//Categories/view.php:88
+#: /home/artefact/www/CakeLORD//Coats/index.php:31
+#: /home/artefact/www/CakeLORD//Colors/index.php:31
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:29
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:27
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:53
+#: /home/artefact/www/CakeLORD//Contributions/index.php:29
+#: /home/artefact/www/CakeLORD//Conversations/index.php:35
+#: /home/artefact/www/CakeLORD//Conversations/view.php:106
+#: /home/artefact/www/CakeLORD//Conversations/view.php:137
+#: /home/artefact/www/CakeLORD//Countries/index.php:27
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:31
+#: /home/artefact/www/CakeLORD//Earsets/index.php:31
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:31
+#: /home/artefact/www/CakeLORD//Faqs/index.php:27
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:29
+#: /home/artefact/www/CakeLORD//Litters/view.php:217
+#: /home/artefact/www/CakeLORD//Litters/view.php:248
+#: /home/artefact/www/CakeLORD//Logs/index.php:25
+#: /home/artefact/www/CakeLORD//Markings/index.php:31
+#: /home/artefact/www/CakeLORD//Messages/index.php:29
+#: /home/artefact/www/CakeLORD//Operators/index.php:27
+#: /home/artefact/www/CakeLORD//Operators/view.php:62
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:29
+#: /home/artefact/www/CakeLORD//Rats/sex.php:38
+#: /home/artefact/www/CakeLORD//Rats/view.php:267
+#: /home/artefact/www/CakeLORD//Rats/view.php:298
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:25
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:25
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:27
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:29
+#: /home/artefact/www/CakeLORD//Roles/index.php:43
+#: /home/artefact/www/CakeLORD//Roles/view.php:117
+#: /home/artefact/www/CakeLORD//Singularities/index.php:31
+#: /home/artefact/www/CakeLORD//States/summary.php:61
+#: /home/artefact/www/CakeLORD//States/summary.php:86
+#: /home/artefact/www/CakeLORD//States/summary.php:112
+#: /home/artefact/www/CakeLORD//Users/index.php:55
+#: /home/artefact/www/CakeLORD//Users/view.php:215
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:25
+#: /home/artefact/www/CakeLORD//element/my/messages.php:25
+#: /home/artefact/www/CakeLORD/vendor/cakephp/cakephp//View/Helper/PaginatorHelper.php:1268
+msgid "View"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/index.php:32
+#: /home/artefact/www/CakeLORD//Categories/index.php:28
+#: /home/artefact/www/CakeLORD//Categories/view.php:60
+#: /home/artefact/www/CakeLORD//Categories/view.php:89
+#: /home/artefact/www/CakeLORD//Coats/index.php:32
+#: /home/artefact/www/CakeLORD//Colors/index.php:32
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:30
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:28
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:54
+#: /home/artefact/www/CakeLORD//Contributions/index.php:30
+#: /home/artefact/www/CakeLORD//Conversations/index.php:36
+#: /home/artefact/www/CakeLORD//Conversations/view.php:107
+#: /home/artefact/www/CakeLORD//Conversations/view.php:138
+#: /home/artefact/www/CakeLORD//Countries/index.php:28
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:32
+#: /home/artefact/www/CakeLORD//Earsets/index.php:32
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:32
+#: /home/artefact/www/CakeLORD//Faqs/index.php:28
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:30
+#: /home/artefact/www/CakeLORD//Litters/view.php:218
+#: /home/artefact/www/CakeLORD//Litters/view.php:249
+#: /home/artefact/www/CakeLORD//Logs/index.php:26
+#: /home/artefact/www/CakeLORD//Markings/index.php:32
+#: /home/artefact/www/CakeLORD//Messages/index.php:30
+#: /home/artefact/www/CakeLORD//Operators/index.php:28
+#: /home/artefact/www/CakeLORD//Operators/view.php:63
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:30
+#: /home/artefact/www/CakeLORD//Rats/sex.php:39
+#: /home/artefact/www/CakeLORD//Rats/view.php:268
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:26
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:26
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:28
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:30
+#: /home/artefact/www/CakeLORD//Roles/index.php:44
+#: /home/artefact/www/CakeLORD//Roles/view.php:118
+#: /home/artefact/www/CakeLORD//Singularities/index.php:32
+#: /home/artefact/www/CakeLORD//States/index.php:51
+#: /home/artefact/www/CakeLORD//Users/index.php:56
+#: /home/artefact/www/CakeLORD//Users/view.php:216
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:26
+#: /home/artefact/www/CakeLORD//element/litters.php:66
+#: /home/artefact/www/CakeLORD//element/my/messages.php:26
+msgid "Edit"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/index.php:42
+#: /home/artefact/www/CakeLORD//Categories/index.php:38
+#: /home/artefact/www/CakeLORD//Coats/index.php:42
+#: /home/artefact/www/CakeLORD//Colors/index.php:42
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:40
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:38
+#: /home/artefact/www/CakeLORD//Contributions/index.php:40
+#: /home/artefact/www/CakeLORD//Conversations/index.php:46
+#: /home/artefact/www/CakeLORD//Countries/index.php:38
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/index.php:48
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/index.php:46
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:42
+#: /home/artefact/www/CakeLORD//Earsets/index.php:42
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:42
+#: /home/artefact/www/CakeLORD//Faqs/index.php:38
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:40
+#: /home/artefact/www/CakeLORD//Logs/index.php:36
+#: /home/artefact/www/CakeLORD//Markings/index.php:42
+#: /home/artefact/www/CakeLORD//Messages/index.php:40
+#: /home/artefact/www/CakeLORD//Operators/index.php:38
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:40
+#: /home/artefact/www/CakeLORD//Rats/sex.php:49
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:36
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:36
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:38
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:40
+#: /home/artefact/www/CakeLORD//Roles/index.php:54
+#: /home/artefact/www/CakeLORD//Singularities/index.php:42
+#: /home/artefact/www/CakeLORD//States/index.php:61
+#: /home/artefact/www/CakeLORD//Users/index.php:66
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:36
+#: /home/artefact/www/CakeLORD//element/litters.php:77
+#: /home/artefact/www/CakeLORD//element/rats.php:97
+#: /home/artefact/www/CakeLORD//element/ratteries.php:84
+msgid "first"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/index.php:43
+#: /home/artefact/www/CakeLORD//Categories/index.php:39
+#: /home/artefact/www/CakeLORD//Coats/index.php:43
+#: /home/artefact/www/CakeLORD//Colors/index.php:43
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:41
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:39
+#: /home/artefact/www/CakeLORD//Contributions/index.php:41
+#: /home/artefact/www/CakeLORD//Conversations/index.php:47
+#: /home/artefact/www/CakeLORD//Countries/index.php:39
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/index.php:49
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/index.php:47
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:43
+#: /home/artefact/www/CakeLORD//Earsets/index.php:43
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:43
+#: /home/artefact/www/CakeLORD//Faqs/index.php:39
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:41
+#: /home/artefact/www/CakeLORD//Logs/index.php:37
+#: /home/artefact/www/CakeLORD//Markings/index.php:43
+#: /home/artefact/www/CakeLORD//Messages/index.php:41
+#: /home/artefact/www/CakeLORD//Operators/index.php:39
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:41
+#: /home/artefact/www/CakeLORD//Rats/sex.php:50
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:37
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:37
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:39
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:41
+#: /home/artefact/www/CakeLORD//Roles/index.php:55
+#: /home/artefact/www/CakeLORD//Singularities/index.php:43
+#: /home/artefact/www/CakeLORD//States/index.php:62
+#: /home/artefact/www/CakeLORD//Users/index.php:67
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:37
+#: /home/artefact/www/CakeLORD//element/litters.php:78
+#: /home/artefact/www/CakeLORD//element/rats.php:98
+#: /home/artefact/www/CakeLORD//element/ratteries.php:85
+msgid "previous"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/index.php:45
+#: /home/artefact/www/CakeLORD//Categories/index.php:41
+#: /home/artefact/www/CakeLORD//Coats/index.php:45
+#: /home/artefact/www/CakeLORD//Colors/index.php:45
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:43
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:41
+#: /home/artefact/www/CakeLORD//Contributions/index.php:43
+#: /home/artefact/www/CakeLORD//Conversations/index.php:49
+#: /home/artefact/www/CakeLORD//Countries/index.php:41
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/index.php:51
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/index.php:49
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:45
+#: /home/artefact/www/CakeLORD//Earsets/index.php:45
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:45
+#: /home/artefact/www/CakeLORD//Faqs/index.php:41
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:43
+#: /home/artefact/www/CakeLORD//Logs/index.php:39
+#: /home/artefact/www/CakeLORD//Markings/index.php:45
+#: /home/artefact/www/CakeLORD//Messages/index.php:43
+#: /home/artefact/www/CakeLORD//Operators/index.php:41
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:43
+#: /home/artefact/www/CakeLORD//Rats/sex.php:52
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:39
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:39
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:41
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:43
+#: /home/artefact/www/CakeLORD//Roles/index.php:57
+#: /home/artefact/www/CakeLORD//Singularities/index.php:45
+#: /home/artefact/www/CakeLORD//States/index.php:64
+#: /home/artefact/www/CakeLORD//Users/index.php:69
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:39
+#: /home/artefact/www/CakeLORD//element/litters.php:80
+#: /home/artefact/www/CakeLORD//element/rats.php:100
+#: /home/artefact/www/CakeLORD//element/ratteries.php:87
+msgid "next"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/index.php:46
+#: /home/artefact/www/CakeLORD//Categories/index.php:42
+#: /home/artefact/www/CakeLORD//Coats/index.php:46
+#: /home/artefact/www/CakeLORD//Colors/index.php:46
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:44
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:42
+#: /home/artefact/www/CakeLORD//Contributions/index.php:44
+#: /home/artefact/www/CakeLORD//Conversations/index.php:50
+#: /home/artefact/www/CakeLORD//Countries/index.php:42
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/index.php:52
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/index.php:50
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:46
+#: /home/artefact/www/CakeLORD//Earsets/index.php:46
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:46
+#: /home/artefact/www/CakeLORD//Faqs/index.php:42
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:44
+#: /home/artefact/www/CakeLORD//Logs/index.php:40
+#: /home/artefact/www/CakeLORD//Markings/index.php:46
+#: /home/artefact/www/CakeLORD//Messages/index.php:44
+#: /home/artefact/www/CakeLORD//Operators/index.php:42
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:44
+#: /home/artefact/www/CakeLORD//Rats/sex.php:53
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:40
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:40
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:42
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:44
+#: /home/artefact/www/CakeLORD//Roles/index.php:58
+#: /home/artefact/www/CakeLORD//Singularities/index.php:46
+#: /home/artefact/www/CakeLORD//States/index.php:65
+#: /home/artefact/www/CakeLORD//Users/index.php:70
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:40
+#: /home/artefact/www/CakeLORD//element/litters.php:81
+#: /home/artefact/www/CakeLORD//element/rats.php:101
+#: /home/artefact/www/CakeLORD//element/ratteries.php:88
+msgid "last"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/index.php:48
+#: /home/artefact/www/CakeLORD//Categories/index.php:44
+#: /home/artefact/www/CakeLORD//Coats/index.php:48
+#: /home/artefact/www/CakeLORD//Colors/index.php:48
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:46
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:44
+#: /home/artefact/www/CakeLORD//Contributions/index.php:46
+#: /home/artefact/www/CakeLORD//Conversations/index.php:52
+#: /home/artefact/www/CakeLORD//Countries/index.php:44
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/index.php:54
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/index.php:52
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:48
+#: /home/artefact/www/CakeLORD//Earsets/index.php:48
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:48
+#: /home/artefact/www/CakeLORD//Faqs/index.php:44
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:46
+#: /home/artefact/www/CakeLORD//Logs/index.php:42
+#: /home/artefact/www/CakeLORD//Markings/index.php:48
+#: /home/artefact/www/CakeLORD//Messages/index.php:46
+#: /home/artefact/www/CakeLORD//Operators/index.php:44
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:46
+#: /home/artefact/www/CakeLORD//Rats/sex.php:55
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:42
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:42
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:44
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:46
+#: /home/artefact/www/CakeLORD//Roles/index.php:60
+#: /home/artefact/www/CakeLORD//Singularities/index.php:48
+#: /home/artefact/www/CakeLORD//States/index.php:67
+#: /home/artefact/www/CakeLORD//Users/index.php:72
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:42
+#: /home/artefact/www/CakeLORD//element/litters.php:83
+#: /home/artefact/www/CakeLORD//element/rats.php:103
+#: /home/artefact/www/CakeLORD//element/ratteries.php:90
+msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/view.php:19
+msgid "Delete Article"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/view.php:29
+#: /home/artefact/www/CakeLORD//Categories/view.php:41
+msgid "Title"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/view.php:33
+#: /home/artefact/www/CakeLORD//Categories/view.php:42
+msgid "Subtitle"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/view.php:37
+#: /home/artefact/www/CakeLORD//Categories/view.php:26
+#: /home/artefact/www/CakeLORD//Categories/view.php:40
+#: /home/artefact/www/CakeLORD//Categories/view.php:75
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:41
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:26
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:40
+#: /home/artefact/www/CakeLORD//Contributions/view.php:34
+#: /home/artefact/www/CakeLORD//Conversations/view.php:41
+#: /home/artefact/www/CakeLORD//Conversations/view.php:63
+#: /home/artefact/www/CakeLORD//Conversations/view.php:122
+#: /home/artefact/www/CakeLORD//Countries/view.php:41
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:72
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:35
+#: /home/artefact/www/CakeLORD//Faqs/view.php:30
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:37
+#: /home/artefact/www/CakeLORD//Litters/view.php:198
+#: /home/artefact/www/CakeLORD//Litters/view.php:233
+#: /home/artefact/www/CakeLORD//Logs/view.php:29
+#: /home/artefact/www/CakeLORD//Messages/view.php:37
+#: /home/artefact/www/CakeLORD//Operators/view.php:37
+#: /home/artefact/www/CakeLORD//Operators/view.php:47
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:37
+#: /home/artefact/www/CakeLORD//Rats/view.php:248
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:37
+#: /home/artefact/www/CakeLORD//Roles/view.php:26
+#: /home/artefact/www/CakeLORD//Roles/view.php:72
+#: /home/artefact/www/CakeLORD//States/summary.php:41
+#: /home/artefact/www/CakeLORD//States/summary.php:52
+#: /home/artefact/www/CakeLORD//States/summary.php:75
+#: /home/artefact/www/CakeLORD//States/summary.php:99
+#: /home/artefact/www/CakeLORD//States/view.php:42
+#: /home/artefact/www/CakeLORD//Users/view.php:142
+#: /home/artefact/www/CakeLORD//Users/view.php:196
+#: /home/artefact/www/CakeLORD//element/my/messages.php:6
+msgid "Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/view.php:41
+#: /home/artefact/www/CakeLORD//Categories/view.php:44
+#: /home/artefact/www/CakeLORD//Conversations/view.php:45
+#: /home/artefact/www/CakeLORD//Conversations/view.php:80
+#: /home/artefact/www/CakeLORD//Conversations/view.php:126
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:41
+#: /home/artefact/www/CakeLORD//Litters/view.php:202
+#: /home/artefact/www/CakeLORD//Litters/view.php:237
+#: /home/artefact/www/CakeLORD//Logs/view.php:33
+#: /home/artefact/www/CakeLORD//Messages/view.php:41
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:41
+#: /home/artefact/www/CakeLORD//Rats/view.php:252
+#: /home/artefact/www/CakeLORD//Rats/view.php:285
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:41
+#: /home/artefact/www/CakeLORD//Roles/view.php:90
+#: /home/artefact/www/CakeLORD//Users/view.php:200
+#: /home/artefact/www/CakeLORD//element/my/messages.php:10
+msgid "Created"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/view.php:45
+#: /home/artefact/www/CakeLORD//Categories/view.php:45
+#: /home/artefact/www/CakeLORD//Conversations/view.php:49
+#: /home/artefact/www/CakeLORD//Conversations/view.php:81
+#: /home/artefact/www/CakeLORD//Litters/view.php:203
+#: /home/artefact/www/CakeLORD//Rats/view.php:253
+#: /home/artefact/www/CakeLORD//Roles/view.php:91
+#: /home/artefact/www/CakeLORD//Users/view.php:201
+#: /home/artefact/www/CakeLORD//element/my/messages.php:11
+msgid "Modified"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Articles/view.php:50
+#: /home/artefact/www/CakeLORD//Categories/view.php:43
+#: /home/artefact/www/CakeLORD//Conversations/view.php:124
+#: /home/artefact/www/CakeLORD//Messages/view.php:46
+msgid "Content"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/add.php:11
+#: /home/artefact/www/CakeLORD//Categories/edit.php:16
+#: /home/artefact/www/CakeLORD//Categories/view.php:13
+msgid "List Categories"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/add.php:18
+msgid "Add Category"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/edit.php:23
+#: /home/artefact/www/CakeLORD//Categories/view.php:11
+msgid "Edit Category"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/index.php:8
+#: /home/artefact/www/CakeLORD//Categories/view.php:14
+msgid "New Category"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/index.php:9
+msgid "Categories"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/view.php:12
+msgid "Delete Category"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/view.php:22
+#: /home/artefact/www/CakeLORD//Coats/view.php:51
+#: /home/artefact/www/CakeLORD//Colors/view.php:51
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:22
+#: /home/artefact/www/CakeLORD//Countries/view.php:33
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:73
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:51
+#: /home/artefact/www/CakeLORD//Earsets/view.php:44
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:44
+#: /home/artefact/www/CakeLORD//Markings/view.php:51
+#: /home/artefact/www/CakeLORD//Rats/search.php:46
+#: /home/artefact/www/CakeLORD//Rats/view.php:75
+#: /home/artefact/www/CakeLORD//Roles/view.php:22
+#: /home/artefact/www/CakeLORD//Singularities/view.php:53
+#: /home/artefact/www/CakeLORD//States/summary.php:29
+#: /home/artefact/www/CakeLORD//States/summary.php:77
+#: /home/artefact/www/CakeLORD//States/summary.php:101
+#: /home/artefact/www/CakeLORD//States/view.php:46
+#: /home/artefact/www/CakeLORD//element/simple_rats.php:20
+#: /home/artefact/www/CakeLORD//element/simple_ratteries.php:18
+msgid "Name"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/view.php:30
+msgid "Position"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/view.php:35
+msgid "Related Articles"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/view.php:46
+#: /home/artefact/www/CakeLORD//Categories/view.php:76
+msgid "Category Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/view.php:70
+msgid "Related Faqs"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/view.php:77
+#: /home/artefact/www/CakeLORD//Faqs/view.php:26
+msgid "Question"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Categories/view.php:78
+#: /home/artefact/www/CakeLORD//Faqs/view.php:35
+msgid "Answer"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/add.php:19
+#: /home/artefact/www/CakeLORD//Coats/edit.php:23
+msgid "List Coats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/add.php:26
+msgid "Add Coat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/edit.php:30
+msgid "Edit Coat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/index.php:8
+msgid "New Coat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/index.php:9
+msgid "All Coats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:22
+#: /home/artefact/www/CakeLORD//Colors/view.php:22
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:22
+#: /home/artefact/www/CakeLORD//Markings/view.php:22
+#: /home/artefact/www/CakeLORD//Singularities/view.php:23
+msgid "Laborats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:24
+msgid "Edit coat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:25
+msgid "Delete coat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:26
+msgid "List coats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:27
+msgid "New coat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:37
+#: /home/artefact/www/CakeLORD//Coats/view.php:45
+#: /home/artefact/www/CakeLORD//Rats/view.php:160
+msgid "Coat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:40
+#: /home/artefact/www/CakeLORD//Colors/view.php:40
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:37
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:31
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:40
+#: /home/artefact/www/CakeLORD//Earsets/view.php:33
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:33
+#: /home/artefact/www/CakeLORD//Markings/view.php:40
+#: /home/artefact/www/CakeLORD//Singularities/view.php:41
+#: /home/artefact/www/CakeLORD//Singularities/view.php:49
+#: /home/artefact/www/CakeLORD//States/view.php:38
+msgid "Reference information"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:55
+#: /home/artefact/www/CakeLORD//Colors/view.php:55
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:55
+#: /home/artefact/www/CakeLORD//Earsets/view.php:48
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:48
+#: /home/artefact/www/CakeLORD//Markings/view.php:55
+#: /home/artefact/www/CakeLORD//Singularities/view.php:57
+msgid "Genotype"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:59
+#: /home/artefact/www/CakeLORD//Colors/view.php:59
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:59
+#: /home/artefact/www/CakeLORD//Earsets/view.php:52
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:52
+#: /home/artefact/www/CakeLORD//Markings/view.php:59
+#: /home/artefact/www/CakeLORD//Singularities/view.php:61
+msgid "Is Picture Mandatory"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:60
+#: /home/artefact/www/CakeLORD//Colors/view.php:60
+#: /home/artefact/www/CakeLORD//Conversations/view.php:54
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:46
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:50
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:54
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:44
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:60
+#: /home/artefact/www/CakeLORD//Earsets/view.php:53
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:53
+#: /home/artefact/www/CakeLORD//Markings/view.php:60
+#: /home/artefact/www/CakeLORD//Rats/view.php:173
+#: /home/artefact/www/CakeLORD//Rats/view.php:194
+#: /home/artefact/www/CakeLORD//Rats/view.php:198
+#: /home/artefact/www/CakeLORD//Rats/view.php:202
+#: /home/artefact/www/CakeLORD//Roles/view.php:31
+#: /home/artefact/www/CakeLORD//Roles/view.php:35
+#: /home/artefact/www/CakeLORD//Roles/view.php:39
+#: /home/artefact/www/CakeLORD//Roles/view.php:43
+#: /home/artefact/www/CakeLORD//Roles/view.php:47
+#: /home/artefact/www/CakeLORD//Roles/view.php:51
+#: /home/artefact/www/CakeLORD//Roles/view.php:55
+#: /home/artefact/www/CakeLORD//Roles/view.php:59
+#: /home/artefact/www/CakeLORD//Roles/view.php:63
+#: /home/artefact/www/CakeLORD//Singularities/view.php:62
+#: /home/artefact/www/CakeLORD//States/view.php:66
+#: /home/artefact/www/CakeLORD//States/view.php:70
+#: /home/artefact/www/CakeLORD//States/view.php:74
+#: /home/artefact/www/CakeLORD//States/view.php:78
+#: /home/artefact/www/CakeLORD//States/view.php:82
+#: /home/artefact/www/CakeLORD//States/view.php:86
+#: /home/artefact/www/CakeLORD//States/view.php:90
+#: /home/artefact/www/CakeLORD//Users/my.php:20
+#: /home/artefact/www/CakeLORD//Users/view.php:181
+#: /home/artefact/www/CakeLORD//Users/view.php:185
+msgid "Yes"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:60
+#: /home/artefact/www/CakeLORD//Colors/view.php:60
+#: /home/artefact/www/CakeLORD//Conversations/view.php:54
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:46
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:50
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:54
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:44
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:60
+#: /home/artefact/www/CakeLORD//Earsets/view.php:53
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:53
+#: /home/artefact/www/CakeLORD//Markings/view.php:60
+#: /home/artefact/www/CakeLORD//Rats/view.php:173
+#: /home/artefact/www/CakeLORD//Rats/view.php:194
+#: /home/artefact/www/CakeLORD//Rats/view.php:198
+#: /home/artefact/www/CakeLORD//Rats/view.php:202
+#: /home/artefact/www/CakeLORD//Roles/view.php:31
+#: /home/artefact/www/CakeLORD//Roles/view.php:35
+#: /home/artefact/www/CakeLORD//Roles/view.php:39
+#: /home/artefact/www/CakeLORD//Roles/view.php:43
+#: /home/artefact/www/CakeLORD//Roles/view.php:47
+#: /home/artefact/www/CakeLORD//Roles/view.php:51
+#: /home/artefact/www/CakeLORD//Roles/view.php:55
+#: /home/artefact/www/CakeLORD//Roles/view.php:59
+#: /home/artefact/www/CakeLORD//Roles/view.php:63
+#: /home/artefact/www/CakeLORD//Singularities/view.php:62
+#: /home/artefact/www/CakeLORD//States/view.php:66
+#: /home/artefact/www/CakeLORD//States/view.php:70
+#: /home/artefact/www/CakeLORD//States/view.php:74
+#: /home/artefact/www/CakeLORD//States/view.php:78
+#: /home/artefact/www/CakeLORD//States/view.php:82
+#: /home/artefact/www/CakeLORD//States/view.php:86
+#: /home/artefact/www/CakeLORD//States/view.php:90
+#: /home/artefact/www/CakeLORD//Users/my.php:20
+#: /home/artefact/www/CakeLORD//Users/view.php:181
+#: /home/artefact/www/CakeLORD//Users/view.php:185
+msgid "No"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:71
+#: /home/artefact/www/CakeLORD//Colors/view.php:64
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:59
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:48
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:71
+#: /home/artefact/www/CakeLORD//Earsets/view.php:64
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:64
+#: /home/artefact/www/CakeLORD//Markings/view.php:71
+#: /home/artefact/www/CakeLORD//Singularities/view.php:66
+#: /home/artefact/www/CakeLORD//States/view.php:39
+msgid "Description"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Coats/view.php:77
+#: /home/artefact/www/CakeLORD//Colors/view.php:77
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:77
+#: /home/artefact/www/CakeLORD//Markings/view.php:77
+#: /home/artefact/www/CakeLORD//Singularities/view.php:79
+msgid "Gallery"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Colors/add.php:18
+#: /home/artefact/www/CakeLORD//Colors/edit.php:23
+#: /home/artefact/www/CakeLORD//Colors/view.php:26
+msgid "List Colors"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Colors/add.php:25
+msgid "Add Color"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Colors/edit.php:30
+#: /home/artefact/www/CakeLORD//Colors/view.php:24
+msgid "Edit Color"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Colors/index.php:8
+#: /home/artefact/www/CakeLORD//Colors/view.php:27
+msgid "New Color"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Colors/index.php:9
+msgid "All Colors"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Colors/view.php:25
+msgid "Delete Color"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Colors/view.php:37
+#: /home/artefact/www/CakeLORD//Colors/view.php:45
+#: /home/artefact/www/CakeLORD//Rats/search.php:160
+#: /home/artefact/www/CakeLORD//Rats/view.php:140
+#: /home/artefact/www/CakeLORD//States/summary.php:33
+#: /home/artefact/www/CakeLORD//States/view.php:54
+msgid "Color"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Compatibilities/add.php:18
+#: /home/artefact/www/CakeLORD//Compatibilities/edit.php:23
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:20
+msgid "List Compatibilities"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Compatibilities/add.php:25
+msgid "Add Compatibility"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Compatibilities/edit.php:30
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:18
+msgid "Edit Compatibility"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:8
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:21
+msgid "New Compatibility"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Compatibilities/index.php:9
+msgid "All Compatibility Rules"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:19
+msgid "Delete Compatibility"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:29
+#: /home/artefact/www/CakeLORD//Operators/view.php:48
+msgid "Left Genotype"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:33
+msgid "Operator"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:37
+#: /home/artefact/www/CakeLORD//Operators/view.php:50
+msgid "Right Genotype"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Compatibilities/view.php:46
+#: /home/artefact/www/CakeLORD//Operators/view.php:51
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:62
+msgid "Comments"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//ContributionTypes/add.php:11
+#: /home/artefact/www/CakeLORD//ContributionTypes/edit.php:16
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:13
+msgid "List Contribution Types"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//ContributionTypes/add.php:18
+msgid "Add Contribution Type"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//ContributionTypes/edit.php:23
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:11
+msgid "Edit Contribution Type"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:8
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:14
+msgid "New Contribution Type"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//ContributionTypes/index.php:9
+msgid "Contribution Types"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:12
+msgid "Delete Contribution Type"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:30
+msgid "Priority"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:35
+msgid "Related Contributions"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:41
+#: /home/artefact/www/CakeLORD//Litters/view.php:200
+#: /home/artefact/www/CakeLORD//Rats/view.php:250
+#: /home/artefact/www/CakeLORD//Users/view.php:198
+#: /home/artefact/www/CakeLORD//element/my/messages.php:8
+msgid "Rattery Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:42
+#: /home/artefact/www/CakeLORD//Litters/view.php:201
+#: /home/artefact/www/CakeLORD//Litters/view.php:235
+#: /home/artefact/www/CakeLORD//Rats/view.php:251
+#: /home/artefact/www/CakeLORD//Users/view.php:199
+#: /home/artefact/www/CakeLORD//element/my/messages.php:9
+msgid "Litter Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//ContributionTypes/view.php:43
+msgid "Contribution Type Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Contributions/add.php:11
+#: /home/artefact/www/CakeLORD//Contributions/edit.php:16
+#: /home/artefact/www/CakeLORD//Contributions/view.php:13
+msgid "List Contributions"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Contributions/add.php:18
+msgid "Add Contribution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Contributions/edit.php:23
+#: /home/artefact/www/CakeLORD//Contributions/view.php:11
+msgid "Edit Contribution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Contributions/index.php:8
+#: /home/artefact/www/CakeLORD//Contributions/view.php:14
+msgid "New Contribution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Contributions/index.php:9
+msgid "Contributions"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Contributions/view.php:12
+msgid "Delete Contribution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Contributions/view.php:22
+#: /home/artefact/www/CakeLORD//Conversations/view.php:33
+#: /home/artefact/www/CakeLORD//Rats/view.php:105
+#: /home/artefact/www/CakeLORD//RatteriesLitters/view.php:29
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:29
+msgid "Rattery"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Contributions/view.php:26
+#: /home/artefact/www/CakeLORD//Conversations/view.php:37
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:29
+#: /home/artefact/www/CakeLORD//Litters/view.php:23
+#: /home/artefact/www/CakeLORD//RatsLitters/view.php:33
+#: /home/artefact/www/CakeLORD//RatteriesLitters/view.php:33
+msgid "Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Contributions/view.php:30
+msgid "Contribution Type"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/add.php:24
+msgid "Add Conversation"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/edit.php:23
+#: /home/artefact/www/CakeLORD//Conversations/view.php:20
+msgid "List Conversations"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/edit.php:30
+#: /home/artefact/www/CakeLORD//Conversations/view.php:18
+msgid "Edit Conversation"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/index.php:8
+#: /home/artefact/www/CakeLORD//Conversations/view.php:21
+msgid "New Conversation"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/index.php:9
+#: /home/artefact/www/CakeLORD//Rats/view.php:242
+msgid "Conversations"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:19
+msgid "Delete Conversation"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:29
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:29
+#: /home/artefact/www/CakeLORD//RatsLitters/view.php:29
+#: /home/artefact/www/CakeLORD//RatsSingularities/view.php:29
+msgid "Rat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:53
+#: /home/artefact/www/CakeLORD//Litters/view.php:204
+#: /home/artefact/www/CakeLORD//Rats/view.php:254
+#: /home/artefact/www/CakeLORD//Users/view.php:202
+#: /home/artefact/www/CakeLORD//element/my/messages.php:12
+msgid "Is Active"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:58
+#: /home/artefact/www/CakeLORD//Roles/view.php:67
+msgid "Related Users"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:64
+#: /home/artefact/www/CakeLORD//Roles/view.php:73
+#: /home/artefact/www/CakeLORD//Users/view.php:147
+msgid "Email"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:65
+#: /home/artefact/www/CakeLORD//Roles/view.php:74
+#: /home/artefact/www/CakeLORD//Users/view.php:151
+msgid "Password"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:66
+#: /home/artefact/www/CakeLORD//Roles/view.php:75
+#: /home/artefact/www/CakeLORD//Users/view.php:48
+msgid "Username"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:67
+#: /home/artefact/www/CakeLORD//Roles/view.php:76
+#: /home/artefact/www/CakeLORD//Users/view.php:156
+msgid "Firstname"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:68
+#: /home/artefact/www/CakeLORD//Roles/view.php:77
+#: /home/artefact/www/CakeLORD//Users/view.php:160
+msgid "Lastname"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:69
+#: /home/artefact/www/CakeLORD//Litters/view.php:120
+#: /home/artefact/www/CakeLORD//Rats/view.php:83
+#: /home/artefact/www/CakeLORD//Roles/view.php:78
+#: /home/artefact/www/CakeLORD//States/summary.php:53
+#: /home/artefact/www/CakeLORD//Users/view.php:164
+#: /home/artefact/www/CakeLORD//element/simple_rats.php:26
+msgid "Birth Date"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:70
+#: /home/artefact/www/CakeLORD//Rats/search.php:50
+#: /home/artefact/www/CakeLORD//Rats/view.php:87
+#: /home/artefact/www/CakeLORD//Roles/view.php:79
+#: /home/artefact/www/CakeLORD//Users/view.php:168
+msgid "Sex"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:71
+#: /home/artefact/www/CakeLORD//Roles/view.php:80
+#: /home/artefact/www/CakeLORD//Users/view.php:52
+msgid "Localization"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:72
+#: /home/artefact/www/CakeLORD//Roles/view.php:81
+msgid "Avatar"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:73
+#: /home/artefact/www/CakeLORD//Roles/view.php:82
+msgid "About Me"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:74
+#: /home/artefact/www/CakeLORD//Roles/view.php:83
+#: /home/artefact/www/CakeLORD//Users/view.php:180
+msgid "Wants Newsletter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:75
+#: /home/artefact/www/CakeLORD//Roles/view.php:84
+msgid "Role Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:76
+#: /home/artefact/www/CakeLORD//Roles/view.php:85
+#: /home/artefact/www/CakeLORD//Users/view.php:172
+msgid "Failed Login Attempts"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:77
+#: /home/artefact/www/CakeLORD//Roles/view.php:86
+#: /home/artefact/www/CakeLORD//Users/view.php:176
+msgid "Failed Login Last Date"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:78
+#: /home/artefact/www/CakeLORD//Roles/view.php:87
+#: /home/artefact/www/CakeLORD//Users/view.php:184
+msgid "Is Locked"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:79
+#: /home/artefact/www/CakeLORD//Roles/view.php:89
+#: /home/artefact/www/CakeLORD//Users/view.php:130
+msgid "Staff Comments"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:117
+msgid "Related Messages"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:123
+msgid "Conversation Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Conversations/view.php:125
+msgid "From User Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Countries/add.php:18
+#: /home/artefact/www/CakeLORD//Countries/edit.php:23
+#: /home/artefact/www/CakeLORD//Countries/view.php:20
+msgid "List Countries"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Countries/add.php:25
+msgid "Add Country"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Countries/edit.php:30
+#: /home/artefact/www/CakeLORD//Countries/view.php:18
+msgid "Edit Country"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Countries/index.php:8
+#: /home/artefact/www/CakeLORD//Countries/view.php:21
+msgid "New Country"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Countries/index.php:9
+msgid "All Available Countries"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Countries/view.php:19
+msgid "Delete Country"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Countries/view.php:27
+msgid "Countries"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Countries/view.php:30
+msgid "Information"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Countries/view.php:37
+msgid "Iso3166"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Countries/view.php:46
+msgid "Ratteries registered in this country"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Countries/view.php:49
+#: /home/artefact/www/CakeLORD//Litters/in_state.php:14
+#: /home/artefact/www/CakeLORD//Rats/born_after.php:14
+#: /home/artefact/www/CakeLORD//Rats/born_before.php:13
+#: /home/artefact/www/CakeLORD//Rats/from_rattery.php:14
+#: /home/artefact/www/CakeLORD//Rats/in_state.php:14
+#: /home/artefact/www/CakeLORD//Rats/index.php:11
+#: /home/artefact/www/CakeLORD//Rats/named.php:14
+#: /home/artefact/www/CakeLORD//Rats/owned_by.php:14
+#: /home/artefact/www/CakeLORD//Rats/search.php:198
+#: /home/artefact/www/CakeLORD//Rats/view.php:223
+#: /home/artefact/www/CakeLORD//Ratteries/in_state.php:14
+#: /home/artefact/www/CakeLORD//Ratteries/index.php:12
+#: /home/artefact/www/CakeLORD//Ratteries/named.php:15
+#: /home/artefact/www/CakeLORD//Ratteries/owned_by.php:15
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:283
+#: /home/artefact/www/CakeLORD//Users/view.php:82
+#: /home/artefact/www/CakeLORD//Users/view.php:97
+#: /home/artefact/www/CakeLORD//Users/view.php:114
+msgid ""
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/add.php:11
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/edit.php:16
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:26
+msgid "List Death Primary Causes"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/add.php:18
+msgid "Add Death Primary Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/edit.php:23
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:24
+msgid "Edit Death Primary Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/index.php:8
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:27
+msgid "New Death Primary Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/index.php:9
+msgid "Death Primary Causes"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/index.php:34
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/index.php:38
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:86
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/index.php:32
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/index.php:36
+#: /home/artefact/www/CakeLORD//Litters/view.php:155
+#: /home/artefact/www/CakeLORD//element/rats.php:82
+#: /home/artefact/www/CakeLORD//element/simple_rats.php:82
+msgid "See Rat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:25
+msgid "Delete Death Primary Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:33
+msgid "Primary Death Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:41
+msgid "Identification code"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:45
+msgid "Happens only to infant rats?"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:49
+msgid "Accidental cause?"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:53
+msgid "Happens only to elderly rats?"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:66
+msgid "Related information"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:67
+msgid "Related Death Secondary Causes"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:74
+msgid "Tumor?"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathPrimaryCauses/view.php:95
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:54
+msgid "Statistics"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/add.php:11
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/edit.php:16
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:20
+msgid "List Death Secondary Causes"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/add.php:18
+msgid "Add Death Secondary Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/edit.php:23
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:18
+msgid "Edit Death Secondary Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/index.php:8
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:21
+msgid "New Death Secondary Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/index.php:9
+msgid "All Death Secondary Causes"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:19
+msgid "Delete Death Secondary Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:27
+msgid "Secondary Death Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:39
+#: /home/artefact/www/CakeLORD//Rats/view.php:185
+msgid "Death Primary Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//DeathSecondaryCauses/view.php:43
+msgid "Is Tumor"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Dilutions/add.php:18
+#: /home/artefact/www/CakeLORD//Dilutions/edit.php:23
+msgid "List Dilutions"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Dilutions/add.php:25
+msgid "Add Dilution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Dilutions/edit.php:30
+msgid "Edit Dilution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:8
+msgid "New Dilution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Dilutions/index.php:9
+msgid "All Dilutions"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:24
+msgid "Edit dilution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:25
+msgid "Delete dilution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:26
+msgid "List dilutions"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:27
+msgid "New dilution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:37
+#: /home/artefact/www/CakeLORD//Dilutions/view.php:45
+#: /home/artefact/www/CakeLORD//Rats/view.php:148
+msgid "Dilution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Earsets/add.php:18
+#: /home/artefact/www/CakeLORD//Earsets/edit.php:23
+#: /home/artefact/www/CakeLORD//Earsets/view.php:20
+msgid "List Earsets"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Earsets/add.php:25
+msgid "Add Earset"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Earsets/edit.php:30
+#: /home/artefact/www/CakeLORD//Earsets/view.php:18
+msgid "Edit Earset"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Earsets/index.php:8
+#: /home/artefact/www/CakeLORD//Earsets/view.php:21
+msgid "New Earset"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Earsets/index.php:9
+msgid "All Earsets"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Earsets/view.php:19
+msgid "Delete Earset"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Earsets/view.php:30
+#: /home/artefact/www/CakeLORD//Rats/view.php:156
+msgid "Earset"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Earsets/view.php:38
+msgid "earset"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Eyecolors/add.php:18
+#: /home/artefact/www/CakeLORD//Eyecolors/edit.php:23
+msgid "List Eyecolors"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Eyecolors/add.php:25
+msgid "Add Eyecolor"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Eyecolors/edit.php:30
+msgid "Edit Eyecolor"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:8
+msgid "New Eyecolor"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Eyecolors/index.php:9
+msgid "All Eyecolors"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:18
+msgid "Edit eyecolor"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:19
+msgid "Delete eyecolor"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:20
+msgid "List eyecolors"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:21
+msgid "New eyecolor"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:30
+#: /home/artefact/www/CakeLORD//Rats/view.php:144
+msgid "Eyecolor"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Eyecolors/view.php:38
+msgid "eyecolor"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Faqs/add.php:11
+#: /home/artefact/www/CakeLORD//Faqs/edit.php:16
+#: /home/artefact/www/CakeLORD//Faqs/view.php:13
+msgid "List Faqs"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Faqs/add.php:18
+msgid "Add Faq"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Faqs/edit.php:23
+#: /home/artefact/www/CakeLORD//Faqs/view.php:11
+msgid "Edit Faq"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Faqs/index.php:8
+#: /home/artefact/www/CakeLORD//Faqs/view.php:14
+msgid "New Faq"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Faqs/index.php:9
+msgid "Faqs"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Faqs/view.php:12
+msgid "Delete Faq"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Faqs/view.php:22
+msgid "Category"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//LitterSnapshots/add.php:18
+#: /home/artefact/www/CakeLORD//LitterSnapshots/edit.php:23
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:20
+msgid "List Litter Snapshots"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//LitterSnapshots/add.php:25
+msgid "Add Litter Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//LitterSnapshots/edit.php:30
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:18
+msgid "Edit Litter Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:8
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:21
+msgid "New Litter Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//LitterSnapshots/index.php:9
+msgid "Litter Snapshots"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:19
+msgid "Delete Litter Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:33
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:33
+#: /home/artefact/www/CakeLORD//Rats/search.php:119
+#: /home/artefact/www/CakeLORD//Rats/view.php:288
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:33
+msgid "State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//LitterSnapshots/view.php:46
+#: /home/artefact/www/CakeLORD//Litters/view.php:234
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:46
+#: /home/artefact/www/CakeLORD//Rats/view.php:287
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:46
+msgid "Data"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/add.php:18
+#: /home/artefact/www/CakeLORD//Litters/edit.php:23
+msgid "List Litters"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/add.php:25
+msgid "Add Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/edit.php:30
+msgid "Edit Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/in_state.php:10
+#: /home/artefact/www/CakeLORD//Rats/born_after.php:10
+#: /home/artefact/www/CakeLORD//Rats/born_before.php:9
+#: /home/artefact/www/CakeLORD//Rats/from_rattery.php:10
+#: /home/artefact/www/CakeLORD//Rats/in_state.php:10
+#: /home/artefact/www/CakeLORD//Rats/named.php:10
+#: /home/artefact/www/CakeLORD//Rats/owned_by.php:10
+#: /home/artefact/www/CakeLORD//Ratteries/in_state.php:10
+#: /home/artefact/www/CakeLORD//Ratteries/named.php:11
+#: /home/artefact/www/CakeLORD//Ratteries/owned_by.php:11
+msgid "Search Results"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/in_state.php:12
+msgid "Litters in state "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/in_state.php:12
+#: /home/artefact/www/CakeLORD//Rats/from_rattery.php:12
+#: /home/artefact/www/CakeLORD//Rats/in_state.php:12
+#: /home/artefact/www/CakeLORD//Rats/named.php:12
+#: /home/artefact/www/CakeLORD//Rats/owned_by.php:12
+#: /home/artefact/www/CakeLORD//Ratteries/in_state.php:12
+#: /home/artefact/www/CakeLORD//Ratteries/named.php:13
+#: /home/artefact/www/CakeLORD//Ratteries/owned_by.php:13
+msgid "« "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/in_state.php:12
+#: /home/artefact/www/CakeLORD//Rats/from_rattery.php:12
+#: /home/artefact/www/CakeLORD//Rats/in_state.php:12
+#: /home/artefact/www/CakeLORD//Rats/named.php:12
+#: /home/artefact/www/CakeLORD//Rats/owned_by.php:12
+#: /home/artefact/www/CakeLORD//Ratteries/in_state.php:12
+#: /home/artefact/www/CakeLORD//Ratteries/named.php:13
+#: /home/artefact/www/CakeLORD//Ratteries/owned_by.php:13
+msgid " »"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:23
+msgid "Inbreeding report"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:35
+msgid "Shortest family tree branch"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:36
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:41
+msgid "generations"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:36
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:41
+msgid "generation"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:40
+msgid "Longest family tree branch"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:45
+msgid "Number of known ancestors"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:46
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:51
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:58
+msgid "rats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:46
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:51
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:58
+msgid "rat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:50
+msgid "Number of distinct ancestors"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:57
+msgid "Number of founding ancestors"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:62
+msgid "Ancestor Loss Coefficient"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:67
+msgid "Coefficient of Inbreeding"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/inbreeding.php:83
+msgid "Global inbreeding coefficient"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/index.php:8
+msgid "New Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/index.php:9
+msgid "All Litters"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/my.php:10
+#: /home/artefact/www/CakeLORD//element/my/sidebar.php:41
+msgid "My Litters"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:42
+msgid "Dam: "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:66
+#: /home/artefact/www/CakeLORD//Litters/view.php:88
+msgid "Sire: "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:112
+#: /home/artefact/www/CakeLORD//States/summary.php:100
+#: /home/artefact/www/CakeLORD//element/rats.php:17
+#: /home/artefact/www/CakeLORD//element/simple_ratteries.php:15
+msgid "Prefix"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:116
+msgid "Mating Date"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:124
+msgid "Pups Number"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:125
+msgid "pups"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:128
+msgid "Pups Number Stillborn"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:139
+msgid "Rattery Prefix"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:140
+msgid "Rattery Name"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:141
+msgid "Contribution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:181
+msgid "Survival rate"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:185
+msgid "Average Lifespan"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:191
+#: /home/artefact/www/CakeLORD//Rats/view.php:238
+#: /home/artefact/www/CakeLORD//Users/view.php:128
+msgid "Private information"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:193
+#: /home/artefact/www/CakeLORD//Users/view.php:191
+msgid "Related Conversations"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:199
+#: /home/artefact/www/CakeLORD//Rats/view.php:249
+#: /home/artefact/www/CakeLORD//Users/view.php:197
+#: /home/artefact/www/CakeLORD//element/my/messages.php:7
+msgid "Rat Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:228
+msgid "Related Litter Snapshots"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Litters/view.php:236
+msgid "State Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Logs/add.php:18
+#: /home/artefact/www/CakeLORD//Logs/edit.php:23
+#: /home/artefact/www/CakeLORD//Logs/view.php:20
+msgid "List Logs"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Logs/add.php:25
+msgid "Add Log"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Logs/edit.php:30
+#: /home/artefact/www/CakeLORD//Logs/view.php:18
+msgid "Edit Log"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Logs/index.php:8
+#: /home/artefact/www/CakeLORD//Logs/view.php:21
+msgid "New Log"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Logs/index.php:9
+msgid "Logs"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Logs/view.php:19
+msgid "Delete Log"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Logs/view.php:38
+msgid "Event"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Markings/add.php:18
+#: /home/artefact/www/CakeLORD//Markings/edit.php:23
+msgid "List Markings"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Markings/add.php:25
+msgid "Add Marking"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Markings/edit.php:30
+msgid "Edit Marking"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Markings/index.php:8
+msgid "New Marking"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Markings/index.php:9
+msgid "All Markings"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Markings/view.php:24
+msgid "Edit marking"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Markings/view.php:25
+msgid "Delete marking"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Markings/view.php:26
+msgid "List markings"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Markings/view.php:27
+msgid "New marking"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Markings/view.php:37
+#: /home/artefact/www/CakeLORD//Markings/view.php:45
+#: /home/artefact/www/CakeLORD//Rats/view.php:152
+msgid "Marking"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Messages/add.php:18
+#: /home/artefact/www/CakeLORD//Messages/edit.php:23
+#: /home/artefact/www/CakeLORD//Messages/view.php:20
+msgid "List Messages"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Messages/add.php:25
+msgid "Add Message"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Messages/edit.php:30
+#: /home/artefact/www/CakeLORD//Messages/view.php:18
+msgid "Edit Message"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Messages/index.php:8
+#: /home/artefact/www/CakeLORD//Messages/view.php:21
+msgid "New Message"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Messages/index.php:9
+msgid "Messages"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Messages/view.php:19
+msgid "Delete Message"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Messages/view.php:29
+#: /home/artefact/www/CakeLORD//UsersConversations/view.php:33
+msgid "Conversation"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Messages/view.php:33
+#: /home/artefact/www/CakeLORD//UsersConversations/view.php:29
+msgid "User"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Operators/add.php:18
+#: /home/artefact/www/CakeLORD//Operators/edit.php:23
+#: /home/artefact/www/CakeLORD//Operators/view.php:20
+msgid "List Operators"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Operators/add.php:25
+msgid "Add Operator"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Operators/edit.php:30
+#: /home/artefact/www/CakeLORD//Operators/view.php:18
+msgid "Edit Operator"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Operators/index.php:8
+#: /home/artefact/www/CakeLORD//Operators/view.php:21
+msgid "New Operator"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Operators/index.php:9
+msgid "Operators"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Operators/view.php:19
+msgid "Delete Operator"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Operators/view.php:29
+#: /home/artefact/www/CakeLORD//States/summary.php:37
+#: /home/artefact/www/CakeLORD//States/view.php:50
+msgid "Symbol"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Operators/view.php:33
+msgid "Meaning"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Operators/view.php:42
+msgid "Related Compatibilities"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Operators/view.php:49
+msgid "Operator Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Pages/home.php:119
+msgid "Browse"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Pages/home.php:120
+#: /home/artefact/www/CakeLORD//Users/register.php:14
+msgid "Register"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatSnapshots/add.php:18
+#: /home/artefact/www/CakeLORD//RatSnapshots/edit.php:23
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:20
+msgid "List Rat Snapshots"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatSnapshots/add.php:25
+msgid "Add Rat Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatSnapshots/edit.php:30
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:18
+msgid "Edit Rat Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:8
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:21
+msgid "New Rat Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatSnapshots/index.php:9
+msgid "Rat Snapshots"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatSnapshots/view.php:19
+msgid "Delete Rat Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/add.php:18
+#: /home/artefact/www/CakeLORD//Rats/edit.php:23
+msgid "List Rats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/add.php:25
+msgid "Add Rat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/born_after.php:12
+msgid "Rats born after"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/born_before.php:11
+msgid "Rats born before"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:25
+msgid "Declare Death of "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:36
+msgid "Main information"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:38
+msgid "Please enter the death date (or date of last news)"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:41
+msgid "Select the death cause category"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:49
+msgid "Select the precise cause of death, if known"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:56
+msgid "Complementary information"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:58
+msgid "The rat was euthanized"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:59
+msgid "The diagnosis was confirmed by a veterinary"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:60
+msgid "The diagnosis was confirmed by an autopsy or analyses"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:67
+msgid "Append comments if needed"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/declare_death.php:73
+msgid "Declare Death"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/edit.php:30
+msgid "Edit Rat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/from_rattery.php:12
+msgid "Rats from rattery with name or prefix like"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/in_state.php:12
+msgid "Rats in state "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/index.php:8
+msgid "New Rat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/index.php:9
+msgid "All Rats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/my.php:10
+msgid "My Rats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/named.php:12
+msgid "Rats named"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/owned_by.php:12
+msgid "Rats whose owner’s username is like "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/pedigree.php:24
+msgid "Full Screen"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/pedigree.php:28
+msgid "Print"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:26
+msgid "Advanced search"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:30
+msgid "Please fill in your search criteria below. You can leave empty the criteria you do not want to use."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:34
+msgid "New search"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:44
+msgid "Identity criteria"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:76
+msgid "Origin"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:78
+#: /home/artefact/www/CakeLORD//Rats/search.php:99
+#: /home/artefact/www/CakeLORD//Rats/transfer_ownership.php:44
+msgid "Type here..."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:97
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:67
+#: /home/artefact/www/CakeLORD//Users/view.php:33
+#: /home/artefact/www/CakeLORD//element/simple_rats.php:35
+#: /home/artefact/www/CakeLORD//element/simple_ratteries.php:21
+msgid "Owner"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:134
+msgid "Deceased"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:152
+msgid "Physical criteria"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:182
+msgid "Search"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:191
+msgid "Results"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:191
+msgid "{{pages}}"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:191
+msgid "{{page}}/{{pages}}"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/search.php:194
+msgid "Sorry, no rat matches your criteria. You can try again above."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/sex.php:8
+msgid "Rats sex :"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/sex.php:13
+#: /home/artefact/www/CakeLORD//element/rats.php:11
+#: /home/artefact/www/CakeLORD//element/simple_rats.php:11
+msgid "Picture"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/transfer_ownership.php:25
+msgid "Change Owner of "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/transfer_ownership.php:42
+msgid "Search and select new owner username"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/transfer_ownership.php:58
+msgid "Append comments (if needed)"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/transfer_ownership.php:64
+msgid "Transfer ownership"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:23
+msgid "Modify Rat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:27
+msgid "Change Owner"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:31
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:31
+msgid "Declare Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:35
+#: /home/artefact/www/CakeLORD//element/rats.php:86
+msgid "Declare Rat Death"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:40
+msgid "Edit Rat as Admin"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:43
+msgid "Delete Rat"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:71
+#: /home/artefact/www/CakeLORD//States/summary.php:76
+msgid "Pedigree Identifier"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:79
+#: /home/artefact/www/CakeLORD//element/simple_rats.php:23
+msgid "Pup Name"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:91
+msgid "Owner User"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:109
+msgid "Dam"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:118
+msgid "Sire"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:128
+msgid "Genealogy"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:164
+msgid "Singularities"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:172
+msgid "Is Alive"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:176
+msgid "Age"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:176
+msgid "Age at death"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:181
+msgid "Death Date"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:189
+msgid "Death Secondary Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:193
+msgid "Death Euthanized"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:197
+msgid "Death Diagnosed"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:201
+msgid "Death Necropsied"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:215
+msgid "Bred Litters"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:279
+msgid "Snapshots"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:286
+msgid "Differences"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Rats/view.php:299
+msgid "Restore"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsLitters/add.php:18
+#: /home/artefact/www/CakeLORD//RatsLitters/edit.php:23
+#: /home/artefact/www/CakeLORD//RatsLitters/view.php:20
+msgid "List Rats Litters"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsLitters/add.php:25
+msgid "Add Rats Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsLitters/edit.php:30
+#: /home/artefact/www/CakeLORD//RatsLitters/view.php:18
+msgid "Edit Rats Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:8
+#: /home/artefact/www/CakeLORD//RatsLitters/view.php:21
+msgid "New Rats Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsLitters/index.php:9
+msgid "Rats Litters"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsLitters/view.php:19
+msgid "Delete Rats Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsSingularities/add.php:18
+#: /home/artefact/www/CakeLORD//RatsSingularities/edit.php:23
+#: /home/artefact/www/CakeLORD//RatsSingularities/view.php:20
+msgid "List Rats Singularities"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsSingularities/add.php:25
+msgid "Add Rats Singularity"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsSingularities/edit.php:30
+#: /home/artefact/www/CakeLORD//RatsSingularities/view.php:18
+msgid "Edit Rats Singularity"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:8
+#: /home/artefact/www/CakeLORD//RatsSingularities/view.php:21
+msgid "New Rats Singularity"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsSingularities/index.php:9
+msgid "Rats Singularities"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsSingularities/view.php:19
+msgid "Delete Rats Singularity"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatsSingularities/view.php:33
+#: /home/artefact/www/CakeLORD//Singularities/view.php:38
+#: /home/artefact/www/CakeLORD//Singularities/view.php:46
+msgid "Singularity"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/add.php:18
+#: /home/artefact/www/CakeLORD//Ratteries/edit.php:23
+#: /home/artefact/www/CakeLORD//Ratteries/register.php:12
+msgid "List Ratteries"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/add.php:25
+msgid "Add Rattery"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/edit.php:30
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:36
+msgid "Edit Rattery"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/in_state.php:12
+msgid "Ratteries in state "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/index.php:9
+msgid "New Rattery"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/index.php:10
+msgid "All Ratteries"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/my.php:27
+msgid "Closed Ratteries"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/named.php:13
+msgid "Ratteries with name or prefix like "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/owned_by.php:13
+msgid "Ratteries whose owner’s username is like "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/register.php:17
+msgid "Register your rattery"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/register.php:21
+msgid "Please enter your rattery information below"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/register.php:23
+msgid "This prefix is already in use"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:23
+msgid "See on Map"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:27
+msgid "Modify Rattery"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:39
+msgid "Delete Rattery"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:71
+msgid "Founded in"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:75
+msgid "Area"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:79
+msgid "Zip Code"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:83
+#: /home/artefact/www/CakeLORD//element/simple_ratteries.php:30
+msgid "Country"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:87
+msgid "Website"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:265
+msgid "Unknown date"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Ratteries/view.php:273
+#: /home/artefact/www/CakeLORD//element/litters.php:65
+msgid "See Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatteriesLitters/add.php:18
+#: /home/artefact/www/CakeLORD//RatteriesLitters/edit.php:23
+#: /home/artefact/www/CakeLORD//RatteriesLitters/view.php:20
+msgid "List Ratteries Litters"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatteriesLitters/add.php:25
+msgid "Add Ratteries Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatteriesLitters/edit.php:30
+#: /home/artefact/www/CakeLORD//RatteriesLitters/view.php:18
+msgid "Edit Ratteries Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:8
+#: /home/artefact/www/CakeLORD//RatteriesLitters/view.php:21
+msgid "New Ratteries Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatteriesLitters/index.php:9
+msgid "Ratteries Litters"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatteriesLitters/view.php:19
+msgid "Delete Ratteries Litter"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatteriesLitters/view.php:37
+msgid "Litters Contribution"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatterySnapshots/add.php:18
+#: /home/artefact/www/CakeLORD//RatterySnapshots/edit.php:23
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:20
+msgid "List Rattery Snapshots"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatterySnapshots/add.php:25
+msgid "Add Rattery Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatterySnapshots/edit.php:30
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:18
+msgid "Edit Rattery Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:8
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:21
+msgid "New Rattery Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatterySnapshots/index.php:9
+msgid "Rattery Snapshots"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//RatterySnapshots/view.php:19
+msgid "Delete Rattery Snapshot"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/add.php:11
+#: /home/artefact/www/CakeLORD//Roles/edit.php:16
+#: /home/artefact/www/CakeLORD//Roles/view.php:13
+msgid "List Roles"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/add.php:18
+msgid "Add Role"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/edit.php:23
+#: /home/artefact/www/CakeLORD//Roles/view.php:11
+msgid "Edit Role"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/index.php:8
+#: /home/artefact/www/CakeLORD//Roles/view.php:14
+msgid "New Role"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/index.php:9
+msgid "Roles"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/view.php:12
+msgid "Delete Role"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/view.php:30
+msgid "Is Root"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/view.php:34
+msgid "Is Admin"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/view.php:38
+msgid "Is Staff"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/view.php:42
+msgid "Can Change State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/view.php:46
+msgid "Can Edit Others"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/view.php:50
+msgid "Can Edit Frozen"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/view.php:54
+msgid "Can Delete"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/view.php:58
+msgid "Can Configure"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/view.php:62
+msgid "Can Restore"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Roles/view.php:88
+msgid "Passkey"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Singularities/add.php:18
+#: /home/artefact/www/CakeLORD//Singularities/edit.php:23
+msgid "List Singularities"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Singularities/add.php:25
+msgid "Add Singularity"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Singularities/edit.php:30
+msgid "Edit Singularity"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Singularities/index.php:8
+msgid "New Singularity"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Singularities/index.php:9
+msgid "All Singularities"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Singularities/view.php:25
+msgid "Edit singularity"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Singularities/view.php:26
+msgid "Delete singularities"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Singularities/view.php:27
+msgid "List singularities"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Singularities/view.php:28
+msgid "New singularity"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/add.php:11
+#: /home/artefact/www/CakeLORD//States/edit.php:16
+#: /home/artefact/www/CakeLORD//States/summary.php:20
+#: /home/artefact/www/CakeLORD//States/view.php:26
+msgid "List States"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/add.php:18
+msgid "Add State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/edit.php:23
+#: /home/artefact/www/CakeLORD//States/summary.php:18
+#: /home/artefact/www/CakeLORD//States/view.php:24
+msgid "Edit State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/index.php:8
+#: /home/artefact/www/CakeLORD//States/summary.php:21
+#: /home/artefact/www/CakeLORD//States/view.php:27
+msgid "New State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/index.php:9
+msgid "All Sheet States"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/index.php:50
+msgid "See State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/summary.php:19
+#: /home/artefact/www/CakeLORD//States/view.php:25
+msgid "Delete State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/summary.php:47
+msgid "Related Litters"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/summary.php:70
+msgid "Related Rats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/summary.php:94
+msgid "Related Ratteries"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/summary.php:102
+msgid "Owner User Id"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:22
+#: /home/artefact/www/CakeLORD//Users/view.php:22
+msgid "Find their rats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:33
+msgid "Sheet State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:58
+msgid "Css Property"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:62
+msgid "Properties"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:65
+msgid "Is Default"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:69
+msgid "Needs User Action"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:73
+msgid "Needs Staff Action"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:77
+msgid "Is Reliable"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:81
+msgid "Is Visible"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:85
+msgid "Is Searchable"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:89
+msgid "Is Frozen"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:94
+msgid "Workflow"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:97
+msgid "Next OK State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:102
+msgid "Next KO State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:106
+msgid "Next Frozen State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:110
+msgid "Next Thawed State"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:116
+msgid "Related sheets and snapshots"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:119
+msgid "Related rats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:120
+msgid "rat sheets"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:120
+#: /home/artefact/www/CakeLORD//States/view.php:126
+#: /home/artefact/www/CakeLORD//States/view.php:132
+msgid "are currently in this state."
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:125
+msgid "Related ratteries"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:126
+msgid "rattery sheets"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:131
+msgid "Related litters"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//States/view.php:132
+msgid "litter sheets"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/add.php:18
+#: /home/artefact/www/CakeLORD//Users/edit.php:23
+#: /home/artefact/www/CakeLORD//Users/view.php:26
+msgid "List Users"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/add.php:25
+msgid "Add User"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/edit.php:30
+#: /home/artefact/www/CakeLORD//Users/view.php:24
+msgid "Edit User"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/index.php:8
+#: /home/artefact/www/CakeLORD//Users/view.php:27
+msgid "New User"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/index.php:9
+msgid "All Users"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/login.php:9
+msgid "Please enter your registration email address and password"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/login.php:15
+msgid "Forgotten password?"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/login.php:15
+msgid "Not registered?"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/login.php:18
+msgid "Login"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/lost_password.php:8
+msgid "Please enter your email"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/lost_password.php:11
+msgid "Request reset email"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/register.php:7
+msgid "In order to create your account, please fill in this form"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/register.php:11
+msgid "What is the meaning of the letter \"R\" in the LORD acronym?"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/reset_password.php:7
+msgid "Enter New Password"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/reset_password.php:12
+msgid "Submit new password"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/view.php:25
+msgid "Delete User"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/view.php:56
+msgid "Role"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/view.php:67
+msgid "About me"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/view.php:75
+msgid "Related entries"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/view.php:80
+msgid "Ratteries"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/view.php:95
+msgid "Owned Rats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/view.php:112
+msgid "Managed Rats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//Users/view.php:139
+msgid "User information"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//UsersConversations/add.php:18
+#: /home/artefact/www/CakeLORD//UsersConversations/edit.php:23
+#: /home/artefact/www/CakeLORD//UsersConversations/view.php:20
+msgid "List Users Conversations"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//UsersConversations/add.php:25
+msgid "Add Users Conversation"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//UsersConversations/edit.php:30
+#: /home/artefact/www/CakeLORD//UsersConversations/view.php:18
+msgid "Edit Users Conversation"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:8
+#: /home/artefact/www/CakeLORD//UsersConversations/view.php:21
+msgid "New Users Conversation"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//UsersConversations/index.php:9
+msgid "Users Conversations"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//UsersConversations/view.php:19
+msgid "Delete Users Conversation"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/my/messages.php:1
+msgid "My Messages"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/my/rattery.php:5
+msgid "Email:"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/my/sidebar.php:5
+msgid "My profile"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/my/sidebar.php:12
+msgid "All my rats"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/my/sidebar.php:17
+msgid "My females"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/my/sidebar.php:22
+msgid "My males"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/my/sidebar.php:27
+msgid "My deceased"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/my/sidebar.php:34
+msgid "My ratteries"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/my/sidebar.php:48
+msgid "Admin site"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/my/statistics.php:1
+msgid "My Statistics"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/rats.php:29
+msgid "Reached Age"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/rats.php:32
+msgid "Death cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/ratteries.php:12
+#: /home/artefact/www/CakeLORD//element/simple_ratteries.php:12
+msgid "picture"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/ratteries.php:70
+#: /home/artefact/www/CakeLORD//element/ratteries.php:75
+#: /home/artefact/www/CakeLORD//element/simple_ratteries.php:70
+#: /home/artefact/www/CakeLORD//element/simple_ratteries.php:75
+msgid "See Rattery"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/simple_rats.php:14
+msgid "Identifier"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/simple_rats.php:17
+msgid "Prefix  "
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/simple_rats.php:29
+msgid "Age (mo)"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/simple_rats.php:32
+msgid "Death Cause"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/simple_ratteries.php:9
+msgid "On?"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/simple_ratteries.php:24
+msgid "Birth year"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//element/simple_ratteries.php:27
+msgid "Zip code"
+msgstr ""
+
+#: /home/artefact/www/CakeLORD//layout/error.php:40
+msgid "Back"
+msgstr ""
+

@@ -292,8 +292,6 @@ class LittersController extends AppController
         $coancestry = [];
 
         // sort out by decreasing path length to compute coancestors inbreeding easily?
-        // $coancestry table should look like ['coancestor_id' => ['nb_appearances', 'own_coi', 'coi_contrib']]
-
         foreach($duplicate_id_list as $sub_path => $duplicate) {
 
             // extract all lines from $duplicates which share the same value (duplicate id)
@@ -308,7 +306,7 @@ class LittersController extends AppController
             $f_paths = array_filter($paths, function ($input) {return $input[0] == 'F';});
             $m_paths = array_filter($paths, function ($input) {return $input[0] == 'M';});
 
-            // loop on pairs of path {(mother,ancestor),(father,ancestor)}
+            // loop on pairs of path {(mother to ancestor),(father to ancestor)}
             foreach($f_paths as $f_path) {
                 // trim f_path
                 $f_path = trim($f_path,'X');

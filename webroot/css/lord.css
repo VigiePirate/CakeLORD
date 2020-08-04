@@ -281,11 +281,10 @@ td,th {
 
 .actions, .actions-title {
     text-align:right;
-    min-width: 6ch;
   }
 
-.doubleprefix {
-    min-width: 11ch;
+.nowrap {
+    white-space: nowrap;
 }
 
 blockquote {

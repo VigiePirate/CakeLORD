@@ -14,7 +14,7 @@
                 <th><?= $this->Paginator->sort('pedigree_identifier','Identifier') ?></th>
             <?php endif; ?>
             <?php if (! in_array('prefix', $exceptions)): ?>
-                <th class="doubleprefix"><?= __('Prefix') ?></th>
+                <th><?= __('Prefix') ?></th>
             <?php endif; ?>
             <?php if (! in_array('name', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('name') ?></th>
@@ -52,7 +52,7 @@
                         <td><?= $this->Html->link($rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('prefix', $exceptions)): ?>
-                        <td><?= h($rat->double_prefix) ?></td>
+                        <td><span class="nowrap"><?= h($rat->double_prefix) ?></span></td>
                     <?php endif; ?>
                     <?php if (! in_array('name', $exceptions)): ?>
                         <td><?= h($rat->name) ?></td>
@@ -76,6 +76,7 @@
                         <td class="sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></td>
                     <?php endif; ?>
                     <td class="actions">
+                        <span class="nowrap">
                         <?= $this->Html->image('/img/icon-view.svg', [
                             'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
                             'class' => 'action-icon',
@@ -84,6 +85,7 @@
                             'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
                             'class' => 'action-icon',
                             'alt' => __('Declare Rat Death')]) ?>
+                        </span>
                     </td>
                 </tr>
             <?php endforeach; ?>
