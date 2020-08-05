@@ -163,7 +163,7 @@
 
             <h2>Offspring</h2>
             <?php if (!empty($litter->offspring_rats)) : ?>
-                <?= $this->element('rats', [
+                <?= $this->element('simple_rats', [
                     'rubric' => '',
                     'rats' => $offsprings,
                     'exceptions' => [
