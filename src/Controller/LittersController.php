@@ -86,22 +86,81 @@ class LittersController extends AppController
      */
     public function add()
     {
-        $litter = $this->Litters->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $litter = $this->Litters->patchEntity($litter, $this->request->getData());
-            if ($this->Litters->save($litter)) {
-                $this->Flash->success(__('The litter has been saved.'));
+        //// original baked add
+        // $litter = $this->Litters->newEmptyEntity();
+        // if ($this->request->is('post')) {
+        //     $litter = $this->Litters->patchEntity($litter, $this->request->getData());
+        //     if ($this->Litters->save($litter)) {
+        //         $this->Flash->success(__('The litter has been saved.'));
+        //
+        //         return $this->redirect(['action' => 'index']);
+        //     }
+        //     $this->Flash->error(__('The litter could not be saved. Please, try again.'));
+        // }
+        // $users = $this->Litters->Users->find('list', ['limit' => 200]);
+        // $states = $this->Litters->States->find('list', ['limit' => 200]);
+        // $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
+        // $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
+        // $contributions = $this->Litters->Contributions->find('list', ['limit' => 200]);
+        // $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries', 'contributions'));
 
-                return $this->redirect(['action' => 'index']);
+        $litter = $this->Litters->newEmptyEntity();
+
+        if ($this->request->is('post')) {
+            // this is not an unauthenticated action, so, test should not be necessary?
+            $result = $this->Authentication->getResult();
+
+            if ($result->isValid()) {
+                // get and complete request data
+                $data = $this->request->getData();
+                // process data to fit patchEntity expected format
+                $mother_id = $this->request->getData('mother_id');
+
+                if (! empty($this->request->getData('father_id'))) {
+                    $father_id = $this->request->getData('father_id');
+                    $data['parent_rats'] = ['_ids' => [$mother_id, $father_id]];
+                } else {
+                    $data['parent_rats'] = ['_ids' => [$mother_id]];
+                };
+
+                // check if a litter with the same birthdate and mother exists
+                $samelitter = $this->Litters->find('fromBirth', [
+                    'birth_date' => $data['birth_date'],
+                    'mother_id' => $mother_id,
+                ])->first();
+                if (! empty($samelitter)) {
+                    $this->Flash->error(__('This litter already exists.'));
+                    return $this->redirect(['action' => 'view', $samelitter['id']]);
+                } else {
+                    dd($data);
+                    $data['creator_user_id'] = $this->Authentication->getIdentityData('id');
+                    
+                    // add contributions
+
+                    // patch and save
+                    $litter = $this->Litters->patchEntity($litter, $data);
+                    if ($this->Litters->save($litter)) {
+                        $this->Flash->success(__('The litter has been saved.'));
+
+                        return $this->redirect(['action' => 'index']);
+                    }
+                    $this->Flash->error(__('The litter could not be saved. Please, try again.'));
+                }
+            } else {
+                $this->Flash->error(__('Only registered users are allowed to register a new litter. Please sign in or sign up before proceeding.')); // . $email->smtpError);
+                return $this->redirect(['action' => 'login']);
             }
-            $this->Flash->error(__('The litter could not be saved. Please, try again.'));
         }
+
+        // for debug
         $users = $this->Litters->Users->find('list', ['limit' => 200]);
         $states = $this->Litters->States->find('list', ['limit' => 200]);
         $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
         $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
         $contributions = $this->Litters->Contributions->find('list', ['limit' => 200]);
         $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries', 'contributions'));
+
+
     }
 
     /**

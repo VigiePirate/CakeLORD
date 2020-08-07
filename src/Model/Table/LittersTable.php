@@ -56,6 +56,7 @@ class LittersTable extends Table
             'repository' => 'LitterSnapshots',
             'entityField' => 'litter_id',
         ]);
+        $this->addBehavior('State');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'creator_user_id',
@@ -170,6 +171,23 @@ class LittersTable extends Table
                     'Litters.state_id IS' => $inState,
             ]);
         }
+
+        return $query->group(['Litters.id']);
+    }
+
+    public function findFromBirth(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        $birth_date = $options['birth_date'];
+        $mother_id = $options['mother_id'];
+        $query = $query
+            ->where(['Litters.birth_date IS' => $birth_date])
+            ->matching('ParentRats', function ($q) use ($mother_id) {
+                return $q->where(['ParentRats.id' => $mother_id]);
+            });
 
         return $query->group(['Litters.id']);
     }

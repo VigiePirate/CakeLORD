@@ -114,8 +114,6 @@ a sup {
   font-size: 75%;
 }
 
-
-
 /* Forms */
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
@@ -407,7 +405,7 @@ main {
 th {
     white-space: nowrap;
     border-bottom-width: 0rem;
-    padding-bottom:0.2rem;
+    /*padding-bottom:0.2rem;*/
   }
 .signature {
   font-family:"Alegreya",serif;

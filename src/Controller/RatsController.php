@@ -480,6 +480,24 @@ class RatsController extends AppController
         ]);
     }
 
+    /* Autocomplete for forms function */
+    /* There is probably a way to avoid having three functions... */
+
+    public function autocomplete() {
+        if ($this->request->is(['ajax'])) {
+            $searchkey = $this->request->getQuery('searchkey');
+            $sex = $this->request->getQuery('sex');
+            $items = $this->Rats->find('identified', [
+                'names' => [$searchkey],
+                ])
+                ->where(['sex IS' => $sex])
+                ->select(['id', 'value' => "concat(name, ' (', pedigree_identifier, ')')", 'label' => "concat(name, ' (', pedigree_identifier, ')')"])
+            ;
+            $this->set('items', $items);
+            $this->viewBuilder()->setOption('serialize', ['items']);
+        }
+    }
+
     /* Pedigree functions */
 
     public function parentsTree($id=null) {

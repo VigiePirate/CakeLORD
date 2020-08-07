@@ -458,6 +458,34 @@ class RatsTable extends Table
         return $query->group(['Rats.id']);
     }
 
+    public function findIdentified(Query $query, array $options)
+    {
+        $columns = [
+            'Rats.id', 'Rats.pedigree_identifier', 'Rats.is_pedigree_custom', 'Rats.name', 'Rats.pup_name', 'Rats.sex', 'Rats.is_alive',
+            'Rats.rattery_id', 'Rats.owner_user_id', 'Rats.state_id', 'Rats.birth_date',
+        ];
+
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['names'])) {
+            $query->where([
+                'OR' => ['Rats.name IS' => null, 'Rats.pup_name IS' => NULL],
+            ]);
+        } else {
+            // Find rats with parts of the string in that name
+            $query->where([
+                'OR' => [
+                    'Rats.name LIKE' => implode($options['names']).'%',
+                    'Rats.pedigree_identifier LIKE' => '%'.implode($options['names']).'%',
+                ],
+            ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
     public function findFromRattery(Query $query, array $options)
     {
         $query = $query
@@ -518,7 +546,7 @@ class RatsTable extends Table
         } else {
             // Find rats with parts of the string in that name
             $query->where([
-                    'Rats.sex IN' => ($options['sex']),
+                'Rats.sex IN' => ($options['sex']),
             ]);
         }
 
