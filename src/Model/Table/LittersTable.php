@@ -152,6 +152,63 @@ class LittersTable extends Table
         $rules->add($rules->existsIn(['creator_user_id'], 'Users'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
 
+        /* No birth in the future */
+        $future = function($litter) {
+            return !( $litter->birth_date->isFuture() );
+        };
+        $rules->add($future, [
+            'errorField' => 'birth_date',
+            'message' => 'Impossible: this date is in the future. Please check and correct your entry.'
+        ]);
+
+        /* Mating should be 20-45 days before birth */
+        $short_pregnancy = function($litter) {
+            return !( $litter->has('mating_date') && ($litter->mating_date->diffInDays($litter->birth_date, false) < 20) );
+        };
+        $rules->add($short_pregnancy, [
+            'errorField' => 'mating_date',
+            'message' => 'Impossible: mating must have occurred at least 20 days before birth. Please check and correct your entry.'
+        ]);
+
+        $long_pregnancy = function($litter) {
+            return !( $litter->has('mating_date') && ($litter->mating_date->diffInDays($litter->birth_date, false) > 45) );
+        };
+        $rules->add($long_pregnancy, [
+            'errorField' => 'mating_date',
+            'message' => 'Impossible: mating must have occurred at most 45 days before birth. Please check and correct your entry.'
+        ]);
+
+        /* No dead parents */
+        $deadmother = function($litter) {
+            if ($litter->parent_rats['0']['sex'] == 'F') {
+                $mother = $litter->parent_rats['0'];
+            } else {
+                $mother = $litter->parent_rats['1'];
+            }
+            return ! (! $mother->is_alive && $litter->birth_date->gt($mother->death_date));
+        };
+        $rules->add($deadmother, [
+            'errorField' => 'birth_date',
+            'message' => 'Impossible: mother was dead at this date. Please check and correct your entry.'
+        ]);
+
+        $deadfather = function($litter) {
+            if ($litter->parent_rats['0']['sex'] == 'M') {
+                $father = $litter->parent_rats['0'];
+            } else {
+                if(! empty($litter->parent_rats['1']) ) {
+                    $father = $litter->parent_rats['1'];
+                } else {
+                    return true;
+                }
+            }
+            return ! (! $father->is_alive && ($litter->birth_date->diffInDays($father->death_date, false) > 45));
+        };
+        $rules->add($deadfather, [
+            'errorField' => 'birth_date',
+            'message' => 'Impossible: father was dead too long before this date. Please check and correct your entry.'
+        ]);
+
         return $rules;
     }
 

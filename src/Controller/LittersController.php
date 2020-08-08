@@ -86,8 +86,7 @@ class LittersController extends AppController
      */
     public function add()
     {
-        // some of the stuff here should move to beforeMarshal
-
+        // some of the stuff here should move to beforeMarshal?
         $litter = $this->Litters->newEmptyEntity([
             'associated' => ['ParentRats, Contributions']
         ]);
@@ -136,13 +135,13 @@ class LittersController extends AppController
                     ]);
 
                     $mother_rattery_id = $data['rattery_id'];
-                    if(count($mother->owner_user->ratteries) == 1) {
+                    if(count($mother->owner_user->ratteries) == 1 && ! $mother->owner_user->ratteries['0']['is_generic']) {
                         $mother_rattery_id = $mother->owner_user->ratteries['0']['id'];
                         // activate rattery if needed
                         // ... code ...
                     } else {
                         foreach($mother->owner_user->ratteries as $rattery) {
-                            if($rattery->is_alive) {
+                            if(! $rattery->is_generic && $rattery->is_alive) {
                                 $mother_rattery_id = $rattery['id'];
                             } else {
                                 // mother's owner has several ratteries, but none is active: we don't know what to do
@@ -158,34 +157,36 @@ class LittersController extends AppController
 
                     // potential contribution is father's owner's active rattery
                     // could use a separate function in the rat model, returning the active rattery of its owner
-                    $father = $this->Rats->get($father_id, [
-                        'contain' => ['OwnerUsers','OwnerUsers.Ratteries']
-                    ]);
+                    if (! empty($data['father_id'])) {
+                        $father = $this->Rats->get($father_id, [
+                            'contain' => ['OwnerUsers','OwnerUsers.Ratteries']
+                        ]);
 
-                    $father_rattery_id = $data['rattery_id'];
-                    if(count($father->owner_user->ratteries) == 1) {
-                        $father_rattery_id = $father->owner_user->ratteries['0']['id'];
-                        // activate rattery if needed
-                        // ... code ...
-                    } else {
-                        foreach($father->owner_user->ratteries as $rattery) {
-                            if($rattery->is_alive) {
-                                $father_rattery_id = $rattery['id'];
-                            } else {
-                                // mother's owner has several ratteries, but none is active: we don't know what to do
+                        $father_rattery_id = $data['rattery_id'];
+                        if(count($father->owner_user->ratteries) == 1) {
+                            $father_rattery_id = $father->owner_user->ratteries['0']['id'];
+                            // activate rattery if needed
+                            // ... code ...
+                        } else {
+                            foreach($father->owner_user->ratteries as $rattery) {
+                                if($rattery->is_alive) {
+                                    $father_rattery_id = $rattery['id'];
+                                } else {
+                                    // mother's owner has several ratteries, but none is active: we don't know what to do
+                                }
                             }
                         }
-                    }
-                    if( $data['rattery_id'] != $father_rattery_id ) {
-                        array_push($data['contributions'], [
-                            'contribution_type_id' => '3',
-                            'rattery_id' => $father_rattery_id,
-                        ]);
+                        if( $data['rattery_id'] != $father_rattery_id ) {
+                            array_push($data['contributions'], [
+                                'contribution_type_id' => '3',
+                                'rattery_id' => $father_rattery_id,
+                            ]);
+                        }
                     }
 
                     // patch and save
                     $litter = $this->Litters->patchEntity($litter, $data, [
-                        'associated' => ['ParentRats','Contributions']
+                        'associated' => ['ParentRats', 'Contributions']
                     ]);
 
                     if ($this->Litters->save($litter)) {
@@ -193,7 +194,7 @@ class LittersController extends AppController
 
                         return $this->redirect(['action' => 'index']);
                     }
-                    $this->Flash->error(__('The litter could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The litter could not be saved. Please, read explanatory messages in the form and try again.'));
                 }
             } else {
                 $this->Flash->error(__('Only registered users are allowed to register a new litter. Please sign in or sign up before proceeding.')); // . $email->smtpError);
@@ -201,15 +202,7 @@ class LittersController extends AppController
             }
         }
 
-        // for debug
-        $users = $this->Litters->Users->find('list', ['limit' => 200]);
-        $states = $this->Litters->States->find('list', ['limit' => 200]);
-        $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
-        $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $contributions = $this->Litters->Contributions->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries', 'contributions'));
-
-
+        $this->set(compact('litter'));
     }
 
     /**

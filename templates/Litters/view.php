@@ -15,8 +15,16 @@
               'url' => ['controller' => 'Articles', 'action' => 'index'],
               'class' => 'side-nav-icon',
               'alt' => __('Help')]) ?>
-
-             <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $litter->id], ['confirm' => __('Are you sure you want to delete # {0}?', $litter->id)]) ?>
+            <div class="spacer"> </div>
+            <?= $this->Form->postLink(
+                $this->Html->image('/img/icon-fa-trash.svg', [
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Delete')
+                ]),
+                ['action' => 'delete', $litter->id],
+                ['escape' => false,
+                    'confirm' => __('Are you sure you want to delete # {0}?', $litter->id)
+                ]) ?>
         </div>
     </aside>
     <div class="column-responsive column-90">

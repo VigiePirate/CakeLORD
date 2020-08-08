@@ -277,20 +277,21 @@
                     </tbody>
                 </table>
             </details>
-            <details>
-                <summary>All Rats Born in the Rattery</summary>
-                <?= $this->element('simple_rats', [ //rats
-                    'rubric' => __(''),
-                    'rats' =>  $rattery->rats,//$offsprings,
-                    'exceptions' => [
-                        'picture',
-                        'owner_user_id',
-                        'death_primary_cause',
-                        'death_secondary_cause',
-                    ],
-                ]) ?>
-            </details>
-        <?php // endif ?>
+            <?php if(! $rattery->is_generic) : ?>
+                <details>
+                    <summary>All Rats Born in the Rattery</summary>
+                    <?= $this->element('simple_rats', [ //rats
+                        'rubric' => __(''),
+                        'rats' =>  $rattery->rats,//$offsprings,
+                        'exceptions' => [
+                            'picture',
+                            'owner_user_id',
+                            'death_primary_cause',
+                            'death_secondary_cause',
+                        ],
+                    ]) ?>
+                </details>
+            <?php endif; ?>
         <div class="spacer"> </div>
         <h2 class="staff">Private information</h2>
         <div class="signature">
