@@ -8,13 +8,15 @@
     <aside class="column">
         <div class="side-nav">
             <?= $this->Html->image('/img/icon-fa-alert.svg', [
-          'url' => ['controller' => 'Conversations', 'action' => 'add'],
-          'class' => 'side-nav-icon',
-          'alt' => __('Report')]) ?>
-      <?= $this->Html->image('/img/icon-help.svg', [
+              'url' => ['controller' => 'Conversations', 'action' => 'add'],
+              'class' => 'side-nav-icon',
+              'alt' => __('Report')]) ?>
+            <?= $this->Html->image('/img/icon-help.svg', [
               'url' => ['controller' => 'Articles', 'action' => 'index'],
               'class' => 'side-nav-icon',
               'alt' => __('Help')]) ?>
+
+             <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $litter->id], ['confirm' => __('Are you sure you want to delete # {0}?', $litter->id)]) ?>
         </div>
     </aside>
     <div class="column-responsive column-90">

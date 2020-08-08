@@ -86,44 +86,22 @@ class LittersController extends AppController
      */
     public function add()
     {
-        //// original baked add
-        // $litter = $this->Litters->newEmptyEntity();
-        // if ($this->request->is('post')) {
-        //     $litter = $this->Litters->patchEntity($litter, $this->request->getData());
-        //     if ($this->Litters->save($litter)) {
-        //         $this->Flash->success(__('The litter has been saved.'));
-        //
-        //         return $this->redirect(['action' => 'index']);
-        //     }
-        //     $this->Flash->error(__('The litter could not be saved. Please, try again.'));
-        // }
-        // $users = $this->Litters->Users->find('list', ['limit' => 200]);
-        // $states = $this->Litters->States->find('list', ['limit' => 200]);
-        // $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
-        // $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        // $contributions = $this->Litters->Contributions->find('list', ['limit' => 200]);
-        // $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries', 'contributions'));
+        // some of the stuff here should move to beforeMarshal
 
-        $litter = $this->Litters->newEmptyEntity();
+        $litter = $this->Litters->newEmptyEntity([
+            'associated' => ['ParentRats, Contributions']
+        ]);
 
         if ($this->request->is('post')) {
-            // this is not an unauthenticated action, so, test should not be necessary?
+            // this is not an unauthenticated action, so, test $result emptiness is not necessary
             $result = $this->Authentication->getResult();
 
             if ($result->isValid()) {
-                // get and complete request data
-                $data = $this->request->getData();
-                // process data to fit patchEntity expected format
-                $mother_id = $this->request->getData('mother_id');
 
-                if (! empty($this->request->getData('father_id'))) {
-                    $father_id = $this->request->getData('father_id');
-                    $data['parent_rats'] = ['_ids' => [$mother_id, $father_id]];
-                } else {
-                    $data['parent_rats'] = ['_ids' => [$mother_id]];
-                };
+                $data = $this->request->getData();
 
                 // check if a litter with the same birthdate and mother exists
+                $mother_id = $data['mother_id'];
                 $samelitter = $this->Litters->find('fromBirth', [
                     'birth_date' => $data['birth_date'],
                     'mother_id' => $mother_id,
@@ -132,13 +110,84 @@ class LittersController extends AppController
                     $this->Flash->error(__('This litter already exists.'));
                     return $this->redirect(['action' => 'view', $samelitter['id']]);
                 } else {
-                    dd($data);
+
                     $data['creator_user_id'] = $this->Authentication->getIdentityData('id');
-                    
+
+                    if (! empty($this->request->getData('father_id'))) {
+                        $father_id = $this->request->getData('father_id');
+                        $data['parent_rats'] = ['_ids' => [$mother_id, $father_id]];
+                    } else {
+                        $data['parent_rats'] = ['_ids' => [$mother_id]];
+                    };
+
                     // add contributions
+                    $data['contributions'] = [
+                        [
+                            'contribution_type_id' => '1',
+                            'rattery_id' => $data['rattery_id']
+                        ]
+                    ];
+
+                    // potential contribution is mother's owner's active rattery
+                    // could use a separate function in the rat model, returning the active rattery of its owner
+                    $this->loadModel('Rats');
+                    $mother = $this->Rats->get($mother_id, [
+                        'contain' => ['OwnerUsers','OwnerUsers.Ratteries']
+                    ]);
+
+                    $mother_rattery_id = $data['rattery_id'];
+                    if(count($mother->owner_user->ratteries) == 1) {
+                        $mother_rattery_id = $mother->owner_user->ratteries['0']['id'];
+                        // activate rattery if needed
+                        // ... code ...
+                    } else {
+                        foreach($mother->owner_user->ratteries as $rattery) {
+                            if($rattery->is_alive) {
+                                $mother_rattery_id = $rattery['id'];
+                            } else {
+                                // mother's owner has several ratteries, but none is active: we don't know what to do
+                            }
+                        }
+                    }
+                    if( $data['rattery_id'] != $mother_rattery_id ) {
+                        array_push($data['contributions'], [
+                            'contribution_type_id' => '2',
+                            'rattery_id' => $mother_rattery_id,
+                        ]);
+                    }
+
+                    // potential contribution is father's owner's active rattery
+                    // could use a separate function in the rat model, returning the active rattery of its owner
+                    $father = $this->Rats->get($father_id, [
+                        'contain' => ['OwnerUsers','OwnerUsers.Ratteries']
+                    ]);
+
+                    $father_rattery_id = $data['rattery_id'];
+                    if(count($father->owner_user->ratteries) == 1) {
+                        $father_rattery_id = $father->owner_user->ratteries['0']['id'];
+                        // activate rattery if needed
+                        // ... code ...
+                    } else {
+                        foreach($father->owner_user->ratteries as $rattery) {
+                            if($rattery->is_alive) {
+                                $father_rattery_id = $rattery['id'];
+                            } else {
+                                // mother's owner has several ratteries, but none is active: we don't know what to do
+                            }
+                        }
+                    }
+                    if( $data['rattery_id'] != $father_rattery_id ) {
+                        array_push($data['contributions'], [
+                            'contribution_type_id' => '3',
+                            'rattery_id' => $father_rattery_id,
+                        ]);
+                    }
 
                     // patch and save
-                    $litter = $this->Litters->patchEntity($litter, $data);
+                    $litter = $this->Litters->patchEntity($litter, $data, [
+                        'associated' => ['ParentRats','Contributions']
+                    ]);
+
                     if ($this->Litters->save($litter)) {
                         $this->Flash->success(__('The litter has been saved.'));
 

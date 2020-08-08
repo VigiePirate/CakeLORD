@@ -56,6 +56,7 @@ class Litter extends Entity
         'litter_snapshots' => true,
         'parent_rats' => true,
         'ratteries' => true,
+        'contributions' => true,
     ];
 
     protected function _getFullName()
