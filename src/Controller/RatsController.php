@@ -262,6 +262,7 @@ class RatsController extends AppController
     {
         $rat = $this->Rats->get($id, ['contain' => ['Ratteries']]);
         $this->Authorization->authorize($rat);
+        $this->Rats->removeBehavior('State');
         if ($this->Rats->snapRestore($rat, $snapshot_id)) {
             $this->Flash->success(__('The snapshot has been restored.'));
         } else {
@@ -564,13 +565,16 @@ class RatsController extends AppController
     // this change is authorized to owner and staff, and brings rat to next_ok_state
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['CreatorUsers','OwnerUsers','States','Ratteries','BirthLitters','BirthLitters.Contributions',
-            'DeathPrimaryCauses','DeathSecondaryCauses'],
+            'contain' => ['CreatorUsers', 'OwnerUsers', 'States', 'Ratteries', 
+            'BirthLitters', 'BirthLitters.Contributions'],
         ]);
         $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $rat = $this->Rats->patchEntity($rat, $this->request->getData());
-            if ($this->Rats->save($rat)) {
+            if ($this->request->getData('owner_user_id')) {
+                $rat->set('owner_user_id', $this->request->getData('owner_user_id'));
+                $rat->set('comments', $this->request->getData('comments'));
+            }
+            if ($this->Rats->save($rat, ['checkRules' => false])) {
                 $this->Flash->success(__('The rat has been transferred to its new owner.'));
                 return $this->redirect(['action' => 'view', $rat->id]);
             }
