@@ -203,7 +203,7 @@ table.summary {
 table.condensed.stats.histogram>tbody>tr>th>div{
   padding-right:0.5rem;
   float:right;
-  min-width:3em;
+  min-width:7ch; /*3em for health, 7ch for coi? */
   background:#3d5299;
 }
 
@@ -281,11 +281,10 @@ td,th {
 
 .actions, .actions-title {
     text-align:right;
-    min-width: 6ch;
   }
 
-.doubleprefix {
-    min-width: 11ch;
+.nowrap {
+    white-space: nowrap;
 }
 
 blockquote {
@@ -435,7 +434,7 @@ th {
   padding-right:1.5rem;
 }
 .shieldline span {
-    color: #bfcaff; /*gray footer: #6076bf */
+    color: #bfceff; /*gray footer: #6076bf */
   }
 .shieldline {
   /* font-family:"Alegreya",serif;*/
@@ -507,7 +506,7 @@ th {
     }
 
 .top-nav-title span {
-    color: #bfcaff;
+    color: #bfceff;
   }
 
 .top-nav-links {
@@ -664,7 +663,7 @@ footer {
 
 /*gray: comment out here */
 .footer_section h5 {
-    color: #bfcaff;
+    color: #bfceff;
     font-weight:bold;
 }
 

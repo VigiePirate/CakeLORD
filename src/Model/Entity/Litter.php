@@ -6,6 +6,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
+use Cake\ORM\Locator\LocatorAwareTrait;
 
 /**
  * Litter Entity
@@ -108,5 +109,10 @@ class Litter extends Entity
             return __('Unknown');
             //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
         }
+    }
+
+    protected function _getInbreedingCoefficient()
+    {
+
     }
 }
