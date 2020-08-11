@@ -564,12 +564,17 @@ class RatsController extends AppController
     // this change is authorized to owner and staff, and brings rat to next_ok_state
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['CreatorUsers','OwnerUsers','States','Ratteries','BirthLitters','BirthLitters.Contributions'],
+            'contain' => ['CreatorUsers', 'OwnerUsers', 'States', 'Ratteries', 
+            'BirthLitters', 'BirthLitters.Contributions'],
         ]);
         $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $rat = $this->Rats->patchEntity($rat, $this->request->getData());
-            if ($this->Rats->save($rat)) {
+            if ($this->request->getData('owner_user_id')) {
+                $rat->set('owner_user_id', $this->request->getData('owner_user_id'));
+                $rat->set('comments', $this->request->getData('comments'));
+            }
+            #dd($rat);
+            if ($this->Rats->save($rat, ['checkRules' => false])) {
                 $this->Flash->success(__('The rat has been transferred to its new owner.'));
                 return $this->redirect(['action' => 'view', $rat->id]);
             }
