@@ -262,6 +262,7 @@ class RatsController extends AppController
     {
         $rat = $this->Rats->get($id, ['contain' => ['Ratteries']]);
         $this->Authorization->authorize($rat);
+        $this->Rats->removeBehavior('State');
         if ($this->Rats->snapRestore($rat, $snapshot_id)) {
             $this->Flash->success(__('The snapshot has been restored.'));
         } else {
