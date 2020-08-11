@@ -91,7 +91,6 @@ class SnapshotBehavior extends Behavior
             if ($this->getTable()->save($entity, ['checkRules' => false])) {
                 return $this->snapDelete($entity, $snapshot_id);
             }
-            #dd($entity);
         }
         return false;
     }

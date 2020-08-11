@@ -574,7 +574,6 @@ class RatsController extends AppController
                 $rat->set('owner_user_id', $this->request->getData('owner_user_id'));
                 $rat->set('comments', $this->request->getData('comments'));
             }
-            #dd($rat);
             if ($this->Rats->save($rat, ['checkRules' => false])) {
                 $this->Flash->success(__('The rat has been transferred to its new owner.'));
                 return $this->redirect(['action' => 'view', $rat->id]);
