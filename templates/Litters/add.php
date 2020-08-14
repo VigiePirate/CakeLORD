@@ -24,9 +24,7 @@
             </div>
             <h1><?=__('Record a new litter') ?></h1>
 
-            <div class="message default">
-                <?= __('Please record the litter’s main information below. You will be able to add rats later.') ?>
-            </div>
+            <?= $this->Flash->render() ?>
 
             <?= $this->Form->create($litter) ?>
             <fieldset>

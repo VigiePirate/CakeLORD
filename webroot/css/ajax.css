@@ -50,8 +50,12 @@
   margin-top: -0.6rem;
 }
 
-input:required {
+input:required:invalid {
   border: 1px solid #f88131;
   border-radius: 0.4rem;
   background: #fff4eb;
+}
+
+li {
+  margin-bottom: 0em;
 }

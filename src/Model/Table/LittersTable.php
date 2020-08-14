@@ -152,62 +152,112 @@ class LittersTable extends Table
         $rules->add($rules->existsIn(['creator_user_id'], 'Users'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
 
+        /* Mother existence */
+        $rules->add(function($litter) {
+                return $litter->hasMother();
+            },
+            'mother_selected',
+            [
+                'errorField' => 'mother_name',
+                'message' => 'We could not find the mother. Please, select it in the list or type its complete pedigree identifier.'
+            ]
+        );
+
+        /* Father was tentatively selected but not found */
+        $rules->add(function($litter) {
+                return $litter->hasRealFather();
+            },
+            'father_selected',
+            [
+                'errorField' => 'father_name',
+                'message' => 'We could not find the father. Please, select it in the list or type its complete pedigree identifier.'
+            ]
+        );
+
+        /* Birth place */
+        $rules->add(function($litter) {
+                return $litter->hasBirthPlace();
+            },
+            'rattery_selected',
+            [
+                'errorField' => 'rattery_name',
+                'message' => 'We could not find this rattery. Please, select it in the list or type an existing prefix.'
+            ]
+        );
+
         /* No birth in the future */
-        $future = function($litter) {
-            return !( $litter->birth_date->isFuture() );
-        };
-        $rules->add($future, [
-            'errorField' => 'birth_date',
-            'message' => 'Impossible: this date is in the future. Please check and correct your entry.'
-        ]);
+        $rules->add(function ($litter) {
+                return ! $litter->isBornFuture();
+            },
+            'bornFuture',
+            [
+                'errorField' => 'birth_date',
+                'message' => 'Impossible: this date is in the future.'
+            ]
+        );
 
-        /* Mating should be 20-45 days before birth */
-        $short_pregnancy = function($litter) {
-            return !( $litter->has('mating_date') && ($litter->mating_date->diffInDays($litter->birth_date, false) < 20) );
-        };
-        $rules->add($short_pregnancy, [
-            'errorField' => 'mating_date',
-            'message' => 'Impossible: mating must have occurred at least 20 days before birth. Please check and correct your entry.'
-        ]);
+        /* Mating should be 20-28 days before birth */
+        $rules->add(function($litter) {
+                return ! $litter->isAbnormalPregnancy();
+            },
+            'abnormalPregnancy',
+            [
+                'errorField' => 'mating_date',
+                'message' => 'Impossible: mating happens at least 20 days and at most 25 days before birth.'
+            ]
+        );
 
-        $long_pregnancy = function($litter) {
-            return !( $litter->has('mating_date') && ($litter->mating_date->diffInDays($litter->birth_date, false) > 45) );
-        };
-        $rules->add($long_pregnancy, [
-            'errorField' => 'mating_date',
-            'message' => 'Impossible: mating must have occurred at most 45 days before birth. Please check and correct your entry.'
-        ]);
+        /* No unborn parents */
+        $rules->add(function($litter) {
+                return $litter->wasBornMother();
+            },
+            'wasBornMother',
+            [
+                'errorField' => 'birth_date',
+                'message' => 'Impossible: mother had not been born at this date.'
+            ]
+        );
+
+        $rules->add(function($litter) {
+                return $litter->wasBornFather();
+            },
+            'wasBornFather',
+            [
+                'errorField' => 'birth_date',
+                'message' => 'Impossible: father had not been born at this date.'
+            ]
+        );
 
         /* No dead parents */
-        $deadmother = function($litter) {
-            if ($litter->parent_rats['0']['sex'] == 'F') {
-                $mother = $litter->parent_rats['0'];
-            } else {
-                $mother = $litter->parent_rats['1'];
-            }
-            return ! (! $mother->is_alive && $litter->birth_date->gt($mother->death_date));
-        };
-        $rules->add($deadmother, [
-            'errorField' => 'birth_date',
-            'message' => 'Impossible: mother was dead at this date. Please check and correct your entry.'
-        ]);
+        $rules->add(function($litter) {
+                return $litter->wasAliveMother();
+            },
+            'wasAliveMother',
+            [
+                'errorField' => 'birth_date',
+                'message' => 'Impossible: mother was dead at this date.'
+            ]
+        );
 
-        $deadfather = function($litter) {
-            if ($litter->parent_rats['0']['sex'] == 'M') {
-                $father = $litter->parent_rats['0'];
-            } else {
-                if(! empty($litter->parent_rats['1']) ) {
-                    $father = $litter->parent_rats['1'];
-                } else {
-                    return true;
-                }
-            }
-            return ! (! $father->is_alive && ($litter->birth_date->diffInDays($father->death_date, false) > 45));
-        };
-        $rules->add($deadfather, [
-            'errorField' => 'birth_date',
-            'message' => 'Impossible: father was dead too long before this date. Please check and correct your entry.'
-        ]);
+        $rules->add(function($litter) {
+                return $litter->wasAliveFather();
+            },
+            'wasAliveFather',
+            [
+                'errorField' => 'birth_date',
+                'message' => 'Impossible: father was dead too long before this date.'
+            ]
+        );
+
+        $rules->add(function($litter) {
+                return $litter->areCompatibleParents();
+            },
+            'areCompatibleParents',
+            [
+                'errorField' => 'father_name',
+                'message' => 'Impossible: father and mother were never alive at the same time.'
+            ]
+        );
 
         return $rules;
     }

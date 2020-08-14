@@ -116,4 +116,120 @@ class Litter extends Entity
     {
 
     }
+
+    /* rules */
+
+    public function hasBirthPlace()
+    {
+        return (! is_null($this->contributions['0']->rattery_id)) && ($this->contributions['0']->rattery_id != 0);
+    }
+
+    public function hasMother()
+    {
+        if(! empty($this->parent_rats)) {
+            foreach($this->parent_rats as $parent) {
+                if ($parent['sex'] == 'F') {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public function hasFather()
+    {
+        if(! empty($this->parent_rats)) {
+            foreach($this->parent_rats as $parent) {
+                if ($parent['sex'] == 'M') {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public function hasRealFather()
+    {
+        // should check if the declared father has a real ID
+        return true;
+    }
+
+    public function isBornFuture()
+    {
+        return $this->birth_date->isFuture();
+    }
+
+    public function isAbnormalPregnancy()
+    // normal pregnancy duration are taken from AFRMA sheets
+    // superfetation is not allowed now
+    // we could authorize up to 45 days if mother had a litter recently
+    {
+        return (
+            $this->has('mating_date')
+            &&
+            (
+                $this->mating_date->diffInDays($this->birth_date, false) < 20
+                || $this->mating_date->diffInDays($this->birth_date, false) > 25
+            )
+        );
+    }
+
+    public function wasBornMother() {
+        if(! empty($this->parent_rats)) {
+            foreach($this->parent_rats as $parent) {
+                if ($parent['sex'] == 'F') {
+                    return $this->birth_date->gte($parent['birth_date']);
+                }
+            }
+        }
+        return true;
+    }
+
+    public function wasBornFather() {
+        if(! empty($this->parent_rats)) {
+            foreach($this->parent_rats as $parent) {
+                if ($parent['sex'] == 'M') {
+                    return $this->birth_date->gte($parent['birth_date']);
+                }
+            }
+        }
+        return true;
+    }
+
+    public function wasAliveMother() {
+        if(! empty($this->parent_rats)) {
+            foreach($this->parent_rats as $parent) {
+                if ($parent['sex'] == 'F') {
+                    return $parent['is_alive'] || $this->birth_date->lte($parent['death_date']);
+                }
+            }
+        }
+        return true;
+    }
+
+    public function wasAliveFather() {
+        if(! empty($this->parent_rats)) {
+            foreach($this->parent_rats as $parent) {
+                if ($parent['sex'] == 'M') {
+                    return $parent['is_alive'] || $this->birth_date->lte($parent['death_date']->addDays(25));
+                }
+            }
+        }
+        return true;
+    }
+
+    // parents are incompatible if one is dead before the other was born
+    public function areCompatibleParents() {
+        if(! empty($this->parent_rats)) {
+            if(count($this->parent_rats) == 2) {
+                $parent0 = $this->parent_rats['0'];
+                $parent1 = $this->parent_rats['1'];
+                return
+                    ! (((! $parent0->is_alive) && $parent0->death_date->lte($parent1->birth_date))
+                    || ((! $parent1->is_alive) && $parent1->death_date->lte($parent0->birth_date)));
+            }
+            return true;
+        }
+        return true;
+    }
 }

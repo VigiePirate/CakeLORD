@@ -488,11 +488,16 @@ class RatsController extends AppController
         if ($this->request->is(['ajax'])) {
             $searchkey = $this->request->getQuery('searchkey');
             $sex = $this->request->getQuery('sex');
-            $items = $this->Rats->find('identified', [
-                'names' => [$searchkey],
-                ])
+            $items = $this->Rats->find('identified',[
+                'names' => [$searchkey]])
+                //'contain' => ['Ratteries','BirthLitters'],
                 ->where(['sex IS' => $sex])
-                ->select(['id', 'value' => "concat(name, ' (', pedigree_identifier, ')')", 'label' => "concat(name, ' (', pedigree_identifier, ')')"])
+                //->select(['id', 'Rats.rattery_id'
+                ->select(['id',
+                    //'value' => "concat(Ratteries.prefix, ' ', Rats.name, ' (', pedigree_identifier, ')')",
+                    //'label' => "concat(Ratteries.prefix, ' ', Rats.name, ' (', pedigree_identifier, ')')"])
+                    'value' => "concat(Rats.name, ' (', pedigree_identifier, ')')",
+                    'label' => "concat(Rats.name, ' (', pedigree_identifier, ')')"])
             ;
             $this->set('items', $items);
             $this->viewBuilder()->setOption('serialize', ['items']);
@@ -583,7 +588,7 @@ class RatsController extends AppController
     // this change is authorized to owner and staff, and brings rat to next_ok_state
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['CreatorUsers', 'OwnerUsers', 'States', 'Ratteries', 
+            'contain' => ['CreatorUsers', 'OwnerUsers', 'States', 'Ratteries',
             'BirthLitters', 'BirthLitters.Contributions'],
         ]);
         $this->Authorization->authorize($rat);
