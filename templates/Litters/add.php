@@ -30,6 +30,27 @@
             <fieldset>
                 <legend><?= __('Origins') ?></legend>
 
+                <?php
+                    echo $this->Form->control('rattery_name', [
+                        'id' => 'jquery-rattery-input',
+                        'name' => 'rattery_name',
+                        'label' => __('Birth place'),
+                        'type' => 'text',
+                        'required' => 'required',
+                        'placeholder' => __('Type and select the rattery’s name or prefix here...'),
+                    ]);
+                    echo $this->Form->control('rattery_id', [
+                        'id' => 'jquery-rattery-id',
+                        'name' => 'rattery_id',
+                        'label' => [
+                            'class' => 'hide-everywhere',
+                            'text' => 'Hidden field for rattery ID'
+                        ],
+                        'class' => 'hide-everywhere',
+                        'type' => 'text',
+                    ]);
+                ?>
+
                 <div class="row">
                     <div class="column-responsive column-50">
                         <?php
@@ -75,27 +96,6 @@
                         ?>
                     </div>
                 </div>
-
-                <?php
-                    echo $this->Form->control('rattery_name', [
-                        'id' => 'jquery-rattery-input',
-                        'name' => 'rattery_name',
-                        'label' => __('Birth place'),
-                        'type' => 'text',
-                        'required' => 'required',
-                        'placeholder' => __('Type and select the rattery’s name or prefix here...'),
-                    ]);
-                    echo $this->Form->control('rattery_id', [
-                        'id' => 'jquery-rattery-id',
-                        'name' => 'rattery_id',
-                        'label' => [
-                            'class' => 'hide-everywhere',
-                            'text' => 'Hidden field for rattery ID'
-                        ],
-                        'class' => 'hide-everywhere',
-                        'type' => 'text',
-                    ]);
-                ?>
 
                 <legend><?= __('Dates') ?></legend>
                 <div class="row">

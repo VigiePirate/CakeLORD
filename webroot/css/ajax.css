@@ -47,8 +47,12 @@
 }
 
 .checkbox {
-  margin-top: -0.6rem;
+  margin-top: 0.6rem;
 }
+
+.input.radio label:first-of-type {
+    margin-bottom: 0.6rem;
+  }
 
 input:required:invalid {
   border: 1px solid #f88131;

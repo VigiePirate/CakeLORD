@@ -101,6 +101,7 @@ class RatsController extends AppController
         $rat = $this->Rats->newEmptyEntity();
         $this->Authorization->authorize($rat);
         if ($this->request->is('post')) {
+            dd($this->request->getData());
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
@@ -108,23 +109,18 @@ class RatsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
+        } else {
+            $this->Flash->default(__('Please record the rat’s information below. When in doubt, please check documentation before entering data.'));
         }
-        $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 200]);
-        $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
-        $birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
         $markings = $this->Rats->Markings->find('list', ['limit' => 200]);
         $earsets = $this->Rats->Earsets->find('list', ['limit' => 200]);
         $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
-        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list', ['limit' => 200]);
-        $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
-        $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
-        $states = $this->Rats->States->find('list', ['limit' => 200]);
-        $bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters','colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
+        $states = $this->Rats->States->find('list', ['limit' => 200]);
+        $this->set(compact('rat','colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'singularities','states'));
     }
 
     /**

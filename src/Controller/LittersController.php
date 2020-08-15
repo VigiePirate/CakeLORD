@@ -184,26 +184,25 @@ class LittersController extends AppController
                     ]);
 
                     $mother_rattery_id = $data['rattery_id'];
-                    if(count($mother->owner_user->ratteries) == 1 && ! $mother->owner_user->ratteries['0']['is_generic']) {
+                    if (count($mother->owner_user->ratteries) == 1 && ! $mother->owner_user->ratteries['0']['is_generic']) {
                         $mother_rattery_id = $mother->owner_user->ratteries['0']['id'];
                         // activate rattery if needed
                         // ... code ...
                     } else {
                         foreach($mother->owner_user->ratteries as $rattery) {
-                            if(! $rattery->is_generic && $rattery->is_alive) {
+                            if (! $rattery->is_generic && $rattery->is_alive) {
                                 $mother_rattery_id = $rattery['id'];
                             } else {
                                 // mother's owner has several ratteries, but none is active: we don't know what to do
                             }
                         }
                     }
-                    if( $data['rattery_id'] != $mother_rattery_id ) {
+                    if ($data['rattery_id'] != $mother_rattery_id) {
                         array_push($data['contributions'], [
                             'contribution_type_id' => '2',
                             'rattery_id' => $mother_rattery_id,
                         ]);
                     }
-
                 }
 
                 // potential contribution is father's owner's active rattery

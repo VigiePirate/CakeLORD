@@ -176,7 +176,7 @@
                             /*echo $this->Form->control('singularities._ids', ['empty' => true, 'default' => 0, 'options' => $singularities, 'size' => '13', 'style' => 'height:auto;']);*/
                             echo $this->Form->control('singularity_id', ['empty' => true, 'default' => 0, 'options' => $singularities]);
                         ?>
-                        <div>
+                        </div>
                     </div>
                 </fieldset>
                 <?= $this->Form->button(__('Search')) ?>
