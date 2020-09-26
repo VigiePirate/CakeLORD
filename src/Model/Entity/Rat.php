@@ -435,4 +435,9 @@ class Rat extends Entity
         return $children;
     }
 
+    public function isBornFuture()
+    {
+        return $this->birth_date->isFuture();
+    }
+
 }

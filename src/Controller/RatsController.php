@@ -101,8 +101,10 @@ class RatsController extends AppController
         $rat = $this->Rats->newEmptyEntity();
         $this->Authorization->authorize($rat);
         if ($this->request->is('post')) {
-            dd($this->request->getData());
-            $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+            // process data
+            $data = $this->request->getData();
+            /* ... code ... */
+            $rat = $this->Rats->patchEntity($rat, $data);
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
 

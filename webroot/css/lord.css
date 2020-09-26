@@ -562,16 +562,49 @@ th {
 
 .side-nav-item {
     display:block;
-    padding: 0.5rem 0;
-    font-size: 1.8rem;
-    font-weight: 500;
+    /* display:flex;
+    align-items:center; */
+    /* padding: 0.5rem 0; */
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #663300;
   }
+
+.side-nav-icon:hover {
+  background-color: #cabcaf;
+  border-radius: 0.4rem;
+}
 
 .side-nav-icon {
     display:inline;
     padding: 0.5rem;
-    width:5rem;
+    width:5.2rem;
+    background-color: #66330029; /* #e0d7ce; */
+    border-radius: 0.4rem;
+    /* padding: 1.25rem;
+    width: 6.5rem; */
+    /* box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+    background-color: #ffffff;
+    border-radius: 0.4rem; */
   }
+
+.side-nav-icon-staff {
+      display:inline;
+      padding: 0.5rem;
+      width:5.2rem;
+      background-color: #e8dbdc; /* to be improved */
+      border-radius: 0.4rem;
+      /* padding: 1.25rem;
+      width: 6.5rem; */
+      /* box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+      background-color: #ffffff;
+      border-radius: 0.4rem; */
+    }
+
+.side-nav-icon-staff:hover {
+      background-color: #d6bcbe;
+      border-radius: 0.4rem;
+    }
 
 .action-icon {
       display:inline;

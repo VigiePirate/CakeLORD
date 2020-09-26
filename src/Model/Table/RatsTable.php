@@ -258,6 +258,17 @@ class RatsTable extends Table
         $rules->add($rules->existsIn(['creator_user_id'], 'CreatorUsers'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
 
+        /* No rat born in the future */
+        $rules->add(function ($rat) {
+                return ! $rat->isBornFuture();
+            },
+            'bornFuture',
+            [
+                'errorField' => 'birth_date',
+                'message' => 'Impossible: this date is in the future.'
+            ]
+        );
+
         /* Rules about death date and cause */
         $timeline = function($rat) {
             return !( !$rat->is_alive && $rat->birth_date->gt($rat->death_date) );
@@ -283,7 +294,6 @@ class RatsTable extends Table
             'message' => 'Impossible: it means that your rat would have lived more than 4 years and a half, but rats do not live this long.'
         ]);
 
-        // should test on is_infant property and not on id...
         $infant = function($rat) {
             return ! ( !$rat->is_alive && ($rat->death_primary_cause->is_infant) && ($rat->precise_age > 42) );
         };
@@ -482,7 +492,7 @@ class RatsTable extends Table
                 ],
             ]);
         }
-        
+
         return $query->group(['Rats.id']);
     }
 

@@ -368,7 +368,7 @@ class LittersController extends AppController
         // no test on parent existence, since a litter must have at least one parent
         foreach ($parents as $parent) {
 
-            if (! is_null($parent['litter_id'])) {
+            if (! is_null($parent['litter_id'])) { 
                 $new_path = $path . $parent->sex;
                 $genealogy[$new_path] = $parent['id'];
                 $genealogy = array_merge($genealogy, $this->genealogy($parent['litter_id'], $new_path));

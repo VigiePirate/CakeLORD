@@ -8,35 +8,65 @@
     <aside class="column">
         <div class="side-nav">
             <!-- New actions with icons -->
-            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+
+            <div class="side-nav-item">
+                <?= $this->Html->image('/img/icon-report.svg', [
                 'url' => ['controller' => 'Conversations', 'action' => 'add'],
                 'class' => 'side-nav-icon',
                 'alt' => __('Report')]) ?>
-            <?= $this->Html->image('/img/icon-help.svg', [
+                <div class="side-nav-text hide-everywhere"><?= __('Report') ?></div>
+            </div>
+
+            <div class="side-nav-item">
+                <?= $this->Html->image('/img/icon-help.svg', [
                     'url' => ['controller' => 'Articles', 'action' => 'index'],
                     'class' => 'side-nav-icon',
                     'alt' => __('Help')]) ?>
+                <span class="side-nav-text hide-everywhere"><?= __('Get help') ?><span>
+            </div>
+
             <div class="spacer"> </div>
+
+            <div class="side-nav-item">
             <?= $this->Html->image('/img/icon-map.svg', [
                 'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
                 'class' => 'side-nav-icon',
                 'alt' => __('See on Map')]) ?>
+                <span class="side-nav-text hide-everywhere"><?= __('See on map') ?><span>
+            </div>
+
+            <div class="side-nav-item">
             <?= $this->Html->image('/img/icon-file-edit.svg', [
                 'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
                 'class' => 'side-nav-icon',
                 'alt' => __('Modify Rattery')]) ?>
-            <?= $this->Html->image('/img/icon-fa-baby.svg', [
+                <span class="side-nav-text hide-everywhere"><?= __('Edit') ?><span>
+            </div>
+
+            <div class="side-nav-item">
+            <?= $this->Html->image('/img/icon-birth.svg', [
                 'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
                 'class' => 'side-nav-icon',
                 'alt' => __('Declare Litter')]) ?>
+            <span class="side-nav-text hide-everywhere"><?= __('Add litter') ?><span>
+            </div>
+
             <div class="spacer"> </div>
-            <?= $this->Html->image('/img/icon-edit-admin.svg', [
+
+            <div class="side-nav-item staff">
+            <?= $this->Html->image('/img/icon-edit-staff.svg', [
                 'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
-                'class' => 'side-nav-icon',
+                'class' => 'side-nav-icon-staff',
                 'alt' => __('Edit Rattery')]) ?>
-            <?= $this->Html->image('/img/icon-fa-trash.svg', [
-                'class' => 'side-nav-icon',
+            <span class="side-nav-text hide-everywhere"><?= __('Edit') ?><span>
+            </div>
+
+            <div class="side-nav-item staff">
+            <?= $this->Html->image('/img/icon-delete.svg', [
+                'class' => 'side-nav-icon-staff',
                 'alt' => __('Delete Rattery')]) ?>
+            <span class="side-nav-text hide-everywhere"><?= __('Delete') ?><span>
+            </div>
         </div>
     </aside>
     <div class="column-responsive column-90">
