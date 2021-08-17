@@ -101,30 +101,28 @@ class RatsController extends AppController
         $rat = $this->Rats->newEmptyEntity();
         $this->Authorization->authorize($rat);
         if ($this->request->is('post')) {
-            $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+            // process data
+            $data = $this->request->getData();
+            /* ... code ... */
+            $rat = $this->Rats->patchEntity($rat, $data);
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
+        } else {
+            $this->Flash->default(__('Please record the rat’s information below. When in doubt, please check documentation before entering data.'));
         }
-        $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 200]);
-        $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
-        $birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
         $markings = $this->Rats->Markings->find('list', ['limit' => 200]);
         $earsets = $this->Rats->Earsets->find('list', ['limit' => 200]);
         $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
-        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list', ['limit' => 200]);
-        $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
-        $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
-        $states = $this->Rats->States->find('list', ['limit' => 200]);
-        $bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters','colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
+        $states = $this->Rats->States->find('list', ['limit' => 200]);
+        $this->set(compact('rat','colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'singularities','states'));
     }
 
     /**
@@ -481,6 +479,29 @@ class RatsController extends AppController
         ]);
     }
 
+    /* Autocomplete for forms function */
+    /* There is probably a way to avoid having three functions... */
+
+    public function autocomplete() {
+        if ($this->request->is(['ajax'])) {
+            $searchkey = $this->request->getQuery('searchkey');
+            $sex = $this->request->getQuery('sex');
+            $items = $this->Rats->find('identified',[
+                'names' => [$searchkey]])
+                //'contain' => ['Ratteries','BirthLitters'],
+                ->where(['sex IS' => $sex])
+                //->select(['id', 'Rats.rattery_id'
+                ->select(['id',
+                    //'value' => "concat(Ratteries.prefix, ' ', Rats.name, ' (', pedigree_identifier, ')')",
+                    //'label' => "concat(Ratteries.prefix, ' ', Rats.name, ' (', pedigree_identifier, ')')"])
+                    'value' => "concat(Rats.name, ' (', pedigree_identifier, ')')",
+                    'label' => "concat(Rats.name, ' (', pedigree_identifier, ')')"])
+            ;
+            $this->set('items', $items);
+            $this->viewBuilder()->setOption('serialize', ['items']);
+        }
+    }
+
     /* Pedigree functions */
 
     public function parentsTree($id=null) {
@@ -565,7 +586,7 @@ class RatsController extends AppController
     // this change is authorized to owner and staff, and brings rat to next_ok_state
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['CreatorUsers', 'OwnerUsers', 'States', 'Ratteries', 
+            'contain' => ['CreatorUsers', 'OwnerUsers', 'States', 'Ratteries',
             'BirthLitters', 'BirthLitters.Contributions'],
         ]);
         $this->Authorization->authorize($rat);

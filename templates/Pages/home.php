@@ -116,8 +116,8 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                             <h1><?= $this->Html->image("catchphrase_path.svg", ["alt" => "Pour mieux les faire grandir, nous conservons leurs racines"]) ?></h1>
                          </div>
                          <div class="btn__center hero__text">
-                           <?= $this->Html->link(__('Browse'), ['controller' => 'Rats', 'action' => 'search'], ['class' => 'button']) ?>
-                           <?= $this->Html->link(__('Register'), ['controller' => 'Users', 'action' => 'register'], ['class' => 'button']) ?>
+                           <?= $this->Html->link(__('Sign up'), ['controller' => 'Users', 'action' => 'register'], ['class' => 'button']) ?>
+                           <?= $this->Html->link(__('Sign in'), ['controller' => 'Users', 'action' => 'login'], ['class' => 'button']) ?>
                          </div>
                     </div>
                     <div class="column-responsive column-60 col__img">

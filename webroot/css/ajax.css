@@ -28,12 +28,11 @@
 	color: #606c76;
 }
 
-#jquery-owner-input::placeholder {
-  color: #707e8a;
-  opacity: 1;
-}
-
-#jquery-rattery-input::placeholder {
+#jquery-owner-input::placeholder,
+#jquery-rattery-input::placeholder,
+#jquery-mother-input::placeholder,
+#jquery-father-input::placeholder
+ {
   color: #707e8a;
   opacity: 1;
 }
@@ -48,5 +47,19 @@
 }
 
 .checkbox {
-  margin-top: -0.6rem;
+  margin-top: 0.6rem;
+}
+
+.input.radio label:first-of-type {
+    margin-bottom: 0.6rem;
+  }
+
+input:required:invalid {
+  border: 1px solid #f88131;
+  border-radius: 0.4rem;
+  background: #fff4eb;
+}
+
+li {
+  margin-bottom: 0em;
 }

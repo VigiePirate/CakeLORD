@@ -5,7 +5,7 @@
 
 /* Miligram overrides */
 a {
-  font-family: "Alegreya", serif;
+  font-family: "Roboto Condensed"; /* "Alegreya", serif; */
   color: #663300;
 }
 
@@ -114,24 +114,31 @@ a sup {
   font-size: 75%;
 }
 
-
-
 /* Forms */
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
-    background: #663300;
+    background: #cabcafa3; /* #663300*/
     border-color: #663300;
-    font-family: "Alegreya", serif;
+    font-family: "Roboto Condensed", serif;
     font-size: 1.6rem;
+    color: #663300;
   }
 
-.button-staff {
-    background: #b1000c;
-    border-color: #b1000c;
+.button:visited {
+    color: #663300;
+    background: #cabcaf;
 }
 
-.button:visited {
-  color:#ffffff;
+.button-staff {
+    background: #e8dbdc;
+    border-color: #b1000c;
+    color: #b1000c;
+}
+
+.button-staff:visited {
+  background: #d6bcbe;
+  border-color: #b1000c;
+  color: #b1000c;
 }
 
 textarea {
@@ -279,6 +286,11 @@ td,th {
     padding:0rem 1rem;
   }
 
+.false-a {
+  font-family: "Roboto Condensed";
+  color: #606c76;
+}
+
 .actions, .actions-title {
     text-align:right;
   }
@@ -407,7 +419,7 @@ main {
 th {
     white-space: nowrap;
     border-bottom-width: 0rem;
-    padding-bottom:0.2rem;
+    /*padding-bottom:0.2rem;*/
   }
 .signature {
   font-family:"Alegreya",serif;
@@ -564,16 +576,49 @@ th {
 
 .side-nav-item {
     display:block;
-    padding: 0.5rem 0;
-    font-size: 1.8rem;
-    font-weight: 500;
+    /* display:flex;
+    align-items:center; */
+    /* padding: 0.5rem 0; */
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #663300;
   }
+
+.side-nav-icon:hover {
+  background-color: #cabcaf;
+  border-radius: 0.4rem;
+}
 
 .side-nav-icon {
     display:inline;
     padding: 0.5rem;
-    width:5rem;
+    width:5.2rem;
+    /* background-color: #66330029; */ /* #e0d7ce; */
+    border-radius: 0.4rem;
+    /* padding: 1.25rem;
+    width: 6.5rem; */
+    /* box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+    background-color: #ffffff;
+    border-radius: 0.4rem; */
   }
+
+.side-nav-icon-staff {
+      display:inline;
+      padding: 0.5rem;
+      width:5.2rem;
+      /* background-color: #e8dbdc; */ /* to be improved */
+      border-radius: 0.4rem;
+      /* padding: 1.25rem;
+      width: 6.5rem; */
+      /* box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+      background-color: #ffffff;
+      border-radius: 0.4rem; */
+    }
+
+.side-nav-icon-staff:hover {
+      background-color: #d6bcbe;
+      border-radius: 0.4rem;
+    }
 
 .action-icon {
       display:inline;

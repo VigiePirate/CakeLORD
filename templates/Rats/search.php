@@ -76,6 +76,7 @@
                                     'label' => __('Origin'),
                                     'type' => 'text',
                                     'placeholder' => __('Type here...'),
+                                    'empty' => true,
                                 ]);
                                 echo $this->Form->control('rattery_id', [
                                     'id' => 'jquery-rattery-id',
@@ -86,6 +87,7 @@
                                     ],
                                     'class' => 'hide-everywhere',
                                     'type' => 'text',
+                                    'empty' => true,
                                 ]);
                             ?>
                         </div>
@@ -176,7 +178,7 @@
                             /*echo $this->Form->control('singularities._ids', ['empty' => true, 'default' => 0, 'options' => $singularities, 'size' => '13', 'style' => 'height:auto;']);*/
                             echo $this->Form->control('singularity_id', ['empty' => true, 'default' => 0, 'options' => $singularities]);
                         ?>
-                        <div>
+                        </div>
                     </div>
                 </fieldset>
                 <?= $this->Form->button(__('Search')) ?>

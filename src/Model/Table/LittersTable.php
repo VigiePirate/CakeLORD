@@ -56,6 +56,7 @@ class LittersTable extends Table
             'repository' => 'LitterSnapshots',
             'entityField' => 'litter_id',
         ]);
+        $this->addBehavior('State');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'creator_user_id',
@@ -151,6 +152,113 @@ class LittersTable extends Table
         $rules->add($rules->existsIn(['creator_user_id'], 'Users'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
 
+        /* Mother existence */
+        $rules->add(function($litter) {
+                return $litter->hasMother();
+            },
+            'mother_selected',
+            [
+                'errorField' => 'mother_name',
+                'message' => 'We could not find the mother. Please, select it in the list or type its complete pedigree identifier.'
+            ]
+        );
+
+        /* Father was tentatively selected but not found */
+        $rules->add(function($litter) {
+                return $litter->hasRealFather();
+            },
+            'father_selected',
+            [
+                'errorField' => 'father_name',
+                'message' => 'We could not find the father. Please, select it in the list or type its complete pedigree identifier.'
+            ]
+        );
+
+        /* Birth place */
+        $rules->add(function($litter) {
+                return $litter->hasBirthPlace();
+            },
+            'rattery_selected',
+            [
+                'errorField' => 'rattery_name',
+                'message' => 'We could not find this rattery. Please, select it in the list or type an existing prefix.'
+            ]
+        );
+
+        /* No birth in the future */
+        $rules->add(function ($litter) {
+                return ! $litter->isBornFuture();
+            },
+            'bornFuture',
+            [
+                'errorField' => 'birth_date',
+                'message' => 'Impossible: this date is in the future.'
+            ]
+        );
+
+        /* Mating should be 20-28 days before birth */
+        $rules->add(function($litter) {
+                return ! $litter->isAbnormalPregnancy();
+            },
+            'abnormalPregnancy',
+            [
+                'errorField' => 'mating_date',
+                'message' => 'Impossible: mating happens at least 20 days and at most 25 days before birth.'
+            ]
+        );
+
+        /* No unborn parents */
+        $rules->add(function($litter) {
+                return $litter->wasBornMother();
+            },
+            'wasBornMother',
+            [
+                'errorField' => 'birth_date',
+                'message' => 'Impossible: mother had not been born at this date.'
+            ]
+        );
+
+        $rules->add(function($litter) {
+                return $litter->wasBornFather();
+            },
+            'wasBornFather',
+            [
+                'errorField' => 'birth_date',
+                'message' => 'Impossible: father had not been born at this date.'
+            ]
+        );
+
+        /* No dead parents */
+        $rules->add(function($litter) {
+                return $litter->wasAliveMother();
+            },
+            'wasAliveMother',
+            [
+                'errorField' => 'birth_date',
+                'message' => 'Impossible: mother was dead at this date.'
+            ]
+        );
+
+        $rules->add(function($litter) {
+                return $litter->wasAliveFather();
+            },
+            'wasAliveFather',
+            [
+                'errorField' => 'birth_date',
+                'message' => 'Impossible: father was dead too long before this date.'
+            ]
+        );
+
+        $rules->add(function($litter) {
+                return $litter->areCompatibleParents();
+            },
+            'areCompatibleParents',
+            [
+                'errorField' => 'father_name',
+                'message' => 'Impossible: father and mother were never alive at the same time.'
+            ]
+        );
+
         return $rules;
     }
 
@@ -170,6 +278,23 @@ class LittersTable extends Table
                     'Litters.state_id IS' => $inState,
             ]);
         }
+
+        return $query->group(['Litters.id']);
+    }
+
+    public function findFromBirth(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        $birth_date = $options['birth_date'];
+        $mother_id = $options['mother_id'];
+        $query = $query
+            ->where(['Litters.birth_date IS' => $birth_date])
+            ->matching('ParentRats', function ($q) use ($mother_id) {
+                return $q->where(['ParentRats.id' => $mother_id]);
+            });
 
         return $query->group(['Litters.id']);
     }
