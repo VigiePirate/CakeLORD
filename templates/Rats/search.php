@@ -76,6 +76,7 @@
                                     'label' => __('Origin'),
                                     'type' => 'text',
                                     'placeholder' => __('Type here...'),
+                                    'empty' => true,
                                 ]);
                                 echo $this->Form->control('rattery_id', [
                                     'id' => 'jquery-rattery-id',
@@ -86,6 +87,7 @@
                                     ],
                                     'class' => 'hide-everywhere',
                                     'type' => 'text',
+                                    'empty' => true,
                                 ]);
                             ?>
                         </div>

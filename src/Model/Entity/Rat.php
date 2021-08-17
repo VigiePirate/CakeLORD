@@ -74,7 +74,7 @@ class Rat extends Entity
     protected $_accessible = [
         'pedigree_identifier' => true,
         'is_pedigree_custom' => true,
-        'owner_user_id' => false,
+        'owner_user_id' => true, /* used to be false: why? */
         'name' => true,
         'pup_name' => true,
         'sex' => true,

@@ -271,15 +271,16 @@ class RatsTable extends Table
 
         /* Rules about death date and cause */
         $timeline = function($rat) {
-            return !( !$rat->is_alive && $rat->birth_date->gt($rat->death_date) );
+            return !( !$rat->is_alive && $rat->birth_date->isFuture($rat->death_date) );
         };
         $rules->add($timeline, [
             'errorField' => 'death_date',
             'message' => 'Impossible: chosen death date is anterior to birth date. Please check and correct your entry.'
         ]);
 
+        // temporary test for dead rats without death date (should not exist but...)
         $future = function($rat) {
-            return !( !$rat->is_alive && $rat->death_date->isFuture() );
+            return !( !$rat->is_alive && !is_null($rat->death_date) && $rat->death_date->isFuture() );
         };
         $rules->add($future, [
             'errorField' => 'death_date',
@@ -294,7 +295,7 @@ class RatsTable extends Table
             'message' => 'Impossible: it means that your rat would have lived more than 4 years and a half, but rats do not live this long.'
         ]);
 
-        $infant = function($rat) {
+/*        $infant = function($rat) {
             return ! ( !$rat->is_alive && ($rat->death_primary_cause->is_infant) && ($rat->precise_age > 42) );
         };
         $rules->add($infant, [
@@ -308,7 +309,7 @@ class RatsTable extends Table
         $rules->add($oldster, [
             'errorField' => 'death_primary_cause_id',
             'message' => 'Impossible: your rat was too young at this date to die “from old age”.'
-        ]);
+        ]); */
 
         return $rules;
     }
@@ -339,8 +340,8 @@ class RatsTable extends Table
          if( !empty($options['namekey']) ) {
              $query->where([
                  'OR' => [
-                     'Rats.name LIKE' => '%'.h($options['namekey']).'%',
-                     'Rats.pup_name LIKE' => '%'.h($options['namekey']).'%',
+                     'Rats.name LIKE' => '%'.$options['namekey'].'%',
+                     'Rats.pup_name LIKE' => '%'.$options['namekey'].'%',
                  ],
              ]);
          }
@@ -432,7 +433,6 @@ class RatsTable extends Table
                  ]);
              });
          }
-
          return $query->group(['Rats.id']);
      }
 
@@ -646,4 +646,26 @@ class RatsTable extends Table
             ])
             ->contain(['Ratteries']);
     }
+
+    // public function findBySecondaryDeath(Query $query, array $options)
+    // {
+    //     $query = $query
+    //         ->select()
+    //         ->distinct();
+    //
+    //     if (empty($options['cause'])) {
+    //         $query->leftJoinWith('OwnerUsers')
+    //               ->where([
+    //                   'OwnerUsers.username IS' => null,
+    //               ]);
+    //     } else {
+    //         // Find articles that have one or more of the provided tags.
+    //         $query->innerJoinWith('OwnerUsers')
+    //               ->where([
+    //                       'OwnerUsers.username LIKE' => '%'.implode($options['owners']).'%',
+    //             ]);
+    //     }
+    //
+    //     return $query->group(['Rats.id']);
+    // }
 }

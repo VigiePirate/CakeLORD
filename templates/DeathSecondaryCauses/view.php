@@ -15,6 +15,7 @@
                 'url' => ['controller' => 'Articles', 'action' => 'index'],
                 'class' => 'side-nav-icon',
                 'alt' => __('Help')]) ?>
+
             <?= $this->Html->link(__('Edit Death Secondary Cause'), ['action' => 'edit', $deathSecondaryCause->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Death Secondary Cause'), ['action' => 'delete', $deathSecondaryCause->id], ['confirm' => __('Are you sure you want to delete # {0}?', $deathSecondaryCause->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Death Secondary Causes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
@@ -52,6 +53,19 @@
             </div>
             <div class="related">
                 <h2><?= __('Statistics') ?></h2>
+
+                <h2><?= __('Related rats') ?></h2>
+                <?= $this->element('simple_rats', [ //rats
+                    'rubric' => __(''),
+                    'rats' =>  $deathSecondaryCause->rats,
+                    'exceptions' => [
+                        'picture',
+                        'owner_user_id',
+                        'death_primary_cause',
+                        'death_secondary_cause',
+                        'death_cause',
+                    ],
+                ]) ?>
             </div>
         </div>
     </div>

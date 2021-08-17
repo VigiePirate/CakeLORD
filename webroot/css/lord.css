@@ -5,7 +5,7 @@
 
 /* Miligram overrides */
 a {
-  font-family: "Alegreya", serif;
+  font-family: "Roboto Condensed"; /* "Alegreya", serif; */
   color: #663300;
 }
 
@@ -117,19 +117,28 @@ a sup {
 /* Forms */
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
-    background: #663300;
+    background: #cabcafa3; /* #663300*/
     border-color: #663300;
-    font-family: "Alegreya", serif;
+    font-family: "Roboto Condensed", serif;
     font-size: 1.6rem;
+    color: #663300;
   }
 
-.button-staff {
-    background: #b1000c;
-    border-color: #b1000c;
+.button:visited {
+    color: #663300;
+    background: #cabcaf;
 }
 
-.button:visited {
-  color:#ffffff;
+.button-staff {
+    background: #e8dbdc;
+    border-color: #b1000c;
+    color: #b1000c;
+}
+
+.button-staff:visited {
+  background: #d6bcbe;
+  border-color: #b1000c;
+  color: #b1000c;
 }
 
 textarea {
@@ -276,6 +285,11 @@ td,th {
     border-bottom: none;
     padding:0rem 1rem;
   }
+
+.false-a {
+  font-family: "Roboto Condensed";
+  color: #606c76;
+}
 
 .actions, .actions-title {
     text-align:right;
@@ -579,7 +593,7 @@ th {
     display:inline;
     padding: 0.5rem;
     width:5.2rem;
-    background-color: #66330029; /* #e0d7ce; */
+    /* background-color: #66330029; */ /* #e0d7ce; */
     border-radius: 0.4rem;
     /* padding: 1.25rem;
     width: 6.5rem; */
@@ -592,7 +606,7 @@ th {
       display:inline;
       padding: 0.5rem;
       width:5.2rem;
-      background-color: #e8dbdc; /* to be improved */
+      /* background-color: #e8dbdc; */ /* to be improved */
       border-radius: 0.4rem;
       /* padding: 1.25rem;
       width: 6.5rem; */

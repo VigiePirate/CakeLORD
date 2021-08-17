@@ -5,16 +5,16 @@
     <table class="condensed">
         <thead>
             <?php if (! in_array('state_id', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('state_id',$this->Html->image('/img/icon-fa-state.svg', ['class' => 'action-icon']), ['escape' => false])?></th>
+                <th><?= $this->Paginator->sort('state_id','State')?></th>
             <?php endif; ?>
             <?php if (! in_array('picture', $exceptions)): ?>
-                <th><?= __('Picture') ?></th>
+                <th class="false-a"><?= __('Picture') ?></th>
             <?php endif; ?>
             <?php if (! in_array('pedigree_identifier', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('pedigree_identifier','Identifier') ?></th>
             <?php endif; ?>
             <?php if (! in_array('prefix', $exceptions)): ?>
-                <th><?= __('Prefix') ?></th>
+                <th class="false-a"><?= __('Prefix') ?></th>
             <?php endif; ?>
             <?php if (! in_array('name', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('name') ?></th>
@@ -26,18 +26,18 @@
                 <th><?= $this->Paginator->sort('birth_date') ?></th>
             <?php endif; ?>
             <?php if (! in_array('age_string', $exceptions)): ?>
-                <th><?= __('Reached Age') ?></th>
+                <th class="false-a"><?= __('Reached Age') ?></th>
             <?php endif; ?>
             <?php if (! in_array('death_cause', $exceptions)): ?>
-                <th><?= __('Death cause') ?></th>
+                <th class="false-a"><?= __('Death cause') ?></th>
             <?php endif; ?>
             <?php if (! in_array('owner_user_id', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('owner_user_id','Owner') ?></th>
             <?php endif; ?>
             <?php if (! in_array('sex', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('sex',$this->Html->image('/img/icon-fa-sex.svg', ['class' => 'action-icon']), ['escape' => false])?></th>
+                <th><?= $this->Paginator->sort('sex','Sex') ?></th>
             <?php endif; ?>
-            <th class="actions-title"><?= $this->Html->image('/img/icon-fa-action.svg', ['class' => 'action-icon'])?></th>
+            <th class="actions-title false-a"><?= __('Actions') ?></th>
     </thead>
         <tbody>
             <?php foreach($rats as $rat): ?>
@@ -77,8 +77,8 @@
                     <?php endif; ?>
                     <td class="actions">
                         <span class="nowrap">
-                        <?= $this->Html->image('/img/icon-view.svg', [
-                            'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
+                        <?= $this->Html->image('/img/icon-file-edit.svg', [
+                            'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
                             'class' => 'action-icon',
                             'alt' => __('See Rat')]) ?>
                         <?= $this->Html->image('/img/icon-rip.svg', [

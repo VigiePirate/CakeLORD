@@ -27,7 +27,7 @@
             <?= $this->Flash->render() ?>
 
             <?= $this->Form->create($rat) ?>
-            
+
             <fieldset>
                 <legend><?= __('Identity') ?></legend>
 
@@ -191,7 +191,7 @@
                     ]);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Do not press now!')) ?>
+            <?= $this->Form->button(__('Create litter')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>
