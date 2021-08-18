@@ -641,7 +641,7 @@ th {
 /* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
-  /* width: 120px; */
+  width: 100%;
   background-color: #663300;
   color: #fff;
   text-align: left;
