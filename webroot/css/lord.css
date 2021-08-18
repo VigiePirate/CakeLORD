@@ -635,18 +635,18 @@ th {
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  /* border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }
 
 /* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  /* width: 120px; */
   background-color: #663300;
   color: #fff;
   text-align: left;
-  padding: 5px 0;
-  border-radius: 6px;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
 
   /* Position the tooltip text - see examples below! */
   position: absolute;
@@ -666,7 +666,7 @@ th {
   margin-top: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent black transparent transparent;
+  border-color: transparent #663300 transparent transparent;
 }
 
 /* Sheet heading */
