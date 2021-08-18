@@ -6,7 +6,9 @@
 ?>
 <div class="row">
     <aside class="column">
-        <?= $this->element('default_sidebar') ?>
+        <div class="side-nav">
+            <?= $this->element('default_sidebar') ?>
+        </div>
     </aside>
 
     <div class="column-responsive column-90">

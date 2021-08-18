@@ -7,7 +7,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
+            <?= $this->element('default_sidebar') ?>
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $contribution->id],

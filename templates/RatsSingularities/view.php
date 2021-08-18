@@ -7,14 +7,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->Html->image('/img/icon-report.svg', [
-          'url' => ['controller' => 'Conversations', 'action' => 'add'],
-          'class' => 'side-nav-icon',
-          'alt' => __('Report')]) ?>
-      <?= $this->Html->image('/img/icon-help.svg', [
-              'url' => ['controller' => 'Articles', 'action' => 'index'],
-              'class' => 'side-nav-icon',
-              'alt' => __('Help')]) ?>
+            <?= $this->element('default_sidebar') ?>
             <?= $this->Html->link(__('Edit Rats Singularity'), ['action' => 'edit', $ratsSingularity->rat_id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Rats Singularity'), ['action' => 'delete', $ratsSingularity->rat_id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratsSingularity->rat_id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Rats Singularities'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>

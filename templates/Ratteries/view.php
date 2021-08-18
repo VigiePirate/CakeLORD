@@ -10,18 +10,7 @@
             <!-- New actions with icons -->
 
             <div class="side-nav-item">
-                <?= $this->Html->image('/img/icon-report.svg', [
-                'url' => ['controller' => 'Conversations', 'action' => 'add'],
-                'class' => 'side-nav-icon',
-                'alt' => __('Report')]) ?>
-                <div class="side-nav-text hide-everywhere"><?= __('Report') ?></div>
-            </div>
-
-            <div class="side-nav-item">
-                <?= $this->Html->image('/img/icon-help.svg', [
-                    'url' => ['controller' => 'Articles', 'action' => 'index'],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Help')]) ?>
+                <?= $this->element('default_sidebar') ?>
                 <span class="side-nav-text hide-everywhere"><?= __('Get help') ?><span>
             </div>
 
