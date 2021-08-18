@@ -8,42 +8,35 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    inkscape:version="1.0beta1 (fe3e306, 2019-09-17)"
-   sodipodi:docname="icon-fa-alert.svg"
-   id="svg4"
+   sodipodi:docname="icon-report.svg"
    version="1.1"
-   viewBox="0 0 576 512"
-   role="img"
-   class="svg-inline--fa fa-exclamation-triangle fa-w-18"
-   data-icon="exclamation-triangle"
-   data-prefix="fas"
-   focusable="false"
-   aria-hidden="true">
+   viewBox="0 0 60 60"
+   data-name="Layer 1"
+   id="Layer_1">
   <metadata
-     id="metadata10">
+     id="metadata15">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title>icon-help</dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <defs
-     id="defs8" />
   <sodipodi:namedview
-     inkscape:current-layer="svg4"
+     inkscape:current-layer="Layer_1"
      inkscape:window-maximized="0"
-     inkscape:window-y="1"
-     inkscape:window-x="898"
-     inkscape:cy="256"
-     inkscape:cx="288"
-     inkscape:zoom="0.40972222"
+     inkscape:window-y="0"
+     inkscape:window-x="0"
+     inkscape:cy="27.094431"
+     inkscape:cx="30"
+     inkscape:zoom="13.766667"
      showgrid="false"
-     id="namedview6"
-     inkscape:window-height="899"
-     inkscape:window-width="944"
+     id="namedview13"
+     inkscape:window-height="949"
+     inkscape:window-width="1715"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0"
      guidetolerance="10"
@@ -53,9 +46,22 @@
      inkscape:document-rotation="0"
      bordercolor="#666666"
      pagecolor="#ffffff" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1{fill:none;stroke:#630;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.5px;}.cls-2{fill:#630;}</style>
+  </defs>
+  <title
+     id="title6">icon-help</title>
   <path
-     style="fill:#663300;fill-opacity:1"
-     id="path2"
-     d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
-     fill="currentColor" />
+     style="stroke:#ffffff;stroke-opacity:1;fill:#663300;fill-opacity:1"
+     id="path8"
+     d="M30.67,10.66a19.77,19.77,0,0,0-20,19.49,19.24,19.24,0,0,0,6.2,14.15c-.36,1.07-1.79,4.93-3.6,5.37-2.07.5,3.47,2.49,10.14-1.3a20.62,20.62,0,0,0,7.23,1.33,19.77,19.77,0,0,0,20-19.49A19.77,19.77,0,0,0,30.67,10.66Z"
+     class="cls-1" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     class="cls-1"
+     d="m 27.926733,19.269146 a 1.25,1.25 0 0 1 1.21,-1.48 h 2.49 a 1.27,1.27 0 0 1 1.25,1.48 l -1.22,14.07 a 1.27,1.27 0 0 1 -1.28,1.24 1.23,1.23 0 0 1 -1.24,-1.24 z m 2.45,17.83 a 2.36,2.36 0 0 1 2.5,2.38 v 0.35 a 2.36,2.36 0 0 1 -2.45,2.38 2.38,2.38 0 0 1 -2.45,-2.38 v -0.35 a 2.38,2.38 0 0 1 2.4,-2.38 z"
+     id="path8-1" />
 </svg>
