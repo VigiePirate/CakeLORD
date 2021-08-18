@@ -645,7 +645,7 @@ th {
   background-color: #663300;
   color: #fff;
   text-align: left;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.4rem;
 
   /* Position the tooltip text - see examples below! */
@@ -665,8 +665,8 @@ th {
   position: absolute;
   top: 50%;
   right: 100%; /* To the left of the tooltip */
-  margin-top: -1rem;
-  border-width: 1rem;
+  margin-top: -0.75rem;
+  border-width: 0.75rem;
   border-style: solid;
   border-color: transparent #663300 transparent transparent;
 }
