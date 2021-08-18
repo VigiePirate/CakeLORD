@@ -12,15 +12,19 @@
                     'url' => ['controller' => 'Conversations', 'action' => 'add'],
                     'class' => 'side-nav-icon',
                     'alt' => __('Report')]) ?>
-                <span class="tooltiptext">Report a problem</span>
+                <span class="tooltiptext">__('Report a problem')</span>
             </div>
 
-            <?= $this->Html->image('/img/icon-help.svg', [
-                'url' => ['controller' => 'Articles', 'action' => 'index'],
-                'class' => 'side-nav-icon',
-                'alt' => __('Help')]) ?>
+            <div class="tooltip">
+                <?= $this->Html->image('/img/icon-help.svg', [
+                    'url' => ['controller' => 'Articles', 'action' => 'index'],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Help')]) ?>
+                <span class="tooltiptext">__('Get help')</span>
+            </div>
         </div>
     </aside>
+
     <div class="column-responsive column-90">
         <div class="rats form content">
             <div class="sheet-heading">
