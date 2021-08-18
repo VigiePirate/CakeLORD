@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0beta1 (fe3e306, 2019-09-17)"
+   sodipodi:docname="icon-home.svg"
+   version="1.1"
+   viewBox="0 0 60 60"
+   data-name="Layer 1"
+   id="Layer_1">
+  <metadata
+     id="metadata15">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>icon-help</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:current-layer="Layer_1"
+     inkscape:window-maximized="0"
+     inkscape:window-y="0"
+     inkscape:window-x="0"
+     inkscape:cy="37.501378"
+     inkscape:cx="15.675791"
+     inkscape:zoom="6.8833333"
+     showgrid="false"
+     id="namedview13"
+     inkscape:window-height="949"
+     inkscape:window-width="1715"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     inkscape:document-rotation="0"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1{fill:none;stroke:#630;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.5px;}.cls-2{fill:#630;}</style>
+  </defs>
+  <title
+     id="title6">icon-help</title>
+  <path
+     inkscape:connector-curvature="0"
+     d="M 30,4.5823244 0.0968525,31.495158 h 8.970944 V 55.417676 H 50.932203 V 31.495158 h 8.970945 L 30,4.5823244 M 30,21.776635 A 6.7282082,6.7282082 0 0 1 36.728208,28.504843 6.7282082,6.7282082 0 0 1 30,35.233051 6.7282082,6.7282082 0 0 1 23.271792,28.504843 6.7282082,6.7282082 0 0 1 30,21.776635 m 0,18.689467 c 4.485472,0 13.456417,2.242736 13.456417,6.728208 v 2.242736 H 16.543583 V 47.19431 c 0,-4.485472 8.970945,-6.728208 13.456417,-6.728208 z"
+     id="path2"
+     style="fill:#ffffff;fill-opacity:1;stroke-width:2.99031;stroke:none;stroke-opacity:1" />
+</svg>
