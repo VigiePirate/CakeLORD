@@ -90,7 +90,7 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                     ($this->getRequest()->getSession()->check('Auth.id')) ?
                         $this->Html->Link(
                         // $this->getRequest()->getSession()->read('Auth.username'),
-                            $this->Html->image("/img/icon-user.svg", ["alt" => "Dashboard", "width" => "40"]),
+                            $this->Html->image("/img/icon-home.svg", ["alt" => "Dashboard", "width" => "40"]),
                             ['controller' => 'Users', 'action' => 'home'],
                             ['escape' => false]) .
                         $this->Html->Link(
