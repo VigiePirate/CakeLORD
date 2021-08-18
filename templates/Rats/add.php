@@ -7,11 +7,13 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->Html->image('/img/icon-report.svg', [
-                'url' => ['controller' => 'Conversations', 'action' => 'add'],
-                'class' => 'side-nav-icon tooltip',
-                'alt' => __('Report')]) ?>
-            <span class="tooltiptext">Report a problem</span>
+            <div class="tooltip">
+                <?= $this->Html->image('/img/icon-report.svg', [
+                    'url' => ['controller' => 'Conversations', 'action' => 'add'],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Report')]) ?>
+                <span class="tooltiptext">Report a problem</span>
+            </div>
 
             <?= $this->Html->image('/img/icon-help.svg', [
                 'url' => ['controller' => 'Articles', 'action' => 'index'],
