@@ -12,7 +12,7 @@
                     'url' => ['controller' => 'Conversations', 'action' => 'add'],
                     'class' => 'side-nav-icon',
                     'alt' => __('Report')]) ?>
-                <span class="tooltiptext">__('Report a problem')</span>
+                <span class="tooltiptext"><?= __('Report a problem') ?></span>
             </div>
 
             <div class="tooltip">
@@ -20,7 +20,7 @@
                     'url' => ['controller' => 'Articles', 'action' => 'index'],
                     'class' => 'side-nav-icon',
                     'alt' => __('Help')]) ?>
-                <span class="tooltiptext">__('Get help')</span>
+                <span class="tooltiptext"><?= __('Get help') ?></span>
             </div>
         </div>
     </aside>

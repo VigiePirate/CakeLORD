@@ -647,11 +647,11 @@ th {
   text-align: left;
   padding: 0.5rem 1rem;
   border-radius: 0.4rem;
-  font-size: 0.8rem;
+  font-size: 1.4rem;
 
   /* Position the tooltip text - see examples below! */
   position: absolute;
-  top: 1rem;
+  top: 1.4rem;
   left: 105%;
   z-index: 1;
 }
