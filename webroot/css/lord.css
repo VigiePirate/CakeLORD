@@ -584,7 +584,7 @@ th {
     color: #663300;
   }
 
-.side-nav-icon:hover {
+.side-nav-icon:hover, .side-nav-icon:focus {
   background-color: #cabcaf;
   border-radius: 0.4rem;
 }
@@ -592,14 +592,13 @@ th {
 .side-nav-icon {
     display:inline;
     padding: 0.5rem;
-    width:5.2rem;
+    width:6rem; /* 5.2 */
     /* background-color: #66330029; */ /* #e0d7ce; */
     border-radius: 0.4rem;
     /* padding: 1.25rem;
     width: 6.5rem; */
-    /* box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+    box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
     background-color: #ffffff;
-    border-radius: 0.4rem; */
   }
 
 .side-nav-icon-staff {
