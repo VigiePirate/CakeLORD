@@ -30,7 +30,7 @@ summary {
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
   font-weight: bold;
   font-size:2.2rem;
-  color: #6076bf;
+  color: #606ebf;
   padding-left: 1rem;
   margin-bottom: 0.5rem;
   cursor: pointer;
@@ -50,7 +50,7 @@ details > summary.h2 {
 h1, h2, h3, h4, h5 {
   font-weight: bold;
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
-  color: #6076bf;
+  color: #606ebf;  /* #606ebf; */
   hyphens: manual;
 }
 
@@ -94,7 +94,7 @@ h5 {
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
   font-weight: bold;
   font-size: 1.8rem;
-  color: #6076bf;
+  color: #606ebf;
   padding-bottom:0.5rem;
 }
 
@@ -148,7 +148,7 @@ textarea {
 legend {
     font-family: "Imprima", sans-serif;
     font-size: 2.4rem;
-    color:#6076bf;
+    color:#606ebf;
   }
 
 label {
@@ -446,7 +446,7 @@ th {
   padding-right:1.5rem;
 }
 .shieldline span {
-    color: #bfceff; /*gray footer: #6076bf */
+    color: #bfc9ff; /*gray footer: #606ebf ; hue 226: #bfc99ff*/
   }
 .shieldline {
   /* font-family:"Alegreya",serif;*/
@@ -518,7 +518,7 @@ th {
     }
 
 .top-nav-title span {
-    color: #bfceff;
+    color: #bfc9ff;
   }
 
 .top-nav-links {
@@ -708,7 +708,7 @@ footer {
 
 /*gray: comment out here */
 .footer_section h5 {
-    color: #bfceff;
+    color: #bfc9ff;
     font-weight:bold;
 }
 
@@ -746,7 +746,7 @@ footer {
 .message {
     padding: 1rem;
     background: #ebf0fa;
-    color: #6076bf; /*#7786bf;*/
+    color: #606ebf; /*#7786bf;*/
     border-color: #6f7db3; /*#c9d2eb*/
     border-width: 1px;
     border-style: solid;
