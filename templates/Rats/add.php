@@ -9,8 +9,10 @@
         <div class="side-nav">
             <?= $this->Html->image('/img/icon-report.svg', [
                 'url' => ['controller' => 'Conversations', 'action' => 'add'],
-                'class' => 'side-nav-icon',
+                'class' => 'side-nav-icon tooltip',
                 'alt' => __('Report')]) ?>
+            <span class="tooltiptext">Report a problem</span>
+
             <?= $this->Html->image('/img/icon-help.svg', [
                 'url' => ['controller' => 'Articles', 'action' => 'index'],
                 'class' => 'side-nav-icon',
