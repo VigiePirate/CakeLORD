@@ -21,22 +21,22 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>icon-help</dc:title>
+        <dc:title>icon-report</dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
      inkscape:current-layer="Layer_1"
-     inkscape:window-maximized="0"
-     inkscape:window-y="0"
-     inkscape:window-x="0"
-     inkscape:cy="29.357394"
-     inkscape:cx="16.580684"
+     inkscape:window-maximized="1"
+     inkscape:window-y="-9"
+     inkscape:window-x="-9"
+     inkscape:cy="26.420784"
+     inkscape:cx="11.569904"
      inkscape:zoom="9.7345034"
      showgrid="false"
      id="namedview13"
-     inkscape:window-height="949"
-     inkscape:window-width="1715"
+     inkscape:window-height="1001"
+     inkscape:window-width="1920"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0"
      guidetolerance="10"
@@ -49,20 +49,13 @@
   <defs
      id="defs4">
     <style
-       id="style2">.cls-1{fill:none;stroke:#630;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.5px;}.cls-2{fill:#630;}</style>
+       id="style2">.cls-1{fill:#630;}.cls-2{fill:none;stroke:#630;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.5px;}</style>
   </defs>
   <title
-     id="title6">icon-help</title>
-  <path
-     style="stroke-width:3.96349;stroke-miterlimit:4;stroke-dasharray:none"
-     inkscape:connector-curvature="0"
-     id="path8"
-     d="M 30.020979,2.0440241 A 27.652414,27.650014 0 0 0 2.0468641,29.302435 26.911101,26.908765 0 0 0 10.718839,49.092404 c -0.503534,1.496486 -2.5036822,6.895022 -5.0353398,7.510398 -2.895321,0.699292 4.8535088,3.482477 14.1828758,-1.818158 A 28.841315,28.838812 0 0 0 29.979019,56.644762 27.652414,27.650014 0 0 0 57.953136,29.386349 27.652414,27.650014 0 0 0 30.020979,2.0440241 Z"
-     class="cls-1" />
+     id="title6">icon-report</title>
   <path
      inkscape:connector-curvature="0"
-     style="fill:#663300;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
-     class="cls-1"
-     d="m 26.506193,14.866199 a 1.7659525,1.76288 0 0 1 1.709442,-2.08725 h 3.517778 a 1.7942077,1.7910861 0 0 1 1.765952,2.08725 l -1.72357,19.842977 a 1.7942077,1.7910861 0 0 1 -1.808334,1.748777 1.7376972,1.7346739 0 0 1 -1.751826,-1.748777 z m 3.461268,25.14572 a 3.3341182,3.3283174 0 0 1 3.531904,3.356524 v 0.493606 a 3.3341182,3.3283174 0 0 1 -3.461267,3.356523 3.3623735,3.3565235 0 0 1 -3.461267,-3.356523 v -0.493606 a 3.3623735,3.3565235 0 0 1 3.39063,-3.356524 z"
-     id="path8-1" />
+     style="overflow:hidden;fill:#663300;stroke-width:0.0582124;fill-opacity:1"
+     d="m 30.000001,3.9208437 c -16.462463,0 -29.80475075,10.8391473 -29.80475075,24.2163563 0,5.774675 2.49149555,11.060363 6.63621485,15.216726 -1.4553079,5.86781 -6.3218641,11.095285 -6.38007649,11.153497 -0.25613836,0.267772 -0.32599519,0.663614 -0.1746369,1.012888 0.15134783,0.349275 0.47733266,0.558845 0.84989569,0.558845 7.7189705,0 13.5052796,-3.702309 16.3693276,-5.984235 3.80709,1.432019 8.033311,2.258636 12.504026,2.258636 16.462462,0 29.804749,-10.839147 29.804749,-24.216357 0,-13.377209 -13.342287,-24.2163564 -29.804749,-24.2163563 z m 0,39.1187323 c -2.06072,0 -3.725599,-1.664879 -3.725599,-3.725589 0,-2.060721 1.664879,-3.7256 3.725599,-3.7256 2.060719,0 3.725587,1.664879 3.725587,3.7256 0,2.06071 -1.664868,3.725589 -3.725587,3.725589 z m 2.957184,-12.853299 c -0.09313,0.954685 -0.896465,1.676523 -1.85115,1.676523 h -2.212068 c -0.954686,0 -1.758014,-0.721838 -1.85116,-1.676523 L 25.552575,15.283901 c -0.10479,-1.094389 0.756761,-2.049076 1.85115,-2.049076 h 5.192551 c 1.106034,0 1.967575,0.954687 1.851151,2.049076 z"
+     id="path2" />
 </svg>
