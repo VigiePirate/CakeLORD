@@ -651,7 +651,7 @@ th {
   /* Position the tooltip text - see examples below! */
   position: absolute;
   top: -5px;
-  right: 105%;
+  left: 105%;
   z-index: 1;
 }
 
