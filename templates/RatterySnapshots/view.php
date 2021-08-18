@@ -7,7 +7,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+            <?= $this->Html->image('/img/icon-report.svg', [
           'url' => ['controller' => 'Conversations', 'action' => 'add'],
           'class' => 'side-nav-icon',
           'alt' => __('Report')]) ?>
