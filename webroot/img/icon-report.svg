@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0beta1 (fe3e306, 2019-09-17)"
+   sodipodi:docname="icon-report.svg"
+   version="1.1"
+   viewBox="0 0 60 60"
+   data-name="Layer 1"
+   id="Layer_1">
+  <metadata
+     id="metadata15">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>icon-report</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:current-layer="Layer_1"
+     inkscape:window-maximized="1"
+     inkscape:window-y="-9"
+     inkscape:window-x="-9"
+     inkscape:cy="30"
+     inkscape:cx="30"
+     inkscape:zoom="13.766667"
+     showgrid="false"
+     id="namedview13"
+     inkscape:window-height="1001"
+     inkscape:window-width="1920"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     inkscape:document-rotation="0"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1{fill:#630;}.cls-2{fill:none;stroke:#630;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.5px;}</style>
+  </defs>
+  <title
+     id="title6">icon-report</title>
+  <path
+     inkscape:connector-curvature="0"
+     style="stroke-width:4.00003;stroke-miterlimit:4;stroke-dasharray:none"
+     id="path8"
+     d="M 28.05,24.580018 A 1.25,1.2500143 0 0 1 29.26,23.1 h 2.49 A 1.27,1.2700144 0 0 1 33,24.580018 l -1.22,14.070159 a 1.27,1.2700144 0 0 1 -1.28,1.240014 1.23,1.2300141 0 0 1 -1.24,-1.240014 z m 2.45,17.830203 a 2.36,2.3600269 0 0 1 2.5,2.380026 v 0.350005 a 2.36,2.3600269 0 0 1 -2.45,2.380027 2.38,2.380027 0 0 1 -2.45,-2.380027 v -0.350005 a 2.38,2.380027 0 0 1 2.4,-2.380026 z"
+     class="cls-1" />
+  <polygon
+     style="stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none"
+     id="polygon10"
+     points="30.52 11.63 41.88 31.31 53.24 50.98 30.52 50.98 7.8 50.98 19.16 31.31 30.52 11.63"
+     class="cls-2" />
+</svg>
