@@ -647,7 +647,7 @@ th {
   text-align: left;
   padding: 0.5rem 1rem;
   border-radius: 0.4rem;
-  font-weight:bold;
+  font-size: 0.8rem;
 
   /* Position the tooltip text - see examples below! */
   position: absolute;
