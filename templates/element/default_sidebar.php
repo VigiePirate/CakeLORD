@@ -13,3 +13,11 @@
         'alt' => __('Help')]) ?>
     <span class="tooltiptext"><?= __('Get help') ?></span>
 </div>
+
+<div class="tooltip">
+    <?= $this->Html->image('/img/icon-rat-add.svg', [
+        'url' => ['controller' => 'Rats', 'action' => 'add'],
+        'class' => 'side-nav-icon',
+        'alt' => __('Help')]) ?>
+    <span class="tooltiptext"><?= __('Add a rat') ?></span>
+</div>
