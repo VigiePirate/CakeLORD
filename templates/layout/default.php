@@ -78,6 +78,13 @@ $cakeDescription = 'LORD';
                 ['escape' => false])
             ?>
 
+            <?=
+            $this->Html->Link(
+            // $this->getRequest()->getSession()->read('Auth.username'),
+                $this->Html->image("/img/icon-rat-add.svg", ["alt" => "Add a Rat", "width" => "40"]),
+                ['controller' => 'Rats', 'action' => 'add'],
+                ['escape' => false])
+            ?>
             <!-- /* < ? = ($this->getRequest()->getSession()->check('Auth.id')) ?
                 $this->Html->Link(
                     $this->Html->image("/img/icon-logout.svg", ["alt" => "Logout", "width" => "40"]),
@@ -95,17 +102,6 @@ $cakeDescription = 'LORD';
         <div class="container">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
-
-            <!-- float button for adding a rat -->
-
-            <div class=" button float-button float-right">
-                <?= $this->Html->image('/img/icon-rat-add.svg', [
-                'url' => ['controller' => 'Rats', 'action' => 'add'],
-                'class' => 'side-nav-icon',
-                'alt' => __('Add a Rat')]) ?>
-            </div>
-
-
         </div>
     </main>
     <footer>
