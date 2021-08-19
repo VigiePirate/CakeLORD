@@ -21,3 +21,19 @@
         'alt' => __('Help')]) ?>
     <span class="tooltiptext"><?= __('Add a rat') ?></span>
 </div>
+
+<div class="tooltip">
+    <?= $this->Html->image('/img/icon-litter.svg', [
+        'url' => ['controller' => 'Litters', 'action' => 'index'],
+        'class' => 'side-nav-icon',
+        'alt' => __('Help')]) ?>
+    <span class="tooltiptext"><?= __('Browse litters') ?></span>
+</div>
+
+<div class="tooltip">
+    <?= $this->Html->image('/img/icon-add-litter.svg', [
+        'url' => ['controller' => 'Litters', 'action' => 'add'],
+        'class' => 'side-nav-icon',
+        'alt' => __('Help')]) ?>
+    <span class="tooltiptext"><?= __('Add a rat') ?></span>
+</div>
