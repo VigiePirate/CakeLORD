@@ -15,7 +15,7 @@
 </div>
 
 <div class="tooltip">
-    <?= $this->Html->image('/img/icon-rat-add.svg', [
+    <?= $this->Html->image('/img/icon-add-rat.svg', [
         'url' => ['controller' => 'Rats', 'action' => 'add'],
         'class' => 'side-nav-icon',
         'alt' => __('Help')]) ?>
