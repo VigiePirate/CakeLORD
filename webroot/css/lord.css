@@ -117,16 +117,16 @@ a sup {
 /* Forms */
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
-    background: #cabcafa3; /* #663300*/
+    background: #663300; /* #cabcafa3*/
     border-color: #663300;
     font-family: "Roboto Condensed", serif;
     font-size: 1.6rem;
-    color: #663300;
+    color: #ffffff;
   }
 
 .button:visited {
     color: #663300;
-    background: #cabcaf;
+    background: #a65400; /* #cabcaf; */
 }
 
 .button-staff {
