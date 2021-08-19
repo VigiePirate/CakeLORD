@@ -71,12 +71,14 @@ $cakeDescription = 'LORD';
             <?= $this->Form->end(); ?>
             <!-- Login or access dashboard -->
             <?=
-            ($this->getRequest()->getSession()->check('Auth.id')) ?
-                $this->Html->Link(
-                // $this->getRequest()->getSession()->read('Auth.username'),
-                    $this->Html->image("/img/icon-home.svg", ["alt" => "Dashboard", "width" => "40"]),
-                    ['controller' => 'Users', 'action' => 'home'],
-                    ['escape' => false]) .
+            $this->Html->Link(
+            // $this->getRequest()->getSession()->read('Auth.username'),
+                $this->Html->image("/img/icon-home.svg", ["alt" => "Dashboard", "width" => "40"]),
+                ['controller' => 'Users', 'action' => 'home'],
+                ['escape' => false])
+            ?>
+
+            <!-- /* < ? = ($this->getRequest()->getSession()->check('Auth.id')) ?
                 $this->Html->Link(
                     $this->Html->image("/img/icon-logout.svg", ["alt" => "Logout", "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'logout'],
@@ -85,8 +87,8 @@ $cakeDescription = 'LORD';
                 $this->Html->Link(
                     $this->Html->image("/img/icon-login.svg", ["alt" => "Login", "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'login'],
-                    ['escape' => false])
-            ?>
+                    ['escape' => false]) */
+            ? > */ -->
         </div>
     </nav>
     <main class="main">
