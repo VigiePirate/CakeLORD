@@ -99,7 +99,7 @@ $cakeDescription = 'LORD';
             <!-- float button for adding a rat -->
             <?= $this->Html->image('/img/icon-rat-add.svg', [
                 'url' => ['controller' => 'Rats', 'action' => 'add'],
-                'class' => 'side-nav-icon button floatingbutton',
+                'class' => 'side-nav-icon button float-button',
                 'alt' => __('Modify Rat')]) ?>
 
 
