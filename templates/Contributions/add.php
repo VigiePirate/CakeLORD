@@ -8,7 +8,6 @@
     <aside class="column">
         <div class="side-nav">
             <?= $this->element('default_sidebar') ?>
-            
             <?= $this->Html->link(__('List Contributions'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>

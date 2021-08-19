@@ -141,6 +141,14 @@ a sup {
   color: #b1000c;
 }
 
+.floatbutton {
+  position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+}
+
 textarea {
   height:auto;
 }

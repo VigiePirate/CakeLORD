@@ -95,6 +95,14 @@ $cakeDescription = 'LORD';
         <div class="container">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
+
+            <!-- float button for adding a rat -->
+            <?= $this->Html->image('/img/icon-rat-add.svg', [
+                'url' => ['controller' => 'Rats', 'action' => 'add'],
+                'class' => 'side-nav-icon button floatingbutton',
+                'alt' => __('Modify Rat')]) ?>
+
+
         </div>
     </main>
     <footer>
