@@ -654,7 +654,7 @@ th {
   border-radius:3px 3px 0px 0px;
   box-shadow: 0 0.5rem 0.8rem #00000080;
 }
-.panels{
+/*.panels{
   background:#fffffff6;
   box-shadow: 0 2rem 2rem #00000080;
   min-height:200px;
@@ -663,7 +663,7 @@ th {
   border-radius:3px;
   overflow:hidden;
   padding:20px;
-}
+}*/
 .panel{
   display:none;
   animation: fadein .8s;
