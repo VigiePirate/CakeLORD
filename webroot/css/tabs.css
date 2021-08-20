@@ -2,28 +2,20 @@
 .tab-wrapper{
   display:flex;
   flex-direction: column;
-  align-items: center;
+  align-items: right;
 }
 .tab{
   cursor: pointer;
-  padding:10px 20px;
-  margin:0px 2px;
-  background:#000;
+  padding: 1em 2em;
+  margin:0 0.25rem;
+  background: #f5f7fa;
   display:inline-block;
-  color:#fff;
-  border-radius:3px 3px 0px 0px;
-  box-shadow: 0 0.5rem 0.8rem #00000080;
+  color: #fff;
+  border-radius:0.5rem;
+  /* box-shadow: 0 0.5rem 0.8rem #00000080;*/
+  box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1),
+  0 3px 6px 0 rgba(0, 0, 0, 0.07);
 }
-/*.panels{
-  background:#fffffff6;
-  box-shadow: 0 2rem 2rem #00000080;
-  min-height:200px;
-  width:100%;
-  max-width:500px;
-  border-radius:3px;
-  overflow:hidden;
-  padding:20px;
-}*/
 .panel{
   display:none;
   animation: fadein .8s;
@@ -52,7 +44,7 @@ input[type=radio].radio{
 #one:checked ~ .tabs #one-tab,
 #two:checked ~ .tabs #two-tab,
 #three:checked ~ .tabs #three-tab{
-  background:#fffffff6;
-  color:#000;
-  border-top: 3px solid #000;
+  background:#663300;
+  color:#663300;
+  border-top: 3px solid #663300;
 }

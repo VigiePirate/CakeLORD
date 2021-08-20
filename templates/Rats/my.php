@@ -12,13 +12,20 @@
             <input class="radio" id="two" name="group" type="radio">
             <input class="radio" id="three" name="group" type="radio">
             <div class="tabs">
-                <label class="tab" id="one-tab" for="one">CSS</label>
-                <label class="tab" id="two-tab" for="two">Skills</label>
-                <label class="tab" id="three-tab" for="three">Prerequisites</label>
+                <label class="tab" id="one-tab" for="one"><?= __('All my rats') ?></label>
+                <label class="tab" id="two-tab" for="two"><?= __('My males') ?></label>
+                <label class="tab" id="three-tab" for="three"><?= __('My females') ?></label>
             </div>
             <div class="panels users view content">
                 <div class="panel" id="one-panel">
-                        <p>Without CSS, every web page would be drab plain text and images that flowed straight down the page. With CSS, you can add color and background images and change the layout of your page — your web pages can feel like works of art!</p>
+                    <?= $this->element('rats', [
+                        'rubric' => __('My Rats'),
+                        'exceptions' => [
+                            'pup_name',
+                            'birth_date',
+                            'owner_user_id',
+                        ],
+                    ]) ?>
                 </div>
                 <div class="panel" id="two-panel">
                     <div class="panel-title">Take-Away Skills</div>
@@ -29,20 +36,6 @@
                     <p>We recommend that you complete Learn HTML before learning CSS.</p>
                 </div>
             </div>
-        </div>
-
-        <div class="spacer"> </div>
-        <div class="spacer"> </div>
-
-        <div class="users view content">
-            <?= $this->element('rats', [
-                'rubric' => __('My Rats'),
-                'exceptions' => [
-                    'pup_name',
-                    'birth_date',
-                    'owner_user_id',
-                ],
-            ]) ?>
         </div>
     </div>
 </div>
