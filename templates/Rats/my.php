@@ -46,3 +46,5 @@
         </div>
     </div>
 </div>
+
+<?= $this->Html->css('tabs.css') ?>
