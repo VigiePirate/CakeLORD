@@ -77,14 +77,14 @@ $cakeDescription = 'LORD';
                 ['controller' => 'Users', 'action' => 'home'],
                 ['escape' => false])
             ?>
-            <!-- /* < ? = ($this->getRequest()->getSession()->check('Auth.id')) ?
+            <?= ($this->getRequest()->getSession()->check('Auth.id')) ?
                 $this->Html->Link(
-                    $this->Html->image("/img/icon-logout.svg", ["alt" => "Logout", "width" => "40"]),
+                    $this->Html->image("/img/icon-keys.svg", ["alt" => "Logout", "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'logout'],
                     ['escape' => false])
                 :
                 $this->Html->Link(
-                    $this->Html->image("/img/icon-login.svg", ["alt" => "Login", "width" => "40"]),
+                    $this->Html->image("/img/icon-keys.svg", ["alt" => "Login", "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'login'],
                     ['escape' => false]) */
             ? > */ -->
