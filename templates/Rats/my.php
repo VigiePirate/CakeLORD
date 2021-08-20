@@ -17,15 +17,17 @@
             </div>
         </div>
         <div class="panels">
-            <div class="panel users view content" id="one-panel">
-                <?= $this->element('rats', [
-                    'rubric' => __('My Rats'),
-                    'exceptions' => [
-                        'pup_name',
-                        'birth_date',
-                        'owner_user_id',
-                    ],
-                ]) ?>
+            <div class="panel" id="one-panel">
+                <div class= "users view content">
+                    <?= $this->element('rats', [
+                        'rubric' => __('My Rats'),
+                        'exceptions' => [
+                            'pup_name',
+                            'birth_date',
+                            'owner_user_id',
+                        ],
+                    ]) ?>
+                </div>
             </div>
             <div class="panel users view content" id="two-panel">
                 <?= $this->element('rats', [
