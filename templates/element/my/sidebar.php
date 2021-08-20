@@ -4,9 +4,7 @@
     'class' => 'side-nav-icon',
     'alt' => __('My profile')]) ?>
 
-<div class="spacer"> </div>
-
-<?= $this->Html->image('/img/icon-one-rat.svg', [
+<?= $this->Html->image('/img/icon-rat.svg', [
     'url' => ['controller' => 'Rats', 'action' => 'my'],
     'class' => 'side-nav-icon',
     'alt' => __('My rats')]) ?>
