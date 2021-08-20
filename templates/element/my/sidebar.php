@@ -14,8 +14,7 @@
     'class' => 'side-nav-icon',
     'alt' => __('My ratteries')]) ?>
 
-
-<?= $this->Html->image('/img/icon-fa-baby.svg', [
+<?= $this->Html->image('/img/icon-litter.svg', [
     'url' => ['controller' => 'Litters', 'action' => 'my'],
     'class' => 'side-nav-icon',
     'alt' => __('My Litters')]) ?>
