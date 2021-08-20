@@ -639,43 +639,55 @@ th {
 }
 
 /* Tab nav (from milligram+) */
-.mg-nav > ul {
-  margin-bottom: 0;
-}
-.mg-nav > ul > li {
-  list-style-type: none;
+.mg-tabs > ul {
+  display: flex;
+  text-align: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  list-style: none;
+  cursor: pointer;
   margin: 0;
-  padding: 0;
 }
-.mg-nav > ul > li.active {
-  color: $color-initial;
-  border-left: 0.3rem solid #663300;
-  overflow-y: hidden;
+
+.mg-tabs > ul > li > * {
+  color: #663300; /*color secondary*/
+  white-space: nowrap;
+}
+.mg-tabs > ul > li {
   font-weight: bold;
+  border-bottom: 0.3rem solid transparent;
+  color: $color-tertiary; /*color tertiary*/
+  opacity: 0.7;
+  flex: 0 0 auto;
 }
 
-.mg-nav.mg-nav--inline > ul > li.active {
-  border: none;
-  border-bottom: 0.3rem solid #663300;
+.mg-tabs > ul > li.active {
+  color: #663300; /*color primary*/
+  border-color: #663300; /*color primary*/
+  overflow-y: hidden;
+  opacity: 1;
 }
-.mg-nav > ul > li a {
-  display: block;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
+
+.mg-tabs > ul > li:hover {
   color: #663300;
+  border-color: #663300; /*color tertiary*/
+  opacity: 1;
+  transition: all 0.3s;
 }
 
-.mg-nav > ul > li a:hover {
-  background-color: #663300;
+.mg-tabs--item {
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
 }
 
-.mg-nav--inline > ul {
-  display: inline-block;
-  width: 100%;
-}
-
-.mg-nav--inline > ul > li:not(.mg-right) {
-  float: left;
+.mg-tabs--content {
+  display: none;
+  padding-bottom: 1em;
+  border-bottom: 1px solid transparent;
+  border-color: #663300; /*color quaternary*/
+  clear: both;
 }
 
 /* Tooltips */
