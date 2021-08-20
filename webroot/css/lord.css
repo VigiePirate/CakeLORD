@@ -680,6 +680,13 @@ th {
 }
 
 /* Tooltip text for staff */
+
+.tooltip-staff {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
 .tooltip-staff .tooltiptext-staff {
   visibility: hidden;
   width: max-content;
