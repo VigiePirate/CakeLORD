@@ -37,5 +37,5 @@
         'url' => ['controller' => 'Users', 'action' => 'myBackOffice'],
         'class' => 'side-nav-icon',
         'alt' => __('Admin site')]) ?>
-    <span class="tooltiptext staff"><?= __('Admin site') ?></span>
+    <span class="tooltiptext-staff"><?= __('Admin site') ?></span>
 </div>

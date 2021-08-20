@@ -35,5 +35,5 @@
         'url' => ['controller' => 'Litters', 'action' => 'add'],
         'class' => 'side-nav-icon',
         'alt' => __('Help')]) ?>
-    <span class="tooltiptext"><?= __('Add a rat') ?></span>
+    <span class="tooltiptext tooltiptext-staff"><?= __('Add a rat') ?></span>
 </div>
