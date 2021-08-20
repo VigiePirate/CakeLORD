@@ -30,10 +30,10 @@
     <span class="tooltiptext"><?= __('Browse litters') ?></span>
 </div>
 
-<div class="tooltip">
+<div class="tooltip-staff">
     <?= $this->Html->image('/img/icon-add-litter.svg', [
         'url' => ['controller' => 'Litters', 'action' => 'add'],
         'class' => 'side-nav-icon',
         'alt' => __('Help')]) ?>
-    <span class="tooltiptext tooltiptext-staff"><?= __('Add a rat') ?></span>
+    <span class="tooltiptext-staff"><?= __('Add a rat') ?></span>
 </div>

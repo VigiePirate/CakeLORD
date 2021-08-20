@@ -656,8 +656,6 @@ th {
   padding: 0.5rem 1rem;
   border-radius: 0.4rem;
   font-size: 1.4rem;
-
-  /* Position the tooltip text - see examples below! */
   position: absolute;
   top: 1.4rem;
   left: 105%;
@@ -665,11 +663,22 @@ th {
 }
 
 .tooltiptext-staff {
-  background-color:#b1000c;
+  visibility: hidden;
+  width: max-content;
+  background-color: #b1000c;
+  color: #fff;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 1.4rem;
+  position: absolute;
+  top: 1.4rem;
+  left: 105%;
+  z-index: 1;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptext .tooltiptext-staff{
   visibility: visible;
 }
 
@@ -682,6 +691,17 @@ th {
   border-width: 0.75rem;
   border-style: solid;
   border-color: transparent #663300 transparent transparent;
+}
+
+.tooltiptext-staff::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%; /* To the left of the tooltip */
+  margin-top: -0.75rem;
+  border-width: 0.75rem;
+  border-style: solid;
+  border-color: transparent #b1000c transparent transparent;
 }
 
 /* Sheet heading */
