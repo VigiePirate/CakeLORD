@@ -19,23 +19,24 @@
                       <a href="#" class="secondary">Tab one</a>
                     </li>
                 </ul>
-            <div class="mg-tabs--content" id="tab1">
-            1 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Magni iste, placeat voluptates sapiente blanditiis fuga ullam.
-            Iure dolorum libero fugit quidem, voluptate veniam aut animi
-            nihil voluptas mollitia, aliquid inventore.
-            </div>
-            <div class="mg-tabs--content" id="tab2">
-            2 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Magni iste, placeat voluptates sapiente blanditiis fuga ullam.
-            Iure dolorum libero fugit quidem, voluptate veniam aut animi
-            nihil voluptas mollitia, aliquid inventore.
-            </div>
-            <div class="mg-tabs--content" id="tab3">
-            3 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Magni iste, placeat voluptates sapiente blanditiis fuga ullam.
-            Iure dolorum libero fugit quidem, voluptate veniam aut animi
-            nihil voluptas mollitia, aliquid inventore.
+                <div class="mg-tabs--content" id="tab1">
+                1 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Magni iste, placeat voluptates sapiente blanditiis fuga ullam.
+                Iure dolorum libero fugit quidem, voluptate veniam aut animi
+                nihil voluptas mollitia, aliquid inventore.
+                </div>
+                <div class="mg-tabs--content" id="tab2">
+                2 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Magni iste, placeat voluptates sapiente blanditiis fuga ullam.
+                Iure dolorum libero fugit quidem, voluptate veniam aut animi
+                nihil voluptas mollitia, aliquid inventore.
+                </div>
+                <div class="mg-tabs--content" id="tab3">
+                3 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Magni iste, placeat voluptates sapiente blanditiis fuga ullam.
+                Iure dolorum libero fugit quidem, voluptate veniam aut animi
+                nihil voluptas mollitia, aliquid inventore.
+                </div>
             </div>
         </div>
 
