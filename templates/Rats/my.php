@@ -1,6 +1,7 @@
 <div class="row">
     <aside class="column"/>
         <div class="side-nav">
+            <div class="spacer"> </div>
             <?= $this->element('my/sidebar') ?>
         </div>
     </aside>
