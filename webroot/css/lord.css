@@ -593,7 +593,7 @@ th {
   }
 
 .side-nav-icon:hover, .side-nav-icon:focus {
-  background-color: #cabcaf;
+  background-color: #c3c8e6 /*#cabcaf;*/
   border-radius: 0.4rem;
 }
 
