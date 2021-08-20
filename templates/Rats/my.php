@@ -12,7 +12,7 @@
             <input class="radio" id="three" name="group" type="radio">
             <div class="tabs">
                 <label class="tab" id="one-tab" for="one"> <?= __('My rats') ?> </label>
-                <label class="tab" id="two-tab" for="two"> <?= __('My females') ?> </label>
+                <label class="tab" id="two-tab" for="two"> <?= $this->Html->image("/img/icon-female.svg", ["alt" => "Dashboard", "width" => "40"]) ?> <?= __('My females') ?> </label>
                 <label class="tab" id="three-tab" for="three"> <?= __('My males') ?> </label>
             </div>
             <div class="panels">
