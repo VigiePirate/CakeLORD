@@ -638,6 +638,46 @@ th {
     width: 5rem;
 }
 
+/* Tab nav (from milligram+) */
+.mg-nav > ul {
+  margin-bottom: 0;
+}
+.mg-nav > ul > li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.mg-nav > ul > li.active {
+  color: $color-initial;
+  border-left: 0.3rem solid #663300;
+  overflow-y: hidden;
+  font-weight: bold;
+}
+
+.mg-nav.mg-nav--inline > ul > li.active {
+  border: none;
+  border-bottom: 0.3rem solid #663300;
+}
+.mg-nav > ul > li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #663300;
+}
+
+.mg-nav > ul > li a:hover {
+  background-color: #663300;
+}
+
+.mg-nav--inline > ul {
+  display: inline-block;
+  width: 100%;
+}
+
+.mg-nav--inline > ul > li:not(.mg-right) {
+  float: left;
+}
+
 /* Tooltips */
 /* Tooltip container */
 .tooltip {
