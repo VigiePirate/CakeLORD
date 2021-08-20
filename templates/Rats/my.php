@@ -6,7 +6,6 @@
     </aside>
 
     <div class="column-responsive column-90">
-
         <div class="tab-wrapper">
             <input class="radio" id="one" name="group" type="radio" checked>
             <input class="radio" id="two" name="group" type="radio">
@@ -17,8 +16,8 @@
                 <label class="tab" id="three-tab" for="three"><?= __('My females') ?></label>
             </div>
         </div>
-        <div class="panels  users view content">
-            <div class="panel" id="one-panel">
+        <div class="panels users view content">
+            <div class="panel  users view content" id="one-panel">
                 <?= $this->element('rats', [
                     'rubric' => __('My Rats'),
                     'exceptions' => [
