@@ -8,9 +8,9 @@
   cursor: pointer;
   padding: 1em 2em;
   margin:0 0.25rem;
-  background: #f5f7fa;
+  background: #a65400;
   display:inline-block;
-  color: #fff;
+  color: #ffffff;
   border-radius:0.5rem;
   /* box-shadow: 0 0.5rem 0.8rem #00000080;*/
   box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1),
@@ -43,8 +43,8 @@ input[type=radio].radio{
 }
 #one:checked ~ .tabs #one-tab,
 #two:checked ~ .tabs #two-tab,
-#three:checked ~ .tabs #three-tab{
-  background:#663300;
+#three:checked ~ .tabs #three-tab {
+  background:#ffffff;
   color:#663300;
-  border-top: 3px solid #663300;
+  border-top: 3px solid #ffffff;
 }
