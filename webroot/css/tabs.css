@@ -9,7 +9,7 @@
   cursor: pointer;
   padding: 0.5em 1em;
   margin: 0rem;
-  background: #606ebf;
+  background: #c3c8e6;
   display:inline-block;
   color: #ffffff;
   border-radius:0.4rem 0.4rem 0rem 0rem;
@@ -55,6 +55,6 @@ input[type=radio].radio{
 #two:checked ~ .tabs #two-tab,
 #three:checked ~ .tabs #three-tab {
   background:#ffffff;
-  color:#bfc9ff;
+  color:#606ebf;
   border-top: 3px solid #ffffff;
 }
