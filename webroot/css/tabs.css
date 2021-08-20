@@ -55,6 +55,6 @@ input[type=radio].radio{
 #two:checked ~ .tabs #two-tab,
 #three:checked ~ .tabs #three-tab {
   background:#ffffff;
-  color:#606ebf;
+  color:#bfc9ff;
   border-top: 3px solid #ffffff;
 }
