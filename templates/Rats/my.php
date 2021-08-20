@@ -16,9 +16,16 @@
                 <label class="tab" id="three-tab" for="three">Prerequisites</label>
             </div>
             <div class="panels">
-                <div class="panel" id="one-panel">
+                <div class="panel users content view" id="one-panel">
                     <div class="panel-title">Why Learn CSS?</div>
-                    <p>Without CSS, every web page would be drab plain text and images that flowed straight down the page. With CSS, you can add color and background images and change the layout of your page — your web pages can feel like works of art!</p>
+                    <?= $this->element('rats', [
+                        'rubric' => __('My Rats'),
+                        'exceptions' => [
+                            'pup_name',
+                            'birth_date',
+                            'owner_user_id',
+                        ],
+                        ]) ?>
                 </div>
                 <div class="panel" id="two-panel">
                     <div class="panel-title">Take-Away Skills</div>
