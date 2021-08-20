@@ -49,8 +49,8 @@ details > summary.h2 {
 
 h1, h2, h3, h4, h5 {
   font-weight: bold;
-  font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
-  color: #606ebf;  /* #606ebf; */
+  font-family: "Alegreya", "Lucida Sans Unicode", sans-serif;
+  color: #606ebf;
   hyphens: manual;
 }
 
@@ -63,6 +63,7 @@ h1 span {
     color: #606c76;
     vertical-align: top;
     font-size: 75%;
+    font-family: "Lucida Sans Unicode";
   }
 
 h2 {
