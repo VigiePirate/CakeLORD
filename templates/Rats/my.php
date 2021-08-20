@@ -7,7 +7,7 @@
 
     <div class="column-responsive column-90">
 
-        <div class="tab-wrapper users view content">
+        <div class="tab-wrapper">
             <input class="radio" id="one" name="group" type="radio" checked>
             <input class="radio" id="two" name="group" type="radio">
             <input class="radio" id="three" name="group" type="radio">
