@@ -20,7 +20,13 @@
 }
 .panels{
   background:#ffffff;
-  width:100%; 
+  box-shadow: 0 2rem 2rem #00000080;
+  min-height:200px;
+  width:100%;
+  max-width:500px;
+  border-radius:3px;
+  overflow:hidden;
+  padding:20px;
 }
 .panel{
   display:none;
@@ -45,7 +51,7 @@ input[type=radio].radio{
 #one:checked ~ .panels #one-panel,
 #two:checked ~ .panels #two-panel,
 #three:checked ~ .panels #three-panel{
-  display:block
+  display:block;
 }
 #one:checked ~ .tabs #one-tab,
 #two:checked ~ .tabs #two-tab,
