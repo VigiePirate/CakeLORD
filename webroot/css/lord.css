@@ -592,7 +592,12 @@ th {
     color: #663300;
   }
 
-.side-nav-icon a:hover, .side-nav-icon a:focus {
+.side-nav-icon:hover, .side-nav-icon:focus {
+  background-color: #cabcaf;
+  border-radius: 0.4rem;
+}
+
+a:hover, a:focus {
   background-color: #cabcaf;
   border-radius: 0.4rem;
 }
