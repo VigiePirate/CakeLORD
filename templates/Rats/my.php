@@ -18,41 +18,26 @@
         </div>
         <div class="panels">
             <div class="panel" id="one-panel">
-                <div class= "users view content">
-                    <?= $this->element('rats', [
-                        'rubric' => __('My Rats'),
-                        'exceptions' => [
-                            'pup_name',
-                            'birth_date',
-                            'owner_user_id',
-                        ],
-                    ]) ?>
-                </div>
+                <p>Panel 1</p>
             </div>
             <div class="panel" id="two-panel">
-                <div class= "users view content">
-                    <?= $this->element('rats', [
-                        'rubric' => __('My Females'),
-                        'exceptions' => [
-                            'pup_name',
-                            'birth_date',
-                            'owner_user_id',
-                        ],
-                    ]) ?>
-                </div>
+                <p>Panel 2</p>
             </div>
             <div class="panel" id="three-panel">
-                <div class= "users view content">
-                    <?= $this->element('rats', [
-                        'rubric' => __('My Males'),
-                        'exceptions' => [
-                            'pup_name',
-                            'birth_date',
-                            'owner_user_id',
-                        ],
-                    ]) ?>
-                </div>
+                <p>Panel 3</p>
             </div>
+        </div>
+
+        <div class="spacer"> </div>
+        <div class= "users view content">
+            <?= $this->element('rats', [
+                'rubric' => __('My Males'),
+                'exceptions' => [
+                    'pup_name',
+                    'birth_date',
+                    'owner_user_id',
+                ],
+            ]) ?>
         </div>
     </div>
 </div>
