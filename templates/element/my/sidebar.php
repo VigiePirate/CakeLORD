@@ -32,9 +32,9 @@
 
 
 <div class="spacer"> </div>
-<div class="tooltip">
+<div class="tooltip-staff">
     <?= $this->Html->image('/img/icon-backoffice.svg', [
-        'url' => ['controller' => 'Users', 'action' => 'myBackOffice'],
+        'url' => ['controller' => 'States', 'action' => 'index'],
         'class' => 'side-nav-icon',
         'alt' => __('Admin site')]) ?>
     <span class="tooltiptext-staff"><?= __('Admin site') ?></span>

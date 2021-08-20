@@ -679,6 +679,37 @@ th {
   border-color: transparent #663300 transparent transparent;
 }
 
+/* Tooltip text for staff */
+.tooltip-staff .tooltiptext-staff {
+  visibility: hidden;
+  width: max-content;
+  background-color: #b1000c;
+  color: #fff;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 1.4rem;
+  position: absolute;
+  top: 1.4rem;
+  left: 105%;
+  z-index: 1;
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip-staff:hover .tooltiptext-staff {
+  visibility: visible;
+}
+
+.tooltip-staff .tooltiptext-staff::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%; /* To the left of the tooltip */
+  margin-top: -0.75rem;
+  border-width: 0.75rem;
+  border-style: solid;
+  border-color: transparent #b1000c transparent transparent;
+}
+
 /* Sheet heading */
 .sheet-heading {
     display: flex;
