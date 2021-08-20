@@ -12,12 +12,12 @@
             <input class="radio" id="three" name="group" type="radio">
             <div class="tabs">
                 <label class="tab" id="one-tab" for="one"><?= __('All my rats') ?></label>
-                <label class="tab" id="two-tab" for="two"><?= __('My males') ?></label>
-                <label class="tab" id="three-tab" for="three"><?= __('My females') ?></label>
+                <label class="tab" id="two-tab" for="two"><?= __('My females') ?></label>
+                <label class="tab" id="three-tab" for="three"><?= __('My males') ?></label>
             </div>
         </div>
-        <div class="panels users view content">
-            <div class="panel  users view content" id="one-panel">
+        <div class="panels">
+            <div class="panel users view content" id="one-panel">
                 <?= $this->element('rats', [
                     'rubric' => __('My Rats'),
                     'exceptions' => [
@@ -27,13 +27,25 @@
                     ],
                 ]) ?>
             </div>
-            <div class="panel" id="two-panel">
-                <div class="panel-title">Take-Away Skills</div>
-                <p>You will learn many aspects of styling web pages! You’ll be able to set up the correct file structure, edit text and colors, and create attractive layouts. With these skills, you’ll be able to customize the appearance of your web pages to suit your every need!</p>
+            <div class="panel users view content" id="two-panel">
+                <?= $this->element('rats', [
+                    'rubric' => __('My Females'),
+                    'exceptions' => [
+                        'pup_name',
+                        'birth_date',
+                        'owner_user_id',
+                    ],
+                ]) ?>
             </div>
-            <div class="panel" id="three-panel">
-                <div class="panel-title">Note on Prerequisites</div>
-                <p>We recommend that you complete Learn HTML before learning CSS.</p>
+            <div class="panel users view content" id="three-panel">
+                <?= $this->element('rats', [
+                    'rubric' => __('My Males'),
+                    'exceptions' => [
+                        'pup_name',
+                        'birth_date',
+                        'owner_user_id',
+                    ],
+                ]) ?>
             </div>
         </div>
     </div>
