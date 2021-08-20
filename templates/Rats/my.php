@@ -16,8 +16,8 @@
                 <label class="tab" id="two-tab" for="two"><?= __('My males') ?></label>
                 <label class="tab" id="three-tab" for="three"><?= __('My females') ?></label>
             </div>
-            <div class="panels users view content">
-                <div class="panel" id="one-panel">
+            <div class="panels">
+                <div class="panel users view content" id="one-panel">
                     <?= $this->element('rats', [
                         'rubric' => __('My Rats'),
                         'exceptions' => [
