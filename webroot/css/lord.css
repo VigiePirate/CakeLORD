@@ -597,11 +597,6 @@ th {
   border-radius: 0.4rem;
 }
 
-a:hover, a:focus {
-  background-color: #cabcaf;
-  border-radius: 0.4rem;
-}
-
 .side-nav-icon {
     display:inline;
     padding: 1rem;
