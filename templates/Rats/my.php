@@ -29,25 +29,29 @@
                     ]) ?>
                 </div>
             </div>
-            <div class="panel users view content" id="two-panel">
-                <?= $this->element('rats', [
-                    'rubric' => __('My Females'),
-                    'exceptions' => [
-                        'pup_name',
-                        'birth_date',
-                        'owner_user_id',
-                    ],
-                ]) ?>
+            <div class="panel" id="two-panel">
+                <div class= "users view content">
+                    <?= $this->element('rats', [
+                        'rubric' => __('My Females'),
+                        'exceptions' => [
+                            'pup_name',
+                            'birth_date',
+                            'owner_user_id',
+                        ],
+                    ]) ?>
+                </div>
             </div>
-            <div class="panel users view content" id="three-panel">
-                <?= $this->element('rats', [
-                    'rubric' => __('My Males'),
-                    'exceptions' => [
-                        'pup_name',
-                        'birth_date',
-                        'owner_user_id',
-                    ],
-                ]) ?>
+            <div class="panel" id="three-panel">
+                <div class= "users view content">
+                    <?= $this->element('rats', [
+                        'rubric' => __('My Males'),
+                        'exceptions' => [
+                            'pup_name',
+                            'birth_date',
+                            'owner_user_id',
+                        ],
+                    ]) ?>
+                </div>
             </div>
         </div>
     </div>
