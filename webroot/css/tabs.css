@@ -6,12 +6,12 @@
 }
 .tab{
   cursor: pointer;
-  padding: 1em 2em;
-  margin:0 0.25rem;
+  padding: 1em;
+  margin:0rem;
   background: #663300;
   display:inline-block;
   color: #ffffff;
-  border-radius:0.5rem;
+  border-radius:0.4rem 0.4rem 0rem 0rem;
   /* box-shadow: 0 0.5rem 0.8rem #00000080;*/
   box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1),
   0 3px 6px 0 rgba(0, 0, 0, 0.07);
