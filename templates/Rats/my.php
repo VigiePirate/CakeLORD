@@ -17,7 +17,7 @@
             </div>
             <div class="panels">
                 <div class="panel users content view" id="one-panel">
-                    <div class="panel-title">Why Learn CSS?</div>
+                    
                     <?= $this->element('rats', [
                         'rubric' => __('My Rats'),
                         'exceptions' => [
