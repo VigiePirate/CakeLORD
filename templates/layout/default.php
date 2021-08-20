@@ -86,8 +86,8 @@ $cakeDescription = 'LORD';
                 $this->Html->Link(
                     $this->Html->image("/img/icon-keys.svg", ["alt" => "Login", "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'login'],
-                    ['escape' => false]) */
-            ? > */ -->
+                    ['escape' => false])
+            ?>
         </div>
     </nav>
     <main class="main">
