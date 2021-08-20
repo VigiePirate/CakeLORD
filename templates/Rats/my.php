@@ -1,7 +1,6 @@
 <div class="row">
     <aside class="column"/>
         <div class="side-nav">
-            <div class="spacer"> </div>
             <?= $this->element('my/sidebar') ?>
         </div>
     </aside>
@@ -19,7 +18,7 @@
             <div class="panels">
                 <div class="panel users content view" id="one-panel">
                     <?= $this->element('rats', [
-                        'rubric' => __('My Rats'),
+                        'rubric' => __(''),
                         'exceptions' => [
                             'pup_name',
                             'birth_date',

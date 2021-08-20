@@ -2,18 +2,18 @@
 .tab-wrapper{
   display:flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   width: 100%;
 }
 .tab{
   cursor: pointer;
   padding: 0.5em 1em;
   margin: 0rem;
-  background: #663300;
+  background: #606ebf;
   display:inline-block;
   color: #ffffff;
   border-radius:0.4rem 0.4rem 0rem 0rem;
-  font-size: 1.6rem;
+  font-size: 2.2rem;
   /* box-shadow: 0 0.5rem 0.8rem #00000080;*/
   box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1),
   0 0px 6px 0 rgba(0, 0, 0, 0.07);
@@ -54,6 +54,6 @@ input[type=radio].radio{
 #two:checked ~ .tabs #two-tab,
 #three:checked ~ .tabs #three-tab {
   background:#ffffff;
-  color:#663300;
+  color:#606ebf;
   border-top: 3px solid #ffffff;
 }
