@@ -25,20 +25,17 @@
                 <div>Panel 2</div>
             </div>
             <div class="panel" id="three-panel">
-                <div>Panel 3</div>
+                <div class= "users view content">
+                    <?= $this->element('rats', [
+                        'rubric' => __('My Males'),
+                        'exceptions' => [
+                            'pup_name',
+                            'birth_date',
+                            'owner_user_id',
+                        ],
+                    ]) ?>
+                </div>
             </div>
-        </div>
-
-        <div class="spacer"> </div>
-        <div class= "users view content">
-            <?= $this->element('rats', [
-                'rubric' => __('My Males'),
-                'exceptions' => [
-                    'pup_name',
-                    'birth_date',
-                    'owner_user_id',
-                ],
-            ]) ?>
         </div>
     </div>
 </div>
