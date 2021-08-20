@@ -639,90 +639,62 @@ th {
 }
 
 /* Tabs */
-.pc-tab > input,
-.pc-tab section > div {
-  display: none;
+.warpper{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-#tab1:checked ~ section .tab1,
-#tab2:checked ~ section .tab2,
-#tab3:checked ~ section .tab3 {
-  display: block;
+.tab{
+  cursor: pointer;
+  padding:10px 20px;
+  margin:0px 2px;
+  background:#000;
+  display:inline-block;
+  color:#fff;
+  border-radius:3px 3px 0px 0px;
+  box-shadow: 0 0.5rem 0.8rem #00000080;
 }
-
-#tab1:checked ~ nav .tab1,
-#tab2:checked ~ nav .tab2,
-#tab3:checked ~ nav .tab3 {
-  color: red;
+.panels{
+  background:#fffffff6;
+  box-shadow: 0 2rem 2rem #00000080;
+  min-height:200px;
+  width:100%;
+  max-width:500px;
+  border-radius:3px;
+  overflow:hidden;
+  padding:20px;
 }
-
-.pc-tab {
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    li {
-      label {
-        float: left;
-        padding: 15px 25px;
-        border: 1px solid #ddd;
-        border-bottom: 0;
-        background: #fafef5; /* $unactiveColor; */
-        color: #663300;
-        &:hover {
-          background: #fafef5; /* $unactiveHoverColor; */
-        }
-        &:active {
-          background: $activeColor;
-        }
-      }
-      &:not(:last-child) label {
-         border-right-width: 0;
-      }
+.panel{
+  display:none;
+  animation: fadein .8s;
+}
+@keyframes fadein {
+    from {
+        opacity:0;
     }
-  }
-  section {
-    clear: both;
-    div {
-      padding: 20px;
-      width: 100%;
-      border: 1px solid #ddd;
-      background: #fff;
-      line-height: 1.5em;
-      letter-spacing: 0.3px;
-      color: #444;
-      h2 {
-        margin: 0;
-        letter-spacing: 1px;
-        color: #34495e;
-      }
+    to {
+        opacity:1;
     }
-  }
 }
-
-#tab1:checked ~ nav .tab1,
-#tab2:checked ~ nav .tab2,
-#tab3:checked ~ nav .tab3 {
-  label {
-    background: white;
-    color: #111;
-    position: relative;
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      height: 2px;
-      width: 100%;
-      background: #663300; /*$activeColor;*/
-      left: 0;
-      bottom: -1px;
-    }
-  }
+.panel-title{
+  font-size:1.5em;
+  font-weight:bold
 }
-
+.radio{
+  display:none;
+}
+#one:checked ~ .panels #one-panel,
+#two:checked ~ .panels #two-panel,
+#three:checked ~ .panels #three-panel{
+  display:block
+}
+#one:checked ~ .tabs #one-tab,
+#two:checked ~ .tabs #two-tab,
+#three:checked ~ .tabs #three-tab{
+  background:#fffffff6;
+  color:#000;
+  border-top: 3px solid #000;
+}
 
 /* Tooltips */
 /* Tooltip container */
