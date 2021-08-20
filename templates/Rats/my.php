@@ -27,12 +27,14 @@
                         ]) ?>
                 </div>
                 <div class="panel" id="two-panel">
-                    <div class="panel-title">Take-Away Skills</div>
-                    <p>You will learn many aspects of styling web pages! You’ll be able to set up the correct file structure, edit text and colors, and create attractive layouts. With these skills, you’ll be able to customize the appearance of your web pages to suit your every need!</p>
+                    <div class="panel users content view" id="two-panel">
+                        Females (to be done)
+                    </div>
                 </div>
                 <div class="panel" id="three-panel">
-                    <div class="panel-title">Note on Prerequisites</div>
-                    <p>We recommend that you complete Learn HTML before learning CSS.</p>
+                    <div class="panel users content view" id="three-panel">
+                        Males (to be done)
+                    </div>
                 </div>
             </div>
         </div>
