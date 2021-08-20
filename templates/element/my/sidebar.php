@@ -1,5 +1,5 @@
 
-<?= $this->Html->image('/img/icon-profile.svg', [
+<?= $this->Html->image('/img/icon-user.svg', [
     'url' => ['controller' => 'Users', 'action' => 'my'],
     'class' => 'side-nav-icon',
     'alt' => __('My profile')]) ?>
