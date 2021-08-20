@@ -15,6 +15,14 @@
 </div>
 
 <div class="tooltip">
+    <?= $this->Html->image('/img/icon-add-rat.svg', [
+        'url' => ['controller' => 'Rats', 'action' => 'add'],
+        'class' => 'side-nav-icon',
+        'alt' => __('Help')]) ?>
+    <span class="tooltiptext"><?= __('Add a rat') ?></span>
+</div>
+
+<div class="tooltip">
     <?= $this->Html->image('/img/icon-rattery.svg', [
         'url' => ['controller' => 'Ratteries', 'action' => 'my'],
         'class' => 'side-nav-icon',
@@ -30,8 +38,16 @@
     <span class="tooltiptext"><?= __('Manage my litters') ?></span>
 </div>
 
+<div class="tooltip">
+    <?= $this->Html->image('/img/icon-add-litter.svg', [
+        'url' => ['controller' => 'Litters', 'action' => 'add'],
+        'class' => 'side-nav-icon',
+        'alt' => __('Help')]) ?>
+    <span class="tooltiptext"><?= __('Add a rat') ?></span>
+</div>
 
 <div class="spacer"> </div>
+
 <div class="tooltip-staff">
     <?= $this->Html->image('/img/icon-backoffice.svg', [
         'url' => ['controller' => 'States', 'action' => 'index'],
