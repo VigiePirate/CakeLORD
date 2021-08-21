@@ -78,6 +78,12 @@ input[type=radio].radio{
   border-top: 3px solid #ffffff;
 }
 
+#two:checked ~ .tabs #two-tab {
+  background:#ffffff;
+  border-top: 3px solid #ffffff;
+  filter: brightness(0) saturate(100%) invert(77%) sepia(98%) saturate(3360%) hue-rotate(285deg) brightness(102%) contrast(106%);
+}
+
 /* filter: brightness(0) saturate(100%) invert(77%) sepia(98%) saturate(3360%) hue-rotate(285deg) brightness(102%) contrast(106%);
 
 /* color:#606ebf;*/
