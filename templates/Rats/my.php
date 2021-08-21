@@ -15,7 +15,7 @@
                 <label class="tab" id="one-tab" for="one">
                     <?= __('My rats') ?>
                 </label>
-                <label class="tab filter-green" id="two-tab" for="two">
+                <label class="tab" id="two-tab" for="two">
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
                         'class' => 'tab-icon',
                         'alt' => __('My females'),
