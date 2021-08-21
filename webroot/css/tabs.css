@@ -20,7 +20,7 @@
     display:inline;
     background-color: transparent;
     padding: 0rem;
-    width:3rem;
+    width: 3rem;
   }
 .panels{
   background:#ffffff;
@@ -44,10 +44,7 @@
         opacity:1;
     }
 }
-.panel-title{
-  font-size:1.5em;
-  font-weight:bold
-}
+
 input[type=radio].radio{
   display:none;
 }
@@ -86,15 +83,15 @@ input[type=radio].radio{
 #five:checked ~ .tabs #five-tab,
 #six:checked ~ .tabs #six-tab {
   background:#ffffff;
-  border-top: 1rem solid #ffffff;
+  border-top: 0.5rem solid #ffffff;
   width: 10rem;
-  font-size:larger;
   text-align:center;
 }
 
 /* blue : invert(41%) sepia(10%) saturate(2867%) hue-rotate(194deg) brightness(102%) contrast(83%); */
 #one:checked ~ .tabs #one-tab > img {
   filter: brightness(0) saturate(100%) invert(18%) sepia(87%) saturate(1194%) hue-rotate(13deg) brightness(99%) contrast(104%);
+  width: 4rem;
 }
 
 #two:checked ~ .tabs #two-tab > img {
