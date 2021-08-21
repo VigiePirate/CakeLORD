@@ -91,7 +91,7 @@ input[type=radio].radio{
 }
 
 #four:checked ~ .tabs #four-tab > img {
-  filter: brightness(0) saturate(100%) invert(42%) sepia(4%) saturate(1226%) hue-rotate(165deg) brightness(95%) contrast(90%);
+  filter: brightness(0) saturate(100%) invert(77%) sepia(11%) saturate(96%) hue-rotate(163deg) brightness(87%) contrast(87%);
 }
 
 /* filter: brightness(0) saturate(100%) invert(77%) sepia(98%) saturate(3360%) hue-rotate(285deg) brightness(102%) contrast(106%);
