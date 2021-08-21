@@ -86,7 +86,8 @@ input[type=radio].radio{
 #five:checked ~ .tabs #five-tab,
 #six:checked ~ .tabs #six-tab {
   background:#ffffff;
-  border-top: 3px solid #ffffff;
+  border-top: 0.5rem solid #ffffff;
+  width: 4rem;
 }
 
 /* blue : invert(41%) sepia(10%) saturate(2867%) hue-rotate(194deg) brightness(102%) contrast(83%); */
