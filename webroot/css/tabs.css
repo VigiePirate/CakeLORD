@@ -52,6 +52,19 @@ input[type=radio].radio{
   display:none;
 }
 
+#one {
+    color: #c3c8e6;
+}
+#two {
+    color: #ff99cf88;
+}
+#three {
+    color: #99ccff88;
+}
+#four {
+    color: #606c7688;
+}
+
 #one:checked ~ .panels #one-panel,
 #two:checked ~ .panels #two-panel,
 #three:checked ~ .panels #three-panel
@@ -67,18 +80,7 @@ input[type=radio].radio{
   border-top: 3px solid #ffffff;
 }
 
-#one {
-    background: #c3c8e6;
-}
-#two {
-    background: #ff99cf88;
-}
-#three {
-    background: #99ccff88;
-}
-#four {
-    background: #606c7688;
-}
+
 /* color for females/males */
 /* #ff99cf88 */
 /* #99ccff88 */
