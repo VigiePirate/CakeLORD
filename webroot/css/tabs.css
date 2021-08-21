@@ -9,7 +9,6 @@
   cursor: pointer;
   padding: 0.5em 1em;
   margin: 0rem;
-  background: #c3c8e6;
   display:inline-block;
   color: #ffffff;
   border-radius:0.4rem 0.4rem 0rem 0rem;
@@ -55,18 +54,32 @@ input[type=radio].radio{
 
 #one:checked ~ .panels #one-panel,
 #two:checked ~ .panels #two-panel,
-#three:checked ~ .panels #three-panel{
+#three:checked ~ .panels #three-panel
+#four:checked ~ .panels #four-panel{
   display:block;
 }
 #one:checked ~ .tabs #one-tab,
 #two:checked ~ .tabs #two-tab,
-#three:checked ~ .tabs #three-tab {
+#three:checked ~ .tabs #three-tab
+#four:checked ~ .tabs #four-tab {
   background:#ffffff;
   color:#606ebf;
   border-top: 3px solid #ffffff;
 }
 
-
+#one {
+    background: #c3c8e6;
+}
+#two {
+    background: #ff99cf88;
+}
+#three {
+    background: #99ccff88;
+}
+#four {
+    background: #606c7688;
+}
 /* color for females/males */
 /* #ff99cf88 */
 /* #99ccff88 */
+/* hover : #c3c8e6 */

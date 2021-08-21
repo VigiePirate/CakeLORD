@@ -10,6 +10,7 @@
             <input class="radio" id="one" name="group" type="radio" checked>
             <input class="radio" id="two" name="group" type="radio">
             <input class="radio" id="three" name="group" type="radio">
+            <input class="radio" id="four" name="group" type="radio">
             <div class="tabs">
                 <label class="tab" id="one-tab" for="one">
                     <?= __('My rats') ?>
@@ -24,6 +25,12 @@
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
                         'class' => 'tab-icon',
                         'alt' => __('My males'),
+                        "width" => "36"]) ?>
+                </label>
+                <label class="tab" id="four-tab" for="four">
+                    <?= $this->Html->image('/img/icon-white-rat.svg', [
+                        'class' => 'tab-icon',
+                        'alt' => __('My lost'),
                         "width" => "36"]) ?>
                 </label>
             </div>
