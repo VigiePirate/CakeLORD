@@ -52,16 +52,16 @@ input[type=radio].radio{
   display:none;
 }
 
-#one {
+.tab#one {
     color: #c3c8e6;
 }
-#two {
+.tab#two {
     color: #ff99cf88;
 }
-#three {
+.tab#three {
     color: #99ccff88;
 }
-#four {
+.tab#four {
     color: #606c7688;
 }
 
