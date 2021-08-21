@@ -54,7 +54,7 @@ input[type=radio].radio{
 }
 
 #one-tab {
-    background: #c3c8e6;
+    background: #c3c8e688;
 }
 #two-tab {
     background: #ff99cf88;
@@ -77,9 +77,8 @@ input[type=radio].radio{
 #three:checked ~ .tabs #three-tab
 #four:checked ~ .tabs #four-tab {
   background:#ffffff;
-  color:#606ebf;
+  /* color:#606ebf;*/
   border-top: 3px solid #ffffff;
-
 }
 
 /* color for females/males */

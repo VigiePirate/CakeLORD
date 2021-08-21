@@ -13,7 +13,10 @@
             <input class="radio" id="four" name="group" type="radio">
             <div class="tabs">
                 <label class="tab" id="one-tab" for="one">
-                    <?= __('My rats') ?>
+                    <?= $this->Html->image('/img/icon-black-rat.svg', [
+                        'class' => 'tab-icon',
+                        'alt' => __('My rats'),
+                        "width" => "36"]) ?>
                 </label>
                 <label class="tab" id="two-tab" for="two">
                     <?= $this->Html->image('/img/icon-black-rat.svg', [
