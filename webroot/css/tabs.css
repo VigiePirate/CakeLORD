@@ -53,16 +53,16 @@ input[type=radio].radio{
 }
 
 #one-tab {
-    color: #c3c8e6;
+    background: #c3c8e6;
 }
 #two-tab {
-    color: #ff99cf88;
+    background: #ff99cf88;
 }
 #three-tab {
-    color: #99ccff88;
+    background: #99ccff88;
 }
 #four-tab {
-    color: #606c7688;
+    background: #606c7688;
 }
 
 #one:checked ~ .panels #one-panel,
