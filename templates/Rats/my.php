@@ -11,15 +11,21 @@
             <input class="radio" id="two" name="group" type="radio">
             <input class="radio" id="three" name="group" type="radio">
             <div class="tabs">
-                <label class="tab" id="one-tab" for="one"> <?= __('My rats') ?> </label>
-                <label class="tab" id="two-tab" for="two"> <?= $this->Html->image('/img/icon-white-rat.svg', [
-                    'url' => ['controller' => 'Rats', 'action' => 'my'],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('My females')]) ?> </label>
-                <label class="tab" id="three-tab" for="three"> <?= $this->Html->image('/img/icon-white-rat.svg', [
-                    'url' => ['controller' => 'Rats', 'action' => 'my'],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('My males')]) ?> </label>
+                <label class="tab" id="one-tab" for="one">
+                    <?= __('My rats') ?>
+                </label>
+                <label class="tab" id="two-tab" for="two">
+                    <?= $this->Html->image('/img/icon-white-rat.svg', [
+                        'class' => 'tab-icon',
+                        'alt' => __('My females'),
+                        "width" => "24"]) ?>
+                </label>
+                <label class="tab" id="three-tab" for="three">
+                    <?= $this->Html->image('/img/icon-white-rat.svg', [
+                        'class' => 'tab-icon',
+                        'alt' => __('My males'),
+                        "width" => "24"]) ?>
+                </label>
             </div>
             <div class="panels">
                 <div class="panel users content view" id="one-panel">
