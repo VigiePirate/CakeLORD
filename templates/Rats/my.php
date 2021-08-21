@@ -40,7 +40,7 @@
             <div class="panels">
                 <div class="panel users content view" id="one-panel">
                     <?= $this->element('rats', [
-                        'rubric' => __(''),
+                        'rubric' => __('All my rats'),
                         'exceptions' => [
                             'pup_name',
                             'birth_date',
@@ -50,17 +50,17 @@
                 </div>
                 <div class="panel" id="two-panel">
                     <div class="panel users content view" id="two-panel">
-                        <p>Females (to be done)</p>
+                        <h2>My Females</h2>
                     </div>
                 </div>
                 <div class="panel" id="three-panel">
                     <div class="panel users content view" id="three-panel">
-                        <p>Males (to be done)</p>
+                        <h2>My Males</h2>
                     </div>
                 </div>
                 <div class="panel" id="four-panel">
                     <div class="panel users content view" id="four-panel">
-                        <p>Lost (to be done)</p>
+                        <h2>My Lost</h2>
                     </div>
                 </div>
             </div>
