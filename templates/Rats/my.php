@@ -18,13 +18,13 @@
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
                         'class' => 'tab-icon',
                         'alt' => __('My females'),
-                        "width" => "24"]) ?>
+                        "width" => "36"]) ?>
                 </label>
                 <label class="tab" id="three-tab" for="three">
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
                         'class' => 'tab-icon',
                         'alt' => __('My males'),
-                        "width" => "24"]) ?>
+                        "width" => "36"]) ?>
                 </label>
             </div>
             <div class="panels">
