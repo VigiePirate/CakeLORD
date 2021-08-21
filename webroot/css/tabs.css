@@ -66,13 +66,13 @@ input[type=radio].radio{
 
 #one:checked ~ .panels #one-panel,
 #two:checked ~ .panels #two-panel,
-#three:checked ~ .panels #three-panel
+#three:checked ~ .panels #three-panel,
 #four:checked ~ .panels #four-panel{
   display:block;
 }
 #one:checked ~ .tabs #one-tab,
 #two:checked ~ .tabs #two-tab,
-#three:checked ~ .tabs #three-tab
+#three:checked ~ .tabs #three-tab,
 #four:checked ~ .tabs #four-tab {
   background:#ffffff;
   border-top: 3px solid #ffffff;
