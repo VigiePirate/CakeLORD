@@ -78,7 +78,7 @@ input[type=radio].radio{
   border-top: 3px solid #ffffff;
 }
 
-img #two:checked ~ .tabs #two-tab {
+img #two:checked ~ .tabs #two-tab + img {
   filter: brightness(0) saturate(100%) invert(77%) sepia(98%) saturate(3360%) hue-rotate(285deg) brightness(102%) contrast(106%);
 }
 
