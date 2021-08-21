@@ -58,6 +58,11 @@
                         Males (to be done)
                     </div>
                 </div>
+                <div class="panel" id="four-panel">
+                    <div class="panel users content view" id="four-panel">
+                        Lost (to be done)
+                    </div>
+                </div>
             </div>
         </div>
     </div>
