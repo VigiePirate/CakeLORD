@@ -76,6 +76,7 @@ input[type=radio].radio{
 #four:checked ~ .tabs #four-tab {
   background:#ffffff;
   border-top: 3px solid #ffffff;
+  background-image: url(/img/icon-black-rat.svg);
 }
 
 /* filter: brightness(0) saturate(100%) invert(77%) sepia(98%) saturate(3360%) hue-rotate(285deg) brightness(102%) contrast(106%);
