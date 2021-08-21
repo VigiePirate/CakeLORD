@@ -21,7 +21,7 @@
     display:inline;
     background-color: transparent;
     padding: 0rem;
-    width:3rem; 
+    width:3rem;
   }
 .panels{
   background:#ffffff;
@@ -65,17 +65,27 @@ input[type=radio].radio{
 #four-tab {
     background: #606c7644;
 }
+#five-tab {
+    background: #cc1f1a88;
+}
+#six-tab {
+    background: #ff8c1b88;
+}
 
 #one:checked ~ .panels #one-panel,
 #two:checked ~ .panels #two-panel,
 #three:checked ~ .panels #three-panel,
-#four:checked ~ .panels #four-panel{
+#four:checked ~ .panels #four-panel
+#five:checked ~ .panels #five-panel
+#six:checked ~ .panels #six-panel{
   display:block;
 }
 #one:checked ~ .tabs #one-tab,
 #two:checked ~ .tabs #two-tab,
 #three:checked ~ .tabs #three-tab,
-#four:checked ~ .tabs #four-tab {
+#four:checked ~ .tabs #four-tab
+#five:checked ~ .tabs #five-tab
+#six:checked ~ .tabs #six-tab {
   background:#ffffff;
   border-top: 3px solid #ffffff;
 }
@@ -94,6 +104,14 @@ input[type=radio].radio{
 
 #four:checked ~ .tabs #four-tab > img {
   filter: brightness(0) saturate(100%) invert(77%) sepia(11%) saturate(96%) hue-rotate(163deg) brightness(87%) contrast(87%);
+}
+
+#five:checked ~ .tabs #five-tab > img {
+  filter: brightness(0) saturate(100%) invert(14%) sepia(53%) saturate(6950%) hue-rotate(356deg) brightness(95%) contrast(87%);
+}
+
+#six:checked ~ .tabs #six-tab > img {
+  filter: brightness(0) saturate(100%) invert(59%) sepia(14%) saturate(3193%) hue-rotate(346deg) brightness(106%) contrast(101%);
 }
 
 /* filter: brightness(0) saturate(100%) invert(77%) sepia(98%) saturate(3360%) hue-rotate(285deg) brightness(102%) contrast(106%);

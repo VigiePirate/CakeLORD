@@ -34,6 +34,16 @@
                         'class' => 'tab-icon',
                         'alt' => __('My rainbow brigde')]) ?>
                 </label>
+                <label class="tab" id="five-tab" for="five">
+                    <?= $this->Html->image('/img/icon-white-rat.svg', [
+                        'class' => 'tab-icon',
+                        'alt' => __('Corrections needed')]) ?>
+                </label>
+                <label class="tab" id="six-tab" for="six">
+                    <?= $this->Html->image('/img/icon-white-rat.svg', [
+                        'class' => 'tab-icon',
+                        'alt' => __('Waiting staff action')]) ?>
+                </label>
             </div>
             <div class="panels">
                 <div class="panel users content view" id="one-panel">
@@ -48,17 +58,27 @@
                 </div>
                 <div class="panel" id="two-panel">
                     <div class="panel users content view" id="two-panel">
-                        <h2>My Females</h2>
+                        <h2><?= __('My Females') ?></h2>
                     </div>
                 </div>
                 <div class="panel" id="three-panel">
                     <div class="panel users content view" id="three-panel">
-                        <h2>My Males</h2>
+                        <h2><?= __('My Males') ?></h2>
                     </div>
                 </div>
                 <div class="panel" id="four-panel">
                     <div class="panel users content view" id="four-panel">
-                        <h2>My Lost</h2>
+                        <h2><?= __('My Rainbow Bridge') ?></h2>
+                    </div>
+                </div>
+                <div class="panel" id="five-panel">
+                    <div class="panel users content view" id="four-panel">
+                        <h2><?= __('Corrections needed') ?></h2>
+                    </div>
+                </div>
+                <div class="panel" id="six-panel">
+                    <div class="panel users content view" id="four-panel">
+                        <h2><?= __('Waiting staff action') ?></h2>
                     </div>
                 </div>
             </div>
