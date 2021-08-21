@@ -75,10 +75,12 @@ input[type=radio].radio{
 #three:checked ~ .tabs #three-tab
 #four:checked ~ .tabs #four-tab {
   background:#ffffff;
-  filter: brightness(0) saturate(100%) invert(77%) sepia(98%) saturate(3360%) hue-rotate(285deg) brightness(102%) contrast(106%);
-  /* color:#606ebf;*/
   border-top: 3px solid #ffffff;
 }
+
+/* filter: brightness(0) saturate(100%) invert(77%) sepia(98%) saturate(3360%) hue-rotate(285deg) brightness(102%) contrast(106%);
+
+/* color:#606ebf;*/
 
 /* color for females/males */
 /* From black to #ff99cf(88) */
