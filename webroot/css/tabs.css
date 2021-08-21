@@ -80,7 +80,9 @@ input[type=radio].radio{
   border-top: 3px solid #ffffff;
 }
 
-
+.filter-green{
+        filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+    }
 /* color for females/males */
 /* #ff99cf88 */
 /* #99ccff88 */
