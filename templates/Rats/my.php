@@ -16,19 +16,19 @@
                     <?= __('My rats') ?>
                 </label>
                 <label class="tab" id="two-tab" for="two">
-                    <?= $this->Html->image('/img/icon-white-rat.svg', [
+                    <?= $this->Html->image('/img/icon-black-rat.svg', [
                         'class' => 'tab-icon',
                         'alt' => __('My females'),
                         "width" => "36"]) ?>
                 </label>
                 <label class="tab" id="three-tab" for="three">
-                    <?= $this->Html->image('/img/icon-white-rat.svg', [
+                    <?= $this->Html->image('/img/icon-black-rat.svg', [
                         'class' => 'tab-icon',
                         'alt' => __('My males'),
                         "width" => "36"]) ?>
                 </label>
                 <label class="tab" id="four-tab" for="four">
-                    <?= $this->Html->image('/img/icon-white-rat.svg', [
+                    <?= $this->Html->image('/img/icon-black-rat.svg', [
                         'class' => 'tab-icon',
                         'alt' => __('My lost'),
                         "width" => "36"]) ?>
