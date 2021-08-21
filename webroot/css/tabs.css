@@ -66,10 +66,10 @@ input[type=radio].radio{
     background: #606c7644;
 }
 #five-tab {
-    background: #cc1f1a88;
+    background: #cc1f1a55;
 }
 #six-tab {
-    background: #ff8c1b88;
+    background: #ff8c1b55;
 }
 
 #one:checked ~ .panels #one-panel,
