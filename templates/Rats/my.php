@@ -50,17 +50,17 @@
                 </div>
                 <div class="panel" id="two-panel">
                     <div class="panel users content view" id="two-panel">
-                        Females (to be done)
+                        <p>Females (to be done)</p>
                     </div>
                 </div>
                 <div class="panel" id="three-panel">
                     <div class="panel users content view" id="three-panel">
-                        Males (to be done)
+                        <p>Males (to be done)</p>
                     </div>
                 </div>
                 <div class="panel" id="four-panel">
                     <div class="panel users content view" id="four-panel">
-                        Lost (to be done)
+                        <p>Lost (to be done)</p>
                     </div>
                 </div>
             </div>
