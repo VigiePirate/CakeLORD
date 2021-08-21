@@ -20,6 +20,8 @@
 .tab-icon {
     display:inline;
     background-color: transparent;
+    padding: 0rem;
+    width:3rem; 
   }
 .panels{
   background:#ffffff;
