@@ -72,12 +72,12 @@
                     </div>
                 </div>
                 <div class="panel" id="five-panel">
-                    <div class="panel users content view" id="four-panel">
+                    <div class="panel users content view" id="five-panel">
                         <h2><?= __('Corrections needed') ?></h2>
                     </div>
                 </div>
                 <div class="panel" id="six-panel">
-                    <div class="panel users content view" id="four-panel">
+                    <div class="panel users content view" id="six-panel">
                         <h2><?= __('Waiting staff action') ?></h2>
                     </div>
                 </div>

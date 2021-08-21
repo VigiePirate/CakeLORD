@@ -54,7 +54,7 @@ input[type=radio].radio{
 }
 
 #one-tab {
-    background: #c3c8e688;
+    background: #66330088; /* bleu #c3c8e688; */
 }
 #two-tab {
     background: #ff99cf88;
@@ -77,7 +77,7 @@ input[type=radio].radio{
 #three:checked ~ .panels #three-panel,
 #four:checked ~ .panels #four-panel,
 #five:checked ~ .panels #five-panel,
-#six:checked ~ .panels #six-panel{
+#six:checked ~ .panels #six-panel {
   display:block;
 }
 #one:checked ~ .tabs #one-tab,
@@ -90,8 +90,9 @@ input[type=radio].radio{
   border-top: 3px solid #ffffff;
 }
 
+/* blue : invert(41%) sepia(10%) saturate(2867%) hue-rotate(194deg) brightness(102%) contrast(83%); */
 #one:checked ~ .tabs #one-tab > img {
-  filter: brightness(0) saturate(100%) invert(41%) sepia(10%) saturate(2867%) hue-rotate(194deg) brightness(102%) contrast(83%);
+  filter: brightness(0) saturate(100%) invert(18%) sepia(87%) saturate(1194%) hue-rotate(13deg) brightness(99%) contrast(104%);
 }
 
 #two:checked ~ .tabs #two-tab > img {
