@@ -7,7 +7,6 @@
 }
 .tab{
   cursor: pointer;
-  padding: 0.5em 1em;
   margin: 0rem;
   display:inline-block;
   border-radius:0.4rem 0.4rem 0rem 0rem;
@@ -19,14 +18,13 @@
 .tab-icon {
     display:inline;
     background-color: transparent;
-    padding: 0rem;
-    width: 3rem;
+    padding: 0.25rem 0.5rem;
+    width: 6rem;
   }
 .panels{
   background:#ffffff;
   /* min-height:200px; */
   width:100%;
-  max-width:100rem;
   overflow:hidden;
   box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1),
   0 0px 6px 0 rgba(0, 0, 0, 0.07);
@@ -83,8 +81,8 @@ input[type=radio].radio{
 #five:checked ~ .tabs #five-tab,
 #six:checked ~ .tabs #six-tab {
   background:#ffffff;
-  border-top: 0.5rem solid #ffffff;
-  width: 9rem;
+  border-top: 0.25rem solid #ffffff;
+  width: 6rem;
   text-align:center;
 }
 
