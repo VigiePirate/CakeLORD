@@ -21,7 +21,7 @@
 .tab-icon {
     display:inline;
     background-color: transparent;
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem 1rem;
     width: 6rem;
   }
 .panels{
@@ -51,7 +51,7 @@ input[type=radio].radio{
 }
 
 #one-tab {
-    background: #66330088; /* bleu #c3c8e688; */
+    background: #cabcaf; /* bleu #c3c8e688; */
 }
 #two-tab {
     background: #ff99cf88;
@@ -124,7 +124,7 @@ input[type=radio].radio{
   .tab-icon {
       display: inline;
       width: 4rem;
-      padding: 0.125rem 0.25rem;
+      padding: 0.25rem 0.5rem;
     }
     #one:checked ~ .tabs #one-tab > img,
     #two:checked ~ .tabs #two-tab > img,
