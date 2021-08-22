@@ -81,8 +81,8 @@ input[type=radio].radio{
 #five:checked ~ .tabs #five-tab,
 #six:checked ~ .tabs #six-tab {
   background:#ffffff;
-  border-top: 0.25rem solid #ffffff;
-  width: 6rem;
+  /* border-top: 0.25rem solid #ffffff; */
+  width: 8rem;
   text-align:center;
 }
 
