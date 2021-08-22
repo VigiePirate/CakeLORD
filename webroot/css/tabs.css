@@ -26,8 +26,7 @@
     width: 6rem;
   }
 .tab-icon:hover {
-  filter: saturate(100%);
-
+  filter: saturate(2000%);
   }
 .panels{
   background:#ffffff;
