@@ -47,7 +47,7 @@
             </div>
             <div class="panels">
                 <div class="panel users content view" id="one-panel">
-                    <?= $this->element('simple_rats', [
+                    <?= $this->element('rats', [
                         'rubric' => __('My colony'),
                         'exceptions' => [
                             'pup_name',
