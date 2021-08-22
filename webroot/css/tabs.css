@@ -25,6 +25,10 @@
     margin:0 1rem;
     width: 6rem;
   }
+.tab-icon:hover {
+  filter: saturate(100%);
+
+  }
 .panels{
   background:#ffffff;
   /* min-height:200px; */
