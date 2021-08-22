@@ -73,7 +73,7 @@ input[type=radio].radio{
     background: #ff8c1b55;
 }
 #seven-tab {
-    background: #1f9d5555;
+    background: #1f9d5544;
 }
 
 #one:checked ~ .panels #one-panel,
