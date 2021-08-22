@@ -55,7 +55,7 @@ class RatsController extends AppController
             'contain' => ['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
         ];
         $rats = $this->paginate($this->Rats->find()->where(['Rats.owner_user_id' => $user->id]));
-        $females = $rats->where(['Rats.sex' => 'F']);
+        $females = $rats->find()->where(['Rats.sex' => 'F']);
         $this->set(compact('females','rats', 'user'));
     }
 
