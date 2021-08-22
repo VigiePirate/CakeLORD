@@ -70,8 +70,11 @@ class RatsController extends AppController
         $pending = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id' => '4'])
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        $waiting = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id' => '3'])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
 
-        $this->set(compact('rats','females','males','alive','departed','pending','user'));
+        $this->set(compact('rats','females','males','alive','departed','pending','waiting','user'));
     }
 
     /**
