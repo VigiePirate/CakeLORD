@@ -54,7 +54,7 @@ class RatsController extends AppController
         $this->paginate = [
             'contain' => ['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
         ];
-        $rats = $this->paginate($this->Rats->find()->where(['Rats.owner_user_id' => $user->id]));
+        // $rats = $this->paginate($this->Rats->find()->where(['Rats.owner_user_id' => $user->id]));
         $females = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'F'])
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
@@ -73,8 +73,11 @@ class RatsController extends AppController
         $waiting = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id' => '3'])
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        $waiting = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'OR' => ['Rats.state_id' => '2','Rats.state_id' => '1'])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
 
-        $this->set(compact('rats','females','males','alive','departed','pending','waiting','user'));
+        $this->set(compact('females','males','alive','departed','pending','waiting','okrats','user'));
     }
 
     /**

@@ -13,6 +13,7 @@
             <input class="radio" id="four" name="group" type="radio">
             <input class="radio" id="five" name="group" type="radio">
             <input class="radio" id="six" name="group" type="radio">
+            <input class="radio" id="seven" name="group" type="radio">
             <div class="tabs">
                 <label class="tab" id="one-tab" for="one">
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
@@ -43,6 +44,11 @@
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
                         'class' => 'tab-icon',
                         'alt' => __('Waiting staff action')]) ?>
+                </label>
+                <label class="tab" id="six-tab" for="six">
+                    <?= $this->Html->image('/img/icon-white-rat.svg', [
+                        'class' => 'tab-icon',
+                        'alt' => __('All my validated rats')]) ?>
                 </label>
             </div>
             <div class="panels">
@@ -119,6 +125,20 @@
                         <?= $this->element('simple_rats', [
                             'rubric' => __('Waiting staff action'),
                             'rats' => $waiting,
+                            'exceptions' => [
+                                'tabs',
+                                'pup_name',
+                                'birth_date',
+                                'owner_user_id',
+                            ],
+                        ]) ?>
+                    </div>
+                </div>
+                <div class="panel" id="seven-panel">
+                    <div class="panel users content view" id="seven-panel">
+                        <?= $this->element('simple_rats', [
+                            'rubric' => __('All my validated rats'),
+                            'rats' => $okrats,
                             'exceptions' => [
                                 'tabs',
                                 'pup_name',

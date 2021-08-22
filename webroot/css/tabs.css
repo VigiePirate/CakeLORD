@@ -19,7 +19,7 @@
   0 0px 6px 0 rgba(0, 0, 0, 0.07);
 }
 .tab:hover {
-  filter: contrast(200%);
+  filter: opacity(0.5);
   }
 .tab-icon {
     display:inline;
@@ -72,13 +72,17 @@ input[type=radio].radio{
 #six-tab {
     background: #ff8c1b55;
 }
+#seven-tab {
+    background: #1f9d5555;
+}
 
 #one:checked ~ .panels #one-panel,
 #two:checked ~ .panels #two-panel,
 #three:checked ~ .panels #three-panel,
 #four:checked ~ .panels #four-panel,
 #five:checked ~ .panels #five-panel,
-#six:checked ~ .panels #six-panel {
+#six:checked ~ .panels #six-panel,
+#seven:checked ~ .panels #seven-panel {
   display:block;
 }
 #one:checked ~ .tabs #one-tab,
@@ -86,7 +90,8 @@ input[type=radio].radio{
 #three:checked ~ .tabs #three-tab,
 #four:checked ~ .tabs #four-tab,
 #five:checked ~ .tabs #five-tab,
-#six:checked ~ .tabs #six-tab {
+#six:checked ~ .tabs #six-tab,
+#seven:checked ~ .tabs #seven-tab {
   background:#ffffff;
   /* border-top: 0.25rem solid #ffffff; */
   width: 12rem;
@@ -123,6 +128,13 @@ input[type=radio].radio{
   filter: brightness(0) saturate(100%) invert(59%) sepia(14%) saturate(3193%) hue-rotate(346deg) brightness(106%) contrast(101%);
   width: 8rem;
 }
+
+#seven:checked ~ .tabs #seven-tab > img {
+  filter: brightness(0) saturate(100%) invert(47%) sepia(100%) saturate(423%) hue-rotate(93deg) brightness(85%) contrast(76%);
+  width: 8rem;
+}
+
+
 
 @media screen and (max-width: 640px) {
   .tab-icon {
