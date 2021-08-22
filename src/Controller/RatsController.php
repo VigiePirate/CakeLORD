@@ -54,11 +54,12 @@ class RatsController extends AppController
         $this->paginate = [
             'contain' => ['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
         ];
-        $rats = $this->paginate($this->Rats->find()->where(['Rats.owner_user_id' => $user->id]));
-        $females = $this->Rats->find()->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'F']);
+        $results = $this->Rats->find()->where(['Rats.owner_user_id' => $user->id]);
+        $females = $results->where(['Rats.sex' => 'F']);
+        $rats = $this->paginate($results);
+        /* $females = $this->Rats->find()->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'F']);
         $males = $this->Rats->find()->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'M']);
-        $departed = $this->Rats->find()->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => false]);
-
+        $departed = $this->Rats->find()->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => false]); */
         $this->set(compact('rats','females','males','departed','user'));
     }
 
