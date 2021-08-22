@@ -112,7 +112,7 @@
                 <div class="panel" id="six-panel">
                     <div class="panel users content view" id="six-panel">
                         <?= $this->element('simple_rats', [
-                            'rubric' => __('Waiting staff action',
+                            'rubric' => __('Waiting staff action'),
                             'rats' => $waiting,
                             'exceptions' => [
                                 'pup_name',
