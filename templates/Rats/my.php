@@ -45,7 +45,7 @@
                         'class' => 'tab-icon',
                         'alt' => __('Waiting staff action')]) ?>
                 </label>
-                <label class="tab" id="six-tab" for="six">
+                <label class="tab" id="six-tab" for="seven">
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
                         'class' => 'tab-icon',
                         'alt' => __('All my validated rats')]) ?>
