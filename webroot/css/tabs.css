@@ -122,19 +122,32 @@ input[type=radio].radio{
 }
 
 @media screen and (max-width: 640px) {
+  .tabs {
+    width:5rem
+  }
   .tab-icon {
-      display: inline;
-      width: 4rem;
-      padding: 0.25rem 0.5rem;
-    }
-    #one:checked ~ .tabs #one-tab > img,
-    #two:checked ~ .tabs #two-tab > img,
-    #three:checked ~ .tabs #three-tab > img,
-    #four:checked ~ .tabs #four-tab > img,
-    #five:checked ~ .tabs #five-tab > img,
-    #six:checked ~ .tabs #six-tab > img {
-      width: 5rem;
-    }
+    display: inline;
+    width: 4rem;
+    padding: 0.25rem 0.5rem;
+  }
+  #one:checked ~ .tabs #one-tab > img,
+  #two:checked ~ .tabs #two-tab > img,
+  #three:checked ~ .tabs #three-tab > img,
+  #four:checked ~ .tabs #four-tab > img,
+  #five:checked ~ .tabs #five-tab > img,
+  #six:checked ~ .tabs #six-tab > img {
+    width: 5rem;
+  }
+
+  #one:checked ~ .tabs #one-tab,
+  #two:checked ~ .tabs #two-tab,
+  #three:checked ~ .tabs #three-tab,
+  #four:checked ~ .tabs #four-tab,
+  #five:checked ~ .tabs #five-tab,
+  #six:checked ~ .tabs #six-tab {
+    background:#ffffff;
+    width: 6rem;
+  }
 }
 
 /* filter: brightness(0) saturate(100%) invert(77%) sepia(98%) saturate(3360%) hue-rotate(285deg) brightness(102%) contrast(106%);
