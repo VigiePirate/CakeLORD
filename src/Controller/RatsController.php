@@ -58,10 +58,20 @@ class RatsController extends AppController
         $females = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'F'])
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
-        $males = $this->Rats->find()->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'M']);
-        $departed = $this->Rats->find()->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => false]);
+        $males = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'M'])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        $alive = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => true])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        $departed = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => false])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        $pending = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'Rats.state' => '5'])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
 
-        $this->set(compact('rats','females','males','departed','user'));
+        $this->set(compact('rats','females','males','alive','departed','pending','user'));
     }
 
     /**
