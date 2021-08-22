@@ -32,7 +32,7 @@
                 <label class="tab" id="four-tab" for="four">
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
                         'class' => 'tab-icon',
-                        'alt' => __('My rainbow brigde')]) ?>
+                        'alt' => __('My rainbow bridge')]) ?>
                 </label>
                 <label class="tab" id="five-tab" for="five">
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
