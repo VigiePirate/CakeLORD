@@ -5,7 +5,7 @@
     <table class="summary">
         <thead>
             <?php if (! in_array('state_id', $exceptions)): ?>
-                <th><?= $this->Html->image('/img/icon-fa-state.svg', ['class' => 'action-icon']) ?></th>
+                <th><?= __('State') ?></th>
             <?php endif; ?>
             <?php if (! in_array('picture', $exceptions)): ?>
                 <th><?= __('Picture') ?></th>
@@ -35,9 +35,9 @@
                 <th><?= __('Owner') ?></th>
             <?php endif; ?>
             <?php if (! in_array('sex', $exceptions)): ?>
-                <th><?= $this->Html->image('/img/icon-fa-sex.svg', ['class' => 'action-icon']) ?></th>
+                <th><?= __('Sex') ?></th>
             <?php endif; ?>
-            <th class="actions-title"><?= $this->Html->image('/img/icon-fa-action.svg', ['class' => 'action-icon'])?></th>
+            <th class="actions-title"><?= __('Actions') ?></th>
     </thead>
         <tbody>
             <?php foreach($rats as $rat): ?>
