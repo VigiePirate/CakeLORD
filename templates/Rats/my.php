@@ -54,11 +54,18 @@
                             'birth_date',
                             'owner_user_id',
                         ],
-                        ]) ?>
+                    ]) ?>
                 </div>
                 <div class="panel" id="two-panel">
                     <div class="panel users content view" id="two-panel">
-                        <h2><?= __('My Females') ?></h2>
+                        <?= $this->element('females', [
+                            'rubric' => __('My females'),
+                            'exceptions' => [
+                                'pup_name',
+                                'birth_date',
+                                'owner_user_id',
+                            ],
+                        ]) ?>
                     </div>
                 </div>
                 <div class="panel" id="three-panel">
