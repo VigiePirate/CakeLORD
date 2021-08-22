@@ -47,7 +47,7 @@
             </div>
             <div class="panels">
                 <div class="panel users content view" id="one-panel">
-                    <?= $this->element('rats', [
+                    <?= $this->element('simple_rats', [
                         'rubric' => __('My colony'),
                         'exceptions' => [
                             'pup_name',
@@ -58,7 +58,7 @@
                 </div>
                 <div class="panel" id="two-panel">
                     <div class="panel users content view" id="two-panel">
-                        <?= $this->element('rats', [
+                        <?= $this->element('simple_rats', [
                             'rubric' => __('My females'),
                             'rats' => $females,
                             'exceptions' => [
@@ -71,7 +71,7 @@
                 </div>
                 <div class="panel" id="three-panel">
                     <div class="panel users content view" id="three-panel">
-                        <?= $this->element('rats', [
+                        <?= $this->element('simple_rats', [
                             'rubric' => __('My males'),
                             'rats' => $males,
                             'exceptions' => [
@@ -84,7 +84,7 @@
                 </div>
                 <div class="panel" id="four-panel">
                     <div class="panel users content view" id="four-panel">
-                        <?= $this->element('rats', [
+                        <?= $this->element('simple_rats', [
                             'rubric' => __('My Rainbow Bridge'),
                             'rats' => $departed,
                             'exceptions' => [
