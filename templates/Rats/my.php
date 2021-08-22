@@ -99,6 +99,15 @@
                 <div class="panel" id="five-panel">
                     <div class="panel users content view" id="five-panel">
                         <h2><?= __('Corrections needed') ?></h2>
+                            <?= $this->element('rats', [
+                                'rubric' => __('Corrections needed'),
+                                'rats' => $pending,
+                                'exceptions' => [
+                                    'pup_name',
+                                    'birth_date',
+                                    'owner_user_id',
+                                ],
+                            ]) ?>
                     </div>
                 </div>
                 <div class="panel" id="six-panel">
