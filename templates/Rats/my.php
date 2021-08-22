@@ -71,12 +71,28 @@
                 </div>
                 <div class="panel" id="three-panel">
                     <div class="panel users content view" id="three-panel">
-                        <h2><?= __('My Males') ?></h2>
+                        <?= $this->element('rats', [
+                            'rubric' => __('My males'),
+                            'rats' => $males,
+                            'exceptions' => [
+                                'pup_name',
+                                'birth_date',
+                                'owner_user_id',
+                            ],
+                        ]) ?>
                     </div>
                 </div>
                 <div class="panel" id="four-panel">
                     <div class="panel users content view" id="four-panel">
-                        <h2><?= __('My Rainbow Bridge') ?></h2>
+                        <?= $this->element('rats', [
+                            'rubric' => __('My Rainbow Bridge'),
+                            'rats' => $departed,
+                            'exceptions' => [
+                                'pup_name',
+                                'birth_date',
+                                'owner_user_id',
+                            ],
+                        ]) ?>
                     </div>
                 </div>
                 <div class="panel" id="five-panel">
