@@ -45,6 +45,15 @@
                         'alt' => __('Waiting staff action')]) ?>
                 </label>
             </div>
+            <div class="float-right">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-add-rat.svg', [
+                        'url' => ['controller' => 'Rats', 'action' => 'add'],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('My rats')]) ?>
+                    <span class="tooltiptext"><?= __('Add a rat') ?></span>
+                </div>
+            </div>
             <div class="panels">
                 <div class="panel users content view" id="one-panel">
                     <?= $this->element('simple_rats', [
