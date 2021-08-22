@@ -124,7 +124,7 @@ input[type=radio].radio{
 @media screen and (max-width: 640px) {
   .tab-icon {
     display: inline;
-    width: 4rem;
+    width:3rem;
     padding: 0.25rem 0.5rem;
   }
   #one:checked ~ .tabs #one-tab > img,
@@ -133,7 +133,7 @@ input[type=radio].radio{
   #four:checked ~ .tabs #four-tab > img,
   #five:checked ~ .tabs #five-tab > img,
   #six:checked ~ .tabs #six-tab > img {
-    width: 5rem;
+    width: 4rem;
   }
 
   #one:checked ~ .tabs #one-tab,
