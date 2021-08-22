@@ -5,6 +5,9 @@
   align-items: flex-start;
   width: 100%;
 }
+.tabs{
+  text-align:center;
+}
 .tab{
   cursor: pointer;
   margin: 0rem;
@@ -82,7 +85,7 @@ input[type=radio].radio{
 #six:checked ~ .tabs #six-tab {
   background:#ffffff;
   /* border-top: 0.25rem solid #ffffff; */
-  width: 8rem;
+  width: 12rem;
   text-align:center;
 }
 
@@ -121,7 +124,7 @@ input[type=radio].radio{
   .tab-icon {
       display: inline;
       width: 4rem;
-      padding: 0.5rem;
+      padding: 0.125rem 0.25rem;
     }
     #one:checked ~ .tabs #one-tab > img,
     #two:checked ~ .tabs #two-tab > img,
