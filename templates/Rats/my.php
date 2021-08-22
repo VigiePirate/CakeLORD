@@ -47,7 +47,7 @@
             </div>
             <div class="panels">
                 <div class="panel users content view" id="one-panel">
-                    <?= $this->element('rats', [
+                    <?= $this->element('simple_rats', [
                         'rubric' => __('My colony'),
                         'rats' => $alive,
                         'exceptions' => [
@@ -59,7 +59,7 @@
                 </div>
                 <div class="panel" id="two-panel">
                     <div class="panel users content view" id="two-panel">
-                        <?= $this->element('rats', [
+                        <?= $this->element('simple_rats', [
                             'rubric' => __('My females'),
                             'rats' => $females,
                             'exceptions' => [
@@ -72,7 +72,7 @@
                 </div>
                 <div class="panel" id="three-panel">
                     <div class="panel users content view" id="three-panel">
-                        <?= $this->element('rats', [
+                        <?= $this->element('simple_rats', [
                             'rubric' => __('My males'),
                             'rats' => $males,
                             'exceptions' => [
@@ -85,7 +85,7 @@
                 </div>
                 <div class="panel" id="four-panel">
                     <div class="panel users content view" id="four-panel">
-                        <?= $this->element('rats', [
+                        <?= $this->element('simple_rats', [
                             'rubric' => __('My Rainbow Bridge'),
                             'rats' => $departed,
                             'exceptions' => [
@@ -98,8 +98,7 @@
                 </div>
                 <div class="panel" id="five-panel">
                     <div class="panel users content view" id="five-panel">
-                        <h2><?= __('Corrections needed') ?></h2>
-                            <?= $this->element('rats', [
+                            <?= $this->element('simple_rats', [
                                 'rubric' => __('Corrections needed'),
                                 'rats' => $pending,
                                 'exceptions' => [
