@@ -98,20 +98,28 @@
                 </div>
                 <div class="panel" id="five-panel">
                     <div class="panel users content view" id="five-panel">
-                            <?= $this->element('simple_rats', [
-                                'rubric' => __('Corrections needed'),
-                                'rats' => $pending,
-                                'exceptions' => [
-                                    'pup_name',
-                                    'birth_date',
-                                    'owner_user_id',
-                                ],
-                            ]) ?>
+                        <?= $this->element('simple_rats', [
+                            'rubric' => __('Corrections needed'),
+                            'rats' => $pending,
+                            'exceptions' => [
+                                'pup_name',
+                                'birth_date',
+                                'owner_user_id',
+                            ],
+                        ]) ?>
                     </div>
                 </div>
                 <div class="panel" id="six-panel">
                     <div class="panel users content view" id="six-panel">
-                        <h2><?= __('Waiting staff action') ?></h2>
+                        <?= $this->element('simple_rats', [
+                            'rubric' => __('Waiting staff action',
+                            'rats' => $waiting,
+                            'exceptions' => [
+                                'pup_name',
+                                'birth_date',
+                                'owner_user_id',
+                            ],
+                        ]) ?>
                     </div>
                 </div>
             </div>
