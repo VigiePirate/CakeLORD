@@ -58,8 +58,9 @@
                 </div>
                 <div class="panel" id="two-panel">
                     <div class="panel users content view" id="two-panel">
-                        <?= $this->element('females', [
+                        <?= $this->element('rats', [
                             'rubric' => __('My females'),
+                            'rats' => $females,
                             'exceptions' => [
                                 'pup_name',
                                 'birth_date',
