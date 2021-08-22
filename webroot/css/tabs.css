@@ -19,7 +19,7 @@
   0 0px 6px 0 rgba(0, 0, 0, 0.07);
 }
 .tab:hover {
-  filter: saturate(2000%);
+  filter: contrast(200%);
   }
 .tab-icon {
     display:inline;
