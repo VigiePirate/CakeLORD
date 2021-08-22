@@ -7,7 +7,6 @@
 }
 .tabs{
   text-align:center;
-  width: 8rem;
 }
 .tab{
   cursor: pointer;
@@ -22,8 +21,8 @@
 .tab-icon {
     display:inline;
     background-color: transparent;
-    padding: 0.5rem 1rem;
-    width: 6rem;
+    padding: 0.5rem 1.5rem;
+    width: 6.5rem;
   }
 .panels{
   background:#ffffff;
@@ -122,9 +121,6 @@ input[type=radio].radio{
 }
 
 @media screen and (max-width: 640px) {
-  .tabs {
-    width:5rem
-  }
   .tab-icon {
     display: inline;
     width: 4rem;
