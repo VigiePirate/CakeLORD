@@ -2,7 +2,12 @@
     <h2><?= h($rubric) ?></h2>
 <?php endif; ?>
 <div class="table-responsive">
-    <table class="summary">
+    <!-- in tabs, style is that of 'rats' element -->
+    <?php if (! in_array('tabs', $exceptions)): ?>
+        <table class="summary">
+    <?php else: ?>
+        <table class="condensed">
+    <?php endif; ?>
         <thead>
             <?php if (! in_array('state_id', $exceptions)): ?>
                 <th><?= __('State') ?></th>

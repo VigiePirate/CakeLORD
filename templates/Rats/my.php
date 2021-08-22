@@ -51,6 +51,7 @@
                         'rubric' => __('My colony'),
                         'rats' => $alive,
                         'exceptions' => [
+                            'tabs',
                             'pup_name',
                             'birth_date',
                             'owner_user_id',
@@ -63,6 +64,7 @@
                             'rubric' => __('My females'),
                             'rats' => $females,
                             'exceptions' => [
+                                'tabs',
                                 'pup_name',
                                 'birth_date',
                                 'owner_user_id',
@@ -76,6 +78,7 @@
                             'rubric' => __('My males'),
                             'rats' => $males,
                             'exceptions' => [
+                                'tabs',
                                 'pup_name',
                                 'birth_date',
                                 'owner_user_id',
@@ -89,6 +92,7 @@
                             'rubric' => __('My Rainbow Bridge'),
                             'rats' => $departed,
                             'exceptions' => [
+                                'tabs',
                                 'pup_name',
                                 'birth_date',
                                 'owner_user_id',
@@ -102,6 +106,7 @@
                             'rubric' => __('Corrections needed'),
                             'rats' => $pending,
                             'exceptions' => [
+                                'tabs',
                                 'pup_name',
                                 'birth_date',
                                 'owner_user_id',
@@ -115,6 +120,7 @@
                             'rubric' => __('Waiting staff action'),
                             'rats' => $waiting,
                             'exceptions' => [
+                                'tabs',
                                 'pup_name',
                                 'birth_date',
                                 'owner_user_id',
