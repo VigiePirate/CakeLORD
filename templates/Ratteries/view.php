@@ -25,7 +25,7 @@
             </div>
 
             <div class="side-nav-item">
-            <?= $this->Html->image('/img/icon-file-edit.svg', [
+            <?= $this->Html->image('/img/icon-edit.svg', [
                 'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
                 'class' => 'side-nav-icon',
                 'alt' => __('Modify Rattery')]) ?>

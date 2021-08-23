@@ -77,7 +77,7 @@
                     <?php endif; ?>
                     <td class="actions">
                         <span class="nowrap">
-                        <?= $this->Html->image('/img/icon-file-edit.svg', [
+                        <?= $this->Html->image('/img/icon-edit.svg', [
                             'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
                             'class' => 'action-icon',
                             'alt' => __('See Rat')]) ?>
