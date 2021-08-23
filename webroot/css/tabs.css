@@ -90,9 +90,10 @@ input[type=radio].radio{
 #six:checked ~ .tabs #six-tab,
 #seven:checked ~ .tabs #seven-tab {
   background:#ffffff;
-  /* border-top: 0.25rem solid #ffffff; */
   width: 12rem;
   text-align:center;
+  box-shadow:none;
+  border-bottom: 0.25rem solid #ffffff;
 }
 
 /* blue : invert(41%) sepia(10%) saturate(2867%) hue-rotate(194deg) brightness(102%) contrast(83%); */
