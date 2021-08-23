@@ -133,7 +133,7 @@ input[type=radio].radio{
 }
 
 .noshadow {
-  border-top: solid 6px #ffffff;
+  border-top: solid 5px #ffffff;
   z-index:99;
   width:100%;
   border-top-right-radius:0.4rem;
