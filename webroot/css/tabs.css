@@ -131,14 +131,10 @@ input[type=radio].radio{
 }
 
 .noshadow {
-  border-top: solid 7px #ffffff;
+  border-top: solid 6px #ffffff;
   z-index:99;
   width:100%;
   border-top-right-radius:0.4rem;
-}
-
-.noshadow:hover {
-  opacity:0.5;
 }
 
 @media screen and (min-width: 920px) {
