@@ -7,11 +7,11 @@
 
     <div class="column-responsive column-90">
 
-        <div class="users content view" id="one-panel">
-            <div class="sheet-heading">
-                <div class="sheet-title pretitle">User Dashboard</div>
-            </div>
+        <div class="users content view" id="one-panel">        
             <?= $this->Html->link(__('New Rat'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= $user->name . '’s Dashboard') ?></div>
+            </div>
             <h1><?= __('My rats') ?> </h1>
             <h2>Summary</h2>
             <h2>Statistics</h2>
