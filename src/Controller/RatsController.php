@@ -71,7 +71,9 @@ class RatsController extends AppController
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id' => '4'])
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
         $waiting = $this->Rats->find()
-            ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id' => '3'])
+            ->where([
+                'Rats.owner_user_id' => $user->id,
+                'OR' => [['Rats.state_id' => '3'], ['Rats.state_id' => '5']]])
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
         $okrats = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id <=' => '2'])
