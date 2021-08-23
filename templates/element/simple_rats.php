@@ -97,11 +97,6 @@
                             'class' => 'action-icon',
                             'alt' => __('Declare Death')]) ?>
                         </span>
-                        <?= $this->Html->image('/img/icon-delete.svg', [
-                            'url' => ['controller' => 'Rats', 'action' => 'delete', $rat->id],
-                            'class' => 'action-icon',
-                            'alt' => __('See Rat')]) ?>
-                        </span>
                     </td>
                 </tr>
             <?php endforeach; ?>
