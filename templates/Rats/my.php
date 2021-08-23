@@ -8,14 +8,13 @@
     <div class="column-responsive column-90">
 
         <div class="users content view" id="one-panel">
-            <h2><?= __('Manage my rats') ?> </h2>
-            <p>I have currently <em>xx</em> rats (yy females, zz males).</p>
-            <div class="btn__center hero__text">
-              <?= $this->Html->link(__('View my rats as a visitor'), ['controller' => 'Rats', 'action' => 'owned-by',$user_id], ['class' => 'button']) ?>
-              <?= $this->Html->link(__('Add a new rat'), ['controller' => 'Rats', 'action' => 'add'], ['class' => 'button']) ?>
-            </div>
+            <?= $this->Html->link(__('New Rat'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+            <h1><?= __('My rats') ?> </h1>
+            <h2>Summary</h2>
+            <h2>Statistics</h2>
         </div>
 
+        <div class="spacer"> </div>
         <div class="tab-wrapper">
             <input class="radio" id="one" name="group" type="radio" checked>
             <input class="radio" id="two" name="group" type="radio">
