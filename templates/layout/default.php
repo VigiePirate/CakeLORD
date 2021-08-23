@@ -52,7 +52,7 @@ $cakeDescription = 'LORD';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="/"><img alt="LORD Logo: Book with a Rat Tail" src="/img/lord.icon.contour.svg" /></a>
+            <a href="/"><img alt="LORD Logo: Book with a Rat Tail" title="Landing page" src="/img/lord.icon.contour.svg" /></a>
             <a href="/" class="hide-on-mobile">Livre des Origines <br>du <span>Rat</span> Domestique</td></a>
         </div>
         <div class="top-nav-links">
