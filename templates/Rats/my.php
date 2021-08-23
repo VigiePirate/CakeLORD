@@ -8,6 +8,9 @@
     <div class="column-responsive column-90">
 
         <div class="users content view" id="one-panel">
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle">User Dashboard</div>
+            </div>
             <?= $this->Html->link(__('New Rat'), ['action' => 'add'], ['class' => 'button float-right']) ?>
             <h1><?= __('My rats') ?> </h1>
             <h2>Summary</h2>
