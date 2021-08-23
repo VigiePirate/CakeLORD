@@ -18,7 +18,7 @@
                 <label class="tab" id="one-tab" for="one">
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
                         'class' => 'tab-icon',
-                        'alt' => __('My colony')]) ?>
+                        'alt' => __('My current colony')]) ?>
                 </label>
                 <label class="tab" id="two-tab" for="two">
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
@@ -56,7 +56,7 @@
             <div class="panels">
                 <div class="panel users content view" id="one-panel">
                     <?= $this->element('simple_rats', [
-                        'rubric' => __('My colony'),
+                        'rubric' => __('My current colony'),
                         'rats' => $alive,
                         'exceptions' => [
                             'tabs',
