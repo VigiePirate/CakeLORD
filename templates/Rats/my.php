@@ -6,6 +6,16 @@
     </aside>
 
     <div class="column-responsive column-90">
+
+        <div class="users content view" id="one-panel">
+            <h2><?= __('Manage my rats') ?> </h2>
+            <p>I have currently <em>xx</em> rats (yy females, zz males).</p>
+            <div class="btn__center hero__text">
+              <?= $this->Html->link(__('View my rats as a visitor'), ['controller' => 'Rats', 'action' => 'owned-by',$user_id], ['class' => 'button']) ?>
+              <?= $this->Html->link(__('Add a new rat'), ['controller' => 'Rats', 'action' => 'add'], ['class' => 'button']) ?>
+            </div>
+        </div>
+
         <div class="tab-wrapper">
             <input class="radio" id="one" name="group" type="radio" checked>
             <input class="radio" id="two" name="group" type="radio">
@@ -14,6 +24,7 @@
             <input class="radio" id="five" name="group" type="radio">
             <input class="radio" id="six" name="group" type="radio">
             <input class="radio" id="seven" name="group" type="radio">
+
             <div class="tabs">
                 <label class="tab" id="one-tab" for="one">
                     <?= $this->Html->image('/img/icon-white-rat.svg', [
