@@ -156,7 +156,8 @@ input[type=radio].radio{
   #three:checked ~ .tabs #three-tab > img,
   #four:checked ~ .tabs #four-tab > img,
   #five:checked ~ .tabs #five-tab > img,
-  #six:checked ~ .tabs #six-tab > img {
+  #six:checked ~ .tabs #six-tab > img,
+  #seven:checked ~ .tabs #seven-tab > img {
     width: 4rem;
   }
 
@@ -165,7 +166,8 @@ input[type=radio].radio{
   #three:checked ~ .tabs #three-tab,
   #four:checked ~ .tabs #four-tab,
   #five:checked ~ .tabs #five-tab,
-  #six:checked ~ .tabs #six-tab {
+  #six:checked ~ .tabs #six-tab,
+  #seven:checked ~ .tabs #seven-tab {
     background:#ffffff;
     width: 6rem;
   }
