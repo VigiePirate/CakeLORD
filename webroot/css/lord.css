@@ -125,20 +125,21 @@ a sup {
   }
 
 .button:visited {
-    color: #663300;
-    background: #a65400; /* #cabcaf; */
+    color: #ffffff;
+    background: #a65400;
+    border-color: #a65400;/* #cabcaf; */
 }
 
 .button-staff {
     background: #e8dbdc;
     border-color: #b1000c;
-    color: #b1000c;
+    color: #ffffff;
 }
 
 .button-staff:visited {
-  background: #d6bcbe;
-  border-color: #b1000c;
-  color: #b1000c;
+  background: #d33c44;
+  border-color: #d33c44;
+  color: #ffffff;
 }
 
 .float-button {
