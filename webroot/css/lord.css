@@ -116,7 +116,8 @@ a sup {
 
 /* Forms */
 
-.button, button, input[type='button'], input[type='reset'], input[type='submit'] {
+.button, button, .button:visited,
+input[type='button'], input[type='reset'], input[type='submit'] {
     background: #663300; /* #cabcafa3*/
     border-color: #663300;
     font-family: "Roboto Condensed", serif;
@@ -124,19 +125,19 @@ a sup {
     color: #ffffff;
   }
 
-.button:visited {
+.button:hover {
     color: #ffffff;
     background: #a65400;
     border-color: #a65400;/* #cabcaf; */
 }
 
-.button-staff {
+.button-staff, .button-staff:visited {
     background: #e8dbdc;
     border-color: #b1000c;
     color: #ffffff;
 }
 
-.button-staff:visited {
+.button-staff:hover {
   background: #d33c44;
   border-color: #d33c44;
   color: #ffffff;
