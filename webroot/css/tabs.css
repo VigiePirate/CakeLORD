@@ -92,8 +92,7 @@ input[type=radio].radio{
   background:#ffffff;
   width: 12rem;
   text-align:center;
-  box-shadow:none;
-  border-bottom: 0.25rem solid #ffffff;
+  z-index:99;
 }
 
 /* blue : invert(41%) sepia(10%) saturate(2867%) hue-rotate(194deg) brightness(102%) contrast(83%); */
