@@ -9,11 +9,11 @@
         <table>
     <?php endif; ?>
         <thead>
-            <?php if (! in_array('state_id', $exceptions)): ?>
-                <th><?= __('State') ?></th>
-            <?php endif; ?>
             <?php if (! in_array('picture', $exceptions)): ?>
                 <th><?= __('Picture') ?></th>
+            <?php endif; ?>
+            <?php if (! in_array('state_id', $exceptions)): ?>
+                <th><?= __('State') ?></th>
             <?php endif; ?>
             <?php if (! in_array('pedigree_identifier', $exceptions)): ?>
                 <th><?= __('Identifier') ?></th>
@@ -46,12 +46,12 @@
     </thead>
         <tbody>
             <?php foreach($rats as $rat): ?>
-                <tr>
-                    <?php if (! in_array('state_id', $exceptions)): ?>
-                        <td><span class="statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></span></td>
-                    <?php endif; ?>
+                <tr>                    
                     <?php if (! in_array('picture', $exceptions)): ?>
                         <td><?= isset($rat->picture_thumbnail) ? $this->Html->image($rat->picture_thumbnail, ['alt' => $rat->name]) : '' ?></td>
+                    <?php endif; ?>
+                    <?php if (! in_array('state_id', $exceptions)): ?>
+                        <td><span class="statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></span></td>
                     <?php endif; ?>
                     <?php if (! in_array('pedigree_identifier', $exceptions)): ?>
                         <td><?= $this->Html->link($rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?></td>
