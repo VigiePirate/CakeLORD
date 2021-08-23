@@ -82,8 +82,18 @@
                     <?php endif; ?>
                     <td class="actions">
                         <span class="nowrap">
-                        <?= $this->Html->image('/img/icon-view.svg', [
-                            'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
+                        <?= $this->Html->image('/img/icon-edit.svg', [
+                            'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Edit Rat')]) ?>
+                        </span>
+                        <?= $this->Html->image('/img/icon-rip.svg', [
+                            'url' => ['controller' => 'Rats', 'action' => 'declare-death', $rat->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Declare Death')]) ?>
+                        </span>
+                        <?= $this->Html->image('/img/icon-delete.svg', [
+                            'url' => ['controller' => 'Rats', 'action' => 'delete', $rat->id],
                             'class' => 'action-icon',
                             'alt' => __('See Rat')]) ?>
                         </span>
