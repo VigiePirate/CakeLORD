@@ -79,6 +79,9 @@ class RatsController extends AppController
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id <=' => '2'])
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
 
+        if(! empty($pending->first())) {
+            $this->Flash->error(__('You have sheets pending corrections.'));
+        }
         $this->set(compact('females','males','alive','departed','pending','waiting','okrats','user'));
     }
 
