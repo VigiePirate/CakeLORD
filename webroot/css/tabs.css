@@ -92,7 +92,6 @@ input[type=radio].radio{
   background:#ffffff;
   width: 12rem;
   text-align:center;
-  z-index:99;
 }
 
 /* blue : invert(41%) sepia(10%) saturate(2867%) hue-rotate(194deg) brightness(102%) contrast(83%); */
@@ -129,6 +128,11 @@ input[type=radio].radio{
 #seven:checked ~ .tabs #seven-tab > img {
   filter: brightness(0) saturate(100%) invert(47%) sepia(100%) saturate(423%) hue-rotate(93deg) brightness(85%) contrast(76%);
   width: 8rem;
+}
+
+.noshadow {
+  border-top: solid 2px #ffffff;
+  z-index:99;
 }
 
 @media screen and (min-width: 920px) {

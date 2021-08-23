@@ -51,6 +51,8 @@
                         'alt' => __('All my validated rats')]) ?>
                 </label>
             </div>
+            <div class="noshadow">
+            </div>
             <div class="panels">
                 <div class="panel users content view" id="one-panel">
                     <?= $this->element('simple_rats', [
