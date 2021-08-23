@@ -6,7 +6,7 @@
     <?php if (! in_array('tabs', $exceptions)): ?>
         <table class="summary">
     <?php else: ?>
-        <table class="condensed">
+        <table>
     <?php endif; ?>
         <thead>
             <?php if (! in_array('state_id', $exceptions)): ?>
@@ -82,6 +82,11 @@
                     <?php endif; ?>
                     <td class="actions">
                         <span class="nowrap">
+                        <?= $this->Html->image('/img/icon-view.svg', [
+                            'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
+                            'class' => 'action-icon',
+                            'alt' => __('View Rat')]) ?>
+                        </span>
                         <?= $this->Html->image('/img/icon-edit.svg', [
                             'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
                             'class' => 'action-icon',
