@@ -701,7 +701,7 @@ th {
   position: absolute;
   top: 1.4rem;
   left: 105%;
-  z-index: 49;
+  z-index: 99;
 }
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip-staff:hover .tooltiptext-staff {
