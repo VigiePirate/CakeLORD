@@ -86,7 +86,7 @@
                                 'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
                                 'class' => 'action-icon',
                                 'alt' => __('Edit Rat')]) ?>
-                            <?= $this->Html->image('/img/icon-rip.svg', [
+                            <?= $this->Html->image('/img/icon-declare-death.svg', [
                                 'url' => ['controller' => 'Rats', 'action' => 'declare-death', $rat->id],
                                 'class' => 'action-icon',
                                 'alt' => __('Declare Death')]) ?>

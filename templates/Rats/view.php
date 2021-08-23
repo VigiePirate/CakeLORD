@@ -22,7 +22,7 @@
                     'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Declare Litter')]) ?>
-                    <?= $this->Html->image('/img/icon-rip.svg', [
+                    <?= $this->Html->image('/img/icon-declare-death.svg', [
                         'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Declare Rat Death')]) ?>
