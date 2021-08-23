@@ -10,7 +10,7 @@
             <div class="side-nav">
                 <?= $this->element('default_sidebar') ?>
                 <div class="spacer"> </div>
-                <?= $this->Html->image('/img/icon-edit.svg', [
+                <?= $this->Html->image('/img/icon-edit-rat.svg', [
                     'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Modify Rat')]) ?>
@@ -31,7 +31,7 @@
                     'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Edit Rat as Admin')]) ?>
-                <?= $this->Html->image('/img/icon-fa-trash.svg', [
+                <?= $this->Html->image('/img/icon-delete.svg', [
                     'class' => 'side-nav-icon',
                     'alt' => __('Delete Rat')]) ?>
             </div>
