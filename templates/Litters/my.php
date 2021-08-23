@@ -11,7 +11,7 @@
                 <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
             </div>
             <h1><?= __('My litters') ?> </h1>
-            <h2><?= __('Summary')</h2>
+            <h2><?= __('Summary') ?></h2>
             <h2><?= __('Statistics')</h2>
             <?= $this->element('litters', [
                 'rubric' => __('All my Litters'),
