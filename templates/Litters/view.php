@@ -9,6 +9,20 @@
         <div class="side-nav">
             <?= $this->element('default_sidebar') ?>
             <div class="spacer"> </div>
+            <div class="tooltip">
+                <?= $this->Html->image('/img/icon-add-rat.svg', [
+                    'url' => ['controller' => 'Rats', 'action' => 'add'],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Add rat')]) ?>
+                <span class="tooltiptext"><?= __('Add a rat in this litter') ?></span>
+            </div>
+            <div class="tooltip">
+                <?= $this->Html->image('/img/icon-add-rattery.svg', [
+                    'url' => ['controller' => 'Litters', 'action' => 'add_contribution'],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Add rattery')]) ?>
+                <span class="tooltiptext"><?= __('Add a contributing rattery') ?></span>
+            </div>
             <?= $this->Form->postLink(
                 $this->Html->image('/img/icon-fa-trash.svg', [
                     'class' => 'side-nav-icon',
