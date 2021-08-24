@@ -155,7 +155,6 @@
                         <tr>
                             <th><?= __('Rattery Prefix') ?></th>
                             <th><?= __('Rattery Name') ?></th>
-                            <th><?= __('Rattery Owner') ?></th>
                             <th><?= __('Contribution') ?></th>
                         </tr>
                     </thead>
@@ -165,7 +164,6 @@
                             <td><?= $this->Html->link(h($contribution->rattery->prefix), ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id]) ?></td>
                             <td><?= h($contribution->rattery->name) ?></td>
                             <td><?= h($contribution->contribution_type->name) ?></td>
-                            <td><?= h($contribution->rattery->owner_user) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
