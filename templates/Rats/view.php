@@ -18,7 +18,7 @@
                     <span class="tooltiptext"><?= __('Edit whole rat sheet') ?></span>
                 </div>
                 <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-fa-give.svg', [
+                    <?= $this->Html->image('/img/icon-transfer-ownership.svg', [
                         'url' => ['controller' => 'Rats', 'action' => 'transferOwnership', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Change Owner')]) ?>
