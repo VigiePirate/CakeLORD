@@ -193,6 +193,9 @@ tr:hover {
 table {
   padding-left:1rem;
 }
+table.summary {
+  padding-left:0rem;
+}
 
 table.summary>tbody>tr>td:last-of-type {
   text-align:right;
