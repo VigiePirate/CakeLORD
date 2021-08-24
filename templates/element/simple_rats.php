@@ -42,7 +42,9 @@
             <?php if (! in_array('sex', $exceptions)): ?>
                 <th><?= __('Sex') ?></th>
             <?php endif; ?>
-            <th class="actions-title"><?= __('Actions') ?></th>
+            <?php if (! in_array('actions', $exceptions)): ?>
+                <th class="actions-title"><?= __('Actions') ?></th>
+            <?php endif; ?>
     </thead>
         <tbody>
             <?php foreach($rats as $rat): ?>
@@ -80,18 +82,20 @@
                     <?php if (! in_array('sex', $exceptions)): ?>
                         <td class="sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></td>
                     <?php endif; ?>
-                    <td class="actions">
-                        <span class="nowrap">
-                            <?= $this->Html->image('/img/icon-edit.svg', [
-                                'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
-                                'class' => 'action-icon',
-                                'alt' => __('Edit Rat')]) ?>
-                            <?= $this->Html->image('/img/icon-declare-death.svg', [
-                                'url' => ['controller' => 'Rats', 'action' => 'declare-death', $rat->id],
-                                'class' => 'action-icon',
-                                'alt' => __('Declare Death')]) ?>
-                        </span>
-                    </td>
+                    <?php if (! in_array('actions', $exceptions)): ?>
+                        <td class="actions">
+                            <span class="nowrap">
+                                <?= $this->Html->image('/img/icon-edit.svg', [
+                                    'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('Edit Rat')]) ?>
+                                <?= $this->Html->image('/img/icon-declare-death.svg', [
+                                    'url' => ['controller' => 'Rats', 'action' => 'declare-death', $rat->id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('Declare Death')]) ?>
+                            </span>
+                        </td>
+                    <?php endif; ?>
                 </tr>
             <?php endforeach; ?>
         </tbody>
