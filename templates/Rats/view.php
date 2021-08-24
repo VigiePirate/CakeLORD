@@ -36,7 +36,7 @@
                         'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Declare Rat Death')]) ?>
-                    <span class="tooltiptext"><?= __('Declare rat Death') ?></span>
+                    <span class="tooltiptext"><?= __('Declare rat death') ?></span>
                 </div>
                 <?= $this->element('staff_sidebar') ?>
             </div>
