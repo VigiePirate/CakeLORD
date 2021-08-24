@@ -18,7 +18,7 @@
                         'url' => ['controller' => 'Rats', 'action' => 'transferOwnership', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Change Owner')]) ?>
-                <?= $this->Html->image('/img/icon-fa-baby.svg', [
+                <?= $this->Html->image('/img/icon-add-litter.svg', [
                     'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Declare Litter')]) ?>
@@ -26,14 +26,7 @@
                         'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Declare Rat Death')]) ?>
-                <div class="spacer"> </div>
-                <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
-                    'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Edit Rat as Admin')]) ?>
-                <?= $this->Html->image('/img/icon-delete.svg', [
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Delete Rat')]) ?>
+                <?= $this->element('staff_sidebar') ?>
             </div>
         </div>
     </aside>
