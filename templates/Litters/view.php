@@ -24,7 +24,7 @@
                 <span class="tooltiptext"><?= __('Add a contributing rattery') ?></span>
             </div>
             <?= $this->Form->postLink(
-                $this->Html->image('/img/icon-fa-trash.svg', [
+                $this->Html->image('/img/icon-delete.svg', [
                     'class' => 'side-nav-icon',
                     'alt' => __('Delete')
                 ]),
