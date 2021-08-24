@@ -155,8 +155,8 @@
                         <tr>
                             <th><?= __('Rattery Prefix') ?></th>
                             <th><?= __('Rattery Name') ?></th>
+                            <th><?= __('Rattery Owner') ?></th>
                             <th><?= __('Contribution') ?></th>
-                            <th class="actions-title"><?= $this->Html->image('/img/icon-fa-action.svg', ['class' => 'action-icon'])?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -165,12 +165,7 @@
                             <td><?= $this->Html->link(h($contribution->rattery->prefix), ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id]) ?></td>
                             <td><?= h($contribution->rattery->name) ?></td>
                             <td><?= h($contribution->contribution_type->name) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->image('/img/icon-view.svg', [
-                                    'url' => ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id],
-                                    'class' => 'action-icon',
-                                    'alt' => __('See Rat')]) ?>
-                            </td>
+                            <td><?= h($contribution->rattery->owner_user) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
