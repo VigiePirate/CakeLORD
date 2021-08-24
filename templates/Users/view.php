@@ -77,6 +77,7 @@
                             'exceptions' => [
                                 'picture',
                                 'owner_user',
+                                'actions'
                             ],
                         ]) ?>
                     </details>
@@ -95,6 +96,7 @@
                             'owner_user_id',
                             'death_primary_cause',
                             'death_secondary_cause',
+                            'actions'
                         ],
                     ]) ?>
                 </details>
@@ -112,6 +114,7 @@
                             'owner_user_id',
                             'death_primary_cause',
                             'death_secondary_cause',
+                            'actions'
                         ],
                     ]) ?>
                 </details>
