@@ -80,7 +80,7 @@ class RatsController extends AppController
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
 
         if(! empty($pending->first())) {
-            $this->Flash->error(__('Beware, you have rat sheets waiting for your corrections!'));
+            $this->Flash->error(__('You have rat sheets to correct!'));
         }
         $this->set(compact('females','males','alive','departed','pending','waiting','okrats','user'));
     }
