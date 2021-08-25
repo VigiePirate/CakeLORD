@@ -116,7 +116,7 @@ a sup {
 
 /* Forms */
 
-.button, button, .button:visited,
+button, .button , .button:visited,
 input[type='button'], input[type='reset'], input[type='submit'] {
     background: #663300; /* #cabcafa3*/
     border-color: #663300;
@@ -125,19 +125,19 @@ input[type='button'], input[type='reset'], input[type='submit'] {
     color: #ffffff;
   }
 
-.button:hover {
+.button:hover, .button:focus, .button:active {
     color: #ffffff;
     background: #a65400;
     border-color: #a65400;/* #cabcaf; */
 }
 
 .button-staff, .button-staff:visited {
-    background: #e8dbdc;
+    background: #b1000c;
     border-color: #b1000c;
     color: #ffffff;
 }
 
-.button-staff:hover {
+.button-staff:hover, .button-staff:focus, .button-staff:active {
   background: #d33c44;
   border-color: #d33c44;
   color: #ffffff;
