@@ -389,10 +389,12 @@ blockquote:before {
 
 .sexcolor_F {
   color: #ff99cc;
+  font-weight:bold;
 }
 
 .sexcolor_M {
   color: #99ccff;
+  font-weight:bold;
 }
 
 /* Utility */
