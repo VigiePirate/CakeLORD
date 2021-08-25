@@ -382,6 +382,7 @@ blockquote:before {
   font-size:3rem;
   font-weight:500;
   line-height:1.1;
+  font-weight:bold;
   /* margin-bottom:2.0rem;
   margin-top:0; */
 }
