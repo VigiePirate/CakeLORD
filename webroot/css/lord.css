@@ -346,29 +346,35 @@ blockquote:before {
   letter-spacing:-0.5rem;
 }
 
-/* should be read from states table later */
+/* should be read from states table later ('css property' field) */
 .statecolor_1 {
   color: #1f9d55;
+  font-weight: bold;
 }
 
 .statecolor_2 {
   color: #1f9d55;
+  font-weight: bold;
 }
 
 .statecolor_3 {
   color: #ff8c1b;
+  font-weight: bold;
 }
 
 .statecolor_4 {
   color: #cc1f1a;
+  font-weight: bold;
 }
 
 .statecolor_5 {
   color: #663300;
+  font-weight: bold;
 }
 
 .statecolor_6 {
   color: #343740;
+  font-weight: bold;
 }
 /* end of states color */
 
