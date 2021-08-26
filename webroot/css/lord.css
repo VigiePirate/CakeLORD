@@ -381,8 +381,7 @@ blockquote:before {
 /* end of states color */
 
 .sexmark {
-  font-size:3rem;
-  font-weight:500;
+  font-size:2.8rem;
   line-height:1.1;
   font-weight:bold;
   /* margin-bottom:2.0rem;
