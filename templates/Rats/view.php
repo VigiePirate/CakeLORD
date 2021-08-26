@@ -49,24 +49,9 @@
                 <div class="sheet-title pretitle">Rat</div>
                 <div class="sheet-markers">
                     <div class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
-
                     <!-- to be replaced by a state element later? -->
-                    <div class="box">
-                        <input type="checkbox" id="like" class="field-reactions">
-                        <h3 class="text-desc">Press space and after tab key to navigation</h3>
-                        <label for="like" class="label-reactions">Like</label>
-                        <label for="like" class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></label>
-                        <div class="toolbox"></div>
-                        <label class="overlay" for="like"></label>
-                        <button class="reaction-like"><span class="legend-reaction">Like</span></button>
-                        <button class="reaction-love"><span class="legend-reaction">Love</span></button>
-                        <button class="reaction-haha"><span class="legend-reaction">Haha</span></button>
-                        <button class="reaction-wow"><span class="legend-reaction">Wow</span></button>
-                        <button class="reaction-sad"><span class="legend-reaction">Sad</span></button>
-                        <button class="reaction-angry"><span class="legend-reaction">Angry</span></button>
-                    </div>
-                    <!-- end state stuff -->
-
+                    <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                    <!-- end state element -->
                 </div>
             </div>
 
