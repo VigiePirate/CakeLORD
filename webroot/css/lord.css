@@ -349,7 +349,7 @@ blockquote:before {
 }
 
 .statemark:hover {
-  transform: scale(2);
+  transform: scale(1.25);
 }
 
 /* should be read from states table later ('css property' field) */
