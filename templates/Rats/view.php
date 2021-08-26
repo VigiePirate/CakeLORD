@@ -50,7 +50,23 @@
                 <div class="sheet-markers">
                     <div class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
                     <!-- to be replaced by a state element later? -->
-                    <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                    <div class="statebox">
+                        <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                        <div class="actionbox">
+                            <ul>
+                                <li><?= $this->Html->image('/img/icon-backoffice.svg', [
+                                    'url' => ['controller' => 'States', 'action' => 'index'],
+                                    'class' => 'side-nav-icon',
+                                    'alt' => __('Admin site')]) ?>
+                                </li>
+                                <li><?= $this->Html->image('/img/icon-backoffice.svg', [
+                                    'url' => ['controller' => 'States', 'action' => 'index'],
+                                    'class' => 'side-nav-icon',
+                                    'alt' => __('Admin site')]) ?>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <!-- end state element -->
                 </div>
             </div>
