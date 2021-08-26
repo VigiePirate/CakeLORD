@@ -338,7 +338,7 @@ blockquote:before {
     text-align:right;
   }
 
-.statemark, .sexmark {
+.statemark {
   font-size:3rem;
   line-height:1; /* 1.25 ?*/
   font-weight: bold;
