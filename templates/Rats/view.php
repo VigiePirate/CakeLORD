@@ -50,14 +50,7 @@
                 <div class="sheet-markers">
                     <div class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
                     <!-- to be replaced by a state element later? -->
-                    <div class="statebox">
-                        <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
-                        <div class="actionbox">
-                            <div> >> </div>
-                            <div> << </div>
-                            <div> * </div>
-                        </div>
-                    </div>
+                    <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
                     <!-- end state element -->
                 </div>
             </div>
