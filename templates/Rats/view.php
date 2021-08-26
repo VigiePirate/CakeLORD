@@ -66,7 +66,7 @@
                     <table class="condensed">
                 <?php endif ?>
                         <tr>
-                            <th><?= __('Pedigree Identifier') ?></th>
+                            <th><?= __('Identifier') ?></th>
                             <td><?= h($rat->pedigree_identifier) ?></td>
                         </tr>
                         <tr>
@@ -86,7 +86,7 @@
                             <td><?= h($rat->sex_name) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Owner User') ?></th>
+                            <th><?= __('Owner') ?></th>
                             <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                         </tr>
                     </table>
@@ -180,23 +180,23 @@
                     <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : 'Unknown' ?></td>
                     </tr>
                 <tr>
-                    <th><?= __('Death Primary Cause') ?></th>
+                    <th><?= __('Death Category') ?></th>
                     <td><?= $rat->has('death_primary_cause') ? $this->Html->link($rat->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $rat->death_primary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Death Secondary Cause') ?></th>
+                    <th><?= __('Death Cause') ?></th>
                     <td><?= $rat->has('death_secondary_cause') ? $this->Html->link($rat->death_secondary_cause->name, ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $rat->death_secondary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Death Euthanized') ?></th>
+                    <th><?= __('Euthanized?') ?></th>
                     <td><?= $rat->death_euthanized ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Death Diagnosed') ?></th>
+                    <th><?= __('Diagnosed by Vet?') ?></th>
                     <td><?= $rat->death_diagnosed ? __('Yes') : __('No'); ?></td>
                     </tr>
                 <tr>
-                    <th><?= __('Death Necropsied') ?></th>
+                    <th><?= __('Post-mortem analyses?') ?></th>
                     <td><?= $rat->death_necropsied ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <?php endif; ?>
