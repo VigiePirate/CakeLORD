@@ -46,7 +46,7 @@
         <div class="rats view content">
 
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><span class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></span>Rat</div>
+                <div class="sheet-title pretitle">Rat <span class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></span></div>
                 <div class="sheet-markers">
 
                     <!-- to be replaced by a state element later? -->
