@@ -74,11 +74,11 @@
                             <td><?= h($rat->name) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Pup Name') ?></th>
+                            <th><?= __('Pup name') ?></th>
                             <td><?= h($rat->pup_name) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Birth Date') ?></th>
+                            <th><?= __('Birth date') ?></th>
                             <td><?= h($rat->birth_date->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE])) ?></td>
                         </tr>
                         <tr>
@@ -100,7 +100,7 @@
             <h2>Origins</h2>
                 <table class="condensed">
                     <tr>
-                        <th><?= __('Rattery') ?></th>
+                        <th><?= __('Birth place') ?></th>
                         <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
                     </tr>
                     <tr>
@@ -167,7 +167,7 @@
             <h2>Health</h2>
             <table class="condensed">
                 <tr>
-                    <th><?= __('Is Alive') ?></th>
+                    <th><?= __('Is alive?') ?></th>
                     <td><?= $rat->is_alive ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
@@ -176,15 +176,15 @@
                 </tr>
                 <?php if (!$rat->is_alive) : ?>
                 <tr>
-                    <th><?= __('Death Date') ?></th>
+                    <th><?= __('Death date') ?></th>
                     <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : 'Unknown' ?></td>
                     </tr>
                 <tr>
-                    <th><?= __('Death Category') ?></th>
+                    <th><?= __('Death category') ?></th>
                     <td><?= $rat->has('death_primary_cause') ? $this->Html->link($rat->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $rat->death_primary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Death Cause') ?></th>
+                    <th><?= __('Death cause') ?></th>
                     <td><?= $rat->has('death_secondary_cause') ? $this->Html->link($rat->death_secondary_cause->name, ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $rat->death_secondary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
@@ -192,7 +192,7 @@
                     <td><?= $rat->death_euthanized ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Diagnosed by Vet?') ?></th>
+                    <th><?= __('Diagnosed by vet?') ?></th>
                     <td><?= $rat->death_diagnosed ? __('Yes') : __('No'); ?></td>
                     </tr>
                 <tr>
@@ -210,7 +210,7 @@
             </div>
             <div class="spacer"> </div>
             <?php if (!empty($rat->bred_litters)) : ?>
-                <h2><?= __('Bred Litters') ?></h2>
+                <h2><?= __('Bred litters') ?></h2>
                 <div class="related">
                     <?php foreach ($rat->bred_litters as $litter) : ?>
                         <details>
