@@ -49,7 +49,7 @@
                 <div class="sheet-title pretitle">Rat</div>
                 <div class="sheet-markers">
                     <div class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
-                    <div class="spacer"> </div>
+                    <div class="sexmark"> </div>
                     <!-- to be replaced by a state element later? -->
                     <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
                     <!-- end state element -->
