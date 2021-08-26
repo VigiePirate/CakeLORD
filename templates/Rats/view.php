@@ -53,18 +53,9 @@
                     <div class="statebox">
                         <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
                         <div class="actionbox">
-                            <ul>
-                                <li><?= $this->Html->image('/img/icon-backoffice.svg', [
-                                    'url' => ['controller' => 'States', 'action' => 'index'],
-                                    'class' => 'side-nav-icon',
-                                    'alt' => __('Admin site')]) ?>
-                                </li>
-                                <li><?= $this->Html->image('/img/icon-backoffice.svg', [
-                                    'url' => ['controller' => 'States', 'action' => 'index'],
-                                    'class' => 'side-nav-icon',
-                                    'alt' => __('Admin site')]) ?>
-                                </li>
-                            </ul>
+                            <div> >> </div>
+                            <div> << </div>
+                            <div> * </div>
                         </div>
                     </div>
                     <!-- end state element -->
