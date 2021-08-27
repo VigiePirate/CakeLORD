@@ -45,11 +45,13 @@
     <div class="column-responsive column-90">
         <div class="rats view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle">Rat <span class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></span></div>
+                <div class="sheet-title pretitle">Rat</div>
                 <?= $this->element('statebar') ?>
             </div>
 
-            <h1><?= h($rat->usual_name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
+            <h1>
+                <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '</span>' . h($rat->sex_symbol). '<span>' . h($rat->is_alive_symbol) . '</span>' ?>
+            </h1>
 
             <div class="row row-reverse">
                 <?php if ($rat->picture != '') : ?>
