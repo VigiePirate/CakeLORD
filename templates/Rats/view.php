@@ -51,7 +51,7 @@
 
             <h1>
                 <!-- to be improved -->
-                <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '</span>' . h($rat->sex_symbol). '<span>' . h($rat->is_alive_symbol) . '</span>' ?>
+                <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '">' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?>
             </h1>
 
             <div class="row row-reverse">
