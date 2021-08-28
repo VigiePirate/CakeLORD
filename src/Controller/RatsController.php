@@ -110,6 +110,7 @@ class RatsController extends AppController
              'Conversations', 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
         ]);
 
+        $this->loadModel('States');
         $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
         $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
 
