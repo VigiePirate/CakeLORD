@@ -32,7 +32,7 @@
     <?php else : ?>
         <!-- if state is frozen, show next thawed in the right order (depending on reliability) -->
         <?php if( $rat->state->is_reliable ) : ?>
-            <div class="statemark statecolor_<?php echo h($rat->state->next_thawed_id) ?>"><?= h($next_thawed_state->symbol) ?></div>
+            <div class="statemark statecolor_<?php echo h($rat->state->next_thawed__state_id) ?>"><?= h($next_thawed_state->symbol) ?></div>
             <div class="staff-action-symbol">⮜</div>
             <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
         <?php else : ?>
