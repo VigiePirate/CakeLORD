@@ -113,6 +113,8 @@ class RatsController extends AppController
         $this->loadModel('States');
         $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
         $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
+        $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
+        $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);
 
         $snap_diffs = [];
         foreach ($rat->rat_snapshots as $snapshot) {
