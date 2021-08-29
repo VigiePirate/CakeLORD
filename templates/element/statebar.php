@@ -33,5 +33,6 @@
             <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
             <div class="staff-action-symbol">⮞</div>
             <div class="statemark statecolor_<?php echo h($rat->state->next_thawed_state_id) ?>"><?= h($next_thawed_state->symbol) ?></div>
+        <?php endif; ?>
     <?php endif; ?>
 </div>
