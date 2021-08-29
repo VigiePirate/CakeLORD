@@ -110,18 +110,23 @@ class RatsController extends AppController
              'Conversations', 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
         ]);
 
+
         $this->loadModel('States');
-        $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
-        $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
-        $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
-        $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);
+        if($rat->is_frozen) {
+            $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);
+        }
+        else {
+            $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
+            $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
+            $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
+        };
 
         $snap_diffs = [];
         foreach ($rat->rat_snapshots as $snapshot) {
             $snap_diffs[$snapshot->id] = $this->Rats->snapCompareAsString($rat, $snapshot->id);
         }
 
-        $this->set(compact('rat', 'next_ko_state', 'next_ok_state', 'snap_diffs'));
+        $this->set(compact('rat', 'next_ko_state', 'next_ok_state', 'next_frozen_state', 'next_thawed','snap_diffs'));
     }
 
     /**
