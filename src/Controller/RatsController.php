@@ -112,7 +112,7 @@ class RatsController extends AppController
 
 
         $this->loadModel('States');
-        if($rat->is_frozen) {
+        if($rat->state->is_frozen) {
             $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);
             $this->set(compact('next_thawed_state'));
         }
