@@ -6,10 +6,23 @@
     <!-- else, if user is a staff member, show full state bar -->
 
     <!-- if state is not frozen -->
+    <?php if() : ?>
     <!-- if state doesn't need staff action: show next ko, next frozen -->
-    <!-- if state needs staff action: show newt frozen, next ko, next ok -->
+        <?php if() : ?>
+        <!-- if state needs staff action: show newt frozen, next ko, next ok -->
+        <?php else : ?>
+
+        <?php endif; ?>
 
     <!-- if state is frozen, show next thawed in the right order (using is reliable) -->
+    <?php else : ?>
+
+
+    <?php endif; ?>
+
+
+
+
 
     <div class="statemark statecolor_<?php echo h($rat->state->next_ko_state_id) ?>"><?= h($next_ko_state->symbol) ?></div>
     <div class="staff-action-symbol">《</div>
