@@ -114,11 +114,13 @@ class RatsController extends AppController
         $this->loadModel('States');
         if($rat->is_frozen) {
             $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);
+            $this->set(compact('next_thawed_state'));
         }
         else {
             $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
             $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
             $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
+            $this->set(compact('next_ko_state','next_ok_state','next_frozen_state'));
         };
 
         $snap_diffs = [];
@@ -126,7 +128,7 @@ class RatsController extends AppController
             $snap_diffs[$snapshot->id] = $this->Rats->snapCompareAsString($rat, $snapshot->id);
         }
 
-        $this->set(compact('rat', 'next_ko_state', 'next_ok_state', 'next_frozen_state', 'next_thawed_state','snap_diffs'));
+        $this->set(compact('rat','snap_diffs'));
     }
 
     /**
