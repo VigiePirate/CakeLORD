@@ -35,9 +35,9 @@
             <div class="statemark statecolor_<?php echo h($rat->state->next_frozen_state_id) ?>"><?= h($next_frozen_state->symbol) ?></div>
 
         <?php endif; ?>
-
+    <?php endif; ?>
     <!-- if state is frozen, show next thawed in the right order (depending on reliability) -->
-    <?php else : ?>
+    <?php if( $rat->state->is_frozen ) : ?>
         <?php if( $rat->state->is_reliable ) : ?>
             <div class="statemark statecolor_<?php echo h($rat->state->next_thawed_id) ?>"><?= h($next_thawed_state->symbol) ?></div>
             <div class="staff-action-symbol">⮜</div>
