@@ -1,6 +1,6 @@
 .current-statemark {
   font-size:3rem;
-  line-height:1; /* 1.25 ?*/
+  /* line-height:1; */ /* 1.25 ?*/
   font-weight: bold;
   padding:1rem 1.25rem;
   margin: 0rem 0.5rem;
@@ -10,7 +10,7 @@
 
 .statemark {
   font-size:2.5rem;
-  line-height:1; /* 1.25 ?*/
+  /* line-height:1; */ /* 1.25 ?*/
   font-weight: bold;
   padding:0.5rem 0.75rem;
 }
@@ -24,7 +24,7 @@
 
 .staff-action-symbol{
   font-size:2rem;
-  line-height:1; /* 1.25 ?*/
+  /* line-height:1; */ /* 1.25 ?*/
   color:#b1000c;
   padding:0.5rem;
 }
