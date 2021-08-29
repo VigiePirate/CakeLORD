@@ -126,7 +126,7 @@ class RatsController extends AppController
             $snap_diffs[$snapshot->id] = $this->Rats->snapCompareAsString($rat, $snapshot->id);
         }
 
-        $this->set(compact('rat', 'next_ko_state', 'next_ok_state', 'next_frozen_state', 'next_thawed','snap_diffs'));
+        $this->set(compact('rat', 'next_ko_state', 'next_ok_state', 'next_frozen_state', 'next_thawed_state','snap_diffs'));
     }
 
     /**
