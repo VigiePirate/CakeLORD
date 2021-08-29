@@ -3,7 +3,6 @@
   line-height:1; /* 1.25 ?*/
   font-weight: bold;
   padding:1rem 1.25rem;
-  margin-left:-1rem;
   box-shadow: 0px -7px 14px 0 rgb(60 66 87 / 10%) inset, 0px 6px 6px 0 rgb(0 0 0 / 7%) inset;
   border-radius:20em;
 }
@@ -13,19 +12,17 @@
   line-height:1; /* 1.25 ?*/
   font-weight: bold;
   padding:0.75rem 0rem; */
-  margin-left:-1rem;
   border-radius:20em;
 }
 
 .statemark:last-of-type {
   padding:0.5rem 0.75rem;
-  margin-left:-1rem;
 }
 
 .statemark:hover {
   box-shadow: 0px -7px 14px 0 rgb(60 66 87 / 10%) inset, 0px 6px 6px 0 rgb(0 0 0 / 7%) inset;
   padding: 0.75rem 1rem;
-  margin-left:-1.5rem;
+  margin-left:.5rem;
   transform: scale(1.33);
 }
 
@@ -33,5 +30,5 @@
   font-size:2rem;
   line-height:1; /* 1.25 ?*/
   color:#b1000c;
-  padding:1rem 1rem 1rem 0rem;
+  padding:1rem;
 }
