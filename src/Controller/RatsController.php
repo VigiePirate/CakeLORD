@@ -129,6 +129,7 @@ class RatsController extends AppController
         }
 
         $this->set(compact('rat','snap_diffs'));
+        dd($rat);
     }
 
     /**
