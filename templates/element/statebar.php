@@ -3,7 +3,7 @@
 
 <div class="sheet-markers">
     <!-- if user is a staff member, show full state bar (now only checking connection) -->
-    <?php if ( $this->getRequest()->getSession()->check('Auth.id')) ) : ?>
+    <?php if ( $this->getRequest()->getSession()->check('Auth.id') ) : ?>
         <!-- if state is not frozen -->
         <?php if( !$rat->state->is_frozen ) : ?>
             <!-- if state needs staff action: show newt frozen, next ko, next ok -->
