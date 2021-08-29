@@ -12,9 +12,9 @@
     <!-- if state is frozen, show next thawed in the right order (using is reliable) -->
 
     <div class="statemark statecolor_<?php echo h($rat->state->next_ko_state_id) ?>"><?= h($next_ko_state->symbol) ?></div>
-    <div class="statemark"> << </div>
+    <div class="staff-action-symbol"> << </div>
     <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
-    <div class="statemark"> >> </div>
+    <div class="staff-action-symbol"> >> </div>
     <div class="statemark statecolor_<?php echo h($rat->state->next_ok_state_id) ?>"><?= h($next_ok_state->symbol) ?></div>
 
 </div>
