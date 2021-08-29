@@ -119,8 +119,11 @@ class RatsController extends AppController
         else {
             $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
             $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
-            $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
-            $this->set(compact('next_ko_state','next_ok_state','next_frozen_state'));
+            if( !empty($rat->state->next_frozen_state_id) ) {
+                $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
+                $this->set(compact('next_frozen_state'));
+            }
+            $this->set(compact('next_ko_state','next_ok_state'));
         };
 
         $snap_diffs = [];
@@ -129,7 +132,6 @@ class RatsController extends AppController
         }
 
         $this->set(compact('rat','snap_diffs'));
-        dd($rat);
     }
 
     /**
