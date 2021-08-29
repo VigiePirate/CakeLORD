@@ -9,7 +9,7 @@
     <!-- if state is not frozen -->
     <?php if( !$rat->state->is_frozen ) : ?>
         <!-- if state needs staff action: show newt frozen, next ko, next ok -->
-        <?php if( $rat->state->needs_staff_action : ?>
+        <?php if( $rat->state->needs_staff_action ) : ?>
             <?php if( !empty($rat->state->next_frozen_state_id) ) : ?>
                 <div class="statemark statecolor_<?php echo h($rat->state->next_frozen_state_id) ?>"><?= h($next_frozen_state->symbol) ?></div>
             <?php endif; ?>
