@@ -1,2 +1,4 @@
 <h1><?= __('Welcome!') ?></h1>
-Write something here? (Last/failed connection time?)
+Write something here?
+(Last/failed connection time?)
+(Sheets pending correction?)

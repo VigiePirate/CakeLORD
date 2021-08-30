@@ -7,10 +7,10 @@
     <div class="column-responsive column-90">
         <div class="users view content">
             <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
                 <div class="float-right avatar">
                     <?= $this->Html->image($user->avatar, ['alt' => $user->username]) ?>
                 </div>
-                <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
             </div>
             <?= $this->element('my/user-summary') ?>
         </div>
