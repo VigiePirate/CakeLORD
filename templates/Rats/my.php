@@ -13,9 +13,9 @@
                 <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
             </div>
             <h1><?= __('My rats') ?> </h1>
-            
-            <h2>Summary</h2>
+
             <h2>Statistics</h2>
+
         </div>
 
         <div class="spacer"> </div>
