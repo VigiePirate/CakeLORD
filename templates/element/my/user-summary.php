@@ -1,4 +1,4 @@
-<div class="float-right">
+<div class="float-right" width="25%">
     <?= $this->Html->image($user->avatar, ['alt' => $user->username]) ?>
 </div>
 
