@@ -3,4 +3,4 @@
 </div>
 <h1><?= __('Welcome!') ?></h1>
 
-<p><?= h($user->email) ?> (<?= $user->has('role') ? $this->Html->link($user->role->name, ['controller' => 'Roles', 'action' => 'view', $user->role->id]) : '' ?>)</p>
+<p>Write something here? (Last/Failed connection?)</p>
