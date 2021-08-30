@@ -1,5 +1,5 @@
 <div class="float-right">
-    <?= $this->Html->image($user->avatar, ['alt' => $user->username, 'width' => '20%']) ?>
+    <?= $this->Html->image($user->avatar, ['alt' => $user->username]) ?>
 </div>
 
 <h1><?= __('Welcome!') ?></h1>
