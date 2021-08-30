@@ -3,6 +3,4 @@
 </div>
 <h1><?= __('Welcome!') ?></h1>
 
-<div class="users view content">
-    <p>Write something here? (Last/failed connection time?)</p>
-</div>
+Write something here? (Last/failed connection time?)
