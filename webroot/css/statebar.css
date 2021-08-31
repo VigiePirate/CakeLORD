@@ -40,6 +40,7 @@
 .tooltip-state .tooltiptext-state {
   visibility: hidden;
   width: max-content;
+  background-color: #663300;
   color: #fff;
   text-align: right;
   padding: 0.5rem 1rem;
