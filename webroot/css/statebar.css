@@ -46,11 +46,10 @@
   padding: 0.5rem 1rem;
   border-radius: 0.4rem;
   font-size: 1.4rem;
-
   /* Position the tooltip text */
   position: absolute;
   top: 2.8rem;
-  right: 105%;
+  right: 10%;
   z-index: 99;
 }
 /* Show the tooltip text when you mouse over the tooltip container */
