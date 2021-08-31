@@ -660,7 +660,7 @@ th {
   border-radius: 0.4rem;
   font-size: 1.4rem;
 
-  /* Position the tooltip text - see examples below! */
+  /* Position the tooltip text */
   position: absolute;
   top: 1.4rem;
   left: 105%;
