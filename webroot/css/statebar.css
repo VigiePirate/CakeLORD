@@ -50,7 +50,7 @@
   /* Position the tooltip text */
   position: absolute;
   top: 2.8rem;
-  right: 10%;
+  right: 105%;
   z-index: 99;
 }
 /* Show the tooltip text when you mouse over the tooltip container */
@@ -58,7 +58,7 @@
   visibility: visible;
 }
 
-.tooltip-state .tooltiptext-state::after {
+.tooltiptext-state::after {
   content: " ";
   position: absolute;
   top: 50%;
