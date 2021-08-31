@@ -13,7 +13,10 @@
                 <?php endif; ?>
                 <div class="statemark statecolor_<?php echo h($rat->state->next_ko_state_id) ?>"><?= h($next_ko_state->symbol) ?></div>
                 <div class="staff-action-symbol">⮜</div>
-                <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                <div class="tooltip-state">
+                    <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                    <span class="tooltiptext-state"><?= $rat->state->name ?></span>
+                </div>
                 <div class="staff-action-symbol">⮞</div>
                 <div class="statemark statecolor_<?php echo h($rat->state->next_ok_state_id) ?>"><?= h($next_ok_state->symbol) ?></div>
             <!-- if state needs user action: nothing to do-->

@@ -28,3 +28,43 @@
   color:#b1000c;
   padding:0.5rem;
 }
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip-state .tooltiptext-state {
+  visibility: hidden;
+  width: max-content;
+  background-color: #663300;
+  color: #fff;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 1.4rem;
+
+  /* Position the tooltip text */
+  position: absolute;
+  top: 1.4rem;
+  left: 105%;
+  z-index: 99;
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip-state:hover .tooltiptext-state {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%; /* To the left of the tooltip */
+  margin-top: -0.75rem;
+  border-width: 0.75rem;
+  border-style: solid;
+  border-color: transparent #663300 transparent transparent;
+}
