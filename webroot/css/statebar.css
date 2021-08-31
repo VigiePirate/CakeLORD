@@ -42,7 +42,7 @@
   width: max-content;
   background-color: #663300;
   color: #fff;
-  text-align: left;
+  text-align: right;
   padding: 0.5rem 1rem;
   border-radius: 0.4rem;
   font-size: 1.4rem;
@@ -50,7 +50,7 @@
   /* Position the tooltip text */
   position: absolute;
   top: 1.4rem;
-  left: 105%;
+  right: 105%;
   z-index: 99;
 }
 /* Show the tooltip text when you mouse over the tooltip container */
@@ -62,7 +62,7 @@
   content: " ";
   position: absolute;
   top: 50%;
-  right: 100%; /* To the left of the tooltip */
+  left: 100%; /* To the left of the tooltip */
   margin-top: -0.75rem;
   border-width: 0.75rem;
   border-style: solid;
