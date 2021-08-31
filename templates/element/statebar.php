@@ -43,7 +43,7 @@
     <!-- else, if guest or non-staff user, show only current state -->
     <div class="tooltip-state">
         <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
-        <span class="tooltiptext-state"><?= $rat->state->name ?></span>
     </div>
+    <span class="tooltiptext-state"><?= $rat->state->name ?></span>
     <?php endif; ?>
 </div>
