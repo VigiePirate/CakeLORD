@@ -1,5 +1,3 @@
-<div class="spacer"> </div>
-
 <div class="tooltip-staff">
     <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
         'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],

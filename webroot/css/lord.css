@@ -591,6 +591,10 @@ th {
   text-align:center;
 }
 
+.side-nav-group {
+  display:inline;
+}
+
 .side-nav-item {
     display:block;
     /* display:flex;
@@ -1093,7 +1097,7 @@ svg {
     .spacer{
         width: 1.5rem;
     }
-    
+
     /* override all milligram transposition stuff */
     table {
         border-spacing: 0;
