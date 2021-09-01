@@ -81,7 +81,7 @@ class Rattery extends Entity
     protected function _getIsAliveSymbol()
     {
         // dagger is preceded with a non breakable fine space, do not edit!
-        return ($this->is_alive ? '' : ' †');
+        return ($this->is_alive ? '' : ' 💤');
     }
 
     /* Statistics */
