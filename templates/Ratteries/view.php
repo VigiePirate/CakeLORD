@@ -17,7 +17,6 @@
                     'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('See on Map')]) ?>
-                    <span class="side-nav-text hide-everywhere"><?= __('See on map') ?><span>
                 <!-- </div>
 
                 <!-- <div class="side-nav-item"> -->
@@ -25,7 +24,6 @@
                     'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Modify Rattery')]) ?>
-                    <span class="side-nav-text hide-everywhere"><?= __('Edit') ?><span>
                 <!-- </div> -->
 
                 <!-- <div class="side-nav-item"> -->
@@ -33,7 +31,6 @@
                     'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Declare Litter')]) ?>
-                <span class="side-nav-text hide-everywhere"><?= __('Add litter') ?><span>
                 <!-- </div> -->
             </div>
 
