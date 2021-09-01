@@ -115,21 +115,17 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      style="fill:#663300;fill-opacity:1"
-     transform="matrix(1.3536557,0,0,1.3536557,-1.8413925,-1.9090753)"
+     transform="matrix(1.3536557,0,0,1.3536557,-10.166375,-1.9090753)"
      id="g12">
     <polygon
        style="fill:#663300;fill-opacity:1"
-       points="1.6,45.6 1.6,20.4 12,16.7 12,41.9 "
-       id="polygon2" />
-    <polygon
-       style="fill:#663300;fill-opacity:1"
-       points="13.9,41.9 13.9,16.7 24,23.1 24,48.3 "
+       points="24,48.3 13.9,41.9 13.9,16.7 24,23.1 "
        id="polygon4" />
     <path
        style="fill:#663300;fill-opacity:1"
