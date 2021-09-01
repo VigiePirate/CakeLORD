@@ -38,7 +38,7 @@
                         <td><span class="statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></span></td>
                     <?php endif; ?>
                     <?php if (! in_array('is_alive', $exceptions)): ?>
-                        <td><?= $rattery->is_alive_symbol ?></td>
+                        <td class="rotate statecolor_6"><?= $rattery->is_alive_symbol ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('picture', $exceptions)): ?>
                         <td><?= isset($rattery->picture_thumbnail) ? $this->Html->image($rattery->picture_thumbnail, ['alt' => $rattery->name]) : '' ?></td>
