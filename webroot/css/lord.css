@@ -1088,10 +1088,12 @@ svg {
     .desc:after {
       content: " \2190";
     }
+
+    /* this should be replaced by the appropriate flex */
     .spacer{
         width: 1.5rem;
     }
-
+    
     /* override all milligram transposition stuff */
     table {
         border-spacing: 0;
