@@ -38,9 +38,7 @@
         <div class="litters view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= __('Litter') ?></div>
-                <div class="sheet-markers">
-                    <div class="statemark statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></div>
-                </div>
+                <?= $this->element('statebar', ['sheet' => $litter]) ?>
             </div>
 
             <h1><?= h($litter->full_name) ?></h1>

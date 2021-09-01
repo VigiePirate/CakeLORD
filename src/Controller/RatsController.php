@@ -110,7 +110,6 @@ class RatsController extends AppController
              'Conversations', 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
         ]);
 
-
         $this->loadModel('States');
         if($rat->state->is_frozen) {
             $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);

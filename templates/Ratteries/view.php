@@ -59,7 +59,7 @@
         <div class="ratteries view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= __('Rattery') ?></div>
-                    <?= $this->element('statebar', ['sheet' => $rattery]) ?>
+                <?= $this->element('statebar', ['sheet' => $rattery]) ?>
             </div>
 
             <h1><?= h($rattery->full_name) . '<span> ' . h($rattery->is_alive_symbol) . '</span>'?></h1> <!-- -->
