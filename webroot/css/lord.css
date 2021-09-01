@@ -593,6 +593,7 @@ th {
 
 .side-nav-group {
   display:inline;
+  margin-bottom:1rem;
 }
 
 .side-nav-item {
@@ -1068,7 +1069,9 @@ svg {
       margin: 0 auto;
     }
     .side-nav {
-      display:inline;
+      display:inline-flex;
+      justify-content:space-between;
+      width:100%;
       margin-bottom: 1rem;
     }
     .heading {
