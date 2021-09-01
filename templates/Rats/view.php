@@ -49,8 +49,8 @@
     <div class="column-responsive column-90">
         <div class="rats view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle">Rat</div>
-                <?= $this->element('statebar') ?>
+                <div class="sheet-title pretitle"><?= _('Rat') ?></div>
+                <?= $this->element('statebar', ['sheet' => $rat]) ?>
             </div>
 
             <h1>
