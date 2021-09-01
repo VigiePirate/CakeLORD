@@ -593,7 +593,6 @@ th {
 
 .side-nav-group {
   display:inline;
-  margin-bottom:1rem;
 }
 
 .side-nav-item {
@@ -1052,6 +1051,9 @@ svg {
   .row .column-responsive.column-90 {
       flex: 0 0 90%;
       max-width: 90%
+  }
+  .side-nav-group {
+    margin-bottom:21rem;
   }
 }
 
