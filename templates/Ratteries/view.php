@@ -59,7 +59,7 @@
                 <?= $this->element('statebar', ['sheet' => $rattery]) ?>
             </div>
 
-            <h1><?= h($rattery->full_name) . '<span> ' . h($rattery->is_alive_symbol) . '</span>'?></h1> <!-- -->
+            <h1><?= h($rattery->full_name) . '<span class="rotate"> ' . h($rattery->is_alive_symbol) . '</span>'?></h1> <!-- -->
 
             <?php if($rattery->is_generic) : ?>
                 <div class="message"><?= __('This “rattery” is generic. Therefore, only a small number of relevant information are shown.') ?></div>
