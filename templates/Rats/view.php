@@ -7,39 +7,37 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <div class="side-nav">
-                <?= $this->element('default_sidebar') ?>
-                <div class="spacer"> </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-edit-rat.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Modify Rat')]) ?>
-                    <span class="tooltiptext"><?= __('Edit whole rat sheet') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-transfer-ownership.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'transferOwnership', $rat->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Change Owner')]) ?>
-                    <span class="tooltiptext"><?= __('Give rat to a new owner') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-add-litter.svg', [
-                        'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Declare Litter')]) ?>
-                    <span class="tooltiptext"><?= __('Declare litter from this rat') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-declare-death.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Declare Rat Death')]) ?>
-                    <span class="tooltiptext"><?= __('Declare rat death') ?></span>
-                </div>
-                <?= $this->element('staff_sidebar') ?>
+            <?= $this->element('default_sidebar') ?>
+            <div class="spacer"> </div>
+            <div class="tooltip">
+                <?= $this->Html->image('/img/icon-edit-rat.svg', [
+                    'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Modify Rat')]) ?>
+                <span class="tooltiptext"><?= __('Edit whole rat sheet') ?></span>
             </div>
+            <div class="tooltip">
+                <?= $this->Html->image('/img/icon-transfer-ownership.svg', [
+                    'url' => ['controller' => 'Rats', 'action' => 'transferOwnership', $rat->id],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Change Owner')]) ?>
+                <span class="tooltiptext"><?= __('Give rat to a new owner') ?></span>
+            </div>
+            <div class="tooltip">
+                <?= $this->Html->image('/img/icon-add-litter.svg', [
+                    'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Declare Litter')]) ?>
+                <span class="tooltiptext"><?= __('Declare litter from this rat') ?></span>
+            </div>
+            <div class="tooltip">
+                <?= $this->Html->image('/img/icon-declare-death.svg', [
+                    'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Declare Rat Death')]) ?>
+                <span class="tooltiptext"><?= __('Declare rat death') ?></span>
+            </div>
+            <?= $this->element('staff_sidebar') ?>
         </div>
     </aside>
     <div class="column-responsive column-90">
