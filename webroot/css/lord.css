@@ -1053,7 +1053,7 @@ svg {
       max-width: 90%
   }
   .side-nav-group {
-    display:inline;
+    display:inline-block;
     margin-bottom:2rem;
   }
 }
