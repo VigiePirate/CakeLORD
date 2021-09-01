@@ -62,10 +62,8 @@
         <div class="ratteries view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle">Rattery</div>
-                <div class="sheet-markers">
-                    <div class="statemark"><?= $rattery->is_alive ? $this->Html->image('/img/icon-on.svg',['width' => '42','alt' => 'Rattery is on']) : $this->Html->image('/img/icon-off.svg',['width' => '42','alt' => 'Rattery is off']) ?></div>
-                    <div class="statemark statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></div>
-                </div>
+                <div class="statemark"><?= $rattery->is_alive ? $this->Html->image('/img/icon-on.svg',['width' => '42','alt' => 'Rattery is on']) : $this->Html->image('/img/icon-off.svg',['width' => '42','alt' => 'Rattery is off']) ?></div>
+                <?= $this->element('statebar', ['sheet' => $rattery]) ?>
             </div>
 
             <h1><?= h($rattery->full_name)?></h1> <!-- . '&#8239;' . '<span>' . h($rattery->is_alive_symbol) . '</span>'-->
