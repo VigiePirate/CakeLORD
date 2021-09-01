@@ -3,10 +3,10 @@
     <table class="condensed">
         <thead>
             <?php if (! in_array('state_id', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('state_id',__('State'))?></th>
+                <th><?= $this->Paginator->sort('state_id',__('State')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('is_alive', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('is_active',__('Active?')?></th>
+                <th><?= $this->Paginator->sort('is_active',__('Active?')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('picture', $exceptions)): ?>
                 <th><?= __('picture') ?></th>
