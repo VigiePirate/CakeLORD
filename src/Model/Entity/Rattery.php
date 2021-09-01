@@ -78,6 +78,12 @@ class Rattery extends Entity
         return $this->prefix . ' – ' . $this->name;
     }
 
+    protected function _getIsAliveSymbol()
+    {
+        // dagger is preceded with a non breakable fine space, do not edit!
+        return ($this->is_alive ? '' : ' †');
+    }
+
     /* Statistics */
 
     protected function _getChampion() {
