@@ -65,7 +65,7 @@ h1 span {
     font-size: 75%;
   }
 
-h1 span .rotate {
+.rotate {
   display:inline-block;
   -webkit-transform:rotate(330deg);
 }
