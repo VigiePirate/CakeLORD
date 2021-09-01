@@ -727,7 +727,7 @@ th {
 /* Sheet heading */
 .sheet-heading {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     /* padding: 2rem; */
     /* top: 0; */
