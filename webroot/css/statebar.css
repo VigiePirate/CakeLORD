@@ -49,7 +49,7 @@
   /* Position the tooltip text */
   position: absolute;
   top: 2.8rem;
-  right: 8.75%;
+  right: 3.5rem;
   z-index: 99;
 }
 /* Show the tooltip text when you mouse over the tooltip container */
