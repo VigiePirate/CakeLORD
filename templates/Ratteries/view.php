@@ -13,7 +13,7 @@
 
             <div class="side-nav-group">
                 <div class="side-nav-item">
-                <?= $this->Html->image('/img/icon-map.svg', [
+                <?= $this->Html->image('/img/icon-locate.svg', [
                     'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('See on Map')]) ?>
