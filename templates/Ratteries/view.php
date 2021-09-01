@@ -12,29 +12,29 @@
             </div>
 
             <div class="side-nav-group">
-                <div class="side-nav-item">
+                <!-- <div class="side-nav-item"> -->
                 <?= $this->Html->image('/img/icon-locate.svg', [
                     'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('See on Map')]) ?>
                     <span class="side-nav-text hide-everywhere"><?= __('See on map') ?><span>
-                </div>
+                <!-- </div>
 
-                <div class="side-nav-item">
+                <!-- <div class="side-nav-item"> -->
                 <?= $this->Html->image('/img/icon-edit-rattery.svg', [
                     'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Modify Rattery')]) ?>
                     <span class="side-nav-text hide-everywhere"><?= __('Edit') ?><span>
-                </div>
+                <!-- </div> -->
 
-                <div class="side-nav-item">
+                <!-- <div class="side-nav-item"> -->
                 <?= $this->Html->image('/img/icon-add-litter.svg', [
                     'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Declare Litter')]) ?>
                 <span class="side-nav-text hide-everywhere"><?= __('Add litter') ?><span>
-                </div>
+                <!-- </div> -->
             </div>
 
             <div class="side-nav-group">
