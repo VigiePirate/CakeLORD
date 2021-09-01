@@ -33,7 +33,7 @@
             </div>
 
             <div class="side-nav-item">
-            <?= $this->Html->image('/img/icon-birth.svg', [
+            <?= $this->Html->image('/img/icon-add-litter.svg', [
                 'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
                 'class' => 'side-nav-icon',
                 'alt' => __('Declare Litter')]) ?>
@@ -43,7 +43,7 @@
             <div class="spacer"> </div>
 
             <div class="side-nav-item staff">
-            <?= $this->Html->image('/img/icon-edit-staff.svg', [
+            <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
                 'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
                 'class' => 'side-nav-icon-staff',
                 'alt' => __('Edit Rattery')]) ?>
@@ -61,15 +61,14 @@
     <div class="column-responsive column-90">
         <div class="ratteries view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle">Rattery</div>
-                <div class="statemark"><?= $rattery->is_alive ? $this->Html->image('/img/icon-on.svg',['width' => '42','alt' => 'Rattery is on']) : $this->Html->image('/img/icon-off.svg',['width' => '42','alt' => 'Rattery is off']) ?></div>
-                <?= $this->element('statebar', ['sheet' => $rattery]) ?>
+                <div class="sheet-title pretitle"><?= __('Rattery') ?></div>
+                    <?= $this->element('statebar', ['sheet' => $rattery]) ?>
             </div>
 
-            <h1><?= h($rattery->full_name)?></h1> <!-- . '&#8239;' . '<span>' . h($rattery->is_alive_symbol) . '</span>'-->
+            <h1><?= h($rattery->full_name) . '<span> ' . h($rattery->is_alive_symbol) . '</span>'?></h1> <!-- -->
 
             <?php if($rattery->is_generic) : ?>
-                <div class="message">This “rattery” is generic. Therefore, only a small number of relevant information are shown.</div>
+                <div class="message"><?= __'(This “rattery” is generic. Therefore, only a small number of relevant information are shown.') ?></div>
             <?php endif ?>
             <h2>Information</h2>
             <div class="row">
