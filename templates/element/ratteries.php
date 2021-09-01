@@ -38,7 +38,11 @@
                         <td><span class="statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></span></td>
                     <?php endif; ?>
                     <?php if (! in_array('is_alive', $exceptions)): ?>
-                        <td class="rotate"><b><?= $rattery->is_alive_symbol ?></b></td>
+                        <?php if ($rattery->is_alive) : >
+                            <td class="rotate"><b><?= $rattery->is_alive_symbol ?></b></td>
+                        <?php else :?>
+                            <td class="sun"><b><?= $rattery->is_alive_symbol ?></b></td>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <?php if (! in_array('picture', $exceptions)): ?>
                         <td><?= isset($rattery->picture_thumbnail) ? $this->Html->image($rattery->picture_thumbnail, ['alt' => $rattery->name]) : '' ?></td>

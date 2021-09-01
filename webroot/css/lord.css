@@ -65,10 +65,16 @@ h1 span {
     font-size: 75%;
   }
 
+/* ugly stuff that should be improved later for on/off ratteries */
 .rotate {
   display:inline-block;
   -webkit-transform:rotate(330deg);
 }
+
+.sun {
+  color: #ffd42a
+}
+/* end of ugly stuff */ 
 
 h2 {
   font-size:2.8rem; /*2.8*/
