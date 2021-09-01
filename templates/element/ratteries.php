@@ -39,9 +39,9 @@
                     <?php endif; ?>
                     <?php if (! in_array('is_alive', $exceptions)): ?>
                         <?php if ($rattery->is_alive) : ?>
-                            <td class="rotate"><b><?= $rattery->is_alive_symbol ?></b></td>
-                        <?php else :?>
                             <td class="sun"><b><?= $rattery->is_alive_symbol ?></b></td>
+                        <?php else :?>
+                            <td class="rotate"><b><?= $rattery->is_alive_symbol ?></b></td>
                         <?php endif; ?>
                     <?php endif; ?>
                     <?php if (! in_array('picture', $exceptions)): ?>
