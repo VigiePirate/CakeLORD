@@ -7,54 +7,38 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <!-- New actions with icons -->
-
-            <div class="side-nav-item">
+            <div class="side-nav-group">
                 <?= $this->element('default_sidebar') ?>
-                <span class="side-nav-text hide-everywhere"><?= __('Get help') ?><span>
             </div>
 
-            <div class="spacer"> </div>
+            <div class="side-nav-group">
+                <div class="side-nav-item">
+                <?= $this->Html->image('/img/icon-map.svg', [
+                    'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('See on Map')]) ?>
+                    <span class="side-nav-text hide-everywhere"><?= __('See on map') ?><span>
+                </div>
 
-            <div class="side-nav-item">
-            <?= $this->Html->image('/img/icon-map.svg', [
-                'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
-                'class' => 'side-nav-icon',
-                'alt' => __('See on Map')]) ?>
-                <span class="side-nav-text hide-everywhere"><?= __('See on map') ?><span>
+                <div class="side-nav-item">
+                <?= $this->Html->image('/img/icon-edit.svg', [
+                    'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Modify Rattery')]) ?>
+                    <span class="side-nav-text hide-everywhere"><?= __('Edit') ?><span>
+                </div>
+
+                <div class="side-nav-item">
+                <?= $this->Html->image('/img/icon-add-litter.svg', [
+                    'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Declare Litter')]) ?>
+                <span class="side-nav-text hide-everywhere"><?= __('Add litter') ?><span>
+                </div>
             </div>
 
-            <div class="side-nav-item">
-            <?= $this->Html->image('/img/icon-edit.svg', [
-                'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
-                'class' => 'side-nav-icon',
-                'alt' => __('Modify Rattery')]) ?>
-                <span class="side-nav-text hide-everywhere"><?= __('Edit') ?><span>
-            </div>
-
-            <div class="side-nav-item">
-            <?= $this->Html->image('/img/icon-add-litter.svg', [
-                'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
-                'class' => 'side-nav-icon',
-                'alt' => __('Declare Litter')]) ?>
-            <span class="side-nav-text hide-everywhere"><?= __('Add litter') ?><span>
-            </div>
-
-            <div class="spacer"> </div>
-
-            <div class="side-nav-item staff">
-            <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
-                'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
-                'class' => 'side-nav-icon-staff',
-                'alt' => __('Edit Rattery')]) ?>
-            <span class="side-nav-text hide-everywhere"><?= __('Edit') ?><span>
-            </div>
-
-            <div class="side-nav-item staff">
-            <?= $this->Html->image('/img/icon-delete.svg', [
-                'class' => 'side-nav-icon-staff',
-                'alt' => __('Delete Rattery')]) ?>
-            <span class="side-nav-text hide-everywhere"><?= __('Delete') ?><span>
+            <div class="side-nav-group">
+                <?= $this->element('staff_sidebar', ['object' => $rattery]) ?>
             </div>
         </div>
     </aside>
