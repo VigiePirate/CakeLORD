@@ -21,6 +21,12 @@
     </aside>
     <div class="column-responsive column-90">
         <div class="articles view content">
+
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= _('Rat') ?></div>
+                <?= $this->element('statebar', ['sheet' => $rat]) ?>
+            </div>
+
             <h3><?= h($article->title) ?></h3>
             <table>
                 <tr>
