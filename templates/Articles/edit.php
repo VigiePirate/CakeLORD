@@ -25,7 +25,10 @@
                     echo $this->Form->control('category');
                     echo $this->Form->control('title');
                     echo $this->Form->control('subtitle');
-                    echo $this->Form->control('content', ['type'=> 'hidden', 'id' => 'editor']);
+                ?>
+                <label for="content"><?= __('Content') ?></label>
+                <?php
+                    echo $this->Form->control('content', ['type'=> 'hidden', 'id' => 'editor','name' => 'content']);
                 ?>
                 <div id="editor-container">
                     <?= $article->content ?>
