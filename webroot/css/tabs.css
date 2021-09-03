@@ -137,6 +137,7 @@ input[type=radio].radio{
   z-index:49;
   width:100%;
   border-top-right-radius:0.4rem;
+  margin-top:-0.25rem;
 }
 
 @media screen and (min-width: 920px) {
