@@ -144,7 +144,7 @@ $cakeDescription = 'LORD';
                 <div class="hide-on-tablet"></div><a href="https://cakephp.org/"><img src="/img/logo-cake.svg" width="100"/></a><a href="https://github.com/VigiePirate/CakeLORD"><img src="/img/logo-github.svg" width="60"/></a><a href="https://www.srfa.info"><img src="/img/logo-srfa.svg" width="80"/></a>
             </div>
         <div class="creditline">
-            © 2020 – Tous droits réservés<br>
+            © <?= h(date("Y")) ?> – Tous droits réservés<br>
             Textes et images non libres de droits<br>
             Code de l'application distribué sous licence GPL<br>
             Service gratuit hébergé et maintenu par l'association SRFA
