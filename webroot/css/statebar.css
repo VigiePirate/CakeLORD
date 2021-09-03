@@ -67,3 +67,8 @@
   border-style: solid;
   border-color: transparent transparent transparent #663300;
 }
+
+.sheet-heading {
+  margin-top:-1rem;
+  margin-bottom:-.5rem;
+}
