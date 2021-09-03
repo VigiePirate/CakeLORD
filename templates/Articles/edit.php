@@ -24,11 +24,8 @@
                 <?php
                     echo $this->Form->control('title');
                     echo $this->Form->control('subtitle');
+                    echo $this->Form->control('content', ['type'=> 'textarea', 'class' => 'editor']);             
                 ?>
-                <div id="editor">
-            <!--        echo $this->Form->control('content'); -->
-                </div>
-
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>
