@@ -22,8 +22,8 @@
      inkscape:window-maximized="0"
      inkscape:window-y="39"
      inkscape:window-x="64"
-     inkscape:cy="5.5307619"
-     inkscape:cx="29.689517"
+     inkscape:cy="4.2393234"
+     inkscape:cx="20.653609"
      inkscape:zoom="3.6875"
      showgrid="false"
      id="namedview39"
@@ -121,29 +121,29 @@
   </metadata>
   <g
      style="fill:#663300;fill-opacity:1"
-     transform="matrix(1.3536557,0,0,1.3536557,-1.8413925,-1.9090753)"
+     transform="matrix(-1.3536557,0,0,1.3536557,72.268069,-1.9090753)"
      id="g12">
     <polygon
+       transform="matrix(1.2776939,-0.17956817,0,1,-9.619617,4.3628128)"
        style="fill:#663300;fill-opacity:1"
-       points="1.6,45.6 1.6,20.4 12,16.7 12,41.9 "
-       id="polygon2" />
-    <polygon
-       style="fill:#663300;fill-opacity:1"
-       points="13.9,41.9 13.9,16.7 24,23.1 24,48.3 "
+       points="24,48.3 13.9,41.9 13.9,16.7 24,23.1 "
        id="polygon4" />
     <path
+       sodipodi:nodetypes="cccccc"
        style="fill:#663300;fill-opacity:1"
-       d="M 36,26.2 V 42.9 L 26,48.4 V 23.2 l 4.9,-2.6 c 2.1,2.6 4.3,4.8 5.1,5.6 z"
+       d="M 36,26.2 V 42.9 L 23.045038,48.4 V 23.2 L 30.9,20.6 c 2.1,2.6 4.3,4.8 5.1,5.6 z"
        id="path6"
        inkscape:connector-curvature="0" />
     <path
+       sodipodi:nodetypes="cccccc"
        style="fill:#663300;fill-opacity:1"
-       d="M 48.4,20.4 V 45.6 L 38,42.8 V 27.1 c 2.2,-2.2 4.4,-4.2 6.8,-7.6 z"
+       d="m 51.354961,23.354961 v 23.72252 L 38,42.8 V 27.1 c 2.2,-2.2 4.4,-4.2 6.8,-7.6 z"
        id="path8"
        inkscape:connector-curvature="0" />
     <path
+       sodipodi:nodetypes="ssccszzzzz"
        style="fill:#663300;fill-opacity:1"
-       d="m 37.4,1.7 c -5.1,0 -9.2,4.1 -9.2,9.2 0,4.4 6.5,11.1 9.2,13.9 2.9,-3 9.2,-9.6 9.2,-13.9 0.1,-5.1 -4.1,-9.2 -9.2,-9.2 z m 0,13.4 c -2.4,0 -4.4,-2 -4.4,-4.4 0,-2.4 2,-4.4 4.4,-4.4 2.4,0 4.4,2 4.4,4.4 0,2.5 -1.9,4.4 -4.4,4.4 z"
+       d="m 37.4,1.7 c -5.1,0 -9.2,4.1 -9.2,9.2 0,4.4 6.5,11.1 9.2,13.9 2.9,-3 9.2,-9.6 9.2,-13.9 0.1,-5.1 -4.1,-9.2 -9.2,-9.2 z m 0,13.030537 c -2.099327,0 -4.030526,-1.931042 -4.030526,-4.030537 0,-2.0994955 1.880946,-4.0305971 4.030526,-4.0305971 2.14958,0 4.030608,1.9312698 4.030608,4.0305971 0,2.099327 -1.931281,4.030537 -4.030608,4.030537 z"
        id="path10"
        inkscape:connector-curvature="0" />
   </g>
