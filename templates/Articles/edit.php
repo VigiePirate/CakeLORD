@@ -18,7 +18,7 @@
     </aside>
     <div class="column-responsive column-90">
         <div class="articles form content">
-            <?= $this->Form->create($article, ['id' => 'form']) ?>
+            <?= $this->Form->create($article) ?>
             <fieldset>
                 <legend><?= __('Edit Article') ?></legend>
                 <?php
@@ -61,7 +61,7 @@
     theme: 'snow'
     });
 
-    var form = document.querySelector('form');
+    var form = document.querySelector('content');
     form.onsubmit = function() {
     // Populate hidden form on submit
     var about = document.querySelector('input[name=content]');
