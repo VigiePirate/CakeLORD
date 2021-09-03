@@ -29,11 +29,11 @@
             <h1><?= h($article->title) ?></h1>
 
             <div class="text">
-                    <?= $this->Text->autoParagraph(h($article->content)); ?>
+                    <?= /* $this->Text->autoParagraph(h($article->content)); */ $article->content ?>
             </div>
 
             <div class="signature">
-                &mdash; Created on <?= $article->created->i18nFormat('dd/MM/yyyy') ?><?= ($article->modified != $article->created) ? ', ast modified on ' . $article->modified->i18nFormat('dd/MM/yyyy') .'.' : '.' ?>
+                &mdash; Created on <?= $article->created->i18nFormat('dd/MM/yyyy') ?><?= ($article->modified != $article->created) ? ', last modified on ' . $article->modified->i18nFormat('dd/MM/yyyy') .'.' : '.' ?>
             </div>
 
         </div>
