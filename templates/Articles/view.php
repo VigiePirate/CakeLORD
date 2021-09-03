@@ -55,6 +55,11 @@
                     <?= $this->Text->autoParagraph(h($article->content)); ?>
                 </blockquote>
             </div>
+
+            <div class="signature">
+                &mdash; Created on <?= $article->created->i18nFormat('dd/MM/yyyy') ?> <?= ($rat->modified != $rat->created) ? ', ast modified on ' . $rat->modified->i18nFormat('dd/MM/yyyy') .'.' : '.' ?>
+            </div>
+
         </div>
     </div>
 </div>
