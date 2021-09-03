@@ -68,6 +68,10 @@
   border-color: transparent transparent transparent #663300;
 }
 
+.sheet-heading {
+  align-items:flex-start;
+}
+
 h1 {
   margin-top:-1rem;
 }
