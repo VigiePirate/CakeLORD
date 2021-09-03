@@ -24,11 +24,25 @@
                 <?php
                     echo $this->Form->control('title');
                     echo $this->Form->control('subtitle');
-                    echo $this->Form->control('content');
                 ?>
+                <div id="editor">
+            <!--        echo $this->Form->control('content'); -->
+                </div>
+
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>
 </div>
+
+<!-- Include the Quill library & stylesheet -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow'
+  });
+</script>
