@@ -1,6 +1,6 @@
 <div class="tooltip-staff">
     <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
-        'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
+        'url' => ['controller' => $this, 'action' => 'edit', $this->id],
         'class' => 'side-nav-icon',
         'alt' => __('Edit Rat as Admin')]) ?>
     <span class="tooltiptext-staff"><?= __('Edit rat data as staff') ?></span>
