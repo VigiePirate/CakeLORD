@@ -29,7 +29,7 @@
             <h1><?= h($article->title) ?></h1>
 
             <div class="text">
-                    <?= /* $this->Text->autoParagraph(h($article->content)); */ $article->content ?>
+                    <?= $this->Text->autoParagraph(h($article->content)); ?>
             </div>
 
             <div class="signature">
