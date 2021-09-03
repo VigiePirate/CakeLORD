@@ -21,6 +21,7 @@
             <fieldset>
                 <legend><?= __('Add Article') ?></legend>
                 <?php
+                    echo $this->Form->control('category');
                     echo $this->Form->control('title');
                     echo $this->Form->control('subtitle');
                     echo $this->Form->control('content');
