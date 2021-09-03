@@ -27,33 +27,9 @@
             </div>
 
             <h1><?= h($article->title) ?></h1>
-            <table>
-                <tr>
-                    <th><?= __('Title') ?></th>
-                    <td><?= h($article->title) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Subtitle') ?></th>
-                    <td><?= h($article->subtitle) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($article->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($article->created) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($article->modified) ?></td>
-                </tr>
-            </table>
+
             <div class="text">
-                <strong><?= __('Content') ?></strong>
-                <blockquote>
                     <?= $this->Text->autoParagraph(h($article->content)); ?>
-                </blockquote>
             </div>
 
             <div class="signature">
