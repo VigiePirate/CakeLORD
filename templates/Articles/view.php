@@ -11,7 +11,11 @@
                 <?= $this->element('default_sidebar') ?>
             </div>
             <div class="side-nav-group">
-                <?= $this->element('staff_sidebar') ?>
+                <?= $this->element('staff_sidebar', [
+                    'controller' => 'Articles',
+                    'object' => $article
+                    ])
+                ?>
             </div>
         </div>
     </aside>
