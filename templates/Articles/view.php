@@ -23,7 +23,7 @@
         <div class="articles view content">
 
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= h($article->category) ?></div>
+                <div class="sheet-title pretitle"><?= h($article->category->name) ?></div>
             </div>
 
             <h1><?= h($article->title) ?></h1>

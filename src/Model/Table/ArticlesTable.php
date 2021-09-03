@@ -91,6 +91,7 @@ class ArticlesTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['title']));
+        $rules->add($rules->existsIn(['category_id'], 'Categories'));
 
         return $rules;
     }
