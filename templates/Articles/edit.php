@@ -18,7 +18,7 @@
     </aside>
     <div class="column-responsive column-90">
         <div class="articles form content">
-            <?= $this->Form->create($article) ?>
+            <?= $this->Form->create($article, ['id' => 'form']) ?>
             <fieldset>
                 <legend><?= __('Edit Article') ?></legend>
                 <?php
@@ -28,7 +28,10 @@
                 ?>
                 <label for="content"><?= __('Content') ?></label>
                 <?php
-                    echo $this->Form->control('content', ['type'=> 'hidden', 'id' => 'editor','name' => 'content']);
+                    echo $this->Form->control('content', [
+                        'type'=> 'hidden',
+                        'id' => 'editor',
+                        'name' => 'content']);
                 ?>
                 <div id="editor-container">
                     <?= $article->content ?>
