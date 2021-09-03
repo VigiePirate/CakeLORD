@@ -22,10 +22,14 @@
             <fieldset>
                 <legend><?= __('Edit Article') ?></legend>
                 <?php
+                    echo $this->Form->control('category');
                     echo $this->Form->control('title');
                     echo $this->Form->control('subtitle');
-                    echo $this->Form->control('content', ['type'=> 'textarea', 'id' => 'editor', 'default' => $article->content]);             
+                    echo $this->Form->control('content', ['type'=> 'hidden', 'id' => 'editor']);
                 ?>
+                <div id="editor-container">
+                    <?= $article->content ?>
+                </div>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>
@@ -39,7 +43,28 @@
 
 <!-- Initialize Quill editor -->
 <script>
-  var quill = new Quill('#editor', {
+    var quill = new Quill('#editor-container', {
+    modules: {
+      toolbar: [
+        ['bold', 'italic'],
+        ['link', 'blockquote', 'code-block', 'image'],
+        [{ list: 'ordered' }, { list: 'bullet' }]
+      ]
+    },
+    placeholder: 'Type text here...',
     theme: 'snow'
-  });
+    });
+
+    var form = document.querySelector('form');
+    form.onsubmit = function() {
+    // Populate hidden form on submit
+    var about = document.querySelector('input[name=about]');
+    about.value = JSON.stringify(quill.getContents());
+
+    console.log("Submitted", $(form).serialize(), $(form).serializeArray());
+
+    // No back end to actually submit to!
+    alert('Open the console to see the submit data!')
+    return false;
+    };
 </script>
