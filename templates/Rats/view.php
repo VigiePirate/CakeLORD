@@ -42,7 +42,11 @@
                 </div>
             </div>
             <div class="side-nav-group">
-                <?= $this->element('staff_sidebar') ?>
+                <?= $this->element('staff_sidebar', [
+                    'controller' => 'Rats',
+                    'object' => $rat
+                    ])
+                ?>
             </div>
         </div>
     </aside>
