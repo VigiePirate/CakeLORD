@@ -23,11 +23,10 @@
         <div class="articles view content">
 
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= _('Rat') ?></div>
-                <?= $this->element('statebar', ['sheet' => $rat]) ?>
+                <div class="sheet-title pretitle"><?= $article->category ?></div>
             </div>
 
-            <h3><?= h($article->title) ?></h3>
+            <h1><?= h($article->title) ?></h1>
             <table>
                 <tr>
                     <th><?= __('Title') ?></th>
