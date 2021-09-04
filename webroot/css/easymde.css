@@ -543,12 +543,12 @@ span.CodeMirror-selectedtext {
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
-    padding: 9px 10px;
-    border-top: 1px solid #bbb;
-    border-left: 1px solid #bbb;
-    border-right: 1px solid #bbb;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px
+    padding: 0.5em 0.5em;
+    border-top: 1px solid #606c76;
+    border-left: 1px solid #606c76;
+    border-right: 1px solid #606c76;
+    border-top-left-radius: 0.4rem;
+    border-top-right-radius: 0.4rem;
 }
 
 .editor-toolbar.fullscreen {
@@ -616,7 +616,8 @@ span.CodeMirror-selectedtext {
 }
 
 .editor-toolbar button {
-    width: 30px
+    width: 3.5rem;
+    height:3.5rem;
 }
 
 .editor-toolbar button.active, .editor-toolbar button:hover {
@@ -852,4 +853,9 @@ span[data-img-src]::after {
 
 .CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
     background: rgba(255, 0, 0, .15)
+}
+
+/* lord additions */
+.fa {
+  color: #606c76;
 }
