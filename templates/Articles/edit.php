@@ -39,7 +39,7 @@
 </div>
 
 <!-- Easy MDE -->
-<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 
 <script>
