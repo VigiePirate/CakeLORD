@@ -544,9 +544,9 @@ span.CodeMirror-selectedtext {
     -o-user-select: none;
     user-select: none;
     padding: 0.5em 0.5em;
-    border-top: 1px solid #606c76;
-    border-left: 1px solid #606c76;
-    border-right: 1px solid #606c76;
+    border-top: 1px solid #d1d1d1;
+    border-left: 1px solid #d1d1d1;
+    border-right: 1px solid #d1d1d1;
     border-top-left-radius: 0.4rem;
     border-top-right-radius: 0.4rem;
 }
