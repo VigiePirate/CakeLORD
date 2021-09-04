@@ -745,8 +745,8 @@ span.CodeMirror-selectedtext {
 }
 
 .editor-preview {
-    padding: 10px;
-    background: #fafafa
+    padding: 0.5em;
+    background: #f5f7fa
 }
 
 .editor-preview>p {
