@@ -38,10 +38,10 @@
     </div>
 </div>
 
-<!-- Simple MDE -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<!-- Easy MDE -->
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 
 <script>
-var simplemde = new SimpleMDE();
+    var easyMDE = new EasyMDE();
 </script>
