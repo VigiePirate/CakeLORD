@@ -30,11 +30,12 @@
                 <?php
                     echo $this->Form->control('content', [
                         'type'=> 'hidden',
-                        'id' => 'editor',
-                        'name' => 'content']);
+                        'id' => 'content',
+                        'name' => 'content',
+                        'default' => $article->content ]);
                 ?>
-                <div id="editor-container">
-                    <?= $article->content ?>
+                <div id="editor">
+                    
                 </div>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
@@ -42,35 +43,3 @@
         </div>
     </div>
 </div>
-
-<!-- Include the Quill library & stylesheet -->
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-<!-- Initialize Quill editor -->
-<script>
-    var quill = new Quill('#editor-container', {
-    modules: {
-      toolbar: [
-        ['bold', 'italic'],
-        ['link', 'blockquote', 'code-block', 'image'],
-        [{ list: 'ordered' }, { list: 'bullet' }]
-      ]
-    },
-    placeholder: 'Type text here...',
-    theme: 'snow'
-    });
-
-    var form = document.querySelector('content');
-    form.onsubmit = function() {
-    // Populate hidden form on submit
-    var about = document.querySelector('input[name=content]');
-    about.value = JSON.stringify(quill.getContents());
-
-    console.log("Submitted", $(form).serialize(), $(form).serializeArray());
-
-    // No back end to actually submit to!
-    alert('Open the console to see the submit data!')
-    return false;
-    };
-</script>
