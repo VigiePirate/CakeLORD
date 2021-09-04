@@ -65,7 +65,7 @@
                             <th><?= __('Subtitle') ?></th>
                             <th><?= __('Created') ?></th>
                             <th><?= __('Modified') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Manage') ?></th>
                         </tr>
                         <?php foreach ($category->articles as $article) : ?>
                         <tr>
@@ -76,14 +76,10 @@
                             <td><?= h($article->modified) ?></td>
                             <td class="actions">
                                 <span class="nowrap">
-                                    <?= $this->Html->image('/img/icon-edit.svg', [
-                                        'url' => ['controller' => 'Articles', 'action' => 'edit', $article->id],
+                                    <?= $this->Html->image('/img/icon-backoffice.svg', [
+                                        'url' => ['controller' => 'Articles', 'action' => 'view', $article->id],
                                         'class' => 'action-icon',
-                                        'alt' => __('Edit')]) ?>
-                                    <?= $this->Html->image('/img/icon-delete.svg', [
-                                        'url' => ['controller' => 'Articles', 'action' => 'delete', $article->id],
-                                        'class' => 'action-icon',
-                                        'alt' => __('Delete')]) ?>
+                                        'alt' => __('Manage')]) ?>
                                 </span>
                             </td>
                         </tr>
