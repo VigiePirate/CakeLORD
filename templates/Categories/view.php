@@ -67,13 +67,13 @@
                             <th><?= __('Modified') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($category->articles as $articles) : ?>
+                        <?php foreach ($category->articles as $article) : ?>
                         <tr>
-                            <td><?= h($articles->id) ?></td>
-                            <td><?= h($articles->title) ?></td>
-                            <td><?= h($articles->subtitle) ?></td>
-                            <td><?= h($articles->created) ?></td>
-                            <td><?= h($articles->modified) ?></td>
+                            <td><?= h($article->id) ?></td>
+                            <td><?= h($article->title) ?></td>
+                            <td><?= h($article->subtitle) ?></td>
+                            <td><?= h($article->created) ?></td>
+                            <td><?= h($article->modified) ?></td>
                             <td class="actions">
                                 <span class="nowrap">
                                     <?= $this->Html->image('/img/icon-edit.svg', [
