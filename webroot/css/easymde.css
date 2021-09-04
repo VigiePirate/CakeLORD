@@ -621,8 +621,9 @@ span.CodeMirror-selectedtext {
 }
 
 .editor-toolbar button.active, .editor-toolbar button:hover {
-    background: #fcfcfc;
-    border-color: #95a5a6
+    background: #ebeefa;
+    border-color: #606c76;
+    border-radius: 0.4rem;
 }
 
 .editor-toolbar i.separator {
