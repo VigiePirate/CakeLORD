@@ -7,17 +7,32 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <div class="spacer"> </div>
-            <?= $this->Html->image('/img/icon-labo.svg', [
-                'url' => 'http://laborats.weebly.com/' . h($coat->name) . '.html',
-                'class' => 'side-nav-icon',
-                'alt' => __('Laborats')]) ?>
-            <div class="spacer"> </div>
-            <?= $this->Html->link(__('Edit coat'), ['action' => 'edit', $coat->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete coat'), ['action' => 'delete', $coat->id], ['confirm' => __('Are you sure you want to delete # {0}?', $coat->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List coats'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New coat'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar') ?>
+            </div>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-list.svg', [
+                        'url' => ['controller' => 'Coats', 'action' => 'index'],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('All coats')]) ?>
+                    <span class="tooltiptext"><?= __('See all coats') ?></span>
+                </div>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-labo.svg', [
+                        'url' => 'http://laborats.weebly.com/' . h($coat->name) . '.html',
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Laborats')]) ?>
+                    <span class="tooltiptext"><?= __('See matching Lab-o-rats entry') ?></span>
+                </div>
+            </div>
+            <div class="side-nav-group">
+                <?= $this->element('staff_sidebar', [
+                    'controller' => 'Coats',
+                    'object' => $coat
+                    ])
+                ?>
+            </div>
         </div>
     </aside>
     <div class="column-responsive column-90">

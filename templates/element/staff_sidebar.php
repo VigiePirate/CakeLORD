@@ -12,3 +12,6 @@
         'alt' => __('Delete entry')]) ?>
     <span class="tooltiptext-staff"><?= __('Delete entry') ?></span>
 </div>
+
+<!-- code for postlink delete -->
+<!-- $this->Form->postLink(__('Delete coat'), ['action' => 'delete', $coat->id], ['confirm' => __('Are you sure you want to delete # {0}?', $coat->id), 'class' => 'side-nav-item']) */ -->
