@@ -39,7 +39,8 @@
 </div>
 
 <!-- Easy MDE -->
-<?= $this->Html->css('easymde.css') ?>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 
 <script>
