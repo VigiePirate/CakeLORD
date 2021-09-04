@@ -19,7 +19,7 @@
                     <span class="tooltiptext"><?= __('See all coats') ?></span>
                 </div>
                 <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-labo.svg', [
+                    <?= $this->Html->image('/img/icon-laborats.svg', [
                         'url' => 'http://laborats.weebly.com/' . h($coat->name) . '.html',
                         'class' => 'side-nav-icon',
                         'alt' => __('Laborats')]) ?>
