@@ -25,21 +25,23 @@
                     echo $this->Form->control('category');
                     echo $this->Form->control('title');
                     echo $this->Form->control('subtitle');
-                ?>
-                <label for="content"><?= __('Content') ?></label>
-                <?php
                     echo $this->Form->control('content', [
-                        'type'=> 'hidden',
+                        'type'=> 'textarea',
                         'id' => 'content',
                         'name' => 'content',
                         'default' => $article->content ]);
                 ?>
-                <div id="editor">
-                    
-                </div>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>
 </div>
+
+<!-- Simple MDE -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+<script>
+var simplemde = new SimpleMDE();
+</script>
