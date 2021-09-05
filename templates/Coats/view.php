@@ -56,7 +56,7 @@
                     <table class="condensed">
             <?php endif ?>
                         <tr>
-                            <th><?= __('Name') ?></th>
+                            <th><?= __('Color name') ?></th>
                             <td><?= h($coat->name) ?></td>
                         </tr>
                         <tr>
@@ -64,7 +64,7 @@
                             <td><?= h($coat->genotype) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Is Picture Mandatory') ?></th>
+                            <th><?= __('Mandatory picture?') ?></th>
                             <td><?= $coat->is_picture_mandatory ? __('Yes') : __('No'); ?></td>
                         </tr>
                     </table>
@@ -85,6 +85,7 @@
                 <h2><?= __('Gallery') ?></h2>
                 <?php if (!empty($examples)) : ?>
                     <section id="gallery">
+                        <p>Here is a random selection of rats with this coat color. Refresh to see more!</p>
                     <?php foreach ($examples as $rat) : ?>
                         <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
                             <?= $this->Html->image('uploads/' . $rat->picture, ['alt' => $rat->name, 'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id]]) ?>
