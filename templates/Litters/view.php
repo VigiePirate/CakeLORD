@@ -13,10 +13,10 @@
             <div class="side-nav-group">
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-edit-litter.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'add'],
+                        'url' => ['controller' => 'Litters', 'action' => 'edit'],
                         'class' => 'side-nav-icon',
-                        'alt' => __('Add rat')]) ?>
-                    <span class="tooltiptext"><?= __('Add a rat in this litter') ?></span>
+                        'alt' => __('Edit litter')]) ?>
+                    <span class="tooltiptext"><?= __('Edit this litter') ?></span>
                 </div>
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-add-rattery.svg', [
@@ -31,10 +31,13 @@
                         'class' => 'side-nav-icon',
                         'alt' => __('Add rat')]) ?>
                     <span class="tooltiptext"><?= __('Add a rat in this litter') ?></span>
-                </div>    
+                </div>
             </div>
             <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', ['object' => $litter]) ?>
+                <?= $this->element('staff_sidebar', [
+                    'controller' => 'Litters',
+                    'object' => $litter
+                    ]) ?>
             </div>
         </div>
     </aside>
