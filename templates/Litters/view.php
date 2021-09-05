@@ -7,31 +7,35 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <div class="spacer"> </div>
-            <div class="tooltip">
-                <?= $this->Html->image('/img/icon-add-rat.svg', [
-                    'url' => ['controller' => 'Rats', 'action' => 'add'],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Add rat')]) ?>
-                <span class="tooltiptext"><?= __('Add a rat in this litter') ?></span>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar') ?>
             </div>
-            <div class="tooltip">
-                <?= $this->Html->image('/img/icon-add-rattery.svg', [
-                    'url' => ['controller' => 'Litters', 'action' => 'add_contribution'],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Add rattery')]) ?>
-                <span class="tooltiptext"><?= __('Add a contributing rattery') ?></span>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-edit-litter.svg', [
+                        'url' => ['controller' => 'Rats', 'action' => 'add'],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Add rat')]) ?>
+                    <span class="tooltiptext"><?= __('Add a rat in this litter') ?></span>
+                </div>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-add-rattery.svg', [
+                        'url' => ['controller' => 'Litters', 'action' => 'add_contribution'],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Add rattery')]) ?>
+                    <span class="tooltiptext"><?= __('Add a contributing rattery') ?></span>
+                </div>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-add-rat.svg', [
+                        'url' => ['controller' => 'Rats', 'action' => 'add'],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Add rat')]) ?>
+                    <span class="tooltiptext"><?= __('Add a rat in this litter') ?></span>
+                </div>    
             </div>
-            <?= $this->Form->postLink(
-                $this->Html->image('/img/icon-delete.svg', [
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Delete')
-                ]),
-                ['action' => 'delete', $litter->id],
-                ['escape' => false,
-                    'confirm' => __('Are you sure you want to delete # {0}?', $litter->id)
-                ]) ?>
+            <div class="side-nav-group">
+                <?= $this->element('staff_sidebar', ['object' => $litter]) ?>
+            </div>
         </div>
     </aside>
     <div class="column-responsive column-90">
