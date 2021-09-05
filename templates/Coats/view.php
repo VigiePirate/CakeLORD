@@ -79,7 +79,7 @@
                 <?php endif ?>
             </div>
             <div class="text">
-                <strong><?= __('Description') ?></strong>
+                <h2><?= __('Description') ?></h2>
                 <blockquote>
                     <?= $this->Text->autoParagraph(h($coat->description)); ?>
                 </blockquote>
