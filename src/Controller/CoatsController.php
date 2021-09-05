@@ -35,9 +35,9 @@ class CoatsController extends AppController
     {
         $coat = $this->Coats->get($id);
         $examples = $this->Coats->Rats->find()
-            ->where(['coat_id' => $id])
+            ->where([['coat_id' => $id],['picture !=' => 'Unknown.png']])
             ->order(['rand()'])
-            ->limit(5)        
+            ->limit(5)
             ->toArray();
         $this->set(compact('coat','examples'));
     }
