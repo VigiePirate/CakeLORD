@@ -37,7 +37,7 @@ class CoatsController extends AppController
         $examples = $this->Coats->Rats->find('list', [
             ['order' => 'rand()'],
             ['limit' => '5']])
-            ->where(['Rats.Coats' => $id])
+            ->where(['coat_id' => $id])
             ->toArray();
         $this->set(compact('coat','examples'));
     }
