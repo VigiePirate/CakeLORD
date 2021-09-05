@@ -35,7 +35,10 @@ class CoatsController extends AppController
     {
         $coat = $this->Coats->get($id);
         $examples = $this->Coats->Rats->find()
-            ->where([['coat_id' => $id],['picture !=' => 'Unknown.png']])
+            ->where([
+                ['coat_id' => $id],
+                ['picture !=' => 'Unknown.png'],
+                ['picture !=' => null]])
             ->order(['rand()'])
             ->limit(5)
             ->toArray();
