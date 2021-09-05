@@ -139,6 +139,11 @@
                     </tr>
                 </table>
 
+                <!-- buttons rather than texts links? -->
+                <?= $this->Html->link(__('See birth litter'), ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id], ['class' => 'button']) ?>
+                <?= $this->Html->link(__('See interactive family tree'), ['controller' => 'Rats', 'action' => 'pedigree', $rat->id], ['class' => 'button']) ?>
+
+
             <h2>Description</h2>
                 <table class="condensed">
                     <tr>
