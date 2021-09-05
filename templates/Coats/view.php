@@ -83,7 +83,7 @@
             </div>
             <div class="related">
                 <h2><?= __('Gallery') ?></h2>
-                <?php if (!empty($coat->rats)) : ?>
+                <?php if (!empty($examples)) : ?>
                     <section id="gallery">
                     <?php foreach ($examples as $rat) : ?>
                         <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
