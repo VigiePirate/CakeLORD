@@ -38,8 +38,9 @@ class CoatsController extends AppController
             'contain' => ['Rats'],
         ]);
 
+        $examples = $this->Coats->Rats->find('list', ['limit' => 5]);
         /* $coat = $this->Coats->get($id); */
-        $this->set(compact('coat'));
+        $this->set(compact('coat','examples'));
     }
 
     /**

@@ -85,7 +85,7 @@
                 <h2><?= __('Gallery') ?></h2>
                 <?php if (!empty($coat->rats)) : ?>
                     <section id="gallery">
-                    <?php foreach ($coat->rats as $rat) : ?>
+                    <?php foreach ($examples as $rat) : ?>
                         <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
                             <?= $this->Html->image('uploads/' . $rat->picture, ['alt' => $rat->name, 'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id]]) ?>
                         <?php endif ?>
