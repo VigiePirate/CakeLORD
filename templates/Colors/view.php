@@ -72,7 +72,7 @@
                         </tr>
                     </table>
                     <div class="text">
-                        <strong><?= __('Description') ?></strong>
+                        <h2><?= __('Description') ?></h2>
                         <blockquote>
                             <?= $this->Text->autoParagraph(h($color->description)); ?>
                         </blockquote>
