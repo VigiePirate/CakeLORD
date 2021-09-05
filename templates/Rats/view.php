@@ -13,7 +13,7 @@
             </div>
             <div class="side-nav-group">
                 <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-edit-rat.svg', [
+                    <?= $this->Html->image('/img/icon-edit.svg', [
                         'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Modify Rat')]) ?>

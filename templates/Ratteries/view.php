@@ -12,26 +12,21 @@
             </div>
 
             <div class="side-nav-group">
-                <!-- <div class="side-nav-item"> -->
+
                 <?= $this->Html->image('/img/icon-locate.svg', [
                     'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('See on Map')]) ?>
-                <!-- </div>
 
-                <!-- <div class="side-nav-item"> -->
-                <?= $this->Html->image('/img/icon-edit-rattery.svg', [
+                <?= $this->Html->image('/img/icon-edit.svg', [
                     'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Modify Rattery')]) ?>
-                <!-- </div> -->
 
-                <!-- <div class="side-nav-item"> -->
                 <?= $this->Html->image('/img/icon-add-litter.svg', [
                     'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Declare Litter')]) ?>
-                <!-- </div> -->
             </div>
 
             <div class="side-nav-group">

@@ -12,7 +12,7 @@
             </div>
             <div class="side-nav-group">
                 <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-edit-litter.svg', [
+                    <?= $this->Html->image('/img/icon-edit.svg', [
                         'url' => ['controller' => 'Litters', 'action' => 'edit'],
                         'class' => 'side-nav-icon',
                         'alt' => __('Edit litter')]) ?>
