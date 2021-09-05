@@ -42,7 +42,7 @@ class CoatsController extends AppController
                 ['picture IS NOT' => null]])
             ->order(['rand()'])
             ->limit(5)
-            ->toList();
+            ->toArray();
         $this->set(compact('coat','examples'));
     }
 
