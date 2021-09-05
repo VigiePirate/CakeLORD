@@ -82,10 +82,9 @@
                 </blockquote>
             </div>
             <div class="related">
-                <h2><?= __('Gallery') ?></h2>
-                <p>Here is a random selection of rats with this coat color. Refresh to see more!</p>
+                <h2><?= __('Random gallery') ?></h2>
                 <?php if (!empty($examples)) : ?>
-                    <section id="gallery">        
+                    <section id="gallery">
                     <?php foreach ($examples as $rat) : ?>
                         <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
                             <?= $this->Html->image('uploads/' . $rat->picture, ['alt' => $rat->name, 'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id]]) ?>
