@@ -131,18 +131,13 @@
                     </tr>
                     <tr>
                         <th><?= __('Genealogy') ?></th>
-                        <td><?= $rat->has('birth_litter') ? $this->Html->link(__('See birth litter sheet'), ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id], ['class' => 'button']) : 'Not attached to any litter' ?></td>
+                        <td><?= $rat->has('birth_litter') ? $this->Html->link('See birth litter sheet', ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) . ' (parents and siblings)' : 'Not attached to any litter' ?></td>
                     </tr>
                     <tr>
                         <th></th>
                         <td><?= $this->Html->link('See interactive family tree', ['controller' => 'Rats', 'action' => 'pedigree', $rat->id]) ?> (all direct ascendants and descendants)</td>
                     </tr>
                 </table>
-
-                <!-- buttons rather than texts links? -->
-                <?= $this->Html->link(__('See birth litter sheet'), ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id], ['class' => 'button']) ?>
-                <?= $this->Html->link(__('See interactive family tree'), ['controller' => 'Rats', 'action' => 'pedigree', $rat->id], ['class' => 'button']) ?>
-                <?= $this->Html->link(__('Download .csv pedigree'), ['controller' => 'Rats', 'action' => 'pedigreecsv', $rat->id], ['class' => 'button']) ?>
 
             <h2>Description</h2>
                 <table class="condensed">
