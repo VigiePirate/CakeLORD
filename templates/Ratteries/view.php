@@ -13,15 +13,15 @@
 
             <div class="side-nav-group">
 
-                <?= $this->Html->image('/img/icon-locate.svg', [
-                    'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('See on Map')]) ?>
-
                 <?= $this->Html->image('/img/icon-edit.svg', [
                     'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
                     'class' => 'side-nav-icon',
                     'alt' => __('Modify Rattery')]) ?>
+
+                <?= $this->Html->image('/img/icon-locate.svg', [
+                    'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('See on Map')]) ?>
 
                 <?= $this->Html->image('/img/icon-add-litter.svg', [
                     'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
