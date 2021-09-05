@@ -38,6 +38,7 @@ class CoatsController extends AppController
             ->where([
                 ['coat_id' => $id],
                 ['picture !=' => 'Unknown.png'],
+                ['picture !=' => ''],
                 ['picture IS NOT' => null]])
             ->order(['rand()'])
             ->limit(5)
