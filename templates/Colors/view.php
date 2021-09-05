@@ -15,8 +15,8 @@
                     <?= $this->Html->image('/img/icon-list.svg', [
                         'url' => ['controller' => 'Colors', 'action' => 'index'],
                         'class' => 'side-nav-icon',
-                        'alt' => __('All colors')]) ?>
-                    <span class="tooltiptext"><?= __('See all colors') ?></span>
+                        'alt' => __('Color list')]) ?>
+                    <span class="tooltiptext"><?= __('Browse color list') ?></span>
                 </div>
                 <div class="tooltip">
                     <?= $this->Html->link(
