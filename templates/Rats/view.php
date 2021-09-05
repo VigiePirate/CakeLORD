@@ -131,7 +131,7 @@
                     </tr>
                     <tr>
                         <th><?= __('Genealogy') ?></th>
-                        <td><?= $rat->has('birth_litter') ? $this->Html->link('See birth litter sheet', ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) . ' (parents and siblings)' : 'Not attached to any litter' ?></td>
+                        <td><?= $rat->has('birth_litter') ? $this->Html->link(__('See birth litter sheet'), ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id], ['class' => 'button']) : 'Not attached to any litter' ?></td>
                     </tr>
                     <tr>
                         <th></th>
