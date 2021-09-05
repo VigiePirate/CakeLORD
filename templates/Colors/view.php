@@ -72,7 +72,7 @@
                         </tr>
                         <tr>
                             <th><?= __('Frequency') ?></th>
-                            <td><?= __(' % of all rats have this color')</td>
+                            <td><?= __(' % of all rats have this color') ?></td>
                         </tr>
                     </table>
                     <div class="text">
