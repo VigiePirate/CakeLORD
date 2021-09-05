@@ -36,20 +36,11 @@
             </div>
 
             <div class="side-nav-group">
-                <div class="tooltip-staff">
-                    <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
-                        'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Edit Rattery as Admin')]) ?>
-                    <span class="tooltiptext-staff"><?= __('Edit rattery data as staff') ?></span>
-                </div>
-
-                <div class="tooltip-staff">
-                    <?= $this->Html->image('/img/icon-delete.svg', [
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Delete Rattery')]) ?>
-                    <span class="tooltiptext-staff"><?= __('Delete rattery') ?></span>
-                </div>
+                <?= $this->element('staff_sidebar', [
+                    'controller' => 'Ratteries',
+                    'object' => $rattery
+                    ])
+                ?>
             </div>
         </div>
     </aside>
