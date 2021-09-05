@@ -19,10 +19,13 @@
                     <span class="tooltiptext"><?= __('See all coats') ?></span>
                 </div>
                 <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-laborats.svg', [
-                        'url' => ['http://laborats.weebly.com/' . h($coat->name) . '.html',['target' => "_blank"]],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Laborats')]) ?>
+                    <?= $this->Html->link(
+                        $this->Html->image('/img/icon-laborats.svg', [
+                            'class' => 'side-nav-icon',
+                            'alt' => __('Laborats')])]),
+                        'http://laborats.weebly.com/' . h($coat->name) . '.html',
+                        ['escape' => false, 'target' => '_blank']
+                    ); ?>
                     <span class="tooltiptext"><?= __('See matching Lab-o-rats entry') ?></span>
                 </div>
             </div>
