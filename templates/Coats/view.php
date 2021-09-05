@@ -20,9 +20,8 @@
                 </div>
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-laborats.svg', [
-                        'url' => 'http://laborats.weebly.com/' . h($coat->name) . '.html',
+                        'url' => ['http://laborats.weebly.com/' . h($coat->name) . '.html',['target' => "_blank"]]),
                         'class' => 'side-nav-icon',
-                        'target' => "_blank",
                         'alt' => __('Laborats')]) ?>
                     <span class="tooltiptext"><?= __('See matching Lab-o-rats entry') ?></span>
                 </div>
