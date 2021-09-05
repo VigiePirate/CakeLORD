@@ -36,7 +36,8 @@ class CoatsController extends AppController
         $coat = $this->Coats->get($id);
         $examples = $this->Coats->Rats->find('list', [
             ['order' => 'rand()'],
-            ['limit' => '5']]);
+            ['limit' => '5']])
+            ->toArray();
         $this->set(compact('coat','examples'));
     }
 
