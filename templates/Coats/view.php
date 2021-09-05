@@ -22,7 +22,7 @@
                     <?= $this->Html->link(
                         $this->Html->image('/img/icon-laborats.svg', [
                             'class' => 'side-nav-icon',
-                            'alt' => __('Laborats')])]),
+                            'alt' => __('Laborats')]),
                         'http://laborats.weebly.com/' . h($coat->name) . '.html',
                         ['escape' => false, 'target' => '_blank']
                     ); ?>
