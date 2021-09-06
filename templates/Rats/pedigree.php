@@ -26,7 +26,12 @@
         <div class="rats view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle">Rat Family Tree</div>
-                <?= $this->element('statebar', ['sheet' => $rat]) ?>
+                <div class="sheet-markers"
+                    <div class="tooltip-state">
+                        <div class="current-statemark statecolor_<?php echo h($sheet->state_id) ?>"><?= h($sheet->state->symbol) ?></div>
+                        <span class="tooltiptext-state hide-on-mobile"><?= h($sheet->state->name) ?></span>
+                    </div>
+                </div>
             </div>
             <h1><?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?></div>
 
@@ -59,5 +64,3 @@
         </div>
     </div>
 </div>
-
-<?= $this->Html->css('statebar.css') ?>

@@ -613,21 +613,6 @@ class RatsController extends AppController
             '_children' => $rat->children_array,
         ];
 
-        $this->loadModel('States');
-        if($rat->state->is_frozen) {
-            $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);
-            $this->set(compact('next_thawed_state'));
-        }
-        else {
-            $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
-            $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
-            if( !empty($rat->state->next_frozen_state_id) ) {
-                $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
-                $this->set(compact('next_frozen_state'));
-            }
-            $this->set(compact('next_ko_state','next_ok_state'));
-        };
-
         $json = json_encode($family);
         $this->set(compact('rat', 'json'));
     }
