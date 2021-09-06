@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <h1><?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?></div>
+            <h1><?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
             <!-- d3.js family tree -->
             <div id="fullscreen_container">
