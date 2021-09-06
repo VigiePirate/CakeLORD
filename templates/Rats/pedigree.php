@@ -11,20 +11,29 @@
                 <?= $this->element('default_sidebar') ?>
             </div>
             <div class="side-nav-group">
-                <?= $this->Html->image('/img/icon-back.svg', [
-                    'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
-                    'class' => 'side-nav-icon',
-                    'id' => 'toggle_fullscreen',
-                    'alt' => __('Full Screen')]) ?>
-                <?= $this->Html->image('/img/icon-fullscreen.svg', [
-                    'url' => '#',
-                    'class' => 'side-nav-icon',
-                    'id' => 'toggle_fullscreen',
-                    'alt' => __('Full Screen')]) ?>
-                <?= $this->Html->image('/img/icon-print.svg', [
-                    'url' => ['controller' => 'Rats', 'action' => 'print',$rat->id],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Print')]) ?>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-back.svg', [
+                        'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
+                        'class' => 'side-nav-icon',
+                        'id' => 'toggle_fullscreen',
+                        'alt' => __('Full Screen')]) ?>
+                    <span class="tooltiptext"><?= __('Back to rat sheet') ?></span>
+                </div>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-fullscreen.svg', [
+                        'url' => '#',
+                        'class' => 'side-nav-icon',
+                        'id' => 'toggle_fullscreen',
+                        'alt' => __('Full Screen')]) ?>
+                    <span class="tooltiptext"><?= __('Toggle full screen') ?></span>
+                </div>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-print.svg', [
+                        'url' => ['controller' => 'Rats', 'action' => 'print', $rat->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Print')]) ?>
+                    <span class="tooltiptext"><?= __('Print pedigree') ?></span>
+                </div>
             </div>
         </div>
     </aside>
