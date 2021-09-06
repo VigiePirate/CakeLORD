@@ -7,9 +7,15 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <div class="side-nav">
+            <div class="side-nav-group">
                 <?= $this->element('default_sidebar') ?>
-                <div class="spacer"> </div>
+            </div>
+            <div class="side-nav-group">
+                <?= $this->Html->image('/img/icon-back.svg', [
+                    'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
+                    'class' => 'side-nav-icon',
+                    'id' => 'toggle_fullscreen',
+                    'alt' => __('Full Screen')]) ?>
                 <?= $this->Html->image('/img/icon-fullscreen.svg', [
                     'url' => '#',
                     'class' => 'side-nav-icon',
