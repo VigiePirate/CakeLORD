@@ -26,12 +26,9 @@
         <div class="rats view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle">Rat Family Tree</div>
-                <div class="sheet-markers">
-                    <div class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
-                    <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
-                </div>
+                <?= $this->element('statebar', ['sheet' => $rat]) ?>
             </div>
-            <h1><?= h($rat->double_prefix) . ' '. h($rat->name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
+            <h1><?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?></div>
 
             <!-- d3.js family tree -->
             <div id="fullscreen_container">
