@@ -7,35 +7,24 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
-            </div>
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-list.svg', [
-                        'url' => ['controller' => 'Coats', 'action' => 'index'],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('All coats')]) ?>
-                    <span class="tooltiptext"><?= __('See all coats') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->link(
-                        $this->Html->image('/img/icon-laborats.svg', [
-                            'class' => 'side-nav-icon',
-                            'alt' => __('Laborats')]),
-                        'http://laborats.weebly.com/' . h($coat->name) . '.html',
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
-                    <span class="tooltiptext"><?= __('See matching Lab-o-rats entry') ?></span>
-                </div>
-            </div>
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Coats',
-                    'object' => $coat
-                    ])
-                ?>
-            </div>
+            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+                'url' => ['controller' => 'Conversations', 'action' => 'add'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Report')]) ?>
+            <?= $this->Html->image('/img/icon-help.svg', [
+                'url' => ['controller' => 'Articles', 'action' => 'index'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Help')]) ?>
+            <div class="spacer"> </div>
+            <?= $this->Html->image('/img/icon-labo.svg', [
+                'url' => 'http://laborats.weebly.com/' . h($coat->name) . '.html',
+                'class' => 'side-nav-icon',
+                'alt' => __('Laborats')]) ?>
+            <div class="spacer"> </div>
+            <?= $this->Html->link(__('Edit coat'), ['action' => 'edit', $coat->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Delete coat'), ['action' => 'delete', $coat->id], ['confirm' => __('Are you sure you want to delete # {0}?', $coat->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('List coats'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('New coat'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-90">
@@ -59,7 +48,7 @@
                     <table class="condensed">
             <?php endif ?>
                         <tr>
-                            <th><?= __('Color name') ?></th>
+                            <th><?= __('Name') ?></th>
                             <td><?= h($coat->name) ?></td>
                         </tr>
                         <tr>
@@ -67,7 +56,7 @@
                             <td><?= h($coat->genotype) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Mandatory picture?') ?></th>
+                            <th><?= __('Is Picture Mandatory') ?></th>
                             <td><?= $coat->is_picture_mandatory ? __('Yes') : __('No'); ?></td>
                         </tr>
                     </table>
@@ -79,17 +68,17 @@
                 <?php endif ?>
             </div>
             <div class="text">
-                <h2><?= __('Description') ?></h2>
+                <strong><?= __('Description') ?></strong>
                 <blockquote>
                     <?= $this->Text->autoParagraph(h($coat->description)); ?>
                 </blockquote>
             </div>
             <div class="related">
-                <h2><?= __('Random gallery') ?></h2>
-                <?php if (!empty($examples)) : ?>
+                <h2><?= __('Gallery') ?></h2>
+                <?php if (!empty($coat->rats)) : ?>
                     <section id="gallery">
-                    <?php foreach ($examples as $rat) : ?>
-                        <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
+                    <?php foreach ($coat->rats as $rat) : ?>
+                        <?php if ($rat->picture != '') : ?>
                             <?= $this->Html->image('uploads/' . $rat->picture, ['alt' => $rat->name, 'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id]]) ?>
                         <?php endif ?>
                     <?php endforeach; ?>

@@ -87,14 +87,12 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                     <?= $this->Form->end(); ?>
                     <!-- Login or access dashboard -->
                     <?=
-                    $this->Html->Link(
-                    // $this->getRequest()->getSession()->read('Auth.username'),
-                        $this->Html->image("/img/icon-home.svg", ["alt" => "Dashboard", "width" => "40"]),
-                        ['controller' => 'Users', 'action' => 'home'],
-                        ['escape' => false])
-                    ?>
-
-                    <!-- /* < ? = ($this->getRequest()->getSession()->check('Auth.id')) ?
+                    ($this->getRequest()->getSession()->check('Auth.id')) ?
+                        $this->Html->Link(
+                        // $this->getRequest()->getSession()->read('Auth.username'),
+                            $this->Html->image("/img/icon-user.svg", ["alt" => "Dashboard", "width" => "40"]),
+                            ['controller' => 'Users', 'action' => 'home'],
+                            ['escape' => false]) .
                         $this->Html->Link(
                             $this->Html->image("/img/icon-logout.svg", ["alt" => "Logout", "width" => "40"]),
                             ['controller' => 'Users', 'action' => 'logout'],
@@ -103,8 +101,8 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                         $this->Html->Link(
                             $this->Html->image("/img/icon-login.svg", ["alt" => "Login", "width" => "40"]),
                             ['controller' => 'Users', 'action' => 'login'],
-                            ['escape' => false]) */
-                    ? > */ -->
+                            ['escape' => false])
+                    ?>
                 </div>
             </nav>
         </div>
@@ -132,7 +130,7 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
             <div class="container">
                 <div class="row row__hero">
                     <div class="column-30">
-                        <?= $this->Html->image("icon-idcard.png", ["alt" => "Carte d'identité"]) ?>
+                        <?= $this->Html->image("icon-idcard.svg", ["alt" => "Carte d'identité"]) ?>
                         <h3>Fiches individuelles</h3>
                         <ul>
                             <li>Indentifiant unique</li>
@@ -141,7 +139,7 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                         </ul>
                     </div>
                     <div class="column-30">
-                        <?= $this->Html->image("icon-genealogy.png", ["alt" => "Arbre généalogique"]) ?>
+                        <?= $this->Html->image("icon-genealogy.svg", ["alt" => "Arbre généalogique"]) ?>
                         <h3>Suivi des familles</h3>
                         <ul>
                             <li>Fiches portées</li>
@@ -150,7 +148,7 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                         </ul>
                     </div>
                     <div class="column-30">
-                        <?= $this->Html->image("icon-health.png", ["alt" => "Graphique santé"]) ?>
+                        <?= $this->Html->image("icon-healthstats.svg", ["alt" => "Graphique santé"]) ?>
                         <h3>Suivi de la population</h3>
                         <ul>
                             <li>Veille sanitaire</li>

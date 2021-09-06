@@ -6,7 +6,15 @@
 ?>
 <div class="row">
     <aside class="column">
-            <?= $this->element('default_sidebar') ?>
+        <div class="side-nav">
+            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+          'url' => ['controller' => 'Conversations', 'action' => 'add'],
+          'class' => 'side-nav-icon',
+          'alt' => __('Report')]) ?>
+      <?= $this->Html->image('/img/icon-help.svg', [
+              'url' => ['controller' => 'Articles', 'action' => 'index'],
+              'class' => 'side-nav-icon',
+              'alt' => __('Help')]) ?>
             <?= $this->Html->link(__('List Colors'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>

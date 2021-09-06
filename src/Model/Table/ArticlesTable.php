@@ -44,11 +44,6 @@ class ArticlesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-
-        $this->belongsTo('Categories', [
-            'foreignKey' => 'category_id',
-            'joinType' => 'INNER',
-        ]);
     }
 
     /**
@@ -91,7 +86,6 @@ class ArticlesTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['title']));
-        $rules->add($rules->existsIn(['category_id'], 'Categories'));
 
         return $rules;
     }

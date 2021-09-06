@@ -52,7 +52,7 @@ $cakeDescription = 'LORD';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="/"><img alt="LORD Logo: Book with a Rat Tail" title="Landing page" src="/img/lord.icon.contour.svg" /></a>
+            <a href="/"><img alt="LORD Logo: Book with a Rat Tail" src="/img/lord.icon.contour.svg" /></a>
             <a href="/" class="hide-on-mobile">Livre des Origines <br>du <span>Rat</span> Domestique</td></a>
         </div>
         <div class="top-nav-links">
@@ -71,20 +71,19 @@ $cakeDescription = 'LORD';
             <?= $this->Form->end(); ?>
             <!-- Login or access dashboard -->
             <?=
-            $this->Html->Link(
-            // $this->getRequest()->getSession()->read('Auth.username'),
-                $this->Html->image("/img/icon-home.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
-                ['controller' => 'Users', 'action' => 'home'],
-                ['escape' => false])
-            ?>
-            <?= ($this->getRequest()->getSession()->check('Auth.id')) ?
+            ($this->getRequest()->getSession()->check('Auth.id')) ?
                 $this->Html->Link(
-                    $this->Html->image("/img/icon-key.svg", ["alt" => "Logout", "title" => "Log out", "width" => "40"]),
+                // $this->getRequest()->getSession()->read('Auth.username'),
+                    $this->Html->image("/img/icon-user.svg", ["alt" => "Dashboard", "width" => "40"]),
+                    ['controller' => 'Users', 'action' => 'home'],
+                    ['escape' => false]) .
+                $this->Html->Link(
+                    $this->Html->image("/img/icon-logout.svg", ["alt" => "Logout", "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'logout'],
                     ['escape' => false])
                 :
                 $this->Html->Link(
-                    $this->Html->image("/img/icon-key.svg", ["alt" => "Login", "title" => "Log in", "width" => "40"]),
+                    $this->Html->image("/img/icon-login.svg", ["alt" => "Login", "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'login'],
                     ['escape' => false])
             ?>
@@ -144,7 +143,7 @@ $cakeDescription = 'LORD';
                 <div class="hide-on-tablet"></div><a href="https://cakephp.org/"><img src="/img/logo-cake.svg" width="100"/></a><a href="https://github.com/VigiePirate/CakeLORD"><img src="/img/logo-github.svg" width="60"/></a><a href="https://www.srfa.info"><img src="/img/logo-srfa.svg" width="80"/></a>
             </div>
         <div class="creditline">
-            © <?= h(date("Y")) ?> – Tous droits réservés<br>
+            © 2020 – Tous droits réservés<br>
             Textes et images non libres de droits<br>
             Code de l'application distribué sous licence GPL<br>
             Service gratuit hébergé et maintenu par l'association SRFA

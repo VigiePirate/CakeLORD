@@ -7,7 +7,14 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
+            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+          'url' => ['controller' => 'Conversations', 'action' => 'add'],
+          'class' => 'side-nav-icon',
+          'alt' => __('Report')]) ?>
+      <?= $this->Html->image('/img/icon-help.svg', [
+              'url' => ['controller' => 'Articles', 'action' => 'index'],
+              'class' => 'side-nav-icon',
+              'alt' => __('Help')]) ?>
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $marking->id],

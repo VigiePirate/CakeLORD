@@ -2,18 +2,13 @@
     <h2><?= h($rubric) ?></h2>
 <?php endif; ?>
 <div class="table-responsive">
-    <!-- in tabs, style is that of 'rats' element -->
-    <?php if (! in_array('tabs', $exceptions)): ?>
-        <table class="summary">
-    <?php else: ?>
-        <table>
-    <?php endif; ?>
+    <table class="summary">
         <thead>
+            <?php if (! in_array('state_id', $exceptions)): ?>
+                <th><?= $this->Html->image('/img/icon-fa-state.svg', ['class' => 'action-icon']) ?></th>
+            <?php endif; ?>
             <?php if (! in_array('picture', $exceptions)): ?>
                 <th><?= __('Picture') ?></th>
-            <?php endif; ?>
-            <?php if (! in_array('state_id', $exceptions)): ?>
-                <th><?= __('State') ?></th>
             <?php endif; ?>
             <?php if (! in_array('pedigree_identifier', $exceptions)): ?>
                 <th><?= __('Identifier') ?></th>
@@ -40,20 +35,18 @@
                 <th><?= __('Owner') ?></th>
             <?php endif; ?>
             <?php if (! in_array('sex', $exceptions)): ?>
-                <th><?= __('Sex') ?></th>
+                <th><?= $this->Html->image('/img/icon-fa-sex.svg', ['class' => 'action-icon']) ?></th>
             <?php endif; ?>
-            <?php if (! in_array('actions', $exceptions)): ?>
-                <th class="actions-title"><?= __('Actions') ?></th>
-            <?php endif; ?>
+            <th class="actions-title"><?= $this->Html->image('/img/icon-fa-action.svg', ['class' => 'action-icon'])?></th>
     </thead>
         <tbody>
             <?php foreach($rats as $rat): ?>
                 <tr>
-                    <?php if (! in_array('picture', $exceptions)): ?>
-                        <td><?= isset($rat->picture_thumbnail) ? $this->Html->image($rat->picture_thumbnail, ['alt' => $rat->name]) : '' ?></td>
-                    <?php endif; ?>
                     <?php if (! in_array('state_id', $exceptions)): ?>
                         <td><span class="statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></span></td>
+                    <?php endif; ?>
+                    <?php if (! in_array('picture', $exceptions)): ?>
+                        <td><?= isset($rat->picture_thumbnail) ? $this->Html->image($rat->picture_thumbnail, ['alt' => $rat->name]) : '' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('pedigree_identifier', $exceptions)): ?>
                         <td><?= $this->Html->link($rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?></td>
@@ -82,20 +75,14 @@
                     <?php if (! in_array('sex', $exceptions)): ?>
                         <td class="sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></td>
                     <?php endif; ?>
-                    <?php if (! in_array('actions', $exceptions)): ?>
-                        <td class="actions">
-                            <span class="nowrap">
-                                <?= $this->Html->image('/img/icon-edit.svg', [
-                                    'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
-                                    'class' => 'action-icon',
-                                    'alt' => __('Edit Rat')]) ?>
-                                <?= $this->Html->image('/img/icon-declare-death.svg', [
-                                    'url' => ['controller' => 'Rats', 'action' => 'declare-death', $rat->id],
-                                    'class' => 'action-icon',
-                                    'alt' => __('Declare Death')]) ?>
-                            </span>
-                        </td>
-                    <?php endif; ?>
+                    <td class="actions">
+                        <span class="nowrap">
+                        <?= $this->Html->image('/img/icon-view.svg', [
+                            'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
+                            'class' => 'action-icon',
+                            'alt' => __('See Rat')]) ?>
+                        </span>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

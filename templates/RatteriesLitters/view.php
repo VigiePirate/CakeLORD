@@ -7,7 +7,14 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
+            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+          'url' => ['controller' => 'Conversations', 'action' => 'add'],
+          'class' => 'side-nav-icon',
+          'alt' => __('Report')]) ?>
+      <?= $this->Html->image('/img/icon-help.svg', [
+              'url' => ['controller' => 'Articles', 'action' => 'index'],
+              'class' => 'side-nav-icon',
+              'alt' => __('Help')]) ?>
             <?= $this->Html->link(__('Edit Ratteries Litter'), ['action' => 'edit', $ratteriesLitter->rattery_id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Ratteries Litter'), ['action' => 'delete', $ratteriesLitter->rattery_id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratteriesLitter->rattery_id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Ratteries Litters'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>

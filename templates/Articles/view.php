@@ -7,44 +7,51 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
-            </div>
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-list.svg', [
-                        'url' => ['controller' => 'Articles', 'action' => 'index'],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('All articles')]) ?>
-                    <span class="tooltiptext"><?= __('See all articles') ?></span>
-                </div>
-            </div>
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Articles',
-                    'object' => $article
-                    ])
-                ?>
-            </div>
+            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+          'url' => ['controller' => 'Conversations', 'action' => 'add'],
+          'class' => 'side-nav-icon',
+          'alt' => __('Report')]) ?>
+      <?= $this->Html->image('/img/icon-help.svg', [
+              'url' => ['controller' => 'Articles', 'action' => 'index'],
+              'class' => 'side-nav-icon',
+              'alt' => __('Help')]) ?>
+            <?= $this->Html->link(__('Edit Article'), ['action' => 'edit', $article->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Delete Article'), ['action' => 'delete', $article->id], ['confirm' => __('Are you sure you want to delete # {0}?', $article->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('List Articles'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('New Article'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-90">
         <div class="articles view content">
-
-            <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= h($article->category->name) ?></div>
-            </div>
-
-            <h1><?= h($article->title) ?></h1>
-
+            <h3><?= h($article->title) ?></h3>
+            <table>
+                <tr>
+                    <th><?= __('Title') ?></th>
+                    <td><?= h($article->title) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Subtitle') ?></th>
+                    <td><?= h($article->subtitle) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Id') ?></th>
+                    <td><?= $this->Number->format($article->id) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Created') ?></th>
+                    <td><?= h($article->created) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Modified') ?></th>
+                    <td><?= h($article->modified) ?></td>
+                </tr>
+            </table>
             <div class="text">
+                <strong><?= __('Content') ?></strong>
+                <blockquote>
                     <?= $this->Text->autoParagraph(h($article->content)); ?>
+                </blockquote>
             </div>
-
-            <div class="signature">
-                &mdash; Created on <?= $article->created->i18nFormat('dd/MM/yyyy') ?><?= ($article->modified != $article->created) ? ', last modified on ' . $article->modified->i18nFormat('dd/MM/yyyy') .'.' : '.' ?>
-            </div>
-
         </div>
     </div>
 </div>

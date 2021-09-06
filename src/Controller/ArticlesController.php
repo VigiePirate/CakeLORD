@@ -34,7 +34,7 @@ class ArticlesController extends AppController
     public function view($id = null)
     {
         $article = $this->Articles->get($id, [
-            'contain' => ['Categories'],
+            'contain' => [],
         ]);
 
         $this->set('article', $article);
@@ -57,9 +57,7 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
-        $this->loadModel('Categories');
-        $categories = $this->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('article','categories'));
+        $this->set(compact('article'));
     }
 
     /**

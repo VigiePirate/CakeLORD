@@ -33,17 +33,11 @@ class ColorsController extends AppController
      */
     public function view($id = null)
     {
-        $color = $this->Colors->get($id);
-        $examples = $this->Colors->Rats->find()
-            ->where([
-                ['color_id' => $id],
-                ['picture !=' => 'Unknown.png'],
-                ['picture !=' => ''],
-                ['picture IS NOT' => null]])
-            ->order(['rand()'])
-            ->limit(100)
-            ->toArray();
-        $this->set(compact('color','examples'));
+        $color = $this->Colors->get($id, [
+            'contain' => ['Rats'],
+        ]);
+
+        $this->set('color', $color);
     }
 
     /**

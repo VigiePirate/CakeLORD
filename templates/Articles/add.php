@@ -7,7 +7,14 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
+            <?= $this->Html->image('/img/icon-fa-alert.svg', [
+                'url' => ['controller' => 'Conversations', 'action' => 'add'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Report')]) ?>
+            <?= $this->Html->image('/img/icon-help.svg', [
+                'url' => ['controller' => 'Articles', 'action' => 'index'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Help')]) ?>
             <div class="spacer"> </div>
             <?= $this->Html->image('/img/icon-fa-list.svg', [
                 'url' => ['controller' => 'Articles', 'action' => 'index'],
@@ -21,7 +28,6 @@
             <fieldset>
                 <legend><?= __('Add Article') ?></legend>
                 <?php
-                    echo $this->Form->control('category', ['options' => $categories]);
                     echo $this->Form->control('title');
                     echo $this->Form->control('subtitle');
                     echo $this->Form->control('content');

@@ -7,60 +7,55 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-
-            <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
-            </div>
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-edit.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Modify Rat')]) ?>
-                    <span class="tooltiptext"><?= __('Edit whole rat sheet') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-transfer-ownership.svg', [
+            <div class="side-nav">
+                <?= $this->Html->image('/img/icon-fa-alert.svg', [
+                    'url' => ['controller' => 'Conversations', 'action' => 'add'],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Report')]) ?>
+                <?= $this->Html->image('/img/icon-help.svg', [
+                    'url' => ['controller' => 'Articles', 'action' => 'index'],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Help')]) ?>
+                <div class="spacer"> </div>
+                <?= $this->Html->image('/img/icon-file-edit.svg', [
+                    'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Modify Rat')]) ?>
+                    <?= $this->Html->image('/img/icon-fa-give.svg', [
                         'url' => ['controller' => 'Rats', 'action' => 'transferOwnership', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Change Owner')]) ?>
-                    <span class="tooltiptext"><?= __('Give rat to a new owner') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-add-litter.svg', [
-                        'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Declare Litter')]) ?>
-                    <span class="tooltiptext"><?= __('Declare litter from this rat') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-declare-death.svg', [
+                <?= $this->Html->image('/img/icon-fa-baby.svg', [
+                    'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Declare Litter')]) ?>
+                    <?= $this->Html->image('/img/icon-rip.svg', [
                         'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Declare Rat Death')]) ?>
-                    <span class="tooltiptext"><?= __('Declare rat death') ?></span>
-                </div>
-            </div>
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Rats',
-                    'object' => $rat
-                    ])
-                ?>
+                <div class="spacer"> </div>
+                <?= $this->Html->image('/img/icon-edit-admin.svg', [
+                    'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Edit Rat as Admin')]) ?>
+                <?= $this->Html->image('/img/icon-fa-trash.svg', [
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Delete Rat')]) ?>
             </div>
         </div>
     </aside>
     <div class="column-responsive column-90">
         <div class="rats view content">
+
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= _('Rat') ?></div>
-                <?= $this->element('statebar', ['sheet' => $rat]) ?>
+                <div class="sheet-title pretitle">Rat</div>
+                <div class="sheet-markers">
+                    <div class="sexmark sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></div>
+                    <div class="statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                </div>
             </div>
 
-            <h1>
-                <!-- to be improved -->
-                <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?>
-            </h1>
+            <h1><?= h($rat->usual_name) . '<span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
             <div class="row row-reverse">
                 <?php if ($rat->picture != '') : ?>
@@ -73,7 +68,7 @@
                     <table class="condensed">
                 <?php endif ?>
                         <tr>
-                            <th><?= __('Identifier') ?></th>
+                            <th><?= __('Pedigree Identifier') ?></th>
                             <td><?= h($rat->pedigree_identifier) ?></td>
                         </tr>
                         <tr>
@@ -81,11 +76,11 @@
                             <td><?= h($rat->name) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Pup name') ?></th>
+                            <th><?= __('Pup Name') ?></th>
                             <td><?= h($rat->pup_name) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Birth date') ?></th>
+                            <th><?= __('Birth Date') ?></th>
                             <td><?= h($rat->birth_date->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE])) ?></td>
                         </tr>
                         <tr>
@@ -93,7 +88,7 @@
                             <td><?= h($rat->sex_name) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Owner') ?></th>
+                            <th><?= __('Owner User') ?></th>
                             <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                         </tr>
                     </table>
@@ -107,7 +102,7 @@
             <h2>Origins</h2>
                 <table class="condensed">
                     <tr>
-                        <th><?= __('Birth place') ?></th>
+                        <th><?= __('Rattery') ?></th>
                         <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
                     </tr>
                     <tr>
@@ -174,7 +169,7 @@
             <h2>Health</h2>
             <table class="condensed">
                 <tr>
-                    <th><?= __('Is alive?') ?></th>
+                    <th><?= __('Is Alive') ?></th>
                     <td><?= $rat->is_alive ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
@@ -183,27 +178,27 @@
                 </tr>
                 <?php if (!$rat->is_alive) : ?>
                 <tr>
-                    <th><?= __('Death date') ?></th>
+                    <th><?= __('Death Date') ?></th>
                     <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : 'Unknown' ?></td>
                     </tr>
                 <tr>
-                    <th><?= __('Death category') ?></th>
+                    <th><?= __('Death Primary Cause') ?></th>
                     <td><?= $rat->has('death_primary_cause') ? $this->Html->link($rat->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $rat->death_primary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Death cause') ?></th>
+                    <th><?= __('Death Secondary Cause') ?></th>
                     <td><?= $rat->has('death_secondary_cause') ? $this->Html->link($rat->death_secondary_cause->name, ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $rat->death_secondary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Euthanized?') ?></th>
+                    <th><?= __('Death Euthanized') ?></th>
                     <td><?= $rat->death_euthanized ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Diagnosed by vet?') ?></th>
+                    <th><?= __('Death Diagnosed') ?></th>
                     <td><?= $rat->death_diagnosed ? __('Yes') : __('No'); ?></td>
                     </tr>
                 <tr>
-                    <th><?= __('Post-mortem analyses?') ?></th>
+                    <th><?= __('Death Necropsied') ?></th>
                     <td><?= $rat->death_necropsied ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <?php endif; ?>
@@ -217,7 +212,7 @@
             </div>
             <div class="spacer"> </div>
             <?php if (!empty($rat->bred_litters)) : ?>
-                <h2><?= __('Bred litters') ?></h2>
+                <h2><?= __('Bred Litters') ?></h2>
                 <div class="related">
                     <?php foreach ($rat->bred_litters as $litter) : ?>
                         <details>
@@ -316,5 +311,3 @@
         </div>
     </div>
 </div>
-
-<?= $this->Html->css('statebar.css') ?>

@@ -77,11 +77,11 @@
                     <?php endif; ?>
                     <td class="actions">
                         <span class="nowrap">
-                        <?= $this->Html->image('/img/icon-edit.svg', [
+                        <?= $this->Html->image('/img/icon-file-edit.svg', [
                             'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
                             'class' => 'action-icon',
                             'alt' => __('See Rat')]) ?>
-                        <?= $this->Html->image('/img/icon-declare-death.svg', [
+                        <?= $this->Html->image('/img/icon-rip.svg', [
                             'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
                             'class' => 'action-icon',
                             'alt' => __('Declare Rat Death')]) ?>

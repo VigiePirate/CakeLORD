@@ -7,37 +7,16 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
-            </div>
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-list.svg', [
-                        'url' => ['controller' => 'Categories', 'action' => 'index'],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('All categories')]) ?>
-                    <span class="tooltiptext"><?= __('See all categories') ?></span>
-                </div>
-            </div>
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Categories',
-                    'object' => $category
-                    ])
-                ?>
-            </div>
+            <h4 class="heading"><?= __('Actions') ?></h4>
+            <?= $this->Html->link(__('Edit Category'), ['action' => 'edit', $category->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Delete Category'), ['action' => 'delete', $category->id], ['confirm' => __('Are you sure you want to delete # {0}?', $category->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('List Categories'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('New Category'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-90">
+    <div class="column-responsive column-80">
         <div class="categories view content">
-            <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Category') ?></div>
-            </div>
-
-            <h1><?= h($category->name) ?></h1>
-
-            <h2><?= __('Reference information') ?></h2>
-
+            <h3><?= h($category->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Name') ?></th>
@@ -52,10 +31,8 @@
                     <td><?= $this->Number->format($category->position) ?></td>
                 </tr>
             </table>
-
-            <h2><? __('Related entries') ?></h2>
             <div class="related">
-                <h3><?= __('Related Articles') ?></h3>
+                <h4><?= __('Related Articles') ?></h4>
                 <?php if (!empty($category->articles)) : ?>
                 <div class="table-responsive">
                     <table>
@@ -63,24 +40,25 @@
                             <th><?= __('Id') ?></th>
                             <th><?= __('Title') ?></th>
                             <th><?= __('Subtitle') ?></th>
+                            <th><?= __('Content') ?></th>
                             <th><?= __('Created') ?></th>
                             <th><?= __('Modified') ?></th>
-                            <th class="actions"><?= __('Manage') ?></th>
+                            <th><?= __('Category Id') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($category->articles as $article) : ?>
+                        <?php foreach ($category->articles as $articles) : ?>
                         <tr>
-                            <td><?= h($article->id) ?></td>
-                            <td><?= h($article->title) ?></td>
-                            <td><?= h($article->subtitle) ?></td>
-                            <td><?= h($article->created) ?></td>
-                            <td><?= h($article->modified) ?></td>
+                            <td><?= h($articles->id) ?></td>
+                            <td><?= h($articles->title) ?></td>
+                            <td><?= h($articles->subtitle) ?></td>
+                            <td><?= h($articles->content) ?></td>
+                            <td><?= h($articles->created) ?></td>
+                            <td><?= h($articles->modified) ?></td>
+                            <td><?= h($articles->category_id) ?></td>
                             <td class="actions">
-                                <span class="nowrap">
-                                    <?= $this->Html->image('/img/icon-backoffice.svg', [
-                                        'url' => ['controller' => 'Articles', 'action' => 'view', $article->id],
-                                        'class' => 'action-icon',
-                                        'alt' => __('Manage')]) ?>
-                                </span>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Articles', 'action' => 'view', $articles->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Articles', 'action' => 'edit', $articles->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Articles', 'action' => 'delete', $articles->id], ['confirm' => __('Are you sure you want to delete # {0}?', $articles->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -89,7 +67,7 @@
                 <?php endif; ?>
             </div>
             <div class="related">
-                <h3><?= __('Related Faqs') ?></h3>
+                <h4><?= __('Related Faqs') ?></h4>
                 <?php if (!empty($category->faqs)) : ?>
                 <div class="table-responsive">
                     <table>

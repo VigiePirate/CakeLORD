@@ -30,7 +30,7 @@ summary {
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
   font-weight: bold;
   font-size:2.2rem;
-  color: #606ebf;
+  color: #6076bf;
   padding-left: 1rem;
   margin-bottom: 0.5rem;
   cursor: pointer;
@@ -50,7 +50,7 @@ details > summary.h2 {
 h1, h2, h3, h4, h5 {
   font-weight: bold;
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
-  color: #606ebf;
+  color: #6076bf;
   hyphens: manual;
 }
 
@@ -64,17 +64,6 @@ h1 span {
     vertical-align: top;
     font-size: 75%;
   }
-
-/* ugly stuff that should be improved later for on/off ratteries */
-.rotate {
-  display:inline-block;
-  -webkit-transform:rotate(330deg);
-}
-
-.sun {
-  color: #ffd42a
-}
-/* end of ugly stuff */ 
 
 h2 {
   font-size:2.8rem; /*2.8*/
@@ -105,8 +94,8 @@ h5 {
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
   font-weight: bold;
   font-size: 1.8rem;
-  color: #606ebf;
-  /* padding-bottom:0.5rem; */
+  color: #6076bf;
+  padding-bottom:0.5rem;
 }
 
 .parent {
@@ -127,39 +116,29 @@ a sup {
 
 /* Forms */
 
-button, .button , .button:visited,
-input[type='button'], input[type='reset'], input[type='submit'] {
-    background: #663300; /* #cabcafa3*/
+.button, button, input[type='button'], input[type='reset'], input[type='submit'] {
+    background: #cabcafa3; /* #663300*/
     border-color: #663300;
     font-family: "Roboto Condensed", serif;
     font-size: 1.6rem;
-    color: #ffffff;
+    color: #663300;
   }
 
-.button:hover, .button:focus, .button:active {
-    color: #ffffff;
-    background: #a65400;
-    border-color: #a65400;/* #cabcaf; */
+.button:visited {
+    color: #663300;
+    background: #cabcaf;
 }
 
-.button-staff, .button-staff:visited {
-    background: #b1000c;
+.button-staff {
+    background: #e8dbdc;
     border-color: #b1000c;
-    color: #ffffff;
+    color: #b1000c;
 }
 
-.button-staff:hover, .button-staff:focus, .button-staff:active {
-  background: #d33c44;
-  border-color: #d33c44;
-  color: #ffffff;
-}
-
-.float-button {
-  position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
+.button-staff:visited {
+  background: #d6bcbe;
+  border-color: #b1000c;
+  color: #b1000c;
 }
 
 textarea {
@@ -169,7 +148,7 @@ textarea {
 legend {
     font-family: "Imprima", sans-serif;
     font-size: 2.4rem;
-    color:#606ebf;
+    color:#6076bf;
   }
 
 label {
@@ -203,9 +182,6 @@ tr:hover {
 
 table {
   padding-left:1rem;
-}
-table.summary {
-  padding-left:0rem;
 }
 
 table.summary>tbody>tr>td:last-of-type {
@@ -349,59 +325,55 @@ blockquote:before {
     text-align:right;
   }
 
-.avatar {
-  max-width:25%;
+.statemark {
+  font-size:3rem;
+  line-height:1; /* 1.25 ?*/
+  font-weight: bold;
+  padding-left:0.5rem;
+  letter-spacing:-0.5rem;
 }
 
+/* should be read from states table later */
+.statecolor_1 {
+  color: #1f9d55;
+}
+
+.statecolor_2 {
+  color: #1f9d55;
+}
+
+.statecolor_3 {
+  color: #ff8c1b;
+}
+
+.statecolor_4 {
+  color: #cc1f1a;
+}
+
+.statecolor_5 {
+  color: #663300;
+}
+
+.statecolor_6 {
+  color: #343740;
+}
+/* end of states color */
+
 .sexmark {
-  font-size:2.8rem;
+  font-size:3rem;
+  font-weight:500;
   line-height:1.1;
-  font-weight:bold;
   /* margin-bottom:2.0rem;
   margin-top:0; */
 }
 
 .sexcolor_F {
   color: #ff99cc;
-  font-weight:bold;
 }
 
 .sexcolor_M {
   color: #99ccff;
-  font-weight:bold;
 }
-
-/* should be read from states table later ('css property' field) */
-.statecolor_1 {
-  color: #1f9d55;
-  font-weight: bold;
-}
-
-.statecolor_2 {
-  color: #1f9d55;
-  font-weight: bold;
-}
-
-.statecolor_3 {
-  color: #ff8c1b;
-  font-weight: bold;
-}
-
-.statecolor_4 {
-  color: #cc1f1a;
-  font-weight: bold;
-}
-
-.statecolor_5 {
-  color: #663300;
-  font-weight: bold;
-}
-
-.statecolor_6 {
-  color: #343740;
-  font-weight: bold;
-}
-/* end of states color */
 
 /* Utility */
 .table-responsive {
@@ -474,7 +446,7 @@ th {
   padding-right:1.5rem;
 }
 .shieldline span {
-    color: #bfc9ff; /*gray footer: #606ebf ; hue 226: #bfc99ff*/
+    color: #bfceff; /*gray footer: #6076bf */
   }
 .shieldline {
   /* font-family:"Alegreya",serif;*/
@@ -546,7 +518,7 @@ th {
     }
 
 .top-nav-title span {
-    color: #bfc9ff;
+    color: #bfceff;
   }
 
 .top-nav-links {
@@ -584,7 +556,7 @@ th {
     background: #a65400;
     background-repeat:no-repeat;
     color:#ffffff;
-    background-image: url('/img/icon-searchbar.svg');
+    background-image: url('/img/searchbar.icon.svg');
     border: 0 none;
     margin: 0;
     padding-right: 1.5rem;
@@ -602,10 +574,6 @@ th {
   text-align:center;
 }
 
-.side-nav-group {
-  display:inline;
-}
-
 .side-nav-item {
     display:block;
     /* display:flex;
@@ -616,29 +584,35 @@ th {
     color: #663300;
   }
 
-.side-nav-icon:hover, .side-nav-icon:focus {
-  background-color: #c3c8e6; /*#cabcaf;*/
+.side-nav-icon:hover {
+  background-color: #cabcaf;
   border-radius: 0.4rem;
 }
 
 .side-nav-icon {
     display:inline;
-    padding: 1rem;
-    width:6rem; /* 5.2 */
+    padding: 0.5rem;
+    width:5.2rem;
     /* background-color: #66330029; */ /* #e0d7ce; */
     border-radius: 0.4rem;
     /* padding: 1.25rem;
     width: 6.5rem; */
-    box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+    /* box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
     background-color: #ffffff;
-    margin-bottom:0.5rem;
+    border-radius: 0.4rem; */
   }
 
 .side-nav-icon-staff {
       display:inline;
       padding: 0.5rem;
       width:5.2rem;
+      /* background-color: #e8dbdc; */ /* to be improved */
       border-radius: 0.4rem;
+      /* padding: 1.25rem;
+      width: 6.5rem; */
+      /* box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+      background-color: #ffffff;
+      border-radius: 0.4rem; */
     }
 
 .side-nav-icon-staff:hover {
@@ -654,85 +628,6 @@ th {
 .spacer{
     display: inline-block;
     width: 5rem;
-}
-
-/* Tooltips */
-/* Tooltip container */
-.tooltip {
-  position: relative;
-  display: inline-block;
-  /* border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: max-content;
-  background-color: #663300;
-  color: #fff;
-  text-align: left;
-  padding: 0.5rem 1rem;
-  border-radius: 0.4rem;
-  font-size: 1.4rem;
-
-  /* Position the tooltip text */
-  position: absolute;
-  top: 1.4rem;
-  left: 105%;
-  z-index: 99;
-}
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
-
-.tooltip .tooltiptext::after {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  right: 100%; /* To the left of the tooltip */
-  margin-top: -0.75rem;
-  border-width: 0.75rem;
-  border-style: solid;
-  border-color: transparent #663300 transparent transparent;
-}
-
-/* Tooltip text for staff */
-
-.tooltip-staff {
-  position: relative;
-  display: inline-block;
-  /* border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-}
-
-.tooltip-staff .tooltiptext-staff {
-  visibility: hidden;
-  width: max-content;
-  background-color: #b1000c;
-  color: #fff;
-  text-align: left;
-  padding: 0.5rem 1rem;
-  border-radius: 0.4rem;
-  font-size: 1.4rem;
-  position: absolute;
-  top: 1.4rem;
-  left: 105%;
-  z-index: 99;
-}
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip-staff:hover .tooltiptext-staff {
-  visibility: visible;
-}
-
-.tooltip-staff .tooltiptext-staff::after {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  right: 100%; /* To the left of the tooltip */
-  margin-top: -0.75rem;
-  border-width: 0.75rem;
-  border-style: solid;
-  border-color: transparent #b1000c transparent transparent;
 }
 
 /* Sheet heading */
@@ -813,7 +708,7 @@ footer {
 
 /*gray: comment out here */
 .footer_section h5 {
-    color: #bfc9ff;
+    color: #bfceff;
     font-weight:bold;
 }
 
@@ -851,7 +746,7 @@ footer {
 .message {
     padding: 1rem;
     background: #ebf0fa;
-    color: #606ebf; /*#7786bf;*/
+    color: #6076bf; /*#7786bf;*/
     border-color: #6f7db3; /*#c9d2eb*/
     border-width: 1px;
     border-style: solid;
@@ -1063,10 +958,6 @@ svg {
       flex: 0 0 90%;
       max-width: 90%
   }
-  .side-nav-group {
-    display:inline-block;
-    margin-bottom:2rem;
-  }
 }
 
 @media screen and (max-width: 640px) {
@@ -1083,9 +974,7 @@ svg {
       margin: 0 auto;
     }
     .side-nav {
-      display:inline-flex;
-      justify-content:space-between;
-      width:100%;
+      display:inline;
       margin-bottom: 1rem;
     }
     .heading {
@@ -1109,10 +998,8 @@ svg {
     .desc:after {
       content: " \2190";
     }
-
-    /* this should be replaced by the appropriate flex */
     .spacer{
-        width: 1.5rem;
+        width: 2rem;
     }
 
     /* override all milligram transposition stuff */

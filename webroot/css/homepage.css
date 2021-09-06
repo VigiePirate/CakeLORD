@@ -114,7 +114,7 @@ p {
     }
 
 .top-nav-title span {
-    color: #bfc9ff;
+    color: #bfceff;
   }
 
 .top-nav-links {
@@ -183,9 +183,7 @@ p {
   font-size: 1.7rem;
   /* background-image: linear-gradient(123deg, #505285 0%, #585e92 12%, #65689f 25%, #7474b0 37%, #7e7ebb 50%, #8389c7 62%, #9795d4 75%, #a2a1dc 87%, #b5aee4 100%);*/
   /* background-image: linear-gradient(303deg, #4B5285 0%, #535e92 12%, #60689f 25%, #6f74b0 37%, #707ebb 50%, #7e89c7 62%, #9295d4 75%, #97a1dc 87%, #b0aee4 100%);*/
-  /* background-image: linear-gradient(313deg, #505c85 0%, #586692 12%, #65739f 25%, #7482b0 37%, #7e8cbb 50%, #8393c7 62%, #95a4d4 75%, #a1afdc 87%, #aebbe4 100%);*/
-  background-image: linear-gradient(313deg, #505885 0%, #586192 12%, #656e9f 25%, #747db0 37%, #7e87bb 50%, #838dc7 62%, #959ed4 75%, #a1aadc 87%, #aebbe4 100%);
-
+  background-image: linear-gradient(313deg, #505c85 0%, #586692 12%, #65739f 25%, #7482b0 37%, #7e8cbb 50%, #8393c7 62%, #95a4d4 75%, #a1afdc 87%, #aebbe4 100%);
 }
 
 /* More */
