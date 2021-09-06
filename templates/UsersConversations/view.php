@@ -7,14 +7,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->Html->image('/img/icon-fa-alert.svg', [
-          'url' => ['controller' => 'Conversations', 'action' => 'add'],
-          'class' => 'side-nav-icon',
-          'alt' => __('Report')]) ?>
-      <?= $this->Html->image('/img/icon-help.svg', [
-              'url' => ['controller' => 'Articles', 'action' => 'index'],
-              'class' => 'side-nav-icon',
-              'alt' => __('Help')]) ?>
+            <?= $this->element('default_sidebar') ?>
             <?= $this->Html->link(__('Edit Users Conversation'), ['action' => 'edit', $usersConversation->user_id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Users Conversation'), ['action' => 'delete', $usersConversation->user_id], ['confirm' => __('Are you sure you want to delete # {0}?', $usersConversation->user_id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Users Conversations'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>

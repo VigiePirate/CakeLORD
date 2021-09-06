@@ -7,82 +7,61 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <!-- New actions with icons -->
-
-            <div class="side-nav-item">
-                <?= $this->Html->image('/img/icon-report.svg', [
-                'url' => ['controller' => 'Conversations', 'action' => 'add'],
-                'class' => 'side-nav-icon',
-                'alt' => __('Report')]) ?>
-                <div class="side-nav-text hide-everywhere"><?= __('Report') ?></div>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar') ?>
             </div>
 
-            <div class="side-nav-item">
-                <?= $this->Html->image('/img/icon-help.svg', [
-                    'url' => ['controller' => 'Articles', 'action' => 'index'],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Help')]) ?>
-                <span class="side-nav-text hide-everywhere"><?= __('Get help') ?><span>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-edit.svg', [
+                        'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Modify Rattery')]) ?>
+                    <span class="tooltiptext"><?= __('Edit whole rattery sheet') ?></span>
+                </div>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-locate.svg', [
+                        'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('See on Map')]) ?>
+                    <span class="tooltiptext"><?= __('See rattery on the map') ?></span>
+                </div>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-relocate.svg', [
+                        'url' => ['controller' => 'Ratteries', 'action' => 'relocate', $rattery->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Move')]) ?>
+                    <span class="tooltiptext"><?= __('Declare a new location') ?></span>
+                </div>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-add-litter.svg', [
+                        'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Declare Litter')]) ?>
+                    <span class="tooltiptext"><?= __('Declare a litter born here') ?></span>
+                </div>
             </div>
 
-            <div class="spacer"> </div>
-
-            <div class="side-nav-item">
-            <?= $this->Html->image('/img/icon-map.svg', [
-                'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
-                'class' => 'side-nav-icon',
-                'alt' => __('See on Map')]) ?>
-                <span class="side-nav-text hide-everywhere"><?= __('See on map') ?><span>
-            </div>
-
-            <div class="side-nav-item">
-            <?= $this->Html->image('/img/icon-file-edit.svg', [
-                'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
-                'class' => 'side-nav-icon',
-                'alt' => __('Modify Rattery')]) ?>
-                <span class="side-nav-text hide-everywhere"><?= __('Edit') ?><span>
-            </div>
-
-            <div class="side-nav-item">
-            <?= $this->Html->image('/img/icon-birth.svg', [
-                'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
-                'class' => 'side-nav-icon',
-                'alt' => __('Declare Litter')]) ?>
-            <span class="side-nav-text hide-everywhere"><?= __('Add litter') ?><span>
-            </div>
-
-            <div class="spacer"> </div>
-
-            <div class="side-nav-item staff">
-            <?= $this->Html->image('/img/icon-edit-staff.svg', [
-                'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
-                'class' => 'side-nav-icon-staff',
-                'alt' => __('Edit Rattery')]) ?>
-            <span class="side-nav-text hide-everywhere"><?= __('Edit') ?><span>
-            </div>
-
-            <div class="side-nav-item staff">
-            <?= $this->Html->image('/img/icon-delete.svg', [
-                'class' => 'side-nav-icon-staff',
-                'alt' => __('Delete Rattery')]) ?>
-            <span class="side-nav-text hide-everywhere"><?= __('Delete') ?><span>
+            <div class="side-nav-group">
+                <?= $this->element('staff_sidebar', [
+                    'controller' => 'Ratteries',
+                    'object' => $rattery
+                    ])
+                ?>
             </div>
         </div>
     </aside>
     <div class="column-responsive column-90">
         <div class="ratteries view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle">Rattery</div>
-                <div class="sheet-markers">
-                    <div class="statemark"><?= $rattery->is_alive ? $this->Html->image('/img/icon-on.svg',['width' => '42','alt' => 'Rattery is on']) : $this->Html->image('/img/icon-off.svg',['width' => '42','alt' => 'Rattery is off']) ?></div>
-                    <div class="statemark statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></div>
-                </div>
+                <div class="sheet-title pretitle"><?= __('Rattery') ?></div>
+                <?= $this->element('statebar', ['sheet' => $rattery]) ?>
             </div>
 
-            <h1><?= h($rattery->full_name)?></h1> <!-- . '&#8239;' . '<span>' . h($rattery->is_alive_symbol) . '</span>'-->
+            <h1><?= h($rattery->full_name) . '<span class="rotate"> ' . h($rattery->is_alive_symbol) . '</span>'?></h1> <!-- -->
 
             <?php if($rattery->is_generic) : ?>
-                <div class="message">This “rattery” is generic. Therefore, only a small number of relevant information are shown.</div>
+                <div class="message"><?= __('This “rattery” is generic. Therefore, only a small number of relevant information are shown.') ?></div>
             <?php endif ?>
             <h2>Information</h2>
             <div class="row">
@@ -329,4 +308,5 @@
         </div>
     </div>
 </div>
-</div>
+
+<?= $this->Html->css('statebar.css') ?>

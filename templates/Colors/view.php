@@ -7,24 +7,35 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->Html->image('/img/icon-fa-alert.svg', [
-                'url' => ['controller' => 'Conversations', 'action' => 'add'],
-                'class' => 'side-nav-icon',
-                'alt' => __('Report')]) ?>
-            <?= $this->Html->image('/img/icon-help.svg', [
-                'url' => ['controller' => 'Articles', 'action' => 'index'],
-                'class' => 'side-nav-icon',
-                'alt' => __('Help')]) ?>
-            <div class="spacer"> </div>
-            <?= $this->Html->image('/img/icon-labo.svg', [
-                'url' => 'http://laborats.weebly.com/' . h($color->name) . '.html',
-                'class' => 'side-nav-icon',
-                'alt' => __('Laborats')]) ?>
-            <div class="spacer"> </div>
-            <?= $this->Html->link(__('Edit Color'), ['action' => 'edit', $color->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Color'), ['action' => 'delete', $color->id], ['confirm' => __('Are you sure you want to delete # {0}?', $color->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Colors'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Color'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar') ?>
+            </div>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-list.svg', [
+                        'url' => ['controller' => 'Colors', 'action' => 'index'],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Color list')]) ?>
+                    <span class="tooltiptext"><?= __('Browse color list') ?></span>
+                </div>
+                <div class="tooltip">
+                    <?= $this->Html->link(
+                        $this->Html->image('/img/icon-laborats.svg', [
+                            'class' => 'side-nav-icon',
+                            'alt' => __('Laborats')]),
+                        'http://laborats.weebly.com/' . h($color->name) . '.html',
+                        ['escape' => false, 'target' => '_blank']
+                    ); ?>
+                    <span class="tooltiptext"><?= __('See matching Lab-o-rats entry') ?></span>
+                </div>
+            </div>
+            <div class="side-nav-group">
+                <?= $this->element('staff_sidebar', [
+                    'controller' => 'Colors',
+                    'object' => $color
+                    ])
+                ?>
+            </div>
         </div>
     </aside>
     <div class="column-responsive column-90">
@@ -56,12 +67,16 @@
                             <td><?= h($color->genotype) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Is Picture Mandatory') ?></th>
+                            <th><?= __('Mandatory picture?') ?></th>
                             <td><?= $color->is_picture_mandatory ? __('Yes') : __('No'); ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Frequency') ?></th>
+                            <td>(xx)<?= __(' %') ?></td>
                         </tr>
                     </table>
                     <div class="text">
-                        <strong><?= __('Description') ?></strong>
+                        <h2><?= __('Description') ?></h2>
                         <blockquote>
                             <?= $this->Text->autoParagraph(h($color->description)); ?>
                         </blockquote>
@@ -74,10 +89,10 @@
                 <?php endif ?>
             </div>
             <div class="related">
-                <h2><?= __('Gallery') ?></h2>
-                <?php if (!empty($color->rats)) : ?>
+                <h2><?= __('Random gallery') ?></h2>
+                <?php if (!empty($examples)) : ?>
                     <section id="gallery">
-                    <?php foreach ($color->rats as $rat) : ?>
+                    <?php foreach ($examples as $rat) : ?>
                         <?php if ($rat->picture != '') : ?>
                             <?= $this->Html->image('uploads/' . $rat->picture, ['alt' => $rat->name, 'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id]]) ?>
                         <?php endif ?>

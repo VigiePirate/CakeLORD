@@ -7,7 +7,7 @@
     <div class="column-responsive column-90">
         <div class="users view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle">User Dashboard</div>
+                <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
             </div>
             <?= $this->element('my/user-summary') ?>
         </div>

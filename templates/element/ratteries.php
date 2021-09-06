@@ -3,10 +3,10 @@
     <table class="condensed">
         <thead>
             <?php if (! in_array('state_id', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('state_id',$this->Html->image('/img/icon-fa-state.svg', ['class' => 'action-icon']), ['escape' => false])?></th>
+                <th><?= $this->Paginator->sort('state_id',__('State')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('is_alive', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('is_active','On?')?></th>
+                <th><?= $this->Paginator->sort('is_active',__('Active?')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('picture', $exceptions)): ?>
                 <th><?= __('picture') ?></th>
@@ -38,7 +38,11 @@
                         <td><span class="statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></span></td>
                     <?php endif; ?>
                     <?php if (! in_array('is_alive', $exceptions)): ?>
-                        <td><?= $rattery->is_alive ? $this->Html->image('/img/icon-on.svg',['width' => '22','alt' => 'Rattery is on']) : $this->Html->image('/img/icon-off.svg',['width' => '22','alt' => 'Rattery is off']) ?></td>
+                        <?php if ($rattery->is_alive) : ?>
+                            <td class="sun"><b><?= $rattery->is_alive_symbol ?></b></td>
+                        <?php else :?>
+                            <td class="rotate"><b><?= $rattery->is_alive_symbol ?></b></td>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <?php if (! in_array('picture', $exceptions)): ?>
                         <td><?= isset($rattery->picture_thumbnail) ? $this->Html->image($rattery->picture_thumbnail, ['alt' => $rattery->name]) : '' ?></td>

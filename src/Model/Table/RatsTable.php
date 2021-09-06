@@ -295,7 +295,7 @@ class RatsTable extends Table
             'message' => 'Impossible: it means that your rat would have lived more than 4 years and a half, but rats do not live this long.'
         ]);
 
-/*        $infant = function($rat) {
+        $infant = function($rat) {
             return ! ( !$rat->is_alive && ($rat->death_primary_cause->is_infant) && ($rat->precise_age > 42) );
         };
         $rules->add($infant, [
@@ -309,7 +309,7 @@ class RatsTable extends Table
         $rules->add($oldster, [
             'errorField' => 'death_primary_cause_id',
             'message' => 'Impossible: your rat was too young at this date to die “from old age”.'
-        ]); */
+        ]);
 
         return $rules;
     }

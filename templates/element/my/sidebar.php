@@ -1,30 +1,43 @@
+<div class="side-nav-group">
+    <div class="tooltip">
+        <?= $this->Html->image('/img/icon-user.svg', [
+            'url' => ['controller' => 'Users', 'action' => 'my'],
+            'class' => 'side-nav-icon',
+            'alt' => __('My profile')]) ?>
+        <span class="tooltiptext"><?= __('Manage my profile') ?></span>
+    </div>
 
-<?= $this->Html->image('/img/icon-profile.svg', [
-    'url' => ['controller' => 'Users', 'action' => 'my'],
-    'class' => 'side-nav-icon',
-    'alt' => __('My profile')]) ?>
+    <div class="tooltip">
+        <?= $this->Html->image('/img/icon-rat.svg', [
+            'url' => ['controller' => 'Rats', 'action' => 'my'],
+            'class' => 'side-nav-icon',
+            'alt' => __('My rats')]) ?>
+        <span class="tooltiptext"><?= __('Manage my rats') ?></span>
+    </div>
 
-<div class="spacer"> </div>
+    <div class="tooltip">
+        <?= $this->Html->image('/img/icon-rattery.svg', [
+            'url' => ['controller' => 'Ratteries', 'action' => 'my'],
+            'class' => 'side-nav-icon',
+            'alt' => __('My ratteries')]) ?>
+            <span class="tooltiptext"><?= __('Manage my ratteries') ?></span>
+    </div>
 
-<?= $this->Html->image('/img/icon-one-rat.svg', [
-    'url' => ['controller' => 'Rats', 'action' => 'my'],
-    'class' => 'side-nav-icon',
-    'alt' => __('My rats')]) ?>
+    <div class="tooltip">
+        <?= $this->Html->image('/img/icon-litter.svg', [
+            'url' => ['controller' => 'Litters', 'action' => 'my'],
+            'class' => 'side-nav-icon',
+            'alt' => __('My Litters')]) ?>
+        <span class="tooltiptext"><?= __('Manage my litters') ?></span>
+    </div>
+</div>
 
-<?= $this->Html->image('/img/icon-rattery.svg', [
-    'url' => ['controller' => 'Ratteries', 'action' => 'my'],
-    'class' => 'side-nav-icon',
-    'alt' => __('My ratteries')]) ?>
-
-
-<?= $this->Html->image('/img/icon-fa-baby.svg', [
-    'url' => ['controller' => 'Litters', 'action' => 'my'],
-    'class' => 'side-nav-icon',
-    'alt' => __('My Litters')]) ?>
-
-<div class="spacer"> </div>
-
-<?= $this->Html->image('/img/icon-backoffice.svg', [
-    'url' => ['controller' => 'Users', 'action' => 'myBackOffice'],
-    'class' => 'side-nav-icon',
-    'alt' => __('Admin site')]) ?>
+<div class="side-nav-group">
+    <div class="tooltip-staff">
+        <?= $this->Html->image('/img/icon-backoffice.svg', [
+            'url' => ['controller' => 'States', 'action' => 'index'],
+            'class' => 'side-nav-icon',
+            'alt' => __('Admin site')]) ?>
+        <span class="tooltiptext-staff"><?= __('Admin site') ?></span>
+    </div>
+</div>

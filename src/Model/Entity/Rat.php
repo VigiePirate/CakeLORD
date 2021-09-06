@@ -338,7 +338,7 @@ class Rat extends Entity
             }
         } else {
             if($this->age > 54) {
-                $cause = __('Unknown (presumably dead)'); // ndash and fine space, please edit carefully
+                $cause = __('Unknown (presumably dead)');
             } else {
                 $cause = '– ' . __('Alive') . ' –'; // ndash and fine space, please edit carefully
             }

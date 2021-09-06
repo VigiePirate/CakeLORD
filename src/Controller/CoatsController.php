@@ -33,13 +33,17 @@ class CoatsController extends AppController
      */
     public function view($id = null)
     {
-        /* From bake, but associated rats are too many */
-        $coat = $this->Coats->get($id, [
-            'contain' => ['Rats'],
-        ]);
-
-        /* $coat = $this->Coats->get($id); */
-        $this->set(compact('coat'));
+        $coat = $this->Coats->get($id);
+        $examples = $this->Coats->Rats->find()
+            ->where([
+                ['coat_id' => $id],
+                ['picture !=' => 'Unknown.png'],
+                ['picture !=' => ''],
+                ['picture IS NOT' => null]])
+            ->order(['rand()'])
+            ->limit(100)
+            ->toArray();
+        $this->set(compact('coat','examples'));
     }
 
     /**
