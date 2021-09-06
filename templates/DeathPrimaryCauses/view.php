@@ -7,14 +7,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->Html->image('/img/icon-fa-alert.svg', [
-                'url' => ['controller' => 'Conversations', 'action' => 'add'],
-                'class' => 'side-nav-icon',
-                'alt' => __('Report')]) ?>
-            <?= $this->Html->image('/img/icon-help.svg', [
-                'url' => ['controller' => 'Articles', 'action' => 'index'],
-                'class' => 'side-nav-icon',
-                'alt' => __('Help')]) ?>
+            <?= $this->element('default_sidebar') ?>
             <div class="spacer"> </div>
             <?= $this->Html->image('/img/icon-search-rats.svg', [
                 'url' => ['controller' => 'Rats', 'action' => 'findByPrimaryDeath'],

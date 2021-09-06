@@ -1,0 +1,78 @@
+.current-statemark {
+  font-size:3rem;
+  line-height:1;
+  font-weight: bold;
+  padding:1rem 1.25rem;
+  margin: 0rem 0.5rem;
+  box-shadow: 0px -7px 14px 0 rgb(60 66 87 / 10%) inset, 0px 6px 6px 0 rgb(0 0 0 / 7%) inset;
+  border-radius:20em;
+}
+
+.statemark {
+  font-size:2.5rem;
+  line-height:1;
+  font-weight: bold;
+  padding:0.5rem 0.75rem;
+}
+
+.statemark:hover {
+  box-shadow: 0px -7px 14px 0 rgb(60 66 87 / 10%) inset, 0px 6px 6px 0 rgb(0 0 0 / 7%) inset;
+  border-radius: 20em;
+  background-color: #c3c8e688;
+  transform: scale(1.33);
+}
+
+.staff-action-symbol{
+  font-size:2rem;
+  line-height:1;
+  color:#b1000c;
+  padding:0.5rem;
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip-state .tooltiptext-state {
+  visibility: hidden;
+  width: max-content;
+  background-color: #663300;
+  color: #fff;
+  text-align: right;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 1.4rem;
+  /* Position the tooltip text */
+  position: absolute;
+  top: 2.8rem;
+  right: 9.75rem;
+  z-index: 99;
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip-state:hover .tooltiptext-state {
+  visibility: visible;
+}
+
+.tooltip-state .tooltiptext-state::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -0.75rem;
+  border-width: 0.75rem;
+  border-style: solid;
+  border-color: transparent transparent transparent #663300;
+}
+
+/* compensate for statebar height in global layout */
+.sheet-heading {
+  align-items:flex-start;
+}
+
+h1 {
+  margin-top:-2rem;
+}

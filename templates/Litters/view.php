@@ -7,33 +7,45 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->Html->image('/img/icon-fa-alert.svg', [
-              'url' => ['controller' => 'Conversations', 'action' => 'add'],
-              'class' => 'side-nav-icon',
-              'alt' => __('Report')]) ?>
-            <?= $this->Html->image('/img/icon-help.svg', [
-              'url' => ['controller' => 'Articles', 'action' => 'index'],
-              'class' => 'side-nav-icon',
-              'alt' => __('Help')]) ?>
-            <div class="spacer"> </div>
-            <?= $this->Form->postLink(
-                $this->Html->image('/img/icon-fa-trash.svg', [
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Delete')
-                ]),
-                ['action' => 'delete', $litter->id],
-                ['escape' => false,
-                    'confirm' => __('Are you sure you want to delete # {0}?', $litter->id)
-                ]) ?>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar') ?>
+            </div>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-edit.svg', [
+                        'url' => ['controller' => 'Litters', 'action' => 'edit'],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Edit litter')]) ?>
+                    <span class="tooltiptext"><?= __('Edit this litter') ?></span>
+                </div>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-add-rattery.svg', [
+                        'url' => ['controller' => 'Litters', 'action' => 'add_contribution'],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Add rattery')]) ?>
+                    <span class="tooltiptext"><?= __('Add a contributing rattery') ?></span>
+                </div>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-add-rat.svg', [
+                        'url' => ['controller' => 'Rats', 'action' => 'add'],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Add rat')]) ?>
+                    <span class="tooltiptext"><?= __('Add a rat in this litter') ?></span>
+                </div>
+            </div>
+            <div class="side-nav-group">
+                <?= $this->element('staff_sidebar', [
+                    'controller' => 'Litters',
+                    'object' => $litter
+                    ]) ?>
+            </div>
         </div>
     </aside>
     <div class="column-responsive column-90">
         <div class="litters view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= __('Litter') ?></div>
-                <div class="sheet-markers">
-                    <div class="statemark statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></div>
-                </div>
+                <?= $this->element('statebar', ['sheet' => $litter]) ?>
             </div>
 
             <h1><?= h($litter->full_name) ?></h1>
@@ -149,7 +161,6 @@
                             <th><?= __('Rattery Prefix') ?></th>
                             <th><?= __('Rattery Name') ?></th>
                             <th><?= __('Contribution') ?></th>
-                            <th class="actions-title"><?= $this->Html->image('/img/icon-fa-action.svg', ['class' => 'action-icon'])?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -158,12 +169,6 @@
                             <td><?= $this->Html->link(h($contribution->rattery->prefix), ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id]) ?></td>
                             <td><?= h($contribution->rattery->name) ?></td>
                             <td><?= h($contribution->contribution_type->name) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->image('/img/icon-view.svg', [
-                                    'url' => ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id],
-                                    'class' => 'action-icon',
-                                    'alt' => __('See Rat')]) ?>
-                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -271,3 +276,5 @@
         </div>
     </div>
 </div>
+
+<?= $this->Html->css('statebar.css') ?>
