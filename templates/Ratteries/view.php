@@ -27,6 +27,13 @@
                     <span class="tooltiptext"><?= __('See rattery on the map') ?></span>
                 </div>
                 <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-move-rattery.svg', [
+                        'url' => ['controller' => 'Ratteries', 'action' => 'move', $rattery->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Move')]) ?>
+                    <span class="tooltiptext"><?= __('Declare a new location') ?></span>
+                </div>
+                <div class="tooltip">
                     <?= $this->Html->image('/img/icon-add-litter.svg', [
                         'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
                         'class' => 'side-nav-icon',
