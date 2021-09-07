@@ -54,9 +54,35 @@ class RatsController extends AppController
         $this->paginate = [
             'contain' => ['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
         ];
-        $rats = $this->paginate($this->Rats->find()->where(['Rats.owner_user_id' => $user->id]));
+        // $rats = $this->paginate($this->Rats->find()->where(['Rats.owner_user_id' => $user->id]));
+        $females = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'F'])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        $males = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'M'])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        $alive = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => true])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        $departed = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => false])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        $pending = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id' => '4'])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        $waiting = $this->Rats->find()
+            ->where([
+                'Rats.owner_user_id' => $user->id,
+                'OR' => [['Rats.state_id' => '3'], ['Rats.state_id' => '5']]])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        $okrats = $this->Rats->find()
+            ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id <=' => '2'])
+            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
 
-        $this->set(compact('rats', 'user'));
+        if(! empty($pending->first())) {
+            $this->Flash->error(__('You have rat sheets to correct!'));
+        }
+        $this->set(compact('females','males','alive','departed','pending','waiting','okrats','user'));
     }
 
     /**
@@ -84,11 +110,27 @@ class RatsController extends AppController
              'Conversations', 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
         ]);
 
+        $this->loadModel('States');
+        if($rat->state->is_frozen) {
+            $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);
+            $this->set(compact('next_thawed_state'));
+        }
+        else {
+            $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
+            $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
+            if( !empty($rat->state->next_frozen_state_id) ) {
+                $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
+                $this->set(compact('next_frozen_state'));
+            }
+            $this->set(compact('next_ko_state','next_ok_state'));
+        };
+
         $snap_diffs = [];
         foreach ($rat->rat_snapshots as $snapshot) {
             $snap_diffs[$snapshot->id] = $this->Rats->snapCompareAsString($rat, $snapshot->id);
         }
-        $this->set(compact('rat', 'snap_diffs'));
+
+        $this->set(compact('rat','snap_diffs'));
     }
 
     /**

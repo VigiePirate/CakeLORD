@@ -92,6 +92,22 @@ class RatteriesController extends AppController
                                 });
         $offsprings = $this->paginate($offspringsQuery);
 
+        /* statebar */
+        $this->loadModel('States');
+        if($rattery->state->is_frozen) {
+            $next_thawed_state = $this->States->get($rattery->state->next_thawed_state_id);
+            $this->set(compact('next_thawed_state'));
+        }
+        else {
+            $next_ko_state = $this->States->get($rattery->state->next_ko_state_id);
+            $next_ok_state = $this->States->get($rattery->state->next_ok_state_id);
+            if( !empty($rattery->state->next_frozen_state_id) ) {
+                $next_frozen_state = $this->States->get($rattery->state->next_frozen_state_id);
+                $this->set(compact('next_frozen_state'));
+            }
+            $this->set(compact('next_ko_state','next_ok_state'));
+        };
+
         $this->set(compact('rattery','stats','champion','offsprings'));
     }
 

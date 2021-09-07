@@ -7,15 +7,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->Html->image('/img/icon-fa-alert.svg', [
-                'url' => ['controller' => 'Conversations', 'action' => 'add'],
-                'class' => 'side-nav-icon',
-                'alt' => __('Report')]) ?>
-            <?= $this->Html->image('/img/icon-help.svg', [
-                'url' => ['controller' => 'Articles', 'action' => 'index'],
-                'class' => 'side-nav-icon',
-                'alt' => __('Help')]) ?>
-
+            <?= $this->element('default_sidebar') ?>
             <?= $this->Html->link(__('Edit Death Secondary Cause'), ['action' => 'edit', $deathSecondaryCause->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Death Secondary Cause'), ['action' => 'delete', $deathSecondaryCause->id], ['confirm' => __('Are you sure you want to delete # {0}?', $deathSecondaryCause->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Death Secondary Causes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>

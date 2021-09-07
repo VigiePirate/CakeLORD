@@ -7,7 +7,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
+            <?= $this->element('default_sidebar') ?>
             <?= $this->Html->link(__('Edit Contribution'), ['action' => 'edit', $contribution->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Contribution'), ['action' => 'delete', $contribution->id], ['confirm' => __('Are you sure you want to delete # {0}?', $contribution->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Contributions'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
