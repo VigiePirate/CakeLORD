@@ -70,6 +70,10 @@
                             <th><?= __('Mandatory picture?') ?></th>
                             <td><?= $coat->is_picture_mandatory ? __('Yes') : __('No'); ?></td>
                         </tr>
+                        <tr>
+                            <th><?= __('Frequency') ?></th>
+                            <td><?= h($frequency) . __(' %') ?> (<?= h($count) ?> rats) </td>
+                        </tr>
                     </table>
                 </div>
                 <?php if ($coat->picture != '') : ?>

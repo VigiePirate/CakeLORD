@@ -33,11 +33,22 @@ class MarkingsController extends AppController
      */
     public function view($id = null)
     {
-        $marking = $this->Markings->get($id, [
-            'contain' => ['Rats'],
-        ]);
+        $marking = $this->Markings->get($id);
 
-        $this->set('marking', $marking);
+        $examples = $this->Markings->Rats->find()
+            ->where([
+                ['marking_id' => $id],
+                ['picture !=' => 'Unknown.png'],
+                ['picture !=' => ''],
+                ['picture IS NOT' => null]])
+            ->order(['rand()'])
+            ->limit(32)
+            ->toArray();
+
+        $count = $marking->countMyRats(['field' => 'marking_id']);
+        $frequency = $marking->frequencyOfMyRats(['field' => 'marking_id']);
+
+        $this->set(compact('marking','examples','count','frequency'));
     }
 
     /**
