@@ -51,34 +51,35 @@
 
             <h1><?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
 
-            <!-- d3.js family tree -->
             <div id="fullscreen_container">
                 <div id="familytree">
                 </div>
             </div>
-            <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
-            <?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'); ?>
-            <?= $this->Html->script('familytree'); ?>
-            <?= $this->Html->script('fullscreen'); ?>
-            <script>
-            // box sizes variables; should probably be in rem
-            var boxWidth = 222,
-                boxHeight = 60,
-                nodeWidth = 93,
-                nodeHeight = 248,
-                // duration of transitions in ms
-                duration = 440, //500 is fine, 3000 for debug
-                // d3 multiplies the node size by this value
-                // to calculate the distance between nodes
-                sibling_separation = 0.75,
-                cousin_separation = 1;
-                // data filename
-                json = <?= $json ?>;
-            setup();
-            </script>
-            <!-- end family tree -->
         </div>
     </div>
 </div>
 
 <?= $this->Html->css('statebar.css') ?>
+
+<!-- d3.js family tree -->
+<?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
+<?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'); ?>
+<?= $this->Html->script('familytree'); ?>
+<?= $this->Html->script('fullscreen'); ?>
+<script>
+// box sizes variables; should probably be in rem
+var boxWidth = 222,
+    boxHeight = 60,
+    nodeWidth = 93,
+    nodeHeight = 248,
+    // duration of transitions in ms
+    duration = 440, //500 is fine, 3000 for debug
+    // d3 multiplies the node size by this value
+    // to calculate the distance between nodes
+    sibling_separation = 0.75,
+    cousin_separation = 1;
+    // data filename
+    json = <?= $json ?>;
+setup();
+</script>
+<!-- end family tree -->

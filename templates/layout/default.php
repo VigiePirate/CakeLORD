@@ -116,7 +116,7 @@ $cakeDescription = 'LORD';
         <div class="footer_section">
             <h5>Statistics</h5>
             <div class="footer_subsection">
-            <a href="/articles">Site statistics</a>
+            <a href="/pages/stats">Site statistics</a>
             <a href="/articles">Rat statistics</a>
         </div>
             <h5>Rattery map</h5>
