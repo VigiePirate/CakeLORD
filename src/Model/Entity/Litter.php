@@ -7,6 +7,7 @@ use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\ORM\Locator\LocatorAwareTrait;
+use App\Model\Entity\StatisticsTrait;
 
 /**
  * Litter Entity
@@ -31,6 +32,8 @@ use Cake\ORM\Locator\LocatorAwareTrait;
  */
 class Litter extends Entity
 {
+    use StatisticsTrait;
+
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *

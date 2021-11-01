@@ -135,19 +135,22 @@
                     <td><?= $litter->contributions[0]->rattery->prefix ?><?= !empty($litter->contributions[1]) ? ('-' . $litter->contributions[1]->rattery->prefix) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Mating Date') ?></th>
+                    <th><?= __('Mating date') ?></th>
                     <td><?= isset($litter->mating_date) ? h($litter->mating_date->i18nFormat('dd/MM/yyyy')) : __('Unknown') ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Birth Date') ?></th>
+                    <th><?= __('Birth date') ?></th>
                     <td><?= h($litter->birth_date->i18nFormat('dd/MM/yyyy')) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Pups Number') ?></th>
-                    <td><?= $this->Number->format($litter->pups_number) . ' ' . __('pups')?> (x males, y females, tbd)</td>
+                    <th><?= __('Pups number') ?></th>
+                    <td>
+                        <?= $this->Number->format($litter->pups_number) . ' ' . __('pups')?>
+                        (♀: <?= $this->Number->format($sexes[0]['F']) ?>,
+                        ♂: <?= $this->Number->format($sexes[0]['M']) ?>)</td>
                 </tr>
                 <tr>
-                    <th><?= __('Pups Number Stillborn') ?></th>
+                    <th><?= __('Stillborn pups number') ?></th>
                     <td><?= $this->Number->format($litter->pups_number_stillborn) ?></td>
                 </tr>
             </table>

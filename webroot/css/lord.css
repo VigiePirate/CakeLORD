@@ -47,6 +47,10 @@ details > summary.h2 {
   margin-bottom: 1.5rem;
 }
 
+details:last-of-type {
+  margin-bottom:1.5rem;
+}
+
 h1, h2, h3, h4, h5 {
   font-weight: bold;
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
@@ -74,7 +78,7 @@ h1 span {
 .sun {
   color: #ffd42a
 }
-/* end of ugly stuff */ 
+/* end of ugly stuff */
 
 h2 {
   font-size:2.8rem; /*2.8*/
@@ -321,6 +325,11 @@ td,th {
 
 .nowrap {
     white-space: nowrap;
+}
+
+.comment {
+  font-family: "Alegreya", serif;
+  font-style: italic;
 }
 
 blockquote {
@@ -961,6 +970,11 @@ footer {
 #gallery img {
   width: 100% !important;
   height: auto !important;
+}
+
+/* Statistics canvas */
+canvas {
+  margin-bottom: 1.5rem;
 }
 
 /* d3js pedigree */

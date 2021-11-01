@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Collection\Collection;
+// use App\Model\Entity\Litter;
 
 /**
  * Litters Controller
@@ -68,6 +69,9 @@ class LittersController extends AppController
             'Ratteries','Contributions', 'Conversations', 'LitterSnapshots',
             ],
         ]);
+
+        $sexes = $litter->computeLitterSexes(['litter_id' => $id])->toArray();
+
         $offspringsQuery = $this->Litters->OffspringRats
                                 ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses','OwnerUsers']])
                                 ->matching('BirthLitters', function (\Cake\ORM\Query $query) use ($litter) {
@@ -92,7 +96,7 @@ class LittersController extends AppController
             $this->set(compact('next_ko_state','next_ok_state'));
         };
 
-        $this->set(compact('litter', 'offsprings'));
+        $this->set(compact('litter', 'offsprings', 'sexes'));
     }
 
     /**

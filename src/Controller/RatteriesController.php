@@ -92,6 +92,10 @@ class RatteriesController extends AppController
                                 });
         $offsprings = $this->paginate($offspringsQuery);
 
+        // debug new statistics
+        // $lifetime = $rattery->lifetime;
+        // $this->set(compact('lifetime'));
+
         /* statebar */
         $this->loadModel('States');
         if($rattery->state->is_frozen) {

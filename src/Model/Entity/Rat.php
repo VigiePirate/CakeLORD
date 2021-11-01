@@ -293,12 +293,12 @@ class Rat extends Entity
 
     protected function _getChampionAgeString()
     {
-        if (!$this->is_alive
-            && isset($this->birth_date)
-            && isset($this->_fields['death_date'])
-            && isset($this->_fields['death_primary_cause'])
-            && (!isset($this->_fields['death_secondary_cause']) || (isset($this->_fields['death_primary_cause']) && $this->death_secondary_cause_id != 1))
-        ) {
+        // if (!$this->is_alive
+        //    && isset($this->birth_date)
+        //    && isset($this->_fields['death_date'])
+        //    && isset($this->_fields['death_primary_cause'])
+        //    && (!isset($this->_fields['death_secondary_cause']) || (isset($this->_fields['death_primary_cause']) && $this->death_secondary_cause_id != 1))
+        // ) {
             //return $agedate->diffInDays($this->_fields['birth_date'], true);
             // timeAgoInWords? diffForHumans?
             $birthdate = $this->birth_date;
@@ -306,9 +306,9 @@ class Rat extends Entity
             /* call to timeAgoInWords in the "wrong" date order to avoid "ago" to be added to the string */
             /* could be improved with option "relativeString" to skip number of weeks and convert them to days */
             return $ageInWords =  $deathdate->timeAgoInWords(['from' => $birthdate, 'accuracy' => ['year' => 'day']]);
-        } else {
-            return 0; // Should raise exception
-        }
+        //} else {
+        //    return 0; // Should raise exception
+        //}
     }
 
     protected function _getSingularityString()

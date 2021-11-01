@@ -86,6 +86,11 @@ class Rattery extends Entity
 
     /* Statistics */
 
+    /* to do */
+    protected function _getLifetime() {
+        return -1;
+    }
+
     protected function _getChampion() {
     /* should return usual name with double prefix instead of name */
 

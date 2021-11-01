@@ -15,9 +15,8 @@
                     <?= $this->Html->image('/img/icon-back.svg', [
                         'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
                         'class' => 'side-nav-icon',
-                        'id' => 'toggle_fullscreen',
                         'alt' => __('Full Screen')]) ?>
-                    <span class="tooltiptext"><?= __('Back to rat sheet') ?></span>
+                        <span class="tooltiptext"><?= __('Back to rat sheet') ?></span>
                 </div>
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-fullscreen.svg', [
@@ -40,17 +39,16 @@
     <div class="column-responsive column-90">
         <div class="rats view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Rat Family Tree') ?></div>
-                <div class="sheet-markers">
-                    <div class="tooltip-state">
-                        <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
-                        <span class="tooltiptext-state hide-on-mobile"><?= h($rat->state->name) ?></span>
-                    </div>
-                </div>
+                <div class="sheet-title pretitle"><?= _('Rat family tree') ?></div>
+                <?= $this->element('statebar', ['sheet' => $rat]) ?>
             </div>
 
-            <h1><?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?></h1>
+            <h1>
+                <!-- to be improved -->
+                <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?>
+            </h1>
 
+            <!-- d3.js family tree -->
             <div id="fullscreen_container">
                 <div id="familytree">
                 </div>
@@ -61,7 +59,6 @@
 
 <?= $this->Html->css('statebar.css') ?>
 
-<!-- d3.js family tree -->
 <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
 <?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'); ?>
 <?= $this->Html->script('familytree'); ?>
