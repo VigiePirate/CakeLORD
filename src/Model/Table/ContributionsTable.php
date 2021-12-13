@@ -97,4 +97,24 @@ class ContributionsTable extends Table
             ->contain(['ContributionTypes', 'Ratteries'])
             ->order(['ContributionTypes.priority' => 'ASC']);
     }
+
+    public function findFromRattery(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['ratteries'])) {
+            $query->leftJoinWith('Ratteries')
+                  ->where([
+                      'OR' => ['Ratteries.name IS' => null, 'Ratteries.prefix IS' => NULL],
+                  ]);
+        } else {
+            // Find articles that have one or more of the provided tags.
+            $query->innerJoinWith('Ratteries')
+                  ->where(['Ratteries.id' => implode($options['ratteries'])]);
+        }
+
+        return $query->group(['Contributions.id']);
+    }
 }

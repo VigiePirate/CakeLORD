@@ -219,6 +219,54 @@
             <?php endif; ?>
         </div>
 
+        <div class="related">
+            <h3 class="staff">Statistics</h3>
+            <table class="condensed stats">
+                <tr>
+                    <th><?= __('Current number of rats:') ?></th>
+                    <td><?=
+                        $alive_rat_count!=0 ?
+                        h($alive_rat_count) . ' ' . __('rats') . ' (♀: ' . h($alive_female_count) . ', ♂: ' . h($alive_male_count) . ')' :
+                        __('No rat at the moment')
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th><?= __('Total number of owned rats:') ?></th>
+                    <td><?= h($rat_count) . ' ' . __('rats') ?> (♀: <?= h($female_count) ?>, ♂: <?= h($male_count) ?>) </td>
+                </tr>
+                <tr>
+                    <th><?= __('Managed sheets (as owner or creator):') ?></th>
+                    <td>
+                        <?= h($rat_count+$managed_rat_count) . ' ' . __('rats') ?>
+                        (<?= __('alive: ') . h($alive_rat_count+$alive_managed_rat_count) ?>)
+                    </td>
+                </tr>
+            </table>
+
+            <table class="condensed stats">
+                <tr>
+                    <th><?= __('Average lifespan of their rats:') ?></th>
+                    <td><?= h($avg_lifespan) . ' ' . __('months') ?> (♀: <?= h($female_avg_lifespan) ?>, ♂: <?= h($male_avg_lifespan) ?>) </td>
+                    <tr>
+                        <th> ⨽ average, infant mortality excluded:</th>
+                        <td> ⨽ <?= h($not_infant_lifespan) . __(' months') ?> (♀: <?= h($not_infant_female_lifespan) ?>, ♂: <?= h($not_infant_male_lifespan) ?>)
+                    </tr>
+                    <tr>
+                        <th> ⨽ average, accidents also excluded:</th>
+                        <td> ⨽ <?= h($not_accident_lifespan) . __(' months') ?> (♀: <?= h($not_accident_female_lifespan) ?>, ♂: <?= h($not_accident_male_lifespan) ?>)
+                    </tr>
+                </tr>
+            </table>
+
+            <table class="condensed stats">
+                <tr>
+                    <th><?= __('Their champion:') ?></th>
+                    <td><?= empty($champion) ? 'This user has no eligible champion' : $this->Html->link(h($champion->usual_name),['controller' => 'Rats', 'action' => 'view', $champion->id]) . ' (' . h($champion->champion_age_string) .')'?></td>
+                </tr>
+            </table>
+        </div>
+
         <div class="signature">
             &mdash; Created on <?= $user->created->i18nFormat('dd/MM/yyyy') ?>. <?= ($user->modified != $user->created) ? 'Last modified on ' . $user->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
         </div>

@@ -104,10 +104,10 @@ class RatsController extends AppController
             'BredLitters', 'BredLitters.Contributions', 'BredLitters.Ratteries',
             'BredLitters.Sire', 'BredLitters.Sire.BirthLitters', 'BredLitters.Sire.BirthLitters.Contributions',
             'BredLitters.Dam', 'BredLitters.Dam.BirthLitters', 'BredLitters.Dam.BirthLitters.Contributions',
-            'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
+            'BredLitters.OffspringRats', 'BredLitters.OffspringRats.Ratteries',
             'BredLitters.OffspringRats.BirthLitters', 'BredLitters.OffspringRats.BirthLitters.Contributions',
             'BredLitters.OffspringRats.OwnerUsers', 'BredLitters.OffspringRats.States', 'BredLitters.OffspringRats.DeathPrimaryCauses', 'BredLitters.OffspringRats.DeathSecondaryCauses',
-             'Conversations', 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
+            'Conversations', 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
         ]);
 
         $this->loadModel('States');
@@ -122,7 +122,7 @@ class RatsController extends AppController
                 $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }
-            $this->set(compact('next_ko_state','next_ok_state'));
+            $this->set(compact('next_ko_state', 'next_ok_state'));
         };
 
         $snap_diffs = [];
@@ -130,7 +130,7 @@ class RatsController extends AppController
             $snap_diffs[$snapshot->id] = $this->Rats->snapCompareAsString($rat, $snapshot->id);
         }
 
-        $this->set(compact('rat','snap_diffs'));
+        $this->set(compact('rat', 'snap_diffs'));
     }
 
     /**
@@ -613,8 +613,117 @@ class RatsController extends AppController
             '_children' => $rat->children_array,
         ];
 
+        $this->loadModel('States');
+        if($rat->state->is_frozen) {
+            $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);
+            $this->set(compact('next_thawed_state'));
+        }
+        else {
+            $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
+            $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
+            if( !empty($rat->state->next_frozen_state_id) ) {
+                $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
+                $this->set(compact('next_frozen_state'));
+            }
+            $this->set(compact('next_ko_state','next_ok_state'));
+        };
+
         $json = json_encode($family);
         $this->set(compact('rat', 'json'));
+    }
+
+    public function computeDescendance($id, &$descendance)
+    {
+        if (in_array($id, $descendance)) {
+            return null;
+        }
+
+        else {
+            array_push($descendance, $id);
+
+            $children = $this->Rats->find()
+                ->select(['id'])
+                ->matching('BirthLitters.ParentRats', function ($query) use ($id) {
+                    return $query->where(['ParentRats.id' => $id]);
+                })
+                ->all();
+
+            if (!empty($children)) {
+                foreach ($children as $child) {
+                    $this->computeDescendance($child->id, $descendance);
+                }
+                return $descendance;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public function computeAncestry($id, &$ancestry)
+    {
+        if (in_array($id, $ancestry)) {
+            return null;
+        }
+
+        else {
+            array_push($ancestry, $id);
+
+            $ancestors = $this->Rats->find()
+                ->select(['id'])
+                ->matching('BredLitters.OffspringRats', function ($query) use ($id) {
+                    return $query->where(['OffspringRats.id' => $id]);
+                })
+                ->all();
+
+            if (!empty($ancestors)) {
+                foreach ($ancestors as $ancestor) {
+                    $this->computeAncestry($ancestor->id, $ancestry);
+                }
+                return $ancestry;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public function family($id = null) {
+        $this->Authorization->skipAuthorization();
+        $rat = $this->Rats->get($id, [
+            'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions', 'BredLitters']
+        ]);
+
+        // -1 since the rat itself is put in the list for recursion initialization
+        $descendance = [];
+        $descendors = count($this->computeDescendance($rat->id, $descendance)) - 1;
+        $ancestry = [];
+        $ancestors = count($this->computeAncestry($rat->id, $ancestry)) - 1;
+        $children = 0; // we have an internal function to get children!!
+        foreach ($rat->bred_litters as $litter) {
+            $children += $litter->pups_number;
+        }
+
+        $asc_alive = $rat->countRats([
+            'Rats.id IN' => $ancestry,
+            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
+            'Rats.id !=' => $rat->id,
+            'is_alive IS' => true,
+            'DATEDIFF(NOW(), birth_date) <' => '1645'
+        ]);
+
+        $desc_alive = $rat->countRats([
+            'Rats.id IN' => $descendance,
+            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
+            'Rats.id !=' => $rat->id,
+            'is_alive IS' => true,
+            'DATEDIFF(NOW(), birth_date) <' => '1645'
+        ]);
+
+        $stats = $rat->wrapFamilyStatistics($ancestry, $descendance);
+
+        $this->set(compact('rat', 'children',
+            'ancestors', 'asc_alive',
+            'descendors', 'desc_alive',
+            'stats'));
     }
 
     /**

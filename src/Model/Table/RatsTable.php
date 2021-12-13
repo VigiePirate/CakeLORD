@@ -646,11 +646,4 @@ class RatsTable extends Table
             ])
             ->contain(['Ratteries']);
     }
-
-    /*** Statistics functions ***/
-
-     public function countRats(Query $query, array $options) {
-         return $query->count();
-     }
-
 }

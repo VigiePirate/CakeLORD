@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Chronos\Chronos;
 use App\Model\Entity\Lord;
 
 class LordController extends AppController
@@ -40,19 +41,20 @@ class LordController extends AppController
         $active_frequency = round(100 * $active_count / $rattery_count,2);
         $rattery_lifetime = $lord->computeAvgRatteryLifetime();
 
-        $lifespan = $lord->roundLifespan();
-        $female_lifespan = $lord->roundLifespan(['sex' => 'F']);
-        $male_lifespan = $lord->roundLifespan(['sex' => 'M']);
+        $offset_option =  ['birth_date <=' => Chronos::today()->modify('-3 years')];
+        $lifespan = $lord->roundLifespan($offset_option);
+        $female_lifespan = $lord->roundLifespan(['sex' => 'F', 'birth_date <=' => Chronos::today()->modify('-3 years')]);
+        $male_lifespan = $lord->roundLifespan(['sex' => 'M', 'birth_date <=' => Chronos::today()->modify('-3 years')]);
 
-        $not_infant_lifespan = $lord->roundLifespan(['DeathPrimaryCauses.is_infant IS' => false]);
-        $not_infant_female_lifespan = $lord->roundLifespan(['sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
-        $not_infant_male_lifespan = $lord->roundLifespan(['sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $not_infant_lifespan = $lord->roundLifespan(['DeathPrimaryCauses.is_infant IS' => false, 'birth_date <=' => Chronos::today()->modify('-3 years')]);
+        $not_infant_female_lifespan = $lord->roundLifespan(['sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'birth_date <=' => Chronos::today()->modify('-3 years')]);
+        $not_infant_male_lifespan = $lord->roundLifespan(['sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'birth_date <=' => Chronos::today()->modify('-3 years')]);
 
-        $not_accident_lifespan = $lord->roundLifespan(['DeathPrimaryCauses.is_infant IS' => false,'DeathPrimaryCauses.is_accident IS' => false]);
-        $not_accident_female_lifespan = $lord->roundLifespan(['DeathPrimaryCauses.is_infant IS' => false,'DeathPrimaryCauses.is_accident IS' => false]);
-        $not_accident_male_lifespan = $lord->roundLifespan(['DeathPrimaryCauses.is_infant IS' => false,'DeathPrimaryCauses.is_accident IS' => false]);
+        $not_accident_lifespan = $lord->roundLifespan(['DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false, 'birth_date <=' => Chronos::today()->modify('-3 years')]);
+        $not_accident_female_lifespan = $lord->roundLifespan(['sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false, 'birth_date <=' => Chronos::today()->modify('-3 years')]);
+        $not_accident_male_lifespan = $lord->roundLifespan(['sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false, 'birth_date <=' => Chronos::today()->modify('-3 years')]);
 
-        $champion = $lord->findChampion()->first();
+        $champion = $lord->findChampion();
         $champion = $rats->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
 
         $distribution = $lord->computeMortalityDistribution()->enableHydration(false)->toArray();
@@ -61,7 +63,7 @@ class LordController extends AppController
         $quartiles = $lord->computeDeathInterquartile($survival);
         $max = $lord->computeDeathPeak($distribution);
         $rate = json_encode($lord->computeMortalityRate($distribution));
-        $expectancy = json_encode($lord->computeLifespanByYear()->toArray());
+        $expectancy = json_encode($lord->computeLifespanByYear(['birth_date <=' => Chronos::today()->modify('-3 years')])->toArray());
         $mortality = json_encode($distribution);
         $survival = json_encode($survival);
 
@@ -78,7 +80,7 @@ class LordController extends AppController
         $litters_by_birthplace = $lord->computeLittersByRattery(['Contributions.contribution_type_id' => '1']);
         $litters_by_contributor = $lord->computeLittersByRattery(['Contributions.contribution_type_id >' => '1']);
         $pups_by_rattery = $lord->computePupsByRattery();
-        $avg_sex_ratio = $lord->computeLitterSexRatioInWords(['OffspringRats.rattery_id >' => '6']);
+        $avg_sex_ratio = $lord->computeLitterSexRatioInWords(['OffspringRats.rattery_id >' => '6'], 100);
 
         $nongeneric_litter_count = $lord->countLitters(['rattery_id >' => '6']);
         $littersize_distribution = json_encode($lord->computeLitterSizeDistribution()->toArray());

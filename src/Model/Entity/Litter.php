@@ -97,6 +97,17 @@ class Litter extends Entity
     {
         if (isset($this->birth_date)) {
             $agedate = $this->birth_date;
+            return $agedate->diffInDays($this->sire[0]->birth_date, true);
+        } else { // should raise exception
+            return __('Unknown');
+            //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
+        }
+    }
+
+    protected function _getSireAgeInMonths() // now with litter birth date, should be with mating date?
+    {
+        if (isset($this->birth_date)) {
+            $agedate = $this->birth_date;
             return $agedate->diffInMonths($this->sire[0]->birth_date, true) .' months';
         } else { // should raise exception
             return __('Unknown');
@@ -108,10 +119,31 @@ class Litter extends Entity
     {
         if (isset($this->birth_date)) {
             $agedate = $this->birth_date;
+            return $agedate->diffInDays($this->dam[0]->birth_date, true);
+        } else { // should raise exception
+            return 0;
+            //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
+        }
+    }
+
+    protected function _getDamAgeInMonths() // now with litter birth date, should be with mating date?
+    {
+        if (isset($this->birth_date)) {
+            $agedate = $this->birth_date;
             return $agedate->diffInMonths($this->dam[0]->birth_date, true) .' months';
         } else { // should raise exception
             return __('Unknown');
             //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
+        }
+    }
+
+    protected function _getMaxAge()
+    {
+        if (isset($this->birth_date)) {
+            $agedate = $this->birth_date;
+            return $agedate->diffInMonths() .' months';
+        } else { // should raise exception
+            return __('Unknown');
         }
     }
 

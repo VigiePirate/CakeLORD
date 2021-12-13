@@ -238,7 +238,7 @@ table.summary {
 table.condensed.stats.histogram>tbody>tr>th>div{
   padding-right:0.5rem;
   float:right;
-  min-width:7ch; /*3em for health, 7ch for coi? */
+  min-width:8ch; /*3em for health, 8ch for coi? */
   background:#3d5299;
 }
 

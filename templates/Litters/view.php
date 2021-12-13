@@ -71,7 +71,7 @@
                     <table class="caption" align="center">
                         <tr>
                             <th>Age at litter birth:</th>
-                            <td><?= h($litter->dam_age) ?></td>
+                            <td><?= h($litter->dam_age_in_months) ?></td>
                         </tr>
                         <tr>
                             <th>Reached age:</th>
@@ -95,7 +95,7 @@
                         <table class="caption" align="center">
                             <tr>
                                 <th>Age at litter birth:</th>
-                                <td><?= h($litter->sire_age) ?></td>
+                                <td><?= h($litter->sire_age_in_months) ?></td>
                             </tr>
                             <tr>
                                 <th>Reached age:</th>
@@ -194,14 +194,41 @@
             <?php endif; ?>
 
             <h2>Statistics</h2>
+
+            <?php if ($survivors > 0) : ?>
+                <div class="message warning">
+                    <?= __('Please note that lifespan is computed only on deceased rats. Litter statistics will be accurate after the last survivor’s death.') ?>
+                </div>
+            <?php endif; ?>
+
             <table class="condensed">
                 <tr>
-                    <th><?= __('Survival rate') ?></th>
-                    <td>(not available yet)</td>
+                    <th><?= __('Current survival rate:') ?></th>
+                    <td>
+                        <?= h($survivors) . ' %'?>
+                    <span class="comment">
+                        <?= $survivors == 0 ?
+                        __('(all rats of the litter are now dead, or supposed so)') :
+                        '(at ' . $max_age . ')'
+                         ?>
+                    </span>
+                    </td>
                 </tr>
+
                 <tr>
-                    <th><?= __('Average Lifespan') ?></th>
-                    <td>(not available yet)</td>
+                    <th><?= __('Intermediate survival rates:') ?></th>
+                </tr>
+
+                <?php foreach ($survival as $rate) : ?>
+                    <tr>
+                        <th> ⨽ <?= h($rate['months']) . ' months:' ?> </th>
+                        <td> <?= h($rate['count']) . ' %' ?> </td>
+                    </tr>
+                <?php endforeach ?>
+
+                <tr>
+                    <th><?= __('Average lifespan:') ?></th>
+                    <td><?= h($lifespan) .' months' ?></td>
                 </tr>
             </table>
 

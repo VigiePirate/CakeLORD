@@ -2,7 +2,9 @@
 declare(strict_types=1);
 
 namespace App\Model\Entity;
+use App\Model\Entity\StatisticsTrait;
 
+// use Cake\Datasource\FactoryLocator;
 use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
@@ -62,6 +64,9 @@ use Cake\View\Helper\HtmlHelper;
  */
 class Rat extends Entity
 {
+
+    use StatisticsTrait;
+
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -261,13 +266,16 @@ class Rat extends Entity
         */
 
         if ($this->age < 0) { // Should raise exception
+            return $age = 'Negative age!';
+        }
+        if ($this->age > 54) {
             return $age = 'Unknown';
         }
         if (! $this->_fields['is_alive'] ) {
-            $age = $this->has('death_date') ?  ($this->age . ' months') : ('Unknown') ;//('supposed deceased, unknown age');
+            $age = $this->has('death_date') ? ($this->age . ' months') : ('Unknown') ;//('supposed deceased, unknown age');
             return $age;
         }  else {
-            if($this->age<1) {
+            if($this->age < 1) {
                 return $age = $this->precise_age . ' days';
             } else {
                 return $age = $this->age . ' months';
@@ -440,4 +448,32 @@ class Rat extends Entity
         return $this->birth_date->isFuture();
     }
 
+    public function wrapFamilyStatistics($ancestry, $descendance)
+    {
+        $stats['asc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry]);
+        $stats['asc_female_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry,'sex' => 'F']);
+        $stats['asc_male_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry,'sex' => 'M']);
+
+        $stats['asc_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['asc_female_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['asc_male_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
+
+        $stats['asc_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['asc_female_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['asc_male_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+
+        $stats['desc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance]);
+        $stats['desc_female_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance,'sex' => 'F']);
+        $stats['desc_male_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance,'sex' => 'M']);
+
+        $stats['desc_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['desc_female_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['desc_male_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
+
+        $stats['desc_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['desc_female_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['desc_male_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+
+        return $stats;
+    }
 }

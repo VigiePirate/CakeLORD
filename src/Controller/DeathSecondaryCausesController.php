@@ -40,7 +40,18 @@ class DeathSecondaryCausesController extends AppController
                 'Rats.States','Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions'],
         ]);
 
-        $this->set(compact('deathSecondaryCause'));
+        $count = $deathSecondaryCause->countMyRats(['field' => 'death_secondary_cause_id']);
+        $frequency = $deathSecondaryCause->frequencyOfMyRats(['field' => 'death_secondary_cause_id']);
+
+        if ($count > 0) {
+            $sex_ratio =  $deathSecondaryCause->computeRatSexRatioInWords(['death_secondary_cause_id' => $deathSecondaryCause->id], 20);
+            $age = $deathSecondaryCause->roundLifespan(['death_secondary_cause_id' => $deathSecondaryCause->id]);
+        } else {
+            $sex_ratio = 'N/A';
+            $age = 'N/A';
+        }
+
+        $this->set(compact('deathSecondaryCause', 'count', 'frequency', 'sex_ratio', 'age'));
     }
 
     /**

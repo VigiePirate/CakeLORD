@@ -7,7 +7,6 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-
             <div class="side-nav-group">
                 <?= $this->element('default_sidebar') ?>
             </div>
@@ -218,6 +217,7 @@
             <div class="spacer"> </div>
             <?php if (!empty($rat->bred_litters)) : ?>
                 <h2><?= __('Bred litters') ?></h2>
+
                 <div class="related">
                     <?php foreach ($rat->bred_litters as $litter) : ?>
                         <details>

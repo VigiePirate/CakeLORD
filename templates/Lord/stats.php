@@ -38,15 +38,15 @@
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Rats considered as deceased:') ?></th>
-                    <td> <?= h($dead_rat_count) ?> rats (<?= h($dead_rat_frequency) ?> % of all rats) </td>
+                    <td> <?= h($dead_rat_count) ?> rats (<?= h($dead_rat_frequency) ?> % of all rats) </td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('declared with known date:') ?></th>
-                    <td> ⨽ <?= h($knowingly_dead_rat_count) ?> rats (<?= h($knowingly_dead_rat_frequency) ?> % of deceased rats) </td>
+                    <td> ⨽ <?= h($knowingly_dead_rat_count) ?> rats (<?= h($knowingly_dead_rat_frequency) ?> % of deceased rats) </td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('presumably dead:') ?></th>
-                    <td> ⨽ <?= h($dead_rat_count - $knowingly_dead_rat_count) ?> rats (<?= h(100 - $knowingly_dead_rat_frequency) ?> % of deceased rats) </td>
+                    <td> ⨽ <?= h($dead_rat_count - $knowingly_dead_rat_count) ?> rats (<?= h(100 - $knowingly_dead_rat_frequency) ?> % of deceased rats) </td>
                 </tr>
             </table>
 
@@ -66,7 +66,7 @@
                 </tr>
                 <tr>
                     <th> ⨽ average, accidents also excluded:</th>
-                    <td> ⨽ <?= h($not_accident_lifespan) . __(' months') ?> (♀: <?= h($not_accident_lifespan) ?>, ♂: <?= h($not_accident_lifespan) ?>)
+                    <td> ⨽ <?= h($not_accident_lifespan) . __(' months') ?> (♀: <?= h($not_accident_female_lifespan) ?>, ♂: <?= h($not_accident_male_lifespan) ?>)
                 </tr>
                 <tr>
                     <th> ⨽ maximum:</th>
@@ -151,7 +151,7 @@
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Median death age:') ?></th>
-                    <td><?= h($median) ?> months <span class="comment">(50 % of rats die before this age, 50 % after)</span></td>
+                    <td><?= h($median) ?> months <span class="comment">(50 % of rats die before this age, 50 % after)</span></td>
                 </tr>
                 <tr>
                     <th><?= __('Death peak:') ?></th>
@@ -163,11 +163,11 @@
                 </tr>
                 <tr>
                     <th><?= __('Leading death category:') ?></th>
-                    <td><?= '« ' . h($primaries[0]['name']) . ' »'?> <span class="comment"> <?=' ('. h(100*round($primaries[0]['count']/$knowingly_dead_rat_count,2)) . ' % of declared deaths)'?></span></td>
+                    <td><?= '« ' . h($primaries[0]['name']) . ' »'?> <span class="comment"> <?=' ('. h(100*round($primaries[0]['count']/$knowingly_dead_rat_count,2)) . ' % of declared deaths)'?></span></td>
                 </tr>
                 <tr>
                     <th><?= __('Leading death cause:') ?></th>
-                    <td><?= '« ' . h($secondaries[0]['name']) . ' »'?> <span class="comment"> <?=' ('. h(100*round($secondaries[0]['count']/$knowingly_dead_rat_count,2)) . ' % of declared deaths)'?></span></td>
+                    <td><?= '« ' . h($secondaries[0]['name']) . ' »'?> <span class="comment"> <?=' ('. h(100*round($secondaries[0]['count']/$knowingly_dead_rat_count,2)) . ' % of declared deaths)'?></span></td>
                 </tr>
             </table>
 
@@ -178,9 +178,10 @@
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Number of deaths with recorded cause:') ?></th>
-                    <td><?= h($knowingly_dead_rat_count) ?> rats (<?= h(round($knowingly_dead_rat_count/$dead_rat_count,2)*100) ?> % of rats considered as dead) </td>
+                    <td><?= h($knowingly_dead_rat_count) ?> rats (<?= h(round($knowingly_dead_rat_count/$dead_rat_count,2)*100) ?> % of rats considered as dead) </td>
                 </tr>
-                <tr><th><?= __('By decreasing frequency:') ?></th></tr>
+                <tr><th><?= __('By decreasing frequency:') ?></th>
+                <td><span class="comment">* please note that tumours without recorded localization appear as « Autres »</span></td></tr>
             </table>
 
             <table class="condensed stats histogram">
@@ -202,7 +203,7 @@
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Number of deaths with recorded cause:') ?></th>
-                    <td><?= h($knowingly_dead_rat_count) ?> rats (<?= h(round($knowingly_dead_rat_count/$dead_rat_count,2)*100) ?> % of rats considered as dead) </td>
+                    <td><?= h($knowingly_dead_rat_count) ?> rats (<?= h(round($knowingly_dead_rat_count/$dead_rat_count,2)*100) ?> % of rats considered as dead) </td>
                 </tr>
                 <tr>
                     <th><?= __('By decreasing frequency:') ?></th>
@@ -228,9 +229,11 @@
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Number of tumour-related deaths:') ?></th>
-                    <td><?= h($tumour_dead_count) ?> rats (<?= h(round($tumour_dead_count/$knowingly_dead_rat_count,4)*100) ?> % of rats with known death cause) </td>
+                    <td><?= h($tumour_dead_count) ?> rats (<?= h(round($tumour_dead_count/$knowingly_dead_rat_count,4)*100) ?> % of rats with known death cause) </td>
                 </tr>
-                <tr><th><?= __('By decreasing frequency:') ?></th></tr>
+                <tr><th><?= __('By decreasing frequency:') ?></th>
+                    <td><span class="comment">* please note that tumour localization could not recorded before 2022</span></td>
+            </tr>
             </table>
             <table class="condensed stats histogram">
                 <?php foreach($tumours as $tumour): ?>
@@ -527,7 +530,7 @@
                             //    label += ': ';
                             //}
                             if (context.parsed.y !== null) {
-                                label = Math.round(100*context.parsed.y)/100+' % of litters';
+                                label = Math.round(100*context.parsed.y)/100+' % of litters';
                             }
                             return label;
                         },
@@ -623,7 +626,7 @@
                             //    label += ': ';
                             //}
                             if (context.parsed.y !== null) {
-                                label = Math.round(100*context.parsed.y)/100+' % of litters';
+                                label = Math.round(100*context.parsed.y)/100+' % of litters';
                             }
                             return label;
                         },
@@ -715,7 +718,7 @@
                     display: true,
                     position: 'bottom',
                     min: 0,
-                    max: 42,
+                    max: 48,
                     title: {
                         display: true,
                         text: 'Age (in months)',
@@ -778,13 +781,13 @@
                                 label += ': ';
                             }
                             if (context.datasetIndex === 0) {
-                                label += Math.round(100*context.parsed.y)/100 + ' % of all rats reach this age';
+                                label += Math.round(100*context.parsed.y)/100 + ' % of all rats reach this age';
                             }
                             if (context.datasetIndex === 1) {
-                                label += Math.round(100*context.parsed.y)/100+' % of all deaths occur in rats of this age';
+                                label += Math.round(100*context.parsed.y)/100+' % of all deaths occur in rats of this age';
                             }
                             if (context.datasetIndex === 2) {
-                                label += Math.round(100*context.parsed.y)/100+' % of all rats reaching this age die in the following month';
+                                label += Math.round(100*context.parsed.y)/100+' % of all rats reaching this age die in the following month';
                             }
                             return label;
                         },

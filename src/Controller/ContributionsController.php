@@ -111,4 +111,31 @@ class ContributionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * fromRattery method
+     *
+     * Search contributions by ratteries.
+     *
+     * @param
+     * @return
+     */
+    public function fromRattery()
+    {
+        $this->Authorization->skipAuthorization();
+        $ratteries = $this->request->getParam('pass');
+        //
+        // Use the RatsTable to find named rats.
+        $contributions = $this->Contributions->find('fromRattery', [
+            'ratteries' => $ratteries
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['Litters', 'Litters.States', 'Litters.Sire', 'Litters.Dam', 'Ratteries', 'ContributionTypes'],
+        ];
+        $contributions = $this->paginate($contributions);
+
+        $this->set(compact('contributions', 'ratteries'));
+    }
 }

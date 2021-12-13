@@ -6,6 +6,7 @@ namespace App\Model\Entity;
 use Authentication\PasswordHasher\DefaultPasswordHasher;
 use Authentication\IdentityInterface;
 use Cake\ORM\Entity;
+use App\Model\Entity\StatisticsTrait;
 
 /**
  * User Entity
@@ -36,6 +37,8 @@ use Cake\ORM\Entity;
  */
 class User extends Entity implements IdentityInterface
 {
+    use StatisticsTrait;
+
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *

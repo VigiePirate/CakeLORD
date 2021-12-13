@@ -66,35 +66,68 @@ class RatteriesController extends AppController
 
         $rattery = $this->Ratteries->get($id, [
             'contain' => ['Users', 'Countries', 'States',
-            'Litters', 'Litters.Sire', 'Litters.Dam', 'Litters.States', 'Litters.Ratteries',
-            'Litters.Sire.BirthLitters.Ratteries', 'Litters.Dam.BirthLitters.Ratteries',
-            'Litters.Sire.BirthLitters.Contributions', 'Litters.Dam.BirthLitters.Contributions',
-            'Rats','Rats.States',
-            'Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions',
-            'Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses',
-            'RatterySnapshots'],
+                'Litters' => function($q) {
+                    return $q
+                    ->order('birth_date DESC')
+                    ->limit(10);
+                },
+                'Litters.States',
+                'Litters.Sire', 'Litters.Dam', 'Litters.Contributions',
+                'Litters.Sire.BirthLitters.Contributions', 'Litters.Dam.BirthLitters.Contributions',
+                'Rats' => function($q) {
+                    return $q
+                    ->order('Rats.modified DESC')
+                    ->limit(10);
+                },
+                'Rats.States',
+                'Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions',
+                'Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses',
+                'RatterySnapshots'],
         ]);
 
-        // fixme: for statistics, probably does not belong here
-        // $count = $rattery->Rats->find('all')->count();
-        // $this->set('count', $count);
+        $stats = $rattery->wrapStatistics();
 
-        // $stats = ($rattery->is_generic) ? $rattery->rat_stat : $rattery->health_stat;
-        $stats = $rattery->health_stat;
-        $champion = $rattery->champion;
+        if (! $rattery->is_generic && $stats['deadRatCount'] > 0) {
+            $rats = $this->loadModel('Rats');
+            $champion = $rattery->findChampion(['rattery_id' => $rattery->id]);
+            if(! is_null($champion)) {
+                $champion = $rats->get($champion->id, ['contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions']]);
+            }
+        } else {
+            $champion = null;
+        }
 
-        $offspringsQuery = $this->Ratteries->Rats
-                                ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses']])
-                                ->matching('Ratteries', function (\Cake\ORM\Query $query) use ($rattery) {
-                                    return $query->where([
-                                        'Ratteries.id' => $rattery->id
-                                    ]);
-                                });
-        $offsprings = $this->paginate($offspringsQuery);
+        if (! $rattery->is_generic) {
+            $avg_mother_age = $rattery->computeAvgMotherAge(['Contributions.rattery_id' => $rattery->id]);
+            $avg_father_age = $rattery->computeAvgFatherAge(['Contributions.rattery_id' => $rattery->id]);
+            $avg_litter_size = $rattery->computeAvgLitterSize(['Contributions.rattery_id' => $rattery->id]);
+            $debiased_avg_litter_size = $rattery->computeAvgLitterSize(['Contributions.rattery_id' => $rattery->id, 'pups_number >=' => '6', 'pups_number <=' => '16']);
 
-        // debug new statistics
-        // $lifetime = $rattery->lifetime;
-        // $this->set(compact('lifetime'));
+            // Currently compute at the rat-level. Switch to litter-level?
+            $avg_sex_ratio = $rattery->computeRatSexRatioInWords([
+                'OR' => [
+                    'Contributions.rattery_id' => $rattery->id,
+                    'Rats.rattery_id' => $rattery->id // for rats with rattery_id but no litter_id...
+                ]], 12);
+
+            $primaries = $rattery->countRatsByPrimaryDeath(['rattery_id' => $rattery->id])->toArray();
+            $secondaries = $rattery->countRatsBySecondaryDeath(['rattery_id' => $rattery->id]);
+            $tumours = $rattery->countRatsByTumour()->toArray(['rattery_id' => $rattery->id]);
+
+            $this->set(compact(
+                'primaries', 'secondaries', 'tumours',
+                'avg_mother_age', 'avg_father_age', 'avg_litter_size','debiased_avg_litter_size', 'avg_sex_ratio'
+            ));
+        }
+
+        // $offspringsQuery = $this->Ratteries->Rats
+        //                         ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses']])
+        //                         ->matching('Ratteries', function (\Cake\ORM\Query $query) use ($rattery) {
+        //                             return $query->where([
+        //                                 'Ratteries.id' => $rattery->id
+        //                             ]);
+        //                         });
+        // $offsprings = $this->paginate($offspringsQuery);
 
         /* statebar */
         $this->loadModel('States');
@@ -112,7 +145,7 @@ class RatteriesController extends AppController
             $this->set(compact('next_ko_state','next_ok_state'));
         };
 
-        $this->set(compact('rattery','stats','champion','offsprings'));
+        $this->set(compact('rattery','champion', 'stats')); // 'offsprings'));
     }
 
     /**

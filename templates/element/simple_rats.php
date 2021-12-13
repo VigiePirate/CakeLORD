@@ -71,7 +71,7 @@
                         <td><?= h($rat->birth_date->i18nFormat('dd/MM/yyyy')) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('age_string', $exceptions)): ?>
-                        <td><?= h($rat->age) ?> mo</td>
+                        <td><?= $rat->age <= 54 ? h($rat->age) . ' mo' : '– ?? –' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('death_cause', $exceptions)): ?>
                         <td><?= h($rat->short_death_cause) ?></td>

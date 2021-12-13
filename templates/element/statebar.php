@@ -30,7 +30,7 @@
         <?php else : ?>
             <!-- if state is frozen, show next thawed in the right order (depending on reliability) -->
             <?php if( $sheet->state->is_reliable ) : ?>
-                <div class="statemark statecolor_<?php echo h($sheet->state->next_thawed__state_id) ?>"><?= h($next_thawed_state->symbol) ?></div>
+                <div class="statemark statecolor_<?php echo h($sheet->state->next_thawed_state_id) ?>"><?= h($next_thawed_state->symbol) ?></div>
                 <div class="staff-action-symbol">⮜</div>
                 <div class="current-statemark statecolor_<?php echo h($sheet->state_id) ?>"><?= h($sheet->state->symbol) ?></div>
             <?php else : ?>
