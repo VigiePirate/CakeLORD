@@ -222,22 +222,22 @@
                             <table class="condensed stats">
                                 <tr>
                                     <th><?= __('Average mother age:') ?></th>
-                                    <td><?= h(round($avg_mother_age)) ?> days (<?= h(round($avg_mother_age/30.5,1)) ?> months)</td>
+                                    <td><?= h(round($stats['avg_mother_age'])) ?> days (<?= h(round($stats['avg_mother_age']/30.5,1)) ?> months)</td>
                                 </tr>
                                 <tr>
                                     <th><?= __('Average father age:') ?></th>
-                                    <td><?= ($avg_father_age != 0) ?
-                                        h(round($avg_father_age)) . __(' days (') . h(round($avg_father_age/30.5,1)) . __(' months)') :
+                                    <td><?= ($stats['avg_father_age'] != 0) ?
+                                        h(round($stats['avg_father_age'])) . __(' days (') . h(round($stats['avg_father_age']/30.5,1)) . __(' months)') :
                                         __('This rattery only had litters of unknown fathers')
                                         ?> </td>
                                 </tr>
                                 <tr>
                                     <th><?= __('Average litter size:') ?></th>
-                                    <td><?= h($avg_litter_size) ?> pups (debiased estimation : <?= h($debiased_avg_litter_size) ?> pups)</td>
+                                    <td><?= h($stats['avg_litter_size']) ?> pups (debiased estimation : <?= h($stats['debiased_avg_litter_size']) ?> pups)</td>
                                 </tr>
                                 <tr>
                                     <th><?= __('Average sex ratio:') ?></th>
-                                    <td><?= h($avg_sex_ratio) ?></td>
+                                    <td><?= h($stats['avg_sex_ratio']) ?></td>
                                 </tr>
                             </table>
                         </details>
@@ -295,10 +295,10 @@
                                         </tr>
                                     </table>
                                     <table class="condensed stats histogram">
-                                        <?php foreach($primaries as $category): ?>
+                                        <?php foreach($stats['primaries'] as $category): ?>
                                             <tr>
                                                 <th>
-                                                    <div style="opacity:<?= h(0.25+0.75*$category['count']/$primaries[0]['count']) ?>; width:<?= h($category['count']/$primaries[0]['count']*100) ?>%">
+                                                    <div style="opacity:<?= h(0.25+0.75*$category['count']/$stats['primaries'][0]['count']) ?>; width:<?= h($category['count']/$stats['primaries'][0]['count']*100) ?>%">
                                                         <?= h(round($category['count']/$stats['deadRatCount']*100,2)) ?> %
                                                     </div>
                                                 </th>
@@ -313,10 +313,10 @@
                                         </tr>
                                     </table>
                                     <table class="condensed stats histogram">
-                                        <?php foreach($secondaries as $cause): ?>
+                                        <?php foreach($stats['secondaries'] as $cause): ?>
                                             <tr>
                                                 <th>
-                                                    <div style="opacity:<?= h(0.25+0.75*$cause['count']/$secondaries[0]['count']) ?>; width:<?= h($cause['count']/$secondaries[0]['count']*100) ?>%">
+                                                    <div style="opacity:<?= h(0.25+0.75*$cause['count']/$stats['secondaries'][0]['count']) ?>; width:<?= h($cause['count']/$stats['secondaries'][0]['count']*100) ?>%">
                                                         <?= h(round($cause['count']/$stats['deadRatCount']*100,2)) ?> %
                                                     </div>
                                                 </th>
@@ -345,7 +345,7 @@
                                         </tr>
                                     </table>
                                 </details>
-                                <div class="message">There aren't enough rats with reliable information to compute relevant mortality statistics.</div>
+                                <div class="message">There aren't enough rats with consolidated information to compute relevant mortality statistics.</div>
                             <?php endif; ?>
                         <?php endif; ?>
                     <?php else : ?> <!-- treat ratteries not wanting statistics -->
@@ -360,8 +360,8 @@
                         <h2>Related entries</h2>
                     </div>
                     <div class="column-responsive column-66">
-                        <?= $this->Html->link(__('See all their rats'), ['controller' => 'Rats', 'action' => 'fromRattery', $rattery->prefix], ['class' => 'button float-right']) ?>
-                        <?= $this->Html->link(__('See all their litters'), ['controller' => 'Contributions', 'action' => 'fromRattery', $rattery->id], ['class' => 'button float-right']) ?>
+                        <?= $this->Html->link(__('See all bred rats'), ['controller' => 'Rats', 'action' => 'fromRattery', $rattery->prefix], ['class' => 'button float-right']) ?>
+                        <?= $this->Html->link(__('See all contributed litters'), ['controller' => 'Contributions', 'action' => 'fromRattery', $rattery->id], ['class' => 'button float-right']) ?>
                     </div>
                 </div>
 

@@ -45,8 +45,8 @@ class DilutionsController extends AppController
             ->limit(32)
             ->toArray();
 
-        $count = $dilution->countMyRats(['field' => 'marking_id']);
-        $frequency = $dilution->frequencyOfMyRats(['field' => 'marking_id']);
+        $count = $dilution->countMy('rats', 'dilution');
+        $frequency = $dilution->frequencyOfMy('rats', 'dilution');
 
         $this->set(compact('dilution','examples','count','frequency'));
     }

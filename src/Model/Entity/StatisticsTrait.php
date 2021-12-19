@@ -9,25 +9,38 @@ use Cake\Collection\Collection;
 
 trait StatisticsTrait
 {
-
-    public function countAll($name)
+    public function countAll($name, $options = [])
     {
         $model = FactoryLocator::get('Table')->get($name);
-        return $model->find()->count();
+        return $model->find()->where($options)->count();
     }
 
-    public function countMy($name,$alias)
+    public function countMy($name, $key, $options = [])
     {
-        /* $alias = strtolower(substr($this->getSource(),0,-1)); */
         $model = FactoryLocator::get('Table')->get($name);
-        return $model->find()->where([$alias.'_id' => $this->id])->count();
+        $filter = [$key.'_id' => $this->id];
+        if (! empty($options)) {
+            $filter = array_merge($filter, $options);
+        }
+        return $model->find()->where($filter)->count();
     }
 
-    public function countAllByCreationYear($name)
+    public function frequencyOfMy($name, $key, $options = [])
+    {
+        $rats = $this->countMy($name, $key, $options);
+        $allrats = $model->find();
+        return round (100 * $rats->count() / $allrats->count(),2);
+    }
+
+    public function countAllByCreationYear($name, $options = [])
     {
         $model = FactoryLocator::get('Table')->get($name);
+        $filter = ['created !=' => '1981-08-01'];
+        if (! empty($options)) {
+            $filter = array_merge($filter, $options);
+        }
         $histogram = $model->find()
-            ->where(['created !=' => '1981-08-01'])
+            ->where($filter)
             ->select(['year' => 'YEAR(created)', 'count' => 'COUNT(id)'])
             ->group('year')
             ->order(['year' => 'ASC']);
@@ -36,29 +49,24 @@ trait StatisticsTrait
 
     public function countRats($options = []) {
         $model = FactoryLocator::get('Table')->get('Rats');
-        return $model->find()->where($options)->count();
+        $filter = [];
+        if (! empty($options)) {
+            $filter = array_merge($filter, $options);
+        }
+        return $model->find()->where($filter)->count();
     }
 
-    public function countMyRats($options = [])
-    {
-        $model = FactoryLocator::get('Table')->get('Rats');
-        $rats = $model->find()->where([$options['field'] => $this->id]);
-        return $rats->count();
-    }
 
-    public function frequencyOfMyRats($options = [])
-    {
-        $model = FactoryLocator::get('Table')->get('Rats');
-        $rats = $model->find()->where([$options['field'] => $this->id]);
-        $allrats = $model->find();
-        return round (100 * $rats->count() / $allrats->count(),2);
-    }
 
     public function countRatsByYear()
     {
         $model = FactoryLocator::get('Table')->get('Rats');
+        $filter = ['birth_date !=' => '1981-08-01'];
+        if (! empty($options)) {
+            $filter = array_merge($filter, $options);
+        }
         $histogram = $model->find()
-            ->where(['birth_date !=' => '1981-08-01'])
+            ->where($filter)
             ->select(['year' => 'YEAR(birth_date)', 'count' => 'COUNT(id)'])
             ->group('year')
             ->order(['year' => 'ASC']);
@@ -67,13 +75,13 @@ trait StatisticsTrait
 
     // will compute sex ratio of a (sub)set of rats
     // for litter-based sex ratio, see computeLitterSexRatio* functions
-    public function computeRatSexRatioInWords($options = [], $maxi) {
+    public function computeRatSexRatioInWords($options = [], $max_denominator) {
         $model = FactoryLocator::get('Table')->get('Rats');
 
         $filter_F = ['sex' => 'F'];
         $filter_M = ['sex' => 'M'];
 
-        if(!empty($options)) {
+        if (! empty($options)) {
             $filter_F = array_merge($filter_F, $options);
             $filter_M = array_merge($filter_M, $options);
         }
@@ -97,12 +105,13 @@ trait StatisticsTrait
             return 'Balanced (1 male for 1 female)';
         }
 
+        //FIXME: deal with singular/plural
         if ($sex_ratio > 1) {
-            $operands = $this->computeFareyApproximation($sex_ratio, $maxi);
+            $operands = $this->computeFareyApproximation($sex_ratio, $max_denominator);
             return h($sex_ratio) . ' (about ' . h($operands[0]) . __(' males for ' . h($operands[1]) . ' females') . ')';
         } else {
             $inverse_ratio = round(1/$sex_ratio,2);
-            $operands = $this->computeFareyApproximation($inverse_ratio, $maxi);
+            $operands = $this->computeFareyApproximation($inverse_ratio, $max_denominator);
             return h($sex_ratio) . ' (about ' . h($operands[0]) . __(' females for ' . h($operands[1]) . ' males') . ')';
         }
     }
@@ -119,7 +128,7 @@ trait StatisticsTrait
             'is_alive' => false
         ];
 
-        if(!empty($options)) {
+        if (! empty($options)) {
             $filter = array_merge($filter,$options);
         }
 
@@ -136,6 +145,7 @@ trait StatisticsTrait
         return $histogram;
     }
 
+    // uses 2 queries in order to deal with 'null' secondary deaths
     public function countRatsBySecondaryDeath($options = []) {
         $model = FactoryLocator::get('Table')->get('Rats')->find();
 
@@ -145,7 +155,7 @@ trait StatisticsTrait
             'is_alive' => false
         ];
 
-        if(!empty($options)) {
+        if (! empty($options)) {
             $filter_1 = array_merge($filter_1,$options);
         }
 
@@ -165,7 +175,7 @@ trait StatisticsTrait
             'is_alive' => false
         ];
 
-        if(!empty($options)) {
+        if (! empty($options)) {
             $filter_2 = array_merge($filter_2,$options);
         }
 
@@ -186,16 +196,23 @@ trait StatisticsTrait
         return $causes;
     }
 
-    // should be able to reuse previous function with an option ['is_tumour' => true]
-    public function countRatsByTumour() {
+    // does not reuse previous with option ['is_tumour' => true] to avoid double query
+    public function countRatsByTumour($options = []) {
         $model = FactoryLocator::get('Table')->get('Rats');
+
+        $filter = [
+            'birth_date !=' => '1981-08-01',
+            'death_secondary_cause_id !=' => '1',
+            'is_alive' => false,
+            'is_tumor' => true,
+        ];
+
+        if (! empty($options)) {
+            $filter = array_merge($filter, $options);
+        }
+
         $histogram = $model->find()
-            ->where([
-                'birth_date !=' => '1981-08-01',
-                'death_secondary_cause_id !=' => '1',
-                'is_alive' => false,
-                'is_tumor' => true,
-            ])
+            ->where()
             ->contain(['DeathSecondaryCauses'])
             ->select([
                 'name' => 'DeathSecondaryCauses.name',
@@ -237,7 +254,7 @@ trait StatisticsTrait
 
         $filter = [];
 
-        if(!empty($options)) {
+        if (! empty($options)) {
             $filter = array_merge($filter,$options);
         }
 
@@ -272,9 +289,8 @@ trait StatisticsTrait
     public function computeAvgMotherAge($options = []) {
         $model = FactoryLocator::get('Table')->get('Litters');
 
-        // exclude unknown mother (should be replaced by a test on States.is_reliable)
         $filter = [
-            'Dam.id >' => 1,
+            'Dam.id >' => 1, // exclude unknown mother (should be replaced by a test on States.is_reliable)
             'Litters.birth_date !=' => '1981-08-01',
             'Dam.birth_date !=' => '1981-08-01',
             'Dam.birth_date IS NOT' => null
@@ -299,9 +315,8 @@ trait StatisticsTrait
     public function computeAvgFatherAge($options = []) {
         $model = FactoryLocator::get('Table')->get('Litters');
 
-        // exclude unknown mother (should be replaced by a test on States.is_reliable)
         $filter = [
-            'Sire.id >' => 2,
+            'Sire.id >' => 2, // exclude unknown father (should be replaced by a test on States.is_reliable)
             'Litters.birth_date !=' => '1981-08-01',
             'Sire.birth_date !=' => '1981-08-01',
             'Sire.birth_date IS NOT' => null
@@ -326,7 +341,7 @@ trait StatisticsTrait
     public function computeAvgLitterSize($options = []) {
         $model = FactoryLocator::get('Table')->get('Litters');
         $filter = ['Contributions.rattery_id >' => '6'];
-        if(!empty($options)) {
+        if (! empty($options)) {
             $filter = array_merge($filter, $options);
         }
         $avg = $model->find()
@@ -370,9 +385,8 @@ trait StatisticsTrait
         return $query->enableHydration(false);
     }
 
-    // use real php function to compute averages!
     public function computeLitterSexRatio($options = []) {
-        $litters = $this->computeLitterSexes($options)->toArray();
+        $litter_size_by_sex = $this->computeLitterSexes($options)->toArray();
         $valid_litters_count = 0;
         $male_proportion_sum = 0;
         foreach ($litters as $litter) {
@@ -386,25 +400,37 @@ trait StatisticsTrait
         if ($valid_litters_count > 0) {
             $avg_male_proportion = $male_proportion_sum/$valid_litters_count;
             $avg_female_proportion = 1 - $avg_male_proportion;
-            return $avg_male_proportion/$avg_female_proportion;
+            if ($avg_female_proportion == 0) {
+                return -2;
+            } else {
+                return $avg_male_proportion/$avg_female_proportion;
+            }
         } else {
-            return 1;
+            return -1;
         }
     }
 
-    public function computeLitterSexRatioInWords($options = [], $maxi) {
+    public function computeLitterSexRatioInWords($options = [], $max_denominator) {
         $sex_ratio = round($this->computeLitterSexRatio($options),3);
+
+        if ($sex_ratio == -2) {
+            return 'Only females';
+        }
+
+        if ($sex_ratio == -1) {
+            return 'N/A';
+        }
 
         if ($sex_ratio == 0) {
             return 'Only males';
         }
 
         if ($sex_ratio >= 1) {
-            $operands = $this->computeFareyApproximation($sex_ratio, $maxi);
+            $operands = $this->computeFareyApproximation($sex_ratio, $max_denominator);
             return h($sex_ratio) . ' (about ' . h($operands[0]) . __(' males for ' . h($operands[1]) . ' females') . ')';
         } else {
             $inverse_ratio = round(1/$sex_ratio,2);
-            $operands = $this->computeFareyApproximation($inverse_ratio, $maxi);
+            $operands = $this->computeFareyApproximation($inverse_ratio, $max_denominator);
             return h($sex_ratio) . ' (about ' . h($operands[0]) . __(' females for ' . h($operands[1]) . ' males') . ')';
         }
     }
@@ -416,17 +442,18 @@ trait StatisticsTrait
         return $histogram;
     }
 
-    public function computeLitterSizeDistribution() {
+    public function computeLitterSizeDistribution($options = []) {
         $model = FactoryLocator::get('Table')->get('Litters');
-        if(!empty($options)) {
+
+        $filter = [];
+        if (! empty($options)) {
             $filter = array_merge($filter,$options);
         }
+
         $histogram = $model->find()
             ->select([
                 'size' => 'pups_number',
                 'count' => 'COUNT(Litters.id)',
-                //'Litters__id' => 'litter_id',
-                //'Contributions__litter_id' => 'Contributions.litter_id'
             ])
             ->matching('Contributions.Ratteries', function ($q) {
                 return $q->where(['Ratteries.is_generic IS' => false]);
@@ -453,7 +480,7 @@ trait StatisticsTrait
             ]
         ];
 
-        if(!empty($options)) {
+        if (! empty($options)) {
             $filter = array_merge($filter,$options);
         }
 
@@ -465,7 +492,7 @@ trait StatisticsTrait
         return $lifespan;
     }
 
-    // to be improved: cut-off should be softcoded!
+    //FIXME: cut-off should be completely softcoded!
     // first year: when enough rats to guarantee significance
     // last year: enough rats + 2 years before current date to avoid young-death bias
     public function computeLifespanByYear($options = []) {
@@ -496,7 +523,7 @@ trait StatisticsTrait
             'birth_date !=' => '1981-08-01'
         ];
 
-        if(!empty($options)) {
+        if (! empty($options)) {
             $filter = array_merge($filter, $options);
         }
 
@@ -527,7 +554,7 @@ trait StatisticsTrait
             'death_primary_cause_id !=' => '6'
         ];
 
-        if(!empty($options)) {
+        if (! empty($options)) {
             $filter = array_merge($filter,$options);
         }
 
@@ -542,8 +569,6 @@ trait StatisticsTrait
         return $mortality;
     }
 
-    /* to improve, prone to bug */
-    /* (assumes mortality_distribution has no holes in the 'months' field) */
     public function computeSurvivalRate($mortality_distribution = [], $options = []) {
 
         if(empty($mortality_distribution)) {
@@ -564,12 +589,10 @@ trait StatisticsTrait
         return $survival;
     }
 
-    /* to improve, prone to bug */
-    /* (assumes mortality_distrib has no holes in the 'months' field) */
-    public function computeMortalityRate($mortality_distribution = []) {
+    public function computeMortalityRate($mortality_distribution = [], $options = []) {
 
         if(empty($mortality_distribution)) {
-            $mortality_distribution = $this->computeMortalityDistribution();
+            $mortality_distribution = $this->computeMortalityDistribution($options);
         }
 
         $max_months = count($mortality_distribution);
@@ -584,9 +607,9 @@ trait StatisticsTrait
         return $rate;
     }
 
-    public function computeDeathMedian($survival = []) {
+    public function computeDeathMedian($survival = [], $options = []) {
         if(empty($survival)) {
-            $survival = $this->computeSurvivalRate();
+            $survival = $this->computeSurvivalRate($options);
         }
 
         $median = 0;
@@ -598,9 +621,9 @@ trait StatisticsTrait
         return $median+1;
     }
 
-    public function computeDeathPeak($distribution = []) {
+    public function computeDeathPeak($distribution = [], $options = []) {
         if(empty($distribution)) {
-            $distribution = $this->computeMortalityDistribution();
+            $distribution = $this->computeMortalityDistribution($options);
         }
 
         $maximum = 0; $maximizer = 0;
@@ -613,9 +636,9 @@ trait StatisticsTrait
         return $maximizer;
     }
 
-    public function computeDeathInterquartile($survival = []) {
+    public function computeDeathInterquartile($survival = [], $options = []) {
         if(empty($survival)) {
-            $survival = $this->computeSurvivalRate();
+            $survival = $this->computeSurvivalRate($options);
         }
 
         $quartiles = [
@@ -652,7 +675,7 @@ trait StatisticsTrait
             'DATEDIFF(Rats.death_date,Rats.birth_date) <' => '1645'
         ];
 
-        if (!empty($options)) {
+        if (! empty($options)) {
             $filter = array_merge($filter,$options);
         }
 
@@ -667,7 +690,7 @@ trait StatisticsTrait
 
         $max = $max['max'];
 
-        if(!is_null($max)) {
+        if (! is_null($max)) {
             $champion = $model->find()
                 ->select([
                     'id' => 'Rats.id'

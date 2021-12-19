@@ -69,8 +69,6 @@ class LittersController extends AppController
             ],
         ]);
 
-        $sexes = $litter->computeLitterSexes(['litter_id' => $id])->toArray();
-
         $offspringsQuery = $this->Litters->OffspringRats
                                 ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses','OwnerUsers']])
                                 ->matching('BirthLitters', function (\Cake\ORM\Query $query) use ($litter) {
@@ -80,22 +78,7 @@ class LittersController extends AppController
                                 });
         $offsprings = $this->paginate($offspringsQuery);
 
-        // survival: could be cheaper if called on $litter->offsprings with trait in RatsTable?
-        // or pass offsprings as optional argument?
-        $survival = $litter->computeSurvivalRate([],['litter_id' => $litter->id]);
-
-        // to be moved in model
-
-        // FIXME dont count overaged forgotten rats
-        $survivors = 0;
-        foreach ($offsprings as $pup) {
-            if ($pup->is_alive) {
-                $survivors += 1;
-            }
-        }
-        $survivors = 100*round($survivors/$litter->pups_number,4);
-        $max_age = $litter->max_age;
-        $lifespan = $litter->roundLifespan(['Rats.litter_id' => $litter->id]);
+        $stats = $litter->wrapStatistics();
 
         $this->loadModel('States');
         if($litter->state->is_frozen) {
@@ -112,7 +95,7 @@ class LittersController extends AppController
             $this->set(compact('next_ko_state','next_ok_state'));
         };
 
-        $this->set(compact('litter', 'offsprings', 'sexes', 'survival', 'survivors', 'max_age', 'lifespan'));
+        $this->set(compact('litter', 'offsprings', 'stats'));
     }
 
     /**

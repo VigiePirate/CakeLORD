@@ -36,25 +36,25 @@
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Total number of known ancestors:') ?></th>
-                    <td><?= h($ancestors) . __(' rats') ?></td>
+                    <td><?= h($stats['ancestors']) . __(' rats') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Number of alive ancestors:') ?></th>
-                    <td><?= h($asc_alive) . __(' rats') ?></td>
+                    <td><?= h($stats['asc_alive']) . __(' rats') ?></td>
                 </tr>
             </table>
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Number of children:') ?></th>
-                    <td><?= h($children) . __(' rats') ?></td>
+                    <td><?= h($stats['children']) . __(' rats') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Total number of descendants:') ?></th>
-                    <td><?= h($descendors) . __(' rats') ?></td>
+                    <td><?= h($stats['descendors']) . __(' rats') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Number of alive descendants:') ?></th>
-                    <td><?= h($desc_alive) . __(' rats') ?></td>
+                    <td><?= h($stats['desc_alive']) . __(' rats') ?></td>
                 </tr>
             </table>
 

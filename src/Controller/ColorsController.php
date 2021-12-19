@@ -44,8 +44,8 @@ class ColorsController extends AppController
             ->limit(32)
             ->toArray();
 
-        $count = $color->countMyRats(['field' => 'color_id']);
-        $frequency = $color->frequencyOfMyRats(['field' => 'color_id']);
+        $count = $color->countMy('rats', 'color');
+        $frequency = $color->frequencyOfMyRats('rats', 'color');
 
         $this->set(compact('color','examples','count', 'frequency'));
     }

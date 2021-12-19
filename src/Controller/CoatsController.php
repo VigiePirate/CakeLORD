@@ -46,8 +46,8 @@ class CoatsController extends AppController
             ->limit(32)
             ->toArray();
 
-        $count = $coat->countMyRats(['field' => 'coat_id']);
-        $frequency = $coat->frequencyOfMyRats(['field' => 'coat_id']);
+        $count = $coat->countMy('Rats', 'coat');
+        $frequency = $coat->frequencyOfMy('Rats', 'coat');
 
         $this->set(compact('coat','examples','count','frequency'));
     }

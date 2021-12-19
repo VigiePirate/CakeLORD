@@ -16,7 +16,7 @@ class RatteriesController extends AppController
     {
         parent::beforeFilter($event);
         // No authentication needed on consultation
-        $this->Authentication->addUnauthenticatedActions(['index', 'view','autocomplete']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'autocomplete']);
     }
 
     /**
@@ -95,29 +95,6 @@ class RatteriesController extends AppController
             }
         } else {
             $champion = null;
-        }
-
-        if (! $rattery->is_generic) {
-            $avg_mother_age = $rattery->computeAvgMotherAge(['Contributions.rattery_id' => $rattery->id]);
-            $avg_father_age = $rattery->computeAvgFatherAge(['Contributions.rattery_id' => $rattery->id]);
-            $avg_litter_size = $rattery->computeAvgLitterSize(['Contributions.rattery_id' => $rattery->id]);
-            $debiased_avg_litter_size = $rattery->computeAvgLitterSize(['Contributions.rattery_id' => $rattery->id, 'pups_number >=' => '6', 'pups_number <=' => '16']);
-
-            // Currently compute at the rat-level. Switch to litter-level?
-            $avg_sex_ratio = $rattery->computeRatSexRatioInWords([
-                'OR' => [
-                    'Contributions.rattery_id' => $rattery->id,
-                    'Rats.rattery_id' => $rattery->id // for rats with rattery_id but no litter_id...
-                ]], 12);
-
-            $primaries = $rattery->countRatsByPrimaryDeath(['rattery_id' => $rattery->id])->toArray();
-            $secondaries = $rattery->countRatsBySecondaryDeath(['rattery_id' => $rattery->id]);
-            $tumours = $rattery->countRatsByTumour()->toArray(['rattery_id' => $rattery->id]);
-
-            $this->set(compact(
-                'primaries', 'secondaries', 'tumours',
-                'avg_mother_age', 'avg_father_age', 'avg_litter_size','debiased_avg_litter_size', 'avg_sex_ratio'
-            ));
         }
 
         // $offspringsQuery = $this->Ratteries->Rats

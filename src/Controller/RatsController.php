@@ -632,98 +632,15 @@ class RatsController extends AppController
         $this->set(compact('rat', 'json'));
     }
 
-    public function computeDescendance($id, &$descendance)
-    {
-        if (in_array($id, $descendance)) {
-            return null;
-        }
-
-        else {
-            array_push($descendance, $id);
-
-            $children = $this->Rats->find()
-                ->select(['id'])
-                ->matching('BirthLitters.ParentRats', function ($query) use ($id) {
-                    return $query->where(['ParentRats.id' => $id]);
-                })
-                ->all();
-
-            if (!empty($children)) {
-                foreach ($children as $child) {
-                    $this->computeDescendance($child->id, $descendance);
-                }
-                return $descendance;
-            } else {
-                return null;
-            }
-        }
-    }
-
-    public function computeAncestry($id, &$ancestry)
-    {
-        if (in_array($id, $ancestry)) {
-            return null;
-        }
-
-        else {
-            array_push($ancestry, $id);
-
-            $ancestors = $this->Rats->find()
-                ->select(['id'])
-                ->matching('BredLitters.OffspringRats', function ($query) use ($id) {
-                    return $query->where(['OffspringRats.id' => $id]);
-                })
-                ->all();
-
-            if (!empty($ancestors)) {
-                foreach ($ancestors as $ancestor) {
-                    $this->computeAncestry($ancestor->id, $ancestry);
-                }
-                return $ancestry;
-            } else {
-                return null;
-            }
-        }
-    }
-
     public function family($id = null) {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
             'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions', 'BredLitters']
         ]);
 
-        // -1 since the rat itself is put in the list for recursion initialization
-        $descendance = [];
-        $descendors = count($this->computeDescendance($rat->id, $descendance)) - 1;
-        $ancestry = [];
-        $ancestors = count($this->computeAncestry($rat->id, $ancestry)) - 1;
-        $children = 0; // we have an internal function to get children!!
-        foreach ($rat->bred_litters as $litter) {
-            $children += $litter->pups_number;
-        }
+        $stats = $rat->wrapFamilyStatistics();
 
-        $asc_alive = $rat->countRats([
-            'Rats.id IN' => $ancestry,
-            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
-            'Rats.id !=' => $rat->id,
-            'is_alive IS' => true,
-            'DATEDIFF(NOW(), birth_date) <' => '1645'
-        ]);
-
-        $desc_alive = $rat->countRats([
-            'Rats.id IN' => $descendance,
-            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
-            'Rats.id !=' => $rat->id,
-            'is_alive IS' => true,
-            'DATEDIFF(NOW(), birth_date) <' => '1645'
-        ]);
-
-        $stats = $rat->wrapFamilyStatistics($ancestry, $descendance);
-
-        $this->set(compact('rat', 'children',
-            'ancestors', 'asc_alive',
-            'descendors', 'desc_alive',
-            'stats'));
+        $this->set(compact('rat', 'stats'));
     }
 
     /**

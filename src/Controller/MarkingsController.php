@@ -45,8 +45,8 @@ class MarkingsController extends AppController
             ->limit(32)
             ->toArray();
 
-        $count = $marking->countMyRats(['field' => 'marking_id']);
-        $frequency = $marking->frequencyOfMyRats(['field' => 'marking_id']);
+        $count = $marking->countMy('rats', 'marking');
+        $frequency = $marking->frequencyOfMy('rats', 'marking');
 
         $this->set(compact('marking','examples','count','frequency'));
     }

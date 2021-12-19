@@ -146,8 +146,8 @@
                     <th><?= __('Pups number') ?></th>
                     <td>
                         <?= $this->Number->format($litter->pups_number) . ' ' . __('pups')?>
-                        (♀: <?= $this->Number->format($sexes[0]['F']) ?>,
-                        ♂: <?= $this->Number->format($sexes[0]['M']) ?>)</td>
+                        (♀: <?= $this->Number->format($stats['sexes'][0]['F']) ?>,
+                        ♂: <?= $this->Number->format($stats['sexes'][0]['M']) ?>)</td>
                 </tr>
                 <tr>
                     <th><?= __('Stillborn pups number') ?></th>
@@ -195,7 +195,7 @@
 
             <h2>Statistics</h2>
 
-            <?php if ($survivors > 0) : ?>
+            <?php if ($stats['survivors'] > 0) : ?>
                 <div class="message warning">
                     <?= __('Please note that lifespan is computed only on deceased rats. Litter statistics will be accurate after the last survivor’s death.') ?>
                 </div>
@@ -205,11 +205,11 @@
                 <tr>
                     <th><?= __('Current survival rate:') ?></th>
                     <td>
-                        <?= h($survivors) . ' %'?>
+                        <?= h($stats['survivors']) . ' %'?>
                     <span class="comment">
-                        <?= $survivors == 0 ?
+                        <?= $stats['survivors'] == 0 ?
                         __('(all rats of the litter are now dead, or supposed so)') :
-                        '(at ' . $max_age . ')'
+                        '(at ' . $stats['max_age'] . ')'
                          ?>
                     </span>
                     </td>
@@ -219,7 +219,7 @@
                     <th><?= __('Intermediate survival rates:') ?></th>
                 </tr>
 
-                <?php foreach ($survival as $rate) : ?>
+                <?php foreach ($stats['survival'] as $rate) : ?>
                     <tr>
                         <th> ⨽ <?= h($rate['months']) . ' months:' ?> </th>
                         <td> <?= h($rate['count']) . ' %' ?> </td>
@@ -228,7 +228,7 @@
 
                 <tr>
                     <th><?= __('Average lifespan:') ?></th>
-                    <td><?= h($lifespan) .' months' ?></td>
+                    <td><?= h($stats['lifespan']) .' months' ?></td>
                 </tr>
             </table>
 

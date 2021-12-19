@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 namespace App\Model\Entity;
-use App\Model\Entity\StatisticsTrait;
 
-// use Cake\Datasource\FactoryLocator;
 use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\Collection\Collection;
 use Cake\View\Helper\HtmlHelper;
+use Cake\Datasource\FactoryLocator;
+use App\Model\Entity\StatisticsTrait;
 
 /**
  * Rat Entity
@@ -448,8 +448,95 @@ class Rat extends Entity
         return $this->birth_date->isFuture();
     }
 
-    public function wrapFamilyStatistics($ancestry, $descendance)
+    /* family statistics */
+
+    public function computeDescendance($id, &$descendance)
     {
+        $model = FactoryLocator::get('Table')->get('Rats');
+
+        if (in_array($id, $descendance)) {
+            return null;
+        }
+
+        else {
+            array_push($descendance, $id);
+
+            $children = $model->find()
+                ->select(['id'])
+                ->matching('BirthLitters.ParentRats', function ($query) use ($id) {
+                    return $query->where(['ParentRats.id' => $id]);
+                })
+                ->all();
+
+            if (!empty($children)) {
+                foreach ($children as $child) {
+                    $this->computeDescendance($child->id, $descendance);
+                }
+                return $descendance;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public function computeAncestry($id, &$ancestry)
+    {
+        $model = FactoryLocator::get('Table')->get('Rats');
+
+        if (in_array($id, $ancestry)) {
+            return null;
+        }
+
+        else {
+            array_push($ancestry, $id);
+
+            $ancestors = $model->find()
+                ->select(['id'])
+                ->matching('BredLitters.OffspringRats', function ($query) use ($id) {
+                    return $query->where(['OffspringRats.id' => $id]);
+                })
+                ->all();
+
+            if (! empty($ancestors)) {
+                foreach ($ancestors as $ancestor) {
+                    $this->computeAncestry($ancestor->id, $ancestry);
+                }
+                return $ancestry;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public function wrapFamilyStatistics()
+    {
+        // -1 since the rat itself is put in the list for recursion initialization
+        $descendance = [];
+        $stats['descendors'] = count($this->computeDescendance($this->id, $descendance)) - 1;
+        $ancestry = [];
+        $stats['ancestors'] = count($this->computeAncestry($this->id, $ancestry)) - 1;
+        $children = 0;
+        foreach ($this->bred_litters as $litter) {
+            $children += $litter->pups_number;
+        }
+        $stats['children'] = $children;
+
+        $stats['asc_alive'] = $this->countRats([
+            'Rats.id IN' => $ancestry,
+            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
+            'Rats.id !=' => $this->id,
+            'is_alive IS' => true,
+            'DATEDIFF(NOW(), birth_date) <' => '1645'
+        ]);
+
+        $stats['desc_alive'] = $this->countRats([
+            'Rats.id IN' => $descendance,
+            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
+            'Rats.id !=' => $this->id,
+            'is_alive IS' => true,
+            'DATEDIFF(NOW(), birth_date) <' => '1645'
+        ]);
+
         $stats['asc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry]);
         $stats['asc_female_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry,'sex' => 'F']);
         $stats['asc_male_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry,'sex' => 'M']);

@@ -45,8 +45,8 @@ class EarsetsController extends AppController
             ->limit(32)
             ->toArray();
 
-        $count = $earset->countMyRats(['field' => 'earset_id']);
-        $frequency = $earset->frequencyOfMyRats(['field' => 'earset_id']);
+        $count = $earset->countMy('rats', 'earset');
+        $frequency = $earset->frequencyOfMyRats('rats', 'earset');
 
         $this->set(compact('earset','examples','count','frequency'));
     }

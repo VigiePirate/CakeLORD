@@ -155,6 +155,24 @@ class Rattery extends Entity
             $stats['deadRatCount'] = 0;
         }
 
+        if (! $this->is_generic) {
+            $stats['avg_mother_age'] = $this->computeAvgMotherAge(['Contributions.rattery_id' => $this->id]);
+            $stats['avg_father_age'] = $this->computeAvgFatherAge(['Contributions.rattery_id' => $this->id]);
+            $stats['avg_litter_size'] = $this->computeAvgLitterSize(['Contributions.rattery_id' => $this->id]);
+            $stats['debiased_avg_litter_size'] = $this->computeAvgLitterSize(['Contributions.rattery_id' => $this->id, 'pups_number >=' => '6', 'pups_number <=' => '16']);
+
+            // Currently compute at the rat-level. Switch to litter-level?
+            $stats['avg_sex_ratio'] = $this->computeRatSexRatioInWords([
+                'OR' => [
+                    'Contributions.rattery_id' => $this->id,
+                    'Rats.rattery_id' => $this->id // for rats with rattery_id but no litter_id
+                ]], 12);
+
+            $stats['primaries'] = $this->countRatsByPrimaryDeath(['rattery_id' => $this->id])->toArray();
+            $stats['secondaries'] = $this->countRatsBySecondaryDeath(['rattery_id' => $this->id]);
+            $stats['tumours'] = $this->countRatsByTumour()->toArray(['rattery_id' => $this->id]);
+        }
+        
         return $stats;
     }
 

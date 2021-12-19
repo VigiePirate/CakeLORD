@@ -45,8 +45,8 @@ class EyecolorsController extends AppController
             ->limit(32)
             ->toArray();
 
-        $count = $eyecolor->countMyRats(['field' => 'eyecolor_id']);
-        $frequency = $eyecolor->frequencyOfMyRats(['field' => 'eyecolor_id']);
+        $count = $eyecolor->countMy('rats', 'eyecolor');
+        $frequency = $eyecolor->frequencyOfMy('rats', 'eyecolor');
 
         $this->set(compact('eyecolor','examples','count','frequency'));
     }

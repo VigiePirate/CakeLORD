@@ -267,4 +267,18 @@ class Litter extends Entity
         }
         return true;
     }
+
+    /* Statistics */
+    public function wrapStatistics() {
+        // survival: could be cheaper if called on $litter->offsprings with trait in RatsTable?
+        // or pass offsprings as optional argument?
+        $stats['survival'] = $this->computeSurvivalRate([],['litter_id' => $this->id]);
+        $stats['max_age'] = $this->max_age;
+        $stats['lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id]);
+        $stats['sexes'] = $this->computeLitterSexes(['litter_id' => $this->id])->toArray();
+        $stats['survivors'] = 100 * round($this->countMy('rats', 'litter', ['is_alive IS' => true])/$this->pups_number,2);
+
+        return $stats;
+    }
+
 }
