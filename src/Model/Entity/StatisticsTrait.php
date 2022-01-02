@@ -27,9 +27,9 @@ trait StatisticsTrait
 
     public function frequencyOfMy($name, $key, $options = [])
     {
-        $rats = $this->countMy($name, $key, $options);
-        $allrats = $model->find();
-        return round (100 * $rats->count() / $allrats->count(),2);
+        $model = $this->countMy($name, $key, $options);
+        $all = $this->countAll($name, $options);
+        return round (100 * $model / $all, 2);
     }
 
     public function countAllByCreationYear($name, $options = [])
@@ -212,7 +212,7 @@ trait StatisticsTrait
         }
 
         $histogram = $model->find()
-            ->where()
+            ->where($filter)
             ->contain(['DeathSecondaryCauses'])
             ->select([
                 'name' => 'DeathSecondaryCauses.name',
@@ -386,7 +386,7 @@ trait StatisticsTrait
     }
 
     public function computeLitterSexRatio($options = []) {
-        $litter_size_by_sex = $this->computeLitterSexes($options)->toArray();
+        $litters = $this->computeLitterSexes($options)->toArray();
         $valid_litters_count = 0;
         $male_proportion_sum = 0;
         foreach ($litters as $litter) {
@@ -600,7 +600,7 @@ trait StatisticsTrait
         $total_deaths = array_sum(array_column($rate, 'count'));
         $starters = $total_deaths;
         for ($i=0; $i < $max_months; $i++) {
-            $finishers = $starters-$mortality_distribution[$i]['count'] ;
+            $finishers = $starters-$mortality_distribution[$i]['count'];
             $rate[$i]['count'] = 100*(1-$finishers/$starters);
             $starters = $finishers;
         }

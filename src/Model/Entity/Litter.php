@@ -141,6 +141,16 @@ class Litter extends Entity
     {
         if (isset($this->birth_date)) {
             $agedate = $this->birth_date;
+            return $agedate->diffInMonths();
+        } else { // should raise exception
+            return -1;
+        }
+    }
+
+    protected function _getMaxAgeInWords()
+    {
+        if (isset($this->birth_date)) {
+            $agedate = $this->birth_date;
             return $agedate->diffInMonths() .' months';
         } else { // should raise exception
             return __('Unknown');
@@ -269,14 +279,51 @@ class Litter extends Entity
     }
 
     /* Statistics */
-    public function wrapStatistics() {
+
+    // survival rate in litter does not use StatisticsTrait because of right censoring
+    public function computeIntermediateSurvivalRate($offsprings = []) {
+        $total = $this->pups_number;
+        $ages = [];
+        $k_max = min([54, $this->max_age]);
+        foreach($offsprings as $offspring) {
+            array_push($ages, $offspring->age);
+        }
+        for ($k=0; $k<=$k_max; $k++) {
+            $deaths = array_filter($ages, function ($age) use ($k) {
+                return $age < $k;
+            });
+            $survival[$k]['months'] = $k;
+            $survival[$k]['count'] = 100*round(1-count($deaths)/$total,2);
+        }
+        if ($k_max < 54) {
+            for ($j=$k_max+1; $j<=54; $j++) {
+                $survival[$j]['months'] = $j;
+            }
+        }
+        return $survival;
+    }
+
+    public function wrapStatistics($offsprings) {
         // survival: could be cheaper if called on $litter->offsprings with trait in RatsTable?
         // or pass offsprings as optional argument?
-        $stats['survival'] = $this->computeSurvivalRate([],['litter_id' => $this->id]);
-        $stats['max_age'] = $this->max_age;
-        $stats['lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id]);
         $stats['sexes'] = $this->computeLitterSexes(['litter_id' => $this->id])->toArray();
+
+        $stats['max_age'] = $this->max_age_in_words;
+
+        $stats['lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id]);
+        $stats['female_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'F']);
+        $stats['male_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'M']);
+
+        $stats['not_infant_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['female_not_infant_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['male_not_infant_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
+
+        $stats['not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['female_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['male_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+
         $stats['survivors'] = 100 * round($this->countMy('rats', 'litter', ['is_alive IS' => true])/$this->pups_number,2);
+        $stats['survival'] = $this->computeIntermediateSurvivalRate($offsprings);
 
         return $stats;
     }

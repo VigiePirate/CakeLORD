@@ -62,7 +62,7 @@
 
             <?php if($rattery->is_generic) : ?>
                 <div class="message"><?= __('This is a generic prefix. It does not correspond to an actual rattery. Therefore, only limited information is shown.') ?></div>
-                <h2>Statistics</h2>
+                <h2><?= __('Statistics') ?></h2>
                 <h3>Breeding statistics</h3>
                 <table class="condensed stats">
                     <tr>
@@ -92,8 +92,8 @@
                     <?php else : ?>
                         <table class="condensed stats">
                             <tr>
-                                <th>Bred rats recorded as deceased:</th>
-                                <td><?= h($stats['presumedDeadRatCount']) ?> rat<?= h($stats['presumedDeadRatCount']<2) ? '' : 's' ?> (<?= h($stats['deadRatProportion']) ?> % of recorded bred rats)</td>
+                                <th>Rats recorded as deceased:</th>
+                                <td><?= h($stats['presumedDeadRatCount']) ?> rat<?= h($stats['presumedDeadRatCount']<2) ? '' : 's' ?> (<?= h($stats['deadRatProportion']) ?> % of recorded rats)</td>
                             </tr>
                             <tr>
                                 <th> ⨽ declared with known date:</th>
@@ -120,7 +120,7 @@
                                 </tr>
                             </table>
                         <?php else : ?>
-                            <div class="message">There aren't enough rats with reliable information to compute relevant mortality statistics.</div>
+                            <div class="message">There aren't enough rats with consolidated information to compute relevant mortality statistics.</div>
                         <?php endif; ?>
                     <?php endif; ?>
                 <?php endif; ?>
@@ -178,7 +178,7 @@
                     </div>
                 <?php endif; ?>
 
-                <h2>Statistics</h2>
+                <h2><?= __('Statistics') ?></h2>
                 <?php if ($stats['ratCount'] == 0 && $stats['outRatCount'] == 0) : ?>
                     <div class="message error">No recorded rat was born in (or in partnership with) this rattery.</div>
                 <?php else : ?>
@@ -192,9 +192,20 @@
                         </table>
                         <table class="condensed stats">
                             <tr>
-                                <th>Litter records (born in the rattery):</th>
-                                <td><?= h($stats['inLitterCount']) ?> litter<?= h($stats['inLitterCount']<2) ? '' : 's' ?>, <?= h($stats['inRatCount']) ?> pup<?= h($stats['inRatCount']<2) ? '' : 's' ?></td>
+                                <th>Total breeding activity:</th>
+                                <td><?= h($stats['inLitterCount']+$stats['outLitterCount']) ?> litter<?= ($stats['inLitterCount']+$stats['outLitterCount'])<2 ? '' : 's' ?>,
+                                    <?= h($stats['inRatCount']+$stats['outRatCount']) ?> pup<?= ($stats['inRatCount']+$stats['outRatCount'])<2 ? '' : 's' ?></td>
                             </tr>
+                            <tr>
+                                <th> ⨽ internal (born in the rattery):</th>
+                                <td> ⨽ <?= h($stats['inLitterCount']) ?> litter<?= h($stats['inLitterCount']<2) ? '' : 's' ?>, <?= h($stats['inRatCount']) ?> pup<?= h($stats['inRatCount']<2) ? '' : 's' ?></td>
+                            </tr>
+                            <tr>
+                                <th> ⨽ external (other contributed litters):</th>
+                                <td> ⨽ <?= h($stats['outLitterCount']) ?> litter<?= h($stats['outLitterCount']<2) ? '' : 's' ?>, <?= h($stats['outRatCount']) ?> pup<?= h($stats['outRatCount']<2) ? '' : 's' ?><!--, with xx different partner ratteries--></td>
+                            </tr>
+                        </table>
+                        <table class="condensed stats">
                             <tr>
                                 <th>Rat records (born in the rattery):</th>
                                 <td><?= h($stats['ratCount']) ?> rat<?= h($stats['ratCount']<2) ? '' : 's' ?></td>
@@ -206,12 +217,6 @@
                             <tr>
                                 <th> ⨽ males:</th>
                                 <td> ⨽ <?= h($stats['maleCount']) . ' male'. (h($stats['maleCount']<2) ? '' : 's') . ' (' . h($stats['maleProportion']) .' %)' ?></td>
-                            </tr>
-                        </table>
-                        <table class="condensed stats">
-                            <tr>
-                                <th>Other contributed litters:</th>
-                                <td><?= h($stats['outLitterCount']) ?> litter<?= h($stats['outLitterCount']<2) ? '' : 's' ?>, <?= h($stats['outRatCount']) ?> pup<?= h($stats['outRatCount']<2) ? '' : 's' ?><!--, with xx different partner ratteries--></td>
                             </tr>
                         </table>
                     </details>
@@ -233,7 +238,7 @@
                                 </tr>
                                 <tr>
                                     <th><?= __('Average litter size:') ?></th>
-                                    <td><?= h($stats['avg_litter_size']) ?> pups (debiased estimation : <?= h($stats['debiased_avg_litter_size']) ?> pups)</td>
+                                    <td><?= h($stats['avg_litter_size']) ?> pups</td>
                                 </tr>
                                 <tr>
                                     <th><?= __('Average sex ratio:') ?></th>
@@ -352,9 +357,10 @@
                         <div class="message warning">The owner of this rattery does not wish to show their full breeding and mortality statistics.</div>
                     <?php endif; ?>
 
-                <?php endif; ?>
-
-                <div class="spacer"> </div>
+                <?php endif; ?>        
+            </div>
+            <div class="spacer"> </div>
+            <div class="ratteries view content">
                 <div class="row">
                     <div class="column-responsive column-33">
                         <h2>Related entries</h2>

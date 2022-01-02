@@ -136,6 +136,10 @@
                         <th></th>
                         <td><?= $this->Html->link('See interactive family tree', ['controller' => 'Rats', 'action' => 'pedigree', $rat->id]) ?> (all direct ascendants and descendants)</td>
                     </tr>
+                    <tr>
+                        <th></th>
+                        <td><?= $this->Html->link('See family report', ['controller' => 'Rats', 'action' => 'family', $rat->id]) ?> (family size and lifespan statistics)</td>
+                    </tr>
                 </table>
 
             <h2>Description</h2>
@@ -238,8 +242,12 @@
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
-
-            <div class="spacer"> </div>
+            <div class="signature">
+                &mdash; Created on <?= $rat->created->i18nFormat('dd/MM/yyyy') ?> by <?= $rat->creator_user->username ?>. <?= ($rat->modified != $rat->created) ? 'Last modified on ' . $rat->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
+            </div>
+        </div>
+        <div class="spacer"> </div>
+        <div class="rat view content">
             <h2 class="staff"><?= __('Private information') ?></h2>
             <div class="related">
                 <details>
@@ -309,9 +317,6 @@
                     </div>
                     <?php endif; ?>
                 </details>
-            </div>
-            <div class="signature">
-                &mdash; Created on <?= $rat->created->i18nFormat('dd/MM/yyyy') ?> by <?= $rat->creator_user->username ?>. <?= ($rat->modified != $rat->created) ? 'Last modified on ' . $rat->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
             </div>
         </div>
     </div>

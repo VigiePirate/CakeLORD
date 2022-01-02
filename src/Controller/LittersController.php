@@ -78,7 +78,7 @@ class LittersController extends AppController
                                 });
         $offsprings = $this->paginate($offspringsQuery);
 
-        $stats = $litter->wrapStatistics();
+        $stats = $litter->wrapStatistics($offsprings);
 
         $this->loadModel('States');
         if($litter->state->is_frozen) {

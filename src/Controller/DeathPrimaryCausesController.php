@@ -37,7 +37,7 @@ class DeathPrimaryCausesController extends AppController
         ]);
 
         $count = $deathPrimaryCause->countMy('rats','death_primary_cause');
-        $frequency = $deathPrimaryCause->frequencyOfMyRats('rats','death_primary_cause');
+        $frequency = $deathPrimaryCause->frequencyOfMy('rats','death_primary_cause');
         if ($count > 0) {
             $sex_ratio =  $deathPrimaryCause->computeRatSexRatioInWords(['death_primary_cause_id' => $deathPrimaryCause->id], 20);
             $age = $deathPrimaryCause->roundLifespan(['death_primary_cause_id' => $deathPrimaryCause->id]);
