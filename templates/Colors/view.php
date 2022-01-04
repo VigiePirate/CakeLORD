@@ -72,7 +72,7 @@
                         </tr>
                         <tr>
                             <th><?= __('Frequency') ?></th>
-                            <td>(xx)<?= __(' %') ?></td>
+                            <td><?= h($frequency) . __(' %') ?> (<?= h($count) ?> rats) </td>
                         </tr>
                     </table>
                     <div class="text">

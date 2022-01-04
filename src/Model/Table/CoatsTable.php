@@ -29,6 +29,7 @@ use Cake\Validation\Validator;
  */
 class CoatsTable extends Table
 {
+
     /**
      * Initialize method
      *

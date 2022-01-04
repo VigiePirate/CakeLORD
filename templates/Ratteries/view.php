@@ -54,22 +54,86 @@
     <div class="column-responsive column-90">
         <div class="ratteries view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Rattery') ?></div>
+                <div class="sheet-title pretitle"><?= $rattery->is_generic ? __('Generic origin') :  __('Rattery') ?></div>
                 <?= $this->element('statebar', ['sheet' => $rattery]) ?>
             </div>
 
             <h1><?= h($rattery->full_name) . '<span class="rotate"> ' . h($rattery->is_alive_symbol) . '</span>'?></h1> <!-- -->
 
             <?php if($rattery->is_generic) : ?>
-                <div class="message"><?= __('This “rattery” is generic. Therefore, only a small number of relevant information are shown.') ?></div>
-            <?php endif ?>
-            <h2>Information</h2>
-            <div class="row">
-                <?php if ($rattery->picture != '') : ?>
-                <div class="column-responsive column-66">
+                <div class="message"><?= __('This is a generic prefix. It does not correspond to an actual rattery. Therefore, only limited information is shown.') ?></div>
+                <h2><?= __('Statistics') ?></h2>
+                <h3>Breeding statistics</h3>
+                <table class="condensed stats">
+                    <tr>
+                        <th>Litters recorded under this prefix:</th>
+                        <td><?= h($stats['inLitterCount']) ?> litter<?= h($stats['inLitterCount']<2) ? '' : 's' ?></td>
+                    </tr>
+                    <tr>
+                        <th>Rats recorded under this prefix:</th>
+                        <td><?= h($stats['ratCount']) ?> rats</td>
+                    </tr>
+                    <tr>
+                        <th> ⨽ females:</th>
+                        <td> ⨽ <?= h($stats['femaleCount']) . ' females (' . h($stats['femaleProportion']) .' %)' ?></td>
+                    </tr>
+                    <tr>
+                        <th> ⨽ males:</th>
+                        <td> ⨽ <?= h($stats['maleCount']) . ' males (' . h($stats['maleProportion']) .' %)' ?></td>
+                    </tr>
+                </table>
+
+                <h3>Lifespan statistics</h3>
+                <?php if($stats['ratCount'] == 0 && $stats['outRatCount'] > 0) : ?>
+                    <div class="message">This prefix is only used in external litters.</div>
                 <?php else : ?>
-                <div class="column-responsive column-100">
-                <?php endif ?>
+                    <?php if ($stats['ratCount'] == 0 && $stats['outRatCount'] == 0) : ?>
+                        <div class="message error">No recorded rat is associated with this origin.</div>
+                    <?php else : ?>
+                        <table class="condensed stats">
+                            <tr>
+                                <th>Rats recorded as deceased:</th>
+                                <td><?= h($stats['presumedDeadRatCount']) ?> rat<?= h($stats['presumedDeadRatCount']<2) ? '' : 's' ?> (<?= h($stats['deadRatProportion']) ?> % of recorded rats)</td>
+                            </tr>
+                            <tr>
+                                <th> ⨽ declared with known date:</th>
+                                <td> ⨽ <?= h($stats['deadRatCount']) ?> rat<?= h($stats['deadRatCount']<2) ? '' : 's' ?> (<?= h($stats['followedRatProportion']) ?> %)</td>
+                            </tr>
+                            <tr>
+                                <th> ⨽ presumed dead:</th>
+                                <td> ⨽ <?= h($stats['lostRatCount']) ?> rat<?= h($stats['lostRatCount']<2) ? '' : 's' ?> (<?= h($stats['lostRatProportion']) ?> %)</td>
+                            </tr>
+                        </table>
+                        <?php if ($stats['deadRatCount'] > 9) : ?>
+                            <table class="condensed stats">
+                                <tr>
+                                    <th>Average lifespan of rats with this prefix:</th>
+                                    <td><?= h($stats['deadRatAge']) ?> months (♀: <?= h($stats['deadFemaleAge']) ?>, ♂: <?= h($stats['deadMaleAge']) ?>)</td>
+                                </tr>
+                                <tr>
+                                    <th> ⨽ infant mortality excluded:</th>
+                                    <td> ⨽ <?= h($stats['deadRatAgeAdult']) ?> months (♀: <?= h($stats['deadFemaleAgeAdult']) ?>, ♂: <?= h($stats['deadMaleAgeAdult']) ?>)</td>
+                                </tr>
+                                <tr>
+                                    <th> ⨽ accidents excluded:</th>
+                                    <td> ⨽ <?= h($stats['deadRatAgeHealthy']) ?> months (♀: <?= h($stats['deadFemaleAgeHealthy']) ?>, ♂: <?= h($stats['deadMaleAgeHealthy']) ?>)</td>
+                                </tr>
+                            </table>
+                        <?php else : ?>
+                            <div class="message">There aren't enough rats with consolidated information to compute relevant mortality statistics.</div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php endif; ?>
+
+            <?php else : ?> <!-- non generic rattery -->
+
+                <h2>Information</h2>
+                <div class="row">
+                    <?php if ($rattery->picture != '') : ?>
+                        <div class="column-responsive column-66">
+                    <?php else : ?>
+                        <div class="column-responsive column-100">
+                    <?php endif; ?>
                     <table class="condensed stats">
                         <tr>
                             <!-- add user first and last name if not anonymous ? -->
@@ -98,39 +162,26 @@
                         </tr>
                     </table>
 
-                </div>
-                <?php if ($rattery->picture != '') : ?>
-                    <div class="column">
-                        <?= $this->Html->image('uploads/' . $rattery->picture, ['alt' => $rattery->prefix]) ?>
                     </div>
-                <?php endif ?>
-            </div>
-            <div class="text">
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($rattery->comments)); ?>
-                </blockquote>
-            </div>
-            <h2>Statistics</h2>
-            <?php if ($stats['ratCount']==0 && $stats['outRatCount']==0) : ?>
-                <div class="message error">No recorded rat was born in (or in partnership with) this rattery.</div>
-            <?php else : ?>
-                <?php if($rattery->is_generic) : ?>
-                    <table class="condensed stats">
-                        <tr>
-                            <th>Recorded rats under this prefix:</th>
-                            <td><?= h($stats['ratCount']) ?> rats</td>
-                        </tr>
-                        <tr>
-                            <th> ⨽ females:</th>
-                            <td> ⨽ <?= h($stats['femaleCount']) . ' females (' . h($stats['femaleProportion']) .' %)' ?></td>
-                        </tr>
-                        <tr>
-                            <th> ⨽ males:</th>
-                            <td> ⨽ <?= h($stats['maleCount']) . ' males (' . h($stats['maleProportion']) .' %)' ?></td>
-                        </tr>
-                    </table>
-                <?php endif ?>
-                <?php if($rattery->wants_statistic) : ?>
+                    <?php if ($rattery->picture != '') : ?>
+                        <div class="column">
+                            <?= $this->Html->image('uploads/' . $rattery->picture, ['alt' => $rattery->prefix]) ?>
+                        </div>
+                    <?php endif ?>
+                </div>
+
+                <?php if (! empty($rattery->comments)) : ?>
+                    <div class="text">
+                        <blockquote>
+                            <?= $this->Text->autoParagraph(h($rattery->comments)); ?>
+                        </blockquote>
+                    </div>
+                <?php endif; ?>
+
+                <h2><?= __('Statistics') ?></h2>
+                <?php if ($stats['ratCount'] == 0 && $stats['outRatCount'] == 0) : ?>
+                    <div class="message error">No recorded rat was born in (or in partnership with) this rattery.</div>
+                <?php else : ?>
                     <details open>
                         <summary>Breeding statistics</summary>
                         <table class="condensed stats">
@@ -138,10 +189,23 @@
                                 <th>Breeding activity period:</th>
                                 <td><?= h($stats['activityYears']) ?></td>
                             </tr>
+                        </table>
+                        <table class="condensed stats">
                             <tr>
-                                <th>Litter records (born in the rattery):</th>
-                                <td><?= h($stats['inLitterCount']) ?> litter<?= h($stats['inLitterCount']<2) ? '' : 's' ?>, <?= h($stats['inRatCount']) ?> rat<?= h($stats['inRatCount']<2) ? '' : 's' ?></td>
+                                <th>Total breeding activity:</th>
+                                <td><?= h($stats['inLitterCount']+$stats['outLitterCount']) ?> litter<?= ($stats['inLitterCount']+$stats['outLitterCount'])<2 ? '' : 's' ?>,
+                                    <?= h($stats['inRatCount']+$stats['outRatCount']) ?> pup<?= ($stats['inRatCount']+$stats['outRatCount'])<2 ? '' : 's' ?></td>
                             </tr>
+                            <tr>
+                                <th> ⨽ internal (born in the rattery):</th>
+                                <td> ⨽ <?= h($stats['inLitterCount']) ?> litter<?= h($stats['inLitterCount']<2) ? '' : 's' ?>, <?= h($stats['inRatCount']) ?> pup<?= h($stats['inRatCount']<2) ? '' : 's' ?></td>
+                            </tr>
+                            <tr>
+                                <th> ⨽ external (other contributed litters):</th>
+                                <td> ⨽ <?= h($stats['outLitterCount']) ?> litter<?= h($stats['outLitterCount']<2) ? '' : 's' ?>, <?= h($stats['outRatCount']) ?> pup<?= h($stats['outRatCount']<2) ? '' : 's' ?><!--, with xx different partner ratteries--></td>
+                            </tr>
+                        </table>
+                        <table class="condensed stats">
                             <tr>
                                 <th>Rat records (born in the rattery):</th>
                                 <td><?= h($stats['ratCount']) ?> rat<?= h($stats['ratCount']<2) ? '' : 's' ?></td>
@@ -155,140 +219,193 @@
                                 <td> ⨽ <?= h($stats['maleCount']) . ' male'. (h($stats['maleCount']<2) ? '' : 's') . ' (' . h($stats['maleProportion']) .' %)' ?></td>
                             </tr>
                         </table>
-                        <table class="condensed stats">
-                            <tr>
-                                <th>Other contributed litters:</th>
-                                <td><?= h($stats['outLitterCount']) ?> litter<?= h($stats['outLitterCount']<2) ? '' : 's' ?>, <?= h($stats['outRatCount']) ?> rat<?= h($stats['outRatCount']<2) ? '' : 's' ?><!--, with xx different partner ratteries--></td>
-                            </tr>
-                            <!-- Might be uncommented one day if we want to count males and females in contributed litters
-                            <tr>
-                            <th>Rats born in contributed litters: (outRatcount with male and female? (♀: , ♂: )</th>
-                        </tr>-->
-                        </table>
                     </details>
-                    <details>
-                        <summary>Lifespan statistics</summary>
-                        <?php if($stats['ratCount']==0 && $stats['outRatCount']>0) : ?>
-                            <div class="message">This rattery only had external external litters. Lifespan statistics can be consulted on each of their contributed litter sheets and on their partner ratteries. </div>
-                        <?php else : ?>
+
+                    <?php if($rattery->wants_statistic) : ?>
+                        <details>
+                            <summary>More breeding statistics</summary>
                             <table class="condensed stats">
                                 <tr>
-                                    <th>Bred rats recorded as deceased:</th>
-                                    <td><?= h($stats['presumedDeadRatCount']) ?> rat<?= h($stats['presumedDeadRatCount']<2) ? '' : 's' ?> (<?= h($stats['deadRatProportion']) ?> % of recorded bred rats)</td>
+                                    <th><?= __('Average mother age:') ?></th>
+                                    <td><?= h(round($stats['avg_mother_age'])) ?> days (<?= h(round($stats['avg_mother_age']/30.5,1)) ?> months)</td>
                                 </tr>
                                 <tr>
-                                    <th> ⨽ declared with known date:</th>
-                                    <td> ⨽ <?= h($stats['deadRatCount']) ?> rat<?= h($stats['deadRatCount']<2) ? '' : 's' ?> (<?= h($stats['followedRatProportion']) ?> %)</td>
+                                    <th><?= __('Average father age:') ?></th>
+                                    <td><?= ($stats['avg_father_age'] != 0) ?
+                                        h(round($stats['avg_father_age'])) . __(' days (') . h(round($stats['avg_father_age']/30.5,1)) . __(' months)') :
+                                        __('This rattery only had litters of unknown fathers')
+                                        ?> </td>
                                 </tr>
                                 <tr>
-                                    <th> ⨽ presumed dead:</th>
-                                    <td> ⨽ <?= h($stats['lostRatCount']) ?> rat<?= h($stats['lostRatCount']<2) ? '' : 's' ?> (<?= h($stats['lostRatProportion']) ?> %)</td>
+                                    <th><?= __('Average litter size:') ?></th>
+                                    <td><?= h($stats['avg_litter_size']) ?> pups</td>
+                                </tr>
+                                <tr>
+                                    <th><?= __('Average sex ratio:') ?></th>
+                                    <td><?= h($stats['avg_sex_ratio']) ?></td>
                                 </tr>
                             </table>
-                            <?php if ($stats['deadRatCount']>9) : ?>
-                                <table class="condensed stats">
-                                    <tr>
-                                        <th>Average lifespan of bred rats:</th>
-                                        <td><?= h($stats['deadRatAge']) ?> months (♀: <?= h($stats['deadFemaleAge']) ?>, ♂: <?= h($stats['deadMaleAge']) ?>)</td>
-                                    </tr>
-                                    <tr>
-                                        <th> ⨽ infant mortality excluded:</th>
-                                        <td> ⨽ <?= h($stats['deadRatAgeAdult']) ?> months (♀: <?= h($stats['deadFemaleAgeAdult']) ?>, ♂: <?= h($stats['deadMaleAgeAdult']) ?>)</td>
-                                    </tr>
-                                    <tr>
-                                        <th> ⨽ accidents excluded:</th>
-                                        <td> ⨽ <?= h($stats['deadRatAgeHealthy']) ?> months (♀: <?= h($stats['deadFemaleAgeHealthy']) ?>, ♂: <?= h($stats['deadMaleAgeHealthy']) ?>)</td>
-                                    </tr>
-                                </table>
-                                <table class="condensed stats">
-                                    <tr>
-                                        <th>Oldest bred rat:</th>
-                                        <!-- fixme -->
-                                        <td><?= $this->Html->link(
-                                            h($champion['name']),
-                                            ['controller' => 'Rats', 'action' => 'view', $champion['id']]); ?>  (deceased at <?= h($champion['ageInWords']) ?>)
-                                        </td>
-                                    </tr>
-                                </table>
-                            </details>
-                            <details>
-                                <summary>Death causes statistics</summary>
-                                <table class="condensed stats">
-                                    <tr>
-                                        <th>Primary death causes by decreasing frequency:</th>
-                                    </tr>
-                                </table>
+                        </details>
 
-                                <table class="condensed stats histogram">
-                                    <?php foreach($stats['deathPrimary'] as $cause => $count) : ?>
+                        <?php if($stats['ratCount'] == 0 && $stats['outRatCount'] > 0) : ?>
+                            <div class="message">This rattery only had external litters. Mortality statistics can be consulted on each of their contributed litter sheets. </div>
+                        <?php else : ?>
+                            <?php if ($stats['deadRatCount'] > 9) : ?>
+                                <details open>
+                                    <summary>Lifespan statistics</summary>
+                                    <table class="condensed stats">
                                         <tr>
-                                            <th><div style="opacity:<?= h(0.25+0.75*$count/max($stats['deathPrimary'])) ?>; width:<?= h($count/max($stats['deathPrimary'])*100) ?>%"><?= h($count) ?> %</div></th>
-                                            <td><?= h($cause) ?></td>
+                                            <th>Bred rats recorded as deceased:</th>
+                                            <td><?= h($stats['presumedDeadRatCount']) ?> rat<?= h($stats['presumedDeadRatCount']<2) ? '' : 's' ?> (<?= h($stats['deadRatProportion']) ?> % of recorded bred rats)</td>
                                         </tr>
-                                    <?php endforeach ?>
-                                </table>
+                                        <tr>
+                                            <th> ⨽ declared with known date:</th>
+                                            <td> ⨽ <?= h($stats['deadRatCount']) ?> rat<?= h($stats['deadRatCount']<2) ? '' : 's' ?> (<?= h($stats['followedRatProportion']) ?> %)</td>
+                                        </tr>
+                                        <tr>
+                                            <th> ⨽ presumed dead:</th>
+                                            <td> ⨽ <?= h($stats['lostRatCount']) ?> rat<?= h($stats['lostRatCount']<2) ? '' : 's' ?> (<?= h($stats['lostRatProportion']) ?> %)</td>
+                                        </tr>
+                                    </table>
+                                    <table class="condensed stats">
+                                        <tr>
+                                            <th>Average lifespan of bred rats:</th>
+                                            <td><?= h($stats['deadRatAge']) ?> months (♀: <?= h($stats['deadFemaleAge']) ?>, ♂: <?= h($stats['deadMaleAge']) ?>)</td>
+                                        </tr>
+                                        <tr>
+                                            <th> ⨽ infant mortality excluded:</th>
+                                            <td> ⨽ <?= h($stats['deadRatAgeAdult']) ?> months (♀: <?= h($stats['deadFemaleAgeAdult']) ?>, ♂: <?= h($stats['deadMaleAgeAdult']) ?>)</td>
+                                        </tr>
+                                        <tr>
+                                            <th> ⨽ accidents excluded:</th>
+                                            <td> ⨽ <?= h($stats['deadRatAgeHealthy']) ?> months (♀: <?= h($stats['deadFemaleAgeHealthy']) ?>, ♂: <?= h($stats['deadMaleAgeHealthy']) ?>)</td>
+                                        </tr>
+                                    </table>
+                                    <table class="condensed stats">
+                                        <tr>
+                                            <th>Oldest bred rat:</th>
+                                            <td><?= ! is_null($champion) ?
+                                                $this->Html->link(h($champion->usual_name),['controller' => 'Rats', 'action' => 'view', $champion->id]) . __(' (deceased at ') . h($champion->champion_age_string) . ')' :
+                                                __('No eligible champion')
+                                            ?></td>
+                                        </tr>
+                                    </table>
+                                </details>
 
-                                <table class="condensed stats">
-                                    <tr>
-                                        <th>Secondary death causes by decreasing frequency:</th>
-                                    </tr>
-                                </table>
-                                <!-- Now let us try to draw histograms with this -->
-                                <table class="condensed stats histogram">
-                                    <?php foreach($stats['deathSecondary'] as $cause => $count) : ?>
-                                        <tr><th><div style="opacity:<?= h(0.25+0.75*$count/max($stats['deathSecondary'])) ?>; width:<?= h($count/max($stats['deathSecondary'])*100) ?>%"><?= h($count) ?> %</div></th>
-                                            <td><?= h($cause) ?>
-                                            </td>
+                                <details>
+                                    <summary>Death causes statistics</summary>
+                                    <table class="condensed stats">
+                                        <tr>
+                                            <th>Primary death causes by decreasing frequency:</th>
                                         </tr>
-                                    <?php endforeach ?>
-                                </table>
+                                    </table>
+                                    <table class="condensed stats histogram">
+                                        <?php foreach($stats['primaries'] as $category): ?>
+                                            <tr>
+                                                <th>
+                                                    <div style="opacity:<?= h(0.25+0.75*$category['count']/$stats['primaries'][0]['count']) ?>; width:<?= h($category['count']/$stats['primaries'][0]['count']*100) ?>%">
+                                                        <?= h(round($category['count']/$stats['deadRatCount']*100,2)) ?> %
+                                                    </div>
+                                                </th>
+                                                <td><?= h($category['name']) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach ?>
+                                    </table>
+                                    <table class="condensed stats">
+                                        <tr>
+                                            <th>Secondary death causes by decreasing frequency:</th>
+                                        </tr>
+                                    </table>
+                                    <table class="condensed stats histogram">
+                                        <?php foreach($stats['secondaries'] as $cause): ?>
+                                            <tr>
+                                                <th>
+                                                    <div style="opacity:<?= h(0.25+0.75*$cause['count']/$stats['secondaries'][0]['count']) ?>; width:<?= h($cause['count']/$stats['secondaries'][0]['count']*100) ?>%">
+                                                        <?= h(round($cause['count']/$stats['deadRatCount']*100,2)) ?> %
+                                                    </div>
+                                                </th>
+                                                <td><?= h($cause['name']) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach ?>
+                                    </table>
+                                </details>
+
                             <?php else : ?>
-                                <div class="message">There aren't enough rats with reliable death information to compute relevant health statistics.</div>
-                            <?php endif ?>
-                        <?php endif ?>
-                    </details>
-            <?php else : ?>
-                <div class="message warning">This rattery do not wish to show her statistics.</div>
-            <?php endif ?>
-        <?php endif ?>
-        <div class="spacer"> </div>
-        <?php // if($rattery->is_generic) : ?>
-            <h2>Related entries</h2>
-            <details>
-                <summary>All Contributed Litters</summary>
-                <table class="summary">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th><?= $this->Paginator->sort('birth_date') ?></th>
-                            <th><?= $this->Paginator->sort('dam') ?></th>
-                            <th><?= $this->Paginator->sort('sire') ?></th>
-                            <th><?= $this->Paginator->sort('size') ?></th>
-                            <th class="actions"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($rattery->litters as $litter): ?>
-                        <tr>
-                            <td><span class="statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></span></td>
-                            <td><?= $litter->has('birth_date') ? h($litter->birth_date->i18nFormat('dd/MM/yyyy')) : __('Unknown date') ?></td>
-                            <td><?= !empty($litter->dam) ? h($litter->dam[0]->usual_name) : __('Unknown') ?></td>
-                            <td><?= !empty($litter->sire) ? h($litter->sire[0]->usual_name) : __('Unknown') ?></td>
-                            <td><?= $this->Number->format($litter->pups_number) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->image('/img/icon-view.svg', [
-                                    'url' => ['controller' => 'Litters', 'action' => 'view', $litter->id],
-                                    'class' => 'action-icon',
-                                    'alt' => __('See Litter')]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </details>
-            <?php if(! $rattery->is_generic) : ?>
-                <details>
-                    <summary>All Rats Born in the Rattery</summary>
+                                <details open>
+                                    <summary>Lifespan statistics</summary>
+                                    <table class="condensed stats">
+                                        <tr>
+                                            <th>Bred rats recorded as deceased:</th>
+                                            <td><?= h($stats['presumedDeadRatCount']) ?> rat<?= h($stats['presumedDeadRatCount']<2) ? '' : 's' ?> (<?= h($stats['deadRatProportion']) ?> % of recorded bred rats)</td>
+                                        </tr>
+                                        <tr>
+                                            <th> ⨽ declared with known date:</th>
+                                            <td> ⨽ <?= h($stats['deadRatCount']) ?> rat<?= h($stats['deadRatCount']<2) ? '' : 's' ?> (<?= h($stats['followedRatProportion']) ?> %)</td>
+                                        </tr>
+                                        <tr>
+                                            <th> ⨽ presumed dead:</th>
+                                            <td> ⨽ <?= h($stats['lostRatCount']) ?> rat<?= h($stats['lostRatCount']<2) ? '' : 's' ?> (<?= h($stats['lostRatProportion']) ?> %)</td>
+                                        </tr>
+                                    </table>
+                                </details>
+                                <div class="message">There aren't enough rats with consolidated information to compute relevant mortality statistics.</div>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php else : ?> <!-- treat ratteries not wanting statistics -->
+                        <div class="message warning">The owner of this rattery does not wish to show their full breeding and mortality statistics.</div>
+                    <?php endif; ?>
+
+                <?php endif; ?>        
+            </div>
+            <div class="spacer"> </div>
+            <div class="ratteries view content">
+                <div class="row">
+                    <div class="column-responsive column-33">
+                        <h2>Related entries</h2>
+                    </div>
+                    <div class="column-responsive column-66">
+                        <?= $this->Html->link(__('See all bred rats'), ['controller' => 'Rats', 'action' => 'fromRattery', $rattery->prefix], ['class' => 'button float-right']) ?>
+                        <?= $this->Html->link(__('See all contributed litters'), ['controller' => 'Contributions', 'action' => 'fromRattery', $rattery->id], ['class' => 'button float-right']) ?>
+                    </div>
+                </div>
+
+                <details open>
+                    <summary>Last contributed litters</summary>
+                    <table class="summary">
+                        <thead>
+                            <tr>
+                                <th><?= __('State') ?></th>
+                                <th><?= $this->Paginator->sort('birth_date') ?></th>
+                                <th><?= $this->Paginator->sort('dam') ?></th>
+                                <th><?= $this->Paginator->sort('sire') ?></th>
+                                <th><?= $this->Paginator->sort('size') ?></th>
+                                <th class="actions"><?= __('Actions') ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach (array_slice($rattery->litters,0,10) as $litter): ?>
+                            <tr>
+                                <td><span class="statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></span></td>
+                                <td><?= $litter->has('birth_date') ? h($litter->birth_date->i18nFormat('dd/MM/yyyy')) : __('Unknown date') ?></td>
+                                <td><?= !empty($litter->dam) ? h($litter->dam[0]->usual_name) : __('Unknown') ?></td>
+                                <td><?= !empty($litter->sire) ? h($litter->sire[0]->usual_name) : __('Unknown') ?></td>
+                                <td><?= $this->Number->format($litter->pups_number) ?></td>
+                                <td class="actions">
+                                    <?= $this->Html->image('/img/icon-view.svg', [
+                                        'url' => ['controller' => 'Litters', 'action' => 'view', $litter->id],
+                                        'class' => 'action-icon',
+                                        'alt' => __('See Litter')]) ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </details>
+
+                <details open>
+                    <summary>Recently modified rats</summary>
                     <?= $this->element('simple_rats', [ //rats
                         'rubric' => __(''),
                         'rats' =>  $rattery->rats,//$offsprings,
@@ -300,11 +417,12 @@
                         ],
                     ]) ?>
                 </details>
-            <?php endif; ?>
-        <div class="spacer"> </div>
-        <h2 class="staff">Private information</h2>
-        <div class="signature">
+
+            <?php endif; ?> <!-- end non generic rattery part -->
+
+            <div class="signature">
             &mdash; Created on <?= $rattery->created->i18nFormat('dd/MM/yyyy') ?>. <?= ($rattery->has('modified') && ($rattery->modified != $rattery->created)) ? 'Last modified on ' . $rattery->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
+            </div>
         </div>
     </div>
 </div>

@@ -36,7 +36,17 @@ class DeathPrimaryCausesController extends AppController
             'contain' => ['DeathSecondaryCauses'],
         ]);
 
-        $this->set(compact('deathPrimaryCause'));
+        $count = $deathPrimaryCause->countMy('rats','death_primary_cause');
+        $frequency = $deathPrimaryCause->frequencyOfMy('rats','death_primary_cause');
+        if ($count > 0) {
+            $sex_ratio =  $deathPrimaryCause->computeRatSexRatioInWords(['death_primary_cause_id' => $deathPrimaryCause->id], 20);
+            $age = $deathPrimaryCause->roundLifespan(['death_primary_cause_id' => $deathPrimaryCause->id]);
+        } else {
+            $sex_ratio = 'N/A';
+            $age = 'N/A';
+        }
+
+        $this->set(compact('deathPrimaryCause', 'count', 'frequency', 'sex_ratio', 'age'));
     }
 
     /**

@@ -33,11 +33,22 @@ class EarsetsController extends AppController
      */
     public function view($id = null)
     {
-        $earset = $this->Earsets->get($id, [
-            //'contain' => ['Rats'],
-        ]);
+        $earset = $this->Earsets->get($id);
 
-        $this->set('earset', $earset);
+        $examples = $this->Earsets->Rats->find()
+            ->where([
+                ['earset_id' => $id],
+                ['picture !=' => 'Unknown.png'],
+                ['picture !=' => ''],
+                ['picture IS NOT' => null]])
+            ->order(['rand()'])
+            ->limit(32)
+            ->toArray();
+
+        $count = $earset->countMy('rats', 'earset');
+        $frequency = $earset->frequencyOfMy('rats', 'earset');
+
+        $this->set(compact('earset','examples','count','frequency'));
     }
 
     /**

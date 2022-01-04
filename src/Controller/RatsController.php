@@ -104,10 +104,10 @@ class RatsController extends AppController
             'BredLitters', 'BredLitters.Contributions', 'BredLitters.Ratteries',
             'BredLitters.Sire', 'BredLitters.Sire.BirthLitters', 'BredLitters.Sire.BirthLitters.Contributions',
             'BredLitters.Dam', 'BredLitters.Dam.BirthLitters', 'BredLitters.Dam.BirthLitters.Contributions',
-            'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
+            'BredLitters.OffspringRats', 'BredLitters.OffspringRats.Ratteries',
             'BredLitters.OffspringRats.BirthLitters', 'BredLitters.OffspringRats.BirthLitters.Contributions',
             'BredLitters.OffspringRats.OwnerUsers', 'BredLitters.OffspringRats.States', 'BredLitters.OffspringRats.DeathPrimaryCauses', 'BredLitters.OffspringRats.DeathSecondaryCauses',
-             'Conversations', 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
+            'Conversations', 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
         ]);
 
         $this->loadModel('States');
@@ -122,7 +122,7 @@ class RatsController extends AppController
                 $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }
-            $this->set(compact('next_ko_state','next_ok_state'));
+            $this->set(compact('next_ko_state', 'next_ok_state'));
         };
 
         $snap_diffs = [];
@@ -130,7 +130,7 @@ class RatsController extends AppController
             $snap_diffs[$snapshot->id] = $this->Rats->snapCompareAsString($rat, $snapshot->id);
         }
 
-        $this->set(compact('rat','snap_diffs'));
+        $this->set(compact('rat', 'snap_diffs'));
     }
 
     /**
@@ -613,8 +613,34 @@ class RatsController extends AppController
             '_children' => $rat->children_array,
         ];
 
+        $this->loadModel('States');
+        if($rat->state->is_frozen) {
+            $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);
+            $this->set(compact('next_thawed_state'));
+        }
+        else {
+            $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
+            $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
+            if( !empty($rat->state->next_frozen_state_id) ) {
+                $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
+                $this->set(compact('next_frozen_state'));
+            }
+            $this->set(compact('next_ko_state','next_ok_state'));
+        };
+
         $json = json_encode($family);
         $this->set(compact('rat', 'json'));
+    }
+
+    public function family($id = null) {
+        $this->Authorization->skipAuthorization();
+        $rat = $this->Rats->get($id, [
+            'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions', 'BredLitters']
+        ]);
+
+        $stats = $rat->wrapFamilyStatistics();
+
+        $this->set(compact('rat', 'stats'));
     }
 
     /**

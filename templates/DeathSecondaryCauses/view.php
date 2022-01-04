@@ -44,7 +44,21 @@
                 </blockquote>
             </div>
             <div class="related">
-                <h2><?= __('Statistics') ?></h2>
+                <h2><?= __('Statistics') ?></h3>
+                <table class="condensed">
+                    <tr>
+                        <th><?= __('Frequency') ?></th>
+                        <td><?= h($frequency) . __(' %') ?> (<?= h($count) ?> rats) </td>
+                    </tr>
+                    <tr>
+                        <th><?= __('Sex ratio') ?></th>
+                        <td><?= h($sex_ratio) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= __('Average age') ?></th>
+                        <td><?= h($age) . __(' months') ?></td>
+                    </tr>
+                </table>
 
                 <h2><?= __('Related rats') ?></h2>
                 <?= $this->element('simple_rats', [ //rats

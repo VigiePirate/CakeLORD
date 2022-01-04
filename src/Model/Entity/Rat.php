@@ -8,6 +8,8 @@ use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\Collection\Collection;
 use Cake\View\Helper\HtmlHelper;
+use Cake\Datasource\FactoryLocator;
+use App\Model\Entity\StatisticsTrait;
 
 /**
  * Rat Entity
@@ -62,6 +64,9 @@ use Cake\View\Helper\HtmlHelper;
  */
 class Rat extends Entity
 {
+
+    use StatisticsTrait;
+
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -261,13 +266,16 @@ class Rat extends Entity
         */
 
         if ($this->age < 0) { // Should raise exception
+            return $age = 'Negative age!';
+        }
+        if ($this->age > 54) {
             return $age = 'Unknown';
         }
         if (! $this->_fields['is_alive'] ) {
-            $age = $this->has('death_date') ?  ($this->age . ' months') : ('Unknown') ;//('supposed deceased, unknown age');
+            $age = $this->has('death_date') ? ($this->age . ' months') : ('Unknown') ;//('supposed deceased, unknown age');
             return $age;
         }  else {
-            if($this->age<1) {
+            if($this->age < 1) {
                 return $age = $this->precise_age . ' days';
             } else {
                 return $age = $this->age . ' months';
@@ -293,12 +301,12 @@ class Rat extends Entity
 
     protected function _getChampionAgeString()
     {
-        if (!$this->is_alive
-            && isset($this->birth_date)
-            && isset($this->_fields['death_date'])
-            && isset($this->_fields['death_primary_cause'])
-            && (!isset($this->_fields['death_secondary_cause']) || (isset($this->_fields['death_primary_cause']) && $this->death_secondary_cause_id != 1))
-        ) {
+        // if (!$this->is_alive
+        //    && isset($this->birth_date)
+        //    && isset($this->_fields['death_date'])
+        //    && isset($this->_fields['death_primary_cause'])
+        //    && (!isset($this->_fields['death_secondary_cause']) || (isset($this->_fields['death_primary_cause']) && $this->death_secondary_cause_id != 1))
+        // ) {
             //return $agedate->diffInDays($this->_fields['birth_date'], true);
             // timeAgoInWords? diffForHumans?
             $birthdate = $this->birth_date;
@@ -306,9 +314,9 @@ class Rat extends Entity
             /* call to timeAgoInWords in the "wrong" date order to avoid "ago" to be added to the string */
             /* could be improved with option "relativeString" to skip number of weeks and convert them to days */
             return $ageInWords =  $deathdate->timeAgoInWords(['from' => $birthdate, 'accuracy' => ['year' => 'day']]);
-        } else {
-            return 0; // Should raise exception
-        }
+        //} else {
+        //    return 0; // Should raise exception
+        //}
     }
 
     protected function _getSingularityString()
@@ -440,4 +448,119 @@ class Rat extends Entity
         return $this->birth_date->isFuture();
     }
 
+    /* family statistics */
+
+    public function computeDescendance($id, &$descendance)
+    {
+        $model = FactoryLocator::get('Table')->get('Rats');
+
+        if (in_array($id, $descendance)) {
+            return null;
+        }
+
+        else {
+            array_push($descendance, $id);
+
+            $children = $model->find()
+                ->select(['id'])
+                ->matching('BirthLitters.ParentRats', function ($query) use ($id) {
+                    return $query->where(['ParentRats.id' => $id]);
+                })
+                ->all();
+
+            if (!empty($children)) {
+                foreach ($children as $child) {
+                    $this->computeDescendance($child->id, $descendance);
+                }
+                return $descendance;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public function computeAncestry($id, &$ancestry)
+    {
+        $model = FactoryLocator::get('Table')->get('Rats');
+
+        if (in_array($id, $ancestry)) {
+            return null;
+        }
+
+        else {
+            array_push($ancestry, $id);
+
+            $ancestors = $model->find()
+                ->select(['id'])
+                ->matching('BredLitters.OffspringRats', function ($query) use ($id) {
+                    return $query->where(['OffspringRats.id' => $id]);
+                })
+                ->all();
+
+            if (! empty($ancestors)) {
+                foreach ($ancestors as $ancestor) {
+                    $this->computeAncestry($ancestor->id, $ancestry);
+                }
+                return $ancestry;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public function wrapFamilyStatistics()
+    {
+        // -1 since the rat itself is put in the list for recursion initialization
+        $descendance = [];
+        $stats['descendors'] = count($this->computeDescendance($this->id, $descendance)) - 1;
+        $ancestry = [];
+        $stats['ancestors'] = count($this->computeAncestry($this->id, $ancestry)) - 1;
+        $children = 0;
+        foreach ($this->bred_litters as $litter) {
+            $children += $litter->pups_number;
+        }
+        $stats['children'] = $children;
+
+        $stats['asc_alive'] = $this->countRats([
+            'Rats.id IN' => $ancestry,
+            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
+            'Rats.id !=' => $this->id,
+            'is_alive IS' => true,
+            'DATEDIFF(NOW(), birth_date) <' => '1645'
+        ]);
+
+        $stats['desc_alive'] = $this->countRats([
+            'Rats.id IN' => $descendance,
+            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
+            'Rats.id !=' => $this->id,
+            'is_alive IS' => true,
+            'DATEDIFF(NOW(), birth_date) <' => '1645'
+        ]);
+
+        $stats['asc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry]);
+        $stats['asc_female_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry,'sex' => 'F']);
+        $stats['asc_male_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry,'sex' => 'M']);
+
+        $stats['asc_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['asc_female_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['asc_male_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
+
+        $stats['asc_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['asc_female_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['asc_male_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+
+        $stats['desc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance]);
+        $stats['desc_female_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance,'sex' => 'F']);
+        $stats['desc_male_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance,'sex' => 'M']);
+
+        $stats['desc_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['desc_female_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['desc_male_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
+
+        $stats['desc_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['desc_female_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['desc_male_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+
+        return $stats;
+    }
 }

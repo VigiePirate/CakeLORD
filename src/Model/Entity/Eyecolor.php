@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use App\Model\Entity\StatisticsTrait;
 
 /**
  * Eyecolor Entity
@@ -19,6 +20,7 @@ use Cake\ORM\Entity;
  */
 class Eyecolor extends Entity
 {
+    use StatisticsTrait;
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *

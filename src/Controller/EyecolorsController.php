@@ -33,11 +33,22 @@ class EyecolorsController extends AppController
      */
     public function view($id = null)
     {
-        $eyecolor = $this->Eyecolors->get($id, [
-            //'contain' => ['Rats'],
-        ]);
+        $eyecolor = $this->Eyecolors->get($id);
 
-        $this->set('eyecolor', $eyecolor);
+        $examples = $this->Eyecolors->Rats->find()
+            ->where([
+                ['coat_id' => $id],
+                ['picture !=' => 'Unknown.png'],
+                ['picture !=' => ''],
+                ['picture IS NOT' => null]])
+            ->order(['rand()'])
+            ->limit(32)
+            ->toArray();
+
+        $count = $eyecolor->countMy('rats', 'eyecolor');
+        $frequency = $eyecolor->frequencyOfMy('rats', 'eyecolor');
+
+        $this->set(compact('eyecolor','examples','count','frequency'));
     }
 
     /**

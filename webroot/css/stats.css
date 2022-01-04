@@ -1,0 +1,46 @@
+.stats-container {
+  display: flex;
+  align-items: baseline;
+  vertical-align: baseline;
+  justify-content: space-between;
+  padding:1em;
+}
+
+.stat-icon {
+  display:inline;
+  padding: 0.5em;
+  width:8em; /* 5.2 */
+}
+
+.stat-icon:hover {
+  background-color:#ebeefa;
+}
+
+.stat-text {
+  font-size:2rem;
+  text-align:center;
+  color:#663300;
+}
+
+.stat-text > span {
+  font-weight:bold;
+}
+
+.centered {
+  text-align:center;
+}
+
+#user-chart, #rattery-chart, #rat-chart {
+  margin-bottom: 1.5em;
+}
+
+@media screen and (max-width: 640px) {
+  .stat-text {
+    font-size:1.8rem;
+  }
+  .stat-icon {
+    display:inline;
+    padding: 0.5em;
+    width:5.5em;
+  }
+}

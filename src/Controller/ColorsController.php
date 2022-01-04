@@ -41,9 +41,13 @@ class ColorsController extends AppController
                 ['picture !=' => ''],
                 ['picture IS NOT' => null]])
             ->order(['rand()'])
-            ->limit(100)
+            ->limit(32)
             ->toArray();
-        $this->set(compact('color','examples'));
+
+        $count = $color->countMy('rats', 'color');
+        $frequency = $color->frequencyOfMy('rats', 'color');
+
+        $this->set(compact('color','examples','count', 'frequency'));
     }
 
     /**

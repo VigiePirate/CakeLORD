@@ -71,7 +71,7 @@
                     <table class="caption" align="center">
                         <tr>
                             <th>Age at litter birth:</th>
-                            <td><?= h($litter->dam_age) ?></td>
+                            <td><?= h($litter->dam_age_in_months) ?></td>
                         </tr>
                         <tr>
                             <th>Reached age:</th>
@@ -95,7 +95,7 @@
                         <table class="caption" align="center">
                             <tr>
                                 <th>Age at litter birth:</th>
-                                <td><?= h($litter->sire_age) ?></td>
+                                <td><?= h($litter->sire_age_in_months) ?></td>
                             </tr>
                             <tr>
                                 <th>Reached age:</th>
@@ -135,20 +135,28 @@
                     <td><?= $litter->contributions[0]->rattery->prefix ?><?= !empty($litter->contributions[1]) ? ('-' . $litter->contributions[1]->rattery->prefix) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Mating Date') ?></th>
+                    <th><?= __('Mating date') ?></th>
                     <td><?= isset($litter->mating_date) ? h($litter->mating_date->i18nFormat('dd/MM/yyyy')) : __('Unknown') ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Birth Date') ?></th>
+                    <th><?= __('Birth date') ?></th>
                     <td><?= h($litter->birth_date->i18nFormat('dd/MM/yyyy')) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Pups Number') ?></th>
-                    <td><?= $this->Number->format($litter->pups_number) . ' ' . __('pups')?> (x males, y females, tbd)</td>
+                    <th><?= __('Pups number') ?></th>
+                    <td>
+                        <?= $this->Number->format($litter->pups_number) . ' ' . __('pups')?>
+                        (♀: <?= $this->Number->format($stats['sexes'][0]['F']) ?>,
+                        ♂: <?= $this->Number->format($stats['sexes'][0]['M']) ?>)</td>
                 </tr>
                 <tr>
-                    <th><?= __('Pups Number Stillborn') ?></th>
-                    <td><?= $this->Number->format($litter->pups_number_stillborn) ?></td>
+                    <th><?= __('Stillborn pups') ?></th>
+                    <td><?= $this->Number->format($litter->pups_number_stillborn) . ' ' . __('pups') ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Inbreeding') ?></th>
+                    <td><?= $this->Html->link('See inbreeding report', ['controller' => 'Litters', 'action' => 'inbreeding', $litter->id]) ?> (beta version)</td>
+                </td>
                 </tr>
             </table>
 
@@ -191,18 +199,51 @@
             <?php endif; ?>
 
             <h2>Statistics</h2>
+
+            <?php if ($stats['survivors'] > 0) : ?>
+                <div class="message warning">
+                    <?= __('Lifespan is computed only on deceased rats. Please note that litter statistics will be accurate only after the last survivor’s death.') ?>
+                </div>
+            <?php endif; ?>
+
             <table class="condensed">
                 <tr>
-                    <th><?= __('Survival rate') ?></th>
-                    <td>(not available yet)</td>
+                    <th><?= __('Current survival rate:') ?></th>
+                    <td>
+                        <?= h($stats['survivors']) . ' %'?>
+                    <span class="comment">
+                        <?= $stats['survivors'] == 0 ?
+                        __('(all rats of the litter are now dead, or supposed so)') :
+                        '(at ' . $stats['max_age'] . ')'
+                         ?>
+                    </span>
+                    </td>
+                </tr>
+            </table>
+            <table class="condensed">
+                <tr>
+                    <th><?= __('Average lifespan:') ?></th>
+                    <td><?= h($stats['lifespan']) .' months' ?> (♀: <?= h($stats['female_lifespan']) ?>, ♂: <?= h($stats['male_lifespan']) ?>)</td>
+                </tr>
+
+                <tr>
+                    <th> ⨽ infant mortality excluded:</th>
+                    <td> ⨽ <?= h($stats['not_infant_lifespan']) . __(' months') ?> (♀: <?= h($stats['female_not_infant_lifespan']) ?>, ♂: <?= h($stats['male_not_infant_lifespan']) ?>)</td>
                 </tr>
                 <tr>
-                    <th><?= __('Average Lifespan') ?></th>
-                    <td>(not available yet)</td>
+                    <th> ⨽ accidents excluded:</th>
+                    <td> ⨽ <?= h($stats['not_accident_lifespan']) . __(' months') ?> (♀: <?= h($stats['female_not_accident_lifespan']) ?>, ♂: <?= h($stats['male_not_accident_lifespan']) ?>)</td>
                 </tr>
             </table>
 
-            <div class="spacer"> </div>
+            <canvas id="mortality-chart"></canvas>
+
+            <div class="signature">
+                &mdash; Created on <?= $litter->created->i18nFormat('dd/MM/yyyy') ?> by <?= $litter->user->username ?>. <?= ($litter->modified != $litter->created) ? 'Last modified on ' . $litter->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
+            </div>
+        </div>
+        <div class="spacer"> </div>
+        <div class="content litter view">
             <h2 class="staff"><?= __('Private information') ?></h2>
             <div class="related staff">
                 <h3 class="staff"><?= __('Related Conversations') ?></h3>
@@ -270,11 +311,128 @@
                 </div>
                 <?php endif; ?>
             </div>
-            <div class="signature">
-                &mdash; Created on <?= $litter->created->i18nFormat('dd/MM/yyyy') ?> by <?= $litter->user->username ?>. <?= ($litter->modified != $litter->created) ? 'Last modified on ' . $litter->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
-            </div>
+
         </div>
     </div>
 </div>
 
 <?= $this->Html->css('statebar.css') ?>
+<?= $this->Html->script('https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js') ?>
+<script>
+    Chart.defaults.font.family = "Imprima";
+    Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(102,51,0,1)';
+    Chart.defaults.plugins.tooltip.position = 'nearest';
+
+    var survival_json = <?php echo json_encode($stats['survival']); ?>;
+    var survival_data = survival_json.map(function(e) {
+      return e.count;
+    });
+    var survival_labels = survival_json.map(function(e) {
+      return e.months;
+    });
+
+    var mortality_ctx = document.getElementById('mortality-chart').getContext('2d');
+    var mortality_config = {
+      data: {
+          labels: survival_labels,
+          datasets: [
+              {
+                  type: 'line',
+                  label: 'Survival rate',
+                  data: survival_data,
+                  backgroundColor: 'rgba(61, 75, 153, 1)',
+                  borderColor: 'rgba(61, 75, 153, 1)',
+                  hoverBackgroundColor: 'rgba(102,51,0,1)',
+                  xAxisID: 'xtrunc',
+                  yAxisID: 'yleft',
+                  stepped: true
+              }
+          ],
+      },
+      options: {
+          aspectRatio:2.5,
+          responsive: true,
+          interaction: {
+              mode: 'index',
+              intersect: false,
+          },
+          stacked: false,
+          scales: {
+              xtrunc: {
+                  display: true,
+                  position: 'bottom',
+                  max: 48,
+                  suggestedMax: 48,
+                  ticks: {
+                      beginAtZero:true,
+                      stepSize: 1,
+                      min: 0,
+                      max: 48,
+                      suggestedMax: 48,
+                  },
+                  title: {
+                      display: true,
+                      text: 'Age (in months)',
+                      font: {
+                          weight: 700
+                      }
+                  }
+              },
+              yleft: {
+                  type: 'linear',
+                  display: true,
+                  offset: false,
+                  position: 'left',
+                  suggestedMin: 0,
+                  //max: 102,
+                  ticks: {
+                      beginAtZero:true,
+                      min: 0,
+                      max: 100
+                  },
+                  title: {
+                      display: true,
+                      text: 'Survival rate (%)',
+                      color: 'rgba(61, 75, 153, 1)',
+                      font: {
+                          weight: 700
+                      }
+                  }
+              }
+          },
+          plugins: {
+              legend: {
+                  display: false,
+              },
+              title: {
+                   display: true,
+                   text: 'Survival rate by age'
+              },
+              tooltip: {
+                  caretPadding: 6,
+                  xAlign: 'center',
+                  yAlign: 'bottom',
+                  position: 'nearest',
+                  displayColors: true,
+                  callbacks: {
+                      label: function(context) {
+                          var label = context.dataset.label || '';
+                          if (label) {
+                              label += ': ';
+                          }
+                          if (context.datasetIndex === 0) {
+                              label += Math.round(100*context.parsed.y)/100 + ' % of litter pups reached this age';
+                          }
+                          return label;
+                      },
+                      title: function(context) {
+                          var title = 'Age: between '+context[0].label+' and ' + (parseInt(context[0].label)+1).toString() + ' months';
+                          return title;
+                      }
+                  }
+              }
+          }
+      }
+    };
+    var mortality_chart = new Chart(mortality_ctx, mortality_config);
+</script>

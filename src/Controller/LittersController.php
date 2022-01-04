@@ -68,6 +68,7 @@ class LittersController extends AppController
             'Ratteries','Contributions', 'Conversations', 'LitterSnapshots',
             ],
         ]);
+
         $offspringsQuery = $this->Litters->OffspringRats
                                 ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses','OwnerUsers']])
                                 ->matching('BirthLitters', function (\Cake\ORM\Query $query) use ($litter) {
@@ -76,6 +77,8 @@ class LittersController extends AppController
                                     ]);
                                 });
         $offsprings = $this->paginate($offspringsQuery);
+
+        $stats = $litter->wrapStatistics($offsprings);
 
         $this->loadModel('States');
         if($litter->state->is_frozen) {
@@ -92,7 +95,7 @@ class LittersController extends AppController
             $this->set(compact('next_ko_state','next_ok_state'));
         };
 
-        $this->set(compact('litter', 'offsprings'));
+        $this->set(compact('litter', 'offsprings', 'stats'));
     }
 
     /**
@@ -371,7 +374,7 @@ class LittersController extends AppController
      *
      */
 
-    public function genealogy($id = null, $path)
+    public function genealogy($id, $path, &$genealogy)
     {
         $this->loadModel('Rats');
         $parents = $this->Rats->find()
@@ -379,21 +382,52 @@ class LittersController extends AppController
             ->matching('BredLitters', function ($query) use ($id) {
                 return $query->where(['BredLitters.id' => $id]);
             })
+            ->enableHydration(false)
             ->all();
 
         // no test on parent existence, since a litter must have at least one parent
         foreach ($parents as $parent) {
+            $new_path = $path . $parent['sex'];
 
-            if (! is_null($parent['litter_id']) && strlen($path) < 14) { // temporary truncature for memory limit, to be improved
-                $new_path = $path . $parent->sex;
-                $genealogy[$new_path] = $parent['id'];
-                $genealogy = array_merge($genealogy, $this->genealogy($parent['litter_id'], $new_path));
+            if (! in_array($parent['id'], array_values($genealogy))) {
+                if (is_null($parent['litter_id'])) {
+                    $new_path = $new_path . 'X';
+                    $genealogy[$new_path] = $parent['id'];
+                } else {
+                    // since we have never been there, we continue exploring upwards
+                    $this->genealogy($parent['litter_id'], $new_path, $genealogy);
+                    $genealogy[$new_path] = $parent['id'];
+                }
             } else {
-                $new_path = $path . $parent->sex . 'X';
+                if (is_null($parent['litter_id'])) {
+                    $new_path = $new_path . 'X';
+                } else {
+                    // find other paths to the same id to copy already parsed ascendants
+                    $copies = array_filter($genealogy, function ($id) use ($parent) {return $id == $parent['id'];});
+                    $genealogy[$new_path] = $parent['id'];
+                    foreach ($copies as $copy_path => $copy_id) {
+                        $ancestors = array_filter(
+                            $genealogy,
+                            function ($ancestor) use ($copy_path) {
+                                return str_starts_with($ancestor, $copy_path . 'F') || str_starts_with($ancestor, $copy_path . 'M');
+                            },
+                            ARRAY_FILTER_USE_KEY
+                        );
+                        if (! empty($ancestors)) {
+                            // replace prefixes and write in genealogy
+                            foreach($ancestors as $ancestor_path => $ancestor_id) {
+                                // if (strlen($copy_path) <= 16) {
+                                    $new_ancestor_path = substr_replace($ancestor_path, $new_path, 0, strlen($copy_path));
+                                    $genealogy[$new_ancestor_path] = $ancestor_id;
+                                // }
+                            }
+                        }
+                    }
+                }
                 $genealogy[$new_path] = $parent['id'];
             }
         }
-        return $genealogy;
+        return null;
     }
 
     /**
@@ -404,7 +438,7 @@ class LittersController extends AppController
      * Should probably be in the model
      *
      */
-    public function coefficients($genealogy = null, $flag = true) {
+    public function coefficients($genealogy = null, &$sub_coefs = [], $flag = true) {
         if($genealogy == null) {
             $coefficients = [
                 'coi' => 'Unknown',
@@ -412,7 +446,7 @@ class LittersController extends AppController
             ];
         }
 
-        // compute supplementary stuff only if needed
+        // compute supplementary stuff only if needed, on full genealogy
         if ($flag) {
             // will be needed later for common ancestors name
             $this->loadModel('Rats');
@@ -440,27 +474,28 @@ class LittersController extends AppController
             $coefficients['avk'] = round(100 * count(array_unique($avk_genealogy)) / count($avk_genealogy),2);
         }
 
-        // find and filter duplicates in a limited number of generations (here:8)
-        $short_gen = array();
-        foreach ($genealogy as $key => $value) {
-            if (strlen($key) < 9) {
-                // fixme: different processing if last character is 'X' or not!
-                $short_gen[substr($key,0,8)] = $value;
-            }
-        }
+        // now, truncate for security
+        // $short_gen = array();
+        // foreach ($genealogy as $key => $value) {
+        //     if (strlen($key) <= 9) {
+        //         // fixme: different processing if last character is 'X' or not!
+        //         $short_gen[substr($key,0,9)] = $value;
+        //     }
+        // }
+        // $genealogy = $short_gen;
 
-        $counts = array_count_values($short_gen);
-        $duplicates = array_filter($short_gen, function ($value) use ($counts) {
+        // find duplicates
+        $counts = array_count_values($genealogy);
+        $duplicates = array_filter($genealogy, function ($value) use ($counts) {
             return $counts[$value] > 1;
         });
-        $duplicate_id_list = array_unique($duplicates);
-        /* $coefficients['common_number'] = count($duplicate_id_list); */
-
+        $unique_duplicates = array_unique($duplicates);
+        asort($unique_duplicates);
         $coi = 0;
         $coancestry = [];
 
         // sort out by decreasing path length to compute coancestors inbreeding easily?
-        foreach($duplicate_id_list as $sub_path => $duplicate) {
+        foreach($unique_duplicates as $sub_path => $duplicate) {
 
             // extract all lines from $duplicates which share the same value (duplicate id)
             $contribution = 0;
@@ -482,44 +517,54 @@ class LittersController extends AppController
                 $f_path_length = strlen($f_path);
                 $f_labels = array();
                 for ($i = 1; $i <= $f_path_length-1 ; $i++) {
-                    array_push($f_labels, $short_gen[substr($f_path,0,$i)]);
+                    array_push($f_labels, $genealogy[substr($f_path, 0, $i)]);
                 }
-                // now check if some rats in f_path are in some m_paths to prune them
-                $overlap = false;
-                foreach($m_paths as $m_path) {
 
-                    // trim m_path
-                    $m_path = trim($m_path,'X');
+                // now check if some rats in f_path are in some m_paths to prune the latter
+                // $overlap = false;
+                // It is not because ONE m_path overlap that all do!
+
+                foreach($m_paths as $m_path) {
+                    $overlap = false;
+                    $m_path = trim($m_path, 'X');
                     $m_path_length = strlen($m_path);
                     // if overlapping paths, prune it
                     for ($j = 1; $j <= $m_path_length-1; $j++) {
-                        $m_label = $short_gen[substr($m_path,0,$j)];
-                        if(in_array($m_label,$f_labels)) {
+                        $m_label = $genealogy[substr($m_path, 0, $j)];
+                        if (in_array($m_label, $f_labels)) {
                             $overlap = true;
                             break;
                         }
                     }
+
                     if (! $overlap) {
-                        // here: get subgenealogy of coancestor and compute its own inbreeding
-                        $sub_genealogy = array();
-                        $sub_path = trim($sub_path,'X');
-                        foreach($genealogy as $key => $val) {
-                            //array_filter($genealogy, function($key) use ($sub_path) {
-                            if (substr($key,0,strlen($sub_path)) === $sub_path) {
-                                $sub_genealogy[substr($key,strlen($sub_path))] = $genealogy[$key];
-                            };
+                        // get subgenealogy of coancestor and compute its own inbreeding coefficient if still unknown
+                        if (! in_array($duplicate, $sub_coefs)) {
+                            //if(strlen($m_path) <= 13 && strlen($f_path) <= 13) {
+                                $sub_genealogy = array();
+                                $sub_path = trim($sub_path, 'X');
+                                foreach ($genealogy as $key => $val) {
+                                    if (substr($key, 0, strlen($sub_path)) === $sub_path) {
+                                        $sub_genealogy[substr($key, strlen($sub_path))] = $genealogy[$key];
+                                    };
+                                }
+                                $sub_coef = $this->coefficients($sub_genealogy, $sub_coefs, false);
+                                $sub_coefs[$duplicate] = $sub_coef['coi'];
+                            //} else { // approximate common ancestor own inbreeding rate if it is far enough
+                            //    $sub_coefs[$duplicate] = 0;
+                            //}
                         }
-                        $subcoef = $this->coefficients($sub_genealogy, false);
-                        $contribution += 1/pow(2,$f_path_length + $m_path_length - 1) * (1 + $subcoef['coi']/100);
+                        $contribution += 1/pow(2, $f_path_length + $m_path_length - 1) * (1 + $sub_coefs[$duplicate]/100);
                     }
                 }
             }
 
+
             if ($contribution > 0) {
                 $coi += $contribution;
 
-                if($contribution > 0.0001) {
-                    $coancestry[$duplicate] = ['coi' => round(100 * $contribution,2)];
+                // if($contribution >= 0.00001) {
+                    $coancestry[$duplicate] = ['coi' => 100*$contribution]; // ['coi' => round(100 * $contribution,2)];
 
                     if ($flag) {
                         $name = $this->Rats->get($duplicate, [
@@ -528,16 +573,18 @@ class LittersController extends AppController
                             ]
                         ])->usual_name;
                         $coancestry[$duplicate]['name'] = $name;
-                    }
+                //    }
                 }
             }
         }
 
-        $coefficients['coi'] = round(100 * $coi,2);
+        $coefficients['coi'] = 100*$coi; // round(100 * $coi,2);
 
+        // additional coefs we could not compute in the beginning
         if ($flag) {
             arsort($coancestry);
             $coefficients['coancestry'] = $coancestry;
+            $coefficients['common_number'] = count($coancestry);
         }
 
         return $coefficients;
@@ -552,8 +599,10 @@ class LittersController extends AppController
                 'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions'
             ],
         ]);
-        $genealogy = $this->genealogy($id,'');
-        $coefficients = $this->coefficients($genealogy);
+        $genealogy = [];
+        $sub_coefs = [];
+        $this->genealogy($id, '', $genealogy);
+        $coefficients = $this->coefficients($genealogy, $sub_coefs);
 
         $this->set(compact('litter','genealogy','coefficients'));
     }

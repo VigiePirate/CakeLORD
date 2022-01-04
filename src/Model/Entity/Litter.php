@@ -7,6 +7,7 @@ use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\ORM\Locator\LocatorAwareTrait;
+use App\Model\Entity\StatisticsTrait;
 
 /**
  * Litter Entity
@@ -31,6 +32,8 @@ use Cake\ORM\Locator\LocatorAwareTrait;
  */
 class Litter extends Entity
 {
+    use StatisticsTrait;
+
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -94,6 +97,17 @@ class Litter extends Entity
     {
         if (isset($this->birth_date)) {
             $agedate = $this->birth_date;
+            return $agedate->diffInDays($this->sire[0]->birth_date, true);
+        } else { // should raise exception
+            return __('Unknown');
+            //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
+        }
+    }
+
+    protected function _getSireAgeInMonths() // now with litter birth date, should be with mating date?
+    {
+        if (isset($this->birth_date)) {
+            $agedate = $this->birth_date;
             return $agedate->diffInMonths($this->sire[0]->birth_date, true) .' months';
         } else { // should raise exception
             return __('Unknown');
@@ -105,10 +119,41 @@ class Litter extends Entity
     {
         if (isset($this->birth_date)) {
             $agedate = $this->birth_date;
+            return $agedate->diffInDays($this->dam[0]->birth_date, true);
+        } else { // should raise exception
+            return 0;
+            //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
+        }
+    }
+
+    protected function _getDamAgeInMonths() // now with litter birth date, should be with mating date?
+    {
+        if (isset($this->birth_date)) {
+            $agedate = $this->birth_date;
             return $agedate->diffInMonths($this->dam[0]->birth_date, true) .' months';
         } else { // should raise exception
             return __('Unknown');
             //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
+        }
+    }
+
+    protected function _getMaxAge()
+    {
+        if (isset($this->birth_date)) {
+            $agedate = $this->birth_date;
+            return $agedate->diffInMonths();
+        } else { // should raise exception
+            return -1;
+        }
+    }
+
+    protected function _getMaxAgeInWords()
+    {
+        if (isset($this->birth_date)) {
+            $agedate = $this->birth_date;
+            return $agedate->diffInMonths() .' months';
+        } else { // should raise exception
+            return __('Unknown');
         }
     }
 
@@ -232,4 +277,55 @@ class Litter extends Entity
         }
         return true;
     }
+
+    /* Statistics */
+
+    // survival rate in litter does not use StatisticsTrait because of right censoring
+    public function computeIntermediateSurvivalRate($offsprings = []) {
+        $total = $this->pups_number;
+        $ages = [];
+        $k_max = min([54, $this->max_age]);
+        foreach($offsprings as $offspring) {
+            array_push($ages, $offspring->age);
+        }
+        for ($k=0; $k<=$k_max; $k++) {
+            $deaths = array_filter($ages, function ($age) use ($k) {
+                return $age < $k;
+            });
+            $survival[$k]['months'] = $k;
+            $survival[$k]['count'] = 100*round(1-count($deaths)/$total,2);
+        }
+        if ($k_max < 54) {
+            for ($j=$k_max+1; $j<=54; $j++) {
+                $survival[$j]['months'] = $j;
+            }
+        }
+        return $survival;
+    }
+
+    public function wrapStatistics($offsprings) {
+        // survival: could be cheaper if called on $litter->offsprings with trait in RatsTable?
+        // or pass offsprings as optional argument?
+        $stats['sexes'] = $this->computeLitterSexes(['litter_id' => $this->id])->toArray();
+
+        $stats['max_age'] = $this->max_age_in_words;
+
+        $stats['lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id]);
+        $stats['female_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'F']);
+        $stats['male_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'M']);
+
+        $stats['not_infant_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['female_not_infant_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['male_not_infant_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
+
+        $stats['not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['female_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['male_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+
+        $stats['survivors'] = 100 * round($this->countMy('rats', 'litter', ['is_alive IS' => true])/$this->pups_number,2);
+        $stats['survival'] = $this->computeIntermediateSurvivalRate($offsprings);
+
+        return $stats;
+    }
+
 }

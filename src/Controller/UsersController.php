@@ -218,11 +218,45 @@ class UsersController extends AppController
     public function home()
     {
         $user = $this->Users->get($this->Authentication->getIdentity()->get('id'), [
-            'contain' => ['Roles', 'Conversations', 'OwnerRats', 'CreatorRats', 'Ratteries'],
+            'contain' => ['Roles', 'Conversations'],
         ]);
         $this->Authorization->authorize($user);
 
-        $this->set('user', $user);
+        $rat_count = $user->countRats(['owner_user_id' => $user->id]);
+        $female_count = $user->countRats(['owner_user_id' => $user->id, 'sex' => 'F']);
+        $male_count = $user->countRats(['owner_user_id' => $user->id, 'sex' => 'M']);
+        $alive_rat_count = $user->countRats(['owner_user_id' => $user->id, 'is_alive' => true]);
+        $alive_female_count = $user->countRats(['owner_user_id' => $user->id, 'is_alive' => true, 'sex' => 'F']);
+        $alive_male_count = $user->countRats(['owner_user_id' => $user->id, 'is_alive' => true, 'sex' => 'M']);
+        $managed_rat_count = $user->countRats(['creator_user_id' => $user->id, 'owner_user_id !=' => $user->id]);
+        $alive_managed_rat_count = $user->countRats(['creator_user_id' => $user->id, 'owner_user_id !=' => $user->id, 'is_alive' => true]);
+
+        $avg_lifespan = $user->roundLifespan(['owner_user_id' => $user->id]);
+        $female_avg_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'sex' => 'F']);
+        $male_avg_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'sex' => 'M']);
+
+        $not_infant_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'DeathPrimaryCauses.is_infant IS' => false]);
+        $not_infant_female_lifespan = $user->roundLifespan(['owner_user_id' => $user->id,'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $not_infant_male_lifespan = $user->roundLifespan(['owner_user_id' => $user->id,'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
+
+        $not_accident_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'DeathPrimaryCauses.is_infant IS' => false,'DeathPrimaryCauses.is_accident IS' => false]);
+        $not_accident_female_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false,'DeathPrimaryCauses.is_accident IS' => false]);
+        $not_accident_male_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false,'DeathPrimaryCauses.is_accident IS' => false]);
+
+        $champion = $user->findChampion(['Rats.owner_user_id' => $user->id]);
+        if(!empty($champion)) {
+            $champion = $this->loadModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
+        }
+
+        $this->set(compact('user',
+            'rat_count', 'female_count', 'male_count',
+            'alive_rat_count', 'alive_female_count', 'alive_male_count',
+            'managed_rat_count', 'alive_managed_rat_count',
+            'avg_lifespan','female_avg_lifespan','male_avg_lifespan',
+            'not_infant_lifespan', 'not_infant_female_lifespan', 'not_infant_male_lifespan',
+            'not_accident_lifespan', 'not_accident_female_lifespan', 'not_accident_male_lifespan',
+            'champion'
+        ));
     }
 
     /**
@@ -271,20 +305,54 @@ class UsersController extends AppController
     {
         $user = $this->Users->get($id, [
             'contain' => ['Roles', 'Conversations',
-            'OwnerRats', 'OwnerRats.States','OwnerRats.DeathPrimaryCauses','OwnerRats.DeathSecondaryCauses',
-            'OwnerRats.BirthLitters','OwnerRats.Ratteries','OwnerRats.BirthLitters.Ratteries','OwnerRats.BirthLitters.Contributions',
-            'OwnerRats.BirthLitters.Sire','OwnerRats.BirthLitters.Sire.BirthLitters','OwnerRats.BirthLitters.Sire.BirthLitters.Ratteries',
-            'OwnerRats.BirthLitters.Dam','OwnerRats.BirthLitters.Dam.BirthLitters','OwnerRats.BirthLitters.Dam.BirthLitters.Ratteries',
-            'CreatorRats','CreatorRats.States','CreatorRats.DeathPrimaryCauses','CreatorRats.DeathSecondaryCauses',
-            'CreatorRats.BirthLitters','CreatorRats.Ratteries','CreatorRats.BirthLitters.Ratteries','CreatorRats.BirthLitters.Contributions',
-            'CreatorRats.BirthLitters.Sire','CreatorRats.BirthLitters.Sire.BirthLitters','CreatorRats.BirthLitters.Sire.BirthLitters.Ratteries',
-            'CreatorRats.BirthLitters.Dam','CreatorRats.BirthLitters.Dam.BirthLitters','CreatorRats.BirthLitters.Dam.BirthLitters.Ratteries',
+            //'OwnerRats', 'OwnerRats.States','OwnerRats.DeathPrimaryCauses','OwnerRats.DeathSecondaryCauses',
+            //'OwnerRats.BirthLitters','OwnerRats.Ratteries','OwnerRats.BirthLitters.Ratteries','OwnerRats.BirthLitters.Contributions',
+            //'OwnerRats.BirthLitters.Sire','OwnerRats.BirthLitters.Sire.BirthLitters','OwnerRats.BirthLitters.Sire.BirthLitters.Ratteries',
+            //'OwnerRats.BirthLitters.Dam','OwnerRats.BirthLitters.Dam.BirthLitters','OwnerRats.BirthLitters.Dam.BirthLitters.Ratteries',
+            //'CreatorRats','CreatorRats.States','CreatorRats.DeathPrimaryCauses','CreatorRats.DeathSecondaryCauses',
+            //'CreatorRats.BirthLitters','CreatorRats.Ratteries','CreatorRats.BirthLitters.Ratteries','CreatorRats.BirthLitters.Contributions',
+            //'CreatorRats.BirthLitters.Sire','CreatorRats.BirthLitters.Sire.BirthLitters','CreatorRats.BirthLitters.Sire.BirthLitters.Ratteries',
+            //'CreatorRats.BirthLitters.Dam','CreatorRats.BirthLitters.Dam.BirthLitters','CreatorRats.BirthLitters.Dam.BirthLitters.Ratteries',
 
             'Ratteries', 'Ratteries.States','Ratteries.Countries'],
         ]);
         $this->Authorization->authorize($user);
 
-        $this->set('user', $user);
+        $rat_count = $user->countRats(['owner_user_id' => $user->id]);
+        $female_count = $user->countRats(['owner_user_id' => $user->id, 'sex' => 'F']);
+        $male_count = $user->countRats(['owner_user_id' => $user->id, 'sex' => 'M']);
+        $alive_rat_count = $user->countRats(['owner_user_id' => $user->id, 'is_alive' => true]);
+        $alive_female_count = $user->countRats(['owner_user_id' => $user->id, 'is_alive' => true, 'sex' => 'F']);
+        $alive_male_count = $user->countRats(['owner_user_id' => $user->id, 'is_alive' => true, 'sex' => 'M']);
+        $managed_rat_count = $user->countRats(['creator_user_id' => $user->id, 'owner_user_id !=' => $user->id]);
+        $alive_managed_rat_count = $user->countRats(['creator_user_id' => $user->id, 'owner_user_id !=' => $user->id, 'is_alive' => true]);
+
+        $avg_lifespan = $user->roundLifespan(['owner_user_id' => $user->id]);
+        $female_avg_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'sex' => 'F']);
+        $male_avg_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'sex' => 'M']);
+
+        $not_infant_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'DeathPrimaryCauses.is_infant IS' => false]);
+        $not_infant_female_lifespan = $user->roundLifespan(['owner_user_id' => $user->id,'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $not_infant_male_lifespan = $user->roundLifespan(['owner_user_id' => $user->id,'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
+
+        $not_accident_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'DeathPrimaryCauses.is_infant IS' => false,'DeathPrimaryCauses.is_accident IS' => false]);
+        $not_accident_female_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false,'DeathPrimaryCauses.is_accident IS' => false]);
+        $not_accident_male_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false,'DeathPrimaryCauses.is_accident IS' => false]);
+
+        $champion = $user->findChampion(['Rats.owner_user_id' => $user->id]);
+        if(!empty($champion)) {
+            $champion = $this->loadModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
+        }
+
+        $this->set(compact('user',
+            'rat_count', 'female_count', 'male_count',
+            'alive_rat_count', 'alive_female_count', 'alive_male_count',
+            'managed_rat_count', 'alive_managed_rat_count',
+            'avg_lifespan','female_avg_lifespan','male_avg_lifespan',
+            'not_infant_lifespan', 'not_infant_female_lifespan', 'not_infant_male_lifespan',
+            'not_accident_lifespan', 'not_accident_female_lifespan', 'not_accident_male_lifespan',
+            'champion'
+        ));
     }
 
     /**

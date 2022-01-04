@@ -7,16 +7,24 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar') ?>
+            </div>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-back.svg', [
+                        'url' => ['controller' => 'Litters', 'action' => 'view', $litter->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Full Screen')]) ?>
+                        <span class="tooltiptext"><?= __('Back to litter sheet') ?></span>
+                </div>
+            </div>
         </div>
     </aside>
     <div class="column-responsive column-90">
         <div class="litters view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= __('Inbreeding report') ?></div>
-                <div class="sheet-markers">
-                    <div class="statemark statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></div>
-                </div>
             </div>
 
             <h1><?= h($litter->full_name) ?></h1>
@@ -25,13 +33,13 @@
 
             <table class="condensed stats">
                 <tr>
-                    <th><?= __('Shortest family tree branch') ?></th>
-                    <td><?= h($coefficients['min_depth'])?>  <?= $coefficients['min_depth'] > 1 ? __('generations') : __('generation') ?></td>
+                    <th><?= __('Longest family tree branch') ?></th>
+                    <td><?= h($coefficients['max_depth'])?>  <?= $coefficients['max_depth'] > 1 ? __('generations') : __('generation') ?></td>
                 </tr>
 
                 <tr>
-                    <th><?= __('Longest family tree branch') ?></th>
-                    <td><?= h($coefficients['max_depth'])?>  <?= $coefficients['max_depth'] > 1 ? __('generations') : __('generation') ?></td>
+                    <th><?= __('Shortest family tree branch') ?></th>
+                    <td><?= h($coefficients['min_depth'])?>  <?= $coefficients['min_depth'] > 1 ? __('generations') : __('generation') ?></td>
                 </tr>
 
                 <tr>
@@ -44,11 +52,14 @@
                     <td><?= h($coefficients['distinct_number'])?>  <?= $coefficients['distinct_number'] > 1 ? __('rats') : __('rat') ?></td>
                 </tr>
 
-                <!-- Common ancestor number could come here -->
-
                 <tr>
                     <th><?= __('Number of founding ancestors') ?></th>
                     <td><?= h($coefficients['founder_number'])?>  <?= ($coefficients['founder_number'] > 1 ? __('rats') : __('rat')) ?></td>
+                </tr>
+
+                <tr>
+                    <th><?= __('Number of common ancestors') ?></th>
+                    <td><?= h($coefficients['common_number'])?>  <?= $coefficients['common_number'] > 1 ? __('rats') : __('rat') ?></td>
                 </tr>
 
                 <tr>
@@ -58,7 +69,7 @@
 
                 <tr>
                     <th><?= __('Coefficient of Inbreeding') ?></th>
-                    <td>COI  ≃  <?= h($coefficients['coi']) ?> %</td>
+                    <td>COI  ≃  <?= h(round($coefficients['coi'],2)) ?> %</td>
                 </tr>
 
             </table>
@@ -69,7 +80,7 @@
 
                 <th>
                     <div style="opacity:1; width:100%">
-                        <?= h($coefficients['coi']) ?> %
+                        <?= h(round($coefficients['coi'],2)) ?> %
                     </div>
                 </th>
                 <td>
@@ -80,7 +91,7 @@
                     <tr>
                         <th>
                             <div style="opacity:<?= h(0.25+0.75*$contrib['coi']/$coefficients['coi']) ?>; width:<?= h(round(100*log(1+$contrib['coi']/$coefficients['coi'],2))) ?>%;">
-                                <?= h($contrib['coi']) ?> %
+                                <?= round($contrib['coi'],2) != 0 ? h(round($contrib['coi'],2)) : '< 0.01' ?> %
                             </div>
                         </th>
                         <td>
@@ -94,5 +105,3 @@
         </div>
     </div>
 </div>
-
-<?= $this->Html->css('statebar.css') ?>

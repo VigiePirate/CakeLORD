@@ -33,11 +33,22 @@ class DilutionsController extends AppController
      */
     public function view($id = null)
     {
-        $dilution = $this->Dilutions->get($id, [
-            'contain' => ['Rats'],
-        ]);
+        $dilution = $this->Dilutions->get($id);
 
-        $this->set('dilution', $dilution);
+        $examples = $this->Dilutions->Rats->find()
+            ->where([
+                ['marking_id' => $id],
+                ['picture !=' => 'Unknown.png'],
+                ['picture !=' => ''],
+                ['picture IS NOT' => null]])
+            ->order(['rand()'])
+            ->limit(32)
+            ->toArray();
+
+        $count = $dilution->countMy('rats', 'dilution');
+        $frequency = $dilution->frequencyOfMy('rats', 'dilution');
+
+        $this->set(compact('dilution','examples','count','frequency'));
     }
 
     /**

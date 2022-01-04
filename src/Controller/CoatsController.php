@@ -17,6 +17,7 @@ class CoatsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
+
     public function index()
     {
         $coats = $this->paginate($this->Coats);
@@ -34,6 +35,7 @@ class CoatsController extends AppController
     public function view($id = null)
     {
         $coat = $this->Coats->get($id);
+
         $examples = $this->Coats->Rats->find()
             ->where([
                 ['coat_id' => $id],
@@ -41,9 +43,13 @@ class CoatsController extends AppController
                 ['picture !=' => ''],
                 ['picture IS NOT' => null]])
             ->order(['rand()'])
-            ->limit(100)
+            ->limit(32)
             ->toArray();
-        $this->set(compact('coat','examples'));
+
+        $count = $coat->countMy('Rats', 'coat');
+        $frequency = $coat->frequencyOfMy('Rats', 'coat');
+
+        $this->set(compact('coat','examples','count','frequency'));
     }
 
     /**

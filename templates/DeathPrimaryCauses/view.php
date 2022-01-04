@@ -55,6 +55,22 @@
                 </blockquote>
             </div>
 
+            <h2><?= __('Statistics') ?></h3>
+            <table class="condensed">
+                <tr>
+                    <th><?= __('Frequency') ?></th>
+                    <td><?= h($frequency) . __(' %') ?> (<?= h($count) ?> rats) </td>
+                </tr>
+                <tr>
+                    <th><?= __('Sex ratio') ?></th>
+                    <td><?= h($sex_ratio) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Average age') ?></th>
+                    <td><?= h($age) . __(' months') ?></td>
+                </tr>
+            </table>
+
             <div class="related">
                 <h2><?= __('Related information') ?></h2>
                 <h3><?= __('Related Death Secondary Causes') ?></h3>
@@ -84,9 +100,7 @@
                 </div>
                 <?php endif; ?>
             </div>
-            <div class="related">
-                <h3><?= __('Statistics') ?></h3>
-            </div>
+
         </div>
     </div>
 </div>
