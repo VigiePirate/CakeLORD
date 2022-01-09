@@ -76,8 +76,8 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                     <?= $this->Form->create(
                         null,
                         ['url' => [
-                            'controller' => 'Rats',
-                            'action' => 'named'],
+                            'controller' => 'Lord',
+                            'action' => 'search'],
                         'type' => 'post',
                         'method' => 'post',
                         'class' => 'searchbar'],

@@ -131,4 +131,27 @@ class User extends Entity implements IdentityInterface
         return $this->role_id <= 3;
     }
 
+    // if user has 1 rattery, return its name even if it is not active
+    // if user has more than 1 rattery, return the active one
+    protected function _getMainRatteryName()
+    {
+        $rattery_count = $this->countMy('ratteries', 'owner_user');
+        if ($rattery_count == 1) {
+            return h($this->ratteries[0]->full_name);
+        }
+        if ($rattery_count > 1) {
+            foreach ($this->ratteries as $rattery) {
+                if ($rattery->is_alive) {
+                    return h($rattery->full_name);
+                }
+            }
+            return h(end($this->ratteries)->full_name);
+        }
+    }
+
+    protected function _getLockedSymbol()
+    {
+        return ($this->is_locked ? '✗' : '✓');
+    }
+
 }

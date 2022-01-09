@@ -175,4 +175,26 @@ class UsersTable extends Table
 
         return $rules;
     }
+
+    public function findNamed(Query $query, array $options)
+    {
+        $columns = [
+            'Users.id', 'Users.username', 'Users.role_id'
+        ];
+
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['names'])) {
+            $query->where([
+                'OR' => ['Users.username IS' => null],
+            ]);
+        } else {
+            // Find rats with parts of the string in that name
+            $query->where(['Users.username LIKE' => '%'.implode($options['names']).'%']);
+        }
+
+        return $query->group(['Users.id']);
+    }
 }

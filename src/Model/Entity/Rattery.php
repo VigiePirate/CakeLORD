@@ -85,7 +85,7 @@ class Rattery extends Entity
     protected function _getIsAliveSymbol()
     {
         // dagger is preceded with a non breakable fine space, do not edit!
-        return ($this->is_alive ? '' : ' ☾');
+        return ($this->is_alive ? ' ☼' : ' ☾');
     }
 
     /* Statistics */
@@ -172,7 +172,7 @@ class Rattery extends Entity
             $stats['secondaries'] = $this->countRatsBySecondaryDeath(['rattery_id' => $this->id]);
             $stats['tumours'] = $this->countRatsByTumour()->toArray(['rattery_id' => $this->id]);
         }
-        
+
         return $stats;
     }
 

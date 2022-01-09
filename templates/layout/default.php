@@ -60,13 +60,14 @@ $cakeDescription = 'LORD';
             <?= $this->Form->create(
                 null,
                 ['url' => [
-                    'controller' => 'Rats',
-                    'action' => 'named'],
+                    'controller' => 'Lord',
+                    'action' => 'search'
+                ],
                 'type' => 'post',
                 'method' => 'post',
                 'class' => 'searchbar'],
             ); ?>
-                <?= $this->Form->control('name', ['id' => 'searchbarname', 'type' => 'text','label' => false,'placeholder' => 'Search...']); ?>
+                <?= $this->Form->control('name', ['id' => 'searchbarname', 'type' => 'text', 'label' => false, 'placeholder' => 'Search...']); ?>
                 <?= $this->Form->submit(); ?>
             <?= $this->Form->end(); ?>
             <!-- Login or access dashboard -->

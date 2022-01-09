@@ -14,7 +14,7 @@
             <div class="side-nav-group">
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-back.svg', [
-                        'url' => ['controller' => 'Articles', 'action' => 'view',$article->id],
+                        'url' => ['controller' => 'Articles', 'action' => 'view', $article->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Back')]) ?>
                     <span class="tooltiptext"><?= __('Cancel and go back') ?></span>
