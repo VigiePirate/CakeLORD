@@ -7,6 +7,52 @@ use App\Model\Entity\Lord;
 
 class LordController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+        /* $this->loadComponent('Security'); */
+    }
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['search', 'webstats']);
+        /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
+    }
+
+    public function search() {
+
+        $this->Authorization->skipAuthorization();
+
+        if($this->request->is(['post'])) {
+            $names = [$this->request->getData('name')];
+        } else {
+                $names = $this->request->getParam('pass');
+        }
+
+        $model = $this->loadModel('Rats');
+        $query = $model->find('named', ['names' => $names])
+            ->order('Rats.modified DESC')
+            ->contain(['States', 'OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions']);
+        $count['rats'] = $query->count();
+        $rats = $query->limit(10);
+
+        $model = $this->loadModel('Ratteries');
+        $query = $model->find('named', ['names' => $names])
+            ->order('Ratteries.modified DESC')
+            ->contain(['Countries', 'States', 'Users']);
+        $count['ratteries'] = $query->count();
+        $ratteries = $query->limit(10);
+
+        $model = $this->loadModel('Users');
+        $query = $model->find('named', ['names' => $names])
+            ->order('Users.modified DESC')
+            ->contain(['Roles', 'Ratteries']);
+        $count['users'] = $query->count();
+        $users = $query->limit(10);
+
+        $this->set(compact('names', 'count', 'rats', 'ratteries', 'users'));
+    }
 
     public function stats()
     {

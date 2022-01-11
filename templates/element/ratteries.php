@@ -29,7 +29,9 @@
             <?php if (! in_array('country', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('country') ?></th>
             <?php endif; ?>
-            <th class="actions-title"><?= $this->Html->image('/img/icon-fa-action.svg', ['class' => 'action-icon'])?></th>
+            <?php if (! in_array('actions', $exceptions)): ?>
+                <th class="actions-title"><?= __('Actions') ?></th>
+            <?php endif; ?>
         </thead>
         <tbody>
             <?php foreach($ratteries as $rattery): ?>
@@ -65,19 +67,21 @@
                     <?php if (! in_array('country', $exceptions)): ?>
                         <td><?= h($rattery->country->name) ?></td>
                     <?php endif; ?>
-                    <td class="actions">
-                        <?php if (! in_array('website', $exceptions)): ?>
-                            <?= $rattery->website ?
-                                $this->Html->image('/img/icon-website.svg', [
-                                'url' => h($rattery->website),
+                    <?php if (! in_array('actions', $exceptions)): ?>
+                        <td class="actions">
+                            <?php if (! in_array('website', $exceptions)): ?>
+                                <?= $rattery->website ?
+                                    $this->Html->image('/img/icon-website.svg', [
+                                    'url' => h($rattery->website),
+                                    'class' => 'action-icon',
+                                    'alt' => __('See Rattery')]) : '' ?>
+                            <?php endif; ?>
+                            <?= $this->Html->image('/img/icon-view.svg', [
+                                'url' => ['controller' => 'Ratteries', 'action' => 'view', $rattery->id],
                                 'class' => 'action-icon',
-                                'alt' => __('See Rattery')]) : '' ?>
-                        <?php endif; ?>
-                        <?= $this->Html->image('/img/icon-view.svg', [
-                            'url' => ['controller' => 'Ratteries', 'action' => 'view', $rattery->id],
-                            'class' => 'action-icon',
-                            'alt' => __('See Rattery')]) ?>
-                    </td>
+                                'alt' => __('See Rattery')]) ?>
+                        </td>
+                    <?php endif; ?>
                 </tr>
             <?php endforeach; ?>
         </tbody>
