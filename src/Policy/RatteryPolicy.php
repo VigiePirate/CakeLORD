@@ -88,4 +88,16 @@ class RatteryPolicy
     {
         return true;
     }
+
+    /**
+     * Check if $user can relocate Rattery
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Rattery $rattery
+     * @return bool
+     */
+    public function canRelocate(IdentityInterface $user, Rattery $rattery)
+    {
+        return true;
+    }
 }

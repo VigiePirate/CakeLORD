@@ -70,6 +70,7 @@
                                     'type' => 'text',
                                     'placeholder' => __('Type here...'),
                                     'empty' => true,
+                                    'default' => '',
                                 ]);
                                 echo $this->Form->control('rattery_id', [
                                     'id' => 'jquery-rattery-id',
@@ -81,6 +82,7 @@
                                     'class' => 'hide-everywhere',
                                     'type' => 'text',
                                     'empty' => true,
+                                    'default' => '',
                                 ]);
                             ?>
                         </div>
@@ -93,6 +95,7 @@
                                     'type' => 'text',
                                     'placeholder' => __('Type here...'),
                                     'empty' => true,
+                                    'default' => '',
                                 ]);
                                 echo $this->Form->control('owner_user_id', [
                                     'id' => 'jquery-owner-id',
@@ -104,6 +107,7 @@
                                     'class' => 'hide-everywhere',
                                     'type' => 'text',
                                     'empty' => true,
+                                    'default' => '',
                                 ]);
                             ?>
                         </div>
@@ -249,7 +253,7 @@
         });
 
         $("#jquery-owner-input").on("input", function(){
-            $("#jquery-owner-id").val('');
+           $("#jquery-owner-id").val('');
         });
     });
     </script>
@@ -284,7 +288,7 @@
         });
 
         $("#jquery-rattery-input").on("input", function(){
-            $("#jquery-rattery-id").val('');
+        // $("#jquery-rattery-id").val('');
         });
     });
     </script>

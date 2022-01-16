@@ -73,6 +73,7 @@ class Application extends BaseApplication
         $this->addPlugin('Authentication');
         $this->addPlugin('Authorization');
         $this->addPlugin('Ajax', ['bootstrap' => true]);
+        $this->addPlugin('Geo', ['bootstrap' => true]);
     }
 
     /**

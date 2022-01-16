@@ -303,6 +303,28 @@ class RatteriesController extends AppController
         }
     }
 
+    /* change country, zipcode and/or other location indications */
+    /* should trigger the lat/lng update through Geocoder behaviour */
+    public function relocate($id = null)
+    {
+        $rattery = $this->Ratteries->get($id, [
+            'contain' => ['Countries'],
+        ]);
+        $this->Authorization->authorize($rattery);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
+            if ($this->Ratteries->save($rattery)) {
+                $this->Flash->success(__('The new location of your rattery has been recorded.'));
+                return $this->redirect(['action' => 'view', $rattery->id]);
+            }
+            $this->Flash->error(__('Your rattery’s new location could not be recorded. Please, try again.'));
+        } else {
+            $this->Flash->default(__('Please fill the information below to record your rattery new location. Country is mandatory.'));
+        }
+        $countries = $this->Ratteries->Countries->find('list');
+        $this->set(compact('countries', 'rattery'));
+    }
+
     /** Search methods **/
 
     /**
