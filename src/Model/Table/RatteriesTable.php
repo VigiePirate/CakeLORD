@@ -7,6 +7,9 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Core\Configure;
+use Cake\Core\Configure\Engine\PhpConfig;
+use Geo\Geocoder\Geocoder;
 
 /**
  * Ratteries Model
@@ -57,7 +60,17 @@ class RatteriesTable extends Table
             'repository' => 'RatterySnapshots',
             'entityField' => 'rattery_id',
         ]);
-        $this->addBehavior('Geo.Geocoder', []);
+
+        /* configuration must be registered in app_local file
+         * (to protect Googlemaps api key)
+         * Geocoder config variable should be like:
+         * ['address' => 'zip_code', 'country_name']
+            'apiKey' => 'your Googlemaps platform API key',
+            'locale' => 'fr']
+        */
+        if (! empty($geo_config = Configure::read('Geocoder'))) {
+            $this->addBehavior('Geo.Geocoder', $geo_config);
+        }
 
         $this->belongsTo('Users', [
             'foreignKey' => 'owner_user_id',
@@ -67,6 +80,7 @@ class RatteriesTable extends Table
             'foreignKey' => 'country_id',
             'joinType' => 'INNER',
         ]);
+
         $this->belongsTo('States', [
             'foreignKey' => 'state_id',
             'joinType' => 'INNER',

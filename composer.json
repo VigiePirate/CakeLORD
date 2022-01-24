@@ -13,7 +13,11 @@
         "cakephp/plugin-installer": "^1.2",
         "dereuromark/cakephp-ajax": "^2.0",
         "dereuromark/cakephp-geo": "^2.1",
-        "mobiledetect/mobiledetectlib": "^2.8"
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "php-http/cakephp-adapter": "^0.3.0",
+        "php-http/message": "^1.8.0",
+        "geocoder-php/provider-implementation": "^1.0",
+        "geocoder-php/google-maps-provider": "^4.4.0"
     },
     "require-dev": {
         "cakephp/bake": "^2.0.3",

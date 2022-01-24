@@ -304,7 +304,7 @@ class RatteriesController extends AppController
     }
 
     /* change country, zipcode and/or other location indications */
-    /* should trigger the lat/lng update through Geocoder behaviour */
+    /* lat/lng will be updated through Geocoder behaviour if configured */
     public function relocate($id = null)
     {
         $rattery = $this->Ratteries->get($id, [

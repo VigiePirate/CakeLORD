@@ -246,7 +246,7 @@ class Rat extends Entity
             $agedate = $this->_fields['death_date'];
         }
         if (isset($this->birth_date)) {
-            return $agedate->diffInMonths($this->_fields['birth_date'], true);
+            return round($agedate->diffInDays($this->_fields['birth_date'], true)/30.5);
         } else {
             return -1; // Should raise exception
         }
