@@ -68,6 +68,8 @@ class Rattery extends Entity
         'state_id' => true,
         'created' => true,
         'modified' => true,
+        'lat' => true,
+        'lng' => true,
         'user' => true,
         'country' => true,
         'state' => true,
@@ -84,8 +86,19 @@ class Rattery extends Entity
 
     protected function _getIsAliveSymbol()
     {
-        // dagger is preceded with a non breakable fine space, do not edit!
-        return ($this->is_alive ? ' ☼' : ' ☾');
+        return ($this->is_alive ? '☼' : '☾');
+    }
+
+    // different from the previous; shows a symbol only if ratterie is inactive
+    protected function _getIsInactiveSymbol()
+    {
+        // moon is preceded with a non breakable fine space, do not edit!
+        return ($this->is_alive ? '' : ' ☾');
+    }
+
+    protected function _getCountryName()
+    {
+        return $this->country->name;
     }
 
     /* Statistics */

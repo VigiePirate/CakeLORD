@@ -58,7 +58,7 @@
                 <?= $this->element('statebar', ['sheet' => $rattery]) ?>
             </div>
 
-            <h1><?= h($rattery->full_name) . '<span class="rotate"> ' . h($rattery->is_alive_symbol) . '</span>'?></h1> <!-- -->
+            <h1><?= h($rattery->full_name) . '<span class="rotate"> ' . h($rattery->is_inactive_symbol) . '</span>'?></h1> <!-- -->
 
             <?php if($rattery->is_generic) : ?>
                 <div class="message"><?= __('This is a generic prefix. It does not correspond to an actual rattery. Therefore, only limited information is shown.') ?></div>
@@ -145,7 +145,11 @@
                             <td><?= ($rattery->birth_year != '0000') ? h($rattery->birth_year) : h(substr($stats['activityYears'],0,4)) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Area') ?></th>
+                            <th><?= __('Country') ?></th>
+                            <td><?= $rattery->has('country') ? h($rattery->country->name) : '' ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Localization') ?></th>
                             <td><?= h($rattery->district) ?></td>
                         </tr>
                         <tr>
@@ -153,8 +157,12 @@
                             <td><?= h($rattery->zip_code) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Country') ?></th>
-                            <td><?= $rattery->has('country') ? h($rattery->country->name) : '' ?></td>
+                            <th><?= __('Latitude (debug)') ?></th>
+                            <td><?= h($rattery->lat) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Longitude (debug)') ?></th>
+                            <td><?= h($rattery->lng) ?></td>
                         </tr>
                         <tr>
                             <th><?= __('Website') ?></th>
@@ -357,7 +365,7 @@
                         <div class="message warning">The owner of this rattery does not wish to show their full breeding and mortality statistics.</div>
                     <?php endif; ?>
 
-                <?php endif; ?>        
+                <?php endif; ?>
             </div>
             <div class="spacer"> </div>
             <div class="ratteries view content">
