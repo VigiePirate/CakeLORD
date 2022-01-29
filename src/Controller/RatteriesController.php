@@ -303,6 +303,41 @@ class RatteriesController extends AppController
         }
     }
 
+    /* see all active ratteries on a Googlemap + highlight one if $id is not null */
+    public function locate()
+    {
+        $ratteries = $this->Ratteries->find('located', ['contain' => ['Users']]);
+
+        $id = $this->request->getParam('pass');
+        if (! empty($id)) {
+            $rattery = $rattery = $this->Ratteries->get($id, ['contain' => ['Users']]);
+            $this->set(compact('rattery'));
+        }
+
+        $map_options = [
+            'zoom' => 'auto',
+            'type' => 'R',
+            'geolocate' => true,
+            'div' => ['id' => 'ratterymap'],
+            'map' => [
+                'navOptions' => ['style' => 'SMALL'],
+                'typeOptions' => [
+                    'style' => 'HORIZONTAL_BAR',
+                    'pos' => 'LEFT_TOP'
+                ],
+                'defaultLat' => isset($rattery) ? $rattery->lat : null,
+                'defaultLng' => isset($rattery) ? $rattery->lng : null,
+            ]
+        ];
+
+        if (! empty($id)) {
+            $map_options['zoom'] = 7;
+            $map_options['geolocate'] = false;
+        }
+
+        $this->set(compact('ratteries', 'map_options'));
+    }
+
     /* change country, zipcode and/or other location indications */
     /* lat/lng will be updated through Geocoder behaviour if configured */
     public function relocate($id = null)
@@ -319,7 +354,8 @@ class RatteriesController extends AppController
             }
             $this->Flash->error(__('Your rattery’s new location could not be recorded. Please, try again.'));
         } else {
-            $this->Flash->default(__('Please fill the information below to record your rattery new location. Country is mandatory.'));
+            $this->Flash->default(__('Please fill the information below to record your rattery new location. Country is mandatory.
+            If you do not live in France and wish to appear on the map, it is recommended that you add optional localization information.'));
         }
         $countries = $this->Ratteries->Countries->find('list');
         $this->set(compact('countries', 'rattery'));
@@ -401,14 +437,6 @@ class RatteriesController extends AppController
             'ratteries' => $ratteries,
             'inState' => $inState
         ]);
-    }
-
-    // Functions for statistics
-    // Compute the number of rats born in the rattery
-    // not used and probably bugged
-    public function countRats()
-    {
-        $this->Rats->find('all')->count();
     }
 
     public function autocomplete() {

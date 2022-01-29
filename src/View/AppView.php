@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace App\View;
 
 use Cake\View\View;
+use Cake\Core\Configure;
 
 /**
  * Application View
@@ -38,8 +39,15 @@ class AppView extends View
     public function initialize(): void
     {
 	    parent::initialize();
+
+        /* default helpers */
 	    $this->loadHelper('Html');
 	    $this->loadHelper('Form');
 	    $this->loadHelper('Flash');
+
+        /* configuration to be added in app_local
+         * 'GoogleMap' => ['apiKey' => 'your Googlemaps platform API key (Maps Javascript API)']
+         */
+        $this->loadHelper('Geo.GoogleMap', Configure::read('GoogleMap'));
     }
 }

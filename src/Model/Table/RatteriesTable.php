@@ -61,12 +61,12 @@ class RatteriesTable extends Table
             'entityField' => 'rattery_id',
         ]);
 
-        /* configuration must be registered in app_local file
-         * (to protect Googlemaps api key)
-         * Geocoder config variable should be like:
-         * ['address' => 'zip_code', 'country_name']
-            'apiKey' => 'your Googlemaps platform API key',
-            'locale' => 'fr']
+        /* configuration to be added in app_local:
+         * 'Geocoder' => [
+         *      'address' => 'zip_code', 'district', 'country_name']
+                'apiKey' => 'your Googlemaps platform API key (Geocoding API)',
+                'locale' => 'fr'
+            ]
         */
         if (! empty($geo_config = Configure::read('Geocoder'))) {
             $this->addBehavior('Geo.Geocoder', $geo_config);
@@ -191,6 +191,28 @@ class RatteriesTable extends Table
     }
 
     // Finder Functions
+
+    // Find active ratteries with known location
+    public function findLocated(Query $query, array $options) {
+
+        $filter = [
+            'is_alive' => true,
+            'zip_code !=' => '',
+            'lat IS NOT' => null,
+            'lat IS NOT' => null
+        ];
+
+        if (! empty($options)) {
+            $filter = array_merge($filter, $options);
+        }
+
+        $query = $query
+        ->select()
+        ->where($filter);
+
+        return $query;
+    }
+
     // Search rattery by name or prefix
     public function findNamed(Query $query, array $options)
     {
