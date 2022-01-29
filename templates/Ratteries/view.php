@@ -157,14 +157,6 @@
                             <td><?= h($rattery->zip_code) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Latitude (debug)') ?></th>
-                            <td><?= h($rattery->lat) ?></td>
-                        </tr>
-                        <tr>
-                            <th><?= __('Longitude (debug)') ?></th>
-                            <td><?= h($rattery->lng) ?></td>
-                        </tr>
-                        <tr>
                             <th><?= __('Website') ?></th>
                             <td><?= $rattery->website ? $this->Html->link(h($rattery->website)) : '' ?></td>
                         </tr>
