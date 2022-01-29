@@ -199,7 +199,7 @@ class RatteriesTable extends Table
             'is_alive' => true,
             'zip_code !=' => '',
             'lat IS NOT' => null,
-            'lat IS NOT' => null
+            'lng IS NOT' => null
         ];
 
         if (! empty($options)) {
