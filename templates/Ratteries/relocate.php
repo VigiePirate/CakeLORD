@@ -47,7 +47,7 @@
                         'required' => true
                     ]);
                 ?>
-                <legend><?= __('Complementary information') ?></legend>
+                <legend><?= __('Optional information') ?></legend>
                 <?php
                     echo $this->Form->control('district', ['label' => __('Localization (region, district, city...)' )]);
                     echo $this->Form->control('zip_code', ['label' => __('Zipcode (will be used in rattery map)')]);

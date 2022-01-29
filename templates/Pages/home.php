@@ -213,7 +213,7 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                     <a href="/lord/webstats">Site statistics</a>
                     <a href="/lord/stats">Rat statistics</a>
                 </div>
-                <h5>Rattery map</h5>
+                <h5><a href="/ratteries/locate/">Rattery map</a></h5>
                 <h5>Contact</h5>
             </div>
             <div class="footer_center hide-on-tablet">

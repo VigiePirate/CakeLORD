@@ -1,0 +1,13 @@
+.map-legend {
+  font-family: "Imprima";
+  font-size: 1.4rem;
+  line-height: 1.4
+}
+
+.map-legend a {
+  font-weight: bold
+}
+
+.map-legend a:visited {
+  color: #663300
+}

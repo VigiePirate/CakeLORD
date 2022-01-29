@@ -820,10 +820,10 @@ footer {
   padding-right: 0rem;
 }
 
-/*gray: comment out here */
-.footer_section h5 {
+.footer_section h5, .footer_section h5 a {
     color: #bfc9ff;
     font-weight:bold;
+    font-size: 1.8rem;
 }
 
 .footer_center {
