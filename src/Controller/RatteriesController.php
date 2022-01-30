@@ -310,7 +310,7 @@ class RatteriesController extends AppController
 
         $id = $this->request->getParam('pass');
         if (! empty($id)) {
-            $rattery = $rattery = $this->Ratteries->get($id, ['contain' => ['Users']]);
+            $rattery = $this->Ratteries->get($id, ['contain' => ['Users']]);
             $this->set(compact('rattery'));
         }
 
