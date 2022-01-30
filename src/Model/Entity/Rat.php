@@ -245,6 +245,9 @@ class Rat extends Entity
         if (! $this->is_alive && isset($this->_fields['death_date'])) {
             $agedate = $this->_fields['death_date'];
         }
+
+        // Compute diffInDays and round it rather than diffInMonths for consistency:
+        // we want 1 month age for a 20 days rat rather than 0
         if (isset($this->birth_date)) {
             return round($agedate->diffInDays($this->_fields['birth_date'], true)/30.5);
         } else {
