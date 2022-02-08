@@ -327,10 +327,25 @@ td,th {
     white-space: nowrap;
 }
 
-.comment {
+.comment, em {
   font-family: "Alegreya", serif;
   font-style: italic;
 }
+
+/* styling articles converted from markdown in db */
+.markdown > p {
+  padding-left: .5em;
+}
+
+.markdown > ul, .markdown > ol, .markdown > dl {
+  padding-left: 1.5em;
+  margin-bottom: 2rem;
+}
+
+.markdown > h2, .markdown > h3, .markdown > h4, .markdown > h5 {
+  margin-top: 2.5rem;
+}
+/* end of markdown specials */
 
 blockquote {
     font-family: "Alegreya", serif;
