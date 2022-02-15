@@ -5,10 +5,10 @@
  */
 ?>
 <div class="faqs index content">
-    <?= $this->Html->link(__('New Faq'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Faqs') ?></h3>
+    <?= $this->Html->link(__('New Faq'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('All FAQs') ?></h1>
     <div class="table-responsive">
-        <table>
+        <table class="condensed">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
@@ -22,11 +22,22 @@
                 <tr>
                     <td><?= $this->Number->format($faq->id) ?></td>
                     <td><?= $faq->has('category') ? $this->Html->link($faq->category->name, ['controller' => 'Categories', 'action' => 'view', $faq->category->id]) : '' ?></td>
-                    <td><?= h($faq->question) ?></td>
+                    <td><?= $this->Html->link($faq->question, ['action' => 'view', $faq->id]) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $faq->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $faq->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $faq->id], ['confirm' => __('Are you sure you want to delete # {0}?', $faq->id)]) ?>
+                        <?= $this->Html->image('/img/icon-edit.svg', [
+                            'url' => ['controller' => 'Faqs', 'action' => 'edit', $faq->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Edit FAQ')
+                        ])?>
+                        <?= $this->Form->postLink(
+                                $this->Html->image('/img/icon-delete.svg', [
+                                    'class' => 'action-icon',
+                                    'alt' => __('Delete FAQ')
+                                ]),
+                                ['action' => 'delete', $faq->id],
+                                ['confirm' => __('Are you sure you want to delete # {0}?', $faq->id), 'escape' => false]
+                            )
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

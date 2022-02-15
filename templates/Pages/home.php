@@ -86,25 +86,30 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                         <?= $this->Form->submit(); ?>
                     <?= $this->Form->end(); ?>
                     <!-- Login or access dashboard -->
-                    <?=
-                    $this->Html->Link(
-                    // $this->getRequest()->getSession()->read('Auth.username'),
-                        $this->Html->image("/img/icon-home.svg", ["alt" => "Dashboard", "width" => "40"]),
-                        ['controller' => 'Users', 'action' => 'home'],
-                        ['escape' => false])
-                    ?>
-
-                    <!-- /* < ? = ($this->getRequest()->getSession()->check('Auth.id')) ?
+                    <?= ($this->getRequest()->getSession()->check('Auth.id')) ?
                         $this->Html->Link(
-                            $this->Html->image("/img/icon-logout.svg", ["alt" => "Logout", "width" => "40"]),
+                            // $this->getRequest()->getSession()->read('Auth.username'),
+                            $this->Html->image("/img/icon-home-open.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
+                            ['controller' => 'Users', 'action' => 'home'],
+                            ['escape' => false])
+                        :
+                        $this->Html->Link(
+                            // $this->getRequest()->getSession()->read('Auth.username'),
+                            $this->Html->image("/img/icon-home-closed.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
+                            ['controller' => 'Users', 'action' => 'home'],
+                            ['escape' => false])
+                    ?>
+                    <?= ($this->getRequest()->getSession()->check('Auth.id')) ?
+                        $this->Html->Link(
+                            $this->Html->image("/img/icon-key.svg", ["alt" => "Logout", "title" => "Log out", "width" => "40"]),
                             ['controller' => 'Users', 'action' => 'logout'],
                             ['escape' => false])
                         :
                         $this->Html->Link(
-                            $this->Html->image("/img/icon-login.svg", ["alt" => "Login", "width" => "40"]),
+                            $this->Html->image("/img/icon-key.svg", ["alt" => "Login", "title" => "Log in", "width" => "40"]),
                             ['controller' => 'Users', 'action' => 'login'],
-                            ['escape' => false]) */
-                    ? > */ -->
+                            ['escape' => false])
+                    ?>
                 </div>
             </nav>
         </div>
@@ -193,7 +198,7 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
         <footer>
             <div class="footer_section">
                 <h5>Guides</h5>
-                <a href="/articles">F.A.Q.</a>
+                <a href="/faqs/all">F.A.Q.</a>
                 <a href="/articles">Full guides</a>
                 <a href="/articles">Code of conduct</a>
                 <a href="/articles">Contributing</a>

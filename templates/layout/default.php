@@ -74,13 +74,13 @@ $cakeDescription = 'LORD';
             <?= ($this->getRequest()->getSession()->check('Auth.id')) ?
                 $this->Html->Link(
                     // $this->getRequest()->getSession()->read('Auth.username'),
-                    $this->Html->image("/img/icon-home.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
+                    $this->Html->image("/img/icon-home-open.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'home'],
                     ['escape' => false])
                 :
                 $this->Html->Link(
                     // $this->getRequest()->getSession()->read('Auth.username'),
-                    $this->Html->image("/img/icon-home-empty.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
+                    $this->Html->image("/img/icon-home-closed.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'home'],
                     ['escape' => false])
             ?>
@@ -106,7 +106,7 @@ $cakeDescription = 'LORD';
     <footer>
         <div class="footer_section">
             <h5>Guides</h5>
-            <a href="/articles">F.A.Q.</a>
+            <a href="/faqs/all">F.A.Q.</a>
             <a href="/articles">Full guides</a>
             <a href="/articles">Code of conduct</a>
             <a href="/articles">Contributing</a>

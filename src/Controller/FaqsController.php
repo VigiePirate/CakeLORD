@@ -26,6 +26,16 @@ class FaqsController extends AppController
         $this->set(compact('faqs'));
     }
 
+    public function all()
+    {
+        $categories = $this->loadModel('Categories')
+            ->find('all')
+            ->contain('Faqs')
+            ->order(['position' => 'ASC']);
+
+        $this->set(compact('categories'));
+    }
+
     /**
      * View method
      *
@@ -53,11 +63,11 @@ class FaqsController extends AppController
         if ($this->request->is('post')) {
             $faq = $this->Faqs->patchEntity($faq, $this->request->getData());
             if ($this->Faqs->save($faq)) {
-                $this->Flash->success(__('The faq has been saved.'));
+                $this->Flash->success(__('The FAQ has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The faq could not be saved. Please, try again.'));
+            $this->Flash->error(__('The FAQ could not be saved. Please, try again.'));
         }
         $categories = $this->Faqs->Categories->find('list', ['limit' => 200]);
         $this->set(compact('faq', 'categories'));
@@ -78,11 +88,11 @@ class FaqsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $faq = $this->Faqs->patchEntity($faq, $this->request->getData());
             if ($this->Faqs->save($faq)) {
-                $this->Flash->success(__('The faq has been saved.'));
+                $this->Flash->success(__('The FAQ has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The faq could not be saved. Please, try again.'));
+            $this->Flash->error(__('The FAQ could not be saved. Please, try again.'));
         }
         $categories = $this->Faqs->Categories->find('list', ['limit' => 200]);
         $this->set(compact('faq', 'categories'));
@@ -100,9 +110,9 @@ class FaqsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $faq = $this->Faqs->get($id);
         if ($this->Faqs->delete($faq)) {
-            $this->Flash->success(__('The faq has been deleted.'));
+            $this->Flash->success(__('The FAQ has been deleted.'));
         } else {
-            $this->Flash->error(__('The faq could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The FAQ could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

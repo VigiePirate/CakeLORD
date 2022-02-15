@@ -342,9 +342,44 @@ td,th {
   margin-bottom: 2rem;
 }
 
+.markdown > * > li {
+  margin-bottom: 0rem;
+}
+
 .markdown > h2, .markdown > h3, .markdown > h4, .markdown > h5 {
   margin-top: 2.5rem;
 }
+
+.sanitized-md > h1,
+.sanitized-md > h2,
+.sanitized-md > h3,
+.sanitized-md > h4 {
+  margin-top: .5rem;
+  /* color: #606c76; */
+  font-size: 1.8rem;
+  letter-spacing: 0rem; /* -.05rem; */
+  /* line-height: 1.5; */
+}
+
+.cm-em {
+  font-family: "Alegreya", serif;
+  font-style: italic;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ul li::marker {
+  color: #606ebf;
+  font-size: 1.1em;
+}
+
+ol li::marker {
+  color: #606ebf;
+  font-weight: bold;
+}
+
 /* end of markdown specials */
 
 blockquote {
@@ -455,12 +490,12 @@ main {
     padding: 2rem;
     background: #ffffff;
     border-radius: 0.4rem;
-    /* Thanks Stripe */
     box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1),
     0 3px 6px 0 rgba(0, 0, 0, 0.07);
   }
+
 .actions img{
-    min-width: 1em;
+    min-width: 1.1em;
   }
 
 /* .actions a {

@@ -31,29 +31,13 @@
     <div class="column-responsive column-90">
         <div class="faqs view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Frequently asked question') ?></div>
+                <div class="sheet-title pretitle"><?= h($faq->category->name) ?></div>
             </div>
 
             <h1><?= h($faq->question) ?></h1>
-            <table>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($faq->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Category') ?></th>
-                    <td><?= $faq->has('category') ? $this->Html->link($faq->category->name, ['controller' => 'Categories', 'action' => 'view', $faq->category->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Question') ?></th>
-                    <td><?= h($faq->question) ?></td>
-                </tr>
-            </table>
-            <div class="text">
-                <strong><?= __('Answer') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($faq->answer)); ?>
-                </blockquote>
+            <h2><?= __('Answer') ?></h2>
+            <div class="markdown answer sanitized-md">
+                <?= $this->Commonmark->sanitize($faq->answer); ?>
             </div>
         </div>
     </div>

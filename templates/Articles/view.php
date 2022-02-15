@@ -32,13 +32,13 @@
         <div class="articles view content">
 
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= h($article->category->name) ?></div>
+                <div class="sheet-title pretitle"><?= h($article->subtitle) ?></div>
             </div>
 
             <h1><?= h($article->title) ?></h1>
 
             <div class="markdown">
-                <?= $this->Commonmark->parse($article->content); ?>
+                    <?= $this->Commonmark->parse($article->content); ?>
             </div>
 
             <div class="signature">

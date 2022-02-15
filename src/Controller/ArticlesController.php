@@ -19,7 +19,7 @@ class ArticlesController extends AppController
      */
     public function index()
     {
-        $articles = $this->paginate($this->Articles);
+        $articles = $this->paginate($this->Articles, ['contain' => ['Categories']]);
 
         $this->set(compact('articles'));
     }
@@ -72,7 +72,7 @@ class ArticlesController extends AppController
     public function edit($id = null)
     {
         $article = $this->Articles->get($id, [
-            'contain' => [],
+            'contain' => ['Categories'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
@@ -83,7 +83,8 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
-        $this->set(compact('article'));
+        $categories = $this->Articles->Categories->find('list', ['limit' => 200]);
+        $this->set(compact('article', 'categories'));
     }
 
     /**
