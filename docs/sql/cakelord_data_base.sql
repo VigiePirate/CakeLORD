@@ -355,7 +355,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `ratteries` WRITE;
 /*!40000 ALTER TABLE `ratteries` DISABLE KEYS */;
-INSERT INTO `ratteries` VALUES (1,'INC','*Animalerie*',2,1956,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:25:58','2020-02-28 19:25:58'),(2,'IND','* Eleveur indépendant *',2,2006,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:29:09','2020-02-28 19:38:18'),(3,'ETR','* Eleveur étranger *',2,2006,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:31:14','2020-02-28 19:39:30'),(4,'LAB','* Lignée de laboratoire *',2,2006,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:31:45','2020-02-28 19:38:37'),(5,'SOS','*Sauvetage*',2,2006,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:33:50','2020-02-28 19:33:50'),(6,'SVG','* Rat Sauvage *',2,2006,1,1,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:37:41','2020-02-28 19:37:41');
+INSERT INTO `ratteries` VALUES (1,'INC','*Animalerie*',2,1956,1,1,'','',1,NULL,NULL,'','',1,'Unknown.png',1,'2020-02-28 19:25:58','2020-02-28 19:25:58'),(2,'IND','* Eleveur indépendant *',2,2006,1,1,'','',1,NULL,NULL,'','',1,'Unknown.png',1,'2020-02-28 19:29:09','2020-02-28 19:38:18'),(3,'ETR','* Eleveur étranger *',2,2006,1,1,NULL,NULL,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:31:14','2020-02-28 19:39:30'),(4,'LAB','* Lignée de laboratoire *',2,2006,1,1,NULL,NULL,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:31:45','2020-02-28 19:38:37'),(5,'SOS','*Sauvetage*',2,2006,1,1,NULL,NULL,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:33:50','2020-02-28 19:33:50'),(6,'SVG','* Rat Sauvage *',2,2006,1,1,NULL,NULL,'','',1,'','',1,'Unknown.png',1,'2020-02-28 19:37:41','2020-02-28 19:37:41');
 /*!40000 ALTER TABLE `ratteries` ENABLE KEYS */;
 UNLOCK TABLES;
 
