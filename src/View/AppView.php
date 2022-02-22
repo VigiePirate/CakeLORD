@@ -49,5 +49,6 @@ class AppView extends View
          * 'GoogleMap' => ['apiKey' => 'your Googlemaps platform API key (Maps Javascript API)']
          */
         $this->loadHelper('Geo.GoogleMap', Configure::read('GoogleMap'));
+        $this->loadHelper('CommonMark');
     }
 }

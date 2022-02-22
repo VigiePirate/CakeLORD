@@ -8,12 +8,13 @@
     <?= $this->Html->link(__('New Article'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
     <h1><?= __('All Articles') ?></h1>
     <div class="table-responsive">
-        <table>
+        <table class="condensed">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('category') ?></th>
+                    <th><?= $this->Paginator->sort('subtitle', __('Overtitle')) ?></th>
                     <th><?= $this->Paginator->sort('title') ?></th>
-                    <th><?= $this->Paginator->sort('subtitle') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -23,14 +24,26 @@
                 <?php foreach ($articles as $article): ?>
                 <tr>
                     <td><?= $this->Number->format($article->id) ?></td>
-                    <td><?= h($article->title) ?></td>
+                    <td><?= $this->Html->link($article->category->name, ['controller' => 'Categories', 'action' => 'view', $article->category->id]) ?></td>
                     <td><?= h($article->subtitle) ?></td>
+                    <td><?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?></td>
                     <td><?= h($article->created) ?></td>
                     <td><?= h($article->modified) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $article->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $article->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $article->id], ['confirm' => __('Are you sure you want to delete # {0}?', $article->id)]) ?>
+                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                            'url' => ['controller' => 'Articles', 'action' => 'edit', $article->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Edit Category')
+                        ])?>
+                        <?= $this->Form->postLink(
+                                $this->Html->image('/img/icon-delete.svg', [
+                                    'class' => 'action-icon',
+                                    'alt' => __('Delete Article')
+                                ]),
+                                ['action' => 'delete', $article->id],
+                                ['confirm' => __('Are you sure you want to delete # {0}?', $article->id), 'escape' => false]
+                            )
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

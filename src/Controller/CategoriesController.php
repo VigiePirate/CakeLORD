@@ -36,7 +36,9 @@ class CategoriesController extends AppController
             'contain' => ['Articles', 'Faqs'],
         ]);
 
-        $this->set(compact('category'));
+        $category_count = $this->Categories->find('all')->count();
+
+        $this->set(compact('category', 'category_count'));
     }
 
     /**

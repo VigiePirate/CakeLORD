@@ -488,6 +488,7 @@ class RatsTable extends Table
             $query->where([
                 'OR' => [
                     'Rats.name LIKE' => implode($options['names']).'%',
+                    'Rats.pup_name LIKE' => '%'.implode($options['names']).'%',
                     'Rats.pedigree_identifier LIKE' => '%'.implode($options['names']).'%',
                 ],
             ]);

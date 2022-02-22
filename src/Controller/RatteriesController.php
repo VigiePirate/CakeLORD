@@ -325,8 +325,8 @@ class RatteriesController extends AppController
                     'style' => 'HORIZONTAL_BAR',
                     'pos' => 'LEFT_TOP'
                 ],
-                'defaultLat' => isset($rattery) ? $rattery->lat : null,
-                'defaultLng' => isset($rattery) ? $rattery->lng : null,
+                'defaultLat' => isset($rattery) ? $rattery->latitude : null,
+                'defaultLng' => isset($rattery) ? $rattery->longitude : null,
             ]
         ];
 
@@ -339,7 +339,7 @@ class RatteriesController extends AppController
     }
 
     /* change country, zipcode and/or other location indications */
-    /* lat/lng will be updated through Geocoder behaviour if configured */
+    /* latitude/longitude will be updated through Geocoder behaviour if configured */
     public function relocate($id = null)
     {
         $rattery = $this->Ratteries->get($id, [

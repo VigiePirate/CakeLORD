@@ -27,13 +27,14 @@ $cakeDescription = 'LORD';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <link href="https://fonts.googleapis.com/css2?family=Imprima&family=Alegreya:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Imprima&family=Alegreya:ital,wght@0,300;0,400;0,500;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,500,700" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
 
     <?= $this->Html->css('milligram.min.css') ?>
     <?= $this->Html->css('lord.css') ?>
+    <?= $this->Html->css('from-md.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -74,13 +75,13 @@ $cakeDescription = 'LORD';
             <?= ($this->getRequest()->getSession()->check('Auth.id')) ?
                 $this->Html->Link(
                     // $this->getRequest()->getSession()->read('Auth.username'),
-                    $this->Html->image("/img/icon-home.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
+                    $this->Html->image("/img/icon-home-open.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'home'],
                     ['escape' => false])
                 :
                 $this->Html->Link(
                     // $this->getRequest()->getSession()->read('Auth.username'),
-                    $this->Html->image("/img/icon-home-empty.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
+                    $this->Html->image("/img/icon-home-closed.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'home'],
                     ['escape' => false])
             ?>
@@ -106,7 +107,7 @@ $cakeDescription = 'LORD';
     <footer>
         <div class="footer_section">
             <h5>Guides</h5>
-            <a href="/articles">F.A.Q.</a>
+            <a href="/faqs/all">F.A.Q.</a>
             <a href="/articles">Full guides</a>
             <a href="/articles">Code of conduct</a>
             <a href="/articles">Contributing</a>

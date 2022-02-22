@@ -327,9 +327,27 @@ td,th {
     white-space: nowrap;
 }
 
-.comment {
+.comment, em {
   font-family: "Alegreya", serif;
   font-style: italic;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ul li::marker {
+  color: #606ebf;
+}
+
+ol li::marker {
+  color: #606ebf;
+  font-weight: bold;
+}
+
+ul, ol, dl {
+  padding-left: 1.5em;
+  margin-bottom: 2rem;
 }
 
 blockquote {
@@ -440,12 +458,12 @@ main {
     padding: 2rem;
     background: #ffffff;
     border-radius: 0.4rem;
-    /* Thanks Stripe */
     box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1),
     0 3px 6px 0 rgba(0, 0, 0, 0.07);
   }
+
 .actions img{
-    min-width: 1em;
+    min-width: 1.1em;
   }
 
 /* .actions a {

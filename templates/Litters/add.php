@@ -113,7 +113,7 @@
                 <legend><?= __('Comments') ?></legend>
                 <?= $this->Form->control('comments', ['label' => 'Additional information']); ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit (do not press for now!)')) ?>
+            <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

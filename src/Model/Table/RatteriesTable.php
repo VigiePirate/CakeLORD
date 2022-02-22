@@ -65,7 +65,9 @@ class RatteriesTable extends Table
          * 'Geocoder' => [
          *      'address' => 'zip_code', 'district', 'country_name']
                 'apiKey' => 'your Googlemaps platform API key (Geocoding API)',
-                'locale' => 'fr'
+                'locale' => 'fr',
+                'lat' => 'latitude',
+                'lng' => 'longitude'
             ]
         */
         if (! empty($geo_config = Configure::read('Geocoder'))) {
@@ -198,8 +200,8 @@ class RatteriesTable extends Table
         $filter = [
             'is_alive' => true,
             'zip_code !=' => '',
-            'lat IS NOT' => null,
-            'lng IS NOT' => null
+            'latitude IS NOT' => null,
+            'longitude IS NOT' => null
         ];
 
         if (! empty($options)) {

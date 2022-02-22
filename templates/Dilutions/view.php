@@ -65,10 +65,10 @@
                 <?php endif ?>
             </div>
             <div class="text">
-                <strong><?= __('Description') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($dilution->description)); ?>
-                </blockquote>
+                <h2><?= __('Description') ?></h2>
+                <div class="markdown">
+                    <?= $this->Commonmark->sanitize($dilution->description); ?>
+                </div>
             </div>
             <div class="related">
                 <h2><?= __('Gallery') ?></h2>

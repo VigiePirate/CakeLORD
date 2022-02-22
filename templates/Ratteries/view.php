@@ -173,7 +173,9 @@
                 <?php if (! empty($rattery->comments)) : ?>
                     <div class="text">
                         <blockquote>
-                            <?= $this->Text->autoParagraph(h($rattery->comments)); ?>
+                            <div class="markdown">
+                                <?= $this->Commonmark->sanitize($rattery->comments); ?>
+                            </div>
                         </blockquote>
                     </div>
                 <?php endif; ?>

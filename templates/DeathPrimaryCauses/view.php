@@ -50,9 +50,9 @@
 
             <div class="text">
                 <strong><?= __('Description') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($deathPrimaryCause->description)); ?>
-                </blockquote>
+                <div class="markdown">
+                    <?= $this->Commonmark->parse($deathPrimaryCause->description); ?>
+                </div>
             </div>
 
             <h2><?= __('Statistics') ?></h3>

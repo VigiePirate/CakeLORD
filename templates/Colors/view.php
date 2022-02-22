@@ -77,9 +77,9 @@
                     </table>
                     <div class="text">
                         <h2><?= __('Description') ?></h2>
-                        <blockquote>
-                            <?= $this->Text->autoParagraph(h($color->description)); ?>
-                        </blockquote>
+                        <div class="markdown">
+                            <?= $this->Commonmark->parse($color->description); ?>
+                        </div>
                     </div>
                 </div>
                 <?php if ($color->picture != '') : ?>

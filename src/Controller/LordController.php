@@ -31,7 +31,7 @@ class LordController extends AppController
         }
 
         $model = $this->loadModel('Rats');
-        $query = $model->find('named', ['names' => $names])
+        $query = $model->find('identified', ['names' => $names])
             ->order('Rats.modified DESC')
             ->contain(['States', 'OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions']);
         $count['rats'] = $query->count();
