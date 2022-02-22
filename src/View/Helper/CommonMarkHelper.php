@@ -22,12 +22,12 @@ class CommonmarkHelper extends Helper
      */
     public function parse($text = '')
     {
-        return $this->_getParser(['html_input' => 'allow'])->convert($text);
+        return is_null($text) ? '' : $this->_getParser(['html_input' => 'allow'])->convert($text);
     }
 
     public function sanitize($text = '')
     {
-        return $this->_getParser(['html_input' => 'escape', 'allow_unsafe_links' => false])
+        return is_null($text) ? '' : $this->_getParser(['html_input' => 'escape', 'allow_unsafe_links' => false])
             ->convert($text);
     }
 
