@@ -52,9 +52,9 @@
 
             <?php if ($litter->comments) : ?>
                 <div class="text">
-                    <blockquote>
-                        <?= $this->Text->autoParagraph(h($litter->comments)); ?>
-                    </blockquote>
+                    <div class="markdown">
+                        <?= $this->Commonmark->sanitize($litter->comments); ?>
+                    </div>
                 </div>
             <?php endif; ?>
 

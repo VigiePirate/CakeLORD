@@ -38,7 +38,9 @@
             <div class="text">
                 <strong><?= __('Comments') ?></strong>
                 <blockquote>
-                    <?= $this->Text->autoParagraph(h($compatibility->comments)); ?>
+                    <div class="markdown">
+                        <?= $this->Commonmark->parse($compatibility->comments); ?>
+                    </div>
                 </blockquote>
             </div>
         </div>

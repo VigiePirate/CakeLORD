@@ -45,8 +45,13 @@
   padding: 0 1rem;
 }
 
-blockquote .markdown em {
+blockquote .markdown em, blockquote .markdown a,
+blockquote .markdown h3, blockquote .markdown h4, blockquote .markdown h5 {
   font-style: normal;
+}
+
+blockquote .markdown h3, blockquote .markdown h4, blockquote .markdown h5 {
+  padding-left: 0.5em;
 }
 
 blockquote .markdown a {

@@ -84,9 +84,9 @@
             </div>
             <div class="text">
                 <h2><?= __('Description') ?></h2>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($coat->description)); ?>
-                </blockquote>
+                <div class="markdown">
+                    <?= $this->Commonmark->parse($coat->description); ?>
+                </div>
             </div>
             <div class="related">
                 <h2><?= __('Random gallery') ?></h2>

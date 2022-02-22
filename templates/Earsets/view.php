@@ -58,10 +58,10 @@
                 <?php endif ?>
             </div>
             <div class="text">
-                <strong><?= __('Description') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($earset->description)); ?>
-                </blockquote>
+                <h2><?= __('Description') ?></h2>
+                <div class="markdown">
+                    <?= $this->Commonmark->sanitize($earset->description); ?>
+                </div>
             </div>
         </div>
     </div>

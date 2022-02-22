@@ -217,7 +217,7 @@
                 <div class="text">
                     <blockquote>
                         <div class="markdown">
-                                <?= $this->Commonmark->sanitize($rat->comments); ?>
+                            <?= $this->Commonmark->sanitize($rat->comments); ?>
                         </div>
                     </blockquote>
                 </div>
@@ -328,4 +328,3 @@
 </div>
 
 <?= $this->Html->css('statebar.css') ?>
-<?= $this->Html->css('from-md.css') ?>

@@ -39,9 +39,9 @@
             </table>
             <div class="text">
                 <strong><?= __('Description') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($deathSecondaryCause->description)); ?>
-                </blockquote>
+                <div class="markdown">
+                    <?= $this->Commonmark->sanitize($deathSecondaryCause->description); ?>
+                </div>
             </div>
             <div class="related">
                 <h2><?= __('Statistics') ?></h3>

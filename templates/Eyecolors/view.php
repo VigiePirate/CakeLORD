@@ -59,9 +59,9 @@
             </div>
             <div class="text">
                 <strong><?= __('Description') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($eyecolor->description)); ?>
-                </blockquote>
+                <div class="markdown">
+                    <?= $this->Commonmark->sanitize($earset->description); ?>
+                </div>
             </div>
         </div>
     </div>

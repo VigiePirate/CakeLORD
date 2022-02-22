@@ -59,9 +59,9 @@
             </div>
             <h2><?= __('About me') ?></h2>
             <div class="text">
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($user->about_me)); ?>
-                </blockquote>
+                <div class="markdown">
+                    <?= $this->Commonmark->sanitize($user->about_me); ?>
+                </div>
             </div>
 
             <div class="spacer"> </div>

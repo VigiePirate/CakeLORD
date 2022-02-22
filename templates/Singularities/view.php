@@ -57,9 +57,9 @@
                     </table>
                     <div class="text">
                         <strong><?= __('Description') ?></strong>
-                        <blockquote>
-                            <?= $this->Text->autoParagraph(h($singularity->description)); ?>
-                        </blockquote>
+                        <div class="markdown">
+                            <?= $this->Commonmark->sanitize($singularity->description); ?>
+                        </div>
                     </div>
                 </div>
                 <?php if ($singularity->picture != '') : ?>

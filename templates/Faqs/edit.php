@@ -61,7 +61,6 @@
 
 <!-- Easy MDE -->
 <?= $this->Html->css('easymde.css') ?>
-<?= $this->Html->css('from-md.css') ?>
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 
 <script>
