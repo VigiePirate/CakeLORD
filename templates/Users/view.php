@@ -59,9 +59,11 @@
             </div>
             <h2><?= __('About me') ?></h2>
             <div class="text">
-                <div class="markdown">
-                    <?= $this->Commonmark->sanitize($user->about_me); ?>
-                </div>
+                <blockquote>
+                    <div class="markdown">
+                        <?= $this->Commonmark->sanitize($user->about_me); ?>
+                    </div>
+                </blockquote>
             </div>
 
             <div class="spacer"> </div>

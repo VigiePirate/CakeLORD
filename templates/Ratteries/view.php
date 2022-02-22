@@ -172,9 +172,11 @@
 
                 <?php if (! empty($rattery->comments)) : ?>
                     <div class="text">
-                        <div class="markdown">
-                            <?= $this->Commonmark->sanitize($rattery->comments); ?>
-                        </div>
+                        <blockquote>
+                            <div class="markdown">
+                                <?= $this->Commonmark->sanitize($rattery->comments); ?>
+                            </div>
+                        </blockquote>
                     </div>
                 <?php endif; ?>
 

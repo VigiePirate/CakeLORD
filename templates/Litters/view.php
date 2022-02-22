@@ -52,9 +52,11 @@
 
             <?php if ($litter->comments) : ?>
                 <div class="text">
-                    <div class="markdown">
-                        <?= $this->Commonmark->sanitize($litter->comments); ?>
-                    </div>
+                    <blockquote>
+                        <div class="markdown">
+                            <?= $this->Commonmark->sanitize($litter->comments); ?>
+                        </div>
+                    </blockquote>
                 </div>
             <?php endif; ?>
 
