@@ -1,0 +1,54 @@
+.markdown > p {
+  padding-left: .5em;
+}
+
+.markdown > * > li, .editor-preview > * > li {
+  margin-bottom: 0rem;
+}
+
+.markdown > h2, .markdown > h3, .markdown > h4, .markdown > h5,
+.editor-preview > h2, .editor-preview > h3, .editor-preview > h4, .editor-preview > h5 {
+  margin-top: 2.5rem;
+}
+
+.sanitized-md > h1,
+.sanitized-md > h2,
+.sanitized-md > h3,
+.sanitized-md > h4 {
+  margin-top: .5rem;
+  /* color: #606c76; */
+  font-size: 1.8rem;
+  letter-spacing: 0rem; /* -.05rem; */
+  /* line-height: 1.5; */
+}
+
+.sanitized-md > h5 {
+  margin-top: .5rem;
+  letter-spacing: -.05rem;
+}
+
+.cm-em {
+  font-family: "Alegreya", serif;
+  font-style: italic;
+}
+
+.markdown table, .editor-preview table {
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 2.5rem;
+  padding: 0;
+  border-collapse: collapse;
+}
+
+.markdown table td, .markdown table th {
+  border: 2px solid #d1d1d1;
+  padding: 0 1rem;
+}
+
+blockquote .markdown em {
+  font-style: normal;
+}
+
+blockquote .markdown a {
+  font-style: normal;
+}

@@ -332,47 +332,12 @@ td,th {
   font-style: italic;
 }
 
-/* styling articles converted from markdown in db */
-.markdown > p {
-  padding-left: .5em;
-}
-
-.markdown > ul, .markdown > ol, .markdown > dl {
-  padding-left: 1.5em;
-  margin-bottom: 2rem;
-}
-
-.markdown > * > li {
-  margin-bottom: 0rem;
-}
-
-.markdown > h2, .markdown > h3, .markdown > h4, .markdown > h5 {
-  margin-top: 2.5rem;
-}
-
-.sanitized-md > h1,
-.sanitized-md > h2,
-.sanitized-md > h3,
-.sanitized-md > h4 {
-  margin-top: .5rem;
-  /* color: #606c76; */
-  font-size: 1.8rem;
-  letter-spacing: 0rem; /* -.05rem; */
-  /* line-height: 1.5; */
-}
-
-.cm-em {
-  font-family: "Alegreya", serif;
-  font-style: italic;
-}
-
 ul {
   list-style-type: disc;
 }
 
 ul li::marker {
   color: #606ebf;
-  font-size: 1.1em;
 }
 
 ol li::marker {
@@ -380,7 +345,10 @@ ol li::marker {
   font-weight: bold;
 }
 
-/* end of markdown specials */
+ul, ol, dl {
+  padding-left: 1.5em;
+  margin-bottom: 2rem;
+}
 
 blockquote {
     font-family: "Alegreya", serif;

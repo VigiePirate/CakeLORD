@@ -33,7 +33,7 @@
 
             <h1><?= __('Rattery Map') ?></h1>
 
-            <?php if (isset($rattery) && (! isset($rattery->lat) || ! isset($rattery->lng))) : ?>
+            <?php if (isset($rattery) && (! isset($rattery->latitude) || ! isset($rattery->longitude))) : ?>
                 <div class="message error">The rattery you asked for has not recorded its zipcode and therefore, cannot be displayed. Here are the other located ratteries.</div>
             <?php endif; ?>
 
@@ -48,8 +48,8 @@
                 foreach ($ratteries as $marker) {
                     $icon = $this->GoogleMap->iconSet('purple', '', 's');
                     $this->GoogleMap->addMarker([
-                        'lat' => $marker->lat,
-                        'lng' => $marker->lng,
+                        'lat' => $marker->latitude,
+                        'lng' => $marker->longitude,
                         'title' => $marker->full_name,
                         'content' =>
                             '<span class="map-legend">
@@ -63,11 +63,11 @@
                 }
 
                 if (isset($rattery)) {
-                    if (isset($rattery->lat) && isset($rattery->lng)) {
+                    if (isset($rattery->latitude) && isset($rattery->longitude)) {
                         $icon = $this->GoogleMap->iconSet('red', 'O', 'l');
                         $this->GoogleMap->addMarker([
-                            'lat' => $rattery->lat,
-                            'lng' => $rattery->lng,
+                            'lat' => $rattery->latitude,
+                            'lng' => $rattery->longitude,
                             'title' => $rattery->full_name,
                             'content' =>
                                 '<span class="map-legend">

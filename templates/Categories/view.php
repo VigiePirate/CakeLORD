@@ -76,7 +76,7 @@
                             <td><?= h($article->modified) ?></td>
                             <span class="nowrap">
                                 <td class="actions">
-                                    <?= $this->Html->image('/img/icon-edit.svg', [
+                                    <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
                                         'url' => ['controller' => 'Articles', 'action' => 'edit', $article->id],
                                         'class' => 'action-icon',
                                         'alt' => __('Edit Category')
@@ -120,7 +120,7 @@
                             <td><?= h($faqs->answer) ?></td>
                             <span class="nowrap">
                                 <td class="actions">
-                                    <?= $this->Html->image('/img/icon-edit.svg', [
+                                    <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
                                         'url' => ['controller' => 'Faqs', 'action' => 'edit', $faq->id],
                                         'class' => 'action-icon',
                                         'alt' => __('Edit Category')

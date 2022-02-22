@@ -30,7 +30,7 @@
                     <td><?= h($article->created) ?></td>
                     <td><?= h($article->modified) ?></td>
                     <td class="actions">
-                        <?= $this->Html->image('/img/icon-edit.svg', [
+                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
                             'url' => ['controller' => 'Articles', 'action' => 'edit', $article->id],
                             'class' => 'action-icon',
                             'alt' => __('Edit Category')

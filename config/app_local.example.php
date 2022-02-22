@@ -90,4 +90,30 @@ return [
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
     ],
+
+    /*
+	 * Geocoder / Googlemap configuration.
+	 *
+	 */
+
+	'Geocoder' => [
+		'address' => ['zip_code', 'district', 'country_name'],
+		'apiKey' => 'my_googlemaps_geocoding_api_key',
+		'locale' => 'fr',
+		'lat' => 'latitude',
+		'lng' => 'longitude'
+	],
+
+	'GoogleMap' => [
+		'key' => 'my_googlemaps_javascript_api_key',
+		'autoScript' => true,
+		'div' => [
+			'height' => '80vh'
+		],
+        /* default: center of France */
+		'map' => [
+			'defaultLat' => '46.621416',
+			'defaultLng' => '2.578361'
+		]
+	],
 ];

@@ -62,10 +62,15 @@
 
 <!-- Easy MDE -->
 <?= $this->Html->css('easymde.css') ?>
+<?= $this->Html->css('from-md.css') ?>
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 
 <script>
     var easyMDE = new EasyMDE({
+        minHeight: "20rem",
+        spellChecker: false,
+        inputStyle: "contenteditable",
+        nativeSpellcheck: true,
         previewImagesInEditor: true,
         promptURLs: true,
         sideBySideFullscreen: false,

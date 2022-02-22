@@ -212,13 +212,18 @@
                 <?php endif; ?>
             </table>
 
-            <h2>Comments</h2>
-            <div class="text">
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($rat->comments)); ?>
-                </blockquote>
-            </div>
-            <div class="spacer"> </div>
+            <?php if (! is_null($rat->comments)) : ?>
+                <h2><?= __('Comments') ?></h2>
+                <div class="text">
+                    <blockquote>
+                        <div class="markdown">
+                                <?= $this->Commonmark->sanitize($rat->comments); ?>
+                        </div>
+                    </blockquote>
+                </div>
+                <div class="spacer"> </div>
+            <?php endif; ?>
+
             <?php if (!empty($rat->bred_litters)) : ?>
                 <h2><?= __('Bred litters') ?></h2>
 
@@ -323,3 +328,4 @@
 </div>
 
 <?= $this->Html->css('statebar.css') ?>
+<?= $this->Html->css('from-md.css') ?>

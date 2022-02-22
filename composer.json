@@ -15,14 +15,14 @@
         "dereuromark/cakephp-geo": "^2.1",
         "geocoder-php/google-maps-provider": "^4.4.0",
         "geocoder-php/provider-implementation": "^1.0",
-        "league/commonmark": "^1.6",
+        "league/commonmark": "^2.2",
         "mobiledetect/mobiledetectlib": "^2.8",
         "php-http/cakephp-adapter": "^0.3.0",
         "php-http/message": "^1.8.0"
     },
     "require-dev": {
         "cakephp/bake": "^2.0.3",
-        "cakephp/cakephp-codesniffer": "~4.0.0",
+        "cakephp/cakephp-codesniffer": "~4.5",
         "cakephp/debug_kit": "^4.0",
         "josegonzalez/dotenv": "^3.2",
         "phpunit/phpunit": "^8.5",
@@ -58,7 +58,11 @@
     },
     "prefer-stable": true,
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cakephp/plugin-installer": true
+        }
     },
     "minimum-stability": "dev"
 }

@@ -30,7 +30,7 @@
                             'url' => ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $deathSecondaryCause->id],
                             'class' => 'action-icon',
                             'alt' => __('See Rat')]) ?>
-                        <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
+                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
                             'url' => ['controller' => 'DeathSecondaryCauses', 'action' => 'edit', $deathSecondaryCause->id],
                             'class' => 'action-icon',
                             'alt' => __('See Rat')]) ?>

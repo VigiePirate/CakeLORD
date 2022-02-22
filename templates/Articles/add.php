@@ -52,6 +52,10 @@
 
 <script>
     var easyMDE = new EasyMDE({
+        minHeight: "20rem",
+        spellChecker: false,
+        inputStyle: "contenteditable",
+        nativeSpellcheck: true,
         previewImagesInEditor: true,
         promptURLs: true,
         sideBySideFullscreen: false,

@@ -24,7 +24,7 @@
                     <td><?= $faq->has('category') ? $this->Html->link($faq->category->name, ['controller' => 'Categories', 'action' => 'view', $faq->category->id]) : '' ?></td>
                     <td><?= $this->Html->link($faq->question, ['action' => 'view', $faq->id]) ?></td>
                     <td class="actions">
-                        <?= $this->Html->image('/img/icon-edit.svg', [
+                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
                             'url' => ['controller' => 'Faqs', 'action' => 'edit', $faq->id],
                             'class' => 'action-icon',
                             'alt' => __('Edit FAQ')

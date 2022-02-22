@@ -75,7 +75,7 @@ trait StatisticsTrait
 
     // will compute sex ratio of a (sub)set of rats
     // for litter-based sex ratio, see computeLitterSexRatio* functions
-    public function computeRatSexRatioInWords($options = [], $max_denominator) {
+    public function computeRatSexRatioInWords($options = [], $max_denominator = 10) {
         $model = FactoryLocator::get('Table')->get('Rats');
 
         $filter_F = ['sex' => 'F'];
@@ -350,7 +350,7 @@ trait StatisticsTrait
             ->enableAutoFields(true)
             ->where($filter)
             ->first();
-        return round($avg['avg'],1);
+        return round(floatval($avg['avg']),1);
     }
 
     // should exclude generic ratteries as an option
@@ -410,7 +410,7 @@ trait StatisticsTrait
         }
     }
 
-    public function computeLitterSexRatioInWords($options = [], $max_denominator) {
+    public function computeLitterSexRatioInWords($options = [], $max_denominator = 10) {
         $sex_ratio = round($this->computeLitterSexRatio($options),3);
 
         if ($sex_ratio == -2) {
