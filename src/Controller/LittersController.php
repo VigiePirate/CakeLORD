@@ -2,199 +2,323 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Collection\Collection;
 
 /**
- * Ratteries Controller
+ * Litters Controller
  *
- * @property \App\Model\Table\RatteriesTable $Ratteries
- *
- * @method \App\Model\Entity\Rattery[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \App\Model\Table\LittersTable $Litters
+ * @method \App\Model\Entity\Litter[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class RatteriesController extends AppController
+class LittersController extends AppController
 {
-    public function beforeFilter(\Cake\Event\EventInterface $event)
-    {
-        parent::beforeFilter($event);
-        // No authentication needed on consultation
-        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'autocomplete']);
-    }
-
     /**
      * Index method
      *
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|null|void Renders view
      */
     public function index()
     {
-        $this->Authorization->skipAuthorization();
         $this->paginate = [
-            'contain' => ['Users', 'Countries', 'States'],
+            'contain' => ['Users', 'States', 'Sire', 'Dam'],
         ];
-        $ratteries = $this->paginate($this->Ratteries);
+        $litters = $this->paginate($this->Litters);
 
-        $this->set(compact('ratteries'));
+        $this->set(compact('litters'));
     }
 
     /**
      * My method
      *
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|null|void Renders view
      */
     public function my()
     {
         $user = $this->Authentication->getIdentity();
         $this->paginate = [
-            'contain' => ['Users', 'Countries', 'States'],
+            'contain' => ['Users', 'States', 'Sire', 'Dam', 'Contributions'],
         ];
-        $ratteries = $this->paginate($this->Ratteries->find()->where([
-            'owner_user_id' => $user->id,
-            'is_alive' => true,
-        ]));
-        $closed_ratteries = $this->paginate($this->Ratteries->find()->where([
-            'owner_user_id' => $user->id,
-            'is_alive' => false,
-        ]));
+        $litters = $this->paginate($this->Litters->find()
+                        ->matching('Contributions.Ratteries', function (\Cake\ORM\Query $q) use ($user) {
+                            return $q->where([
+                                'Ratteries.owner_user_id' => $user->id,
+                            ]);
+                        })
+                        ->order(['Contributions.litter_id' => 'ASC', 'Litters.birth_date' => 'DESC'])
+                );
 
-
-        $this->set(compact('ratteries', 'closed_ratteries', 'user'));
+        $this->set(compact('litters', 'user'));
     }
 
-    /* rattery sheet for all users, including statistics */
+    /**
+     * View method
+     *
+     * @param string|null $id Litter id.
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
     public function view($id = null)
     {
-        $this->Authorization->skipAuthorization();
-
-        $rattery = $this->Ratteries->get($id, [
-            'contain' => ['Users', 'Countries', 'States',
-                'Litters' => function($q) {
-                    return $q
-                    ->order('birth_date DESC')
-                    ->limit(10);
-                },
-                'Litters.States',
-                'Litters.Sire', 'Litters.Dam', 'Litters.Contributions',
-                'Litters.Sire.BirthLitters.Contributions', 'Litters.Dam.BirthLitters.Contributions',
-                'Rats' => function($q) {
-                    return $q
-                    ->order('Rats.modified DESC')
-                    ->limit(10);
-                },
-                'Rats.States',
-                'Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions',
-                'Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses',
-                'RatterySnapshots'],
+        $litter = $this->Litters->get($id, [
+            'contain' => ['Users', 'States', 'OffspringRats', 'OffspringRats.States',
+            'Sire.Ratteries', 'Sire.BirthLitters', 'Sire.BirthLitters.Contributions',
+            'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions',
+            'Sire', 'Sire.Markings', 'Sire.Dilutions', 'Sire.Colors', 'Sire.Coats', 'Sire.Earsets','Sire.DeathPrimaryCauses','Sire.DeathSecondaryCauses',
+            'Dam', 'Dam.Markings', 'Dam.Dilutions', 'Dam.Colors', 'Dam.Coats', 'Dam.Earsets','Dam.DeathPrimaryCauses','Dam.DeathSecondaryCauses',
+            'Ratteries','Contributions', 'Conversations', 'LitterSnapshots',
+            ],
         ]);
 
-        $stats = $rattery->wrapStatistics();
+        $offspringsQuery = $this->Litters->OffspringRats
+                                ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses','OwnerUsers']])
+                                ->matching('BirthLitters', function (\Cake\ORM\Query $query) use ($litter) {
+                                    return $query->where([
+                                        'BirthLitters.id' => $litter->id
+                                    ]);
+                                });
+        $offsprings = $this->paginate($offspringsQuery);
 
-        if (! $rattery->is_generic && $stats['deadRatCount'] > 0) {
-            $rats = $this->loadModel('Rats');
-            $champion = $rattery->findChampion(['rattery_id' => $rattery->id]);
-            if(! is_null($champion)) {
-                $champion = $rats->get($champion->id, ['contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions']]);
-            }
-        } else {
-            $champion = null;
-        }
+        $stats = $litter->wrapStatistics($offsprings);
 
-        // $offspringsQuery = $this->Ratteries->Rats
-        //                         ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses']])
-        //                         ->matching('Ratteries', function (\Cake\ORM\Query $query) use ($rattery) {
-        //                             return $query->where([
-        //                                 'Ratteries.id' => $rattery->id
-        //                             ]);
-        //                         });
-        // $offsprings = $this->paginate($offspringsQuery);
-
-        /* statebar */
         $this->loadModel('States');
-        if($rattery->state->is_frozen) {
-            $next_thawed_state = $this->States->get($rattery->state->next_thawed_state_id);
+        if($litter->state->is_frozen) {
+            $next_thawed_state = $this->States->get($litter->state->next_thawed_state_id);
             $this->set(compact('next_thawed_state'));
         }
         else {
-            $next_ko_state = $this->States->get($rattery->state->next_ko_state_id);
-            $next_ok_state = $this->States->get($rattery->state->next_ok_state_id);
-            if( !empty($rattery->state->next_frozen_state_id) ) {
-                $next_frozen_state = $this->States->get($rattery->state->next_frozen_state_id);
+            $next_ko_state = $this->States->get($litter->state->next_ko_state_id);
+            $next_ok_state = $this->States->get($litter->state->next_ok_state_id);
+            if( !empty($litter->state->next_frozen_state_id) ) {
+                $next_frozen_state = $this->States->get($litter->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }
             $this->set(compact('next_ko_state','next_ok_state'));
         };
 
-        $this->set(compact('rattery','champion', 'stats')); // 'offsprings'));
+        $this->set(compact('litter', 'offsprings', 'stats'));
     }
 
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
-        $rattery = $this->Ratteries->newEmptyEntity();
-        $this->Authorization->authorize($rattery, 'create');
-        if ($this->request->is('post')) {
-            $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
-            if ($this->Ratteries->save($rattery)) {
-                $this->Flash->success(__('The rattery has been saved.'));
+        // some of the stuff here should move to beforeMarshal?
+        $litter = $this->Litters->newEmptyEntity([
+            'associated' => ['ParentRats, Contributions']
+        ]);
 
-                return $this->redirect(['action' => 'index']);
+        if ($this->request->is('post')) {
+            // this is not an unauthenticated action, so, test $result emptiness is not necessary?
+            $result = $this->Authentication->getResult();
+
+            if ($result->isValid()) {
+
+                $data = $this->request->getData();
+                $data['creator_user_id'] = $this->Authentication->getIdentityData('id');
+
+                // check if mother was properly selected
+                if (empty($data['mother_id'])) {
+                    // autocomplete was not used
+                    // try to find the pedigree
+                    $this->loadModel('Rats');
+                    $mother = $this->Rats->findByPedigreeIdentifier($data['mother_name'])->toList();
+                    if ((! empty($mother)) && $mother['sex'] == 'F') {
+                        $mother_id = $mother['0']['id'];
+                    } else {
+                        $mother_id = 0;
+                        unset($data['mother_id']);
+                    }
+                } else {
+                    $mother_id = $data['mother_id'];
+                }
+
+                // check if some father data were tentatively entered
+                if (empty($data['father_id'])) {
+                    // autocomplete was not used
+                    // try to find the pedigree
+                    $this->loadModel('Rats');
+                    $father = $this->Rats->findByPedigreeIdentifier($data['father_name'])->toList();
+                    if ((! empty($mother)) && $father['sex'] == 'M') {
+                        $father_id = $father['0']['id'];
+                    } else {
+                        $father_id = 0;
+                        unset($data['father_id']);
+                    }
+                } else {
+                    $father_id = $data['father_id'];
+                }
+
+                if(empty($data['father_id'])) {
+                    $data['parent_rats'] = ['_ids' => [$mother_id]];
+                } else {
+                    $data['parent_rats'] = ['_ids' => [$mother_id, $father_id]];
+                }
+
+                // check if a litter with the same birthdate and mother exists
+                if (isset($data['mother_id']) && isset($data['birth_date'])) {
+                    $samelitter = $this->Litters->find('fromBirth', [
+                        'birth_date' => $data['birth_date'],
+                        'mother_id' => $mother_id,
+                    ])->first();
+
+                    if (! empty($samelitter)) {
+                        $this->Flash->error(__('This litter already exists. You can add rats to it directly.'));
+                        return $this->redirect(['action' => 'view', $samelitter['id']]);
+                    }
+                }
+
+                // add contributions
+                // first, check rattery (javascript callback)
+                if (empty($data['rattery_id'])) {
+                    // autocomplete was not used
+                    // try to find the prefix
+                    $this->loadModel('Ratteries');
+                    $rattery = $this->Ratteries->findByPrefix($data['rattery_name'])->toList();
+                    if (! empty($rattery)) {
+                        $rattery_id = $rattery['0']['id'];
+                    } else {
+                        $rattery_id = 0;
+                        unset($data['rattery_id']);
+                    }
+                } else {
+                    $rattery_id = $data['rattery_id'];
+                }
+
+                $data['contributions'] = [
+                    [
+                        'contribution_type_id' => '1',
+                        'rattery_id' => $rattery_id,
+                    ]
+                ];
+
+                // potential contribution is mother's owner's active rattery
+                // could use a separate function in the rat model, returning the active rattery of its owner
+                if($mother_id != 0) {
+                    $this->loadModel('Rats');
+                    $mother = $this->Rats->get($mother_id, [
+                        'contain' => ['OwnerUsers','OwnerUsers.Ratteries']
+                    ]);
+
+                    $mother_rattery_id = $data['rattery_id'];
+                    if (count($mother->owner_user->ratteries) == 1 && ! $mother->owner_user->ratteries['0']['is_generic']) {
+                        $mother_rattery_id = $mother->owner_user->ratteries['0']['id'];
+                        // activate rattery if needed
+                        // ... code ...
+                    } else {
+                        foreach($mother->owner_user->ratteries as $rattery) {
+                            if (! $rattery->is_generic && $rattery->is_alive) {
+                                $mother_rattery_id = $rattery['id'];
+                            } else {
+                                // mother's owner has several ratteries, but none is active: we don't know what to do
+                            }
+                        }
+                    }
+                    if ($data['rattery_id'] != $mother_rattery_id) {
+                        array_push($data['contributions'], [
+                            'contribution_type_id' => '2',
+                            'rattery_id' => $mother_rattery_id,
+                        ]);
+                    }
+                }
+
+                // potential contribution is father's owner's active rattery
+                // could use a separate function in the rat model, returning the active rattery of its owner
+                if ($father_id != 0) {
+                    $father = $this->Rats->get($father_id, [
+                        'contain' => ['OwnerUsers','OwnerUsers.Ratteries']
+                    ]);
+
+                    $father_rattery_id = $data['rattery_id'];
+                    if(count($father->owner_user->ratteries) == 1) {
+                        $father_rattery_id = $father->owner_user->ratteries['0']['id'];
+                        // activate rattery if needed
+                        // ... code ...
+                    } else {
+                        foreach($father->owner_user->ratteries as $rattery) {
+                            if($rattery->is_alive) {
+                                $father_rattery_id = $rattery['id'];
+                            } else {
+                                // mother's owner has several ratteries, but none is active: we don't know what to do
+                            }
+                        }
+                    }
+                    if( $data['rattery_id'] != $father_rattery_id ) {
+                        array_push($data['contributions'], [
+                            'contribution_type_id' => '3',
+                            'rattery_id' => $father_rattery_id,
+                        ]);
+                    }
+                }
+                // patch and try saving
+                $litter = $this->Litters->patchEntity($litter, $data, [
+                    'associated' => ['ParentRats', 'Contributions']
+                ]);
+
+                if ($this->Litters->save($litter)) {
+                    $this->Flash->success(__('The litter has been saved.'));
+
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The litter could not be saved. Please, read explanatory messages in the form, check and correct your entry, and try again.'));
+
+            } else {
+                $this->Flash->error(__('Only registered users are allowed to register a new litter. Please sign in or sign up before proceeding.')); // . $email->smtpError);
+                return $this->redirect(['action' => 'login']);
             }
-            $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
+        } else {
+            $this->Flash->default(__('Please record the litter’s main information below. You will be able to add rats to the litter just after.'));
         }
-        $users = $this->Ratteries->Users->find('list', ['limit' => 200]);
-        $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
-        $states = $this->Ratteries->States->find('list', ['limit' => 200]);
-        $litters = $this->Ratteries->Litters->find('list', ['limit' => 500, 'contain' => ['Dam', 'Sire']]);
-        $this->set(compact('rattery', 'users', 'countries', 'states', 'litters'));
+
+        $this->set(compact('litter'));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Rattery id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @param string|null $id Litter id.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $rattery = $this->Ratteries->get($id, [
-            'contain' => ['Litters', 'Litters.Sire', 'Litters.Dam'],
+        $litter = $this->Litters->get($id, [
+            'contain' => ['ParentRats', 'Ratteries', 'Contributions'],
         ]);
-        $this->Authorization->authorize($rattery);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
-            if ($this->Ratteries->save($rattery)) {
-                $this->Flash->success(__('The rattery has been saved.'));
+            $litter = $this->Litters->patchEntity($litter, $this->request->getData());
+            if ($this->Litters->save($litter)) {
+                $this->Flash->success(__('The litter has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
+            $this->Flash->error(__('The litter could not be saved. Please, try again.'));
         }
-        $users = $this->Ratteries->Users->find('list', ['limit' => 500]);
-        $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
-        $states = $this->Ratteries->States->find('list', ['limit' => 200]);
-        $litters = $this->Ratteries->Litters->find('list', ['limit' => 500, 'contain' => ['Dam', 'Sire']]);
-        $this->set(compact('rattery', 'users', 'countries', 'states', 'litters'));
+        $users = $this->Litters->Users->find('list', ['limit' => 200]);
+        $states = $this->Litters->States->find('list', ['limit' => 200]);
+        $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
+        $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
+        $contributions = $this->Litters->Contributions->find('list', ['limit' => 200]);
+        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries', 'contributions'));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Rattery id.
-     * @return \Cake\Http\Response|null Redirects to index.
+     * @param string|null $id Litter id.
+     * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $rattery = $this->Ratteries->get($id);
-        $this->Authorization->authorize($rattery);
-        if ($this->Ratteries->delete($rattery)) {
-            $this->Flash->success(__('The rattery has been deleted.'));
+        $litter = $this->Litters->get($id);
+        if ($this->Litters->delete($litter)) {
+            $this->Flash->success(__('The litter has been deleted.'));
         } else {
-            $this->Flash->error(__('The rattery could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The litter could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -203,250 +327,283 @@ class RatteriesController extends AppController
     /**
      * Restore method
      *
-     * Restores a Rattery from a previous snapshot.
+     * Restores a Litter from a previous snapshot.
      *
-     * @param string|null $id Rattery id.
-     * @param string|null $snapshot_id RatterySnapshot id.
+     * @param string|null $id Litter id.
+     * @param string|null $snapshot_id LitterSnapshot id.
      * @return \Cake\Http\Response|null Redirects to view.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function restore($id = null, $snapshot_id = null)
     {
-        $rattery = $this->Ratteries->get($id);
-        $this->Authorization->authorize($rattery);
-        if ($this->Ratteries->snapRestore($rattery, $snapshot_id)) {
+        $litter = $this->Litters->get($id);
+        $this->Authorization->authorize($litter);
+        if ($this->Litters->snapRestore($litter, $snapshot_id)) {
             $this->Flash->success(__('The snapshot has been restored.'));
         } else {
             $this->Flash->error(__('The snapshot could not be loaded. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'view', $rattery->id]);
-    }
-
-
-    /* create a rattery, reserved to logged in users (with any role) */
-    public function register($id = null)
-    {
-        $result = $this->Authentication->getResult();
-        if ($result->isValid()) {
-            $user = $this->Authentication->getIdentityData('id');
-            // check if user has an alive rattery
-            $query = $this->Ratteries->find()
-                ->where(['owner_user_id' => $user, 'is_alive' => true])
-                ->toList();
-            if( count($query) !=0 ) {
-                $this->Flash->error(__('You already have an active rattery. Declare your previous ratteries as inactive if you want to register a new one.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $rattery = $this->Ratteries->newEmptyEntity();
-                $this->Authorization->authorize($rattery, 'create');
-                if ($this->request->is('post')) {
-                    // fill non form-controlled info
-                    $rattery->owner_user_id = $this->Authentication->getIdentityData('id');
-                    $rattery->is_alive = false;
-                    $rattery->is_generic = false;
-                    $rattery->state_id = 3; // to be replaced by the is_default state
-                    // process and save picture (rough prototype)
-                    // should probably also be in a validator/rules instead
-                    $picture = $this->request->getData('picture_file');
-                    if($picture->getClientFilename() != '') { // there should be a better test than that when no file has been uploaded
-                        $type = $picture->getClientMediaType();
-                        if( $type != 'image/jpeg' ){ // other file types should be accepted (at least png)
-                            $this->Flash->error(__('Your picture cannot be processed. Please, try with another picture in jpeg format.'));
-                        } else {
-                            // process image with GD
-                            $name = $picture->getClientFilename();
-                            $size = $picture->getSize();
-                            $tmpName = $picture->getStream()->getMetadata('uri');
-                            $img = imagecreatefromjpeg($tmpName);
-                            $sizes = getimagesize($tmpName);
-                            // determine final size to respect aspect ratio and maximal dimensions
-                            $maxWidth = 600;
-                            $maxHeight = 400;
-                            $newWidth = (int)$sizes[0];
-                            $newHeight = (int)$sizes[1];
-                            $aspectRatio = $sizes[0]/$sizes[1];
-                            if($sizes[0]>$maxWidth) {
-                                $newWidth = $maxWidth;
-                                $newHeight = (int)round($newWidth/$aspectRatio);
-                            }
-                            if($sizes[1]>$maxHeight) {
-                                $newHeight = $maxHeight;
-                                $newWidth = (int)round($newHeight*$aspectRatio);
-                            }
-                            $new_img = imagecreatetruecolor($newWidth,$newHeight);
-                            $final = imagecopyresampled($new_img,$img,0,0,0,0,$newWidth,$newHeight,$sizes[0],$sizes[1]);
-                            $picture_name = 'Rattery_' . $this->request->getData('prefix') . '.jpg';
-                            $dest = UPLOADS . $picture_name;
-                            imagejpeg($new_img,$dest,90);
-                            $rattery->picture = $picture_name;
-                        }
-                    } else {
-                        $rattery->picture = 'Unknown.png';
-                    }
-                    // save rattery
-                    $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
-                    if ($this->Ratteries->save($rattery)) {
-                        $this->Flash->warning(__('The rattery has been saved. Please note it will be validated only once you have recorded a rat, a litter, or a litter contribution under this prefix.'));
-                        return $this->redirect(['action' => 'index']);
-                    } else {
-                        $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
-                    }
-                }
-                // $litters = $this->Ratteries->Litters->find('list', ['limit' => 200]);
-                $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
-                $this->set(compact('rattery', 'countries')); //'litters'));
-            }
-        } else {
-            $this->Flash->error(__('Only registered users are allowed to register a new rattery. Please sign in or sign up before proceeding.')); // . $email->smtpError);
-            return $this->redirect(['action' => 'login']);
-        }
-    }
-
-    /* see all active ratteries on a Googlemap + highlight one if $id is not null */
-    public function locate()
-    {
-        $ratteries = $this->Ratteries->find('located', ['contain' => ['Users']]);
-
-        $id = $this->request->getParam('pass');
-        if (! empty($id)) {
-            $rattery = $this->Ratteries->get($id, ['contain' => ['Users']]);
-            $this->set(compact('rattery'));
-        }
-
-        $map_options = [
-            'zoom' => 'auto',
-            'type' => 'R',
-            'geolocate' => true,
-            'div' => ['id' => 'ratterymap'],
-            'map' => [
-                'navOptions' => ['style' => 'SMALL'],
-                'typeOptions' => [
-                    'style' => 'HORIZONTAL_BAR',
-                    'pos' => 'LEFT_TOP'
-                ],
-                'defaultLat' => isset($rattery) ? $rattery->lat : null,
-                'defaultLng' => isset($rattery) ? $rattery->lng : null,
-            ]
-        ];
-
-        if (! empty($id)) {
-            $map_options['zoom'] = 7;
-            $map_options['geolocate'] = false;
-        }
-
-        $this->set(compact('ratteries', 'map_options'));
-    }
-
-    /* change country, zipcode and/or other location indications */
-    /* lat/lng will be updated through Geocoder behaviour if configured */
-    public function relocate($id = null)
-    {
-        $rattery = $this->Ratteries->get($id, [
-            'contain' => ['Countries'],
-        ]);
-        $this->Authorization->authorize($rattery);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
-            if ($this->Ratteries->save($rattery)) {
-                $this->Flash->success(__('The new location of your rattery has been recorded.'));
-                return $this->redirect(['action' => 'view', $rattery->id]);
-            }
-            $this->Flash->error(__('Your rattery’s new location could not be recorded. Please, try again.'));
-        } else {
-            $this->Flash->default(__('Please fill the information below to record your rattery new location. Country is mandatory.
-            If you do not live in France and wish to appear on the map, it is recommended that you add optional localization information.'));
-        }
-        $countries = $this->Ratteries->Countries->find('list');
-        $this->set(compact('countries', 'rattery'));
-    }
-
-    /** Search methods **/
-
-    /**
-    * Prefix method (search rattery by prefix)
-    **/
-
-    public function named()
-    {
-        // The 'pass' key is provided by CakePHP and contains all
-        // the passed URL path segments in the request.
-        $names = $this->request->getParam('pass');
-
-        // Use the RatteriesTable to find prefixed ratteries.
-        $ratteries = $this->Ratteries->find('named', [
-            'names' => $names
-        ]);
-
-        // Pass variables into the view template context.
-        $this->paginate = [
-            'contain' => ['Users', 'Countries', 'States'],
-        ];
-        $ratteries = $this->paginate($ratteries);
-
-        $this->set([
-            'ratteries' => $ratteries,
-            'names' => $names
-        ]);
-    }
-
-    /**
-     * ownedBy method
-     *
-     * Search ratteries by owners.
-     *
-     * @param
-     * @return
-     */
-    public function ownedBy()
-    {
-        // The 'pass' key is provided by CakePHP and contains all
-        // the passed URL path segments in the request.
-        $users = $this->request->getParam('pass');
-        //
-        // Use the RatsTable to find named rats.
-        $ratteries = $this->Ratteries->find('ownedBy', [
-            'users' => $users
-        ]);
-
-        // Pass variables into the view template context.
-        $this->paginate = [
-            'contain' => ['Users', 'States','Countries'],
-        ];
-        $ratteries = $this->paginate($ratteries);
-
-        $this->set(compact('ratteries', 'users'));
+        return $this->redirect(['action' => 'view', $litter->id]);
     }
 
     public function inState()
     {
         $inState = $this->request->getParam('pass');
-        $ratteries = $this->Ratteries->find('inState', [
+        $litters = $this->Litters->find('inState', [
             'inState' => $inState
         ]);
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['Users', 'States','Countries'],
+            'contain' => ['Users', 'Sire', 'Dam', 'Contributions', 'States'],
         ];
-        $ratteries = $this->paginate($ratteries);
-
-        // $this->set(compact('rats', 'birth_dates'));
+        $litters = $this->paginate($litters);
 
         $this->set([
-            'ratteries' => $ratteries,
+            'litters' => $litters,
             'inState' => $inState
         ]);
     }
 
-    public function autocomplete() {
-        if ($this->request->is(['ajax'])) {
-            $searchkey = $this->request->getQuery('searchkey');
-            $items = $this->Ratteries->find('named', ['names' => [$searchkey]] )
-                ->select(['id', 'value' => "concat(prefix,' – ',name)", 'label' => "concat(prefix,' – ',name)"])
-            ;
-            $this->set('items', $items);
-            $this->viewBuilder()->setOption('serialize', ['items']);
+    /**
+     * Genealogy method
+     *
+     * Recursive walk in the genealogy tree
+     * Returns a flat table with [$path => $litter_id] rows
+     *
+     */
+
+    public function genealogy($id, $path, &$genealogy)
+    {
+        $this->loadModel('Rats');
+        $parents = $this->Rats->find()
+            ->select(['id', 'litter_id', 'sex'])
+            ->matching('BredLitters', function ($query) use ($id) {
+                return $query->where(['BredLitters.id' => $id]);
+            })
+            ->enableHydration(false)
+            ->all();
+
+        // no test on parent existence, since a litter must have at least one parent
+        foreach ($parents as $parent) {
+            $new_path = $path . $parent['sex'];
+
+            if (! in_array($parent['id'], array_values($genealogy))) {
+                if (is_null($parent['litter_id'])) {
+                    $new_path = $new_path . 'X';
+                    $genealogy[$new_path] = $parent['id'];
+                } else {
+                    // since we have never been there, we continue exploring upwards
+                    $this->genealogy($parent['litter_id'], $new_path, $genealogy);
+                    $genealogy[$new_path] = $parent['id'];
+                }
+            } else {
+                if (is_null($parent['litter_id'])) {
+                    $new_path = $new_path . 'X';
+                } else {
+                    // find other paths to the same id to copy already parsed ascendants
+                    $copies = array_filter($genealogy, function ($id) use ($parent) {return $id == $parent['id'];});
+                    $genealogy[$new_path] = $parent['id'];
+                    foreach ($copies as $copy_path => $copy_id) {
+                        $ancestors = array_filter(
+                            $genealogy,
+                            function ($ancestor) use ($copy_path) {
+                                return str_starts_with($ancestor, $copy_path . 'F') || str_starts_with($ancestor, $copy_path . 'M');
+                            },
+                            ARRAY_FILTER_USE_KEY
+                        );
+                        if (! empty($ancestors)) {
+                            // replace prefixes and write in genealogy
+                            foreach($ancestors as $ancestor_path => $ancestor_id) {
+                                // if (strlen($copy_path) <= 16) {
+                                    $new_ancestor_path = substr_replace($ancestor_path, $new_path, 0, strlen($copy_path));
+                                    $genealogy[$new_ancestor_path] = $ancestor_id;
+                                // }
+                            }
+                        }
+                    }
+                }
+                $genealogy[$new_path] = $parent['id'];
+            }
         }
+        return null;
+    }
+
+    /**
+     * Coefficients methods
+     *
+     * Returns inbreeding coefficients (AVK, COI) and associated coancestry
+     * Returns only COI if $flag = false
+     * Should probably be in the model
+     *
+     */
+    public function coefficients($genealogy = null, &$sub_coefs = [], $flag = true) {
+        if($genealogy == null) {
+            $coefficients = [
+                'coi' => 'Unknown',
+                'avk' => 'Unknown'
+            ];
+        }
+
+        // compute supplementary stuff only if needed, on full genealogy
+        if ($flag) {
+            // will be needed later for common ancestors name
+            $this->loadModel('Rats');
+
+            $coefficients['ancestor_number'] = count($genealogy);
+            $coefficients['distinct_number'] = count(array_unique($genealogy));
+
+            $leaves = array_filter($genealogy, function($key) {
+                return (substr($key, -1) == 'X');
+            }, ARRAY_FILTER_USE_KEY);
+
+            $coefficients['founder_number'] = count(array_unique($leaves));
+
+            $depths = array_map('strlen', array_keys($leaves));
+            $min_depth = min($depths);
+            $coefficients['min_depth'] = $min_depth-1;
+            $coefficients['max_depth'] = max($depths)-1;
+
+            // for avk computation, we need to truncate tree at minDepth
+            $avk_genealogy = array_filter($genealogy, function($key) use ($min_depth) {
+                $key = trim($key,'X');
+                return (strlen($key) <= $min_depth);
+            }, ARRAY_FILTER_USE_KEY);
+
+            $coefficients['avk'] = round(100 * count(array_unique($avk_genealogy)) / count($avk_genealogy),2);
+        }
+
+        // now, truncate for security
+        // $short_gen = array();
+        // foreach ($genealogy as $key => $value) {
+        //     if (strlen($key) <= 9) {
+        //         // fixme: different processing if last character is 'X' or not!
+        //         $short_gen[substr($key,0,9)] = $value;
+        //     }
+        // }
+        // $genealogy = $short_gen;
+
+        // find duplicates
+        $counts = array_count_values($genealogy);
+        $duplicates = array_filter($genealogy, function ($value) use ($counts) {
+            return $counts[$value] > 1;
+        });
+        $unique_duplicates = array_unique($duplicates);
+        asort($unique_duplicates);
+        $coi = 0;
+        $coancestry = [];
+
+        // sort out by decreasing path length to compute coancestors inbreeding easily?
+        foreach($unique_duplicates as $sub_path => $duplicate) {
+
+            // extract all lines from $duplicates which share the same value (duplicate id)
+            $contribution = 0;
+
+            $paths = array_filter($duplicates, function($value) use ($duplicate) {
+                return ($value == $duplicate);
+            });
+
+            $paths = array_keys($paths);
+
+            $f_paths = array_filter($paths, function ($input) {return $input[0] == 'F';});
+            $m_paths = array_filter($paths, function ($input) {return $input[0] == 'M';});
+
+            // loop on pairs of path {(mother to ancestor),(father to ancestor)}
+            foreach($f_paths as $f_path) {
+                // trim f_path
+                $f_path = trim($f_path,'X');
+                // fetch rats on the way
+                $f_path_length = strlen($f_path);
+                $f_labels = array();
+                for ($i = 1; $i <= $f_path_length-1 ; $i++) {
+                    array_push($f_labels, $genealogy[substr($f_path, 0, $i)]);
+                }
+
+                // now check if some rats in f_path are in some m_paths to prune the latter
+                // $overlap = false;
+                // It is not because ONE m_path overlap that all do!
+
+                foreach($m_paths as $m_path) {
+                    $overlap = false;
+                    $m_path = trim($m_path, 'X');
+                    $m_path_length = strlen($m_path);
+                    // if overlapping paths, prune it
+                    for ($j = 1; $j <= $m_path_length-1; $j++) {
+                        $m_label = $genealogy[substr($m_path, 0, $j)];
+                        if (in_array($m_label, $f_labels)) {
+                            $overlap = true;
+                            break;
+                        }
+                    }
+
+                    if (! $overlap) {
+                        // get subgenealogy of coancestor and compute its own inbreeding coefficient if still unknown
+                        if (! in_array($duplicate, $sub_coefs)) {
+                            //if(strlen($m_path) <= 13 && strlen($f_path) <= 13) {
+                                $sub_genealogy = array();
+                                $sub_path = trim($sub_path, 'X');
+                                foreach ($genealogy as $key => $val) {
+                                    if (substr($key, 0, strlen($sub_path)) === $sub_path) {
+                                        $sub_genealogy[substr($key, strlen($sub_path))] = $genealogy[$key];
+                                    };
+                                }
+                                $sub_coef = $this->coefficients($sub_genealogy, $sub_coefs, false);
+                                $sub_coefs[$duplicate] = $sub_coef['coi'];
+                            //} else { // approximate common ancestor own inbreeding rate if it is far enough
+                            //    $sub_coefs[$duplicate] = 0;
+                            //}
+                        }
+                        $contribution += 1/pow(2, $f_path_length + $m_path_length - 1) * (1 + $sub_coefs[$duplicate]/100);
+                    }
+                }
+            }
+
+
+            if ($contribution > 0) {
+                $coi += $contribution;
+
+                // if($contribution >= 0.00001) {
+                    $coancestry[$duplicate] = ['coi' => 100*$contribution]; // ['coi' => round(100 * $contribution,2)];
+
+                    if ($flag) {
+                        $name = $this->Rats->get($duplicate, [
+                            'contain' => [
+                                'Ratteries','BirthLitters','BirthLitters.Contributions',
+                            ]
+                        ])->usual_name;
+                        $coancestry[$duplicate]['name'] = $name;
+                //    }
+                }
+            }
+        }
+
+        $coefficients['coi'] = 100*$coi; // round(100 * $coi,2);
+
+        // additional coefs we could not compute in the beginning
+        if ($flag) {
+            arsort($coancestry);
+            $coefficients['coancestry'] = $coancestry;
+            $coefficients['common_number'] = count($coancestry);
+        }
+
+        return $coefficients;
+    }
+
+    public function inbreeding($id = null)
+    {
+        $litter = $this->Litters->get($id, [
+            'contain' => [
+                'States',
+                'Sire.Ratteries', 'Sire.BirthLitters', 'Sire.BirthLitters.Contributions',
+                'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions'
+            ],
+        ]);
+        $genealogy = [];
+        $sub_coefs = [];
+        $this->genealogy($id, '', $genealogy);
+        $coefficients = $this->coefficients($genealogy, $sub_coefs);
+
+        $this->set(compact('litter','genealogy','coefficients'));
     }
 }
