@@ -157,7 +157,12 @@
                 </tr>
                 <tr>
                     <th><?= __('Inbreeding') ?></th>
-                    <td><?= $this->Html->link('See inbreeding report', ['controller' => 'Litters', 'action' => 'inbreeding', $litter->id]) ?> (beta version)</td>
+                    <td><?= $this->Html->link('See approximate inbreeding report', ['controller' => 'Litters', 'action' => 'inbreeding-server', $litter->id]) ?> (server side, beta version)</td>
+                </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><?= $this->Html->link('See exact inbreeding report', ['controller' => 'Litters', 'action' => 'inbreeding-client', $litter->id]) ?> (client side, beta version)</td>
                 </td>
                 </tr>
             </table>
