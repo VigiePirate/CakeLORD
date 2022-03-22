@@ -30,14 +30,16 @@
             <h1><?= h($litter->full_name) ?></h1>
 
             <div id="waiting-message" class="message warning">
-                Computations are in progress. Please be aware that intermediary results might be incorrect. Thank you for your patience.
+                <?= $this->Html->image('/img/icon-warning-spinner.gif', ['class' => 'action-icon'])
+                . ' ' . __('Computations are in progress. Intermediary results might be inexact. Thank you for your patience.')
+                . ' ' . $this->Html->image('/img/icon-warning-spinner.gif', ['class' => 'action-icon']) ?>
             </div>
 
             <div id="success-message" class="message success hide-everywhere">
                 Computations took <span id="cost"></span> seconds and are now finished. <span id="cost-comment"></span>
             </div>
 
-            <h2>Summary</h2>
+            <h2><?= __('Summary') ?></h2>
 
             <table class="condensed stats">
                 <tr>
@@ -103,6 +105,28 @@
                     </td>
                 </tr>
             </table>
+
+            <!-- to be shown if coi > 0 -->
+            <div id="coancestry" class="hide-everywhere">
+                <h2>Coancestry analysis</h2>
+                <table id="coancestry-table" class="condensed stats histogram">
+                    <th>
+                        <div id="coancestry-global" style="opacity:1; width:100%">
+                        </div>
+                    </th>
+                    <td>
+                        <strong> = <?= __('Global inbreeding coefficient') ?></strong>
+                    </td>
+                </table>
+            </div>
+
+            <div class="signature">
+                &mdash; <?= __('Feeling stuck, javascript allergic? Give a look at our ')
+                    .  $this->Html->link(__('server-side, full-PHP approximate analysis') . '.',
+                    ['controller' => 'Litters', 'action' => 'inbreeding-approx', $litter->id],
+                    ['class' => 'discrete-link'])
+                ?>
+            </div>
         </div>
     </div>
 </div>
@@ -113,5 +137,5 @@
 <script>
     var partialTree = <?php echo $genealogy_json; ?>;
     var ancestorIndex = <?php echo $index_json; ?>;
-    window.onload = setTimeout(init(partialTree, ancestorIndex), 250); // a small timeout to let debugkit loading itself...
+    window.onload = setTimeout(init(partialTree, ancestorIndex), 250); // a small timeout to let debugkit loading
 </script>

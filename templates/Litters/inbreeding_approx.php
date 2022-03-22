@@ -98,11 +98,11 @@
 
                     <?php foreach($coefficients['coancestry'] as $ancestor => $contrib) : ?>
                         <tr>
-                            <th>
-                                <div style="opacity:<?= h(0.25+0.75*$contrib['coi']/$coefficients['coi']) ?>; width:<?= h(round(100*log(1+$contrib['coi']/$coefficients['coi'],2))) ?>%;">
+                            <td class="th">
+                                <div style="opacity:<?= h(0.25+0.75*log(1+$contrib['coi']/$coefficients['coi'],2)) ?>; width:<?= h(round(15+100*log(1+$contrib['coi']/$coefficients['coi'],2))) ?>%;">
                                     <?= round($contrib['coi'],2) != 0 ? h(round($contrib['coi'],2)) : '< 0.01' ?> %
                                 </div>
-                            </th>
+                            </td>
                             <td>
                                  + <?= $this->Html->link(
                                      $contrib['name'],
@@ -115,3 +115,5 @@
         </div>
     </div>
 </div>
+
+<?= $this->Html->css('loading'); ?>

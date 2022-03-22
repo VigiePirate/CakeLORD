@@ -20,3 +20,29 @@
     font-weight: 900;
   }
 }
+
+table.condensed.stats.histogram>tbody>tr>td.th>div{
+  padding-right:0.5rem;
+  float:right;
+  min-width:8ch; /*3em for health, 8ch for coi? */
+  max-width: 100%;
+  background:#3d5299;
+  transition: width 2s;
+}
+
+table.condensed.stats.histogram>tbody>tr>td.th{
+  width:40%;
+  color:#ffffff;
+  text-align:right;
+  font-size:smaller;
+  font-weight:normal;
+  padding:0.25em 0em 0.25em 0.5em;
+  vertical-align:middle;
+}
+
+.discrete-link {
+  font-family:"Alegreya",serif;
+  font-size: revert;
+  font-style:italic;
+  margin-bottom: 1.5rem;
+}

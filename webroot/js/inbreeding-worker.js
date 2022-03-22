@@ -1,41 +1,61 @@
-function computeInbreeding(tree, index, coefs)
+// function computeInbreeding(tree, index, coefs)
+function computeInbreeding(tree, coefs, ancestorIndex, verbose)
 {
+  // init output
+  let output = {coi: 0};
+  if (verbose) {
+    output.contributions = {};
+  }
+  let contributions = {};
+
   // find candidate coancestors (duplicates in tree)
   // count occurrences of each (returns an object {id1: count1, id2: count2})
-  var candidates = Object.values(tree).reduce(function(acc,e){acc[e] = (e in acc ? acc[e]+1 : 1); return acc}, {});
-  // filter out ids appearing only once and cast keys to integers
-  candidates = Object.keys(candidates).filter(function(c) {return candidates[c] > 1}).map(c => parseInt(c));
+  var counts = Object.values(tree).reduce(function(acc,e){acc[e] = (e in acc ? acc[e]+1 : 1); return acc}, {});
+  // filter out ids appearing only once and unknown parents (id 1 and 2), and cast keys to integers
+  var candidates = Object.keys(counts).filter(function(c) {
+      return (parseInt(c) > 2 && counts[c] > 1); }
+    ).map(c => parseInt(c));
 
   // loop on candidates
   for (let candidate of candidates) {
-    // find all paths to candidate in tree, separating maternal and paternal
-    fpaths = Object.keys(tree).filter(function(c) {return tree[c] === candidate && c.slice(0,1) === 'F'});
-    mpaths = Object.keys(tree).filter(function(c) {return tree[c] === candidate && c.slice(0,1) === 'M'});
 
-    if (fpaths.length != 0 && mpaths.length != 0) {
+    // console.log('I am dealing with candidate : ' + candidate);
+
+    // find all paths to candidate in tree, separating maternal and paternal
+    let fpaths = Object.keys(tree).filter(function(c) {return tree[c] === candidate && c.slice(0,1) === 'F'});
+    let mpaths = Object.keys(tree).filter(function(c) {return tree[c] === candidate && c.slice(0,1) === 'M'});
+
+    // console.log('Here are its mother paths : ' + fpaths);
+    // console.log('Here are its father paths : ' + mpaths);
+
+    contributions[candidate] = 0;
+
+    if (fpaths.length > 0 && mpaths.length > 0) {
       // remove leaf markers (it would bias path length)
       fpaths = fpaths.map(p => p.slice(-1) === 'X' ? p.slice(0,-1) : p);
       mpaths = mpaths.map(p => p.slice(-1) === 'X' ? p.slice(0,-1) : p);
-      refpath = index[candidate];
-      refpathLength = refpath.length;
+
+      // let refpath = index[candidate];
+      let refpath = findPathToId(tree, candidate);
+      let refpathLength = refpath.length;
 
       // loop on maternal paths
       for (let fp of fpaths) {
 
         // take path from mother to candidate
         fpLabels = [];
-        fpLength = fp.length;
+        let fpLength = fp.length;
         for (let i=1; i <= fpLength - 1; i++) {
           fpLabels.push(tree[fp.slice(0, i)]);
         }
 
         // loop on paternal paths
         for (let mp of mpaths) {
-          mpLength = mp.length;
+          let mpLength = mp.length;
           // check if paths are not overlapping
           let overlap = false;
           for (let j=1; j <= mpLength - 1; j++) {
-            if (fpLabels.includes(tree[mp.slice(0,j)])) {
+            if (fpLabels.includes(tree[mp.slice(0, j)])) {
               overlap = true;
               break;
             }
@@ -43,34 +63,54 @@ function computeInbreeding(tree, index, coefs)
           // paths do not overlap : a contribution has to be added
           if (! overlap) {
             // check if the candidate already has a COI, compute it if not
-            // let contrib = coefs[candidate];
-            let contrib = 0; // debug, neglect coancestor COI
             if (coefs[candidate] == undefined) {
-              // get candidate subtree and subindex
-              subTree = {};
-              subIndex = {};
+              // get candidate subtree (and subindex?)
+              let subTree = {};
+              // subIndex = {};
               for (let key in tree) {
-                if (key.slice(0,refpathLength) === refpath) {
+                if (key.slice(0, refpathLength) === refpath) {
                   subTree[key.slice(refpathLength)] = tree[key];
-                  subIndex[tree[key]] = key.slice(refpathLength);
                 }
               }
-              contrib = computeInbreeding(subTree, subIndex, coefs);
-            } else {
-              contrib = coefs[candidate];
+              coefs[candidate] = computeInbreeding(subTree, coefs, ancestorIndex, false).coi;
             }
-            // add contribution of the ancestor
-            coefs[candidate] += 1/2**((fpLength + mpLength - 1)*(1 + contrib));
 
-            // send message to update ancestor's contribution
+            // calculate the contribution of the ancestor through this pair of paths
+            contributions[candidate] += 1/2**(fpLength + mpLength - 1)*(1 + coefs[candidate]);
           }
         }
       }
-      // send message to update common ancestors number and main COI
+    }
+    // send message to update common ancestors number
+    if (contributions[candidate] > 0) {
+      output.coi += contributions[candidate];
+      if (verbose) {
+        output.contributions[candidate] = contributions[candidate];
+        postMessage({common: Object.keys(output.contributions).length});
+        // update all values since coi has changed and is used for display normalization
+        for (let coancestor of candidates) {
+          if (contributions[coancestor] > 0) {
+            postMessage({
+              coi: output.coi,
+              coancestor: {
+                id: coancestor,
+                name: ancestorIndex[coancestor]['name'],
+                contribution: contributions[coancestor]
+              }
+            });
+          }
+        }
+      }
     }
   }
+  // output.coi = Object.values(contributions).reduce((a, b) => a + b, 0);
+  // send message to update common ancestors number and main COI
+  return output;
+}
 
-  return Object.values(coefs).reduce((a, b) => a + b, 0);
+function findPathToId(tree, id) {
+  let path = Object.keys(tree).find(key => tree[key] === id);
+  return path.slice(-1) === 'X' ? path.slice(0,-1) : path;
 }
 
 function expandTreeStep(tree, index)
@@ -81,7 +121,7 @@ function expandTreeStep(tree, index)
     let id = tree[path];
     if (path.slice(-1) == 'Y') { // this guy has copies and needs to be expanded
       newTree[path.slice(0,-1)] = id; // write the guy
-      let original_path = index[id]; // find the original it is the copy of
+      let original_path = index[id]['path']; // find the original it is the copy of
       if (original_path.slice(-1) == 'X') { // if the original is a leaf
         newTree[path.slice(0,-1) + 'X'] = id; // write the guy with an X instead of its Y
       } else {
@@ -117,9 +157,7 @@ function truncateTree(tree, level) {
 function computeAvk(tree, level) {
   var approxTree = truncateTree(tree,level);
   var approxKnown = Object.keys(approxTree).length;
-  // var approxUnknown = (2**(level+1) - 2) - approxKnown;
   var approxDistinct = [...new Set(Object.values(approxTree))].length;
-  // return Math.round(100*(approxDistinct + approxUnknown)/(approxKnown + approxUnknown));
   return Math.round(100*approxDistinct/approxKnown);
 }
 
@@ -226,13 +264,13 @@ onmessage = function(evt) {
 
     if (done_avk5 == false && min_depth >= 5) {
       avk5 = computeAvk(fullTree, 5);
-      postMessage({avk5: avk5});
+      postMessage({avk5: avk5, approx: false});
       done_avk5 = true;
     }
 
     if (done_avk10 == false && min_depth >= 10) {
       avk10 = computeAvk(fullTree, 10);
-      postMessage({avk10: avk10});
+      postMessage({avk10: avk10, approx: false});
       done_avk10 = true;
     }
 
@@ -248,22 +286,23 @@ onmessage = function(evt) {
   // if avks are still uncomputed, it is time to approximate them from uncomplete tree
   if (done_avk5 == false) {
     avk5 = computeAvk(fullTree, 5);
-    postMessage({avk5: avk5});
+    postMessage({avk5: avk5, approx: true});
     done_avk5 = true;
   }
 
   if (done_avk10 == false) {
     avk10 = computeAvk(fullTree, 10);
-    postMessage({avk10: avk10});
+    postMessage({avk10: avk10, approx: true});
     done_avk10 = true;
   }
 
   // start coi computations -- messages will be sent from there
   let coefs = {}; // init coefs object that will be filled with coancestors coi's
-  coi = computeInbreeding(fullTree, ancestorIndex, coefs);
-  postMessage({coi: coi});
+  // output = computeInbreeding(fullTree, ancestorIndex, coefs);
+  output = computeInbreeding(fullTree, coefs, ancestorIndex, true);
+  postMessage({coi: output.coi});
 
   endTime = performance.now();
   cost = Math.trunc(endTime - startTime);
-  setTimeout(postMessage({cost: cost}), 1000);
+  setTimeout(postMessage({cost: cost}), 500);
 }

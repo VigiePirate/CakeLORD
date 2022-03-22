@@ -415,7 +415,7 @@ class LittersController extends AppController
                         if (! empty($ancestors)) {
                             // FIXME : some better criteria to decide to copy or not?
                             // copy only ancestors which might bring significant inbreeding, but copy more if low copy root
-                            $limit = 32 - 2*strlen($copy_path);
+                            $limit = 30 - 2*strlen($copy_path);
                             foreach($ancestors as $ancestor_path => $ancestor_id) {
                                 if (strlen($ancestor_path) < $limit) {
                                     // replace prefixes and write in genealogy
@@ -445,6 +445,7 @@ class LittersController extends AppController
     public function spanningTree($id, $path = '', &$genealogy = null, &$index = null)
     {
         $this->loadModel('Rats');
+        $this->loadModel('Litters');
         $parents = $this->Rats->find()
             ->select(['id', 'litter_id', 'sex'])
             ->matching('BredLitters', function ($query) use ($id) {
@@ -464,8 +465,13 @@ class LittersController extends AppController
                     $new_path = $new_path . 'Y';
                 }
                 $genealogy[$new_path] = $parent['id'];
+                if (! array_key_exists('name', $index[$parent['id']])) { // write name if not known
+                    // fetch full name - could we get it with raw SQL query to save server time?
+                    $rat = $this->Rats->get($parent['id'], ['contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Contributions']]);
+                    $index[$parent['id']]['name'] = $rat->usual_name;
+                }
             } else {
-                $index[$parent['id']] = $new_path;
+                $index[$parent['id']] = ['path' => $new_path];
                 if (is_null($parent['litter_id'])) {
                     $new_path = $new_path . 'X';
                     $genealogy[$new_path] = $parent['id'];
@@ -487,7 +493,7 @@ class LittersController extends AppController
      * Should probably be in the model
      *
      */
-     public function coefficients($genealogy = null, &$sub_coefs = [], $limit = 18, $approx = false, $flag = true)
+     public function coefficients($genealogy = null, &$sub_coefs = [], $limit = 17, $approx = false, $flag = true)
      {
          if($genealogy == null) {
              $coefficients = [
@@ -564,14 +570,12 @@ class LittersController extends AppController
                                                      $sub_genealogy[substr($key, $sub_path_length)] = $genealogy[$key];
                                                  };
                                              }
-                                             $new_limit = $limit - 2;
+                                             $new_limit = $limit; // could be used to modulate the limit as the tree grows
                                              $sub_coef = $this->coefficients($sub_genealogy, $sub_coefs, $new_limit, false, false);
                                              $sub_coefs[$duplicate] = $sub_coef['coi'];
                                              $contribution += 1/pow(2, $f_path_length + $m_path_length - 1) * (1 + $sub_coefs[$duplicate]/100);
                                          } else { // approximate common ancestor own inbreeding rate if it is far enough
-                                             // $sub_coefs[$duplicate] = 25; // negligible if not high
                                              $sub_coefs[$duplicate] = 1.1257574; // LORD average COI of all rats
-                                             // $sub_coefs[$duplicate] = 8.3460252; // LORD average COI of inbred rats
                                              $contribution += 1/pow(2, $f_path_length + $m_path_length - 1) * (1 + $sub_coefs[$duplicate]/100);
                                              $approx = true;
                                          }
@@ -639,13 +643,14 @@ class LittersController extends AppController
         }, ARRAY_FILTER_USE_KEY);
 
         $known = count($avk_genealogy);
-        $unknown = (2**($level+1)-2)-$known;
+        // $unknown = (2**($level+1)-2)-$known;
         $unique = count(array_unique($avk_genealogy));
-        $avk = 100*round(($unique + $unknown)/($known + $unknown), 2);
+        // $avk = 100*round(($unique + $unknown)/($known + $unknown), 2);
+        $avk = 100*round($unique/$known, 2);
         return $avk;
     }
 
-    public function inbreedingServer($id = null)
+    public function inbreedingApprox($id = null)
     {
         $litter = $this->Litters->get($id, [
             'contain' => [
@@ -655,7 +660,7 @@ class LittersController extends AppController
             ],
         ]);
 
-        $limit = 19;
+        $limit = 17;
         $genealogy = [];
         $sub_coefs = [];
         $approx = $this->genealogy($id, '', $genealogy, false);
@@ -670,12 +675,9 @@ class LittersController extends AppController
         $json = json_encode($genealogy);
 
         $this->set(compact('litter', 'genealogy', 'coefficients', 'json'));
-
-        // $this->spanningTree($id, '', $genealogy, false);
-        // $this->set(compact('litter', 'genealogy'));
     }
 
-    public function inbreedingClient($id)
+    public function inbreeding($id)
     {
         $litter = $this->Litters->get($id, [
             'contain' => [
@@ -688,15 +690,9 @@ class LittersController extends AppController
         $genealogy = [];
         $index = [];
         $this->spanningTree($id, '', $genealogy, $index);
-        // sort genealogy by path length (easier in php than javascript)
-        // $keys = array_map('strlen', array_keys($genealogy));
-        // array_multisort($keys, SORT_DESC, $genealogy);
         $genealogy_json = json_encode($genealogy);
         $index_json = json_encode($index);
 
-        $this->set(compact('litter', 'genealogy_json', 'index_json',
-            // 'genealogy', 'index' // for debug, to be deleted later
-        ));
-        // $this->viewBuilder()->setOption('serialize', ['genealogy']);
+        $this->set(compact('litter', 'genealogy_json', 'index_json'));
     }
 }
