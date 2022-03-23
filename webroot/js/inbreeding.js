@@ -79,7 +79,11 @@ worker.onmessage = function(evt) {
   if (evt.data.coi != undefined) {
     ranks[0] = evt.data.coi;
     document.getElementById('coi').innerHTML = '<span class="pulse">COI = ' + (100*evt.data.coi).toPrecision(4) + ' %';
-    document.getElementById('coancestry').style.display = 'revert';
+    if (evt.data.coi > 0) {
+      document.getElementById('coancestry').style.display = 'revert';
+    } else {
+      document.getElementById('common').innerHTML = '<span class="pulse"> None </span>';
+    }
   }
 
   if (evt.data.coancestor != undefined) {
