@@ -1,7 +1,5 @@
-// function computeInbreeding(tree, index, coefs)
 function computeInbreeding(tree, coefs, ancestorIndex, verbose)
 {
-  // init output
   let output = {coi: 0};
   if (verbose) {
     output.contributions = {};
@@ -19,23 +17,17 @@ function computeInbreeding(tree, coefs, ancestorIndex, verbose)
   // loop on candidates
   for (let candidate of candidates) {
 
-    // console.log('I am dealing with candidate : ' + candidate);
+    contributions[candidate] = 0;
 
     // find all paths to candidate in tree, separating maternal and paternal
     let fpaths = Object.keys(tree).filter(function(c) {return tree[c] === candidate && c.slice(0,1) === 'F'});
     let mpaths = Object.keys(tree).filter(function(c) {return tree[c] === candidate && c.slice(0,1) === 'M'});
-
-    // console.log('Here are its mother paths : ' + fpaths);
-    // console.log('Here are its father paths : ' + mpaths);
-
-    contributions[candidate] = 0;
 
     if (fpaths.length > 0 && mpaths.length > 0) {
       // remove leaf markers (it would bias path length)
       fpaths = fpaths.map(p => p.slice(-1) === 'X' ? p.slice(0,-1) : p);
       mpaths = mpaths.map(p => p.slice(-1) === 'X' ? p.slice(0,-1) : p);
 
-      // let refpath = index[candidate];
       let refpath = findPathToId(tree, candidate);
       let refpathLength = refpath.length;
 
@@ -81,7 +73,7 @@ function computeInbreeding(tree, coefs, ancestorIndex, verbose)
         }
       }
     }
-    // send message to update common ancestors number
+    // send messages
     if (contributions[candidate] > 0) {
       output.coi += contributions[candidate];
       if (verbose) {
@@ -103,8 +95,6 @@ function computeInbreeding(tree, coefs, ancestorIndex, verbose)
       }
     }
   }
-  // output.coi = Object.values(contributions).reduce((a, b) => a + b, 0);
-  // send message to update common ancestors number and main COI
   return output;
 }
 

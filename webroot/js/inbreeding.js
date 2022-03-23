@@ -77,7 +77,7 @@ worker.onmessage = function(evt) {
   }
 
   if (evt.data.coi != undefined) {
-    ranks[0] = coi;
+    ranks[0] = evt.data.coi;
     document.getElementById('coi').innerHTML = '<span class="pulse">COI = ' + (100*evt.data.coi).toPrecision(4) + ' %';
     document.getElementById('coancestry').style.display = 'revert';
   }
@@ -91,7 +91,7 @@ worker.onmessage = function(evt) {
     var row = document.getElementById("id-" + id);
     var contrast;
 
-    ranks[0] = coi;
+    ranks[0] = evt.data.coi;
 
     if (row === null) { // first time we see this guy: add row
       var position = insertPosition(ranks, evt.data.coancestor.contribution);
@@ -114,7 +114,6 @@ worker.onmessage = function(evt) {
       rectangle.style.width = (15+100*contrast) + '%';
       rectangle.style.opacity = 0.25+0.75*contrast;
       rectangle.innerHTML = ((100*evt.data.coancestor.contribution).toFixed(3) >= 0.01 ? (100*evt.data.coancestor.contribution).toFixed(2) : '< 0.01') + ' %';
-      // sort again
     }
   }
 
