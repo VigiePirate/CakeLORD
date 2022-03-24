@@ -487,9 +487,9 @@ class RatsTable extends Table
             // Find rats with parts of the string in that name
             $query->where([
                 'OR' => [
-                    'Rats.name LIKE' => implode($options['names']).'%',
+                    'Rats.name LIKE' => '%'.implode($options['names']).'%',
                     'Rats.pup_name LIKE' => '%'.implode($options['names']).'%',
-                    'Rats.pedigree_identifier LIKE' => '%'.implode($options['names']).'%',
+                    'Rats.pedigree_identifier' => implode($options['names']),
                 ],
             ]);
         }

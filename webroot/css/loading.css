@@ -1,0 +1,48 @@
+.pulse {
+  animation: bump 0.5s 0s 2 ease-in;
+}
+
+@keyframes bump {
+  0%,
+  100% {
+    color: #606c76;
+    font-weight: 500;
+  }
+
+  25%,
+  75% {
+    color: #606ebf;
+    font-weight: 700;
+  }
+
+  50% {
+    color: #606ebf; /* #663300; */
+    font-weight: 900;
+  }
+}
+
+table.condensed.stats.histogram>tbody>tr>td.th>div{
+  padding-right:0.5rem;
+  float:right;
+  min-width:8ch; /*3em for health, 8ch for coi? */
+  max-width: 100%;
+  background:#3d5299;
+  transition: width 2s;
+}
+
+table.condensed.stats.histogram>tbody>tr>td.th{
+  width:40%;
+  color:#ffffff;
+  text-align:right;
+  font-size:smaller;
+  font-weight:normal;
+  padding:0.25em 0em 0.25em 0.5em;
+  vertical-align:middle;
+}
+
+.discrete-link {
+  font-family:"Alegreya",serif;
+  font-size: revert;
+  font-style:italic;
+  margin-bottom: 1.5rem;
+}

@@ -29,79 +29,113 @@
 
             <h1><?= h($litter->full_name) ?></h1>
 
-            <h2>Summary</h2>
+            <div id="waiting-message" class="message warning">
+                <?= $this->Html->image('/img/icon-warning-spinner.gif', ['class' => 'action-icon'])
+                . ' ' . __('Computations are in progress. Intermediary results might be inexact. Thank you for your patience.')
+                . ' ' . $this->Html->image('/img/icon-warning-spinner.gif', ['class' => 'action-icon']) ?>
+            </div>
+
+            <div id="success-message" class="message success hide-everywhere">
+                Computations took <span id="cost"></span> seconds and are now finished. <span id="cost-comment"></span>
+            </div>
+
+            <h2><?= __('Summary') ?></h2>
 
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Longest family tree branch') ?></th>
-                    <td><?= h($coefficients['max_depth'])?>  <?= $coefficients['max_depth'] > 1 ? __('generations') : __('generation') ?></td>
+                    <td id="max_depth">
+                        <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
+                    </td>
                 </tr>
 
                 <tr>
                     <th><?= __('Shortest family tree branch') ?></th>
-                    <td><?= h($coefficients['min_depth'])?>  <?= $coefficients['min_depth'] > 1 ? __('generations') : __('generation') ?></td>
+                    <td id="min_depth">
+                        <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
+                    </td>
                 </tr>
 
                 <tr>
                     <th><?= __('Number of known ancestors') ?></th>
-                    <td><?= h($coefficients['ancestor_number'])?>  <?= $coefficients['ancestor_number'] > 1 ? __('rats') : __('rat') ?></td>
+                    <td id="known">
+                        <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
+                    </td>
                 </tr>
 
                 <tr>
                     <th><?= __('Number of distinct ancestors') ?></th>
-                    <td><?= h($coefficients['distinct_number'])?>  <?= $coefficients['distinct_number'] > 1 ? __('rats') : __('rat') ?></td>
+                    <td id="distinct">
+                        <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
+                    </td>
                 </tr>
 
                 <tr>
                     <th><?= __('Number of founding ancestors') ?></th>
-                    <td><?= h($coefficients['founder_number'])?>  <?= ($coefficients['founder_number'] > 1 ? __('rats') : __('rat')) ?></td>
+                    <td id="founding">
+                        <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
+                    </td>
                 </tr>
 
                 <tr>
                     <th><?= __('Number of common ancestors') ?></th>
-                    <td><?= h($coefficients['common_number'])?>  <?= $coefficients['common_number'] > 1 ? __('rats') : __('rat') ?></td>
+                    <td id="common">
+                        <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
+                    </td>
                 </tr>
 
                 <tr>
-                    <th><?= __('Ancestor Loss Coefficient') ?></th>
-                    <td>AVK ≃  <?= h($coefficients['avk']) ?> %</td>
+                    <th><?= __('Ancestor loss coefficient (5G)') ?></th>
+                    <td id="avk5">
+                        <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><?= __('Ancestor loss coefficient (10G)') ?></th>
+                    <td class="loading" id="avk10">
+                        <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
+                    </td>
                 </tr>
 
                 <tr>
                     <th><?= __('Coefficient of Inbreeding') ?></th>
-                    <td>COI  ≃  <?= h(round($coefficients['coi'],2)) ?> %</td>
+                    <td id="coi">
+                        <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
+                    </td>
                 </tr>
-
             </table>
 
-            <h2>Coancestry analysis</h2>
+            <!-- to be shown if coi > 0 -->
+            <div id="coancestry" class="hide-everywhere">
+                <h2>Coancestry analysis</h2>
+                <table id="coancestry-table" class="condensed stats histogram">
+                    <th>
+                        <div id="coancestry-global" style="opacity:1; width:100%">
+                        </div>
+                    </th>
+                    <td>
+                        <strong> = <?= __('Global inbreeding coefficient') ?></strong>
+                    </td>
+                </table>
+            </div>
 
-            <table class="condensed stats histogram">
-
-                <th>
-                    <div style="opacity:1; width:100%">
-                        <?= h(round($coefficients['coi'],2)) ?> %
-                    </div>
-                </th>
-                <td>
-                    <strong> = <?= __('Global inbreeding coefficient') ?></strong>
-                </td>
-
-                <?php foreach($coefficients['coancestry'] as $ancestor => $contrib) : ?>
-                    <tr>
-                        <th>
-                            <div style="opacity:<?= h(0.25+0.75*$contrib['coi']/$coefficients['coi']) ?>; width:<?= h(round(100*log(1+$contrib['coi']/$coefficients['coi'],2))) ?>%;">
-                                <?= round($contrib['coi'],2) != 0 ? h(round($contrib['coi'],2)) : '< 0.01' ?> %
-                            </div>
-                        </th>
-                        <td>
-                             + <?= $this->Html->link(
-                                 $contrib['name'],
-                                 ['controller' => 'Rats', 'action' => 'view', $ancestor]) ?>
-                        </td>
-                    </tr>
-                <?php endforeach ?>
-            </table>
+            <div class="signature">
+                &mdash; <?= __('Feeling stuck, javascript allergic? Give a look at our ')
+                    .  $this->Html->link(__('server-side, full-PHP approximate analysis') . '.',
+                    ['controller' => 'Litters', 'action' => 'inbreeding-approx', $litter->id],
+                    ['class' => 'discrete-link'])
+                ?>
+            </div>
         </div>
     </div>
 </div>
+
+<?= $this->Html->css('loading'); ?>
+<?= $this->Html->script('inbreeding'); ?>
+
+<script>
+    var partialTree = <?php echo $genealogy_json; ?>;
+    var ancestorIndex = <?php echo $index_json; ?>;
+    window.onload = setTimeout(init(partialTree, ancestorIndex), 250); // a small timeout to let debugkit loading
+</script>

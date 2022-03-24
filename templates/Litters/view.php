@@ -157,9 +157,8 @@
                 </tr>
                 <tr>
                     <th><?= __('Inbreeding') ?></th>
-                    <td><?= $this->Html->link('See inbreeding report', ['controller' => 'Litters', 'action' => 'inbreeding', $litter->id]) ?> (beta version)</td>
-                </td>
-                </tr>
+                    <td><?= $this->Html->link('See inbreeding report', ['controller' => 'Litters', 'action' => 'inbreeding', $litter->id]) ?> </td>
+                    </tr>
             </table>
 
             <h2>Ratteries</h2>
