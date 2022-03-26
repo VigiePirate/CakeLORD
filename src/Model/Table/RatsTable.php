@@ -619,15 +619,23 @@ class RatsTable extends Table
                 'Rats.state_id IS' => null,
             ]);
         } else {
-            // Find rats with birthdates posterior to passed parameter
             $inState = implode($options['inState']);
-            // concatenate with  . " 00:00:00.000" ??
             $query->where([
                     'Rats.state_id IS' => $inState,
             ]);
         }
 
         return $query->group(['Rats.id']);
+    }
+
+    public function findNeedsStaff(Query $query, array $options)
+    {
+        return $query
+            ->select()
+            ->distinct()
+            ->where(['States.needs_staff_action IS' => true])
+            ->contain(['States'])
+            ->group(['Rats.id']);
     }
 
     public function findMales(Query $query, array $options)
