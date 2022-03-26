@@ -526,6 +526,23 @@ class RatsController extends AppController
         ]);
     }
 
+    public function needsStaff()
+    {
+        $rats = $this->Rats->find('needsStaff');
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['OwnerUsers','Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
+        ];
+        $rats = $this->paginate($rats);
+
+        // $this->set(compact('rats', 'birth_dates'));
+
+        $this->set([
+            'rats' => $rats
+        ]);
+    }
+
     /* Autocomplete for forms function */
     /* There is probably a way to avoid having three functions... */
 

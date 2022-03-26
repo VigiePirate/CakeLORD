@@ -20,6 +20,13 @@ class LordController extends AppController
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
 
+    public function my() {
+        $id = $this->Authentication->getIdentity()->getIdentifier();
+        $user = $this->loadModel('Users')->get($id, ['contain' => ['Roles']]);
+
+        $this->set(compact('user'));
+    }
+
     public function search() {
 
         $this->Authorization->skipAuthorization();

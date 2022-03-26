@@ -35,7 +35,7 @@
 <div class="side-nav-group">
     <div class="tooltip-staff">
         <?= $this->Html->image('/img/icon-backoffice.svg', [
-            'url' => ['controller' => 'States', 'action' => 'index'],
+            'url' => ['controller' => 'Lord', 'action' => 'my'],
             'class' => 'side-nav-icon',
             'alt' => __('Admin site')]) ?>
         <span class="tooltiptext-staff"><?= __('Admin site') ?></span>
