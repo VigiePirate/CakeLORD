@@ -765,7 +765,7 @@ th {
 /* Sheet heading */
 .sheet-heading {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   /* padding: 2rem; */
   /* top: 0; */
@@ -784,7 +784,6 @@ th {
   justify-content:flex-end;
   align-items:center;
 }
-
 /* Footer */
 
 footer {

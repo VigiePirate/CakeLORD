@@ -2,20 +2,19 @@
   font-size:3rem;
   line-height:1;
   font-weight: bold;
-  padding:1rem 1.25rem;
-  margin: 0rem 0.5rem;
+  padding: 1rem 1.25rem;
   box-shadow: 0px -7px 14px 0 rgb(60 66 87 / 10%) inset, 0px 6px 6px 0 rgb(0 0 0 / 7%) inset;
   border-radius:20em;
 }
 
-.statemark {
-  font-size:2.5rem;
-  line-height:1;
+.statemark, a.statemark, a.statemark:visited {
+  font-size: 2.5rem;
+  line-height: 1;
   font-weight: bold;
-  padding:0.5rem 0.75rem;
+  padding: 0.5rem 0.75rem;
 }
 
-.statemark:hover {
+.statemark:hover, a.statemark:hover {
   box-shadow: 0px -7px 14px 0 rgb(60 66 87 / 10%) inset, 0px 6px 6px 0 rgb(0 0 0 / 7%) inset;
   border-radius: 20em;
   background-color: #c3c8e688;
@@ -24,6 +23,7 @@
 
 .staff-action-symbol{
   font-size:2rem;
+  font-family: "Imprima", "Roboto";
   line-height:1;
   color:#b1000c;
   padding:0.5rem;
@@ -52,7 +52,7 @@
   right: 9.75rem;
   z-index: 99;
 }
-/* Show the tooltip text when you mouse over the tooltip container */
+
 .tooltip-state:hover .tooltiptext-state {
   visibility: visible;
 }
@@ -68,11 +68,52 @@
   border-color: transparent transparent transparent #663300;
 }
 
-/* compensate for statebar height in global layout */
-.sheet-heading {
-  align-items:flex-start;
+.staff-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.staff-heading > h2 {
+  margin-top:1rem;
+  margin-bottom:1rem;
 }
 
 h1 {
   margin-top:-2rem;
+}
+
+a.statecolor_1  {
+  color: #1f9d55;
+  font-weight: bold;
+}
+
+a.statecolor_2 {
+  color: #1f9d55;
+  font-weight: bold;
+}
+
+a.statecolor_3 {
+  color: #ff8c1b;
+  font-weight: bold;
+}
+
+a.statecolor_4 {
+  color: #cc1f1a;
+  font-weight: bold;
+}
+
+a.statecolor_5 {
+  color: #663300;
+  font-weight: bold;
+}
+
+a.statecolor_6 {
+  color: #343740;
+  font-weight: bold;
+}
+
+h1 {
+  max-width: 95%;
 }

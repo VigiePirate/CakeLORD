@@ -64,7 +64,6 @@ use App\Model\Entity\StatisticsTrait;
  */
 class Rat extends Entity
 {
-
     use StatisticsTrait;
 
     /**

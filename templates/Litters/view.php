@@ -45,10 +45,17 @@
         <div class="litters view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= __('Litter') ?></div>
-                <?= $this->element('statebar', ['sheet' => $litter]) ?>
+                <div class="sheet-markers">
+                    <div class="tooltip-state">
+                        <div class="current-statemark statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></div>
+                        <span class="tooltiptext-state hide-on-mobile"><?= h($litter->state->name) ?></span>
+                    </div>
+                </div>
             </div>
 
             <h1><?= h($litter->full_name) ?></h1>
+
+            <?= $this->Flash->render() ?>
 
             <?php if ($litter->comments) : ?>
                 <div class="text">
@@ -243,6 +250,9 @@
                 &mdash; Created on <?= $litter->created->i18nFormat('dd/MM/yyyy') ?> by <?= $litter->user->username ?>. <?= ($litter->modified != $litter->created) ? 'Last modified on ' . $litter->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
             </div>
         </div>
+
+        <?= $this->element('statebar', ['sheet' => $litter]) ?>
+
         <div class="spacer"> </div>
         <div class="content litter view">
             <h2 class="staff"><?= __('Private information') ?></h2>

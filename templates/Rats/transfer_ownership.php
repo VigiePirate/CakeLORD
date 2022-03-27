@@ -16,6 +16,10 @@
 
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= __('Change Owner of ') ?></div>
+                <div class="tooltip-state">
+                    <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                    <span class="tooltiptext-state hide-on-mobile"><?= h($rat->state->name) ?></span>
+                </div>
             </div>
 
             <h1><?= $rat->usual_name . ' (' . $rat->pedigree_identifier . ')' ?></h1>
@@ -59,6 +63,8 @@
         </div>
     </div>
 </div>
+
+<?= $this->Html->css('statebar.css') ?>
 
 <?php $this->append('css');?>
 	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />

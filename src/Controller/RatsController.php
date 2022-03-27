@@ -457,13 +457,7 @@ class RatsController extends AppController
      */
     public function bornBefore()
     {
-        // The 'pass' key is provided by CakePHP and contains all
-        // the passed URL path segments in the request.
         $bornBefore = $this->request->getParam('pass');
-        // $bornBefore = $bornBefore . " 00:00:00.000";
-        // $bornBefore = new Chronos::Chronos($bornBeforeString);
-        //
-        // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('bornBefore', [
             'bornBefore' => $bornBefore
         ]);
@@ -473,8 +467,6 @@ class RatsController extends AppController
             'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
-
-        // $this->set(compact('rats', 'birth_dates'));
 
         $this->set([
             'rats' => $rats,
@@ -486,18 +478,14 @@ class RatsController extends AppController
     {
         $bornAfter = $this->request->getParam('pass');
 
-        // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('bornAfter', [
             'bornAfter' => $bornAfter
         ]);
 
-        // Pass variables into the view template context.
         $this->paginate = [
             'contain' => ['OwnerUsers','Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
-
-        // $this->set(compact('rats', 'birth_dates'));
 
         $this->set([
             'rats' => $rats,
@@ -512,13 +500,10 @@ class RatsController extends AppController
             'inState' => $inState
         ]);
 
-        // Pass variables into the view template context.
         $this->paginate = [
             'contain' => ['OwnerUsers','Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
-
-        // $this->set(compact('rats', 'birth_dates'));
 
         $this->set([
             'rats' => $rats,
@@ -530,13 +515,10 @@ class RatsController extends AppController
     {
         $rats = $this->Rats->find('needsStaff');
 
-        // Pass variables into the view template context.
         $this->paginate = [
             'contain' => ['OwnerUsers','Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
         $rats = $this->paginate($rats);
-
-        // $this->set(compact('rats', 'birth_dates'));
 
         $this->set([
             'rats' => $rats
@@ -544,7 +526,6 @@ class RatsController extends AppController
     }
 
     /* Autocomplete for forms function */
-    /* There is probably a way to avoid having three functions... */
 
     public function autocomplete() {
         if ($this->request->is(['ajax'])) {
@@ -552,12 +533,8 @@ class RatsController extends AppController
             $sex = $this->request->getQuery('sex');
             $items = $this->Rats->find('identified',[
                 'names' => [$searchkey]])
-                //'contain' => ['Ratteries','BirthLitters'],
                 ->where(['sex IS' => $sex])
-                //->select(['id', 'Rats.rattery_id'
                 ->select(['id',
-                    //'value' => "concat(Ratteries.prefix, ' ', Rats.name, ' (', pedigree_identifier, ')')",
-                    //'label' => "concat(Ratteries.prefix, ' ', Rats.name, ' (', pedigree_identifier, ')')"])
                     'value' => "concat(Rats.name, ' (', pedigree_identifier, ')')",
                     'label' => "concat(Rats.name, ' (', pedigree_identifier, ')')"])
             ;
@@ -657,7 +634,10 @@ class RatsController extends AppController
     public function family($id = null) {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions', 'BredLitters']
+            'contain' => ['States',
+                'Ratteries',
+                'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
+                'BredLitters']
         ]);
 
         $stats = $rat->wrapFamilyStatistics();
@@ -727,5 +707,59 @@ class RatsController extends AppController
         }
         $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')->order(['id' => 'ASC']);
         $this->set(compact('rat','deathPrimaryCauses'));
+    }
+
+    /* State changes */
+
+    public function freeze($id)
+    {
+        $this->request->allowMethod(['get', 'freeze']);
+        $rat = $this->Rats->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($rat);
+        if ($this->Rats->freeze($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
+            $this->Flash->success(__('This rat sheet is now frozen.'));
+        } else {
+            $this->Flash->error(__('We could not freeze the sheet. Please retry or contact an administrator.'));
+        }
+        return $this->redirect(['action' => 'view', $rat->id]);
+    }
+
+    public function thaw($id)
+    {
+        $this->request->allowMethod(['get', 'thaw']);
+        $rat = $this->Rats->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($rat);
+        if ($this->Rats->thaw($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
+            $this->Flash->success(__('This rat sheet is now unfrozen.'));
+        } else {
+            $this->Flash->error(__('We could not thaw the sheet. Please retry or contact an administrator.'));
+        }
+        return $this->redirect(['action' => 'view', $rat->id]);
+    }
+
+    public function approve($id)
+    {
+        $this->request->allowMethod(['get', 'approve']);
+        $rat = $this->Rats->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($rat);
+        if ($this->Rats->approve($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
+            $this->Flash->success(__('This rat sheet has been approved.'));
+        } else {
+            $this->Flash->error(__('We could not approve the sheet. Please retry or contact an administrator.'));
+        }
+        return $this->redirect(['action' => 'view', $rat->id]);
+    }
+
+    public function blame($id)
+    {
+        $this->request->allowMethod(['get', 'blame']);
+        $rat = $this->Rats->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($rat);
+        if ($this->Rats->blame($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
+            $this->Flash->success(__('This rat sheet has been unapproved.'));
+        } else {
+            $this->Flash->error(__('We could not unapprove the sheet. Please retry or contact an administrator.'));
+        }
+        return $this->redirect(['action' => 'view', $rat->id]);
     }
 }

@@ -14,7 +14,7 @@ class StateBehavior extends Behavior
 {
     protected $_defaultConfig = [
         'repository' => 'States',
-        'safe_properties' => ['modified'],
+        'safe_properties' => ['modified', 'state_id'],
     ];
 
     /**
@@ -52,11 +52,12 @@ class StateBehavior extends Behavior
             $initial_state = $this->States->find()->select('id')->where(['is_default' => true])->firstOrFail();
             $entity->set('state_id', $initial_state->id);
             return $entity->state_id;
-        } elseif (empty(array_diff($entity->getDirty(), $this->config['safe_properties']))) {
-            // All the changes are in the safe list
-            return $this->approve($entity);
-        } else {
+        } elseif (! empty(array_diff($entity->getDirty(), $this->config['safe_properties']))) {
             return $this->blame($entity);
+        } else {
+            // All the changes are in the safe list
+            // return $this->approve($entity);
+            return true;
         }
     }
 

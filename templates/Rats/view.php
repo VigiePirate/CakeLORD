@@ -53,13 +53,18 @@
         <div class="rats view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= _('Rat') ?></div>
-                <?= $this->element('statebar', ['sheet' => $rat]) ?>
+                <div class="tooltip-state">
+                    <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                    <span class="tooltiptext-state hide-on-mobile"><?= h($rat->state->name) ?></span>
+                </div>
             </div>
 
             <h1>
                 <!-- to be improved -->
                 <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?>
             </h1>
+
+            <?= $this->Flash->render() ?>
 
             <div class="row row-reverse">
                 <?php if ($rat->picture != '') : ?>
@@ -174,7 +179,7 @@
                     </tr>
                 </table>
 
-            <h2>Health</h2>
+            <h2><?= __('Health') ?></h2>
             <table class="condensed">
                 <tr>
                     <th><?= __('Is alive?') ?></th>
@@ -251,6 +256,9 @@
                 &mdash; Created on <?= $rat->created->i18nFormat('dd/MM/yyyy') ?> by <?= $rat->creator_user->username ?>. <?= ($rat->modified != $rat->created) ? 'Last modified on ' . $rat->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
             </div>
         </div>
+
+        <?= $this->element('statebar', ['sheet' => $rat]) ?>
+
         <div class="spacer"> </div>
         <div class="rat view content">
             <h2 class="staff"><?= __('Private information') ?></h2>

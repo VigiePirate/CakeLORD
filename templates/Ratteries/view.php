@@ -55,10 +55,17 @@
         <div class="ratteries view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= $rattery->is_generic ? __('Generic origin') :  __('Rattery') ?></div>
-                <?= $this->element('statebar', ['sheet' => $rattery]) ?>
+                <div class="sheet-markers">
+                    <div class="tooltip-state">
+                        <div class="current-statemark statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></div>
+                        <span class="tooltiptext-state hide-on-mobile"><?= h($rattery->state->name) ?></span>
+                    </div>
+                </div>
             </div>
 
             <h1><?= h($rattery->full_name) . '<span class="rotate"> ' . h($rattery->is_inactive_symbol) . '</span>'?></h1> <!-- -->
+
+            <?= $this->Flash->render(); ?>
 
             <?php if($rattery->is_generic) : ?>
                 <div class="message"><?= __('This is a generic prefix. It does not correspond to an actual rattery. Therefore, only limited information is shown.') ?></div>
@@ -426,6 +433,9 @@
             &mdash; Created on <?= $rattery->created->i18nFormat('dd/MM/yyyy') ?>. <?= ($rattery->has('modified') && ($rattery->modified != $rattery->created)) ? 'Last modified on ' . $rattery->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
             </div>
         </div>
+        
+        <?= $this->element('statebar', ['sheet' => $rattery]) ?>
+
     </div>
 </div>
 

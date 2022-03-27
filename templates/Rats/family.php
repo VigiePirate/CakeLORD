@@ -25,6 +25,10 @@
         <div class="rats view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= _('Family report') ?></div>
+                <div class="tooltip-state">
+                    <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                    <span class="tooltiptext-state hide-on-mobile"><?= h($rat->state->name) ?></span>
+                </div>
             </div>
 
             <h1>
@@ -90,3 +94,5 @@
         </div>
     </div>
 </div>
+
+<?= $this->Html->css('statebar.css') ?>

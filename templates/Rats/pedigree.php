@@ -40,7 +40,10 @@
         <div class="rats view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= _('Rat family tree') ?></div>
-                <?= $this->element('statebar', ['sheet' => $rat]) ?>
+                <div class="tooltip-state">
+                    <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                    <span class="tooltiptext-state hide-on-mobile"><?= h($rat->state->name) ?></span>
+                </div>
             </div>
 
             <h1>
