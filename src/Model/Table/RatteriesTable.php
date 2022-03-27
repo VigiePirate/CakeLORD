@@ -56,6 +56,9 @@ class RatteriesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('State', [
+            'safe_properties' => ['localization'],
+        ]);
         $this->addBehavior('Snapshot', [
             'repository' => 'RatterySnapshots',
             'entityField' => 'rattery_id',

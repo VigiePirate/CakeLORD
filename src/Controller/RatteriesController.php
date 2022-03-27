@@ -449,4 +449,58 @@ class RatteriesController extends AppController
             $this->viewBuilder()->setOption('serialize', ['items']);
         }
     }
+
+    /* State changes */
+
+    public function freeze($id)
+    {
+        $this->request->allowMethod(['get', 'freeze']);
+        $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($rattery);
+        if ($this->Ratteries->freeze($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
+            $this->Flash->success(__('This rat sheet is now frozen.'));
+        } else {
+            $this->Flash->error(__('We could not freeze the sheet. Please retry or contact an administrator.'));
+        }
+        return $this->redirect(['action' => 'view', $rattery->id]);
+    }
+
+    public function thaw($id)
+    {
+        $this->request->allowMethod(['get', 'thaw']);
+        $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($rattery);
+        if ($this->Ratteries->thaw($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
+            $this->Flash->success(__('This rat sheet is now unfrozen.'));
+        } else {
+            $this->Flash->error(__('We could not thaw the sheet. Please retry or contact an administrator.'));
+        }
+        return $this->redirect(['action' => 'view', $rattery->id]);
+    }
+
+    public function approve($id)
+    {
+        $this->request->allowMethod(['get', 'approve']);
+        $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($rattery);
+        if ($this->Ratteries->approve($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
+            $this->Flash->success(__('This rat sheet has been approved.'));
+        } else {
+            $this->Flash->error(__('We could not approve the sheet. Please retry or contact an administrator.'));
+        }
+        return $this->redirect(['action' => 'view', $rattery->id]);
+    }
+
+    public function blame($id)
+    {
+        $this->request->allowMethod(['get', 'blame']);
+        $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($rattery);
+        if ($this->Ratteries->blame($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
+            $this->Flash->success(__('This rat sheet has been unapproved.'));
+        } else {
+            $this->Flash->error(__('We could not unapprove the sheet. Please retry or contact an administrator.'));
+        }
+        return $this->redirect(['action' => 'view', $rattery->id]);
+    }
 }

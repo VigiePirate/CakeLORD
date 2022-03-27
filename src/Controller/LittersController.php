@@ -695,4 +695,59 @@ class LittersController extends AppController
 
         $this->set(compact('litter', 'genealogy_json', 'index_json'));
     }
+
+    /* State changes */
+
+    public function freeze($id)
+    {
+        $this->request->allowMethod(['get', 'freeze']);
+        $litter = $this->Litters->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($litter);
+        if ($this->Litters->freeze($litter) && $this->Litters->save($litter, ['checkRules' => false])) {
+            $this->Flash->success(__('This litter sheet is now frozen.'));
+        } else {
+            $this->Flash->error(__('We could not freeze the sheet. Please retry or contact an administrator.'));
+        }
+
+        return $this->redirect(['action' => 'view', $litter->id]);
+    }
+
+    public function thaw($id)
+    {
+        $this->request->allowMethod(['get', 'thaw']);
+        $litter = $this->Litters->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($litter);
+        if ($this->Litters->thaw($litter) && $this->Litters->save($litter, ['checkRules' => false])) {
+            $this->Flash->success(__('This litter sheet is now unfrozen.'));
+        } else {
+            $this->Flash->error(__('We could not thaw the sheet. Please retry or contact an administrator.'));
+        }
+        return $this->redirect(['action' => 'view', $litter->id]);
+    }
+
+    public function approve($id)
+    {
+        $this->request->allowMethod(['get', 'approve']);
+        $litter = $this->Litters->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($litter);
+        if ($this->Litters->approve($litter) && $this->Litters->save($litter, ['checkRules' => false])) {
+            $this->Flash->success(__('This rat sheet has been approved.'));
+        } else {
+            $this->Flash->error(__('We could not approve the sheet. Please retry or contact an administrator.'));
+        }
+        return $this->redirect(['action' => 'view', $litter->id]);
+    }
+
+    public function blame($id)
+    {
+        $this->request->allowMethod(['get', 'blame']);
+        $litter = $this->Litters->get($id, ['contain' => ['States']]);
+        $this->Authorization->authorize($litter);
+        if ($this->Litters->blame($litter) && $this->Litters->save($litter, ['checkRules' => false])) {
+            $this->Flash->success(__('This rat sheet has been unapproved.'));
+        } else {
+            $this->Flash->error(__('We could not unapprove the sheet. Please retry or contact an administrator.'));
+        }
+        return $this->redirect(['action' => 'view', $litter->id]);
+    }
 }

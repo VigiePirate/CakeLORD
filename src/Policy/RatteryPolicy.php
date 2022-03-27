@@ -100,4 +100,52 @@ class RatteryPolicy
     {
         return true;
     }
+
+    /**
+     * Check if $user can freeze Litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canFreeze(IdentityInterface $user, Rattery $rattery)
+    {
+        return true;
+    }
+
+    /**
+     * Check if $user can thaw Litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canThaw(IdentityInterface $user, Rattery $rattery)
+    {
+        return true;
+    }
+
+    /**
+     * Check if $user can approve Litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canApprove(IdentityInterface $user, Rattery $rattery)
+    {
+        return true;
+    }
+
+    /**
+     * Check if $user can blame Litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canBlame(IdentityInterface $user, Rattery $rattery)
+    {
+        return true;
+    }
 }

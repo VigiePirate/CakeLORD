@@ -50,7 +50,7 @@ class Litter extends Entity
         'pups_number_stillborn' => true,
         'comments' => true,
         'creator_user_id' => true,
-        'state_id' => true,
+        'state_id' => false,
         'created' => true,
         'modified' => true,
         'user' => true,

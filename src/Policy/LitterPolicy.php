@@ -112,4 +112,53 @@ class LitterPolicy
     {
         return true;
     }
+
+    /**
+     * Check if $user can freeze Litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canFreeze(IdentityInterface $user, Litter $litter)
+    {
+        return true;
+    }
+
+    /**
+     * Check if $user can thaw Litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canThaw(IdentityInterface $user, Litter $litter)
+    {
+        return true;
+    }
+
+    /**
+     * Check if $user can approve Litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canApprove(IdentityInterface $user, Litter $litter)
+    {
+        return true;
+    }
+
+    /**
+     * Check if $user can blame Litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canBlame(IdentityInterface $user, Litter $litter)
+    {
+        return true;
+    }
+    
 }
