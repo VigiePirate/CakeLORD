@@ -370,7 +370,7 @@ class LittersController extends AppController
      * Genealogy method
      *
      * Recursive walk in the genealogy tree
-     * Returns a flat table with [$path => $litter_id] rows
+     * Returns a flat table with [$path => $rat_id] rows
      *
      */
 
@@ -439,7 +439,7 @@ class LittersController extends AppController
      *
      * Recursive walk in the genealogy tree
      * (ancestors of an already met ancestor are not rewritten)
-     * Returns a flat table with [$path => $litter_id] rows
+     * Returns a flat table with [$path => $rat_id] rows
      *
      */
     public function spanningTree($id, $path = '', &$genealogy = null, &$index = null)
