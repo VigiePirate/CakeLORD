@@ -8,13 +8,13 @@
                 <th><?= $this->Paginator->sort('state_id','State')?></th>
             <?php endif; ?>
             <?php if (! in_array('picture', $exceptions)): ?>
-                <th class="false-a"><?= __('Picture') ?></th>
+                <th class="col-head"><?= __('Picture') ?></th>
             <?php endif; ?>
             <?php if (! in_array('pedigree_identifier', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('pedigree_identifier','Identifier') ?></th>
             <?php endif; ?>
             <?php if (! in_array('prefix', $exceptions)): ?>
-                <th class="false-a"><?= __('Prefix') ?></th>
+                <th class="col-head"><?= __('Prefix') ?></th>
             <?php endif; ?>
             <?php if (! in_array('name', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('name') ?></th>
@@ -26,10 +26,10 @@
                 <th><?= $this->Paginator->sort('birth_date') ?></th>
             <?php endif; ?>
             <?php if (! in_array('age_string', $exceptions)): ?>
-                <th class="false-a"><?= __('Reached Age') ?></th>
+                <th class="col-head"><?= __('Reached Age') ?></th>
             <?php endif; ?>
             <?php if (! in_array('death_cause', $exceptions)): ?>
-                <th class="false-a"><?= __('Death cause') ?></th>
+                <th class="col-head"><?= __('Death cause') ?></th>
             <?php endif; ?>
             <?php if (! in_array('owner_user_id', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('owner_user_id','Owner') ?></th>
@@ -37,7 +37,7 @@
             <?php if (! in_array('sex', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('sex','Sex') ?></th>
             <?php endif; ?>
-            <th class="actions-title false-a"><?= __('Actions') ?></th>
+            <th class="actions-title col-head"><?= __('Actions') ?></th>
     </thead>
         <tbody>
             <?php foreach($rats as $rat): ?>

@@ -6,40 +6,19 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
-            </div>
-
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-back.svg', [
-                        'url' => ['controller' => 'Categories', 'action' => 'view', $category->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Back')]) ?>
-                    <span class="tooltiptext"><?= __('Cancel and go back') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-list.svg', [
-                        'url' => ['controller' => 'Categories', 'action' => 'index'],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('All categories')]) ?>
-                    <span class="tooltiptext"><?= __('See all categories') ?></span>
-                </div>
-            </div>
-
-            <div class="side-nav-group">
-                <div class="tooltip-staff">
-                    <?= $this->Html->image('/img/icon-delete.svg', [
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Delete Category')]) ?>
-                    <span class="tooltiptext-staff"><?= __('Delete category') ?></span>
-                </div>
-            </div>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'Categories',
+                'object' => $category,
+                'tooltip' => __('Browse category list'),
+                'show_staff' => true
+            ])
+        ?>
     </aside>
     <div class="column-responsive column-90">
         <div class="categories form content">
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Categories') ?></div>
+            </div>
             <h1><?= __('Edit Category') ?></h1>
             <?= $this->Form->create($category) ?>
             <fieldset>

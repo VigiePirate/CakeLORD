@@ -8,15 +8,14 @@
     <?= $this->Html->link(__('New Color'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
     <h1><?= __('All Colors') ?></h1>
     <div class="table-responsive">
-        <table>
+        <table class="condensed">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('genotype') ?></th>
-                    <th><?= $this->Paginator->sort('picture') ?></th>
-                    <th><?= $this->Paginator->sort('is_picture_mandatory') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('is_picture_mandatory', __('Mandatory picture?')) ?></th>
+                    <th class="actions col-head"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -25,12 +24,22 @@
                     <td><?= $this->Number->format($color->id) ?></td>
                     <td><?= h($color->name) ?></td>
                     <td><?= h($color->genotype) ?></td>
-                    <td><?= h($color->picture) ?></td>
-                    <td><?= h($color->is_picture_mandatory) ?></td>
+                    <td><?= $color->is_picture_mandatory ? '✓' : '' ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $color->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $color->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $color->id], ['confirm' => __('Are you sure you want to delete # {0}?', $color->id)]) ?>
+                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                            'url' => ['controller' => 'Colors', 'action' => 'edit', $color->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Edit Color')
+                        ])?>
+                        <?= $this->Form->postLink(
+                                $this->Html->image('/img/icon-delete.svg', [
+                                    'class' => 'action-icon',
+                                    'alt' => __('Delete Color')
+                                ]),
+                                ['action' => 'delete', $color->id],
+                                ['confirm' => __('Are you sure you want to delete coolor # {0}?', $color->id), 'escape' => false]
+                            )
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

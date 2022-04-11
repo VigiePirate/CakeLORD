@@ -6,24 +6,19 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <div class="spacer"> </div>
-            <?= $this->Html->image('/img/icon-search-rats.svg', [
-                'url' => ['controller' => 'Rats', 'action' => 'findByPrimaryDeath'],
-                'class' => 'side-nav-icon',
-                'alt' => __('Help')]) ?>
-            <div class="spacer"> </div>
-            <?= $this->Html->link(__('Edit Death Primary Cause'), ['action' => 'edit', $deathPrimaryCause->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Death Primary Cause'), ['action' => 'delete', $deathPrimaryCause->id], ['confirm' => __('Are you sure you want to delete # {0}?', $deathPrimaryCause->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Death Primary Causes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Death Primary Cause'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'DeathPrimaryCauses',
+                'object' => $deathPrimaryCause,
+                'tooltip' => __('Browse death category list'),
+                'help_url' =>  ['controller' => 'Articles', 'action' => 'index']
+            ])
+        ?>
     </aside>
+
     <div class="column-responsive column-90">
         <div class="deathPrimaryCauses view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Primary Death Cause') ?></div>
+                <div class="sheet-title pretitle"><?= __('Death category') ?></div>
             </div>
             <h1><?= h($deathPrimaryCause->name) ?></h1>
 
@@ -48,11 +43,9 @@
                 </tr>
             </table>
 
-            <div class="text">
-                <strong><?= __('Description') ?></strong>
-                <div class="markdown">
-                    <?= $this->Commonmark->parse($deathPrimaryCause->description); ?>
-                </div>
+            <h2><?= __('Description') ?></h2>
+            <div class="markdown">
+                <?= $this->Commonmark->parse($deathPrimaryCause->description); ?>
             </div>
 
             <h2><?= __('Statistics') ?></h3>

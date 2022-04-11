@@ -314,13 +314,13 @@ td,th {
   padding:0rem 1rem;
 }
 
-.false-a {
+.col-head {
   font-family: "Roboto Condensed";
   color: #606c76;
 }
 
 .actions, .actions-title {
-  text-align:right;
+  text-align: right;
 }
 
 .nowrap {
@@ -952,6 +952,8 @@ footer {
 .pagination li {
   margin: 0 0.5rem;
 }
+.disabled:hover,
+.disabled a,
 .prev.disabled a,
 .next.disabled a {
   cursor: not-allowed;

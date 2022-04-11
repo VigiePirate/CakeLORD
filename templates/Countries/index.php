@@ -8,7 +8,7 @@
     <?= $this->Html->link(__('New Country'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
     <h1><?= __('All Available Countries') ?></h1>
     <div class="table-responsive">
-        <table>
+        <table class="condensed">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
@@ -21,12 +21,23 @@
                 <?php foreach ($countries as $country): ?>
                 <tr>
                     <td><?= $this->Number->format($country->id) ?></td>
-                    <td><?= h($country->name) ?></td>
+                    <td><?= $this->Html->link(h($country->name), ['action' => 'view', $country->id]) ?></td>
                     <td><?= h($country->iso3166) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $country->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $country->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $country->id], ['confirm' => __('Are you sure you want to delete # {0}?', $country->id)]) ?>
+                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                            'url' => ['controller' => 'Country', 'action' => 'edit', $country->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Edit Country')
+                        ])?>
+                        <?= $this->Form->postLink(
+                                $this->Html->image('/img/icon-delete.svg', [
+                                    'class' => 'action-icon',
+                                    'alt' => __('Delete Country')
+                                ]),
+                                ['action' => 'delete', $country->id],
+                                ['confirm' => __('Are you sure you want to delete country # {0}?', $country->id), 'escape' => false]
+                            )
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

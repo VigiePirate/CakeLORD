@@ -6,21 +6,22 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $color->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $color->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Colors'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'Colors',
+                'object' => $color,
+                'tooltip' => __('Browse color list'),
+                'show_staff' => true
+            ])
+        ?>
     </aside>
     <div class="column-responsive column-90">
         <div class="colors form content">
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Colors') ?></div>
+            </div>
+            <h1><?= __('Edit Color') ?></h1>
             <?= $this->Form->create($color) ?>
             <fieldset>
-                <legend><?= __('Edit Color') ?></legend>
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('genotype');

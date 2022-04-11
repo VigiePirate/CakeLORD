@@ -29,20 +29,20 @@
                     <td><?= $this->Number->format($deathSecondaryCause->id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Death Primary Cause') ?></th>
+                    <th><?= __('Death Category') ?></th>
                     <td><?= $deathSecondaryCause->has('death_primary_cause') ? $this->Html->link($deathSecondaryCause->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $deathSecondaryCause->death_primary_cause->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Is Tumor') ?></th>
                     <td><?= $deathSecondaryCause->is_tumor ? __('Yes') : __('No'); ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Description') ?></th>
+                    <td><div class="markdown">
+                        <?= $this->Commonmark->sanitize($deathSecondaryCause->description); ?>
+                    </div></td>
+                </tr>
             </table>
-            <div class="text">
-                <strong><?= __('Description') ?></strong>
-                <div class="markdown">
-                    <?= $this->Commonmark->sanitize($deathSecondaryCause->description); ?>
-                </div>
-            </div>
             <div class="related">
                 <h2><?= __('Statistics') ?></h3>
                 <table class="condensed">

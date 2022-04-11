@@ -7,11 +7,14 @@
 </div>
 
 <div class="tooltip-staff">
-    <?= $this->Html->image('/img/icon-delete.svg', [
-        'class' => 'side-nav-icon',
-        'alt' => __('Delete entry')]) ?>
-    <span class="tooltiptext-staff"><?= __('Delete entry') ?></span>
+    <?= $this->Form->postLink(
+            $this->Html->image('/img/icon-delete.svg', [
+                'class' => 'side-nav-icon',
+                'alt' => __('Delete Article')
+            ]),
+            ['action' => 'delete', $object->id],
+            ['confirm' => __('Are you sure you want to delete # {0}?', $object->id), 'escape' => false]
+        )
+    ?>
+    <span class="tooltiptext-staff"><?= __('Delete') ?></span>
 </div>
-
-<!-- code for postlink delete -->
-<!-- $this->Form->postLink(__('Delete coat'), ['action' => 'delete', $coat->id], ['confirm' => __('Are you sure you want to delete # {0}?', $coat->id), 'class' => 'side-nav-item']) */ -->
