@@ -6,32 +6,17 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
-            </div>
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-list.svg', [
-                        'url' => ['controller' => 'Categories', 'action' => 'index'],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('All categories')]) ?>
-                    <span class="tooltiptext"><?= __('See all categories') ?></span>
-                </div>
-            </div>
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Categories',
-                    'object' => $category
-                    ])
-                ?>
-            </div>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'Categories',
+                'object' => $category,
+                'tooltip' => __('Browse documentation category list'),
+            ])
+        ?>
     </aside>
     <div class="column-responsive column-90">
         <div class="categories view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Category') ?></div>
+                <div class="sheet-title pretitle"><?= __('Documentation category') ?></div>
             </div>
 
             <h1><?= h($category->name) ?></h1>
@@ -40,16 +25,16 @@
 
             <table>
                 <tr>
-                    <th><?= __('Name') ?></th>
-                    <td><?= h($category->name) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($category->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Position') ?></th>
                     <td><?= $this->Number->format($category->position) ?>/<?= $this->Number->format($category_count) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Name') ?></th>
+                    <td><?= h($category->name) ?></td>
                 </tr>
             </table>
 
@@ -58,14 +43,14 @@
                 <h3><?= __('Related Articles') ?></h3>
                 <?php if (!empty($category->articles)) : ?>
                 <div class="table-responsive">
-                    <table>
+                    <table class="summary">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Overtitle') ?></th>
                             <th><?= __('Title') ?></th>
                             <th><?= __('Created') ?></th>
                             <th><?= __('Modified') ?></th>
-                            <th class="actions"><?= __('Manage') ?></th>
+                            <th class="actions-title"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($category->articles as $article) : ?>
                         <tr>
@@ -74,24 +59,22 @@
                             <td><?= $this->Html->link(h($article->title), ['controller' => 'Articles', 'action' => 'view', $article->id]) ?></td>
                             <td><?= h($article->created) ?></td>
                             <td><?= h($article->modified) ?></td>
-                            <span class="nowrap">
-                                <td class="actions">
-                                    <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
-                                        'url' => ['controller' => 'Articles', 'action' => 'edit', $article->id],
-                                        'class' => 'action-icon',
-                                        'alt' => __('Edit Category')
-                                    ])?>
-                                    <?= $this->Form->postLink(
-                                            $this->Html->image('/img/icon-delete.svg', [
-                                                'class' => 'action-icon',
-                                                'alt' => __('Delete Article')
-                                            ]),
-                                            ['action' => 'delete', $article->id],
-                                            ['confirm' => __('Are you sure you want to delete # {0}?', $article->id), 'escape' => false]
-                                        )
-                                    ?>
-                                </td>
-                            </span>
+                            <td class="actions">
+                                <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                                    'url' => ['controller' => 'Articles', 'action' => 'edit', $article->id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('Edit Category')
+                                ])?>
+                                <?= $this->Form->postLink(
+                                        $this->Html->image('/img/icon-delete.svg', [
+                                            'class' => 'action-icon',
+                                            'alt' => __('Delete Article')
+                                        ]),
+                                        ['action' => 'delete', $article->id],
+                                        ['confirm' => __('Are you sure you want to delete # {0}?', $article->id), 'escape' => false]
+                                    )
+                                ?>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </table>
@@ -106,18 +89,18 @@
                 <h3><?= __('Related FAQs') ?></h3>
                 <?php if (!empty($category->faqs)) : ?>
                 <div class="table-responsive">
-                    <table>
+                    <table class="summary">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Question') ?></th>
                             <th><?= __('Answer') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($category->faqs as $faqs) : ?>
+                        <?php foreach ($category->faqs as $faq) : ?>
                         <tr>
-                            <td><?= h($faqs->id) ?></td>
-                            <td><?= h($faqs->question) ?></td>
-                            <td><?= h($faqs->answer) ?></td>
+                            <td><?= h($faq->id) ?></td>
+                            <td><?= h($faq->question) ?></td>
+                            <td><?= h($faq->answer) ?></td>
                             <span class="nowrap">
                                 <td class="actions">
                                     <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [

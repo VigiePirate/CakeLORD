@@ -8,7 +8,7 @@
 
 <div class="tooltip">
     <?= $this->Html->image('/img/icon-help.svg', [
-        'url' => ['controller' => 'Articles', 'action' => 'index'],
+        'url' => isset($help_url) ? $help_url : ['controller' => 'Faqs', 'action' => 'all'],
         'class' => 'side-nav-icon',
         'alt' => __('Help')]) ?>
     <span class="tooltiptext"><?= __('Get help') ?></span>

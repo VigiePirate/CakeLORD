@@ -6,20 +6,13 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
-            </div>
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-list.svg', [
-                        'url' => ['controller' => 'Articles', 'action' => 'index'],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('All articles')]) ?>
-                    <span class="tooltiptext"><?= __('See all articles') ?></span>
-                </div>
-            </div>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'Articles',
+                'object' => $article,
+                'tooltip' => __('Browse article list'),
+                'show_staff' => false
+            ])
+        ?>
     </aside>
     <div class="column-responsive column-90">
         <div class="articles form content">

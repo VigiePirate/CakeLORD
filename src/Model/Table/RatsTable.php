@@ -534,7 +534,6 @@ class RatsTable extends Table
                       'OwnerUsers.username IS' => null,
                   ]);
         } else {
-            // Find articles that have one or more of the provided tags.
             $query->innerJoinWith('OwnerUsers')
                   ->where([
                           'OwnerUsers.username LIKE' => '%'.implode($options['owners']).'%',
@@ -555,7 +554,6 @@ class RatsTable extends Table
                 'Rats.sex IS' => null,
             ]);
         } else {
-            // Find rats with parts of the string in that name
             $query->where([
                 'Rats.sex IN' => ($options['sex']),
             ]);

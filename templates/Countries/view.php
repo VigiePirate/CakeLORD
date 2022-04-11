@@ -7,11 +7,25 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Html->link(__('Edit Country'), ['action' => 'edit', $country->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Country'), ['action' => 'delete', $country->id], ['confirm' => __('Are you sure you want to delete # {0}?', $country->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Countries'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Country'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar') ?>
+            </div>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-list.svg', [
+                        'url' => ['controller' => 'Countries', 'action' => 'index'],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Country list')]) ?>
+                    <span class="tooltiptext"><?= __('Browse country list') ?></span>
+                </div>
+            </div>
+            <div class="side-nav-group">
+                <?= $this->element('staff_sidebar', [
+                    'controller' => 'Countries',
+                    'object' => $country
+                    ])
+                ?>
+            </div>
         </div>
     </aside>
     <div class="column-responsive column-90">
@@ -20,20 +34,21 @@
                 <div class="sheet-title pretitle"><?= __('Countries') ?></div>
             </div>
             <h1><?= h($country->name) ?></h1>
-            <h2><?= __('Information') ?></h2>
+            <h2><?= __('Reference information') ?></h2>
             <table class="condensed">
                 <tr>
-                    <th><?= __('Name') ?></th>
-                    <td><?= h($country->name) ?></td>
+                    <th><?= __('Id') ?></th>
+                    <td><?= $this->Number->format($country->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Iso3166') ?></th>
                     <td><?= h($country->iso3166) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($country->id) ?></td>
+                    <th><?= __('Name') ?></th>
+                    <td><?= h($country->name) ?></td>
                 </tr>
+
             </table>
             <div class="related">
                 <h2><?= __('Ratteries registered in this country') ?></h2>

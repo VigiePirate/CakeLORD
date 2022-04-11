@@ -6,37 +6,14 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
-            </div>
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-list.svg', [
-                        'url' => ['controller' => 'Colors', 'action' => 'index'],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Color list')]) ?>
-                    <span class="tooltiptext"><?= __('Browse color list') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->link(
-                        $this->Html->image('/img/icon-laborats.svg', [
-                            'class' => 'side-nav-icon',
-                            'alt' => __('Laborats')]),
-                        'http://laborats.weebly.com/' . h($color->name) . '.html',
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
-                    <span class="tooltiptext"><?= __('See matching Lab-o-rats entry') ?></span>
-                </div>
-            </div>
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Colors',
-                    'object' => $color
-                    ])
-                ?>
-            </div>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'Colors',
+                'object' => $color,
+                'tooltip' => __('Browse color list'),
+                'show_staff' => true,
+                'is_labo' => true
+            ])
+        ?>
     </aside>
     <div class="column-responsive column-90">
         <div class="colors view content">
@@ -75,12 +52,6 @@
                             <td><?= h($frequency) . __(' %') ?> (<?= h($count) ?> rats) </td>
                         </tr>
                     </table>
-                    <div class="text">
-                        <h2><?= __('Description') ?></h2>
-                        <div class="markdown">
-                            <?= $this->Commonmark->parse($color->description); ?>
-                        </div>
-                    </div>
                 </div>
                 <?php if ($color->picture != '') : ?>
                     <div class="column footer-center">
@@ -88,6 +59,10 @@
                     </div>
                 <?php endif ?>
             </div>
+
+            <h2><?= __('Description') ?></h2>
+            <div class="markdown"><?= $this->Commonmark->parse($color->description); ?></div>
+
             <div class="related">
                 <h2><?= __('Random gallery') ?></h2>
                 <?php if (!empty($examples)) : ?>

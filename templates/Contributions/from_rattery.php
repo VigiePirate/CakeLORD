@@ -5,9 +5,9 @@
  */
 ?>
 <div class="contributions index content">
-    <h3><?= __('Contributions') ?></h3>
+    <h1><?= __('All Contributions from ') . h($ratteries->name) ?></h1>
     <div class="table-responsive">
-        <table>
+        <table class="condensed">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
@@ -25,9 +25,20 @@
                     <td><?= $contribution->has('litter') ? $this->Html->link($contribution->litter->full_name, ['controller' => 'Litters', 'action' => 'view', $contribution->litter->id]) : '' ?></td>
                     <td><?= $contribution->has('contribution_type') ? $this->Html->link($contribution->contribution_type->name, ['controller' => 'ContributionTypes', 'action' => 'view', $contribution->contribution_type->id]) : '' ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $contribution->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $contribution->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $contribution->id], ['confirm' => __('Are you sure you want to delete # {0}?', $contribution->id)]) ?>
+                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                            'url' => ['controller' => 'Contributions', 'action' => 'edit', $contribution->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Edit Contribution')
+                        ])?>
+                        <?= $this->Form->postLink(
+                                $this->Html->image('/img/icon-delete.svg', [
+                                    'class' => 'action-icon',
+                                    'alt' => __('Delete Contribution')
+                                ]),
+                                ['action' => 'delete', $contribution->id],
+                                ['confirm' => __('Are you sure you want to delete contribution # {0}?', $contribution->id), 'escape' => false]
+                            )
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

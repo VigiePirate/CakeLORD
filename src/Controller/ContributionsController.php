@@ -43,29 +43,6 @@ class ContributionsController extends AppController
     }
 
     /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $contribution = $this->Contributions->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $contribution = $this->Contributions->patchEntity($contribution, $this->request->getData());
-            if ($this->Contributions->save($contribution)) {
-                $this->Flash->success(__('The contribution has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The contribution could not be saved. Please, try again.'));
-        }
-        $ratteries = $this->Contributions->Ratteries->find('list', ['limit' => 200]);
-        $litters = $this->Contributions->Litters->find('list', ['limit' => 200, 'contain' => ['Sire', 'Dam']]);
-        $contributionTypes = $this->Contributions->ContributionTypes->find('list', ['limit' => 200, 'order' => ['priority' => 'ASC']]);
-        $this->set(compact('contribution', 'ratteries', 'litters', 'contributionTypes'));
-    }
-
-    /**
      * Edit method
      *
      * @param string|null $id Contribution id.
@@ -124,8 +101,8 @@ class ContributionsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $ratteries = $this->request->getParam('pass');
-        //
-        // Use the RatsTable to find named rats.
+
+        // Use the ContributionsTable to find contributions from the rattery.
         $contributions = $this->Contributions->find('fromRattery', [
             'ratteries' => $ratteries
         ]);
@@ -135,6 +112,8 @@ class ContributionsController extends AppController
             'contain' => ['Litters', 'Litters.States', 'Litters.Sire', 'Litters.Dam', 'Ratteries', 'ContributionTypes'],
         ];
         $contributions = $this->paginate($contributions);
+
+        $ratteries = $this->loadModel('Ratteries')->get(array_map('intval', $ratteries));
 
         $this->set(compact('contributions', 'ratteries'));
     }

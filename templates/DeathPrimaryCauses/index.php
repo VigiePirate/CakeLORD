@@ -5,38 +5,45 @@
  */
 ?>
 <div class="deathPrimaryCauses index content">
-    <?= $this->Html->link(__('New Death Primary Cause'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
-    <h1><?= __('Death Primary Causes') ?></h1>
+    <?= $this->Html->link(__('New Death Category'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('Death Categories') ?></h1>
     <div class="table-responsive">
-        <table class="summary">
+        <table class="condensed">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
-                    <th><?= $this->Paginator->sort('is_infant') ?></th>
-                    <th><?= $this->Paginator->sort('is_accident') ?></th>
-                    <th><?= $this->Paginator->sort('is_oldster') ?></th>
-                    <th class="actions-title"><?= $this->Html->image('/img/icon-fa-action.svg', ['class' => 'action-icon'])?></th>
+                    <th><?= $this->Paginator->sort('is_infant', __('Infant?')) ?></th>
+                    <th><?= $this->Paginator->sort('is_accident', __('Accidental?')) ?></th>
+                    <th><?= $this->Paginator->sort('is_oldster', __('Old age?')) ?></th>
+                    <th class="actions-title col-head"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($deathPrimaryCauses as $deathPrimaryCause): ?>
                 <tr>
-                    <td><?= $this->Number->format($deathPrimaryCause->id) ?></td>
+                    <td><?= $this->Html->link(
+                        $this->Number->format($deathPrimaryCause->id),
+                        ['action' => 'view', $deathPrimaryCause->id]
+                    )?></td>
                     <td><?= h($deathPrimaryCause->name) ?></td>
-                    <td><?= h($deathPrimaryCause->is_infant) ?></td>
-                    <td><?= h($deathPrimaryCause->is_accident) ?></td>
-                    <td><?= h($deathPrimaryCause->is_oldster) ?></td>
+                    <td><?= $deathPrimaryCause->is_infant ? '✓' : '' ?></td>
+                    <td><?= $deathPrimaryCause->is_accident ? '✓' : '' ?></td>
+                    <td><?= $deathPrimaryCause->is_oldster ? '✓' : '' ?></td>
                     <td class="actions">
-                            <?= $this->Html->image('/img/icon-view.svg', [
-                                'url' => ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $deathPrimaryCause->id],
-                                'class' => 'action-icon',
-                                'alt' => __('See Rat')]) ?>
-                            <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
-                                'url' => ['controller' => 'DeathPrimaryCauses', 'action' => 'edit', $deathPrimaryCause->id],
-                                'class' => 'action-icon',
-                                'alt' => __('See Rat')]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $deathPrimaryCause->id], ['confirm' => __('Are you sure you want to delete # {0}?', $deathPrimaryCause->id)]) ?>
+                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                            'url' => ['controller' => 'DeathPrimaryCauses', 'action' => 'edit', $deathPrimaryCause->id],
+                            'class' => 'action-icon',
+                            'alt' => __('See Death Category')]) ?>
+                        <?= $this->Form->postLink(
+                                $this->Html->image('/img/icon-delete.svg', [
+                                    'class' => 'action-icon',
+                                    'alt' => __('Delete Death Category')
+                                ]),
+                                ['action' => 'delete', $deathPrimaryCause->id],
+                                ['confirm' => __('Are you sure you want to delete country # {0}?', $deathPrimaryCause->id), 'escape' => false]
+                            )
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

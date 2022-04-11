@@ -6,43 +6,20 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
-            </div>
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-list.svg', [
-                        'url' => ['controller' => 'Coats', 'action' => 'index'],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('All coats')]) ?>
-                    <span class="tooltiptext"><?= __('See all coats') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->link(
-                        $this->Html->image('/img/icon-laborats.svg', [
-                            'class' => 'side-nav-icon',
-                            'alt' => __('Laborats')]),
-                        'http://laborats.weebly.com/' . h($coat->name) . '.html',
-                        ['escape' => false, 'target' => '_blank']
-                    ); ?>
-                    <span class="tooltiptext"><?= __('See matching Lab-o-rats entry') ?></span>
-                </div>
-            </div>
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Coats',
-                    'object' => $coat
-                    ])
-                ?>
-            </div>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'Coats',
+                'object' => $coat,
+                'tooltip' => __('Browse coat list'),
+                'show_staff' => true,
+                'is_labo' => true
+            ])
+        ?>
     </aside>
     <div class="column-responsive column-90">
         <div class="coats view content">
-
             <div class="row">
-            <?php if ($coat->picture != '') : ?> <!-- should become unnecessary: we should have pictures for all varieties -->
+            <!-- should become unnecessary: we should have pictures for all varieties -->
+            <?php if ($coat->picture != '') : ?>
                 <div class="column-responsive column-66">
                     <div class="sheet-heading">
                         <div class="sheet-title pretitle"><?= __('Coat') ?></div>
@@ -82,15 +59,13 @@
                     </div>
                 <?php endif ?>
             </div>
-            <div class="text">
-                <h2><?= __('Description') ?></h2>
-                <div class="markdown">
-                    <?= $this->Commonmark->parse($coat->description); ?>
-                </div>
-            </div>
-            <div class="related">
-                <h2><?= __('Random gallery') ?></h2>
-                <?php if (!empty($examples)) : ?>
+
+            <h2><?= __('Description') ?></h2>
+            <div class="markdown"><?= $this->Commonmark->parse($coat->description); ?></div>
+
+            <?php if (!empty($examples)) : ?>
+                <div class="related">
+                    <h2><?= __('Random gallery') ?></h2>
                     <section id="gallery">
                     <?php foreach ($examples as $rat) : ?>
                         <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
@@ -98,8 +73,8 @@
                         <?php endif ?>
                     <?php endforeach; ?>
                     </section>
-                <?php endif; ?>
-            </div>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

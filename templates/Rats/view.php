@@ -11,13 +11,29 @@
                 <?= $this->element('default_sidebar') ?>
             </div>
             <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-edit.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Modify Rat')]) ?>
-                    <span class="tooltiptext"><?= __('Edit whole rat sheet') ?></span>
-                </div>
+                <?php if ($rat->state->is_frozen) : ?>
+                    <div class="tooltip disabled">
+                        <?= $this->Html->image('/img/icon-edit.svg', [
+                            'url' => [],
+                            'class' => 'side-nav-icon',
+                            'alt' => __('Modify Rat')
+                        ]) ?>
+                        <span class="tooltiptext"><?= __('You cannot edit this sheet') ?></span>
+                    </div>
+                <?php else : ?>
+                    <div class="tooltip">
+                        <?= $this->Html->image('/img/icon-edit.svg', [
+                            'url' => [
+                                'controller' => 'Rats',
+                                'action' => 'edit', $rat->id,
+                            ],
+                            'class' => 'side-nav-icon',
+                            'alt' => __('Modify Rat')
+                        ]) ?>
+                        <span class="tooltiptext"><?= __('Edit whole rat sheet') ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-transfer-ownership.svg', [
                         'url' => ['controller' => 'Rats', 'action' => 'transferOwnership', $rat->id],
