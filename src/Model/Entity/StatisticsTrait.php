@@ -56,8 +56,6 @@ trait StatisticsTrait
         return $model->find()->where($filter)->count();
     }
 
-
-
     public function countRatsByYear()
     {
         $model = FactoryLocator::get('Table')->get('Rats');

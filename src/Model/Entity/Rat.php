@@ -460,24 +460,23 @@ class Rat extends Entity
             return null;
         }
 
-        else {
-            array_push($descendance, $id);
+        $children = $model->find()
+            ->select(['id'])
+            ->matching('BirthLitters.ParentRats', function ($query) use ($id) {
+                return $query->where(['ParentRats.id' => $id]);
+            })
+            ->enableHydration(false)
+            ->toArray();
 
-            $children = $model->find()
-                ->select(['id'])
-                ->matching('BirthLitters.ParentRats', function ($query) use ($id) {
-                    return $query->where(['ParentRats.id' => $id]);
-                })
-                ->all();
-
-            if (!empty($children)) {
-                foreach ($children as $child) {
-                    $this->computeDescendance($child->id, $descendance);
-                }
-                return $descendance;
-            } else {
-                return null;
+        if (!empty($children)) {
+            foreach ($children as $child) {
+                $this->computeDescendance($child['id'], $descendance);
             }
+            array_push($descendance, $id);
+            return $descendance;
+        } else {
+            array_push($descendance, $id);
+            return null;
         }
     }
 
@@ -489,24 +488,23 @@ class Rat extends Entity
             return null;
         }
 
-        else {
-            array_push($ancestry, $id);
+        $ancestors = $model->find()
+            ->select(['id'])
+            ->matching('BredLitters.OffspringRats', function ($query) use ($id) {
+                return $query->where(['OffspringRats.id' => $id]);
+            })
+            ->enableHydration(false)
+            ->toArray();
 
-            $ancestors = $model->find()
-                ->select(['id'])
-                ->matching('BredLitters.OffspringRats', function ($query) use ($id) {
-                    return $query->where(['OffspringRats.id' => $id]);
-                })
-                ->all();
-
-            if (! empty($ancestors)) {
-                foreach ($ancestors as $ancestor) {
-                    $this->computeAncestry($ancestor->id, $ancestry);
-                }
-                return $ancestry;
-            } else {
-                return null;
+        if (! empty($ancestors)) {
+            foreach ($ancestors as $ancestor) {
+                $this->computeAncestry($ancestor['id'], $ancestry);
             }
+            array_push($ancestry, $id);
+            return $ancestry;
+        } else {
+            array_push($ancestry, $id);
+            return null;
         }
     }
 
@@ -514,9 +512,11 @@ class Rat extends Entity
     {
         // -1 since the rat itself is put in the list for recursion initialization
         $descendance = [];
-        $stats['descendors'] = count($this->computeDescendance($this->id, $descendance)) - 1;
+        $this->computeDescendance($this->id, $descendance);
+        $stats['descendors'] = count($descendance) - 1;
         $ancestry = [];
-        $stats['ancestors'] = count($this->computeAncestry($this->id, $ancestry)) - 1;
+        $this->computeAncestry($this->id, $ancestry);
+        $stats['ancestors'] = count($ancestry) - 1;
         $children = 0;
         foreach ($this->bred_litters as $litter) {
             $children += $litter->pups_number;
