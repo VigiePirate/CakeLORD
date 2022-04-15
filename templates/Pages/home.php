@@ -140,7 +140,7 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                         <?= $this->Html->image("icon-idcard.png", ["alt" => "Carte d'identité"]) ?>
                         <h3>Fiches individuelles</h3>
                         <ul>
-                            <li>Indentifiant unique</li>
+                            <li>Identifiant unique</li>
                             <li>Pedigree imprimable</li>
                             <li>Traçabilité des origines</li>
                         </ul>

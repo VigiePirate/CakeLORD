@@ -20,10 +20,10 @@
                 </div>
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-add-rattery.svg', [
-                        'url' => ['controller' => 'Litters', 'action' => 'add_contribution'],
+                        'url' => ['controller' => 'Litters', 'action' => 'manageContributions', $litter->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Add rattery')]) ?>
-                    <span class="tooltiptext"><?= __('Add a contributing rattery') ?></span>
+                    <span class="tooltiptext"><?= __('Manage contributing ratteries') ?></span>
                 </div>
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-add-rat.svg', [

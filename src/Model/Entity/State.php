@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use App\Model\Entity\StatisticsTrait;
 
 /**
  * State Entity
@@ -34,6 +35,8 @@ use Cake\ORM\Entity;
  */
 class State extends Entity
 {
+    use StatisticsTrait;
+    
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *

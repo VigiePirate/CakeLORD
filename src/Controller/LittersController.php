@@ -60,12 +60,13 @@ class LittersController extends AppController
     public function view($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['Users', 'States', 'OffspringRats', 'OffspringRats.States',
-            'Sire.Ratteries', 'Sire.BirthLitters', 'Sire.BirthLitters.Contributions',
-            'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions',
-            'Sire', 'Sire.Markings', 'Sire.Dilutions', 'Sire.Colors', 'Sire.Coats', 'Sire.Earsets','Sire.DeathPrimaryCauses','Sire.DeathSecondaryCauses',
-            'Dam', 'Dam.Markings', 'Dam.Dilutions', 'Dam.Colors', 'Dam.Coats', 'Dam.Earsets','Dam.DeathPrimaryCauses','Dam.DeathSecondaryCauses',
-            'Ratteries','Contributions', 'Conversations', 'LitterSnapshots',
+            'contain' => [
+                'Users', 'States', 'OffspringRats', 'OffspringRats.States',
+                'Sire.Ratteries', 'Sire.BirthLitters', 'Sire.BirthLitters.Contributions',
+                'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions',
+                'Sire', 'Sire.Markings', 'Sire.Dilutions', 'Sire.Colors', 'Sire.Coats', 'Sire.Earsets','Sire.DeathPrimaryCauses','Sire.DeathSecondaryCauses',
+                'Dam', 'Dam.Markings', 'Dam.Dilutions', 'Dam.Colors', 'Dam.Coats', 'Dam.Earsets','Dam.DeathPrimaryCauses','Dam.DeathSecondaryCauses',
+                'Ratteries', 'Contributions', 'Conversations', 'LitterSnapshots',
             ],
         ]);
 
@@ -302,6 +303,25 @@ class LittersController extends AppController
         $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
         $contributions = $this->Litters->Contributions->find('list', ['limit' => 200]);
         $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries', 'contributions'));
+    }
+
+    /**
+     * ManageContributions method
+     *
+     * @param string|null $id Litter id.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function manageContributions($id = null)
+    {
+        $litter = $this->Litters->get($id, [
+            'contain' => [
+                'Sire', 'Sire.Ratteries', 'Sire.BirthLitters', 'Sire.BirthLitters.Contributions',
+                'Dam', 'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions',
+                'Ratteries', 'Contributions', 'States'
+            ],
+        ]);
+        $this->set(compact('litter'));
     }
 
     /**

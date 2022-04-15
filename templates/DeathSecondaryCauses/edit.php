@@ -6,26 +6,28 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $deathSecondaryCause->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $deathSecondaryCause->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Death Secondary Causes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'DeathSecondaryCauses',
+                'object' => $deathSecondaryCause,
+                'tooltip' => __('Browse death category list'),
+                'can_cancel' => true,
+                'show_staff' => true,
+            ])
+        ?>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="deathSecondaryCauses form content">
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Death Causes') ?></div>
+            </div>
+            <h1><?= __('Edit Death Cause') ?></h1>
             <?= $this->Form->create($deathSecondaryCause) ?>
             <fieldset>
-                <legend><?= __('Edit Death Secondary Cause') ?></legend>
                 <?php
+                    echo $this->Form->control('death_primary_cause_id', ['options' => $deathPrimaryCauses, 'label' => __('Death category')]);
                     echo $this->Form->control('name');
-                    echo $this->Form->control('death_primary_cause_id', ['options' => $deathPrimaryCauses]);
                     echo $this->Form->control('description');
-                    echo $this->Form->control('is_tumor');
+                    echo $this->Form->control('is_tumor', ['label' => __('Tumoral cause?')]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

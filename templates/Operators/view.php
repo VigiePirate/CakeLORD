@@ -6,13 +6,13 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Html->link(__('Edit Operator'), ['action' => 'edit', $operator->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Operator'), ['action' => 'delete', $operator->id], ['confirm' => __('Are you sure you want to delete # {0}?', $operator->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Operators'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Operator'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'OPerators',
+                'object' => $operator,
+                'tooltip' => __('Browse operator list'),
+                'show_staff' => true
+            ])
+        ?>
     </aside>
     <div class="column-responsive column-90">
         <div class="operators view content">

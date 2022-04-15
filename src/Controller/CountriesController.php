@@ -34,7 +34,15 @@ class CountriesController extends AppController
     public function view($id = null)
     {
         $country = $this->Countries->get($id, [
-            'contain' => ['Ratteries','Ratteries.States','Ratteries.Users'],
+            'contain' => [
+                'Ratteries' => function($q) {
+                    return $q
+                    ->where(['is_alive' => true])
+                    ->order('Ratteries.prefix');
+                },
+                'Ratteries.States',
+                'Ratteries.Users'
+            ],
         ]);
 
         $this->set(compact('country'));

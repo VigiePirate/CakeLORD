@@ -6,18 +6,19 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Html->link(__('Edit Death Secondary Cause'), ['action' => 'edit', $deathSecondaryCause->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Death Secondary Cause'), ['action' => 'delete', $deathSecondaryCause->id], ['confirm' => __('Are you sure you want to delete # {0}?', $deathSecondaryCause->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Death Secondary Causes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Death Secondary Cause'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'DeathSecondaryCauses',
+                'object' => $deathSecondaryCause,
+                'tooltip' => __('Browse death cause list'),
+                'help_url' =>  ['controller' => 'Articles', 'action' => 'index'],
+                'show_staff' => true
+            ])
+        ?>
     </aside>
     <div class="column-responsive column-90">
         <div class="deathSecondaryCauses view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Secondary Death Cause') ?></div>
+                <div class="sheet-title pretitle"><?= __('Death Cause') ?></div>
             </div>
             <h1><?= h($deathSecondaryCause->name) ?></h1>
 
@@ -36,15 +37,16 @@
                     <th><?= __('Is Tumor') ?></th>
                     <td><?= $deathSecondaryCause->is_tumor ? __('Yes') : __('No'); ?></td>
                 </tr>
-                <tr>
-                    <th><?= __('Description') ?></th>
-                    <td><div class="markdown">
-                        <?= $this->Commonmark->sanitize($deathSecondaryCause->description); ?>
-                    </div></td>
-                </tr>
             </table>
-            <div class="related">
-                <h2><?= __('Statistics') ?></h3>
+
+            <h2><?= __('Description') ?></h2>
+            <div class="text">
+                <!-- no h because this might store a few markups, but we do not want md here -->
+                <table class="condensed"><tr><td><?= $deathSecondaryCause->description ?></td></tr></table>
+            </div>
+            <?php if (count($deathSecondaryCause->rats) > 0) : ?>
+                <h2><?= __('Related Information') ?></h2>
+                <h3><?= __('Statistics') ?></h3>
                 <table class="condensed">
                     <tr>
                         <th><?= __('Frequency') ?></th>
@@ -60,8 +62,8 @@
                     </tr>
                 </table>
 
-                <h2><?= __('Related rats') ?></h2>
-                <?= $this->element('simple_rats', [ //rats
+                <h3><?= __('Last rat deaths recorded with this cause') ?></h3>
+                <?= $this->element('simple_rats', [
                     'rubric' => __(''),
                     'rats' =>  $deathSecondaryCause->rats,
                     'exceptions' => [
@@ -70,9 +72,12 @@
                         'death_primary_cause',
                         'death_secondary_cause',
                         'death_cause',
+                        'actions'
                     ],
                 ]) ?>
-            </div>
+            <?php else : ?>
+                <div class="message"><?= __('No rat was recorded as dead from this cause.') ?></div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

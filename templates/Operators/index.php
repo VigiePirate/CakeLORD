@@ -14,7 +14,7 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('symbol') ?></th>
                     <th><?= $this->Paginator->sort('meaning') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions col-head"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -24,9 +24,20 @@
                     <td><?= h($operator->symbol) ?></td>
                     <td><?= h($operator->meaning) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $operator->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $operator->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $operator->id], ['confirm' => __('Are you sure you want to delete # {0}?', $operator->id)]) ?>
+                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                            'url' => ['controller' => 'Operators', 'action' => 'edit', $operator->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Edit Operator')
+                        ])?>
+                        <?= $this->Form->postLink(
+                                $this->Html->image('/img/icon-delete.svg', [
+                                    'class' => 'action-icon',
+                                    'alt' => __('Delete Operator')
+                                ]),
+                                ['action' => 'delete', $operator->id],
+                                ['confirm' => __('Are you sure you want to delete # {0}?', $operator->id), 'escape' => false]
+                            )
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

@@ -50,7 +50,9 @@
                         'type' => 'select']);
                 ?>
                 <div id="secondary-desc" class="message warning">
-                    Please, read carefully information that will appear below to check the fitness of your choice.
+                    <div class="markdown">
+                        <?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?>
+                    </div>
                 </div>
                 <legend><?= __('Complementary information') ?></legend>
                 <?php
@@ -125,7 +127,7 @@
                 },
     			success: function(data) {
                     var p = document.getElementById("secondary-desc");
-                    p.innerText = data.items['0'].value;
+                    p.innerHTML = data.items['0'].value;
                     //$('#secondary-desc').appendChild(data.items['0'].value);
                 },
             });

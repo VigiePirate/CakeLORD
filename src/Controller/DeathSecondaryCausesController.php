@@ -36,8 +36,15 @@ class DeathSecondaryCausesController extends AppController
     public function view($id = null)
     {
         $deathSecondaryCause = $this->DeathSecondaryCauses->get($id, [
-            'contain' => ['DeathPrimaryCauses','Rats',
-                'Rats.States','Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions'],
+            'contain' => [
+                'DeathPrimaryCauses',
+                'Rats' => function($q) {
+                    return $q
+                    ->order('Rats.modified DESC')
+                    ->limit(10);
+                },
+                'Rats.States','Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions'
+            ],
         ]);
 
         $count = $deathSecondaryCause->countMy('rats', 'death_secondary_cause');
@@ -65,13 +72,13 @@ class DeathSecondaryCausesController extends AppController
         if ($this->request->is('post')) {
             $deathSecondaryCause = $this->DeathSecondaryCauses->patchEntity($deathSecondaryCause, $this->request->getData());
             if ($this->DeathSecondaryCauses->save($deathSecondaryCause)) {
-                $this->Flash->success(__('The death secondary cause has been saved.'));
+                $this->Flash->success(__('The death cause has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The death secondary cause could not be saved. Please, try again.'));
+            $this->Flash->error(__('The death cause could not be saved. Please, try again.'));
         }
-        $deathPrimaryCauses = $this->DeathSecondaryCauses->DeathPrimaryCauses->find('list', ['limit' => 200]);
+        $deathPrimaryCauses = $this->DeathSecondaryCauses->DeathPrimaryCauses->find('list', ['limit' => 200])->order('id');
         $this->set(compact('deathSecondaryCause', 'deathPrimaryCauses'));
     }
 
@@ -90,13 +97,13 @@ class DeathSecondaryCausesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $deathSecondaryCause = $this->DeathSecondaryCauses->patchEntity($deathSecondaryCause, $this->request->getData());
             if ($this->DeathSecondaryCauses->save($deathSecondaryCause)) {
-                $this->Flash->success(__('The death secondary cause has been saved.'));
+                $this->Flash->success(__('The death cause has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The death secondary cause could not be saved. Please, try again.'));
+            $this->Flash->error(__('The death cause could not be saved. Please, try again.'));
         }
-        $deathPrimaryCauses = $this->DeathSecondaryCauses->DeathPrimaryCauses->find('list', ['limit' => 200]);
+        $deathPrimaryCauses = $this->DeathSecondaryCauses->DeathPrimaryCauses->find('list', ['limit' => 200])->order('id');
         $this->set(compact('deathSecondaryCause', 'deathPrimaryCauses'));
     }
 
@@ -112,9 +119,9 @@ class DeathSecondaryCausesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $deathSecondaryCause = $this->DeathSecondaryCauses->get($id);
         if ($this->DeathSecondaryCauses->delete($deathSecondaryCause)) {
-            $this->Flash->success(__('The death secondary cause has been deleted.'));
+            $this->Flash->success(__('The death cause has been deleted.'));
         } else {
-            $this->Flash->error(__('The death secondary cause could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The death cause could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

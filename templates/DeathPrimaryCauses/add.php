@@ -6,22 +6,28 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Html->link(__('List Death Primary Causes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'DeathPrimaryCauses',
+                'object' => $deathPrimaryCause,
+                'tooltip' => __('Browse death category list'),
+                'show_staff' => false
+            ])
+        ?>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="deathPrimaryCauses form content">
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Death Categories') ?></div>
+            </div>
+            <h1><?= __('Add Death Category') ?></h1>
             <?= $this->Form->create($deathPrimaryCause) ?>
             <fieldset>
-                <legend><?= __('Add Death Primary Cause') ?></legend>
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('description');
-                    echo $this->Form->control('is_infant');
-                    echo $this->Form->control('is_accident');
-                    echo $this->Form->control('is_oldster');
+                    echo $this->Form->control('is_infant', ['label' => __('Infant-only?')]);
+                    echo $this->Form->control('is_accident', ['label' => __('Accidental?')]);
+                    echo $this->Form->control('is_oldster', ['label' => __('Elderly-only?')]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

@@ -26,14 +26,14 @@
                     <td><?= h($contribution->contribution_type->name) ?></td>
                     <td class="actions">
                         <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
-                            'url' => ['controller' => 'Contributions', 'action' => 'edit', $contribution->id],
+                            'url' => ['controller' => 'Litters', 'action' => 'manageContributions', $contribution->litter_id],
                             'class' => 'action-icon',
-                            'alt' => __('Edit Contribution')
+                            'alt' => __('Edit')
                         ])?>
                         <?= $this->Form->postLink(
                                 $this->Html->image('/img/icon-delete.svg', [
                                     'class' => 'action-icon',
-                                    'alt' => __('Delete Contribution')
+                                    'alt' => __('Delete')
                                 ]),
                                 ['action' => 'delete', $contribution->id],
                                 ['confirm' => __('Are you sure you want to delete contribution # {0}?', $contribution->id), 'escape' => false]

@@ -6,21 +6,22 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $contributionType->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $contributionType->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Contribution Types'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'ContributionTypes',
+                'object' => $contributionType,
+                'tooltip' => __('Browse contribution type list'),
+                'show_staff' => true
+            ])
+        ?>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="contributionTypes form content">
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Contribution Types') ?></div>
+            </div>
+            <h1><?= __('Edit Contribution Type') ?></h1>
             <?= $this->Form->create($contributionType) ?>
             <fieldset>
-                <legend><?= __('Edit Contribution Type') ?></legend>
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('priority');

@@ -39,7 +39,13 @@ class StatesController extends AppController
             'contain' => ['NextOkStates', 'NextKoStates', 'NextFrozenStates', 'NextThawedStates'],
         ]);
 
-        $this->set(compact('state'));
+        $counts = [
+            'rats' => $state->countMy('rats', 'state'),
+            'ratteries' => $state->countMy('rats', 'state'),
+            'litters' => $state->countMy('litters', 'state')
+        ];
+
+        $this->set(compact('state', 'counts'));
     }
 
     /**

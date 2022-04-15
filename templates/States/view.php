@@ -6,25 +6,22 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <div class="spacer"> </div>
-            <?= $this->Html->image('/img/icon-search-rats.svg', [
-                  'url' => ['controller' => 'Rats', 'action' => 'inState', $state->id],
-                  'class' => 'side-nav-icon',
-                  'alt' => __('Find their rats')]) ?>
-            <div class="spacer"> </div>
-            <?= $this->Html->link(__('Edit State'), ['action' => 'edit', $state->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete State'), ['action' => 'delete', $state->id], ['confirm' => __('Are you sure you want to delete # {0}?', $state->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List States'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New State'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'States',
+                'object' => $state,
+                'tooltip' => __('Browse state list'),
+                'show_staff' => true
+            ])
+        ?>
     </aside>
     <div class="column-responsive column-90">
         <div class="states view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Sheet State') ?></div>
-                <div class="statemark statecolor_<?= h($state->id) ?>"><?= h($state->symbol) ?></div>
+                <div class="sheet-title pretitle"><?= _('State') ?></div>
+                <div class="tooltip-state">
+                    <div class="current-statemark statecolor_<?php echo h($state->id) ?>"><?= h($state->symbol) ?></div>
+                    <span class="tooltiptext-state hide-on-mobile"><?= h($state->name) ?></span>
+                </div>
             </div>
             <h1><?= h($state->name) ?></h1>
 
@@ -106,25 +103,28 @@
             </table>
 
             <div class="related">
-                <h2><?= __('Related sheets and snapshots') ?></h2>
-                <div class="related">
-                    <details>
-                        <summary><?= __('Related rats') ?></summary>
-                        <p><strong>xx <?= __('rat sheets') ?></strong> <?= __('are currently in this state.') ?> </p>
-                    </details>
-                </div>
-                <div class="related">
-                    <details>
-                        <summary><?= __('Related ratteries') ?></summary>
-                        <p><strong>yy <?= __('rattery sheets') ?></strong> <?= __('are currently in this state.') ?> </p>
-                    </details>
-                </div>
-                <div class="related">
-                    <details>
-                        <summary><?= __('Related litters') ?></summary>
-                        <p><strong>zz <?= __('litter sheets') ?></strong> <?= __('are currently in this state.') ?> </p>
-                    </details>
-                </div>
+                <h2><?= __('Related sheets') ?></h2>
+                <details>
+                    <summary><?= __('Related rats') ?></summary>
+                    <div class="button-raised">
+                        <?= $this->Html->link(__('See all rats in this state'), ['controller' => 'Rats', 'action' => 'inState', $state->id], ['class' => 'button float-right']) ?>
+                    </div>
+                    <table><tr><td><strong><?= $counts['rats'] ?> <?= __('rat sheets') ?></strong> <?= __('are currently in this state.') ?> </td></tr></table>
+                </details>
+                <details>
+                    <summary><?= __('Related ratteries') ?></summary>
+                    <div class="button-raised">
+                        <?= $this->Html->link(__('See all ratteries in this state'), ['controller' => 'Ratteries', 'action' => 'inState', $state->id], ['class' => 'button float-right']) ?>
+                    </div>
+                    <table><tr><td><strong><?= $counts['ratteries'] ?> <?= __('rattery sheets') ?></strong> <?= __('are currently in this state.') ?> </td></tr></table>
+                </details>
+                <details>
+                    <summary><?= __('Related litters') ?></summary>
+                    <div class="button-raised">
+                        <?= $this->Html->link(__('See all litters in this state'), ['controller' => 'Litters', 'action' => 'inState', $state->id], ['class' => 'button float-right']) ?>
+                    </div>
+                    <table><tr><td><strong><?= $counts['litters'] ?> <?= __('litter sheets') ?></strong> <?= __('are currently in this state.') ?> </td></tr></table>
+                </details>
             </div>
         </div>
     </div>

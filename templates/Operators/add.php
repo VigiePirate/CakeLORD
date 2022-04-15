@@ -6,16 +6,23 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Html->link(__('List Operators'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'Operators',
+                'object' => $operator,
+                'tooltip' => __('Browse operator list'),
+                'show_staff' => false
+            ])
+        ?>
     </aside>
     <div class="column-responsive column-90">
         <div class="operators form content">
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Compatibility operators') ?></div>
+            </div>
+            <h1><?= __('Add Operator') ?></h1>
             <?= $this->Form->create($operator) ?>
             <fieldset>
-                <legend><?= __('Add Operator') ?></legend>
+
                 <?php
                     echo $this->Form->control('symbol');
                     echo $this->Form->control('meaning');

@@ -4,34 +4,36 @@
  * @var \App\Model\Entity\Color $color
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <?= $this->element('tech_sidebar', [
-                'controller' => 'Colors',
-                'object' => $color,
-                'tooltip' => __('Browse color list'),
-                'show_staff' => true
-            ])
-        ?>
-    </aside>
-    <div class="column-responsive column-90">
-        <div class="colors form content">
-            <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Colors') ?></div>
-            </div>
-            <h1><?= __('Edit Color') ?></h1>
-            <?= $this->Form->create($color) ?>
-            <fieldset>
-                <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('genotype');
-                    echo $this->Form->control('picture');
-                    echo $this->Form->control('description');
-                    echo $this->Form->control('is_picture_mandatory');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
-    </div>
-</div>
+<?= $this->element('variety/edit', [
+        'Varieties' => 'Colors',
+        'Variety' => __('Color'),
+        'variety' => $color,
+        'tooltip' => __('Browse color list'),
+        'show_staff' => true
+    ])
+?>
+
+<!-- Easy MDE -->
+<?= $this->Html->css('easymde.css') ?>
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
+<script>
+    var easyMDE = new EasyMDE({
+        minHeight: "20rem",
+        spellChecker: false,
+        inputStyle: "contenteditable",
+        nativeSpellcheck: true,
+        previewImagesInEditor: true,
+        promptURLs: true,
+        sideBySideFullscreen: false,
+        toolbar: [
+            "heading", "|",
+            "bold", "italic", "strikethrough", "|",
+            "unordered-list", "ordered-list", "table", "|",
+            "link", "image", "|",
+            "side-by-side", "fullscreen", "preview", "|",
+            "guide"
+        ]
+    });
+    easyMDE.toggleSideBySide();
+</script>
