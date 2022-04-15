@@ -32,9 +32,10 @@ class RolesController extends AppController
      */
     public function view($id = null)
     {
-        $role = $this->Roles->get($id, [
-            'contain' => ['Users'],
-        ]);
+        $role = $this->Roles->get($id);
+        if ($role->is_staff) {
+            $role = $this->Roles->get($id, ['contain' => 'Users']);
+        }
 
         $this->set(compact('role'));
     }

@@ -4,33 +4,36 @@
  * @var \App\Model\Entity\Earset $earset
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $earset->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $earset->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Earsets'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-90">
-        <div class="earsets form content">
-            <?= $this->Form->create($earset) ?>
-            <fieldset>
-                <legend><?= __('Edit Earset') ?></legend>
-                <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('picture');
-                    echo $this->Form->control('genotype');
-                    echo $this->Form->control('description');
-                    echo $this->Form->control('is_picture_mandatory');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
-    </div>
-</div>
+<?= $this->element('variety/edit', [
+        'Varieties' => 'Earsets',
+        'Variety' => __('Earset'),
+        'variety' => $earset,
+        'tooltip' => __('Browse earset list'),
+        'show_staff' => true
+    ])
+?>
+
+<!-- Easy MDE -->
+<?= $this->Html->css('easymde.css') ?>
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
+<script>
+    var easyMDE = new EasyMDE({
+        minHeight: "20rem",
+        spellChecker: false,
+        inputStyle: "contenteditable",
+        nativeSpellcheck: true,
+        previewImagesInEditor: true,
+        promptURLs: true,
+        sideBySideFullscreen: false,
+        toolbar: [
+            "heading", "|",
+            "bold", "italic", "strikethrough", "|",
+            "unordered-list", "ordered-list", "table", "|",
+            "link", "image", "|",
+            "side-by-side", "fullscreen", "preview", "|",
+            "guide"
+        ]
+    });
+    easyMDE.toggleSideBySide();
+</script>

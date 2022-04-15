@@ -21,6 +21,7 @@ use App\Model\Entity\StatisticsTrait;
 class Earset extends Entity
 {
     use StatisticsTrait;
+    
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *

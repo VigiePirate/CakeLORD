@@ -254,6 +254,9 @@
                             <summary>
                                 <?php if($rat->sex === 'M') { echo $litter->name_from_sire ; } else { echo $litter->name_from_dam ; } ?>
                             </summary>
+                            <div class="button-raised">
+                                <?= $this->Html->link(__('See litter'), ['controller' => 'Litters', 'action' => 'view', $litter->id], ['class' => 'button float-right']) ?>
+                            </div>
                             <?= $this->element('simple_rats', [ //rats
                                 'rubric' => __(''),
                                 'rats' => $litter->offspring_rats,

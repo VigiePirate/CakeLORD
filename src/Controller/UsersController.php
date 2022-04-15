@@ -304,7 +304,8 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Roles', 'Conversations',
+            'contain' => [
+                'Roles', 'Conversations',
             //'OwnerRats', 'OwnerRats.States','OwnerRats.DeathPrimaryCauses','OwnerRats.DeathSecondaryCauses',
             //'OwnerRats.BirthLitters','OwnerRats.Ratteries','OwnerRats.BirthLitters.Ratteries','OwnerRats.BirthLitters.Contributions',
             //'OwnerRats.BirthLitters.Sire','OwnerRats.BirthLitters.Sire.BirthLitters','OwnerRats.BirthLitters.Sire.BirthLitters.Ratteries',
@@ -313,8 +314,15 @@ class UsersController extends AppController
             //'CreatorRats.BirthLitters','CreatorRats.Ratteries','CreatorRats.BirthLitters.Ratteries','CreatorRats.BirthLitters.Contributions',
             //'CreatorRats.BirthLitters.Sire','CreatorRats.BirthLitters.Sire.BirthLitters','CreatorRats.BirthLitters.Sire.BirthLitters.Ratteries',
             //'CreatorRats.BirthLitters.Dam','CreatorRats.BirthLitters.Dam.BirthLitters','CreatorRats.BirthLitters.Dam.BirthLitters.Ratteries',
-
-            'Ratteries', 'Ratteries.States','Ratteries.Countries'],
+                'Ratteries', 'Ratteries.States','Ratteries.Countries',
+                'OwnerRats' => function($q) {
+                    return $q
+                    ->order('OwnerRats.modified DESC')
+                    ->limit(10);
+                },
+                'OwnerRats.States', 'OwnerRats.DeathPrimaryCauses', 'OwnerRats.DeathSecondaryCauses',
+                'OwnerRats.Ratteries', 'OwnerRats.BirthLitters', 'OwnerRats.BirthLitters.Contributions'
+            ]
         ]);
         $this->Authorization->authorize($user);
 

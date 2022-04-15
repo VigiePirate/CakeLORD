@@ -5,16 +5,16 @@
  */
 ?>
 <div class="contributionTypes index content">
-    <?= $this->Html->link(__('New Contribution Type'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Contribution Types') ?></h3>
+    <?= $this->Html->link(__('New Contribution Type'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('Contribution Types') ?></h1>
     <div class="table-responsive">
-        <table>
+        <table class="condensed">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('priority') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions col-head"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -24,11 +24,21 @@
                     <td><?= h($contributionType->name) ?></td>
                     <td><?= $this->Number->format($contributionType->priority) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $contributionType->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $contributionType->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $contributionType->id], ['confirm' => __('Are you sure you want to delete # {0}?', $contributionType->id)]) ?>
+                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                            'url' => ['controller' => 'ContributionTypes', 'action' => 'edit', $contributionType->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Edit')
+                        ])?>
+                        <?= $this->Form->postLink(
+                                $this->Html->image('/img/icon-delete.svg', [
+                                    'class' => 'action-icon',
+                                    'alt' => __('Delete')
+                                ]),
+                                ['action' => 'delete', $contributionType->id],
+                                ['confirm' => __('Are you sure you want to delete contribution type # {0}?', $contributionType->id), 'escape' => false]
+                            )
+                        ?>
                     </td>
-                </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>

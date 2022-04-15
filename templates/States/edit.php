@@ -6,21 +6,23 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $state->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $state->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List States'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'States',
+                'object' => $state,
+                'tooltip' => __('Browse state list'),
+                'can_cancel' => true,
+                'show_staff' => true
+            ])
+        ?>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="states form content">
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('States') ?></div>
+            </div>
+            <h1><?= __('Edit State') ?></h1>
             <?= $this->Form->create($state) ?>
             <fieldset>
-                <legend><?= __('Edit State') ?></legend>
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('color');

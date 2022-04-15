@@ -4,37 +4,14 @@
  * @var \App\Model\Entity\Coat $coat
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <?= $this->element('tech_sidebar', [
-                'controller' => 'Coats',
-                'object' => $coat,
-                'tooltip' => __('Browse coat list'),
-                'show_staff' => true
-            ])
-        ?>
-    </aside>
-    <div class="column-responsive column-90">
-        <div class="coats form content">
-            <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Coats') ?></div>
-            </div>
-            <h1><?= __('Edit Coat') ?></h1>
-            <?= $this->Form->create($coat) ?>
-            <fieldset>
-                <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('picture');
-                    echo $this->Form->control('genotype');
-                    echo $this->Form->control('description');
-                    echo $this->Form->control('is_picture_mandatory');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
-    </div>
-</div>
+<?= $this->element('variety/edit', [
+        'Varieties' => 'Coats',
+        'Variety' => __('Coat'),
+        'variety' => $coat,
+        'tooltip' => __('Browse coat list'),
+        'show_staff' => true
+    ])
+?>
 
 <!-- Easy MDE -->
 <?= $this->Html->css('easymde.css') ?>

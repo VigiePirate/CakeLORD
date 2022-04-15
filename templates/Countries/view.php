@@ -51,7 +51,7 @@
 
             </table>
             <div class="related">
-                <h2><?= __('Ratteries registered in this country') ?></h2>
+                <h2><?= __('Active ratteries registered in this country') ?></h2>
                 <?php if (!empty($country->ratteries)) : ?>
                     <?= $this->element('simple_ratteries', [
                         'rubric' => __(''),
@@ -59,8 +59,11 @@
                         'exceptions' => [
                             'picture',
                             'country',
+                            'actions'
                         ],
                     ]) ?>
+                <?php else : ?>
+                    <div class="message"><?= __('There is currently no active rattery registered in this country.') ?></div>
                 <?php endif; ?>
             </div>
         </div>

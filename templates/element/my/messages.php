@@ -1,4 +1,4 @@
-<h4><?= __('My Messages') ?></h4>
+<h2><?= __('My Messages') ?></h2>
 <?php if (!empty($user->conversations)) : ?>
 <div class="table-responsive">
     <table>

@@ -33,7 +33,15 @@ class DeathPrimaryCausesController extends AppController
     public function view($id = null)
     {
         $deathPrimaryCause = $this->DeathPrimaryCauses->get($id, [
-            'contain' => ['DeathSecondaryCauses'],
+            'contain' => [
+                'DeathSecondaryCauses',
+                'Rats' => function($q) {
+                    return $q
+                    ->order('Rats.modified DESC')
+                    ->limit(10);
+                },
+                'Rats.States','Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions'
+            ],
         ]);
 
         $count = $deathPrimaryCause->countMy('rats','death_primary_cause');
@@ -60,11 +68,11 @@ class DeathPrimaryCausesController extends AppController
         if ($this->request->is('post')) {
             $deathPrimaryCause = $this->DeathPrimaryCauses->patchEntity($deathPrimaryCause, $this->request->getData());
             if ($this->DeathPrimaryCauses->save($deathPrimaryCause)) {
-                $this->Flash->success(__('The death primary cause has been saved.'));
+                $this->Flash->success(__('The death category has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The death primary cause could not be saved. Please, try again.'));
+            $this->Flash->error(__('The death category could not be saved. Please, try again.'));
         }
         $this->set(compact('deathPrimaryCause'));
     }
@@ -84,11 +92,11 @@ class DeathPrimaryCausesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $deathPrimaryCause = $this->DeathPrimaryCauses->patchEntity($deathPrimaryCause, $this->request->getData());
             if ($this->DeathPrimaryCauses->save($deathPrimaryCause)) {
-                $this->Flash->success(__('The death primary cause has been saved.'));
+                $this->Flash->success(__('The death category has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The death primary cause could not be saved. Please, try again.'));
+            $this->Flash->error(__('The death category could not be saved. Please, try again.'));
         }
         $this->set(compact('deathPrimaryCause'));
     }
@@ -105,9 +113,9 @@ class DeathPrimaryCausesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $deathPrimaryCause = $this->DeathPrimaryCauses->get($id);
         if ($this->DeathPrimaryCauses->delete($deathPrimaryCause)) {
-            $this->Flash->success(__('The death primary cause has been deleted.'));
+            $this->Flash->success(__('The death category has been deleted.'));
         } else {
-            $this->Flash->error(__('The death primary cause could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The death category could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

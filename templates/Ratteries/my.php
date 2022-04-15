@@ -6,6 +6,13 @@
     </aside>
     <div class="column-responsive column-90">
         <div class="users view content">
+
+            <?= $this->Html->link(__('New Rattery'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
+            </div>
+            <h1><?= __('My rattery') ?> </h1>
+
             <?php foreach($ratteries as $rattery): ?>
                 <?= $this->element('card', [
                     'image' => $rattery->picture,
@@ -22,8 +29,9 @@
                 ]) ?>
             <?php endforeach; ?>
         </div>
+        <div class="spacer"> </div>
         <div class="users view content">
-                <?= $this->element('ratteries', [
+                <?= $this->element('simple_ratteries', [
                     'rubric' => __('Closed Ratteries'),
                     'ratteries' => $closed_ratteries,
                     'exceptions' => [

@@ -10,7 +10,8 @@
                 'controller' => 'DeathPrimaryCauses',
                 'object' => $deathPrimaryCause,
                 'tooltip' => __('Browse death category list'),
-                'help_url' =>  ['controller' => 'Articles', 'action' => 'index']
+                'help_url' =>  ['controller' => 'Articles', 'action' => 'index'],
+                'show_staff' => true
             ])
         ?>
     </aside>
@@ -44,11 +45,52 @@
             </table>
 
             <h2><?= __('Description') ?></h2>
-            <div class="markdown">
-                <?= $this->Commonmark->parse($deathPrimaryCause->description); ?>
+            <div class="text">
+                <!-- no h because this might store a few markups, but we do not want md here -->
+                <table class="condensed"><tr><td><?= $deathPrimaryCause->description ?></td></tr></table>
             </div>
 
-            <h2><?= __('Statistics') ?></h3>
+            <h2><?= __('Related Information') ?>
+            <?php if (!empty($deathPrimaryCause->death_secondary_causes)) : ?>
+            <h3><?= __('Related Death Causes') ?></h3>
+            <div class="table-responsive">
+                <table class="summary">
+                    <thead>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Name') ?></th>
+                            <th><?= __('Tumor?') ?></th>
+                            <th class="actions-icon col-head"><?= __('Actions') ?></th>
+                        </tr>
+                    </thead>
+                    <?php foreach ($deathPrimaryCause->death_secondary_causes as $deathSecondaryCause) : ?>
+                    <tr>
+                        <td><?= h($deathSecondaryCause->id) ?></td>
+                        <td><?= $this->Html->link(h($deathSecondaryCause->name), ['actions' => 'view', $deathSecondaryCause->id]) ?></td>
+                        <td><?= $deathSecondaryCause->is_tumor ? '✓' : '' ?></td>
+                        <td class="actions">
+                            <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                                'url' => ['controller' => 'DeathSecondaryCauses', 'action' => 'edit', $deathSecondaryCause->id],
+                                'class' => 'action-icon',
+                                'alt' => __('Edit Death Cause')]) ?>
+                            <?= $this->Form->postLink(
+                                    $this->Html->image('/img/icon-delete.svg', [
+                                        'class' => 'action-icon',
+                                        'alt' => __('Delete Death Cause')
+                                    ]),
+                                    ['action' => 'delete', $deathSecondaryCause->id],
+                                    ['confirm' => __('Are you sure you want to delete country # {0}?', $deathSecondaryCause->id), 'escape' => false]
+                                )
+                            ?>
+                        </td>
+                    </tr>
+
+                    <?php endforeach; ?>
+                </table>
+            </div>
+            <?php endif; ?>
+
+            <h3><?= __('Statistics') ?></h3>
             <table class="condensed">
                 <tr>
                     <th><?= __('Frequency') ?></th>
@@ -64,36 +106,23 @@
                 </tr>
             </table>
 
-            <div class="related">
-                <h2><?= __('Related information') ?></h2>
-                <h3><?= __('Related Death Secondary Causes') ?></h3>
-                <?php if (!empty($deathPrimaryCause->death_secondary_causes)) : ?>
-                <div class="table-responsive">
-                    <table class="summary">
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Name') ?></th>
-                            <th><?= __('Tumor?') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($deathPrimaryCause->death_secondary_causes as $deathSecondaryCauses) : ?>
-                        <tr>
-                            <td><?= h($deathSecondaryCauses->id) ?></td>
-                            <td><?= h($deathSecondaryCauses->name) ?></td>
-                            <td><?= h($deathSecondaryCauses->is_tumor) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->image('/img/icon-view.svg', [
-                                    'url' => ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $deathSecondaryCauses->id],
-                                    'class' => 'action-icon',
-                                    'alt' => __('See Rat')]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
-
+            <h3><?= __('Last rat deaths recorded in this category') ?></h3>
+            <?php if (count($deathPrimaryCause->rats) > 0) : ?>
+                <?= $this->element('simple_rats', [
+                    'rubric' => __(''),
+                    'rats' =>  $deathPrimaryCause->rats,
+                    'exceptions' => [
+                        'picture',
+                        'owner_user_id',
+                        'death_primary_cause',
+                        'death_secondary_cause',
+                        'death_cause',
+                        'actions'
+                    ],
+                ]) ?>
+            <?php else : ?>
+                <div class="message"><?= __('No rat was recorded as dead from this cause.') ?></div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

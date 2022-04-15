@@ -64,7 +64,8 @@ class Litter extends Entity
 
     protected function _getFullName()
     {
-        $fullname = $this->birth_date->i18nFormat('dd/MM/yyyy') . ' – ' . $this->dam[0]->usual_name;
+        $date = isset($this->birth_date) ? $this->birth_date->i18nFormat('dd/MM/yyyy') : '??/??/????';
+        $fullname = $date . ' – ' . $this->dam[0]->usual_name;
         if (isset ($this->sire[0])) {
             $fullname .= ' × ' . $this->sire[0]->usual_name;
         }
@@ -73,7 +74,8 @@ class Litter extends Entity
 
     protected function _getNameFromSire()
     {
-        $partname = $this->birth_date->i18nFormat('dd/MM/yyyy') . ' – ' . $this->pups_number . ' pups';
+        $date = isset($this->birth_date) ? $this->birth_date->i18nFormat('dd/MM/yyyy') : '??/??/????';
+        $partname = $date . ' – ' . $this->pups_number . ' pups';
         if (isset ($this->dam[0]) && $this->dam[0]['name'] != 'Mère inconnue') {
             $partname .= ' with ' . $this->dam[0]->usual_name;
         } else {
@@ -84,7 +86,8 @@ class Litter extends Entity
 
     protected function _getNameFromDam()
     {
-        $partname = $this->birth_date->i18nFormat('dd/MM/yyyy') . ' – ' . $this->pups_number . ' pups';
+        $date = isset($this->birth_date) ? $this->birth_date->i18nFormat('dd/MM/yyyy') : '??/??/????';
+        $partname = $date . ' – ' . $this->pups_number . ' pups';
         if (isset ($this->sire[0]) && $this->sire[0]['name'] != 'Père inconnu') {
             $partname .= ' with ' . $this->sire[0]->usual_name;
         } else {

@@ -6,21 +6,23 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $role->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $role->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Roles'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'Roles',
+                'object' => $role,
+                'tooltip' => __('Browse role list'),
+                'can_cancel' => true,
+                'show_staff' => true
+            ])
+        ?>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="roles form content">
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Roles') ?></div>
+            </div>
+            <h1><?= __('Edit Role') ?></h1>
             <?= $this->Form->create($role) ?>
             <fieldset>
-                <legend><?= __('Edit Role') ?></legend>
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('is_root');

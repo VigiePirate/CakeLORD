@@ -367,29 +367,29 @@
                     <?php endif; ?>
 
                 <?php endif; ?>
+
+                <div class="signature">
+                &mdash; Created on <?= $rattery->created->i18nFormat('dd/MM/yyyy') ?>. <?= ($rattery->has('modified') && ($rattery->modified != $rattery->created)) ? 'Last modified on ' . $rattery->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
+                </div>
             </div>
             <div class="spacer"> </div>
             <div class="ratteries view content">
-                <div class="row">
-                    <div class="column-responsive column-33">
-                        <h2>Related entries</h2>
-                    </div>
-                    <div class="column-responsive column-66">
-                        <?= $this->Html->link(__('See all bred rats'), ['controller' => 'Rats', 'action' => 'fromRattery', $rattery->prefix], ['class' => 'button float-right']) ?>
-                        <?= $this->Html->link(__('See all contributed litters'), ['controller' => 'Contributions', 'action' => 'fromRattery', $rattery->id], ['class' => 'button float-right']) ?>
-                    </div>
-                </div>
+
+                <h2>Related entries</h2>
 
                 <details open>
                     <summary>Last contributed litters</summary>
+                    <div class="button-raised">
+                        <?= $this->Html->link(__('See all contributed litters'), ['controller' => 'Contributions', 'action' => 'fromRattery', $rattery->id], ['class' => 'button float-right']) ?>
+                    </div>
                     <table class="summary">
                         <thead>
                             <tr>
                                 <th><?= __('State') ?></th>
-                                <th><?= $this->Paginator->sort('birth_date') ?></th>
-                                <th><?= $this->Paginator->sort('dam') ?></th>
-                                <th><?= $this->Paginator->sort('sire') ?></th>
-                                <th><?= $this->Paginator->sort('size') ?></th>
+                                <th><?= __('Birth date') ?></th>
+                                <th><?= __('Dam') ?></th>
+                                <th><?= __('Sire') ?></th>
+                                <th><?= __('Size') ?></th>
                                 <th class="actions"><?= __('Actions') ?></th>
                             </tr>
                         </thead>
@@ -415,6 +415,9 @@
 
                 <details open>
                     <summary>Recently modified rats</summary>
+                    <div class="button-raised">
+                        <?= $this->Html->link(__('See all bred rats'), ['controller' => 'Rats', 'action' => 'fromRattery', $rattery->prefix], ['class' => 'button float-right']) ?>
+                    </div>
                     <?= $this->element('simple_rats', [ //rats
                         'rubric' => __(''),
                         'rats' =>  $rattery->rats,//$offsprings,
@@ -428,12 +431,8 @@
                 </details>
 
             <?php endif; ?> <!-- end non generic rattery part -->
-
-            <div class="signature">
-            &mdash; Created on <?= $rattery->created->i18nFormat('dd/MM/yyyy') ?>. <?= ($rattery->has('modified') && ($rattery->modified != $rattery->created)) ? 'Last modified on ' . $rattery->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
-            </div>
         </div>
-        
+
         <?= $this->element('statebar', ['sheet' => $rattery]) ?>
 
     </div>

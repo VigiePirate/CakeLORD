@@ -36,7 +36,7 @@ summary {
   cursor: pointer;
 }
 
-summary:focus {
+summary:focus, summary:hover {
   background-color:#ebeefa;
   outline:none;
 }
@@ -166,6 +166,17 @@ input[type='button'], input[type='reset'], input[type='submit'] {
   right:40px;
 }
 
+.button-raised {
+  margin-top: -3.5rem;
+}
+
+.button-raised a {
+  font-size:1.2rem;
+  padding: 0.5rem 1rem;
+  height: 1.4rem;
+  line-height: 1.2;
+}
+
 textarea {
   height:auto;
 }
@@ -277,6 +288,10 @@ table.condensed {
   margin-bottom:1.5rem;
 }
 
+table {
+  margin-bottom:1.5rem;
+}
+
 table.caption {
   margin-bottom: 1.5rem;
   padding: 0rem;
@@ -377,7 +392,7 @@ blockquote:before {
 }
 
 .avatar {
-  max-width:25%;
+  max-width:20%;
 }
 
 .sexmark {

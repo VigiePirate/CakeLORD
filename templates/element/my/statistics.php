@@ -1,4 +1,4 @@
-<h3><?= __('My Statistics') ?></h3>
+<h2><?= __('My Statistics') ?></h2>
 
 <table class="condensed stats">
     <tr>

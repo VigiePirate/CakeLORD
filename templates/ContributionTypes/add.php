@@ -6,16 +6,22 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Html->link(__('List Contribution Types'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'ContributionTypes',
+                'object' => $contributionType,
+                'tooltip' => __('Browse contribution type list'),
+                'show_staff' => false
+            ])
+        ?>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="contributionTypes form content">
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Contribution Types') ?></div>
+            </div>
+            <h1><?= __('Add Contribution Type') ?></h1>
             <?= $this->Form->create($contributionType) ?>
             <fieldset>
-                <legend><?= __('Add Contribution Type') ?></legend>
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('priority');

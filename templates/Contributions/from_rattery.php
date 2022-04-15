@@ -11,7 +11,6 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('rattery_id') ?></th>
                     <th><?= $this->Paginator->sort('litter_id') ?></th>
                     <th><?= $this->Paginator->sort('contribution_type_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -21,12 +20,11 @@
                 <?php foreach ($contributions as $contribution): ?>
                 <tr>
                     <td><?= $this->Number->format($contribution->id) ?></td>
-                    <td><?= $contribution->has('rattery') ? $this->Html->link($contribution->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id]) : '' ?></td>
                     <td><?= $contribution->has('litter') ? $this->Html->link($contribution->litter->full_name, ['controller' => 'Litters', 'action' => 'view', $contribution->litter->id]) : '' ?></td>
-                    <td><?= $contribution->has('contribution_type') ? $this->Html->link($contribution->contribution_type->name, ['controller' => 'ContributionTypes', 'action' => 'view', $contribution->contribution_type->id]) : '' ?></td>
+                    <td><?= $contribution->has('contribution_type') ? h($contribution->contribution_type->name) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
-                            'url' => ['controller' => 'Contributions', 'action' => 'edit', $contribution->id],
+                            'url' => ['controller' => 'Contributions', 'action' => 'manageContributions', $contribution->litter->id],
                             'class' => 'action-icon',
                             'alt' => __('Edit Contribution')
                         ])?>

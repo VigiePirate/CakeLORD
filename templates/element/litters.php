@@ -3,7 +3,7 @@
     <table class="condensed">
         <thead>
                 <?php if (! in_array('state', $exceptions)): ?>
-                    <th><?= $this->Paginator->sort('state',$this->Html->image('/img/icon-fa-state.svg', ['class' => 'action-icon']), ['escape' => false])?></th>
+                    <th class="col-head"><?= $this->Paginator->sort('state', __('State')) ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('mating_date', $exceptions)): ?>
                     <th><?= $this->Paginator->sort('mating_date') ?></th>
@@ -27,7 +27,7 @@
                     <th><?= $this->Paginator->sort('pups_number_stillborn') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('actions', $exceptions)): ?>
-                    <th class="actions-title"><?= $this->Html->image('/img/icon-fa-action.svg', ['class' => 'action-icon'])?></th>
+                    <th class="actions-title col-head"><?= __('Actions') ?></th>
                 <?php endif; ?>
         </thead>
         <tbody>
@@ -63,9 +63,11 @@
                                 'url' => ['controller' => 'Litters', 'action' => 'view', $litter->id],
                                 'class' => 'action-icon',
                                 'alt' => __('See Litter')]) ?>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $litter->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $litter->id], ['confirm' => __('Are you sure you want to delete # {0}?', $litter->id)]) ?>
-                        </td>
+                            <?= $this->Html->image('/img/icon-edit.svg', [
+                                'url' => ['controller' => 'Litters', 'action' => 'edit', $litter->id],
+                                'class' => 'action-icon',
+                                'alt' => __('Edit Litter')]) ?>
+                            </td>
                     <?php endif; ?>
                 </tr>
             <?php endforeach; ?>

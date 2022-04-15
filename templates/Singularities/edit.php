@@ -4,34 +4,36 @@
  * @var \App\Model\Entity\Singularity $singularity
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $singularity->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $singularity->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Singularities'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-90">
-        <div class="singularities form content">
-            <?= $this->Form->create($singularity) ?>
-            <fieldset>
-                <legend><?= __('Edit Singularity') ?></legend>
-                <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('picture');
-                    echo $this->Form->control('genotype');
-                    echo $this->Form->control('description');
-                    echo $this->Form->control('is_picture_mandatory');
-                    echo $this->Form->control('rats._ids', ['options' => $rats]);
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
-    </div>
-</div>
+<?= $this->element('variety/edit', [
+        'Varieties' => 'Singularities',
+        'Variety' => __('Singularity'),
+        'variety' => $singularity,
+        'tooltip' => __('Browse singularity list'),
+        'show_staff' => true
+    ])
+?>
+
+<!-- Easy MDE -->
+<?= $this->Html->css('easymde.css') ?>
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
+<script>
+    var easyMDE = new EasyMDE({
+        minHeight: "20rem",
+        spellChecker: false,
+        inputStyle: "contenteditable",
+        nativeSpellcheck: true,
+        previewImagesInEditor: true,
+        promptURLs: true,
+        sideBySideFullscreen: false,
+        toolbar: [
+            "heading", "|",
+            "bold", "italic", "strikethrough", "|",
+            "unordered-list", "ordered-list", "table", "|",
+            "link", "image", "|",
+            "side-by-side", "fullscreen", "preview", "|",
+            "guide"
+        ]
+    });
+    easyMDE.toggleSideBySide();
+</script>

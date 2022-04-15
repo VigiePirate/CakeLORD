@@ -6,26 +6,33 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Html->link(__('Edit Role'), ['action' => 'edit', $role->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Role'), ['action' => 'delete', $role->id], ['confirm' => __('Are you sure you want to delete # {0}?', $role->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Roles'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Role'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'Roles',
+                'object' => $role,
+                'tooltip' => __('Browse role list'),
+                'show_staff' => true
+            ])
+        ?>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-90">
         <div class="roles view content">
-            <h3><?= h($role->name) ?></h3>
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Roles') ?></div>
+            </div>
+            <h1><?= h($role->name) ?></h1>
+            <h2><?= __('Reference information') ?></h2>
             <table>
-                <tr>
-                    <th><?= __('Name') ?></th>
-                    <td><?= h($role->name) ?></td>
-                </tr>
                 <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($role->id) ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Name') ?></th>
+                    <td><?= h($role->name) ?></td>
+                </tr>
+            </table>
+            <h2><?= __('Permissions') ?></h2>
+            <table>
                 <tr>
                     <th><?= __('Is Root') ?></th>
                     <td><?= $role->is_root ? __('Yes') : __('No'); ?></td>
@@ -64,59 +71,27 @@
                 </tr>
             </table>
             <div class="related">
-                <h4><?= __('Related Users') ?></h4>
-                <?php if (!empty($role->users)) : ?>
+                <?php if ($role->is_staff && !empty($role->users)) : ?>
+                <h2><?= __('Related Users') ?></h2>        
                 <div class="table-responsive">
                     <table>
                         <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Email') ?></th>
-                            <th><?= __('Password') ?></th>
                             <th><?= __('Username') ?></th>
-                            <th><?= __('Firstname') ?></th>
-                            <th><?= __('Lastname') ?></th>
-                            <th><?= __('Birth Date') ?></th>
-                            <th><?= __('Sex') ?></th>
-                            <th><?= __('Localization') ?></th>
-                            <th><?= __('Avatar') ?></th>
-                            <th><?= __('About Me') ?></th>
-                            <th><?= __('Wants Newsletter') ?></th>
-                            <th><?= __('Role Id') ?></th>
-                            <th><?= __('Failed Login Attempts') ?></th>
-                            <th><?= __('Failed Login Last Date') ?></th>
-                            <th><?= __('Is Locked') ?></th>
-                            <th><?= __('Passkey') ?></th>
-                            <th><?= __('Staff Comments') ?></th>
                             <th><?= __('Created') ?></th>
                             <th><?= __('Modified') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions col-head"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($role->users as $users) : ?>
+                        <?php foreach ($role->users as $user) : ?>
                         <tr>
-                            <td><?= h($users->id) ?></td>
-                            <td><?= h($users->email) ?></td>
-                            <td><?= h($users->password) ?></td>
-                            <td><?= h($users->username) ?></td>
-                            <td><?= h($users->firstname) ?></td>
-                            <td><?= h($users->lastname) ?></td>
-                            <td><?= h($users->birth_date) ?></td>
-                            <td><?= h($users->sex) ?></td>
-                            <td><?= h($users->localization) ?></td>
-                            <td><?= h($users->avatar) ?></td>
-                            <td><?= h($users->about_me) ?></td>
-                            <td><?= h($users->wants_newsletter) ?></td>
-                            <td><?= h($users->role_id) ?></td>
-                            <td><?= h($users->failed_login_attempts) ?></td>
-                            <td><?= h($users->failed_login_last_date) ?></td>
-                            <td><?= h($users->is_locked) ?></td>
-                            <td><?= h($users->passkey) ?></td>
-                            <td><?= h($users->staff_comments) ?></td>
-                            <td><?= h($users->created) ?></td>
-                            <td><?= h($users->modified) ?></td>
+                            <td><?= $this->Html->link(h($user->username), ['action' => 'view', $user->id]) ?></td>
+                            <td><?= h($user->created) ?></td>
+                            <td><?= h($user->modified) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Users', 'action' => 'view', $users->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Users', 'action' => 'edit', $users->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Users', 'action' => 'delete', $users->id], ['confirm' => __('Are you sure you want to delete # {0}?', $users->id)]) ?>
+                                <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                                    'url' => ['controller' => 'Users', 'action' => 'edit', $user->id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('Edit User')
+                                ])?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
