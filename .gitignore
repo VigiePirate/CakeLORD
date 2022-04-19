@@ -62,4 +62,4 @@ nbproject/*
 /docs/cdc/*.svg
 /migrate/*.sql
 /docs/sql/migration_users_pa.sql
-/webroot/img/uploads/*
+/webroot/uploads/*

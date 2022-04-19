@@ -49,7 +49,7 @@
                 </div>
                 <?php if ($variety->picture != '') : ?>
                     <div class="column footer-center">
-                        <?= $this->Html->image('uploads/' . $variety->picture, ['alt' => $variety->name]) ?>
+                        <?= $this->Html->image(UPLOADS . $variety->picture, ['alt' => $variety->name]) ?>
                     </div>
                 <?php endif ?>
             </div>
@@ -63,7 +63,7 @@
                     <section id="gallery">
                     <?php foreach ($examples as $rat) : ?>
                         <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
-                            <?= $this->Html->image('uploads/' . $rat->picture, ['alt' => $rat->name, 'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id]]) ?>
+                            <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->name, 'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id]]) ?>
                         <?php endif ?>
                     <?php endforeach; ?>
                     </section>

@@ -172,7 +172,7 @@
                     </div>
                     <?php if ($rattery->picture != '') : ?>
                         <div class="column">
-                            <?= $this->Html->image('uploads/' . $rattery->picture, ['alt' => $rattery->prefix]) ?>
+                            <?= $this->Html->image(UPLOADS . $rattery->picture, ['alt' => $rattery->prefix]) ?>
                         </div>
                     <?php endif ?>
                 </div>

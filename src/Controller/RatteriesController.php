@@ -274,11 +274,11 @@ class RatteriesController extends AppController
                                 $newHeight = $maxHeight;
                                 $newWidth = (int)round($newHeight*$aspectRatio);
                             }
-                            $new_img = imagecreatetruecolor($newWidth,$newHeight);
-                            $final = imagecopyresampled($new_img,$img,0,0,0,0,$newWidth,$newHeight,$sizes[0],$sizes[1]);
+                            $new_img = imagecreatetruecolor($newWidth, $newHeight);
+                            $final = imagecopyresampled($new_img, $img, 0, 0, 0, 0, $newWidth, $newHeight, $sizes[0], $sizes[1]);
                             $picture_name = 'Rattery_' . $this->request->getData('prefix') . '.jpg';
-                            $dest = UPLOADS . $picture_name;
-                            imagejpeg($new_img,$dest,90);
+                            $dest = WWW_UPLOADS . $picture_name;
+                            imagejpeg($new_img, $dest, 90);
                             $rattery->picture = $picture_name;
                         }
                     } else {
