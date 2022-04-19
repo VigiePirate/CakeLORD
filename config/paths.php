@@ -96,4 +96,6 @@ define('CAKE', CORE_PATH . 'src' . DS);
 /*
  * Path to the uploads directory.
  */
-define('UPLOADS', WWW_ROOT . DS . 'img' . DS . 'uploads' . DS);
+
+define('UPLOADS', DS . 'uploads' . DS);
+define('WWW_UPLOADS', WWW_ROOT . UPLOADS);

@@ -52,10 +52,10 @@ class RatteriesTable extends Table
 
         $this->setTable('ratteries');
         $this->setDisplayField('full_name');
-        // $this->setDisplayField('prefix');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Picture');
         $this->addBehavior('State', [
             'safe_properties' => ['localization'],
         ]);

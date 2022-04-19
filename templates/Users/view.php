@@ -65,7 +65,7 @@
                 </div>
                 <?php if ($user->avatar != '') : ?>
                     <div class="column footer-center">
-                        <?= $this->Html->image('uploads/' . $user->avatar, ['alt' => $user->avatar]) ?>
+                        <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->avatar]) ?>
                     </div>
                 <?php endif ?>
             </div>

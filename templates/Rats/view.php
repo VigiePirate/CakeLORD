@@ -120,7 +120,7 @@
                 </div>
                 <?php if ($rat->picture != '') : ?>
                     <div class="column footer-center">
-                        <?= $this->Html->image('uploads/' . $rat->picture, ['alt' => $rat->pedigree_identifier]) ?>
+                        <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier]) ?>
                     </div>
                 <?php endif ?>
             </div>
