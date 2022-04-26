@@ -230,73 +230,39 @@ class RatteriesController extends AppController
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
             $user = $this->Authentication->getIdentityData('id');
-            // check if user has an alive rattery
+
+            /* Check if user has an active rattery */
             $query = $this->Ratteries->find()
                 ->where(['owner_user_id' => $user, 'is_alive' => true])
                 ->toList();
-            if( count($query) !=0 ) {
+            if (count($query) != 0) {
                 $this->Flash->error(__('You already have an active rattery. Declare your previous ratteries as inactive if you want to register a new one.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $rattery = $this->Ratteries->newEmptyEntity();
-                $this->Authorization->authorize($rattery, 'create');
-                if ($this->request->is('post')) {
-                    // fill non form-controlled info
-                    $rattery->owner_user_id = $this->Authentication->getIdentityData('id');
-                    $rattery->is_alive = false;
-                    $rattery->is_generic = false;
-                    $rattery->state_id = 3; // to be replaced by the is_default state
-                    // process and save picture (rough prototype)
-                    // should probably also be in a validator/rules instead
-                    $picture = $this->request->getData('picture_file');
-                    if($picture->getClientFilename() != '') { // there should be a better test than that when no file has been uploaded
-                        $type = $picture->getClientMediaType();
-                        if( $type != 'image/jpeg' ){ // other file types should be accepted (at least png)
-                            $this->Flash->error(__('Your picture cannot be processed. Please, try with another picture in jpeg format.'));
-                        } else {
-                            // process image with GD
-                            $name = $picture->getClientFilename();
-                            $size = $picture->getSize();
-                            $tmpName = $picture->getStream()->getMetadata('uri');
-                            $img = imagecreatefromjpeg($tmpName);
-                            $sizes = getimagesize($tmpName);
-                            // determine final size to respect aspect ratio and maximal dimensions
-                            $maxWidth = 600;
-                            $maxHeight = 400;
-                            $newWidth = (int)$sizes[0];
-                            $newHeight = (int)$sizes[1];
-                            $aspectRatio = $sizes[0]/$sizes[1];
-                            if($sizes[0]>$maxWidth) {
-                                $newWidth = $maxWidth;
-                                $newHeight = (int)round($newWidth/$aspectRatio);
-                            }
-                            if($sizes[1]>$maxHeight) {
-                                $newHeight = $maxHeight;
-                                $newWidth = (int)round($newHeight*$aspectRatio);
-                            }
-                            $new_img = imagecreatetruecolor($newWidth, $newHeight);
-                            $final = imagecopyresampled($new_img, $img, 0, 0, 0, 0, $newWidth, $newHeight, $sizes[0], $sizes[1]);
-                            $picture_name = 'Rattery_' . $this->request->getData('prefix') . '.jpg';
-                            $dest = WWW_UPLOADS . $picture_name;
-                            imagejpeg($new_img, $dest, 90);
-                            $rattery->picture = $picture_name;
-                        }
-                    } else {
-                        $rattery->picture = 'Unknown.png';
-                    }
-                    // save rattery
-                    $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
-                    if ($this->Ratteries->save($rattery)) {
-                        $this->Flash->warning(__('The rattery has been saved. Please note it will be validated only once you have recorded a rat, a litter, or a litter contribution under this prefix.'));
-                        return $this->redirect(['action' => 'index']);
-                    } else {
-                        $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
-                    }
-                }
-                // $litters = $this->Ratteries->Litters->find('list', ['limit' => 200]);
-                $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
-                $this->set(compact('rattery', 'countries')); //'litters'));
+                return $this->redirect(['action' => 'my']);
             }
+
+            /* Else : process form */
+            $rattery = $this->Ratteries->newEmptyEntity();
+            $this->Authorization->authorize($rattery, 'create');
+
+            if ($this->request->is('post')) {
+
+                /* Fill non form-controlled info */
+                $rattery->owner_user_id = $this->Authentication->getIdentityData('id');
+                $rattery->is_alive = false;
+                $rattery->is_generic = false;
+
+                /* save rattery */
+                $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
+                if ($this->Ratteries->save($rattery)) {
+                    $this->Flash->warning(__('The rattery has been saved. Please note it will be validated only once you have recorded a rat, a litter, or a litter contribution under this prefix.'));
+                    return $this->redirect(['action' => 'my']);
+                } else {
+                    $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
+                }
+            }
+
+            $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
+            $this->set(compact('rattery', 'countries'));
         } else {
             $this->Flash->error(__('Only registered users are allowed to register a new rattery. Please sign in or sign up before proceeding.')); // . $email->smtpError);
             return $this->redirect(['action' => 'login']);
