@@ -57,7 +57,15 @@ class RatteriesTable extends Table
         $this->addBehavior('Timestamp');
         $this->addBehavior('Picture');
         $this->addBehavior('State', [
-            'safe_properties' => ['localization'],
+            'safe_properties' => [
+                'modified',
+                'state_id',
+                'district',
+                'zip_code',
+                'country_id',
+                'latitude',
+                'longitude'
+            ],
         ]);
         $this->addBehavior('Snapshot', [
             'repository' => 'RatterySnapshots',

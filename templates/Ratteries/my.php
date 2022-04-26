@@ -7,15 +7,16 @@
     <div class="column-responsive column-90">
         <div class="users view content">
 
-            <?= $this->Html->link(__('New Rattery'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+            <?= $this->Html->link(__('New Rattery'), ['action' => 'register'], ['class' => 'button float-right']) ?>
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
             </div>
             <h1><?= __('My rattery') ?> </h1>
+            <?= $this->Flash->render(); ?>
 
             <?php foreach($ratteries as $rattery): ?>
                 <?= $this->element('card', [
-                    'image' => $rattery->picture,
+                    'image' => UPLOADS . $rattery->picture,
                     'rubric' => h($rattery->prefix),
                     $rattery->prefix => [
                         'Name:' => $rattery->name,
