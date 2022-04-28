@@ -47,6 +47,7 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Picture', ['slug' => 'username']);
 
         $this->belongsTo('Roles', [
             'foreignKey' => 'role_id',

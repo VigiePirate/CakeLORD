@@ -43,6 +43,8 @@ class DilutionsTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Picture');
+
         $this->hasMany('Rats', [
             'foreignKey' => 'dilution_id',
         ]);

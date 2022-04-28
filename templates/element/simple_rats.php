@@ -50,7 +50,7 @@
             <?php foreach($rats as $rat): ?>
                 <tr>
                     <?php if (! in_array('picture', $exceptions)): ?>
-                        <td><?= isset($rat->picture_thumbnail) ? $this->Html->image($rat->picture_thumbnail, ['alt' => $rat->name]) : '' ?></td>
+                        <td><?= isset($rat->picture_thumbnail) ? $this->Html->image(UPLOADS . $rat->picture_thumbnail, ['alt' => $rat->name]) : '' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('state_id', $exceptions)): ?>
                         <td><span class="statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></span></td>

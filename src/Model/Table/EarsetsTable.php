@@ -43,6 +43,8 @@ class EarsetsTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Picture');
+
         $this->hasMany('Rats', [
             'foreignKey' => 'earset_id',
         ]);
