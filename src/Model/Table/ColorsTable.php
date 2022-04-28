@@ -43,6 +43,8 @@ class ColorsTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Picture');
+
         $this->hasMany('Rats', [
             'foreignKey' => 'color_id',
         ]);

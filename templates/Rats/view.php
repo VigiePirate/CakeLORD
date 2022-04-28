@@ -33,7 +33,13 @@
                         <span class="tooltiptext"><?= __('Edit whole rat sheet') ?></span>
                     </div>
                 <?php endif; ?>
-
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-picture.svg', [
+                        'url' => ['controller' => 'Rats', 'action' => 'changePicture', $rat->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Change Picture')]) ?>
+                    <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
+                </div>
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-transfer-ownership.svg', [
                         'url' => ['controller' => 'Rats', 'action' => 'transferOwnership', $rat->id],
@@ -83,15 +89,9 @@
             <?= $this->Flash->render() ?>
 
             <div class="row row-reverse">
-                <?php if ($rat->picture != '') : ?>
                 <div class="column-responsive column-66">
                     <h2>Identity</h2>
                     <table class="condensed stats">
-                <?php else : ?>
-                <div class="column-responsive column-100">
-                    <h2>Identity</h2>
-                    <table class="condensed">
-                <?php endif ?>
                         <tr>
                             <th><?= __('Identifier') ?></th>
                             <td><?= h($rat->pedigree_identifier) ?></td>
@@ -118,11 +118,15 @@
                         </tr>
                     </table>
                 </div>
-                <?php if ($rat->picture != '') : ?>
-                    <div class="column footer-center">
+
+                <div class="column footer-center">
+                    <?php if ($rat->picture != '') : ?>
                         <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier]) ?>
-                    </div>
-                <?php endif ?>
+                    <?php else : ?>
+                        <?= $this->Html->image('Unknown.png', ['url' => ['action' => 'changePicture', $rat->id]]) ?>
+                    <?php endif; ?>
+                </div>
+
             </div>
             <h2>Origins</h2>
                 <table class="condensed">

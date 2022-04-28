@@ -15,12 +15,12 @@
                 <div class="sheet-title pretitle"><?= $Varieties ?></div>
             </div>
             <h1><?= __('Edit') . ' ' . $Variety ?></h1>
-            <?= $this->Form->create($variety) ?>
+            <?= $this->Form->create($variety, ['type' => 'file']) ?>
             <fieldset>
                 <?php
                     echo $this->Form->control('name');
-                    echo $this->Form->control('picture');
                     echo $this->Form->control('genotype');
+                    echo $this->Form->control('picture_file', ['type' => 'file', 'label' => __('Reference picture')]);            
                     echo $this->Form->control('description', [
                         'type'=> 'textarea',
                         'id' => 'description',

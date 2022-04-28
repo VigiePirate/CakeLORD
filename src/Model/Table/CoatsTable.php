@@ -44,6 +44,8 @@ class CoatsTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Picture');
+
         $this->hasMany('Rats', [
             'foreignKey' => 'coat_id',
         ]);

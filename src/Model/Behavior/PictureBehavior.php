@@ -15,7 +15,8 @@ class PictureBehavior extends Behavior
 {
     protected $_defaultConfig = [
         'maxWidth' => 600,
-        'maxHeight' => 400
+        'maxHeight' => 400,
+        'slug' => 'name'
     ];
 
     /**
@@ -51,8 +52,8 @@ class PictureBehavior extends Behavior
     {
         if ($data->offsetExists('picture_file')) {
             $picture = $data['picture_file'];
-            if ($picture === '') {
-                unset($picture);
+            if ($picture->getClientFilename() === '') {
+                unset($data['picture_file']);
                 return;
             } else {
                 $tmpName = $this->resizePic($picture);
@@ -95,7 +96,7 @@ class PictureBehavior extends Behavior
     public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
         if ($entity->has('picture') && in_array('picture', $entity->getDirty())) {
-            $finalName = 'Rattery_' . $entity->prefix . '_' . $entity->picture;
+            $finalName = $entity->getSource() . '_' . $entity[$this->config['slug']] . '_' . $entity->picture;
             $entity->set('picture', $finalName);
         }
         return true;
@@ -113,7 +114,7 @@ class PictureBehavior extends Behavior
      */
     public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        if (in_array('picture', $entity->getDirty()) && $entity->picture != '') {
+        if (in_array('picture', $entity->getDirty())) {
             $finalName = $entity->picture;
             $tmpName = substr($finalName, strrpos($finalName, "_") + 1);
             rename(TMP . $tmpName, WWW_UPLOADS . $finalName);

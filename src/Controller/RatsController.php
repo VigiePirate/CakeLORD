@@ -646,6 +646,31 @@ class RatsController extends AppController
     }
 
     /**
+     * ChangePicture method
+     *
+     * @param string|null $id Rat id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function changePicture($id = null)
+    // this change is authorized to owner and staff, and brings rat to next_ok_state
+    {
+        $rat = $this->Rats->get($id, [
+            'contain' => ['States', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions'],
+        ]);
+        $this->Authorization->authorize($rat);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+            if ($this->Rats->save($rat, ['checkRules' => false])) {
+                $this->Flash->warning(__('The rat’s new picture has been saved. A staff member still has to validate it.'));
+                return $this->redirect(['action' => 'view', $rat->id]);
+            }
+            $this->Flash->error(__('The rat’s new picture could not be saved. Please, try again.'));
+        }
+        $this->set(compact('rat'));
+    }
+
+    /**
      * ChangeOwner method
      *
      * @param string|null $id Rat id.

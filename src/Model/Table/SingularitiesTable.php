@@ -43,6 +43,8 @@ class SingularitiesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Picture');
+
         $this->belongsToMany('Rats', [
             'foreignKey' => 'singularity_id',
             'targetForeignKey' => 'rat_id',

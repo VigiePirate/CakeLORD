@@ -55,7 +55,11 @@ class RatteriesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-        $this->addBehavior('Picture');
+        $this->addBehavior('Picture', ['slug' => 'prefix']);
+        $this->addBehavior('Snapshot', [
+            'repository' => 'RatterySnapshots',
+            'entityField' => 'rattery_id',
+        ]);
         $this->addBehavior('State', [
             'safe_properties' => [
                 'modified',
@@ -66,10 +70,6 @@ class RatteriesTable extends Table
                 'latitude',
                 'longitude'
             ],
-        ]);
-        $this->addBehavior('Snapshot', [
-            'repository' => 'RatterySnapshots',
-            'entityField' => 'rattery_id',
         ]);
 
         /* configuration to be added in app_local:
