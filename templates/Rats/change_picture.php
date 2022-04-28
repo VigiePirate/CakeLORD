@@ -8,7 +8,18 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar') ?>
+            </div>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-back.svg', [
+                        'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Full Screen')]) ?>
+                        <span class="tooltiptext"><?= __('Back to rat sheet') ?></span>
+                </div>
+            </div>
         </div>
     </aside>
     <div class="column-responsive column-90">
@@ -27,7 +38,7 @@
             echo $this->Form->create($rat, ['type' => 'file']); ?>
             <fieldset>
                 <div class="message default">
-                    Please restrict yourself to jpeg, gif or png format. Your picture will be resized to a maximum of 600 pixels wide and 400 pixels high.
+                    <?= __('Pictures must be in jpeg, gif or png format.') ?> <?= (' They will be resized to a maximum of 800 pixels wide and 600 pixels high.') ?>
                 </div>
                 <?= $this->Form->control('picture_file', ['type' => 'file']) ?>
             </fieldset>

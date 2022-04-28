@@ -16,7 +16,6 @@ class PictureBehavior extends Behavior
     protected $_defaultConfig = [
         'maxWidth' => 600,
         'maxHeight' => 400,
-        'slug' => 'name'
     ];
 
     /**
@@ -84,28 +83,9 @@ class PictureBehavior extends Behavior
     }
 
     /**
-     * beforeSave method
-     *
-     * Rewrite picture name if a new one has been uploaded.
-     *
-     * @param EventInterface $event
-     * @param EntityInterface $entity
-     * @param ArrayObject $options
-     * @return boolean
-     */
-    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
-    {
-        if ($entity->has('picture') && in_array('picture', $entity->getDirty())) {
-            $finalName = $entity->getSource() . '_' . $entity[$this->config['slug']] . '_' . $entity->picture;
-            $entity->set('picture', $finalName);
-        }
-        return true;
-    }
-
-    /**
      * afterSave method
      *
-     * Renames and moves picture from temporary directory to uploads directory
+     * Moves picture from temporary directory to uploads directory
      *
      * @param EventInterface $event
      * @param EntityInterface $entity
@@ -115,9 +95,7 @@ class PictureBehavior extends Behavior
     public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
         if (in_array('picture', $entity->getDirty())) {
-            $finalName = $entity->picture;
-            $tmpName = substr($finalName, strrpos($finalName, "_") + 1);
-            rename(TMP . $tmpName, WWW_UPLOADS . $finalName);
+            rename(TMP . $entity->picture, WWW_UPLOADS . $entity->picture);
         }
         return;
     }
@@ -174,7 +152,8 @@ class PictureBehavior extends Behavior
         imagecopyresampled($new_img, $img, 0, 0, 0, 0, $newWidth, $newHeight, $sizes[0], $sizes[1]);
 
         /* Write in temporary place and free up memory */
-        $tmpName = \Cake\Utility\Security::hash($picture->getClientFilename(), 'md5') . '.jpg';
+        $hashable = \Cake\I18n\FrozenTime::now() . '.' . $picture->getClientFilename();
+        $tmpName = \Cake\Utility\Security::hash($hashable, 'md5') . '.jpg';
         $tmpDest = TMP . $tmpName;
         imagejpeg($new_img, $tmpDest, 90);
         imagedestroy($new_img);
