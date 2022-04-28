@@ -89,9 +89,9 @@
             <?= $this->Flash->render() ?>
 
             <div class="row row-reverse">
-                <div class="column-responsive column-66">
+                <div class="column-responsive column-60">
                     <h2>Identity</h2>
-                    <table class="condensed stats">
+                    <table class="aside-photo">
                         <tr>
                             <th><?= __('Identifier') ?></th>
                             <td><?= h($rat->pedigree_identifier) ?></td>

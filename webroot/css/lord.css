@@ -246,6 +246,10 @@ table.summary {
   font-size: 1.4rem;
 }
 
+table.aside-photo>tbody>tr>th{
+  width: 44.5%; /* why? */
+}
+
 table.condensed.stats.histogram>tbody>tr>th>div{
   padding-right:0.5rem;
   float:right;
