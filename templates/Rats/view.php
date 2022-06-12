@@ -119,7 +119,7 @@
                     </table>
                 </div>
 
-                <div class="column footer-center">
+                <div class="column footer-center column-photo">
                     <?php if ($rat->picture != '') : ?>
                         <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier]) ?>
                     <?php else : ?>

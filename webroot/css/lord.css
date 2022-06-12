@@ -250,6 +250,11 @@ table.aside-photo>tbody>tr>th{
   width: 44.5%; /* why? */
 }
 
+.column-photo {
+    max-height: 24rem;
+    overflow: hidden;
+}
+
 table.condensed.stats.histogram>tbody>tr>th>div{
   padding-right:0.5rem;
   float:right;

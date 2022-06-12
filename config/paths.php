@@ -98,4 +98,4 @@ define('CAKE', CORE_PATH . 'src' . DS);
  */
 
 define('UPLOADS', DS . 'uploads' . DS);
-define('WWW_UPLOADS', WWW_ROOT . UPLOADS);
+define('WWW_UPLOADS', WWW_ROOT . 'uploads' . DS);
