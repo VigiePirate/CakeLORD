@@ -66,7 +66,7 @@
                     <?php foreach ($deathPrimaryCause->death_secondary_causes as $deathSecondaryCause) : ?>
                     <tr>
                         <td><?= h($deathSecondaryCause->id) ?></td>
-                        <td><?= $this->Html->link(h($deathSecondaryCause->name), ['actions' => 'view', $deathSecondaryCause->id]) ?></td>
+                        <td><?= $this->Html->link(h($deathSecondaryCause->name), ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $deathSecondaryCause->id]) ?></td>
                         <td><?= $deathSecondaryCause->is_tumor ? '✓' : '' ?></td>
                         <td class="actions">
                             <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [

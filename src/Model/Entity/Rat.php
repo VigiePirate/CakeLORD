@@ -169,11 +169,10 @@ class Rat extends Entity
 
     protected function _getPictureThumbnail()
     {
-        if (isset($this->_fields['picture_thumbnails'])) {
-            return $this->_fields['picture_thumbnails'];
-        } else {
-            return 'thumbnails/Unknown.png';
+        if (isset($this->_fields['picture_thumbnail'])) {
+            return $this->_fields['picture_thumbnail'];
         }
+        return 'thumbnails/Unknown.svg';
     }
 
     protected function _getPedigreeIdentifier()
@@ -513,10 +512,10 @@ class Rat extends Entity
         // -1 since the rat itself is put in the list for recursion initialization
         $descendance = [];
         $this->computeDescendance($this->id, $descendance);
-        $stats['descendors'] = count($descendance) - 1;
+        $stats['descendors'] = count($descendance);
         $ancestry = [];
         $this->computeAncestry($this->id, $ancestry);
-        $stats['ancestors'] = count($ancestry) - 1;
+        $stats['ancestors'] = count($ancestry);
         $children = 0;
         foreach ($this->bred_litters as $litter) {
             $children += $litter->pups_number;
@@ -525,18 +524,18 @@ class Rat extends Entity
 
         $stats['asc_alive'] = $this->countRats([
             'Rats.id IN' => $ancestry,
-            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
             'Rats.id !=' => $this->id,
+            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
             'is_alive IS' => true,
-            'DATEDIFF(NOW(), birth_date) <' => '1645'
+            'DATEDIFF(NOW(), birth_date) <' => '1645' // to be replaced by a configurable constant
         ]);
 
         $stats['desc_alive'] = $this->countRats([
             'Rats.id IN' => $descendance,
-            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
             'Rats.id !=' => $this->id,
+            'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
             'is_alive IS' => true,
-            'DATEDIFF(NOW(), birth_date) <' => '1645'
+            'DATEDIFF(NOW(), birth_date) <' => '1645' // to be replaced by a configurable constant
         ]);
 
         $stats['asc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry]);

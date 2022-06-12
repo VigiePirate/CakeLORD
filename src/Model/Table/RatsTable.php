@@ -66,7 +66,11 @@ class RatsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-        $this->addBehavior('Picture');
+        $this->addBehavior('Picture', [
+            'thumbnail' => true,
+            'thumbWidth' => 45,
+            'thumbHeight' => 30
+        ]);
         $this->addBehavior('Snapshot', [
             'repository' => 'RatSnapshots',
             'entityField' => 'rat_id',

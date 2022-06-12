@@ -14,8 +14,9 @@ use Cake\Filesystem\File;
 class PictureBehavior extends Behavior
 {
     protected $_defaultConfig = [
-        'maxWidth' => 600,
-        'maxHeight' => 400,
+        'maxWidth' => 900,
+        'maxHeight' => 600,
+        'thumbnail' => false
     ];
 
     /**
@@ -57,6 +58,9 @@ class PictureBehavior extends Behavior
             } else {
                 $tmpName = $this->resizePic($picture);
                 $data['picture'] = $tmpName;
+                if ($this->config['thumbnail']) {
+                    $data['picture_thumbnail'] = 'thumb.' . $tmpName;
+                }
             }
         }
         return;
@@ -75,11 +79,8 @@ class PictureBehavior extends Behavior
      */
     public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
     {
-        if ($data->offsetExists('picture_file')) {
-            $entity->setDirty('picture', true);
-        } else {
-            $entity->setDirty('picture', false);
-        }
+        $entity->setDirty('picture', $data->offsetExists('picture_file'));
+        $entity->setDirty('picture_thumbnail', $data->offsetExists('picture_file') && $this->config['thumbnail']);
     }
 
     /**
@@ -97,6 +98,11 @@ class PictureBehavior extends Behavior
         if (in_array('picture', $entity->getDirty())) {
             rename(TMP . $entity->picture, WWW_UPLOADS . $entity->picture);
         }
+
+        if (in_array('picture_thumbnail', $entity->getDirty())) {
+            rename(TMP . $entity->picture_thumbnail, WWW_UPLOADS . $entity->picture_thumbnail);
+        }
+
         return;
     }
 
@@ -104,8 +110,10 @@ class PictureBehavior extends Behavior
      * resizePic method
      *
      * Resizes picture to a predefined maximum bounding box.
+     * Generates a thumbnail with predefined dimensions if option selected.
      *
      * @param \Laminas\Diactoros\UploadedFile $picture
+     * @param ArrayObject $options
      * @return void
      */
     public function resizePic(\Laminas\Diactoros\UploadedFile $picture)
@@ -140,11 +148,11 @@ class PictureBehavior extends Behavior
         $newWidth = (int)$sizes[0];
         $newHeight = (int)$sizes[1];
         $aspectRatio = $sizes[0]/$sizes[1];
-        if($sizes[0]>$maxWidth) {
+        if ($sizes[0] > $maxWidth) {
             $newWidth = $maxWidth;
             $newHeight = (int)round($newWidth/$aspectRatio);
         }
-        if($sizes[1]>$maxHeight) {
+        if ($sizes[1] > $maxHeight) {
             $newHeight = $maxHeight;
             $newWidth = (int)round($newHeight*$aspectRatio);
         }
@@ -157,6 +165,36 @@ class PictureBehavior extends Behavior
         $tmpDest = TMP . $tmpName;
         imagejpeg($new_img, $tmpDest, 90);
         imagedestroy($new_img);
+
+        /* Write thumbnail if required */
+        if ($this->config['thumbnail']) {
+            $thumb_img = imagecreatetruecolor($this->config['thumbWidth'], $this->config['thumbHeight']);
+            $targetRatio = (int)$this->config['thumbWidth']/$this->config['thumbHeight'];
+            if ($aspectRatio >= $targetRatio) {
+                $src_width = (int) $sizes[1] * $targetRatio;
+                $src_height = $sizes[1];
+                $src_x = (int) ($sizes[0] - $src_width)/2;
+                $src_y = 0;
+            } else {
+                $src_width = $sizes[0];
+                $src_height = (int) $sizes[0] / $targetRatio;
+                $src_x = 0;
+                $src_y = (int) ($sizes[1] - $src_height)/2;
+            }
+
+            imagecopyresampled(
+                $thumb_img, $img,
+                0, 0,
+                $src_x, $src_y,
+                $this->config['thumbWidth'], $this->config['thumbHeight'],
+                $src_width, $src_height
+            );
+
+            $tmpDest = TMP . 'thumb.' . $tmpName;
+            imagejpeg($thumb_img, $tmpDest, 90);
+            imagedestroy($thumb_img);
+        }
+
         return $tmpName;
     }
 }
