@@ -269,6 +269,29 @@ class RatteriesController extends AppController
         }
     }
 
+    /**
+     * ChangePicture method
+     *
+     * @param string|null $id Rattery id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function changePicture($id = null)
+    // this change is authorized to owner and staff
+    {
+        $rattery = $this->Ratteries->get($id, ['contain' => 'States']);
+        $this->Authorization->authorize($rattery);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
+            if ($this->Ratteries->save($rattery, ['checkRules' => false])) {
+                $this->Flash->warning(__('The rattery’s new picture has been saved. A staff member still has to validate it.'));
+                return $this->redirect(['action' => 'view', $rattery->id]);
+            }
+            $this->Flash->error(__('The rattery’s new picture could not be saved. Please, try again.'));
+        }
+        $this->set(compact('rattery'));
+    }
+
     /* see all active ratteries on a Googlemap + highlight one if $id is not null */
     public function locate()
     {

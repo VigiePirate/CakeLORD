@@ -414,6 +414,29 @@ class UsersController extends AppController
     }
 
     /**
+     * ChangePicture method
+     *
+     * @param string|null $id User id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function changePicture($id = null)
+    // this change is authorized to user and staff
+    {
+        $user = $this->Users->get($id);
+        $this->Authorization->authorize($user);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user, ['checkRules' => false])) {
+                $this->Flash->warning(__('The user’s new picture has been saved. A staff member still has to validate it.'));
+                return $this->redirect(['action' => 'view', $user->id]);
+            }
+            $this->Flash->error(__('The user’s new picture could not be saved. Please, try again.'));
+        }
+        $this->set(compact('rat'));
+    }
+
+    /**
      * Delete method
      *
      * @param string|null $id User id.

@@ -26,6 +26,14 @@ p {
   max-width: 90%;
 }
 
+.row-with-photo {
+  align-items: center;
+}
+
+.row-with-avatar {
+  align-items: flex-start;
+}
+
 summary {
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
   font-weight: bold;
@@ -251,8 +259,13 @@ table.aside-photo>tbody>tr>th{
 }
 
 .column-photo {
-    max-height: 24rem;
-    overflow: hidden;
+  max-height: 24rem;
+  overflow: hidden;
+}
+
+.column-photo > img {
+  display: block;
+  margin: auto;
 }
 
 table.condensed.stats.histogram>tbody>tr>th>div{
@@ -401,7 +414,7 @@ blockquote:before {
 }
 
 .avatar {
-  max-width:20%;
+  max-width:60%;
 }
 
 .sexmark {

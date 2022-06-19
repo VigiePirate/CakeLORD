@@ -80,7 +80,7 @@ class PictureBehavior extends Behavior
     public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
     {
         $entity->setDirty('picture', $data->offsetExists('picture_file'));
-        if ($this->config->offsetExists('thumbnail')) {
+        if (array_key_exists('thumbnail', $this->config)) {
             $entity->setDirty('picture_thumbnail', $data->offsetExists('picture_file') && $this->config['thumbnail']);
         }
     }
