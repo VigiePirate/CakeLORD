@@ -123,7 +123,7 @@
                     <?php if ($rat->picture != '') : ?>
                         <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier]) ?>
                     <?php else : ?>
-                        <?= $this->Html->image('Unknown.png', ['url' => ['action' => 'changePicture', $rat->id]]) ?>
+                        <?= $this->Html->image('Unknown.svg', ['url' => ['action' => 'changePicture', $rat->id]]) ?>
                     <?php endif; ?>
                 </div>
 
