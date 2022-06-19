@@ -90,6 +90,18 @@ class RatteryPolicy
     }
 
     /**
+     * Check if $user can change picture of the Rattery
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Rattery $rattery
+     * @return bool
+     */
+    public function canChangePicture(IdentityInterface $user, Rattery $rattery)
+    {
+        return true;
+    }
+
+    /**
      * Check if $user can relocate Rattery
      *
      * @param Authorization\IdentityInterface $user The user.

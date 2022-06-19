@@ -20,6 +20,13 @@
                     <span class="tooltiptext"><?= __('Edit whole rattery sheet') ?></span>
                 </div>
                 <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-picture.svg', [
+                        'url' => ['controller' => 'Ratteries', 'action' => 'changePicture', $rattery->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Change Picture')]) ?>
+                    <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
+                </div>
+                <div class="tooltip">
                     <?= $this->Html->image('/img/icon-locate.svg', [
                         'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
                         'class' => 'side-nav-icon',
@@ -133,48 +140,44 @@
                 <?php endif; ?>
 
             <?php else : ?> <!-- non generic rattery -->
-
-                <h2>Information</h2>
-                <div class="row">
-                    <?php if ($rattery->picture != '') : ?>
-                        <div class="column-responsive column-66">
-                    <?php else : ?>
-                        <div class="column-responsive column-100">
-                    <?php endif; ?>
-                    <table class="condensed stats">
-                        <tr>
-                            <!-- add user first and last name if not anonymous ? -->
-                            <th><?= __('Owner') ?></th>
-                            <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->username, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
-                        </tr>
-                        <tr>
-                            <th><?= __('Founded in') ?></th>
-                            <td><?= ($rattery->birth_year != '0000') ? h($rattery->birth_year) : h(substr($stats['activityYears'],0,4)) ?></td>
-                        </tr>
-                        <tr>
-                            <th><?= __('Country') ?></th>
-                            <td><?= $rattery->has('country') ? h($rattery->country->name) : '' ?></td>
-                        </tr>
-                        <tr>
-                            <th><?= __('Localization') ?></th>
-                            <td><?= h($rattery->district) ?></td>
-                        </tr>
-                        <tr>
-                            <th><?= __('Zip Code') ?></th>
-                            <td><?= h($rattery->zip_code) ?></td>
-                        </tr>
-                        <tr>
-                            <th><?= __('Website') ?></th>
-                            <td><?= $rattery->website ? $this->Html->link(h($rattery->website)) : '' ?></td>
-                        </tr>
-                    </table>
-
+                <div class="row row-reverse row-with-photo">
+                    <div class="column-responsive column-60">
+                        <h2>Information</h2>
+                        <table class="aside-photo">
+                            <tr>
+                                <!-- add user first and last name if not anonymous ? -->
+                                <th><?= __('Owner') ?></th>
+                                <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->username, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
+                            </tr>
+                            <tr>
+                                <th><?= __('Founded in') ?></th>
+                                <td><?= ($rattery->birth_year != '0000') ? h($rattery->birth_year) : h(substr($stats['activityYears'],0,4)) ?></td>
+                            </tr>
+                            <tr>
+                                <th><?= __('Country') ?></th>
+                                <td><?= $rattery->has('country') ? h($rattery->country->name) : '' ?></td>
+                            </tr>
+                            <tr>
+                                <th><?= __('Localization') ?></th>
+                                <td><?= h($rattery->district) ?></td>
+                            </tr>
+                            <tr>
+                                <th><?= __('Zip Code') ?></th>
+                                <td><?= h($rattery->zip_code) ?></td>
+                            </tr>
+                            <tr>
+                                <th><?= __('Website') ?></th>
+                                <td><?= $rattery->website ? $this->Html->link(h($rattery->website)) : '' ?></td>
+                            </tr>
+                        </table>
                     </div>
-                    <?php if ($rattery->picture != '') : ?>
-                        <div class="column">
+                    <div class="column footer-center column-photo">
+                        <?php if ($rattery->picture != '') : ?>
                             <?= $this->Html->image(UPLOADS . $rattery->picture, ['alt' => $rattery->prefix]) ?>
-                        </div>
-                    <?php endif ?>
+                        <?php else : ?>
+                            <?= $this->Html->image('UnknownRattery.svg', ['url' => ['action' => 'changePicture', $rattery->id]]) ?>
+                        <?php endif ?>
+                    </div>
                 </div>
 
                 <?php if (! empty($rattery->comments)) : ?>

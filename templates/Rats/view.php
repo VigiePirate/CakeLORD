@@ -88,7 +88,7 @@
 
             <?= $this->Flash->render() ?>
 
-            <div class="row row-reverse">
+            <div class="row row-reverse row-with-photo">
                 <div class="column-responsive column-60">
                     <h2>Identity</h2>
                     <table class="aside-photo">

@@ -22,6 +22,13 @@
                     ]) ?>
                     <span class="tooltiptext"><?= __('Edit whole user sheet') ?></span>
                 </div>
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-picture.svg', [
+                        'url' => ['controller' => 'Users', 'action' => 'changePicture', $user->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Change Picture')]) ?>
+                    <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
+                </div>
             </div>
             <div class="side-nav-group">
                 <?= $this->element('staff_sidebar', [
@@ -39,16 +46,10 @@
             </div>
             <h1><?= h($user->username) ?></h1>
 
-            <div class="row">
-                <?php if ($user->avatar != '') : ?>
-                    <div class="column-responsive column-80">
+            <div class="row row-reverse row-with-photo">
+                <div class="column-responsive column-75">
                     <h2><?= __('Information') ?></h2>
-                    <table class="condensed stats">
-                <?php else : ?>
-                    <div class="column-responsive column-100">
-                    <h2><?= __('Information') ?></h2>
-                    <table class="condensed">
-                <?php endif ?>
+                    <table class="aside-photo">
                         <tr>
                             <th><?= __('Username') ?></th>
                             <td><?= h($user->username) ?></td>
@@ -63,12 +64,16 @@
                         </tr>
                     </table>
                 </div>
-                <?php if ($user->avatar != '') : ?>
-                    <div class="column footer-center">
-                        <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->avatar]) ?>
-                    </div>
-                <?php endif ?>
+
+                <div class="column footer-center column-photo">
+                    <?php if ($user->picture != '') : ?>
+                        <?= $this->Html->image(UPLOADS . $user->picture, ['alt' => $user->username]) ?>
+                    <?php else : ?>
+                        <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
+                    <?php endif; ?>
+                </div>
             </div>
+
             <h2><?= __('About me') ?></h2>
             <div class="text">
                 <blockquote>

@@ -97,4 +97,16 @@ class UserPolicy implements BeforePolicyInterface
         // User can view users
         return true;
     }
+
+    /**
+     * Check if $user can change picture of the Rattery
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canChangePicture(IdentityInterface $user, User $resource)
+    {
+        return true;
+    }
 }
