@@ -40,6 +40,8 @@ use Geo\Geocoder\Geocoder;
  */
 class RatteriesTable extends Table
 {
+    const MAXIMAL_INACTIVITY = 730;
+
     /**
      * Initialize method
      *
@@ -309,7 +311,7 @@ class RatteriesTable extends Table
 
         $ids = array_column(
             array_filter($latest, function($d) {
-                return $d['latest'] > '650';
+                return $d['latest'] > RatteriesTable::MAXIMAL_INACTIVITY;
             }),
             'rattery_id'
         );
