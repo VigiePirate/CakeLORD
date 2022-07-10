@@ -90,7 +90,7 @@ class LordController extends AppController
         $alive_females_distribution = json_encode($lord->computeAgeDistribution(['sex' => 'F']));
 
         $rattery_count = $lord->countRatteries(['is_generic IS' => false]);
-        $active_count = $lord->countRatteries(['is_alive IS' => true]);
+        $active_count = $lord->countRatteries(['is_alive IS' => true, 'is_generic IS' => false]);
         $active_frequency = round(100 * $active_count / $rattery_count,2);
         $rattery_lifetime = $lord->computeAvgRatteryLifetime();
 
