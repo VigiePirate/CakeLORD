@@ -661,4 +661,34 @@ class RatsTable extends Table
             ])
             ->contain(['Ratteries']);
     }
+
+    public function findZombies(Query $query, array $options)
+    {
+        return $query
+            ->where([
+                'is_alive IS' => true,
+                'DATEDIFF(NOW(), birth_date) >' => '1464'
+            ]);
+    }
+
+    // default death cause is hardcoded, should be configured as 'is_default' in corresponding tables
+    public function killZombies() {
+        $query = $this->find('zombies');
+        $count = $query->select()->count();
+        $comment = __('**This sheet was automatically updated to set the rat as dead, as it was too old to be still alive.**');
+        $query->update()
+            ->set([
+                'is_alive' => false,
+                'death_date' => \Cake\I18n\FrozenTime::now(),
+                'death_primary_cause_id' => '1',
+                'death_secondary_cause_id' => '1',
+                'death_euthanized' => '0',
+                'death_diagnosed' => '0',
+                'death_necropsied' => '0',
+                'comments' => $query->func()->concat(['comments' => 'identifier', 'CHAR (10)' => 'identifier', 'CHAR (13)' => 'identifier', $comment]),
+            ])
+            ->execute();
+
+        return $count;
+    }
 }

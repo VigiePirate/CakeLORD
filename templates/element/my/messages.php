@@ -1,4 +1,7 @@
 <h2><?= __('My Messages') ?></h2>
+
+<?= $this->Flash->render() ?>
+
 <?php if (!empty($user->conversations)) : ?>
 <div class="table-responsive">
     <table>
