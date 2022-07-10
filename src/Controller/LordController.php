@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 use Cake\Chronos\Chronos;
 use App\Model\Entity\Lord;
+use App\Model\Table\RatsTable;
 
 class LordController extends AppController
 {
@@ -72,7 +73,7 @@ class LordController extends AppController
         $female_frequency = round(100 * $female_count / $rat_count,2);
         $male_frequency = round(100 * $male_count / $rat_count,2);
 
-        $dead_rat_count = $lord->countRats(['OR' => ['is_alive IS' => false, 'DATEDIFF(NOW(), birth_date) >' => '1645']]);
+        $dead_rat_count = $lord->countRats(['OR' => ['is_alive IS' => false, 'DATEDIFF(NOW(), birth_date) >' => RatsTable::MAXIMAL_AGE]]);
         $dead_rat_frequency = round(100*$dead_rat_count/$rat_count,1);
         $knowingly_dead_rat_count = $lord->countRats([
             'is_alive IS' => false,

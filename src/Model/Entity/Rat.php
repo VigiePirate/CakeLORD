@@ -10,6 +10,7 @@ use Cake\Collection\Collection;
 use Cake\View\Helper\HtmlHelper;
 use Cake\Datasource\FactoryLocator;
 use App\Model\Entity\StatisticsTrait;
+use App\Model\Table\RatsTable;
 
 /**
  * Rat Entity
@@ -346,7 +347,7 @@ class Rat extends Entity
                 $cause = h($this->death_primary_cause->name);
             }
         } else {
-            if($this->age > 54) {
+            if($this->age >= 54) {
                 $cause = __('Unknown (presumably dead)');
             } else {
                 $cause = '– ' . __('Alive') . ' –'; // ndash and fine space, please edit carefully
@@ -527,7 +528,7 @@ class Rat extends Entity
             'Rats.id !=' => $this->id,
             'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
             'is_alive IS' => true,
-            'DATEDIFF(NOW(), birth_date) <' => '1645' // to be replaced by a configurable constant
+            'DATEDIFF(NOW(), birth_date) <' => RatsTable::MAXIMAL_AGE,
         ]);
 
         $stats['desc_alive'] = $this->countRats([
@@ -535,7 +536,7 @@ class Rat extends Entity
             'Rats.id !=' => $this->id,
             'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
             'is_alive IS' => true,
-            'DATEDIFF(NOW(), birth_date) <' => '1645' // to be replaced by a configurable constant
+            'DATEDIFF(NOW(), birth_date) <' => RatsTable::MAXIMAL_AGE
         ]);
 
         $stats['asc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry]);

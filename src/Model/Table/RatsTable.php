@@ -51,6 +51,8 @@ use Cake\Collection\Collection;
  */
 class RatsTable extends Table
 {
+    const MAXIMAL_AGE = 1645;
+
     /**
      * Initialize method
      *
@@ -667,7 +669,7 @@ class RatsTable extends Table
         return $query
             ->where([
                 'is_alive IS' => true,
-                'DATEDIFF(NOW(), birth_date) >' => '1464'
+                'DATEDIFF(NOW(), birth_date) >' => self::MAXIMAL_AGE
             ]);
     }
 

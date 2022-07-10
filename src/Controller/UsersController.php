@@ -443,7 +443,7 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user’s new picture could not be saved. Please, try again.'));
         }
-        $this->set(compact('rat'));
+        $this->set(compact('user'));
     }
 
     /**
