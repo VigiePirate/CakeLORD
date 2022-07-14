@@ -51,6 +51,11 @@ use Cake\Collection\Collection;
  */
 class RatsTable extends Table
 {
+    const MAXIMAL_AGE = 1645;
+    const MAXIMAL_AGE_MONTHS = 54;
+    const MAXIMAL_INFANT_AGE = 42;
+    const MINIMAL_OLDSTER_AGE = 24;
+
     /**
      * Initialize method
      *
@@ -296,15 +301,15 @@ class RatsTable extends Table
         ]);
 
         $mathusalem = function($rat) {
-            return !( !$rat->is_alive && $rat->age > 54);
+            return !( !$rat->is_alive && $rat->age > RatsTable::MAXIMAL_AGE_MONTHS );
         };
         $rules->add($mathusalem, [
             'errorField' => 'death_date',
-            'message' => 'Impossible: it means that your rat would have lived more than 4 years and a half, but rats do not live this long.'
+            'message' => __('Impossible: it means that your rat would have lived more than {age} months, but rats do not live this long.', ['age' => RatsTable::MAXIMAL_AGE_MONTHS])
         ]);
 
         $infant = function($rat) {
-            return ! ( !$rat->is_alive && ($rat->death_primary_cause->is_infant) && ($rat->precise_age > 42) );
+            return ! ( !$rat->is_alive && ($rat->death_primary_cause->is_infant) && ($rat->precise_age > RatsTable::MAXIMAL_INFANT_AGE) );
         };
         $rules->add($infant, [
             'errorField' => 'death_primary_cause_id',
@@ -312,7 +317,7 @@ class RatsTable extends Table
         ]);
 
         $oldster = function($rat) {
-            return !( !$rat->is_alive && ($rat->death_primary_cause->is_oldster) && ($rat->age < 24) );
+            return !( !$rat->is_alive && ($rat->death_primary_cause->is_oldster) && ($rat->age < RatsTable::MINIMAL_OLDSTER_AGE) );
         };
         $rules->add($oldster, [
             'errorField' => 'death_primary_cause_id',
@@ -660,5 +665,35 @@ class RatsTable extends Table
                 'sex' => 'F'
             ])
             ->contain(['Ratteries']);
+    }
+
+    public function findZombies(Query $query, array $options)
+    {
+        return $query
+            ->where([
+                'is_alive IS' => true,
+                'DATEDIFF(NOW(), birth_date) >' => self::MAXIMAL_AGE
+            ]);
+    }
+
+    // default death cause is hardcoded, should be configured as 'is_default' in corresponding tables
+    public function killZombies() {
+        $query = $this->find('zombies');
+        $count = $query->select()->count();
+        $comment = __('**This sheet was automatically updated to set the rat as dead, as it was too old to be still alive.**');
+        $query->update()
+            ->set([
+                'is_alive' => false,
+                'death_date' => \Cake\I18n\FrozenTime::now(),
+                'death_primary_cause_id' => '1',
+                'death_secondary_cause_id' => '1',
+                'death_euthanized' => '0',
+                'death_diagnosed' => '0',
+                'death_necropsied' => '0',
+                'comments' => $query->func()->concat(['comments' => 'identifier', 'CHAR (10)' => 'identifier', 'CHAR (13)' => 'identifier', $comment]),
+            ])
+            ->execute();
+
+        return $count;
     }
 }

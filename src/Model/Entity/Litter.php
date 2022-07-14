@@ -8,6 +8,7 @@ use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use App\Model\Entity\StatisticsTrait;
+use App\Model\Table\RatsTable;
 
 /**
  * Litter Entity
@@ -287,7 +288,7 @@ class Litter extends Entity
     public function computeIntermediateSurvivalRate($offsprings = []) {
         $total = $this->pups_number;
         $ages = [];
-        $k_max = min([54, $this->max_age]);
+        $k_max = min([RatsTable::MAXIMAL_AGE_MONTHS, $this->max_age]);
         foreach($offsprings as $offspring) {
             array_push($ages, $offspring->age);
         }
@@ -298,8 +299,8 @@ class Litter extends Entity
             $survival[$k]['months'] = $k;
             $survival[$k]['count'] = 100*round(1-count($deaths)/$total,2);
         }
-        if ($k_max < 54) {
-            for ($j=$k_max+1; $j<=54; $j++) {
+        if ($k_max < RatsTable::MAXIMAL_AGE_MONTHS) {
+            for ($j=$k_max+1; $j<=RatsTable::MAXIMAL_AGE_MONTHS; $j++) {
                 $survival[$j]['months'] = $j;
             }
         }

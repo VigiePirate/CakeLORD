@@ -40,6 +40,8 @@ use Geo\Geocoder\Geocoder;
  */
 class RatteriesTable extends Table
 {
+    const MAXIMAL_INACTIVITY = 730;
+
     /**
      * Initialize method
      *
@@ -291,5 +293,46 @@ class RatteriesTable extends Table
         }
 
         return $query->group(['Ratteries.id']);
+    }
+
+    public function pauseZombies()
+    {
+        $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
+        $latest = $contributions->find()
+            ->select([
+                'rattery_id' => 'rattery_id',
+                'latest' => 'DATEDIFF(NOW(), MAX(Litters.birth_date))'
+            ])
+            ->innerJoinWith('Litters')
+            ->group('rattery_id')
+            ->enableAutoFields(true) // should be replaced by selecting only useful fields
+            ->enableHydration(false)
+            ->toArray();
+
+        $ids = array_column(
+            array_filter($latest, function($d) {
+                return $d['latest'] > RatteriesTable::MAXIMAL_INACTIVITY;
+            }),
+            'rattery_id'
+        );
+
+        $comment = __('**This sheet was automatically updated to set the rattery as inactive, as it hasn’t bred any litter for several years.**');
+
+        $query = $this->find()
+            ->where([
+                'id IN' => $ids,
+                'is_alive IS' => true
+            ]);
+
+        $count = $query->select()->count();
+
+        $query->update()
+            ->set([
+                'is_alive' => false,
+                'comments' => $query->func()->concat(['comments' => 'identifier', 'CHAR (10)' => 'identifier', 'CHAR (13)' => 'identifier', $comment])
+            ])
+            ->execute();
+
+        return $count;
     }
 }

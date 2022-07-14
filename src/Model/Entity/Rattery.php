@@ -8,6 +8,7 @@ use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\Datasource\FactoryLocator;
 use App\Model\Entity\StatisticsTrait;
+use App\Model\Table\RatsTable;
 
 /**
  * Rattery Entity
@@ -125,7 +126,7 @@ class Rattery extends Entity
                 'rattery_id' => $this->id,
                 'OR' => [
                     'is_alive IS' => false,
-                    'DATEDIFF(NOW(), birth_date) >' => '1645'
+                    'DATEDIFF(NOW(), birth_date) >' => RatsTable::MAXIMAL_AGE
                 ]
             ]);
             $stats['deadRatProportion'] = round(100*$stats['presumedDeadRatCount'] / $stats['ratCount'], 1);

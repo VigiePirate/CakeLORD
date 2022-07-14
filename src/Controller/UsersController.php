@@ -62,7 +62,7 @@ class UsersController extends AppController
             $authService = $this->Authentication->getAuthenticationService();
 
             // get user
-            $user = $this->Users->get($this->Authentication->getIdentityData('id'));
+            $user = $this->Users->get($this->Authentication->getIdentityData('id'), ['contain' => 'Roles']);
 
             // update last failed login fields
             $user->failed_login_attempts = 0;
@@ -78,11 +78,19 @@ class UsersController extends AppController
                 $this->Users->save($user);
             }
 
-            //$redirect = $this->request->getQuery('redirect', [
-            //   'controller' => 'Pages',
-            //    'action' => 'display',
-            //]);
-            //return $this->redirect($redirect);
+            // check user role: if staff, run zombie killing routine
+            if ($user->role->is_staff) {
+                $this->loadModel('Rats');
+                $rat_count = $this->Rats->killZombies();
+                $this->loadModel('Ratteries');
+                $rattery_count = $this->Ratteries->pauseZombies();
+                if ($rat_count > 0) {
+                    $this->Flash->success($rat_count . __(' rats who were too old have just been automatically set as presumably dead.'));
+                }
+                if ($rattery_count > 0) {
+                    $this->Flash->success($rattery_count . __(' ratteries which had no litter for a long time have just been automatically set as inactive.'));
+                }
+            }
 
             $target = $this->Authentication->getLoginRedirect();
             if (! $target) {
@@ -91,6 +99,8 @@ class UsersController extends AppController
                     'action' => 'home',
                 ];
             }
+
+
             return $this->redirect($target);
         }
 
@@ -433,7 +443,7 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user’s new picture could not be saved. Please, try again.'));
         }
-        $this->set(compact('rat'));
+        $this->set(compact('user'));
     }
 
     /**

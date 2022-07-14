@@ -6,6 +6,7 @@ namespace App\Model\Entity;
 use Cake\Datasource\FactoryLocator;
 use Cake\Chronos\Chronos;
 use Cake\Collection\Collection;
+use App\Model\Table\RatsTable;
 
 trait StatisticsTrait
 {
@@ -486,7 +487,7 @@ trait StatisticsTrait
 
         $lifespan = $lifespan
             ->select(['lifespan' => 'ROUND(AVG(DATEDIFF(death_date,birth_date)))'])
-            ->where(['DATEDIFF(death_date,birth_date) <' => '1645']);
+            ->where(['DATEDIFF(death_date,birth_date) <' => RatsTable::MAXIMAL_AGE]);
         return $lifespan;
     }
 
@@ -529,7 +530,7 @@ trait StatisticsTrait
 
         $pyramid = $pyramid
             ->select(['months' => 'FLOOR(DATEDIFF(NOW(),birth_date)/30.5)', 'count' => 'COUNT(Rats.id)'])
-            ->where(['DATEDIFF(NOW(),birth_date) >=' => '0', 'DATEDIFF(NOW(),birth_date) <' => '1645'])
+            ->where(['DATEDIFF(NOW(),birth_date) >=' => '0', 'DATEDIFF(NOW(),birth_date) <' => RatsTable::MAXIMAL_AGE])
             ->group('months')
             ->order(['months' => 'ASC']);
 
@@ -560,7 +561,7 @@ trait StatisticsTrait
 
         $mortality = $mortality
             ->select(['months' => 'FLOOR(DATEDIFF(death_date,birth_date)/30.5)', 'count' => 'COUNT(Rats.id)'])
-            ->where(['DATEDIFF(death_date,birth_date) >=' => '0', 'DATEDIFF(death_date,birth_date) <' => '1645'])
+            ->where(['DATEDIFF(death_date,birth_date) >=' => '0', 'DATEDIFF(death_date,birth_date) <' => RatsTable::MAXIMAL_AGE])
             ->group('months')
             ->order(['months' => 'ASC']);
 
@@ -670,7 +671,7 @@ trait StatisticsTrait
                 'death_secondary_cause_id IS' => null
             ],
             'States.is_reliable IS' => true,
-            'DATEDIFF(Rats.death_date,Rats.birth_date) <' => '1645'
+            'DATEDIFF(Rats.death_date,Rats.birth_date) <' => RatsTable::MAXIMAL_AGE
         ];
 
         if (! empty($options)) {
