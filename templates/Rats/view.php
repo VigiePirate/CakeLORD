@@ -209,31 +209,35 @@
                     <th><?= $rat->is_alive ? __('Age') : __('Age at death'); ?></th>
                     <td><?= h($rat->age_string) ?></td>
                 </tr>
+                <?php if (!$rat->is_alive && (!$rat->has('death_secondary_cause') || $rat->death_secondary_cause->id != '1')) : ?>
+                    <tr>
+                        <th><?= __('Death date') ?></th>
+                        <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : 'Unknown' ?></td>
+                    </tr>
+                <?php endif; ?>
                 <?php if (!$rat->is_alive) : ?>
-                <tr>
-                    <th><?= __('Death date') ?></th>
-                    <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : 'Unknown' ?></td>
+                    <tr>
+                        <th><?= __('Death category') ?></th>
+                        <td><?= $rat->has('death_primary_cause') ? $this->Html->link($rat->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $rat->death_primary_cause->id]) : '' ?></td>
                     </tr>
-                <tr>
-                    <th><?= __('Death category') ?></th>
-                    <td><?= $rat->has('death_primary_cause') ? $this->Html->link($rat->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $rat->death_primary_cause->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Death cause') ?></th>
-                    <td><?= $rat->has('death_secondary_cause') ? $this->Html->link($rat->death_secondary_cause->name, ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $rat->death_secondary_cause->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Euthanized?') ?></th>
-                    <td><?= $rat->death_euthanized ? __('Yes') : __('No'); ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Diagnosed by vet?') ?></th>
-                    <td><?= $rat->death_diagnosed ? __('Yes') : __('No'); ?></td>
+                    <tr>
+                        <th><?= __('Death cause') ?></th>
+                        <td><?= $rat->has('death_secondary_cause') ? $this->Html->link($rat->death_secondary_cause->name, ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $rat->death_secondary_cause->id]) : '' ?></td>
                     </tr>
-                <tr>
-                    <th><?= __('Post-mortem analyses?') ?></th>
-                    <td><?= $rat->death_necropsied ? __('Yes') : __('No'); ?></td>
-                </tr>
+                <?php endif; ?>
+                <?php if (!$rat->is_alive && (!$rat->has('death_secondary_cause') || $rat->death_secondary_cause->id != '1')) : ?>
+                    <tr>
+                        <th><?= __('Euthanized?') ?></th>
+                        <td><?= $rat->death_euthanized ? __('Yes') : __('No'); ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= __('Diagnosed by vet?') ?></th>
+                        <td><?= $rat->death_diagnosed ? __('Yes') : __('No'); ?></td>
+                        </tr>
+                    <tr>
+                        <th><?= __('Post-mortem analyses?') ?></th>
+                        <td><?= $rat->death_necropsied ? __('Yes') : __('No'); ?></td>
+                    </tr>
                 <?php endif; ?>
             </table>
 
