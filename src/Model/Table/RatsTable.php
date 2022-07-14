@@ -53,6 +53,8 @@ class RatsTable extends Table
 {
     const MAXIMAL_AGE = 1645;
     const MAXIMAL_AGE_MONTHS = 54;
+    const MAXIMAL_INFANT_AGE = 42;
+    const MINIMAL_OLDSTER_AGE = 24;
 
     /**
      * Initialize method
@@ -307,7 +309,7 @@ class RatsTable extends Table
         ]);
 
         $infant = function($rat) {
-            return ! ( !$rat->is_alive && ($rat->death_primary_cause->is_infant) && ($rat->precise_age > 42) );
+            return ! ( !$rat->is_alive && ($rat->death_primary_cause->is_infant) && ($rat->precise_age > RatsTable::MAXIMAL_INFANT_AGE) );
         };
         $rules->add($infant, [
             'errorField' => 'death_primary_cause_id',
@@ -315,7 +317,7 @@ class RatsTable extends Table
         ]);
 
         $oldster = function($rat) {
-            return !( !$rat->is_alive && ($rat->death_primary_cause->is_oldster) && ($rat->age < 24) );
+            return !( !$rat->is_alive && ($rat->death_primary_cause->is_oldster) && ($rat->age < RatsTable::MINIMAL_OLDSTER_AGE) );
         };
         $rules->add($oldster, [
             'errorField' => 'death_primary_cause_id',
