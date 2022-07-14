@@ -240,7 +240,6 @@ class Rat extends Entity
         $agedate = FrozenTime::now();
         /* debug while waiting for data conformity:
         there shouldn't be a death date if the rat is alive, but... */
-        // if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
         if (! $this->is_alive && isset($this->_fields['death_date'])) {
             $agedate = $this->_fields['death_date'];
         }
@@ -256,21 +255,10 @@ class Rat extends Entity
 
     protected function _getAgeString()
     {
-        /* bugged code, consider everyone as lost -- should be a "is_lost" separate test
-        if(
-            (!$this->is_alive && !isset($this->_fields['death_primary_cause']))
-            || (!$this->is_alive && isset($this->_fields['death_primary_cause']) && $this->death_primary_cause_id == 1 && !isset($this->_fields['death_secondary_cause']))
-            || (!$this->is_alive && isset($this->_fields['death_primary_cause']) && $this->death_primary_cause_id == 1 && isset($this->_fields['death_primary_cause']) && $this->death_secondary_cause_id == 1)
-            || ($this->is_alive && $this->age>54)
-        ) {
-            return $age = 'Unknown (supposed deceased)';
-        }
-        */
-
         if ($this->age < 0) { // Should raise exception
             return $age = 'Negative age!';
         }
-        if ($this->age > 54) {
+        if ($this->age > RatsTable::MAXIMAL_AGE_MONTHS) {
             return $age = 'Unknown';
         }
         if (! $this->_fields['is_alive'] ) {
@@ -347,7 +335,7 @@ class Rat extends Entity
                 $cause = h($this->death_primary_cause->name);
             }
         } else {
-            if($this->age >= 54) {
+            if ($this->age > RatsTable::MAXIMAL_AGE_MONTHS) {
                 $cause = __('Unknown (presumably dead)');
             } else {
                 $cause = '– ' . __('Alive') . ' –'; // ndash and fine space, please edit carefully
@@ -358,8 +346,8 @@ class Rat extends Entity
 
     protected function _getShortDeathCause()
     {
-        if(!$this->is_alive) {
-            if(!isset($this->death_primary_cause)) {
+        if (!$this->is_alive) {
+            if (!isset($this->death_primary_cause)) {
                 return 'Unknown'; // should raise exception
             }
             if(isset($this->death_secondary_cause)) {
@@ -367,13 +355,13 @@ class Rat extends Entity
             } else {
                 $cause = h($this->death_primary_cause->name);
             }
-            // trim cause to before first comma or parenthesis for concision
+            // trim cause before first comma or parenthesis for concision
             $cause = strpos($cause, "(") ? substr($cause, 0, strpos($cause, "(")) : $cause;
             if( strlen($cause) > 12 ) {
                 $cause = strpos($cause, "," , 12) ? substr($cause, 0, strpos($cause, "," , 12)) . ', etc.' : $cause;
             }
         } else {
-            if($this->age > 54) {
+            if ($this->age > RatsTable::MAXIMAL_AGE_MONTHS) {
                 $cause = '– ' . __('presumably dead') . ' –'; // ndash and fine space, please edit carefully
             } else {
                 $cause = '– ' . __('alive') . ' –'; // ndash and fine space, please edit carefully

@@ -52,6 +52,7 @@ use Cake\Collection\Collection;
 class RatsTable extends Table
 {
     const MAXIMAL_AGE = 1645;
+    const MAXIMAL_AGE_MONTHS = 54;
 
     /**
      * Initialize method
@@ -298,11 +299,11 @@ class RatsTable extends Table
         ]);
 
         $mathusalem = function($rat) {
-            return !( !$rat->is_alive && $rat->age > 54);
+            return !( !$rat->is_alive && $rat->age > RatsTable::MAXIMAL_AGE_MONTHS );
         };
         $rules->add($mathusalem, [
             'errorField' => 'death_date',
-            'message' => 'Impossible: it means that your rat would have lived more than 4 years and a half, but rats do not live this long.'
+            'message' => __('Impossible: it means that your rat would have lived more than {age} months, but rats do not live this long.', ['age' => RatsTable::MAXIMAL_AGE_MONTHS])
         ]);
 
         $infant = function($rat) {
