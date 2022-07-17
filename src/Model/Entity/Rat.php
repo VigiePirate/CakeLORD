@@ -201,40 +201,6 @@ class Rat extends Entity
         }
     }
 
-    public function hasUnchangedBirthDate()
-    {
-       if (isset($this->_original['birth_date'])) {
-           return $this->birth_date->equals($this->_original['birth_date']);
-       }
-       return true;
-    }
-
-    public function hasUnchangedSingularities()
-    {
-        if (isset($this->_original['singularities'])) {
-            /*
-             * Checks if BTM field is actually unchanged by :
-             * - putting all the new and old ids in their respective array
-             * - sorting these
-             * - reducing each to a string and comparing the two
-             */
-            $new_ids = [];
-            $old_ids = [];
-
-            foreach($this->singularities as $singularity) {
-                $new_ids[] = $singularity->id;
-            }
-            foreach($this->_original['singularities'] as $singularity) {
-                $old_ids[] = $singularity->id;
-            }
-            sort($new_ids);
-            sort($old_ids);
-            return array_reduce($new_ids, function ($carry, $item) { return $carry . ',' . $item; }) ==
-                array_reduce($old_ids, function ($carry, $item) { return $carry . ',' .  $item; });
-        }
-        return true;
-    }
-
     protected function _getAge()
     {
         $agedate = FrozenTime::now();
