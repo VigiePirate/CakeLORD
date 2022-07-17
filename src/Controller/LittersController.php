@@ -125,7 +125,7 @@ class LittersController extends AppController
                     // autocomplete was not used
                     // try to find the pedigree
                     $this->loadModel('Rats');
-                    $mother = $this->Rats->findByPedigreeIdentifier($data['mother_name'])->toList();
+                    $mother = $this->Rats->findByPedigreeIdentifier($data['mother_name'])->all()->toList();
                     if ((! empty($mother)) && $mother['sex'] == 'F') {
                         $mother_id = $mother['0']['id'];
                     } else {
@@ -141,7 +141,7 @@ class LittersController extends AppController
                     // autocomplete was not used
                     // try to find the pedigree
                     $this->loadModel('Rats');
-                    $father = $this->Rats->findByPedigreeIdentifier($data['father_name'])->toList();
+                    $father = $this->Rats->findByPedigreeIdentifier($data['father_name'])->all()->toList();
                     if ((! empty($mother)) && $father['sex'] == 'M') {
                         $father_id = $father['0']['id'];
                     } else {
@@ -177,7 +177,7 @@ class LittersController extends AppController
                     // autocomplete was not used
                     // try to find the prefix
                     $this->loadModel('Ratteries');
-                    $rattery = $this->Ratteries->findByPrefix($data['rattery_name'])->toList();
+                    $rattery = $this->Ratteries->findByPrefix($data['rattery_name'])->all()->toList();
                     if (! empty($rattery)) {
                         $rattery_id = $rattery['0']['id'];
                     } else {

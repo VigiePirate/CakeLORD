@@ -150,7 +150,7 @@ class SnapshotBehavior extends Behavior
         $snapshot = $this->SnapshotsTable->get($snapshot_id);
         if ($snapshot->{$this->config['entityField']} == $entity->id) {
             if ($snapshot_data = $this->snapLoad($entity, $snapshot_id)) {
-                $raw_entity = $this->getTable()->get($entity->id);
+                $raw_entity = $this->table()->get($entity->id);
                 $entity_data = json_decode(json_encode($raw_entity), true);
                 return array_diff_assoc($snapshot_data,$entity_data);
             }

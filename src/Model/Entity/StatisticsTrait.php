@@ -360,18 +360,9 @@ trait StatisticsTrait
             ->find()
             ->where($options)
             ->innerJoinWith('OffspringRats');
-        $females = $query->newExpr()
-            ->addCase(
-                $query->newExpr()->add(['sex' => 'F']),
-                1,
-                'integer'
-            );
-        $males = $query->newExpr()
-            ->addCase(
-                $query->newExpr()->add(['sex' => 'M']),
-                1,
-                'integer'
-            );
+
+        $females = $query->newExpr()->case()->when(['sex' => 'F'])->then(1, 'integer');
+        $males = $query->newExpr()->case()->when(['sex' => 'M'])->then(1, 'integer');
 
         $query = $query
             ->select([
