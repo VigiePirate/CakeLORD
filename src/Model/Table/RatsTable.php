@@ -57,6 +57,94 @@ class RatsTable extends Table
     const MINIMAL_OLDSTER_AGE = 24;
 
     /**
+     * Default validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationDefault(Validator $validator): Validator
+    {
+        $validator
+            ->nonNegativeInteger('id')
+            ->allowEmptyString('id', null, 'create')
+            ->add('id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->scalar('pedigree_identifier')
+            ->maxLength('pedigree_identifier', 16)
+            ->allowEmptyString('pedigree_identifier')
+            ->add('pedigree_identifier', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->boolean('is_pedigree_custom')
+            ->notEmptyString('is_pedigree_custom');
+
+        $validator
+            ->scalar('name')
+            ->maxLength('name', 70)
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name');
+
+        $validator
+            ->scalar('pup_name')
+            ->maxLength('pup_name', 70)
+            ->allowEmptyString('pup_name');
+
+        $validator
+            ->scalar('sex')
+            ->maxLength('sex', 1)
+            ->requirePresence('sex', 'create')
+            ->notEmptyString('sex')
+            ->add('sex', 'validSex', ['rule' => 'isValidSex', 'message' => __('Sex must be either M or F'), 'provider' => 'table']);
+
+        $validator
+            ->date('birth_date')
+            ->requirePresence('birth_date', 'create')
+            ->notEmptyDate('birth_date');
+
+        $validator
+            ->boolean('is_alive')
+            ->notEmptyString('is_alive');
+
+        $validator
+            ->date('death_date')
+            ->allowEmptyDate('death_date');
+
+        $validator
+            ->boolean('death_euthanized')
+            ->allowEmptyString('death_euthanized');
+
+        $validator
+            ->boolean('death_diagnosed')
+            ->allowEmptyString('death_diagnosed');
+
+        $validator
+            ->boolean('death_necropsied')
+            ->allowEmptyString('death_necropsied');
+
+        $validator
+            ->scalar('comments')
+            ->allowEmptyString('comments');
+
+        $validator
+            ->scalar('picture')
+            ->maxLength('picture', 255)
+            ->allowEmptyString('picture');
+
+        $validator
+            ->scalar('picture_thumbnail')
+            ->maxLength('picture_thumbnail', 255)
+            ->allowEmptyString('picture_thumbnail');
+
+        return $validator;
+    }
+
+    public function isValidSex($value, array $context)
+    {
+            return in_array($value, ['M', 'F'], true);
+        }
+
+    /**
      * Initialize method
      *
      * @param array $config The configuration for the Table.
@@ -159,91 +247,93 @@ class RatsTable extends Table
     }
 
     /**
-     * Default validation rules.
+     * beforeMarshal method
      *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
+     * @param EventInterface $event
+     * @param ArrayObject $data
+     * @param ArrayObject $options
+     * @return void
      */
-    public function validationDefault(Validator $validator): Validator
+    public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
     {
-        $validator
-            ->nonNegativeInteger('id')
-            ->allowEmptyString('id', null, 'create')
-            ->add('id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
-        $validator
-            ->scalar('pedigree_identifier')
-            ->maxLength('pedigree_identifier', 16)
-            ->allowEmptyString('pedigree_identifier')
-            ->add('pedigree_identifier', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+        // if (isset($data['username'])) {
 
-        $validator
-            ->boolean('is_pedigree_custom')
-            ->notEmptyString('is_pedigree_custom');
+        // sent by current form :
+        // name, pup_name, sex, birth_date, owner_username, owner_user_id
+        // rattery_name, rattery_id, mother_name, mother_id, father_name, father_id
 
-        $validator
-            ->scalar('name')
-            ->maxLength('name', 70)
-            ->requirePresence('name', 'create')
-            ->notEmptyString('name');
+        // $id
+        // $pedigree_identifier
+        // $is_pedigree_custom
 
-        $validator
-            ->scalar('pup_name')
-            ->maxLength('pup_name', 70)
-            ->allowEmptyString('pup_name');
+        // $owner_user_id
+        if (isset($data['owner_user_id']) && $data['owner_user_id'] == '') {
+            $data['owner_user_id'] = $data['creator_user_id'];
+        }
 
-        $validator
-            ->scalar('sex')
-            ->maxLength('sex', 1)
-            ->requirePresence('sex', 'create')
-            ->notEmptyString('sex')
-            ->add('sex', 'validSex', ['rule' => 'isValidSex', 'message' => __('Sex must be either M or F'), 'provider' => 'table']);
+        // $rattery_id
+        if (isset($data['generic_rattery_id']) && $data['generic_rattery_id'] != '') {
+            $data['rattery_id'] = $data['generic_rattery_id'];
+        } else {
+            // fallback for rattery_id if not properly selected
+        }
 
-        $validator
-            ->date('birth_date')
-            ->requirePresence('birth_date', 'create')
-            ->notEmptyDate('birth_date');
+        // $litter_id: specific processing! try creating here?
 
-        $validator
-            ->boolean('is_alive')
-            ->notEmptyString('is_alive');
+        // $color_id: passed as array by current javascript
+        if (isset($data['colors']) && ! empty($data['colors'])) {
+            $data['color_id'] = $data['colors'][0];
+        }
 
-        $validator
-            ->date('death_date')
-            ->allowEmptyDate('death_date');
+        // singularities to be fixed
 
-        $validator
-            ->boolean('death_euthanized')
-            ->allowEmptyString('death_euthanized');
+        // $death_date
+        // $death_primary_cause_id
+        // $death_secondary_cause_id
+        // $death_euthanized
+        // $death_diagnosed
+        // $death_necropsied
 
-        $validator
-            ->boolean('death_diagnosed')
-            ->allowEmptyString('death_diagnosed');
+        // FIXME: manage markdown in comments (not supported yet)
 
-        $validator
-            ->boolean('death_necropsied')
-            ->allowEmptyString('death_necropsied');
+        // $picture, $picture_thumbnail: PictureBehavior (add field in form)
 
-        $validator
-            ->scalar('comments')
-            ->allowEmptyString('comments');
+        // $state_id: StateBehavior
 
-        $validator
-            ->scalar('picture')
-            ->maxLength('picture', 255)
-            ->allowEmptyString('picture');
-
-        $validator
-            ->scalar('picture_thumbnail')
-            ->maxLength('picture_thumbnail', 255)
-            ->allowEmptyString('picture_thumbnail');
-
-        return $validator;
+        // $created, $modified: TimestampBehavior
     }
 
-    public function isValidSex($value, array $context)
+    /**
+     * beforeMarshal method
+     *
+     * @param EventInterface $event
+     * @param EntityInterface $entity
+     * @param ArrayObject $data
+     * @param ArrayObject $options
+     * @return void
+     */
+    public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
     {
-        return in_array($value, ['M', 'F'], true);
+        if($entity->isNew()) {
+            $entity->is_alive = true;
+            $entity->is_pedigree_custom = false;
+            // has to be explicitly set since creator_user_id is not "accessible"
+            $entity->creator_user_id = (int)$data['creator_user_id'];
+        }
+    }
+
+    /**
+     * beforeSave method
+     *
+     * @param EventInterface $event
+     * @param EntityInterface $entity
+     * @param ArrayObject $options
+     * @return boolean
+     */
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
+        return true;
     }
 
     /**
@@ -325,16 +415,6 @@ class RatsTable extends Table
         ]);
 
         return $rules;
-    }
-
-    public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
-    {
-        if ($entity->hasUnchangedBirthDate()) {
-            $entity->setDirty('birth_date', false);
-        }
-        if ($entity->hasUnchangedSingularities()) {
-            $entity->setDirty('singularities', false);
-        }
     }
 
     /*

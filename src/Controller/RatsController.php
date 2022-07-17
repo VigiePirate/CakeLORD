@@ -141,6 +141,8 @@ class RatsController extends AppController
     /**
      * Add method
      *
+     * FIXME: litter_id as optional input (pre-fill form, read-only fields?)
+     *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
     public function add()
@@ -150,7 +152,6 @@ class RatsController extends AppController
         if ($this->request->is('post')) {
             // process data
             $data = $this->request->getData();
-            /* ... code ... */
             $rat = $this->Rats->patchEntity($rat, $data);
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
@@ -169,7 +170,25 @@ class RatsController extends AppController
         $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
-        $this->set(compact('rat','colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'singularities','states'));
+
+        $generic = $this->Rats->Ratteries->find()->where(['is_generic IS' => true]);
+        $creator = $this->Authentication->getIdentity()->get('id');
+        $rattery = $this->Rats->Ratteries->findByOwnerUserId($creator)->where(['is_alive IS' => true]);
+        $origins = $generic->all()->append($rattery)->combine('id', 'full_name');
+
+        $this->set(compact(
+            'rat',
+            'colors',
+            'eyecolors',
+            'dilutions',
+            'markings',
+            'earsets',
+            'coats',
+            'singularities',
+            'states',
+            'origins',
+            'creator'
+        ));
     }
 
     /**
