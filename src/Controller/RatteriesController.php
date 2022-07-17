@@ -234,7 +234,7 @@ class RatteriesController extends AppController
             /* Check if user has an active rattery */
             $query = $this->Ratteries->find()
                 ->where(['owner_user_id' => $user, 'is_alive' => true])
-                ->toList();
+                ->all()->toList();
             if (count($query) != 0) {
                 $this->Flash->error(__('You already have an active rattery. Declare your previous ratteries as inactive if you want to register a new one.'));
                 return $this->redirect(['action' => 'my']);

@@ -57,7 +57,8 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
-        $this->loadModel('Categories');
+        //$this->loadModel('Categories');
+        $this->fetchTable('Categories');
         $categories = $this->Categories->find('list', ['limit' => 200]);
         $this->set(compact('article','categories'));
     }
