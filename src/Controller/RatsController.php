@@ -28,8 +28,8 @@ class RatsController extends AppController
         $this->Authentication->addUnauthenticatedActions([
             'index', 'view',
             'named', 'fromRattery', 'ownedBy', 'sex',
-            'search','results',
-            'pedigree','parentsTree', 'childrenTree'
+            'search', 'results',
+            'pedigree', 'parentsTree', 'childrenTree'
         ]);
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
@@ -147,16 +147,20 @@ class RatsController extends AppController
      */
     public function add()
     {
-        $rat = $this->Rats->newEmptyEntity();
+        $rat = $this->Rats->newEmptyEntity(['contain' => ['Colors']]);
         $this->Authorization->authorize($rat);
         if ($this->request->is('post')) {
             // process data
             $data = $this->request->getData();
             $rat = $this->Rats->patchEntity($rat, $data);
             if ($this->Rats->save($rat)) {
-                $this->Flash->success(__('The rat has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                if (empty($rat->litter_id)) {
+                    $this->Flash->success(__('The rat has been saved.'));
+                    return $this->redirect(['action' => 'view', $rat->id]);
+                } else {
+                    $this->Flash->success(__('The rat has been saved and attached to the above litter.'));
+                    return $this->redirect(['controller' => 'Litters', 'action' => 'view', $rat->litter_id]);
+                }
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
         } else {
@@ -210,7 +214,6 @@ class RatsController extends AppController
             $rat->set('pedigree_identifier', $this->request->getData('pedigree_identifier'));
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
-
                 return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));

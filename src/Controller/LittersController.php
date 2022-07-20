@@ -83,7 +83,6 @@ class LittersController extends AppController
 
         $this->loadModel('States');
         if($litter->state->is_frozen) {
-            $next_thawed_state = $this->States->get($litter->state->next_thawed_state_id);
             $this->set(compact('next_thawed_state'));
         }
         else {
@@ -104,7 +103,7 @@ class LittersController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add(ArrayObject $data = null)
     {
         // some of the stuff here should move to beforeMarshal?
         $litter = $this->Litters->newEmptyEntity([
@@ -270,6 +269,9 @@ class LittersController extends AppController
                 return $this->redirect(['action' => 'login']);
             }
         } else {
+            if (! is_null($data)) {
+                $dd($data);
+            }
             $this->Flash->default(__('Please record the litter’s main information below. You will be able to add rats to the litter just after.'));
         }
 
