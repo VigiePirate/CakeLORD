@@ -143,6 +143,7 @@ class RatteriesController extends AppController
             }
             $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
         }
+        
         $users = $this->Ratteries->Users->find('list', ['limit' => 200]);
         $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
         $states = $this->Ratteries->States->find('list', ['limit' => 200]);

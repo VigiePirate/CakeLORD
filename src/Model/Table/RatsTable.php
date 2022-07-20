@@ -11,6 +11,7 @@ use Cake\Datasource\EntityInterface;
 use Cake\Validation\Validator;
 use Cake\Event\EventInterface;
 use Cake\Collection\Collection;
+use App\Controller\LittersController;
 
 /**
  * Rats Model
@@ -316,10 +317,23 @@ class RatsTable extends Table
     public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
     {
         if($entity->isNew()) {
+            // default values
             $entity->is_alive = true;
             $entity->is_pedigree_custom = false;
+
             // has to be explicitly set since creator_user_id is not "accessible"
             $entity->creator_user_id = (int)$data['creator_user_id'];
+
+            // contain varieties for mandatory picture check
+            $entity->coat = \Cake\Datasource\FactoryLocator::get('Table')->get('Coats')->get($entity->coat_id);
+            $entity->color = \Cake\Datasource\FactoryLocator::get('Table')->get('Colors')->get($entity->color_id);
+            $entity->dilution = \Cake\Datasource\FactoryLocator::get('Table')->get('Dilutions')->get($entity->dilution_id);
+            $entity->earset = \Cake\Datasource\FactoryLocator::get('Table')->get('Earsets')->get($entity->earset_id);
+            $entity->eyecolor = \Cake\Datasource\FactoryLocator::get('Table')->get('Eyecolors')->get($entity->eyecolor_id);
+            $entity->marking = \Cake\Datasource\FactoryLocator::get('Table')->get('Markings')->get($entity->marking_id);
+
+            // treat origins input and try to convert it into a litter
+            
         }
     }
 
@@ -361,6 +375,17 @@ class RatsTable extends Table
         $rules->add($rules->existsIn(['creator_user_id'], 'CreatorUsers'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
 
+        /* Rats must have a proper name */
+        $rules->add(function ($rat) {
+                return ! $rat->hasInvalidName();
+            },
+            'validName',
+            [
+                'errorField' => 'name',
+                'message' => 'Forbidden: names such as “F1” or “M4” are not allowed.'
+            ]
+        );
+
         /* No rat born in the future */
         $rules->add(function ($rat) {
                 return ! $rat->isBornFuture();
@@ -369,6 +394,17 @@ class RatsTable extends Table
             [
                 'errorField' => 'birth_date',
                 'message' => 'Impossible: this date is in the future.'
+            ]
+        );
+
+        /* Picture when mandatory */
+        $rules->add(function ($rat) {
+                return $rat->hasNeededPicture();
+            },
+            'hasNeededPicture',
+            [
+                'errorField' => 'picture_file',
+                'message' => 'This rat’s variety is considered as rare. Please upload a good quality picture for verification.'
             ]
         );
 

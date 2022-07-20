@@ -404,6 +404,39 @@ class Rat extends Entity
         return $this->birth_date->isFuture();
     }
 
+    public function hasInvalidName()
+    {
+        return preg_match("/\b[FM][0-9]*\b/i", $this->name);
+    }
+
+    public function hasNeededPicture()
+    {
+        $coat_condition = ! $this->coat->is_picture_mandatory
+        || ($this->coat->is_picture_mandatory && $this->picture != '');
+
+        $color_condition = ! $this->color->is_picture_mandatory
+        || ($this->color->is_picture_mandatory && $this->picture != '');
+
+        $dilution_condition = ! $this->dilution->is_picture_mandatory
+        || ($this->dilution->is_picture_mandatory && $this->picture != '');
+
+        $earset_condition = ! $this->earset->is_picture_mandatory
+        || ($this->earset->is_picture_mandatory && $this->picture != '');
+
+        $eyecolor_condition = ! $this->eyecolor->is_picture_mandatory
+        || ($this->eyecolor->is_picture_mandatory && $this->picture != '');
+
+        $marking_condition = ! $this->marking->is_picture_mandatory
+        || ($this->marking->is_picture_mandatory && $this->picture != '');
+
+        return $coat_condition
+            && $color_condition
+            && $dilution_condition
+            && $earset_condition
+            && $eyecolor_condition
+            && $marking_condition;
+    }
+
     /* family statistics */
 
     public function computeDescendance($id, &$descendance)

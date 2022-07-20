@@ -20,7 +20,7 @@
 
             <?= $this->Flash->render() ?>
 
-            <?= $this->Form->create($rat) ?>
+            <?= $this->Form->create($rat, ['type' => 'file']) ?>
 
             <fieldset>
                 <legend><?= __('Identity') ?></legend>
@@ -210,6 +210,12 @@
                     </div>
                 </div>
 
+                <?= $this->Form->control('picture_file', [
+                    'type' => 'file',
+                    'label' => __('Photo')
+                    ])
+                ?>
+
                 <legend><?= __('Comments') ?></legend>
                 <?php
                     echo $this->Form->control('comments', [
@@ -224,6 +230,7 @@
                     'value' => $creator,
                 ]);
             ?>
+
             </fieldset>
             <?= $this->Form->button(__('Create rat')) ?>
             <?= $this->Form->end() ?>
