@@ -396,6 +396,15 @@ ul, ol, dl {
   margin-bottom: 2rem;
 }
 
+.error-message > ul li::marker {
+  color: #cc1f1a;
+}
+
+.error-message > ul {
+  padding-left: .5em;
+  margin-bottom: 0rem;
+}
+
 blockquote {
   font-family: "Alegreya", serif;
   font-style: italic;

@@ -297,7 +297,7 @@ class Litter extends Entity
                 return $age < $k;
             });
             $survival[$k]['months'] = $k;
-            $survival[$k]['count'] = 100*round(1-count($deaths)/$total,2);
+            $survival[$k]['count'] = $total == 0 ? 0 : 100*round(1-count($deaths)/$total,2);
         }
         if ($k_max < RatsTable::MAXIMAL_AGE_MONTHS) {
             for ($j=$k_max+1; $j<=RatsTable::MAXIMAL_AGE_MONTHS; $j++) {
@@ -326,7 +326,7 @@ class Litter extends Entity
         $stats['female_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
         $stats['male_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
 
-        $stats['survivors'] = 100 * round($this->countMy('rats', 'litter', ['is_alive IS' => true])/$this->pups_number,2);
+        $stats['survivors'] = $this->pups_number == 0 ? 0 : 100 * round($this->countMy('rats', 'litter', ['is_alive IS' => true])/$this->pups_number,2);
         $stats['survival'] = $this->computeIntermediateSurvivalRate($offsprings);
 
         return $stats;

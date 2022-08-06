@@ -3,10 +3,14 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use ArrayObject;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\Datasource\EntityInterface;
+use Cake\Event\EventInterface;
 use Cake\Validation\Validator;
+
 
 /**
  * Litters Model
@@ -141,6 +145,60 @@ class LittersTable extends Table
     }
 
     /**
+     * beforeMarshal method
+     *
+     * @param EventInterface $event
+     * @param ArrayObject $data
+     * @param ArrayObject $options
+     * @return void
+     */
+    public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
+    {
+        $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
+
+        // javacript fallback for parent input data
+        if (empty($data['mother_id'])) {
+            $mother = $rats->findByPedigreeIdentifier($data['mother_name'])->first();
+            if ((! empty($mother)) && $mother['sex'] == 'F') {
+                $data['mother_id'] = $mother['0']['id'];
+            }
+        }
+
+        if (empty($data['father_id'])) {
+            $father = $rats->findByPedigreeIdentifier($data['father_name'])->first();
+            if ((! empty($father)) && $father['sex'] == 'M') {
+                $data['father_id'] = $father['0']['id'];
+            }
+        }
+
+        if (! isset($data['father_id'])) {
+            $data['parent_rats'] = ['_ids' => [$data['mother_id']]];
+        } else {
+            $data['parent_rats'] = ['_ids' => [$data['mother_id'], $data['father_id']]];
+        }
+
+        // javascript fallback for rattery input data
+        if (empty($data['rattery_id'])) {
+            $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+            $rattery = $ratteries->findByPrefix($data['rattery_name'])->first();
+            if (! empty($rattery)) {
+                $data['rattery_id'] = $rattery['0']['id'];
+            }
+        }
+
+        // mandatory contribution for saving association
+        // (optional contribution will be tenatively created later, once rules are checked)
+        $data['contributions'] = [
+            [
+                'contribution_type_id' => '1',
+                'rattery_id' => $data['rattery_id'],
+            ]
+        ];
+
+        return;
+    }
+
+    /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
      *
@@ -260,6 +318,49 @@ class LittersTable extends Table
         );
 
         return $rules;
+    }
+
+    /**
+     * beforeSave method
+     *
+     * Automatically complete contributions and activate ratteries before saving litter.
+     *
+     * @param EventInterface $event
+     * @param EntityInterface $entity
+     * @param ArrayObject $options
+     * @return void
+     */
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
+        $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
+        $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+        $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
+
+        foreach ($entity->parent_rats as $parent) {
+            $p = $rats->get($parent['id'], [
+                'contain' => ['OwnerUsers','OwnerUsers.Ratteries']
+            ]);
+
+            $prattery = $p->owner_user->main_rattery;
+
+            if (! empty($prattery) && $entity->contributions['0']->rattery_id != $prattery->id) {
+                if ($p->sex == 'F') {
+                    array_push($entity->contributions, $contributions->newEntity([
+                        'contribution_type_id' => '2',
+                        'rattery_id' => $prattery->id,
+                    ]));
+                } else {
+                    array_push($entity->contributions, $contributions->newEntity([
+                        'contribution_type_id' => '3',
+                        'rattery_id' => $prattery->id,
+                    ]));
+                }
+
+                if (! $prattery->is_alive) {
+                    // update owner user's active rattery here (activate $prattery, desactivate others if necessary)
+                }
+            }
+        }
     }
 
     public function findInState(Query $query, array $options)
