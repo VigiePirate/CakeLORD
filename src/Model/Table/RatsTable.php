@@ -11,7 +11,6 @@ use Cake\Datasource\EntityInterface;
 use Cake\Validation\Validator;
 use Cake\Event\EventInterface;
 use Cake\Collection\Collection;
-use App\Controller\LittersController;
 
 /**
  * Rats Model
@@ -257,17 +256,6 @@ class RatsTable extends Table
      */
     public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
     {
-
-        // if (isset($data['username'])) {
-
-        // sent by current form :
-        // name, pup_name, sex, birth_date, owner_username, owner_user_id
-        // rattery_name, rattery_id, mother_name, mother_id, father_name, father_id
-
-        // $id
-        // $pedigree_identifier
-        // $is_pedigree_custom
-
         // $owner_user_id
         if (isset($data['owner_user_id']) && $data['owner_user_id'] == '') {
             $data['owner_user_id'] = $data['creator_user_id'];
@@ -289,24 +277,11 @@ class RatsTable extends Table
 
         // singularities to be fixed
 
-        // $death_date
-        // $death_primary_cause_id
-        // $death_secondary_cause_id
-        // $death_euthanized
-        // $death_diagnosed
-        // $death_necropsied
-
         // FIXME: manage markdown in comments (not supported yet)
-
-        // $picture, $picture_thumbnail: PictureBehavior (add field in form)
-
-        // $state_id: StateBehavior
-
-        // $created, $modified: TimestampBehavior
     }
 
     /**
-     * beforeMarshal method
+     * afterMarshal method
      *
      * @param EventInterface $event
      * @param EntityInterface $entity
@@ -333,7 +308,7 @@ class RatsTable extends Table
             $entity->marking = \Cake\Datasource\FactoryLocator::get('Table')->get('Markings')->get($entity->marking_id);
 
             // treat origins input and try to convert it into a litter
-            
+
         }
     }
 

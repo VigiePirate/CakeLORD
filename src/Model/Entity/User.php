@@ -132,20 +132,30 @@ class User extends Entity implements IdentityInterface
     }
 
     // if user has 1 rattery, return its name even if it is not active
-    // if user has more than 1 rattery, return the active one
-    protected function _getMainRatteryName()
+    // if user has more than 1 rattery, return the active one, or the latest one if none is active
+    protected function _getMainRattery()
     {
         $rattery_count = $this->countMy('ratteries', 'owner_user');
+
         if ($rattery_count == 1) {
-            return h($this->ratteries[0]->full_name);
+            return $this->ratteries[0];
         }
+
         if ($rattery_count > 1) {
             foreach ($this->ratteries as $rattery) {
                 if ($rattery->is_alive) {
-                    return h($rattery->full_name);
+                    return $rattery;
                 }
             }
-            return h(end($this->ratteries)->full_name);
+            return end($this->ratteries);
+        }
+    }
+
+    protected function _getMainRatteryName()
+    {
+        $rattery = $this->main_rattery;
+        if (! empty($rattery)) {
+            return h($rattery->full_name);
         }
     }
 

@@ -585,4 +585,28 @@ class UsersController extends AppController
             $this->viewBuilder()->setOption('serialize', ['items']);
         }
     }
+
+    /**
+    * named method
+    **/
+
+    public function named()
+    {
+        $names = $this->request->getParam('pass');
+
+        $users = $this->Users->find('named', [
+            'names' => $names
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['Ratteries', 'Roles'],
+        ];
+        $users = $this->paginate($users);
+
+        $this->set([
+            'users' => $users,
+            'names' => $names
+        ]);
+    }
 }
