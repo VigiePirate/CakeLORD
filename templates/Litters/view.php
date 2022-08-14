@@ -27,7 +27,7 @@
                 </div>
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-add-rat.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'add'],
+                        'url' => ['controller' => 'Rats', 'action' => 'add', $litter->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Add rat')]) ?>
                     <span class="tooltiptext"><?= __('Add a rat in this litter') ?></span>
