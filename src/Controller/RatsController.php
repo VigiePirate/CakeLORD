@@ -149,6 +149,7 @@ class RatsController extends AppController
     {
         $rat = $this->Rats->newEmptyEntity();
         $this->Authorization->authorize($rat);
+
         if ($this->request->is('post')) {
             $data = $this->request->getData();
 
@@ -225,11 +226,21 @@ class RatsController extends AppController
         $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
-
-        $generic = $this->Rats->Ratteries->find()->where(['is_generic IS' => true]);
         $creator = $this->Authentication->getIdentity()->get('id');
-        $rattery = $this->Rats->Ratteries->findByOwnerUserId($creator)->where(['is_alive IS' => true]);
-        $origins = $generic->all()->append($rattery)->combine('id', 'full_name');
+
+        $litter_id = $this->request->getParam('pass');
+        if (empty($litter_id)) {
+            $from_litter = false;
+            $generic = $this->Rats->Ratteries->find()->where(['is_generic IS' => true]);
+            $rattery = $this->Rats->Ratteries->findByOwnerUserId($creator)->where(['is_alive IS' => true]);
+            $origins = $generic->all()->append($rattery)->combine('id', 'full_name');
+            $this->set(compact('from_litter', 'origins'));
+        } else {
+            $from_litter = true;
+            $litters = $this->getTableLocator()->get('Litters');
+            $litter = $litters->get($litter_id, ['contain' => ['Sire', 'Dam', 'Contributions']]);
+            $this->set(compact('from_litter', 'litter'));
+        }
 
         $this->set(compact(
             'rat',
@@ -241,8 +252,7 @@ class RatsController extends AppController
             'coats',
             'singularities',
             'states',
-            'origins',
-            'creator'
+            'creator',
         ));
     }
 

@@ -23,6 +23,126 @@
             <?= $this->Form->create($rat, ['type' => 'file']) ?>
 
             <fieldset>
+
+                <?php if (! $from_litter): ?>
+                    <legend><?= __('Origins') ?></legend>
+                    <div class="row row-reverse">
+                        <div class="column-responsive column-50">
+                            <?php
+                                echo $this->Form->control('generic_rattery_id', [
+                                    'id' => 'generic-rattery-input',
+                                    'name' => 'generic_rattery_id',
+                                    'label' => __('Birth place or origin'),
+                                    'type' => 'radio',
+                                    'options' => $origins,
+                                    'empty' => false,
+                                ]);
+                            ?>
+                        </div>
+                        <div class="column-responsive column-50">
+                            <div class="message">
+                                <p><?= __('Please record mandatory information: name and location in comments for a generic origin, or rattery and (at least) mother for a registered rattery.')?></p>
+                                <?= __('If a litter with the same birth date and mother already exists, the rat will be automatically added to it. If not, a new litter will be created with the rat.') ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php
+                        echo $this->Form->control('generic_rattery_id', [
+                            'id' => 'alt-generic-rattery-input',
+                            'name' => 'generic_rattery_id',
+                            'label' => '',
+                            'type' => 'radio',
+                            'hiddenField' => false,
+                            'empty' => __('None of the above (I will select a registered rattery below)'),
+                        ]);
+                    ?>
+
+                    <div class="radio-complement">
+                        <?php
+                            echo $this->Form->control('rattery_name', [
+                                'id' => 'jquery-rattery-input',
+                                'name' => 'rattery_name',
+                                'label' => '',
+                                'type' => 'text',
+                                'placeholder' => __('Type and select the rattery’s name or prefix here...'),
+                            ]);
+
+                            echo $this->Form->control('rattery_id', [
+                                'id' => 'jquery-rattery-id',
+                                'name' => 'rattery_id',
+                                'label' => [
+                                    'class' => 'hide-everywhere',
+                                    'text' => 'Hidden field for rattery ID'
+                                ],
+                                'class' => 'hide-everywhere',
+                                'type' => 'text',
+                            ]);
+                        ?>
+                    </div>
+
+                    <div class="row">
+                        <div class="column-responsive column-50">
+                            <?php
+                                echo $this->Form->control('mother_name', [
+                                    'id' => 'jquery-mother-input',
+                                    'name' => 'mother_name',
+                                    'label' => __('Mother'),
+                                    'type' => 'text',
+                                    'placeholder' => __('Type and select the mother’s name or identifier here...'),
+                                ]);
+                                echo $this->Form->control('mother_id', [
+                                    'id' => 'jquery-mother-id',
+                                    'name' => 'mother_id',
+                                    'label' => [
+                                        'class' => 'hide-everywhere',
+                                        'text' => 'Hidden field for mother ID'
+                                    ],
+                                    'class' => 'hide-everywhere',
+                                    'type' => 'text',
+                                ]);
+                            ?>
+                        </div>
+                        <div class="column-responsive column-50">
+                            <?php
+                                echo $this->Form->control('father_name', [
+                                    'id' => 'jquery-father-input',
+                                    'name' => 'father_name',
+                                    'label' => __('Father'),
+                                    'type' => 'text',
+                                    'placeholder' => __('Type and select the father’s name or identifier here...'),
+                                ]);
+                                echo $this->Form->control('father_id', [
+                                    'id' => 'jquery-father-id',
+                                    'name' => 'father_id',
+                                    'label' => [
+                                        'class' => 'hide-everywhere',
+                                        'text' => 'Hidden field for mother ID'
+                                    ],
+                                    'class' => 'hide-everywhere',
+                                    'type' => 'text',
+                                ]);
+                            ?>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <legend><?= __('Origins') ?></legend>
+                    <div class="button-small">
+                        <?= $this->Html->link(__('Cancel'), ['controller' => 'Rats', 'action' => 'add'], ['class' => 'button float-right']); ?>
+                    </div>
+                    <div><strong><?= __('The rat will be added to the following litter: ')?></strong>
+                        <?= $this->Html->link(h($litter->full_name), ['controller' => 'litters', 'action' => 'view', $litter->id]); ?>
+                    </div>
+                    <div class="spacer"></div>
+
+                    <?php
+                        echo $this->Form->hidden('rattery_id', ['name' => 'rattery_id', 'value' => $litter->contributions[0]->rattery_id]);
+                        echo $this->Form->hidden('mother_id', ['name' => 'mother_id', 'value' => $litter->dam[0]['id']]);
+                        echo $this->Form->hidden('mother_name', ['name' => 'mother_name', 'value' => $litter->dam[0]['name']]);
+                    ?>
+
+                <?php endif; ?>
+
                 <legend><?= __('Identity') ?></legend>
 
                 <div class="row">
@@ -49,9 +169,11 @@
                         ?>
                     </div>
                     <div class="column-responsive column-30">
-                        <?php
-                            echo $this->Form->control('birth_date', ['type' => 'date']);
-                        ?>
+                        <?php if (! $from_litter): ?>
+                            <?= $this->Form->control('birth_date', ['type' => 'date']); ?>
+                        <?php else: ?>
+                            <?= $this->Form->control('birth_date', ['type' => 'date', 'value' => $litter->birth_date, 'readonly' => true]); ?>
+                        <?php endif; ?>
                     </div>
                     <div class="column-responsive column-50">
                         <?php
@@ -73,108 +195,6 @@
                                 'class' => 'hide-everywhere',
                                 'type' => 'text',
                                 'empty' => true,
-                            ]);
-                        ?>
-                    </div>
-                </div>
-
-                <legend><?= __('Origins') ?></legend>
-
-                <div class="row row-reverse">
-                    <div class="column-responsive column-50">
-                        <?php
-                            echo $this->Form->control('generic_rattery_id', [
-                                'id' => 'generic-rattery-input',
-                                'name' => 'generic_rattery_id',
-                                'label' => __('Birth place or origin'),
-                                'type' => 'radio',
-                                'options' => $origins,
-                                'empty' => false,
-                            ]);
-                        ?>
-                    </div>
-                    <div class="column-responsive column-50">
-                        <div class="message">
-                            <p><?= __('Please record mandatory information: name and location in comments for a generic origin, or rattery and (at least) mother for a registered rattery.')?></p>
-                            <?= __('If a litter with the same birth date and mother already exists, the rat will be automatically added to it. If not, a new litter will be created with the rat.') ?>
-                        </div>
-                    </div>
-                </div>
-
-                <?php
-                    echo $this->Form->control('generic_rattery_id', [
-                        'id' => 'alt-generic-rattery-input',
-                        'name' => 'generic_rattery_id',
-                        'label' => '',
-                        'type' => 'radio',
-                        'hiddenField' => false,
-                        'empty' => __('None of the above (I will select a registered rattery below)'),
-                    ]);
-                ?>
-
-                <div class="radio-complement">
-                    <?php
-                        echo $this->Form->control('rattery_name', [
-                            'id' => 'jquery-rattery-input',
-                            'name' => 'rattery_name',
-                            'label' => '',
-                            'type' => 'text',
-                            'placeholder' => __('Type and select the rattery’s name or prefix here...'),
-                        ]);
-
-                        echo $this->Form->control('rattery_id', [
-                            'id' => 'jquery-rattery-id',
-                            'name' => 'rattery_id',
-                            'label' => [
-                                'class' => 'hide-everywhere',
-                                'text' => 'Hidden field for rattery ID'
-                            ],
-                            'class' => 'hide-everywhere',
-                            'type' => 'text',
-                        ]);
-                    ?>
-                </div>
-
-                <div class="row">
-                    <div class="column-responsive column-50">
-                        <?php
-                            echo $this->Form->control('mother_name', [
-                                'id' => 'jquery-mother-input',
-                                'name' => 'mother_name',
-                                'label' => __('Mother'),
-                                'type' => 'text',
-                                'placeholder' => __('Type and select the mother’s name or identifier here...'),
-                            ]);
-                            echo $this->Form->control('mother_id', [
-                                'id' => 'jquery-mother-id',
-                                'name' => 'mother_id',
-                                'label' => [
-                                    'class' => 'hide-everywhere',
-                                    'text' => 'Hidden field for mother ID'
-                                ],
-                                'class' => 'hide-everywhere',
-                                'type' => 'text',
-                            ]);
-                        ?>
-                    </div>
-                    <div class="column-responsive column-50">
-                        <?php
-                            echo $this->Form->control('father_name', [
-                                'id' => 'jquery-father-input',
-                                'name' => 'father_name',
-                                'label' => __('Father'),
-                                'type' => 'text',
-                                'placeholder' => __('Type and select the father’s name or identifier here...'),
-                            ]);
-                            echo $this->Form->control('father_id', [
-                                'id' => 'jquery-father-id',
-                                'name' => 'father_id',
-                                'label' => [
-                                    'class' => 'hide-everywhere',
-                                    'text' => 'Hidden field for mother ID'
-                                ],
-                                'class' => 'hide-everywhere',
-                                'type' => 'text',
                             ]);
                         ?>
                     </div>
