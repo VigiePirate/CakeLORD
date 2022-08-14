@@ -170,7 +170,7 @@ class Litter extends Entity
 
     public function hasBirthPlace()
     {
-        return (! is_null($this->contributions['0']->rattery_id)) && ($this->contributions['0']->rattery_id != 0);
+        return ! is_null($this->contributions) && ! is_null($this->contributions['0']->rattery_id) && ($this->contributions['0']->rattery_id != 0);
     }
 
     public function hasMother()

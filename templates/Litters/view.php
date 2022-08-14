@@ -156,7 +156,7 @@
                     <td>
                         <?= $this->Number->format($litter->pups_number) . ' ' . __('pups')?>
                         (♀: <?= ! empty($stats['sexes']) ? $this->Number->format($stats['sexes'][0]['F']) : '0' ?>,
-                        ♂: <?= ! empty($stats['sexes']) ? $this->Number->format($stats['sexes'][0]['M']) : '0' ?>)</td>
+                        ♂: <?= ! empty($stats['sexes']) ? $this->Number->format($stats['sexes'][0]['M']) : '0' ?> <?= __(' recorded') ?>)</td>
                 </tr>
                 <tr>
                     <th><?= __('Stillborn pups') ?></th>

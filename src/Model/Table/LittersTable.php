@@ -157,44 +157,45 @@ class LittersTable extends Table
         $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
 
         // javacript fallback for parent input data
-        if (empty($data['mother_id'])) {
+        if (empty($data['mother_id']) && ! empty($data['mother_name'])) {
             $mother = $rats->findByPedigreeIdentifier($data['mother_name'])->first();
             if ((! empty($mother)) && $mother['sex'] == 'F') {
                 $data['mother_id'] = $mother['0']['id'];
             }
         }
 
-        if (empty($data['father_id'])) {
+        if (empty($data['father_id']) && ! empty($data['father_name'])) {
             $father = $rats->findByPedigreeIdentifier($data['father_name'])->first();
             if ((! empty($father)) && $father['sex'] == 'M') {
                 $data['father_id'] = $father['0']['id'];
             }
         }
 
-        if (! isset($data['father_id'])) {
-            $data['parent_rats'] = ['_ids' => [$data['mother_id']]];
-        } else {
-            $data['parent_rats'] = ['_ids' => [$data['mother_id'], $data['father_id']]];
-        }
-
-        // javascript fallback for rattery input data
-        if (empty($data['rattery_id'])) {
-            $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
-            $rattery = $ratteries->findByPrefix($data['rattery_name'])->first();
-            if (! empty($rattery)) {
-                $data['rattery_id'] = $rattery['0']['id'];
+        if (isset($data['mother_id'])) {
+            if (! isset($data['father_id'])) {
+                $data['parent_rats'] = ['_ids' => [$data['mother_id']]];
+            } else {
+                $data['parent_rats'] = ['_ids' => [$data['mother_id'], $data['father_id']]];
             }
         }
 
-        // mandatory contribution for saving association
-        // (optional contribution will be tenatively created later, once rules are checked)
-        $data['contributions'] = [
-            [
-                'contribution_type_id' => '1',
-                'rattery_id' => $data['rattery_id'],
-            ]
-        ];
+        // javascript fallback for rattery input data
+        if (empty($data['rattery_id']) || is_null($data['rattery_id']) && ! empty($data['rattery_name'])) {
+            $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+            $rattery = $ratteries->findByPrefix($data['rattery_name'])->first();
+            if (! is_null($rattery)) {
+                $data['rattery_id'] = $rattery['id'];
+            }
+        }
 
+        if (isset($data['rattery_id'])) {
+            $data['contributions'] = [
+                [
+                    'contribution_type_id' => '1',
+                    'rattery_id' => $data['rattery_id'],
+                ]
+            ];
+        }
         return;
     }
 
@@ -209,9 +210,10 @@ class LittersTable extends Table
     {
         $rules->add($rules->existsIn(['creator_user_id'], 'Users'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
+        // $rules->add($rules->isUnique(['birth_date', 'parents._ids']));
 
         /* Mother existence */
-        $rules->add(function($litter) {
+        $rules->addCreate(function($litter) {
                 return $litter->hasMother();
             },
             'mother_selected',
@@ -222,7 +224,7 @@ class LittersTable extends Table
         );
 
         /* Father was tentatively selected but not found */
-        $rules->add(function($litter) {
+        $rules->addCreate(function($litter) {
                 return $litter->hasRealFather();
             },
             'father_selected',
@@ -332,35 +334,52 @@ class LittersTable extends Table
      */
     public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
-        $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
-        $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
+        if ($entity->isNew()) {
+            $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
+            $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+            $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
 
-        foreach ($entity->parent_rats as $parent) {
-            $p = $rats->get($parent['id'], [
-                'contain' => ['OwnerUsers','OwnerUsers.Ratteries']
-            ]);
+            foreach ($entity->parent_rats as $parent) {
+                $p = $rats->get($parent['id'], [
+                    'contain' => ['OwnerUsers','OwnerUsers.Ratteries']
+                ]);
 
-            $prattery = $p->owner_user->main_rattery;
+                $prattery = $p->owner_user->main_rattery;
 
-            if (! empty($prattery) && $entity->contributions['0']->rattery_id != $prattery->id) {
-                if ($p->sex == 'F') {
-                    array_push($entity->contributions, $contributions->newEntity([
-                        'contribution_type_id' => '2',
-                        'rattery_id' => $prattery->id,
-                    ]));
-                } else {
-                    array_push($entity->contributions, $contributions->newEntity([
-                        'contribution_type_id' => '3',
-                        'rattery_id' => $prattery->id,
-                    ]));
-                }
+                if (! empty($prattery) && $entity->contributions['0']->rattery_id != $prattery->id) {
+                    if ($p->sex == 'F') {
+                        array_push($entity->contributions, $contributions->newEntity([
+                            'contribution_type_id' => '2',
+                            'rattery_id' => $prattery->id,
+                        ]));
+                    } else {
+                        array_push($entity->contributions, $contributions->newEntity([
+                            'contribution_type_id' => '3',
+                            'rattery_id' => $prattery->id,
+                        ]));
+                    }
 
-                if (! $prattery->is_alive) {
-                    // update owner user's active rattery here (activate $prattery, desactivate others if necessary)
+                    // update owner users' ratteries here? (or after save ?)
+                    if (! $prattery->is_alive) {
+
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * afterSave method
+     *
+     * Update ratteries activities (or should it be in contributions ?)
+     *
+     * @param EventInterface $event
+     * @param EntityInterface $entity
+     * @param ArrayObject $options
+     * @return void
+     */
+    public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
     }
 
     public function findInState(Query $query, array $options)

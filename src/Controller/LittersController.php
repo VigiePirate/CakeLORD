@@ -71,7 +71,7 @@ class LittersController extends AppController
         ]);
 
         $offspringsQuery = $this->Litters->OffspringRats
-                                ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses','OwnerUsers']])
+                                ->find('all', ['contain' => ['States', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'OwnerUsers', 'Ratteries']])
                                 ->matching('BirthLitters', function (\Cake\ORM\Query $query) use ($litter) {
                                     return $query->where([
                                         'BirthLitters.id' => $litter->id
@@ -83,6 +83,7 @@ class LittersController extends AppController
 
         $this->loadModel('States');
         if($litter->state->is_frozen) {
+            $next_thawed_state = $this->States->get($litter->state->next_thawed_state_id);
             $this->set(compact('next_thawed_state'));
         }
         else {

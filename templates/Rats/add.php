@@ -222,6 +222,9 @@
                         'name' => 'comments',
                         'label' => __('Comments'),
                         'rows' => '5',
+                        "error" => [
+                            "escape" => false
+                        ]
                     ]);
                 ?>
 
@@ -232,7 +235,7 @@
             ?>
 
             </fieldset>
-            <?= $this->Form->button(__('Create rat')) ?>
+            <?= $this->Form->button(__('Record rat')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>
@@ -401,4 +404,28 @@
         });
      });
     </script>
-<?php $this->end();
+<?php $this->end(); ?>
+
+<!-- Easy MDE -->
+<?= $this->Html->css('easymde.css') ?>
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
+<script>
+    var easyMDE = new EasyMDE({
+        minHeight: "20rem",
+        spellChecker: false,
+        inputStyle: "contenteditable",
+        nativeSpellcheck: true,
+        previewImagesInEditor: true,
+        promptURLs: true,
+        sideBySideFullscreen: false,
+        toolbar: [
+            "bold", "italic", "strikethrough", "|",
+            "unordered-list", "ordered-list", "table", "|",
+            "link", "|",
+            "side-by-side", "fullscreen", "preview", "|",
+            "guide"
+        ]
+    });
+    easyMDE.toggleSideBySide();
+</script>

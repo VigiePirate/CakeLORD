@@ -151,46 +151,60 @@ class RatsController extends AppController
         $this->Authorization->authorize($rat);
         if ($this->request->is('post')) {
             $data = $this->request->getData();
-            $options['from_rat'] = true;
 
-            // try creating litter if something was put in mother_name field
+            $rat_options = [
+                'associated' => ['Ratteries', 'BirthLitters'],
+                'accessibleFields' => ['pedigree_identifier' => true],
+            ];
+
             if (! empty($data['mother_name'])) {
                 $litters = $this->getTableLocator()->get('Litters');
-                $options['associated'] = ['ParentRats', 'Contributions'];
-                $options['accessibleFields'] = ['pedigree_identifier' => true];
-                $litter = $litters->newEntity($data, $options);
+                $litter_options = [
+                    'from_rat' => true,
+                    'associated' => ['ParentRats', 'Contributions'],
+                    'accessibleFields' => ['pups_number' => true, 'comments' => false],
+                ];
 
-                dd($litter);
+                $samelitter = $litters->find('fromBirth', [
+                    'birth_date' => $data['birth_date'],
+                    'mother_id' => $data['mother_id'],
+                ])
+                ->contain(['ParentRats', 'Contributions'])
+                ->first();
 
-                if (empty($litter->id)) {
-                    $litter = $litters->save($litter, $options);
-
-                    if ($litter) {
-                        $rat = $this->Rats->patchEntity($rat, $data, ['associated' => 'Ratteries']);
-                        $rat->litter = $litter;
-                        if ($this->Rats->save($rat, ['associated' => 'Ratteries'])) {
-                            $this->Flash->success(__('The rat has been saved and attached to the above litter.'));
-                            return $this->redirect(['controller' => 'Litters', 'action' => 'view', $rat->litter_id]);
+                if (! is_null($samelitter)) {
+                    $data['litter_id'] = $samelitter->id;
+                    $rat = $this->Rats->patchEntity($rat, $data, $rat_options);
+                    if ($this->Rats->save($rat)) {
+                        $this->Flash->success(__('The rat has been saved and attached to the above litter.'));
+                        return $this->redirect(['controller' => 'Litters', 'action' => 'view', $samelitter->id]);
+                    } else {
+                        $this->Flash->error(__('The rat could not be saved. Please, read explanatory messages in the form, check and correct your entry, and try again.'));
+                    }
+                } else {
+                    $data['pups_number'] = 0;
+                    $litter = $litters->newEntity($data, $litter_options);
+                    if ($litters->save($litter, $litter_options)) {
+                        $rat = $this->Rats->patchEntity($rat, $data, $rat_options);
+                        if ($this->Rats->save($rat)) {
+                            $this->Flash->success(__('The rat has been saved as well as its birth litter, and attached to it.'));
+                            return $this->redirect(['controller' => 'Litters', 'action' => 'view', $litter->id]);
                         } else {
                             $this->Flash->error(__('The rat could not be saved. Please, read explanatory messages in the form, check and correct your entry, and try again.'));
                         }
                     } else {
-                        dd($litter);
-                        $rat->setErrors($litter->getErrors()); // does it erase the rat errors themselves?
-                        $this->Flash->error(__('The rat could not be saved. Please, read explanatory messages in the form, check and correct your entry, and try again.'));
-
-                    }
-                } else {
-                    $data['litter_id'] = $litter->id;
-                    $rat = $this->Rats->patchEntity($rat, $data, ['associated' => 'Ratteries']);
-                    if ($this->Rats->save($rat, ['associated' => 'Ratteries'])) {
-                        $this->Flash->success(__('The rat has been saved and attached to the above litter.'));
-                        return $this->redirect(['controller' => 'Litters', 'action' => 'view', $rat->litter_id]);
-                    } else {
-                        $this->Flash->error(__('The rat could not be saved. Please, read explanatory messages in the form, check and correct your entry, and try again.'));
+                        $rat = $this->Rats->patchEntity($rat, $data, $rat_options);
+                        if ($this->Rats->save($rat)) { // should fail if litter save failed?
+                            $this->Flash->warning(__('The rat has been saved, but could not be attached to any litter.'));
+                            return $this->redirect(['action' => 'view', $rat->id]);
+                        } else {
+                            $rat->setErrors(array_replace_recursive($rat->getErrors(), $litter->getErrors()));
+                            $this->Flash->error(__('The rat and its birth litter could not be saved. Please, read explanatory messages below and try again.'));
+                        }
                     }
                 }
             } else { // no mother entered
+                $rat = $this->Rats->patchEntity($rat, $data, $rat_options);
                 if ($this->Rats->save($rat)) {
                     $this->Flash->success(__('The rat has been saved.'));
                     return $this->redirect(['action' => 'view', $rat->id]);
