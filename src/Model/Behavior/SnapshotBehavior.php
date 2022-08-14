@@ -61,7 +61,7 @@ class SnapshotBehavior extends Behavior
     {
         // Do nothing if the entity is new
         if (! $entity->isNew()) {
-            $saved_entity = $this->getTable()->get($entity->id);
+            $saved_entity = $this->table()->get($entity->id);
             $snapshot_values = [
                 'data' => json_encode($saved_entity),
                 $this->config['entityField'] => $saved_entity->id,

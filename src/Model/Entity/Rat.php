@@ -404,9 +404,15 @@ class Rat extends Entity
         return $this->birth_date->isFuture();
     }
 
+    public function hasValidOrigins()
+    {
+        return ($this->rattery->is_generic && ! empty($this->comments))
+            || (! $this->rattery->is_generic && ! empty($this->litter_id));
+    }
+
     public function hasInvalidName()
     {
-        return preg_match("/\b[FM][0-9]*\b/i", $this->name);
+        return preg_match("/^[FM][0-9]*$/i", $this->name);
     }
 
     public function hasNeededPicture()

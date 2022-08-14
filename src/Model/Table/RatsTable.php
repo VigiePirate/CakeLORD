@@ -257,7 +257,7 @@ class RatsTable extends Table
     public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
     {
         // $owner_user_id
-        if (isset($data['owner_user_id']) && $data['owner_user_id'] == '') {
+        if (isset($data['creator_user_id']) && (! isset($data['owner_user_id']) || $data['owner_user_id'] == '')) {
             $data['owner_user_id'] = $data['creator_user_id'];
         }
 
@@ -267,8 +267,6 @@ class RatsTable extends Table
         } else {
             // fallback for rattery_id if not properly selected
         }
-
-        // $litter_id: specific processing! try creating here?
 
         // $color_id: passed as array by current javascript
         if (isset($data['colors']) && ! empty($data['colors'])) {
@@ -307,22 +305,9 @@ class RatsTable extends Table
             $entity->eyecolor = \Cake\Datasource\FactoryLocator::get('Table')->get('Eyecolors')->get($entity->eyecolor_id);
             $entity->marking = \Cake\Datasource\FactoryLocator::get('Table')->get('Markings')->get($entity->marking_id);
 
-            // treat origins input and try to convert it into a litter
-
+            // contain rattery for origin checks
+            $entity->rattery = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries')->get($entity->rattery_id);
         }
-    }
-
-    /**
-     * beforeSave method
-     *
-     * @param EventInterface $event
-     * @param EntityInterface $entity
-     * @param ArrayObject $options
-     * @return boolean
-     */
-    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
-    {
-        return true;
     }
 
     /**
@@ -372,8 +357,21 @@ class RatsTable extends Table
             ]
         );
 
+        /* Mandatory origin information */
+        $rules->addCreate(function ($rat) {
+                return $rat->hasValidOrigins();
+            },
+            'validOrigins',
+            [
+                'errorField' => 'comments',
+                'message' => 'Incomplete: mandatory information about origins are missing.
+                <ul><li>For a generic origin, please add a comment (name and location, circumstances of the rescue, etc.)</li>
+                <li>For a registered rattery, add at least a mother. Create her first if needed, or chose a generic origin.</li></ul>'
+            ]
+        );
+
         /* Picture when mandatory */
-        $rules->add(function ($rat) {
+        $rules->addCreate(function ($rat) {
                 return $rat->hasNeededPicture();
             },
             'hasNeededPicture',
@@ -426,6 +424,30 @@ class RatsTable extends Table
         ]);
 
         return $rules;
+    }
+
+    /**
+     * afterSave method
+     *
+     * Update litter count after adding a rat
+     *
+     * @param EventInterface $event
+     * @param EntityInterface $entity
+     * @param ArrayObject $options
+     * @return void
+     */
+    public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
+        if ($entity->isNew() && isset($entity->litter_id)) {
+            $litters = \Cake\Datasource\FactoryLocator::get('Table')->get('Litters');
+            $litters->removeBehavior('State');
+            $litter = $litters->get($entity->litter_id);
+            $count = $litter->countMy('rats', 'litter');
+            if ($litter->pups_number < $count) {
+                $litter->pups_number = $litter->pups_number + 1;
+                $litters->save($litter, ['checkRules' => false, 'atomic' => false]);
+            }
+        }
     }
 
     /*
