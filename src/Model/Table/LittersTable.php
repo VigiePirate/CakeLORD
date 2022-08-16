@@ -179,16 +179,24 @@ class LittersTable extends Table
             }
         }
 
-        // javascript fallback for rattery input data
-        if (empty($data['rattery_id']) || is_null($data['rattery_id']) && ! empty($data['rattery_name'])) {
-            $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
-            $rattery = $ratteries->findByPrefix($data['rattery_name'])->first();
-            if (! is_null($rattery)) {
-                $data['rattery_id'] = $rattery['id'];
+        // javacript fallback for rattery
+        if (! isset($data['rattery_id']) || empty($data['rattery_id'])) {
+            if (isset($data['generic_rattery_id']) && ! empty($data['generic_rattery_id'])) {
+                $data['rattery_id'] = $data['generic_rattery_id'];
+            } else {
+                if (empty($data['nongeneric_rattery_id'])) {
+                    $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+                    $rattery = $ratteries->findByPrefix($data['rattery_name'])->all()->toList();
+                    if (! empty($rattery)) {
+                        $data['rattery_id'] = $rattery['0']['id'];
+                    }
+                } else {
+                    $data['rattery_id'] = $data['nongeneric_rattery_id'];
+                }
             }
         }
 
-        if (isset($data['rattery_id'])) {
+        if (isset($data['rattery_id']) && ! empty($data['rattery_id'])) {
             $data['contributions'] = [
                 [
                     'contribution_type_id' => '1',
@@ -242,6 +250,19 @@ class LittersTable extends Table
             [
                 'errorField' => 'rattery_name',
                 'message' => 'We could not find this rattery. Please, select it in the list or type an existing prefix.'
+            ]
+        );
+
+        /* Mandatory origin information */
+        $rules->add(function ($litter) {
+                return $litter->hasValidOrigins();
+            },
+            'validOrigins',
+            [
+                'errorField' => 'comments',
+                'message' => 'Incomplete: mandatory information about origins are missing.
+                <ul><li>For a generic origin, please add a comment (name and location, circumstances of the rescue, etc.)</li>
+                <li>For a registered rattery, add at least a mother. Create her first if needed, or chose a generic origin.</li></ul>'
             ]
         );
 
@@ -358,11 +379,6 @@ class LittersTable extends Table
                             'rattery_id' => $prattery->id,
                         ]));
                     }
-
-                    // update owner users' ratteries here? (or after save ?)
-                    if (! $prattery->is_alive) {
-
-                    }
                 }
             }
         }
@@ -371,7 +387,7 @@ class LittersTable extends Table
     /**
      * afterSave method
      *
-     * Update ratteries activities (or should it be in contributions ?)
+     * Update ratteries activities
      *
      * @param EventInterface $event
      * @param EntityInterface $entity
@@ -380,6 +396,16 @@ class LittersTable extends Table
      */
     public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
+        $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+        // $ratteries->removeBehavior('State');
+        $now = \Cake\I18n\FrozenTime::now();
+        foreach ($entity->contributions as $contribution) {
+            $rattery = $ratteries->get($contribution->rattery_id, ['contain' => ['Countries']]); // FIXME: contain countries to avoid warning
+            if (! $rattery->is_alive && $now->diffInDays($entity->birth_date) < RatteriesTable::MAXIMAL_INACTIVITY) {
+                $rattery->is_alive = true;
+                $ratteries->save($rattery, ['checkRules' => false, 'atomic' => false]);
+            }
+        }
     }
 
     public function findInState(Query $query, array $options)

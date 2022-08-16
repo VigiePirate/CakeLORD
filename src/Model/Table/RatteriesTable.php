@@ -70,7 +70,8 @@ class RatteriesTable extends Table
                 'zip_code',
                 'country_id',
                 'latitude',
-                'longitude'
+                'longitude',
+                'is_alive'
             ],
         ]);
 

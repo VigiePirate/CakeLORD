@@ -203,6 +203,12 @@ class Litter extends Entity
         return true;
     }
 
+    public function hasValidOrigins()
+    {
+        return ($this->contributions[0]->rattery->is_generic && ! empty($this->comments))
+            || (! $this->contributions[0]->rattery->is_generic && ! empty($this->parent_rats));
+    }
+
     public function isBornFuture()
     {
         return $this->birth_date->isFuture();

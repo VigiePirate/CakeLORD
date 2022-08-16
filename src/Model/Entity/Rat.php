@@ -406,7 +406,7 @@ class Rat extends Entity
 
     public function hasValidOrigins()
     {
-        return ($this->rattery->is_generic && ! empty($this->comments))
+        return ($this->rattery->is_generic && (! empty($this->comments) || ! empty($this->litter_id)))
             || (! $this->rattery->is_generic && ! empty($this->litter_id));
     }
 

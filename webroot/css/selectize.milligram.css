@@ -149,6 +149,24 @@
   opacity: 1;
 }
 
+.selectize-control.plugin-remove_button .remove-single {
+  top: -0.3rem;
+  right: 0.3rem;
+  font-size: 2rem;
+  color: #6f7db3;
+  font-weight: bold;
+}
+
+.has-items > span {
+  border: 1px solid #6f7db3;
+  border-radius: 0.4rem;
+  padding: 0px 5px 0px 5px;
+  color: #6076bf;
+  background-color: #ebeefa;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
 /* bugfix for details' box-sizing inheritance */
 *,
 *::before,

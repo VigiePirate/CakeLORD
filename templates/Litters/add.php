@@ -22,27 +22,60 @@
             <?= $this->Form->create($litter) ?>
             <fieldset>
                 <legend><?= __('Origins') ?></legend>
+                <div class="row row-reverse">
+                    <div class="column-responsive column-50">
+                        <?php
+                            echo $this->Form->control('generic_rattery_id', [
+                                'id' => 'generic-rattery-input',
+                                'name' => 'generic_rattery_id',
+                                'label' => __('Birth place or origin'),
+                                'type' => 'radio',
+                                'options' => $origins,
+                                'empty' => false,
+                            ]);
+                        ?>
+                    </div>
+                    <div class="column-responsive column-50">
+                        <div class="message">
+                            <p><?= __('Please record mandatory information: (at least) a mother, and for generic origins, a name and location in comments.')?></p>
+                            <?= __('If a litter with the same birth date and mother already exists, you will be redirected to it to avoid duplicates.') ?>
+                        </div>
+                    </div>
+                </div>
 
                 <?php
-                    echo $this->Form->control('rattery_name', [
-                        'id' => 'jquery-rattery-input',
-                        'name' => 'rattery_name',
-                        'label' => __('Birth place'),
-                        'type' => 'text',
-                        'required' => 'required',
-                        'placeholder' => __('Type and select the rattery’s name or prefix here...'),
-                    ]);
-                    echo $this->Form->control('rattery_id', [
-                        'id' => 'jquery-rattery-id',
-                        'name' => 'rattery_id',
-                        'label' => [
-                            'class' => 'hide-everywhere',
-                            'text' => 'Hidden field for rattery ID'
-                        ],
-                        'class' => 'hide-everywhere',
-                        'type' => 'text',
+                    echo $this->Form->control('generic_rattery_id', [
+                        'id' => 'alt-generic-rattery-input',
+                        'name' => 'generic_rattery_id',
+                        'label' => '',
+                        'type' => 'radio',
+                        'hiddenField' => false,
+                        'empty' => __('None of the above (I will select a registered rattery below)'),
                     ]);
                 ?>
+
+                <div class="radio-complement">
+                    <?php
+                        echo $this->Form->control('rattery_name', [
+                            'id' => 'jquery-rattery-input',
+                            'name' => 'rattery_name',
+                            'label' => '',
+                            'type' => 'text',
+                            'placeholder' => __('Type and select the rattery’s name or prefix here...'),
+                        ]);
+
+                        echo $this->Form->control('nongeneric_rattery_id', [
+                            'id' => 'jquery-rattery-id',
+                            'name' => 'nongeneric_rattery_id',
+                            'label' => [
+                                'class' => 'hide-everywhere',
+                                'text' => 'Hidden field for rattery ID'
+                            ],
+                            'class' => 'hide-everywhere',
+                            'type' => 'text',
+                        ]);
+                    ?>
+                </div>
 
                 <div class="row">
                     <div class="column-responsive column-50">
@@ -111,7 +144,16 @@
                 </div>
 
                 <legend><?= __('Comments') ?></legend>
-                <?= $this->Form->control('comments', ['label' => 'Additional information']); ?>
+                <?php
+                    echo $this->Form->control('comments', [
+                        'name' => 'comments',
+                        'label' => __('Additional information'),
+                        'rows' => '5',
+                        "error" => [
+                            "escape" => false
+                        ]
+                    ]);
+                ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>
@@ -234,4 +276,28 @@
         });
     });
     </script>
-<?php $this->end();
+<?php $this->end(); ?>
+
+<!-- Easy MDE -->
+<?= $this->Html->css('easymde.css') ?>
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
+<script>
+    var easyMDE = new EasyMDE({
+        minHeight: "20rem",
+        spellChecker: false,
+        inputStyle: "contenteditable",
+        nativeSpellcheck: true,
+        previewImagesInEditor: true,
+        promptURLs: true,
+        sideBySideFullscreen: false,
+        toolbar: [
+            "bold", "italic", "strikethrough", "|",
+            "unordered-list", "ordered-list", "table", "|",
+            "link", "|",
+            "side-by-side", "fullscreen", "preview", "|",
+            "guide"
+        ]
+    });
+    easyMDE.toggleSideBySide();
+</script>
