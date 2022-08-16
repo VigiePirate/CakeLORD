@@ -175,6 +175,7 @@ class RatsController extends AppController
 
                 if (! is_null($samelitter)) {
                     $data['litter_id'] = $samelitter->id;
+                    $data['rattery_id'] = $samelitter->contributions[0]->rattery_id;
                     $rat = $this->Rats->patchEntity($rat, $data, $rat_options);
                     if ($this->Rats->save($rat)) {
                         $this->Flash->success(__('The rat has been saved and attached to the above litter.'));
@@ -186,6 +187,8 @@ class RatsController extends AppController
                     $data['pups_number'] = 0;
                     $litter = $litters->newEntity($data, $litter_options);
                     if ($litters->save($litter, $litter_options)) {
+                        $data['litter_id'] = $litter->id;
+                        $data['rattery_id'] = $litter->contributions[0]->rattery_id;
                         $rat = $this->Rats->patchEntity($rat, $data, $rat_options);
                         if ($this->Rats->save($rat)) {
                             $this->Flash->success(__('The rat has been saved as well as its birth litter, and attached to it.'));

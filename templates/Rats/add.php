@@ -20,7 +20,7 @@
 
             <?= $this->Flash->render() ?>
 
-            <?= $this->Form->create($rat, ['type' => 'file']) ?>
+            <?= $this->Form->setValueSources(['context', 'data'])->create($rat, ['type' => 'file']) ?>
 
             <fieldset>
 
@@ -41,7 +41,7 @@
                         </div>
                         <div class="column-responsive column-50">
                             <div class="message">
-                                <p><?= __('Please record mandatory information: name and location in comments for a generic origin, or rattery and (at least) mother for a registered rattery.')?></p>
+                                <p><?= __('Please record mandatory information: name and location in comments for a generic origin, or (at least) mother for a registered rattery.')?></p>
                                 <?= __('If a litter with the same birth date and mother already exists, the rat will be automatically added to it. If not, a new litter will be created with the rat.') ?>
                             </div>
                         </div>
@@ -68,9 +68,9 @@
                                 'placeholder' => __('Type and select the rattery’s name or prefix here...'),
                             ]);
 
-                            echo $this->Form->control('rattery_id', [
+                            echo $this->Form->control('nongeneric_rattery_id', [
                                 'id' => 'jquery-rattery-id',
-                                'name' => 'rattery_id',
+                                'name' => 'nongeneric_rattery_id',
                                 'label' => [
                                     'class' => 'hide-everywhere',
                                     'text' => 'Hidden field for rattery ID'
@@ -202,30 +202,22 @@
 
                 <legend><?= __('Description') ?></legend>
                 <?php
-                    echo $this->Form->control('colors', [
-                        'id' => 'jquery-color-select',
-                        'type' => 'select',
-                        'empty' => true,
-                        'multiple' => 'true',
-                        'default' => 0,
-                        'label' => __('Color'),
-                        'options' => $colors
-                    ]);
+                    echo $this->Form->control('color_id', ['id' => 'jquery-color-select', 'empty' => true, 'default' => 0, 'options' => $colors]);
                 ?>
                 <div class="row">
                     <div class="column-responsive column-50">
                     <?php
-                        echo $this->Form->control('eyecolor_id', ['empty' => true, 'default' => 0, 'options' => $eyecolors]);
-                        echo $this->Form->control('dilution_id', ['empty' => true, 'default' => 0, 'options' => $dilutions]);
-                        echo $this->Form->control('marking_id', ['empty' => true, 'default' => 0, 'options' => $markings]);
+                        echo $this->Form->control('eyecolor_id', ['id' => 'jquery-eyecolor-select', 'empty' => false, 'default' => 2, 'options' => $eyecolors]);
+                        echo $this->Form->control('dilution_id', ['id' => 'jquery-dilution-select', 'empty' => false, 'default' => 1, 'options' => $dilutions]);
+                        echo $this->Form->control('marking_id', ['id' => 'jquery-marking-select', 'empty' => false, 'default' => 2, 'options' => $markings]);
                     ?>
                     </div>
                     <div class="column-responsive column-50">
                     <?php
-                        echo $this->Form->control('earset_id', ['empty' => true, 'default' => 0, 'options' => $earsets]);
-                        echo $this->Form->control('coat_id', ['empty' => true, 'default' => 0, 'options' => $coats]);
-                        /*echo $this->Form->control('singularities._ids', ['empty' => true, 'default' => 0, 'options' => $singularities, 'size' => '13', 'style' => 'height:auto;']);*/
-                        echo $this->Form->control('singularity_id', ['empty' => true, 'default' => 0, 'options' => $singularities]);
+                        echo $this->Form->control('earset_id', ['id' => 'jquery-earset-select', 'empty' => false, 'default' => 2, 'options' => $earsets]);
+                        echo $this->Form->control('coat_id', ['id' => 'jquery-coat-select', 'empty' => false, 'default' => 2, 'options' => $coats]);
+                        /*echo $this->Form->control('singularities._ids', ['empty' => false, 'default' => 0, 'options' => $singularities, 'size' => '13', 'style' => 'height:auto;']);*/
+                        echo $this->Form->control('singularity_id', ['id' => 'jquery-singularity-select', 'empty' => true, 'default' => 0, 'options' => $singularities]);
                     ?>
                     </div>
                 </div>
@@ -240,7 +232,7 @@
                 <?php
                     echo $this->Form->control('comments', [
                         'name' => 'comments',
-                        'label' => __('Comments'),
+                        'label' => __('Additional information'),
                         'rows' => '5',
                         "error" => [
                             "escape" => false
@@ -300,6 +292,7 @@
             },
             select: function (event, ui) {
                 $("#jquery-owner-input").val(ui.item.value); // display the selected text
+                // $("#jquery-owner-input").addClass('has-items'); // add class for css
                 $("#jquery-owner-id").val(ui.item.id); // save selected id to hidden input
             }
         });
@@ -421,8 +414,51 @@
         $("#jquery-color-select").selectize( {
             placeholder : 'Type here to filter colors...',
             maxItems: 1,
+            plugins: ['remove_button']
         });
      });
+     $(function () {
+         $("#jquery-eyecolor-select").selectize( {
+             placeholder : 'Type here to filter eyecolors...',
+             maxItems: 1,
+             plugins: ['remove_button']
+         });
+      });
+      $(function () {
+          $("#jquery-coat-select").selectize( {
+              placeholder : 'Type here to filter coats...',
+              maxItems: 1,
+              plugins: ['remove_button']
+          });
+       });
+       $(function () {
+           $("#jquery-dilution-select").selectize( {
+               placeholder : 'Type here to filter dilutions...',
+               maxItems: 1,
+               plugins: ['remove_button']
+           });
+        });
+        $(function () {
+            $("#jquery-earset-select").selectize( {
+                placeholder : 'Type here to filter earsets...',
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
+         });
+         $(function () {
+             $("#jquery-marking-select").selectize( {
+                 placeholder : 'Type here to filter markings...',
+                 maxItems: 1,
+                 plugins: ['remove_button']
+             });
+          });
+          $(function () {
+              $("#jquery-singularity-select").selectize( {
+                  placeholder : 'Type here to filter singularities...',
+                  maxItems: 1,
+                  plugins: ['remove_button']
+              });
+           });
     </script>
 <?php $this->end(); ?>
 

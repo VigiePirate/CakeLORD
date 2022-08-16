@@ -122,7 +122,7 @@ class LittersController extends AppController
 
                 $litter = $this->Litters->patchEntity($litter, $data, [
                     'from_rat' => false,
-                    'associated' => ['ParentRats', 'Contributions']
+                    'associated' => ['ParentRats', 'Contributions', 'Contributions.Ratteries']
                 ]);
 
                 $samelitter = $this->Litters->find('fromBirth', [
@@ -148,7 +148,13 @@ class LittersController extends AppController
             $this->Flash->default(__('Please record the litter’s main information below. You will be able to add rats to the litter just after.'));
         }
 
-        $this->set(compact('litter'));
+        $ratteries = $this->loadModel('Ratteries');
+        $creator = $this->Authentication->getIdentity()->get('id');
+        $generic = $ratteries->find()->where(['is_generic IS' => true]);
+        $rattery = $ratteries->findByOwnerUserId($creator)->where(['is_alive IS' => true]);
+        $origins = $generic->all()->append($rattery)->combine('id', 'full_name');
+
+        $this->set(compact('litter', 'origins'));
     }
 
     /**

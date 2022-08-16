@@ -262,20 +262,23 @@ class RatsTable extends Table
         }
 
         // $rattery_id
-        if (isset($data['generic_rattery_id']) && $data['generic_rattery_id'] != '') {
-            $data['rattery_id'] = $data['generic_rattery_id'];
-        } else {
-            // fallback for rattery_id if not properly selected
+        if (! isset($data['rattery_id'])) {
+            if (isset($data['generic_rattery_id']) && ! empty($data['generic_rattery_id'])) {
+                $data['rattery_id'] = $data['generic_rattery_id'];
+            } else {
+                if (empty($data['nongeneric_rattery_id'])) {
+                    $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+                    $rattery = $ratteries->findByPrefix($data['rattery_name'])->all()->toList();
+                    if (! empty($rattery)) {
+                        $data['rattery_id'] = $rattery[0]['id'];
+                    }
+                } else {
+                    $data['rattery_id'] = $data['nongeneric_rattery_id'];
+                }
+            }
         }
 
-        // $color_id: passed as array by current javascript
-        if (isset($data['colors']) && ! empty($data['colors'])) {
-            $data['color_id'] = $data['colors'][0];
-        }
-
-        // singularities to be fixed
-
-        // FIXME: manage markdown in comments (not supported yet)
+        // FIXME singularities
     }
 
     /**
@@ -306,7 +309,9 @@ class RatsTable extends Table
             $entity->marking = \Cake\Datasource\FactoryLocator::get('Table')->get('Markings')->get($entity->marking_id);
 
             // contain rattery for origin checks
-            $entity->rattery = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries')->get($entity->rattery_id);
+            if (isset($data['rattery_id'])) {
+                $entity->rattery = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries')->get($entity->rattery_id);
+            }
         }
     }
 
