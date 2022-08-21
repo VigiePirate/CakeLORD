@@ -128,9 +128,9 @@ class Rat extends Entity
     {
         $doublePrefix = $this->rattery->prefix;
 
-        if( isset($this->birth_litter)
-            && !empty($this->birth_litter->contributions[1])
-            && !$this->birth_litter->contributions[1]->rattery->is_generic
+        if (isset($this->birth_litter)
+            && ! empty($this->birth_litter->contributions[1])
+            && ! $this->birth_litter->contributions[1]->rattery->is_generic
             && ($this->rattery->prefix != $this->birth_litter->contributions[1])
         ) {
             $doublePrefix .= '-' . $this->birth_litter->contributions[1]->rattery->prefix;
@@ -404,8 +404,23 @@ class Rat extends Entity
         return $this->birth_date->isFuture();
     }
 
+    public function hasBirthPlace()
+    {
+        return ! is_null($this->rattery_id);
+    }
+
     public function hasValidOrigins()
     {
+
+        if (empty($this->rattery_id)) {
+            return false;
+        }
+
+        if (! isset($this->rattery)) {
+            $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+            $this->rattery = $ratteries->get($this->rattery_id);
+        }
+
         return ($this->rattery->is_generic && (! empty($this->comments) || ! empty($this->litter_id)))
             || (! $this->rattery->is_generic && ! empty($this->litter_id));
     }

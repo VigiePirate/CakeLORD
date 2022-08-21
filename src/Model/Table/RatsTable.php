@@ -262,7 +262,7 @@ class RatsTable extends Table
         }
 
         // $rattery_id
-        if (! isset($data['rattery_id'])) {
+        if (! isset($data['rattery_id']) && isset($data['rattery_name'])) {
             if (isset($data['generic_rattery_id']) && ! empty($data['generic_rattery_id'])) {
                 $data['rattery_id'] = $data['generic_rattery_id'];
             } else {
@@ -363,6 +363,17 @@ class RatsTable extends Table
         );
 
         /* Mandatory origin information */
+
+        $rules->addCreate(function ($rat) {
+                return $rat->hasBirthPlace();
+            },
+            'rattery_selected',
+            [
+                'errorField' => 'rattery_name',
+                'message' => 'We could not find this rattery. Please, select it in the list or type an existing prefix.'
+            ]
+        );
+
         $rules->addCreate(function ($rat) {
                 return $rat->hasValidOrigins();
             },

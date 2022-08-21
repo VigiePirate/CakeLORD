@@ -160,11 +160,6 @@ class RatsController extends AppController
 
             if (! empty($data['mother_name'])) {
                 $litters = $this->getTableLocator()->get('Litters');
-                $litter_options = [
-                    'from_rat' => true,
-                    'associated' => ['ParentRats', 'Contributions'],
-                    'accessibleFields' => ['pups_number' => true, 'comments' => false],
-                ];
 
                 $samelitter = $litters->find('fromBirth', [
                     'birth_date' => $data['birth_date'],
@@ -184,6 +179,11 @@ class RatsController extends AppController
                         $this->Flash->error(__('The rat could not be saved. Please, read explanatory messages in the form, check and correct your entry, and try again.'));
                     }
                 } else {
+                    $litter_options = [
+                        'from_rat' => true,
+                        'associated' => ['ParentRats', 'Contributions'],
+                        'accessibleFields' => ['pups_number' => true],
+                    ];
                     $data['pups_number'] = 0;
                     $litter = $litters->newEntity($data, $litter_options);
                     if ($litters->save($litter, $litter_options)) {
@@ -198,7 +198,7 @@ class RatsController extends AppController
                         }
                     } else {
                         $rat = $this->Rats->patchEntity($rat, $data, $rat_options);
-                        if ($this->Rats->save($rat)) { // should fail if litter save failed?
+                        if ($this->Rats->save($rat)) {
                             $this->Flash->warning(__('The rat has been saved, but could not be attached to any litter.'));
                             return $this->redirect(['action' => 'view', $rat->id]);
                         } else {

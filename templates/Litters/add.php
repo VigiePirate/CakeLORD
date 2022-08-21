@@ -19,7 +19,25 @@
 
             <?= $this->Flash->render() ?>
 
-            <?= $this->Form->create($litter) ?>
+            <?php if ($from_parent): ?>
+                <div class="button-small">
+                    <?= $this->Html->link(__('Cancel'), ['controller' => 'Rats', 'action' => 'add'], ['class' => 'button float-right']); ?>
+                </div>
+                <?php if (isset($mother)): ?>
+                    <div><strong><?= __('The litter will be recorded as born from the following mother: ')?></strong>
+                        <?= $this->Html->link(h($mother['name']), ['controller' => 'rats', 'action' => 'view', $mother['id']]); ?>
+                    </div>
+
+                <?php endif; ?>
+                <?php if (isset($father)): ?>
+                    <div><strong><?= __('The litter will be recorded as born from the following father: ')?></strong>
+                        <?= $this->Html->link(h($father['name']), ['controller' => 'rats', 'action' => 'view', $father['id']]); ?>
+                    </div>
+                <?php endif; ?>
+                <div class="spacer"></div>
+            <?php endif; ?>
+
+            <?= $this->Form->setValueSources(['context', 'data'])->create($litter) ?>
             <fieldset>
                 <legend><?= __('Origins') ?></legend>
                 <div class="row row-reverse">
@@ -79,47 +97,94 @@
 
                 <div class="row">
                     <div class="column-responsive column-50">
-                        <?php
-                            echo $this->Form->control('mother_name', [
-                                'id' => 'jquery-mother-input',
-                                'name' => 'mother_name',
-                                'label' => __('Mother'),
-                                'type' => 'text',
-                                'required' => 'required',
-                                'placeholder' => __('Type and select the mother’s name or identifier here...'),
-                            ]);
-                            echo $this->Form->control('mother_id', [
-                                'id' => 'jquery-mother-id',
-                                'name' => 'mother_id',
-                                'label' => [
+
+                        <?php if ($from_parent && isset($mother)): ?>
+                            <?php
+                                echo $this->Form->control('mother_name', [
+                                    'name' => 'mother_name',
+                                    'label' => __('Mother'),
+                                    'value' => $mother['name'],
+                                    'readonly' => true
+                                ]);
+                                echo $this->Form->control('mother_id', [
+                                    'name' => 'mother_id',
+                                    'label' => [
+                                        'class' => 'hide-everywhere',
+                                        'text' => 'Hidden field for mother ID'
+                                    ],
                                     'class' => 'hide-everywhere',
-                                    'text' => 'Hidden field for mother ID'
-                                ],
-                                'class' => 'hide-everywhere',
-                                'type' => 'text',
-                            ]);
-                        ?>
+                                    'type' => 'text',
+                                    'value' => $mother['id'],
+                                    'readonly' => true
+                                ]);
+
+                            ?>
+                        <?php else: ?>
+                            <?php
+                                echo $this->Form->control('mother_name', [
+                                    'id' => 'jquery-mother-input',
+                                    'name' => 'mother_name',
+                                    'label' => __('Mother'),
+                                    'type' => 'text',
+                                    'required' => 'required',
+                                    'placeholder' => __('Type and select the mother’s name or identifier here...'),
+                                ]);
+                                echo $this->Form->control('mother_id', [
+                                    'id' => 'jquery-mother-id',
+                                    'name' => 'mother_id',
+                                    'label' => [
+                                        'class' => 'hide-everywhere',
+                                        'text' => 'Hidden field for mother ID'
+                                    ],
+                                    'class' => 'hide-everywhere',
+                                    'type' => 'text',
+                                ]);
+                            ?>
+                        <?php endif; ?>
                     </div>
                     <div class="column-responsive column-50">
-                        <?php
-                            echo $this->Form->control('father_name', [
-                                'id' => 'jquery-father-input',
-                                'name' => 'father_name',
-                                'label' => __('Father'),
-                                'type' => 'text',
-                                'placeholder' => __('Type and select the father’s name or identifier here...'),
-                            ]);
-                            echo $this->Form->control('father_id', [
-                                'id' => 'jquery-father-id',
-                                'name' => 'father_id',
-                                'label' => [
+                        <?php if ($from_parent && isset($father)): ?>
+                            <?php
+                                echo $this->Form->control('father_name', [
+                                    'name' => 'father_name',
+                                    'label' => __('Father'),
+                                    'value' => $father['name'],
+                                    'readonly' => true
+                                ]);
+                                echo $this->Form->control('father_id', [
+                                    'name' => 'father_id',
+                                    'label' => [
+                                        'class' => 'hide-everywhere',
+                                        'text' => 'Hidden field for father ID'
+                                    ],
                                     'class' => 'hide-everywhere',
-                                    'text' => 'Hidden field for mother ID'
-                                ],
-                                'class' => 'hide-everywhere',
-                                'type' => 'text',
-                            ]);
-                        ?>
+                                    'type' => 'text',
+                                    'value' => $father['id'],
+                                    'readonly' => true
+                                ]);
+
+                            ?>
+                        <?php else: ?>
+                            <?php
+                                echo $this->Form->control('father_name', [
+                                    'id' => 'jquery-father-input',
+                                    'name' => 'father_name',
+                                    'label' => __('Father'),
+                                    'type' => 'text',
+                                    'placeholder' => __('Type and select the father’s name or identifier here...'),
+                                ]);
+                                echo $this->Form->control('father_id', [
+                                    'id' => 'jquery-father-id',
+                                    'name' => 'father_id',
+                                    'label' => [
+                                        'class' => 'hide-everywhere',
+                                        'text' => 'Hidden field for mother ID'
+                                    ],
+                                    'class' => 'hide-everywhere',
+                                    'type' => 'text',
+                                ]);
+                            ?>
+                        <?php endif; ?>
                     </div>
                 </div>
 

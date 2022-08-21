@@ -21,9 +21,7 @@
             <?= $this->Flash->render() ?>
 
             <?= $this->Form->setValueSources(['context', 'data'])->create($rat, ['type' => 'file']) ?>
-
             <fieldset>
-
                 <?php if (! $from_litter): ?>
                     <legend><?= __('Origins') ?></legend>
                     <div class="row row-reverse">
@@ -55,6 +53,7 @@
                             'type' => 'radio',
                             'hiddenField' => false,
                             'empty' => __('None of the above (I will select a registered rattery below)'),
+                            'checked' => 'checked'
                         ]);
                     ?>
 

@@ -26,6 +26,18 @@ class RatPolicy implements BeforePolicyInterface
     }
 
     /**
+     * Check if $user can add Rat
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Rat $rat
+     * @return bool
+     */
+    public function canAdd(IdentityInterface $user, Rat $rat)
+    {
+        return true;
+    }
+
+    /**
      * Check if $user can create Rat
      *
      * @param Authorization\IdentityInterface $user The user.
