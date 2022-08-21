@@ -49,7 +49,7 @@
                 </div>
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-add-litter.svg', [
-                        'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
+                        'url' => ['controller' => 'Litters', 'action' => 'add', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Declare Litter')]) ?>
                     <span class="tooltiptext"><?= __('Declare litter from this rat') ?></span>

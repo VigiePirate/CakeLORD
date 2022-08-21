@@ -205,6 +205,16 @@ class Litter extends Entity
 
     public function hasValidOrigins()
     {
+
+        if (empty($this->contributions)) {
+            return false;
+        }
+
+        if (! isset($this->contributions[0]->rattery)) {
+            $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+            $this->contributions[0]->rattery = $ratteries->get($this->contributions[0]->rattery_id);
+        }
+
         return ($this->contributions[0]->rattery->is_generic && ! empty($this->comments))
             || (! $this->contributions[0]->rattery->is_generic && ! empty($this->parent_rats));
     }

@@ -225,6 +225,12 @@ legend, label {
   margin-top: -1.5rem;
 }
 
+input:read-only {
+  background-color: #f5f7fa;
+  border-color: #d1d1d1 !important;
+  color: #606c76;
+}
+
 /* styling checkbox? works only on Chrome for now...
 input[type='checkbox'] {
 transform: scale(1.5) translate(+25%, 0%);

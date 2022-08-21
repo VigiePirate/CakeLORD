@@ -148,13 +148,28 @@ class LittersController extends AppController
             $this->Flash->default(__('Please record the litter’s main information below. You will be able to add rats to the litter just after.'));
         }
 
+        $parent_id = $this->request->getParam('pass');
+        if (! empty($parent_id)) {
+            $from_parent = true;
+            $rats = $this->loadModel('Rats');
+            $parent = $rats->get($parent_id, ['contain' => 'Ratteries']);
+            if ($parent->sex == 'F') {
+                $mother = ['name' => $parent->name . ' ('. $parent->pedigree_identifier .')', 'id' => $parent->id];
+                $this->set(compact('mother'));
+            } else {
+                $father = ['name' => $parent->name . ' ('. $parent->pedigree_identifier .')', 'id' => $parent->id];
+                $this->set(compact('father'));
+            }
+        } else {
+            $from_parent = false;
+        }
         $ratteries = $this->loadModel('Ratteries');
         $creator = $this->Authentication->getIdentity()->get('id');
         $generic = $ratteries->find()->where(['is_generic IS' => true]);
         $rattery = $ratteries->findByOwnerUserId($creator)->where(['is_alive IS' => true]);
         $origins = $generic->all()->append($rattery)->combine('id', 'full_name');
 
-        $this->set(compact('litter', 'origins'));
+        $this->set(compact('litter', 'origins', 'from_parent'));
     }
 
     /**
