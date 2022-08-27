@@ -361,23 +361,23 @@ class LittersTable extends Table
             $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
             $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
 
-            foreach ($entity->parent_rats as $parent) {
-                $parents = $rats->get($parent['id'], [
+            foreach ($entity->parent_rats as $parent_ref) {
+                $parent = $rats->get($parent_ref['id'], [
                     'contain' => ['OwnerUsers','OwnerUsers.Ratteries']
                 ]);
 
-                $parents_rattery = $parents->owner_user->main_rattery;
+                $parent_rattery = $parent->owner_user->main_rattery;
 
-                if (! empty($parents_rattery) && $entity->contributions['0']->rattery_id != $parents_rattery->id) {
-                    if ($parents->sex == 'F') {
+                if (! empty($parent_rattery) && $entity->contributions['0']->rattery_id != $parent_rattery->id) {
+                    if ($parent->sex == 'F') {
                         array_push($entity->contributions, $contributions->newEntity([
                             'contribution_type_id' => '2',
-                            'rattery_id' => $parents_rattery->id,
+                            'rattery_id' => $parent_rattery->id,
                         ]));
                     } else {
                         array_push($entity->contributions, $contributions->newEntity([
                             'contribution_type_id' => '3',
-                            'rattery_id' => $parents_rattery->id,
+                            'rattery_id' => $parent_rattery->id,
                         ]));
                     }
                 }
