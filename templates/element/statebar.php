@@ -1,7 +1,6 @@
 <!-- ugly style to be replaced later by state->css_property -->
 
-<!-- if user is a staff member, show full state bar (now only checking connection) -->
-<?php if ( $this->getRequest()->getSession()->check('Auth.id') ) : ?>
+<?php if ($user->can('changeState', $sheet)) : ?>
 
     <div class="spacer"> </div>
 

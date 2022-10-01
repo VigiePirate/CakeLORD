@@ -19,6 +19,7 @@ class LittersController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
         $this->paginate = [
             'contain' => ['Users', 'States', 'Sire', 'Dam'],
         ];
@@ -34,6 +35,7 @@ class LittersController extends AppController
      */
     public function my()
     {
+        $this->Authorization->skipAuthorization();
         $user = $this->Authentication->getIdentity();
         $this->paginate = [
             'contain' => ['Users', 'States', 'Sire', 'Dam', 'Contributions'],
@@ -59,6 +61,7 @@ class LittersController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $litter = $this->Litters->get($id, [
             'contain' => [
                 'Users', 'States', 'OffspringRats', 'OffspringRats.States',
@@ -106,7 +109,8 @@ class LittersController extends AppController
      */
     public function add()
     {
-        // some of the stuff here should move to beforeMarshal?
+        $this->Authorization->skipAuthorization();
+
         $litter = $this->Litters->newEmptyEntity([
             'associated' => ['ParentRats', 'Contributions']
         ]);
@@ -411,6 +415,7 @@ class LittersController extends AppController
      */
      public function coefficients($genealogy = null, &$sub_coefs = [], $limit = 17, $approx = false, $flag = true)
      {
+         $this->Authorization->skipAuthorization();
          if($genealogy == null) {
              $coefficients = [
                  'coi' => 'Unknown',
@@ -553,6 +558,7 @@ class LittersController extends AppController
 
     public function computeAvk($genealogy, $level = 5)
     {
+        $this->Authorization->skipAuthorization();
         $avk_genealogy = array_filter($genealogy, function($key) use ($level) {
             $key = trim($key,'X');
             return (strlen($key) <= $level);
@@ -568,6 +574,7 @@ class LittersController extends AppController
 
     public function inbreedingApprox($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $litter = $this->Litters->get($id, [
             'contain' => [
                 'States',
@@ -595,6 +602,7 @@ class LittersController extends AppController
 
     public function inbreeding($id)
     {
+        $this->Authorization->skipAuthorization();
         $litter = $this->Litters->get($id, [
             'contain' => [
                 'States',

@@ -143,7 +143,7 @@ class RatteriesController extends AppController
             }
             $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
         }
-        
+
         $users = $this->Ratteries->Users->find('list', ['limit' => 200]);
         $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
         $states = $this->Ratteries->States->find('list', ['limit' => 200]);
@@ -430,6 +430,8 @@ class RatteriesController extends AppController
     }
 
     public function autocomplete() {
+
+        $this->Authorization->skipAuthorization();
         if ($this->request->is(['ajax'])) {
             $searchkey = $this->request->getQuery('searchkey');
             $items = $this->Ratteries->find('named', ['names' => [$searchkey]] )

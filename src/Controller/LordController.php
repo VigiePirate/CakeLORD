@@ -65,6 +65,7 @@ class LordController extends AppController
     public function stats()
     {
         $lord = new Lord();
+        $this->Authorize->skipAuthorization();
         $rats = $this->loadModel('Rats');
 
         $rat_count = $lord->countAll('Rats');
@@ -162,6 +163,7 @@ class LordController extends AppController
     public function webstats()
     {
         $lord = new Lord();
+        $this->Authorize->skipAuthorization();
         $user_count = $lord->countAll('Users');
         $rattery_count = $lord->countAll('Ratteries');
         $litter_count = $lord->countAll('Litters');

@@ -741,6 +741,10 @@ th {
   border-radius: 0.4rem;
 }
 
+.disabled > .side-nav-icon {
+  filter: opacity(0.5) saturate(0.75);
+}
+
 .action-icon {
   display:inline;
   width:1em;

@@ -10,67 +10,109 @@
             <div class="side-nav-group">
                 <?= $this->element('default_sidebar') ?>
             </div>
-            <div class="side-nav-group">
-                <?php if ($rat->state->is_frozen) : ?>
-                    <div class="tooltip disabled">
-                        <?= $this->Html->image('/img/icon-edit.svg', [
-                            'url' => [],
-                            'class' => 'side-nav-icon',
-                            'alt' => __('Modify Rat')
-                        ]) ?>
-                        <span class="tooltiptext"><?= __('You cannot edit this sheet') ?></span>
-                    </div>
-                <?php else : ?>
-                    <div class="tooltip">
-                        <?= $this->Html->image('/img/icon-edit.svg', [
-                            'url' => [
-                                'controller' => 'Rats',
-                                'action' => 'edit', $rat->id,
-                            ],
-                            'class' => 'side-nav-icon',
-                            'alt' => __('Modify Rat')
-                        ]) ?>
-                        <span class="tooltiptext"><?= __('Edit whole rat sheet') ?></span>
+
+            <?php if (! is_null($user)) : ?>
+                <div class="side-nav-group">
+                    <?php if (! $user->can('microEdit', $rat)) : ?>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-picture.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Change Picture')
+                            ]) ?>
+                            <span class="tooltiptext"><?= __('You cannot upload a new picture') ?></span>
+                        </div>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-transfer-ownership.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Change Owner')
+                            ]) ?>
+                            <span class="tooltiptext"><?= __('You cannot give this rat to another user') ?></span>
+                        </div>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-add-litter.svg', [
+                                'url' => ['controller' => 'Litters', 'action' => 'add', $rat->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Declare Litter')]) ?>
+                            <span class="tooltiptext"><?= __('Declare litter from this rat') ?></span>
+                        </div>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-declare-death.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Declare Rat Death')
+                            ]) ?>
+                            <span class="tooltiptext"><?= __('You cannot declare this rat’s death') ?></span>
+                        </div>
+                    <?php else : ?>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-picture.svg', [
+                                'url' => ['controller' => 'Rats', 'action' => 'changePicture', $rat->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Change Picture')]) ?>
+                            <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
+                        </div>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-transfer-ownership.svg', [
+                                'url' => ['controller' => 'Rats', 'action' => 'transferOwnership', $rat->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Change Owner')]) ?>
+                            <span class="tooltiptext"><?= __('Give rat to a new owner') ?></span>
+                        </div>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-add-litter.svg', [
+                                'url' => ['controller' => 'Litters', 'action' => 'add', $rat->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Declare Litter')]) ?>
+                            <span class="tooltiptext"><?= __('Declare litter from this rat') ?></span>
+                        </div>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-declare-death.svg', [
+                                'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Declare Rat Death')]) ?>
+                            <span class="tooltiptext"><?= __('Declare rat death') ?></span>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (! $user->can('edit', $rat)) : ?>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-edit.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Modify Rat')
+                            ]) ?>
+                            <span class="tooltiptext"><?= __('You cannot edit this sheet') ?></span>
+                        </div>
+                    <?php else : ?>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-edit.svg', [
+                                'url' => [
+                                    'controller' => 'Rats',
+                                    'action' => 'edit', $rat->id,
+                                ],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Modify Rat')
+                            ]) ?>
+                            <span class="tooltiptext"><?= __('Edit whole rat sheet') ?></span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+                <?php if ($user->is_staff) : ?>
+                    <div class="side-nav-group">
+                        <?= $this->element('staff_sidebar', [
+                            'controller' => 'Rats',
+                            'object' => $rat,
+                            'user' => $user
+                            ])
+                        ?>
                     </div>
                 <?php endif; ?>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-picture.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'changePicture', $rat->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Change Picture')]) ?>
-                    <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-transfer-ownership.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'transferOwnership', $rat->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Change Owner')]) ?>
-                    <span class="tooltiptext"><?= __('Give rat to a new owner') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-add-litter.svg', [
-                        'url' => ['controller' => 'Litters', 'action' => 'add', $rat->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Declare Litter')]) ?>
-                    <span class="tooltiptext"><?= __('Declare litter from this rat') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-declare-death.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'declareDeath', $rat->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Declare Rat Death')]) ?>
-                    <span class="tooltiptext"><?= __('Declare rat death') ?></span>
-                </div>
-            </div>
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Rats',
-                    'object' => $rat
-                    ])
-                ?>
-            </div>
+            <?php endif; ?>
         </div>
     </aside>
+
     <div class="column-responsive column-90">
         <div class="rats view content">
             <div class="sheet-heading">
@@ -284,81 +326,92 @@
             </div>
         </div>
 
-        <?= $this->element('statebar', ['sheet' => $rat]) ?>
+        <?= $this->element('statebar', ['sheet' => $rat, 'user' => $user]) ?>
 
-        <div class="spacer"> </div>
-        <div class="rat view content">
-            <h2 class="staff"><?= __('Private information') ?></h2>
-            <div class="related">
-                <details>
-                    <summary class="staff">
-                        <?= __('Conversations') ?>
-                    </summary>
-                    <?php if (!empty($rat->conversations)) : ?>
-                    <div class="table-responsive">
-                        <table>
-                            <tr>
-                                <th><?= __('Id') ?></th>
-                                <th><?= __('Rat Id') ?></th>
-                                <th><?= __('Rattery Id') ?></th>
-                                <th><?= __('Litter Id') ?></th>
-                                <th><?= __('Created') ?></th>
-                                <th><?= __('Modified') ?></th>
-                                <th><?= __('Is Active') ?></th>
-                                <th class="actions"><?= __('Actions') ?></th>
-                            </tr>
-                            <?php foreach ($rat->conversations as $conversations) : ?>
-                            <tr>
-                                <td><?= h($conversations->id) ?></td>
-                                <td><?= h($conversations->rat_id) ?></td>
-                                <td><?= h($conversations->rattery_id) ?></td>
-                                <td><?= h($conversations->litter_id) ?></td>
-                                <td><?= h($conversations->created) ?></td>
-                                <td><?= h($conversations->modified) ?></td>
-                                <td><?= h($conversations->is_active) ?></td>
-                                <td class="actions">
-                                    <?= $this->Html->link(__('View'), ['controller' => 'Conversations', 'action' => 'view', $conversations->id]) ?>
-                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Conversations', 'action' => 'edit', $conversations->id]) ?>
-                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Conversations', 'action' => 'delete', $conversations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $conversations->id)]) ?>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </table>
-                    </div>
-                    <?php endif; ?>
-                </details>
-                <details>
-                    <summary class="staff">
-                        <?= __('Snapshots') ?>
-                    </summary>
-                    <?php if (!empty($rat->rat_snapshots)) : ?>
-                    <div class="table-responsive">
-                        <table>
-                            <tr>
-                                <th><?= __('Created') ?></th>
-                                <th><?= __('Differences') ?></th>
-                                <!-- <th><?= __('Data') ?></th> -->
-                                <th><?= __('State') ?></th>
-                                <th class="actions"><?= __('Actions') ?></th>
-                            </tr>
-                            <?php foreach ($rat->rat_snapshots as $ratSnapshots) : ?>
-                            <tr>
-                                <td><?= h($ratSnapshots->created) ?></td>
-                                <td><?= h($snap_diffs[$ratSnapshots->id]) ?></td>
-                                <!-- <td><?= h($ratSnapshots->data) ?></td> -->
-                                <td><?= h($ratSnapshots->state->symbol) ?></td>
-                                <td class="actions">
-                                    <?= $this->Html->link(__('View'), ['controller' => 'RatSnapshots', 'action' => 'view', $ratSnapshots->id]) ?>
-                                    <?= $this->Html->link(__('Restore'), ['controller' => 'Rats', 'action' => 'restore', $rat->id, $ratSnapshots->id]) ?>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </table>
-                    </div>
-                    <?php endif; ?>
-                </details>
+        <!-- Show private information to owner and staff only for now -->
+        <?php if ($user->can('accessPrivate', $rat)) : ?>
+            <div class="spacer"> </div>
+            <div class="rat view content">
+                <h2 class="staff"><?= __('Private information') ?></h2>
+                <div class="related">
+                    <details>
+                        <summary class="staff">
+                            <?= __('Conversations') ?>
+                        </summary>
+                        <?php if (!empty($rat->conversations)) : ?>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th><?= __('Id') ?></th>
+                                    <th><?= __('Rat Id') ?></th>
+                                    <th><?= __('Rattery Id') ?></th>
+                                    <th><?= __('Litter Id') ?></th>
+                                    <th><?= __('Created') ?></th>
+                                    <th><?= __('Modified') ?></th>
+                                    <th><?= __('Is Active') ?></th>
+                                    <th class="actions"><?= __('Actions') ?></th>
+                                </tr>
+                                <?php foreach ($rat->conversations as $conversations) : ?>
+                                <tr>
+                                    <td><?= h($conversations->id) ?></td>
+                                    <td><?= h($conversations->rat_id) ?></td>
+                                    <td><?= h($conversations->rattery_id) ?></td>
+                                    <td><?= h($conversations->litter_id) ?></td>
+                                    <td><?= h($conversations->created) ?></td>
+                                    <td><?= h($conversations->modified) ?></td>
+                                    <td><?= h($conversations->is_active) ?></td>
+                                    <td class="actions">
+                                        <?= $this->Html->link(__('View'), ['controller' => 'Conversations', 'action' => 'view', $conversations->id]) ?>
+                                        <?= $this->Html->link(__('Edit'), ['controller' => 'Conversations', 'action' => 'edit', $conversations->id]) ?>
+                                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Conversations', 'action' => 'delete', $conversations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $conversations->id)]) ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        </div>
+                        <?php endif; ?>
+                    </details>
+                    <details>
+                        <summary class="staff">
+                            <?= __('Snapshots') ?>
+                        </summary>
+                        <?php if (!empty($rat->rat_snapshots)) : ?>
+                        <div class="table-responsive">
+                            <table class="summary">
+                                <tr>
+                                    <th><?= __('Created') ?></th>
+                                    <th><?= __('Differences') ?></th>
+                                    <!-- <th><?= __('Data') ?></th> -->
+                                    <th><?= __('State') ?></th>
+                                    <th class="actions"><?= __('Actions') ?></th>
+                                </tr>
+                                <?php foreach ($rat->rat_snapshots as $ratSnapshots) : ?>
+                                <tr>
+                                    <td><?= h($ratSnapshots->created) ?></td>
+                                    <td><?= h($snap_diffs[$ratSnapshots->id]) ?></td>
+                                    <!-- <td><?= h($ratSnapshots->data) ?></td> -->
+                                    <td><?= h($ratSnapshots->state->symbol) ?></td>
+                                    <td class="actions">
+                                        <span class="nowrap">
+                                            <?= $this->Html->image('/img/icon-view.svg', [
+                                                'url' => ['controller' => 'RatSnapshots', 'action' => 'view', $ratSnapshots->id],
+                                                'class' => 'action-icon',
+                                                'alt' => __('View Snapshot')]) ?>
+                                            <?= $this->Html->image('/img/icon-restore.svg', [
+                                                'url' => ['controller' => 'Rats', 'action' => 'restore', $rat->id, $ratSnapshots->id],
+                                                'class' => 'action-icon',
+                                                'alt' => __('Restore Snapshot')]) ?>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        </div>
+                        <?php endif; ?>
+                    </details>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
     </div>
 </div>
 

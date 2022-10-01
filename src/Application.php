@@ -106,24 +106,25 @@ class Application extends BaseApplication
             // add Authentication after RoutingMiddleware
             //->add(new AuthenticationMiddleware($this->configAuth()));
             ->add(new AuthenticationMiddleware($this))
-            ->add(new AuthorizationMiddleware($this, [
-                // FOR DEV PHASE ONLY !!!!!
-                'requireAuthorizationCheck' => false
-            ]))
-            ;
+            ->add(new AuthorizationMiddleware($this));
+            // ->add(new AuthorizationMiddleware($this, [
+            //     // FOR DEV PHASE ONLY !!!!!
+            //     'requireAuthorizationCheck' => false
+            // ]))
+            // ;
 
-        /*
-         * Not necessary as the DebugKit.ignoreAuthorization in bootstrap.php already does this
-        if (Configure::read('debug')) {
-            // Disable authz for debugkit
-            $middlewareQueue->add(function ($req, $res, $next) {
-                if ($req->getParam('plugin') === 'DebugKit') {
-                    $req->getAttribute('authorization')->skipAuthorization();
-                }
-                return $next($req, $res);
-            });
-        }
-         */
+            /*
+             * Not necessary as the DebugKit.ignoreAuthorization in bootstrap.php already does this
+            if (Configure::read('debug')) {
+                // Disable authz for debugkit
+                $middlewareQueue->add(function ($req, $res, $next) {
+                    if ($req->getParam('plugin') === 'DebugKit') {
+                        $req->getAttribute('authorization')->skipAuthorization();
+                    }
+                    return $next($req, $res);
+                });
+            }
+             */
 
         return $middlewareQueue;
     }

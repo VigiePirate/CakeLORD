@@ -51,15 +51,17 @@ class RatsController extends AppController
     /**
      * My method
      *
+     * FIXME: hardcoded states to be replaced by query on state->needs_staff_action, state->needs_user_action
+     *
      * @return \Cake\Http\Response|null
      */
     public function my()
     {
         $user = $this->Authentication->getIdentity();
+        $this->Authorization->skipAuthorization();
         $this->paginate = [
             'contain' => ['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
         ];
-        // $rats = $this->paginate($this->Rats->find()->where(['Rats.owner_user_id' => $user->id]));
         $females = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'F'])
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
@@ -135,7 +137,9 @@ class RatsController extends AppController
             $snap_diffs[$snapshot->id] = $this->Rats->snapCompareAsString($rat, $snapshot->id);
         }
 
-        $this->set(compact('rat', 'snap_diffs'));
+        $user = $this->request->getAttribute('identity');
+
+        $this->set(compact('rat', 'snap_diffs', 'user'));
     }
 
     /**
@@ -148,7 +152,7 @@ class RatsController extends AppController
     public function add()
     {
         $rat = $this->Rats->newEmptyEntity();
-        $this->Authorization->authorize($rat);
+        $this->Authorization->skipAuthorization();
 
         if ($this->request->is('post')) {
             $data = $this->request->getData();
@@ -367,6 +371,7 @@ class RatsController extends AppController
      }
 
     public function results() {
+        $this->Authorization->skipAuthorization();
         $url['action'] = 'search';
         $options = $this->request->getData();
         $query_string = [];
@@ -543,6 +548,7 @@ class RatsController extends AppController
      */
     public function bornBefore()
     {
+        $this->Authorization->skipAuthorization();
         $bornBefore = $this->request->getParam('pass');
         $rats = $this->Rats->find('bornBefore', [
             'bornBefore' => $bornBefore
@@ -562,6 +568,7 @@ class RatsController extends AppController
 
     public function bornAfter()
     {
+        $this->Authorization->skipAuthorization();
         $bornAfter = $this->request->getParam('pass');
 
         $rats = $this->Rats->find('bornAfter', [
@@ -581,6 +588,8 @@ class RatsController extends AppController
 
     public function inState()
     {
+        $this->Authorization->authorize($this->Rats, 'filterByState');
+
         $inState = $this->request->getParam('pass');
         $rats = $this->Rats->find('inState', [
             'inState' => $inState
@@ -599,6 +608,8 @@ class RatsController extends AppController
 
     public function needsStaff()
     {
+        $this->Authorization->authorize($this->Rats, 'filterByState');
+
         $rats = $this->Rats->find('needsStaff');
 
         $this->paginate = [
@@ -614,6 +625,7 @@ class RatsController extends AppController
     /* Autocomplete for forms function */
 
     public function autocomplete() {
+        $this->Authorization->skipAuthorization();
         if ($this->request->is(['ajax'])) {
             $searchkey = $this->request->getQuery('searchkey');
             $sex = $this->request->getQuery('sex');
@@ -632,6 +644,7 @@ class RatsController extends AppController
     /* Pedigree functions */
 
     public function parentsTree($id=null) {
+        $this->Authorization->skipAuthorization();
         if ($this->request->is(['ajax'])) {
             $id = $this->request->getQuery('id');
             $rat = $this->Rats->get($id, [
@@ -651,6 +664,7 @@ class RatsController extends AppController
     }
 
     public function childrenTree(){
+        $this->Authorization->skipAuthorization();
         if ($this->request->is(['ajax'])) {
             $id = $this->request->getQuery('id');
             $rat = $this->Rats->get($id, [
@@ -739,12 +753,13 @@ class RatsController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function changePicture($id = null)
-    // this change is authorized to owner and staff, and brings rat to next_ok_state
     {
+
         $rat = $this->Rats->get($id, [
             'contain' => ['States', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions'],
         ]);
-        $this->Authorization->authorize($rat);
+        $this->Authorization->authorize($rat, 'microEdit');
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
             if ($this->Rats->save($rat, ['checkRules' => false])) {
@@ -764,13 +779,13 @@ class RatsController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function transferOwnership($id = null)
-    // this change is authorized to owner and staff, and brings rat to next_ok_state
     {
         $rat = $this->Rats->get($id, [
             'contain' => ['CreatorUsers', 'OwnerUsers', 'States', 'Ratteries',
             'BirthLitters', 'BirthLitters.Contributions'],
         ]);
-        $this->Authorization->authorize($rat);
+        $this->Authorization->authorize($rat, 'microEdit');
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             if ($this->request->getData('owner_user_id')) {
                 $rat->set('owner_user_id', $this->request->getData('owner_user_id'));
@@ -801,7 +816,8 @@ class RatsController extends AppController
                 'DeathPrimaryCauses','DeathSecondaryCauses',
             ],
         ]);
-        $this->Authorization->authorize($rat);
+        $this->Authorization->authorize($rat, 'microEdit');
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat->is_alive = false;
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
@@ -826,7 +842,8 @@ class RatsController extends AppController
     {
         $this->request->allowMethod(['get', 'freeze']);
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($rat);
+        $this->Authorization->authorize($rat, 'changeState');
+
         if ($this->Rats->freeze($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet is now frozen.'));
         } else {
@@ -839,7 +856,8 @@ class RatsController extends AppController
     {
         $this->request->allowMethod(['get', 'thaw']);
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($rat);
+        $this->Authorization->authorize($rat, 'changeState');
+
         if ($this->Rats->thaw($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet is now unfrozen.'));
         } else {
@@ -852,7 +870,8 @@ class RatsController extends AppController
     {
         $this->request->allowMethod(['get', 'approve']);
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($rat);
+        $this->Authorization->authorize($rat, 'changeState');
+
         if ($this->Rats->approve($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet has been approved.'));
         } else {
@@ -865,7 +884,8 @@ class RatsController extends AppController
     {
         $this->request->allowMethod(['get', 'blame']);
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($rat);
+        $this->Authorization->authorize($rat, 'changeState');
+
         if ($this->Rats->blame($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet has been unapproved.'));
         } else {

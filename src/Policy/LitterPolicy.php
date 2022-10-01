@@ -10,7 +10,7 @@ use Authorization\Policy\BeforePolicyInterface;
 /**
  * Litter policy
  */
-class LitterPolicy
+class LitterPolicy implements BeforePolicyInterface
 {
     /**
      * Open all for admin
@@ -22,7 +22,9 @@ class LitterPolicy
      */
     public function before($user, $resource, $action)
     {
-        return $user->getOriginalData()->is_admin;
+        if ($user->getOriginalData()->is_root || $user->getOriginalData()->is_admin) {
+            return true;
+        };
     }
 
     /**
@@ -160,5 +162,5 @@ class LitterPolicy
     {
         return true;
     }
-    
+
 }

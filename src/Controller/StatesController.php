@@ -11,6 +11,13 @@ namespace App\Controller;
  */
 class StatesController extends AppController
 {
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['index']);
+    }
+
     /**
      * Index method
      *
@@ -18,6 +25,7 @@ class StatesController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
         $this->paginate = [
             'contain' => ['NextOkStates', 'NextKoStates', 'NextFrozenStates', 'NextThawedStates'],
         ];
@@ -35,6 +43,7 @@ class StatesController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $state = $this->States->get($id, [
             'contain' => ['NextOkStates', 'NextKoStates', 'NextFrozenStates', 'NextThawedStates'],
         ]);
@@ -56,6 +65,7 @@ class StatesController extends AppController
     public function add()
     {
         $state = $this->States->newEmptyEntity();
+        $this->Authorization->authorize($state, 'act');
         if ($this->request->is('post')) {
             $state = $this->States->patchEntity($state, $this->request->getData());
             if ($this->States->save($state)) {
@@ -81,9 +91,9 @@ class StatesController extends AppController
      */
     public function edit($id = null)
     {
-        $state = $this->States->get($id, [
-            'contain' => [],
-        ]);
+        $state = $this->States->get($id, ['contain' => []]);
+        $this->Authorization->authorize($state, 'act');
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $state = $this->States->patchEntity($state, $this->request->getData());
             if ($this->States->save($state)) {
@@ -111,6 +121,8 @@ class StatesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $state = $this->States->get($id);
+        $this->Authorization->authorize($state, 'act');
+        
         if ($this->States->delete($state)) {
             $this->Flash->success(__('The state has been deleted.'));
         } else {

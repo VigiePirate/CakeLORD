@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0beta1 (fe3e306, 2019-09-17)"
+   sodipodi:docname="icon-restore.svg"
+   width="64px"
+   height="64px"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="SVGRoot">
+  <sodipodi:namedview
+     inkscape:current-layer="SVGRoot"
+     inkscape:window-maximized="1"
+     inkscape:window-y="-9"
+     inkscape:window-x="-9"
+     inkscape:cy="28.143629"
+     inkscape:cx="-3.5824508"
+     inkscape:zoom="6.453125"
+     showgrid="false"
+     id="namedview6"
+     inkscape:window-height="1001"
+     inkscape:window-width="1920"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     inkscape:document-rotation="0"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <defs
+     id="defs830" />
+  <metadata
+     id="metadata833">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     id="path2"
+     d="M 11.636508,56.375001 A 5.0908735,5.6249979 0 0 0 16.727378,62 h 30.54524 a 5.0908735,5.6249979 0 0 0 5.090871,-5.624999 V 17.000015 H 11.636508 Z m 9.684313,-20.249993 9.479655,-11.04609 a 1.6343825,1.8058587 0 0 1 2.399068,0 l 9.47962,11.04609 c 1.069085,1.244528 0.31183,3.374995 -1.200579,3.374995 H 35.393908 V 52.624997 A 1.6969579,1.8749993 0 0 1 33.696959,54.5 H 30.303038 A 1.6969579,1.8749993 0 0 1 28.606089,52.624997 V 39.500003 h -6.084643 c -1.512422,0 -2.269697,-2.130467 -1.200625,-3.374995 z M 54.060448,5.750017 H 41.333269 L 40.336313,3.558616 A 2.5454367,2.8124988 0 0 0 38.056021,2.0000203 H 25.933371 A 2.5157399,2.7796864 0 0 0 23.663695,3.558616 L 22.666738,5.750017 H 9.9395485 a 1.6969579,1.8749993 0 0 0 -1.696957,1.8750022 v 3.7499968 a 1.6969579,1.8749993 0 0 0 1.696957,1.875002 H 54.060448 a 1.6969579,1.8749993 0 0 0 1.69696,-1.875002 V 7.6250192 A 1.6969579,1.8749993 0 0 0 54.060448,5.750017 Z"
+     fill="currentColor"
+     style="fill:#b1000c;fill-opacity:1;stroke-width:0.111485" />
+</svg>
