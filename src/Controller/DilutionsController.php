@@ -12,6 +12,13 @@ namespace App\Controller;
  */
 class DilutionsController extends AppController
 {
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['view', 'index']);
+    }
+
     /**
      * Index method
      *
@@ -20,8 +27,10 @@ class DilutionsController extends AppController
     public function index()
     {
         $dilutions = $this->paginate($this->Dilutions);
-
-        $this->set(compact('dilutions'));
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Dilutions);
+        $this->set(compact('dilutions', 'user', 'show_staff'));
     }
 
     /**
@@ -34,7 +43,7 @@ class DilutionsController extends AppController
     public function view($id = null)
     {
         $dilution = $this->Dilutions->get($id);
-
+        $this->Authorization->skipAuthorization();
         $examples = $this->Dilutions->Rats->find()
             ->where([
                 ['marking_id' => $id],
@@ -48,7 +57,10 @@ class DilutionsController extends AppController
         $count = $dilution->countMy('rats', 'dilution');
         $frequency = $dilution->frequencyOfMy('rats', 'dilution');
 
-        $this->set(compact('dilution','examples','count','frequency'));
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Dilutions);
+
+        $this->set(compact('dilution','examples','count','frequency', 'user', 'show_staff'));
     }
 
     /**

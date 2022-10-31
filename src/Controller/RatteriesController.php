@@ -42,6 +42,7 @@ class RatteriesController extends AppController
      */
     public function my()
     {
+        $this->Authorization->skipAuthorization();
         $user = $this->Authentication->getIdentity();
         $this->paginate = [
             'contain' => ['Users', 'Countries', 'States'],
@@ -63,7 +64,6 @@ class RatteriesController extends AppController
     public function view($id = null)
     {
         $this->Authorization->skipAuthorization();
-
         $rattery = $this->Ratteries->get($id, [
             'contain' => ['Users', 'Countries', 'States',
                 'Litters' => function($q) {
@@ -122,7 +122,9 @@ class RatteriesController extends AppController
             $this->set(compact('next_ko_state','next_ok_state'));
         };
 
-        $this->set(compact('rattery','champion', 'stats')); // 'offsprings'));
+        $user = $this->request->getAttribute('identity');
+
+        $this->set(compact('rattery','champion', 'stats', 'user')); // 'offsprings'));
     }
 
     /**
@@ -133,7 +135,7 @@ class RatteriesController extends AppController
     public function add()
     {
         $rattery = $this->Ratteries->newEmptyEntity();
-        $this->Authorization->authorize($rattery, 'create');
+        $this->Authorization->authorize($rattery);
         if ($this->request->is('post')) {
             $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
             if ($this->Ratteries->save($rattery)) {
@@ -243,7 +245,7 @@ class RatteriesController extends AppController
 
             /* Else : process form */
             $rattery = $this->Ratteries->newEmptyEntity();
-            $this->Authorization->authorize($rattery, 'create');
+            $this->Authorization->authorize($rattery);
 
             if ($this->request->is('post')) {
 
@@ -281,7 +283,7 @@ class RatteriesController extends AppController
     // this change is authorized to owner and staff
     {
         $rattery = $this->Ratteries->get($id, ['contain' => 'States']);
-        $this->Authorization->authorize($rattery);
+        $this->Authorization->authorize($rattery, 'microEdit');
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
             if ($this->Ratteries->save($rattery, ['checkRules' => false])) {
@@ -296,6 +298,8 @@ class RatteriesController extends AppController
     /* see all active ratteries on a Googlemap + highlight one if $id is not null */
     public function locate()
     {
+        $this->Authorization->skipAuthorization();
+
         $ratteries = $this->Ratteries->find('located', ['contain' => ['Users']]);
 
         $id = $this->request->getParam('pass');
@@ -335,7 +339,7 @@ class RatteriesController extends AppController
         $rattery = $this->Ratteries->get($id, [
             'contain' => ['Countries'],
         ]);
-        $this->Authorization->authorize($rattery);
+        $this->Authorization->authorize($rattery, 'microEdit');
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
             if ($this->Ratteries->save($rattery)) {
@@ -359,16 +363,14 @@ class RatteriesController extends AppController
 
     public function named()
     {
-        // The 'pass' key is provided by CakePHP and contains all
-        // the passed URL path segments in the request.
+        $this->Authorization->skipAuthorization();
+
         $names = $this->request->getParam('pass');
 
-        // Use the RatteriesTable to find prefixed ratteries.
         $ratteries = $this->Ratteries->find('named', [
             'names' => $names
         ]);
 
-        // Pass variables into the view template context.
         $this->paginate = [
             'contain' => ['Users', 'Countries', 'States'],
         ];
@@ -390,16 +392,13 @@ class RatteriesController extends AppController
      */
     public function ownedBy()
     {
-        // The 'pass' key is provided by CakePHP and contains all
-        // the passed URL path segments in the request.
+        $this->Authorization->skipAuthorization();
         $users = $this->request->getParam('pass');
-        //
-        // Use the RatsTable to find named rats.
+
         $ratteries = $this->Ratteries->find('ownedBy', [
             'users' => $users
         ]);
 
-        // Pass variables into the view template context.
         $this->paginate = [
             'contain' => ['Users', 'States','Countries'],
         ];
@@ -410,18 +409,17 @@ class RatteriesController extends AppController
 
     public function inState()
     {
+        $this->Authorization->authorize($this->Ratteries);
+
         $inState = $this->request->getParam('pass');
         $ratteries = $this->Ratteries->find('inState', [
             'inState' => $inState
         ]);
 
-        // Pass variables into the view template context.
         $this->paginate = [
             'contain' => ['Users', 'States','Countries'],
         ];
         $ratteries = $this->paginate($ratteries);
-
-        // $this->set(compact('rats', 'birth_dates'));
 
         $this->set([
             'ratteries' => $ratteries,
@@ -448,7 +446,7 @@ class RatteriesController extends AppController
     {
         $this->request->allowMethod(['get', 'freeze']);
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($rattery);
+        $this->Authorization->authorize($rattery, 'changeState');
         if ($this->Ratteries->freeze($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet is now frozen.'));
         } else {
@@ -461,7 +459,7 @@ class RatteriesController extends AppController
     {
         $this->request->allowMethod(['get', 'thaw']);
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($rattery);
+        $this->Authorization->authorize($rattery, 'editFrozen');
         if ($this->Ratteries->thaw($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet is now unfrozen.'));
         } else {
@@ -474,7 +472,7 @@ class RatteriesController extends AppController
     {
         $this->request->allowMethod(['get', 'approve']);
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($rattery);
+        $this->Authorization->authorize($rattery, 'changeState');
         if ($this->Ratteries->approve($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet has been approved.'));
         } else {
@@ -487,7 +485,7 @@ class RatteriesController extends AppController
     {
         $this->request->allowMethod(['get', 'blame']);
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($rattery);
+        $this->Authorization->authorize($rattery, 'changeState');
         if ($this->Ratteries->blame($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet has been unapproved.'));
         } else {

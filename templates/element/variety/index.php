@@ -1,5 +1,7 @@
 <div class="coats index content">
-    <?= $this->Html->link($texts['add'], ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <?php if ($show_staff) : ?>
+        <?= $this->Html->link($texts['add'], ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <?php endif; ?>
     <h1><?= $texts['title'] ?></h1>
     <div class="table-responsive">
             <table class="condensed">
@@ -20,20 +22,29 @@
                         <td><?= h($variety->genotype) ?></td>
                         <td><?= $variety->is_picture_mandatory ? '✓' : '' ?></td>
                         <td class="actions">
-                            <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
-                                'url' => ['controller' => $Varieties, 'action' => 'edit', $variety->id],
+                            <?= $this->Html->image('/img/icon-view.svg', [
+                                'url' => ['controller' => $Varieties, 'action' => 'view', $variety->id],
                                 'class' => 'action-icon',
-                                'alt' => $texts['alt_edit']
+                                'alt' => $texts['alt_view']
                             ])?>
-                            <?= $this->Form->postLink(
-                                    $this->Html->image('/img/icon-delete.svg', [
-                                        'class' => 'action-icon',
-                                        'alt' => $texts['alt_delete']
-                                    ]),
-                                    ['action' => 'delete', $variety->id],
-                                    ['confirm' => __('Are you sure you want to delete #{0}?', $variety->id), 'escape' => false]
-                                )
-                            ?>
+                            <?php if (!is_null($user) && $user->can('edit', $variety)) :?>
+                                <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                                    'url' => ['controller' => $Varieties, 'action' => 'edit', $variety->id],
+                                    'class' => 'action-icon',
+                                    'alt' => $texts['alt_edit']
+                                ])?>
+                            <?php endif; ?>
+                            <?php if (!is_null($user) && $user->can('delete', $variety)) :?>
+                                <?= $this->Form->postLink(
+                                        $this->Html->image('/img/icon-delete.svg', [
+                                            'class' => 'action-icon',
+                                            'alt' => $texts['alt_delete']
+                                        ]),
+                                        ['action' => 'delete', $variety->id],
+                                        ['confirm' => __('Are you sure you want to delete #{0}?', $variety->id), 'escape' => false]
+                                    )
+                                ?>
+                            <?php endif; ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>

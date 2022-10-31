@@ -12,6 +12,7 @@
         'texts' => [
             'add' => __('New Dilution'),
             'title' => __('All Dilutions'),
+            'alt_view' => __('View dilution'),
             'alt_edit' => __('Edit dilution'),
             'alt_delete' => __('Delete dilution'),
         ]

@@ -12,6 +12,12 @@ use Cake\Collection\Collection;
  */
 class LittersController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['view']);
+    }
+
     /**
      * Index method
      *
@@ -61,7 +67,6 @@ class LittersController extends AppController
      */
     public function view($id = null)
     {
-        $this->Authorization->skipAuthorization();
         $litter = $this->Litters->get($id, [
             'contain' => [
                 'Users', 'States', 'OffspringRats', 'OffspringRats.States',
@@ -72,6 +77,8 @@ class LittersController extends AppController
                 'Ratteries', 'Contributions', 'Conversations', 'LitterSnapshots',
             ],
         ]);
+
+        $this->Authorization->skipAuthorization();
 
         $offspringsQuery = $this->Litters->OffspringRats
                                 ->find('all', ['contain' => ['States', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'OwnerUsers', 'Ratteries']])
@@ -99,7 +106,9 @@ class LittersController extends AppController
             $this->set(compact('next_ko_state','next_ok_state'));
         };
 
-        $this->set(compact('litter', 'offsprings', 'stats'));
+        $user = $this->request->getAttribute('identity');
+
+        $this->set(compact('litter', 'offsprings', 'stats', 'user'));
     }
 
     /**
@@ -109,11 +118,11 @@ class LittersController extends AppController
      */
     public function add()
     {
-        $this->Authorization->skipAuthorization();
-
         $litter = $this->Litters->newEmptyEntity([
             'associated' => ['ParentRats', 'Contributions']
         ]);
+
+        $this->Authorization->authorize($litter);
 
         if ($this->request->is('post')) {
             // this is not an unauthenticated action, so, test $result emptiness is not necessary?
@@ -188,6 +197,8 @@ class LittersController extends AppController
         $litter = $this->Litters->get($id, [
             'contain' => ['ParentRats', 'Ratteries', 'Contributions'],
         ]);
+        $this->Authorization->authorize($litter);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData());
             if ($this->Litters->save($litter)) {
@@ -221,6 +232,9 @@ class LittersController extends AppController
                 'Ratteries', 'Contributions', 'States'
             ],
         ]);
+
+        $this->Authorization->authorize($litter);
+
         $this->set(compact('litter'));
     }
 
@@ -235,6 +249,7 @@ class LittersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $litter = $this->Litters->get($id);
+        $this->Authorization->authorize($litter);
         if ($this->Litters->delete($litter)) {
             $this->Flash->success(__('The litter has been deleted.'));
         } else {
@@ -269,6 +284,8 @@ class LittersController extends AppController
 
     public function inState()
     {
+        $this->Authorization->authorize($this->Litters);
+
         $inState = $this->request->getParam('pass');
         $litters = $this->Litters->find('inState', [
             'inState' => $inState
@@ -288,14 +305,15 @@ class LittersController extends AppController
 
     /**
      * Genealogy method
+     * FIXME: should be protected?
      *
      * Recursive walk in the genealogy tree
      * Returns a flat table with [$path => $rat_id] rows
      *
      */
-
     public function genealogy($id, $path, &$genealogy, $approx = false)
     {
+        $this->Authorization->skipAuthorization();
         $this->loadModel('Rats');
         $parents = $this->Rats->find()
             ->select(['id', 'litter_id', 'sex'])
@@ -357,6 +375,8 @@ class LittersController extends AppController
     /**
      * SpanningTree method
      *
+     * FIXME: should be protected?
+     *
      * Recursive walk in the genealogy tree
      * (ancestors of an already met ancestor are not rewritten)
      * Returns a flat table with [$path => $rat_id] rows
@@ -364,6 +384,7 @@ class LittersController extends AppController
      */
     public function spanningTree($id, $path = '', &$genealogy = null, &$index = null)
     {
+        $this->Authorization->skipAuthorization();
         $this->loadModel('Rats');
         $this->loadModel('Litters');
         $parents = $this->Rats->find()
@@ -407,6 +428,8 @@ class LittersController extends AppController
 
     /**
      * Coefficients methods
+     *
+     * FIXME: should be protected?
      *
      * Returns inbreeding coefficients (AVK, COI) and associated coancestry
      * Returns only COI if $flag = false
@@ -626,7 +649,7 @@ class LittersController extends AppController
     {
         $this->request->allowMethod(['get', 'freeze']);
         $litter = $this->Litters->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($litter);
+        $this->Authorization->authorize($litter, 'changeState');
         if ($this->Litters->freeze($litter) && $this->Litters->save($litter, ['checkRules' => false])) {
             $this->Flash->success(__('This litter sheet is now frozen.'));
         } else {
@@ -640,7 +663,7 @@ class LittersController extends AppController
     {
         $this->request->allowMethod(['get', 'thaw']);
         $litter = $this->Litters->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($litter);
+        $this->Authorization->authorize($litter, 'editFrozen');
         if ($this->Litters->thaw($litter) && $this->Litters->save($litter, ['checkRules' => false])) {
             $this->Flash->success(__('This litter sheet is now unfrozen.'));
         } else {
@@ -653,7 +676,7 @@ class LittersController extends AppController
     {
         $this->request->allowMethod(['get', 'approve']);
         $litter = $this->Litters->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($litter);
+        $this->Authorization->authorize($litter, 'changeState');
         if ($this->Litters->approve($litter) && $this->Litters->save($litter, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet has been approved.'));
         } else {
@@ -666,7 +689,7 @@ class LittersController extends AppController
     {
         $this->request->allowMethod(['get', 'blame']);
         $litter = $this->Litters->get($id, ['contain' => ['States']]);
-        $this->Authorization->authorize($litter);
+        $this->Authorization->authorize($litter, 'changeState');
         if ($this->Litters->blame($litter) && $this->Litters->save($litter, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet has been unapproved.'));
         } else {

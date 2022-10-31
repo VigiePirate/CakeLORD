@@ -34,6 +34,9 @@
                     echo $this->Form->control('can_delete');
                     echo $this->Form->control('can_configure');
                     echo $this->Form->control('can_restore');
+                    echo $this->Form->control('can_document');
+                    echo $this->Form->control('can_describe');
+                    echo $this->Form->control('can_access_personal');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

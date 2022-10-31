@@ -20,8 +20,9 @@ class SingularitiesController extends AppController
     public function index()
     {
         $singularities = $this->paginate($this->Singularities);
-
-        $this->set(compact('singularities'));
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('singularities', 'user'));
     }
 
     /**

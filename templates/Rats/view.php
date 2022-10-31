@@ -328,8 +328,8 @@
 
         <?= $this->element('statebar', ['sheet' => $rat, 'user' => $user]) ?>
 
-        <!-- Show private information to owner and staff only for now -->
-        <?php if ($user->can('accessPrivate', $rat)) : ?>
+        <!-- Show private information to owner and staff only -->
+        <?php if (!is_null($user) && $user->can('seePrivate', $rat)) : ?>
             <div class="spacer"> </div>
             <div class="rat view content">
                 <h2 class="staff"><?= __('Private information') ?></h2>

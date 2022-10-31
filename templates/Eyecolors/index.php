@@ -12,6 +12,7 @@
         'texts' => [
             'add' => __('New Eyecolor'),
             'title' => __('All Eyecolors'),
+            'alt_view' => __('View eyecolor'),
             'alt_edit' => __('Edit eyecolor'),
             'alt_delete' => __('Delete eyecolor'),
         ]

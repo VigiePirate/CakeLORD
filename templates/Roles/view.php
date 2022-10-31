@@ -10,7 +10,8 @@
                 'controller' => 'Roles',
                 'object' => $role,
                 'tooltip' => __('Browse role list'),
-                'show_staff' => true
+                'show_staff' => true,
+                'user' => $user
             ])
         ?>
     </aside>
@@ -69,10 +70,18 @@
                     <th><?= __('Can Restore') ?></th>
                     <td><?= $role->can_restore ? __('Yes') : __('No'); ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Can Document') ?></th>
+                    <td><?= $role->can_document ? __('Yes') : __('No'); ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Can Describe') ?></th>
+                    <td><?= $role->can_describe ? __('Yes') : __('No'); ?></td>
+                </tr>
             </table>
             <div class="related">
                 <?php if ($role->is_staff && !empty($role->users)) : ?>
-                <h2><?= __('Related Users') ?></h2>        
+                <h2><?= __('Related Users') ?></h2>
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -83,7 +92,7 @@
                         </tr>
                         <?php foreach ($role->users as $user) : ?>
                         <tr>
-                            <td><?= $this->Html->link(h($user->username), ['action' => 'view', $user->id]) ?></td>
+                            <td><?= $this->Html->link(h($user->username), ['controller' => 'Users', 'action' => 'view', $user->id]) ?></td>
                             <td><?= h($user->created) ?></td>
                             <td><?= h($user->modified) ?></td>
                             <td class="actions">

@@ -5,7 +5,8 @@
                 'object' => $variety,
                 'tooltip' => $tooltip,
                 'can_cancel' => true,
-                'show_staff' => $show_staff
+                'show_staff' => $show_staff,
+                'user' => $user
             ])
         ?>
     </aside>
@@ -20,12 +21,12 @@
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('genotype');
-                    echo $this->Form->control('picture_file', ['type' => 'file', 'label' => __('Reference picture')]);            
+                    echo $this->Form->control('picture_file', ['type' => 'file', 'label' => __('Reference picture')]);
                     echo $this->Form->control('description', [
-                        'type'=> 'textarea',
+                        'type' => 'textarea',
                         'id' => 'description',
                         'name' => 'description',
-                        'default' => ' '
+                        'default' => !empty($variety->description) ? $variety->description : '-'
                     ]);
                     echo $this->Form->control('is_picture_mandatory', ['label' => __('Mandatory picture?')]);
                 ?>

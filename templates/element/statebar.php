@@ -1,6 +1,6 @@
 <!-- ugly style to be replaced later by state->css_property -->
 
-<?php if ($user->can('changeState', $sheet)) : ?>
+<?php if (! is_null($user) && $user->can('changeState', $sheet)) : ?>
 
     <div class="spacer"> </div>
 

@@ -12,6 +12,12 @@ namespace App\Controller;
  */
 class CompatibilitiesController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['view', 'index']);
+    }
+
     /**
      * Index method
      *
@@ -19,12 +25,12 @@ class CompatibilitiesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Operators'],
-        ];
+        $this->paginate = ['contain' => ['Operators']];
         $compatibilities = $this->paginate($this->Compatibilities);
-
-        $this->set(compact('compatibilities'));
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Compatibilities);
+        $this->set(compact('compatibilities', 'user', 'show_staff'));
     }
 
     /**
@@ -36,11 +42,11 @@ class CompatibilitiesController extends AppController
      */
     public function view($id = null)
     {
-        $compatibility = $this->Compatibilities->get($id, [
-            'contain' => ['Operators'],
-        ]);
-
-        $this->set('compatibility', $compatibility);
+        $compatibility = $this->Compatibilities->get($id, ['contain' => ['Operators']]);
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Compatibilities);
+        $this->set(compact('compatibility', 'user', 'show_staff'));
     }
 
     /**
@@ -51,6 +57,7 @@ class CompatibilitiesController extends AppController
     public function add()
     {
         $compatibility = $this->Compatibilities->newEmptyEntity();
+        $this->Authorization->authorize($compatibility);
         if ($this->request->is('post')) {
             $compatibility = $this->Compatibilities->patchEntity($compatibility, $this->request->getData());
             if ($this->Compatibilities->save($compatibility)) {

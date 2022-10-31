@@ -13,30 +13,37 @@ use Authorization\Policy\BeforePolicyInterface;
 class LitterPolicy implements BeforePolicyInterface
 {
     /**
-     * Open all for admin
+     * Open all for root
      *
      * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Litter $resource
+     * @param App\Model\Entity\User $resource
      * @param ?? $action
      * @return bool
      */
     public function before($user, $resource, $action)
     {
-        if ($user->getOriginalData()->is_root || $user->getOriginalData()->is_admin) {
+        if ($user->getOriginalData()->is_root) {
             return true;
-        };
+        }
     }
 
     /**
-     * Check if $user can create Litter
+     * Check if $user can view Litter
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\Litter $litter
      * @return bool
      */
-    public function canCreate(IdentityInterface $user, Litter $litter)
+    public function canView(IdentityInterface $user, Litter $litter)
     {
         return true;
+    }
+
+    public function canSeePrivate(IdentityInterface $user, Litter $litter)
+    {
+        return $this->isCreator($user, $litter)
+            || $this->isContributor($user, $litter)
+            || $user->role->is_staff;
     }
 
     /**
@@ -60,23 +67,20 @@ class LitterPolicy implements BeforePolicyInterface
      */
     public function canEdit(IdentityInterface $user, Litter $litter)
     {
-        return $user->getOriginalData()->is_admin;
+        return $user->role->can_edit_others
+            || $user->getIdentifier() === $litter->creator_user_id;
     }
 
-    /**
-     * Check if $user can update Litter
-     *
-     * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Litter $litter
-     * @return bool
-     */
-    public function canUpdate(IdentityInterface $user, Litter $litter)
+    public function canAddRat(IdentityInterface $user, Litter $litter)
     {
-        if ($user->getOriginalData()->is_staff) {
-            return true;
-        }
-        // Can update owned litters
-        return $user->get('id') === $resource->get('creator_user_id');
+        return true;
+    }
+
+    public function canManageContributions(IdentityInterface $user, Litter $litter)
+    {
+        return $this->isCreator($user, $litter)
+            || $this->isContributor($user, $litter)
+            || $user->role->can_edit_others;
     }
 
     /**
@@ -88,7 +92,7 @@ class LitterPolicy implements BeforePolicyInterface
      */
     public function canMy(IdentityInterface $user, Litter $litter)
     {
-        return $user->get('id') === $resource->get('creator_user_id');
+        return true;
     }
 
     /**
@@ -100,67 +104,58 @@ class LitterPolicy implements BeforePolicyInterface
      */
     public function canDelete(IdentityInterface $user, Litter $litter)
     {
-        return $user->getOriginalData()->is_staff;
+        return $user->role->can_delete;
     }
 
     /**
-     * Check if $user can view Litter
+     * Check if $user can alter a sheet state (except frozen sheets)
      *
      * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Litter $litter
+     * @param App\Model\Entity\Rat $rat
      * @return bool
      */
-    public function canView(IdentityInterface $user, Litter $litter)
+    public function canChangeState(IdentityInterface $user, Litter $litter)
     {
-        return true;
+        return $user->role->can_change_state;
     }
 
     /**
-     * Check if $user can freeze Litter
+     * Check if $user can alter a frozen sheet state
      *
      * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Litter $litter
+     * @param App\Model\Entity\Rat $rat
      * @return bool
      */
-    public function canFreeze(IdentityInterface $user, Litter $litter)
+    public function canEditFrozen(IdentityInterface $user, Litter $litter)
     {
-        return true;
+        return $user->role->can_edit_frozen;
     }
 
     /**
-     * Check if $user can thaw Litter
-     *
-     * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Litter $litter
-     * @return bool
+     * Auxiliaries
      */
-    public function canThaw(IdentityInterface $user, Litter $litter)
+    protected function isCreator(IdentityInterface $user, Litter $litter)
     {
-        return true;
+        return $litter->owner_user_id == $user->getIdentifier();
     }
 
-    /**
-     * Check if $user can approve Litter
-     *
-     * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Litter $litter
-     * @return bool
-     */
-    public function canApprove(IdentityInterface $user, Litter $litter)
+    // contributors are owners of contributing ratteries and owners of parents
+    protected function isContributor(IdentityInterface $user, Litter $litter)
     {
-        return true;
-    }
+        $contributions = $litter->contributions;
+        foreach ($contributions as $contribution) {
+            $owner_id = $contribution->rattery->owner_user_id;
+            if ($owner_id == $user->getIdentifier()) {
+                return true;
+            }
+        }
 
-    /**
-     * Check if $user can blame Litter
-     *
-     * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Litter $litter
-     * @return bool
-     */
-    public function canBlame(IdentityInterface $user, Litter $litter)
-    {
-        return true;
-    }
+        if ($litter->sire[0]->owner_user_id == $user->getIdentifier()
+            || $litter->dam[0]->owner_user_id == $user->getIdentifier())
+        {
+            return true;
+        }
 
+        return false;
+    }
 }

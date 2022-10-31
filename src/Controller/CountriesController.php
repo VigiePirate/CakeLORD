@@ -12,6 +12,13 @@ namespace App\Controller;
  */
 class CountriesController extends AppController
 {
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
+    }
+
     /**
      * Index method
      *
@@ -20,8 +27,9 @@ class CountriesController extends AppController
     public function index()
     {
         $countries = $this->paginate($this->Countries);
-
-        $this->set(compact('countries'));
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('countries', 'user'));
     }
 
     /**
@@ -44,7 +52,7 @@ class CountriesController extends AppController
                 'Ratteries.Users'
             ],
         ]);
-
+        $this->Authorization->skipAuthorization();
         $this->set(compact('country'));
     }
 

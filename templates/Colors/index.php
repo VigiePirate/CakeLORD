@@ -12,6 +12,7 @@
         'texts' => [
             'add' => __('New Color'),
             'title' => __('All Colors'),
+            'alt_view' => __('View color'),
             'alt_edit' => __('Edit color'),
             'alt_delete' => __('Delete color'),
         ]

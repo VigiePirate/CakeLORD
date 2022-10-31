@@ -22,7 +22,7 @@ class RatsTablePolicy implements BeforePolicyInterface
      */
     public function before($user, $resource, $action)
     {
-        if ($user->role->is_root) {
+        if ($user->getOriginalData()->is_root) {
             return true;
         };
     }

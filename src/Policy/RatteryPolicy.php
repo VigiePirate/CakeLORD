@@ -22,59 +22,34 @@ class RatteryPolicy
      */
     public function before($user, $resource, $action)
     {
-        return $user->getOriginalData()->is_admin;
-    }
-
-    /**
-     * Check if $user can create Rattery
-     *
-     * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Rattery $rattery
-     * @return bool
-     */
-    public function canCreate(IdentityInterface $user, Rattery $rattery)
-    {
-        return true;
-    }
-
-    /**
-     * Check if $user can edit Rattery
-     *
-     * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Rattery $rattery
-     * @return bool
-     */
-    public function canEdit(IdentityInterface $user, Rattery $rattery)
-    {
-        return $user->getOriginalData()->is_admin;
-    }
-
-    /**
-     * Check if $user can update Rattery
-     *
-     * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Rattery $rattery
-     * @return bool
-     */
-    public function canUpdate(IdentityInterface $user, Rattery $rattery)
-    {
-        if ($user->getOriginalData()->is_staff) {
+        // Root can do anything, no matter the Roles table
+        if ($user->getOriginalData()->is_root) {
             return true;
         }
-        // Can update owned rats
-        return $user->get('id') === $resource->get('owner_user_id');
     }
 
     /**
-     * Check if $user can delete Rattery
+     * Check if $user can add a new Rattery (not necessarily their own; staff reserved)
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\Rattery $rattery
      * @return bool
      */
-    public function canDelete(IdentityInterface $user, Rattery $rattery)
+    public function canAdd(IdentityInterface $user, Rattery $rattery)
     {
-        return $user->getOriginalData()->is_staff;
+        return $user->role->can_edit_others;
+    }
+
+    /**
+     * Check if $user can register their Rattery
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Rattery $rattery
+     * @return bool
+     */
+    public function canRegister(IdentityInterface $user, Rattery $rattery)
+    {
+        return true;
     }
 
     /**
@@ -90,74 +65,63 @@ class RatteryPolicy
     }
 
     /**
-     * Check if $user can change picture of the Rattery
+     * Check if $user can edit Rattery
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\Rattery $rattery
      * @return bool
      */
-    public function canChangePicture(IdentityInterface $user, Rattery $rattery)
+    public function canEdit(IdentityInterface $user, Rattery $rattery)
     {
-        return true;
+        return $this->isOwner($user, $rattery) || $user->role->can_edit_others;
     }
 
     /**
-     * Check if $user can relocate Rattery
+     * Check if $user can change picture or relocate the Rattery
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\Rattery $rattery
      * @return bool
      */
-    public function canRelocate(IdentityInterface $user, Rattery $rattery)
+    public function canMicroEdit(IdentityInterface $user, Rattery $rattery)
     {
-        return true;
+        return $this->isOwner($user, $rattery) || $user->role->can_edit_others;
     }
 
     /**
-     * Check if $user can freeze Litter
+     * Check if $user can delete Rattery
      *
      * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Litter $litter
+     * @param App\Model\Entity\Rattery $rattery
      * @return bool
      */
-    public function canFreeze(IdentityInterface $user, Rattery $rattery)
+    public function canDelete(IdentityInterface $user, Rattery $rattery)
     {
-        return true;
+        return $user->role->can_delete;
     }
 
     /**
-     * Check if $user can thaw Litter
+     * Check if $user can alter a sheet state
      *
      * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Litter $litter
+     * @param App\Model\Entity\Rat $rat
      * @return bool
      */
-    public function canThaw(IdentityInterface $user, Rattery $rattery)
+    public function canChangeState(IdentityInterface $user, Rattery $rattery)
     {
-        return true;
+        return $user->role->can_change_state;
+    }
+
+    public function canEditFrozen(IdentityInterface $user, Rattery $rattery)
+    {
+        return $user->role->can_edit_frozen;
     }
 
     /**
-     * Check if $user can approve Litter
-     *
-     * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Litter $litter
-     * @return bool
+     * Auxiliaries
      */
-    public function canApprove(IdentityInterface $user, Rattery $rattery)
+    protected function isOwner(IdentityInterface $user, Rattery $rattery)
     {
-        return true;
-    }
-
-    /**
-     * Check if $user can blame Litter
-     *
-     * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Litter $litter
-     * @return bool
-     */
-    public function canBlame(IdentityInterface $user, Rattery $rattery)
-    {
-        return true;
+        return $rattery->owner_user_id == $user->getIdentifier();
     }
 }

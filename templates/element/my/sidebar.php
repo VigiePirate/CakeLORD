@@ -32,12 +32,14 @@
     </div>
 </div>
 
-<div class="side-nav-group">
-    <div class="tooltip-staff">
-        <?= $this->Html->image('/img/icon-backoffice.svg', [
-            'url' => ['controller' => 'Lord', 'action' => 'my'],
-            'class' => 'side-nav-icon',
-            'alt' => __('Admin site')]) ?>
-        <span class="tooltiptext-staff"><?= __('Admin site') ?></span>
+<?php if ($user->is_staff) :?>
+    <div class="side-nav-group">
+        <div class="tooltip-staff">
+            <?= $this->Html->image('/img/icon-backoffice.svg', [
+                'url' => ['controller' => 'Lord', 'action' => 'my'],
+                'class' => 'side-nav-icon',
+                'alt' => __('Admin site')]) ?>
+            <span class="tooltiptext-staff"><?= __('Admin site') ?></span>
+        </div>
     </div>
-</div>
+<?php endif ; ?>

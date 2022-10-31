@@ -10,7 +10,8 @@
                 'controller' => 'Categories',
                 'object' => $category,
                 'tooltip' => __('Browse category list'),
-                'show_staff' => true
+                'show_staff' => true,
+                'user' => $user
             ])
         ?>
     </aside>

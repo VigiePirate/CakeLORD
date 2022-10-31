@@ -103,6 +103,18 @@ class RolesTable extends Table
             ->boolean('can_restore')
             ->notEmptyString('can_restore');
 
+        $validator
+            ->boolean('can_document')
+            ->notEmptyString('can_document');
+
+        $validator
+            ->boolean('can_describe')
+            ->notEmptyString('can_describe');
+
+        $validator
+            ->boolean('can_describe')
+            ->notEmptyString('can_access_personal');
+
         return $validator;
     }
 

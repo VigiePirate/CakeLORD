@@ -12,6 +12,7 @@
         'texts' => [
             'add' => __('New Singularity'),
             'title' => __('All Singularities'),
+            'alt_view' => __('View singularity'),
             'alt_edit' => __('Edit singularity'),
             'alt_delete' => __('Delete singularity'),
         ]

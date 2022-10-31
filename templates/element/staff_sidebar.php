@@ -1,6 +1,6 @@
 <!-- if you can cancel, you cannot edit -->
 <?php if (! isset($can_cancel) || ! $can_cancel) : ?>
-    <?php if ($user->can('edit', $object)) : ?>
+    <?php if (! is_null($user) && $user->can('edit', $object)) : ?>
     <div class="tooltip-staff">
         <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
             'url' => ['controller' => $controller, 'action' => 'edit', $object->id],
@@ -19,7 +19,7 @@
     <?php endif; ?>
 <?php endif; ?>
 
-<?php if ($user->can('delete', $object)) : ?>
+<?php if (! is_null($user) &&  $user->can('delete', $object)) : ?>
     <div class="tooltip-staff">
         <?= $this->Form->postLink(
                 $this->Html->image('/img/icon-delete.svg', [

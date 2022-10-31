@@ -10,7 +10,8 @@
                 'controller' => 'Articles',
                 'object' => $article,
                 'tooltip' => __('Browse article list'),
-                'show_staff' => true
+                'show_staff' => true,
+                'user' => $user
             ])
         ?>
     </aside>

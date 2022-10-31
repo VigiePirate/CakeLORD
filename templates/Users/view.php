@@ -10,33 +10,56 @@
             <div class="side-nav-group">
                 <?= $this->element('default_sidebar') ?>
             </div>
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-edit.svg', [
-                        'url' => [
-                            'controller' => 'Users',
-                            'action' => 'edit', $user->id,
-                        ],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Modify User')
-                    ]) ?>
-                    <span class="tooltiptext"><?= __('Edit whole user sheet') ?></span>
+            <?php if (! is_null($identity)) : ?>
+                <?php if ($identity->can('edit', $user)) : ?>
+                    <div class="side-nav-group">
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-picture.svg', [
+                                'url' => ['controller' => 'Users', 'action' => 'changePicture', $user->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Change Picture')]) ?>
+                            <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
+                        </div>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-edit.svg', [
+                                'url' => [
+                                    'controller' => 'Users',
+                                    'action' => 'edit', $user->id,
+                                ],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Modify User')
+                            ]) ?>
+                            <span class="tooltiptext"><?= __('Edit whole user sheet') ?></span>
+                        </div>
+                    </div>
+                <?php else : ?>
+                    <div class="side-nav-group">
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-picture.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Change Picture')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot upload a new picture') ?></span>
+                        </div>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-edit.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Modify User')
+                            ]) ?>
+                            <span class="tooltiptext"><?= __('You cannot edit this sheet') ?></span>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <div class="side-nav-group">
+                    <?= $this->element('staff_sidebar', [
+                        'controller' => 'Users',
+                        'object' => $user,
+                        'user' => $identity
+                        ])
+                    ?>
                 </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-picture.svg', [
-                        'url' => ['controller' => 'Users', 'action' => 'changePicture', $user->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Change Picture')]) ?>
-                    <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
-                </div>
-            </div>
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Users',
-                    'object' => $user
-                    ])
-                ?>
-            </div>
+            <?php endif ; ?>
         </div>
     </aside>
     <div class="column-responsive column-90">
@@ -136,23 +159,32 @@
 
         </div>
 
-        <div>
-            <?= $this->element('lockbar') ?>
-        </div>
+        <?php if (! is_null($identity) && $identity->can('lock', $user)) : ?>
+            <div>
+                <?= $this->element('lockbar') ?>
+            </div>
+        <?php endif; ?>
 
         <div class="spacer"> </div>
 
+        <!-- Show private information to owner and staff only for now -->
+        <?php if (!is_null($identity) && $identity->can('seePrivate', $user)) : ?>
         <div class="litter view content">
             <h2 class="staff"><?= __('Private information') ?></h2>
-            <div class="related">
-                <h3 class='staff'><?= __('Staff Comments') ?></h3>
-                <div class="text">
-                    <blockquote>
-                        <?= $this->Text->autoParagraph(h($user->staff_comments)); ?>
-                    </blockquote>
+            <!-- Sensitive information, edit with care! -->
+            <?php if ($identity->can('seeStaffOnly', $user)) :?>
+                <div class="related">
+                    <h3 class='staff'><?= __('Staff Comments') ?></h3>
+                    <div class="text">
+                        <blockquote>
+                            <?= $this->Text->autoParagraph(h($user->staff_comments)); ?>
+                        </blockquote>
+                    </div>
                 </div>
-            </div>
+            <?php endif ;?>
 
+            <!-- Sensitive information, edit with care! -->
+            <?php if ($identity->can('accessPersonal', $user)) :?>
             <div class="related">
                 <h3 class='staff'><?= __('User information') ?></h3>
                 <table class="condensed">
@@ -160,16 +192,10 @@
                         <th><?= __('Id') ?></th>
                         <td><?= $this->Number->format($user->id) ?></td>
                     </tr>
-
                     <tr>
                         <th><?= __('Email') ?></th>
                         <td><?= h($user->email) ?></td>
                     </tr>
-                    <tr>
-                        <th><?= __('Password') ?></th>
-                        <td><?= h($user->password) ?></td>
-                    </tr>
-
                     <tr>
                         <th><?= __('Firstname') ?></th>
                         <td><?= h($user->firstname) ?></td>
@@ -204,6 +230,7 @@
                     </tr>
                 </table>
             </div>
+            <?php endif ;?>
 
             <div class="related">
                 <h3 class="staff"><?= __('Related Conversations') ?></h3>
@@ -241,6 +268,7 @@
                 <?php endif; ?>
             </div>
 
+            <?php if ($identity->can('seeStaffOnly', $user)) :?>
             <div class="related">
                 <h3 class="staff">Statistics</h3>
                 <table class="condensed stats">
@@ -288,6 +316,8 @@
                     </tr>
                 </table>
             </div>
+            <?php endif; ?>
+        <?php endif; ?>
         </div>
     </div>
 </div>

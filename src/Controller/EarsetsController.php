@@ -20,8 +20,9 @@ class EarsetsController extends AppController
     public function index()
     {
         $earsets = $this->paginate($this->Earsets);
-
-        $this->set(compact('earsets'));
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('earsets', 'user'));
     }
 
     /**

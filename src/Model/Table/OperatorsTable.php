@@ -40,7 +40,7 @@ class OperatorsTable extends Table
         parent::initialize($config);
 
         $this->setTable('operators');
-        $this->setDisplayField('id');
+        $this->setDisplayField('symbol');
         $this->setPrimaryKey('id');
 
         $this->hasMany('Compatibilities', [

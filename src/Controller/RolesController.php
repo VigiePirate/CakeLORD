@@ -33,12 +33,13 @@ class RolesController extends AppController
     public function view($id = null)
     {
         $role = $this->Roles->get($id);
-        $this->Authorization->skipAuthorize();
+        $this->Authorization->skipAuthorization();
         if ($role->is_staff) {
             $role = $this->Roles->get($id, ['contain' => 'Users']);
         }
 
-        $this->set(compact('role'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('role', 'user'));
     }
 
     /**

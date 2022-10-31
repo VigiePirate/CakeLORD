@@ -19,7 +19,7 @@ class CategoriesController extends AppController
     public function index()
     {
         $categories = $this->paginate($this->Categories);
-
+        $this->Authorization->skipAuthorization();
         $this->set(compact('categories'));
     }
 
@@ -35,10 +35,10 @@ class CategoriesController extends AppController
         $category = $this->Categories->get($id, [
             'contain' => ['Articles', 'Faqs'],
         ]);
-
+        $this->Authorization->authorize($category);
         $category_count = $this->Categories->find('all')->count();
-
-        $this->set(compact('category', 'category_count'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('category', 'category_count', 'user'));
     }
 
     /**
@@ -49,6 +49,7 @@ class CategoriesController extends AppController
     public function add()
     {
         $category = $this->Categories->newEmptyEntity();
+        $this->Authorization->authorize($category);
         if ($this->request->is('post')) {
             $category = $this->Categories->patchEntity($category, $this->request->getData());
             if ($this->Categories->save($category)) {
@@ -73,6 +74,7 @@ class CategoriesController extends AppController
         $category = $this->Categories->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->authorize($category);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $category = $this->Categories->patchEntity($category, $this->request->getData());
             if ($this->Categories->save($category)) {
@@ -82,7 +84,8 @@ class CategoriesController extends AppController
             }
             $this->Flash->error(__('The category could not be saved. Please, try again.'));
         }
-        $this->set(compact('category'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('category', 'user'));
     }
 
     /**
@@ -96,6 +99,7 @@ class CategoriesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $category = $this->Categories->get($id);
+        $this->Authorization->authorize($category);
         if ($this->Categories->delete($category)) {
             $this->Flash->success(__('The category has been deleted.'));
         } else {

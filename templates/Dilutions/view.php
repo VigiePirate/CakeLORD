@@ -9,6 +9,6 @@
         'Variety' => 'Dilution',
         'variety' => $dilution,
         'tooltip' => __('Browse dilution list'),
-        'show_staff' => true
+        'show_staff' => $show_staff
     ])
 ?>

@@ -12,6 +12,7 @@
         'texts' => [
             'add' => __('New Earset'),
             'title' => __('All Earsets'),
+            'alt_view' => __('View earset'),
             'alt_edit' => __('Edit earset'),
             'alt_delete' => __('Delete earset'),
         ]

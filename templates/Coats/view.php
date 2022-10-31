@@ -9,6 +9,6 @@
         'Variety' => 'Coat',
         'variety' => $coat,
         'tooltip' => __('Browse coat list'),
-        'show_staff' => true
+        'show_staff' => $show_staff
     ])
 ?>

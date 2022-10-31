@@ -12,6 +12,13 @@ namespace App\Controller;
  */
 class CoatsController extends AppController
 {
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['view', 'index']);
+    }
+
     /**
      * Index method
      *
@@ -21,8 +28,10 @@ class CoatsController extends AppController
     public function index()
     {
         $coats = $this->paginate($this->Coats);
-
-        $this->set(compact('coats'));
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Coats);
+        $this->set(compact('coats', 'user', 'show_staff'));
     }
 
     /**
@@ -35,7 +44,9 @@ class CoatsController extends AppController
     public function view($id = null)
     {
         $coat = $this->Coats->get($id);
+        $this->Authorization->skipAuthorization();
 
+        // FIXME: move to model
         $examples = $this->Coats->Rats->find()
             ->where([
                 ['coat_id' => $id],
@@ -49,7 +60,10 @@ class CoatsController extends AppController
         $count = $coat->countMy('Rats', 'coat');
         $frequency = $coat->frequencyOfMy('Rats', 'coat');
 
-        $this->set(compact('coat','examples','count','frequency'));
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Coats);
+
+        $this->set(compact('coat', 'examples', 'count', 'frequency', 'user', 'show_staff'));
     }
 
     /**
@@ -60,6 +74,7 @@ class CoatsController extends AppController
     public function add()
     {
         $coat = $this->Coats->newEmptyEntity();
+        $this->Authorization->authorize($coat);
         if ($this->request->is('post')) {
             $coat = $this->Coats->patchEntity($coat, $this->request->getData());
             if ($this->Coats->save($coat)) {
@@ -81,9 +96,8 @@ class CoatsController extends AppController
      */
     public function edit($id = null)
     {
-        $coat = $this->Coats->get($id, [
-            'contain' => [],
-        ]);
+        $coat = $this->Coats->get($id);
+        $this->Authorization->authorize($coat);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $coat = $this->Coats->patchEntity($coat, $this->request->getData());
             if ($this->Coats->save($coat)) {
@@ -93,7 +107,8 @@ class CoatsController extends AppController
             }
             $this->Flash->error(__('The coat could not be saved. Please, try again.'));
         }
-        $this->set(compact('coat'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('coat', 'user'));
     }
 
     /**
@@ -107,6 +122,7 @@ class CoatsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $coat = $this->Coats->get($id);
+        $this->Authorization->authorize($coat);
         if ($this->Coats->delete($coat)) {
             $this->Flash->success(__('The coat has been deleted.'));
         } else {

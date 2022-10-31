@@ -316,14 +316,6 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => [
                 'Roles', 'Conversations',
-            //'OwnerRats', 'OwnerRats.States','OwnerRats.DeathPrimaryCauses','OwnerRats.DeathSecondaryCauses',
-            //'OwnerRats.BirthLitters','OwnerRats.Ratteries','OwnerRats.BirthLitters.Ratteries','OwnerRats.BirthLitters.Contributions',
-            //'OwnerRats.BirthLitters.Sire','OwnerRats.BirthLitters.Sire.BirthLitters','OwnerRats.BirthLitters.Sire.BirthLitters.Ratteries',
-            //'OwnerRats.BirthLitters.Dam','OwnerRats.BirthLitters.Dam.BirthLitters','OwnerRats.BirthLitters.Dam.BirthLitters.Ratteries',
-            //'CreatorRats','CreatorRats.States','CreatorRats.DeathPrimaryCauses','CreatorRats.DeathSecondaryCauses',
-            //'CreatorRats.BirthLitters','CreatorRats.Ratteries','CreatorRats.BirthLitters.Ratteries','CreatorRats.BirthLitters.Contributions',
-            //'CreatorRats.BirthLitters.Sire','CreatorRats.BirthLitters.Sire.BirthLitters','CreatorRats.BirthLitters.Sire.BirthLitters.Ratteries',
-            //'CreatorRats.BirthLitters.Dam','CreatorRats.BirthLitters.Dam.BirthLitters','CreatorRats.BirthLitters.Dam.BirthLitters.Ratteries',
                 'Ratteries', 'Ratteries.States','Ratteries.Countries',
                 'OwnerRats' => function($q) {
                     return $q
@@ -362,6 +354,8 @@ class UsersController extends AppController
             $champion = $this->loadModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
         }
 
+        $identity = $this->request->getAttribute('identity');
+
         $this->set(compact('user',
             'rat_count', 'female_count', 'male_count',
             'alive_rat_count', 'alive_female_count', 'alive_male_count',
@@ -369,7 +363,7 @@ class UsersController extends AppController
             'avg_lifespan','female_avg_lifespan','male_avg_lifespan',
             'not_infant_lifespan', 'not_infant_female_lifespan', 'not_infant_male_lifespan',
             'not_accident_lifespan', 'not_accident_female_lifespan', 'not_accident_male_lifespan',
-            'champion'
+            'champion', 'identity'
         ));
     }
 
@@ -494,7 +488,7 @@ class UsersController extends AppController
 
                 if ($user->is_locked) {
                     $this->Flash->error('Your account is locked. Please activate it or contact an administrator');
-                    return $this->redirect(['action' => 'login']); // fixme: redirect to a contact form
+                    return $this->redirect(['action' => 'login']); //FIXME: redirect to a contact form
                 }
 
                 $passkey = uniqid('', true);

@@ -32,6 +32,8 @@ use Authorization\AuthorizationService;
 use Authorization\AuthorizationServiceInterface;
 use Authorization\AuthorizationServiceProviderInterface;
 use Authorization\Middleware\AuthorizationMiddleware;
+use Authorization\Policy\ResolverCollection;
+use Authorization\Policy\MapResolver;
 use Authorization\Policy\OrmResolver;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -198,8 +200,52 @@ class Application extends BaseApplication
 
     public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
     {
-        $resolver = new OrmResolver();
+        // custom resolvers for policy factorization
+        $mapResolver = new MapResolver();
 
+        $mapResolver->map(Model\Entity\Article::class, Policy\DocumentationPolicy::class);
+        $mapResolver->map(Model\Entity\Category::class, Policy\DocumentationPolicy::class);
+        $mapResolver->map(Model\Entity\Faq::class, Policy\DocumentationPolicy::class);
+        $mapResolver->map(Model\Table\ArticlesTable::class, Policy\DocumentationsTablePolicy::class);
+        $mapResolver->map(Model\Table\CategoriesTable::class, Policy\DocumentationsTablePolicy::class);
+        $mapResolver->map(Model\Table\FaqsTable::class, Policy\DocumentationsTablePolicy::class);
+
+        $mapResolver->map(Model\Entity\Coat::class, Policy\DescriptionPolicy::class);
+        $mapResolver->map(Model\Entity\Color::class, Policy\DescriptionPolicy::class);
+        $mapResolver->map(Model\Entity\Dilution::class, Policy\DescriptionPolicy::class);
+        $mapResolver->map(Model\Entity\Earset::class, Policy\DescriptionPolicy::class);
+        $mapResolver->map(Model\Entity\Eyecolor::class, Policy\DescriptionPolicy::class);
+        $mapResolver->map(Model\Entity\Marking::class, Policy\DescriptionPolicy::class);
+        $mapResolver->map(Model\Entity\Singularity::class, Policy\DescriptionPolicy::class);
+        $mapResolver->map(Model\Entity\DeathPrimaryCause::class, Policy\DescriptionPolicy::class);
+        $mapResolver->map(Model\Entity\DeathSecondaryCause::class, Policy\DescriptionPolicy::class);
+
+        $mapResolver->map(Model\Table\CoatsTable::class, Policy\DescriptionsTablePolicy::class);
+        $mapResolver->map(Model\Table\ColorsTable::class, Policy\DescriptionsTablePolicy::class);
+        $mapResolver->map(Model\Table\DilutionsTable::class, Policy\DescriptionsTablePolicy::class);
+        $mapResolver->map(Model\Table\EarsetsTable::class, Policy\DescriptionsTablePolicy::class);
+        $mapResolver->map(Model\Table\EyecolorsTable::class, Policy\DescriptionsTablePolicy::class);
+        $mapResolver->map(Model\Table\MarkingsTable::class, Policy\DescriptionsTablePolicy::class);
+        $mapResolver->map(Model\Table\SingularitiesTable::class, Policy\DescriptionsTablePolicy::class);
+        $mapResolver->map(Model\Table\DeathPrimaryCausesTable::class, Policy\DescriptionsTablePolicy::class);
+        $mapResolver->map(Model\Table\DeathSecondaryCausesTable::class, Policy\DescriptionsTablePolicy::class);
+
+        $mapResolver->map(Model\Entity\Country::class, Policy\DescriptionPolicy::class);
+        $mapResolver->map(Model\Table\CountriesTable::class, Policy\DescriptionsTablePolicy::class);
+
+        $mapResolver->map(Model\Entity\Compatibility::class, Policy\DescriptionPolicy::class);
+        $mapResolver->map(Model\Entity\Operator::class, Policy\DescriptionPolicy::class);
+        $mapResolver->map(Model\Table\CompatibilitiesTable::class, Policy\DescriptionsTablePolicy::class);
+        $mapResolver->map(Model\Table\OperatorsTable::class, Policy\DescriptionsTablePolicy::class);
+
+        $mapResolver->map(Model\Entity\Role::class, Policy\ConfigurationPolicy::class);
+        $mapResolver->map(Model\Entity\State::class, Policy\ConfigurationPolicy::class);
+
+        // default resolver (based on naming conventions)
+        $ormResolver = new OrmResolver();
+
+        // Check the map resolver, and fallback to the orm resolver if a resource is not explicitly mapped
+        $resolver = new ResolverCollection([$mapResolver, $ormResolver]);
         return new AuthorizationService($resolver);
     }
 }

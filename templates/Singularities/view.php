@@ -9,6 +9,6 @@
         'Variety' => 'Singularity',
         'variety' => $singularity,
         'tooltip' => __('Browse singularity list'),
-        'show_staff' => true
+        'show_staff' => $show_staff
     ])
 ?>

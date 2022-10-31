@@ -25,7 +25,7 @@ class RatPolicy implements BeforePolicyInterface
         // Root can do anything, no matter the Roles table
         if ($user->getOriginalData()->is_root) {
             return true;
-        };
+        }
 
         // Frozen sheets are restricted
         if ($resource->state->is_frozen && ! $user->role->can_edit_frozen) {
@@ -57,7 +57,7 @@ class RatPolicy implements BeforePolicyInterface
         return true;
     }
 
-    public function canAccessPrivate(IdentityInterface $user, Rat $rat)
+    public function canSeePrivate(IdentityInterface $user, Rat $rat)
     {
         return $this->isOwner($user, $rat) || $user->role->is_staff;
     }
@@ -98,7 +98,10 @@ class RatPolicy implements BeforePolicyInterface
      */
     public function canMicroEdit(IdentityInterface $user, Rat $rat)
     {
-        return $this->isOwner($user, $rat) || $this->isCreator($user, $rat) || $user->role->can_edit_others;
+        return $this->isOwner($user, $rat)
+            || $this->isCreator($user, $rat)
+            || $this->isBreeder($user, $rat)
+            || $user->role->can_edit_others;
     }
 
     /**
@@ -126,7 +129,7 @@ class RatPolicy implements BeforePolicyInterface
     }
 
     /**
-     * Check if $user can alter a sheet state
+     * Check if $user can alter a sheet state (except thawing)
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\Rat $rat
@@ -135,6 +138,11 @@ class RatPolicy implements BeforePolicyInterface
     public function canChangeState(IdentityInterface $user, Rat $rat)
     {
         return $user->role->can_change_state;
+    }
+
+    public function canEditFrozen(IdentityInterface $user, Rat $rat)
+    {
+        return $user->role->can_edit_frozen;
     }
 
     /**
@@ -148,5 +156,25 @@ class RatPolicy implements BeforePolicyInterface
     protected function isCreator(IdentityInterface $user, Rat $rat)
     {
         return $rat->creator_user_id == $user->getIdentifier();
+    }
+
+    protected function isBreeder(IdentityInterface $user, Rat $rat)
+    {
+        if (! is_null($rat->birth_litter)) {
+            $contributions = $rat->birth_litter->contributions;
+            foreach ($contributions as $contribution) {
+                $owner_id = $contribution->rattery->owner_user_id;
+                if ($owner_id == $user->getIdentifier()) {
+                    return true;
+                }
+            }
+        }
+        // FIXME: untested
+        else {
+           if ($rat->rattery->owner_user_id === $user->getIdentifier()) {
+               return true;
+           }
+        }
+        return false;
     }
 }
