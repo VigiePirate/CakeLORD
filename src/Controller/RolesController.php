@@ -19,7 +19,7 @@ class RolesController extends AppController
     public function index()
     {
         $roles = $this->paginate($this->Roles);
-
+        $this->Authorization->skipAuthorization();
         $this->set(compact('roles'));
     }
 
@@ -33,11 +33,13 @@ class RolesController extends AppController
     public function view($id = null)
     {
         $role = $this->Roles->get($id);
+        $this->Authorization->skipAuthorization();
         if ($role->is_staff) {
             $role = $this->Roles->get($id, ['contain' => 'Users']);
         }
 
-        $this->set(compact('role'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('role', 'user'));
     }
 
     /**
@@ -48,6 +50,7 @@ class RolesController extends AppController
     public function add()
     {
         $role = $this->Roles->newEmptyEntity();
+        $this->Authorization->authorize($role, 'configure');
         if ($this->request->is('post')) {
             $role = $this->Roles->patchEntity($role, $this->request->getData());
             if ($this->Roles->save($role)) {
@@ -69,9 +72,8 @@ class RolesController extends AppController
      */
     public function edit($id = null)
     {
-        $role = $this->Roles->get($id, [
-            'contain' => [],
-        ]);
+        $role = $this->Roles->get($id);
+        $this->Authorization->authorize($role, 'configure');
         if ($this->request->is(['patch', 'post', 'put'])) {
             $role = $this->Roles->patchEntity($role, $this->request->getData());
             if ($this->Roles->save($role)) {
@@ -95,6 +97,7 @@ class RolesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $role = $this->Roles->get($id);
+        $this->Authorization->authorize($role, 'configure');
         if ($this->Roles->delete($role)) {
             $this->Flash->success(__('The role has been deleted.'));
         } else {

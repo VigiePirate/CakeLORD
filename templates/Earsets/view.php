@@ -9,6 +9,6 @@
         'Variety' => 'Earsets',
         'variety' => $earset,
         'tooltip' => __('Browse earset list'),
-        'show_staff' => true
+        'show_staff' => $show_staff
     ])
 ?>

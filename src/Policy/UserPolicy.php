@@ -13,7 +13,7 @@ use Authorization\Policy\BeforePolicyInterface;
 class UserPolicy implements BeforePolicyInterface
 {
     /**
-     * Open all for admin
+     * Open all for root
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\User $resource
@@ -22,7 +22,7 @@ class UserPolicy implements BeforePolicyInterface
      */
     public function before($user, $resource, $action)
     {
-        if ($user->getOriginalData()->is_admin) {
+        if ($user->getOriginalData()->is_root) {
             return true;
         }
     }
@@ -99,7 +99,56 @@ class UserPolicy implements BeforePolicyInterface
     }
 
     /**
-     * Check if $user can change picture of the Rattery
+     * Check if $user can see private sheet part about User
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canSeePrivate(IdentityInterface $user, Rat $rat)
+    {
+        return $this->isSelf($user, $rat) || $user->role->is_staff;
+    }
+
+    /**
+     * Check if $user can see confidential comment about User
+     * DO NOT AUTHORIZE User!!
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canSeeStaffOnly(IdentityInterface $user, Rat $rat)
+    {
+        return $user->role->is_staff;
+    }
+
+    /**
+     * Check if $user can access personal info about User
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canAccessPersonal(IdentityInterface $user, User $resource)
+    {
+        return $user->role->can_access_personal;
+    }
+
+    /**
+     * Check if $user can lock or unlock a User
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canLock(IdentityInterface $user, User $resource)
+    {
+        return $user->role->is_staff;
+    }
+
+    /**
+     * Check if $user can change avatar of the User
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\User $resource
@@ -108,5 +157,13 @@ class UserPolicy implements BeforePolicyInterface
     public function canChangePicture(IdentityInterface $user, User $resource)
     {
         return true;
+    }
+
+    /**
+     * Auxiliaries
+     */
+    protected function isSelf(IdentityInterface $user,  User $resource)
+    {
+        return $resource->id == $user->getIdentifier();
     }
 }

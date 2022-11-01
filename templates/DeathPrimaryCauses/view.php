@@ -11,7 +11,7 @@
                 'object' => $deathPrimaryCause,
                 'tooltip' => __('Browse death category list'),
                 'help_url' =>  ['controller' => 'Articles', 'action' => 'index'],
-                'show_staff' => true
+                'show_staff' => $show_staff
             ])
         ?>
     </aside>

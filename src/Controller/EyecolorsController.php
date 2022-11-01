@@ -20,8 +20,9 @@ class EyecolorsController extends AppController
     public function index()
     {
         $eyecolors = $this->paginate($this->Eyecolors);
-
-        $this->set(compact('eyecolors'));
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('eyecolors', 'user'));
     }
 
     /**

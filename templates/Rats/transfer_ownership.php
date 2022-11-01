@@ -8,8 +8,19 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar') ?>
             </div>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-back.svg', [
+                        'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Full Screen')]) ?>
+                        <span class="tooltiptext"><?= __('Back to rat sheet') ?></span>
+                </div>
+            </div>
+        </div>
     </aside>
     <div class="column-responsive column-90">
         <div class="rats form content">

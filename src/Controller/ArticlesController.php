@@ -12,6 +12,12 @@ namespace App\Controller;
  */
 class ArticlesController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['view', 'all']);
+    }
+
     /**
      * Index method
      *
@@ -20,7 +26,19 @@ class ArticlesController extends AppController
     public function index()
     {
         $articles = $this->paginate($this->Articles, ['contain' => ['Categories']]);
+        $this->Authorization->authorize($this->Articles);
+        $this->set(compact('articles'));
+    }
 
+    /**
+     * All method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function all()
+    {
+        $articles = $this->paginate($this->Articles, ['contain' => ['Categories']]);
+        $this->Authorization->skipAuthorization();
         $this->set(compact('articles'));
     }
 
@@ -36,8 +54,9 @@ class ArticlesController extends AppController
         $article = $this->Articles->get($id, [
             'contain' => ['Categories'],
         ]);
-
-        $this->set('article', $article);
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('article', 'user'));
     }
 
     /**
@@ -48,6 +67,7 @@ class ArticlesController extends AppController
     public function add()
     {
         $article = $this->Articles->newEmptyEntity();
+        $this->Authorization->authorize($article);
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
@@ -59,7 +79,7 @@ class ArticlesController extends AppController
         }
         $this->loadModel('Categories');
         $categories = $this->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('article','categories'));
+        $this->set(compact('article', 'categories'));
     }
 
     /**
@@ -74,6 +94,7 @@ class ArticlesController extends AppController
         $article = $this->Articles->get($id, [
             'contain' => ['Categories'],
         ]);
+        $this->Authorization->authorize($article);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
@@ -84,7 +105,8 @@ class ArticlesController extends AppController
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
         $categories = $this->Articles->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('article', 'categories'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('article', 'categories', 'user'));
     }
 
     /**
@@ -96,14 +118,19 @@ class ArticlesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $article = $this->Articles->get($id);
-        if ($this->Articles->delete($article)) {
-            $this->Flash->success(__('The article has been deleted.'));
-        } else {
-            $this->Flash->error(__('The article could not be deleted. Please, try again.'));
+        // $this->request->allowMethod(['post', 'delete']);
+        $article = $this->Articles->get($id, ['contain' => ['Categories']]);
+        $this->Authorization->authorize($article);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            if ($this->Articles->delete($article)) {
+                $this->Flash->success(__('The article has been deleted.'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The article could not be deleted. Please, try again.'));
+            }
         }
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('article', 'user'));
 
-        return $this->redirect(['action' => 'index']);
     }
 }

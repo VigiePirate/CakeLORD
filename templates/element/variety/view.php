@@ -5,6 +5,7 @@
                 'object' => $variety,
                 'tooltip' => $tooltip,
                 'show_staff' => $show_staff,
+                'user' => $user,
                 'is_labo' => true
             ])
         ?>

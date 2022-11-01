@@ -12,6 +12,12 @@ namespace App\Controller;
  */
 class ColorsController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['view', 'index']);
+    }
+
     /**
      * Index method
      *
@@ -20,8 +26,10 @@ class ColorsController extends AppController
     public function index()
     {
         $colors = $this->paginate($this->Colors);
-
-        $this->set(compact('colors'));
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Colors);
+        $this->set(compact('colors', 'user', 'show_staff'));
     }
 
     /**
@@ -34,6 +42,7 @@ class ColorsController extends AppController
     public function view($id = null)
     {
         $color = $this->Colors->get($id);
+        $this->Authorization->skipAuthorization();
         $examples = $this->Colors->Rats->find()
             ->where([
                 ['color_id' => $id],
@@ -47,7 +56,10 @@ class ColorsController extends AppController
         $count = $color->countMy('rats', 'color');
         $frequency = $color->frequencyOfMy('rats', 'color');
 
-        $this->set(compact('color','examples','count', 'frequency'));
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Colors);
+
+        $this->set(compact('color','examples','count', 'frequency', 'user', 'show_staff'));
     }
 
     /**
@@ -58,6 +70,7 @@ class ColorsController extends AppController
     public function add()
     {
         $color = $this->Colors->newEmptyEntity();
+        $this->Authorization->authorize($color);
         if ($this->request->is('post')) {
             $color = $this->Colors->patchEntity($color, $this->request->getData());
             if ($this->Colors->save($color)) {
@@ -67,7 +80,8 @@ class ColorsController extends AppController
             }
             $this->Flash->error(__('The color could not be saved. Please, try again.'));
         }
-        $this->set(compact('color'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('color', 'user'));
     }
 
     /**
@@ -79,9 +93,8 @@ class ColorsController extends AppController
      */
     public function edit($id = null)
     {
-        $color = $this->Colors->get($id, [
-            'contain' => [],
-        ]);
+        $color = $this->Colors->get($id);
+        $this->Authorization->authorize($color);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $color = $this->Colors->patchEntity($color, $this->request->getData());
             if ($this->Colors->save($color)) {
@@ -91,7 +104,8 @@ class ColorsController extends AppController
             }
             $this->Flash->error(__('The color could not be saved. Please, try again.'));
         }
-        $this->set(compact('color'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('color', 'user'));
     }
 
     /**
@@ -104,13 +118,13 @@ class ColorsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+        $this->Authorization->authorize($color);
         $color = $this->Colors->get($id);
         if ($this->Colors->delete($color)) {
             $this->Flash->success(__('The color has been deleted.'));
         } else {
             $this->Flash->error(__('The color could not be deleted. Please, try again.'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }

@@ -18,12 +18,11 @@ class DeathSecondaryCausesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['DeathPrimaryCauses'],
-        ];
+        $this->paginate = ['contain' => ['DeathPrimaryCauses']];
         $deathSecondaryCauses = $this->paginate($this->DeathSecondaryCauses);
-
-        $this->set(compact('deathSecondaryCauses'));
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('deathSecondaryCauses', 'user'));
     }
 
     /**
@@ -47,6 +46,8 @@ class DeathSecondaryCausesController extends AppController
             ],
         ]);
 
+        $this->Authorization->authorize($deathSecondaryCause);
+
         $count = $deathSecondaryCause->countMy('rats', 'death_secondary_cause');
         $frequency = $deathSecondaryCause->frequencyOfMy('rats', 'death_secondary_cause');
 
@@ -58,7 +59,8 @@ class DeathSecondaryCausesController extends AppController
             $age = 'N/A';
         }
 
-        $this->set(compact('deathSecondaryCause', 'count', 'frequency', 'sex_ratio', 'age'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('deathSecondaryCause', 'count', 'frequency', 'sex_ratio', 'age', 'user'));
     }
 
     /**
@@ -69,6 +71,7 @@ class DeathSecondaryCausesController extends AppController
     public function add()
     {
         $deathSecondaryCause = $this->DeathSecondaryCauses->newEmptyEntity();
+        $this->Authorization->authorize($deathSecondaryCause);
         if ($this->request->is('post')) {
             $deathSecondaryCause = $this->DeathSecondaryCauses->patchEntity($deathSecondaryCause, $this->request->getData());
             if ($this->DeathSecondaryCauses->save($deathSecondaryCause)) {
@@ -91,9 +94,8 @@ class DeathSecondaryCausesController extends AppController
      */
     public function edit($id = null)
     {
-        $deathSecondaryCause = $this->DeathSecondaryCauses->get($id, [
-            'contain' => [],
-        ]);
+        $deathSecondaryCause = $this->DeathSecondaryCauses->get($id);
+        $this->Authorization->authorize($deathPrimaryCause);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $deathSecondaryCause = $this->DeathSecondaryCauses->patchEntity($deathSecondaryCause, $this->request->getData());
             if ($this->DeathSecondaryCauses->save($deathSecondaryCause)) {
@@ -104,7 +106,8 @@ class DeathSecondaryCausesController extends AppController
             $this->Flash->error(__('The death cause could not be saved. Please, try again.'));
         }
         $deathPrimaryCauses = $this->DeathSecondaryCauses->DeathPrimaryCauses->find('list', ['limit' => 200])->order('id');
-        $this->set(compact('deathSecondaryCause', 'deathPrimaryCauses'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('deathSecondaryCause', 'deathPrimaryCauses', 'user'));
     }
 
     /**
@@ -118,6 +121,7 @@ class DeathSecondaryCausesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $deathSecondaryCause = $this->DeathSecondaryCauses->get($id);
+        $this->Authorization->authorize($deathSecondaryCause);
         if ($this->DeathSecondaryCauses->delete($deathSecondaryCause)) {
             $this->Flash->success(__('The death cause has been deleted.'));
         } else {
@@ -129,6 +133,7 @@ class DeathSecondaryCausesController extends AppController
 
     public function findByPrimary() {
         if ($this->request->is(['ajax'])) {
+            $this->Authorization->skipAuthorization();
             $items = $this->DeathSecondaryCauses->find('all')
                 ->select(['id' => 'id', 'value' => 'name'])
                 ->where([
@@ -143,6 +148,7 @@ class DeathSecondaryCausesController extends AppController
 
     public function description() {
         if ($this->request->is(['ajax'])) {
+            $this->Authorization->skipAuthorization();
             $items = $this->DeathSecondaryCauses->find('all')
                 ->select(['id' => 'id', 'value' => 'description'])
                 ->where([

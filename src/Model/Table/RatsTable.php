@@ -504,6 +504,15 @@ class RatsTable extends Table
              ]);
          }
 
+         // FIXME: dirty quickfix
+         if( !empty($options['rattery_name']) ) {
+             $query
+                ->contain('BirthLitters.Ratteries')
+                ->where([
+                    'Ratteries.prefix IS' => substr($options['rattery_name'], 0, 3),
+                ]);
+         }
+
          // owner
          if( !empty($options['owner_user_id']) ) {
              $query->where([

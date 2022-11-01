@@ -93,7 +93,7 @@ $cakeDescription = 'LORD';
                 :
                 $this->Html->Link(
                     $this->Html->image("/img/icon-key.svg", ["alt" => "Login", "title" => "Log in", "width" => "40"]),
-                    ['controller' => 'Users', 'action' => 'login'],
+                    ['controller' => 'Users', 'action' => 'login', '?' => ['redirect' => $this->getRequest()->getAttribute('here')]],
                     ['escape' => false])
             ?>
         </div>
@@ -108,18 +108,18 @@ $cakeDescription = 'LORD';
         <div class="footer_section">
             <h5>Guides</h5>
             <a href="/faqs/all">F.A.Q.</a>
-            <a href="/articles">Full guides</a>
-            <a href="/articles">Code of conduct</a>
-            <a href="/articles">Contributing</a>
-            <a href="/articles">I want a LORD</a>
+            <a href="/articles/all">Full guides</a>
+            <a href="/articles/all">Code of conduct</a>
+            <a href="/articles/all">Contributing</a>
+            <a href="/articles/all">I want a LORD</a>
         </div>
         <div class="footer_section">
             <h5>About</h5>
-            <a href="/articles">History</a>
-            <a href="/articles">What's New?</a>
-            <a href="/articles">Staff</a>
-            <a href="/articles">Credits</a>
-            <a href="/articles">Legal Notice</a>
+            <a href="/articles/all">History</a>
+            <a href="/articles/all">What's New?</a>
+            <a href="/articles/all">Staff</a>
+            <a href="/articles/all">Credits</a>
+            <a href="/articles/all">Legal Notice</a>
         </div>
         <div class="footer_section">
             <h5>Statistics</h5>
@@ -139,11 +139,11 @@ $cakeDescription = 'LORD';
         <div class="footer_section">
             <div class="footer_subsection">
                 <h5>Links</h5>
-                <a href="/articles">Websites</a>
-                <a href="/articles">Forums</a>
-                <a href="/articles">Associations</a>
-                <a href="/articles">Social</a>
-                <a href="/articles">Partners</a>
+                <a href="/articles/all">Websites</a>
+                <a href="/articles/all">Forums</a>
+                <a href="/articles/all">Associations</a>
+                <a href="/articles/all">Social</a>
+                <a href="/articles/all">Partners</a>
             </div>
         </div>
         <div class="footer_largersection">

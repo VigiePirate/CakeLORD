@@ -58,8 +58,8 @@ class AppController extends Controller
     }
 
     public function isAuthorized($user) {
-        // Admins can access anything anywhere
-        if ($user->is_admin) {
+        // Root can access anything anywhere
+        if ($user->is_root) {
             return true;
         }
 

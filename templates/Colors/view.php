@@ -9,6 +9,6 @@
         'Variety' => 'Color',
         'variety' => $color,
         'tooltip' => __('Browse color list'),
-        'show_staff' => true
+        'show_staff' => $show_staff
     ])
 ?>

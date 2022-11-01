@@ -11,6 +11,12 @@ namespace App\Controller;
  */
 class FaqsController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['all', 'view']);
+    }
+
     /**
      * Index method
      *
@@ -21,6 +27,7 @@ class FaqsController extends AppController
         $this->paginate = [
             'contain' => ['Categories'],
         ];
+        $this->Authorization->skipAuthorization();
         $faqs = $this->paginate($this->Faqs);
 
         $this->set(compact('faqs'));
@@ -32,7 +39,7 @@ class FaqsController extends AppController
             ->find('all')
             ->contain('Faqs')
             ->order(['position' => 'ASC']);
-
+        $this->Authorization->skipAuthorization();
         $this->set(compact('categories'));
     }
 
@@ -48,8 +55,9 @@ class FaqsController extends AppController
         $faq = $this->Faqs->get($id, [
             'contain' => ['Categories'],
         ]);
-
-        $this->set(compact('faq'));
+        $this->Authorization->authorize($faq);
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('faq', 'user'));
     }
 
     /**
@@ -60,6 +68,7 @@ class FaqsController extends AppController
     public function add()
     {
         $faq = $this->Faqs->newEmptyEntity();
+        $this->Authorization->authorize($faq);
         if ($this->request->is('post')) {
             $faq = $this->Faqs->patchEntity($faq, $this->request->getData());
             if ($this->Faqs->save($faq)) {
@@ -85,6 +94,7 @@ class FaqsController extends AppController
         $faq = $this->Faqs->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->authorize($faq);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $faq = $this->Faqs->patchEntity($faq, $this->request->getData());
             if ($this->Faqs->save($faq)) {
@@ -95,7 +105,8 @@ class FaqsController extends AppController
             $this->Flash->error(__('The FAQ could not be saved. Please, try again.'));
         }
         $categories = $this->Faqs->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('faq', 'categories'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('faq', 'categories', 'user'));
     }
 
     /**
@@ -109,6 +120,7 @@ class FaqsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $faq = $this->Faqs->get($id);
+        $this->Authorization->authorize($faq);
         if ($this->Faqs->delete($faq)) {
             $this->Flash->success(__('The FAQ has been deleted.'));
         } else {

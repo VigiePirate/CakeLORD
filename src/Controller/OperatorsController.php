@@ -20,7 +20,7 @@ class OperatorsController extends AppController
     public function index()
     {
         $operators = $this->paginate($this->Operators);
-
+        $this->Authorization->skipAuthorization();
         $this->set(compact('operators'));
     }
 
@@ -33,11 +33,11 @@ class OperatorsController extends AppController
      */
     public function view($id = null)
     {
-        $operator = $this->Operators->get($id, [
-            'contain' => ['Compatibilities'],
-        ]);
-
-        $this->set('operator', $operator);
+        $operator = $this->Operators->get($id, ['contain' => ['Compatibilities']]);
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Operators);
+        $this->set(compact('operator', 'user', 'show_staff'));
     }
 
     /**
@@ -48,6 +48,7 @@ class OperatorsController extends AppController
     public function add()
     {
         $operator = $this->Operators->newEmptyEntity();
+        $this->Authorization->authorize($operator);
         if ($this->request->is('post')) {
             $operator = $this->Operators->patchEntity($operator, $this->request->getData());
             if ($this->Operators->save($operator)) {

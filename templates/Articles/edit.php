@@ -10,7 +10,8 @@
                 'controller' => 'Articles',
                 'object' => $article,
                 'tooltip' => __('Browse article list'),
-                'show_staff' => true
+                'show_staff' => true,
+                'user' => $user
             ])
         ?>
     </aside>
@@ -27,10 +28,11 @@
                     echo $this->Form->control('subtitle', ['label' => __('Overtitle')]);
                     echo $this->Form->control('title');
                     echo $this->Form->control('content', [
-                        'type'=> 'textarea',
+                        'type' => 'textarea',
                         'id' => 'content',
                         'name' => 'content',
-                        'default' => $article->content ]);
+                        'default' => $article->content
+                    ]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

@@ -19,8 +19,9 @@ class DeathPrimaryCausesController extends AppController
     public function index()
     {
         $deathPrimaryCauses = $this->paginate($this->DeathPrimaryCauses);
-
-        $this->set(compact('deathPrimaryCauses'));
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('deathPrimaryCauses', 'user'));
     }
 
     /**
@@ -44,6 +45,8 @@ class DeathPrimaryCausesController extends AppController
             ],
         ]);
 
+        $this->Authorization->authorize($deathPrimaryCause);
+
         $count = $deathPrimaryCause->countMy('rats','death_primary_cause');
         $frequency = $deathPrimaryCause->frequencyOfMy('rats','death_primary_cause');
         if ($count > 0) {
@@ -54,7 +57,8 @@ class DeathPrimaryCausesController extends AppController
             $age = 'N/A';
         }
 
-        $this->set(compact('deathPrimaryCause', 'count', 'frequency', 'sex_ratio', 'age'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('deathPrimaryCause', 'count', 'frequency', 'sex_ratio', 'age', 'user'));
     }
 
     /**
@@ -65,6 +69,7 @@ class DeathPrimaryCausesController extends AppController
     public function add()
     {
         $deathPrimaryCause = $this->DeathPrimaryCauses->newEmptyEntity();
+        $this->Authorization->authorize($deathPrimaryCause);
         if ($this->request->is('post')) {
             $deathPrimaryCause = $this->DeathPrimaryCauses->patchEntity($deathPrimaryCause, $this->request->getData());
             if ($this->DeathPrimaryCauses->save($deathPrimaryCause)) {
@@ -86,9 +91,8 @@ class DeathPrimaryCausesController extends AppController
      */
     public function edit($id = null)
     {
-        $deathPrimaryCause = $this->DeathPrimaryCauses->get($id, [
-            'contain' => [],
-        ]);
+        $deathPrimaryCause = $this->DeathPrimaryCauses->get($id);
+        $this->Authorization->authorize($deathPrimaryCause);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $deathPrimaryCause = $this->DeathPrimaryCauses->patchEntity($deathPrimaryCause, $this->request->getData());
             if ($this->DeathPrimaryCauses->save($deathPrimaryCause)) {
@@ -98,7 +102,9 @@ class DeathPrimaryCausesController extends AppController
             }
             $this->Flash->error(__('The death category could not be saved. Please, try again.'));
         }
-        $this->set(compact('deathPrimaryCause'));
+
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('deathPrimaryCause', 'user'));
     }
 
     /**
@@ -112,6 +118,7 @@ class DeathPrimaryCausesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $deathPrimaryCause = $this->DeathPrimaryCauses->get($id);
+        $this->Authorization->authorize($deathPrimaryCause);
         if ($this->DeathPrimaryCauses->delete($deathPrimaryCause)) {
             $this->Flash->success(__('The death category has been deleted.'));
         } else {

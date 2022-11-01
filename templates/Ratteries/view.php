@@ -12,50 +12,84 @@
             </div>
 
             <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-edit.svg', [
-                        'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Modify Rattery')]) ?>
-                    <span class="tooltiptext"><?= __('Edit whole rattery sheet') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-picture.svg', [
-                        'url' => ['controller' => 'Ratteries', 'action' => 'changePicture', $rattery->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Change Picture')]) ?>
-                    <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-locate.svg', [
-                        'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('See on Map')]) ?>
-                    <span class="tooltiptext"><?= __('See rattery on the map') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-relocate.svg', [
-                        'url' => ['controller' => 'Ratteries', 'action' => 'relocate', $rattery->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Move')]) ?>
-                    <span class="tooltiptext"><?= __('Declare a new location') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-add-litter.svg', [
-                        'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Declare Litter')]) ?>
-                    <span class="tooltiptext"><?= __('Declare a litter born here') ?></span>
-                </div>
-            </div>
+                <?php if (!is_null($user)) : ?>
+                    <div class="tooltip">
+                        <?= $this->Html->image('/img/icon-locate.svg', [
+                            'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
+                            'class' => 'side-nav-icon',
+                            'alt' => __('See on Map')]) ?>
+                        <span class="tooltiptext"><?= __('See rattery on the map') ?></span>
+                    </div>
+                    <div class="tooltip">
+                        <?= $this->Html->image('/img/icon-add-litter.svg', [
+                            'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
+                            'class' => 'side-nav-icon',
+                            'alt' => __('Declare Litter')]) ?>
+                        <span class="tooltiptext"><?= __('Declare a litter born here') ?></span>
+                    </div>
 
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Ratteries',
-                    'object' => $rattery
-                    ])
-                ?>
-            </div>
+                    <?php if($user->can('microEdit', $rattery)) : ?>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-picture.svg', [
+                                'url' => ['controller' => 'Ratteries', 'action' => 'changePicture', $rattery->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Change Picture')]) ?>
+                            <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
+                        </div>
+
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-relocate.svg', [
+                                'url' => ['controller' => 'Ratteries', 'action' => 'relocate', $rattery->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Move')]) ?>
+                            <span class="tooltiptext"><?= __('Declare a new location') ?></span>
+                        </div>
+                    <?php else : ?>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-picture.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Change Picture')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot upload a new picture') ?></span>
+                        </div>
+
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-relocate.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Move')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot declare a new location') ?></span>
+                        </div>
+                    <?php endif; ?>
+                    <?php if($user->can('microEdit', $rattery)) : ?>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-edit.svg', [
+                                'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Modify Rattery')]) ?>
+                            <span class="tooltiptext"><?= __('Edit whole rattery sheet') ?></span>
+                        </div>
+                    <?php else : ?>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-edit.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Modify Rattery')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot edit this sheet') ?></span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <?php if ($user->is_staff) : ?>
+                    <div class="side-nav-group">
+                        <?= $this->element('staff_sidebar', [
+                            'controller' => 'Ratteries',
+                            'object' => $rattery,
+                            'user' => $user
+                            ])
+                        ?>
+                    </div>
+                <?php endif ; ?>
+            <?php endif; ?>
         </div>
     </aside>
     <div class="column-responsive column-90">

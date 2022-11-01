@@ -22,7 +22,7 @@ class ContributionsController extends AppController
             'contain' => ['Ratteries', 'Litters', 'Litters.Sire', 'Litters.Dam', 'ContributionTypes'],
         ];
         $contributions = $this->paginate($this->Contributions);
-
+        $this->Authorization->authorize($this->Contributions);
         $this->set(compact('contributions'));
     }
 
@@ -38,7 +38,7 @@ class ContributionsController extends AppController
         $contribution = $this->Contributions->get($id, [
             'contain' => ['Ratteries', 'Litters', 'Litters.Sire', 'Litters.Dam', 'ContributionTypes'],
         ]);
-
+        $this->Authorization->authorize($contribution);
         $this->set(compact('contribution'));
     }
 
@@ -54,6 +54,7 @@ class ContributionsController extends AppController
         $contribution = $this->Contributions->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->authorize($contribution);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $contribution = $this->Contributions->patchEntity($contribution, $this->request->getData());
             if ($this->Contributions->save($contribution)) {
@@ -80,6 +81,7 @@ class ContributionsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $contribution = $this->Contributions->get($id);
+        $this->Authorization->authorize($contribution);
         if ($this->Contributions->delete($contribution)) {
             $this->Flash->success(__('The contribution has been deleted.'));
         } else {

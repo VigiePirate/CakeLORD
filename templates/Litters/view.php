@@ -10,35 +10,70 @@
             <div class="side-nav-group">
                 <?= $this->element('default_sidebar') ?>
             </div>
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-edit.svg', [
-                        'url' => ['controller' => 'Litters', 'action' => 'edit'],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Edit litter')]) ?>
-                    <span class="tooltiptext"><?= __('Edit this litter') ?></span>
+            <?php if (!is_null($user)) : ?>
+                <div class="side-nav-group">
+                    <?php if ($user->can('addRat', $litter)) : ?>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-add-rat.svg', [
+                                'url' => ['controller' => 'Rats', 'action' => 'add', $litter->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Add rat')]) ?>
+                            <span class="tooltiptext"><?= __('Add a rat in this litter') ?></span>
+                        </div>
+                    <?php else :?>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-add-rat.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Add rat')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot add a rat to this litter') ?></span>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($user->can('manageContributions', $litter)) : ?>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-add-rattery.svg', [
+                                'url' => ['controller' => 'Litters', 'action' => 'manageContributions', $litter->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Add rattery')]) ?>
+                            <span class="tooltiptext"><?= __('Manage contributing ratteries') ?></span>
+                        </div>
+                    <?php else : ?>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-add-rattery.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Add rattery')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot manage contributing ratteries in this litter') ?></span>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($user->can('edit', $litter)) : ?>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-edit.svg', [
+                                'url' => ['controller' => 'Litters', 'action' => 'edit', $litter->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Edit litter')]) ?>
+                            <span class="tooltiptext"><?= __('Edit this litter') ?></span>
+                        </div>
+                    <?php else :?>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-edit.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Edit litter')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot edit this litter') ?></span>
+                        </div>
+                    <?php endif; ?>
                 </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-add-rattery.svg', [
-                        'url' => ['controller' => 'Litters', 'action' => 'manageContributions', $litter->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Add rattery')]) ?>
-                    <span class="tooltiptext"><?= __('Manage contributing ratteries') ?></span>
-                </div>
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-add-rat.svg', [
-                        'url' => ['controller' => 'Rats', 'action' => 'add', $litter->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Add rat')]) ?>
-                    <span class="tooltiptext"><?= __('Add a rat in this litter') ?></span>
-                </div>
-            </div>
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Litters',
-                    'object' => $litter
-                    ]) ?>
-            </div>
+                <?php if ($user->is_staff) : ?>
+                    <div class="side-nav-group">
+                        <?= $this->element('staff_sidebar', [
+                            'controller' => 'Litters',
+                            'object' => $litter,
+                            'user' => $user
+                            ]) ?>
+                    </div>
+                <?php endif ;?>
+            <?php endif ; ?>
         </div>
     </aside>
     <div class="column-responsive column-90">
@@ -251,78 +286,81 @@
             </div>
         </div>
 
-        <?= $this->element('statebar', ['sheet' => $litter]) ?>
+        <?php if ($user->can('changeState', $litter)) : ?>
+            <?= $this->element('statebar', ['sheet' => $litter]) ?>
+        <?php endif ; ?>
 
-        <div class="spacer"> </div>
-        <div class="content litter view">
-            <h2 class="staff"><?= __('Private information') ?></h2>
-            <div class="related staff">
-                <h3 class="staff"><?= __('Related Conversations') ?></h3>
-                <?php if (!empty($litter->conversations)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Rat Id') ?></th>
-                            <th><?= __('Rattery Id') ?></th>
-                            <th><?= __('Litter Id') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th><?= __('Is Active') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($litter->conversations as $conversations) : ?>
-                        <tr>
-                            <td><?= h($conversations->id) ?></td>
-                            <td><?= h($conversations->rat_id) ?></td>
-                            <td><?= h($conversations->rattery_id) ?></td>
-                            <td><?= h($conversations->litter_id) ?></td>
-                            <td><?= h($conversations->created) ?></td>
-                            <td><?= h($conversations->modified) ?></td>
-                            <td><?= h($conversations->is_active) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Conversations', 'action' => 'view', $conversations->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Conversations', 'action' => 'edit', $conversations->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Conversations', 'action' => 'delete', $conversations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $conversations->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
+        <?php if ($user->can('seePrivate', $litter)) : ?>
+            <div class="spacer"> </div>
+            <div class="content litter view">
+                <h2 class="staff"><?= __('Private information') ?></h2>
+                <div class="related staff">
+                    <h3 class="staff"><?= __('Related Conversations') ?></h3>
+                    <?php if (!empty($litter->conversations)) : ?>
+                    <div class="table-responsive">
+                        <table>
+                            <tr>
+                                <th><?= __('Id') ?></th>
+                                <th><?= __('Rat Id') ?></th>
+                                <th><?= __('Rattery Id') ?></th>
+                                <th><?= __('Litter Id') ?></th>
+                                <th><?= __('Created') ?></th>
+                                <th><?= __('Modified') ?></th>
+                                <th><?= __('Is Active') ?></th>
+                                <th class="actions"><?= __('Actions') ?></th>
+                            </tr>
+                            <?php foreach ($litter->conversations as $conversations) : ?>
+                            <tr>
+                                <td><?= h($conversations->id) ?></td>
+                                <td><?= h($conversations->rat_id) ?></td>
+                                <td><?= h($conversations->rattery_id) ?></td>
+                                <td><?= h($conversations->litter_id) ?></td>
+                                <td><?= h($conversations->created) ?></td>
+                                <td><?= h($conversations->modified) ?></td>
+                                <td><?= h($conversations->is_active) ?></td>
+                                <td class="actions">
+                                    <?= $this->Html->link(__('View'), ['controller' => 'Conversations', 'action' => 'view', $conversations->id]) ?>
+                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Conversations', 'action' => 'edit', $conversations->id]) ?>
+                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Conversations', 'action' => 'delete', $conversations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $conversations->id)]) ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                    <?php endif; ?>
                 </div>
-                <?php endif; ?>
-            </div>
-            <div class="related staff">
-                <h3 class="staff"><?= __('Related Litter Snapshots') ?></h3>
-                <?php if (!empty($litter->litter_snapshots)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Data') ?></th>
-                            <th><?= __('Litter Id') ?></th>
-                            <th><?= __('State Id') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($litter->litter_snapshots as $litterSnapshots) : ?>
-                        <tr>
-                            <td><?= h($litterSnapshots->id) ?></td>
-                            <td><?= h($litterSnapshots->data) ?></td>
-                            <td><?= h($litterSnapshots->litter_id) ?></td>
-                            <td><?= h($litterSnapshots->state_id) ?></td>
-                            <td><?= h($litterSnapshots->created) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'LitterSnapshots', 'action' => 'view', $litterSnapshots->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'LitterSnapshots', 'action' => 'edit', $litterSnapshots->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'LitterSnapshots', 'action' => 'delete', $litterSnapshots->id], ['confirm' => __('Are you sure you want to delete # {0}?', $litterSnapshots->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
+                <div class="related staff">
+                    <h3 class="staff"><?= __('Related Litter Snapshots') ?></h3>
+                    <?php if (!empty($litter->litter_snapshots)) : ?>
+                    <div class="table-responsive">
+                        <table>
+                            <tr>
+                                <th><?= __('Id') ?></th>
+                                <th><?= __('Data') ?></th>
+                                <th><?= __('Litter Id') ?></th>
+                                <th><?= __('State Id') ?></th>
+                                <th><?= __('Created') ?></th>
+                                <th class="actions"><?= __('Actions') ?></th>
+                            </tr>
+                            <?php foreach ($litter->litter_snapshots as $litterSnapshots) : ?>
+                            <tr>
+                                <td><?= h($litterSnapshots->id) ?></td>
+                                <td><?= h($litterSnapshots->data) ?></td>
+                                <td><?= h($litterSnapshots->litter_id) ?></td>
+                                <td><?= h($litterSnapshots->state_id) ?></td>
+                                <td><?= h($litterSnapshots->created) ?></td>
+                                <td class="actions">
+                                    <?= $this->Html->link(__('View'), ['controller' => 'LitterSnapshots', 'action' => 'view', $litterSnapshots->id]) ?>
+                                    <?= $this->Html->link(__('Edit'), ['controller' => 'LitterSnapshots', 'action' => 'edit', $litterSnapshots->id]) ?>
+                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'LitterSnapshots', 'action' => 'delete', $litterSnapshots->id], ['confirm' => __('Are you sure you want to delete # {0}?', $litterSnapshots->id)]) ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                    <?php endif; ?>
                 </div>
-                <?php endif; ?>
-            </div>
-
+            <?php endif; ?>
         </div>
     </div>
 </div>

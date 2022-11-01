@@ -20,8 +20,9 @@ class MarkingsController extends AppController
     public function index()
     {
         $markings = $this->paginate($this->Markings);
-
-        $this->set(compact('markings'));
+        $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('markings', 'user'));
     }
 
     /**

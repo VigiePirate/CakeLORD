@@ -6,13 +6,20 @@
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Html->link(__('List Compatibilities'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
+        <?= $this->element('tech_sidebar', [
+                'controller' => 'Compatibilities',
+                'object' => $compatibility,
+                'tooltip' => __('Browse compatibility rules list'),
+                'show_staff' => false
+            ])
+        ?>
     </aside>
     <div class="column-responsive column-90">
-        <div class="compatibilities form content">
+        <div class="operators form content">
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Compatibility rules') ?></div>
+            </div>
+            <h1><?= __('Add Compatibility Rule') ?></h1>
             <?= $this->Form->create($compatibility) ?>
             <fieldset>
                 <legend><?= __('Add Compatibility') ?></legend>

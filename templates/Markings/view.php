@@ -9,6 +9,6 @@
         'Variety' => 'Marking',
         'variety' => $marking,
         'tooltip' => __('Browse marking list'),
-        'show_staff' => true
+        'show_staff' => $show_staff
     ])
 ?>

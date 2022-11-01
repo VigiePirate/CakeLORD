@@ -110,25 +110,52 @@ class User extends Entity implements IdentityInterface
     }
 
     /**
-     * We create those fields based upon the numeric value of the role_id field
-     * as it enables simple comparisons. The Roles Table is more of a reminder
-     * as we don't expect roles to change much.
-     *
+     * Shortcuts to role properties when Roles was not contained at user hydration
      * @return bool
      */
     protected function _getIsRoot()
     {
-        return $this->role_id === 1;
+        if (! isset($this->role)) {
+            $roles = \Cake\Datasource\FactoryLocator::get('Table')->get('Roles');
+            $this->role = $roles->get($this->role_id);
+        }
+        return $this->role->is_root;
     }
 
     protected function _getIsAdmin()
     {
-        return $this->role_id <= 2;
+        if (! isset($this->role)) {
+            $roles = \Cake\Datasource\FactoryLocator::get('Table')->get('Roles');
+            $this->role = $roles->get($this->role_id);
+        }
+        return $this->role->is_admin;
     }
 
     protected function _getIsStaff()
     {
-        return $this->role_id <= 3;
+        if (! isset($this->role)) {
+            $roles = \Cake\Datasource\FactoryLocator::get('Table')->get('Roles');
+            $this->role = $roles->get($this->role_id);
+        }
+        return $this->role->is_staff;
+    }
+
+    protected function _getCanChangeState()
+    {
+        if (! isset($this->role)) {
+            $roles = \Cake\Datasource\FactoryLocator::get('Table')->get('Roles');
+            $this->role = $roles->get($this->role_id);
+        }
+        return $this->role->can_change_state;
+    }
+
+    protected function _getCanConfigure()
+    {
+        if (! isset($this->role)) {
+            $roles = \Cake\Datasource\FactoryLocator::get('Table')->get('Roles');
+            $this->role = $roles->get($this->role_id);
+        }
+        return $this->role->can_configure;
     }
 
     // if user has 1 rattery, return its name even if it is not active

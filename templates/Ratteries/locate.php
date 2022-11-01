@@ -34,7 +34,7 @@
             <h1><?= __('Rattery Map') ?></h1>
 
             <?php if (isset($rattery) && (! isset($rattery->latitude) || ! isset($rattery->longitude))) : ?>
-                <div class="message error">The rattery you asked for has not recorded its zipcode and therefore, cannot be displayed. Here are the other located ratteries.</div>
+                <div class="message error"><?= __('The rattery you asked for has not recorded its zipcode and therefore, cannot be displayed. Here are the other located ratteries.') ?></div>
             <?php endif; ?>
 
             <?php $this->append('script');?>

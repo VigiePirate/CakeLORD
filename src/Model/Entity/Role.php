@@ -19,6 +19,9 @@ use Cake\ORM\Entity;
  * @property bool $can_delete
  * @property bool $can_configure
  * @property bool $can_restore
+ * @property bool $can_document
+ * @property bool $can_describe
+ * @property bool $can_access_personal
  *
  * @property \App\Model\Entity\User[] $users
  */
@@ -44,6 +47,9 @@ class Role extends Entity
         'can_delete' => true,
         'can_configure' => true,
         'can_restore' => true,
+        'can_document' => true,
+        'can_decribe' => true,
+        'can_access_personal' => true,
         'users' => true,
     ];
 }
