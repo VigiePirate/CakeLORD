@@ -27,7 +27,10 @@
                     'alt' => __('Delete Sheet')
                 ]),
                 ['action' => 'delete', $object->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $object->id), 'escape' => false]
+                [
+                    'confirm' => __('Are you sure you want to delete # {0}?', $object->id),
+                    'escape' => false
+                ]
             )
         ?>
         <span class="tooltiptext-staff"><?= __('Delete') ?></span>

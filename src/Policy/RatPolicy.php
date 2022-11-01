@@ -83,8 +83,8 @@ class RatPolicy implements BeforePolicyInterface
      */
     public function canEdit(IdentityInterface $user, Rat $rat)
     {
-        // check rat state here? (frozen rats cannot be edited, except if user can edit frozen, etc.)
-        return $this->isOwner($user, $rat) || $user->role->can_edit_others;
+        return (! $rat->state->needs_staff_action && $this->isOwner($user, $rat))
+            || (! $rat->state->needs_user_action && $user->role->can_edit_others);
     }
 
     /**
@@ -98,14 +98,16 @@ class RatPolicy implements BeforePolicyInterface
      */
     public function canMicroEdit(IdentityInterface $user, Rat $rat)
     {
-        return $this->isOwner($user, $rat)
-            || $this->isCreator($user, $rat)
-            || $this->isBreeder($user, $rat)
-            || $user->role->can_edit_others;
+        $staff_condition = ! $rat->state->needs_user_action && $user->role->can_edit_others;
+
+        $user_condition = ! $rat->state->needs_staff_action &&
+            ($this->isOwner($user, $rat) || $this->isCreator($user, $rat) || $this->isBreeder($user, $rat));
+
+        return $staff_condition || $user_condition ;
     }
 
     /**
-     * Check if $user can delete Rat
+     * Check if $user can delete Rat. Only frozen, unreliable rats can be deleted.
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\Rat $rat
@@ -113,7 +115,7 @@ class RatPolicy implements BeforePolicyInterface
      */
     public function canDelete(IdentityInterface $user, Rat $rat)
     {
-        return $user->role->can_delete;
+        return $rat->state->is_frozen && ! $rat->state->is_reliable && $user->role->can_delete;
     }
 
     /**
@@ -169,7 +171,7 @@ class RatPolicy implements BeforePolicyInterface
                 }
             }
         }
-        // FIXME: untested
+        // rats with nongeneric prefix but no litter (legacy case)
         else {
            if ($rat->rattery->owner_user_id === $user->getIdentifier()) {
                return true;

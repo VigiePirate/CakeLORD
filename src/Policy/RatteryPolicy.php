@@ -26,6 +26,11 @@ class RatteryPolicy
         if ($user->getOriginalData()->is_root) {
             return true;
         }
+
+        // Frozen sheets are restricted
+        if ($resource->state->is_frozen && ! $user->role->can_edit_frozen) {
+            return false;
+        }
     }
 
     /**
@@ -73,7 +78,8 @@ class RatteryPolicy
      */
     public function canEdit(IdentityInterface $user, Rattery $rattery)
     {
-        return $this->isOwner($user, $rattery) || $user->role->can_edit_others;
+        return ! $rattery->state->needs_staff_action && $this->isOwner($user, $rattery)
+            || ! $rattery->state->needs_user_action && $user->role->can_edit_others;
     }
 
     /**
@@ -85,7 +91,8 @@ class RatteryPolicy
      */
     public function canMicroEdit(IdentityInterface $user, Rattery $rattery)
     {
-        return $this->isOwner($user, $rattery) || $user->role->can_edit_others;
+        return ! $rattery->state->needs_staff_action && $this->isOwner($user, $rattery)
+            || ! $rattery->state->needs_user_action && $user->role->can_edit_others;
     }
 
     /**
@@ -97,7 +104,7 @@ class RatteryPolicy
      */
     public function canDelete(IdentityInterface $user, Rattery $rattery)
     {
-        return $user->role->can_delete;
+        return $rattery->state->is_frozen && ! $rattery->state->is_reliable && $user->role->can_delete;
     }
 
     /**

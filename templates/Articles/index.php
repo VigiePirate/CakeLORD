@@ -33,17 +33,13 @@
                         <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
                             'url' => ['controller' => 'Articles', 'action' => 'edit', $article->id],
                             'class' => 'action-icon',
-                            'alt' => __('Edit Category')
+                            'alt' => __('Edit Article')
                         ])?>
-                        <?= $this->Form->postLink(
-                                $this->Html->image('/img/icon-delete.svg', [
-                                    'class' => 'action-icon',
-                                    'alt' => __('Delete Article')
-                                ]),
-                                ['action' => 'delete', $article->id],
-                                ['confirm' => __('Are you sure you want to delete # {0}?', $article->id), 'escape' => false]
-                            )
-                        ?>
+                        <?= $this->Html->image('/img/icon-delete.svg', [
+                            'url' => ['controller' => 'Articles', 'action' => 'delete', $article->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Delete Article')
+                        ])?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

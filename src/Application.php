@@ -109,6 +109,7 @@ class Application extends BaseApplication
             //->add(new AuthenticationMiddleware($this->configAuth()));
             ->add(new AuthenticationMiddleware($this))
             ->add(new AuthorizationMiddleware($this));
+
             // ->add(new AuthorizationMiddleware($this, [
             //     // FOR DEV PHASE ONLY !!!!!
             //     'requireAuthorizationCheck' => false

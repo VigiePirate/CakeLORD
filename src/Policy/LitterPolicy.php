@@ -25,6 +25,11 @@ class LitterPolicy implements BeforePolicyInterface
         if ($user->getOriginalData()->is_root) {
             return true;
         }
+
+        // Frozen sheets are restricted
+        if ($resource->state->is_frozen && ! $user->role->can_edit_frozen) {
+            return false;
+        }
     }
 
     /**
@@ -67,8 +72,8 @@ class LitterPolicy implements BeforePolicyInterface
      */
     public function canEdit(IdentityInterface $user, Litter $litter)
     {
-        return $user->role->can_edit_others
-            || $user->getIdentifier() === $litter->creator_user_id;
+        return (! $litter->state->needs_user_action && $user->role->can_edit_others)
+            || (! $litter->state->needs_staff_action && $this->isCreator($user, $litter));
     }
 
     public function canAddRat(IdentityInterface $user, Litter $litter)
@@ -78,9 +83,9 @@ class LitterPolicy implements BeforePolicyInterface
 
     public function canManageContributions(IdentityInterface $user, Litter $litter)
     {
-        return $this->isCreator($user, $litter)
-            || $this->isContributor($user, $litter)
-            || $user->role->can_edit_others;
+        return (! $litter->state->needs_staff_action && $this->isCreator($user, $litter))
+            || (! $litter->state->needs_staff_action && $this->isContributor($user, $litter))
+            || (! $litter->state->needs_user_action && $user->role->can_edit_others);
     }
 
     /**
@@ -104,7 +109,7 @@ class LitterPolicy implements BeforePolicyInterface
      */
     public function canDelete(IdentityInterface $user, Litter $litter)
     {
-        return $user->role->can_delete;
+        return $litter->state->is_frozen && ! $litter->state->is_reliable && $user->role->can_delete;
     }
 
     /**

@@ -118,15 +118,19 @@ class ArticlesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $article = $this->Articles->get($id);
+        // $this->request->allowMethod(['post', 'delete']);
+        $article = $this->Articles->get($id, ['contain' => ['Categories']]);
         $this->Authorization->authorize($article);
-        if ($this->Articles->delete($article)) {
-            $this->Flash->success(__('The article has been deleted.'));
-        } else {
-            $this->Flash->error(__('The article could not be deleted. Please, try again.'));
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            if ($this->Articles->delete($article)) {
+                $this->Flash->success(__('The article has been deleted.'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The article could not be deleted. Please, try again.'));
+            }
         }
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('article', 'user'));
 
-        return $this->redirect(['action' => 'index']);
     }
 }

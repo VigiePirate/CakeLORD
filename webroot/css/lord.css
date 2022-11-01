@@ -286,7 +286,7 @@ table.aside-photo>tbody>tr>th{
 
 .column-photo {
   max-height: 24rem;
-  overflow: hidden;
+  overflow: visible; /* hidden ? */
 }
 
 .column-photo > img {
@@ -366,10 +366,14 @@ padding:0rem 1rem;
 }
 */
 
-table.condensed>tbody>tr>th{
+table.condensed>tbody>tr>th {
   /* border-bottom: none;
   padding:0rem 1rem;*/
-  width:26%;
+  width: 26%;
+}
+
+table.review>tbody>tr>th {
+  vertical-align: baseline;
 }
 
 td,th {
@@ -1276,5 +1280,9 @@ svg {
     -moz-column-gap:      1rem;
     column-count:         2;
     column-gap:           1rem;
+  }
+
+  .column-photo {
+    max-height: unset;
   }
 }
