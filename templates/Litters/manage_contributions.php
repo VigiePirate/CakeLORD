@@ -79,128 +79,14 @@
 <?php $this->append('script');?>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <?= $this->Html->script('forms') ?>
     <script>
-    // autocomplete for rattery
-    $(function () {
-        $('#jquery-rattery-input-1').autocomplete({
-            minLength: 2,
-            source: function (request, response) {
-                $.ajax({
-                    url: '/ratteries/autocomplete.json',
-                    dataType: 'json',
-                    data: {
-                        'searchkey': $('#jquery-rattery-input-1').val(),
-                    },
-                    success: function (data) {
-                        response(data.items);
-                    },
-                    open: function () {
-                        $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-                    },
-                    close: function () {
-                        $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-                    }
-                });
-            },
-            select: function (event, ui) {
-                $("#jquery-rattery-input-1").val(ui.item.value); // display the selected text
-                $("#jquery-rattery-id-1").val(ui.item.id); // save selected id to hidden input
+        $(function () {
+            var types = <?= json_encode($contribution_types->all()->extract('id')->toList()); ?>;
+            for (var i = 0; i < types.length; i++) {
+                autocompleteRattery("#jquery-rattery-input-"+types[i], "#jquery-rattery-id-"+types[i]);
+                console.log('Added autocomplete for contribution type:'+types[i]);
             }
         });
-
-        $("#jquery-rattery-input-2").on("input", function(){
-            $("#jquery-rattery-id-2").val('');
-        });
-
-        $('#jquery-rattery-input-2').autocomplete({
-            minLength: 2,
-            source: function (request, response) {
-                $.ajax({
-                    url: '/ratteries/autocomplete.json',
-                    dataType: 'json',
-                    data: {
-                        'searchkey': $('#jquery-rattery-input-2').val(),
-                    },
-                    success: function (data) {
-                        response(data.items);
-                    },
-                    open: function () {
-                        $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-                    },
-                    close: function () {
-                        $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-                    }
-                });
-            },
-            select: function (event, ui) {
-                $("#jquery-rattery-input-2").val(ui.item.value); // display the selected text
-                $("#jquery-rattery-id-2").val(ui.item.id); // save selected id to hidden input
-            }
-        });
-
-        $("#jquery-rattery-input-3").on("input", function(){
-            $("#jquery-rattery-id-3").val('');
-        });
-
-        $('#jquery-rattery-input-3').autocomplete({
-            minLength: 2,
-            source: function (request, response) {
-                $.ajax({
-                    url: '/ratteries/autocomplete.json',
-                    dataType: 'json',
-                    data: {
-                        'searchkey': $('#jquery-rattery-input-3').val(),
-                    },
-                    success: function (data) {
-                        response(data.items);
-                    },
-                    open: function () {
-                        $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-                    },
-                    close: function () {
-                        $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-                    }
-                });
-            },
-            select: function (event, ui) {
-                $("#jquery-rattery-input-3").val(ui.item.value); // display the selected text
-                $("#jquery-rattery-id-3").val(ui.item.id); // save selected id to hidden input
-            }
-        });
-
-        $("#jquery-rattery-input-4").on("input", function(){
-            $("#jquery-rattery-id-4").val('');
-        });
-
-        $('#jquery-rattery-input-4').autocomplete({
-            minLength: 2,
-            source: function (request, response) {
-                $.ajax({
-                    url: '/ratteries/autocomplete.json',
-                    dataType: 'json',
-                    data: {
-                        'searchkey': $('#jquery-rattery-input-4').val(),
-                    },
-                    success: function (data) {
-                        response(data.items);
-                    },
-                    open: function () {
-                        $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-                    },
-                    close: function () {
-                        $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-                    }
-                });
-            },
-            select: function (event, ui) {
-                $("#jquery-rattery-input-4").val(ui.item.value); // display the selected text
-                $("#jquery-rattery-id-4").val(ui.item.id); // save selected id to hidden input
-            }
-        });
-
-        $("#jquery-rattery-input-4").on("input", function(){
-            $("#jquery-rattery-id-4").val('');
-        });
-    });
     </script>
 <?php $this->end(); ?>
