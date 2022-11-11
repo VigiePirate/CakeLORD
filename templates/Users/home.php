@@ -19,9 +19,9 @@
                         <tr><td>(Sheets pending correction?)</td></tr>
                     </table>
                 </div>
-                <div class="column footer-center column-photo">
-                    <?php if ($user->picture != '') : ?>
-                        <?= $this->Html->image(UPLOADS . $user->picture, ['alt' => $user->username]) ?>
+                <div class="column footer-center column-portrait">
+                    <?php if ($user->avatar != '') : ?>
+                        <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username]) ?>
                     <?php else : ?>
                         <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
                     <?php endif; ?>

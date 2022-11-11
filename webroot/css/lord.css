@@ -289,7 +289,12 @@ table.aside-photo>tbody>tr>th{
   overflow: visible; /* hidden ? */
 }
 
-.column-photo > img {
+.column-portrait {
+  max-height: 18rem;
+  overflow: hidden; /* hidden ? */
+}
+
+.column-photo, .column-portrait > img {
   display: block;
   margin: auto;
 }

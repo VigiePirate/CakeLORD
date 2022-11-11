@@ -16,7 +16,8 @@ class PictureBehavior extends Behavior
     protected $_defaultConfig = [
         'maxWidth' => 900,
         'maxHeight' => 600,
-        'thumbnail' => false
+        'thumbnail' => false,
+        'field_name' => 'picture'
     ];
 
     /**
@@ -57,7 +58,7 @@ class PictureBehavior extends Behavior
                 return;
             } else {
                 $tmpName = $this->resizePic($picture);
-                $data['picture'] = $tmpName;
+                $data[$this->config['field_name']] = $tmpName;
                 if ($this->config['thumbnail']) {
                     $data['picture_thumbnail'] = 'thumb.' . $tmpName;
                 }
@@ -79,7 +80,7 @@ class PictureBehavior extends Behavior
      */
     public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
     {
-        $entity->setDirty('picture', $data->offsetExists('picture_file'));
+        $entity->setDirty($this->config['field_name'], $data->offsetExists('picture_file'));
         if (array_key_exists('thumbnail', $this->config)) {
             $entity->setDirty('picture_thumbnail', $data->offsetExists('picture_file') && $this->config['thumbnail']);
         }
@@ -97,8 +98,8 @@ class PictureBehavior extends Behavior
      */
     public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        if (in_array('picture', $entity->getDirty())) {
-            rename(TMP . $entity->picture, WWW_UPLOADS . $entity->picture);
+        if (in_array($this->config['field_name'], $entity->getDirty())) {
+            rename(TMP . $entity[$this->config['field_name']], WWW_UPLOADS . $entity[$this->config['field_name']]);
         }
 
         if (in_array('picture_thumbnail', $entity->getDirty())) {

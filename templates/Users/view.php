@@ -64,13 +64,13 @@
     </aside>
     <div class="column-responsive column-90">
         <div class="users view content">
-            <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Owner') ?></div> <!-- h($user->role->name) -->
-            </div>
-            <h1><?= h($user->username) ?></h1>
 
-            <div class="row row-reverse row-with-photo">
-                <div class="column-responsive column-75">
+            <div class="row row-with-photo">
+                <div class="column-responsive column-60">
+                    <div class="sheet-heading">
+                        <div class="sheet-title pretitle"><?= __('Owner') ?></div> <!-- h($user->role->name) -->
+                    </div>
+                    <h1><?= h($user->username) ?></h1>
                     <h2><?= __('Information') ?></h2>
                     <table class="aside-photo">
                         <tr>
@@ -89,8 +89,8 @@
                 </div>
 
                 <div class="column footer-center column-photo">
-                    <?php if ($user->picture != '') : ?>
-                        <?= $this->Html->image(UPLOADS . $user->picture, ['alt' => $user->username]) ?>
+                    <?php if ($user->avatar != '') : ?>
+                        <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username]) ?>
                     <?php else : ?>
                         <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
                     <?php endif; ?>
