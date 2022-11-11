@@ -105,9 +105,9 @@ class UserPolicy implements BeforePolicyInterface
      * @param App\Model\Entity\User $resource
      * @return bool
      */
-    public function canSeePrivate(IdentityInterface $user, Rat $rat)
+    public function canSeePrivate(IdentityInterface $user, User $resource)
     {
-        return $this->isSelf($user, $rat) || $user->role->is_staff;
+        return $this->isSelf($user, $resource) || $user->role->is_staff;
     }
 
     /**
@@ -118,7 +118,7 @@ class UserPolicy implements BeforePolicyInterface
      * @param App\Model\Entity\User $resource
      * @return bool
      */
-    public function canSeeStaffOnly(IdentityInterface $user, Rat $rat)
+    public function canSeeStaffOnly(IdentityInterface $user, User $resource)
     {
         return $user->role->is_staff;
     }

@@ -432,7 +432,7 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user, ['checkRules' => false])) {
-                $this->Flash->warning(__('The user’s new picture has been saved. A staff member still has to validate it.'));
+                $this->Flash->success(__('The user’s new avatar has been saved.'));
                 return $this->redirect(['action' => 'view', $user->id]);
             }
             $this->Flash->error(__('The user’s new picture could not be saved. Please, try again.'));
