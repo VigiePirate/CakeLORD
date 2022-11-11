@@ -12,7 +12,7 @@
             </div>
             <?php if (!is_null($user)) : ?>
                 <div class="side-nav-group">
-                    <?php if ($user->can('addRat', $litter)) : ?>
+                    <?php if (! is_null($user) && $user->can('addRat', $litter)) : ?>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-add-rat.svg', [
                                 'url' => ['controller' => 'Rats', 'action' => 'add', $litter->id],
@@ -29,7 +29,7 @@
                             <span class="tooltiptext"><?= __('You cannot add a rat to this litter') ?></span>
                         </div>
                     <?php endif; ?>
-                    <?php if ($user->can('manageContributions', $litter)) : ?>
+                    <?php if (! is_null($user) && $user->can('manageContributions', $litter)) : ?>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-add-rattery.svg', [
                                 'url' => ['controller' => 'Litters', 'action' => 'manageContributions', $litter->id],
@@ -46,7 +46,7 @@
                             <span class="tooltiptext"><?= __('You cannot manage contributing ratteries in this litter') ?></span>
                         </div>
                     <?php endif; ?>
-                    <?php if ($user->can('edit', $litter)) : ?>
+                    <?php if (! is_null($user) && $user->can('edit', $litter)) : ?>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-edit.svg', [
                                 'url' => ['controller' => 'Litters', 'action' => 'edit', $litter->id],
@@ -286,11 +286,11 @@
             </div>
         </div>
 
-        <?php if ($user->can('changeState', $litter)) : ?>
+        <?php if (! is_null($user) && $user->can('changeState', $litter)) : ?>
             <?= $this->element('statebar', ['sheet' => $litter]) ?>
         <?php endif ; ?>
 
-        <?php if ($user->can('seePrivate', $litter)) : ?>
+        <?php if (! is_null($user) && $user->can('seePrivate', $litter)) : ?>
             <div class="spacer"> </div>
             <div class="content litter view">
                 <h2 class="staff"><?= __('Private information') ?></h2>
