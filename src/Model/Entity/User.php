@@ -174,6 +174,7 @@ class User extends Entity implements IdentityInterface
                     return $rattery;
                 }
             }
+            // FIXME: should be based on last litter date, not on index
             return end($this->ratteries);
         }
     }

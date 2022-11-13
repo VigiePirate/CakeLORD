@@ -47,17 +47,15 @@ class RatteriesController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'Countries', 'States'],
         ];
-        $ratteries = $this->paginate($this->Ratteries->find()->where([
+        $alive_ratteries = $this->paginate($this->Ratteries->find()->where([
             'owner_user_id' => $user->id,
             'is_alive' => true,
         ]));
-        $closed_ratteries = $this->paginate($this->Ratteries->find()->where([
+        $rattery = $alive_ratteries->first();
+        $ratteries = $this->paginate($this->Ratteries->find()->where([
             'owner_user_id' => $user->id,
-            'is_alive' => false,
         ]));
-
-
-        $this->set(compact('ratteries', 'closed_ratteries', 'user'));
+        $this->set(compact('rattery', 'ratteries', 'user'));
     }
 
     /* rattery sheet for all users, including statistics */
@@ -271,6 +269,79 @@ class RatteriesController extends AppController
             return $this->redirect(['action' => 'login']);
         }
     }
+
+    /* declare a rattery as inactive */
+    public function pause($id = null) {
+        $rattery = $this->Ratteries->get($id, ['contain' => 'States']);
+        $this->Authorization->authorize($rattery, 'microEdit');
+
+        if (! $rattery->is_alive) {
+            $this->Flash->warning('This rattery was already inactive.');
+        } else {
+            $rattery->is_alive = false;
+            if ($this->Ratteries->save($rattery)) {
+                $this->Flash->success('This rattery is now officially inactive.');
+            } else {
+                $this->Flash->error('This rattery could not be declared inactive. Please try again.');
+            }
+        }
+
+        return $this->redirect(['action' => 'view', $rattery->id]);
+    }
+
+    /* declare a rattery as active */
+    /* FIXME: some checks should be in the model */
+    public function reopen($id = null) {
+        $rattery = $this->Ratteries->get($id, ['contain' => [
+            'States',
+            'Contributions',
+            'Users',
+            'Users.Ratteries'
+        ]]);
+        $this->Authorization->authorize($rattery, 'microEdit');
+
+        if ($rattery->is_alive) {
+            $this->Flash->warning('This rattery was already declared active.');
+        } else {
+            // check other ratteries (rule: 0 or 1 active rattery per user)
+            $sisters = $rattery->user->ratteries;
+            foreach ($sisters as $sister) {
+                if ($sister->id != $rattery->id && $sister->is_alive) {
+                    $this->Flash->error('You already have an active rattery. If you want to reopen another, you have to pause your current rattery first.');
+                    return $this->redirect(['action' => 'view', $sister->id]);
+                }
+            }
+            // check last litter; if too old, fail and require a litter recording
+            $recent = $rattery->countLitters(['rattery_id' => $rattery->id, 'DATEDIFF(NOW(), birth_date) <=' => \App\Model\Table\RatteriesTable::MAXIMAL_INACTIVITY]);
+            if ($recent == 0) {
+                $this->Flash->error('This rattery had no litter for a long time and cannot be manually reopened. Record a litter with it first, and it will be automatically reopened.');
+            } else {
+                $rattery->is_alive = true;
+                if ($this->Ratteries->save($rattery)) {
+                    $this->Flash->success('This rattery is now officially active.');
+                } else {
+                    $this->Flash->error('This rattery could not be declared active. Please try again.');
+                }
+            }
+        }
+
+        return $this->redirect(['action' => 'view', $rattery->id]);
+    }
+
+    /* switch rattery statistics preferences */
+    public function switchStats($id = null) {
+        $rattery = $this->Ratteries->get($id, ['contain' => 'States']);
+        $this->Authorization->authorize($rattery, 'microEdit');
+
+        $rattery->wants_statistic = ! $rattery->wants_statistic;
+        if ($this->Ratteries->save($rattery)) {
+            $this->Flash->success('Your statistics settings have been updated.');
+        } else {
+            $this->Flash->error('We could not update your statistics preferences. Please try again.');
+        }
+        return $this->redirect(['action' => 'my']);
+    }
+
 
     /**
      * ChangePicture method
