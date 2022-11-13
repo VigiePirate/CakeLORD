@@ -27,6 +27,11 @@ class RatPolicy implements BeforePolicyInterface
             return true;
         }
 
+        // Locked users can't do anything
+        if ($user->getOriginalData()->is_locked) {
+            return false;
+        }
+
         // Frozen sheets are restricted
         if ($resource->state->is_frozen && ! $user->role->can_edit_frozen) {
             return false;

@@ -45,6 +45,7 @@ class UsersController extends AppController
             $user = $query->first();
             if (!empty($user)) {
                 if ($user->is_locked) {
+                    $this->Authentication->logout();
                     return $this->Flash->error(__('Your account is locked, please activate it or contact an administrator.'));
                 } else {
                     if ($user->failed_login_attempts > 5 && $user->failed_login_last_date->wasWithinLast('15 minutes')) {
@@ -566,6 +567,62 @@ class UsersController extends AppController
         }
     }
 
+    /**
+     * Lock method
+     *
+     * @param string|null $id User id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+
+    public function lock($id = null) {
+        $this->request->allowMethod(['get', 'post']);
+        $user = $this->Users->get($id);
+        $this->Authorization->authorize($user);
+        if ($user->is_locked) {
+            $this->Flash->warning('This user was already locked.');
+        } else {
+            $user->is_locked = true;
+            if ($this->Users->save($user)) {
+                $this->Flash->success('This user is now locked.');
+            } else {
+                $this->Flash->error('This user could not be locked. Please try again.');
+            }
+        }
+
+        return $this->redirect(['action' => 'view', $user->id]);
+    }
+
+    /**
+     * Unlock method
+     *
+     * @param string|null $id User id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+
+    public function unlock($id = null) {
+        $this->request->allowMethod(['get', 'post']);
+        $user = $this->Users->get($id);
+        $this->Authorization->authorize($user, 'lock');
+        if (! $user->is_locked) {
+            $this->Flash->warning('This user was already unlocked.');
+        } else {
+            $user->is_locked = false;
+            if ($this->Users->save($user)) {
+                $this->Flash->success('This user is now unlocked.');
+            } else {
+                $this->Flash->error('This user could not be unlocked. Please try again.');
+            }
+        }
+
+        return $this->redirect(['action' => 'view', $user->id]);
+    }
+
+    /**
+    * Finders *
+    **/
+
     public function autocomplete() {
         $this->Authorization->skipAuthorization();
         if ($this->request->is(['ajax'])) {
@@ -580,10 +637,6 @@ class UsersController extends AppController
             $this->viewBuilder()->setOption('serialize', ['items']);
         }
     }
-
-    /**
-    * named method
-    **/
 
     public function named()
     {
