@@ -62,14 +62,12 @@ class UserPolicy implements BeforePolicyInterface
      */
     public function canEdit(IdentityInterface $user, User $resource)
     {
-        // Can update self
-        return $user->get('id') === $resource->get('id');
+        return $this->isSelf($user, $resource) || $user->role->can_edit_others;
     }
 
     public function canMy(IdentityInterface $user, User $resource)
     {
-        // Can update self
-        return $user->get('id') === $resource->get('id');
+        return $this->isSelf($user, $resource);
     }
 
     /**
@@ -156,7 +154,7 @@ class UserPolicy implements BeforePolicyInterface
      */
     public function canChangePicture(IdentityInterface $user, User $resource)
     {
-        return true;
+        return $this->isSelf($user, $resource) || $user->role->can_edit_others;
     }
 
     /**
