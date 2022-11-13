@@ -12,7 +12,7 @@
             </div>
 
             <div class="side-nav-group">
-                <?php if (!is_null($user)) : ?>
+                <?php if (! is_null($user)) : ?>
                     <div class="tooltip">
                         <?= $this->Html->image('/img/icon-locate.svg', [
                             'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
@@ -28,7 +28,7 @@
                         <span class="tooltiptext"><?= __('Declare a litter born here') ?></span>
                     </div>
 
-                    <?php if($user->can('microEdit', $rattery)) : ?>
+                    <?php if ($user->can('microEdit', $rattery)) : ?>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-picture.svg', [
                                 'url' => ['controller' => 'Ratteries', 'action' => 'changePicture', $rattery->id],
@@ -61,7 +61,7 @@
                             <span class="tooltiptext"><?= __('You cannot declare a new location') ?></span>
                         </div>
                     <?php endif; ?>
-                    <?php if($user->can('microEdit', $rattery)) : ?>
+                    <?php if (! is_null($user) && $user->can('edit', $rattery)) : ?>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-edit.svg', [
                                 'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
@@ -79,7 +79,7 @@
                         </div>
                     <?php endif; ?>
                 </div>
-                <?php if ($user->is_staff) : ?>
+                <?php if (! is_null($user) && $user->is_staff) : ?>
                     <div class="side-nav-group">
                         <?= $this->element('staff_sidebar', [
                             'controller' => 'Ratteries',
@@ -469,6 +469,8 @@
 
             <?php endif; ?> <!-- end non generic rattery part -->
         </div>
+
+        <?= $this->element('activitybar') ?>
 
         <?= $this->element('statebar', ['sheet' => $rattery]) ?>
 
