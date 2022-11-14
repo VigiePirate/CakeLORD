@@ -10,7 +10,7 @@ use Authorization\Policy\BeforePolicyInterface;
 /**
  * Litters policy. Akso applies to ContributionsTable
  */
-class LittersTablePolicy
+class LittersTablePolicy implements BeforePolicyInterface
 {
     /**
      * Open all for admin
