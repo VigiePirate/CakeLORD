@@ -10,7 +10,7 @@ use Authorization\Policy\BeforePolicyInterface;
 /**
  * Rattery policy
  */
-class RatteryPolicy
+class RatteryPolicy implements BeforePolicyInterface
 {
     /**
      * Open all for admin
@@ -78,8 +78,8 @@ class RatteryPolicy
      */
     public function canEdit(IdentityInterface $user, Rattery $rattery)
     {
-        return ! $rattery->state->needs_staff_action && $this->isOwner($user, $rattery)
-            || ! $rattery->state->needs_user_action && $user->role->can_edit_others;
+        return (! $rattery->state->needs_staff_action && $this->isOwner($user, $rattery))
+            || (! $rattery->state->needs_user_action && $user->role->can_edit_others);
     }
 
     /**
@@ -91,8 +91,8 @@ class RatteryPolicy
      */
     public function canMicroEdit(IdentityInterface $user, Rattery $rattery)
     {
-        return ! $rattery->state->needs_staff_action && $this->isOwner($user, $rattery)
-            || ! $rattery->state->needs_user_action && $user->role->can_edit_others;
+        return (! $rattery->state->needs_staff_action && $this->isOwner($user, $rattery))
+            || (! $rattery->state->needs_user_action && $user->role->can_edit_others);
     }
 
     /**

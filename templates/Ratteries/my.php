@@ -33,7 +33,7 @@
                     <table class="aside-photo">
                         <tr>
                             <th><?= __('Founded in') ?></th>
-                            <td><?= ($rattery->birth_year != '0000') ? h($rattery->birth_year) : h(substr($stats['activityYears'],0,4)) ?></td>
+                            <td><?= ($rattery->birth_year != '0000') ? h($rattery->birth_year) : h(substr($stats['activityYears'],0,4)) ?> — <?= $this->Html->link(__('Pause my rattery now'), ['action' => 'pause', $rattery->id]) ?></td>
                         </tr>
                         <tr>
                             <th><?= __('Country') ?></th>
@@ -45,7 +45,11 @@
                         </tr>
                         <tr>
                             <th><?= __('Zip Code') ?></th>
-                            <td><?= h($rattery->zip_code) ?></td>
+                            <td><?= $rattery->has('zip_code') ?
+                                h($rattery->zip_code) . ' — ' . $this->Html->link(__('Relocate or remove'), ['action' => 'relocate', $rattery->id]) :
+                                $this->Html->link(__('Declare a location to appear on the rattery map'), ['action' => 'relocate', $rattery->id])
+                                ?>
+                            </td>
                         </tr>
                         <tr>
                             <th><?= __('Website') ?></th>
