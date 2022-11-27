@@ -64,13 +64,13 @@
     </aside>
     <div class="column-responsive column-90">
         <div class="users view content">
-
+            <div class="sheet-heading">
+                <div class="sheet-title pretitle"><?= __('Owner') ?></div> <!-- h($user->role->name) -->
+            </div>
+            <h1><?= h($user->username) ?></h1>
             <div class="row row-with-photo">
-                <div class="column-responsive column-60">
-                    <div class="sheet-heading">
-                        <div class="sheet-title pretitle"><?= __('Owner') ?></div> <!-- h($user->role->name) -->
-                    </div>
-                    <h1><?= h($user->username) ?></h1>
+                <div class="column-responsive column-80">
+
                     <h2><?= __('Information') ?></h2>
                     <table class="aside-photo">
                         <tr>
@@ -78,17 +78,21 @@
                             <td><?= h($user->username) ?></td>
                         </tr>
                         <tr>
+                            <th><?= __('Role') ?></th>
+                            <td><?= $user->has('role') ? $this->Html->link($user->role->name, ['controller' => 'Roles', 'action' => 'view', $user->role->id]) : '' ?></td>
+                        </tr>
+                        <tr>
                             <th><?= __('Localization') ?></th>
                             <td><?= h($user->localization) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Role') ?></th>
-                            <td><?= $user->has('role') ? $this->Html->link($user->role->name, ['controller' => 'Roles', 'action' => 'view', $user->role->id]) : '' ?></td>
+                            <th><?= __('Main rattery') ?></th>
+                            <td><?= h($user->main_rattery_name) ?></td>
                         </tr>
                     </table>
                 </div>
 
-                <div class="column footer-center column-photo">
+                <div class="column footer-center column-portrait">
                     <?php if ($user->avatar != '') : ?>
                         <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username]) ?>
                     <?php else : ?>
