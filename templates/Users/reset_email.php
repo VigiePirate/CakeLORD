@@ -26,6 +26,6 @@
         <?= $this->Form->control('new_email', ['type' => 'email', 'required' => true, 'autocomplete' => 'new-email']) ?>
         <?= $this->Form->control('confirm_email', ['type' => 'email', 'required' => true, 'autocomplete' => 'do-not-autofill']) ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit new email (not working now)')); ?>
+    <?= $this->Form->button(__('Submit new email')); ?>
     <?= $this->Form->end() ?>
 </div>
