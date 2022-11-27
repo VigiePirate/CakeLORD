@@ -63,10 +63,6 @@
                                 'url' => ['controller' => 'Litters', 'action' => 'view', $litter->id],
                                 'class' => 'action-icon',
                                 'alt' => __('See Litter')]) ?>
-                            <?= $this->Html->image('/img/icon-edit.svg', [
-                                'url' => ['controller' => 'Litters', 'action' => 'edit', $litter->id],
-                                'class' => 'action-icon',
-                                'alt' => __('Edit Litter')]) ?>
                             </td>
                     <?php endif; ?>
                 </tr>

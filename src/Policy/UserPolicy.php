@@ -41,15 +41,15 @@ class UserPolicy implements BeforePolicyInterface
     }
 
     /**
-     * Check if $user can create User
+     * Check if $user can add User
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\User $resource
      * @return bool
      */
-    public function canCreate(IdentityInterface $user, User $resource)
+    public function canAdd(IdentityInterface $user, User $resource)
     {
-        // User can't create new users
+        // User can't add new users
         return false;
     }
 
@@ -156,6 +156,43 @@ class UserPolicy implements BeforePolicyInterface
     {
         return $this->isSelf($user, $resource) || $user->role->can_edit_others;
     }
+
+    /**
+     * Check if $user can change newsletter settings of the User
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canSwitchNewsletter(IdentityInterface $user, User $resource)
+    {
+        return $this->isSelf($user, $resource) || $user->role->can_edit_others;
+    }
+
+    /**
+     * Check if $user can change the role of the User
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canPromote(IdentityInterface $user, User $resource)
+    {
+        return $user->role->can_configure;
+    }
+
+    /**
+     * Check if $user can change the role of the User
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canResetEmail(IdentityInterface $user, User $resource)
+    {
+        return $this->isSelf($user, $resource) || $user->role->can_edit_others;
+    }
+
 
     /**
      * Auxiliaries
