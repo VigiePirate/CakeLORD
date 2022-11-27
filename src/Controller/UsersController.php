@@ -641,7 +641,7 @@ class UsersController extends AppController
                         $url = Router::Url(['controller' => 'users', 'action' => 'confirm-email'], true) . '/' . $user->passkey;
                         $mailer = $this->getMailer('User')->send('sendConfirmationEmail', [$url, $user]);
                         if ($mailer) {
-                            $this->Flash->success(__('Your email has been modified. Your accound must now be reactivated. Please, check your new email for your confirmation link.'));
+                            $this->Flash->warning(__('Your email has been modified. Your accound must now be reactivated. Please, check your new email for your confirmation link.'));
                             $this->Authentication->logout();
                         } else {
                             $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
