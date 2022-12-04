@@ -7,17 +7,19 @@
     <div class="column-responsive column-90">
         <div class="users view content">
             <div class="row row-reverse row-with-avatar">
-                <div class="column-responsive column-75">
+                <div class="column-responsive column-80">
                     <div class="sheet-heading">
                         <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
                     </div>
                     <h1><?= __('Welcome!') ?></h1>
 
-                    <table class="aside-photo">
-                        <tr><td>Write something here?</td></tr>
-                        <tr><td>(Last/failed connection time?)</td></tr>
-                        <tr><td>(Sheets pending correction?)</td></tr>
+                    <table>
+                        <tr><td><?= ucfirst($today) ?></td></tr>
+                        <tr><td><?= $user->welcome_string ?></td></tr>
+                        <tr><td><?= $user->rat_birthday_string ?></td></tr>
+                        <tr><td><?= $user->coming_birthday_string ?></td></tr>
                     </table>
+
                 </div>
                 <div class="column footer-center column-portrait">
                     <?php if ($user->avatar != '') : ?>

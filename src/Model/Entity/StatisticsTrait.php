@@ -701,6 +701,27 @@ trait StatisticsTrait
         return $champion;
     }
 
+    public function findBornToday($options = []) {
+        $model = FactoryLocator::get('Table')->get('Rats');
+
+        $filter = [
+            'Rats.is_alive IS' => true,
+            'Rats.birth_date IS NOT' => null,
+            'Rats.birth_date !=' => '1981-08-01',
+            'States.is_reliable IS' => true,
+            'DAY(Rats.birth_date) ' => 'DAY(GETDATE())',
+            'MONTH(Rats.birth_date) ' => 'MONTH(GETDATE())',
+        ];
+
+        if (! empty($options)) {
+            $filter = array_merge($filter,$options);
+        }
+
+        $query = $model->find()->contain(['States'])->where($filter);
+
+        return $query;
+    }
+
     /* UTILITIES */
     function computeFareyApproximation($val, $lim) {
         if($val < 0) {
