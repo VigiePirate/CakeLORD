@@ -205,19 +205,20 @@ class User extends Entity implements IdentityInterface
 
     protected function _getRatBirthdayString()
     {
+        $today = FrozenTime::now();
+
         $model = FactoryLocator::get('Table')->get('Rats');
         $query = $model
             ->find()
             ->where([
                 'Rats.owner_user_id' => $this->id,
                 'is_alive' => true,
-                'DAY(Rats.birth_date) ' => FrozenTime::today()->day,
-                'MONTH(Rats.birth_date) ' => FrozenTime::today()->month,
+                'DAY(Rats.birth_date) ' => $today->day,
+                'MONTH(Rats.birth_date) ' => $today->month,
                 ])
             ->all();
 
         $rats = new Collection($query);
-        $today = FrozenTime::now();
 
         if (! $rats->isEmpty()) {
             $str = $rats->reduce(function ($string, $rats) {
@@ -228,7 +229,6 @@ class User extends Entity implements IdentityInterface
         } else {
             return '';
         }
-
     }
 
     protected function _getComingBirthdayString()
@@ -243,9 +243,9 @@ class User extends Entity implements IdentityInterface
         } else {
             $rats = $rats
                 ->sortBy('next_birthday', SORT_ASC)
-                // ->stopWhen(function ($rat) {
-                //     return ! $rat->next_birthday->isWithinNext('3 months');
-                // })
+                ->stopWhen(function ($rat) {
+                    return ! $rat->next_birthday->isWithinNext('3 months');
+                })
                 ->take(3);
 
             $str = $rats->reduce(function ($string, $rats) {
