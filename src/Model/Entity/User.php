@@ -6,6 +6,10 @@ namespace App\Model\Entity;
 use Authentication\PasswordHasher\DefaultPasswordHasher;
 use Authentication\IdentityInterface;
 use Cake\ORM\Entity;
+use Cake\Collection\Collection;
+use Cake\Datasource\FactoryLocator;
+use Cake\I18n\FrozenTime;
+use Cake\I18n\Time;
 use App\Model\Entity\StatisticsTrait;
 
 /**
@@ -184,6 +188,71 @@ class User extends Entity implements IdentityInterface
         $rattery = $this->main_rattery;
         if (! empty($rattery)) {
             return h($rattery->full_name);
+        }
+    }
+
+    public function _getWelcomeString()
+    {
+        if (
+            $this->birth_date->month == FrozenTime::now()->month
+            && $this->birth_date->day == FrozenTime::now()->day
+        ) {
+            return '<b>' . __('Happy birthday to you!') . '</b>';
+        } else {
+            return '<br>';
+        }
+    }
+
+    protected function _getRatBirthdayString()
+    {
+        $model = FactoryLocator::get('Table')->get('Rats');
+        $query = $model
+            ->find()
+            ->where([
+                'Rats.owner_user_id' => $this->id,
+                'is_alive' => true,
+                'DAY(Rats.birth_date) ' => FrozenTime::today()->day,
+                'MONTH(Rats.birth_date) ' => FrozenTime::today()->month,
+                ])
+            ->all();
+
+        $rats = new Collection($query);
+        $today = FrozenTime::now();
+
+        if (! $rats->isEmpty()) {
+            $str = $rats->reduce(function ($string, $rats) {
+                return $string . $rats->name . ', ';
+                },
+            '');
+            return $str =  __('Happy birthday to ') . trim($str, ', ') . '!';
+        } else {
+            return '';
+        }
+
+    }
+
+    protected function _getComingBirthdayString()
+    {
+        $model = FactoryLocator::get('Table')->get('Rats');
+        $query = $model->find()->where(['Rats.owner_user_id' => $this->id, 'is_alive' => true])->all();
+        $rats = new Collection($query);
+        $today = FrozenTime::now();
+
+        if ($rats->isEmpty()) {
+            return __('No rat birthday coming. Time for adoption?');
+        } else {
+            $rats = $rats
+                ->sortBy('next_birthday', SORT_ASC)
+                // ->stopWhen(function ($rat) {
+                //     return ! $rat->next_birthday->isWithinNext('3 months');
+                // })
+                ->take(3);
+
+            $str = $rats->reduce(function ($string, $rats) {
+                return $string . $rats->name . ' (' . $rats->next_birthday->i18nFormat('dd/MM') . ')' . ', ';
+                },
+            '');
+            return __('Next rat birthdays: ') . trim($str, ', ');
         }
     }
 

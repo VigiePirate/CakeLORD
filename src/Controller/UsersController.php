@@ -261,7 +261,9 @@ class UsersController extends AppController
             $champion = $this->loadModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
         }
 
-        $this->set(compact('user',
+        $today = \Cake\I18n\FrozenTime::now()->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
+
+        $this->set(compact('user', 'today',
             'rat_count', 'female_count', 'male_count',
             'alive_rat_count', 'alive_female_count', 'alive_male_count',
             'managed_rat_count', 'alive_managed_rat_count',
