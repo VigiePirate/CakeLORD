@@ -6,6 +6,19 @@
  * Normally you would extract the entire Tree class defintion into a
  * separate file and include it before this script tag.
  */
+
+var labels = []
+var labelsF = [];
+var labelsM = [];
+var colorScaleF = d3.scale.ordinal()
+  .range(['#fff2e6', '#ffe6e6', '#ffffe5']);
+var strokeScaleF = d3.scale.ordinal()
+  .range(['#ffb366', '#ff6666', '#fafa64']);
+var colorScaleM = d3.scale.ordinal()
+  .range(['#e6e6ff', '#f2e6ff', '#e6fff9', '#ecffd9']);
+var strokeScaleM = d3.scale.ordinal()
+  .range(['#6666ff', '#af66ff', '#52ccb8', '#9aff33']);
+
 function setup() {
 
   // local dimensions variables - could be computed from box/node width/height
@@ -227,7 +240,6 @@ Tree.prototype.drawNodes = function(nodes, source){
   // Add any new nodes
   var nodeEnter = node.enter().append("g")
       .attr("class", "person " + self.selector)
-
       // Add new nodes at the right side of their child's box.
       // They will be transitioned into their proper position.
       .attr('transform', function(person){
@@ -243,6 +255,7 @@ Tree.prototype.drawNodes = function(nodes, source){
             },
             success: function(data) {
                 person._parents = data._parents;
+                person._parents.forEach(updateColorScale);
 		            collapse(person);
                 self.togglePerson(person);
             },
@@ -263,7 +276,6 @@ Tree.prototype.drawNodes = function(nodes, source){
           });
         }
         self.togglePerson(person);
-	      console.log(person._parents);
       });
 
   // Draw the rectangle person boxes.
@@ -329,7 +341,7 @@ Tree.prototype.drawNodes = function(nodes, source){
         height: boxHeight
       })
       .style({
-        fill: function(d){return sexColour(d);},
+        fill: function(d){return smartColour(d);},
         stroke: function(d){return sexStroke(d);}
       });
 
@@ -470,28 +482,59 @@ function transitionElbow(d){
 /**
  * Custom function for colors
  */
- function sexColour(d){
-   if(d.sex == "M"){
-     return "#e6f3ff"; // darker: cce6ff
-   } else {
-     if (d.sex == "F") {
-       return "#ffe6f2"; // darker: ffcce6
-     } else {
-       return "#e3fcec";
-     }
-   }
- }
+
+function smartColour(d) {
+    if(d.sex == "M") {
+      if (labelsM.includes(d.true_id)) {
+        return colorScaleM(d.true_id);
+      } else {
+        return "#e6f3ff";
+      }
+    }
+    if(d.sex == "F") {
+      if (labelsF.includes(d.true_id)) {
+        return colorScaleF(d.true_id);
+      } else {
+        return "#ffe6f2";
+      }
+    }
+    return "#e3fcec";
+}
+
+function updateColorScale(d) {
+  if (labels.includes(d.true_id)) {
+    if (d.sex == "M" && ! labelsM.includes(d.true_id)) {
+      labelsM.push(d.true_id);
+      colorScaleM.domain(labelsM);
+      strokeScaleM.domain(labelsM);
+    }
+    if (d.sex == "F" && ! labelsF.includes(d.true_id)) {
+      labelsF.push(d.true_id);
+      colorScaleF.domain(labelsF);
+      strokeScaleF.domain(labelsF); // darker: ffcce6
+    }
+  } else {
+    labels.push(d.true_id);
+  }
+}
+
 
 function sexStroke(d){
-  if(d.sex == "M"){
-    return "#66b3ff";
-  } else {
-    if (d.sex == "F") {
-      return "#ff66b3";
+  if(d.sex == "M") {
+    if (labelsM.includes(d.true_id)) {
+      return strokeScaleM(d.true_id);
     } else {
-      return "#56d88d";
+      return "#66b3ff";
     }
   }
+  if(d.sex == "F") {
+    if (labelsF.includes(d.true_id)) {
+      return strokeScaleF(d.true_id);
+    } else {
+      return "#ff66b3";
+    }
+  }
+  return "#56d88d";
 }
 
 /**

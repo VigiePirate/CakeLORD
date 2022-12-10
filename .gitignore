@@ -63,3 +63,6 @@ nbproject/*
 /migrate/*.sql
 /docs/sql/migration_users_pa.sql
 /webroot/uploads/*
+
+.ftpconfig
+.ftpignore
