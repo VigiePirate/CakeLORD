@@ -11,13 +11,13 @@ var labels = []
 var labelsF = [];
 var labelsM = [];
 var colorScaleF = d3.scale.ordinal()
-  .range(['#fff2e6', '#ffe6e6', '#ffffe5']);
+  .range(['#fff2e6', '#ffe6e6', '#ffffe5', '#ffe7fb', '#ffebe4', '#ffe4ff', '#fcf9ed']);
 var strokeScaleF = d3.scale.ordinal()
-  .range(['#ffb366', '#ff6666', '#fafa64']);
+  .range(['#ffb366', '#ff6666', '#fafa64', '#d900b5', '#ff794d', '#ff66ff', '#c4ab89']);
 var colorScaleM = d3.scale.ordinal()
-  .range(['#e6e6ff', '#f2e6ff', '#e6fff9', '#ecffd9']);
+  .range(['#e6e6ff', '#edffe7', '#f2e6ff', '#e3fcec', '#e6fff9', '#ecffd9', '#e6f9ff']);
 var strokeScaleM = d3.scale.ordinal()
-  .range(['#6666ff', '#af66ff', '#52ccb8', '#9aff33']);
+  .range(['#6666ff', '#78d956', '#af66ff', '#56d88d', '#52ccb8', '#9aff33', '#0f7799']);
 
 function setup() {
 
@@ -498,7 +498,7 @@ function smartColour(d) {
         return "#ffe6f2";
       }
     }
-    return "#e3fcec";
+    return '#f5f7fa';
 }
 
 function updateColorScale(d) {
@@ -534,7 +534,7 @@ function sexStroke(d){
       return "#ff66b3";
     }
   }
-  return "#56d88d";
+  return '#9bafbf';
 }
 
 /**
