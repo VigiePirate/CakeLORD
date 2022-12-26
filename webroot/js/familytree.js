@@ -337,7 +337,7 @@ Tree.prototype.drawNodes = function(nodes, source){
       .attr("text-anchor", "start")
       .attr('class', 'more_parents')
       .text(function(d) {
-        return (d.more_parents ? "—": null);
+        return (d.more_parents ? "⏵": null);
       });
 
     // Draw a sign to indicate if children are available
@@ -348,7 +348,7 @@ Tree.prototype.drawNodes = function(nodes, source){
         .attr("text-anchor", "start")
         .attr('class', 'more_children')
         .text(function(d) {
-          return (d.more_children ? "—": null);
+          return (d.more_children ? "⏴": null);
         });
 
   // Update the position of both old and new nodes
@@ -396,14 +396,26 @@ Tree.prototype.drawNodes = function(nodes, source){
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.more_parents')
-      .attr("dx", boxWidth/2)
-      .attr("dy", 4.5)
-      .style('fill-opacity', 1);
+      .attr("dx", boxWidth/2-3)
+      .attr("dy", 4.75)
+      .style('fill-opacity', function(d) {
+        if (d.hasOwnProperty('_parents') && d._parents.length > 0) {
+           return d.collapsed ? 1 : 0;
+        } else {
+           return 1;
+        }
+      });
 
   nodeUpdate.select('text.more_children')
-      .attr("dx", -(boxWidth/2)-14)
-      .attr("dy", 4.5)
-      .style('fill-opacity', 1);
+      .attr("dx", -(boxWidth/2)-12)
+      .attr("dy", 4.75)
+      .style('fill-opacity', function(d) {
+        if (d.hasOwnProperty('_children') && d._children.length > 0) {
+           return d.collapsed ? 1 : 0;
+        } else {
+           return 1;
+        }
+      });
 
   // Remove nodes we aren't showing anymore
   var nodeExit = node.exit()
@@ -454,6 +466,7 @@ Tree.prototype.togglePerson = function(person){
     } else {
       collapse(person);
     }
+
     this.draw(person);
   }
 };
