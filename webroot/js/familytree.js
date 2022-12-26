@@ -109,6 +109,8 @@ function rootProxy(root){
     death: root.death,
     id: root.id,
     sex: root.sex,
+    more_parents: root.more_parents,
+    more_children: root.more_children,
     x0: 0,
     y0: 0,
     _children: root._children,
@@ -313,7 +315,7 @@ Tree.prototype.drawNodes = function(nodes, source){
       })
       .call(truncate, (boxWidth-16))
       .style('fill-opacity', 0) // should be zero once fixed
-      .style('fill',"#606c76");
+      .style('fill', "#606c76");
 
   // Draw the person's death info and position it inside the box
   nodeEnter.append("text")
@@ -325,7 +327,29 @@ Tree.prototype.drawNodes = function(nodes, source){
         return d.death;
       })
       .style('fill-opacity', 0)
-      .style('fill',"#606c76");
+      .style('fill', "#606c76");
+
+  // Draw a sign to indicate if parents are available
+  nodeEnter.append("text")
+      .attr("dx", 0)
+      .attr("dy", 0)
+      .style("fill", "#ccc")
+      .attr("text-anchor", "start")
+      .attr('class', 'more_parents')
+      .text(function(d) {
+        return (d.more_parents ? "—": null);
+      });
+
+    // Draw a sign to indicate if children are available
+    nodeEnter.append("text")
+        .attr("dx", 0)
+        .attr("dy", 0)
+        .style("fill", "#ccc")
+        .attr("text-anchor", "start")
+        .attr('class', 'more_children')
+        .text(function(d) {
+          return (d.more_children ? "—": null);
+        });
 
   // Update the position of both old and new nodes
   var nodeUpdate = node.transition()
@@ -369,6 +393,16 @@ Tree.prototype.drawNodes = function(nodes, source){
   nodeUpdate.select('text.death')
       .attr("dx", -(boxWidth/2) + 8)
       .attr("dy", 21) //.attr("dy", 39)
+      .style('fill-opacity', 1);
+
+  nodeUpdate.select('text.more_parents')
+      .attr("dx", boxWidth/2)
+      .attr("dy", 4.5)
+      .style('fill-opacity', 1);
+
+  nodeUpdate.select('text.more_children')
+      .attr("dx", -(boxWidth/2)-14)
+      .attr("dy", 4.5)
       .style('fill-opacity', 1);
 
   // Remove nodes we aren't showing anymore
@@ -488,14 +522,14 @@ function smartColour(d) {
       if (labelsM.includes(d.true_id)) {
         return colorScaleM(d.true_id);
       } else {
-        return "#e6f3ff";
+        return "#e6f3ff"; // "#f5faff";
       }
     }
     if(d.sex == "F") {
       if (labelsF.includes(d.true_id)) {
         return colorScaleF(d.true_id);
       } else {
-        return "#ffe6f2";
+        return "#ffe6f2"; // "#fff5fa";
       }
     }
     return '#f5f7fa';
@@ -524,14 +558,14 @@ function sexStroke(d){
     if (labelsM.includes(d.true_id)) {
       return strokeScaleM(d.true_id);
     } else {
-      return "#66b3ff";
+      return "#e6f3ff"; // "#66b3ff";
     }
   }
   if(d.sex == "F") {
     if (labelsF.includes(d.true_id)) {
       return strokeScaleF(d.true_id);
     } else {
-      return "#ff66b3";
+      return "#ffe6f2"; // "#ff66b3";
     }
   }
   return '#9bafbf';

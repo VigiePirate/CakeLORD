@@ -239,6 +239,27 @@ class Rat extends Entity
         }
     }
 
+    // used in pedigree only
+    protected function _getShortAgeString()
+    {
+        if ($this->age < 0) { // Should raise exception
+            return $age = 'Negative age!';
+        }
+        if ($this->age > RatsTable::MAXIMAL_AGE_MONTHS) {
+            return $age = 'unknown';
+        }
+        if (! $this->_fields['is_alive'] ) {
+            $age = $this->has('death_date') ? ($this->age . ' mo') : ('unknown') ;//('supposed deceased, unknown age');
+            return $age;
+        }  else {
+            if($this->age < 1) {
+                return $age = $this->precise_age . __(' d');
+            } else {
+                return $age = $this->age . __(' mo');
+            }
+        }
+    }
+
     protected function _getPreciseAge()
     {
         $agedate = FrozenTime::now();
@@ -360,7 +381,8 @@ class Rat extends Entity
                 'name' => $this->birth_litter->dam[0]->usual_name,
                 'sex' => 'F',
                 'description' => $this->birth_litter->dam[0]->variety,
-                'death'=> $this->birth_litter->dam[0]->short_death_cause . ' (' . $this->birth_litter->dam[0]->age_string . ')',
+                'death'=> $this->birth_litter->dam[0]->short_death_cause . ' (' . $this->birth_litter->dam[0]->short_age_string . ')',
+                'more_parents' => is_null($this->birth_litter->dam[0]->litter_id) ? 0 : 1,
                 '_parents' => [],
             ]);
         }
@@ -373,14 +395,16 @@ class Rat extends Entity
                 'name' => $this->birth_litter->sire[0]->usual_name,
                 'sex' => 'M',
                 'description' => $this->birth_litter->sire[0]->variety,
-                'death'=> $this->birth_litter->sire[0]->short_death_cause . ' (' . $this->birth_litter->sire[0]->age_string . ')',
+                'death'=> $this->birth_litter->sire[0]->short_death_cause . ' (' . $this->birth_litter->sire[0]->short_age_string . ')',
+                'more_parents' => is_null($this->birth_litter->sire[0]->litter_id) ? 0 : 1,
                 '_parents' => [],
             ]);
         }
         return $parents;
     }
 
-    protected function _getChildrenArray() {
+    protected function _getChildrenArray()
+    {
         $children = [];
         foreach($this->bred_litters as $litter) {
             foreach ($litter->offspring_rats as $offspring) {
@@ -391,12 +415,31 @@ class Rat extends Entity
                     'name' => $offspring->usual_name,
                     'sex' => $offspring->sex,
                     'description' => $offspring->variety,
-                    'death' => $offspring->short_death_cause . ' (' . $offspring->age_string . ')',
+                    'death' => $offspring->short_death_cause . ' (' . $offspring->short_age_string . ')',
+                    'more_children' => $offspring->has_children ? 1 : 0,
                     '_children' => [],
                 ]);
             }
         }
         return $children;
+    }
+
+    protected function _getHasChildren()
+    {
+        if (isset($this->bred_litters)) {
+            return ! empty($this->bred_litters);
+        } else { // when bred litters are a deeply nested association
+            $model = FactoryLocator::get('Table')->get('Rats');
+            $id = $this->id;
+            $children = $model->find()
+                ->select(['id'])
+                ->matching('BirthLitters.ParentRats', function ($query) use ($id) {
+                    return $query->where(['ParentRats.id' => $id]);
+                })
+                ->enableHydration(false)
+                ->toArray();
+            return ! empty($children);
+        }
     }
 
     public function isBornFuture()
