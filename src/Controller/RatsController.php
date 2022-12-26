@@ -705,6 +705,7 @@ class RatsController extends AppController
             'id' => $rat->id,
             'true_id' => $id,
             'name' => $rat->usual_name,
+            'link' => Router::Url(['controller' => 'Rats', 'action' => 'view', $rat->id]),
             'sex' => 'X', // we want a different color for the root of the tree
             'description' => $rat->variety,
             'death' => $rat->short_death_cause . ' (' . $rat->short_age_string . ')',

@@ -7,8 +7,8 @@ use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
 use Cake\Collection\Collection;
-use Cake\View\Helper\HtmlHelper;
 use Cake\Datasource\FactoryLocator;
+use Cake\Routing\Router;
 use App\Model\Entity\StatisticsTrait;
 use App\Model\Table\RatsTable;
 
@@ -399,6 +399,7 @@ class Rat extends Entity
                 'id' => rand() . '_' . $this->birth_litter->dam[0]->id,
                 'true_id' => $this->birth_litter->dam[0]->id,
                 'name' => $this->birth_litter->dam[0]->usual_name,
+                'link' => Router::Url(['controller' => 'Rats', 'action' => 'view', $this->birth_litter->dam[0]->id]),
                 'sex' => 'F',
                 'description' => $this->birth_litter->dam[0]->variety,
                 'death'=> $this->birth_litter->dam[0]->short_death_cause . ' (' . $this->birth_litter->dam[0]->short_age_string . ')',
@@ -413,6 +414,7 @@ class Rat extends Entity
                 'id' => rand() . '_' . $this->birth_litter->sire[0]->id,
                 'true_id' => $this->birth_litter->sire[0]->id,
                 'name' => $this->birth_litter->sire[0]->usual_name,
+                'link' => Router::Url(['controller' => 'Rats', 'action' => 'view', $this->birth_litter->sire[0]->id]),
                 'sex' => 'M',
                 'description' => $this->birth_litter->sire[0]->variety,
                 'death'=> $this->birth_litter->sire[0]->short_death_cause . ' (' . $this->birth_litter->sire[0]->short_age_string . ')',
