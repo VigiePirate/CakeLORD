@@ -60,7 +60,8 @@ class DeathSecondaryCausesController extends AppController
         }
 
         $user = $this->request->getAttribute('identity');
-        $this->set(compact('deathSecondaryCause', 'count', 'frequency', 'sex_ratio', 'age', 'user'));
+        $show_staff = !is_null($user) && $user->can('add', $this->DeathSecondaryCauses);
+        $this->set(compact('deathSecondaryCause', 'count', 'frequency', 'sex_ratio', 'age', 'user', 'show_staff'));
     }
 
     /**
@@ -95,7 +96,7 @@ class DeathSecondaryCausesController extends AppController
     public function edit($id = null)
     {
         $deathSecondaryCause = $this->DeathSecondaryCauses->get($id);
-        $this->Authorization->authorize($deathPrimaryCause);
+        $this->Authorization->authorize($deathSecondaryCause);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $deathSecondaryCause = $this->DeathSecondaryCauses->patchEntity($deathSecondaryCause, $this->request->getData());
             if ($this->DeathSecondaryCauses->save($deathSecondaryCause)) {

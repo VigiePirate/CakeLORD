@@ -633,9 +633,9 @@ class RatsController extends AppController
                 'names' => [$searchkey]])
                 ->where(['sex IS' => $sex])
                 ->select(['id',
-                    'value' => "concat(Rats.name, ' (', pedigree_identifier, ')')",
-                    'label' => "concat(Rats.name, ' (', pedigree_identifier, ')')"])
-            ;
+                    'value' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')",
+                    'label' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')"
+                ]);
             $this->set('items', $items);
             $this->viewBuilder()->setOption('serialize', ['items']);
         }
@@ -707,7 +707,7 @@ class RatsController extends AppController
             'name' => $rat->usual_name,
             'sex' => 'X', // we want a different color for the root of the tree
             'description' => $rat->variety,
-            'death' => $rat->short_death_cause . ' (' . $rat->age_string . ')',
+            'death' => $rat->short_death_cause . ' (' . $rat->short_age_string . ')',
             '_parents' => $rat->parents_array,
             '_children' => $rat->children_array,
         ];
