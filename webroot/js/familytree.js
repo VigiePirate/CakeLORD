@@ -302,7 +302,11 @@ Tree.prototype.drawNodes = function(nodes, source){
       })
       .call(truncate, (boxWidth-16))
       .style('fill-opacity', 0)
-      .style('fill',"#343b40");
+      .style('fill',"#343b40")
+      .on('click', function(person){
+        window.open(person.link, "_blank");
+      })
+      .style("cursor", "zoom-in");
 
   // Draw the person's description and position it inside the box
   nodeEnter.append("text")
@@ -340,16 +344,16 @@ Tree.prototype.drawNodes = function(nodes, source){
         return (d.more_parents ? "⏵": null);
       });
 
-    // Draw a sign to indicate if children are available
-    nodeEnter.append("text")
-        .attr("dx", 0)
-        .attr("dy", 0)
-        .style("fill", "#ccc")
-        .attr("text-anchor", "start")
-        .attr('class', 'more_children')
-        .text(function(d) {
-          return (d.more_children ? "⏴": null);
-        });
+  // Draw a sign to indicate if children are available
+  nodeEnter.append("text")
+      .attr("dx", 0)
+      .attr("dy", 0)
+      .style("fill", "#ccc")
+      .attr("text-anchor", "start")
+      .attr('class', 'more_children')
+      .text(function(d) {
+        return (d.more_children ? "⏴": null);
+      });
 
   // Update the position of both old and new nodes
   var nodeUpdate = node.transition()
