@@ -43,6 +43,11 @@ function setup() {
     // TODO: find a better way
     .attr("transform", "translate(" + (w/3+42) + "," + (h/2) + ")");
 
+    // ChatGPT suggestion to avoid double scrolling
+    // .on("touchmove", function() {
+    //   d3.event.preventDefault();
+    // });
+
   // One tree to display the ancestors
   var ancestorTree = new Tree(svg, 'ancestor', 1);
   ancestorTree.children(function(person){
@@ -104,6 +109,7 @@ function setup() {
 function rootProxy(root){
   return {
     name: root.name,
+    link: root.link,
     dates:root.dates,
     description: root.description,
     death: root.death,
@@ -341,7 +347,8 @@ Tree.prototype.drawNodes = function(nodes, source){
       .attr("text-anchor", "start")
       .attr('class', 'more_parents')
       .text(function(d) {
-        return (d.more_parents ? "⏵": null);
+        // return (d.more_parents ? "⏵": null);
+        return (d.more_parents ? "▶": null);
       });
 
   // Draw a sign to indicate if children are available
@@ -352,7 +359,8 @@ Tree.prototype.drawNodes = function(nodes, source){
       .attr("text-anchor", "start")
       .attr('class', 'more_children')
       .text(function(d) {
-        return (d.more_children ? "⏴": null);
+        // return (d.more_children ? "⏴": null);
+        return (d.more_children ? "◀": null);
       });
 
   // Update the position of both old and new nodes
@@ -400,8 +408,8 @@ Tree.prototype.drawNodes = function(nodes, source){
       .style('fill-opacity', 1);
 
   nodeUpdate.select('text.more_parents')
-      .attr("dx", boxWidth/2-3)
-      .attr("dy", 4.75)
+      .attr("dx", boxWidth/2 + 3.25)
+      .attr("dy", 2.25)
       .style('fill-opacity', function(d) {
         if (d.hasOwnProperty('_parents') && d._parents.length > 0) {
            return d.collapsed ? 1 : 0;
@@ -411,8 +419,8 @@ Tree.prototype.drawNodes = function(nodes, source){
       });
 
   nodeUpdate.select('text.more_children')
-      .attr("dx", -(boxWidth/2)-12)
-      .attr("dy", 4.75)
+      .attr("dx", -(boxWidth/2) - 11.75)
+      .attr("dy", 2.25)
       .style('fill-opacity', function(d) {
         if (d.hasOwnProperty('_children') && d._children.length > 0) {
            return d.collapsed ? 1 : 0;
