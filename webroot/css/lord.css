@@ -1109,8 +1109,8 @@ svg {
 }
 
 .person {
-  font-family: "Imprima";
-  cursor: pointer;
+  font-family: "Imprima", sans-serif;
+  cursor: col-resize;
 }
 
 .person text.name {
@@ -1128,6 +1128,12 @@ svg {
 
 .person text.dates {
   font-size: 12px;
+}
+
+.person text.more_parents,
+.person text.more_children {
+  font-size: 10px;
+  transform: scale(1, 2);
 }
 
 .link {

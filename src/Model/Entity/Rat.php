@@ -435,6 +435,7 @@ class Rat extends Entity
                     //'id' => $offspring->id, // should be modified to be unique in the tree
                     'true_id' => $offspring->id,
                     'name' => $offspring->usual_name,
+                    'link' => Router::Url(['controller' => 'Rats', 'action' => 'view', $offspring->id]),
                     'sex' => $offspring->sex,
                     'description' => $offspring->variety,
                     'death' => $offspring->short_death_cause . ' (' . $offspring->short_age_string . ')',
