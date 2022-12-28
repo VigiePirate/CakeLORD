@@ -40,8 +40,32 @@ function setup() {
     .call(zoom)
     .append('g')
     // Left padding of tree so that the whole root node is on the screen.
-    // TODO: find a better way
     .attr("transform", "translate(" + (w/3+42) + "," + (h/2) + ")");
+
+  // Buttons to unfold a whole generation at once
+  var button1 = d3.select("#familytree").append("ellipse")
+    .text("▶▶")
+    .attr("class", "pedigree-button1")
+    .on('click', function(){
+        d3.selectAll("g.person").each(function (d, i) {
+          var onClickFunc = d3.select(this).on("click");
+          if (d.collapsed && d.hasOwnProperty('_parents')) {
+            onClickFunc.apply(this, [d, i]);
+          }
+        })
+    });
+
+  var button2 = d3.select("#familytree").append("ellipse")
+    .text("◀◀")
+    .attr("class", "pedigree-button2")
+    .on('click', function(){
+        d3.selectAll("g.person").each(function (d, i) {
+          var onClickFunc = d3.select(this).on("click");
+          if (d.collapsed && d.hasOwnProperty('_children')) {
+            onClickFunc.apply(this, [d, i]);
+          }
+        })
+    });
 
     // ChatGPT suggestion to avoid double scrolling
     // .on("touchmove", function() {
@@ -104,6 +128,9 @@ function setup() {
       var onClickFunc = d3.select(this).on("click");
       onClickFunc.apply(this, [d, i]);
     });
+
+  // Init children as collapsed for mass unfolding button
+  descendantRoot._children.forEach(collapse);
 }
 
 function rootProxy(root){
