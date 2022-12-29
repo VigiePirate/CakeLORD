@@ -194,7 +194,8 @@ class User extends Entity implements IdentityInterface
     public function _getWelcomeString()
     {
         if (
-            $this->birth_date->month == FrozenTime::now()->month
+            ! empty($this->birth_date)
+            && $this->birth_date->month == FrozenTime::now()->month
             && $this->birth_date->day == FrozenTime::now()->day
         ) {
             return '<b>' . __('Happy birthday to you!') . '</b>';
