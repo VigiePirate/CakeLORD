@@ -5,11 +5,12 @@ namespace App\Policy;
 
 use App\Model\Table\ContributionsTable;
 use Authorization\IdentityInterface;
+use Authorization\Policy\BeforePolicyInterface;
 
 /**
  * Contributions policy
  */
-class ContributionsTablePolicy
+class ContributionsTablePolicy implements BeforePolicyInterface
 {
     /**
      * Open all for admin

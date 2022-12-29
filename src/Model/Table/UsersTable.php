@@ -47,7 +47,12 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-        $this->addBehavior('Picture', ['slug' => 'username']);
+        $this->addBehavior('Picture', [
+            'maxWidth' => 450,
+            'maxHeight' => 300,
+            'thumbnail' => false,
+            'field_name' => 'avatar'
+        ]);
 
         $this->belongsTo('Roles', [
             'foreignKey' => 'role_id',
@@ -87,7 +92,8 @@ class UsersTable extends Table
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->notEmptyString('email');
+            ->notEmptyString('email')
+            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table', 'message' => __('This email is already in use')]);
 
         $validator
             ->scalar('password')
@@ -100,7 +106,7 @@ class UsersTable extends Table
             ->maxLength('username', 45)
             ->requirePresence('username', 'create')
             ->notEmptyString('username')
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table', 'message' => __('This username is already in use')]);
 
         $validator
             ->scalar('firstname')

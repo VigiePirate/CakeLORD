@@ -25,6 +25,10 @@ class CompatibilityPolicy implements BeforePolicyInterface
         if ($user->getOriginalData()->is_root) {
             return true;
         }
+
+        if ($user->getOriginalData()->is_locked) {
+            return false;
+        }
     }
 
     /**

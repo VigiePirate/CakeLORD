@@ -826,7 +826,7 @@ class RatsController extends AppController
 
     public function freeze($id)
     {
-        $this->request->allowMethod(['get', 'freeze']);
+        $this->request->allowMethod(['get', 'post']);
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rat, 'changeState');
 
@@ -840,7 +840,7 @@ class RatsController extends AppController
 
     public function thaw($id)
     {
-        $this->request->allowMethod(['get', 'thaw']);
+        $this->request->allowMethod(['get', 'post']);
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rat, 'editFrozen');
 
@@ -854,7 +854,7 @@ class RatsController extends AppController
 
     public function approve($id)
     {
-        $this->request->allowMethod(['get', 'approve']);
+        $this->request->allowMethod(['get', 'post']);
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rat, 'changeState');
 
@@ -868,7 +868,7 @@ class RatsController extends AppController
 
     public function blame($id)
     {
-        $this->request->allowMethod(['get', 'blame']);
+        $this->request->allowMethod(['get', 'post']);
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rat, 'changeState');
 

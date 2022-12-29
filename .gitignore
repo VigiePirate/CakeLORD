@@ -42,6 +42,11 @@ nbproject/*
 # Sass preprocessor
 .sass-cache/
 
+# Atom remote-ftp package #
+###########################
+.ftpconfig
+.ftpignore
+
 # Others #
 ##########
 /docs/cdc/cdclord2.0.pdf

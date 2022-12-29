@@ -296,6 +296,26 @@ class Rat extends Entity
         //}
     }
 
+    protected function isBirthday()
+    {
+        return (
+            $this->birth_date->month == FrozenTime::now()->month
+            && $this->birth_date->day == FrozenTime::now()->day
+        );
+    }
+
+    protected function _getNextBirthday()
+    {
+        $today = FrozenTime::now();
+        $this_year_birthday = FrozenTime::createFromDate($today->year, $this->birth_date->month, $this->birth_date->day);
+        $next_year_birthday = FrozenTime::createFromDate($today->year + 1, $this->birth_date->month, $this->birth_date->day);
+        if ($this_year_birthday->isFuture()) {
+            return $this_year_birthday;
+        } else {
+            return $next_year_birthday;
+        }
+    }
+
     protected function _getSingularityString()
     {
         if (empty($this->singularities)) {

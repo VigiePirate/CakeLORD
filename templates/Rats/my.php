@@ -14,7 +14,7 @@
             </div>
             <h1><?= __('My rats') ?> </h1>
 
-            <h2>Statistics</h2>
+            <?= $this->Flash->render(); ?>
 
         </div>
 
