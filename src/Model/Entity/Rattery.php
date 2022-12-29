@@ -87,7 +87,12 @@ class Rattery extends Entity
 
     protected function _getIsAliveSymbol()
     {
-        return ($this->is_alive ? '☼' : '☾');
+        return ($this->is_alive ? '☼' : ' ☾ ');
+    }
+
+    protected function _getNextAliveSymbol()
+    {
+        return ($this->is_alive ? ' ☾ ' : '☼');
     }
 
     // different from the previous; shows a symbol only if ratterie is inactive

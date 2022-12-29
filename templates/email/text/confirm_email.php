@@ -1,6 +1,6 @@
 Hi, <?= $username; ?>!
 
-You have asked for a password reset link. Please copy and paste this link in your browser to reset your password:
+You have modified your registration email. Please copy and paste this link in your browser to reset your password:
 
 <?= $url; ?>
 

@@ -1,8 +1,8 @@
 <?= $this->Flash->render() ?>
 
 <div class="users form index content">
-    <h1><?= __('Reset Password') ?></h1>
-    <?= $this->Form->create() ?>
+    <h1><?= __('Reset Email') ?></h1>
+    <?= $this->Form->create(null, ['autocomplete' => 'off']) ?>
     <fieldset>
         <?php if (!is_null($user)) : ?>
             <legend><?= __('Enter Old Password') ?></legend>
@@ -18,14 +18,14 @@
                 ],
                 ])
             ?>
-            <?= $this->Form->control('password', ['type' => 'password', 'required' => true, 'autofocus' => true]) ?>
+            <?= $this->Form->control('password', ['type' => 'password', 'required' => true, 'value' => null]) ?>
         <?php endif; ?>
 
-        <legend><?= __('Enter New Password') ?></legend>
-        <p class="helper"><?= __('We recommend you to chose a password of at least 12 characters with alphanumeric, lowercase, uppercase and/or special characters.') ?></p>
-        <?= $this->Form->control('new_password', ['type' => 'password', 'required' => true, 'autofocus' => true]) ?>
-        <?= $this->Form->control('confirm_password', ['type' => 'password', 'required' => true, 'autofocus' => true]) ?>
+        <legend><?= __('Enter New Email') ?></legend>
+        <p class="helper"><?= __('Please note that an activation link message will be sent to this address. If the entered address is invalid, your account will be locked.') ?></p>
+        <?= $this->Form->control('new_email', ['type' => 'email', 'required' => true, 'autocomplete' => 'new-email']) ?>
+        <?= $this->Form->control('confirm_email', ['type' => 'email', 'required' => true, 'autocomplete' => 'do-not-autofill']) ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit new password')); ?>
+    <?= $this->Form->button(__('Submit new email')); ?>
     <?= $this->Form->end() ?>
 </div>

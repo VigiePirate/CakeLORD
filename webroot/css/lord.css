@@ -85,10 +85,19 @@ h1 span {
 .rotate {
   display:inline-block;
   -webkit-transform:rotate(330deg);
+  font-weight: bold;
+  min-width:0.75em;
 }
 
-.sun {
-  color: #ffd42a
+a.rotate {
+  color: #606c76;
+  font-weight: bold;
+}
+
+.sun, a.sun {
+  color: #ffd42a;
+  font-weight: bold;
+  font-family: unset;
 }
 /* end of ugly stuff */
 
@@ -289,7 +298,12 @@ table.aside-photo>tbody>tr>th{
   overflow: visible; /* hidden ? */
 }
 
-.column-photo > img {
+.column-portrait {
+  max-height: 16rem;
+  overflow: hidden; /* hidden ? */
+}
+
+.column-photo, .column-portrait > img {
   display: block;
   margin: auto;
 }
@@ -1282,7 +1296,7 @@ svg {
     column-gap:           1rem;
   }
 
-  .column-photo {
+  .column-photo, .column-portrait {
     max-height: unset;
   }
 }

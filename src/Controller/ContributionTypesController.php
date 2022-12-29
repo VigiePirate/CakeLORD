@@ -19,7 +19,7 @@ class ContributionTypesController extends AppController
     public function index()
     {
         $contributionTypes = $this->paginate($this->ContributionTypes);
-
+        $this->Authorization->skipAuthorization();
         $this->set(compact('contributionTypes'));
     }
 

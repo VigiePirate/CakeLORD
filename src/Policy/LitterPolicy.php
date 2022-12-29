@@ -27,7 +27,7 @@ class LitterPolicy implements BeforePolicyInterface
         }
 
         // Frozen sheets are restricted
-        if ($resource->state->is_frozen && ! $user->role->can_edit_frozen) {
+        if (! is_null($resource->state) && $resource->state->is_frozen && ! $user->role->can_edit_frozen) {
             return false;
         }
     }

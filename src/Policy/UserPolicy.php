@@ -41,15 +41,15 @@ class UserPolicy implements BeforePolicyInterface
     }
 
     /**
-     * Check if $user can create User
+     * Check if $user can add User
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\User $resource
      * @return bool
      */
-    public function canCreate(IdentityInterface $user, User $resource)
+    public function canAdd(IdentityInterface $user, User $resource)
     {
-        // User can't create new users
+        // User can't add new users
         return false;
     }
 
@@ -62,14 +62,12 @@ class UserPolicy implements BeforePolicyInterface
      */
     public function canEdit(IdentityInterface $user, User $resource)
     {
-        // Can update self
-        return $user->get('id') === $resource->get('id');
+        return $this->isSelf($user, $resource) || $user->role->can_edit_others;
     }
 
     public function canMy(IdentityInterface $user, User $resource)
     {
-        // Can update self
-        return $user->get('id') === $resource->get('id');
+        return $this->isSelf($user, $resource);
     }
 
     /**
@@ -105,9 +103,9 @@ class UserPolicy implements BeforePolicyInterface
      * @param App\Model\Entity\User $resource
      * @return bool
      */
-    public function canSeePrivate(IdentityInterface $user, Rat $rat)
+    public function canSeePrivate(IdentityInterface $user, User $resource)
     {
-        return $this->isSelf($user, $rat) || $user->role->is_staff;
+        return $this->isSelf($user, $resource) || $user->role->is_staff;
     }
 
     /**
@@ -118,7 +116,7 @@ class UserPolicy implements BeforePolicyInterface
      * @param App\Model\Entity\User $resource
      * @return bool
      */
-    public function canSeeStaffOnly(IdentityInterface $user, Rat $rat)
+    public function canSeeStaffOnly(IdentityInterface $user, User $resource)
     {
         return $user->role->is_staff;
     }
@@ -156,8 +154,45 @@ class UserPolicy implements BeforePolicyInterface
      */
     public function canChangePicture(IdentityInterface $user, User $resource)
     {
-        return true;
+        return $this->isSelf($user, $resource) || $user->role->can_edit_others;
     }
+
+    /**
+     * Check if $user can change newsletter settings of the User
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canSwitchNewsletter(IdentityInterface $user, User $resource)
+    {
+        return $this->isSelf($user, $resource) || $user->role->can_edit_others;
+    }
+
+    /**
+     * Check if $user can change the role of the User
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canPromote(IdentityInterface $user, User $resource)
+    {
+        return $user->role->can_configure;
+    }
+
+    /**
+     * Check if $user can change the role of the User
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\User $resource
+     * @return bool
+     */
+    public function canResetEmail(IdentityInterface $user, User $resource)
+    {
+        return $this->isSelf($user, $resource) || $user->role->can_edit_others;
+    }
+
 
     /**
      * Auxiliaries

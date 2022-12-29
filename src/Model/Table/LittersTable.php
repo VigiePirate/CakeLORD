@@ -363,7 +363,7 @@ class LittersTable extends Table
 
             foreach ($entity->parent_rats as $parent_ref) {
                 $parent = $rats->get($parent_ref['id'], [
-                    'contain' => ['OwnerUsers','OwnerUsers.Ratteries']
+                    'contain' => ['OwnerUsers', 'OwnerUsers.Ratteries']
                 ]);
 
                 $parent_rattery = $parent->owner_user->main_rattery;

@@ -91,6 +91,13 @@ return [
         ],
     ],
 
+    'EmailSettings' => [
+        'from' => ['lord@example.com' => 'Livre des Origines du Rat Domestique'],
+        'sender_mail' => 'lord@example.com',
+        'sender_name' => 'Livre des Origines du Rat Domestique'
+
+    ],
+
     /*
 	 * Geocoder / Googlemap configuration.
 	 *

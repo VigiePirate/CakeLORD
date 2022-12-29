@@ -34,8 +34,59 @@
             </div>
 
             <h1><?= h($litter->full_name) ?></h1>
+
+            <?= $this->Flash->render() ?>
+
+            <?php echo $this->Form->setValueSources(['context', 'data'])->create($litter); ?>
+            <fieldset>
+            <?php foreach($contribution_types as $type) : ?>
+                <?php
+                    echo $this->Form->control('rattery_name_contribution_' . $type->id, [
+                        'id' => 'jquery-rattery-input-' . $type->id,
+                        'name' => 'rattery_name_contribution_' . $type->id,
+                        'label' => $type->name,
+                        'type' => 'text',
+                        'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['name'] : __('Type and select the rattery’s name or prefix here...')
+                    ]);
+
+                    echo $this->Form->control('rattery_id_contribution_' . $type->id, [
+                        'id' => 'jquery-rattery-id-' . $type->id,
+                        'name' => 'rattery_id_contribution_' . $type->id,
+                        'label' => [
+                            'class' => 'hide-everywhere',
+                            'text' => 'Hidden field for rattery ID'
+                        ],
+                        'class' => 'hide-everywhere',
+                        'type' => 'text',
+                        'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['id'] : null
+                    ]);
+                ?>
+
+            <?php endforeach ; ?>
+            </fieldset>
+            <?= $this->Form->button(__('Update Contributions')); ?>
+            <?= $this->Form->end(); ?>
         </div>
     </div>
 </div>
 
+<?php $this->append('css');?>
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+<?php $this->end();?>
 <?= $this->Html->css('statebar.css') ?>
+<?= $this->Html->css('ajax.css') ?>
+
+<?php $this->append('script');?>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <?= $this->Html->script('forms') ?>
+    <script>
+        $(function () {
+            var types = <?= json_encode($contribution_types->all()->extract('id')->toList()); ?>;
+            for (var i = 0; i < types.length; i++) {
+                autocompleteRattery("#jquery-rattery-input-"+types[i], "#jquery-rattery-id-"+types[i]);
+                console.log('Added autocomplete for contribution type:'+types[i]);
+            }
+        });
+    </script>
+<?php $this->end(); ?>
