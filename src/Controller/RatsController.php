@@ -29,7 +29,7 @@ class RatsController extends AppController
             'index', 'view',
             'named', 'fromRattery', 'ownedBy', 'sex',
             'search', 'results',
-            'pedigree', 'parentsTree', 'childrenTree'
+            'pedigree', 'parentsTree', 'childrenTree', 'print',
         ]);
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
@@ -645,21 +645,28 @@ class RatsController extends AppController
 
     public function parentsTree($id=null) {
         $this->Authorization->skipAuthorization();
-        if ($this->request->is(['ajax'])) {
-            $id = $this->request->getQuery('id');
-            $rat = $this->Rats->get($id, [
-                'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
-                'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
-                'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
-                'BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
-                'BirthLitters.Sire.Colors', 'BirthLitters.Sire.Dilutions', 'BirthLitters.Sire.Markings', 'BirthLitters.Sire.Earsets', 'BirthLitters.Sire.Coats', 'BirthLitters.Sire.DeathPrimaryCauses', 'BirthLitters.Sire.DeathSecondaryCauses',
-                'BirthLitters.Dam.Colors', 'BirthLitters.Dam.Dilutions', 'BirthLitters.Dam.Markings', 'BirthLitters.Dam.Earsets', 'BirthLitters.Dam.Coats', 'BirthLitters.Dam.DeathPrimaryCauses', 'BirthLitters.Dam.DeathSecondaryCauses',
-                'States'],
-            ]);
 
-            $parents = $rat->parents_array;
-            $this->set('_parents', $parents);
+        if (is_null($id)) {
+            $id = $this->request->getQuery('id');
+        }
+
+        $rat = $this->Rats->get($id, [
+            'contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
+            'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
+            'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
+            'BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
+            'BirthLitters.Sire.Colors', 'BirthLitters.Sire.Dilutions', 'BirthLitters.Sire.Markings', 'BirthLitters.Sire.Earsets', 'BirthLitters.Sire.Coats', 'BirthLitters.Sire.DeathPrimaryCauses', 'BirthLitters.Sire.DeathSecondaryCauses',
+            'BirthLitters.Dam.Colors', 'BirthLitters.Dam.Dilutions', 'BirthLitters.Dam.Markings', 'BirthLitters.Dam.Earsets', 'BirthLitters.Dam.Coats', 'BirthLitters.Dam.DeathPrimaryCauses', 'BirthLitters.Dam.DeathSecondaryCauses',
+            'States'],
+        ]);
+
+        $parents = $rat->parents_array;
+        $this->set('_parents', $parents);
+
+        if ($this->request->is(['ajax'])) {
             $this->viewBuilder()->setOption('serialize', ['_parents']);
+        } else {
+            return $parents;
         }
     }
 
@@ -729,6 +736,43 @@ class RatsController extends AppController
         $stats = $rat->wrapFamilyStatistics();
 
         $this->set(compact('rat', 'stats'));
+    }
+
+    public function print($id = null)
+    {
+        $this->Authorization->skipAuthorization();
+        $rat = $this->Rats->get($id, [
+            'contain' => ['Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'Singularities',
+            'DeathPrimaryCauses', 'DeathSecondaryCauses', 'Ratteries', 'OwnerUsers',
+            'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
+            'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
+            'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
+            'BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
+            'BirthLitters.Sire.Colors', 'BirthLitters.Sire.Dilutions', 'BirthLitters.Sire.Markings', 'BirthLitters.Sire.Earsets', 'BirthLitters.Sire.Coats', 'BirthLitters.Sire.DeathPrimaryCauses', 'BirthLitters.Sire.DeathSecondaryCauses',
+            'BirthLitters.Dam.Colors', 'BirthLitters.Dam.Dilutions', 'BirthLitters.Dam.Markings', 'BirthLitters.Dam.Earsets', 'BirthLitters.Dam.Coats', 'BirthLitters.Dam.DeathPrimaryCauses', 'BirthLitters.Dam.DeathSecondaryCauses',
+            'BredLitters.OffspringRats.Coats','BredLitters.OffspringRats.Colors','BredLitters.OffspringRats.Dilutions','BredLitters.OffspringRats.Markings','BredLitters.OffspringRats.Earsets',
+            'BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
+            'BredLitters.OffspringRats.BirthLitters','BredLitters.OffspringRats.BirthLitters.Contributions',
+            ],
+        ]);
+
+        // $tree = [
+        //     'id' => $rat->id,
+        //     'true_id' => $id,
+        //     'name' => $rat->usual_name,
+        //     'sex' => 'X', // we want a different color for the root of the tree
+        //     'description' => $rat->variety,
+        //     'death' => $rat->short_death_cause . ' (' . $rat->short_age_string . ')',
+        //     '_parents' => $rat->parents_array
+        // ];
+
+        $depth = 4;
+        $tree = $rat->buildFamilyTree($id, $depth);
+        $tree['sex'] = 'X';
+
+        $json = json_encode($tree);
+        $this->set(compact('rat', 'json', 'depth'));
+        $this->viewBuilder()->setLayout('pdf');
     }
 
     /**

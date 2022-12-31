@@ -1110,7 +1110,8 @@ svg {
 
 .person {
   font-family: "Imprima", sans-serif;
-  cursor: col-resize;
+  /* cursor: col-resize; */
+  cursor: pointer;
 }
 
 .person text.name {
