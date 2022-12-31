@@ -58,7 +58,8 @@ class DeathPrimaryCausesController extends AppController
         }
 
         $user = $this->request->getAttribute('identity');
-        $this->set(compact('deathPrimaryCause', 'count', 'frequency', 'sex_ratio', 'age', 'user'));
+        $show_staff = !is_null($user) && $user->can('add', $this->DeathPrimaryCauses);
+        $this->set(compact('deathPrimaryCause', 'count', 'frequency', 'sex_ratio', 'age', 'user', 'show_staff'));
     }
 
     /**

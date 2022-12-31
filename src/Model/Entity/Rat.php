@@ -389,6 +389,61 @@ class Rat extends Entity
         return trim($variety);
     }
 
+    public function buildFamilyTree($id, $depth)
+    {
+        $model = FactoryLocator::get('Table')->get('Rats');
+
+        $rat = $model->get($id, [
+            'contain' => ['Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'Singularities', 'Ratteries',
+            'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
+            'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
+            'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
+            'BirthLitters.Dam.DeathPrimaryCauses','BirthLitters.Dam.DeathSecondaryCauses',
+            'BirthLitters.Sire.Colors', 'BirthLitters.Sire.Dilutions', 'BirthLitters.Sire.Markings', 'BirthLitters.Sire.Earsets', 'BirthLitters.Sire.Coats', 'BirthLitters.Sire.DeathPrimaryCauses', 'BirthLitters.Sire.DeathSecondaryCauses',
+            'BirthLitters.Dam.Colors', 'BirthLitters.Dam.Dilutions', 'BirthLitters.Dam.Markings', 'BirthLitters.Dam.Earsets', 'BirthLitters.Dam.Coats', 'BirthLitters.Dam.DeathPrimaryCauses', 'BirthLitters.Dam.DeathSecondaryCauses',
+            'BredLitters.OffspringRats.Coats','BredLitters.OffspringRats.Colors','BredLitters.OffspringRats.Dilutions','BredLitters.OffspringRats.Markings','BredLitters.OffspringRats.Earsets',
+            'BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
+            'BredLitters.OffspringRats.BirthLitters','BredLitters.OffspringRats.BirthLitters.Contributions',
+            ],
+        ]);
+
+        $tree = [];
+
+        if ($depth > 0) {
+            $parents = [];
+            if(!empty($rat->birth_litter->dam[0])) {
+                $damtree = $this->buildFamilyTree($rat->birth_litter->dam[0]->id, $depth-1);
+                array_push($parents, $damtree);
+            }
+            if(!empty($rat->birth_litter->sire[0])) {
+                $siretree = $this->buildFamilyTree($rat->birth_litter->sire[0]->id, $depth-1);
+                array_push($parents, $siretree);
+            }
+            $tree = [
+                'id' => rand() . '_' . $rat->id,
+                'true_id' => $rat->id,
+                'name' => $rat->usual_name,
+                'sex' => $rat->sex, // we want a different color for the root of the tree
+                'description' => $rat->variety,
+                'death' => $rat->short_death_cause . ' (' . $rat->short_age_string . ')',
+                'more_parents' => is_null($this->birth_litter->dam[0]->litter_id) ? 0 : 1,
+                '_parents' => $parents,
+            ];
+        } else {
+            $tree = [
+                'id' => rand() . '_' . $rat->id,
+                'true_id' => $rat->id,
+                'name' => $rat->usual_name,
+                'sex' => $rat->sex,
+                'description' => $rat->variety,
+                'death' => $rat->short_death_cause . ' (' . $rat->short_age_string . ')',
+                'more_parents' => is_null($this->birth_litter->dam[0]->litter_id) ? 0 : 1,
+                '_parents' => []
+            ];
+        }
+        return $tree;
+    }
+
     protected function _getParentsArray()
     {
         $parents = [];

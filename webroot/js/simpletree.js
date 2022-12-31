@@ -1,12 +1,3 @@
-
-/**
- * For the sake of the examples, I want the setup code to be at the top.
- * However, since it uses a class (Tree) which is defined later, I wrap
- * the setup code in a function at call it at the end of the example.
- * Normally you would extract the entire Tree class defintion into a
- * separate file and include it before this script tag.
- */
-
 var labels = []
 var labelsF = [];
 var labelsM = [];
@@ -22,56 +13,15 @@ var strokeScaleM = d3.scale.ordinal()
 function setup() {
 
   // local dimensions variables - could be computed from box/node width/height
-  w = 1000;
-  h = 1000*window.screen.height/window.screen.width;
-  factor = json._children.length == 0 ? 5 : 3;
+  w = 1620;
+  h = 1350;
 
-  // Setup zoom and pan
-  var zoom = d3.behavior.zoom()
-    .scaleExtent([.05,4])
-    .on('zoom', function(){
-      svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
-    })
-    // Offset so that first pan and zoom does not jump back to the origin
-    .translate([w/factor+42, h/2]);
-
-  var svg = d3.select("#familytree").append("svg")
+  var svg = d3.select("#simpletree").append("svg")
     .attr("viewBox", "0 0 " + w + ' ' + h )
     .attr("preserveAspectRatio", "xMidYMid meet")
-    .call(zoom)
     .append('g')
     // Left padding of tree so that the whole root node is on the screen.
-    .attr("transform", "translate(" + (w/factor+42) + "," + (h/2) + ")");
-
-  // Buttons to unfold a whole generation at once
-  var button1 = d3.select("#familytree").append("ellipse")
-    .text("▶▶")
-    .attr("class", "pedigree-button1")
-    .on('click', function(){
-        d3.selectAll("g.person").each(function (d, i) {
-          var onClickFunc = d3.select(this).on("click");
-          if (d.collapsed && d.hasOwnProperty('_parents') && d.more_parents == 1) {
-            onClickFunc.apply(this, [d, i]);
-          }
-        })
-    });
-
-  var button2 = d3.select("#familytree").append("ellipse")
-    .text("◀◀")
-    .attr("class", "pedigree-button2")
-    .on('click', function(){
-        d3.selectAll("g.person").each(function (d, i) {
-          var onClickFunc = d3.select(this).on("click");
-          if (d.collapsed && d.hasOwnProperty('_children') && d.more_children == 1) {
-            onClickFunc.apply(this, [d, i]);
-          }
-        })
-    });
-
-    // ChatGPT suggestion to avoid double scrolling
-    // .on("touchmove", function() {
-    //   d3.event.preventDefault();
-    // });
+    .attr("transform", "translate(" + w/(depth+2) + "," + (h/2) + ")");
 
   // One tree to display the ancestors
   var ancestorTree = new Tree(svg, 'ancestor', 1);
@@ -85,93 +35,38 @@ function setup() {
     }
   });
 
-  // Use a separate tree to display the descendants
-  var descendantsTree = new Tree(svg, 'descendant', -1);
-  descendantsTree.children(function(person){
-    if(person.collapsed){
-      return;
-    } else {
-      return person._children;
-    }
+    d3.json('https://artefact.kubrick.srfa.info/js/yoyo.json', function (){
+
+    var ancestorRoot = rootProxy(json);
+    ancestorTree.data(ancestorRoot);
+    ancestorTree.draw(ancestorRoot);
+    window.print();
+
   });
-
-  // loading data when they are written in a json file
-  // d3.json(file, function(error, json){
-  //  if(error) {
-  //    return console.error(error);
-  //  }
-
-  // D3 modifies the objects by setting properties such as
-  // coordinates, parent, and children. Thus the same node
-  // node can't exist in two trees. But we need the root to
-  // be in both so we create proxy nodes for the root only.
-  var ancestorRoot = rootProxy(json);
-  var descendantRoot = rootProxy(json);
-
-  // Start with only the first few generations of ancestors showing
-  // ancestorRoot._parents.forEach(function(parents){
-  //   parents._parents.forEach(collapse);
-  // });
-  // Start with only one generation of descendants showing
-  // descendantRoot._children.forEach(collapse);
-
-  // Set the root nodes
-  ancestorTree.data(ancestorRoot);
-  descendantsTree.data(descendantRoot);
-
-  // Draw the tree
-  ancestorTree.draw(ancestorRoot);
-  descendantsTree.draw(descendantRoot);
-
-  // Simulate click on parents to make grandparents appear on load
-  d3.selectAll("g.ancestor")
-    .each(function(d, i) {
-      var onClickFunc = d3.select(this).on("click");
-      onClickFunc.apply(this, [d, i]);
-    });
-
-  // Init children as collapsed for mass unfolding button
-  descendantRoot._children.forEach(collapse);
 }
 
 function rootProxy(root){
   return {
     name: root.name,
-    link: root.link,
     dates:root.dates,
     description: root.description,
     death: root.death,
     id: root.id,
     sex: root.sex,
     more_parents: root.more_parents,
-    more_children: root.more_children,
     x0: 0,
     y0: 0,
-    _children: root._children,
     _parents: root._parents,
     collapsed: false
   };
 }
 
-/**
- * Shared code for drawing ancestors or descendants.
- * `selector` is a class that will be applied to links
- * and nodes so that they can be queried later when
- * the tree is redrawn.
- * `direction` is either 1 (forward) or -1 (backward).
- */
 var Tree = function(svg, selector, direction){
   this.svg = svg;
   this.selector = selector;
   this.direction = direction;
 
   this.tree = d3.layout.tree()
-
-      // Using nodeSize we are able to control
-      // the separation between nodes. If we used
-      // the size parameter instead then d3 would
-      // calculate the separation dynamically to fill
-      // the available space.
       .nodeSize([nodeWidth, nodeHeight])
       .separation(function(a,b){
         return a.parent === b.parent ? sibling_separation : cousin_separation;
@@ -218,10 +113,6 @@ Tree.prototype.drawLinks = function(links, source){
 
   // Update links
   var link = self.svg.selectAll("path.link." + self.selector)
-      // The function we are passing provides d3 with an id
-      // so that it can track when data is being added and removed.
-      // This is not necessary if the tree will only be drawn once
-      // as in the basic example.
       .data(links, function(d){ return d.target.id; });
 
   // Add new links
@@ -241,10 +132,6 @@ Tree.prototype.drawLinks = function(links, source){
         return elbow(d, self.direction);
       });
 
-  // Remove any links we don't need anymore
-  // if part of the tree was collapsed
-  // Transition exit links from their current position
-  // to the source's new position
   link.exit()
       .transition()
       .duration(duration)
@@ -264,11 +151,6 @@ Tree.prototype.drawNodes = function(nodes, source){
 
   // Update nodes
   var node = self.svg.selectAll("g.person." + self.selector)
-
-      // The function we are passing provides d3 with an id
-      // so that it can track when data is being added and removed.
-      // This is not necessary if the tree will only be drawn once
-      // as in the basic example.
       .data(nodes, function(person){
         return person.id;
       });
@@ -281,38 +163,7 @@ Tree.prototype.drawNodes = function(nodes, source){
       .attr('transform', function(person){
         return 'translate(' + (self.direction * (source.y0 + boxWidth/2)) + ',' + source.x0 + ')';
       })
-      .on('click', function(person){
-        if(Array.isArray(person._parents) && ! person._parents.length) {
-          $.ajax({
-            url: '/rats/parents-tree.json',
-            dataType: 'json',
-            data: {
-                'id': person.true_id,
-            },
-            success: function(data) {
-                person._parents = data._parents;
-                person._parents.forEach(updateColorScale);
-		            collapse(person);
-                self.togglePerson(person);
-            },
-          });
-        }
-        if(Array.isArray(person._children) && ! person._children.length) {
-          $.ajax({
-            url: '/rats/children-tree.json',
-            dataType: 'json',
-            data: {
-                'id': person.true_id,
-            },
-            success: function(data) {
-                person._children = data._children;
-		            collapse(person);
-		            self.togglePerson(person);
-            },
-          });
-        }
-        self.togglePerson(person);
-      });
+      .style('cursor', 'default');
 
   // Draw the rectangle person boxes.
   // Start new boxes with 0 size so that
@@ -337,10 +188,7 @@ Tree.prototype.drawNodes = function(nodes, source){
       .call(truncate, (boxWidth-16))
       .style('fill-opacity', 0)
       .style('fill',"#343b40")
-      .on('click', function(person){
-        window.open(person.link, "_blank");
-      })
-      .style("cursor", "zoom-in");
+      .style("cursor", "default");
 
   // Draw the person's description and position it inside the box
   nodeEnter.append("text")
@@ -377,18 +225,6 @@ Tree.prototype.drawNodes = function(nodes, source){
       .text(function(d) {
         // return (d.more_parents ? "⏵": null);
         return (d.more_parents ? "▶": null);
-      });
-
-  // Draw a sign to indicate if children are available
-  nodeEnter.append("text")
-      .attr("dx", 0)
-      .attr("dy", 0)
-      .style("fill", "#ccc")
-      .attr("text-anchor", "start")
-      .attr('class', 'more_children')
-      .text(function(d) {
-        // return (d.more_children ? "⏴": null);
-        return (d.more_children ? "◀": null);
       });
 
   // Update the position of both old and new nodes
@@ -440,17 +276,6 @@ Tree.prototype.drawNodes = function(nodes, source){
       .attr("dy", 2.25)
       .style('fill-opacity', function(d) {
         if (d.hasOwnProperty('_parents') && d._parents.length > 0) {
-           return d.collapsed ? 1 : 0;
-        } else {
-           return 1;
-        }
-      });
-
-  nodeUpdate.select('text.more_children')
-      .attr("dx", -(boxWidth/2) - 11.75)
-      .attr("dy", 2.25)
-      .style('fill-opacity', function(d) {
-        if (d.hasOwnProperty('_children') && d._children.length > 0) {
            return d.collapsed ? 1 : 0;
         } else {
            return 1;
@@ -678,13 +503,3 @@ function truncate(text, width) {
     }
   });
 }
-/*
-* Some unused code snippet to adapt font size of long texts
-*/
-// .style("font-size", function(d) {
-//  if (this.getComputedTextLength() > boxWidth) {
-//    return Math.min(2 * boxWidth/2, (2 * boxWidth/2 - 8) / this.getComputedTextLength() * 14) + "px";
-//  } else {
-//    return "14px";
-//  }
-// })

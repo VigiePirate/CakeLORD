@@ -1,0 +1,505 @@
+{
+    "id": 10560,
+    "true_id": "10560",
+    "name": "WYS-SGS TataYoyo",
+    "sex": "F",
+    "description": "Bleu russe Uni Standard Double-rex",
+    "death": "Unknown (28 mo)",
+    "_parents": [{
+        "id": 9433,
+        "true_id": 9433,
+        "name": "PAA-IAR Plumtree",
+        "sex": "F",
+        "description": "Bleu russe Varieberk Standard Double-rex",
+        "death": "Unknown (40 mo)",
+        "_parents": [{
+            "id": 9423,
+            "true_id": 9423,
+            "name": "PAA-LTR Eleya",
+            "sex": "F",
+            "description": "Bleu russe Uni Standard Rex",
+            "death": "Unknown (13 mo)",
+            "_parents": [{
+                "id": 7588,
+                "true_id": 7588,
+                "name": "PAA-BAT Ondine",
+                "sex": "F",
+                "description": "Bleu us Uni Standard Lisse",
+                "death": "Unknown (30 mo)",
+                "_parents": [{
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }, {
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }]
+            }, {
+                "id": 7588,
+                "true_id": 7588,
+                "name": "PAA-BAT Ondine",
+                "sex": "F",
+                "description": "Bleu us Uni Standard Lisse",
+                "death": "Unknown (30 mo)",
+                "_parents": [{
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }, {
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }]
+            }]
+        }, {
+            "id": 9423,
+            "true_id": 9423,
+            "name": "PAA-LTR Eleya",
+            "sex": "F",
+            "description": "Bleu russe Uni Standard Rex",
+            "death": "Unknown (13 mo)",
+            "_parents": [{
+                "id": 7588,
+                "true_id": 7588,
+                "name": "PAA-BAT Ondine",
+                "sex": "F",
+                "description": "Bleu us Uni Standard Lisse",
+                "death": "Unknown (30 mo)",
+                "_parents": [{
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }, {
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }]
+            }, {
+                "id": 7588,
+                "true_id": 7588,
+                "name": "PAA-BAT Ondine",
+                "sex": "F",
+                "description": "Bleu us Uni Standard Lisse",
+                "death": "Unknown (30 mo)",
+                "_parents": [{
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }, {
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }]
+            }]
+        }]
+    }, {
+        "id": 9433,
+        "true_id": 9433,
+        "name": "PAA-IAR Plumtree",
+        "sex": "F",
+        "description": "Bleu russe Varieberk Standard Double-rex",
+        "death": "Unknown (40 mo)",
+        "_parents": [{
+            "id": 9423,
+            "true_id": 9423,
+            "name": "PAA-LTR Eleya",
+            "sex": "F",
+            "description": "Bleu russe Uni Standard Rex",
+            "death": "Unknown (13 mo)",
+            "_parents": [{
+                "id": 7588,
+                "true_id": 7588,
+                "name": "PAA-BAT Ondine",
+                "sex": "F",
+                "description": "Bleu us Uni Standard Lisse",
+                "death": "Unknown (30 mo)",
+                "_parents": [{
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }, {
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }]
+            }, {
+                "id": 7588,
+                "true_id": 7588,
+                "name": "PAA-BAT Ondine",
+                "sex": "F",
+                "description": "Bleu us Uni Standard Lisse",
+                "death": "Unknown (30 mo)",
+                "_parents": [{
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }, {
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }]
+            }]
+        }, {
+            "id": 9423,
+            "true_id": 9423,
+            "name": "PAA-LTR Eleya",
+            "sex": "F",
+            "description": "Bleu russe Uni Standard Rex",
+            "death": "Unknown (13 mo)",
+            "_parents": [{
+                "id": 7588,
+                "true_id": 7588,
+                "name": "PAA-BAT Ondine",
+                "sex": "F",
+                "description": "Bleu us Uni Standard Lisse",
+                "death": "Unknown (30 mo)",
+                "_parents": [{
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }, {
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }]
+            }, {
+                "id": 7588,
+                "true_id": 7588,
+                "name": "PAA-BAT Ondine",
+                "sex": "F",
+                "description": "Bleu us Uni Standard Lisse",
+                "death": "Unknown (30 mo)",
+                "_parents": [{
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }, {
+                    "id": 7505,
+                    "true_id": 7505,
+                    "name": "PAA Oc\u00e9ane",
+                    "sex": "F",
+                    "description": "Bleu us Uni Standard Lisse",
+                    "death": "Unknown (14 mo)",
+                    "_parents": [{
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }, {
+                        "id": 7501,
+                        "true_id": 7501,
+                        "name": "INC Opaline",
+                        "sex": "F",
+                        "description": "Bleu us Irish Standard Lisse",
+                        "death": "Unknown (16 mo)",
+                        "_parents": []
+                    }]
+                }]
+            }]
+        }]
+    }]
+}
