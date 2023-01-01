@@ -20,8 +20,8 @@
         </tr>
 
         <tr>
-            <td><?= __('Full name') ?></td>
-            <td><?= h($rat->usual_name) ?></td>
+            <td><?= __('Prefix') ?></td>
+            <td><?= h($rat->double_prefix) ?></td>
             <td><?= __('Color') ?></td>
             <td><?= $rat->has('color') ? h($rat->color->name) : '' ?></td>
         </tr>
