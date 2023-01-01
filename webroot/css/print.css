@@ -1,0 +1,106 @@
+svg {
+  border: 2px solid #663300;
+  border-radius: 0.4rem;
+  width: 100%;
+  text-align: center;
+}
+
+.person rect {
+  stroke-width: 2px;
+}
+
+.person {
+  font-family: "Imprima", sans-serif;
+  cursor: col-resize;
+}
+
+.person text.name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.person text.description {
+  font-size: 12px;
+}
+
+.person text.death {
+  font-size: 12px;
+}
+
+.person text.dates {
+  font-size: 12px;
+}
+
+.person text.more_parents,
+.person text.more_children,
+.pedigree-button1,
+.pedigree-button2 {
+  font-size: 10px;
+  transform: scale(1, 2);
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+.person rect {
+  stroke-width: 2px;
+}
+
+.person {
+  font-family: "Imprima", sans-serif;
+  cursor: col-resize;
+}
+
+.person text.name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.person text.description {
+  font-size: 12px;
+}
+
+.person text.death {
+  font-size: 12px;
+}
+
+.person text.dates {
+  font-size: 12px;
+}
+
+.person text.more_parents,
+.person text.more_children,
+.pedigree-button1,
+.pedigree-button2 {
+  font-size: 10px;
+  transform: scale(1, 2);
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+@media print {
+  main {
+    min-height: 0;
+  }
+  svg {
+    border: none;
+    background-color: #ffffff;
+  }
+  ellipse {
+    display: none;
+  }
+}
+
+@page {
+  margin: 0.25rem;
+  size: auto;
+  header: none;
+  footer: none;
+}

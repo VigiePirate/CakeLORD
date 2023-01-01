@@ -23,7 +23,7 @@ function setup() {
 
   // local dimensions variables - could be computed from box/node width/height
   w = 1000;
-  h = 1000*window.screen.height/window.screen.width;
+  h = 1200*window.screen.height/window.screen.width;
   factor = json._children.length == 0 ? 5 : 3;
 
   // Setup zoom and pan
@@ -36,6 +36,7 @@ function setup() {
     .translate([w/factor+42, h/2]);
 
   var svg = d3.select("#familytree").append("svg")
+    .attr("id", "mysvg")
     .attr("viewBox", "0 0 " + w + ' ' + h )
     .attr("preserveAspectRatio", "xMidYMid meet")
     .call(zoom)

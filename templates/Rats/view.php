@@ -97,6 +97,16 @@
                             <span class="tooltiptext"><?= __('Edit whole rat sheet') ?></span>
                         </div>
                     <?php endif; ?>
+
+                    <div class="tooltip hide-on-mobile">
+                        <?= $this->Html->link(
+                                $this->Html->image('/img/icon-print.svg', ['class' => 'side-nav-icon', 'alt' => __('Print')]),
+                                ['controller' => 'Rats', 'action' => 'print', $rat->id],
+                                ['target' => '_blank', 'escape' => false]
+                            )
+                        ?>
+                        <span class="tooltiptext"><?= __('Print pedigree') ?></span>
+                    </div>
                 </div>
 
                 <?php if ($user->is_staff) : ?>

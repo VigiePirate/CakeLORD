@@ -1,4 +1,4 @@
-var labels = []
+var labels = [];
 var labelsF = [];
 var labelsM = [];
 var colorScaleF = d3.scale.ordinal()
@@ -11,12 +11,6 @@ var strokeScaleM = d3.scale.ordinal()
   .range(['#6666ff', '#78d956', '#af66ff', '#56d88d', '#52ccb8', '#9aff33', '#0f7799']);
 
 function setup() {
-
-  // local dimensions variables - could be computed from box/node width/height
-  // w = 1000*(depth+2)/depth;
-  // h = 900*(depth+2)/depth;
-  // f = 4/3;
-  // h = f * nodeWidth*(2**(depth - 1))*2;
 
   w = 1320;
   h = 1320;
@@ -36,6 +30,7 @@ function setup() {
     if(person.collapsed){
       return;
     } else {
+      person._parents.forEach(updateColorScale);
       return person._parents;
     }
   });
@@ -50,7 +45,7 @@ function setup() {
 function rootProxy(root){
   return {
     name: root.name,
-    dates:root.dates,
+    dates: root.dates,
     description: root.description,
     death: root.death,
     id: root.id,
@@ -333,7 +328,6 @@ Tree.prototype.togglePerson = function(person){
     } else {
       collapse(person);
     }
-
     this.draw(person);
   }
 };
@@ -351,6 +345,7 @@ Tree.prototype.togglePerson = function(person){
 function collapse(person){
   person.collapsed = true;
   if(person._parents){
+    person._parents.forEach(updateColorScale);
     person._parents.forEach(collapse);
   }
   if(person._children){

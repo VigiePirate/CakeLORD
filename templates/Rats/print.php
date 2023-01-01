@@ -10,7 +10,6 @@
         <?= h($rat->pedigree_identifier) ?>
     </h1>
 
-
     <table class="printable">
         <tr>
             <td><h2>Identity</h2></td>

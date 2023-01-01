@@ -16,22 +16,24 @@
                         'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
                         'class' => 'side-nav-icon',
                         'alt' => __('Full Screen')]) ?>
-                        <span class="tooltiptext"><?= __('Back to rat sheet') ?></span>
+                        <span class="tooltiptext"><?= __('Back to rat sheet')
+                    ?></span>
                 </div>
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-fullscreen.svg', [
                         'url' => '#',
                         'class' => 'side-nav-icon',
                         'id' => 'toggle_fullscreen',
-                        'alt' => __('Full Screen')]) ?>
+                        'alt' => __('Full Screen')])
+                    ?>
                     <span class="tooltiptext"><?= __('Toggle full screen') ?></span>
                 </div>
                 <div class="tooltip">
-                    <?= $this->Html->link(
-                            $this->Html->image('/img/icon-print.svg', ['class' => 'side-nav-icon', 'alt' => __('Print')]),
-                            ['controller' => 'Rats', 'action' => 'print', $rat->id],
-                            ['target' => '_blank', 'escape' => false]
-                        )
+                    <?= $this->Html->image('/img/icon-print.svg', [
+                        'url' => '#',
+                        'class' => 'side-nav-icon',
+                        'id' => 'export_svg',
+                        'alt' => __('Export Tree')])
                     ?>
                     <span class="tooltiptext"><?= __('Print pedigree') ?></span>
                 </div>
@@ -63,6 +65,7 @@
 </div>
 
 <?= $this->Html->css('statebar.css') ?>
+<?= $this->Html->css('print.css', ['media' => 'print']) ?>
 
 <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
 <?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'); ?>

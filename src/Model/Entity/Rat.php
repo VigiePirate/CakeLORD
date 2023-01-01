@@ -426,7 +426,7 @@ class Rat extends Entity
                 'sex' => $rat->sex, // we want a different color for the root of the tree
                 'description' => $rat->variety,
                 'death' => $rat->short_death_cause . ' (' . $rat->short_age_string . ')',
-                'more_parents' => is_null($this->birth_litter->dam[0]->litter_id) ? 0 : 1,
+                'more_parents' => is_null($rat->litter_id) ? 0 : 1,
                 '_parents' => $parents,
             ];
         } else {
@@ -437,7 +437,7 @@ class Rat extends Entity
                 'sex' => $rat->sex,
                 'description' => $rat->variety,
                 'death' => $rat->short_death_cause . ' (' . $rat->short_age_string . ')',
-                'more_parents' => is_null($this->birth_litter->dam[0]->litter_id) ? 0 : 1,
+                'more_parents' => is_null($rat->litter_id) ? 0 : 1,
                 '_parents' => []
             ];
         }

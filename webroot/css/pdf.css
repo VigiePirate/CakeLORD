@@ -48,12 +48,12 @@ h2 {
 }
 
 h2 {
-  font-size:3.2rem; /*2.8*/
+  font-size:2.8rem; /*2.8*/
   line-height:1.3;
 }
 
 h3 {
-  font-size:3.2rem; /*2.2*/
+  font-size:2.8rem; /*2.2*/
   letter-spacing:0rem; /* -.08rem; */
   line-height:1.35;
   padding-left: 0.5rem;
@@ -336,13 +336,6 @@ svg {
   stroke-width: 2px;
 }
 
-@page {
-  margin: 1rem;
-  size: auto;
-  header: none;
-  footer: none;
-}
-
 /* responsiveness */
 @media screen and (max-width: 810px) {
   html {
@@ -488,4 +481,12 @@ svg {
   table td:last-child, table th:last-child {
     padding-right: inherit
   }
+}
+
+
+@page{
+  margin: 0.5rem;
+  size: auto;
+  header: none;
+  footer: none;
 }
