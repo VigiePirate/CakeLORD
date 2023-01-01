@@ -13,15 +13,20 @@ var strokeScaleM = d3.scale.ordinal()
 function setup() {
 
   // local dimensions variables - could be computed from box/node width/height
-  w = 1620;
-  h = 1350;
+  // w = 1000*(depth+2)/depth;
+  // h = 900*(depth+2)/depth;
+  // f = 4/3;
+  // h = f * nodeWidth*(2**(depth - 1))*2;
+
+  w = 1320;
+  h = 1320;
 
   var svg = d3.select("#simpletree").append("svg")
     .attr("viewBox", "0 0 " + w + ' ' + h )
     .attr("preserveAspectRatio", "xMidYMid meet")
     .append('g')
     // Left padding of tree so that the whole root node is on the screen.
-    .attr("transform", "translate(" + w/(depth+2) + "," + (h/2) + ")");
+    .attr("transform", "translate(" + 2*boxWidth/3 + "," + (h/2) + ")");
 
   // One tree to display the ancestors
   var ancestorTree = new Tree(svg, 'ancestor', 1);
@@ -35,14 +40,11 @@ function setup() {
     }
   });
 
-    d3.json('https://artefact.kubrick.srfa.info/js/yoyo.json', function (){
-
-    var ancestorRoot = rootProxy(json);
-    ancestorTree.data(ancestorRoot);
-    ancestorTree.draw(ancestorRoot);
-    window.print();
-
-  });
+  var ancestorRoot = rootProxy(json);
+  ancestorTree.data(ancestorRoot);
+  ancestorTree.draw(ancestorRoot);
+  window.onafterprint = window.close;
+  window.print();
 }
 
 function rootProxy(root){
