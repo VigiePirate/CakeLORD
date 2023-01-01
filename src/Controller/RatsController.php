@@ -756,16 +756,6 @@ class RatsController extends AppController
             ],
         ]);
 
-        // $tree = [
-        //     'id' => $rat->id,
-        //     'true_id' => $id,
-        //     'name' => $rat->usual_name,
-        //     'sex' => 'X', // we want a different color for the root of the tree
-        //     'description' => $rat->variety,
-        //     'death' => $rat->short_death_cause . ' (' . $rat->short_age_string . ')',
-        //     '_parents' => $rat->parents_array
-        // ];
-
         $depth = 4;
         $tree = $rat->buildFamilyTree($id, $depth);
         $tree['sex'] = 'X';
