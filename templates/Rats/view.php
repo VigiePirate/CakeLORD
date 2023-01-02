@@ -98,11 +98,11 @@
                         </div>
                     <?php endif; ?>
 
-                    <div class="tooltip hide-on-mobile">
+                    <div class="tooltip">
                         <?= $this->Html->link(
                                 $this->Html->image('/img/icon-print.svg', ['class' => 'side-nav-icon', 'alt' => __('Print')]),
                                 ['controller' => 'Rats', 'action' => 'print', $rat->id],
-                                ['target' => '_blank', 'escape' => false]
+                                ['target' => '_blank', 'escape' => false, 'class' => "hide-on-mobile"]
                             )
                         ?>
                         <span class="tooltiptext"><?= __('Print pedigree') ?></span>
