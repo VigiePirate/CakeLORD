@@ -5,16 +5,18 @@
  */
 ?>
 
+<?php $this->start('title') ?>
+  <?= h($rat->usual_name) ?>
+<?php $this->end() ?>
+
 <div class="rats view content">
-    <h1>
-        <?= h($rat->pedigree_identifier) ?>
-    </h1>
+    <h1><?= h($rat->pedigree_identifier) ?></h1>
 
     <table class="printable">
         <tr>
-            <td><h2>Identity</h2></td>
+            <td><h2><?= __('Identity') ?></h2></td>
             <td></td>
-            <td><h2>Description</h2></td>
+            <td><h2><?= __('Description') ?></h2></td>
             <td></td>
         </tr>
 
@@ -64,11 +66,8 @@
     </table>
 
     <h3><?= __('Genealogy') ?></h3>
-
     <!-- d3.js family tree -->
-    <div id="tree_container">
-        <div id="simpletree">
-        </div>
+    <div id="simpletree">
     </div>
 
     <div class="signature">

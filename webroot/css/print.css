@@ -99,8 +99,8 @@ svg {
 }
 
 @page {
-  margin: 0.25rem;
-  size: auto;
+  margin: 0;
+  size: 29.7cm 21cm;
   header: none;
   footer: none;
 }

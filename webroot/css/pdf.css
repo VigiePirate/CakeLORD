@@ -31,9 +31,10 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-  font-size:4.8rem;
+  font-size:4rem;
   line-height:1;
-  margin-top: -10rem;
+  margin-top: -8rem;
+  margin-left: -1rem;
 }
 
 h1 span {
@@ -43,21 +44,22 @@ h1 span {
 }
 
 h2 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
+  margin-left: 0rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  font-size: 2.6rem;
+  line-height: 1.3;
 }
 
-h2 {
-  font-size:2.8rem; /*2.8*/
-  line-height:1.3;
-}
 
 h3 {
-  font-size:2.8rem; /*2.2*/
-  letter-spacing:0rem; /* -.08rem; */
-  line-height:1.35;
-  padding-left: 0.5rem;
-  padding-top: 1.5rem;
+  font-size: 2.6rem; /*2.2*/
+  letter-spacing: 0rem; /* -.08rem; */
+  line-height: 1;
+  margin: 3rem auto 2rem 0;
+  padding-left: 0rem;
+  padding-top: 0.5rem;
+
 }
 
 .parent {
@@ -79,7 +81,7 @@ a sup {
 /* Tables */
 
 table {
-  padding-left:1rem;
+  padding-left:0;
   margin-bottom:1.5rem;
 }
 
@@ -89,7 +91,7 @@ tbody>tr>td:nth-child(odd) {
 }
 
 tbody>tr>td:nth-child(even) {
-  width: 30%;
+  width: 37.5%;
 }
 
 td,th {
@@ -107,7 +109,7 @@ td,th {
 }
 
 .container {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 th {
@@ -121,9 +123,7 @@ th {
   display: flex;
   justify-content: flex-end;
   max-width: 112rem;
-  padding: 1rem;
-  top: 0;
-  z-index: 10;
+  /* padding: 2rem 0 1rem 0; */
   margin: 0 auto 2rem;
 }
 
@@ -136,7 +136,7 @@ th {
 .top-nav-title a {
   font-family: "Imprima", sans-serif;
   font-weight: bold;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: #663300;
   line-height:1.1em;
   padding: 0em 0.5em;
@@ -286,7 +286,7 @@ footer {
 
 #tree_container {
   background-color: #ffffff;
-  padding: 0.5rem;
+  padding: 0;
 }
 
 svg {
@@ -483,10 +483,18 @@ svg {
   }
 }
 
+body {
+  margin-left: 3.75%;
+  width: 92.5%;
+}
+
+.top-nav {
+  padding: 2rem 0.5rem 0rem 0.5rem;
+}
 
 @page{
-  margin: 0.5rem;
-  size: auto;
+  margin: 0;
+  size: 21cm 29.7cm;
   header: none;
   footer: none;
 }
