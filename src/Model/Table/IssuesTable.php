@@ -48,12 +48,15 @@ class IssuesTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Users', [
+        $this->belongsTo('FromUsers', [
+            'className' => 'Users',
             'foreignKey' => 'from_user_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('ClosingUsers', [
+            'className' => 'Users',
             'foreignKey' => 'closing_user_id',
+            'joinType' => 'INNER',
         ]);
     }
 
@@ -108,8 +111,8 @@ class IssuesTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn('from_user_id', 'Users'), ['errorField' => 'from_user_id']);
-        $rules->add($rules->existsIn('closing_user_id', 'Users'), ['errorField' => 'closing_user_id']);
+        $rules->add($rules->existsIn('from_user_id', 'FromUsers'), ['errorField' => 'from_user_id']);
+        $rules->add($rules->existsIn('closing_user_id', 'ClosingUsers'), ['errorField' => 'closing_user_id']);
 
         return $rules;
     }

@@ -1,6 +1,6 @@
 <div class="tooltip">
     <?= $this->Html->image('/img/icon-report.svg', [
-        'url' => ['controller' => 'Conversations', 'action' => 'add'],
+        'url' => ['controller' => 'Issues', 'action' => 'add', $this->request->getAttribute('here')],
         'class' => 'side-nav-icon',
         'alt' => __('Report')]) ?>
     <span class="tooltiptext"><?= __('Report a problem') ?></span>

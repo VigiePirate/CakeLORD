@@ -59,7 +59,7 @@ class ColorsController extends AppController
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Colors);
 
-        $this->set(compact('color','examples','count', 'frequency', 'user', 'show_staff'));
+        $this->set(compact('color', 'examples', 'count', 'frequency', 'user', 'show_staff'));
     }
 
     /**

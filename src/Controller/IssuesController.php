@@ -18,8 +18,10 @@ class IssuesController extends AppController
      */
     public function index()
     {
+        //FIXME: create Policy for Issues
+        $this->Authorization->skipAuthorization();
         $this->paginate = [
-            'contain' => ['Users'],
+            'contain' => ['FromUsers', 'ClosingUsers'],
         ];
         $issues = $this->paginate($this->Issues);
 
@@ -49,18 +51,26 @@ class IssuesController extends AppController
      */
     public function add()
     {
+        $this->Authorization->skipAuthorization();
         $issue = $this->Issues->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $issue = $this->Issues->patchEntity($issue, $this->request->getData());
-            if ($this->Issues->save($issue)) {
-                $this->Flash->success(__('The issue has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+        if ($this->request->is('post')) {
+            // $issue = $this->Issues->patchEntity($issue, $this->request->getData());
+            // if ($this->Issues->save($issue)) {
+            //     $this->Flash->success(__('The issue has been saved.'));
+            //
+            //     return $this->redirect(['action' => 'index']);
+            // }
+            // $this->Flash->error(__('The issue could not be saved. Please, try again.'));
+        } else {
+            $origin = $this->request->getParam('pass');
+            if (! empty($origin)) {
+                $url = implode("/", $origin);
+                $this->set(compact('url'));
             }
-            $this->Flash->error(__('The issue could not be saved. Please, try again.'));
         }
-        $users = $this->Issues->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('issue', 'users'));
+        //
+        $this->set(compact('issue'));
     }
 
     /**
@@ -70,7 +80,7 @@ class IssuesController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function close($id = null)
     {
         $issue = $this->Issues->get($id, [
             'contain' => [],
