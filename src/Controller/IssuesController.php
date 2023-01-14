@@ -55,13 +55,16 @@ class IssuesController extends AppController
         $issue = $this->Issues->newEmptyEntity();
 
         if ($this->request->is('post')) {
-            // $issue = $this->Issues->patchEntity($issue, $this->request->getData());
-            // if ($this->Issues->save($issue)) {
-            //     $this->Flash->success(__('The issue has been saved.'));
-            //
-            //     return $this->redirect(['action' => 'index']);
-            // }
-            // $this->Flash->error(__('The issue could not be saved. Please, try again.'));
+            $data = $this->request->getData();
+            $data['from_user_id'] = $this->request->getAttribute('identity')->id;
+            $data['is_closed'] = false;
+            $issue = $this->Issues->patchEntity($issue, $data);
+            if ($this->Issues->save($issue)) {
+                $this->Flash->success(__('The issue has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The issue could not be saved. Please, try again.'));
         } else {
             $origin = $this->request->getParam('pass');
             if (! empty($origin)) {
