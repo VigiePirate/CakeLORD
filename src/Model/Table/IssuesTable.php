@@ -33,34 +33,6 @@ use Cake\Validation\Validator;
 class IssuesTable extends Table
 {
     /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
-    public function initialize(array $config): void
-    {
-        parent::initialize($config);
-
-        $this->setTable('issues');
-        $this->setDisplayField('id');
-        $this->setPrimaryKey('id');
-
-        $this->addBehavior('Timestamp');
-
-        $this->belongsTo('FromUsers', [
-            'className' => 'Users',
-            'foreignKey' => 'from_user_id',
-            'joinType' => 'INNER',
-        ]);
-        $this->belongsTo('ClosingUsers', [
-            'className' => 'Users',
-            'foreignKey' => 'closing_user_id',
-            'joinType' => 'INNER',
-        ]);
-    }
-
-    /**
      * Default validation rules.
      *
      * @param \Cake\Validation\Validator $validator Validator instance.
@@ -103,6 +75,36 @@ class IssuesTable extends Table
     }
 
     /**
+     * Initialize method
+     *
+     * @param array $config The configuration for the Table.
+     * @return void
+     */
+    public function initialize(array $config): void
+    {
+        parent::initialize($config);
+
+        $this->setTable('issues');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
+
+        $this->addBehavior('Timestamp');
+
+        $this->belongsTo('FromUsers', [
+            'className' => 'Users',
+            'foreignKey' => 'from_user_id',
+            'joinType' => 'INNER',
+        ]);
+
+        /* join type is "left" because closing user can be null */
+        $this->belongsTo('ClosingUsers', [
+            'className' => 'Users',
+            'foreignKey' => 'closing_user_id',
+            'joinType' => 'LEFT',
+        ]);
+    }
+
+    /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
      *
@@ -111,8 +113,8 @@ class IssuesTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn('from_user_id', 'FromUsers'), ['errorField' => 'from_user_id']);
-        $rules->add($rules->existsIn('closing_user_id', 'ClosingUsers'), ['errorField' => 'closing_user_id']);
+        $rules->add($rules->existsIn(['from_user_id'], 'FromUsers'));
+        $rules->add($rules->existsIn(['closing_user_id'], 'ClosingUsers'));
 
         return $rules;
     }

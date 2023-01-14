@@ -31,7 +31,8 @@
             <?= $this->Form->create($issue) ?>
             <fieldset>
                 <?php
-                    echo $this->Form->control('url', ['label' => __('Page'), 'value' => $this->Url->build($url, ['fullBase' => true]), 'readonly' => true]);
+                    echo $this->Form->control('full_url', ['label' => __('Page'), 'value' => $this->Url->build($url, ['fullBase' => true]), 'readonly' => true]);
+                    echo $this->Form->hidden('url', ['value' => $url, 'readonly' => true]);
                     echo $this->Form->control('complaint', ['label' => __('What is wrong with this page?'), 'default' => ' ']);
                 ?>
             </fieldset>
