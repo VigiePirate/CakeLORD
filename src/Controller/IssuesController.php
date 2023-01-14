@@ -11,6 +11,12 @@ namespace App\Controller;
  */
 class IssuesController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+        /* $this->loadComponent('Security'); */
+    }
+
     /**
      * Index method
      *
@@ -37,11 +43,12 @@ class IssuesController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $issue = $this->Issues->get($id, [
-            'contain' => ['Users'],
+            'contain' => ['FromUsers', 'ClosingUsers'],
         ]);
-
-        $this->set(compact('issue'));
+        $identity = $this->request->getAttribute('identity');
+        $this->set(compact('issue', 'identity'));
     }
 
     /**
@@ -57,7 +64,7 @@ class IssuesController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             $data['from_user_id'] = $this->request->getAttribute('identity')->id;
-            $data['is_closed'] = false;
+            $data['is_open'] = true;
             $issue = $this->Issues->patchEntity($issue, $data);
             if ($this->Issues->save($issue)) {
                 $this->Flash->success(__('The issue has been saved.'));
