@@ -32,7 +32,7 @@
             <fieldset>
                 <?php
                     echo $this->Form->control('url', ['label' => __('Page'), 'value' => $this->Url->build($url, ['fullBase' => true]), 'readonly' => true]);
-                    echo $this->Form->control('complaint', ['label' => __('What is wrong with this page?')]);
+                    echo $this->Form->control('complaint', ['label' => __('What is wrong with this page?'), 'default' => ' ']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit issue')) ?>
