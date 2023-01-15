@@ -5,7 +5,9 @@
  */
 ?>
 <div class="issues index content">
-    <h1><?= __('Closed Issues') ?></h3>
+    <?= $this->Html->link(__('See Open Issues'), ['action' => 'index'], ['class' => 'button button-staff float-right']) ?>
+    <?= $this->Html->link(__('See All Issues'), ['action' => 'all'], ['class' => 'button button-staff float-right']) ?>
+    <h1><?= __('Closed Issues') ?></h1>
     <div class="table-responsive">
         <table>
             <thead>
@@ -25,7 +27,7 @@
                     <td><?= $issue->has('from_user') ? $this->Html->link($issue->from_user->username, ['controller' => 'Users', 'action' => 'view', $issue->from_user->id]) : '' ?></td>
                     <td><?= $this->Html->link(h($issue->url), $this->Url->build($issue->url, ['fullBase' => true]))?></td>
                     <td><?= h($issue->closed) ?></td>
-                    <td><?= $issue->has('closing_user') ? $this->Html->link($issue->closing_user->username, ['controller' => 'Users', 'action' => 'view', $issue->closing_user->id]) : '' ?></td>                    
+                    <td><?= $issue->has('closing_user') ? $this->Html->link($issue->closing_user->username, ['controller' => 'Users', 'action' => 'view', $issue->closing_user->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->image('/img/icon-view.svg', [
                             'url' => ['controller' => 'Issues', 'action' => 'view', $issue->id],

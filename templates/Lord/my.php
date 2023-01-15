@@ -20,6 +20,12 @@
         </div>
         <div class="spacer"> </div>
 
+        <div class="view content">
+            <?= $this->Html->link(__('See all'), ['controller' => 'Issues', 'action' => 'index'], ['class' => 'button button-staff float-right']) ?>
+            <h2><?= __('Open issues') ?></h2>
+        </div>
+        <div class="spacer"> </div>
+
         <?php if ($user->role->can_configure) : ?>
             <div class="spacer"> </div>
             <div class="view content">
