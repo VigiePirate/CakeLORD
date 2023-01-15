@@ -413,8 +413,12 @@ td,th {
   font-style: italic;
 }
 
-td.comment > p {
+td.comment > p, td.comment > * > li {
   margin-bottom: unset;
+}
+
+.comment-head {
+  vertical-align: top;
 }
 
 ul {

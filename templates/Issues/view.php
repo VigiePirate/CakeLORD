@@ -40,7 +40,7 @@
 
             <h2><?= __('Complaint') ?></h2>
 
-            <table class="condensed">    
+            <table class="condensed">
                 <tr>
                     <th><?= __('Created') ?></th>
                     <td><?= h($issue->created) ?></td>
@@ -54,7 +54,7 @@
                     <td><?= $this->Html->link(h($issue->url), $this->Url->build($issue->url, ['fullBase' => true]))?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Comment') ?></th>
+                    <th class="comment-head"><?= __('Comment') ?></th>
                     <td class="comment"><?= $this->Commonmark->sanitize($issue->complaint); ?></td>
             </table>
 
@@ -78,7 +78,7 @@
                         <td><?= $issue->has('closing_user') ? $this->Html->link($issue->from_user->username, ['controller' => 'Users', 'action' => 'view', $issue->from_user->id]) : '' ?></td>
                     </tr>
                     <tr>
-                        <th><?= __('Comment') ?></th>
+                        <th class="comment-head"><?= __('Comment') ?></th>
                         <td class="comment"><?= $this->Commonmark->sanitize($issue->handling); ?></td>
                     </tr>
                 </table>

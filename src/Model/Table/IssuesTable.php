@@ -88,7 +88,14 @@ class IssuesTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->addBehavior('Timestamp');
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'created' => 'new',
+                    'closed' => 'always'
+                ]
+            ]
+        ]);
 
         $this->belongsTo('FromUsers', [
             'className' => 'Users',

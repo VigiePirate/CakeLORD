@@ -123,22 +123,26 @@ class IssuesController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function close($id = null)
+    public function edit($id = null)
     {
+        $this->Authorization->skipAuthorization();
+        $identity = $this->request->getAttribute('identity');
+
         $issue = $this->Issues->get($id, [
-            'contain' => [],
+            'contain' => ['FromUsers'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $issue = $this->Issues->patchEntity($issue, $this->request->getData());
+            $data = $this->request->getData();
+            $data['is_open'] = false;
+            $data['closing_user_id'] = $identity->id;
+            $issue = $this->Issues->patchEntity($issue, $data);
             if ($this->Issues->save($issue)) {
-                $this->Flash->success(__('The issue has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $issue->id]);
             }
             $this->Flash->error(__('The issue could not be saved. Please, try again.'));
         }
-        $users = $this->Issues->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('issue', 'users'));
+
+        $this->set(compact('issue', 'identity'));
     }
 
     /**
