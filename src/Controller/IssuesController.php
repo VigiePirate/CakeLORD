@@ -24,12 +24,14 @@ class IssuesController extends AppController
      */
     public function index()
     {
-        //FIXME: create Policy for Issues
-        $this->Authorization->skipAuthorization();
+        $this->Authorization->authorize($this->Issues);
+        $identity = $this->request->getAttribute('identity');
         $this->paginate = [
             'contain' => ['FromUsers', 'ClosingUsers'],
         ];
-        $issues = $this->paginate($this->Issues->findByIsOpen(true));
+
+        $query = $identity->applyScope('index', $this->Issues->findByIsOpen(true));
+        $issues = $this->paginate($query);
 
         $this->set(compact('issues'));
     }
@@ -41,12 +43,13 @@ class IssuesController extends AppController
      */
     public function all()
     {
-        //FIXME: create Policy for Issues
-        $this->Authorization->skipAuthorization();
+        $this->Authorization->authorize($this->Issues, 'index');
+        $identity = $this->request->getAttribute('identity');
         $this->paginate = [
             'contain' => ['FromUsers', 'ClosingUsers'],
         ];
-        $issues = $this->paginate($this->Issues);
+        $query = $identity->applyScope('index', $this->Issues->find());
+        $issues = $this->paginate($query);
 
         $this->set(compact('issues'));
     }
@@ -58,11 +61,13 @@ class IssuesController extends AppController
      */
     public function closed()
     {
-        $this->Authorization->skipAuthorization();
+        $this->Authorization->authorize($this->Issues, 'index');
+        $identity = $this->request->getAttribute('identity');
         $this->paginate = [
             'contain' => ['FromUsers', 'ClosingUsers'],
         ];
-        $issues = $this->paginate($this->Issues->findByIsOpen(false));
+        $query = $identity->applyScope('index', $this->Issues->findByIsOpen(false));
+        $issues = $this->paginate($query);
 
         $this->set(compact('issues'));
     }
@@ -76,10 +81,10 @@ class IssuesController extends AppController
      */
     public function view($id = null)
     {
-        $this->Authorization->skipAuthorization();
         $issue = $this->Issues->get($id, [
             'contain' => ['FromUsers', 'ClosingUsers'],
         ]);
+        $this->Authorization->authorize($îssue);
         $identity = $this->request->getAttribute('identity');
         $this->set(compact('issue', 'identity'));
     }
@@ -91,7 +96,7 @@ class IssuesController extends AppController
      */
     public function add()
     {
-        $this->Authorization->skipAuthorization();
+        $this->Authorization->authorize($this->Issues);
         $issue = $this->Issues->newEmptyEntity();
 
         if ($this->request->is('post')) {
@@ -125,12 +130,13 @@ class IssuesController extends AppController
      */
     public function edit($id = null)
     {
-        $this->Authorization->skipAuthorization();
-        $identity = $this->request->getAttribute('identity');
-
         $issue = $this->Issues->get($id, [
             'contain' => ['FromUsers'],
         ]);
+
+        $identity = $this->request->getAttribute('identity');
+        $this->Authorization->authorize($îssue);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
             $data['is_open'] = false;
@@ -156,6 +162,7 @@ class IssuesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $issue = $this->Issues->get($id);
+        $this->Authorization->authorize($îssue);
         if ($this->Issues->delete($issue)) {
             $this->Flash->success(__('The issue has been deleted.'));
         } else {
