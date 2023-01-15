@@ -413,6 +413,10 @@ td,th {
   font-style: italic;
 }
 
+td.comment > p {
+  margin-bottom: unset;
+}
+
 ul {
   list-style-type: disc;
 }

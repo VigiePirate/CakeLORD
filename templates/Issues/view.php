@@ -40,11 +40,7 @@
 
             <h2><?= __('Complaint') ?></h2>
 
-            <table class="condensed">
-                <tr>
-                    <th><?= __('Page') ?></th>
-                    <td><?= $this->Html->link(h($issue->url), $this->Url->build($issue->url, ['fullBase' => true]))?></td>
-                </tr>
+            <table class="condensed">    
                 <tr>
                     <th><?= __('Created') ?></th>
                     <td><?= h($issue->created) ?></td>
@@ -52,6 +48,10 @@
                 <tr>
                     <th><?= __('From User') ?></th>
                     <td><?= $this->Html->link($issue->from_user->username, ['controller' => 'Users', 'action' => 'view', $issue->from_user->id]) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Page') ?></th>
+                    <td><?= $this->Html->link(h($issue->url), $this->Url->build($issue->url, ['fullBase' => true]))?></td>
                 </tr>
                 <tr>
                     <th><?= __('Comment') ?></th>
