@@ -32,9 +32,20 @@ class IssuePolicy implements BeforePolicyInterface
      * @param Authorization\IdentityInterface $user The user.
      * @return bool
      */
-    public function canView(IdentityInterface $user, EntityInterface $entity)
+    public function canIndex(IdentityInterface $user, EntityInterface $entity)
     {
         return true;
+    }
+
+    /**
+     * Check if $user can see entity
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @return bool
+     */
+    public function canView(IdentityInterface $user, EntityInterface $entity)
+    {
+        return $entity->from_user_id == $user->id || $user->role->can_edit_others;
     }
 
     /**
@@ -45,7 +56,7 @@ class IssuePolicy implements BeforePolicyInterface
      */
     public function canAdd(IdentityInterface $user)
     {
-        return $user->role->can_document;
+        return true;
     }
 
     /**
@@ -56,7 +67,7 @@ class IssuePolicy implements BeforePolicyInterface
      */
     public function canEdit(IdentityInterface $user)
     {
-        return $user->role->can_document;
+        return $user->role->can_edit_others;
     }
 
     /**
