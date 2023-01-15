@@ -29,7 +29,40 @@ class IssuesController extends AppController
         $this->paginate = [
             'contain' => ['FromUsers', 'ClosingUsers'],
         ];
+        $issues = $this->paginate($this->Issues->findByIsOpen(true));
+
+        $this->set(compact('issues'));
+    }
+
+    /**
+     * All method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function all()
+    {
+        //FIXME: create Policy for Issues
+        $this->Authorization->skipAuthorization();
+        $this->paginate = [
+            'contain' => ['FromUsers', 'ClosingUsers'],
+        ];
         $issues = $this->paginate($this->Issues);
+
+        $this->set(compact('issues'));
+    }
+
+    /**
+     * Closed method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function closed()
+    {
+        $this->Authorization->skipAuthorization();
+        $this->paginate = [
+            'contain' => ['FromUsers', 'ClosingUsers'],
+        ];
+        $issues = $this->paginate($this->Issues->findByIsOpen(false));
 
         $this->set(compact('issues'));
     }
