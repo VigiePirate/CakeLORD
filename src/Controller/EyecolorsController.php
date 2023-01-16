@@ -38,7 +38,7 @@ class EyecolorsController extends AppController
 
         $examples = $this->Eyecolors->Rats->find()
             ->where([
-                ['coat_id' => $id],
+                ['eyecolor_id' => $id],
                 ['picture !=' => 'Unknown.png'],
                 ['picture !=' => ''],
                 ['picture IS NOT' => null]])
