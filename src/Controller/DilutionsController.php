@@ -46,7 +46,7 @@ class DilutionsController extends AppController
         $this->Authorization->skipAuthorization();
         $examples = $this->Dilutions->Rats->find()
             ->where([
-                ['marking_id' => $id],
+                ['dilution_id' => $id],
                 ['picture !=' => 'Unknown.png'],
                 ['picture !=' => ''],
                 ['picture IS NOT' => null]])
@@ -60,7 +60,7 @@ class DilutionsController extends AppController
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Dilutions);
 
-        $this->set(compact('dilution','examples','count','frequency', 'user', 'show_staff'));
+        $this->set(compact('dilution', 'examples', 'count', 'frequency', 'user', 'show_staff'));
     }
 
     /**
