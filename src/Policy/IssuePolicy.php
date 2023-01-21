@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace App\Policy;
 use Authorization\IdentityInterface;
-use Cake\Datasource\EntityInterface;
+use App\Model\Entity\Issue;
 use Authorization\Policy\BeforePolicyInterface;
 
 /**
- * Issue policy (umbrella for physical traits, death causes, countries, etc.)
+ * Issue policy
  */
 class IssuePolicy implements BeforePolicyInterface
 {
@@ -32,7 +32,7 @@ class IssuePolicy implements BeforePolicyInterface
      * @param Authorization\IdentityInterface $user The user.
      * @return bool
      */
-    public function canIndex(IdentityInterface $user, EntityInterface $entity)
+    public function canIndex(IdentityInterface $user, Issue $issue)
     {
         return true;
     }
@@ -43,9 +43,9 @@ class IssuePolicy implements BeforePolicyInterface
      * @param Authorization\IdentityInterface $user The user.
      * @return bool
      */
-    public function canView(IdentityInterface $user, EntityInterface $entity)
+    public function canView(IdentityInterface $user, Issue $issue)
     {
-        return $entity->from_user_id == $user->id || $user->role->can_edit_others;
+        return $issue->from_user_id == $user->id || $user->role->can_edit_others;
     }
 
     /**
