@@ -2,8 +2,9 @@
 declare(strict_types=1);
 
 namespace App\Policy;
-use Authorization\IdentityInterface;
+
 use App\Model\Entity\Issue;
+use Authorization\IdentityInterface;
 use Authorization\Policy\BeforePolicyInterface;
 
 /**
@@ -15,7 +16,7 @@ class IssuePolicy implements BeforePolicyInterface
      * Open all for root
      *
      * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\User $resource
+     * @param App\Model\Entity\Issue $resource
      * @param ?? $action
      * @return bool
      */
@@ -30,22 +31,12 @@ class IssuePolicy implements BeforePolicyInterface
      * Check if $user can see entity
      *
      * @param Authorization\IdentityInterface $user The user.
-     * @return bool
-     */
-    public function canIndex(IdentityInterface $user, Issue $issue)
-    {
-        return true;
-    }
-
-    /**
-     * Check if $user can see entity
-     *
-     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Issue $issue
      * @return bool
      */
     public function canView(IdentityInterface $user, Issue $issue)
     {
-        return $issue->from_user_id == $user->id || $user->role->can_edit_others;
+        return $this->isCreator($user, $issue) || $user->role->can_edit_others;
     }
 
     /**
@@ -63,22 +54,27 @@ class IssuePolicy implements BeforePolicyInterface
      * Check if $user can edit entity
      *
      * @param \Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Issue $issue
      * @return bool
      */
-    public function canEdit(IdentityInterface $user)
+    public function canEdit(IdentityInterface $user, Issue $issue)
     {
-        return $user->role->can_edit_others;
+        return $user->role->can_edit_others && $issue->is_open;
     }
 
     /**
      * Check if $user can delete entity
      *
      * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\Coat $coat
      * @return bool
      */
     public function canDelete(IdentityInterface $user)
     {
         return $user->role->can_delete;
+    }
+
+    protected function isCreator(IdentityInterface $user, Issue $issue)
+    {
+        return $issue->from_user_id == $user->getIdentifier();
     }
 }
