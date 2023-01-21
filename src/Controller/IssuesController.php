@@ -84,7 +84,7 @@ class IssuesController extends AppController
         $issue = $this->Issues->get($id, [
             'contain' => ['FromUsers', 'ClosingUsers'],
         ]);
-        $this->Authorization->authorize($îssue);
+        $this->Authorization->authorize($issue);
         $identity = $this->request->getAttribute('identity');
         $this->set(compact('issue', 'identity'));
     }
@@ -135,7 +135,7 @@ class IssuesController extends AppController
         ]);
 
         $identity = $this->request->getAttribute('identity');
-        $this->Authorization->authorize($îssue);
+        $this->Authorization->authorize($issue);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
