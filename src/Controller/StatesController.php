@@ -54,7 +54,9 @@ class StatesController extends AppController
             'litters' => $state->countMy('litters', 'state')
         ];
 
-        $this->set(compact('state', 'counts'));
+        $user = $this->request->getAttribute('identity');
+
+        $this->set(compact('state', 'counts', 'user'));
     }
 
     /**
@@ -107,7 +109,8 @@ class StatesController extends AppController
         $nextKoStates = $this->States->NextKoStates->find('list', ['limit' => 200]);
         $nextFrozenStates = $this->States->NextFrozenStates->find('list', ['limit' => 200]);
         $nextThawedStates = $this->States->NextThawedStates->find('list', ['limit' => 200]);
-        $this->set(compact('state', 'nextOkStates', 'nextKoStates', 'nextFrozenStates', 'nextThawedStates'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('state', 'nextOkStates', 'nextKoStates', 'nextFrozenStates', 'nextThawedStates', 'user'));
     }
 
     /**
@@ -122,7 +125,7 @@ class StatesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $state = $this->States->get($id);
         $this->Authorization->authorize($state, 'act');
-        
+
         if ($this->States->delete($state)) {
             $this->Flash->success(__('The state has been deleted.'));
         } else {
