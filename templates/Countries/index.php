@@ -5,7 +5,9 @@
  */
 ?>
 <div class="countries index content">
-    <?= $this->Html->link(__('New Country'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <?php if (! is_null($user) && $user->is_staff) : ?>
+        <?= $this->Html->link(__('New Country'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <?php endif; ?>
     <h1><?= __('All Available Countries') ?></h1>
     <div class="table-responsive">
         <table class="condensed">
@@ -23,22 +25,31 @@
                     <td><?= $this->Number->format($country->id) ?></td>
                     <td><?= $this->Html->link(h($country->name), ['action' => 'view', $country->id]) ?></td>
                     <td><?= h($country->iso3166) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
-                            'url' => ['controller' => 'Country', 'action' => 'edit', $country->id],
-                            'class' => 'action-icon',
-                            'alt' => __('Edit Country')
-                        ])?>
-                        <?= $this->Form->postLink(
-                                $this->Html->image('/img/icon-delete.svg', [
-                                    'class' => 'action-icon',
-                                    'alt' => __('Delete Country')
-                                ]),
-                                ['action' => 'delete', $country->id],
-                                ['confirm' => __('Are you sure you want to delete country # {0}?', $country->id), 'escape' => false]
-                            )
-                        ?>
-                    </td>
+                    <?php if (! is_null($user) && $user->is_staff) : ?>
+                        <td class="actions">
+                            <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                                'url' => ['controller' => 'countries', 'action' => 'edit', $country->id],
+                                'class' => 'action-icon',
+                                'alt' => __('Edit Country')
+                            ])?>
+                            <?= $this->Form->postLink(
+                                    $this->Html->image('/img/icon-delete.svg', [
+                                        'class' => 'action-icon',
+                                        'alt' => __('Delete Country')
+                                    ]),
+                                    ['action' => 'delete', $country->id],
+                                    ['confirm' => __('Are you sure you want to delete country # {0}?', $country->id), 'escape' => false]
+                                )
+                            ?>
+                        </td>
+                    <?php else: ?>
+                        <td class="actions">
+                            <?= $this->Html->image('/img/icon-view.svg', [
+                                'url' => ['controller' => 'countries', 'action' => 'view', $country->id],
+                                'class' => 'action-icon',
+                                'alt' => __('See Litter')]) ?>
+                            </td>
+                    <?php endif; ?>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
