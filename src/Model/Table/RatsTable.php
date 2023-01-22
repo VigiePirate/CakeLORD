@@ -454,14 +454,24 @@ class RatsTable extends Table
      */
     public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        if ($entity->isNew() && isset($entity->litter_id)) {
-            $litters = \Cake\Datasource\FactoryLocator::get('Table')->get('Litters');
-            $litters->removeBehavior('State');
-            $litter = $litters->get($entity->litter_id);
-            $count = $litter->countMy('rats', 'litter');
-            if ($litter->pups_number < $count) {
-                $litter->pups_number = $litter->pups_number + 1;
-                $litters->save($litter, ['checkRules' => false, 'atomic' => false]);
+        if ($entity->isNew()) {
+            // force pedigree_identifier writing
+            $this->query()
+                ->update()
+                ->set(['pedigree_identifier' => $entity->pedigree_identifier])
+                ->where(['id' => $entity->id])
+                ->execute();
+
+            // update litter count when relevant
+            if (isset($entity->litter_id)) {
+                $litters = \Cake\Datasource\FactoryLocator::get('Table')->get('Litters');
+                $litters->removeBehavior('State');
+                $litter = $litters->get($entity->litter_id);
+                $count = $litter->countMy('rats', 'litter');
+                if ($litter->pups_number < $count) {
+                    $litter->pups_number = $litter->pups_number + 1;
+                    $litters->save($litter, ['checkRules' => false, 'atomic' => false]);
+                }
             }
         }
     }
