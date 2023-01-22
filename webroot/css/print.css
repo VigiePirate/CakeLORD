@@ -100,7 +100,7 @@ svg {
 
 @page {
   margin: 0;
-  size: 29.7cm 21cm;
+  size: auto;
   header: none;
   footer: none;
 }

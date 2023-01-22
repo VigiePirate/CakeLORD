@@ -34,14 +34,18 @@ $('#export_svg').on('click', function(){
     var svgElement = document.getElementById("mysvg");
     var screenHeight = window.screen.height;
     var screenWidth = window.screen.width;
-    var windowHeight = screenHeight * 2/3 * 6/5;
+    var windowHeight = screenHeight * 2/3;
     var windowWidth = screenWidth * 2/3;
+    var cloneSvg = svgElement.cloneNode(true);
+
+    var bbox = svgElement.getBBox();
+    cloneSvg.setAttribute("viewBox", (bbox.x - 50) + " " + (bbox.y - 50) + " " + (bbox.width + 100) + " " + (bbox.height + 100));
+
     var printWindow = window.open("", "_blank", "height=" + windowHeight + ",top=100,width=" + windowWidth + ",left=" + (screenWidth - windowWidth)/2);
-    printWindow.document.write('<html><head><title>' + json.name + '</title><link rel="stylesheet" type="text/css" href="/css/print.css" media="all" type="text/css" /></head><body>');
-    printWindow.document.write(svgElement.outerHTML);
+    printWindow.document.write('<html><head><title>' + json.name + '</title><link rel="stylesheet" type="text/css" href="/css/print.css" media="all" type="text/css" /></style></head><body>');
+    printWindow.document.write(cloneSvg.outerHTML);
     printWindow.document.write('</body></html>');
     printWindow.document.close();
     printWindow.focus();
-    setTimeout(function(){printWindow.print(); printWindow.close();}, 1000);
-
+    setTimeout(function(){printWindow.print();printWindow.close();}, 1000);
 });

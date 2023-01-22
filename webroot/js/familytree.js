@@ -23,7 +23,7 @@ function setup() {
 
   // local dimensions variables - could be computed from box/node width/height
   w = 1000;
-  h = 1200*window.screen.height/window.screen.width;
+  h = 1000*window.screen.height/window.screen.width;
   factor = json._children.length == 0 ? 5 : 3;
 
   // Setup zoom and pan
