@@ -672,6 +672,7 @@
 
         data: {
             labels: mortality_labels,
+
             datasets: [
                 {
                     type: 'line',
@@ -701,8 +702,8 @@
                     backgroundColor: rate_colors,
                     hoverBackgroundColor: 'rgba(102,51,0,1)',
                     xAxisID: 'xtrunc',
-                    yAxisID: 'yleft'
-                }
+                    yAxisID: 'yright'
+                },
             ]
         },
         options: {
@@ -723,9 +724,15 @@
                         display: true,
                         text: 'Age (in months)',
                         font: {
-                            weight: 700
+                            weight: 700,
+                            size: 12,
                         }
-                    }
+                    },
+                    ticks: {
+                        font: {
+                            size: 12
+                        }
+                    },
                 },
                 yleft: {
                     type: 'linear',
@@ -733,37 +740,50 @@
                     position: 'left',
                     title: {
                         display: true,
-                        text: 'Survival rate, mortality probabilities (%)',
-                        color: 'rgba(177, 0, 12, 1)',
+                        text: 'Survival rate (%)',
+                        color: 'rgba(102, 51, 0, 1)',
                         font: {
-                            weight: 700
+                            weight: 700,
+                            size: 12
                         }
+                    },
+                    ticks: {
+                        font: {
+                            size: 12,
+
+                        },
+                        fontColor: 'rgba(102, 51, 0, 1)',
+                        stepSize: 5,
                     }
                 },
                 yright: {
                     type: 'linear',
                     display: true,
                     position: 'right',
+                    max: 30,
                     title: {
                         display: true,
-                        text: 'Mortality distribution (%)',
+                        text: 'Death probabilities (%)',
                         color: 'rgba(61, 75, 153, 1)',
                         font: {
-                            weight: 700
+                            weight: 700,
+                            size: 12
                         }
                     },
+                    ticks: {
+                        font: {
+                            size: 12,
 
-                    // grid line settings
+                        },
+                        fontColor: 'rgba(61, 75, 153, 1)',
+                        stepSize: 3,
+                    },
                     grid: {
                         drawOnChartArea: false, // only want the grid lines for one axis to show up
                     },
                 },
             },
             plugins: {
-                // legend: {
-                //    text: 'Age',
-                //    position: 'top',
-                // },
                 title: {
                      display: true,
                      text: 'All-time survival and mortality by age'
