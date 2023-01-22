@@ -19,13 +19,15 @@
                     <span class="tooltiptext"><?= __('Browse country list') ?></span>
                 </div>
             </div>
-            <div class="side-nav-group">
-                <?= $this->element('staff_sidebar', [
-                    'controller' => 'Countries',
-                    'object' => $country
-                    ])
-                ?>
-            </div>
+            <?php if (! is_null($user) && $user->is_staff) : ?>
+                <div class="side-nav-group">
+                    <?= $this->element('staff_sidebar', [
+                        'controller' => 'Countries',
+                        'object' => $country
+                        ])
+                    ?>
+                </div>
+            <?php endif; ?>
         </div>
     </aside>
     <div class="column-responsive column-90">

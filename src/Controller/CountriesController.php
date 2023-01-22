@@ -53,7 +53,9 @@ class CountriesController extends AppController
             ],
         ]);
         $this->Authorization->skipAuthorization();
-        $this->set(compact('country'));
+        $user = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($user) && $user->can('add', $this->Countries);
+        $this->set(compact('country', 'user', 'show_staff'));
     }
 
     /**
@@ -64,6 +66,7 @@ class CountriesController extends AppController
     public function add()
     {
         $country = $this->Countries->newEmptyEntity();
+        $this->Authorization->authorize($country);
         if ($this->request->is('post')) {
             $country = $this->Countries->patchEntity($country, $this->request->getData());
             if ($this->Countries->save($country)) {
@@ -73,7 +76,8 @@ class CountriesController extends AppController
             }
             $this->Flash->error(__('The country could not be saved. Please, try again.'));
         }
-        $this->set(compact('country'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('country', 'user'));
     }
 
     /**
@@ -88,6 +92,7 @@ class CountriesController extends AppController
         $country = $this->Countries->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->authorize($country);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $country = $this->Countries->patchEntity($country, $this->request->getData());
             if ($this->Countries->save($country)) {
@@ -97,7 +102,8 @@ class CountriesController extends AppController
             }
             $this->Flash->error(__('The country could not be saved. Please, try again.'));
         }
-        $this->set(compact('country'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('country', 'user'));
     }
 
     /**
@@ -111,6 +117,7 @@ class CountriesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $country = $this->Countries->get($id);
+        $this->Authorization->authorize($country);
         if ($this->Countries->delete($country)) {
             $this->Flash->success(__('The country has been deleted.'));
         } else {
