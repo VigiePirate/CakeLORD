@@ -35,7 +35,7 @@
                         'id' => 'export_svg',
                         'alt' => __('Export Tree')])
                     ?>
-                    <span class="tooltiptext"><?= __('Print pedigree') ?></span>
+                    <span class="tooltiptext"><?= __('Print custom tree') ?></span>
                 </div>
             </div>
         </div>
