@@ -10,7 +10,8 @@
                 'controller' => 'ContributionTypes',
                 'object' => $contributionType,
                 'tooltip' => __('Browse contribution type list'),
-                'show_staff' => true
+                'show_staff' => true,
+                'can_cancel' => true
             ])
         ?>
     </aside>

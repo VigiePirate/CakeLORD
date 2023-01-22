@@ -239,6 +239,7 @@ class Application extends BaseApplication
         $mapResolver->map(Model\Table\CompatibilitiesTable::class, Policy\DescriptionsTablePolicy::class);
         $mapResolver->map(Model\Table\OperatorsTable::class, Policy\DescriptionsTablePolicy::class);
 
+        $mapResolver->map(Model\Entity\ContributionType::class, Policy\ConfigurationPolicy::class);
         $mapResolver->map(Model\Entity\Role::class, Policy\ConfigurationPolicy::class);
         $mapResolver->map(Model\Entity\State::class, Policy\ConfigurationPolicy::class);
 

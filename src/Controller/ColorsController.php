@@ -117,9 +117,9 @@ class ColorsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $this->Authorization->authorize($color);
+        $this->request->allowMethod(['post', 'delete']);        
         $color = $this->Colors->get($id);
+        $this->Authorization->authorize($color);
         if ($this->Colors->delete($color)) {
             $this->Flash->success(__('The color has been deleted.'));
         } else {
