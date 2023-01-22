@@ -14,12 +14,11 @@
                     <h1><?= __('Welcome!') ?></h1>
 
                     <table>
-                        <tr><td><?= ucfirst($today) ?></td></tr>
+                        <tr><td><?= ucfirst($today) . ', ' . $hour ?></td></tr>
                         <tr><td><?= $user->welcome_string ?></td></tr>
                         <tr><td><?= $user->rat_birthday_string ?></td></tr>
                         <tr><td><?= $user->coming_birthday_string ?></td></tr>
                     </table>
-
                 </div>
                 <div class="column footer-center column-portrait">
                     <?php if ($user->avatar != '') : ?>

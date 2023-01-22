@@ -240,7 +240,7 @@ class User extends Entity implements IdentityInterface
         $today = FrozenTime::now();
 
         if ($rats->isEmpty()) {
-            return __('No rat birthday coming. Time for adoption?');
+            return __('You don’t have any rat. Time for adoption?');
         } else {
             $rats = $rats
                 ->sortBy('next_birthday', SORT_ASC)
@@ -253,7 +253,7 @@ class User extends Entity implements IdentityInterface
                 return $string . $rats->name . ' (' . $rats->next_birthday->i18nFormat('dd/MM') . ')' . ', ';
                 },
             '');
-            return __('Next rat birthdays: ') . trim($str, ', ');
+            return empty($str) ? __('No rat birthday coming soon') : __('Rat birthdays coming soon: ') . trim($str, ', ');
         }
     }
 

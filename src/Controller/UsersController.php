@@ -211,7 +211,7 @@ class UsersController extends AppController
                     $user->failed_login_attempts = 0;
                     $user->failed_login_last_date = null;
                     if($this->Users->save($user)) {
-                        $this->Flash->success('Your account has been activated. Welcome on LORD!');
+                        $this->Flash->success('Your account has been activated. You can now log in and complete your profile. Welcome on LORD!');
                         return $this->redirect(['action' => 'login']);
                     } else {
                         return $this->Flash->error(__('Something went wrong. Please, try again or contact an administrator.'));
@@ -261,9 +261,11 @@ class UsersController extends AppController
             $champion = $this->loadModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
         }
 
-        $today = \Cake\I18n\FrozenTime::now()->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
+        $now = \Cake\I18n\FrozenTime::now();
+        $today = $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE]);
+        $hour = $now->i18nFormat([\IntlDateFormatter::NONE, \IntlDateFormatter::SHORT]);
 
-        $this->set(compact('user', 'today',
+        $this->set(compact('user', 'today', 'hour',
             'rat_count', 'female_count', 'male_count',
             'alive_rat_count', 'alive_female_count', 'alive_male_count',
             'managed_rat_count', 'alive_managed_rat_count',
