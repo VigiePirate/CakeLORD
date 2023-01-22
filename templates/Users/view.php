@@ -51,14 +51,16 @@
                         </div>
                     </div>
                 <?php endif; ?>
-                <div class="side-nav-group">
-                    <?= $this->element('staff_sidebar', [
-                        'controller' => 'Users',
-                        'object' => $user,
-                        'user' => $identity
-                        ])
-                    ?>
-                </div>
+                <?php if (isset($show_staff) && $show_staff && ! is_null($identity) && $identity->is_staff) : ?>
+                    <div class="side-nav-group">
+                        <?= $this->element('staff_sidebar', [
+                            'controller' => 'Users',
+                            'object' => $user,
+                            'user' => $identity
+                            ])
+                        ?>
+                    </div>
+                <?php endif; ?>
             <?php endif ; ?>
         </div>
     </aside>
