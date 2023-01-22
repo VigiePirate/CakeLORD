@@ -30,6 +30,7 @@ class DescriptionPolicy implements BeforePolicyInterface
      * Check if $user can see entity
      *
      * @param Authorization\IdentityInterface $user The user.
+     * @param Cake\Datasource\EntityInterface $entity the entity
      * @return bool
      */
     public function canView(IdentityInterface $user, EntityInterface $entity)
@@ -63,7 +64,6 @@ class DescriptionPolicy implements BeforePolicyInterface
      * Check if $user can delete entity
      *
      * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\Coat $coat
      * @return bool
      */
     public function canDelete(IdentityInterface $user)

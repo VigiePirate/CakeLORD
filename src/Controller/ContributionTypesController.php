@@ -36,7 +36,8 @@ class ContributionTypesController extends AppController
             'contain' => ['Contributions'],
         ]);
 
-        $this->set(compact('contributionType'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('contributionType', 'user'));
     }
 
     /**
@@ -47,6 +48,7 @@ class ContributionTypesController extends AppController
     public function add()
     {
         $contributionType = $this->ContributionTypes->newEmptyEntity();
+        $this->Authorization->authorize($contributionType);
         if ($this->request->is('post')) {
             $contributionType = $this->ContributionTypes->patchEntity($contributionType, $this->request->getData());
             if ($this->ContributionTypes->save($contributionType)) {
@@ -56,7 +58,8 @@ class ContributionTypesController extends AppController
             }
             $this->Flash->error(__('The contribution type could not be saved. Please, try again.'));
         }
-        $this->set(compact('contributionType'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('contributionType', 'user'));
     }
 
     /**
@@ -71,6 +74,7 @@ class ContributionTypesController extends AppController
         $contributionType = $this->ContributionTypes->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->authorize($contributionType);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $contributionType = $this->ContributionTypes->patchEntity($contributionType, $this->request->getData());
             if ($this->ContributionTypes->save($contributionType)) {
@@ -80,7 +84,8 @@ class ContributionTypesController extends AppController
             }
             $this->Flash->error(__('The contribution type could not be saved. Please, try again.'));
         }
-        $this->set(compact('contributionType'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('contributionType', 'user'));
     }
 
     /**
@@ -94,6 +99,7 @@ class ContributionTypesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $contributionType = $this->ContributionTypes->get($id);
+        $this->Authorization->authorize($contributionType);
         if ($this->ContributionTypes->delete($contributionType)) {
             $this->Flash->success(__('The contribution type has been deleted.'));
         } else {
