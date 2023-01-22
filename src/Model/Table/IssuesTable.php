@@ -92,7 +92,7 @@ class IssuesTable extends Table
             'events' => [
                 'Model.beforeSave' => [
                     'created' => 'new',
-                    'closed' => 'always'
+                    'closed' => 'existing'
                 ]
             ]
         ]);

@@ -187,19 +187,19 @@ class Rat extends Entity
         }
     }
 
-    protected function _setPedigreeIdentifier($pedigree_identifier)
-    {
-        if ($this->is_pedigree_custom) {
-            return $pedigree_identifier ;
-        } else if (isset($this->_fields['id']) && isset($this->_fields['rattery'])) {
-            if ($pedigree_identifier == $this->getOriginal('pedigree_identifier')) {
-                $this->setDirty('pedigree_identifier', false);
-            }
-            return $this->rattery->prefix . $this->id . $this->sex ;
-        } else {
-            return '' ; // Should raise an exception
-        }
-    }
+    // protected function _setPedigreeIdentifier($pedigree_identifier)
+    // {
+    //     if ($this->is_pedigree_custom) {
+    //         return $pedigree_identifier ;
+    //     } else if (isset($this->_fields['id']) && isset($this->_fields['rattery'])) {
+    //         if ($pedigree_identifier == $this->getOriginal('pedigree_identifier')) {
+    //             $this->setDirty('pedigree_identifier', true);
+    //         }
+    //         return $this->rattery->prefix . $this->id . $this->sex ;
+    //     } else {
+    //         return '' ; // Should raise an exception
+    //     }
+    // }
 
     protected function _getAge()
     {
