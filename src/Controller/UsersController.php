@@ -145,7 +145,7 @@ class UsersController extends AppController
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
             $this->Flash->error('You already have an account, on which you are logged in.');
-            return $this->redirect(['controller' => 'users','action' => 'index']);
+            return $this->redirect(['controller' => 'users', 'action' => 'my']);
         }
 
         if ($this->request->is('post')) {
