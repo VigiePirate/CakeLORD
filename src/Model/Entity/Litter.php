@@ -348,4 +348,58 @@ class Litter extends Entity
         return $stats;
     }
 
+    /* genealogy and inbreeding functions */
+
+    public function spanningTree($path = '', &$genealogy = null, &$index = null)
+    {
+        $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('rats');
+        $litters = \Cake\Datasource\FactoryLocator::get('Table')->get('litters');
+
+        if (isset($this->id)) {
+            $id = $this->id;
+            $parents = $rats->find()
+                ->select(['id', 'litter_id', 'sex'])
+                ->matching('BredLitters', function ($query) use ($id) {
+                    return $query->where(['BredLitters.id' => $id]);
+                })
+                ->enableHydration(false)
+                ->all();
+        } else {
+            $parents = $this->parent_rats;
+        }
+
+        // no test on parent existence, since a litter must have at least one parent
+        foreach ($parents as $parent) {
+            $new_path = $path . $parent['sex'];
+
+            if (in_array($parent['id'], array_values($genealogy))) {
+                if (is_null($parent['litter_id'])) {
+                    $new_path = $new_path . 'X';
+                } else {
+                    $new_path = $new_path . 'Y';
+                }
+                $genealogy[$new_path] = $parent['id'];
+                if (! array_key_exists('name', $index[$parent['id']])) { // write name if not known
+                    // fetch full name - could we get it with raw SQL query to save server time?
+                    $rat = $rats->get($parent['id'], ['contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Contributions']]);
+                    $index[$parent['id']]['name'] = $rat->usual_name;
+                }
+            } else {
+                $index[$parent['id']] = ['path' => $new_path];
+                if (is_null($parent['litter_id'])) {
+                    $new_path = $new_path . 'X';
+                    $genealogy[$new_path] = $parent['id'];
+                } else {
+                    // since we have never been there and there is more, we continue exploring upwards
+                    $newlitter = $litters->find()->where(['id' => $parent['litter_id']])->first();
+                    if (! is_null($newlitter)) {
+                        $newlitter->spanningTree($new_path, $genealogy, $index);
+                        $genealogy[$new_path] = $parent['id'];
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 }
