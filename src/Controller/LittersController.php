@@ -186,6 +186,105 @@ class LittersController extends AppController
     }
 
     /**
+     * Simulate method
+     *
+     */
+    public function simulate()
+    {
+        $litter = $this->Litters->newEmptyEntity([
+            'associated' => ['ParentRats', 'Contributions']
+        ]);
+
+        $this->Authorization->authorize($litter, 'add');
+
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $this->redirect(['controller' => 'litters', 'action' => 'project', $data['mother_id'], $data['father_id']]);
+        }
+
+        $this->set(compact('litter'));
+    }
+
+    /**
+     * Project method
+     *
+     */
+    public function project()
+    {
+        $litter = $this->Litters->newEmptyEntity([
+            'associated' => ['ParentRats', 'Contributions']
+        ]);
+        $this->Authorization->authorize($litter, 'add');
+
+        $parents = $this->request->getParam('pass');
+        $data['mother_id'] = $parents[0];
+        $data['father_id'] = $parents[1];
+
+        $data['birth_date'] = \Cake\I18n\FrozenTime::today();
+
+        $user_id = $this->Authentication->getIdentity()->get('id');
+        $user = $this->loadModel('Users')->get($user_id, ['contain' => 'Ratteries']);
+        if (empty($user->main_rattery)) {
+            $data['rattery_id'] = 1;
+        } else {
+            $data['rattery_id'] = $user->main_rattery->id;
+        }
+
+        $litter = $this->Litters->patchEntity($litter, $data, [
+            'from_rat' => false,
+            'associated' => ['ParentRats', 'Contributions', 'Contributions.Ratteries']
+        ]);
+
+        // create fake offspring to init family tree
+        $rats = $this->loadModel('Rats');
+        $dam = $rats->get($parents[0], ['contain' => ['Ratteries', 'Coats', 'Colors', 'Dilutions', 'Markings', 'Earsets']]);
+        $sire = $rats->get($parents[1], ['contain' => ['Ratteries', 'Coats', 'Colors', 'Dilutions', 'Markings', 'Earsets']]);
+        $parents = [];
+
+        array_push($parents,
+        [
+            'id' => rand() . '_' . $dam->id,
+            'true_id' => $dam->id,
+            'name' => $dam->usual_name,
+            'link' => \Cake\Routing\Router::Url(['controller' => 'Rats', 'action' => 'view', $dam->id]),
+            'sex' => 'F',
+            'description' => $dam->variety,
+            'death'=> $dam->short_death_cause . ' (' . $dam->short_age_string . ')',
+            'more_parents' => is_null($dam->litter_id) ? 0 : 1,
+            '_parents' => [],
+        ]);
+
+        array_push($parents,
+        [
+            'id' => rand() . '_' . $sire->id,
+            'true_id' => $sire->id,
+            'name' => $sire->usual_name,
+            'link' => \Cake\Routing\Router::Url(['controller' => 'Rats', 'action' => 'view', $sire->id]),
+            'sex' => 'M',
+            'description' => $sire->variety,
+            'death'=> $sire->short_death_cause . ' (' . $sire->short_age_string . ')',
+            'more_parents' => is_null($sire) ? 0 : 1,
+            '_parents' => [],
+        ]);
+
+        $family = [
+            'id' => 0,
+            'true_id' => 0,
+            'name' => __('Simulated litter'),
+            'link' => '',
+            'sex' => 'X', // we want a different color for the root of the tree
+            'description' => __('Expected prefix: '),
+            'death' => __('Inbreeding rate: '),
+            '_parents' => $parents,
+            '_children' => [],
+        ];
+
+        $json = json_encode($family);
+
+        $this->set(compact('litter', 'sire', 'dam', 'json'));
+    }
+
+    /**
      * Edit method
      *
      * @param string|null $id Litter id.
