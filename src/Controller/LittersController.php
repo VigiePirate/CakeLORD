@@ -199,17 +199,17 @@ class LittersController extends AppController
 
         if ($this->request->is('post')) {
             $data = $this->request->getData();
-            $this->redirect(['controller' => 'litters', 'action' => 'project', $data['mother_id'], $data['father_id']]);
+            $this->redirect(['controller' => 'litters', 'action' => 'virtual', $data['mother_id'], $data['father_id']]);
         }
 
         $this->set(compact('litter'));
     }
 
     /**
-     * Project method
+     * Virtual method
      *
      */
-    public function project()
+    public function virtual()
     {
         $litter = $this->Litters->newEmptyEntity([
             'associated' => ['ParentRats', 'Contributions']
@@ -234,6 +234,13 @@ class LittersController extends AppController
             'from_rat' => false,
             'associated' => ['ParentRats', 'Contributions', 'Contributions.Ratteries']
         ]);
+
+        //
+        $genealogy = [];
+        $index = [];
+        $litter->spanningTree('', $genealogy, $index);
+        $genealogy_json = json_encode($genealogy);
+        $index_json = json_encode($index);
 
         // create fake offspring to init family tree
         $rats = $this->loadModel('Rats');
@@ -280,8 +287,7 @@ class LittersController extends AppController
         ];
 
         $json = json_encode($family);
-
-        $this->set(compact('litter', 'sire', 'dam', 'json'));
+        $this->set(compact('litter', 'sire', 'dam', 'json', 'genealogy_json', 'index_json'));
     }
 
     /**

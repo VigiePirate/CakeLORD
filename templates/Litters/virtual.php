@@ -38,6 +38,15 @@
 
             <h1><?= __('Simulated litter: ') . h($dam->usual_name) . ' × ' . h($sire->usual_name) ?></h1>
 
+            <h2><?= __('Family tree') ?></h2>
+            <!-- d3.js family tree -->
+            <div id="fullscreen_container">
+                <div id="familytree">
+                </div>
+            </div>
+
+            <h2><?= __('Pedigree analysis') ?></h2>
+
             <div id="waiting-message" class="message warning">
                 <?= $this->Html->image('/img/icon-warning-spinner.gif', ['class' => 'action-icon'])
                 . ' ' . __('Computations are in progress. Intermediary results might be inexact. Thank you for your patience.')
@@ -48,7 +57,7 @@
                 Computations took <span id="cost"></span> seconds and are now finished. <span id="cost-comment"></span>
             </div>
 
-            <h2><?= __('Summary') ?></h2>
+            <h3><?= __('Summary') ?></h3>
 
             <table class="condensed stats">
                 <tr>
@@ -117,7 +126,7 @@
 
             <!-- to be shown if coi > 0 -->
             <div id="coancestry" class="hide-everywhere">
-                <h2><?= __('Coancestry analysis') ?></h2>
+                <h3><?= __('Coancestry analysis') ?></h3>
                 <table id="coancestry-table" class="condensed stats histogram">
                     <th>
                         <div id="coancestry-global" style="opacity:1; width:100%">
@@ -130,12 +139,7 @@
             </div>
 
 
-            <h2><?= __('Family tree') ?></h2>
-            <!-- d3.js family tree -->
-            <div id="fullscreen_container">
-                <div id="familytree">
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
@@ -143,11 +147,11 @@
 <?= $this->Html->css('loading'); ?>
 <?= $this->Html->script('inbreeding'); ?>
 
-<!-- <script>
+<script>
     var partialTree = <?php echo $genealogy_json; ?>;
     var ancestorIndex = <?php echo $index_json; ?>;
     window.onload = setTimeout(init(partialTree, ancestorIndex), 250); // a small timeout to let debugkit loading
-</script> -->
+</script>
 
 <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
 <?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'); ?>
