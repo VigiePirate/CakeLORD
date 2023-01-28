@@ -6,6 +6,7 @@
     </aside>
     <div class="column-responsive column-90">
         <div class="litters view content">
+            <?= $this->Html->link(__('Simulate Litter'), ['action' => 'simulate'], ['class' => 'button float-right']) ?>
             <?= $this->Html->link(__('New Litter'), ['action' => 'add'], ['class' => 'button float-right']) ?>
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
