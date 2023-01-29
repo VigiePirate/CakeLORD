@@ -38,15 +38,6 @@
 
             <h1><?= __('Simulated litter: ') . h($dam->usual_name) . ' × ' . h($sire->usual_name) ?></h1>
 
-            <h2><?= __('Family tree') ?></h2>
-            <!-- d3.js family tree -->
-            <div id="fullscreen_container">
-                <div id="familytree">
-                </div>
-            </div>
-
-            <h2><?= __('Pedigree analysis') ?></h2>
-
             <div id="waiting-message" class="message warning">
                 <?= $this->Html->image('/img/icon-warning-spinner.gif', ['class' => 'action-icon'])
                 . ' ' . __('Computations are in progress. Intermediary results might be inexact. Thank you for your patience.')
@@ -56,6 +47,16 @@
             <div id="success-message" class="message success hide-everywhere">
                 Computations took <span id="cost"></span> seconds and are now finished. <span id="cost-comment"></span>
             </div>
+
+            <h2><?= __('Family tree') ?></h2>
+            <!-- d3.js family tree -->
+            <div id="fullscreen_container">
+                <div id="familytree">
+                </div>
+            </div>
+
+            <div class="spacer"></div>
+            <h2><?= __('Pedigree analysis') ?></h2>
 
             <h3><?= __('Summary') ?></h3>
 

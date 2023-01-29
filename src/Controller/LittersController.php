@@ -235,7 +235,7 @@ class LittersController extends AppController
             'associated' => ['ParentRats', 'Contributions', 'Contributions.Ratteries']
         ]);
 
-        //
+        // parse tree for inbreeding computation
         $genealogy = [];
         $index = [];
         $litter->spanningTree('', $genealogy, $index);
