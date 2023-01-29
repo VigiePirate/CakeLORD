@@ -244,8 +244,8 @@ class LittersController extends AppController
 
         // create fake offspring to init family tree
         $rats = $this->loadModel('Rats');
-        $dam = $rats->get($parents[0], ['contain' => ['Ratteries', 'Coats', 'Colors', 'Dilutions', 'Markings', 'Earsets']]);
-        $sire = $rats->get($parents[1], ['contain' => ['Ratteries', 'Coats', 'Colors', 'Dilutions', 'Markings', 'Earsets']]);
+        $dam = $rats->get($parents[0], ['contain' => ['Ratteries', 'Coats', 'Colors', 'Dilutions', 'Markings', 'Earsets', 'OwnerUsers', 'OwnerUsers.Ratteries']]);
+        $sire = $rats->get($parents[1], ['contain' => ['Ratteries', 'Coats', 'Colors', 'Dilutions', 'Markings', 'Earsets', 'OwnerUsers', 'OwnerUsers.Ratteries']]);
         $parents = [];
 
         array_push($parents,
@@ -274,19 +274,24 @@ class LittersController extends AppController
             '_parents' => [],
         ]);
 
+        $litter->dam = $dam;
+        $litter->sire = $sire;
+        $prefix = $litter->predictPrefix();
+
         $family = [
             'id' => 0,
             'true_id' => 0,
             'name' => __('Simulated litter'),
             'link' => '',
             'sex' => 'X', // we want a different color for the root of the tree
-            'description' => __('Expected prefix: '),
+            'description' => __('Expected prefix: ') . h($prefix),
             'death' => __('Inbreeding rate: '),
             '_parents' => $parents,
             '_children' => [],
         ];
 
         $json = json_encode($family);
+
         $this->set(compact('litter', 'sire', 'dam', 'json', 'genealogy_json', 'index_json'));
     }
 

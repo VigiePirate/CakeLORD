@@ -402,4 +402,21 @@ class Litter extends Entity
         return null;
     }
 
+    // predict prefix in virtual litter (without declared birth place)
+    // 'IND' should not be hardcoded but this would be a lot of work for a very small feature
+    function predictPrefix() {
+        $first = $this->dam->owner_user->main_rattery;
+        if (empty($first)) {
+            $prefix = 'IND';
+        } else {
+            $prefix = $first->prefix;
+        }
+        $second = $this->sire->owner_user->main_rattery;
+        if (! empty($second)) {
+            $prefix .= '-' . $second->prefix;
+        }
+
+        return $prefix;
+    }
+
 }
