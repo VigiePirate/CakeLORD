@@ -135,7 +135,7 @@ function setup() {
     });
 
   // Init children as collapsed for mass unfolding button
-  descendantRoot._children.forEach(collapse);  
+  descendantRoot._children.forEach(collapse);
 }
 
 function rootProxy(root){
