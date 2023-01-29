@@ -17,6 +17,9 @@ function showFeedback(cost) {
 
   document.getElementById('cost-comment').innerHTML += costComment;
   document.getElementById('success-message').style.display = 'revert';
+  document.getElementById('success-message').onclick = function() {
+    this.style.display= 'none';
+  };
 }
 
 function insertPosition(ranks, coi) {
