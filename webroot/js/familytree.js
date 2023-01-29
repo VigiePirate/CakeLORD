@@ -124,6 +124,9 @@ function setup() {
   ancestorTree.draw(ancestorRoot);
   descendantsTree.draw(descendantRoot);
 
+  // Add parents to colorScale for close inbreeding cases
+  ancestorRoot._parents.forEach(updateColorScale);
+
   // Simulate click on parents to make grandparents appear on load
   d3.selectAll("g.ancestor")
     .each(function(d, i) {
@@ -132,7 +135,7 @@ function setup() {
     });
 
   // Init children as collapsed for mass unfolding button
-  descendantRoot._children.forEach(collapse);
+  descendantRoot._children.forEach(collapse);  
 }
 
 function rootProxy(root){
