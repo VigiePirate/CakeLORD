@@ -541,66 +541,10 @@ class LittersController extends AppController
     }
 
     /**
-     * SpanningTree method
-     *
-     * FIXME: should be protected?
-     *
-     * Recursive walk in the genealogy tree
-     * (ancestors of an already met ancestor are not rewritten)
-     * Returns a flat table with [$path => $rat_id] rows
-     *
-     */
-    public function spanningTree($id, $path = '', &$genealogy = null, &$index = null)
-    {
-        $this->Authorization->skipAuthorization();
-        $this->loadModel('Rats');
-        $this->loadModel('Litters');
-        $parents = $this->Rats->find()
-            ->select(['id', 'litter_id', 'sex'])
-            ->matching('BredLitters', function ($query) use ($id) {
-                return $query->where(['BredLitters.id' => $id]);
-            })
-            ->enableHydration(false)
-            ->all();
-
-        // no test on parent existence, since a litter must have at least one parent
-        foreach ($parents as $parent) {
-            $new_path = $path . $parent['sex'];
-
-            if (in_array($parent['id'], array_values($genealogy))) {
-                if (is_null($parent['litter_id'])) {
-                    $new_path = $new_path . 'X';
-                } else {
-                    $new_path = $new_path . 'Y';
-                }
-                $genealogy[$new_path] = $parent['id'];
-                if (! array_key_exists('name', $index[$parent['id']])) { // write name if not known
-                    // fetch full name - could we get it with raw SQL query to save server time?
-                    $rat = $this->Rats->get($parent['id'], ['contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Contributions']]);
-                    $index[$parent['id']]['name'] = $rat->usual_name;
-                }
-            } else {
-                $index[$parent['id']] = ['path' => $new_path];
-                if (is_null($parent['litter_id'])) {
-                    $new_path = $new_path . 'X';
-                    $genealogy[$new_path] = $parent['id'];
-                } else {
-                    // since we have never been there and there is more, we continue exploring upwards
-                    $this->spanningTree($parent['litter_id'], $new_path, $genealogy, $index);
-                    $genealogy[$new_path] = $parent['id'];
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
      * Coefficients methods
-     *
-     * FIXME: should be protected?
-     *
      * Returns inbreeding coefficients (AVK, COI) and associated coancestry
      * Returns only COI if $flag = false
+     * Only used as fallback for the client-side javascript computation
      * Should probably be in the model
      *
      */
@@ -747,6 +691,13 @@ class LittersController extends AppController
          return $coefficients;
      }
 
+     /**
+      * ComputeAvk method
+      * 
+      * Only used as fallback for the client-side javascript computation
+      * Should probably be in the model
+      *
+      */
     public function computeAvk($genealogy, $level = 5)
     {
         $this->Authorization->skipAuthorization();
@@ -804,7 +755,7 @@ class LittersController extends AppController
 
         $genealogy = [];
         $index = [];
-        $this->spanningTree($id, '', $genealogy, $index);
+        $litter->spanningTree('', $genealogy, $index);
         $genealogy_json = json_encode($genealogy);
         $index_json = json_encode($index);
 
