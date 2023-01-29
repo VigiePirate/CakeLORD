@@ -281,11 +281,11 @@ class LittersController extends AppController
         $family = [
             'id' => 0,
             'true_id' => 0,
-            'name' => __('Simulated litter'),
-            'link' => '',
+            'name' => __('Virtual litter'),
+            'link' => '#',
             'sex' => 'X', // we want a different color for the root of the tree
             'description' => __('Expected prefix: ') . h($prefix),
-            'death' => __('Inbreeding rate: '),
+            'death' => __('Mating window: ') . $dam->childbearingAge(),
             '_parents' => $parents,
             '_children' => [],
         ];

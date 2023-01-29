@@ -36,7 +36,7 @@
                 <div class="sheet-title pretitle"><?= __('Litters') ?></div>
             </div>
 
-            <h1><?= __('Simulated litter: ') . h($dam->usual_name) . ' × ' . h($sire->usual_name) ?></h1>
+            <h1><?= __('Virtual litter: ') . h($dam->usual_name) . ' × ' . h($sire->usual_name) ?></h1>
 
             <div id="waiting-message" class="message warning">
                 <?= $this->Html->image('/img/icon-warning-spinner.gif', ['class' => 'action-icon'])

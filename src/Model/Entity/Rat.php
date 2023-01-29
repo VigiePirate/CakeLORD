@@ -296,6 +296,13 @@ class Rat extends Entity
         //}
     }
 
+    public function childbearingAge()
+    {
+        $start = $this->birth_date->modify('+ 5 months');
+        $end = $this->birth_date->modify('+ 9 months');
+        return $start->i18nFormat('dd/MM/yyyy') . '-' . $end->i18nFormat('dd/MM/yyyy');
+    }
+
     protected function isBirthday()
     {
         return (
