@@ -597,9 +597,17 @@ class RatsTable extends Table
          return $query->group(['Rats.id']);
      }
 
-/* queries */
-// colors
-// singularity_id
+    // public function findHavingSingularity(Query $query, array $options)
+    // {
+    //     if( !empty($options['singularity_id']) ) {
+    //         $query->matching('Singularities', function ($query) use ($options) {
+    //             return $query->where([
+    //                 'Singularities.id' => $options['singularity_id'],
+    //             ]);
+    //         });
+    //     }
+    //     return $query->group(['Rats.id']);
+    // }
 
     public function findNamed(Query $query, array $options)
     {
