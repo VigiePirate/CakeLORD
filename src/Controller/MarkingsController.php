@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Chronos\Chronos;
 
 /**
  * Markings Controller
@@ -22,7 +23,8 @@ class MarkingsController extends AppController
         $markings = $this->paginate($this->Markings);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
-        $this->set(compact('markings', 'user'));
+        $show_staff = !is_null($user) && $user->can('add', $this->Markings);
+        $this->set(compact('markings', 'user', 'show_staff'));
     }
 
     /**
@@ -49,7 +51,13 @@ class MarkingsController extends AppController
         $count = $marking->countMy('rats', 'marking');
         $frequency = $marking->frequencyOfMy('rats', 'marking');
 
-        $this->set(compact('marking','examples','count','frequency'));
+        $recent_count = $marking->countMy('rats', 'marking', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+        $recent_frequency = $marking->frequencyOfMy('rats', 'marking', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Markings);
+
+        $this->set(compact('marking', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
     }
 
     /**

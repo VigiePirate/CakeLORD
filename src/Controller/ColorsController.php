@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Chronos\Chronos;
 
 /**
  * Colors Controller
@@ -56,10 +57,13 @@ class ColorsController extends AppController
         $count = $color->countMy('rats', 'color');
         $frequency = $color->frequencyOfMy('rats', 'color');
 
+        $recent_count = $color->countMy('rats', 'color', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+        $recent_frequency = $color->frequencyOfMy('rats', 'color', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Colors);
 
-        $this->set(compact('color', 'examples', 'count', 'frequency', 'user', 'show_staff'));
+        $this->set(compact('color', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
     }
 
     /**
@@ -117,7 +121,7 @@ class ColorsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);        
+        $this->request->allowMethod(['post', 'delete']);
         $color = $this->Colors->get($id);
         $this->Authorization->authorize($color);
         if ($this->Colors->delete($color)) {

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Chronos\Chronos;
 
 /**
  * Dilutions Controller
@@ -57,10 +58,13 @@ class DilutionsController extends AppController
         $count = $dilution->countMy('rats', 'dilution');
         $frequency = $dilution->frequencyOfMy('rats', 'dilution');
 
+        $recent_count = $dilution->countMy('rats', 'dilution', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+        $recent_frequency = $dilution->frequencyOfMy('rats', 'dilution', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Dilutions);
 
-        $this->set(compact('dilution', 'examples', 'count', 'frequency', 'user', 'show_staff'));
+        $this->set(compact('dilution', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
     }
 
     /**
