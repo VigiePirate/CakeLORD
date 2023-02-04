@@ -156,9 +156,8 @@ class RatsController extends AppController
 
         if ($this->request->is('post')) {
             $data = $this->request->getData();
-
             $rat_options = [
-                'associated' => ['Ratteries', 'BirthLitters'],
+                'associated' => ['Ratteries', 'BirthLitters', 'Singularities' => ['onlyIds' => true]],
                 'accessibleFields' => ['pedigree_identifier' => true],
             ];
 
