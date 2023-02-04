@@ -215,8 +215,18 @@
                     <?php
                         echo $this->Form->control('earset_id', ['id' => 'jquery-earset-select', 'empty' => false, 'default' => 2, 'options' => $earsets]);
                         echo $this->Form->control('coat_id', ['id' => 'jquery-coat-select', 'empty' => false, 'default' => 2, 'options' => $coats]);
-                        /*echo $this->Form->control('singularities._ids', ['empty' => false, 'default' => 0, 'options' => $singularities, 'size' => '13', 'style' => 'height:auto;']);*/
-                        echo $this->Form->control('singularity_id', ['id' => 'jquery-singularity-select', 'empty' => true, 'default' => 0, 'options' => $singularities]);
+
+                        echo $this->Form->control('singularities._ids', [
+                            'id' => 'jquery-singularity-select',
+                            'type' => 'select',
+                            'multiple' => 'true',
+                            'empty' => true,
+                            'default' => 0,
+                            'label' => __('Singularities'),
+                            'options' => $singularities
+                        ]);
+
+                        // echo $this->Form->control('singularities._ids', ['empty' => true, 'default' => 0, 'options' => $singularities, 'size' => '13', 'style' => 'height:auto;']);
                     ?>
                     </div>
                 </div>
@@ -454,10 +464,11 @@
           $(function () {
               $("#jquery-singularity-select").selectize( {
                   placeholder : 'Type here to filter singularities...',
-                  maxItems: 1,
+                  maxItems: 8,
                   plugins: ['remove_button']
               });
            });
+
     </script>
 <?php $this->end(); ?>
 

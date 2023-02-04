@@ -144,7 +144,7 @@
     padding: 0px 8px;
 }
 
-#jquery-color-select-selectized::placeholder {
+#jquery-color-select-selectized::placeholder, #jquery-singularity-select-selectized::placeholder {
   color: #707e8a;
   opacity: 1;
 }
