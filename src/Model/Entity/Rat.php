@@ -323,6 +323,7 @@ class Rat extends Entity
         }
     }
 
+    // this might be improved through a cell, to add links on singularity lists
     protected function _getSingularityString()
     {
         if (empty($this->singularities)) {
@@ -330,9 +331,7 @@ class Rat extends Entity
         }
         $singularities = new Collection($this->singularities);
         $str = $singularities->reduce(function ($string, $singularity) {
-            return $string . $singularity->name . ', ';
-            // this might be improved through a cell, to add links on singularity lists ; the following does not work at the moment
-            // return $string . $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]) . ', ';
+            return $string . $singularity->name . ', ';        
         }, '');
         return trim($str, ', ');
     }
