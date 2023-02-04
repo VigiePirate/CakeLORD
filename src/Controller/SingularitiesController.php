@@ -22,7 +22,8 @@ class SingularitiesController extends AppController
         $singularities = $this->paginate($this->Singularities);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
-        $this->set(compact('singularities', 'user'));
+        $show_staff = !is_null($user) && $user->can('add', $this->Singularities);
+        $this->set(compact('singularities', 'user', 'show_staff'));
     }
 
     /**
@@ -37,8 +38,27 @@ class SingularitiesController extends AppController
         $singularity = $this->Singularities->get($id, [
             'contain' => ['Rats'],
         ]);
+        $this->Authorization->skipAuthorization();
 
-        $this->set('singularity', $singularity);
+        $examples = $this->Singularities->Rats->find()
+            ->matching('Singularities', function ($q) use ($id) {
+                return $q->where(['Singularities.id' => $id]);
+            })
+            ->where([
+                ['Rats.picture !=' => 'Unknown.png'],
+                ['Rats.picture !=' => ''],
+                ['Rats.picture IS NOT' => null]])
+            ->order(['rand()'])
+            ->limit(32)
+            ->toArray();
+
+        $count = $singularity->countHaving('Rats', 'Singularities');
+        $frequency = $singularity->frequencyOfHaving('rats', 'Singularities');
+
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Singularities);
+
+        $this->set(compact('singularity', 'examples', 'count', 'frequency', 'user', 'show_staff'));
     }
 
     /**
@@ -49,6 +69,7 @@ class SingularitiesController extends AppController
     public function add()
     {
         $singularity = $this->Singularities->newEmptyEntity();
+        $this->Authorization->authorize($singularity);
         if ($this->request->is('post')) {
             $singularity = $this->Singularities->patchEntity($singularity, $this->request->getData());
             if ($this->Singularities->save($singularity)) {
@@ -74,6 +95,7 @@ class SingularitiesController extends AppController
         $singularity = $this->Singularities->get($id, [
             'contain' => ['Rats'],
         ]);
+        $this->Authorization->authorize($singularity);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $singularity = $this->Singularities->patchEntity($singularity, $this->request->getData());
             if ($this->Singularities->save($singularity)) {
@@ -84,7 +106,8 @@ class SingularitiesController extends AppController
             $this->Flash->error(__('The singularity could not be saved. Please, try again.'));
         }
         $rats = $this->Singularities->Rats->find('list', ['limit' => 200]);
-        $this->set(compact('singularity', 'rats'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('singularity', 'rats', 'user'));
     }
 
     /**
@@ -98,6 +121,7 @@ class SingularitiesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $singularity = $this->Singularities->get($id);
+        $this->Authorization->authorize($singularity);
         if ($this->Singularities->delete($singularity)) {
             $this->Flash->success(__('The singularity has been deleted.'));
         } else {

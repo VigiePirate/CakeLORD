@@ -26,9 +26,32 @@ trait StatisticsTrait
         return $model->find()->where($filter)->count();
     }
 
+    public function countHaving($name, $key, $options = [])
+    {
+        $model = FactoryLocator::get('Table')->get($name);
+
+        $query = $model->find()
+            ->matching($key, function ($q) use ($key) {
+                return $q->where([$key.'.id' => $this->id]);
+            });
+
+        if (! empty($options)) {
+            $query = $query->where($options);
+        }
+
+        return $query->count();
+    }
+
     public function frequencyOfMy($name, $key, $options = [])
     {
         $model = $this->countMy($name, $key, $options);
+        $all = $this->countAll($name, $options);
+        return round (100 * $model / $all, 2);
+    }
+
+    public function frequencyOfHaving($name, $key, $options = [])
+    {
+        $model = $this->countHaving($name, $key, $options);
         $all = $this->countAll($name, $options);
         return round (100 * $model / $all, 2);
     }
