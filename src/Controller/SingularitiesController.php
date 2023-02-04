@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Chronos\Chronos;
 
 /**
  * Singularities Controller
@@ -55,10 +56,13 @@ class SingularitiesController extends AppController
         $count = $singularity->countHaving('Rats', 'Singularities');
         $frequency = $singularity->frequencyOfHaving('rats', 'Singularities');
 
+        $recent_count = $singularity->countHaving('rats', 'Singularities', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+        $recent_frequency = $singularity->frequencyOfHaving('rats', 'Singularities', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Singularities);
 
-        $this->set(compact('singularity', 'examples', 'count', 'frequency', 'user', 'show_staff'));
+        $this->set(compact('singularity', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
     }
 
     /**

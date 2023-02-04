@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Chronos\Chronos;
 
 /**
  * Coats Controller
@@ -60,10 +61,13 @@ class CoatsController extends AppController
         $count = $coat->countMy('Rats', 'coat');
         $frequency = $coat->frequencyOfMy('Rats', 'coat');
 
+        $recent_count = $coat->countMy('rats', 'coat', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+        $recent_frequency = $coat->frequencyOfMy('rats', 'coat', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Coats);
 
-        $this->set(compact('coat', 'examples', 'count', 'frequency', 'user', 'show_staff'));
+        $this->set(compact('coat', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
     }
 
     /**

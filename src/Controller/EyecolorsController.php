@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Chronos\Chronos;
 
 /**
  * Eyecolors Controller
@@ -22,7 +23,8 @@ class EyecolorsController extends AppController
         $eyecolors = $this->paginate($this->Eyecolors);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
-        $this->set(compact('eyecolors', 'user'));
+        $show_staff = !is_null($user) && $user->can('add', $this->Eyecolors);
+        $this->set(compact('eyecolors', 'user', 'show_staff'));
     }
 
     /**
@@ -49,7 +51,13 @@ class EyecolorsController extends AppController
         $count = $eyecolor->countMy('rats', 'eyecolor');
         $frequency = $eyecolor->frequencyOfMy('rats', 'eyecolor');
 
-        $this->set(compact('eyecolor','examples','count','frequency'));
+        $recent_count = $eyecolor->countMy('rats', 'eyecolor', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+        $recent_frequency = $eyecolor->frequencyOfMy('rats', 'eyecolor', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Eyecolors);
+
+        $this->set(compact('eyecolor', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
     }
 
     /**

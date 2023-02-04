@@ -43,8 +43,12 @@
                             <td><?= $variety->is_picture_mandatory ? __('Yes') : __('No'); ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Frequency') ?></th>
+                            <th><?= __('Frequency (all time)') ?></th>
                             <td><?= h($frequency) . __(' %') ?> (<?= h($count) ?> <?= __('rats') ?>)</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Frequency (in the last 2 years)') ?></th>
+                            <td><?= h($recent_frequency) . __(' %') ?> (<?= h($recent_count) ?> <?= __('rats') ?>)</td>
                         </tr>
                     </table>
                 </div>

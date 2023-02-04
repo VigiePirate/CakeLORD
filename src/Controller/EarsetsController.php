@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Chronos\Chronos;
 
 /**
  * Earsets Controller
@@ -22,7 +23,8 @@ class EarsetsController extends AppController
         $earsets = $this->paginate($this->Earsets);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
-        $this->set(compact('earsets', 'user'));
+        $show_staff = !is_null($user) && $user->can('add', $this->Earsets);
+        $this->set(compact('earsets', 'user', 'show_staff'));
     }
 
     /**
@@ -49,7 +51,13 @@ class EarsetsController extends AppController
         $count = $earset->countMy('rats', 'earset');
         $frequency = $earset->frequencyOfMy('rats', 'earset');
 
-        $this->set(compact('earset','examples','count','frequency'));
+        $recent_count = $earset->countMy('rats', 'earset', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+        $recent_frequency = $earset->frequencyOfMy('rats', 'earset', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
+
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('add', $this->Earsets);
+
+        $this->set(compact('earset', 'examples' ,'count' , 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
     }
 
     /**
