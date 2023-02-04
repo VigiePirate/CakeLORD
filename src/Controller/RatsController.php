@@ -135,8 +135,6 @@ class RatsController extends AppController
             $this->set(compact('next_ko_state', 'next_ok_state'));
         };
 
-        //$singularity_cell = $this->cell('Singularity::addLinks', $rat->singularities);
-
         $snap_diffs = [];
         foreach ($rat->rat_snapshots as $snapshot) {
             $snap_diffs[$snapshot->id] = $this->Rats->snapCompareAsString($rat, $snapshot->id);

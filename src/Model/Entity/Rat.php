@@ -331,7 +331,7 @@ class Rat extends Entity
         }
         $singularities = new Collection($this->singularities);
         $str = $singularities->reduce(function ($string, $singularity) {
-            return $string . $singularity->name . ', ';        
+            return $string . $singularity->name . ', ';
         }, '');
         return trim($str, ', ');
     }
@@ -557,32 +557,31 @@ class Rat extends Entity
         return preg_match("/^[FM][0-9]*$/i", $this->name);
     }
 
+    /* check if rat's variety requires a picture */
+
     public function hasNeededPicture()
     {
-        $coat_condition = ! $this->coat->is_picture_mandatory
-        || ($this->coat->is_picture_mandatory && $this->picture != '');
+        $coat_condition = ! ($this->coat->is_picture_mandatory && $this->picture == '');
+        $color_condition = ! ($this->color->is_picture_mandatory && $this->picture == '');
+        $dilution_condition = ! ($this->dilution->is_picture_mandatory && $this->picture == '');
+        $earset_condition = ! ($this->earset->is_picture_mandatory && $this->picture == '');
+        $eyecolor_condition = ! ($this->eyecolor->is_picture_mandatory && $this->picture == '');
+        $marking_condition = ! ($this->marking->is_picture_mandatory && $this->picture == '');
 
-        $color_condition = ! $this->color->is_picture_mandatory
-        || ($this->color->is_picture_mandatory && $this->picture != '');
-
-        $dilution_condition = ! $this->dilution->is_picture_mandatory
-        || ($this->dilution->is_picture_mandatory && $this->picture != '');
-
-        $earset_condition = ! $this->earset->is_picture_mandatory
-        || ($this->earset->is_picture_mandatory && $this->picture != '');
-
-        $eyecolor_condition = ! $this->eyecolor->is_picture_mandatory
-        || ($this->eyecolor->is_picture_mandatory && $this->picture != '');
-
-        $marking_condition = ! $this->marking->is_picture_mandatory
-        || ($this->marking->is_picture_mandatory && $this->picture != '');
+        $singularity_condition = True;
+        foreach ($this->singularities as $singularity) {
+            if ($singularity->is_picture_mandatory && $this->picture == '') {
+                $singularity_condition = False;
+            }
+        }
 
         return $coat_condition
             && $color_condition
             && $dilution_condition
             && $earset_condition
             && $eyecolor_condition
-            && $marking_condition;
+            && $marking_condition
+            && $singularity_condition;
     }
 
     /* family statistics */
