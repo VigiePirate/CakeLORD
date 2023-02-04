@@ -247,7 +247,16 @@
                     </tr>
                     <tr>
                         <th><?= __('Singularities') ?></th>
-                        <td><?= $rat->singularity_string ?></td>
+                        <td>
+                            <?php
+                                $link_array = [];
+                                foreach($rat->singularities as $singularity) {
+                                    array_push($link_array, $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]));
+                                }
+                                $string = empty($link_array) ? __('None') : implode(", ", $link_array);
+                                echo $string;
+                            ?>
+                        </td>
                     </tr>
                 </table>
 

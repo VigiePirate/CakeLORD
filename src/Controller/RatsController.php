@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 use Cake\Chronos\Chronos;
 use Cake\Routing\Router;
+use Cake\View\CellTrait;
 
 /**
  * Rats Controller
@@ -14,6 +15,8 @@ use Cake\Routing\Router;
  */
 class RatsController extends AppController
 {
+    use CellTrait;
+
     public function initialize(): void
     {
         parent::initialize();
@@ -131,6 +134,8 @@ class RatsController extends AppController
             }
             $this->set(compact('next_ko_state', 'next_ok_state'));
         };
+
+        //$singularity_cell = $this->cell('Singularity::addLinks', $rat->singularities);
 
         $snap_diffs = [];
         foreach ($rat->rat_snapshots as $snapshot) {
