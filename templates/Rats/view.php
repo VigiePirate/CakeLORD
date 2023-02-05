@@ -75,7 +75,7 @@
                             <span class="tooltiptext"><?= __('Declare rat death') ?></span>
                         </div>
                     <?php endif; ?>
-                    <?php if (! $user->can('edit', $rat)) : ?>
+                    <?php if (! $user->can('ownerEdit', $rat)) : ?>
                         <div class="tooltip disabled">
                             <?= $this->Html->image('/img/icon-edit.svg', [
                                 'url' => [],

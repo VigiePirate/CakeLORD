@@ -80,7 +80,7 @@ class RatPolicy implements BeforePolicyInterface
     }
 
     /**
-     * Check if $user can edit Rat
+     * Check if $user can edit Rat whatever role
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\Rat $rat
@@ -88,10 +88,32 @@ class RatPolicy implements BeforePolicyInterface
      */
     public function canEdit(IdentityInterface $user, Rat $rat)
     {
-        return (! $rat->state->needs_staff_action && $this->isOwner($user, $rat))
-            || (! $rat->state->needs_user_action && $user->role->can_edit_others);
+        return $this->canOwnerEdit($user, $rat) || $this->canStaffEdit($user, $rat);
     }
 
+    /**
+     * Check if $user can edit Rat as a user
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Rat $rat
+     * @return bool
+     */
+    public function canOwnerEdit(IdentityInterface $user, Rat $rat)
+    {
+        return ! $rat->state->needs_staff_action && $this->isOwner($user, $rat);
+    }
+
+    /**
+     * Check if $user can edit Rat as a user
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Rat $rat
+     * @return bool
+     */
+    public function canStaffEdit(IdentityInterface $user, Rat $rat)
+    {
+        return ! $rat->state->needs_user_action && $user->role->can_edit_others;
+    }
     /**
      * Check if $user can perform micro edits on rat (change picture, declare death, etc.)
      *
