@@ -1,6 +1,10 @@
 <!-- if you can cancel, you cannot edit -->
 <?php if (! isset($can_cancel) || ! $can_cancel) : ?>
-    <?php if (! is_null($user) && $user->can('edit', $object)) : ?>
+    <?php
+        if (
+            ($object->has('state') && ! is_null($user) && $user->can('staffEdit', $object))
+            || (! $object->has('state') && ! is_null($user) && $user->can('edit', $object))
+        ): ?>
     <div class="tooltip-staff">
         <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
             'url' => ['controller' => $controller, 'action' => 'edit', $object->id],
