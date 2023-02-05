@@ -305,7 +305,7 @@ class LittersController extends AppController
     public function edit($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['ParentRats', 'Ratteries', 'Contributions'],
+            'contain' => ['ParentRats', 'Ratteries', 'Contributions', 'Sire', 'Dam', 'States'],
         ]);
         $this->Authorization->authorize($litter);
 
@@ -323,7 +323,10 @@ class LittersController extends AppController
         $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
         $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
         $contributions = $this->Litters->Contributions->find('list', ['limit' => 200]);
-        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries', 'contributions'));
+
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('staffEdit', $litter);
+        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries', 'contributions', 'user', 'show_staff'));
     }
 
     /**
@@ -693,7 +696,7 @@ class LittersController extends AppController
 
      /**
       * ComputeAvk method
-      * 
+      *
       * Only used as fallback for the client-side javascript computation
       * Should probably be in the model
       *

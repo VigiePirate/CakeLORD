@@ -60,7 +60,13 @@ class LittersTable extends Table
             'repository' => 'LitterSnapshots',
             'entityField' => 'litter_id',
         ]);
-        $this->addBehavior('State');
+        $this->addBehavior('State', [
+            'safe_properties' => [
+                'modified',
+                'state_id',
+                'pups_number',
+            ],
+        ]);
 
         $this->belongsTo('Users', [
             'foreignKey' => 'creator_user_id',
