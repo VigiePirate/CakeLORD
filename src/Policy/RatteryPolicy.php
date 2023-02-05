@@ -58,6 +58,18 @@ class RatteryPolicy implements BeforePolicyInterface
     }
 
     /**
+     * Check if $user can edit Rattery whatever role
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Rattery $rattery
+     * @return bool
+     */
+    public function canEdit(IdentityInterface $user, Rattery $rattery)
+    {
+        return $this->canOwnerEdit($user, $rattery) || $this->canStaffEdit($user, $rattery);
+    }
+
+    /**
      * Check if $user can edit Rattery as a user
      *
      * @param Authorization\IdentityInterface $user The user.
