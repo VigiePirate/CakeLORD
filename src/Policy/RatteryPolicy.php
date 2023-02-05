@@ -34,18 +34,6 @@ class RatteryPolicy implements BeforePolicyInterface
     }
 
     /**
-     * Check if $user can add a new Rattery (not necessarily their own; staff reserved)
-     *
-     * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Entity\Rattery $rattery
-     * @return bool
-     */
-    public function canAdd(IdentityInterface $user, Rattery $rattery)
-    {
-        return $user->role->can_edit_others;
-    }
-
-    /**
      * Check if $user can register their Rattery
      *
      * @param Authorization\IdentityInterface $user The user.

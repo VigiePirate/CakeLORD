@@ -18,13 +18,24 @@ class RatteriesTablePolicy
      * @param App\Model\Table\LittersTable $litters
      * @return bool
      */
-    public function canInState(IdentityInterface $user, RatteriesTable $litters)
+    public function canInState(IdentityInterface $user, RatteriesTable $ratteries)
     {
         return $user->role->can_change_state;
     }
 
-    public function canRegister(IdentityInterface $user, RatteriesTable $litters)
+    public function canRegister(IdentityInterface $user, RatteriesTable $ratteries)
     {
         return true;
+    }
+
+    /**
+     * Check if $user can add a new Rattery (not necessarily their own; staff reserved)
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @return bool
+     */
+    public function canAdd(IdentityInterface $user)
+    {
+        return $user->role->can_edit_others;
     }
 }
