@@ -82,7 +82,7 @@ class RatteryPolicy implements BeforePolicyInterface
     }
 
     /**
-     * Check if $user can edit Rattery as a user
+     * Check if $user can edit Rattery as a staff member
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\Rattery $rattery
