@@ -46,7 +46,7 @@
                             <span class="tooltiptext"><?= __('You cannot manage contributing ratteries in this litter') ?></span>
                         </div>
                     <?php endif; ?>
-                    <?php if (! is_null($user) && $user->can('edit', $litter)) : ?>
+                    <?php if (! is_null($user) && $user->can('ownerEdit', $litter)) : ?>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-edit.svg', [
                                 'url' => ['controller' => 'Litters', 'action' => 'edit', $litter->id],

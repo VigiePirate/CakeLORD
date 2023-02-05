@@ -104,7 +104,7 @@ class RatPolicy implements BeforePolicyInterface
     }
 
     /**
-     * Check if $user can edit Rat as a user
+     * Check if $user can edit Rat as a staff member
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\Rat $rat
@@ -114,6 +114,7 @@ class RatPolicy implements BeforePolicyInterface
     {
         return ! $rat->state->needs_user_action && $user->role->can_edit_others;
     }
+    
     /**
      * Check if $user can perform micro edits on rat (change picture, declare death, etc.)
      *

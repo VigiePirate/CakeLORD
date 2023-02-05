@@ -64,7 +64,7 @@ class LitterPolicy implements BeforePolicyInterface
     }
 
     /**
-     * Check if $user can edit Litter
+     * Check if $user can edit Litter whatever role
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\Litter $litter
@@ -72,8 +72,31 @@ class LitterPolicy implements BeforePolicyInterface
      */
     public function canEdit(IdentityInterface $user, Litter $litter)
     {
-        return (! $litter->state->needs_user_action && $user->role->can_edit_others)
-            || (! $litter->state->needs_staff_action && $this->isCreator($user, $litter));
+        return $this->canOwnerEdit($user, $litter) || $this->canStaffEdit($user, $litter);
+    }
+
+    /**
+     * Check if $user can edit Litter as a user
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canOwnerEdit(IdentityInterface $user, Litter $litter)
+    {
+        return ! $litter->state->needs_staff_action && $this->isContributor($user, $litter);
+    }
+
+    /**
+     * Check if $user can edit Litter as a staff member
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canStaffEdit(IdentityInterface $user, Litter $litter)
+    {
+        return ! $litter->state->needs_user_action && $user->role->can_edit_others;
     }
 
     public function canAddRat(IdentityInterface $user, Litter $litter)
