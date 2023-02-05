@@ -160,15 +160,14 @@ class RatteriesController extends AppController
     public function edit($id = null)
     {
         $rattery = $this->Ratteries->get($id, [
-            'contain' => ['Litters', 'Litters.Sire', 'Litters.Dam'],
+            'contain' => ['Litters', 'Litters.Sire', 'Litters.Dam', 'States'],
         ]);
         $this->Authorization->authorize($rattery);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
             if ($this->Ratteries->save($rattery)) {
-                $this->Flash->success(__('The rattery has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->warning(__('The rattery has been saved. Modifications still have to be validated by staff.'));
+                return $this->redirect(['action' => 'view', $rattery->id]);
             }
             $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
         }
@@ -176,7 +175,10 @@ class RatteriesController extends AppController
         $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
         $states = $this->Ratteries->States->find('list', ['limit' => 200]);
         $litters = $this->Ratteries->Litters->find('list', ['limit' => 500, 'contain' => ['Dam', 'Sire']]);
-        $this->set(compact('rattery', 'users', 'countries', 'states', 'litters'));
+
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('edit', $rattery);
+        $this->set(compact('rattery', 'users', 'countries', 'states', 'litters', 'user', 'show_staff'));
     }
 
     /**

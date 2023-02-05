@@ -61,7 +61,7 @@
                             <span class="tooltiptext"><?= __('Declare a new location') ?></span>
                         </div>
                     <?php endif; ?>
-                    <?php if (! is_null($user) && $user->can('edit', $rattery)) : ?>
+                    <?php if (! is_null($user) && $user->can('ownerEdit', $rattery)) : ?>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-edit.svg', [
                                 'url' => ['controller' => 'Ratteries', 'action' => 'edit', $rattery->id],
