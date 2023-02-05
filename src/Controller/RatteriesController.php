@@ -133,7 +133,7 @@ class RatteriesController extends AppController
     public function add()
     {
         $rattery = $this->Ratteries->newEmptyEntity();
-        $this->Authorization->authorize($rattery);
+        $this->Authorization->authorize($this->Ratteries);
         if ($this->request->is('post')) {
             $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
             if ($this->Ratteries->save($rattery)) {
@@ -146,9 +146,8 @@ class RatteriesController extends AppController
 
         $users = $this->Ratteries->Users->find('list', ['limit' => 200]);
         $countries = $this->Ratteries->Countries->find('list', ['limit' => 200]);
-        $states = $this->Ratteries->States->find('list', ['limit' => 200]);
-        $litters = $this->Ratteries->Litters->find('list', ['limit' => 500, 'contain' => ['Dam', 'Sire']]);
-        $this->set(compact('rattery', 'users', 'countries', 'states', 'litters'));
+        $states = $this->Ratteries->States->find('list')->order('id');
+        $this->set(compact('rattery', 'users', 'countries', 'states'));
     }
 
     /**
