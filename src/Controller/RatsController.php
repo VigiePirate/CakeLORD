@@ -629,11 +629,10 @@ class RatsController extends AppController
         if ($this->request->is(['ajax'])) {
             $searchkey = $this->request->getQuery('searchkey');
             $sex = $this->request->getQuery('sex');
-            $items = $this->Rats->find('identified',[
-                'names' => [$searchkey]])
+            $items = $this->Rats->find('incipit', ['names' => [$searchkey]])
                 ->where(['sex IS' => $sex])
                 ->select(['id',
-                    'value' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')",
+                    //'value' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')",
                     'label' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')"
                 ]);
             $this->set('items', $items);

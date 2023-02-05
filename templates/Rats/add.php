@@ -351,7 +351,7 @@
     // autocomplete for father
     $(function () {
         $('#jquery-father-input').autocomplete({
-            minLength: 4,
+            minLength: 2,
             source: function (request, response) {
                 $.ajax({
                     /*url: $('#jquery-owner-form').attr('action') + '.json',*/
