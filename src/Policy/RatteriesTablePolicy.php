@@ -22,4 +22,9 @@ class RatteriesTablePolicy
     {
         return $user->role->can_change_state;
     }
+
+    public function canRegister(IdentityInterface $user, RatteriesTable $litters)
+    {
+        return true;
+    }
 }
