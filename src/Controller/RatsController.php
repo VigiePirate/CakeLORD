@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Controller;
 use Cake\Chronos\Chronos;
 use Cake\Routing\Router;
-use Cake\View\CellTrait;
 
 /**
  * Rats Controller
@@ -15,7 +14,6 @@ use Cake\View\CellTrait;
  */
 class RatsController extends AppController
 {
-    use CellTrait;
 
     public function initialize(): void
     {
