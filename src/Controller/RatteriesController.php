@@ -228,6 +228,8 @@ class RatteriesController extends AppController
     /* create a rattery, reserved to logged in users (with any role) */
     public function register($id = null)
     {
+        $this->Authorization->authorize($this->Ratteries);
+
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
             $user = $this->Authentication->getIdentityData('id');
@@ -243,7 +245,6 @@ class RatteriesController extends AppController
 
             /* Else : process form */
             $rattery = $this->Ratteries->newEmptyEntity();
-            $this->Authorization->authorize($rattery);
 
             if ($this->request->is('post')) {
 
