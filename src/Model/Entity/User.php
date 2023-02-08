@@ -200,7 +200,7 @@ class User extends Entity implements IdentityInterface
         ) {
             return '<b>' . __('Happy birthday to you!') . '</b>';
         } else {
-            return '<br>';
+            return '';
         }
     }
 
