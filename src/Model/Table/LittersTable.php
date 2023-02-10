@@ -211,7 +211,37 @@ class LittersTable extends Table
             ];
         }
         return;
+    }
 
+    /**
+     * afterMarshal method
+     *
+     * @param EventInterface $event
+     * @param EntityInterface $entity
+     * @param ArrayObject $data
+     * @param ArrayObject $options
+     * @return void
+     */
+    public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
+    {
+    //     // if rattery id is unchanged, unset contribution to avoid saving it again at litter edit
+    //     // FIXME: could be managed with a rule to forbid duplicate contributions with same litter, type and rattery
+    //     if (! $entity->isNew()) {
+    //         $original_parents = $entity->getOriginal('parent_rats');
+    //         if (isset($data['parent_rats'])) {
+    //             $new_parents_ids = $data['parent_rats']['_ids'];
+    //             if (
+    //                 ($original_parents[0]->id == $new_parents_ids[0] && $original_parents[1]->id == $new_parents_ids[1])
+    //                 || ($original_parents[1]->id == $new_parents_ids[0] && $original_parents[0]->id == $new_parents_ids[1])
+    //             ) {
+    //                 $entity->setDirty('parent_rats', false);
+    //                 $entity->setDirty('contributions', false);
+    //             }
+    //         } else {
+    //             $entity->setDirty('parent_rats', false);
+    //             $entity->setDirty('contributions', false);
+    //         }
+    //     }
     }
 
     /**
@@ -388,7 +418,47 @@ class LittersTable extends Table
                     }
                 }
             }
-        }
+        } // else { // entity is not new: contributions must be patched, not created
+            // if ($entity->isDirty('parent_rats')) {
+            //     $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
+            //     $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+            //     $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
+            //
+            //     foreach ($entity->parent_rats as $parent_ref) {
+            //         $parent = $rats->get($parent_ref['id'], [
+            //             'contain' => ['OwnerUsers', 'OwnerUsers.Ratteries']
+            //         ]);
+            //
+            //         $parent_rattery = $parent->owner_user->main_rattery;
+            //
+            //         if (! empty($parent_rattery) && $entity->contributions['0']->rattery_id != $parent_rattery->id) {
+            //             if ($parent->sex == 'F') {
+            //                 $contribution = $contributions->find('fromLitterAndType', [
+            //                     'litter_id' => [$entity->id],
+            //                     'contribution_type_id' => ['2']
+            //                     ]
+            //                 )->first();
+            //                 array_push($entity->contributions, $contributions->patchEntity($contribution, [
+            //                     'contribution_type_id' => '2',
+            //                     'rattery_id' => $parent_rattery->id,
+            //                 ]));
+            //             }
+            //
+            //             if ($parent->sex == 'M') {
+            //                 $contribution = $contributions->find('fromLitterAndType', [
+            //                     'litter_id' => [$entity->id],
+            //                     'contribution_type_id' => ['3']
+            //                     ]
+            //                 )->first();
+            //                 array_push($entity->contributions, $contributions->patchEntity($contribution, [
+            //                     'contribution_type_id' => '3',
+            //                     'rattery_id' => $parent_rattery->id,
+            //                 ]));
+            //             }
+            //         }
+            //     }
+            // }
+        // }
     }
 
     /**
@@ -404,10 +474,9 @@ class LittersTable extends Table
     public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
         $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
-        // $ratteries->removeBehavior('State');
         $now = \Cake\I18n\FrozenTime::now();
         foreach ($entity->contributions as $contribution) {
-            $rattery = $ratteries->get($contribution->rattery_id, ['contain' => ['Countries']]); // FIXME: contain countries to avoid warning
+            $rattery = $ratteries->get($contribution->rattery_id, ['contain' => ['Countries']]);
             if (! $rattery->is_alive && $now->diffInDays($entity->birth_date) < RatteriesTable::MAXIMAL_INACTIVITY) {
                 $rattery->is_alive = true;
                 $ratteries->save($rattery, ['checkRules' => false, 'atomic' => false]);
