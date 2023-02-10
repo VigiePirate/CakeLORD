@@ -135,7 +135,7 @@ class LittersController extends AppController
 
                 $litter = $this->Litters->patchEntity($litter, $data, [
                     'from_rat' => false,
-                    'associated' => ['ParentRats', 'Contributions', 'Contributions.Ratteries']
+                    'associated' => ['ParentRats', 'Contributions']
                 ]);
 
                 $samelitter = $this->Litters->find('fromBirth', [

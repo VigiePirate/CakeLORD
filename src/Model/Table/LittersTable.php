@@ -226,7 +226,15 @@ class LittersTable extends Table
     {
     //     // if rattery id is unchanged, unset contribution to avoid saving it again at litter edit
     //     // FIXME: could be managed with a rule to forbid duplicate contributions with same litter, type and rattery
-    //     if (! $entity->isNew()) {
+         if (! $entity->isNew()) {
+             $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
+             $contribution = $contributions->find('fromLitterAndType', [
+                 'litter_id' => [$entity->id],
+                 'contribution_type_id' => ['1']
+                 ]
+             )->first();
+             $entity->contributions[0]['id'] = $contribution->id; // contributions should have ids
+         }
     //         $original_parents = $entity->getOriginal('parent_rats');
     //         if (isset($data['parent_rats'])) {
     //             $new_parents_ids = $data['parent_rats']['_ids'];
@@ -241,7 +249,7 @@ class LittersTable extends Table
     //             $entity->setDirty('parent_rats', false);
     //             $entity->setDirty('contributions', false);
     //         }
-    //     }
+
     }
 
     /**
@@ -280,7 +288,7 @@ class LittersTable extends Table
         );
 
         /* Birth place */
-        $rules->add(function($litter) {
+        $rules->addCreate(function($litter) {
                 return $litter->hasBirthPlace();
             },
             'rattery_selected',
@@ -418,8 +426,11 @@ class LittersTable extends Table
                     }
                 }
             }
-        } // else { // entity is not new: contributions must be patched, not created
-            // if ($entity->isDirty('parent_rats')) {
+        } else { // entity is not new: contributions must be patched, not created
+            if ($entity->isDirty('parent_rats')) {
+                
+            } else {
+
             //     $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
             //     $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
             //     $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
@@ -457,8 +468,8 @@ class LittersTable extends Table
             //             }
             //         }
             //     }
-            // }
-        // }
+            }
+        }
     }
 
     /**
