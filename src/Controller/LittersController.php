@@ -310,23 +310,33 @@ class LittersController extends AppController
         $this->Authorization->authorize($litter);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $litter = $this->Litters->patchEntity($litter, $this->request->getData());
+            $litter = $this->Litters->patchEntity($litter, $this->request->getData(), [
+                'associated' => ['ParentRats', 'Contributions']
+            ]);
             if ($this->Litters->save($litter)) {
                 $this->Flash->success(__('The litter has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $litter->id]);
             }
             $this->Flash->error(__('The litter could not be saved. Please, try again.'));
         }
-        $users = $this->Litters->Users->find('list', ['limit' => 200]);
-        $states = $this->Litters->States->find('list', ['limit' => 200]);
-        $parentRats = $this->Litters->ParentRats->find('list', ['limit' => 200]);
-        $ratteries = $this->Litters->Ratteries->find('list', ['limit' => 200]);
-        $contributions = $this->Litters->Contributions->find('list', ['limit' => 200]);
+
+        foreach ($litter->parent_rats as $parent) {
+            if ($parent->sex == 'F') {
+                $mother = ['name' => $parent->name . ' ('. $parent->pedigree_identifier .')', 'id' => $parent->id];
+                $this->set(compact('mother'));
+            }
+            if ($parent->sex == 'M') {
+                $father = ['name' => $parent->name . ' ('. $parent->pedigree_identifier .')', 'id' => $parent->id];
+                $this->set(compact('father'));
+            }
+        }
 
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('staffEdit', $litter);
-        $this->set(compact('litter', 'users', 'states', 'parentRats', 'ratteries', 'contributions', 'user', 'show_staff'));
+
+        $this->Flash->warning( __('For data coherence, modifications of litters are restricted. Please, contact a staff member to change parents or birth date.'));
+        $this->set(compact('litter', 'mother', 'father', 'user', 'show_staff'));
     }
 
     /**

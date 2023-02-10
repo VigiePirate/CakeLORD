@@ -117,7 +117,6 @@
                                     'value' => $mother['id'],
                                     'readonly' => true
                                 ]);
-
                             ?>
                         <?php else: ?>
                             <?php
@@ -162,7 +161,6 @@
                                     'value' => $father['id'],
                                     'readonly' => true
                                 ]);
-
                             ?>
                         <?php else: ?>
                             <?php

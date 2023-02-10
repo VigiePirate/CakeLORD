@@ -117,4 +117,17 @@ class ContributionsTable extends Table
 
         return $query->group(['Contributions.id']);
     }
+
+    public function findFromLitterAndType(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        $query->where([
+            'litter_id' => implode($options['litter_id']),
+            'contribution_type_id' => implode($options['contribution_type_id'])
+        ]);
+        return $query->group(['Contributions.id']);
+    }
 }
