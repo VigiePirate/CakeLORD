@@ -202,7 +202,7 @@ class LittersTable extends Table
             }
         }
 
-        if (isset($data['rattery_id']) && ! empty($data['rattery_id'])) {
+        if (isset($data['rattery_id']) && ! empty($data['rattery_id']) && ! isset($data['contributions'])) {
             $data['contributions'] = [
                 [
                     'contribution_type_id' => '1',
@@ -211,45 +211,6 @@ class LittersTable extends Table
             ];
         }
         return;
-    }
-
-    /**
-     * afterMarshal method
-     *
-     * @param EventInterface $event
-     * @param EntityInterface $entity
-     * @param ArrayObject $data
-     * @param ArrayObject $options
-     * @return void
-     */
-    public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
-    {
-    //     // if rattery id is unchanged, unset contribution to avoid saving it again at litter edit
-    //     // FIXME: could be managed with a rule to forbid duplicate contributions with same litter, type and rattery
-         if (! $entity->isNew()) {
-             $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
-             $contribution = $contributions->find('fromLitterAndType', [
-                 'litter_id' => [$entity->id],
-                 'contribution_type_id' => ['1']
-                 ]
-             )->first();
-             $entity->contributions[0]['id'] = $contribution->id; // contributions should have ids
-         }
-    //         $original_parents = $entity->getOriginal('parent_rats');
-    //         if (isset($data['parent_rats'])) {
-    //             $new_parents_ids = $data['parent_rats']['_ids'];
-    //             if (
-    //                 ($original_parents[0]->id == $new_parents_ids[0] && $original_parents[1]->id == $new_parents_ids[1])
-    //                 || ($original_parents[1]->id == $new_parents_ids[0] && $original_parents[0]->id == $new_parents_ids[1])
-    //             ) {
-    //                 $entity->setDirty('parent_rats', false);
-    //                 $entity->setDirty('contributions', false);
-    //             }
-    //         } else {
-    //             $entity->setDirty('parent_rats', false);
-    //             $entity->setDirty('contributions', false);
-    //         }
-
     }
 
     /**
@@ -428,7 +389,7 @@ class LittersTable extends Table
             }
         } else { // entity is not new: contributions must be patched, not created
             if ($entity->isDirty('parent_rats')) {
-                
+
             } else {
 
             //     $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');

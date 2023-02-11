@@ -65,6 +65,25 @@
                     ]);
                 ?>
 
+                <?php
+                    for ($k = 0; $k <= count($litter->contributions)-1; $k++) {
+                        echo $this->Form->control('contributions.'.$k.'.id', [
+                            'type' => 'hidden',
+                            'value' => $litter->contributions[$k]->id,
+                        ]);
+
+                        echo $this->Form->control('contributions.'.$k.'.contribution_type_id', [
+                            'type' => 'hidden',
+                            'value' => $litter->contributions[$k]->contribution_type_id,
+                        ]);
+
+                        echo $this->Form->control('contributions.'.$k.'.rattery_id', [
+                            'type' => 'hidden',
+                            'value' => $litter->contributions[$k]->rattery_id,
+                        ]);
+                    }
+                ?>
+
                 <?php if ($user->can('staffEdit', $litter)) : ?>
                     <h2 class="staff"><?= __('Staff-only') ?></h2>
 

@@ -135,7 +135,7 @@ class LittersController extends AppController
 
                 $litter = $this->Litters->patchEntity($litter, $data, [
                     'from_rat' => false,
-                    'associated' => ['ParentRats', 'Contributions']
+                    'associated' => ['ParentRats', 'Contributions', 'Contributions.Ratteries']
                 ]);
 
                 $samelitter = $this->Litters->find('fromBirth', [
@@ -311,7 +311,7 @@ class LittersController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData(), [
-                'associated' => ['ParentRats', 'Contributions']
+                'associated' => ['ParentRats', 'Contributions', 'Contributions.Ratteries']
             ]);
             if ($this->Litters->save($litter)) {
                 $this->Flash->success(__('The litter has been saved.'));
