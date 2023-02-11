@@ -314,7 +314,7 @@ class LittersController extends AppController
                 'associated' => ['ParentRats', 'Contributions', 'Contributions.Ratteries']
             ]);
             if ($this->Litters->save($litter)) {
-                $this->Flash->success(__('The litter has been saved.'));
+                $this->Flash->success(__('The litter has been saved. If parents were edited, you might have to manually correct contributions.'));
 
                 return $this->redirect(['action' => 'view', $litter->id]);
             }
