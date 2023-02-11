@@ -298,6 +298,19 @@ class Litter extends Entity
         return true;
     }
 
+    // offspring of a litter must have the same birth dates
+    public function homogeneizeBirthDates() {
+        $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('rats');
+        $rats->removeBehavior('State');
+        foreach ($this->offspring_rats as $rat) {
+            $rat->birth_date = $this->birth_date;
+            if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /* Statistics */
 
     // survival rate in litter does not use StatisticsTrait because of right censoring

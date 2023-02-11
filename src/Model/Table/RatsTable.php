@@ -424,21 +424,25 @@ class RatsTable extends Table
             'message' => __('Impossible: it means that your rat would have lived more than {age} months, but rats do not live this long.', ['age' => RatsTable::MAXIMAL_AGE_MONTHS])
         ]);
 
-        $infant = function($rat) {
-            return ! ( !$rat->is_alive && ($rat->death_primary_cause->is_infant) && ($rat->precise_age > RatsTable::MAXIMAL_INFANT_AGE) );
-        };
-        $rules->add($infant, [
-            'errorField' => 'death_primary_cause_id',
-            'message' => 'Impossible: your rat was too old at this date to die of “infant mortality”.'
-        ]);
+        $rules->add(function ($rat) {
+                return $rat->canDieInfant();
+            },
+            'canDieInfant',
+            [
+                'errorField' => 'death_primary_cause_id',
+                'message' => 'Impossible: your rat was too old at this date to die of “infant mortality”.'
+            ]
+        );
 
-        $oldster = function($rat) {
-            return !( !$rat->is_alive && ($rat->death_primary_cause->is_oldster) && ($rat->age < RatsTable::MINIMAL_OLDSTER_AGE) );
-        };
-        $rules->add($oldster, [
-            'errorField' => 'death_primary_cause_id',
-            'message' => 'Impossible: your rat was too young at this date to die “from old age”.'
-        ]);
+        $rules->add(function ($rat) {
+                return $rat->canDieOldster();
+            },
+            'canDieOldster',
+            [
+                'errorField' => 'death_primary_cause_id',
+                'message' => 'Impossible: your rat was too young at this date to die “from old age”.'
+            ]
+        );
 
         return $rules;
     }
