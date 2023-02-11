@@ -311,20 +311,6 @@ class Litter extends Entity
         return true;
     }
 
-    // // trigger recalculation of litter contributions based on parents
-    // public function homogeneizeContributions($parent) {
-    //     $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('contributions');
-    //     $parent_rattery = $parent->owner_user->main_rattery;
-    //     if ($parent->sex == 'F') {
-    //         if ($this->contributions)
-    //     }
-    //
-    //     if ($parent->sex == 'M') {
-    //
-    //     }
-    //
-    // }
-
     // pup count cannot be lower than actual number of offspring
     public function checkPupCount() {
         return $this->pups_number >= count($this->offspring_rats);
