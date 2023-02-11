@@ -584,6 +584,16 @@ class Rat extends Entity
             && $singularity_condition;
     }
 
+    /* check if rat is young enough to be eligible to infant mortality */
+    public function canDieInfant() {
+        return ! ( !$this->is_alive && ($this->death_primary_cause->is_infant) && ($this->precise_age > RatsTable::MAXIMAL_INFANT_AGE) );
+    }
+
+    /* check if rat is old enough to die of old age */
+    public function canDieOldster() {
+        return !( !$this->is_alive && ($this->death_primary_cause->is_oldster) && ($this->age < RatsTable::MINIMAL_OLDSTER_AGE) );
+    }
+
     /* family statistics */
 
     public function computeDescendance($id, &$descendance)

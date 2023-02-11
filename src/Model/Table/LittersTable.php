@@ -249,7 +249,7 @@ class LittersTable extends Table
         );
 
         /* Birth place */
-        $rules->addCreate(function($litter) {
+        $rules->add(function($litter) {
                 return $litter->hasBirthPlace();
             },
             'rattery_selected',
@@ -343,6 +343,17 @@ class LittersTable extends Table
             [
                 'errorField' => 'father_name',
                 'message' => 'Impossible: father and mother were never alive at the same time.'
+            ]
+        );
+
+        /* offspring must all have the same birth date */
+        $rules->add(function($litter) {
+                return $litter->homogeneizeBirthDates();
+            },
+            'homogeneousBirthDates',
+            [
+                'error_field' => 'birth_date',
+                'message' => 'Something went wrong when updating birth dates.'
             ]
         );
 

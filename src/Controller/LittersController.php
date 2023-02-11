@@ -305,7 +305,7 @@ class LittersController extends AppController
     public function edit($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['ParentRats', 'Ratteries', 'Contributions', 'Sire', 'Dam', 'States'],
+            'contain' => ['ParentRats', 'OffspringRats', 'OffspringRats.DeathPrimaryCauses', 'Ratteries', 'Contributions', 'Sire', 'Dam', 'States'],
         ]);
         $this->Authorization->authorize($litter);
 
