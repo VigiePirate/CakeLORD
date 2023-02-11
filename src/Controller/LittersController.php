@@ -387,7 +387,10 @@ class LittersController extends AppController
                 } else {
                     if ($this->request->getData('rattery_name_contribution_'.$type->id) == '') {
                         $contribution = $this->Litters->Contributions
-                            ->findByLitterIdAndContributionTypeId($litter->id, $type->id)
+                            ->find('findFromLitterAndType', [
+                                'litter_id' => [$litter->id],
+                                'contribution_type_id' => [$type->id],
+                            ])
                             ->all();
                         if (! is_null($contribution)) {
                             $this->Litters->Contributions->delete($contribution->first());
