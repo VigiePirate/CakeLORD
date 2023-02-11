@@ -390,7 +390,7 @@ class LittersController extends AppController
                             ->findByLitterIdAndContributionTypeId($litter->id, $type->id)
                             ->all();
                         if (! is_null($contribution)) {
-                            $this->Litters->Contributions->delete($contribution);
+                            $this->Litters->Contributions->delete($contribution->first());
                         }
                     }
                 }
