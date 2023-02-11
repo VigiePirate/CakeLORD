@@ -10,6 +10,7 @@ use Cake\ORM\Table;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\Validation\Validator;
+use Cake\Collection\Collection;
 
 
 /**
@@ -394,11 +395,11 @@ class LittersTable extends Table
      */
     public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        if ($entity->isNew()) {
-            $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
-            $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
-            $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
+        $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
+        $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+        $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
 
+        if ($entity->isNew()) {
             foreach ($entity->parent_rats as $parent_ref) {
                 $parent = $rats->get($parent_ref['id'], [
                     'contain' => ['OwnerUsers', 'OwnerUsers.Ratteries']
@@ -420,27 +421,28 @@ class LittersTable extends Table
                     }
                 }
             }
-        } else { // entity is not new: contributions must be patched, not created
-
-            if ($entity->isDirty('parent_rats')) {
-                $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
-                $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
-
-                foreach ($entity->parent_rats as $parent_ref) {
-                    $parent = $rats->get($parent_ref['id'], [
-                        'contain' => ['OwnerUsers', 'OwnerUsers.Ratteries']
-                    ]);
-
-                    $parent_rattery = $parent->owner_user->main_rattery;
-
-                    // FIXME: if mother is changed and new mother comes from birth place, previous contribution 1 will not be deleted
-                    // do with a rule?
-                    if (! empty($parent_rattery) && $entity->contributions['0']->rattery_id != $parent_rattery->id) {
-                        if ($parent->sex == 'F') {
-                            $entity->contributions['1']->rattery_id = $parent_rattery->id;
+        } else { // entity is not new and parents have been edited: delete contributions (worst case)
+            $old_parents = new Collection($entity->getOriginal('parent_rats'));
+            foreach ($entity->parent_rats as $parent) {
+                if (! $old_parents->contains($parent)) {
+                    if ($parent->sex == 'F') {
+                        $contribution2 = $contributions->find('fromLitterAndType', [
+                            'litter_id' => [$entity->id],
+                            'contribution_type_id' => ['2']]
+                            )->first();
+                        if (! is_null($contribution2)) {
+                            $contributions->delete($contribution2);
+                            unset($entity->contribution['1']);
                         }
-                        if ($parent->sex == 'M') {
-                            $entity->contributions['2']->rattery_id = $parent_rattery->id;
+                    }
+                    if ($parent->sex == 'M') {
+                        $contribution3 = $contributions->find('fromLitterAndType', [
+                            'litter_id' => [$entity->id],
+                            'contribution_type_id' => ['3']]
+                            )->first();
+                        if (! is_null($contribution3)) {
+                            $contributions->delete($contribution3);
+                            unset($entity->contribution['2']);
                         }
                     }
                 }
