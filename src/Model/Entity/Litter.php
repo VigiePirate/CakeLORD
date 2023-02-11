@@ -311,11 +311,25 @@ class Litter extends Entity
         return true;
     }
 
+    // pup count cannot be lower than actual number of offspring
+    public function checkPupCount() {
+        return $this->pups_number >= count($this->offspring_rats);
+    }
+
+    public function checkStillbornCount() {
+        return $this->pups_number >= $this->pups_number_stillborn;
+
+    }
+
+    public function offspringCount() {
+        return count($this->offspring_rats);
+    }
+
     /* Statistics */
 
     // survival rate in litter does not use StatisticsTrait because of right censoring
     public function computeIntermediateSurvivalRate($offsprings = []) {
-        $total = $this->pups_number;
+        $total = $this->offspringCount();
         $ages = [];
         $k_max = min([RatsTable::MAXIMAL_AGE_MONTHS, $this->max_age]);
         foreach($offsprings as $offspring) {

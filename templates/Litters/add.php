@@ -199,10 +199,10 @@
                 <legend><?= __('Pups') ?></legend>
                 <div class="row">
                     <div class="column-responsive column-50">
-                        <?= $this->Form->control('pups_number', ['empty' => false, 'default' => '1', 'label' => 'Pup number']); ?>
+                        <?= $this->Form->control('pups_number', ['empty' => false, 'default' => '1', 'label' => __('Pup count (including stillborn)')]); ?>
                     </div>
                     <div class="column-responsive column-50">
-                        <?= $this->Form->control('pups_number_stillborn', ['empty' => true, 'label' => 'Stillborn pup number']); ?>
+                        <?= $this->Form->control('pups_number_stillborn', ['empty' => true, 'label' => __('Stillborn pup count')]); ?>
                     </div>
                 </div>
 

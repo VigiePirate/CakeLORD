@@ -352,8 +352,29 @@ class LittersTable extends Table
             },
             'homogeneousBirthDates',
             [
-                'error_field' => 'birth_date',
+                'errorField' => 'birth_date',
                 'message' => 'Something went wrong when updating birth dates.'
+            ]
+        );
+
+        /* Pups count coherence */
+        $rules->add(function($litter) {
+                return $litter->checkPupCount();
+            },
+            'tooManyPups',
+            [
+                'errorField' => 'pups_number',
+                'message' => 'Impossible: lower than the number of recorded pups.'
+            ]
+        );
+
+        $rules->add(function($litter) {
+                return $litter->checkStillbornCount();
+            },
+            'tooManyStillborn',
+            [
+                'errorField' => 'pups_number_stillborn',
+                'message' => 'Impossible: larger than the total number of pups.'
             ]
         );
 
@@ -364,6 +385,7 @@ class LittersTable extends Table
      * beforeSave method
      *
      * Automatically complete contributions and activate ratteries before saving litter.
+     * FIXME: could be done with a rule instead
      *
      * @param EventInterface $event
      * @param EntityInterface $entity
