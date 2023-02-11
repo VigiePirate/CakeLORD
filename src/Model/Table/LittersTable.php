@@ -388,47 +388,29 @@ class LittersTable extends Table
                 }
             }
         } else { // entity is not new: contributions must be patched, not created
+
             if ($entity->isDirty('parent_rats')) {
+                $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
+                $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
 
-            } else {
+                foreach ($entity->parent_rats as $parent_ref) {
+                    $parent = $rats->get($parent_ref['id'], [
+                        'contain' => ['OwnerUsers', 'OwnerUsers.Ratteries']
+                    ]);
 
-            //     $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
-            //     $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
-            //     $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
-            //
-            //     foreach ($entity->parent_rats as $parent_ref) {
-            //         $parent = $rats->get($parent_ref['id'], [
-            //             'contain' => ['OwnerUsers', 'OwnerUsers.Ratteries']
-            //         ]);
-            //
-            //         $parent_rattery = $parent->owner_user->main_rattery;
-            //
-            //         if (! empty($parent_rattery) && $entity->contributions['0']->rattery_id != $parent_rattery->id) {
-            //             if ($parent->sex == 'F') {
-            //                 $contribution = $contributions->find('fromLitterAndType', [
-            //                     'litter_id' => [$entity->id],
-            //                     'contribution_type_id' => ['2']
-            //                     ]
-            //                 )->first();
-            //                 array_push($entity->contributions, $contributions->patchEntity($contribution, [
-            //                     'contribution_type_id' => '2',
-            //                     'rattery_id' => $parent_rattery->id,
-            //                 ]));
-            //             }
-            //
-            //             if ($parent->sex == 'M') {
-            //                 $contribution = $contributions->find('fromLitterAndType', [
-            //                     'litter_id' => [$entity->id],
-            //                     'contribution_type_id' => ['3']
-            //                     ]
-            //                 )->first();
-            //                 array_push($entity->contributions, $contributions->patchEntity($contribution, [
-            //                     'contribution_type_id' => '3',
-            //                     'rattery_id' => $parent_rattery->id,
-            //                 ]));
-            //             }
-            //         }
-            //     }
+                    $parent_rattery = $parent->owner_user->main_rattery;
+
+                    // FIXME: if mother is changed and new mother comes from birth place, previous contribution 1 will not be deleted
+                    // do with a rule?
+                    if (! empty($parent_rattery) && $entity->contributions['0']->rattery_id != $parent_rattery->id) {
+                        if ($parent->sex == 'F') {
+                            $entity->contributions['1']->rattery_id = $parent_rattery->id;
+                        }
+                        if ($parent->sex == 'M') {
+                            $entity->contributions['2']->rattery_id = $parent_rattery->id;
+                        }
+                    }
+                }
             }
         }
     }
