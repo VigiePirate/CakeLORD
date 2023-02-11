@@ -33,7 +33,7 @@
 
                 <div class="row">
                     <div class="column-responsive column-50">
-                        <?= $this->Form->control('pups_number', ['label' => __('Pups count')]) ?>
+                        <?= $this->Form->control('pups_number', ['label' => __('Pups count'), 'name' => 'pups_number']) ?>
                     </div>
                     <div class="column-responsive column-50">
                         <?= $this->Form->control('pups_number_stillborn', ['label' => __('Stillborn pups count')]); ?>
