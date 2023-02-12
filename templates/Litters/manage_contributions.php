@@ -39,30 +39,84 @@
 
             <?php echo $this->Form->setValueSources(['context', 'data'])->create($litter); ?>
             <fieldset>
-            <?php foreach($contribution_types as $type) : ?>
-                <?php
-                    echo $this->Form->control('rattery_name_contribution_' . $type->id, [
-                        'id' => 'jquery-rattery-input-' . $type->id,
-                        'name' => 'rattery_name_contribution_' . $type->id,
-                        'label' => $type->name,
-                        'type' => 'text',
-                        'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['name'] : __('Type and select the rattery’s name or prefix here...')
-                    ]);
+                <?php foreach($contribution_types as $type) : ?>
+                    <?php if($type->id == '1') : ?>
+                        <?php if ($user->can('staffEdit', $litter)) : ?>
+                            <h2 class="staff"><?= __('Staff-only') ?></h2>
+                            <?php
+                                echo $this->Form->control('rattery_name_contribution_' . $type->id, [
+                                    'id' => 'jquery-rattery-input-' . $type->id,
+                                    'name' => 'rattery_name_contribution_' . $type->id,
+                                    'label' => $type->name,
+                                    'type' => 'text',
+                                    'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['name'] : __('Type and select the rattery’s name or prefix here...')
+                                ]);
 
-                    echo $this->Form->control('rattery_id_contribution_' . $type->id, [
-                        'id' => 'jquery-rattery-id-' . $type->id,
-                        'name' => 'rattery_id_contribution_' . $type->id,
-                        'label' => [
+                                echo $this->Form->control('rattery_id_contribution_' . $type->id, [
+                                    'id' => 'jquery-rattery-id-' . $type->id,
+                                    'name' => 'rattery_id_contribution_' . $type->id,
+                                    'label' => [
+                                        'class' => 'hide-everywhere',
+                                        'text' => 'Hidden field for rattery ID'
+                                    ],
+                                    'class' => 'hide-everywhere',
+                                    'type' => 'text',
+                                    'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['id'] : null
+                                ]);
+                            ?>
+                            <div class="spacer"></div>
+                            <h2><?= __('Staff or contributors') ?></h2>
+                        <?php else: ?>
+                            <?php
+                                echo $this->Form->control('rattery_name_contribution_' . $type->id, [
+                                    'id' => 'jquery-rattery-input-' . $type->id,
+                                    'name' => 'rattery_name_contribution_' . $type->id,
+                                    'label' => $type->name,
+                                    'type' => 'text',
+                                    'value' => $previous[$type->id]['name'],
+                                    'readonly' => true,
+                                ]);
+
+                                echo $this->Form->control('rattery_id_contribution_' . $type->id, [
+                                    'id' => 'jquery-rattery-id-' . $type->id,
+                                    'name' => 'rattery_id_contribution_' . $type->id,
+                                    'label' => [
+                                        'class' => 'hide-everywhere',
+                                        'text' => 'Hidden field for rattery ID'
+                                    ],
+                                    'class' => 'hide-everywhere',
+                                    'type' => 'text',
+                                    'default' => $previous[$type->id]['id']
+                                ]);
+                            ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php endforeach ; ?>
+
+                <?php foreach($contribution_types as $type) : ?>
+                    <?php if($type->id != '1') {
+                        echo $this->Form->control('rattery_name_contribution_' . $type->id, [
+                            'id' => 'jquery-rattery-input-' . $type->id,
+                            'name' => 'rattery_name_contribution_' . $type->id,
+                            'label' => $type->name,
+                            'type' => 'text',
+                            'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['name'] : __('Type and select the rattery’s name or prefix here...')
+                        ]);
+
+                        echo $this->Form->control('rattery_id_contribution_' . $type->id, [
+                            'id' => 'jquery-rattery-id-' . $type->id,
+                            'name' => 'rattery_id_contribution_' . $type->id,
+                            'label' => [
+                                'class' => 'hide-everywhere',
+                                'text' => 'Hidden field for rattery ID'
+                            ],
                             'class' => 'hide-everywhere',
-                            'text' => 'Hidden field for rattery ID'
-                        ],
-                        'class' => 'hide-everywhere',
-                        'type' => 'text',
-                        'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['id'] : null
-                    ]);
-                ?>
-
-            <?php endforeach ; ?>
+                            'type' => 'text',
+                            'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['id'] : null
+                        ]);
+                    }
+                    ?>
+                <?php endforeach ; ?>
             </fieldset>
             <?= $this->Form->button(__('Update Contributions')); ?>
             <?= $this->Form->end(); ?>

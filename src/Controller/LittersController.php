@@ -311,7 +311,7 @@ class LittersController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData(), [
-                'associated' => ['ParentRats', 'Contributions', 'Contributions.Ratteries']
+                'associated' => ['ParentRats', 'OffspringRats', 'Contributions', 'Contributions.Ratteries']
             ]);
             if ($this->Litters->save($litter)) {
                 $this->Flash->success(__('The litter has been saved. If parents were edited, you might have to manually correct contributions.'));
@@ -352,7 +352,7 @@ class LittersController extends AppController
             'contain' => [
                 'Sire', 'Sire.Ratteries', 'Sire.BirthLitters', 'Sire.BirthLitters.Contributions',
                 'Dam', 'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions',
-                'Ratteries', 'Contributions', 'Contributions.Ratteries', 'States'
+                'ParentRats', 'OffspringRats', 'OffspringRats.DeathPrimaryCauses', 'Ratteries', 'Contributions', 'Contributions.Ratteries', 'States'
             ],
         ]);
 
@@ -398,13 +398,15 @@ class LittersController extends AppController
                     }
                 }
             }
+            $litter->setDirty('contributions');
+            $litter->OffspringRats->removeBehavior('State');
             if ($this->Litters->save($litter)) {
                 $this->Flash->success(__('The litter’s contributing ratteries have been updated.'));
                 return $this->redirect(['action' => 'view', $litter->id]);
             }
             $this->Flash->error(__('The litter’s contributing ratteries could not be updated. Please, try again.'));
         } else {
-            $this->Flash->default(__('You can add or edit contributing ratteries below.'));
+            $this->Flash->default(__('You can add, edit or delete contributing ratteries below. Please, contact a staff member to edit the birth place.'));
         }
 
         $previous = [];
@@ -419,7 +421,10 @@ class LittersController extends AppController
             }
         }
 
-        $this->set(compact('litter', 'contribution_types', 'previous'));
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('staffEdit', $litter);
+
+        $this->set(compact('litter', 'contribution_types', 'previous', 'user', 'show_staff'));
     }
 
     /**

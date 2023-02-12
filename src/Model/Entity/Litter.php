@@ -6,7 +6,8 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Time;
-use Cake\ORM\Locator\LocatorAwareTrait;
+//use Cake\ORM\Locator\LocatorAwareTrait;
+use Cake\Datasource\FactoryLocator;
 use App\Model\Entity\StatisticsTrait;
 use App\Model\Table\RatsTable;
 
@@ -300,14 +301,32 @@ class Litter extends Entity
 
     // offspring of a litter must have the same birth dates
     public function homogeneizeBirthDates() {
-        $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('rats');
-        $rats->removeBehavior('State');
+        //$rats = FactoryLocator::get('Table')->get('rats');
+        //$rats->removeBehavior('State');
         foreach ($this->offspring_rats as $rat) {
             $rat->birth_date = $this->birth_date;
-            if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
-                return false;
-            }
+            // if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
+            //     return false;
+            // }
         }
+        //$rats->addBehavior('State');
+        $this->setDirty('offspring_rats');
+        return true;
+    }
+
+    // offspring of a litter must have coherent prefix
+    public function homogeneizePrefixes() {
+        // $rats = FactoryLocator::get('Table')->get('rats');
+        // $rats->removeBehavior('State');
+        // foreach ($this->offspring_rats as $rat) {
+        //     $rat->rattery_id = $this->contributions['0']->rattery_id;
+        //     $rat->is_pedigree_custom = true;
+        //     if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
+        //         return false;
+        //     }
+        // }
+        // $rats->addBehavior('State');
+        // $this->setDirty('offspring_rats', false);
         return true;
     }
 
