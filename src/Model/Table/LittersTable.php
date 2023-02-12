@@ -358,6 +358,16 @@ class LittersTable extends Table
             ]
         );
 
+        $rules->add(function($litter) {
+                return $litter->homogeneizePrefixes();
+            },
+            'homogeneousPrefixes',
+            [
+                'errorField' => 'rattery_name_contribution_1',
+                'message' => 'Something went wrong when updating prefixes.'
+            ]
+        );
+
         /* Pups count coherence */
         $rules->add(function($litter) {
                 return $litter->checkPupCount();
@@ -422,27 +432,29 @@ class LittersTable extends Table
                 }
             }
         } else { // entity is not new and parents have been edited: delete contributions (worst case)
-            $old_parents = new Collection($entity->getOriginal('parent_rats'));
-            foreach ($entity->parent_rats as $parent) {
-                if (! $old_parents->contains($parent)) {
-                    if ($parent->sex == 'F') {
-                        $contribution2 = $contributions->find('fromLitterAndType', [
-                            'litter_id' => [$entity->id],
-                            'contribution_type_id' => ['2']]
-                            )->first();
-                        if (! is_null($contribution2)) {
-                            $contributions->delete($contribution2);
-                            unset($entity->contribution['1']);
+            if (isset($entity['parent_rats']) && $entity->isDirty('parent_rats')) {
+                $old_parents = new Collection($entity->getOriginal('parent_rats'));
+                foreach ($entity->parent_rats as $parent) {
+                    if (! $old_parents->contains($parent)) {
+                        if ($parent->sex == 'F') {
+                            $contribution2 = $contributions->find('fromLitterAndType', [
+                                'litter_id' => [$entity->id],
+                                'contribution_type_id' => ['2']]
+                                )->first();
+                            if (! is_null($contribution2)) {
+                                $contributions->delete($contribution2);
+                                unset($entity->contribution['1']);
+                            }
                         }
-                    }
-                    if ($parent->sex == 'M') {
-                        $contribution3 = $contributions->find('fromLitterAndType', [
-                            'litter_id' => [$entity->id],
-                            'contribution_type_id' => ['3']]
-                            )->first();
-                        if (! is_null($contribution3)) {
-                            $contributions->delete($contribution3);
-                            unset($entity->contribution['2']);
+                        if ($parent->sex == 'M') {
+                            $contribution3 = $contributions->find('fromLitterAndType', [
+                                'litter_id' => [$entity->id],
+                                'contribution_type_id' => ['3']]
+                                )->first();
+                            if (! is_null($contribution3)) {
+                                $contributions->delete($contribution3);
+                                unset($entity->contribution['2']);
+                            }
                         }
                     }
                 }
