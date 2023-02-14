@@ -187,7 +187,7 @@ class LittersTable extends Table
         }
 
         // javacript fallback for rattery
-        if (! isset($data['rattery_id']) || empty($data['rattery_id'])) {
+        if (! isset($data['contributions']) && (! isset($data['rattery_id']) || empty($data['rattery_id']))) {
             if (isset($data['generic_rattery_id']) && ! empty($data['generic_rattery_id'])) {
                 $data['rattery_id'] = $data['generic_rattery_id'];
             } else {
@@ -203,14 +203,27 @@ class LittersTable extends Table
             }
         }
 
-        if (isset($data['rattery_id']) && ! empty($data['rattery_id']) && ! isset($data['contributions'])) {
+        if (! isset($data['contributions'])) {
             $data['contributions'] = [
                 [
                     'contribution_type_id' => '1',
                     'rattery_id' => $data['rattery_id'],
                 ]
             ];
+        } else {
+            // contributions have been manually edited; replace litter contributions by form data
+            if (isset($data['rattery_name_contribution_1'])) {
+                $n_contributions = intval((count($data)-1)/2);
+                for ($k=0; $k<$n_contributions; $k++) {
+                    if (strlen($data['rattery_id_contribution_'.($k+1)]) != 0 ) {
+                        $data['contributions'][$k]['rattery_id'] = $data['rattery_id_contribution_'.($k+1)];
+                    } else {
+                        unset($data['contributions'][$k]);
+                    }
+                }
+            }
         }
+
         return;
     }
 
@@ -348,23 +361,23 @@ class LittersTable extends Table
         );
 
         /* offspring must all have the same birth date */
-        $rules->add(function($litter) {
+        $rules->addUpdate(function($litter) {
                 return $litter->homogeneizeBirthDates();
             },
             'homogeneousBirthDates',
             [
                 'errorField' => 'birth_date',
-                'message' => 'Something went wrong when updating birth dates.'
+                'message' => 'Something went wrong when updating offspring birth dates.'
             ]
         );
 
-        $rules->add(function($litter) {
+        $rules->addUpdate(function($litter) {
                 return $litter->homogeneizePrefixes();
             },
             'homogeneousPrefixes',
             [
                 'errorField' => 'rattery_name_contribution_1',
-                'message' => 'Something went wrong when updating prefixes.'
+                'message' => 'Something went wrong when updating offspring prefixes.'
             ]
         );
 
@@ -428,34 +441,6 @@ class LittersTable extends Table
                             'contribution_type_id' => '3',
                             'rattery_id' => $parent_rattery->id,
                         ]));
-                    }
-                }
-            }
-        } else { // entity is not new and parents have been edited: delete contributions (worst case)
-            if (isset($entity['parent_rats']) && $entity->isDirty('parent_rats')) {
-                $old_parents = new Collection($entity->getOriginal('parent_rats'));
-                foreach ($entity->parent_rats as $parent) {
-                    if (! $old_parents->contains($parent)) {
-                        if ($parent->sex == 'F') {
-                            $contribution2 = $contributions->find('fromLitterAndType', [
-                                'litter_id' => [$entity->id],
-                                'contribution_type_id' => ['2']]
-                                )->first();
-                            if (! is_null($contribution2)) {
-                                $contributions->delete($contribution2);
-                                unset($entity->contribution['1']);
-                            }
-                        }
-                        if ($parent->sex == 'M') {
-                            $contribution3 = $contributions->find('fromLitterAndType', [
-                                'litter_id' => [$entity->id],
-                                'contribution_type_id' => ['3']]
-                                )->first();
-                            if (! is_null($contribution3)) {
-                                $contributions->delete($contribution3);
-                                unset($entity->contribution['2']);
-                            }
-                        }
                     }
                 }
             }
