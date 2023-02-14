@@ -94,7 +94,7 @@
                 <?php endforeach ; ?>
 
                 <?php foreach($contribution_types as $type) : ?>
-                    <?php if($type->id != '1') {
+                    <?php if ($type->id != '1') {
                         echo $this->Form->control('rattery_name_contribution_' . $type->id, [
                             'id' => 'jquery-rattery-input-' . $type->id,
                             'name' => 'rattery_name_contribution_' . $type->id,
@@ -117,6 +117,27 @@
                     }
                     ?>
                 <?php endforeach ; ?>
+
+                <!-- also pass previous contributions to check rules -->
+                <?php
+                    for ($k = 0; $k <= count($litter->contributions)-1; $k++) {
+                        echo $this->Form->control('contributions.'.$k.'.id', [
+                            'type' => 'hidden',
+                            'value' => $litter->contributions[$k]->id,
+                        ]);
+
+                        echo $this->Form->control('contributions.'.$k.'.contribution_type_id', [
+                            'type' => 'hidden',
+                            'value' => $litter->contributions[$k]->contribution_type_id,
+                        ]);
+
+                        echo $this->Form->control('contributions.'.$k.'.rattery_id', [
+                            'type' => 'hidden',
+                            'value' => $litter->contributions[$k]->rattery_id,
+                        ]);
+                    }
+                ?>
+
             </fieldset>
             <?= $this->Form->button(__('Update Contributions')); ?>
             <?= $this->Form->end(); ?>

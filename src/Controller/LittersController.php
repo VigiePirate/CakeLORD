@@ -362,44 +362,8 @@ class LittersController extends AppController
         $contribution_types = $this->ContributionTypes->find('all')->order('priority ASC');
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            foreach ($contribution_types as $type) {
-                $rattery_id = $this->request->getData('rattery_id_contribution_'.$type->id);
-                if (! is_null($rattery_id) && $rattery_id != '') {
-                    $contribution_data = [
-                        'litter_id' => $litter->id,
-                        'rattery_id' => $rattery_id,
-                        'contribution_type_id' => $type->id
-                    ];
-                    $contribution = $this->Litters->Contributions->findOrCreate(
-                        ['contribution_type_id' => $type->id, 'litter_id' => $litter->id],
-                        // Only called when a new record is created
-                        function ($entity) use ($contribution_data) {
-                            $entity->rattery_id = $contribution_data['rattery_id'];
-                            $entity->litter_id = $contribution_data['litter_id'];
-                        }
-                    );
-                    if (! $contribution->isNew()) {
-                        $contribution = $this->Litters->Contributions->patchEntity($contribution, ['rattery_id' => $contribution_data['rattery_id']]);
-                        $this->Litters->Contributions->save($contribution);
-                    } else {
-                        $litter->contributions[$litter->contributions->count()] = $contribution;
-                    }
-                } else {
-                    if ($this->request->getData('rattery_name_contribution_'.$type->id) == '') {
-                        $contribution = $this->Litters->Contributions
-                            ->find('findFromLitterAndType', [
-                                'litter_id' => [$litter->id],
-                                'contribution_type_id' => [$type->id],
-                            ])
-                            ->all();
-                        if (! is_null($contribution)) {
-                            $this->Litters->Contributions->delete($contribution->first());
-                        }
-                    }
-                }
-            }
-            $litter->setDirty('contributions');
-            $litter->OffspringRats->removeBehavior('State');
+            $this->Litters->patchEntity($litter, $this->request->getData(), ['associated' => ['Contributions', 'OffspringRats']]);
+
             if ($this->Litters->save($litter)) {
                 $this->Flash->success(__('The litter’s contributing ratteries have been updated.'));
                 return $this->redirect(['action' => 'view', $litter->id]);
