@@ -449,11 +449,11 @@ class LittersTable extends Table
         } else {
             // if entity is updated, check if some contributions must be deleted
             if (isset($entity->contributions)) {
-                $contributions = new Collection($entity->contributions);
-                $types = $contributions->extract('contribution_type_id')->toArray();
+                $new_contributions = new Collection($entity->contributions);
+                $types = $new_contributions->extract('contribution_type_id')->toArray();
                 foreach ($entity->getOriginal('contributions') as $old_contribution) {
                     if (! in_array($old_contribution->contribution_type_id, $types)) {
-                        \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions')->delete($old_contribution);
+                        $contributions->delete($old_contribution);
                     }
                 }
             }
