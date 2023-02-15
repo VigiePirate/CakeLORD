@@ -51,9 +51,8 @@
                     ]);
                 ?>
 
-                <?=
-                    $this->Form->control('rattery_id', [
-                        'id' => 'jquery-rattery-id',
+                <?php
+                    echo $this->Form->control('rattery_id', [
                         'name' => 'rattery_id',
                         'label' => [
                             'class' => 'hide-everywhere',
@@ -63,9 +62,7 @@
                         'type' => 'text',
                         'value' => $litter->contributions[0]->rattery_id,
                     ]);
-                ?>
 
-                <?php
                     for ($k = 0; $k <= count($litter->contributions)-1; $k++) {
                         echo $this->Form->control('contributions.'.$k.'.id', [
                             'type' => 'hidden',

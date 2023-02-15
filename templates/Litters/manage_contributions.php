@@ -118,7 +118,7 @@
                     ?>
                 <?php endforeach ; ?>
 
-                <!-- also pass previous contributions to check rules -->
+                <!-- also pass litter id and previous contributions to cover all cases -->
                 <?php
                     for ($k = 0; $k <= count($litter->contributions)-1; $k++) {
                         echo $this->Form->control('contributions.'.$k.'.id', [

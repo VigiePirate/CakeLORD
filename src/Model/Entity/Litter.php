@@ -328,11 +328,6 @@ class Litter extends Entity
         return true;
     }
 
-    // on litter creation only (to avoid erasing special cases on update)
-    public function createContributions() {
-        
-    }
-
     // pup count cannot be lower than actual number of offspring
     public function checkPupCount() {
         if (! empty($this->offspring_rats)) {

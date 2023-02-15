@@ -203,6 +203,7 @@ class LittersTable extends Table
             }
         }
 
+        // litter creation => no contribution declared
         if (! isset($data['contributions'])) {
             $data['contributions'] = [
                 [
@@ -217,6 +218,7 @@ class LittersTable extends Table
                 for ($k=0; $k<$n_contributions; $k++) {
                     if (strlen($data['rattery_id_contribution_'.($k+1)]) != 0 ) {
                         $data['contributions'][$k]['rattery_id'] = $data['rattery_id_contribution_'.($k+1)];
+                        $data['contributions'][$k]['contribution_type_id'] = $k+1;
                     } else {
                         unset($data['contributions'][$k]);
                     }
@@ -274,7 +276,7 @@ class LittersTable extends Table
         );
 
         /* Mandatory origin information */
-        $rules->add(function ($litter) {
+        $rules->addCreate(function ($litter) {
                 return $litter->hasValidOrigins();
             },
             'validOrigins',
@@ -441,6 +443,17 @@ class LittersTable extends Table
                             'contribution_type_id' => '3',
                             'rattery_id' => $parent_rattery->id,
                         ]));
+                    }
+                }
+            }
+        } else {
+            // if entity is updated, check if some contributions must be deleted
+            if (isset($entity->contributions)) {
+                $contributions = new Collection($entity->contributions);
+                $types = $contributions->extract('contribution_type_id')->toArray();
+                foreach ($entity->getOriginal('contributions') as $old_contribution) {
+                    if (! in_array($old_contribution->contribution_type_id, $types)) {
+                        \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions')->delete($old_contribution);
                     }
                 }
             }
