@@ -73,7 +73,7 @@
                         <td><?= __('Configure roles and permissions') ?></td>
                     </tr>
                     <tr>
-                        <th><?= $this->Html->link(__('States'), ['controller' => 'Roles', 'action' => 'index']) ?></th>
+                        <th><?= $this->Html->link(__('States'), ['controller' => 'States', 'action' => 'index']) ?></th>
                         <td><?= __('Configure states and sheet workflow') ?></td>
                     </tr>
                 </table>
