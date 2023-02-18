@@ -36,9 +36,7 @@ class SingularitiesController extends AppController
      */
     public function view($id = null)
     {
-        $singularity = $this->Singularities->get($id, [
-            'contain' => ['Rats'],
-        ]);
+        $singularity = $this->Singularities->get($id);
         $this->Authorization->skipAuthorization();
 
         $examples = $this->Singularities->Rats->find()
