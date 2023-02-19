@@ -80,10 +80,11 @@ class UsersController extends AppController
                 $this->Users->save($user);
             }
 
+            $this->loadModel('Rats');
+
             // check user role: if staff, execute routines (zombie killing, rattery closing, etc.)
             if ($user->role->is_staff) {
 
-                $this->loadModel('Rats');
                 $rat_count = $this->Rats->killZombies();
 
                 $this->loadModel('Ratteries');
@@ -103,11 +104,15 @@ class UsersController extends AppController
                     + $this->Ratteries->blameNeglected($this->Ratteries)
                     + $this->Litters->blameNeglected($this->Litters);
                 if ($neglected_count > 0) {
-                    $this->Flash->warning($neglected_count . __(' sheets neglected by user have just been escalated to back-office.'));
+                    $this->Flash->warning($neglected_count . __(' sheets neglected by users have just been escalated to back-office.'));
                 }
                 // delete old unused passkeys and accounts never activated
+                // $this->Users->removeOldPasskeys();
+            }
 
-
+            $action_needed = $this->Rats->find('needsUser')->count();
+            if ($action_needed > 0) {
+                $this->Flash->error(__('You have {0} sheets to correct! Please, go to your dashboard and take action soon.', $action_needed));
             }
 
             $target = $this->Authentication->getLoginRedirect();
