@@ -801,4 +801,8 @@ class LittersController extends AppController
         }
         return $this->redirect(['action' => 'view', $litter->id]);
     }
+
+    public function blameNeglected() {
+        $this->Litters->blameNeglected($this->Litters);
+    }
 }

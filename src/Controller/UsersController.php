@@ -80,19 +80,34 @@ class UsersController extends AppController
                 $this->Users->save($user);
             }
 
-            // check user role: if staff, run zombie killing routine
+            // check user role: if staff, execute routines (zombie killing, rattery closing, etc.)
             if ($user->role->is_staff) {
+
                 $this->loadModel('Rats');
                 $rat_count = $this->Rats->killZombies();
+
                 $this->loadModel('Ratteries');
                 $rattery_count = $this->Ratteries->pauseZombies();
+
                 if ($rat_count > 0) {
-                    $this->Flash->success($rat_count . __(' rats who were too old have just been automatically set as presumably dead.'));
+                    $this->Flash->success($rat_zombie_count . __(' rats who were too old have just been automatically set as presumably dead.'));
                 }
+
                 if ($rattery_count > 0) {
                     $this->Flash->success($rattery_count . __(' ratteries which had no litter for a long time have just been automatically set as inactive.'));
                 }
-                // FIXME: add other routines (delete accounts never activated, blame sheets in needs_user_action state for too long)
+
+                // blame sheets in needs_user_action state for too long
+                $this->loadModel('Litters');
+                $neglected_count = $this->Rats->blameNeglected($this->Rats)
+                    + $this->Ratteries->blameNeglected($this->Ratteries)
+                    + $this->Litters->blameNeglected($this->Litters);
+                if ($neglected_count > 0) {
+                    $this->Flash->warning($neglected_count . __(' sheets neglected by user have just been escalated to back-office.'));
+                }
+                // delete old unused passkeys and accounts never activated
+
+
             }
 
             $target = $this->Authentication->getLoginRedirect();
