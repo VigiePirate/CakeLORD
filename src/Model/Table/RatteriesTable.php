@@ -297,6 +297,16 @@ class RatteriesTable extends Table
         return $query->group(['Ratteries.id']);
     }
 
+    public function findNeedsStaff(Query $query, array $options)
+    {
+        return $query
+            ->select()
+            ->distinct()
+            ->where(['States.needs_staff_action IS' => true])
+            ->contain(['States'])
+            ->group(['Ratteries.id']);
+    }
+
     public function pauseZombies()
     {
         $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
