@@ -917,4 +917,8 @@ class RatsController extends AppController
         }
         return $this->redirect(['action' => 'view', $rat->id]);
     }
+
+    public function blameNeglected() {
+        $this->Rats->blameNeglected($this->Rats);
+    }
 }

@@ -838,6 +838,16 @@ class RatsTable extends Table
             ->group(['Rats.id']);
     }
 
+    public function findNeedsUser(Query $query, array $options)
+    {
+        return $query
+            ->select()
+            ->distinct()
+            ->where(['States.needs_user_action IS' => true])
+            ->contain(['States'])
+            ->group(['Rats.id']);
+    }
+
     public function findMales(Query $query, array $options)
     {
         return $query

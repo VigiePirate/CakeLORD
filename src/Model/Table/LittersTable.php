@@ -513,6 +513,16 @@ class LittersTable extends Table
             ->group(['Litters.id']);
     }
 
+    public function findNeedsUser(Query $query, array $options)
+    {
+        return $query
+            ->select()
+            ->distinct()
+            ->where(['States.needs_user_action IS' => true])
+            ->contain(['States'])
+            ->group(['Litters.id']);
+    }
+
     public function findFromBirth(Query $query, array $options)
     {
         $query = $query

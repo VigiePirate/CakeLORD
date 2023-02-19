@@ -307,6 +307,16 @@ class RatteriesTable extends Table
             ->group(['Ratteries.id']);
     }
 
+    public function findNeedsUser(Query $query, array $options)
+    {
+        return $query
+            ->select()
+            ->distinct()
+            ->where(['States.needs_user_action IS' => true])
+            ->contain(['States'])
+            ->group(['Ratteries.id']);
+    }
+
     public function pauseZombies()
     {
         $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');

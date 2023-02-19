@@ -9,6 +9,7 @@ use Cake\Event\EventInterface;
 use Cake\ORM\Behavior;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
+use Cake\ORM\Table;
 
 class StateBehavior extends Behavior
 {
@@ -141,5 +142,17 @@ class StateBehavior extends Behavior
             return true;
         }
         return false;
+    }
+
+    public function blameNeglected(Table $table) {
+        $query = $table->find('needsUser')->contain('States');
+        $query = $query->where(['modified <= ' => \Cake\Chronos\Chronos::today()->modify('-15 days')]);
+        $neglected = $query->all();
+        foreach ($neglected as $entity) {
+            $this->blame($entity);
+            $table->save($entity);
+        }
+        $count = $query->count();
+        return $count;
     }
 }
