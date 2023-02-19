@@ -23,10 +23,32 @@ class LordController extends AppController
 
     public function my() {
         $lord = new Lord();
+
+        $model = $this->loadModel('Rats');
+        $query = $model->find('needsStaff')
+            ->order('Rats.modified DESC')
+            ->contain(['States', 'OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions']);
+        $count['rats'] = $query->count();
+        $rats = $query->limit(5);
+
+        $model = $this->loadModel('Ratteries');
+        $query = $model->find('needsStaff')
+            ->order('Ratteries.modified DESC')
+            ->contain(['Countries', 'States', 'Users']);
+        $count['ratteries'] = $query->count();
+        $ratteries = $query->limit(5);
+
+        $model = $this->loadModel('Litters');
+        $query = $model->find('needsStaff')
+            ->order('Litters.modified DESC')
+            ->contain(['States', 'Contributions', 'Contributions.Ratteries', 'Sire', 'Dam', 'Users']);
+        $count['litters'] = $query->count();
+        $litters = $query->limit(5);
+
         $user = $this->request->getAttribute('identity');
         $this->Authorization->authorize($lord);
 
-        $this->set(compact('user'));
+        $this->set(compact('user', 'count', 'rats', 'litters', 'ratteries'));
     }
 
     public function search() {

@@ -15,13 +15,38 @@
         <div class="spacer"> </div>
 
         <div class="view content">
-            <?= $this->Html->link(__('See all'), ['controller' => 'Rats', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
+
             <h2><?= __('Sheets needing staff action') ?></h2>
+
+
+            <h3><?= __('Rats') ?></h3>
+            <div class="button-small">
+                <?= $this->Html->link(__('See all rats'), ['controller' => 'Rats', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
+            </div>
+            <p><strong><?= $count['rats'] ?> <?= __('rat sheets') ?></strong> <?= __('are currently waiting for staff action. ') ?><?= __('Most recent are:') ?></p>
+            <?= $this->element('staff_rats') ?>
+        
+            <h3><?= __('Litters') ?></h3>
+            <div class="button-small">
+                <?= $this->Html->link(__('See all litters'), ['controller' => 'Litters', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
+            </div>
+            <p><strong><?= $count['litters'] ?> <?= __('litter sheets') ?></strong> <?= __('are currently waiting for staff action. ') ?><?= __('Most recent are:') ?></p>
+            <?= $this->element('staff_litters') ?>
+
+            <h3><?= __('Ratteries') ?></h3>
+            <div class="button-small">
+                <?= $this->Html->link(__('See all ratteries'), ['controller' => 'Ratteries', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
+            </div>
+            <p><strong><?= $count['ratteries'] ?> <?= __('rattery sheets') ?></strong> <?= __('are currently waiting for staff action. ') ?><?= __('Most recent are:') ?><p>
+            <?= $this->element('staff_ratteries') ?>
+
         </div>
         <div class="spacer"> </div>
 
         <div class="view content">
-            <?= $this->Html->link(__('See all'), ['controller' => 'Issues', 'action' => 'index'], ['class' => 'button button-staff float-right']) ?>
+            <div class="button-small">
+                <?= $this->Html->link(__('See all issues'), ['controller' => 'Issues', 'action' => 'index'], ['class' => 'button button-staff float-right']) ?>
+            </div>
             <h2><?= __('Open issues') ?></h2>
         </div>
         <div class="spacer"> </div>

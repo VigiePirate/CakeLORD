@@ -503,6 +503,16 @@ class LittersTable extends Table
         return $query->group(['Litters.id']);
     }
 
+    public function findNeedsStaff(Query $query, array $options)
+    {
+        return $query
+            ->select()
+            ->distinct()
+            ->where(['States.needs_staff_action IS' => true])
+            ->contain(['States'])
+            ->group(['Litters.id']);
+    }
+
     public function findFromBirth(Query $query, array $options)
     {
         $query = $query
