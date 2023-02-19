@@ -431,7 +431,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach (array_slice($rattery->litters,0,10) as $litter): ?>
+                            <?php foreach ($rattery->litters as $litter): ?>
                             <tr>
                                 <td><span class="statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></span></td>
                                 <td><?= $litter->has('birth_date') ? h($litter->birth_date->i18nFormat('dd/MM/yyyy')) : __('Unknown date') ?></td>
