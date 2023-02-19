@@ -109,7 +109,12 @@ class RatsController extends AppController
             'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
             'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'Singularities',
             'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States',
-            'BredLitters', 'BredLitters.Contributions', 'BredLitters.Ratteries',
+            'BredLitters' => function($q) {
+                return $q
+                ->order('birth_date DESC')
+                ->limit(10);
+            },
+            'BredLitters.Contributions', 'BredLitters.Ratteries',
             'BredLitters.Sire', 'BredLitters.Sire.BirthLitters', 'BredLitters.Sire.BirthLitters.Contributions',
             'BredLitters.Dam', 'BredLitters.Dam.BirthLitters', 'BredLitters.Dam.BirthLitters.Contributions',
             'BredLitters.OffspringRats', 'BredLitters.OffspringRats.Ratteries',

@@ -148,7 +148,7 @@ class Rat extends Entity
         if($this->id > 2) {
             return $this->double_prefix . ' ' . $this->name;
         } else { // don't return prefix for unknown mother and unknown father special rats
-            return '???';
+            return $this->name;
         }
     }
 
