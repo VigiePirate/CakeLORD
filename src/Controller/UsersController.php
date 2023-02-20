@@ -66,7 +66,8 @@ class UsersController extends AppController
             // get user
             $user = $this->Users->get($this->Authentication->getIdentityData('id'), ['contain' => 'Roles']);
 
-            // update last failed login fields
+            // update last login fields
+            $user->successful_login_last_date = Chronos::now();
             $user->failed_login_attempts = 0;
             $user->failed_login_last_date = null;
 
@@ -106,8 +107,9 @@ class UsersController extends AppController
                 if ($neglected_count > 0) {
                     $this->Flash->warning($neglected_count . __(' sheets neglected by users have just been escalated to back-office.'));
                 }
+
                 // delete old unused passkeys and accounts never activated
-                // $this->Users->removeOldPasskeys();
+                $this->Users->removeExpiredPasskeys();
             }
 
             $action_needed = $this->Rats->find('needsUser')->count();
@@ -172,7 +174,7 @@ class UsersController extends AppController
 
             // check captcha
             //FIXME: place captcha question/answer in app local config
-            if (strtolower($this->request->getData('captcha'))=='rat') {
+            if (strtolower($this->request->getData('captcha')) == 'rat') {
                 // $this->Flash->default(__('Congratulations, you are not a Replicant.'));
 
                 // create user and activation link and mail
@@ -189,7 +191,7 @@ class UsersController extends AppController
                     $url = Router::Url(['controller' => 'users', 'action' => 'activate'], true) . '/' . $passkey;
                     $mailer = $this->getMailer('User')->send('sendActivationEmail', [$url, $user]);
                     if ($mailer) {
-                        $this->Flash->success(__('Your account has been created, but must be activated before you can log in. Check your email for your activation link'));
+                        $this->Flash->success(__('Your account has been created, but must be activated before you can log in. Check your email for your activation link.'));
                     } else {
                         $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
                     }
