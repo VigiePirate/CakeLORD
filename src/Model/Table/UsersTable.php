@@ -204,4 +204,24 @@ class UsersTable extends Table
 
         return $query->group(['Users.id']);
     }
+
+    public function removeExpiredPasskeys()
+    {
+        $query = $this->find()->where([
+            'passkey IS NOT' => null,
+            'failed_login_last_date IS NOT' => null,
+            'failed_login_last_date <=' => \Cake\Chronos\Chronos::now()->modify('-24 hours'),
+        ]);
+
+        foreach ($query->all() as $user) {
+            // never activated
+            if ($user->is_locked && is_null($user->successful_login_last_date)) {
+                $this->delete($user);
+            } else { // just expired passkey
+                $user->passkey = null;
+                $this->save($user);
+            }
+        }
+
+    }
 }
