@@ -92,7 +92,7 @@ class UsersController extends AppController
                 $rattery_count = $this->Ratteries->pauseZombies();
 
                 if ($rat_count > 0) {
-                    $this->Flash->success($rat_zombie_count . __(' rats who were too old have just been automatically set as presumably dead.'));
+                    $this->Flash->success($rat_count . __(' rats who were too old have just been automatically set as presumably dead.'));
                 }
 
                 if ($rattery_count > 0) {
