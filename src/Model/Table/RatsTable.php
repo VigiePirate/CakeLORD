@@ -416,13 +416,14 @@ class RatsTable extends Table
             'message' => 'Impossible: this date is in the future. Please check and correct your entry.'
         ]);
 
-        $mathusalem = function($rat) {
-            return !( !$rat->is_alive && $rat->age > RatsTable::MAXIMAL_AGE_MONTHS );
-        };
-        $rules->add($mathusalem, [
-            'errorField' => 'death_date',
-            'message' => __('Impossible: it means that your rat would have lived more than {age} months, but rats do not live this long.', ['age' => RatsTable::MAXIMAL_AGE_MONTHS])
-        ]);
+        $rules->add(function ($rat) {
+                return ! $rat->isMathusalem();
+            },
+            [
+                'errorField' => 'death_date',
+                'message' => __('Impossible: it means that your rat would have lived more than {age} months, but rats do not live this long.', ['age' => RatsTable::MAXIMAL_AGE_MONTHS]),
+            ]
+        );
 
         $rules->add(function ($rat) {
                 return $rat->canDieInfant();
@@ -834,7 +835,7 @@ class RatsTable extends Table
             ->select()
             ->distinct()
             ->where(['States.needs_staff_action IS' => true])
-            ->contain(['States'])
+            ->contain(['States', 'DeathPrimaryCauses', 'DeathSecondaryCauses'])
             ->group(['Rats.id']);
     }
 
@@ -844,7 +845,7 @@ class RatsTable extends Table
             ->select()
             ->distinct()
             ->where(['States.needs_user_action IS' => true])
-            ->contain(['States'])
+            ->contain(['States', 'DeathPrimaryCauses', 'DeathSecondaryCauses'])
             ->group(['Rats.id']);
     }
 

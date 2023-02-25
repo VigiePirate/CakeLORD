@@ -568,6 +568,6 @@ class RatteriesController extends AppController
     }
 
     public function blameNeglected() {
-        $this->Ratteries->blameNeglected($this->Ratteries);
+        return $this->Ratteries->blameNeglected($this->Ratteries);
     }
 }
