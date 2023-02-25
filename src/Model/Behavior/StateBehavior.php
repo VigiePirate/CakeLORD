@@ -147,12 +147,12 @@ class StateBehavior extends Behavior
     public function blameNeglected(Table $table) {
         $query = $table->find('needsUser')->contain('States');
         $query = $query->where(['modified <= ' => \Cake\Chronos\Chronos::today()->modify('-15 days')]);
-        $neglected = $query->all();
-        foreach ($neglected as $entity) {
-            $this->blame($entity);
-            $table->save($entity);
-        }
-        $count = $query->count();
-        return $count;
+        $entities = $query->all()->map(function ($value, $key) {
+            $this->blame($value);
+            return $value;
+        });
+
+        $table->saveMany($entities, ['associated' => []]);
+        return $entities->count();
     }
 }

@@ -509,7 +509,7 @@ class LittersTable extends Table
             ->select()
             ->distinct()
             ->where(['States.needs_staff_action IS' => true])
-            ->contain(['States'])
+            ->contain(['States', 'Contributions'])
             ->group(['Litters.id']);
     }
 
@@ -519,7 +519,7 @@ class LittersTable extends Table
             ->select()
             ->distinct()
             ->where(['States.needs_user_action IS' => true])
-            ->contain(['States'])
+            ->contain(['States', 'Contributions'])
             ->group(['Litters.id']);
     }
 

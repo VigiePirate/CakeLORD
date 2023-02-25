@@ -919,6 +919,6 @@ class RatsController extends AppController
     }
 
     public function blameNeglected() {
-        $this->Rats->blameNeglected($this->Rats);
+        return $this->Rats->blameNeglected($this->Rats);
     }
 }

@@ -305,13 +305,23 @@ class LittersController extends AppController
     public function edit($id = null)
     {
         $litter = $this->Litters->get($id, [
-            'contain' => ['ParentRats', 'OffspringRats', 'OffspringRats.DeathPrimaryCauses', 'Ratteries', 'Contributions', 'Sire', 'Dam', 'States'],
+            'contain' => [
+                'ParentRats',
+                'OffspringRats',
+                'OffspringRats.DeathPrimaryCauses',
+                'OffspringRats.DeathSecondaryCauses',
+                'Ratteries',
+                'Contributions',
+                'Sire',
+                'Dam',
+                'States'
+            ],
         ]);
         $this->Authorization->authorize($litter);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData(), [
-                'associated' => ['ParentRats', 'OffspringRats', 'Contributions', 'Contributions.Ratteries']
+                'associated' => ['ParentRats', 'Contributions', 'Contributions.Ratteries']
             ]);
             if ($this->Litters->save($litter)) {
                 $this->Flash->success(__('The litter has been saved. If parents were edited, you might have to manually correct contributions.'));
@@ -803,6 +813,6 @@ class LittersController extends AppController
     }
 
     public function blameNeglected() {
-        $this->Litters->blameNeglected($this->Litters);
+        return $this->Litters->blameNeglected($this->Litters);
     }
 }
