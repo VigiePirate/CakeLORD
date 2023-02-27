@@ -35,40 +35,44 @@ if (Configure::read('debug')) :
     $this->layout = 'fullpage';
     $cakeDescription = 'Livre des Origines du Rat Domestique';
     ?>
-        <div class="row row__oopsie">
-            <div class="column-responsive column-50">
-                <?= $this->Html->image("oopsie_800x600.jpg", ["alt" => "Jeune rat burmese bleu russe dumbo rex", 'class' => 'oopsie__img']) ?>
-            </div>
-
-            <div class="column-responsive">
-                <div class="oopsie__text">
-                    <h1><?= __('Oh') ?> <span><?= __('noes!') ?></span></h1>
-
-                    <p class="error">
-                        <strong><?= __d('cake', 'Error code') ?>: </strong><?= h($code) ?>
-                        <?php if ($code == '404') : ?>
-                            <p>
-                                <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
-                            </p>
-                        <?php elseif ($code == '403') : ?>
-                            <p>
-                                <?= __d('cake', 'You are not allowed to access the page {0}.', "<strong>'{$url}'</strong>") ?>
-                            </p>
-                        <?php else : ?>
-                            <p>
-                                <?= __d('cake', 'Some issue occurred while trying to access the page {0}.', "<strong>'{$url}'</strong>") ?>
-                            </p>
-                        <?php endif; ?>
-                    </p>
+    <main class="main">
+        <div class="container">
+            <div class="row row__oopsie">
+                <div class="column-responsive column-50">
+                    <?= $this->Html->image("oopsie_800x600.jpg", ["alt" => "Jeune rat burmese bleu russe dumbo rex", 'class' => 'oopsie__img']) ?>
                 </div>
-                <div class="btn__center hero__text">
-                    <p>
-                        <?= $this->Html->link(__('Go Back'), 'javascript:history.back()', ['class' => 'button']) ?>
-                        <?= $this->Html->link(__('Get Help'), ['controller' => 'Faqs', 'action' => 'all'], ['class' => 'button']) ?>
-                    </p>
+
+                <div class="column-responsive">
+                    <div class="oopsie__text">
+                        <h1><?= __('Oh') ?> <span><?= __('noes!') ?></span></h1>
+
+                        <p class="error">
+                            <strong><?= __d('cake', 'Error code') ?>: </strong><?= h($code) ?>
+                            <?php if ($code == '404') : ?>
+                                <p>
+                                    <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
+                                </p>
+                            <?php elseif ($code == '403') : ?>
+                                <p>
+                                    <?= __d('cake', 'You are not allowed to access the page {0}.', "<strong>'{$url}'</strong>") ?>
+                                </p>
+                            <?php else : ?>
+                                <p>
+                                    <?= __d('cake', 'Some issue occurred while trying to access the page {0}.', "<strong>'{$url}'</strong>") ?>
+                                </p>
+                            <?php endif; ?>
+                        </p>
+                    </div>
+                    <div class="btn__center hero__text">
+                        <p>
+                            <?= $this->Html->link(__('Go Back'), 'javascript:history.back()', ['class' => 'button']) ?>
+                            <?= $this->Html->link(__('Get Help'), ['controller' => 'Faqs', 'action' => 'all'], ['class' => 'button']) ?>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+    </main>
     <?php
 endif;
 ?>

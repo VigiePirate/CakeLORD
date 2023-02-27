@@ -114,12 +114,10 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
             </nav>
         </div>
     </header>
-    <main class="main">
-        <div class="container">
-            <?= $this->Flash->render() ?>
-            <?= $this->fetch('content') ?>
-        </div>
-    </main>
+
+    <?= $this->Flash->render() ?>
+    <?= $this->fetch('content') ?>
+
     <div class="footer_container">
         <footer>
             <div class="footer_section">
