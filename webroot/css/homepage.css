@@ -7,6 +7,11 @@ body {
 h1 {
   font-family: "Alegreya", serif;
   font-weight: 700;
+  color: #663300;
+}
+
+h1 span {
+  color: #6076bf;
 }
 
 h2 {
@@ -70,6 +75,11 @@ p {
   }
 
 /** Sections **/
+
+main {
+  min-height: calc(100vh - 32rem);
+}
+
 /* Nav bar */
 
 .nav-container{
@@ -164,6 +174,7 @@ p {
 }
 
 /* Hero */
+
 .hero {
 }
 .hero__text {
@@ -186,6 +197,33 @@ p {
   /* background-image: linear-gradient(313deg, #505c85 0%, #586692 12%, #65739f 25%, #7482b0 37%, #7e8cbb 50%, #8393c7 62%, #95a4d4 75%, #a1afdc 87%, #aebbe4 100%);*/
   background-image: linear-gradient(313deg, #505885 0%, #586192 12%, #656e9f 25%, #747db0 37%, #7e87bb 50%, #838dc7 62%, #959ed4 75%, #a1aadc 87%, #aebbe4 100%);
 
+}
+
+/* Oops space */
+
+.oopsie {
+  margin:0;
+  padding:0;
+  top: 0;
+  left: 0;
+}
+
+.oopsie__text {
+  text-align:center;
+  padding-bottom:1.5rem;
+}
+
+.row__oopsie {
+  min-height: calc(100vh - 36.5rem);
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  align-items:center;
+  text-align:center;
+  justify-content:space-around;
+}
+
+.oopsie__img {
+  width: 95%;
 }
 
 /* More */
