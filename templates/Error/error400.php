@@ -48,17 +48,17 @@ if (Configure::read('debug')) :
 
                         <p class="error">
                             <strong><?= __d('cake', 'Error code') ?>: </strong><?= h($code) ?>
-                            <?php if ($code == '404') : ?>
-                                <p>
-                                    <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
-                                </p>
-                            <?php elseif ($code == '403') : ?>
+                            <?php if ($code == '403') : ?>
                                 <p>
                                     <?= __d('cake', 'You are not allowed to access the page {0}.', "<strong>'{$url}'</strong>") ?>
                                 </p>
+                            <?php elseif ($code == '404') : ?>
+                                <p>
+                                    <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
+                                </p>
                             <?php else : ?>
                                 <p>
-                                    <?= __d('cake', 'Some issue occurred while trying to access the page {0}.', "<strong>'{$url}'</strong>") ?>
+                                    <?= __d('cake', 'An issue occurred while trying to access the page {0}.', "<strong>'{$url}'</strong>") ?>
                                 </p>
                             <?php endif; ?>
                         </p>

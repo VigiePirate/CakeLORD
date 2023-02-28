@@ -392,7 +392,7 @@ class UsersController extends AppController
             'avg_lifespan','female_avg_lifespan','male_avg_lifespan',
             'not_infant_lifespan', 'not_infant_female_lifespan', 'not_infant_male_lifespan',
             'not_accident_lifespan', 'not_accident_female_lifespan', 'not_accident_male_lifespan',
-            'champion', 'identity'
+            'champion', 'identity',
         ));
     }
 

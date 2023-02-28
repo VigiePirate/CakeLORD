@@ -5,8 +5,6 @@
 use Cake\Core\Configure;
 use Cake\Error\Debugger;
 
-$this->layout = 'error';
-
 if (Configure::read('debug')) :
     $this->layout = 'dev_error';
 
@@ -35,8 +33,39 @@ if (Configure::read('debug')) :
     $this->end();
 endif;
 ?>
-<h2><?= __d('cake', 'An Internal Error Has Occurred') ?></h2>
-<p class="error">
-    <strong><?= __d('cake', 'Error') ?>: </strong>
-    <?= h($message) ?>
-</p>
+
+<?php else :
+    $this->layout = 'fullpage';
+    $cakeDescription = 'Livre des Origines du Rat Domestique';
+    ?>
+    <main class="main">
+        <div class="container">
+            <div class="row row__oopsie">
+                <div class="column-responsive column-50">
+                    <?= $this->Html->image("oopsie_800x600.jpg", ["alt" => "Jeune rat burmese bleu russe dumbo rex", 'class' => 'oopsie__img']) ?>
+                </div>
+
+                <div class="column-responsive">
+                    <div class="oopsie__text">
+                        <h1><?= __('Oh') ?> <span><?= __('noes!') ?></span></h1>
+
+                        <p class="error">
+                            <strong><?= __d('cake', 'Error code') ?>: </strong><?= h($code) ?>
+                            <p>
+                                <?= __d('cake', 'An internal error has occurred') ?>
+                            </p>
+                        </p>
+                    </div>
+                    <div class="btn__center hero__text">
+                        <p>
+                            <?= $this->Html->link(__('Go Back'), 'javascript:history.back()', ['class' => 'button']) ?>
+                            <?= $this->Html->link(__('Get Help'), ['controller' => 'Faqs', 'action' => 'all'], ['class' => 'button']) ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <?php
+endif;
+?>
