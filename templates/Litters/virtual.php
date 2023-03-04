@@ -151,7 +151,8 @@
 <script>
     var partialTree = <?php echo $genealogy_json; ?>;
     var ancestorIndex = <?php echo $index_json; ?>;
-    window.onload = setTimeout(init(partialTree, ancestorIndex), 250); // a small timeout to let debugkit loading
+    var jsMessages = <?php echo $js_messages; ?>;
+    window.onload = setTimeout(init(partialTree, ancestorIndex, jsMessages), 250); // a small timeout to let debugkit loading
 </script>
 
 <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>

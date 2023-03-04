@@ -292,7 +292,15 @@ class LittersController extends AppController
 
         $json = json_encode($family);
 
-        $this->set(compact('litter', 'sire', 'dam', 'json', 'genealogy_json', 'index_json'));
+        $js_messages = json_encode([
+            __('Easy peasy.'),
+            __('Quite a lot, but I have seen worse.'),
+            __('Wow! that was pretty intense.'),
+            __('Oops, we hope your device is not smoking.'),
+            __('You know some LORD’s developers in person, don’t you?')
+        ]);
+
+        $this->set(compact('litter', 'sire', 'dam', 'json', 'genealogy_json', 'index_json', 'js_messages'));
     }
 
     /**
@@ -754,7 +762,15 @@ class LittersController extends AppController
         $genealogy_json = json_encode($genealogy);
         $index_json = json_encode($index);
 
-        $this->set(compact('litter', 'genealogy_json', 'index_json'));
+        $js_messages = json_encode([
+            __('Easy peasy.'),
+            __('Quite a lot, but I have seen worse.'),
+            __('Wow! that was pretty intense.'),
+            __('Oops, we hope your device is not smoking.'),
+            __('You know some LORD’s developers in person, don’t you?')
+        ]);
+
+        $this->set(compact('litter', 'genealogy_json', 'index_json', 'js_messages'));
     }
 
     /* State changes */
