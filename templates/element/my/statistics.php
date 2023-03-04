@@ -26,14 +26,14 @@
 <table class="condensed stats">
     <tr>
         <th><?= __('Average lifespan of my rats:') ?></th>
-        <td><?= h($avg_lifespan) . ' ' . __('months') ?> (♀: <?= h($female_avg_lifespan) ?>, ♂: <?= h($male_avg_lifespan) ?>) </td>
+        <td><?= __('{0} months', [h($avg_lifespan)]) ?> (♀: <?= h($female_avg_lifespan) ?>, ♂: <?= h($male_avg_lifespan) ?>) </td>
         <tr>
-            <th> ⨽ average, infant mortality excluded:</th>
-            <td> ⨽ <?= h($not_infant_lifespan) . __(' months') ?> (♀: <?= h($not_infant_female_lifespan) ?>, ♂: <?= h($not_infant_male_lifespan) ?>)
+            <th> ⨽ <?= __('average, infant mortality excluded:') ?></th>
+            <td> ⨽ <?= __('{0} months', [h($not_infant_lifespan)]) ?> (♀: <?= h($not_infant_female_lifespan) ?>, ♂: <?= h($not_infant_male_lifespan) ?>)
         </tr>
         <tr>
-            <th> ⨽ average, accidents also excluded:</th>
-            <td> ⨽ <?= h($not_accident_lifespan) . __(' months') ?> (♀: <?= h($not_accident_female_lifespan) ?>, ♂: <?= h($not_accident_male_lifespan) ?>)
+            <th> ⨽ <?= __('average, accidents also excluded:') ?></th>
+            <td> ⨽ <?= __('{0} months', [h($not_accident_lifespan)]) ?> (♀: <?= h($not_accident_female_lifespan) ?>, ♂: <?= h($not_accident_male_lifespan) ?>)
         </tr>
     </tr>
 </table>

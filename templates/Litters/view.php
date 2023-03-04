@@ -114,15 +114,15 @@
                     <p><?= h($litter->dam[0]->variety) ?><p>
                     <table class="caption" align="center">
                         <tr>
-                            <th>Age at litter birth:</th>
+                            <th><?= __('Age at litter birth:') ?></th>
                             <td><?= h($litter->dam_age_in_months) ?></td>
                         </tr>
                         <tr>
-                            <th>Reached age:</th>
+                            <th><?= __('Reached age:') ?></th>
                             <td><?= h($litter->dam[0]->age_string) ?></td>
                         </tr>
                         <tr>
-                            <th>Death cause:</th>
+                            <th><?= __('Death cause:') ?></th>
                             <td><?= h($litter->dam[0]->main_death_cause) ?></td>
                         </tr>
                     </table>
@@ -138,15 +138,15 @@
                         <p><?= h($litter->sire[0]->variety) ?><p>
                         <table class="caption" align="center">
                             <tr>
-                                <th>Age at litter birth:</th>
+                                <th><?= __('Age at litter birth:') ?></th>
                                 <td><?= h($litter->sire_age_in_months) ?></td>
                             </tr>
                             <tr>
-                                <th>Reached age:</th>
+                                <th><?= __('Reached age:') ?></th>
                                 <td><?= h($litter->sire[0]->age_string) ?></td>
                             </tr>
                             <tr>
-                                <th>Death cause:</th>
+                                <th><?= __('Death cause:') ?></th>
                                 <td><?= h($litter->sire[0]->main_death_cause) ?></td>
                             </tr>
                         </table>
@@ -156,15 +156,15 @@
                         <p><?= __('Unknown') ?><p>
                         <table class="caption" align="center">
                             <tr>
-                                <th>Age at litter birth:</th>
+                                <th><?= __('Age at litter birth:') ?></th>
                                 <td><?= __('Unknown') ?></td>
                             </tr>
                             <tr>
-                                <th>Reached age:</th>
+                                <th><?= __('Reached age:') ?></th>
                                 <td><?= __('Unknown') ?></td>
                             </tr>
                             <tr>
-                                <th>Death cause:</th>
+                                <th><?= __('Death cause:') ?></th>
                                 <td><?= __('Unknown') ?></td>
                             </tr>
                         </table>
@@ -172,7 +172,7 @@
                 </div>
             </div>
 
-            <h2>Litter summary</h2>
+            <h2><?= __('Litter summary') ?></h2>
             <table class="condensed">
                 <tr>
                     <th><?= __('Prefix') ?></th>
@@ -203,7 +203,7 @@
                     </tr>
             </table>
 
-            <h2>Ratteries</h2>
+            <h2><?= __('Ratteries') ?></h2>
             <?php if (!empty($litter->contributions)) : ?>
             <div class="table-responsive">
                 <table class="condensed">
@@ -227,7 +227,7 @@
             </div>
             <?php endif; ?>
 
-            <h2>Offspring</h2>
+            <h2><?= __('Offspring') ?></h2>
             <?php if (!empty($litter->offspring_rats)) : ?>
                 <?= $this->element('simple_rats', [
                     'rubric' => '',
@@ -241,7 +241,7 @@
                 ]) ?>
             <?php endif; ?>
 
-            <h2>Statistics</h2>
+            <h2><?= __('Statistics') ?></h2>
 
             <?php if ($stats['survivors'] > 0) : ?>
                 <div class="message warning">
@@ -266,23 +266,23 @@
             <table class="condensed">
                 <tr>
                     <th><?= __('Average lifespan:') ?></th>
-                    <td><?= h($stats['lifespan']) .' months' ?> (♀: <?= h($stats['female_lifespan']) ?>, ♂: <?= h($stats['male_lifespan']) ?>)</td>
+                    <td><?= __('{0} months', [h($stats['lifespan'])]) ?> (♀: <?= h($stats['female_lifespan']) ?>, ♂: <?= h($stats['male_lifespan']) ?>)</td>
                 </tr>
 
                 <tr>
-                    <th> ⨽ infant mortality excluded:</th>
-                    <td> ⨽ <?= h($stats['not_infant_lifespan']) . __(' months') ?> (♀: <?= h($stats['female_not_infant_lifespan']) ?>, ♂: <?= h($stats['male_not_infant_lifespan']) ?>)</td>
+                    <th> ⨽ <?= __('infant mortality excluded:') ?></th>
+                    <td> ⨽ <?= __('{0} months', [h($stats['not_infant_lifespan'])]) ?> (♀: <?= h($stats['female_not_infant_lifespan']) ?>, ♂: <?= h($stats['male_not_infant_lifespan']) ?>)</td>
                 </tr>
                 <tr>
-                    <th> ⨽ accidents excluded:</th>
-                    <td> ⨽ <?= h($stats['not_accident_lifespan']) . __(' months') ?> (♀: <?= h($stats['female_not_accident_lifespan']) ?>, ♂: <?= h($stats['male_not_accident_lifespan']) ?>)</td>
+                    <th> ⨽ <?= __('accidents excluded:') ?></th>
+                    <td> ⨽ <?= __('{0} months', [h($stats['not_accident_lifespan'])]) ?> (♀: <?= h($stats['female_not_accident_lifespan']) ?>, ♂: <?= h($stats['male_not_accident_lifespan']) ?>)</td>
                 </tr>
             </table>
 
             <canvas id="mortality-chart"></canvas>
 
             <div class="signature">
-                &mdash; Created on <?= $litter->created->i18nFormat('dd/MM/yyyy') ?> by <?= $litter->user->username ?>. <?= ($litter->modified != $litter->created) ? 'Last modified on ' . $litter->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
+                &mdash; <?= __('Created on {0} by {1}.', [$litter->created->i18nFormat('dd/MM/yyyy'), $litter->user->username]) ?>  <?= ($litter->modified != $litter->created) ? __('Last modified on {0}.', [$litter->modified->i18nFormat('dd/MM/yyyy')]) : '' ?>
             </div>
         </div>
 

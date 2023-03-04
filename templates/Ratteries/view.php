@@ -114,61 +114,61 @@
                 <h3>Breeding statistics</h3>
                 <table class="condensed stats">
                     <tr>
-                        <th>Litters recorded under this prefix:</th>
+                        <th><?= __('Litters recorded under this prefix:') ?></th>
                         <td><?= h($stats['inLitterCount']) ?> litter<?= h($stats['inLitterCount']<2) ? '' : 's' ?></td>
                     </tr>
                     <tr>
-                        <th>Rats recorded under this prefix:</th>
+                        <th><?= ('Rats recorded under this prefix:') ?></th>
                         <td><?= h($stats['ratCount']) ?> rats</td>
                     </tr>
                     <tr>
-                        <th> ⨽ females:</th>
+                        <th> ⨽ <?= __('females:') ?></th>
                         <td> ⨽ <?= h($stats['femaleCount']) . ' females (' . h($stats['femaleProportion']) .' %)' ?></td>
                     </tr>
                     <tr>
-                        <th> ⨽ males:</th>
+                        <th> ⨽ <?= __('males:') ?></th>
                         <td> ⨽ <?= h($stats['maleCount']) . ' males (' . h($stats['maleProportion']) .' %)' ?></td>
                     </tr>
                 </table>
 
-                <h3>Lifespan statistics</h3>
+                <h3><?= __('Lifespan statistics') ?></h3>
                 <?php if($stats['ratCount'] == 0 && $stats['outRatCount'] > 0) : ?>
-                    <div class="message">This prefix is only used in external litters.</div>
+                    <div class="message"><?= __('This prefix is only used in external litters.') ?></div>
                 <?php else : ?>
                     <?php if ($stats['ratCount'] == 0 && $stats['outRatCount'] == 0) : ?>
-                        <div class="message error">No recorded rat is associated with this origin.</div>
+                        <div class="message error"><?= __('No recorded rat is associated with this origin.')</div>
                     <?php else : ?>
                         <table class="condensed stats">
                             <tr>
-                                <th>Rats recorded as deceased:</th>
+                                <th><?= __('Rats recorded as deceased:') ?></th>
                                 <td><?= h($stats['presumedDeadRatCount']) ?> rat<?= h($stats['presumedDeadRatCount']<2) ? '' : 's' ?> (<?= h($stats['deadRatProportion']) ?> % of recorded rats)</td>
                             </tr>
                             <tr>
-                                <th> ⨽ declared with known date:</th>
+                                <th> ⨽ <?= __('declared with known date:') ?></th>
                                 <td> ⨽ <?= h($stats['deadRatCount']) ?> rat<?= h($stats['deadRatCount']<2) ? '' : 's' ?> (<?= h($stats['followedRatProportion']) ?> %)</td>
                             </tr>
                             <tr>
-                                <th> ⨽ presumed dead:</th>
+                                <th> ⨽ <?= __('presumed dead:') ?></th>
                                 <td> ⨽ <?= h($stats['lostRatCount']) ?> rat<?= h($stats['lostRatCount']<2) ? '' : 's' ?> (<?= h($stats['lostRatProportion']) ?> %)</td>
                             </tr>
                         </table>
                         <?php if ($stats['deadRatCount'] > 9) : ?>
                             <table class="condensed stats">
                                 <tr>
-                                    <th>Average lifespan of rats with this prefix:</th>
+                                    <th><?= __('Average lifespan of rats with this prefix:') ?></th>
                                     <td><?= h($stats['deadRatAge']) ?> months (♀: <?= h($stats['deadFemaleAge']) ?>, ♂: <?= h($stats['deadMaleAge']) ?>)</td>
                                 </tr>
                                 <tr>
-                                    <th> ⨽ infant mortality excluded:</th>
+                                    <th> ⨽ <?= __('infant mortality excluded:') ?></th>
                                     <td> ⨽ <?= h($stats['deadRatAgeAdult']) ?> months (♀: <?= h($stats['deadFemaleAgeAdult']) ?>, ♂: <?= h($stats['deadMaleAgeAdult']) ?>)</td>
                                 </tr>
                                 <tr>
-                                    <th> ⨽ accidents excluded:</th>
+                                    <th> ⨽ <?= __('accidents excluded:') ?></th>
                                     <td> ⨽ <?= h($stats['deadRatAgeHealthy']) ?> months (♀: <?= h($stats['deadFemaleAgeHealthy']) ?>, ♂: <?= h($stats['deadMaleAgeHealthy']) ?>)</td>
                                 </tr>
                             </table>
                         <?php else : ?>
-                            <div class="message">There aren't enough rats with consolidated information to compute relevant mortality statistics.</div>
+                            <div class="message"><?= __('There aren’t enough rats with consolidated information to compute relevant mortality statistics.') ?></div>
                         <?php endif; ?>
                     <?php endif; ?>
                 <?php endif; ?>
@@ -176,7 +176,7 @@
             <?php else : ?> <!-- non generic rattery -->
                 <div class="row row-reverse row-with-photo">
                     <div class="column-responsive column-60">
-                        <h2>Information</h2>
+                        <h2><?= __('Information') ?></h2>
                         <table class="aside-photo">
                             <tr>
                                 <!-- add user first and last name if not anonymous ? -->
@@ -226,42 +226,42 @@
 
                 <h2><?= __('Statistics') ?></h2>
                 <?php if ($stats['ratCount'] == 0 && $stats['outRatCount'] == 0) : ?>
-                    <div class="message error">No recorded rat was born in (or in partnership with) this rattery.</div>
+                    <div class="message error"><?= __('No recorded rat was born in (or in partnership with) this rattery.') ?></div>
                 <?php else : ?>
                     <details open>
-                        <summary>Breeding statistics</summary>
+                        <summary><?= __('Breeding statistics') ?></summary>
                         <table class="condensed stats">
                             <tr>
-                                <th>Breeding activity period:</th>
+                                <th><?= __('Breeding activity period:') ?></th>
                                 <td><?= h($stats['activityYears']) ?></td>
                             </tr>
                         </table>
                         <table class="condensed stats">
                             <tr>
-                                <th>Total breeding activity:</th>
+                                <th><?= __('Total breeding activity:') ?></th>
                                 <td><?= h($stats['inLitterCount']+$stats['outLitterCount']) ?> litter<?= ($stats['inLitterCount']+$stats['outLitterCount'])<2 ? '' : 's' ?>,
                                     <?= h($stats['inRatCount']+$stats['outRatCount']) ?> pup<?= ($stats['inRatCount']+$stats['outRatCount'])<2 ? '' : 's' ?></td>
                             </tr>
                             <tr>
-                                <th> ⨽ internal (born in the rattery):</th>
+                                <th> ⨽ <?= __('internal (born in the rattery):') ?></th>
                                 <td> ⨽ <?= h($stats['inLitterCount']) ?> litter<?= h($stats['inLitterCount']<2) ? '' : 's' ?>, <?= h($stats['inRatCount']) ?> pup<?= h($stats['inRatCount']<2) ? '' : 's' ?></td>
                             </tr>
                             <tr>
-                                <th> ⨽ external (other contributed litters):</th>
+                                <th> ⨽ <?= __('external (other contributed litters):') ?></th>
                                 <td> ⨽ <?= h($stats['outLitterCount']) ?> litter<?= h($stats['outLitterCount']<2) ? '' : 's' ?>, <?= h($stats['outRatCount']) ?> pup<?= h($stats['outRatCount']<2) ? '' : 's' ?><!--, with xx different partner ratteries--></td>
                             </tr>
                         </table>
                         <table class="condensed stats">
                             <tr>
-                                <th>Rat records (born in the rattery):</th>
+                                <th><?= __('Rat records (born in the rattery):') ?></th>
                                 <td><?= h($stats['ratCount']) ?> rat<?= h($stats['ratCount']<2) ? '' : 's' ?></td>
                             </tr>
                             <tr>
-                                <th> ⨽ females:</th>
+                                <th> ⨽ <?= __('females:') ?></th>
                                 <td> ⨽ <?= h($stats['femaleCount']) . ' female'. (h($stats['femaleCount']<2) ? '' : 's') . ' (' . h($stats['femaleProportion']) .' %)' ?></td>
                             </tr>
                             <tr>
-                                <th> ⨽ males:</th>
+                                <th> ⨽ <?= __('males:') ?></th>
                                 <td> ⨽ <?= h($stats['maleCount']) . ' male'. (h($stats['maleCount']<2) ? '' : 's') . ' (' . h($stats['maleProportion']) .' %)' ?></td>
                             </tr>
                         </table>
@@ -269,7 +269,7 @@
 
                     <?php if($rattery->wants_statistic) : ?>
                         <details>
-                            <summary>More breeding statistics</summary>
+                            <summary><?= __('More breeding statistics') ?></summary>
                             <table class="condensed stats">
                                 <tr>
                                     <th><?= __('Average mother age:') ?></th>
@@ -294,42 +294,42 @@
                         </details>
 
                         <?php if($stats['ratCount'] == 0 && $stats['outRatCount'] > 0) : ?>
-                            <div class="message">This rattery only had external litters. Mortality statistics can be consulted on each of their contributed litter sheets. </div>
+                            <div class="message"><?= __('This rattery only had external litters. Mortality statistics can be consulted on each of their contributed litter sheets.') ?> </div>
                         <?php else : ?>
                             <?php if ($stats['deadRatCount'] > 9) : ?>
                                 <details open>
-                                    <summary>Lifespan statistics</summary>
+                                    <summary><?= __('Lifespan statistics') ?></summary>
                                     <table class="condensed stats">
                                         <tr>
-                                            <th>Bred rats recorded as deceased:</th>
+                                            <th><?= __('Bred rats recorded as deceased:' ?>'</th>
                                             <td><?= h($stats['presumedDeadRatCount']) ?> rat<?= h($stats['presumedDeadRatCount']<2) ? '' : 's' ?> (<?= h($stats['deadRatProportion']) ?> % of recorded bred rats)</td>
                                         </tr>
                                         <tr>
-                                            <th> ⨽ declared with known date:</th>
+                                            <th> ⨽ <?= __('declared with known date:') ?></th>
                                             <td> ⨽ <?= h($stats['deadRatCount']) ?> rat<?= h($stats['deadRatCount']<2) ? '' : 's' ?> (<?= h($stats['followedRatProportion']) ?> %)</td>
                                         </tr>
                                         <tr>
-                                            <th> ⨽ presumed dead:</th>
+                                            <th> ⨽ <?= __('presumed dead:') ?></th>
                                             <td> ⨽ <?= h($stats['lostRatCount']) ?> rat<?= h($stats['lostRatCount']<2) ? '' : 's' ?> (<?= h($stats['lostRatProportion']) ?> %)</td>
                                         </tr>
                                     </table>
                                     <table class="condensed stats">
                                         <tr>
-                                            <th>Average lifespan of bred rats:</th>
+                                            <th><?= __('Average lifespan of bred rats:') ?></th>
                                             <td><?= h($stats['deadRatAge']) ?> months (♀: <?= h($stats['deadFemaleAge']) ?>, ♂: <?= h($stats['deadMaleAge']) ?>)</td>
                                         </tr>
                                         <tr>
-                                            <th> ⨽ infant mortality excluded:</th>
+                                            <th> ⨽ <?= __('infant mortality excluded:') ?></th>
                                             <td> ⨽ <?= h($stats['deadRatAgeAdult']) ?> months (♀: <?= h($stats['deadFemaleAgeAdult']) ?>, ♂: <?= h($stats['deadMaleAgeAdult']) ?>)</td>
                                         </tr>
                                         <tr>
-                                            <th> ⨽ accidents excluded:</th>
+                                            <th> ⨽ <?= __('accidents excluded:') ?></th>
                                             <td> ⨽ <?= h($stats['deadRatAgeHealthy']) ?> months (♀: <?= h($stats['deadFemaleAgeHealthy']) ?>, ♂: <?= h($stats['deadMaleAgeHealthy']) ?>)</td>
                                         </tr>
                                     </table>
                                     <table class="condensed stats">
                                         <tr>
-                                            <th>Oldest bred rat:</th>
+                                            <th><?= __('Oldest bred rat:') ?></th>
                                             <td><?= ! is_null($champion) ?
                                                 $this->Html->link(h($champion->usual_name),['controller' => 'Rats', 'action' => 'view', $champion->id]) . __(' (deceased at ') . h($champion->champion_age_string) . ')' :
                                                 __('No eligible champion')
@@ -339,10 +339,10 @@
                                 </details>
 
                                 <details>
-                                    <summary>Death causes statistics</summary>
+                                    <summary><?= __('Death causes statistics') ?></summary>
                                     <table class="condensed stats">
                                         <tr>
-                                            <th>Primary death causes by decreasing frequency:</th>
+                                            <th><?= __('Primary death causes by decreasing frequency:') ?></th>
                                         </tr>
                                     </table>
                                     <table class="condensed stats histogram">
@@ -360,7 +360,7 @@
                                     </table>
                                     <table class="condensed stats">
                                         <tr>
-                                            <th>Secondary death causes by decreasing frequency:</th>
+                                            <th><?= __('Secondary death causes by decreasing frequency:') ?></th>
                                         </tr>
                                     </table>
                                     <table class="condensed stats histogram">
@@ -380,42 +380,42 @@
 
                             <?php else : ?>
                                 <details open>
-                                    <summary>Lifespan statistics</summary>
+                                    <summary><?= __('Lifespan statistics') ?></summary>
                                     <table class="condensed stats">
                                         <tr>
-                                            <th>Bred rats recorded as deceased:</th>
+                                            <th><?= __('Bred rats recorded as deceased:') ?></th>
                                             <td><?= h($stats['presumedDeadRatCount']) ?> rat<?= h($stats['presumedDeadRatCount']<2) ? '' : 's' ?> (<?= h($stats['deadRatProportion']) ?> % of recorded bred rats)</td>
                                         </tr>
                                         <tr>
-                                            <th> ⨽ declared with known date:</th>
+                                            <th> ⨽ <?= __('declared with known date:') ?></th>
                                             <td> ⨽ <?= h($stats['deadRatCount']) ?> rat<?= h($stats['deadRatCount']<2) ? '' : 's' ?> (<?= h($stats['followedRatProportion']) ?> %)</td>
                                         </tr>
                                         <tr>
-                                            <th> ⨽ presumed dead:</th>
+                                            <th> ⨽ <?= __('presumed dead:') ?></th>
                                             <td> ⨽ <?= h($stats['lostRatCount']) ?> rat<?= h($stats['lostRatCount']<2) ? '' : 's' ?> (<?= h($stats['lostRatProportion']) ?> %)</td>
                                         </tr>
                                     </table>
                                 </details>
-                                <div class="message">There aren't enough rats with consolidated information to compute relevant mortality statistics.</div>
+                                <div class="message"><?= __('There aren’t enough rats with consolidated information to compute relevant mortality statistics.') ?></div>
                             <?php endif; ?>
                         <?php endif; ?>
                     <?php else : ?> <!-- treat ratteries not wanting statistics -->
-                        <div class="message warning">The owner of this rattery does not wish to show their full breeding and mortality statistics.</div>
+                        <div class="message warning"><?= __('The owner of this rattery does not wish to show their full breeding and mortality statistics.') ?></div>
                     <?php endif; ?>
 
                 <?php endif; ?>
 
                 <div class="signature">
-                &mdash; Created on <?= $rattery->created->i18nFormat('dd/MM/yyyy') ?>. <?= ($rattery->has('modified') && ($rattery->modified != $rattery->created)) ? 'Last modified on ' . $rattery->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
+                    &mdash; <?= __('Created on {0} by {1}.', [$rattery->created->i18nFormat('dd/MM/yyyy') ?>  <?= ($rattery->modified != $rattery->created) ? __('Last modified on {0}.', [$rattery->modified->i18nFormat('dd/MM/yyyy')]) : '' ?>
                 </div>
             </div>
             <div class="spacer"> </div>
             <div class="ratteries view content">
 
-                <h2>Related entries</h2>
+                <h2><?= __('Related entries') ?></h2>
 
                 <details open>
-                    <summary>Last contributed litters</summary>
+                    <summary><?= __('Last contributed litters' ?></summary>
                     <div class="button-raised">
                         <?= $this->Html->link(__('See all contributed litters'), ['controller' => 'Contributions', 'action' => 'fromRattery', $rattery->id], ['class' => 'button float-right']) ?>
                     </div>
@@ -451,7 +451,7 @@
                 </details>
 
                 <details open>
-                    <summary>Recently modified rats</summary>
+                    <summary><?= __('Recently modified rats') ?></summary>
                     <div class="button-raised">
                         <?= $this->Html->link(__('See all bred rats'), ['controller' => 'Rats', 'action' => 'fromRattery', $rattery->prefix], ['class' => 'button float-right']) ?>
                     </div>

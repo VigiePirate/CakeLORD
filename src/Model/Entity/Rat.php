@@ -5,7 +5,6 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
-use Cake\I18n\Time;
 use Cake\Collection\Collection;
 use Cake\Datasource\FactoryLocator;
 use Cake\Routing\Router;

@@ -13,7 +13,7 @@
     <div class="column-responsive column-90">
         <div class="rats form content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle">Rats</div>
+                <div class="sheet-title pretitle"><?= __('Rats') ?></div>
             </div>
 
             <h1><?= __('Advanced search') ?></h1>

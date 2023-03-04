@@ -41,7 +41,7 @@
             ]); ?>
             <fieldset>
                 <div class="message default">
-                    If the new owner is not registered on LORD, please type and select: <strong>Unregistered.</strong>
+                    <?= __('If the new owner is not registered on LORD, please type and select: <strong>Unregistered.</strong>') ?>
                 </div>
                 <?php
                     echo $this->Form->control('searchkey', [
