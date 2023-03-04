@@ -666,10 +666,10 @@ class Rat extends Entity
         // -1 since the rat itself is put in the list for recursion initialization
         $descendance = [];
         $this->computeDescendance($this->id, $descendance);
-        $stats['descendors'] = count($descendance);
+        $stats['descendors'] = count($descendance) - 1;
         $ancestry = [];
         $this->computeAncestry($this->id, $ancestry);
-        $stats['ancestors'] = count($ancestry);
+        $stats['ancestors'] = count($ancestry) - 1;
         $children = 0;
         foreach ($this->bred_litters as $litter) {
             $children += $litter->pups_number;
@@ -692,29 +692,29 @@ class Rat extends Entity
             'DATEDIFF(NOW(), birth_date) <' => RatsTable::MAXIMAL_AGE
         ]);
 
-        $stats['asc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry]);
-        $stats['asc_female_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry,'sex' => 'F']);
-        $stats['asc_male_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry,'sex' => 'M']);
+        $stats['asc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'Rats.id !=' => $this->id]);
+        $stats['asc_female_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'Rats.id !=' => $this->id, 'sex' => 'F']);
+        $stats['asc_male_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'Rats.id !=' => $this->id, 'sex' => 'M']);
 
-        $stats['asc_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'DeathPrimaryCauses.is_infant IS' => false]);
-        $stats['asc_female_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
-        $stats['asc_male_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['asc_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'Rats.id !=' => $this->id, 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['asc_female_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'Rats.id !=' => $this->id, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['asc_male_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'Rats.id !=' => $this->id, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
 
-        $stats['asc_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
-        $stats['asc_female_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
-        $stats['asc_male_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['asc_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'Rats.id !=' => $this->id, 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['asc_female_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'Rats.id !=' => $this->id, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['asc_male_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'Rats.id !=' => $this->id, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
 
-        $stats['desc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance]);
-        $stats['desc_female_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance,'sex' => 'F']);
-        $stats['desc_male_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance,'sex' => 'M']);
+        $stats['desc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'Rats.id !=' => $this->id]);
+        $stats['desc_female_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'Rats.id !=' => $this->id,'sex' => 'F']);
+        $stats['desc_male_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'Rats.id !=' => $this->id,'sex' => 'M']);
 
-        $stats['desc_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'DeathPrimaryCauses.is_infant IS' => false]);
-        $stats['desc_female_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
-        $stats['desc_male_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['desc_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'Rats.id !=' => $this->id, 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['desc_female_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'Rats.id !=' => $this->id, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false]);
+        $stats['desc_male_not_infant_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'Rats.id !=' => $this->id, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false]);
 
-        $stats['desc_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
-        $stats['desc_female_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
-        $stats['desc_male_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['desc_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'Rats.id !=' => $this->id, 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['desc_female_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'Rats.id !=' => $this->id, 'sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
+        $stats['desc_male_not_accident_lifespan'] = $this->roundLifespan(['Rats.id IN' => $descendance, 'Rats.id !=' => $this->id, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
 
         return $stats;
     }
