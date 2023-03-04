@@ -108,7 +108,7 @@
 
             <!-- to be shown if coi > 0 -->
             <div id="coancestry" class="hide-everywhere">
-                <h2>Coancestry analysis</h2>
+                <h2><?= __('Coancestry analysis') ?></h2>
                 <table id="coancestry-table" class="condensed stats histogram">
                     <th>
                         <div id="coancestry-global" style="opacity:1; width:100%">
@@ -137,5 +137,6 @@
 <script>
     var partialTree = <?php echo $genealogy_json; ?>;
     var ancestorIndex = <?php echo $index_json; ?>;
-    window.onload = setTimeout(init(partialTree, ancestorIndex), 250); // a small timeout to let debugkit loading
+    var jsMessages = <?php echo $js_messages; ?>;
+    window.onload = setTimeout(init(partialTree, ancestorIndex, jsMessages), 250); // a small timeout to let debugkit loading
 </script>

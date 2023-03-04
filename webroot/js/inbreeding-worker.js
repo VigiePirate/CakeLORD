@@ -214,6 +214,7 @@ onmessage = function(evt) {
   var cakeData = JSON.parse(evt.data);
   var partialTree = cakeData.partialTree;
   var ancestorIndex = cakeData.ancestorIndex;
+  var jsMessages = cakeData.jsMessages;
 
   // init values on partial tree and send messages to show them
   var fullTree = partialTree;
@@ -230,7 +231,7 @@ onmessage = function(evt) {
     known: known,
     distinct: distinct,
     founding: founding,
-    common: common
+    common: common,
   });
 
   // expand tree iteratively and update values everytime they changed
@@ -294,5 +295,5 @@ onmessage = function(evt) {
 
   endTime = performance.now();
   cost = Math.trunc(endTime - startTime);
-  setTimeout(postMessage({cost: cost}), 500);
+  setTimeout(postMessage({cost: cost, jsMessages: jsMessages}), 500);
 }

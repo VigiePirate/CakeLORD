@@ -1,18 +1,18 @@
-function showFeedback(cost) {
+function showFeedback(cost, jsMessages) {
   document.getElementById('waiting-message').style.display = 'none';
   document.getElementById('cost').innerHTML = Math.trunc(cost)/1000;
   var costComment;
 
   if (cost <= 2500) {
-    costComment = "Easy peasy.";
+    costComment = jsMessages[0];
   } else if (cost <= 10000) {
-    costComment = "Quite a lot, but I have seen worse.";
+    costComment = jsMessages[1];
   } else if (cost <= 40000) {
-    costComment = "Wow! that was pretty intense.";
+    costComment = jsMessages[2];
   } else if (cost <= 160000) {
-    costComment = "Oops, we hope your device is not smoking.";
+    costComment = jsMessages[3];
   } else {
-    costComment = "You know some LORD’s developers in person, don’t you?";
+    costComment = jsMessages[4];
   }
 
   document.getElementById('cost-comment').innerHTML += costComment;
@@ -31,8 +31,8 @@ function insertPosition(ranks, coi) {
   return i;
 }
 
-function init(partialTree, ancestorIndex) {
-  worker.postMessage(JSON.stringify({partialTree: partialTree, ancestorIndex: ancestorIndex}));
+function init(partialTree, ancestorIndex, jsMessages) {
+  worker.postMessage(JSON.stringify({partialTree: partialTree, ancestorIndex: ancestorIndex, jsMessages: jsMessages}));
 }
 
 /* MAIN */
@@ -125,6 +125,6 @@ worker.onmessage = function(evt) {
   }
 
   if (evt.data.cost != undefined) {
-     showFeedback(evt.data.cost);
+      showFeedback(evt.data.cost, evt.data.jsMessages);
   }
 }
