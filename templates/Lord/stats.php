@@ -177,10 +177,10 @@
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Number of deaths with recorded cause:') ?></th>
-                    <td><?= h($knowingly_dead_rat_count) ?> rats (<?= h(round($knowingly_dead_rat_count/$dead_rat_count,2)*100) ?> % of rats considered as dead) </td>
+                    <td><?= __('{0} rats ({1} % of rats considered as dead)', [$knowingly_dead_rat_count, round($knowingly_dead_rat_count/$dead_rat_count,2)*100]) ?></td>
                 </tr>
                 <tr><th><?= __('By decreasing frequency:') ?></th>
-                <td><span class="comment">* please note that tumours without recorded localization appear as « Autres »</span></td></tr>
+                <td><span class="comment">* <?= __('please note that tumours without recorded localization appear as « Autres »') ?></span></td></tr>
             </table>
 
             <table class="condensed stats histogram">
@@ -202,11 +202,11 @@
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Number of deaths with recorded cause:') ?></th>
-                    <td><?= h($knowingly_dead_rat_count) ?> rats (<?= h(round($knowingly_dead_rat_count/$dead_rat_count,2)*100) ?> % of rats considered as dead) </td>
+                    <td><?= __('{0} rats ({1} % of rats considered as dead)', [$knowingly_dead_rat_count, round($knowingly_dead_rat_count/$dead_rat_count,2)*100]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('By decreasing frequency:') ?></th>
-                    <td><span class="comment">* for rats recorded as dead without precise cause, recorded death category is used instead</span></td>
+                    <td><span class="comment">* <?= __('for rats recorded as dead without precise cause, recorded death category is used instead') ?></span></td>
                 </tr>
             </table>
 
@@ -228,10 +228,10 @@
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Number of tumour-related deaths:') ?></th>
-                    <td><?= h($tumour_dead_count) ?> rats (<?= h(round($tumour_dead_count/$knowingly_dead_rat_count,4)*100) ?> % of rats with known death cause) </td>
+                    <td><?= __('{0} rats ({1} % of rats with known death cause)', [$tumour_dead_count, round($tumour_dead_count/$knowingly_dead_rat_count,4)*100]) ?></td>
                 </tr>
                 <tr><th><?= __('By decreasing frequency:') ?></th>
-                    <td><span class="comment">* please note that tumour localization could not recorded before 2022</span></td>
+                    <td><span class="comment">* <?= __('please note that tumour localization could not recorded before 2022') ?></span></td>
             </tr>
             </table>
             <table class="condensed stats histogram">
