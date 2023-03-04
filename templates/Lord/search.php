@@ -12,12 +12,16 @@
     <h1><?= __('Your search:') . ' ' . __('« ') . h(implode('"', $names)) . __(' »')?></h1> <!-- should be “ ” in English -->
 
     <?php if (($count['rats'] + $count['ratteries'] + $count['users']) == 0) : ?>
-        <div class="message error">Sorry, we haven't found any rat, rattery or user resembling your keyword. Please try with another.</div>
+        <div class="message error"><?= __('Sorry, we haven’t found any rat, rattery or user resembling your keyword. Please try with another.') ?></div>
     <?php else: ?>
         <?php if ($count['rats'] > 10 || $count['ratteries'] > 10 || $count['users'] > 10) : ?>
-            <div class="message warning">We have found <b><?= h($count['rats']) ?></b> rats, <b><?= h($count['ratteries']) ?></b> ratteries and <b><?= h($count['users']) ?></b> users resembling your keyword. Up to the 10 most recently modified of each category are shown below. Please retry with a more specific keyword, or use side buttons below to see browse all the results in each category.</div>
+            <div class="message warning">
+                <?= __('We have found {0} rats, {1} ratteries and {2} users resembling your keyword. Up to the 10 most recently modified of each category are shown below. Please retry with a more specific keyword, or use side buttons below to see browse all the results in each category.', ['<b>'.h($count['rats']).'</b>', '<b>'.h($count['ratteries']).'</b>', '<b>'.h($count['users']).'</b>']) ?>
+            </div>
         <?php else : ?>
-            <div class="message success">We have found <b><?= h($count['rats']) ?></b> rats, <b><?= h($count['ratteries']) ?></b> ratteries and <b><?= h($count['users']) ?></b> users resembling your keyword. They are all shown below.</div>
+            <div class="message success">
+                <?= __('We have found {0} rats, {1} ratteries and {2} users resembling your keyword. They are all shown below.', ['<b>'.h($count['rats']).'</b>', '<b>'.h($count['ratteries']).'</b>', '<b>'.h($count['users']).'</b>']) ?>
+            </div>
         <?php endif ; ?>
     <?php endif ; ?>
 </div>

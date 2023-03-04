@@ -142,7 +142,7 @@
 
             <div class="row row-reverse row-with-photo">
                 <div class="column-responsive column-60">
-                    <h2>Identity</h2>
+                    <h2><?= __('Identity') ?></h2>
                     <table class="aside-photo">
                         <tr>
                             <th><?= __('Identifier') ?></th>
@@ -180,7 +180,7 @@
                 </div>
 
             </div>
-            <h2>Origins</h2>
+            <h2><?= __('Origins') ?></h2>
                 <table class="condensed">
                     <tr>
                         <th><?= __('Birth place') ?></th>
@@ -219,7 +219,7 @@
                     </tr>
                 </table>
 
-            <h2>Description</h2>
+            <h2><?= __('Description') ?></h2>
                 <table class="condensed">
                     <tr>
                         <th><?= __('Color') ?></th>
@@ -341,7 +341,7 @@
                 </div>
             <?php endif; ?>
             <div class="signature">
-                &mdash; Created on <?= $rat->created->i18nFormat('dd/MM/yyyy') ?> by <?= $rat->creator_user->username ?>. <?= ($rat->modified != $rat->created) ? 'Last modified on ' . $rat->modified->i18nFormat('dd/MM/yyyy') .'.' : '' ?>
+                &mdash; <?= __('Created on {0} by {1}.', [$rat->created->i18nFormat('dd/MM/yyyy'), $rat->user->username]) ?>  <?= ($rat->modified != $rat->created) ? __('Last modified on {0}.', [$rat->modified->i18nFormat('dd/MM/yyyy')]) : '' ?>
             </div>
         </div>
 

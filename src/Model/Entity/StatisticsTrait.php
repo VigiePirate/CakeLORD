@@ -716,7 +716,6 @@ trait StatisticsTrait
                     return $q->where(['States.is_reliable IS' => true]);
                     })
                 ->first();
-                ;
         } else {
             $champion = null;
         }

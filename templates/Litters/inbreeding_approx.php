@@ -31,7 +31,7 @@
 
             <?= $this->Flash->render() ?>
 
-            <h2>Summary</h2>
+            <h2><?= __('Summary') ?></h2>
 
             <table class="condensed stats">
                 <tr>
@@ -83,7 +83,7 @@
 
             <?php if ($coefficients['coi'] != 0) : ?>
 
-                <h2>Coancestry analysis</h2>
+                <h2><?= __('Coancestry analysis') ?></h2>
 
                 <table class="condensed stats histogram">
 
