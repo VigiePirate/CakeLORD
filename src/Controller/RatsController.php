@@ -647,7 +647,7 @@ class RatsController extends AppController
 
     /* Pedigree functions */
 
-    public function parentsTree($id=null) {
+    public function parentsTree($id = null) {
         $this->Authorization->skipAuthorization();
 
         if (is_null($id)) {
@@ -674,21 +674,25 @@ class RatsController extends AppController
         }
     }
 
-    public function childrenTree(){
+    public function childrenTree($id = null) {
         $this->Authorization->skipAuthorization();
+
         if ($this->request->is(['ajax'])) {
             $id = $this->request->getQuery('id');
-            $rat = $this->Rats->get($id, [
-                'contain' => ['BredLitters',
-                'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
-                'BredLitters.OffspringRats.Coats','BredLitters.OffspringRats.Colors','BredLitters.OffspringRats.Dilutions','BredLitters.OffspringRats.Markings','BredLitters.OffspringRats.Earsets',
-                'BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
-                'BredLitters.OffspringRats.BirthLitters','BredLitters.OffspringRats.BirthLitters.Contributions'],
-            ]);
+            if (! is_null($id)) {
+                $rat = $this->Rats->get($id, [
+                    'contain' => ['BredLitters',
+                    'BredLitters.OffspringRats','BredLitters.OffspringRats.Ratteries',
+                    'BredLitters.OffspringRats.Coats','BredLitters.OffspringRats.Colors','BredLitters.OffspringRats.Dilutions','BredLitters.OffspringRats.Markings','BredLitters.OffspringRats.Earsets',
+                    'BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
+                    'BredLitters.OffspringRats.BirthLitters','BredLitters.OffspringRats.BirthLitters.Contributions'],
+                ]);
 
-            $children = $rat->children_array;
+                $children = $rat->children_array;
+            } 
             $this->set('_children', $children);
             $this->viewBuilder()->setOption('serialize', ['_children']);
+
         }
     }
 
