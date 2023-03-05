@@ -329,36 +329,43 @@
                     </div>
                     <?php endif; ?>
                 </div>
-                <div class="related staff">
-                    <h3 class="staff"><?= __('Related Litter Snapshots') ?></h3>
+                <div class="related">
+                    <details>
+                        <summary class="staff">
+                            <?= __('Snapshots') ?>
+                        </summary>
                     <?php if (!empty($litter->litter_snapshots)) : ?>
-                    <div class="table-responsive">
-                        <table>
-                            <tr>
-                                <th><?= __('Id') ?></th>
-                                <th><?= __('Data') ?></th>
-                                <th><?= __('Litter Id') ?></th>
-                                <th><?= __('State Id') ?></th>
-                                <th><?= __('Created') ?></th>
-                                <th class="actions"><?= __('Actions') ?></th>
-                            </tr>
-                            <?php foreach ($litter->litter_snapshots as $litterSnapshots) : ?>
-                            <tr>
-                                <td><?= h($litterSnapshots->id) ?></td>
-                                <td><?= h($litterSnapshots->data) ?></td>
-                                <td><?= h($litterSnapshots->litter_id) ?></td>
-                                <td><?= h($litterSnapshots->state_id) ?></td>
-                                <td><?= h($litterSnapshots->created) ?></td>
-                                <td class="actions">
-                                    <?= $this->Html->link(__('View'), ['controller' => 'LitterSnapshots', 'action' => 'view', $litterSnapshots->id]) ?>
-                                    <?= $this->Html->link(__('Edit'), ['controller' => 'LitterSnapshots', 'action' => 'edit', $litterSnapshots->id]) ?>
-                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'LitterSnapshots', 'action' => 'delete', $litterSnapshots->id], ['confirm' => __('Are you sure you want to delete # {0}?', $litterSnapshots->id)]) ?>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </table>
-                    </div>
-                    <?php endif; ?>
+                        <div class="table-responsive">
+                            <table class="summary">
+                                <thead>
+                                    <th><?= __('Created') ?></th>
+                                    <th><?= __('Differences') ?></th>
+                                    <th><?= __('State') ?></th>
+                                    <th class="actions"><?= __('Actions') ?></th>
+                                </thead>
+                                <?php foreach ($litter->litter_snapshots as $litterSnapshots) : ?>
+                                <tr>
+                                    <td><?= h($litterSnapshots->created) ?></td>
+                                    <td><?= h($snap_diffs[$litterSnapshots->id]) ?></td>
+                                    <td><?= h($litterSnapshots->state->symbol) ?></td>
+                                    <td class="actions">
+                                        <span class="nowrap">
+                                            <?= $this->Html->image('/img/icon-view.svg', [
+                                                'url' => ['controller' => 'LitterSnapshots', 'action' => 'view', $litterSnapshots->id],
+                                                'class' => 'action-icon',
+                                                'alt' => __('View Snapshot')]) ?>
+                                            <?= $this->Html->image('/img/icon-restore.svg', [
+                                                'url' => ['controller' => 'Litters', 'action' => 'restore', $litter->id, $litterSnapshots->id],
+                                                'class' => 'action-icon',
+                                                'alt' => __('Restore Snapshot')]) ?>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        </div>
+                        <?php endif; ?>
+                    </details>
                 </div>
             <?php endif; ?>
         </div>

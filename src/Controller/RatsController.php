@@ -278,13 +278,20 @@ class RatsController extends AppController
     public function edit($id = null)
     {
         $rat = $this->Rats->get($id, [
-            'contain' => ['BirthLitters', 'BredLitters', 'Singularities', 'Ratteries', 'DeathPrimaryCauses', 'States'],
+            'contain' => [
+                'OwnerUsers',
+                'CreatorUsers',
+                'BirthLitters',
+                'Singularities',
+                'Ratteries',
+                'DeathPrimaryCauses',
+                'DeathSecondaryCauses',
+                'States'
+            ],
         ]);
         $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
-            // Force setting pedigree_identifier to save the computed value
-            $rat->set('pedigree_identifier', $this->request->getData('pedigree_identifier'));
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
                 return $this->redirect(['action' => 'view', $id]);
@@ -307,7 +314,36 @@ class RatsController extends AppController
         //$bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
         //$this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
-        $this->set(compact('rat', 'ownerUsers', 'ratteries', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'singularities'));
+
+        $user = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($user) && $user->can('staffEdit', $rat);
+
+        if ($show_staff) {
+            $generic = $this->Rats->Ratteries->find()->where(['is_generic IS' => true]);
+            $rattery = $this->Rats->Ratteries->find()->where(['id' => $rat->rattery_id]);
+            $origins = $generic->all()->append($rattery)->combine('id', 'full_name');
+            $this->set(compact('origins'));
+        }
+
+        $this->Flash->warning( __('For data coherence, modifications of rats are restricted. Please, contact a staff member to change origins or birth date.'));
+
+        $this->set(compact(
+            'rat',
+            'ownerUsers',
+            'ratteries',
+            'colors',
+            'eyecolors',
+            'dilutions',
+            'markings',
+            'earsets',
+            'coats',
+            'deathPrimaryCauses',
+            'deathSecondaryCauses',
+            'states',
+            'singularities',
+            'user',
+            'show_staff'
+        ));
     }
 
     /**
@@ -689,7 +725,7 @@ class RatsController extends AppController
                 ]);
 
                 $children = $rat->children_array;
-            } 
+            }
             $this->set('_children', $children);
             $this->viewBuilder()->setOption('serialize', ['_children']);
 

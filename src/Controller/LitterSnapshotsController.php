@@ -36,6 +36,7 @@ class LitterSnapshotsController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $litterSnapshot = $this->LitterSnapshots->get($id, [
             'contain' => ['Litters', 'States'],
         ]);
