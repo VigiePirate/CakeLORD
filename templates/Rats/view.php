@@ -397,18 +397,17 @@
                         <?php if (!empty($rat->rat_snapshots)) : ?>
                         <div class="table-responsive">
                             <table class="summary">
-                                <tr>
+                                <thead>
                                     <th><?= __('Created') ?></th>
                                     <th><?= __('Differences') ?></th>
                                     <!-- <th><?= __('Data') ?></th> -->
                                     <th><?= __('State') ?></th>
                                     <th class="actions"><?= __('Actions') ?></th>
-                                </tr>
+                                </thead>
                                 <?php foreach ($rat->rat_snapshots as $ratSnapshots) : ?>
                                 <tr>
                                     <td><?= h($ratSnapshots->created) ?></td>
                                     <td><?= h($snap_diffs[$ratSnapshots->id]) ?></td>
-                                    <!-- <td><?= h($ratSnapshots->data) ?></td> -->
                                     <td><?= h($ratSnapshots->state->symbol) ?></td>
                                     <td class="actions">
                                         <span class="nowrap">

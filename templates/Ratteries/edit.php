@@ -23,7 +23,7 @@
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= __('Ratteries') ?></div>
             </div>
-            <h1><?=__('Edit rattery ') . h($rattery->full_name) ?></h1>
+            <h1><?=__('Edit {0}', [h($rattery->full_name)]) ?></h1>
             <?= $this->Form->setValueSources(['context', 'data'])->create($rattery) ?>
             <fieldset>
                 <?php

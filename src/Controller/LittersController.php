@@ -74,7 +74,7 @@ class LittersController extends AppController
                 'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions',
                 'Sire', 'Sire.Markings', 'Sire.Dilutions', 'Sire.Colors', 'Sire.Coats', 'Sire.Earsets','Sire.DeathPrimaryCauses','Sire.DeathSecondaryCauses',
                 'Dam', 'Dam.Markings', 'Dam.Dilutions', 'Dam.Colors', 'Dam.Coats', 'Dam.Earsets','Dam.DeathPrimaryCauses','Dam.DeathSecondaryCauses',
-                'Ratteries', 'Contributions', 'Conversations', 'LitterSnapshots',
+                'Ratteries', 'Contributions', 'Conversations', 'LitterSnapshots', 'LitterSnapshots.States',
             ],
         ]);
 
@@ -106,9 +106,14 @@ class LittersController extends AppController
             $this->set(compact('next_ko_state','next_ok_state'));
         };
 
+        $snap_diffs = [];
+        foreach ($litter->litter_snapshots as $snapshot) {
+            $snap_diffs[$snapshot->id] = $this->Litters->snapCompareAsString($litter, $snapshot->id);
+        }
+
         $user = $this->request->getAttribute('identity');
 
-        $this->set(compact('litter', 'offsprings', 'stats', 'user'));
+        $this->set(compact('litter', 'offsprings', 'stats', 'snap_diffs', 'user'));
     }
 
     /**

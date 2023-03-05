@@ -307,7 +307,6 @@ class RatsTable extends Table
             $entity->earset = \Cake\Datasource\FactoryLocator::get('Table')->get('Earsets')->get($entity->earset_id);
             $entity->eyecolor = \Cake\Datasource\FactoryLocator::get('Table')->get('Eyecolors')->get($entity->eyecolor_id);
             $entity->marking = \Cake\Datasource\FactoryLocator::get('Table')->get('Markings')->get($entity->marking_id);
-            //$entity->singularities = \Cake\Datasource\FactoryLocator::get('Table')->get('Singularities')
 
             // contain rattery for origin checks
             if (isset($data['rattery_id'])) {
