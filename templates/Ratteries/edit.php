@@ -27,7 +27,12 @@
             <?= $this->Form->setValueSources(['context', 'data'])->create($rattery) ?>
             <fieldset>
                 <?php
-                    echo $this->Form->control('prefix');
+                    echo $this->Form->control('prefix', [
+                        'readonly' => true
+                    ]);
+
+                ?>
+                <?php
                     echo $this->Form->control('name');
 
                     echo $this->Form->control('owner_username', [
