@@ -277,6 +277,15 @@ class RatsTable extends Table
                 }
             }
         }
+
+        // staff edit case (prefix edition)
+        if (
+            ! isset($data['rattery_id'])
+            && ! isset($data['rattery_name'])
+            && isset($data['generic_rattery_id'])
+        ) {
+            $data['rattery_id'] = $data['generic_rattery_id'];
+        }
     }
 
     /**

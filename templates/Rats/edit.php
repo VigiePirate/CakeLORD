@@ -131,11 +131,43 @@
                     ]);
                 ?>
 
-                <?php echo $this->Form->hidden('creator_user_id', [
-                    'name' => 'creator_user_id',
-                    'value' => $rat->creator_user->username,
-                ]);
-            ?>
+                <?php
+                    echo $this->Form->hidden('creator_user_id', [
+                        'name' => 'creator_user_id',
+                        'value' => $rat->creator_user->username,
+                    ]);
+                    ?>
+
+                <?php if ($user->can('staffEdit', $rat)) : ?>
+                    <h2 class="staff"><?= __('Staff-only') ?></h2>
+                    <div class="row row-reverse">
+                        <div class="column-responsive column-50">
+                            <?php
+                                echo $this->Form->control('generic_rattery_id', [
+                                    'id' => 'generic-rattery-input',
+                                    'name' => 'generic_rattery_id',
+                                    'label' => __('Attach rat to a generic rattery'),
+                                    'type' => 'radio',
+                                    'options' => $generic,
+                                    'empty' => false,
+                                ]);
+
+                                echo $this->Form->control('update_identifier', [
+                                    'label' => ['text' => __('Update pedigree identifier?')],
+                                    'type' => 'checkbox',
+                                    'default' => false,
+                                ]);
+                            ?>
+                        </div>
+                        <div class="column-responsive column-50">
+                            <div class="message warning">
+                                <p><?= __('Use with care!')?></p>
+                                <?= __('This section allows to change the rat prefix to a generic prefix only. Leave unselected to keep rat prefix unchanged, or used the rat attach function for a non-generic prefix.') ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif ; ?>
+
             </fieldset>
             <?= $this->Form->button(__('Save changes')) ?>
             <?= $this->Form->end() ?>
