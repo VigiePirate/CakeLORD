@@ -290,7 +290,16 @@ class RatsController extends AppController
         ]);
         $this->Authorization->authorize($rat);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+            $data = $this->request->getData();
+            $rat = $this->Rats->patchEntity($rat, $data);
+            if (isset($data['generic_rattery_id']) && $data['update_identifier']) {
+                $ratteries = $this->loadModel('Ratteries');
+                $prefix = $ratteries->get($data['generic_rattery_id'])->prefix;
+                $rat->pedigree_identifier =  $prefix . $rat->id . $rat->sex;
+                $rat->is_pedigree_custom = false;
+            } else {
+                $rat->is_pedigree_custom = true;
+            }
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('The rat has been saved.'));
                 return $this->redirect(['action' => 'view', $id]);
@@ -305,6 +314,7 @@ class RatsController extends AppController
         $earsets = $this->Rats->Earsets->find('list', ['limit' => 200]);
         $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
+        $generic = $this->Rats->Ratteries->find()->where(['is_generic IS' => true])->all()->combine('id', 'full_name');
 
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('staffEdit', $rat);
@@ -320,6 +330,7 @@ class RatsController extends AppController
             'earsets',
             'coats',
             'singularities',
+            'generic',
             'user',
             'show_staff'
         ));
