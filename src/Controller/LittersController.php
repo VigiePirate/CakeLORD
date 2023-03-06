@@ -415,6 +415,67 @@ class LittersController extends AppController
     }
 
     /**
+     * AttachRat method
+     *
+     * @param string|null $id Litter id.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function attachRat($id = null)
+    {
+        $litter = $this->Litters->get($id, [
+            'contain' => [
+                'Sire', 'Sire.Ratteries', 'Sire.BirthLitters', 'Sire.BirthLitters.Contributions',
+                'Dam', 'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions',
+                'ParentRats',
+                'OffspringRats', 'OffspringRats.DeathPrimaryCauses',
+                'Ratteries',
+                'Contributions', 'Contributions.Ratteries',
+                'States'
+            ],
+        ]);
+
+        $this->Authorization->authorize($litter, 'staffEdit');
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $rats = $this->loadModel('Rats');
+            $data = $this->request->getData();
+            $rat = $rats->get($data['rat_id']);
+
+            $rat->litter_id = $id;
+            $rat->birth_date = $litter->birth_date;
+            $rat->rattery_id = $litter->contributions['0']->rattery_id;
+            if ($data['update_identifier']) {
+                $rat->pedigree_identifier =  $litter->contributions['0']->rattery->prefix . $rat->id . $rat->sex ;
+                $rat->is_pedigree_custom = false;
+            } else {
+                $rat->is_pedigree_custom = true;
+            }
+
+            $rats->removeBehavior('State');
+            if ($rats->save($rat, ['checkrules' => false, 'associated' => []])) {
+                $this->Flash->success(__('This rat has been successfully attached to the requested birth litter. Pups number might have to be checked.'));
+                $count = $litter->countMy('rats', 'litter');
+                if ($litter->pups_number < $count) {
+                    $litter->pups_number = $litter->pups_number + 1;
+                    $this->save($litter, ['checkRules' => false, 'atomic' => false]);
+                }
+                return $this->redirect(['controller' => 'rats', 'action' => 'view', $rat->id]);
+            } else {
+                $this->Flash->error(__('We could not attach the selected rat to this litter.'));
+                return $this->redirect(['controller' => 'litters', 'action' => 'attachRat', $litter->id]);
+            }
+            $rats->addBehavior('State');
+
+        }
+
+        $user = $this->request->getAttribute('identity');
+        $show_staff = !is_null($user) && $user->can('staffEdit', $litter);
+
+        $this->set(compact('litter', 'user', 'show_staff'));
+    }
+
+    /**
      * Delete method
      *
      * @param string|null $id Litter id.
@@ -777,8 +838,6 @@ class LittersController extends AppController
 
         $this->set(compact('litter', 'genealogy_json', 'index_json', 'js_messages'));
     }
-
-    /* State changes */
 
     public function freeze($id)
     {

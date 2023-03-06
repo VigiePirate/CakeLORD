@@ -277,8 +277,6 @@ class RatsTable extends Table
                 }
             }
         }
-
-        // FIXME singularities
     }
 
     /**

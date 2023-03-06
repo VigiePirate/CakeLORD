@@ -281,7 +281,6 @@ class RatsController extends AppController
             'contain' => [
                 'OwnerUsers',
                 'CreatorUsers',
-                'BirthLitters',
                 'Singularities',
                 'Ratteries',
                 'DeathPrimaryCauses',
@@ -298,48 +297,28 @@ class RatsController extends AppController
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
         }
-        $ownerUsers = $this->Rats->OwnerUsers->find('list', ['limit' => 500]);
-        $ratteries = $this->Rats->Ratteries->find('list', ['limit' => 200]);
-        //$birthLitters = $this->Rats->BirthLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
+
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
         $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
         $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
         $markings = $this->Rats->Markings->find('list', ['limit' => 200]);
         $earsets = $this->Rats->Earsets->find('list', ['limit' => 200]);
         $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
-        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list', ['limit' => 200]);
-        $deathSecondaryCauses = $this->Rats->DeathSecondaryCauses->find('list', ['limit' => 200]);
-        $creatorUsers = $this->Rats->CreatorUsers->find('list', ['limit' => 200]);
-        $states = $this->Rats->States->find('list', ['limit' => 200]);
-        //$bredLitters = $this->Rats->BredLitters->find('list', ['limit' => 200, 'contain' => 'ParentRats']);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-        //$this->set(compact('rat', 'ownerUsers', 'ratteries', 'birthLitters', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'deathPrimaryCauses', 'deathSecondaryCauses', 'creatorUsers', 'states', 'bredLitters', 'singularities'));
 
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('staffEdit', $rat);
-
-        if ($show_staff) {
-            $generic = $this->Rats->Ratteries->find()->where(['is_generic IS' => true]);
-            $rattery = $this->Rats->Ratteries->find()->where(['id' => $rat->rattery_id]);
-            $origins = $generic->all()->append($rattery)->combine('id', 'full_name');
-            $this->set(compact('origins'));
-        }
 
         $this->Flash->warning( __('For data coherence, modifications of rats are restricted. Please, contact a staff member to change origins or birth date.'));
 
         $this->set(compact(
             'rat',
-            'ownerUsers',
-            'ratteries',
             'colors',
             'eyecolors',
             'dilutions',
             'markings',
             'earsets',
             'coats',
-            'deathPrimaryCauses',
-            'deathSecondaryCauses',
-            'states',
             'singularities',
             'user',
             'show_staff'
@@ -670,12 +649,19 @@ class RatsController extends AppController
         if ($this->request->is(['ajax'])) {
             $searchkey = $this->request->getQuery('searchkey');
             $sex = $this->request->getQuery('sex');
-            $items = $this->Rats->find('incipit', ['names' => [$searchkey]])
-                ->where(['sex IS' => $sex])
-                ->select(['id',
-                    //'value' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')",
-                    'label' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')"
-                ]);
+
+            if (! is_null($sex)) {
+                $items = $this->Rats->find('incipit', ['names' => [$searchkey]])
+                    ->where(['sex IS' => $sex])
+                    ->select(['id',
+                        'label' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')"
+                    ]);
+            } else {
+                $items = $this->Rats->find('identified', ['names' => [$searchkey]])
+                    ->select(['id',
+                        'label' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')"
+                    ]);
+            }
             $this->set('items', $items);
             $this->viewBuilder()->setOption('serialize', ['items']);
         }

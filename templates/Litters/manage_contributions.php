@@ -160,7 +160,6 @@
             var types = <?= json_encode($contribution_types->all()->extract('id')->toList()); ?>;
             for (var i = 0; i < types.length; i++) {
                 autocompleteRattery("#jquery-rattery-input-"+types[i], "#jquery-rattery-id-"+types[i]);
-                console.log('Added autocomplete for contribution type:'+types[i]);
             }
         });
     </script>
