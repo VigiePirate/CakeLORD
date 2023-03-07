@@ -230,7 +230,7 @@ main {
 
 .parallax {
   /* min-height: 640px; */
-  background:url('https://artefact.kubrick.srfa.info/img/parallax_1200x600.jpg') no-repeat left fixed;
+  background:url('/img/parallax_1200x600.jpg') no-repeat left fixed;
   background-size:cover;
   -webkit-background-size:cover;
   margin:0;
