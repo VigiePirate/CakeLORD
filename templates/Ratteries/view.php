@@ -136,7 +136,7 @@
                     <div class="message"><?= __('This prefix is only used in external litters.') ?></div>
                 <?php else : ?>
                     <?php if ($stats['ratCount'] == 0 && $stats['outRatCount'] == 0) : ?>
-                        <div class="message error"><?= __('No recorded rat is associated with this origin.')</div>
+                        <div class="message error"><?= __('No recorded rat is associated with this origin.') ?></div>
                     <?php else : ?>
                         <table class="condensed stats">
                             <tr>
@@ -301,7 +301,7 @@
                                     <summary><?= __('Lifespan statistics') ?></summary>
                                     <table class="condensed stats">
                                         <tr>
-                                            <th><?= __('Bred rats recorded as deceased:' ?>'</th>
+                                            <th><?= __('Bred rats recorded as deceased:') ?>'</th>
                                             <td><?= h($stats['presumedDeadRatCount']) ?> rat<?= h($stats['presumedDeadRatCount']<2) ? '' : 's' ?> (<?= h($stats['deadRatProportion']) ?> % of recorded bred rats)</td>
                                         </tr>
                                         <tr>
@@ -406,7 +406,10 @@
                 <?php endif; ?>
 
                 <div class="signature">
-                    &mdash; <?= __('Created on {0} by {1}.', [$rattery->created->i18nFormat('dd/MM/yyyy') ?>  <?= ($rattery->modified != $rattery->created) ? __('Last modified on {0}.', [$rattery->modified->i18nFormat('dd/MM/yyyy')]) : '' ?>
+                    &mdash; <?= __('Created on {0} by {1}.', [$rattery->created->i18nFormat('dd/MM/yyyy')]) ?>
+                    <?= ($rattery->modified != $rattery->created) ?
+                        __('Last modified on {0}.', [$rattery->modified->i18nFormat('dd/MM/yyyy')])
+                        : '' ?>
                 </div>
             </div>
             <div class="spacer"> </div>
@@ -415,7 +418,7 @@
                 <h2><?= __('Related entries') ?></h2>
 
                 <details open>
-                    <summary><?= __('Last contributed litters' ?></summary>
+                    <summary><?= __('Last contributed litters') ?></summary>
                     <div class="button-raised">
                         <?= $this->Html->link(__('See all contributed litters'), ['controller' => 'Contributions', 'action' => 'fromRattery', $rattery->id], ['class' => 'button float-right']) ?>
                     </div>
