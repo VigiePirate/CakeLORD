@@ -283,6 +283,7 @@ class RatsTable extends Table
             ! isset($data['rattery_id'])
             && ! isset($data['rattery_name'])
             && isset($data['generic_rattery_id'])
+            && ! empty($data['generic_rattery_id'])
         ) {
             $data['rattery_id'] = $data['generic_rattery_id'];
         }
