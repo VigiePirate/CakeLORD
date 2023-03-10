@@ -1,9 +1,19 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
-            <?= $this->Html->link(__('List Ratteries'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar') ?>
+            </div>
         </div>
+        <div class="side-nav-group">
+            <div class="tooltip">
+                <?= $this->Html->image('/img/icon-back.svg', [
+                    'url' => ['controller' => 'users', 'action' => 'my'],
+                    'class' => 'side-nav-icon',
+                    'alt' => __('Back')]) ?>
+                <span class="tooltiptext"><?= __('Cancel and go back to dashboard') ?></span>
+            </div>
+        </diV>
     </aside>
     <div class="column-responsive column-90">
         <div class="ratteries form content">
