@@ -306,7 +306,7 @@
                                     <summary><?= __('Lifespan statistics') ?></summary>
                                     <table class="condensed stats">
                                         <tr>
-                                            <th><?= __('Bred rats recorded as deceased:') ?>'</th>
+                                            <th><?= __('Bred rats recorded as deceased:') ?></th>
                                             <td><?= h($stats['presumedDeadRatCount']) ?> rat<?= h($stats['presumedDeadRatCount']<2) ? '' : 's' ?> (<?= h($stats['deadRatProportion']) ?> % of recorded bred rats)</td>
                                         </tr>
                                         <tr>
@@ -411,7 +411,7 @@
                 <?php endif; ?>
 
                 <div class="signature">
-                    &mdash; <?= __('Created on {0} by {1}.', [$rattery->created->i18nFormat('dd/MM/yyyy')]) ?>
+                    &mdash; <?= __('Created on {0} by {1}.', [$rattery->created->i18nFormat('dd/MM/yyyy'), $rattery->user->username]) ?>
                     <?= ($rattery->modified != $rattery->created) ?
                         __('Last modified on {0}.', [$rattery->modified->i18nFormat('dd/MM/yyyy')])
                         : '' ?>
