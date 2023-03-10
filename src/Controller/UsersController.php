@@ -110,15 +110,15 @@ class UsersController extends AppController
 
                 // delete old unused passkeys and accounts never activated
                 $this->Users->removeExpiredPasskeys();
-            }
 
-            $action_needed = (
-                $this->Rats->find('needsUser')->where(['owner_user_id' => $user->id])->count()
-                + $this->Ratteries->find('needsUser')->where(['owner_user_id' => $user->id])->count()
-                + $this->Litters->find('needsUser')->where(['creator_user_id' => $user->id])->count()
-            );
-            if ($action_needed > 0) {
-                $this->Flash->error(__('You have {0} sheets to correct! Please, check rats, litters and ratteries from your dashboard and take action soon.', $action_needed));
+                $action_needed = (
+                    $this->Rats->find('needsUser')->where(['owner_user_id' => $user->id])->count()
+                    + $this->Ratteries->find('needsUser')->where(['owner_user_id' => $user->id])->count()
+                    + $this->Litters->find('needsUser')->where(['creator_user_id' => $user->id])->count()
+                );
+                if ($action_needed > 0) {
+                    $this->Flash->error(__('You have {0} sheets to correct! Please, check rats, litters and ratteries from your dashboard and take action soon.', $action_needed));
+                }
             }
 
             $target = $this->Authentication->getLoginRedirect();
@@ -178,13 +178,10 @@ class UsersController extends AppController
 
             // check captcha
             //FIXME: place captcha question/answer in app local config
-            if (strtolower($this->request->getData('captcha')) == 'rat') {
-                // $this->Flash->default(__('Congratulations, you are not a Replicant.'));
+            $user = $this->Users->newEmptyEntity();
+            $user = $this->Users->patchEntity($user, $this->request->getData());
 
-                // create user and activation link and mail
-                $user = $this->Users->newEmptyEntity();
-                $user = $this->Users->patchEntity($user, $this->request->getData());
-
+            if (strtolower($this->request->getData('captcha')) == 'rat' || strtolower($this->request->getData('captcha')) == 'rats') {
                 $passkey = uniqid('', true);
                 $user->passkey = $passkey;
                 $user->is_locked = true;
@@ -197,15 +194,18 @@ class UsersController extends AppController
                     if ($mailer) {
                         $this->Flash->success(__('Your account has been created, but must be activated before you can log in. Check your email for your activation link.'));
                     } else {
-                        $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
+                        $this->set(compact('user'));
+                        $this->Flash->error(__('Error sending email! Please contact an administrator.')); // . $email->smtpError);
                     }
                     return $this->redirect(['action' => 'login']);
                 } else {
-                    return $this->Flash->error(__('Something went wrong. Please, try again or contact an administrator.'));
+                    $this->set(compact('user'));
+                    $this->Flash->error(__('Something went wrong. Please, try again or contact an administrator.'));
                     // return $this->redirect(['action' => 'register']);
                 }
             } else {
-                return $this->Flash->error(__('This was not the expected answer! Please, retry if you are not a Replicant.'));
+                $this->set(compact('user'));
+                $this->Flash->error(__('This was not the expected answer! Please, retry if you are not a Replicant.'));
             }
         }
     }
