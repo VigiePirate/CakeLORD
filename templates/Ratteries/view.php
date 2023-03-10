@@ -30,35 +30,34 @@
 
                     <?php if (! $user->can('microEdit', $rattery)) : ?>
                         <div class="tooltip disabled">
-                            <?= $this->Html->image('/img/icon-picture.svg', [
-                                'url' => [],
-                                'class' => 'side-nav-icon',
-                                'alt' => __('Change Picture')]) ?>
-                            <span class="tooltiptext"><?= __('You cannot upload a new picture') ?></span>
-                        </div>
-
-                        <div class="tooltip disabled">
                             <?= $this->Html->image('/img/icon-relocate.svg', [
                                 'url' => [],
                                 'class' => 'side-nav-icon',
                                 'alt' => __('Move')]) ?>
                             <span class="tooltiptext"><?= __('You cannot declare a new location') ?></span>
                         </div>
-                    <?php else : ?>
-                        <div class="tooltip">
-                            <?= $this->Html->image('/img/icon-picture.svg', [
-                                'url' => ['controller' => 'Ratteries', 'action' => 'changePicture', $rattery->id],
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-comment.svg', [
+                                'url' => [],
                                 'class' => 'side-nav-icon',
-                                'alt' => __('Change Picture')]) ?>
-                            <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
+                                'alt' => __('Edit Comment')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot edit the comment') ?></span>
                         </div>
 
+                    <?php else : ?>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-relocate.svg', [
                                 'url' => ['controller' => 'Ratteries', 'action' => 'relocate', $rattery->id],
                                 'class' => 'side-nav-icon',
                                 'alt' => __('Move')]) ?>
                             <span class="tooltiptext"><?= __('Declare a new location') ?></span>
+                        </div>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-comment.svg', [
+                                'url' => ['controller' => 'Ratteries', 'action' => 'editComment', $rattery->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Edit Comment')]) ?>
+                            <span class="tooltiptext"><?= __('Edit comment') ?></span>
                         </div>
                     <?php endif; ?>
                     <?php if (! is_null($user) && $user->can('ownerEdit', $rattery)) : ?>
@@ -111,7 +110,7 @@
             <?php if($rattery->is_generic) : ?>
                 <div class="message"><?= __('This is a generic prefix. It does not correspond to an actual rattery. Therefore, only limited information is shown.') ?></div>
                 <h2><?= __('Statistics') ?></h2>
-                <h3>Breeding statistics</h3>
+                <h3><?= __('Breeding statistics') ?></h3>
                 <table class="condensed stats">
                     <tr>
                         <th><?= __('Litters recorded under this prefix:') ?></th>
@@ -205,13 +204,19 @@
                             </tr>
                         </table>
                     </div>
+
                     <div class="column footer-center column-photo">
-                        <?php if ($rattery->picture != '') : ?>
-                            <?= $this->Html->image(UPLOADS . $rattery->picture, ['alt' => $rattery->prefix]) ?>
+                        <?php if ($rattery->picture != '' && $rattery->picture != 'Unknown.png') : ?>
+                            <?php if (! is_null($user) && $user->can('microEdit', $rattery)) : ?>
+                                <?= $this->Html->image(UPLOADS . $rattery->picture, ['alt' => $rattery->prefix, 'url' => ['action' => 'changePicture', $rattery->id]]) ?>
+                            <?php else : ?>
+                                <?= $this->Html->image(UPLOADS . $rattery->picture, ['alt' => $rattery->prefix]) ?>
+                            <?php endif ?>
                         <?php else : ?>
-                            <?= $this->Html->image('UnknownRattery.svg', ['url' => ['action' => 'changePicture', $rattery->id]]) ?>
+                            <?= $this->Html->image('icon-picture.svg', ['alt' => $rattery->prefix]) ?>
                         <?php endif ?>
                     </div>
+
                 </div>
 
                 <?php if (! empty($rattery->comments)) : ?>

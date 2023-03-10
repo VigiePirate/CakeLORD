@@ -368,6 +368,36 @@ class RatteriesController extends AppController
         $this->set(compact('rattery'));
     }
 
+    /**
+     * Edit method
+     *
+     * @param string|null $id Rattery id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function editComment($id = null)
+    {
+        $rattery = $this->Ratteries->get($id, [
+            'contain' => ['Litters', 'Litters.Sire', 'Litters.Dam', 'States'],
+        ]);
+
+        $this->Authorization->authorize($rattery, 'microEdit');
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
+            if ($this->Ratteries->save($rattery)) {
+                $this->Flash->warning(__('Your new comment about the rattery has been saved.'));
+                return $this->redirect(['action' => 'view', $rattery->id]);
+            }
+            $this->Flash->error(__('Your new comment about the rattery could not be saved. Please, try again.'));
+        }
+
+        $user = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($user) && $user->can('staffEdit', $rattery);
+
+
+        $this->set(compact('rattery', 'user', 'show_staff'));
+    }
+
     /* see all active ratteries on a Googlemap + highlight one if $id is not null */
     public function locate()
     {
