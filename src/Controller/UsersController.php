@@ -112,9 +112,13 @@ class UsersController extends AppController
                 $this->Users->removeExpiredPasskeys();
             }
 
-            $action_needed = $this->Rats->find('needsUser')->count();
+            $action_needed = (
+                $this->Rats->find('needsUser')->where(['owner_user_id' => $user->id])->count()
+                + $this->Ratteries->find('needsUser')->where(['owner_user_id' => $user->id])->count()
+                + $this->Litters->find('needsUser')->where(['creator_user_id' => $user->id])->count()
+            );
             if ($action_needed > 0) {
-                $this->Flash->error(__('You have {0} sheets to correct! Please, go to your dashboard and take action soon.', $action_needed));
+                $this->Flash->error(__('You have {0} sheets to correct! Please, check rats, litters and ratteries from your dashboard and take action soon.', $action_needed));
             }
 
             $target = $this->Authentication->getLoginRedirect();
