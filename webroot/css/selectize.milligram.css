@@ -144,7 +144,13 @@
     padding: 0px 8px;
 }
 
-#jquery-color-select-selectized::placeholder, #jquery-singularity-select-selectized::placeholder {
+#jquery-color-select-selectized::placeholder,
+#jquery-eyecolor-select-selectized::placeholder,
+#jquery-earset-select-selectized::placeholder,
+#jquery-dilution-select-selectized::placeholder,
+#jquery-coat-select-selectized::placeholder,
+#jquery-marking-select-selectized::placeholder,
+#jquery-singularity-select-selectized::placeholder {
   color: #707e8a;
   opacity: 1;
 }

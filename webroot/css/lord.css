@@ -75,7 +75,7 @@ h1 {
   line-height:1.25;
 }
 
-h1 span {
+h1 span, h3 span {
   color: #606c76;
   vertical-align: top;
   font-size: 75%;
@@ -451,6 +451,7 @@ ul, ol, dl {
 blockquote {
   font-family: "Alegreya", serif;
   font-style: italic;
+  font-size: 1.9rem;
   border-left: none;
   margin: 1em 0;
   padding: 0.5em 5rem;

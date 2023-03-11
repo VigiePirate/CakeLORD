@@ -308,14 +308,6 @@ class RatsTable extends Table
             // has to be explicitly set since creator_user_id is not "accessible"
             $entity->creator_user_id = (int)$data['creator_user_id'];
 
-            // contain varieties for mandatory picture check
-            $entity->coat = \Cake\Datasource\FactoryLocator::get('Table')->get('Coats')->get($entity->coat_id);
-            $entity->color = \Cake\Datasource\FactoryLocator::get('Table')->get('Colors')->get($entity->color_id);
-            $entity->dilution = \Cake\Datasource\FactoryLocator::get('Table')->get('Dilutions')->get($entity->dilution_id);
-            $entity->earset = \Cake\Datasource\FactoryLocator::get('Table')->get('Earsets')->get($entity->earset_id);
-            $entity->eyecolor = \Cake\Datasource\FactoryLocator::get('Table')->get('Eyecolors')->get($entity->eyecolor_id);
-            $entity->marking = \Cake\Datasource\FactoryLocator::get('Table')->get('Markings')->get($entity->marking_id);
-
             // contain rattery for origin checks
             if (isset($data['rattery_id'])) {
                 $entity->rattery = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries')->get($entity->rattery_id);
@@ -343,6 +335,7 @@ class RatsTable extends Table
         $rules->add($rules->existsIn(['marking_id'], 'Markings'));
         $rules->add($rules->existsIn(['earset_id'], 'Earsets'));
         $rules->add($rules->existsIn(['coat_id'], 'Coats'));
+
         $rules->add($rules->existsIn(['death_primary_cause_id'], 'DeathPrimaryCauses'));
         $rules->add($rules->existsIn(['death_secondary_cause_id'], 'DeathSecondaryCauses'));
         $rules->add($rules->existsIn(['creator_user_id'], 'CreatorUsers'));
@@ -391,6 +384,67 @@ class RatsTable extends Table
                 'message' => 'Incomplete: mandatory information about origins are missing.
                 <ul><li>For a generic origin, please add a comment (name and location, circumstances of the rescue, etc.)</li>
                 <li>For a registered rattery, add at least a mother. Create her first if needed, or chose a generic origin.</li></ul>'
+            ]
+        );
+
+        /* Mandatory physical traits */
+        $rules->addCreate(function ($rat) {
+                return isset($rat->color_id);
+            },
+            'hasColor',
+            [
+                'errorField' => 'color_id',
+                'message' => 'Please select a color. If you don’t know what to chose, read documentation, or chose “Unknown” and add a picture for help.'
+            ]
+        );
+
+        $rules->addCreate(function ($rat) {
+                return isset($rat->coat_id);
+            },
+            'hasCoat',
+            [
+                'errorField' => 'coat_id',
+                'message' => 'Please select a coat type.'
+            ]
+        );
+
+        $rules->addCreate(function ($rat) {
+                return isset($rat->dilution_id);
+            },
+            'hasDilution',
+            [
+                'errorField' => 'dilution_id',
+                'message' => 'Please select a dilution type.'
+            ]
+        );
+
+        $rules->addCreate(function ($rat) {
+                return isset($rat->earset_id);
+            },
+            'hasEarset',
+            [
+                'errorField' => 'earset_id',
+                'message' => 'Please select an earset.'
+            ]
+        );
+
+        $rules->addCreate(function ($rat) {
+                return isset($rat->eyecolor_id);
+            },
+            'hasEyecolor',
+            [
+                'errorField' => 'eyecolor_id',
+                'message' => 'Please select an eyecolor.'
+            ]
+        );
+
+        $rules->addCreate(function ($rat) {
+                return isset($rat->marking_id);
+            },
+            'hasMarking',
+            [
+                'errorField' => 'marking_id',
+                'message' => 'Please select a marking type.'
             ]
         );
 
