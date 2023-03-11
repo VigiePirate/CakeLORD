@@ -560,6 +560,35 @@ class Rat extends Entity
 
     public function hasNeededPicture()
     {
+        if (! isset($coat_id)) {
+            return true;
+        }
+
+        if (! isset($this->coat)) {
+            $coats = \Cake\Datasource\FactoryLocator::get('Table')->get('Coats');
+            $this->coat = $coats->get($this->coat_id);
+        }
+        if (! isset($this->color)) {
+            $colors = \Cake\Datasource\FactoryLocator::get('Table')->get('Colors');
+            $this->color = $colors->get($this->color_id);
+        }
+        if (! isset($this->dilution)) {
+            $dilutions = \Cake\Datasource\FactoryLocator::get('Table')->get('Dilutions');
+            $this->dilution = $dilutions->get($this->dilution_id);
+        }
+        if (! isset($this->earset)) {
+            $earsets = \Cake\Datasource\FactoryLocator::get('Table')->get('Earsets');
+            $this->earset = $earsets->get($this->earset_id);
+        }
+        if (! isset($this->eyecolor)) {
+            $eyecolors = \Cake\Datasource\FactoryLocator::get('Table')->get('Eyecolors');
+            $this->eyecolor = $eyecolors->get($this->eyecolor_id);
+        }
+        if (! isset($this->marking)) {
+            $markings = \Cake\Datasource\FactoryLocator::get('Table')->get('Markings');
+            $this->marking = $markings->get($this->marking_id);
+        }
+
         $coat_condition = ! ($this->coat->is_picture_mandatory && $this->picture == '');
         $color_condition = ! ($this->color->is_picture_mandatory && $this->picture == '');
         $dilution_condition = ! ($this->dilution->is_picture_mandatory && $this->picture == '');
