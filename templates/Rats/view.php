@@ -341,7 +341,7 @@
                 </div>
             <?php endif; ?>
             <div class="signature">
-                &mdash; <?= __('Created on {0} by {1}.', [$rat->created->i18nFormat('dd/MM/yyyy'), $rat->owner_user->username]) ?>  <?= ($rat->modified != $rat->created) ? __('Last modified on {0}.', [$rat->modified->i18nFormat('dd/MM/yyyy')]) : '' ?>
+                &mdash; <?= __('Created on {0} by {1}.', [$rat->created->i18nFormat('dd/MM/yyyy'), $rat->creator_user->username]) ?>  <?= ($rat->modified != $rat->created) ? __('Last modified on {0}.', [$rat->modified->i18nFormat('dd/MM/yyyy')]) : '' ?>
             </div>
         </div>
 
