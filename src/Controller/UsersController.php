@@ -521,7 +521,7 @@ class UsersController extends AppController
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
             $this->Flash->default('You are logged in, you can change your password directly from here.');
-            return $this->redirect(['controller' => 'users', 'action' => 'resetPassword']);
+            return $this->redirect(['controller' => 'users', 'action' => 'changePassword']);
         }
 
         if ($this->request->is('post')) {
@@ -559,83 +559,100 @@ class UsersController extends AppController
         }
     }
 
+    /* Reset lost password */
     public function resetPassword($passkey = null) {
 
         $this->Authorization->skipAuthorization();
 
+        // regardless of anything, redirect if user is logged in
+        $result = $this->Authentication->getResult();
+        if ($result->isValid()) {
+            $this->Flash->default('You are logged in, you can change your password directly from here.');
+            return $this->redirect(['controller' => 'users', 'action' => 'changePassword']);
+        }
+
         if (empty($passkey)) {
-            // check if user is logged
-            $result = $this->Authentication->getResult();
-            if ($result->isValid()) {
-                $user = $this->Users->get($this->Authentication->getIdentity()->get('id'));
-                if ($this->request->is('post')) {
-                    $oldPassword = $this->request->getData('password');
-                    $newPassword = $this->request->getData('new_password');
-                    $confirmPassword = $this->request->getData('confirm_password');
-                    // check if old password is correct for security
-                    $authenticator = $this->Authentication->getAuthenticationService()->loadAuthenticator('Authentication.Form');
-                    if (! $authenticator->authenticate($this->request)) {
-                        $this->Flash->error('We could not confirm your identity (incorrect old password). Please retry.');
-                        return $this->redirect(['action' => 'resetPassword']);
-                    }
-                    // check if the two passwords are identical
-                    if ($newPassword != $confirmPassword) {
-                        $this->Flash->error('Passwords are different. Please retry.');
-                        return $this->redirect(['action' => 'resetPassword']);
-                    } else {
-                        $user->password = $newPassword;
-                        $user->passkey = null;
-                        if ($this->Users->save($user)) {
-                            $this->Flash->success('Your password has been updated.');
-                            return $this->redirect(['action' => 'my']);
-                        } else {
-                            $this->Flash->error('Your password could not be updated. Please, retry or contact an administrator.');
-                            return $this->redirect(['action' => 'resetPassword']);
-                        }
-                    }
+            $this->Flash->error('Invalid passkey. Please check your email or try again.');
+            return $this->redirect(['action' => 'lostPassword']);
+        }
+
+        // no logged user and there is a passkey : proceed!
+        $query = $this->Users->findByPasskey($passkey);
+        $user = $query->first();
+        // check if user exists
+        if (empty($user)) {
+            $this->Flash->error('Invalid passkey. Please check your email or try again');
+            return $this->redirect(['action' => 'lostPassword']);
+        } else {
+            // check if user is locked
+            if ($user->is_locked) {
+                $this->Flash->error('Your account is locked. Please contact an administrator');
+                return $this->redirect(['action' => 'login']); // fixme: redirect to a contact form
+            }
+            // check if passkey is expired
+            if (! $user->failed_login_last_date->wasWithinLast('24 hours')) {
+                $this->Flash->error('Expired passkey. Please generate a new one, check your email and try again');
+                return $this->redirect(['action' => 'lostPassword']);
+            }
+
+            // check if passwords were sent by submit button
+            if ($this->request->is('post')) {
+                $newPassword = $this->request->getData('new_password');
+                $confirmPassword = $this->request->getData('confirm_password');
+                // check if the two passwords are identical
+                if ($newPassword != $confirmPassword) {
+                    $this->Flash->error('Passwords are different. Please retry.');
+                    return $this->redirect(['action' => 'resetPassword', $passkey]);
                 } else {
-                    $this->set(compact('user'));
+                    $user->password = $newPassword;
+                    $user->passkey = null;
+                    $this->Users->save($user);
+                    $this->Flash->success('Your password has been updated.');
+                    return $this->redirect(['action' => 'login']);
+                }
+            }
+        }
+    }
+
+    /* change your password when logged */
+    public function changePassword() {
+        // check if user is logged
+
+        $user = $this->Users->get($this->Authentication->getIdentity()->get('id'));
+        $this->Authorization->authorize($user, 'my');
+
+        if (! is_null($user)) {
+            if ($this->request->is('post')) {
+                $oldPassword = $this->request->getData('password');
+                $newPassword = $this->request->getData('new_password');
+                $confirmPassword = $this->request->getData('confirm_password');
+                // check if old password is correct for security
+                $authenticator = $this->Authentication->getAuthenticationService()->loadAuthenticator('Authentication.Form');
+                if (! $authenticator->authenticate($this->request)) {
+                    $this->Flash->error('We could not confirm your identity (incorrect old password). Please retry.');
+                    return $this->redirect(['action' => 'changePassword']);
+                }
+                // check if the two passwords are identical
+                if ($newPassword != $confirmPassword) {
+                    $this->Flash->error('Passwords are different. Please retry.');
+                    return $this->redirect(['action' => 'changePassword']);
+                } else {
+                    $user->password = $newPassword;
+                    $user->passkey = null;
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success('Your password has been updated.');
+                        return $this->redirect(['action' => 'my']);
+                    } else {
+                        $this->Flash->error('Your password could not be updated. Please, retry or contact an administrator.');
+                        return $this->redirect(['action' => 'changePassword']);
+                    }
                 }
             } else {
-                $this->Flash->error('Invalid passkey. Please check your email or try again.');
-                return $this->redirect(['action' => 'lostPassword']);
+                $this->set(compact('user'));
             }
         } else {
-            $query = $this->Users->findByPasskey($passkey);
-            $user = $query->first();
-            // check if user exists
-            if (empty($user)) {
-                $this->Flash->error('Invalid passkey. Please check your email or try again');
-                return $this->redirect(['action' => 'lostPassword']);
-            } else {
-                // check if user is locked
-                if ($user->is_locked) {
-                    $this->Flash->error('Your account is locked. Please contact an administrator');
-                    return $this->redirect(['action' => 'login']); // fixme: redirect to a contact form
-                }
-                // check if passkey is expired
-                if (! $user->failed_login_last_date->wasWithinLast('24 hours')) {
-                    $this->Flash->error('Expired passkey. Please generate a new one, check your email and try again');
-                    return $this->redirect(['action' => 'lostPassword']);
-                }
-
-                // check if passwords were sent by submit button
-                if ($this->request->is('post')) {
-                    $newPassword = $this->request->getData('password');
-                    $confirmPassword = $this->request->getData('confirm_password');
-                    // check if the two passwords are identical
-                    if ($newPassword != $confirmPassword) {
-                        $this->Flash->error('Passwords are different. Please retry.');
-                        return $this->redirect(['action' => 'resetPassword', $passkey]);
-                    } else {
-                        $user->password = $newPassword;
-                        $user->passkey = null;
-                        $this->Users->save($user);
-                        $this->Flash->success('Your password has been updated.');
-                        return $this->redirect(['action' => 'login']);
-                    }
-                }
-            }
+            $this->Flash->error('You must be logged in to use this feature.');
+            return $this->redirect(['action' => 'login']);
         }
     }
 
