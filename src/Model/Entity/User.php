@@ -247,7 +247,7 @@ class User extends Entity implements IdentityInterface
                 ->stopWhen(function ($rat) {
                     return ! $rat->next_birthday->isWithinNext('3 months');
                 })
-                ->take(3);
+                ->take(100);
 
             $str = $rats->reduce(function ($string, $rats) {
                 return $string . $rats->name . ' (' . $rats->next_birthday->i18nFormat('dd/MM') . ')' . ', ';
