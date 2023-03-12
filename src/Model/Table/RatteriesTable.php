@@ -204,6 +204,17 @@ class RatteriesTable extends Table
         $rules->add($rules->existsIn(['country_id'], 'Countries'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
 
+        // /* A given owner cannot have several active ratteries */
+        // $rules->add(function ($rattery) {
+        //         return $rattery->checkSisters();
+        //     },
+        //     'updateContributions',
+        //     [
+        //         'errorField' => 'name',
+        //         'message' => 'The owner of this rattery has several active ratteries and this could not be solved automatically.'
+        //     ]
+        // );
+
         return $rules;
     }
 
@@ -273,6 +284,28 @@ class RatteriesTable extends Table
         }
 
         return $query->group(['Ratteries.id']);
+    }
+
+    public function findOwnedById(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['users'])) {
+            $query->leftJoinWith('Users')
+                  ->where([
+                      'Users.id IS' => null,
+                  ]);
+        } else {
+            $query->innerJoinWith('Users')
+                  ->where([
+                          'Users.id IS' => $options['users'],
+                ]);
+        }
+
+        //return $query->group(['Ratteries.id']);
+        return $query;
     }
 
     public function findInState(Query $query, array $options)

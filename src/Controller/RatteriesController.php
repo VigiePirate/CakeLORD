@@ -48,14 +48,16 @@ class RatteriesController extends AppController
             'contain' => ['Users', 'Countries', 'States'],
         ];
         $alive_ratteries = $this->paginate($this->Ratteries->find()->where([
-            'owner_user_id' => $user->id,
-            'is_alive' => true,
-        ]));
-        $rattery = $alive_ratteries->first();
-        $ratteries = $this->paginate($this->Ratteries->find()->where([
-            'owner_user_id' => $user->id,
-        ]));
-        $this->set(compact('rattery', 'ratteries', 'user'));
+                'owner_user_id' => $user->id,
+                'is_alive' => true,
+            ])->order('Ratteries.created DESC')
+        );
+        $closed_ratteries = $this->paginate($this->Ratteries->find()->where([
+                'owner_user_id' => $user->id,
+                'is_alive' => false,
+            ])->order('Ratteries.created DESC')
+        );
+        $this->set(compact('alive_ratteries', 'closed_ratteries', 'user'));
     }
 
     /* rattery sheet for all users, including statistics */
@@ -393,7 +395,6 @@ class RatteriesController extends AppController
 
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('staffEdit', $rattery);
-
 
         $this->set(compact('rattery', 'user', 'show_staff'));
     }

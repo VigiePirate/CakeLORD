@@ -66,6 +66,7 @@ class LittersTable extends Table
                 'modified',
                 'state_id',
                 'pups_number',
+                'contributions',
             ],
         ]);
 
@@ -213,19 +214,22 @@ class LittersTable extends Table
             ];
         } else {
             // contributions have been manually edited; replace litter contributions by form data
+            // FIXME assumes there are at most 9 contribution types
             if (isset($data['rattery_name_contribution_1'])) {
-                $n_contributions = intval((count($data)-1)/2);
-                for ($k=0; $k<$n_contributions; $k++) {
-                    if (strlen($data['rattery_id_contribution_'.($k+1)]) != 0 ) {
-                        $data['contributions'][$k]['rattery_id'] = $data['rattery_id_contribution_'.($k+1)];
-                        $data['contributions'][$k]['contribution_type_id'] = $k+1;
-                    } else {
-                        unset($data['contributions'][$k]);
+                $keys = array_keys((array)$data);
+                foreach ($keys as $key) {
+                    if (substr($key, 0, -1) == 'rattery_id_contribution_') {
+                        $k = intval(substr($key, -1));
+                        if ($k > 1 && strlen($data['rattery_id_contribution_'.$k]) != 0 ) {
+                            $data['contributions'][$k-1]['rattery_id'] = $data['rattery_id_contribution_'.$k];
+                            $data['contributions'][$k-1]['contribution_type_id'] = $k;
+                        } else {
+                            unset($data['contributions'][$k]);
+                        }
                     }
                 }
             }
         }
-
         return;
     }
 
@@ -452,8 +456,21 @@ class LittersTable extends Table
                 $new_contributions = new Collection($entity->contributions);
                 $types = $new_contributions->extract('contribution_type_id')->toArray();
                 foreach ($entity->getOriginal('contributions') as $old_contribution) {
-                    if (! in_array($old_contribution->contribution_type_id, $types)) {
+                    $type = $old_contribution->contribution_type_id;
+                    // delete old contribution if optional and absent from new
+                    if (! in_array($type, $types) && $type != 1) {
                         $contributions->delete($old_contribution);
+                    } else {
+                        // check if a new contribution replace the old one
+                        $concurrent = $new_contributions->filter(function ($contrib, $key) use ($type) {
+                            return ($contrib->contribution_type_id === $type && $contrib->contribution_type_id != 1);
+                        })->first();
+
+                        if (! is_null($concurrent)) {
+                            if (! $output = $contributions->delete($old_contribution, ['atomic' => false])) {
+                                return false;
+                            }
+                        }
                     }
                 }
             }
@@ -475,10 +492,11 @@ class LittersTable extends Table
         $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
         $now = \Cake\I18n\FrozenTime::now();
         foreach ($entity->contributions as $contribution) {
-            $rattery = $ratteries->get($contribution->rattery_id, ['contain' => ['Countries']]);
+            $rattery = $ratteries->get($contribution->rattery_id, ['contain' => ['Countries', 'Users']]);
+            //FIXME check if rattery has sisters to deactivate them? in the Rattery rules maybe?
             if (! $rattery->is_alive && $now->diffInDays($entity->birth_date) < RatteriesTable::MAXIMAL_INACTIVITY) {
                 $rattery->is_alive = true;
-                $ratteries->save($rattery, ['checkRules' => false, 'atomic' => false]);
+                $ratteries->save($rattery, ['atomic' => false]);
             }
         }
     }
