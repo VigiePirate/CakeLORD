@@ -107,6 +107,29 @@ class Rattery extends Entity
         return $this->country->name;
     }
 
+    // /* Rule : one active rattery per user */
+    // public function checkSisters()
+    // {
+    //     $ratteries = FactoryLocator::get('Table')->get('ratteries');
+    //     $owner_id = $this->owner_user_id;
+    //     $sisters = $ratteries->find('ownedById', ['users' => $owner_id]);
+    //
+    //     if ($this->is_alive) {
+    //         foreach ($sisters as $sister) {
+    //             if ($sister->user_id == $this->owner_id) {
+    //                 $ratteries->removeBehavior('State');
+    //                 $sister->is_alive = false;
+    //                 if (! $ratteries->save($sister, ['checkrules' => false, 'atomic' => false])) {
+    //                     $ratteries->addBehavior('State');
+    //                     return false;
+    //                 }
+    //                 $ratteries->addBehavior('State');
+    //             }
+    //         }
+    //     }
+    //     return true;
+    // }
+
     /* Statistics */
 
     public function wrapStatistics() {
