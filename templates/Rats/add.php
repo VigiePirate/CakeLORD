@@ -201,7 +201,7 @@
 
                 <legend><?= __('Description') ?></legend>
                 <?php
-                    echo $this->Form->control('color_id', ['id' => 'jquery-color-select', 'name' => 'color', 'empty' => true, 'default' => 0, 'options' => $colors]);
+                    echo $this->Form->control('color_id', ['id' => 'jquery-color-select', 'empty' => true, 'default' => 0, 'options' => $colors]);
                 ?>
                 <div class="row">
                     <div class="column-responsive column-50">

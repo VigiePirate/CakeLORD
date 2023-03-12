@@ -560,10 +560,6 @@ class Rat extends Entity
 
     public function hasNeededPicture()
     {
-        if (! isset($coat_id)) {
-            return true;
-        }
-
         if (! isset($this->coat)) {
             $coats = \Cake\Datasource\FactoryLocator::get('Table')->get('Coats');
             $this->coat = $coats->get($this->coat_id);
