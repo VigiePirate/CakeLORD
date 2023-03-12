@@ -1,4 +1,8 @@
 <div class="side-nav-group">
+    <?= $this->element('default_sidebar') ?>
+</div>
+
+<div class="side-nav-group">
     <div class="tooltip">
         <?= $this->Html->image('/img/icon-user.svg', [
             'url' => ['controller' => 'Users', 'action' => 'my'],

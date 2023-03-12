@@ -388,6 +388,7 @@ class UsersController extends AppController
         }
 
         $identity = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($identity) && $identity->can('edit', $user);
 
         $this->set(compact('user',
             'rat_count', 'female_count', 'male_count',
@@ -396,7 +397,7 @@ class UsersController extends AppController
             'avg_lifespan','female_avg_lifespan','male_avg_lifespan',
             'not_infant_lifespan', 'not_infant_female_lifespan', 'not_infant_male_lifespan',
             'not_accident_lifespan', 'not_accident_female_lifespan', 'not_accident_male_lifespan',
-            'champion', 'identity',
+            'champion', 'identity', 'show_staff'
         ));
     }
 
