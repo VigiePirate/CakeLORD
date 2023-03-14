@@ -465,7 +465,6 @@ class Rat extends Entity
                 'death'=> $this->birth_litter->dam[0]->short_death_cause . ' (' . $this->birth_litter->dam[0]->short_age_string . ')',
                 'more_parents' => is_null($this->birth_litter->dam[0]->litter_id) ? 0 : 1,
                 '_parents' => [],
-                '_children' => [],
             ]);
         }
 
@@ -481,7 +480,6 @@ class Rat extends Entity
                 'death'=> $this->birth_litter->sire[0]->short_death_cause . ' (' . $this->birth_litter->sire[0]->short_age_string . ')',
                 'more_parents' => is_null($this->birth_litter->sire[0]->litter_id) ? 0 : 1,
                 '_parents' => [],
-                '_children' => [],
             ]);
         }
         return $parents;
