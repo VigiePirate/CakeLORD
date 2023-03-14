@@ -629,7 +629,8 @@ class UsersController extends AppController
                 $confirmPassword = $this->request->getData('confirm_password');
                 // check if old password is correct for security
                 $authenticator = $this->Authentication->getAuthenticationService()->loadAuthenticator('Authentication.Form');
-                if (! $authenticator->authenticate($this->request)) {
+                $result = $authenticator->authenticate($this->request);
+                if (! $result->isValid()) {
                     $this->Flash->error('We could not confirm your identity (incorrect old password). Please retry.');
                     return $this->redirect(['action' => 'changePassword']);
                 }
@@ -657,7 +658,7 @@ class UsersController extends AppController
         }
     }
 
-    public function resetEmail() {
+    public function changeEmail() {
         $result = $this->Authentication->getResult();
         $user = $this->Users->get($this->Authentication->getIdentity()->get('id'));
         if ($result->isValid()) {
@@ -669,14 +670,15 @@ class UsersController extends AppController
                 $confirm_email = $this->request->getData('confirm_email');
                 // check if old password is correct for security
                 $authenticator = $this->Authentication->getAuthenticationService()->loadAuthenticator('Authentication.Form');
-                if (! $authenticator->authenticate($this->request)) {
+                $result = $authenticator->authenticate($this->request);
+                if (! $result->isValid()) {
                     $this->Flash->error('We could not confirm your identity (incorrect old password). Please retry.');
-                    return $this->redirect(['action' => 'resetEmail']);
+                    return $this->redirect(['action' => 'changeEmail']);
                 }
                 // check if the two emails are identical
                 if ($new_email != $confirm_email) {
                     $this->Flash->error('Emails are different. Please, check your entry and retry.');
-                    return $this->redirect(['action' => 'resetEmail']);
+                    return $this->redirect(['action' => 'changeEmail']);
                 } else {
                     // update user and send activation link
                     $user->email = $new_email;
@@ -697,7 +699,7 @@ class UsersController extends AppController
                         return $this->redirect(['action' => 'login']);
                     } else {
                         $this->Flash->error(__('Something went wrong. Please, try again or contact an administrator.'));
-                        return $this->redirect(['action' => 'resetEmail']);
+                        return $this->redirect(['action' => 'changeEmail']);
                     }
                 }
             } else {

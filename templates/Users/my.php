@@ -103,7 +103,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Credentials') ?></th>
-                    <td><?= $this->Html->link(__('Change email'), ['action' => 'resetEmail'])
+                    <td><?= $this->Html->link(__('Change email'), ['action' => 'changeEmail'])
                     . ' — '
                     . $this->Html->link(__('Change password'), ['action' => 'changePassword']) ?></td>
                 </tr>
