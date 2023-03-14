@@ -264,6 +264,7 @@ class LittersController extends AppController
             'death'=> $dam->short_death_cause . ' (' . $dam->short_age_string . ')',
             'more_parents' => is_null($dam->litter_id) ? 0 : 1,
             '_parents' => [],
+            '_children' => [],
         ]);
 
         array_push($parents,
@@ -277,6 +278,7 @@ class LittersController extends AppController
             'death'=> $sire->short_death_cause . ' (' . $sire->short_age_string . ')',
             'more_parents' => is_null($sire) ? 0 : 1,
             '_parents' => [],
+            '_children' => [],
         ]);
 
         $litter->dam = $dam;
