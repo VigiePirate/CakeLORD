@@ -54,9 +54,9 @@
                     <p class="helper">
                         <?= __('For security reasons, you cannot change your credentials here.')
                         . ' — '
-                        . $this->Html->link(__('Change email'), ['action' => 'resetEmail'])
+                        . $this->Html->link(__('Change email'), ['action' => 'changeEmail'])
                         . ' — '
-                        . $this->Html->link(__('Change password'), ['action' => 'resetPassword'])
+                        . $this->Html->link(__('Change password'), ['action' => 'changePassword'])
                         ?>
                     </p>
                     <?php

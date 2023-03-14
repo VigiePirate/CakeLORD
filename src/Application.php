@@ -193,7 +193,12 @@ class Application extends BaseApplication
                 'username' => 'email',
                 'password' => 'password',
             ],
-            'loginUrl' => ['/users/login', '/users/reset-password'],
+            'loginUrl' => [
+                '/users/login',
+                '/users/reset-password',
+                '/users/change-password',
+                '/users/change-email',
+            ],
         ]);
 
         return $authenticationService;
