@@ -136,10 +136,14 @@
                 data: {
                     'id': $('#secondaries').val(),
                 },
-    			success: function(data) {
+                success: function(data) {
                     var p = document.getElementById("secondary-desc");
-                    p.innerHTML = data.items['0'].value;
-                    //$('#secondary-desc').appendChild(data.items['0'].value);
+                    var comment = data.items['0'].value;
+                    if (comment == "-") {
+                        p.innerHTML = "Please answer the following questions about euthanasia, diagnostics and analyses.";
+                    } else {
+                        p.innerHTML = comment;
+                    }
                 },
             });
         });
