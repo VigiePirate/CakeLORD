@@ -59,6 +59,13 @@ details > summary.h2 {
   margin-bottom: 1.5rem;
 }
 
+details > summary.legend {
+  font-size:2.4rem;
+  padding-left: 0;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
 details:last-of-type {
   margin-bottom:1.5rem;
 }
@@ -992,8 +999,8 @@ footer {
   display: none;
 }
 .message.warning{
-  background: #fff2e6;
-  color: #f86c00;
+  background: #fff7f0; /* #fff2e6; */
+  color: #ed6700; /* #f86c00; */
   border-color: #f88131;
 }
 .message.success {

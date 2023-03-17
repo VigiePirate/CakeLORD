@@ -287,6 +287,15 @@ class RatsTable extends Table
         ) {
             $data['rattery_id'] = $data['generic_rattery_id'];
         }
+
+        // check if death was recorded at creation
+        if (isset($data['declared_death'])) {
+            $data['is_alive'] = ($data['declared_death'] == 1) ? false : true;
+            if ($data['is_alive']) {
+                unset($data['death_primary_cause_id']);
+                unset($data['death_secondary_cause_id']);
+            }
+        }
     }
 
     /**
@@ -302,7 +311,7 @@ class RatsTable extends Table
     {
         if($entity->isNew()) {
             // default values
-            $entity->is_alive = true;
+            $entity->is_alive = isset($data['is_alive']) ? $data['is_alive'] : true;
             $entity->is_pedigree_custom = false;
 
             // has to be explicitly set since creator_user_id is not "accessible"

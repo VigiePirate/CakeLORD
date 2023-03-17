@@ -560,6 +560,17 @@ class Rat extends Entity
 
     public function hasNeededPicture()
     {
+        if (isset($this->death_primary_cause_id)) {
+            if (! isset($this->death_primary_cause)) {
+                $death_primary_causes = \Cake\Datasource\FactoryLocator::get('Table')->get('DeathPrimaryCauses');
+                $this->death_primary_cause = $death_primary_causes->get($this->death_primary_cause_id);
+            }
+
+            if ($this->death_primary_cause->is_infant) {
+                return true;
+            }
+        }
+
         if (! isset($this->coat)) {
             $coats = \Cake\Datasource\FactoryLocator::get('Table')->get('Coats');
             $this->coat = $coats->get($this->coat_id);
@@ -595,7 +606,7 @@ class Rat extends Entity
         $singularity_condition = True;
         foreach ($this->singularities as $singularity) {
             if ($singularity->is_picture_mandatory && $this->picture == '') {
-                $singularity_condition = False;
+                $singularity_condition = false;
             }
         }
 

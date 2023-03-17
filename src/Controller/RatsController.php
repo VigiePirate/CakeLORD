@@ -163,7 +163,7 @@ class RatsController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             $rat_options = [
-                'associated' => ['Ratteries', 'BirthLitters', 'Singularities' => ['onlyIds' => true]],
+                'associated' => ['Ratteries', 'BirthLitters', 'Singularities' => ['onlyIds' => true], 'DeathPrimaryCauses'],
                 'accessibleFields' => ['pedigree_identifier' => true],
             ];
 
@@ -254,6 +254,8 @@ class RatsController extends AppController
             $this->set(compact('from_litter', 'litter'));
         }
 
+        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')->order(['id' => 'ASC']);
+
         $this->set(compact(
             'rat',
             'colors',
@@ -263,6 +265,7 @@ class RatsController extends AppController
             'earsets',
             'coats',
             'singularities',
+            'deathPrimaryCauses',
             'states',
             'creator',
         ));

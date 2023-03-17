@@ -234,6 +234,47 @@
                     ])
                 ?>
 
+                <details>
+                    <summary class="legend">
+                        <?= __('Click here if this rat is now deceased') ?>
+                    </summary>
+                    <?php
+                        echo $this->Form->control('declared_death', [
+                            'type' => 'checkbox',
+                            'default' => false,
+                            'label' => [
+                                'text' => __('Click this box to confirm that rat was dead at time of recording'),
+                            ],
+                        ]);
+
+                        echo $this->Form->control('death_date', ['label' => __('Please enter the death date (or date of last news)'), 'empty' => true, 'required' => true]);
+                        echo $this->Form->control('death_primary_cause_id', [
+                            'id' => 'primaries',
+                            'label' => __('Select the death cause category'),
+                            'options' => $deathPrimaryCauses,
+                            'empty' => true,
+                            'required' => false
+                        ]);
+                        echo $this->Form->control('death_secondary_cause_select', [
+                            'id' => 'secondaries',
+                            'name' => 'death_secondary_cause_id',
+                            'label' => __('Select the precise cause of death, if known'),
+                            'empty' => true,
+                            'type' => 'select']);
+                    ?>
+                    <div id="secondary-desc" class="message warning">
+                        <div class="markdown">
+                            <?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?>
+                        </div>
+                    </div>
+
+                    <?php
+                        echo $this->Form->control('death_euthanized', ['label' => __('The rat was euthanized')]); //,'Was the rat euthanized?');
+                        echo $this->Form->control('death_diagnosed', ['label' => __('The diagnosis was confirmed by a veterinary')]); //,'Was the diagnosis confirmed by a veterinary?');
+                        echo $this->Form->control('death_necropsied', ['label' => __('The diagnosis was confirmed by an autopsy or analyses')]); //,'Was the diagnosis confirmed by a necropsy or analyses?');
+                    ?>
+                </details>
+
                 <legend><?= __('Comments') ?></legend>
                 <?php
                     echo $this->Form->control('comments', [
@@ -466,6 +507,58 @@
             });
         });
     </script>
+
+    <script>
+    $(function() {
+
+    	$('#primaries').change(function() {
+    		$.ajax({
+                url: '/death-secondary-causes/find-by-primary.json',
+                dataType: 'json',
+                data: {
+                    'deathprimarykey': $('#primaries').val(),
+                },
+    			success: function(data) {
+                    $("#secondaries option").remove();
+                    $('#secondaries').append($("<option></option>").attr("value","").text(""));
+                    $('#secondary-desc').empty();
+                    $('#secondary-desc').append("Please, read carefully information that will appear below to check the fitness of your choice.");
+                    for (var item in data.items) {
+                        var x = document.getElementById("secondaries");
+                        var option = document.createElement("option");
+                        option.value = data.items[item].id;
+                        option.text = data.items[item].value;
+                        x.add(option);
+                    }
+                },
+            });
+    	});
+    });
+    </script>
+
+    <script>
+    $(function() {
+        $('#secondaries').change(function() {
+    		$.ajax({
+                url: '/death-secondary-causes/description.json',
+                dataType: 'json',
+                data: {
+                    'id': $('#secondaries').val(),
+                },
+    			success: function(data) {
+                    var p = document.getElementById("secondary-desc");
+                    var comment = data.items['0'].value;
+                    if (comment == "-") {
+                        p.innerHTML = "Please answer the following questions about euthanasia, diagnostics and analyses.";
+                    } else {
+                        p.innerHTML = comment;
+                    }
+                },
+            });
+        });
+    });
+    </script>
+
 <?php $this->end(); ?>
 
 <!-- Easy MDE -->
