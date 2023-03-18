@@ -160,6 +160,7 @@ class PictureBehavior extends Behavior
             $newWidth = (int)round($newHeight*$aspectRatio);
         }
         $new_img = imagecreatetruecolor($newWidth, $newHeight);
+        imagefill($new_img, 0, 0, imagecolorallocate($new_img, 255, 255, 255));
         imagecopyresampled($new_img, $img, 0, 0, 0, 0, $newWidth, $newHeight, $sizes[0], $sizes[1]);
 
         /* Write in temporary place and free up memory */
