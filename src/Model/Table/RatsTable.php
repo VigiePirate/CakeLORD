@@ -171,7 +171,9 @@ class RatsTable extends Table
         $this->addBehavior('State', [
             'safe_properties' => [
                 'name',
-                'pup_name'
+                'pup_name',
+                'owner_user_id',
+                'comments'
             ],
         ]);
 
