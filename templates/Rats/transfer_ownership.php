@@ -62,8 +62,10 @@
                         'type' => 'text',
                     ]);
                     echo $this->Form->control('comments', [
+                        'type' => 'textarea',
+                        'id' => 'comments',
                         'name' => 'comments',
-                        'label' => __('Append comments (if needed)'),
+                        'label' => __('Append comments if needed'),
                         'value' => $rat->comments,
                         'rows' => '5',
                     ]);
@@ -117,4 +119,28 @@
         });
     });
     </script>
-<?php $this->end();
+<?php $this->end(); ?>
+
+<!-- Easy MDE -->
+<?= $this->Html->css('easymde.css') ?>
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
+<script>
+    var easyMDE = new EasyMDE({
+        minHeight: "20rem",
+        spellChecker: false,
+        inputStyle: "contenteditable",
+        nativeSpellcheck: true,
+        previewImagesInEditor: true,
+        promptURLs: true,
+        sideBySideFullscreen: false,
+        toolbar: [
+            "bold", "italic", "strikethrough", "|",
+            "unordered-list", "ordered-list", "table", "|",
+            "link", "|",
+            "side-by-side", "fullscreen", "preview", "|",
+            "guide"
+        ]
+    });
+    easyMDE.toggleSideBySide();
+</script>
