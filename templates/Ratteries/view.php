@@ -205,16 +205,16 @@
                         </table>
                     </div>
 
-                    <div class="column footer-center column-photo">
+                    <?php if (! is_null($user) && $user->can('microEdit', $rattery)) : ?>
+                        <div class="column column-photo edit-photo">
+                    <?php else : ?>
+                        <div class="column column-photo">
+                    <?php endif ; ?>
                         <?php if ($rattery->picture != '' && $rattery->picture != 'Unknown.png') : ?>
-                            <?php if (! is_null($user) && $user->can('microEdit', $rattery)) : ?>
-                                <?= $this->Html->image(UPLOADS . $rattery->picture, ['alt' => $rattery->prefix, 'url' => ['action' => 'changePicture', $rattery->id]]) ?>
-                            <?php else : ?>
-                                <?= $this->Html->image(UPLOADS . $rattery->picture, ['alt' => $rattery->prefix]) ?>
-                            <?php endif ?>
+                            <?= $this->Html->image(UPLOADS . $rattery->picture, ['alt' => $rattery->prefix, 'url' => ['action' => 'changePicture', $rattery->id]]) ?>
                         <?php else : ?>
-                            <?= $this->Html->image('icon-picture.svg', ['alt' => $rattery->prefix]) ?>
-                        <?php endif ?>
+                            <?= $this->Html->image('UnknownRattery.svg', ['url' => ['action' => 'changePicture', $rattery->id]]) ?>
+                        <?php endif; ?>
                     </div>
 
                 </div>

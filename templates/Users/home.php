@@ -18,7 +18,7 @@
                     <p><?= $user->rat_birthday_string ?></p>
                     <p><?= $user->coming_birthday_string ?></p>
                 </div>
-                <div class="column footer-center column-portrait">
+                <div class="column column-photo">
                     <?php if ($user->avatar != '') : ?>
                         <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username]) ?>
                     <?php else : ?>
