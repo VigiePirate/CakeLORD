@@ -303,11 +303,27 @@ table.aside-photo>tbody>tr>th{
 .column-photo {
   max-height: 24rem;
   overflow: visible; /* hidden ? */
+  text-align: center;
+  display:block;
+  width: 100%;
+}
+
+.column-photo > a > img {
+  padding: 0.5em;
+}
+
+.edit-photo > a > img, .edit-photo > a {
+  cursor: url('/img/cursor-edit.svg'), auto;
+}
+
+.edit-photo > a > img :hover, .edit-photo > a :hover{
+  background-color: #c3c8e6;
 }
 
 .column-portrait {
-  max-height: 16rem;
+  max-height: 30rem;
   overflow: hidden; /* hidden ? */
+  margin-top: -10rem !important;
 }
 
 .column-photo, .column-portrait > img {
@@ -1345,5 +1361,6 @@ svg {
 
   .column-photo, .column-portrait {
     max-height: unset;
+    margin-top: 0;
   }
 }

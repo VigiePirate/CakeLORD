@@ -15,14 +15,6 @@
                 <div class="side-nav-group">
                     <?php if (! $user->can('microEdit', $rat)) : ?>
                         <div class="tooltip disabled">
-                            <?= $this->Html->image('/img/icon-picture.svg', [
-                                'url' => [],
-                                'class' => 'side-nav-icon',
-                                'alt' => __('Change Picture')
-                            ]) ?>
-                            <span class="tooltiptext"><?= __('You cannot upload a new picture') ?></span>
-                        </div>
-                        <div class="tooltip disabled">
                             <?= $this->Html->image('/img/icon-transfer-ownership.svg', [
                                 'url' => [],
                                 'class' => 'side-nav-icon',
@@ -53,13 +45,6 @@
                             <span class="tooltiptext"><?= __('You cannot declare this rat’s death') ?></span>
                         </div>
                     <?php else : ?>
-                        <div class="tooltip">
-                            <?= $this->Html->image('/img/icon-picture.svg', [
-                                'url' => ['controller' => 'Rats', 'action' => 'changePicture', $rat->id],
-                                'class' => 'side-nav-icon',
-                                'alt' => __('Change Picture')]) ?>
-                            <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
-                        </div>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-transfer-ownership.svg', [
                                 'url' => ['controller' => 'Rats', 'action' => 'transferOwnership', $rat->id],
@@ -185,11 +170,15 @@
                     </table>
                 </div>
 
-                <div class="column footer-center column-photo">
-                    <?php if ($rat->picture != '') : ?>
-                        <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier]) ?>
+                <?php if (! is_null($user) && $user->can('microEdit', $rat)) : ?>
+                    <div class="column column-photo edit-photo">
+                <?php else : ?>
+                    <div class="column column-photo">
+                <?php endif ; ?>
+                    <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
+                        <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier, 'url' => ['action' => 'changePicture', $rat->id]]) ?>
                     <?php else : ?>
-                        <?= $this->Html->image('Unknown.svg', ['url' => ['action' => 'changePicture', $rat->id]]) ?>
+                        <?= $this->Html->image('UnknownRat.svg', ['url' => ['action' => 'changePicture', $rat->id]]) ?>
                     <?php endif; ?>
                 </div>
 

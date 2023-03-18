@@ -72,9 +72,9 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="column footer-center column-photo">
-                            <?php if ($rattery->picture != '') : ?>
-                                <?= $this->Html->image(UPLOADS . $rattery->picture, ['alt' => $rattery->prefix]) ?>
+                        <div class="column column-photo edit-photo">
+                            <?php if ($rattery->picture != '' && $rattery->picture != 'Unknown.png') : ?>
+                                <?= $this->Html->image(UPLOADS . $rattery->picture, ['alt' => $rattery->prefix, 'url' => ['action' => 'changePicture', $rattery->id]]) ?>
                             <?php else : ?>
                                 <?= $this->Html->image('UnknownRattery.svg', ['url' => ['action' => 'changePicture', $rattery->id]]) ?>
                             <?php endif ?>

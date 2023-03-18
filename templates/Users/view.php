@@ -71,7 +71,7 @@
             </div>
             <h1><?= h($user->username) ?></h1>
             <div class="row row-with-photo">
-                <div class="column-responsive column-80">
+                <div class="column-responsive column-66">
 
                     <h2><?= __('Information') ?></h2>
                     <table class="aside-photo">
@@ -94,9 +94,13 @@
                     </table>
                 </div>
 
-                <div class="column footer-center column-portrait">
-                    <?php if ($user->avatar != '') : ?>
-                        <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username]) ?>
+                <?php if (! is_null($identity) && $identity->can('changePicture', $user)) : ?>
+                    <div class="column column-photo column-portrait edit-photo">
+                <?php else : ?>
+                    <div class="column column-photo column-portrait">
+                <?php endif ; ?>
+                    <?php if ($user->avatar != '' && $user->avatar != 'Unknown.png') : ?>
+                        <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username, 'url' => ['action' => 'changePicture', $user->id]]) ?>
                     <?php else : ?>
                         <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
                     <?php endif; ?>

@@ -7,7 +7,6 @@
 
     <div class="column-responsive column-90">
         <div class="users view content">
-            <?= $this->Html->link(__('Edit profile'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'button float-right']) ?>
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
             </div>
@@ -15,7 +14,7 @@
             <h1><?= __('My profile') ?> </h1>
 
             <div class="row row-with-photo">
-                <div class="column-responsive column-80">
+                <div class="column-responsive column-66">
                     <h2><?= __('Public information') ?></h2>
                     <table class="aside-photo">
                         <tr>
@@ -36,9 +35,9 @@
                         </tr>
                     </table>
                 </div>
-                <div class="column footer-center column-portrait">
+                <div class="column column-photo edit-photo column-portrait">
                     <?php if ($user->avatar != '') : ?>
-                        <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username]) ?>
+                        <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username, 'url' => ['action' => 'changePicture', $user->id]]) ?>
                     <?php else : ?>
                         <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
                     <?php endif; ?>
@@ -47,6 +46,9 @@
 
             <div class="button-small">
                 <?= $this->Html->link(__('See public profile'), ['controller' => 'Users', 'action' => 'view', $user->id], ['class' => 'button float-right']) ?>
+            </div>
+            <div class="button-small">
+                <?= $this->Html->link(__('Edit profile'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'button float-right']) ?>
             </div>
 
             <h2><?= __('About me') ?></h2>
