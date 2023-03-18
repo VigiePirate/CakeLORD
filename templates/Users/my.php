@@ -60,7 +60,7 @@
                 </blockquote>
             </div>
 
-
+            <div class="spacer"></div>
             <h2><?= __('Private information') ?></h2>
             <table class="aside-photo">
                 <tr>
