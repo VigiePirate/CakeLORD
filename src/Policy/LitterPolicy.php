@@ -185,7 +185,7 @@ class LitterPolicy implements BeforePolicyInterface
             }
         }
 
-        if ($litter->sire[0]->owner_user_id == $user->getIdentifier()
+        if (isset($litter->sire) && ! empty($litter->sire) && $litter->sire[0]->owner_user_id == $user->getIdentifier()
             || $litter->dam[0]->owner_user_id == $user->getIdentifier())
         {
             return true;
