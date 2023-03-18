@@ -36,7 +36,7 @@
                     </table>
                 </div>
                 <div class="column column-photo edit-photo column-portrait">
-                    <?php if ($user->avatar != '') : ?>
+                    <?php if ($user->avatar != '' && $user->avatar != 'Unknown.png') : ?>
                         <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username, 'url' => ['action' => 'changePicture', $user->id]]) ?>
                     <?php else : ?>
                         <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
