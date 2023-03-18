@@ -571,6 +571,18 @@ class Rat extends Entity
             }
         }
 
+        // the missing trait will catch the error itself
+        if (
+            ! isset($this->coat_id)
+            || ! isset($this->color_id)
+            || ! isset($this->dilution_id)
+            || ! isset($this->earset_id)
+            || ! isset($this->eyecolor_id)
+            || ! isset($this->marking_id)
+        ) {
+            return true;
+        }
+
         if (! isset($this->coat)) {
             $coats = \Cake\Datasource\FactoryLocator::get('Table')->get('Coats');
             $this->coat = $coats->get($this->coat_id);
@@ -603,7 +615,7 @@ class Rat extends Entity
         $eyecolor_condition = ! ($this->eyecolor->is_picture_mandatory && $this->picture == '');
         $marking_condition = ! ($this->marking->is_picture_mandatory && $this->picture == '');
 
-        $singularity_condition = True;
+        $singularity_condition = true;
         foreach ($this->singularities as $singularity) {
             if ($singularity->is_picture_mandatory && $this->picture == '') {
                 $singularity_condition = false;

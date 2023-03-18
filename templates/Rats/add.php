@@ -201,7 +201,7 @@
 
                 <legend><?= __('Description') ?></legend>
                 <?php
-                    echo $this->Form->control('color_id', ['id' => 'jquery-color-select', 'empty' => true, 'default' => 0, 'options' => $colors]);
+                    echo $this->Form->control('color_id', ['id' => 'jquery-color-select', 'empty' => true, 'default' => 0, 'options' => $colors, 'required' => 'required']);
                 ?>
                 <div class="row">
                     <div class="column-responsive column-50">
@@ -247,7 +247,10 @@
                             ],
                         ]);
 
-                        echo $this->Form->control('death_date', ['label' => __('Please enter the death date (or date of last news)'), 'empty' => true, 'required' => true]);
+                        echo $this->Form->control('death_date', [
+                            'label' => __('Please enter the death date (or date of last news)'),
+                            'empty' => true,
+                        ]);
                         echo $this->Form->control('death_primary_cause_id', [
                             'id' => 'primaries',
                             'label' => __('Select the death cause category'),
