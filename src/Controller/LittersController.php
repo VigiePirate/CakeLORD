@@ -363,6 +363,41 @@ class LittersController extends AppController
     }
 
     /**
+     * EditComment method
+     *
+     * @param string|null $id Litter id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function editComment($id = null)
+    {
+        $litter = $this->Litters->get($id, [
+            'contain' => [
+                'Ratteries',
+                'Contributions',
+                'Sire',
+                'Dam',
+                'States'
+            ],
+        ]);
+        $this->Authorization->authorize($litter);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $litter = $this->Litters->patchEntity($litter, $this->request->getData());
+            if ($this->Litters->save($litter)) {
+                $this->Flash->success(__('Your new comment about the litter has been saved.'));
+                return $this->redirect(['action' => 'view', $litter->id]);
+            }
+            $this->Flash->error(__('Your new comment about the litter could not be saved. Please, try again.'));
+        }
+
+        $user = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($user) && $user->can('staffEdit', $litter);
+
+        $this->set(compact('litter', 'user', 'show_staff'));
+    }
+
+    /**
      * ManageContributions method
      *
      * @param string|null $id Litter id.

@@ -67,6 +67,7 @@ class LittersTable extends Table
                 'state_id',
                 'pups_number',
                 'contributions',
+                'comments',
             ],
         ]);
 
