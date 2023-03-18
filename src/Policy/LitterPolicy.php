@@ -111,6 +111,13 @@ class LitterPolicy implements BeforePolicyInterface
             || (! $litter->state->needs_user_action && $user->role->can_edit_others);
     }
 
+    public function canEditComment(IdentityInterface $user, Litter $litter)
+    {
+        return (! $litter->state->needs_staff_action && $this->isCreator($user, $litter))
+            || (! $litter->state->needs_staff_action && $this->isContributor($user, $litter))
+            || (! $litter->state->needs_user_action && $user->role->can_edit_others);
+    }
+
     /**
      * Check if $user can list own Litters
      *

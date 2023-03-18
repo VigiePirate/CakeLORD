@@ -46,6 +46,23 @@
                             <span class="tooltiptext"><?= __('You cannot manage contributing ratteries in this litter') ?></span>
                         </div>
                     <?php endif; ?>
+                    <?php if (! is_null($user) && $user->can('editComment', $litter)) : ?>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-comment.svg', [
+                                'url' => ['controller' => 'Litters', 'action' => 'editComment', $litter->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Edit Comment')]) ?>
+                            <span class="tooltiptext"><?= __('Edit comment') ?></span>
+                        </div>
+                    <?php else :?>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-comment.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Edit Comment')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot edit the comment') ?></span>
+                        </div>
+                    <?php endif; ?>
                     <?php if (! is_null($user) && $user->can('ownerEdit', $litter)) : ?>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-edit.svg', [
