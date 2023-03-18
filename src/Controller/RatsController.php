@@ -899,6 +899,38 @@ class RatsController extends AppController
         $this->set(compact('rat','deathPrimaryCauses'));
     }
 
+    /**
+     * EditComment method
+     *
+     * @param string|null $id Rat id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function editComment($id = null)
+    {
+        $rat = $this->Rats->get($id, [
+            'contain' => [
+                'CreatorUsers','OwnerUsers','States','Ratteries','BirthLitters','BirthLitters.Contributions',
+                'DeathPrimaryCauses','DeathSecondaryCauses',
+            ],
+        ]);
+
+        $this->Authorization->authorize($rat, 'microEdit');
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+            if ($this->Rats->save($rat)) {
+                $this->Flash->success(__('Your new comment about the rat has been saved.'));
+                return $this->redirect(['action' => 'view', $rat->id]);
+            }
+            $this->Flash->error(__('Your new comment about the rat could not be saved. Please, try again.'));
+        }
+
+        $user = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($user) && $user->can('staffEdit', $rat);
+
+        $this->set(compact('rat', 'user', 'show_staff'));
+    }
+
     /* State changes */
 
     public function freeze($id)

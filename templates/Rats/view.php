@@ -38,6 +38,13 @@
                             <span class="tooltiptext"><?= __('Declare litter from this rat') ?></span>
                         </div>
                         <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-comment.svg', [
+                                'url' => [],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Edit Comment')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot edit the comment') ?></span>
+                        </div>
+                        <div class="tooltip disabled">
                             <?= $this->Html->image('/img/icon-declare-death.svg', [
                                 'url' => [],
                                 'class' => 'side-nav-icon',
@@ -66,6 +73,13 @@
                                 'class' => 'side-nav-icon',
                                 'alt' => __('Declare Litter')]) ?>
                             <span class="tooltiptext"><?= __('Declare litter from this rat') ?></span>
+                        </div>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-comment.svg', [
+                                'url' => ['controller' => 'Rats', 'action' => 'editComment', $rat->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Edit Comment')]) ?>
+                            <span class="tooltiptext"><?= __('Edit comment') ?></span>
                         </div>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-declare-death.svg', [
