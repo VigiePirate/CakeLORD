@@ -5,7 +5,6 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
-use Cake\I18n\Time;
 //use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\Datasource\FactoryLocator;
 use App\Model\Entity\StatisticsTrait;
@@ -77,11 +76,11 @@ class Litter extends Entity
     protected function _getNameFromSire()
     {
         $date = isset($this->birth_date) ? $this->birth_date->i18nFormat('dd/MM/yyyy') : '??/??/????';
-        $partname = $date . ' – ' . $this->pups_number . ' pups';
-        if (isset ($this->dam[0]) && $this->dam[0]['name'] != 'Mère inconnue') {
-            $partname .= ' with ' . $this->dam[0]->usual_name;
+        $partname = $date . ' – ' . __('{0, plural, =1{1 pup} other{# pups}}', [$this->pups_number]);
+        if (isset ($this->dam[0])) {
+            $partname .= __(' with ') . $this->dam[0]->usual_name;
         } else {
-            $partname .= ' with unknown mother';
+            $partname .= __(' (unknown mother)');
         }
         return $partname;
     }
@@ -89,11 +88,12 @@ class Litter extends Entity
     protected function _getNameFromDam()
     {
         $date = isset($this->birth_date) ? $this->birth_date->i18nFormat('dd/MM/yyyy') : '??/??/????';
-        $partname = $date . ' – ' . $this->pups_number . ' pups';
-        if (isset ($this->sire[0]) && $this->sire[0]['name'] != 'Père inconnu') {
-            $partname .= ' with ' . $this->sire[0]->usual_name;
+        $partname = $date . ' – ' . __('{0, plural, =1{1 pup} other{# pups}}', [$this->pups_number]);
+
+        if (isset ($this->sire[0])) {
+            $partname .= __(' with ') . $this->sire[0]->usual_name;
         } else {
-            $partname .= ' with unknown father';
+            $partname .= __(' (unknown father)');
         }
         return $partname;
     }
@@ -104,8 +104,7 @@ class Litter extends Entity
             $agedate = $this->birth_date;
             return $agedate->diffInDays($this->sire[0]->birth_date, true);
         } else { // should raise exception
-            return __('Unknown');
-            //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
+            return 0;
         }
     }
 
@@ -113,10 +112,9 @@ class Litter extends Entity
     {
         if (isset($this->birth_date)) {
             $agedate = $this->birth_date;
-            return $agedate->diffInMonths($this->sire[0]->birth_date, true) .' months';
+            return __('{0, plural, =1{1 month} other{# months}}', [$agedate->diffInMonths($this->sire[0]->birth_date, true)]);
         } else { // should raise exception
-            return __('Unknown');
-            //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
+            return __x('age', 'Unknown');
         }
     }
 
@@ -127,7 +125,6 @@ class Litter extends Entity
             return $agedate->diffInDays($this->dam[0]->birth_date, true);
         } else { // should raise exception
             return 0;
-            //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
         }
     }
 
@@ -135,10 +132,9 @@ class Litter extends Entity
     {
         if (isset($this->birth_date)) {
             $agedate = $this->birth_date;
-            return $agedate->diffInMonths($this->dam[0]->birth_date, true) .' months';
+            return __('{0, plural, =1{1 month} other{# months}}', [$agedate->diffInMonths($this->dam[0]->birth_date, true)]);
         } else { // should raise exception
-            return __('Unknown');
-            //return (1 + $agedate->diffInMonths($this->sire[0]->birth_date, true)) . ' months (estimated)';
+            return __x('age', 'Unknown');
         }
     }
 
@@ -156,15 +152,10 @@ class Litter extends Entity
     {
         if (isset($this->birth_date)) {
             $agedate = $this->birth_date;
-            return $agedate->diffInMonths() .' months';
+            return __('{0, plural, =0{<1 month} =1{1 month} other{# months}}', [$agedate->diffInMonths()]);
         } else { // should raise exception
-            return __('Unknown');
+            return __x('age', 'Unknown');
         }
-    }
-
-    protected function _getInbreedingCoefficient()
-    {
-
     }
 
     /* rules */

@@ -5,7 +5,6 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
-use Cake\I18n\Time;
 use Cake\Datasource\FactoryLocator;
 use App\Model\Entity\StatisticsTrait;
 use App\Model\Table\RatsTable;
@@ -192,8 +191,8 @@ class Rattery extends Entity
             $stats['deadMaleAgeHealthy'] = $this->roundLifespan(['rattery_id' => $this->id, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
 
         } else {
-            $stats['femaleProportion'] = 'N/A';
-            $stats['maleProportion'] = 'N/A';
+            $stats['femaleProportion'] = __('N/A');
+            $stats['maleProportion'] = __('N/A');
             $stats['deadRatCount'] = 0;
         }
 
@@ -221,6 +220,7 @@ class Rattery extends Entity
     public function lifetimeInWords($options = [], $productivity = []) {
         $model = FactoryLocator::get('Table')->get('Contributions');
 
+        //FIXME: use $rattery->is_generic
         $filter = ['rattery_id >' => 6, 'rattery_id' => $this->id];
 
         if(!empty($options)) {
@@ -242,13 +242,13 @@ class Rattery extends Entity
         }
 
         if (is_null($lifetimes['first_birth'])) {
-            return 'N/A';
+            return __('N/A');
         } else {
             $first_birth = FrozenTime::createFromFormat('Y-m-d', $lifetimes['first_birth']);
             $last_birth = FrozenTime::createFromFormat('Y-m-d', $lifetimes['last_birth']);
 
             if($productivity==1) {
-                $lifetime = $first_birth->year . ' (one-shot rattery)';
+                $lifetime = $first_birth->year . __(' (one-shot rattery)');
             } else {
                 $duration = $last_birth->timeAgoInWords(['from' => $first_birth, 'accuracy' => ['year' => 'month', 'month => week', 'week' => 'week']]);
                 if($first_birth->year == $last_birth->year) {

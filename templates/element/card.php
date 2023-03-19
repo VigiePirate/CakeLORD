@@ -7,7 +7,7 @@
 <table>
 <?php foreach($$rubric as $key => $value): ?>
     <tr>
-        <th><?= __($key) ?></th>
+        <th><?= h($key) ?></th>
         <td><?= $value ?></td>
     </tr>
 <?php endforeach; ?>

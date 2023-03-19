@@ -159,7 +159,7 @@ class Rat extends Entity
 
     protected function _getSexName()
     {
-        return $this->sex=='M' ? 'Male' : 'Female';
+        return $this->sex=='M' ? __('Male') : __('Female');
     }
 
     protected function _getSexSymbol()
@@ -221,19 +221,21 @@ class Rat extends Entity
     protected function _getAgeString()
     {
         if ($this->age < 0) { // Should raise exception
-            return $age = 'Negative age!';
+            return $age = __('Negative age?!');
         }
         if ($this->age > RatsTable::MAXIMAL_AGE_MONTHS) {
-            return $age = 'Unknown';
+            return $age = __x('age', 'Unknown');
         }
         if (! $this->_fields['is_alive'] ) {
-            $age = $this->has('death_date') ? ($this->age . ' months') : ('Unknown') ;//('supposed deceased, unknown age');
+            $age = $this->has('death_date')
+                ? __('{0, plural, =0{< 1 month} =1{1 month} other{# months}}', [$this->age])
+                : ('Unknown') ;
             return $age;
         }  else {
             if($this->age < 1) {
-                return $age = $this->precise_age . ' days';
+                return $age = __('{0, plural, =1{1 day} other{# days}}', [$this->precise_age]);
             } else {
-                return $age = $this->age . ' months';
+                return $age = __('{0, plural, =1{1 month} other{# months}}', [$this->age]);
             }
         }
     }
@@ -242,19 +244,21 @@ class Rat extends Entity
     protected function _getShortAgeString()
     {
         if ($this->age < 0) { // Should raise exception
-            return $age = 'Negative age!';
+            return $age = __('Negative age?!');
         }
         if ($this->age > RatsTable::MAXIMAL_AGE_MONTHS) {
-            return $age = 'unknown';
+            return $age = __x('age', 'unknown');
         }
         if (! $this->_fields['is_alive'] ) {
-            $age = $this->has('death_date') ? ($this->age . ' mo') : ('unknown') ;//('supposed deceased, unknown age');
+            $age = $this->has('death_date')
+                ? __('{0} mo', [$this->age])
+                : __x('age', 'unknown') ;
             return $age;
         }  else {
             if($this->age < 1) {
-                return $age = $this->precise_age . __(' d');
+                return $age = __x('age in short form', '{0} d', [$this->precise_age]);
             } else {
-                return $age = $this->age . __(' mo');
+                return $age = __x('age in short form', '{0} mo', [$this->age]);
             }
         }
     }
@@ -265,7 +269,7 @@ class Rat extends Entity
         /* debug while waiting for data conformity:
         there shouldn't be a death date if the rat is alive, but... */
         // if (! $this->_fields['is_alive'] && isset($this->_fields['death_date'])) {
-        if (!$this->is_alive && isset($this->_fields['death_date'])) {
+        if (! $this->is_alive && isset($this->_fields['death_date'])) {
             $agedate = $this->_fields['death_date'];
         }
         if (isset($this->birth_date)) {
@@ -277,22 +281,13 @@ class Rat extends Entity
 
     protected function _getChampionAgeString()
     {
-        // if (!$this->is_alive
-        //    && isset($this->birth_date)
-        //    && isset($this->_fields['death_date'])
-        //    && isset($this->_fields['death_primary_cause'])
-        //    && (!isset($this->_fields['death_secondary_cause']) || (isset($this->_fields['death_primary_cause']) && $this->death_secondary_cause_id != 1))
-        // ) {
-            //return $agedate->diffInDays($this->_fields['birth_date'], true);
-            // timeAgoInWords? diffForHumans?
-            $birthdate = $this->birth_date;
-            $deathdate = $this->death_date;
-            /* call to timeAgoInWords in the "wrong" date order to avoid "ago" to be added to the string */
-            /* could be improved with option "relativeString" to skip number of weeks and convert them to days */
-            return $ageInWords =  $deathdate->timeAgoInWords(['from' => $birthdate, 'accuracy' => ['year' => 'day']]);
-        //} else {
-        //    return 0; // Should raise exception
-        //}
+        //return $agedate->diffInDays($this->_fields['birth_date'], true);
+        // timeAgoInWords? diffForHumans?
+        $birthdate = $this->birth_date;
+        $deathdate = $this->death_date;
+        /* call to timeAgoInWords in the "wrong" date order to avoid "ago" to be added to the string */
+        /* could be improved with option "relativeString" to skip number of weeks and convert them to days */
+        return $ageInWords =  $deathdate->timeAgoInWords(['from' => $birthdate, 'accuracy' => ['year' => 'day']]);
     }
 
     public function childbearingAge()
@@ -339,7 +334,7 @@ class Rat extends Entity
     {
         if(!$this->is_alive) {
             if(!isset($this->death_primary_cause)) {
-                return 'Unknown'; // should raise exception
+                return __x('death cause', 'Unknown'); // should raise exception
             }
             if(isset($this->death_secondary_cause)) {
                 $cause = h($this->death_secondary_cause->name);
@@ -348,7 +343,7 @@ class Rat extends Entity
             }
         } else {
             if ($this->age > RatsTable::MAXIMAL_AGE_MONTHS) {
-                $cause = __('Unknown (presumably dead)');
+                $cause = __x('death cause', 'Unknown (presumably dead)');
             } else {
                 $cause = '– ' . __('Alive') . ' –'; // ndash and fine space, please edit carefully
             }
@@ -360,7 +355,7 @@ class Rat extends Entity
     {
         if (!$this->is_alive) {
             if (!isset($this->death_primary_cause)) {
-                return 'Unknown'; // should raise exception
+                return __x('death cause', 'Unknown'); // should raise exception
             }
             if(isset($this->death_secondary_cause)) {
                 $cause = h($this->death_secondary_cause->name);
