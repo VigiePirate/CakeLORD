@@ -188,7 +188,7 @@ class UserPolicy implements BeforePolicyInterface
      * @param App\Model\Entity\User $resource
      * @return bool
      */
-    public function canResetEmail(IdentityInterface $user, User $resource)
+    public function canChangeEmail(IdentityInterface $user, User $resource)
     {
         return $this->isSelf($user, $resource) || $user->role->can_edit_others;
     }
