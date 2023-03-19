@@ -155,15 +155,15 @@
                             <table class="condensed stats">
                                 <tr>
                                     <th><?= __('Average lifespan of rats with this prefix:') ?></th>
-                                    <td><?= h($stats['deadRatAge']) ?> months (♀: <?= h($stats['deadFemaleAge']) ?>, ♂: <?= h($stats['deadMaleAge']) ?>)</td>
+                                    <td><?= h($stats['deadRatAge']) ?> months (♀: <?= h($stats['deadFemaleAge']) ?> – ♂: <?= h($stats['deadMaleAge']) ?>)</td>
                                 </tr>
                                 <tr>
                                     <th> ⨽ <?= __('infant mortality excluded:') ?></th>
-                                    <td> ⨽ <?= h($stats['deadRatAgeAdult']) ?> months (♀: <?= h($stats['deadFemaleAgeAdult']) ?>, ♂: <?= h($stats['deadMaleAgeAdult']) ?>)</td>
+                                    <td> ⨽ <?= h($stats['deadRatAgeAdult']) ?> months (♀: <?= h($stats['deadFemaleAgeAdult']) ?> – ♂: <?= h($stats['deadMaleAgeAdult']) ?>)</td>
                                 </tr>
                                 <tr>
                                     <th> ⨽ <?= __('accidents excluded:') ?></th>
-                                    <td> ⨽ <?= h($stats['deadRatAgeHealthy']) ?> months (♀: <?= h($stats['deadFemaleAgeHealthy']) ?>, ♂: <?= h($stats['deadMaleAgeHealthy']) ?>)</td>
+                                    <td> ⨽ <?= h($stats['deadRatAgeHealthy']) ?> months (♀: <?= h($stats['deadFemaleAgeHealthy']) ?> – ♂: <?= h($stats['deadMaleAgeHealthy']) ?>)</td>
                                 </tr>
                             </table>
                         <?php else : ?>
@@ -321,15 +321,15 @@
                                     <table class="condensed stats">
                                         <tr>
                                             <th><?= __('Average lifespan of bred rats:') ?></th>
-                                            <td><?= h($stats['deadRatAge']) ?> months (♀: <?= h($stats['deadFemaleAge']) ?>, ♂: <?= h($stats['deadMaleAge']) ?>)</td>
+                                            <td><?= h($stats['deadRatAge']) ?> months (♀: <?= h($stats['deadFemaleAge']) ?> – ♂: <?= h($stats['deadMaleAge']) ?>)</td>
                                         </tr>
                                         <tr>
                                             <th> ⨽ <?= __('infant mortality excluded:') ?></th>
-                                            <td> ⨽ <?= h($stats['deadRatAgeAdult']) ?> months (♀: <?= h($stats['deadFemaleAgeAdult']) ?>, ♂: <?= h($stats['deadMaleAgeAdult']) ?>)</td>
+                                            <td> ⨽ <?= h($stats['deadRatAgeAdult']) ?> months (♀: <?= h($stats['deadFemaleAgeAdult']) ?> – ♂: <?= h($stats['deadMaleAgeAdult']) ?>)</td>
                                         </tr>
                                         <tr>
                                             <th> ⨽ <?= __('accidents excluded:') ?></th>
-                                            <td> ⨽ <?= h($stats['deadRatAgeHealthy']) ?> months (♀: <?= h($stats['deadFemaleAgeHealthy']) ?>, ♂: <?= h($stats['deadMaleAgeHealthy']) ?>)</td>
+                                            <td> ⨽ <?= h($stats['deadRatAgeHealthy']) ?> months (♀: <?= h($stats['deadFemaleAgeHealthy']) ?> – ♂: <?= h($stats['deadMaleAgeHealthy']) ?>)</td>
                                         </tr>
                                     </table>
                                     <table class="condensed stats">

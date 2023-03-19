@@ -58,15 +58,15 @@
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('average:') ?></th>
-                    <td> ⨽ <?= __('{0, number} months (♀: {1, number}, ♂: {2, number})', [$lifespan, $female_lifespan, $male_lifespan]) ?></td>
+                    <td> ⨽ <?= __('{0, number} months (♀: {1, number} – ♂: {2, number})', [$lifespan, $female_lifespan, $male_lifespan]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('average, infant mortality excluded:') ?></th>
-                    <td> ⨽ <?= __('{0, number} months (♀: {1, number}, ♂: {2, number})', [$not_infant_lifespan, $not_infant_female_lifespan, $not_infant_male_lifespan]) ?></td>
+                    <td> ⨽ <?= __('{0, number} months (♀: {1, number} – ♂: {2, number})', [$not_infant_lifespan, $not_infant_female_lifespan, $not_infant_male_lifespan]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('average, accidents also excluded:') ?></th>
-                    <td> ⨽ <?= __('{0, number} months (♀: {1, number}, ♂: {2, number})', [$not_accident_lifespan, $not_accident_female_lifespan, $not_accident_male_lifespan]) ?></td>
+                    <td> ⨽ <?= __('{0, number} months (♀: {1, number} – ♂: {2, number})', [$not_accident_lifespan, $not_accident_female_lifespan, $not_accident_male_lifespan]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('maximum:') ?></th>

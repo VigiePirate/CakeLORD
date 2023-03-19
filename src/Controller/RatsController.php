@@ -75,6 +75,7 @@ class RatsController extends AppController
         $departed = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => false])
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+        //FIXME use need user action, need staff action properties
         $pending = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id' => '4'])
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
@@ -477,12 +478,6 @@ class RatsController extends AppController
         $rats = $this->paginate($rats);
 
         $this->set(compact('rats', 'names'));
-        /*
-        $this->set([
-            'rats' => $rats,
-            'names' => $names
-        ]);
-         */
     }
 
     /**
@@ -499,13 +494,11 @@ class RatsController extends AppController
         // The 'pass' key is provided by CakePHP and contains all
         // the passed URL path segments in the request.
         $ratteries = $this->request->getParam('pass');
-        //
-        // Use the RatsTable to find named rats.
+
         $rats = $this->Rats->find('fromRattery', [
             'ratteries' => $ratteries
         ]);
 
-        // Pass variables into the view template context.
         $this->paginate = [
             'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
@@ -770,10 +763,14 @@ class RatsController extends AppController
     public function family($id = null) {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['States',
+            'contain' => [
+                'States',
                 'Ratteries',
-                'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
-                'BredLitters']
+                'BirthLitters',
+                'BirthLitters.Ratteries',
+                'BirthLitters.Contributions',
+                'BredLitters'
+            ]
         ]);
 
         $stats = $rat->wrapFamilyStatistics();

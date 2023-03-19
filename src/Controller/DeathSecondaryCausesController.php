@@ -55,8 +55,8 @@ class DeathSecondaryCausesController extends AppController
             $sex_ratio =  $deathSecondaryCause->computeRatSexRatioInWords(['death_secondary_cause_id' => $deathSecondaryCause->id], 20);
             $age = $deathSecondaryCause->roundLifespan(['death_secondary_cause_id' => $deathSecondaryCause->id]);
         } else {
-            $sex_ratio = 'N/A';
-            $age = 'N/A';
+            $sex_ratio = __('N/A');
+            $age = __('N/A');
         }
 
         $user = $this->request->getAttribute('identity');
@@ -140,8 +140,7 @@ class DeathSecondaryCausesController extends AppController
                 ->where([
                             'death_primary_cause_id IS' => $this->request->getQuery('deathprimarykey'),
                         ])
-                ->order(['id' => 'ASC'])
-            ;
+                ->order(['id' => 'ASC']);
             $this->set('items', $items);
             $this->viewBuilder()->setOption('serialize', ['items']);
         }
@@ -150,12 +149,10 @@ class DeathSecondaryCausesController extends AppController
     public function description() {
         if ($this->request->is(['ajax'])) {
             $this->Authorization->skipAuthorization();
-            $items = $this->DeathSecondaryCauses->find('all')
+            $items = $this->DeathSecondaryCauses
+                ->find('all')
                 ->select(['id' => 'id', 'value' => 'description'])
-                ->where([
-                            'id IS' => $this->request->getQuery('id'),
-                        ])
-            ;
+                ->where(['id IS' => $this->request->getQuery('id')]);
             $this->set('items', $items);
             $this->viewBuilder()->setOption('serialize', ['items']);
         }

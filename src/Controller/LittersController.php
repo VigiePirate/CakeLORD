@@ -657,8 +657,8 @@ class LittersController extends AppController
          $this->Authorization->skipAuthorization();
          if($genealogy == null) {
              $coefficients = [
-                 'coi' => 'Unknown',
-                 'avk' => 'Unknown'
+                 'coi' => __('N/A'),
+                 'avk' => __('N/A'),
              ];
          }
 
