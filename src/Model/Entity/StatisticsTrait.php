@@ -112,29 +112,29 @@ trait StatisticsTrait
         $males = $model->find()->where($filter_M)->leftJoinWith('BirthLitters.Contributions')->distinct()->count();
 
         if ($females == 0) {
-            return 'Male-only';
+            return __('Male-only');
         }
 
         $sex_ratio = $males/$females;
 
         if ($sex_ratio == 0) {
-            return 'Female-only';
+            return __('Female-only');
         }
 
         $sex_ratio = round($sex_ratio,3);
 
         if ($sex_ratio == 1) {
-            return 'Balanced (1 male for 1 female)';
+            return __('Balanced (1 male for 1 female)');
         }
 
         //FIXME: deal with singular/plural
         if ($sex_ratio > 1) {
             $operands = $this->computeFareyApproximation($sex_ratio, $max_denominator);
-            return h($sex_ratio) . ' (about ' . h($operands[0]) . __(' males for ' . h($operands[1]) . ' females') . ')';
+            return __('{0, number} (about {1, plural, =1{1 male} other{# males}} for {2, plural, =1{1 female} other{# females}})', [$sex_ratio, $operands[0], $operands[1]]);
         } else {
             $inverse_ratio = round(1/$sex_ratio,2);
             $operands = $this->computeFareyApproximation($inverse_ratio, $max_denominator);
-            return h($sex_ratio) . ' (about ' . h($operands[0]) . __(' females for ' . h($operands[1]) . ' males') . ')';
+            return __('{0, number} (about {1, plural, =1{1 female} other{# females}} for {2, plural, =1{1 male} other{# males}})', [$sex_ratio, $operands[0], $operands[1]]);
         }
     }
 
@@ -427,7 +427,7 @@ trait StatisticsTrait
         $sex_ratio = round($this->computeLitterSexRatio($options),3);
 
         if ($sex_ratio == -2) {
-            return 'Only females';
+            return __('Only females');
         }
 
         if ($sex_ratio == -1) {
@@ -435,16 +435,16 @@ trait StatisticsTrait
         }
 
         if ($sex_ratio == 0) {
-            return 'Only males';
+            return __('Only males');
         }
 
         if ($sex_ratio >= 1) {
             $operands = $this->computeFareyApproximation($sex_ratio, $max_denominator);
-            return h($sex_ratio) . ' (about ' . h($operands[0]) . __(' males for ' . h($operands[1]) . ' females') . ')';
+            return __('{0, number} (about {1, plural, =1{1 male} other{# males}} for {2, plural, =1{1 female} other{# females}})', [$sex_ratio, $operands[0], $operands[1]]);
         } else {
             $inverse_ratio = round(1/$sex_ratio,2);
             $operands = $this->computeFareyApproximation($inverse_ratio, $max_denominator);
-            return h($sex_ratio) . ' (about ' . h($operands[0]) . __(' females for ' . h($operands[1]) . ' males') . ')';
+            return __('{0, number} (about {1, plural, =1{1 female} other{# females}} for {2, plural, =1{1 male} other{# males}})', [$sex_ratio, $operands[0], $operands[1]]);
         }
     }
 

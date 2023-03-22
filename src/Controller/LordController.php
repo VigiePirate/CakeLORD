@@ -160,6 +160,7 @@ class LordController extends AppController
         $pups_by_rattery = $lord->computePupsByRattery();
         $avg_sex_ratio = $lord->computeLitterSexRatioInWords(['OffspringRats.rattery_id >' => '6'], 100);
 
+        //FIXME: use $rattery->is_generic property
         $nongeneric_litter_count = $lord->countLitters(['rattery_id >' => '6']);
         $littersize_distribution = json_encode($lord->computeLitterSizeDistribution()->toArray());
         $females_in_litter_distribution = json_encode($lord->computeLitterSexDistribution(['sex' => 'F']));

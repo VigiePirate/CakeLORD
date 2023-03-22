@@ -53,12 +53,12 @@ class DeathPrimaryCausesController extends AppController
             $sex_ratio =  $deathPrimaryCause->computeRatSexRatioInWords(['death_primary_cause_id' => $deathPrimaryCause->id], 20);
             $age = $deathPrimaryCause->roundLifespan(['death_primary_cause_id' => $deathPrimaryCause->id]);
         } else {
-            $sex_ratio = 'N/A';
-            $age = 'N/A';
+            $sex_ratio = __('N/A');
+            $age = __('N/A');
         }
 
         $user = $this->request->getAttribute('identity');
-        $show_staff = !is_null($user) && $user->can('add', $this->DeathPrimaryCauses);
+        $show_staff = ! is_null($user) && $user->can('add', $this->DeathPrimaryCauses);
         $this->set(compact('deathPrimaryCause', 'count', 'frequency', 'sex_ratio', 'age', 'user', 'show_staff'));
     }
 
