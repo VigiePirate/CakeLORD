@@ -14,6 +14,7 @@
             'birth_date',
             'age_string',
             'death_cause',
+            'actions',
         ],
     ]) ?>
 </div>

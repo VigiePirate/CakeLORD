@@ -85,14 +85,26 @@
                     <?php if (! in_array('actions', $exceptions)): ?>
                         <td class="actions">
                             <span class="nowrap">
-                                <?= $this->Html->image('/img/icon-edit.svg', [
-                                    'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
-                                    'class' => 'action-icon',
-                                    'alt' => __('Edit Rat')]) ?>
-                                <?= $this->Html->image('/img/icon-declare-death.svg', [
-                                    'url' => ['controller' => 'Rats', 'action' => 'declare-death', $rat->id],
-                                    'class' => 'action-icon',
-                                    'alt' => __('Declare Death')]) ?>
+                                <?php if (! is_null($user) && $user->can('edit', $rat)) : ?>
+                                    <?= $this->Html->image('/img/icon-edit.svg', [
+                                        'url' => ['controller' => 'Rats', 'action' => 'edit', $rat->id],
+                                        'class' => 'action-icon',
+                                        'alt' => __('Edit Rat')])
+                                    ?>
+                                <?php endif ;?>
+                                <?php if (! is_null($user) && $user->can('microEdit', $rat)) : ?>
+                                    <?= $this->Html->image('/img/icon-declare-death.svg', [
+                                        'url' => ['controller' => 'Rats', 'action' => 'declare-death', $rat->id],
+                                        'class' => 'action-icon',
+                                        'alt' => __('Declare Death')])
+                                    ?>
+                                <?php else :?>
+                                    <?= $this->Html->image('/img/icon-view.svg', [
+                                        'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
+                                        'class' => 'action-icon',
+                                        'alt' => __('View Rat')])
+                                    ?>
+                                <?php endif ;?>
                             </span>
                         </td>
                     <?php endif; ?>

@@ -242,7 +242,13 @@
                         <?php foreach ($litter->contributions as $contribution) : ?>
                         <tr>
                             <td><?= h($contribution->rattery->prefix) ?></td>
-                            <td><?= $this->Html->link(h($contribution->rattery->name), ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id]) ?></td>
+                            <td>
+                                <?= $this->Html->link(
+                                    h($contribution->rattery->name),
+                                    ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id],
+                                    ['escape' => false]
+                                )?>
+                            </td>
                             <td><?= h($contribution->contribution_type->name) ?></td>
                         </tr>
                         <?php endforeach; ?>

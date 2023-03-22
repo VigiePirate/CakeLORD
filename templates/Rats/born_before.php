@@ -13,6 +13,7 @@
             'rubric' => __(''),
             'exceptions' => [
                 'picture',
+                'actions',
                 //'age_string',
                 //'death_cause',
             ],
