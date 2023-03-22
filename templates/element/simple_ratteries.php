@@ -56,10 +56,10 @@
                         <td><?= h($rattery->prefix) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('name', $exceptions)): ?>
-                        <td><?= $this->Html->link($rattery->name, ['controller' => 'Ratteries', 'action' => 'view', $rattery->id]) ?></td>
+                        <td><?= $this->Html->link(h($rattery->name), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id], ['escape' => false]) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('owner_user', $exceptions)): ?>
-                        <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->username, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
+                        <td><?= $rattery->has('user') ? $this->Html->link(h($rattery->user->username), ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('birth_year', $exceptions)): ?>
                         <td><?= h($rattery->birth_year) ?></td>

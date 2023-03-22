@@ -199,6 +199,7 @@
                         'picture',
                         'age_string',
                         'death_cause',
+                        'actions',
                     ],
                 ]) ?>
 
