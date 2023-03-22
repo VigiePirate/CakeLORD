@@ -6,50 +6,22 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="icon-comment.svg"
-   inkscape:version="1.0beta1 (fe3e306, 2019-09-17)"
-   width="64px"
-   height="64px"
-   viewBox="0 0 64 64"
+   id="SVGRoot"
    version="1.1"
-   id="SVGRoot">
+   viewBox="0 0 64 64"
+   height="64px"
+   width="64px">
   <defs
      id="defs842">
     <linearGradient
-       osb:paint="solid"
-       id="linearGradient1474">
+       id="linearGradient1474"
+       osb:paint="solid">
       <stop
-         id="stop1472"
+         style="stop-color:#ffffff;stop-opacity:1;"
          offset="0"
-         style="stop-color:#ffffff;stop-opacity:1;" />
+         id="stop1472" />
     </linearGradient>
   </defs>
-  <sodipodi:namedview
-     inkscape:grid-bbox="true"
-     inkscape:window-maximized="0"
-     inkscape:window-y="0"
-     inkscape:window-x="96"
-     inkscape:window-height="1030"
-     inkscape:window-width="1719"
-     showgrid="false"
-     inkscape:document-rotation="0"
-     inkscape:current-layer="layer1"
-     inkscape:document-units="px"
-     inkscape:cy="14.832633"
-     inkscape:cx="24.124997"
-     inkscape:zoom="5.6"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base">
-    <inkscape:grid
-       id="grid1478"
-       type="xygrid" />
-  </sodipodi:namedview>
   <metadata
      id="metadata845">
     <rdf:RDF>
@@ -63,19 +35,15 @@
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
-     inkscape:groupmode="layer"
-     inkscape:label="Calque 1">
-    <text
+     id="layer1">
+    <g
+       style="font-weight:500;font-size:209.459px;line-height:1.25;font-family:'Sassoon Sans Std';-inkscape-font-specification:'Sassoon Sans Std Medium';letter-spacing:0px;word-spacing:0px;fill:#663300;fill-opacity:1;stroke-width:3.2728"
        id="text855"
-       y="143.50679"
-       x="-25.182306"
-       style="font-weight:500;font-size:209.459px;line-height:1.25;font-family:'Sassoon Sans Std';-inkscape-font-specification:'Sassoon Sans Std Medium';letter-spacing:0px;word-spacing:0px;stroke-width:3.2728;fill:#663300;fill-opacity:1;"
-       xml:space="preserve"><tspan
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:209.459px;font-family:Alegreya;-inkscape-font-specification:'Alegreya Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:3.2728;fill:#663300;fill-opacity:1;"
-         y="143.50679"
-         x="-25.182306"
-         id="tspan853"
-         sodipodi:role="line">“</tspan></text>
+       aria-label="“">
+      <path
+         id="path835"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:209.459px;font-family:Alegreya;-inkscape-font-specification:'Alegreya Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#663300;fill-opacity:1;stroke-width:3.2728"
+         d="m 56.297245,46.527273 c -4.608098,-2.722967 -8.37836,-7.331065 -8.37836,-12.986458 0,-7.121606 6.702688,-15.499966 15.081048,-20.736441 v -2.09459 L 59.229671,7.5678994 C 47.709426,13.64221 32.418919,24.952996 32.418919,40.034044 c 0,9.216196 5.027016,14.871589 11.310786,14.871589 4.608098,0 9.425655,-3.351344 12.148622,-5.445934 z m -31.41885,0 c -4.608098,-2.722967 -8.37836,-7.331065 -8.37836,-12.986458 0,-7.121606 6.702688,-15.499966 15.081048,-20.736441 v -2.09459 L 27.810821,7.5678994 C 16.290576,13.64221 1.0000687,24.952996 1.0000687,40.034044 c 0,9.216196 5.027016,14.871589 11.3107863,14.871589 4.608098,0 9.425655,-3.351344 12.148622,-5.445934 z" />
+    </g>
   </g>
 </svg>
