@@ -124,7 +124,7 @@ class RatteriesController extends AppController
 
         $user = $this->request->getAttribute('identity');
 
-        $this->set(compact('rattery','champion', 'stats', 'user')); // 'offsprings'));
+        $this->set(compact('rattery', 'champion', 'stats', 'user')); // 'offsprings'));
     }
 
     /**

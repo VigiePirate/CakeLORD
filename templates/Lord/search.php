@@ -66,7 +66,7 @@
             'rubric' => __(''),
             'exceptions' => [
                 'picture',
-                'actions'
+                'actions',
             ],
         ]) ?>
     </div>
