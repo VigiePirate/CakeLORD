@@ -53,10 +53,10 @@
                         <td><?= isset($rattery->picture_thumbnail) ? $this->Html->image($rattery->picture_thumbnail, ['alt' => $rattery->name]) : '' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('prefix', $exceptions)): ?>
-                        <td><?= $this->Html->link($rattery->prefix, ['controller' => 'Ratteries', 'action' => 'view', $rattery->id]) ?></td>
+                        <td><?= h($rattery->prefix) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('name', $exceptions)): ?>
-                        <td><?= h($rattery->name) ?></td>
+                        <td><?= $this->Html->link($rattery->name, ['controller' => 'Ratteries', 'action' => 'view', $rattery->id]) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('owner_user', $exceptions)): ?>
                         <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->username, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>

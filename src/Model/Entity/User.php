@@ -187,7 +187,7 @@ class User extends Entity implements IdentityInterface
     {
         $rattery = $this->main_rattery;
         if (! empty($rattery)) {
-            return h($rattery->full_name);
+            return $rattery->full_name;
         }
     }
 
