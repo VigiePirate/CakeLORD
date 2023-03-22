@@ -291,8 +291,8 @@ class RatsTable extends Table
         }
 
         // check if death was recorded at creation
-        if (isset($data['declared_death'])) {
-            $data['is_alive'] = ($data['declared_death'] == 1) ? false : true;
+        if (isset($data['is_dead'])) {
+            $data['is_alive'] = ! $data['is_dead'];
             if ($data['is_alive']) {
                 unset($data['death_primary_cause_id']);
                 unset($data['death_secondary_cause_id']);

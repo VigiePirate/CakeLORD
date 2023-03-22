@@ -4,7 +4,7 @@
 
 /* Utils */
 .hide-everywhere {
-  display:none;
+  display:none !important;
 }
 
 /* Miligram overrides */
@@ -216,7 +216,7 @@ textarea {
   height:auto;
 }
 
-legend {
+legend, .legend {
   font-family: "Imprima", sans-serif;
   font-size: 2.4rem;
   color:#606ebf;
