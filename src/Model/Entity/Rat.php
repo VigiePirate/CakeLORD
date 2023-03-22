@@ -634,13 +634,37 @@ class Rat extends Entity
     /* check if rat is young enough to be eligible to infant mortality */
     public function canDieInfant()
     {
-        return ! ( !$this->is_alive && ($this->death_primary_cause->is_infant) && ($this->precise_age > RatsTable::MAXIMAL_INFANT_AGE) );
+        if (! $this->is_alive && ! isset($this->death_primary_cause)) {
+            $causes = \Cake\Datasource\FactoryLocator::get('Table')->get('DeathPrimaryCauses');
+            if (! isset($this->death_primary_cause_id)) {
+                return true;
+            } else {
+                $this->death_primary_cause = $causes->get($this->death_primary_cause_id);
+            }
+        }
+
+        return ! ( ! $this->is_alive
+            && ($this->death_primary_cause->is_infant)
+            && ($this->precise_age > RatsTable::MAXIMAL_INFANT_AGE)
+        );
     }
 
     /* check if rat is old enough to die of old age */
     public function canDieOldster()
     {
-        return !( !$this->is_alive && ($this->death_primary_cause->is_oldster) && ($this->age < RatsTable::MINIMAL_OLDSTER_AGE) );
+        if (! $this->is_alive && ! isset($this->death_primary_cause)) {
+            $causes = \Cake\Datasource\FactoryLocator::get('Table')->get('DeathPrimaryCauses');
+            if (! isset($this->death_primary_cause_id)) {
+                return true;
+            } else {
+                $this->death_primary_cause = $causes->get($this->death_primary_cause_id);
+            }
+        }
+
+        return ! (! $this->is_alive
+            && ($this->death_primary_cause->is_oldster)
+            && ($this->age < RatsTable::MINIMAL_OLDSTER_AGE)
+        );
     }
 
     /* check if rat age at death is not larger than max */
