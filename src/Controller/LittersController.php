@@ -111,9 +111,21 @@ class LittersController extends AppController
             $snap_diffs[$snapshot->id] = $this->Litters->snapCompareAsString($litter, $snapshot->id);
         }
 
+        $js_legends = json_encode([
+            __('Survival rate'),
+            __('Age (in months)'),
+            __('Survival rate (%)'),
+            __('Survival rate by age'),
+            __(' % of litter pups reached this age'),
+            __x('litter statistics', 'Age: between '),
+            __x('litter statistics', ' and '),
+            __x('litter statistics', ' months'),
+
+        ]);
+
         $user = $this->request->getAttribute('identity');
 
-        $this->set(compact('litter', 'offsprings', 'stats', 'snap_diffs', 'user'));
+        $this->set(compact('litter', 'offsprings', 'stats', 'snap_diffs', 'user', 'js_legends'));
     }
 
     /**
