@@ -40,25 +40,25 @@
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Total number of known ancestors:') ?></th>
-                    <td><?= __('{0} rats', $stats['ancestors']) ?></td>
+                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['ancestors']) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Number of alive ancestors:') ?></th>
-                    <td><?= __('{0} rats', $stats['asc_alive']) ?></td>
+                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['asc_alive']) ?></td>
                 </tr>
             </table>
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Number of children:') ?></th>
-                    <td><?= __('{0} rats', $stats['children']) ?></td>
+                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['children']) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Total number of descendants:') ?></th>
-                    <td><?= __('{0} rats', $stats['descendors']) ?></td>
+                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['descendors']) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Number of alive descendants:') ?></th>
-                    <td><?= __('{0} rats', $stats['desc_alive']) ?></td>
+                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['desc_alive']) ?></td>
                 </tr>
             </table>
 
@@ -66,29 +66,29 @@
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Ancestors average lifespan:') ?></th>
-                    <td><?= __('{0} months (♀: {1} – ♂: {2})', [$stats['asc_lifespan'], $stats['asc_female_lifespan'], $stats['asc_male_lifespan']]) ?></td>
+                    <td><?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['asc_lifespan'], $stats['asc_female_lifespan'], $stats['asc_male_lifespan']]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('infant mortality excluded:') ?></th>
-                    <td> ⨽ <?= __('{0} months (♀: {1} – ♂: {2})', [$stats['asc_not_infant_lifespan'], $stats['asc_female_not_infant_lifespan'], $stats['asc_male_not_infant_lifespan']]) ?></td>
+                    <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['asc_not_infant_lifespan'], $stats['asc_female_not_infant_lifespan'], $stats['asc_male_not_infant_lifespan']]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('accidents excluded:') ?></th>
-                    <td> ⨽ <?= __('{0} months (♀: {1} – ♂: {2})', [$stats['asc_not_accident_lifespan'], $stats['asc_female_not_accident_lifespan'], $stats['asc_male_not_accident_lifespan']]) ?></td>
+                    <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['asc_not_accident_lifespan'], $stats['asc_female_not_accident_lifespan'], $stats['asc_male_not_accident_lifespan']]) ?></td>
                 </tr>
             </table>
             <table class="condensed stats">
                 <tr>
                     <th><?= __('Descendants average lifespan:') ?></th>
-                    <td><?= __('{0} months (♀: {1} – ♂: {2})', [$stats['desc_lifespan'], $stats['desc_female_lifespan'], $stats['desc_male_lifespan']]) ?></td>
+                    <td><?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, number})', [$stats['desc_lifespan'], $stats['desc_female_lifespan'], $stats['desc_male_lifespan']]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('infant mortality excluded:') ?></th>
-                    <td> ⨽ <?= __('{0} months (♀: {1} – ♂: {2})', [$stats['desc_not_infant_lifespan'], $stats['desc_female_not_infant_lifespan'], $stats['desc_male_not_infant_lifespan']]) ?></td>
+                    <td> ⨽ <?= __('{0, number} months (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['desc_not_infant_lifespan'], $stats['desc_female_not_infant_lifespan'], $stats['desc_male_not_infant_lifespan']]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('accidents excluded:') ?></th>
-                    <td> ⨽ <?= __('{0} months (♀: {1} – ♂: {2})', [$stats['desc_not_accident_lifespan'], $stats['desc_female_not_accident_lifespan'], $stats['desc_male_not_accident_lifespan']]) ?></td>
+                    <td> ⨽ <?= __('{0, number} months (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['desc_not_accident_lifespan'], $stats['desc_female_not_accident_lifespan'], $stats['desc_male_not_accident_lifespan']]) ?></td>
                 </tr>
             </table>
         </div>

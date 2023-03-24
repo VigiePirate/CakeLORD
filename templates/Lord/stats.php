@@ -258,6 +258,9 @@
     Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(102,51,0,1)';
     Chart.defaults.plugins.tooltip.position = 'nearest';
 
+    // Legends (passed as array for i18n)
+    var jsLegends = <?= $js_legends ?>;
+
     // Age pyramid by sex
     var pyramid_norm = <?= $rat_count - $dead_rat_count ?>;
     var pyramid_M_json = <?php echo $alive_males_distribution; ?>;
@@ -291,13 +294,13 @@
             labels: pyramid_M_labels,
             datasets: [
                 {
-                    label: 'Females',
+                    label: jsLegends["Females"], //'Females',
                     data: pyramid_F_data,
                     backgroundColor: pyramid_F_colors,
                     hoverBackgroundColor: 'rgba(102,51,0,1)',
                 },
                 {
-                    label: 'Males',
+                    label: jsLegends["Males"],
                     data: pyramid_M_data,
                     backgroundColor: pyramid_M_colors,
                     hoverBackgroundColor: 'rgba(102,51,0,1)',
@@ -311,7 +314,7 @@
                     stacked:true,
                     title: {
                         display: true,
-                        text: 'Age (in months)'
+                        text: jsLegends["Age (in months)"],
                     }
                 },
                 y: {
@@ -322,19 +325,19 @@
                     },
                     title: {
                         display: true,
-                        text: 'Number of alive rats'
+                        text: jsLegends["Number of alive rats"],
                     }
                 }
             },
             responsive: true,
             plugins: {
                 legend: {
-                    text: 'Age',
+                    text: jsLegends["Age"],
                     position: 'top',
                 },
                 title: {
                     display: true,
-                    text: 'Age pyramid'
+                    text: jsLegends["Age pyramid"],
                 },
                 tooltip: {
                     caretPadding: 4,
@@ -346,15 +349,15 @@
                                 label += ': ';
                             }
                             if (context.datasetIndex === 0) {
-                                label += Math.round(100*context.parsed.y)/100 + ' (presumed) alive rats';
+                                label += Math.round(100*context.parsed.y)/100 + " " + jsLegends["(presumed) alive rats"];
                             }
                             if (context.datasetIndex === 1) {
-                                label += (-1*Math.round(100*context.parsed.y)/100).toString()+' (presumed) alive rats';
+                                label += (-1*Math.round(100*context.parsed.y)/100).toString() + " " + jsLegends["(presumed) alive rats"];
                             }
                             return label;
                         },
                         title: function(context) {
-                            var title = 'Age: between '+context[0].label+' and ' + (parseInt(context[0].label)+1).toString() + ' months';
+                            var title = jsLegends["Age: between"]+ " "+ context[0].label+ jsLegends["and"]+ " " + (parseInt(context[0].label)+1).toString() + " " + jsLegends["months"];
                             return title;
                         }
                     }
@@ -388,7 +391,7 @@
             datasets: [
                 {
                     type: 'line',
-                    label: 'All-time average',
+                    label: jsLegends["All-time average"],
                     data: global_data,
                     backgroundColor: 'rgba(177, 0, 12,1)',
                     borderColor: 'rgba(177, 0, 12,1)',
@@ -399,7 +402,7 @@
                 },
                 {
                     type: 'bar',
-                    label: 'Average lifespan by birth year',
+                    label: jsLegends["Average lifespan by birth year"],
                     data: expectancy_data,
                     backgroundColor: expectancy_colors,
                     hoverBackgroundColor: 'rgba(102,51,0,1)',
@@ -413,14 +416,14 @@
                 x: {
                     title: {
                         display: true,
-                        text: 'Birth year'
+                        text: jsLegends["Birth year"],
                     }
                 },
                 y: {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Average lifespan (in days)'
+                        text: jsLegends["Average lifespan (in days)"]
                     }
                 }
             },
@@ -439,7 +442,7 @@
                 },
                 title: {
                     display: true,
-                    text: 'Life expectancy'
+                    text: jsLegends["Life expectancy"],
                 },
                 tooltip: {
                     caretPadding: 12,
@@ -449,15 +452,15 @@
                             var label = '';
                             console.log(context);
                             if (context.datasetIndex === 0) {
-                                label += 'All-time average: '+Math.round(100*context.parsed.y)/100 + ' days';
+                                label += jsLegends["All-time average:"] + " " + Math.round(100*context.parsed.y)/100 + " " + jsLegends["days"];
                             }
                             if (context.datasetIndex === 1) {
-                                label += 'Average lifespan: '+Math.round(100*context.parsed.y)/100 + ' days';
+                                label += jsLegends["Average lifespan:"] + " " + Math.round(100*context.parsed.y)/100 + " " + jsLegends["days"];
                             }
                             return label;
                         },
                         title: function(context) {
-                            var title = 'Rats born in '+context[0].label;
+                            var title = jsLegends["Rats born in"] + " "+context[0].label;
                             return title;
                         }
                     }
@@ -486,7 +489,7 @@
         data: {
             labels: littersize_labels,
             datasets: [{
-                label: 'Total litter size',
+                label: jsLegends["Total litter size"],
                 data: littersize_data,
                 backgroundColor: littersize_colors,
                 hoverBackgroundColor: 'rgba(102,51,0,1)',
@@ -498,26 +501,26 @@
                 x: {
                     title: {
                         display: true,
-                        text: 'Litter size (number of pups)'
+                        text: jsLegends["Litter size (number of pups)"],
                     }
                 },
                 y: {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Proportion of litters (%)'
+                        text: jsLegends["Proportion of litters (%)"],
                     }
                 }
             },
             responsive: true,
             plugins: {
                 legend: {
-                    text: 'Age',
+                    text: jsLegends["Age"],
                     position: 'top',
                 },
                 title: {
                     display: true,
-                    text: 'Litter size distribution (% of litters)'
+                    text: jsLegends["Litter size distribution (% of litters)"],
                 },
                 tooltip: {
                     caretPadding: 12,
@@ -529,13 +532,13 @@
                             //    label += ': ';
                             //}
                             if (context.parsed.y !== null) {
-                                label = Math.round(100*context.parsed.y)/100+' % of litters';
+                                label = Math.round(100*context.parsed.y)/100 + " " + jsLegends["% of litters"];
                             }
                             return label;
                         },
                         title: function(context) {
                             //var title = 'Rats between '+(parseInt(context[0].parsed.x)-0.5).toString()+' and '+ (parseInt(context[0].parsed.x)+0.5).toString()+' months ';
-                            var title = context[0].label +' pups'; // why??
+                            var title = context[0].label + " " + jsLegends["pups"];
                             return title;
                         }
                     }
@@ -575,13 +578,13 @@
             labels: littersex_M_labels,
             datasets: [
                 {
-                    label: 'Females',
+                    label: jsLegends["Females"],
                     data: littersex_F_data,
                     backgroundColor: littersex_F_colors,
                     hoverBackgroundColor: 'rgba(102,51,0,1)',
                 },
                 {
-                    label: 'Males',
+                    label: jsLegends["Males"],
                     data: littersex_M_data,
                     backgroundColor: littersex_M_colors,
                     hoverBackgroundColor: 'rgba(102,51,0,1)',
@@ -594,26 +597,26 @@
                 x: {
                     title: {
                         display: true,
-                        text: 'Number of pups of the given sex'
+                        text: jsLegends["Number of pups of the given sex"],
                     }
                 },
                 y: {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Proportion of litters (%)'
+                        text: jsLegends["Proportion of litters (%)"],
                     }
                 }
             },
             responsive: true,
             plugins: {
                 legend: {
-                    text: 'Age',
+                    text: jsLegends["Age"],
                     position: 'top',
                 },
                 title: {
                     display: true,
-                    text: 'Litter size distribution by sex (% of litters)'
+                    text: jsLegends["Litter size distribution by sex (% of litters)"],
                 },
                 tooltip: {
                     caretPadding: 12,
@@ -625,13 +628,13 @@
                             //    label += ': ';
                             //}
                             if (context.parsed.y !== null) {
-                                label = Math.round(100*context.parsed.y)/100+' % of litters';
+                                label = Math.round(100*context.parsed.y)/100 + " " + jsLegends["% of litters"];
                             }
                             return label;
                         },
                         title: function(context) {
                             //var title = 'Rats between '+(parseInt(context[0].parsed.x)-0.5).toString()+' and '+ (parseInt(context[0].parsed.x)+0.5).toString()+' months ';
-                            var title = 'Litters with '+context[0].label + ' ' +  (context[0].dataset.label).toLowerCase();
+                            var title = jsLegends["Litters with"] + " " + context[0].label + " " +  (context[0].dataset.label).toLowerCase();
                             return title;
                         }
                     }
@@ -675,7 +678,7 @@
             datasets: [
                 {
                     type: 'line',
-                    label: 'Survival rate',
+                    label: jsLegends["Survival rate"],
                     data: survival_data,
                     backgroundColor: 'rgba(102,51,0,1)',
                     borderColor: 'rgba(102,51,0,1)',
@@ -685,7 +688,7 @@
                 },
                 {
                     type: 'bar',
-                    label: 'Mortality distribution',
+                    label: jsLegends["Mortality distribution"],
                     data: mortality_data,
                     borderColor: mortality_colors,
                     backgroundColor: mortality_colors,
@@ -695,7 +698,7 @@
                 },
                 {
                     type: 'bar',
-                    label: 'Mortality probability',
+                    label: jsLegends["Mortality probability"],
                     data: rate_data,
                     borderColor: rate_colors,
                     backgroundColor: rate_colors,
@@ -721,7 +724,7 @@
                     max: 48,
                     title: {
                         display: true,
-                        text: 'Age (in months)',
+                        text: jsLegends["Age (in months)"],
                         font: {
                             weight: 700,
                             size: 12,
@@ -739,7 +742,7 @@
                     position: 'left',
                     title: {
                         display: true,
-                        text: 'Survival rate (%)',
+                        text: jsLegends["Survival rate (%)"],
                         color: 'rgba(102, 51, 0, 1)',
                         font: {
                             weight: 700,
@@ -762,7 +765,7 @@
                     max: 30,
                     title: {
                         display: true,
-                        text: 'Death probabilities (%)',
+                        text: jsLegends["Death probabilities (%)"],
                         color: 'rgba(61, 75, 153, 1)',
                         font: {
                             weight: 700,
@@ -785,7 +788,7 @@
             plugins: {
                 title: {
                      display: true,
-                     text: 'All-time survival and mortality by age'
+                     text: jsLegends['All-time survival and mortality by age'],
                 },
                 tooltip: {
                     caretPadding: 6,
@@ -800,18 +803,18 @@
                                 label += ': ';
                             }
                             if (context.datasetIndex === 0) {
-                                label += Math.round(100*context.parsed.y)/100 + ' % of all rats reach this age';
+                                label += Math.round(100*context.parsed.y)/100 + " " + jsLegends['% of all rats reach this age'];
                             }
                             if (context.datasetIndex === 1) {
-                                label += Math.round(100*context.parsed.y)/100+' % of all deaths occur in rats of this age';
+                                label += Math.round(100*context.parsed.y)/100 + " " + jsLegends['% of all deaths occur in rats of this age'];
                             }
                             if (context.datasetIndex === 2) {
-                                label += Math.round(100*context.parsed.y)/100+' % of all rats reaching this age die in the following month';
+                                label += Math.round(100*context.parsed.y)/100 + " " + jsLegends['% of all rats reaching this age die in the following month'];
                             }
                             return label;
                         },
                         title: function(context) {
-                            var title = 'Age: between '+context[0].label+' and ' + (parseInt(context[0].label)+1).toString() + ' months';
+                            var title = jsLegends["Age: between"]+ " "+ context[0].label+ jsLegends["and"]+ " " + (parseInt(context[0].label)+1).toString() + " " + jsLegends["months"];
                             return title;
                         }
                     }

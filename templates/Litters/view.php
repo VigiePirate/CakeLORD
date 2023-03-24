@@ -296,16 +296,15 @@
             <table class="condensed">
                 <tr>
                     <th><?= __('Average lifespan:') ?></th>
-                    <td><?= __('{0, number} months', [h($stats['lifespan'])]) ?> (♀: <?= h($stats['female_lifespan']) ?> – ♂: <?= h($stats['male_lifespan']) ?>)</td>
+                    <td><?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['lifespan'], $stats['female_lifespan'], $stats['male_lifespan']]) ?></td>
                 </tr>
-
                 <tr>
                     <th> ⨽ <?= __('infant mortality excluded:') ?></th>
-                    <td> ⨽ <?= __('{0, number} months', [h($stats['not_infant_lifespan'])]) ?> (♀: <?= h($stats['female_not_infant_lifespan']) ?> – ♂: <?= h($stats['male_not_infant_lifespan']) ?>)</td>
+                    <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['not_infant_lifespan'], $stats['female_not_infant_lifespan'], $stats['male_not_infant_lifespan']]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('accidents excluded:') ?></th>
-                    <td> ⨽ <?= __('{0, number} months', [h($stats['not_accident_lifespan'])]) ?> (♀: <?= __('{0, number}', [$stats['female_not_accident_lifespan']]) ?> – ♂: <?= __('{0, number}', [$stats['male_not_accident_lifespan']]) ?>)</td>
+                    <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['not_accident_lifespan'], $stats['female_not_accident_lifespan'], $stats['male_not_accident_lifespan']]) ?></td>
                 </tr>
             </table>
 
@@ -409,6 +408,8 @@
     Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(102,51,0,1)';
     Chart.defaults.plugins.tooltip.position = 'nearest';
 
+    var jsLegends = <?php echo $js_legends; ?>;
+
     var survival_json = <?php echo json_encode($stats['survival']); ?>;
     var survival_data = survival_json.map(function(e) {
       return e.count;
@@ -424,7 +425,7 @@
           datasets: [
               {
                   type: 'line',
-                  label: 'Survival rate',
+                  label: jsLegends['0'], // 'Survival rate'
                   data: survival_data,
                   backgroundColor: 'rgba(61, 75, 153, 1)',
                   borderColor: 'rgba(61, 75, 153, 1)',
@@ -458,7 +459,7 @@
                   },
                   title: {
                       display: true,
-                      text: 'Age (in months)',
+                      text: jsLegends['1'], // 'Age (in months)'
                       font: {
                           weight: 700
                       }
@@ -478,7 +479,7 @@
                   },
                   title: {
                       display: true,
-                      text: 'Survival rate (%)',
+                      text: jsLegends['2'], //'Survival rate (%)',
                       color: 'rgba(61, 75, 153, 1)',
                       font: {
                           weight: 700
@@ -492,7 +493,7 @@
               },
               title: {
                    display: true,
-                   text: 'Survival rate by age'
+                   text: jsLegends['3'], //'Survival rate by age'
               },
               tooltip: {
                   caretPadding: 6,
@@ -507,12 +508,13 @@
                               label += ': ';
                           }
                           if (context.datasetIndex === 0) {
-                              label += Math.round(100*context.parsed.y)/100 + ' % of litter pups reached this age';
+                              label += Math.round(100*context.parsed.y)/100 + jsLegends['4']; //' % of litter pups reached this age'
                           }
                           return label;
                       },
                       title: function(context) {
-                          var title = 'Age: between '+context[0].label+' and ' + (parseInt(context[0].label)+1).toString() + ' months';
+                          // var title = 'Age: between ' + context[0].label + ' and ' + (parseInt(context[0].label)+1).toString() + ' months';
+                          var title = jsLegends['5'] + context[0].label + jsLegends['6'] + (parseInt(context[0].label)+1).toString() + jsLegends['7'];
                           return title;
                       }
                   }

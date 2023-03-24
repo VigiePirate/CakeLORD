@@ -76,6 +76,9 @@
     Chart.defaults.font.family = "Imprima";
     Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(102,51,0,1)';
 
+    // Legends (passed as array for i18n)
+    var jsLegends = <?= $js_legends ?>;
+
     // rats
     var rat_json = <?php echo $rat_birth; ?>;
     var rat_labels = rat_json.map(function(e) {
@@ -94,7 +97,7 @@
        data: {
           labels: rat_labels,
           datasets: [{
-             label: 'Rats',
+             label: jsLegends['Rats'],
              data: rat_data,
              backgroundColor: rat_colors,
              hoverBackgroundColor: 'rgba(102,51,0,1)',
@@ -115,7 +118,7 @@
             },
             title: {
               display: false,
-              text: 'Rats by birth year'
+              text: jsLegends['Rats by birth year'],
             },
             tooltip: {
               caretPadding: 12,
@@ -144,7 +147,7 @@
        data: {
           labels: user_labels,
           datasets: [{
-             label: 'Users',
+             label: jsLegends['Users'],
              data: user_data,
              backgroundColor: user_colors,
              hoverBackgroundColor: 'rgba(102,51,0,1)',
@@ -164,7 +167,7 @@
             },
             title: {
               display: false,
-              text: 'Users by registration year'
+              text: jsLegends['Users by registration year'],
           },
             tooltip: {
               caretPadding: 12,
@@ -193,7 +196,7 @@
        data: {
           labels: rattery_labels,
           datasets: [{
-             label: 'Ratteries',
+             label: jsLegends['Ratteries'],
              data: rattery_data,
              backgroundColor: rattery_colors,
              hoverBackgroundColor: 'rgba(102,51,0,1)',
@@ -213,7 +216,7 @@
             },
             title: {
               display: false,
-              text: 'Ratteries by registration year'
+              text: jsLegends['Ratteries by registration year'],
             },
             tooltip: {
               caretPadding: 12,
