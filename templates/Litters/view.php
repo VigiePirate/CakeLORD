@@ -126,7 +126,7 @@
                 </div>
             <?php endif; ?>
 
-            <h2>Parents</h2>
+            <h2><?= __('Parents') ?></h2>
             <div class="row">
                 <div class="column-responsive column-50 parent">
                     <div class="pretitle"><?= __('Dam: ') . h($litter->dam[0]->name) ?></div>

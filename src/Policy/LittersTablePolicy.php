@@ -60,4 +60,16 @@ class LittersTablePolicy implements BeforePolicyInterface
     {
         return $user->role->can_change_state;
     }
+
+    /**
+     * Check if $user can list litters by state
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Table\LittersTable $litters
+     * @return bool
+     */
+    public function canFilterByState(IdentityInterface $user, LittersTable $litters)
+    {
+        return $user->role->can_change_state;
+    }
 }

@@ -43,17 +43,20 @@ class LittersController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $user = $this->Authentication->getIdentity();
+
+        $litters = $this->Litters->find()
+            ->matching('Contributions.Ratteries', function (\Cake\ORM\Query $q) use ($user) {
+                return $q->where([
+                    'Ratteries.owner_user_id' => $user->id,
+                ]);
+            });
+
         $this->paginate = [
             'contain' => ['Users', 'States', 'Sire', 'Dam', 'Contributions'],
+            'sortableFields' => ['birth_date', 'pups_number'],
         ];
-        $litters = $this->paginate($this->Litters->find()
-                        ->matching('Contributions.Ratteries', function (\Cake\ORM\Query $q) use ($user) {
-                            return $q->where([
-                                'Ratteries.owner_user_id' => $user->id,
-                            ]);
-                        })
-                        ->order(['Contributions.litter_id' => 'ASC', 'Litters.birth_date' => 'DESC'])
-                );
+
+        $litters = $this->paginate($litters);
 
         $this->set(compact('litters', 'user'));
     }
@@ -584,6 +587,24 @@ class LittersController extends AppController
         $this->set([
             'litters' => $litters,
             'inState' => $inState
+        ]);
+    }
+
+    public function needsStaff()
+    {
+        $this->Authorization->authorize($this->Litters, 'filterByState');
+
+        $litters = $this->Litters->find('needsStaff');
+
+        $this->paginate = [
+            'contain' => ['Users', 'Sire', 'Dam', 'Contributions', 'States'],
+            'sortableFields' => ['state_id', 'birth_date', 'id', 'Users.username', 'modified']
+        ];
+
+        $ratteries = $this->paginate($litters);
+
+        $this->set([
+            'litters' => $litters
         ]);
     }
 
