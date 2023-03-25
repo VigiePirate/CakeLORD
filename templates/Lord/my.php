@@ -30,14 +30,14 @@
                 <?= $this->Html->link(__('See all litters'), ['controller' => 'Litters', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
             <p><?= __('<strong>{0} litter sheets</strong> are currently waiting for staff action. Most recent are:', [$count['litters']]) ?></p>
-            <?= $this->element('staff_litters') ?>
+            <?= $this->element('simple_staff_litters') ?>
 
             <h3><?= __('Ratteries') ?></h3>
             <div class="button-small">
                 <?= $this->Html->link(__('See all ratteries'), ['controller' => 'Ratteries', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
             <p><?= __('<strong>{0} rattery sheets</strong> are currently waiting for staff action. Most recent are:', [$count['ratteries']]) ?><p>
-            <?= $this->element('staff_ratteries') ?>
+            <?= $this->element('simple_staff_ratteries') ?>
 
         </div>
         <div class="spacer"> </div>

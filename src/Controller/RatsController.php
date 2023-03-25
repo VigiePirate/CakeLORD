@@ -61,7 +61,16 @@ class RatsController extends AppController
         $user = $this->Authentication->getIdentity();
         $this->Authorization->skipAuthorization();
         $this->paginate = [
-            'contain' => ['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
+            'contain' => [
+                'Ratteries',
+                'OwnerUsers',
+                'States',
+                'DeathPrimaryCauses',
+                'DeathSecondaryCauses',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'BirthLitters.Ratteries'
+            ],
         ];
         $females = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'F'])
@@ -91,7 +100,7 @@ class RatsController extends AppController
         if(! empty($pending->first())) {
             $this->Flash->error(__('You have rat sheets to correct!'));
         }
-        $this->set(compact('females','males','alive','departed','pending','waiting','okrats','user'));
+        $this->set(compact('females', 'males', 'alive', 'departed', 'pending', 'waiting', 'okrats', 'user'));
     }
 
     /**
