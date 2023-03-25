@@ -251,14 +251,14 @@ input:read-only {
   color: #606c76;
 }
 
-/* styling checkbox? works only on Chrome for now...
-input[type='checkbox'] {
-transform: scale(1.5) translate(+25%, 0%);
+.has-items {
+    border: 1px solid #6f7db3 !important;
+    border-radius: 0.4rem !important;
+    color: #6076bf !important;
+    background-color: #ebeefa !important;
+    font-weight: bold;
+    line-height: 1.5 !important;
 }
-
-.input.checkbox label > input {
-margin-right: 1.5rem;
-} */
 
 /* Tables */
 
