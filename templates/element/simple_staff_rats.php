@@ -1,11 +1,11 @@
 <div class="table-responsive">
     <table class="summary">
         <thead>
-                <th><?= $this->Paginator->sort('state_id', __('State')) ?></th>
-                <th><?= $this->Paginator->sort('pedigree_identifier', __('Identifier')) ?></th>
+                <th><?= __('State') ?></th>
+                <th><?= __('Identifier') ?></th>
                 <th><?= __('Usual name') ?></th>
-                <th><?= $this->Paginator->sort('OwnerUsers.username', __('Owner')) ?></th>
-                <th><?= $this->Paginator->sort('modified', __('Modified')) ?></th>
+                <th><?= __('Owner') ?></th>
+                <th><?= __('Modified') ?></th>
                 <th><?= __('Last message') ?></th>
                 <th class="actions-title"><?= __('Actions') ?></th>
         </thead>
@@ -35,15 +35,4 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-</div>
-
-<div class="paginator">
-    <ul class="pagination">
-        <?= $this->Paginator->first('<< ' . __('first')) ?>
-        <?= $this->Paginator->prev('< ' . __('previous')) ?>
-        <?= $this->Paginator->numbers() ?>
-        <?= $this->Paginator->next(__('next') . ' >') ?>
-        <?= $this->Paginator->last(__('last') . ' >>') ?>
-    </ul>
-    <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
 </div>

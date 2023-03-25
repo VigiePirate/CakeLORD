@@ -640,13 +640,23 @@ class RatsController extends AppController
         $rats = $this->Rats->find('needsStaff');
 
         $this->paginate = [
-            'contain' => ['OwnerUsers','Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
+            'contain' => [
+                'OwnerUsers',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'States'
+            ],
+            'sortableFields' => [
+                'state_id',
+                'pedigree_identifier',
+                'OwnerUsers.username',
+                'modified',
+            ]
         ];
         $rats = $this->paginate($rats);
 
-        $this->set([
-            'rats' => $rats
-        ]);
+        $this->set(compact('rats'));
     }
 
     /* Autocomplete for forms function */

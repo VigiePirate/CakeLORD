@@ -23,7 +23,7 @@
                 <?= $this->Html->link(__('See all rats'), ['controller' => 'Rats', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
             <p><?= __('<strong>{0} rat sheets</strong> are currently waiting for staff action. Most recent are:', [$count['rats']]) ?></p>
-            <?= $this->element('staff_rats') ?>
+            <?= $this->element('simple_staff_rats') ?>
 
             <h3><?= __('Litters') ?></h3>
             <div class="button-small">
