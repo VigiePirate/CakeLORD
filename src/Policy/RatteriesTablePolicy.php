@@ -12,13 +12,25 @@ use Authorization\IdentityInterface;
 class RatteriesTablePolicy
 {
     /**
-     * Check if $user can list rats by state
+     * Check if $user can list ratteries by state
      *
      * @param Authorization\IdentityInterface $user The user.
-     * @param App\Model\Table\LittersTable $litters
+     * @param App\Model\Table\RatteriesTable $ratteries
      * @return bool
      */
     public function canInState(IdentityInterface $user, RatteriesTable $ratteries)
+    {
+        return $user->role->can_change_state;
+    }
+
+    /**
+     * Check if $user can list rats by state
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Table\RatteriesTable $ratteries
+     * @return bool
+     */
+    public function canFilterByState(IdentityInterface $user, RatteriesTable $ratteries)
     {
         return $user->role->can_change_state;
     }

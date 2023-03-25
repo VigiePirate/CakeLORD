@@ -521,13 +521,29 @@ class RatteriesController extends AppController
         ]);
 
         $this->paginate = [
-            'contain' => ['Users', 'States','Countries'],
+            'contain' => ['Users', 'States', 'Countries'],
         ];
         $ratteries = $this->paginate($ratteries);
 
         $this->set([
             'ratteries' => $ratteries,
             'inState' => $inState
+        ]);
+    }
+
+    public function needsStaff()
+    {
+        $this->Authorization->authorize($this->Ratteries, 'filterByState');
+
+        $ratteries = $this->Ratteries->find('needsStaff');
+
+        $this->paginate = [
+            'contain' => ['Users', 'States', 'Countries'],
+        ];
+        $ratteries = $this->paginate($ratteries);
+
+        $this->set([
+            'ratteries' => $ratteries
         ]);
     }
 
