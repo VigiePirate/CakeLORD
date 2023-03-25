@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-03-24 20:18+0100\n"
+"PO-Revision-Date: 2023-03-25 10:54+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -1355,6 +1355,8 @@ msgid ""
 "{0, number} (about {1, plural, =1{1 male} other{# males}} for {2, plural, "
 "=1{1 female} other{# females}})"
 msgstr ""
+"{0, number} (environ {1, plural, =1{1 mâle} other{# mâles}} pour {2, plural, "
+"=1{1 femelle} other{# femelles}})"
 
 #: src/Model/Entity/StatisticsTrait.php:137
 #: src/Model/Entity/StatisticsTrait.php:447
@@ -4685,7 +4687,7 @@ msgstr ""
 
 #: templates/Ratteries/locate.php:57 templates/Ratteries/locate.php:75
 msgid "Prefix: "
-msgstr "Affixe:"
+msgstr "Affixe : "
 
 #: templates/Ratteries/locate.php:57 templates/Ratteries/locate.php:75
 msgid "Owner: "

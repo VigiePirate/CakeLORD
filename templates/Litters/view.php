@@ -213,10 +213,13 @@
                 <tr>
                     <th><?= __('Pups number') ?></th>
                     <td>
-                        <?= $this->Number->format($litter->pups_number) . ' ' . __('pups')?>
-                        (♀: <?= ! empty($stats['sexes']) ? $this->Number->format($stats['sexes'][0]['F']) : '0' ?>,
-                        ♂: <?= ! empty($stats['sexes']) ? $this->Number->format($stats['sexes'][0]['M']) : '0' ?> <?= __(' recorded') ?>)</td>
-                </tr>
+                        <?=  __('{0, plural, =0{No pup} =1{1 pup} other{# pups}}', [$this->Number->format($litter->pups_number)]) ?>
+                        <?= __('(♀: {0} – ♂: {1} recorded)', [
+                            ! empty($stats['sexes']) ? $this->Number->format($stats['sexes'][0]['F']) : '0',
+                            ! empty($stats['sexes']) ? $this->Number->format($stats['sexes'][0]['M']) : '0'
+                            ]
+                        )?>
+                    </tr>
                 <tr>
                     <th><?= __('Stillborn pups') ?></th>
                     <td><?= $this->Number->format($litter->pups_number_stillborn) . ' ' . __('pups') ?></td>
@@ -283,7 +286,7 @@
                 <tr>
                     <th><?= __('Current survival rate:') ?></th>
                     <td>
-                        <?= h($stats['survivors']) . ' %'?>
+                        <?= __('{0, number} %', [$this->Number->format($stats['survivors'])]) ?>
                     <span class="comment">
                         <?= $stats['survivors'] == 0 ?
                         __('(all rats of the litter are now dead, or supposed so)') :

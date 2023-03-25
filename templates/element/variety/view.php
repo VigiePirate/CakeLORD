@@ -44,11 +44,11 @@
                         </tr>
                         <tr>
                             <th><?= __('Frequency (all time)') ?></th>
-                            <td><?= h($frequency) . __(' %') ?> (<?= h($count) ?> <?= __('rats') ?>)</td>
+                            <td><?= __('{0, number} % ({1, plural, =0{no rat} =1{1 rat} other{# rats}})',  [$frequency, $count]) ?></td>
                         </tr>
                         <tr>
                             <th><?= __('Frequency (in the last 2 years)') ?></th>
-                            <td><?= h($recent_frequency) . __(' %') ?> (<?= h($recent_count) ?> <?= __('rats') ?>)</td>
+                            <td><?= __('{0, number} % ({1, plural, =0{no rat} =1{1 rat} other{# rats}})',  [$recent_frequency, $recent_count]) ?></td>
                         </tr>
                     </table>
                 </div>
@@ -67,9 +67,7 @@
                     <h2><?= __('Random gallery') ?></h2>
                     <section id="gallery">
                     <?php foreach ($examples as $rat) : ?>
-                        <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
-                            <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->name, 'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id]]) ?>
-                        <?php endif ?>
+                        <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->name, 'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id]]) ?>
                     <?php endforeach; ?>
                     </section>
                 </div>

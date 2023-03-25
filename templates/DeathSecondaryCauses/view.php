@@ -50,7 +50,7 @@
                 <table class="condensed">
                     <tr>
                         <th><?= __('Frequency') ?></th>
-                        <td><?= h($frequency) . __(' %') ?> (<?= h($count) ?> rats) </td>
+                        <td><?= __('{0, number} % ({1, plural, =0{no rat} =1{1 rat} other{# rats}})',  [$frequency, $count]) ?></td>
                     </tr>
                     <tr>
                         <th><?= __('Sex ratio') ?></th>
@@ -58,7 +58,7 @@
                     </tr>
                     <tr>
                         <th><?= __('Average age') ?></th>
-                        <td><?= h($age) . __(' months') ?></td>
+                        <td><?= __('{0, plural, =1{1 month} other{# months}}', [$age]) ?></td>
                     </tr>
                 </table>
 
