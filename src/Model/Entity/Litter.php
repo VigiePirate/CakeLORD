@@ -73,6 +73,22 @@ class Litter extends Entity
         return $fullname;
     }
 
+    protected function _getParentsName()
+    {
+        if (isset ($this->dam[0])) {
+            $name = $this->dam[0]->usual_name;
+        } else {
+            $name = __('Unknown mother');
+        }
+
+        if (isset ($this->sire[0])) {
+            $name .= ' × ' . $this->sire[0]->usual_name;
+        } else {
+            $name .= ' × ' . __('Unknown father');
+        }
+        return $name;
+    }
+
     protected function _getNameFromSire()
     {
         $date = isset($this->birth_date) ? $this->birth_date->i18nFormat('dd/MM/yyyy') : '??/??/????';

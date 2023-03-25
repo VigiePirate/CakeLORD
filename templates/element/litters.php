@@ -15,10 +15,10 @@
                     <th><?= $this->Paginator->sort('full_name') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('dam', $exceptions)): ?>
-                    <th><?= $this->Paginator->sort('dam') ?></th>
+                    <th><?= __('Dam') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('sire', $exceptions)): ?>
-                    <th><?= $this->Paginator->sort('sire') ?></th>
+                    <th><?= __('Sire') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('pups_number', $exceptions)): ?>
                     <th><?= $this->Paginator->sort('pups_number','Size') ?></th>
@@ -40,7 +40,7 @@
                         <td><?= h($litter->mating_date) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('birth_date', $exceptions)): ?>
-                        <td><?= h($litter->birth_date->i18nFormat('dd/MM/yyyy')) ?></td>
+                        <td><?= $litter->birth_date->i18nFormat('dd/MM/yyyy') ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('full_name', $exceptions)): ?>
                         <td><?= $this->Html->link(h($litter->full_name), ['controller' => 'Litters', 'action' => 'view', $litter->id], ['escape' => false]) ?></td>
