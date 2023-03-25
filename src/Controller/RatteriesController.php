@@ -539,7 +539,9 @@ class RatteriesController extends AppController
 
         $this->paginate = [
             'contain' => ['Users', 'States', 'Countries'],
+            'sortableFields' => ['state_id', 'prefix', 'name', 'Users.username', 'modified']
         ];
+
         $ratteries = $this->paginate($ratteries);
 
         $this->set([
