@@ -226,33 +226,33 @@
     </script>
 
     <script>
-    $(function () {
-        $("#jquery-color-select").selectize( {
-            placeholder : 'Type here to filter colors...',
-            maxItems: 1,
-            plugins: ['remove_button']
+        $(function () {
+            $("#jquery-color-select").selectize( {
+                placeholder : 'Type here to filter colors...',
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
         });
-     });
-     $(function () {
-         $("#jquery-eyecolor-select").selectize( {
-             placeholder : 'Type here to filter eyecolors...',
-             maxItems: 1,
-             plugins: ['remove_button']
-         });
-      });
-      $(function () {
-          $("#jquery-coat-select").selectize( {
-              placeholder : 'Type here to filter coats...',
-              maxItems: 1,
-              plugins: ['remove_button']
-          });
-       });
-       $(function () {
-           $("#jquery-dilution-select").selectize( {
-               placeholder : 'Type here to filter dilutions...',
-               maxItems: 1,
-               plugins: ['remove_button']
-           });
+        $(function () {
+            $("#jquery-eyecolor-select").selectize( {
+                placeholder : 'Type here to filter eyecolors...',
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
+        });
+        $(function () {
+            $("#jquery-coat-select").selectize( {
+                placeholder : 'Type here to filter coats...',
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
+        });
+        $(function () {
+            $("#jquery-dilution-select").selectize( {
+                placeholder : 'Type here to filter dilutions...',
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
         });
         $(function () {
             $("#jquery-earset-select").selectize( {
@@ -260,21 +260,21 @@
                 maxItems: 1,
                 plugins: ['remove_button']
             });
-         });
-         $(function () {
-             $("#jquery-marking-select").selectize( {
-                 placeholder : 'Type here to filter markings...',
-                 maxItems: 1,
-                 plugins: ['remove_button']
-             });
-          });
-          $(function () {
-              $("#jquery-singularity-select").selectize( {
-                  placeholder : 'Type here to filter singularities...',
-                  maxItems: 8,
-                  plugins: ['remove_button']
-              });
-           });
+        });
+        $(function () {
+            $("#jquery-marking-select").selectize( {
+                placeholder : 'Type here to filter markings...',
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
+        });
+        $(function () {
+            $("#jquery-singularity-select").selectize( {
+                placeholder : 'Type here to filter singularities...',
+                maxItems: 8,
+                plugins: ['remove_button']
+            });
+        });
     </script>
 <?php $this->end(); ?>
 
