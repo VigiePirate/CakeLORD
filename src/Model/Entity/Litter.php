@@ -328,6 +328,7 @@ class Litter extends Entity
             $rat->rattery_id = $this->contributions['0']->rattery_id;
             $rat->is_pedigree_custom = true;
             if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
+                $rats->addBehavior('State');
                 return false;
             }
         }

@@ -162,7 +162,7 @@ class RatteriesController extends AppController
     public function edit($id = null)
     {
         $rattery = $this->Ratteries->get($id, [
-            'contain' => ['Litters', 'Litters.Sire', 'Litters.Dam', 'States'],
+            'contain' => ['Litters', 'Litters.Sire', 'Litters.Dam', 'Users', 'States'],
         ]);
         $this->Authorization->authorize($rattery);
         if ($this->request->is(['patch', 'post', 'put'])) {

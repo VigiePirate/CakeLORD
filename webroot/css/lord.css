@@ -251,7 +251,7 @@ input:read-only {
   color: #606c76;
 }
 
-.has-items {
+.autocompleted {
     border: 1px solid #6f7db3 !important;
     border-radius: 0.4rem !important;
     color: #6076bf !important;

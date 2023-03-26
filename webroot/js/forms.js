@@ -1,5 +1,20 @@
 function autocompleteRattery(visible, hidden) {
-    $(visible).autocomplete({
+
+    $(window).on('load', function() {
+        if (! $(hidden).val() == '') {
+            $(visible).addClass("autocompleted");
+        }
+    });
+
+    $(visible)
+      .on('input', function() {
+          $(hidden).val('');
+          if ($(visible).val() === '' || $(visible).val() === $(visible).attr('placeholder')) {
+              $(this).removeClass('autocompleted');
+          }
+      })
+
+      .autocomplete({
           minLength: 2,
           source: function (request, response) {
               $.ajax({
@@ -21,11 +36,9 @@ function autocompleteRattery(visible, hidden) {
           },
           select: function (event, ui) {
               $(visible).val(ui.item.value); // display the selected text
+              $(visible).addClass("autocompleted"); // display the selected text
               $(hidden).val(ui.item.id); // save selected id to hidden input
           }
-      });
-
-      $(visible).on("input", function(){
-          $(hidden).val('');
-      });
+        }
+    );
 }

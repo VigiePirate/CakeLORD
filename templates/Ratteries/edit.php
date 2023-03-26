@@ -42,6 +42,7 @@
                         'type' => 'text',
                         'placeholder' => __('Type here...'),
                         'empty' => true,
+                        'value' => $rattery->user->username,
                     ]);
                     echo $this->Form->control('owner_user_id', [
                         'id' => 'jquery-owner-id',
@@ -53,6 +54,7 @@
                         'class' => 'hide-everywhere',
                         'type' => 'text',
                         'empty' => true,
+                        'value' => $rattery->user_id,
                     ]);
 
                     echo $this->Form->control('birth_year');
@@ -89,38 +91,52 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script>
-    $(function () {
-        $('#jquery-owner-input').autocomplete({
-            minLength: 3,
-            source: function (request, response) {
-                $.ajax({
-                    /*url: $('#jquery-owner-form').attr('action') + '.json',*/
-                    url: '/users/autocomplete.json',
-                    dataType: 'json',
-                    data: {
-                        'searchkey': $('#jquery-owner-input').val(),
-                    },
-                    success: function (data) {
-                        response(data.items);
-                    },
-                    open: function () {
-                        $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-                    },
-                    close: function () {
-                        $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-                    }
-                });
-            },
-            select: function (event, ui) {
-                $("#jquery-owner-input").val(ui.item.value); // display the selected text
-                // $("#jquery-owner-input").addClass('has-items'); // add class for css
-                $("#jquery-owner-id").val(ui.item.id); // save selected id to hidden input
+    $(function() {
+        $(window).on('load', function() {
+            if (! $("#jquery-owner-id").val() == '') {
+                $("#jquery-owner-input").addClass("autocompleted");
             }
         });
+    });
+    </script>
 
-        $("#jquery-owner-input").on("input", function(){
-            $("#jquery-owner-id").val('');
-        });
+    <script>
+    $(function () {
+        $('#jquery-owner-input')
+            .on('input', function() {
+                $("#jquery-mother-id").val('');
+                if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
+                    $(this).removeClass('autocompleted');
+                }
+            })
+            .autocomplete({
+                minLength: 3,
+                source: function (request, response) {
+                    $.ajax({
+                        /*url: $('#jquery-owner-form').attr('action') + '.json',*/
+                        url: '/users/autocomplete.json',
+                        dataType: 'json',
+                        data: {
+                            'searchkey': $('#jquery-owner-input').val(),
+                        },
+                        success: function (data) {
+                            response(data.items);
+                        },
+                        open: function () {
+                            $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
+                        },
+                        close: function () {
+                            $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $("#jquery-owner-input").val(ui.item.value); // display the selected text
+                    $("#jquery-owner-input").addClass("autocompleted"); // display the selected text
+                    $("#jquery-owner-id").val(ui.item.id); // save selected id to hidden input
+                }
+            }
+        );
     });
     </script>
 <?php $this->end(); ?>

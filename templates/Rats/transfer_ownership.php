@@ -93,7 +93,7 @@
             .on('input', function() {
                 $("#jquery-mother-id").val('');
                 if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
-                    $(this).removeClass('has-items');
+                    $(this).removeClass('autocompleted');
                 }
             })
             .autocomplete({
@@ -118,7 +118,7 @@
                 },
                 select: function (event, ui) {
                     $("#jquery-owner-input").val(ui.item.value); // display the selected text
-                    $("#jquery-owner-input").addClass("has-items"); // display the selected text
+                    $("#jquery-owner-input").addClass("autocompleted"); // display the selected text
                     $("#jquery-owner-id").val(ui.item.id); // save selected id to hidden input
                 }
             });

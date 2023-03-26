@@ -237,13 +237,13 @@
     $(function() {
         $(window).on('load', function() {
             if (! $("#jquery-mother-id").val() == '') {
-                $("#jquery-mother-input").addClass("has-items");
+                $("#jquery-mother-input").addClass("autocompleted");
             }
             if (! $("#jquery-father-id").val() == '') {
-                $("#jquery-mother-input").addClass("has-items");
+                $("#jquery-father-input").addClass("autocompleted");
             }
             if (! $("#jquery-rattery-id").val() == '') {
-                $("#jquery-rattery-input").addClass("has-items");
+                $("#jquery-rattery-input").addClass("autocompleted");
             }
         });
     });
@@ -256,7 +256,7 @@
             .on('input', function() {
                 $("#jquery-mother-id").val('');
                 if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
-                    $(this).removeClass('has-items');
+                    $(this).removeClass('autocompleted');
                 }
             })
             .autocomplete({
@@ -282,7 +282,7 @@
                 },
                 select: function (event, ui) {
                     $("#jquery-mother-input").val(ui.item.value); // display the selected text
-                    $("#jquery-mother-input").addClass("has-items"); // display the selected text
+                    $("#jquery-mother-input").addClass("autocompleted"); // apply style
                     $("#jquery-mother-id").val(ui.item.id); // save selected id to hidden input
                 }
             });
@@ -295,7 +295,7 @@
             .on('input', function() {
                 $("#jquery-father-id").val('');
                 if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
-                    $(this).removeClass('has-items');
+                    $(this).removeClass('autocompleted');
                 }
             })
 
@@ -323,7 +323,7 @@
                 },
                 select: function (event, ui) {
                     $("#jquery-father-input").val(ui.item.value); // display the selected text
-                    $("#jquery-father-input").addClass("has-items"); // display the selected text
+                    $("#jquery-father-input").addClass("autocompleted"); // display the selected text
                     $("#jquery-father-id").val(ui.item.id); // save selected id to hidden input
                 }
             });
@@ -336,7 +336,7 @@
             .on('input', function() {
                 $("#jquery-rattery-id").val('');
                 if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
-                    $(this).removeClass('has-items');
+                    $(this).removeClass('autocompleted');
                 }
             })
             .autocomplete({
@@ -362,7 +362,7 @@
                 },
                 select: function (event, ui) {
                     $("#jquery-rattery-input").val(ui.item.value); // display the selected text
-                    $("#jquery-rattery-input").addClass("has-items"); // display the selected text
+                    $("#jquery-rattery-input").addClass("autocompleted"); // display the selected text
                     $("#jquery-rattery-id").val(ui.item.id); // save selected id to hidden input
                 }
             });
