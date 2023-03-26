@@ -66,6 +66,7 @@
                                 'label' => __('Owner'),
                                 'type' => 'text',
                                 'placeholder' => __('Type here...'),
+                                'value' => $rat->owner_user->username,
                                 'empty' => true,
                             ]);
                             echo $this->Form->control('owner_user_id', [
@@ -77,6 +78,7 @@
                                 ],
                                 'class' => 'hide-everywhere',
                                 'type' => 'text',
+                                'value' => $rat->owner_user_id,
                                 'empty' => true,
                             ]);
                         ?>
@@ -189,39 +191,54 @@
     <!-- general select2 ; French version at: cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.min.js -->
     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" type="text/javascript"></script> -->
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.js"></script>
+
     <script>
-    $(function () {
-        $('#jquery-owner-input').autocomplete({
-            minLength: 3,
-            source: function (request, response) {
-                $.ajax({
-                    /*url: $('#jquery-owner-form').attr('action') + '.json',*/
-                    url: '/users/autocomplete.json',
-                    dataType: 'json',
-                    data: {
-                        'searchkey': $('#jquery-owner-input').val(),
-                    },
-                    success: function (data) {
-                        response(data.items);
-                    },
-                    open: function () {
-                        $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-                    },
-                    close: function () {
-                        $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-                    }
-                });
-            },
-            select: function (event, ui) {
-                $("#jquery-owner-input").val(ui.item.value); // display the selected text
-                // $("#jquery-owner-input").addClass('has-items'); // add class for css
-                $("#jquery-owner-id").val(ui.item.id); // save selected id to hidden input
+    $(function() {
+        $(window).on('load', function() {
+            if (! $("#jquery-owner-id").val() == '') {
+                $("#jquery-owner-input").addClass("autocompleted");
             }
         });
+    });
+    </script>
 
-        $("#jquery-owner-input").on("input", function(){
-            $("#jquery-owner-id").val('');
-        });
+    <script>
+    $(function () {
+        $('#jquery-owner-input')
+            .on('input', function() {
+                $("#jquery-mother-id").val('');
+                if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
+                    $(this).removeClass('autocompleted');
+                }
+            })
+            .autocomplete({
+                minLength: 3,
+                source: function (request, response) {
+                    $.ajax({
+                        /*url: $('#jquery-owner-form').attr('action') + '.json',*/
+                        url: '/users/autocomplete.json',
+                        dataType: 'json',
+                        data: {
+                            'searchkey': $('#jquery-owner-input').val(),
+                        },
+                        success: function (data) {
+                            response(data.items);
+                        },
+                        open: function () {
+                            $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
+                        },
+                        close: function () {
+                            $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $("#jquery-owner-input").val(ui.item.value); // display the selected text
+                    $("#jquery-owner-input").addClass("autocompleted"); // display the selected text
+                    $("#jquery-owner-id").val(ui.item.id); // save selected id to hidden input
+                }
+            }
+        );
     });
     </script>
 

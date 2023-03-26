@@ -368,7 +368,7 @@ class LittersController extends AppController
         }
 
         $user = $this->request->getAttribute('identity');
-        $show_staff = !is_null($user) && $user->can('staffEdit', $litter);
+        $show_staff = ! is_null($user) && $user->can('staffEdit', $litter);
 
         $this->Flash->warning( __('For data coherence, modifications of litters are restricted. Please, contact a staff member to change parents or birth date.'));
         $this->set(compact('litter', 'mother', 'father', 'user', 'show_staff'));
@@ -505,7 +505,7 @@ class LittersController extends AppController
                 $count = $litter->countMy('rats', 'litter');
                 if ($litter->pups_number < $count) {
                     $litter->pups_number = $litter->pups_number + 1;
-                    $this->save($litter, ['checkRules' => false, 'atomic' => false]);
+                    $this->Litters->save($litter, ['checkRules' => false, 'atomic' => false]);
                 }
                 return $this->redirect(['controller' => 'rats', 'action' => 'view', $rat->id]);
             } else {

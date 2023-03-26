@@ -83,12 +83,12 @@
                 </div>
                 <?php if ($user->is_staff) : ?>
                     <div class="side-nav-group">
-                        <div class="tooltip">
+                        <div class="tooltip-staff">
                             <?= $this->Html->image('/img/icon-attach-rat.svg', [
                                 'url' => ['controller' => 'Litters', 'action' => 'attachRat', $litter->id],
                                 'class' => 'side-nav-icon',
                                 'alt' => __('Add existing rat')]) ?>
-                            <span class="tooltiptext"><?= __('Add an existing rat to this litter') ?></span>
+                            <span class="tooltiptext-staff"><?= __('Add an existing rat to this litter') ?></span>
                         </div>
                         <?= $this->element('staff_sidebar', [
                             'controller' => 'Litters',

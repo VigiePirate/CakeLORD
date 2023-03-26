@@ -13,12 +13,12 @@
         <span class="tooltiptext-staff"><?= __('Edit in database') ?></span>
     </div>
     <?php else : ?>
-        <div class="tooltip disabled">
+        <div class="tooltip-staff disabled">
             <?= $this->Html->image('icon-edit-as-staff.svg', [
                 'url' => [],
                 'class' => 'side-nav-icon',
                 'alt' => __('Delete Sheet')]) ?>
-            <span class="tooltiptext"><?= __('You cannot edit this sheet') ?></span>
+            <span class="tooltiptext-staff"><?= __('You cannot edit this sheet') ?></span>
         </div>
     <?php endif; ?>
 <?php endif; ?>
@@ -40,11 +40,12 @@
         <span class="tooltiptext-staff"><?= __('Delete') ?></span>
     </div>
 <?php else : ?>
-    <div class="tooltip disabled">
+    <div class="tooltip-staff disabled">
         <?= $this->Html->image('/img/icon-delete.svg', [
             'url' => [],
             'class' => 'side-nav-icon',
-            'alt' => __('Delete Sheet')]) ?>
-        <span class="tooltiptext"><?= __('You cannot delete this sheet') ?></span>
+            'alt' => __('Delete Sheet')])
+        ?>
+        <span class="tooltiptext-staff"><?= __('You cannot delete this sheet') ?></span>
     </div>
 <?php endif; ?>
