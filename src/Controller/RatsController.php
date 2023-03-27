@@ -240,12 +240,48 @@ class RatsController extends AppController
         } else {
             $this->Flash->default(__('Please record the rat’s information below. When in doubt, please check documentation before entering data.'));
         }
-        $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
-        $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
-        $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
-        $markings = $this->Rats->Markings->find('list', ['limit' => 200]);
-        $earsets = $this->Rats->Earsets->find('list', ['limit' => 200]);
-        $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
+        $colors = $this->Rats->Colors->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'name ASC' // then sort by name
+            ]
+        ]);
+        $eyecolors = $this->Rats->Eyecolors->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'name ASC' // then sort by name
+            ]
+        ]);
+        $dilutions = $this->Rats->Dilutions->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'name ASC' // then sort by name
+            ]
+        ]);
+        $markings = $this->Rats->Markings->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'name ASC' // then sort by name
+            ]
+        ]);
+        $earsets = $this->Rats->Earsets->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'name ASC' // then sort by name
+            ]
+        ]);
+        $coats = $this->Rats->Coats->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'name ASC' // then sort by name
+            ]
+        ]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
         $creator = $this->Authentication->getIdentity()->get('id');
