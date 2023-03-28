@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-03-28 18:11+0200\n"
+"PO-Revision-Date: 2023-03-28 21:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -5420,20 +5420,24 @@ msgid ""
 msgstr ""
 
 #: templates/Users/change_password.php:27 templates/Users/reset_password.php:12
+#, fuzzy
 msgid "Submit new password"
-msgstr ""
+msgstr "Enregistrer le nouveau mot de passe"
 
 #: templates/Users/change_picture.php:20
+#, fuzzy
 msgid "Back to user sheet"
-msgstr ""
+msgstr "Revenir à la fiche utilisateur"
 
 #: templates/Users/edit.php:19
+#, fuzzy
 msgid "Cancel and go back to user sheet"
-msgstr ""
+msgstr "Annuler et revenir à la fiche utilisateur"
 
 #: templates/Users/edit.php:30
+#, fuzzy
 msgid "Edit "
-msgstr ""
+msgstr "Editer"
 
 #: templates/Users/edit.php:35 templates/Users/my.php:18
 msgid "Public information"
@@ -5449,196 +5453,241 @@ msgid "For security reasons, you cannot change your credentials here."
 msgstr ""
 
 #: templates/Users/edit.php:57 templates/Users/my.php:108
+#, fuzzy
 msgid "Change email"
-msgstr ""
+msgstr "Modifier l'adresse mail"
 
 #: templates/Users/edit.php:59 templates/Users/my.php:110
+#, fuzzy
 msgid "Change password"
-msgstr ""
+msgstr "Modifier le mot de passe"
 
 #: templates/Users/edit.php:72
+#, fuzzy
 msgid "Staff-only information"
-msgstr ""
+msgstr "Information visible par le staff uniquement"
 
 #: templates/Users/edit.php:79
+#, fuzzy
 msgid "Staff comments"
-msgstr ""
+msgstr "Commentaires du staff"
 
 #: templates/Users/home.php:14
+#, fuzzy
 msgid "Welcome!"
-msgstr ""
+msgstr "Bienvenue !"
 
 #: templates/Users/index.php:8
+#, fuzzy
 msgid "New User"
-msgstr ""
+msgstr "Nouvel utilisateur"
 
 #: templates/Users/index.php:9
+#, fuzzy
 msgid "All Users"
-msgstr ""
+msgstr "Tous les utilisateurs"
 
 #: templates/Users/index.php:19
+#, fuzzy
 msgid "Locked?"
-msgstr ""
+msgstr "Verrouillé ?"
 
 #: templates/Users/index.php:46
+#, fuzzy
 msgid "Delete User"
-msgstr ""
+msgstr "Supprimer l'utilisateur"
 
 #: templates/Users/login.php:6 templates/Users/login.php:18
 msgid "Login"
 msgstr ""
 
 #: templates/Users/login.php:9
+#, fuzzy
 msgid "Please enter your registration email address and password"
-msgstr ""
+msgstr "Merci d'entrer votre adresse mail et votre mot de passe"
 
 #: templates/Users/login.php:15
+#, fuzzy
 msgid "Forgotten password?"
-msgstr ""
+msgstr "Mot de passe oublié ?"
 
 #: templates/Users/login.php:15
+#, fuzzy
 msgid "Not registered?"
-msgstr ""
+msgstr "Pas inscrit ?"
 
 #: templates/Users/lost_password.php:5
+#, fuzzy
 msgid "Require new password"
-msgstr ""
+msgstr "Demander un nouveau mot de passe"
 
 #: templates/Users/lost_password.php:8
+#, fuzzy
 msgid "Please enter your email"
-msgstr ""
+msgstr "Merci d'entrer votre adresse mail"
 
 #: templates/Users/lost_password.php:11
+#, fuzzy
 msgid "Request reset email"
-msgstr ""
+msgstr "Demander le changement d'adresse mail"
 
 #: templates/Users/my.php:14 templates/element/my/sidebar.php:10
+#, fuzzy
 msgid "My profile"
-msgstr ""
+msgstr "Mon profil"
 
 #: templates/Users/my.php:33 templates/Users/view.php:91
+#, fuzzy
 msgid "Main rattery"
-msgstr ""
+msgstr "Raterie principale"
 
 #: templates/Users/my.php:48
+#, fuzzy
 msgid "See public profile"
-msgstr ""
+msgstr "Voir le profil public"
 
 #: templates/Users/my.php:51
+#, fuzzy
 msgid "Edit profile"
-msgstr ""
+msgstr "Editer le profil"
 
 #: templates/Users/my.php:96
+#, fuzzy
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 #: templates/Users/my.php:99
 msgid "Wants Newsletter?"
 msgstr ""
 
 #: templates/Users/my.php:102
+#, fuzzy
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Se désabonner"
 
 #: templates/Users/my.php:103
+#, fuzzy
 msgid "Subscribe"
-msgstr ""
+msgstr "S'abonner"
 
 #: templates/Users/my.php:107
 msgid "Credentials"
 msgstr ""
 
 #: templates/Users/named.php:13
+#, fuzzy
 msgid "Users with username like "
-msgstr ""
+msgstr "Utilisateurs dont le nom contient"
 
 #: templates/Users/register.php:4 templates/Users/register.php:26
+#, fuzzy
 msgid "Register"
-msgstr ""
+msgstr "S'enregistrer"
 
 #: templates/Users/register.php:7
+#, fuzzy
 msgid "In order to create your account, please fill in this form"
-msgstr ""
+msgstr "Pour créer votre compte, merci de remplir ce formulaire"
 
 #: templates/Users/register.php:12
+#, fuzzy
 msgid "This username is already in use"
-msgstr ""
+msgstr "Ce nom d'utilisateur est déjà pris"
 
 #: templates/Users/register.php:16
+#, fuzzy
 msgid "Email address"
-msgstr ""
+msgstr "Adresse mail"
 
 #: templates/Users/register.php:19
+#, fuzzy
 msgid "This email is already in use"
-msgstr ""
+msgstr "Cette adresse mail est déjà utilisée"
 
 #: templates/Users/register.php:23
+#, fuzzy
 msgid "What is the meaning of the letter \"R\" in the LORD acronym?"
-msgstr ""
+msgstr "Que signifie la lettre \"R\" dans l'acronyme LORD ?"
 
 #: templates/Users/view.php:20 templates/Users/view.php:41
+#, fuzzy
 msgid "Change Picture"
-msgstr ""
+msgstr "Changer de photo"
 
 #: templates/Users/view.php:21
+#, fuzzy
 msgid "Upload a new picture"
-msgstr ""
+msgstr "Télécharger une nouvelle photo"
 
 #: templates/Users/view.php:30 templates/Users/view.php:48
+#, fuzzy
 msgid "Modify User"
-msgstr ""
+msgstr "Modifier un utilisateur"
 
 #: templates/Users/view.php:32
+#, fuzzy
 msgid "Edit whole user sheet"
-msgstr ""
+msgstr "Editer la fiche utilisateur"
 
 #: templates/Users/view.php:42
+#, fuzzy
 msgid "You cannot upload a new picture"
-msgstr ""
+msgstr "Vous ne pouvez pas télécharger une nouvelle photo"
 
 #: templates/Users/view.php:136
+#, fuzzy
 msgid "This user doesn’t have any rattery."
-msgstr ""
+msgstr "Cet utilisateur n'a pas de raterie."
 
 #: templates/Users/view.php:143
+#, fuzzy
 msgid "Last Modified Rats"
-msgstr ""
+msgstr "Derniers rats modifiés"
 
 #: templates/Users/view.php:146
+#, fuzzy
 msgid "See all their rats"
-msgstr ""
+msgstr "Voir tous leurs rats"
 
 #: templates/Users/view.php:161
+#, fuzzy
 msgid "This user doesn’t have any rat."
-msgstr ""
+msgstr "Cet utilisateur n'a aucun rat."
 
 #: templates/Users/view.php:194
+#, fuzzy
 msgid "User information"
-msgstr ""
+msgstr "Informations de l'utilisateur"
 
 #: templates/Users/view.php:281
+#, fuzzy
 msgid "Current number of rats:"
-msgstr ""
+msgstr "Nombre de rats en ce moment :"
 
 #: templates/Users/view.php:285 templates/element/my/statistics.php:9
+#, fuzzy
 msgid "No rat at the moment"
-msgstr ""
+msgstr "Pas de rat en ce moment"
 
 #: templates/Users/view.php:290
+#, fuzzy
 msgid "Total number of owned rats:"
-msgstr ""
+msgstr "Nombre total de rats :"
 
 #: templates/Users/view.php:294
+#, fuzzy
 msgid "Managed sheets (as owner or creator):"
-msgstr ""
+msgstr "Fiches gérées (en tant que créateur ou propriétaire)"
 
 #: templates/Users/view.php:297 templates/element/my/statistics.php:21
+#, fuzzy
 msgid "alive: "
-msgstr ""
+msgstr "en vie :"
 
 #: templates/Users/view.php:304
+#, fuzzy
 msgid "Average lifespan of their rats:"
-msgstr ""
+msgstr "Longévité moyenne de leurs rats :"
 
 #: templates/Users/view.php:319
 msgid "Their champion:"
@@ -5673,100 +5722,120 @@ msgid "Users Conversations"
 msgstr ""
 
 #: templates/UsersConversations/view.php:12
+#, fuzzy
 msgid "Delete Users Conversation"
-msgstr ""
+msgstr "Supprimer les conversations"
 
 #: templates/element/activitybar.php:7
 msgid "Activity status"
-msgstr ""
+msgstr "Statut de l'activité"
 
 #: templates/element/default_sidebar.php:5
+#, fuzzy
 msgid "Report"
-msgstr ""
+msgstr "Signaler"
 
 #: templates/element/default_sidebar.php:6
+#, fuzzy
 msgid "Report a problem"
-msgstr ""
+msgstr "Signaler un problème"
 
 #: templates/element/default_sidebar.php:13
 msgid "Help"
 msgstr ""
 
 #: templates/element/default_sidebar.php:14
+#, fuzzy
 msgid "Get help"
-msgstr ""
+msgstr "Obtenir de l'aide"
 
 #: templates/element/lockbar.php:7
+#, fuzzy
 msgid "Lock status"
-msgstr ""
+msgstr "Statut du verrou"
 
 #: templates/element/lockbar.php:13
+#, fuzzy
 msgid "Locked"
-msgstr ""
+msgstr "Verrouillé"
 
 #: templates/element/lockbar.php:21
+#, fuzzy
 msgid "Unlock"
-msgstr ""
+msgstr "Déverrouiller"
 
 #: templates/element/lockbar.php:29
+#, fuzzy
 msgid "Unlocked"
-msgstr ""
+msgstr "Déverrouillé"
 
 #: templates/element/lockbar.php:37
+#, fuzzy
 msgid "Lock"
-msgstr ""
+msgstr "Verrouiller"
 
 #: templates/element/my/issues.php:6
+#, fuzzy
 msgid "My Issues"
-msgstr ""
+msgstr "Mes rapports"
 
 #: templates/element/my/messages.php:1
+#, fuzzy
 msgid "My Messages"
-msgstr ""
+msgstr "Mes messages"
 
 #: templates/element/my/rattery.php:5
+#, fuzzy
 msgid "Email:"
-msgstr ""
+msgstr "Email :"
 
 #: templates/element/my/sidebar.php:11
+#, fuzzy
 msgid "Manage my profile"
-msgstr ""
+msgstr "Gérer mon profil"
 
 #: templates/element/my/sidebar.php:19
+#, fuzzy
 msgid "Manage my rats"
-msgstr ""
+msgstr "Gérer mes rats"
 
 #: templates/element/my/sidebar.php:27
+#, fuzzy
 msgid "Manage my ratteries"
-msgstr ""
+msgstr "Gérer mes rateries"
 
 #: templates/element/my/sidebar.php:34
+#, fuzzy
 msgid "My Litters"
-msgstr ""
+msgstr "Mes portées"
 
 #: templates/element/my/sidebar.php:35
+#, fuzzy
 msgid "Manage my litters"
-msgstr ""
+msgstr "Gérer mes portées"
 
 #: templates/element/my/sidebar.php:45 templates/element/my/sidebar.php:46
 msgid "Admin site"
 msgstr ""
 
 #: templates/element/my/statistics.php:1
+#, fuzzy
 msgid "My Statistics"
-msgstr ""
+msgstr "Mes statistiques"
 
 #: templates/element/my/statistics.php:5
 msgid "I currently live with:"
 msgstr "Je vis actuellement avec :"
 
 #: templates/element/my/statistics.php:14
+#, fuzzy
 msgid "In total, I have hosted:"
-msgstr ""
+msgstr "J'ai eu au total :"
 
 #: templates/element/my/statistics.php:18
+#, fuzzy
 msgid "As owner or creator, I manage the sheets of:"
-msgstr ""
+msgstr "En tant que propriétaire ou créateur, je gère les fiches de :"
 
 #: templates/element/my/statistics.php:28
 #, fuzzy
