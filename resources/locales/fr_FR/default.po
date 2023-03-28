@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-03-25 10:54+0100\n"
+"PO-Revision-Date: 2023-03-28 11:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -22,34 +22,41 @@ msgstr "L’article a été enregistré."
 
 #: src/Controller/ArticlesController.php:78
 #: src/Controller/ArticlesController.php:105
+#, fuzzy
 msgid "The article could not be saved. Please, try again."
-msgstr ""
+msgstr "Impossible d'enregistrer l'article. Merci de réessayer."
 
 #: src/Controller/ArticlesController.php:126
+#, fuzzy
 msgid "The article has been deleted."
-msgstr ""
+msgstr "L'article a été supprimé."
 
 #: src/Controller/ArticlesController.php:129
+#, fuzzy
 msgid "The article could not be deleted. Please, try again."
-msgstr ""
+msgstr "Impossible de supprimer l'article. Merci de réessayer."
 
 #: src/Controller/CategoriesController.php:56
 #: src/Controller/CategoriesController.php:81
+#, fuzzy
 msgid "The category has been saved."
-msgstr ""
+msgstr "La catégorie a été enregistrée."
 
 #: src/Controller/CategoriesController.php:60
 #: src/Controller/CategoriesController.php:85
+#, fuzzy
 msgid "The category could not be saved. Please, try again."
-msgstr ""
+msgstr "Impossible d'enregistrer la catégorie. Merci de réessayer."
 
 #: src/Controller/CategoriesController.php:104
+#, fuzzy
 msgid "The category has been deleted."
-msgstr ""
+msgstr "La catégorie a été supprimée."
 
 #: src/Controller/CategoriesController.php:106
+#, fuzzy
 msgid "The category could not be deleted. Please, try again."
-msgstr ""
+msgstr "Impossible de supprimer la catégorie. Merci de réessayer."
 
 #: src/Controller/CoatsController.php:85 src/Controller/CoatsController.php:108
 msgid "The coat has been saved."

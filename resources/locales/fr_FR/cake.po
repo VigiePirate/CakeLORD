@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CakePHP 4.4.7\n"
 "POT-Creation-Date: 2023-03-24 18:55+0000\n"
-"PO-Revision-Date: 2023-03-24 20:02+0100\n"
+"PO-Revision-Date: 2023-03-28 11:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -28,24 +28,29 @@ msgid "The requested address {0} was not found on this server."
 msgstr "L’adresse demandée {0} n'a pas été trouvée sur ce serveur."
 
 #: templates/Error/error400.php:61
+#, fuzzy
 msgid "An issue occurred while trying to access the page {0}."
-msgstr ""
+msgstr "Une erreur est survenue lors de l'accès à la page {0}"
 
 #: templates/Error/error500.php:55
+#, fuzzy
 msgid "An internal error has occurred"
-msgstr ""
+msgstr "Une erreur interne est survenue"
 
 #: vendor/cakephp/cakephp/src/Controller/Component/AuthComponent.php:462
+#, fuzzy
 msgid "You are not authorized to access that location."
-msgstr ""
+msgstr "Vous n'êtes pas autorisé à accéder à cette page."
 
 #: vendor/cakephp/cakephp/src/Error/Renderer/WebExceptionRenderer.php:367
+#, fuzzy
 msgid "Not Found"
-msgstr ""
+msgstr "Non trouvé"
 
 #: vendor/cakephp/cakephp/src/Error/Renderer/WebExceptionRenderer.php:369
+#, fuzzy
 msgid "An Internal Error Has Occurred."
-msgstr ""
+msgstr "Une erreur interne est survenue."
 
 #: vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php:390
 msgid "Missing or incorrect CSRF cookie type."
@@ -71,8 +76,9 @@ msgid "The requested file contains `..` and will not be read."
 msgstr ""
 
 #: vendor/cakephp/cakephp/src/Http/Response.php:1497
+#, fuzzy
 msgid "The requested file was not found"
-msgstr ""
+msgstr "Le fichier est introuvable"
 
 #: vendor/cakephp/cakephp/src/I18n/Number.php:116
 msgid "{0,number,#,###.##} KB"
@@ -105,88 +111,107 @@ msgid "{0} ago"
 msgstr "Il y a {0}"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:89
+#, fuzzy
 msgid "{0} after"
-msgstr ""
+msgstr "{0} après"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:89
+#, fuzzy
 msgid "{0} before"
-msgstr ""
+msgstr "{0} avant"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:120
+#, fuzzy
 msgid "just now"
-msgstr ""
+msgstr "maintenant"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:157
+#, fuzzy
 msgid "about a second ago"
-msgstr ""
+msgstr "il y a une seconde"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:158
+#, fuzzy
 msgid "about a minute ago"
-msgstr ""
+msgstr "il y a une minute"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:159
+#, fuzzy
 msgid "about an hour ago"
-msgstr ""
+msgstr "il y a une heure"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:160
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:370
+#, fuzzy
 msgid "about a day ago"
-msgstr ""
+msgstr "il y a un jour"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:161
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:371
+#, fuzzy
 msgid "about a week ago"
-msgstr ""
+msgstr "il y a une semaine"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:162
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:372
+#, fuzzy
 msgid "about a month ago"
-msgstr ""
+msgstr "il y a un mois"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:163
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:373
+#, fuzzy
 msgid "about a year ago"
-msgstr ""
+msgstr "il y a un an"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:174
+#, fuzzy
 msgid "in about a second"
-msgstr ""
+msgstr "dans une seconde"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:175
+#, fuzzy
 msgid "in about a minute"
-msgstr ""
+msgstr "dans une minute"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:176
+#, fuzzy
 msgid "in about an hour"
-msgstr ""
+msgstr "dans une heure"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:177
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:384
+#, fuzzy
 msgid "in about a day"
-msgstr ""
+msgstr "dans un jour"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:178
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:385
+#, fuzzy
 msgid "in about a week"
-msgstr ""
+msgstr "dans une semaine"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:179
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:386
+#, fuzzy
 msgid "in about a month"
-msgstr ""
+msgstr "dans un mois"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:180
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:387
+#, fuzzy
 msgid "in about a year"
-msgstr ""
+msgstr "dans un an"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:342
+#, fuzzy
 msgid "today"
-msgstr ""
+msgstr "aujourd'hui"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:409
+#, fuzzy
 msgid "%s ago"
-msgstr ""
+msgstr "il y a %s"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:410
 msgid "on %s"
@@ -226,66 +251,81 @@ msgstr[1] "{0} jours"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:70
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:144
+#, fuzzy
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} heure"
+msgstr[1] "{0} heures"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:74
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:147
+#, fuzzy
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} minute"
+msgstr[1] "{0} minutes"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:78
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:150
+#, fuzzy
 msgid "{0} second"
 msgid_plural "{0} seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} seconde"
+msgstr[1] "{0} secondes"
 
 #: vendor/cakephp/cakephp/src/ORM/RulesChecker.php:63
+#, fuzzy
 msgid "This value is already in use"
-msgstr ""
+msgstr "Cette valeur est déjà utilisée"
 
 #: vendor/cakephp/cakephp/src/ORM/RulesChecker.php:110
+#, fuzzy
 msgid "This value does not exist"
-msgstr ""
+msgstr "Cette valeur n'existe pas"
 
 #: vendor/cakephp/cakephp/src/ORM/RulesChecker.php:232
+#, fuzzy
 msgid "Cannot modify row: a constraint for the `{0}` association fails."
 msgstr ""
+"Impossible de modifier une ligne : la contrainte pour l'association `{0}` "
+"n'est pas respectée"
 
 #: vendor/cakephp/cakephp/src/ORM/RulesChecker.php:270
 msgid "The count does not match {0}{1}"
 msgstr ""
 
 #: vendor/cakephp/cakephp/src/Utility/Text.php:923
+#, fuzzy
 msgid "and"
-msgstr ""
+msgstr "et"
 
 #: vendor/cakephp/cakephp/src/Validation/Validator.php:2539
+#, fuzzy
 msgid "This field is required"
-msgstr ""
+msgstr "Ce champ est obligatoire"
 
 #: vendor/cakephp/cakephp/src/Validation/Validator.php:2559
 #: vendor/cakephp/cakephp/src/View/Form/ArrayContext.php:249
+#, fuzzy
 msgid "This field cannot be left empty"
-msgstr ""
+msgstr "Ce champ doit être rempli"
 
 #: vendor/cakephp/cakephp/src/Validation/Validator.php:2711
+#, fuzzy
 msgid "The provided value is invalid"
-msgstr ""
+msgstr "La valeur est incorrecte"
 
 #: vendor/cakephp/cakephp/src/View/Helper/FormHelper.php:979
+#, fuzzy
 msgid "Edit {0}"
-msgstr ""
+msgstr "Editer {0}"
 
 #: vendor/cakephp/cakephp/src/View/Helper/FormHelper.php:981
+#, fuzzy
 msgid "New {0}"
-msgstr ""
+msgstr "Nouveau {0}"
 
 #: vendor/cakephp/cakephp/src/View/Helper/FormHelper.php:1916
+#, fuzzy
 msgid "Submit"
-msgstr ""
+msgstr "Envoyer {0}"
