@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-03-28 11:22+0200\n"
+"PO-Revision-Date: 2023-03-28 18:11+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -5758,7 +5758,7 @@ msgstr ""
 
 #: templates/element/my/statistics.php:5
 msgid "I currently live with:"
-msgstr ""
+msgstr "Je vis actuellement avec :"
 
 #: templates/element/my/statistics.php:14
 msgid "In total, I have hosted:"
@@ -5769,114 +5769,140 @@ msgid "As owner or creator, I manage the sheets of:"
 msgstr ""
 
 #: templates/element/my/statistics.php:28
+#, fuzzy
 msgid "Average lifespan of my rats:"
-msgstr ""
+msgstr "Longévité moyenne de mes rats :"
 
 #: templates/element/my/statistics.php:43
+#, fuzzy
 msgid "My champion:"
-msgstr ""
+msgstr "Mon champion :"
 
 #: templates/element/my/statistics.php:46
+#, fuzzy
 msgid "I have no eligible champion yet"
-msgstr ""
+msgstr "Je n'ai pas trouvé de champion pour le moment"
 
 #: templates/element/rats.php:29
+#, fuzzy
 msgid "Reached Age"
-msgstr ""
+msgstr "Âge atteint"
 
 #: templates/element/rats.php:86 templates/element/simple_rats.php:92
+#, fuzzy
 msgid "Edit Rat"
-msgstr ""
+msgstr "Editer le rat"
 
 #: templates/element/rats.php:99 templates/element/simple_rats.php:105
+#, fuzzy
 msgid "View Rat"
-msgstr ""
+msgstr "Voir le rat"
 
 #: templates/element/ratteries.php:9
+#, fuzzy
 msgid "Active?"
-msgstr ""
+msgstr "Active ?"
 
 #: templates/element/ratteries.php:12 templates/element/simple_ratteries.php:12
+#, fuzzy
 msgid "picture"
-msgstr ""
+msgstr "photo"
 
 #: templates/element/ratteries.php:77 templates/element/ratteries.php:82
 #: templates/element/simple_ratteries.php:79
 #: templates/element/simple_ratteries.php:87
+#, fuzzy
 msgid "See Rattery"
-msgstr ""
+msgstr "Voir la raterie"
 
 #: templates/element/simple_rats.php:28
+#, fuzzy
 msgid "Pup Name"
-msgstr ""
+msgstr "Nom de naissance"
 
 #: templates/element/simple_rats.php:34
+#, fuzzy
 msgid "Age (mo)"
-msgstr ""
+msgstr "Âge (mois)"
 
 #: templates/element/simple_ratteries.php:9
+#, fuzzy
 msgid "On?"
-msgstr "Active?"
+msgstr "Active ?"
 
 #: templates/element/simple_ratteries.php:27
+#, fuzzy
 msgid "Zip code"
-msgstr ""
+msgstr "Code postal"
 
 #: templates/element/staff_litters.php:6
+#, fuzzy
 msgid "Creator"
-msgstr ""
+msgstr "Créateur"
 
 #: templates/element/staff_litters.php:8 templates/element/staff_rats.php:9
 #: templates/element/staff_ratteries.php:9
+#, fuzzy
 msgid "Last message"
-msgstr ""
+msgstr "Dernier message"
 
 #: templates/element/staff_litters.php:25
+#, fuzzy
 msgid "Delete Litter"
-msgstr ""
+msgstr "Supprimer la portée"
 
 #: templates/element/staff_litters.php:28
+#, fuzzy
 msgid "Are you sure you want to delete litter # {0}?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer la portée # {0} ?"
 
 #: templates/element/staff_rats.php:6
+#, fuzzy
 msgid "Usual name"
-msgstr ""
+msgstr "Nom courant"
 
 #: templates/element/staff_rats.php:26
+#, fuzzy
 msgid "Delete Rat"
-msgstr ""
+msgstr "Supprimer le rat"
 
 #: templates/element/staff_rats.php:29
+#, fuzzy
 msgid "Are you sure you want to delete rat # {0}?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer le rat # {0} ?"
 
 #: templates/element/staff_ratteries.php:26
+#, fuzzy
 msgid "Delete Rattery"
-msgstr ""
+msgstr "Supprimer la raterie"
 
 #: templates/element/staff_ratteries.php:29
+#, fuzzy
 msgid "Are you sure you want to delete rattery # {0}?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer la raterie  # {0} ?"
 
 #: templates/element/staff_sidebar.php:12
 #: templates/element/staff_sidebar.php:13
+#, fuzzy
 msgid "Edit in database"
-msgstr ""
+msgstr "Editer dans la base de données"
 
 #: templates/element/staff_sidebar.php:20
 #: templates/element/staff_sidebar.php:31
 #: templates/element/staff_sidebar.php:47
+#, fuzzy
 msgid "Delete Sheet"
-msgstr ""
+msgstr "Supprimer la feuille"
 
 #: templates/element/staff_sidebar.php:48
+#, fuzzy
 msgid "You cannot delete this sheet"
-msgstr ""
+msgstr "Vous ne pouvez pas supprimer cette feuille"
 
 #: templates/element/statebar.php:9
+#, fuzzy
 msgid "Change state"
-msgstr ""
+msgstr "Changer l'état"
 
 #: templates/element/tech_sidebar.php:31
 msgid "Laborats"
@@ -5891,38 +5917,47 @@ msgid "No matching Lab-o-rats entry available"
 msgstr ""
 
 #: templates/element/variety/add.php:16
+#, fuzzy
 msgid "Add"
-msgstr ""
+msgstr "Ajouter"
 
 #: templates/element/variety/add.php:22 templates/element/variety/edit.php:24
+#, fuzzy
 msgid "Reference picture"
-msgstr ""
+msgstr "Référencer une photo"
 
 #: templates/element/variety/add.php:29
+#, fuzzy
 msgid "Require picture from user?"
-msgstr ""
+msgstr "Demander une photo à l'utilisateur ?"
 
 #: templates/element/variety/edit.php:31 templates/element/variety/index.php:13
 #: templates/element/variety/view.php:42
+#, fuzzy
 msgid "Mandatory picture?"
-msgstr ""
+msgstr "Photo obligatoire ?"
 
 #: templates/element/variety/index.php:44
+#, fuzzy
 msgid "Are you sure you want to delete #{0}?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer #{0} ?"
 
 #: templates/element/variety/view.php:38
+#, fuzzy
 msgid "Genotype"
-msgstr ""
+msgstr "Génotype"
 
 #: templates/element/variety/view.php:46
+#, fuzzy
 msgid "Frequency (all time)"
-msgstr ""
+msgstr "Fréquence"
 
 #: templates/element/variety/view.php:50
+#, fuzzy
 msgid "Frequency (in the last 2 years)"
-msgstr ""
+msgstr "Fréquence (les 2 dernières années)"
 
 #: templates/element/variety/view.php:67
+#, fuzzy
 msgid "Random gallery"
-msgstr ""
+msgstr "Galerie aléatoire"
