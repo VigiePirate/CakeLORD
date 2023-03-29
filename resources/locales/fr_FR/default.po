@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-03-28 21:00+0200\n"
+"PO-Revision-Date: 2023-03-29 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -4972,54 +4972,67 @@ msgid "Oldest bred rat:"
 msgstr ""
 
 #: templates/Ratteries/view.php:339
+#, fuzzy
 msgid " (deceased at "
-msgstr ""
+msgstr " (décédé à "
 
 #: templates/Ratteries/view.php:340
+#, fuzzy
 msgid "No eligible champion"
-msgstr ""
+msgstr "Pas de champion éligible"
 
 #: templates/Ratteries/view.php:347
+#, fuzzy
 msgid "Death causes statistics"
-msgstr ""
+msgstr "Statistiques des causes de mortalité"
 
 #: templates/Ratteries/view.php:350
+#, fuzzy
 msgid "Primary death causes by decreasing frequency:"
-msgstr ""
+msgstr "Causes de décès primaire par fréquence décroissante :"
 
 #: templates/Ratteries/view.php:368
+#, fuzzy
 msgid "Secondary death causes by decreasing frequency:"
-msgstr ""
+msgstr "Causes de décès secondaire par fréquence décroissante :"
 
 #: templates/Ratteries/view.php:408
+#, fuzzy
 msgid ""
 "The owner of this rattery does not wish to show their full breeding and "
 "mortality statistics."
 msgstr ""
+"Le propriétaire de cette raterie ne souhaite pas afficher les statistiques "
+"de naissance et de mortalité de ses rats et portées."
 
 #: templates/Ratteries/view.php:423 templates/Users/view.php:120
 msgid "Related entries"
 msgstr ""
 
 #: templates/Ratteries/view.php:426
+#, fuzzy
 msgid "Last contributed litters"
-msgstr ""
+msgstr "Dernière portée en partenariat"
 
 #: templates/Ratteries/view.php:428
+#, fuzzy
 msgid "See all contributed litters"
-msgstr ""
+msgstr "Voir toutes les portées en partenariat"
 
 #: templates/Ratteries/view.php:437
+#, fuzzy
 msgid "Size"
-msgstr ""
+msgstr "Taille"
 
 #: templates/Ratteries/view.php:445
+#, fuzzy
 msgid "Unknown date"
-msgstr ""
+msgstr "Date inconnue"
 
 #: templates/Ratteries/view.php:462
+#, fuzzy
 msgid "Recently modified rats"
-msgstr ""
+msgstr "Rats modifiés récemment"
 
 #: templates/Ratteries/view.php:464
 msgid "See all bred rats"
@@ -5053,59 +5066,72 @@ msgid "Delete Ratteries Litter"
 msgstr ""
 
 #: templates/RatteriesLitters/view.php:30
+#, fuzzy
 msgid "Litters Contribution"
-msgstr ""
+msgstr "Portées en partenariat"
 
 #: templates/RatterySnapshots/add.php:11 templates/RatterySnapshots/edit.php:16
 #: templates/RatterySnapshots/view.php:13
+#, fuzzy
 msgid "List Rattery Snapshots"
-msgstr ""
+msgstr "Liste des snapshots de la raterie"
 
 #: templates/RatterySnapshots/add.php:18
+#, fuzzy
 msgid "Add Rattery Snapshot"
-msgstr ""
+msgstr "Ajouter un snapshot de la raterie"
 
 #: templates/RatterySnapshots/edit.php:23
 #: templates/RatterySnapshots/view.php:11
+#, fuzzy
 msgid "Edit Rattery Snapshot"
-msgstr ""
+msgstr "Editer le snapshot de la raterie"
 
 #: templates/RatterySnapshots/index.php:8
 #: templates/RatterySnapshots/view.php:14
+#, fuzzy
 msgid "New Rattery Snapshot"
-msgstr ""
+msgstr "Nouveau snapshot de la raterie"
 
 #: templates/RatterySnapshots/index.php:9
+#, fuzzy
 msgid "Rattery Snapshots"
-msgstr ""
+msgstr "Snapshots de la raterie"
 
 #: templates/RatterySnapshots/view.php:12
+#, fuzzy
 msgid "Delete Rattery Snapshot"
-msgstr ""
+msgstr "Supprimer le snapshot de la raterie"
 
 #: templates/Roles/add.php:12
+#, fuzzy
 msgid "Role list"
-msgstr ""
+msgstr "Liste des rôles"
 
 #: templates/Roles/add.php:22
+#, fuzzy
 msgid "Add Role"
-msgstr ""
+msgstr "Ajouter un rôle"
 
 #: templates/Roles/edit.php:12 templates/Roles/view.php:12
+#, fuzzy
 msgid "Browse role list"
-msgstr ""
+msgstr "Parcourir la liste des rôles"
 
 #: templates/Roles/edit.php:23 templates/Roles/index.php:37
+#, fuzzy
 msgid "Edit Role"
-msgstr ""
+msgstr "Editer le rôle"
 
 #: templates/Roles/index.php:8
+#, fuzzy
 msgid "New Role"
-msgstr ""
+msgstr "Nouveau rôle"
 
 #: templates/Roles/index.php:9
+#, fuzzy
 msgid "All Roles"
-msgstr ""
+msgstr "Tous les rôles"
 
 #: templates/Roles/index.php:11
 msgid "Staff level"
@@ -5124,12 +5150,14 @@ msgid "Staff?"
 msgstr ""
 
 #: templates/Roles/index.php:42
+#, fuzzy
 msgid "Delete Role"
-msgstr ""
+msgstr "Supprimer le rôle"
 
 #: templates/Roles/index.php:55 templates/Roles/view.php:35
+#, fuzzy
 msgid "Permissions"
-msgstr ""
+msgstr "Permissions"
 
 #: templates/Roles/index.php:62
 msgid "State editor?"
@@ -5180,206 +5208,249 @@ msgid "Is Staff"
 msgstr ""
 
 #: templates/Roles/view.php:50
+#, fuzzy
 msgid "Can Change State"
-msgstr ""
+msgstr "Peut modifier l'état"
 
 #: templates/Roles/view.php:54
+#, fuzzy
 msgid "Can Edit Others"
-msgstr ""
+msgstr "Peut modifier les autres"
 
 #: templates/Roles/view.php:58
+#, fuzzy
 msgid "Can Edit Frozen"
-msgstr ""
+msgstr "Peut modifier une fiche gelée"
 
 #: templates/Roles/view.php:62
+#, fuzzy
 msgid "Can Delete"
-msgstr ""
+msgstr "Peut supprimer"
 
 #: templates/Roles/view.php:66
+#, fuzzy
 msgid "Can Configure"
-msgstr ""
+msgstr "Peut configurer"
 
 #: templates/Roles/view.php:70
+#, fuzzy
 msgid "Can Restore"
-msgstr ""
+msgstr "Peut restaurer"
 
 #: templates/Roles/view.php:74
+#, fuzzy
 msgid "Can Document"
-msgstr ""
+msgstr "Peut documenter"
 
 #: templates/Roles/view.php:78
+#, fuzzy
 msgid "Can Describe"
-msgstr ""
+msgstr "Peut décrire"
 
 #: templates/Roles/view.php:102 templates/Users/index.php:42
+#, fuzzy
 msgid "Edit User"
-msgstr ""
+msgstr "Editer l'utilisateur"
 
 #: templates/Singularities/add.php:11 templates/Singularities/edit.php:11
 #: templates/Singularities/view.php:11
+#, fuzzy
 msgid "Browse singularity list"
-msgstr ""
+msgstr "Parcourir la liste des particularités"
 
 #: templates/Singularities/index.php:13
+#, fuzzy
 msgid "New Singularity"
-msgstr ""
+msgstr "Ajouter une particularité"
 
 #: templates/Singularities/index.php:14
+#, fuzzy
 msgid "All Singularities"
-msgstr ""
+msgstr "Toutes les particularités"
 
 #: templates/Singularities/index.php:15
+#, fuzzy
 msgid "View singularity"
-msgstr ""
+msgstr "Voir la particularité"
 
 #: templates/Singularities/index.php:16
+#, fuzzy
 msgid "Edit singularity"
-msgstr ""
+msgstr "Editer la particularité"
 
 #: templates/Singularities/index.php:17
+#, fuzzy
 msgid "Delete singularity"
-msgstr ""
+msgstr "Supprimer la particularité"
 
 #: templates/States/add.php:12
+#, fuzzy
 msgid "State list"
-msgstr ""
+msgstr "Liste des états"
 
 #: templates/States/add.php:22
+#, fuzzy
 msgid "Add State"
-msgstr ""
+msgstr "Ajouter un état"
 
 #: templates/States/edit.php:12 templates/States/view.php:12
+#, fuzzy
 msgid "Browse state list"
-msgstr ""
+msgstr "Parcourir la liste des états"
 
 #: templates/States/edit.php:23 templates/States/index.php:50
+#, fuzzy
 msgid "Edit State"
-msgstr ""
+msgstr "Editer l'état"
 
 #: templates/States/index.php:8
+#, fuzzy
 msgid "New State"
-msgstr ""
+msgstr "Nouvel état"
 
 #: templates/States/index.php:9
+#, fuzzy
 msgid "All Sheet States"
-msgstr ""
+msgstr "Tous les états de la fiche"
 
 #: templates/States/index.php:55
+#, fuzzy
 msgid "Delete State"
-msgstr ""
+msgstr "Supprimer l'état"
 
 #: templates/States/view.php:48
+#, fuzzy
 msgid "Css Property"
-msgstr ""
+msgstr "Propriété du CSS"
 
 #: templates/States/view.php:52
+#, fuzzy
 msgid "Properties"
-msgstr ""
+msgstr "Propriétés"
 
 #: templates/States/view.php:55
 msgid "Is Default"
 msgstr ""
 
 #: templates/States/view.php:59
+#, fuzzy
 msgid "Needs User Action"
-msgstr ""
+msgstr "Requiert une action de l'utilisateur"
 
 #: templates/States/view.php:63
+#, fuzzy
 msgid "Needs Staff Action"
-msgstr ""
+msgstr "Requiert une action du staff"
 
 #: templates/States/view.php:67
 msgid "Is Reliable"
 msgstr ""
 
 #: templates/States/view.php:71
+#, fuzzy
 msgid "Is Visible"
-msgstr ""
+msgstr "Est visible"
 
 #: templates/States/view.php:75
 msgid "Is Searchable"
 msgstr ""
 
 #: templates/States/view.php:79
+#, fuzzy
 msgid "Is Frozen"
-msgstr ""
+msgstr "Est gelé"
 
 #: templates/States/view.php:84
 msgid "Workflow"
 msgstr ""
 
 #: templates/States/view.php:87
+#, fuzzy
 msgid "Next OK State"
-msgstr ""
+msgstr "Prochain état OK"
 
 #: templates/States/view.php:92
+#, fuzzy
 msgid "Next KO State"
-msgstr ""
+msgstr "Prochain état KO"
 
 #: templates/States/view.php:96
+#, fuzzy
 msgid "Next Frozen State"
-msgstr ""
+msgstr "Prochain état \"gelé\""
 
 #: templates/States/view.php:100
+#, fuzzy
 msgid "Next Thawed State"
-msgstr ""
+msgstr "Prochain état \"dégelé\""
 
 #: templates/States/view.php:106
+#, fuzzy
 msgid "Related sheets"
-msgstr ""
+msgstr "Fiches liées"
 
 #: templates/States/view.php:108
+#, fuzzy
 msgid "Related rats"
-msgstr ""
+msgstr "Rats liés"
 
 #: templates/States/view.php:110
+#, fuzzy
 msgid "See all rats in this state"
-msgstr ""
+msgstr "Liste des rats dans cet état"
 
 #: templates/States/view.php:112
+#, fuzzy
 msgid "rat sheets"
-msgstr ""
+msgstr "fiches rats"
 
 #: templates/States/view.php:112 templates/States/view.php:119
 #: templates/States/view.php:126
+#, fuzzy
 msgid "are currently in this state."
-msgstr ""
+msgstr "sont actuellement dans cet état."
 
 #: templates/States/view.php:115
+#, fuzzy
 msgid "Related ratteries"
-msgstr ""
+msgstr "Rateries liées"
 
 #: templates/States/view.php:117
+#, fuzzy
 msgid "See all ratteries in this state"
-msgstr ""
+msgstr "Liste des rateries dans cet état"
 
 #: templates/States/view.php:119
 msgid "rattery sheets"
-msgstr ""
+msgstr "fiches rateries"
 
 #: templates/States/view.php:122
+#, fuzzy
 msgid "Related litters"
-msgstr ""
+msgstr "Portées liées"
 
 #: templates/States/view.php:124
+#, fuzzy
 msgid "See all litters in this state"
-msgstr ""
+msgstr "Liste des portées dans cet état"
 
 #: templates/States/view.php:126
 msgid "litter sheets"
-msgstr ""
+msgstr "fiches portées"
 
 #: templates/Users/add.php:11
+#, fuzzy
 msgid "List Users"
-msgstr ""
+msgstr "Liste des utilisateurs"
 
 #: templates/Users/add.php:18
+#, fuzzy
 msgid "Add User"
-msgstr ""
+msgstr "Ajouter un utilisateur"
 
 #: templates/Users/change_email.php:4 templates/Users/reset_email.php:4
 msgid "Reset Email"
-msgstr ""
+msgstr "Modifier l'adresse mail"
 
 #: templates/Users/change_email.php:8 templates/Users/change_password.php:7
 #: templates/Users/reset_email.php:8
@@ -5388,36 +5459,47 @@ msgstr "Ancien mot de passe"
 
 #: templates/Users/change_email.php:9 templates/Users/change_password.php:8
 #: templates/Users/reset_email.php:9
+#, fuzzy
 msgid "Please confirm your identity by entering your current password."
-msgstr ""
+msgstr "Confirmez votre identité en saisissant votre mot de passe actuel."
 
 #: templates/Users/change_email.php:24 templates/Users/reset_email.php:24
+#, fuzzy
 msgid "Enter New Email"
-msgstr ""
+msgstr "Saisir la nouvelle adresse mail"
 
 #: templates/Users/change_email.php:25 templates/Users/reset_email.php:25
+#, fuzzy
 msgid ""
 "Please note that an activation link message will be sent to this address. If "
 "the entered address is invalid, your account will be locked."
 msgstr ""
+"Un lien d'activation sera envoyé à cette adresse mail. Si l'adresse est "
+"invalide, votre compte sera verrouillé."
 
 #: templates/Users/change_email.php:29 templates/Users/reset_email.php:29
+#, fuzzy
 msgid "Submit new email"
-msgstr ""
+msgstr "Enregistrer la nouvelle adresse mail"
 
 #: templates/Users/change_password.php:4 templates/Users/reset_password.php:4
+#, fuzzy
 msgid "Reset Password"
-msgstr ""
+msgstr "Modifier le mot de passe"
 
 #: templates/Users/change_password.php:22 templates/Users/reset_password.php:7
+#, fuzzy
 msgid "Enter New Password"
-msgstr ""
+msgstr "Entrer le nouveau mot de passe"
 
 #: templates/Users/change_password.php:23 templates/Users/reset_password.php:8
+#, fuzzy
 msgid ""
 "We recommend you to chose a password of at least 12 characters with "
 "alphanumeric, lowercase, uppercase and/or special characters."
 msgstr ""
+"Nous vous recommandons de choisir un mot de passe de 12 caractères minimum, "
+"avec : une minuscule, une majuscule, un chiffre et/ou un caractère spécial."
 
 #: templates/Users/change_password.php:27 templates/Users/reset_password.php:12
 #, fuzzy
