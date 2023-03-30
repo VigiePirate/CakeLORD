@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-03-29 16:56+0200\n"
+"PO-Revision-Date: 2023-03-30 14:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -4784,188 +4784,236 @@ msgid "Ratteries whose owner’s username is like "
 msgstr ""
 
 #: templates/Ratteries/register.php:14
+#, fuzzy
 msgid "Cancel and go back to dashboard"
-msgstr ""
+msgstr "Annuler et revenir au tableau de bord"
 
 #: templates/Ratteries/register.php:20
+#, fuzzy
 msgid "Register your rattery"
-msgstr ""
+msgstr "Enregistrer votre raterie"
 
 #: templates/Ratteries/register.php:24
+#, fuzzy
 msgid "Please enter your rattery information below"
-msgstr ""
+msgstr "Merci de saisir les informations de votre raterie"
 
 #: templates/Ratteries/register.php:26
+#, fuzzy
 msgid "This prefix is already in use"
-msgstr ""
+msgstr "Ce préfixe est déjà utilisé"
 
 #: templates/Ratteries/relocate.php:29
 msgid "Record New Location of "
 msgstr ""
 
 #: templates/Ratteries/relocate.php:40
+#, fuzzy
 msgid "Mandatory information"
-msgstr ""
+msgstr "Informations obligatoires"
 
 #: templates/Ratteries/relocate.php:44
+#, fuzzy
 msgid "Choose your country"
-msgstr ""
+msgstr "Sélectionner votre pays"
 
 #: templates/Ratteries/relocate.php:50
+#, fuzzy
 msgid "Optional information"
-msgstr ""
+msgstr "Informations optionnelles"
 
 #: templates/Ratteries/relocate.php:52
+#, fuzzy
 msgid "Localization (region, district, city...)"
-msgstr ""
+msgstr "Localisation (région, département, ville…)"
 
 #: templates/Ratteries/relocate.php:53
 msgid "Zipcode (will be used in rattery map)"
 msgstr "Code postal (requis pour la carte des rateries)"
 
 #: templates/Ratteries/relocate.php:56
+#, fuzzy
 msgid "Record new location"
-msgstr ""
+msgstr "Enregistrer le déménagement"
 
 #: templates/Ratteries/view.php:20
+#, fuzzy
 msgid "See on Map"
-msgstr ""
+msgstr "Voir sur la map"
 
 #: templates/Ratteries/view.php:21
+#, fuzzy
 msgid "See rattery on the map"
-msgstr ""
+msgstr "Voir la raterie sur une carte"
 
 #: templates/Ratteries/view.php:28
+#, fuzzy
 msgid "Declare a litter born here"
-msgstr ""
+msgstr "Nouvelle portée"
 
 #: templates/Ratteries/view.php:36 templates/Ratteries/view.php:52
+#, fuzzy
 msgid "Move"
-msgstr ""
+msgstr "Déplacer"
 
 #: templates/Ratteries/view.php:37
+#, fuzzy
 msgid "You cannot declare a new location"
-msgstr ""
+msgstr "Vous ne pouvez pas déménager la raterie"
 
 #: templates/Ratteries/view.php:53
+#, fuzzy
 msgid "Declare a new location"
-msgstr ""
+msgstr "Déménager"
 
 #: templates/Ratteries/view.php:68 templates/Ratteries/view.php:76
+#, fuzzy
 msgid "Modify Rattery"
-msgstr ""
+msgstr "Modifier la raterie"
 
 #: templates/Ratteries/view.php:69
+#, fuzzy
 msgid "Edit whole rattery sheet"
-msgstr ""
+msgstr "Editer la fiche de la raterie"
 
 #: templates/Ratteries/view.php:97
+#, fuzzy
 msgid "Generic origin"
-msgstr ""
+msgstr "Origine générique"
 
 #: templates/Ratteries/view.php:111
+#, fuzzy
 msgid ""
 "This is a generic prefix. It does not correspond to an actual rattery. "
 "Therefore, only limited information is shown."
 msgstr ""
+"C'est un préfixe générique. Il ne correspond à aucune raterie physique, "
+"c'est pourquoi les informations affichées sont limitées."
 
 #: templates/Ratteries/view.php:113 templates/Ratteries/view.php:237
+#, fuzzy
 msgid "Breeding statistics"
-msgstr ""
+msgstr "Statistiques d'élevage"
 
 #: templates/Ratteries/view.php:116
+#, fuzzy
 msgid "Litters recorded under this prefix:"
-msgstr ""
+msgstr "Portées enregistrées sous ce préfixe :"
 
 #: templates/Ratteries/view.php:133 templates/Ratteries/view.php:306
 #: templates/Ratteries/view.php:388
+#, fuzzy
 msgid "Lifespan statistics"
-msgstr ""
+msgstr "Statistiques de longévité"
 
 #: templates/Ratteries/view.php:135
+#, fuzzy
 msgid "This prefix is only used in external litters."
-msgstr ""
+msgstr "Le préfixe est utilisé seulement pour des portées externes."
 
 #: templates/Ratteries/view.php:138
+#, fuzzy
 msgid "No recorded rat is associated with this origin."
-msgstr ""
+msgstr "Il n'y a pas de rat enregistré sous cette origine."
 
 #: templates/Ratteries/view.php:142
+#, fuzzy
 msgid "Rats recorded as deceased:"
-msgstr ""
+msgstr "Rats enregistrés comme décédés :"
 
 #: templates/Ratteries/view.php:150 templates/Ratteries/view.php:317
 #: templates/Ratteries/view.php:399
+#, fuzzy
 msgid "presumed dead:"
-msgstr ""
+msgstr "présumé mort :"
 
 #: templates/Ratteries/view.php:157
+#, fuzzy
 msgid "Average lifespan of rats with this prefix:"
-msgstr ""
+msgstr "Longévité moyenne des rats avec ce préfixe :"
 
 #: templates/Ratteries/view.php:170 templates/Ratteries/view.php:404
+#, fuzzy
 msgid ""
 "There aren’t enough rats with consolidated information to compute relevant "
 "mortality statistics."
 msgstr ""
+"Il n'y a pas assez d'information pour calculer des statistiques de mortalité "
+"pertinentes."
 
 #: templates/Ratteries/view.php:178 templates/Users/view.php:76
+#, fuzzy
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
 #: templates/Ratteries/view.php:234
+#, fuzzy
 msgid "No recorded rat was born in (or in partnership with) this rattery."
-msgstr ""
+msgstr "Aucun rat n'est né dans cette raterie (ou en partenariat avec)"
 
 #: templates/Ratteries/view.php:240
+#, fuzzy
 msgid "Breeding activity period:"
-msgstr ""
+msgstr "Période d'activité :"
 
 #: templates/Ratteries/view.php:246
+#, fuzzy
 msgid "Total breeding activity:"
-msgstr ""
+msgstr "Activité de l'élevage :"
 
 #: templates/Ratteries/view.php:251
+#, fuzzy
 msgid "internal (born in the rattery):"
-msgstr ""
+msgstr "interne (naissances à la raterie)"
 
 #: templates/Ratteries/view.php:255
+#, fuzzy
 msgid "external (other contributed litters):"
-msgstr ""
+msgstr "externe (portées en partenariat)"
 
 #: templates/Ratteries/view.php:261
+#, fuzzy
 msgid "Rat records (born in the rattery):"
-msgstr ""
+msgstr "Nombre de rats (nés à la raterie) :"
 
 #: templates/Ratteries/view.php:277
+#, fuzzy
 msgid "More breeding statistics"
-msgstr ""
+msgstr "Plus de statistiques sur l'élevage"
 
 #: templates/Ratteries/view.php:286
+#, fuzzy
 msgid " days ("
-msgstr ""
+msgstr " jours ("
 
 #: templates/Ratteries/view.php:286
+#, fuzzy
 msgid " months)"
-msgstr ""
+msgstr " mois)"
 
 #: templates/Ratteries/view.php:287
+#, fuzzy
 msgid "This rattery only had litters of unknown fathers"
-msgstr ""
+msgstr "Cette raterie n'a que des portées sans père"
 
 #: templates/Ratteries/view.php:302
+#, fuzzy
 msgid ""
 "This rattery only had external litters. Mortality statistics can be "
 "consulted on each of their contributed litter sheets."
 msgstr ""
+"Cette raterie n'a que des portées externes. Les statistiques de mortalité "
+"peuvent être consultées directement sur les fiches portées."
 
 #: templates/Ratteries/view.php:309 templates/Ratteries/view.php:391
+#, fuzzy
 msgid "Bred rats recorded as deceased:"
-msgstr ""
+msgstr "Rats élevés enregistrés comme décédés :"
 
 #: templates/Ratteries/view.php:323
+#, fuzzy
 msgid "Average lifespan of bred rats:"
-msgstr ""
+msgstr "Longévité moyenne des rats élevés :"
 
 #: templates/Ratteries/view.php:337
 msgid "Oldest bred rat:"
@@ -5012,12 +5060,12 @@ msgstr ""
 #: templates/Ratteries/view.php:426
 #, fuzzy
 msgid "Last contributed litters"
-msgstr "Dernière portée en partenariat"
+msgstr "Dernière portée externe"
 
 #: templates/Ratteries/view.php:428
 #, fuzzy
 msgid "See all contributed litters"
-msgstr "Voir toutes les portées en partenariat"
+msgstr "Voir toutes les portées externes"
 
 #: templates/Ratteries/view.php:437
 #, fuzzy
