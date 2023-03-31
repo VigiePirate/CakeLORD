@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-03-31 11:56+0200\n"
+"PO-Revision-Date: 2023-03-31 20:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -4329,48 +4329,56 @@ msgid "Rats from rattery with name or prefix like"
 msgstr ""
 
 #: templates/Rats/in_state.php:12
+#, fuzzy
 msgid "Rats in state "
-msgstr ""
+msgstr "Rats en état "
 
 #: templates/Rats/index.php:8 templates/Rats/my.php:11
 msgid "New Rat"
-msgstr ""
+msgstr "Nouveau rat"
 
 #: templates/Rats/index.php:9
 msgid "All Rats"
-msgstr ""
+msgstr "Tous les rats"
 
 #: templates/Rats/my.php:15 templates/element/my/sidebar.php:18
 msgid "My rats"
-msgstr ""
+msgstr "Mes rats"
 
 #: templates/Rats/my.php:35 templates/Rats/my.php:73
+#, fuzzy
 msgid "My current colony"
-msgstr ""
+msgstr "Ma troupe actuelle"
 
 #: templates/Rats/my.php:40 templates/Rats/my.php:86
+#, fuzzy
 msgid "My females"
-msgstr ""
+msgstr "Mes femelles"
 
 #: templates/Rats/my.php:45 templates/Rats/my.php:100
+#, fuzzy
 msgid "My males"
-msgstr ""
+msgstr "Mes mâles"
 
 #: templates/Rats/my.php:50
+#, fuzzy
 msgid "My rainbow bridge"
-msgstr ""
+msgstr "Mon nuage de gruyère"
 
 #: templates/Rats/my.php:55 templates/Rats/my.php:128
+#, fuzzy
 msgid "Corrections needed"
-msgstr ""
+msgstr "A corriger"
 
 #: templates/Rats/my.php:60 templates/Rats/my.php:142
+#, fuzzy
 msgid "Waiting staff action"
-msgstr ""
+msgstr "En attente d'une action du staff"
 
 #: templates/Rats/my.php:65 templates/Rats/my.php:156
+#, fuzzy
 msgid "All my validated rats"
-msgstr ""
+msgstr "Tous mes rats validés"
 
 #: templates/Rats/my.php:114
 msgid "My Rainbow Bridge"
@@ -4382,81 +4390,98 @@ msgstr ""
 
 #: templates/Rats/needs_staff.php:10
 msgid "Back office"
-msgstr ""
+msgstr "Back office"
 
 #: templates/Rats/needs_staff.php:12
+#, fuzzy
 msgid "Rat sheets needing staff action"
-msgstr ""
+msgstr "Fiches rat qui nécessitent une action du staff"
 
 #: templates/Rats/owned_by.php:12
+#, fuzzy
 msgid "Rats whose owner’s username is like "
-msgstr ""
+msgstr "Rats dont le nom du propriétaire contient "
 
 #: templates/Rats/pedigree.php:36
+#, fuzzy
 msgid "Export Tree"
-msgstr ""
+msgstr "Exporter l'arbre généalogique"
 
 #: templates/Rats/pedigree.php:38
+#, fuzzy
 msgid "Print custom tree"
-msgstr ""
+msgstr "Imprimer l'arbre généalogique"
 
 #: templates/Rats/print.php:37 templates/Rats/view.php:155
+#, fuzzy
 msgid "Pup name"
-msgstr ""
+msgstr "Nom de naissance"
 
 #: templates/Rats/print.php:49 templates/Rats/view.php:189
+#, fuzzy
 msgid "Birth place"
-msgstr ""
+msgstr "Lieu de naissance"
 
 #: templates/Rats/print.php:68 templates/Rats/view.php:212
+#, fuzzy
 msgid "Genealogy"
-msgstr ""
+msgstr "Généalogie"
 
 #: templates/Rats/search.php:23
+#, fuzzy
 msgid ""
 "Please fill in your search criteria below. You can leave empty the criteria "
 "you do not want to use."
 msgstr ""
+"Veuillez saisir vos critères de recherche ci-dessous. Vous pouvez laisser "
+"vides les champs que vous ne souhaitez pas utiliser pour la recherche."
 
 #: templates/Rats/search.php:27
 msgid "New search"
-msgstr ""
+msgstr "Nouvelle recherche"
 
 #: templates/Rats/search.php:37
+#, fuzzy
 msgid "Identity criteria"
-msgstr ""
+msgstr "Identité"
 
 #: templates/Rats/search.php:69
+#, fuzzy
 msgid "Origin"
-msgstr ""
+msgstr "Origine"
 
 #: templates/Rats/search.php:133
+#, fuzzy
 msgid "Deceased"
-msgstr ""
+msgstr "Décédé"
 
 #: templates/Rats/search.php:151
+#, fuzzy
 msgid "Physical criteria"
-msgstr ""
+msgstr "Phénotype"
 
 #: templates/Rats/search.php:181
 msgid "Search"
-msgstr ""
+msgstr "Rechercher"
 
 #: templates/Rats/search.php:190
 msgid "Results"
-msgstr ""
+msgstr "Résultats"
 
 #: templates/Rats/search.php:190
 msgid "{{pages}}"
-msgstr ""
+msgstr "{{pages}}"
 
 #: templates/Rats/search.php:190
 msgid "{{page}}/{{pages}}"
-msgstr ""
+msgstr "{{page}}/{{pages}}"
 
 #: templates/Rats/search.php:193
+#, fuzzy
 msgid "Sorry, no rat matches your criteria. You can try again above."
 msgstr ""
+"Aucun rat ne correspond à vos critères de recherche. Vous pouvez effectuer "
+"une nouvelle recherche ci-dessus."
 
 #: templates/Rats/sex.php:8
 #, fuzzy
