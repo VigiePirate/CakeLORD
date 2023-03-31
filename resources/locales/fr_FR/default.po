@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-03-30 14:40+0200\n"
+"PO-Revision-Date: 2023-03-31 09:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -4601,96 +4601,110 @@ msgstr "Voir la portée"
 
 #: templates/RatsLitters/add.php:11 templates/RatsLitters/edit.php:16
 #: templates/RatsLitters/view.php:13
+#, fuzzy
 msgid "List Rats Litters"
-msgstr ""
+msgstr "Liste des portées"
 
 #: templates/RatsLitters/add.php:18
+#, fuzzy
 msgid "Add Rats Litter"
-msgstr ""
+msgstr "Ajouter une portée"
 
 #: templates/RatsLitters/edit.php:23 templates/RatsLitters/view.php:11
+#, fuzzy
 msgid "Edit Rats Litter"
-msgstr ""
+msgstr "Editer une portée"
 
 #: templates/RatsLitters/index.php:8 templates/RatsLitters/view.php:14
+#, fuzzy
 msgid "New Rats Litter"
-msgstr ""
+msgstr "Ajouter une portée"
 
 #: templates/RatsLitters/index.php:9
+#, fuzzy
 msgid "Rats Litters"
-msgstr ""
+msgstr "Portées"
 
 #: templates/RatsLitters/view.php:12
+#, fuzzy
 msgid "Delete Rats Litter"
-msgstr ""
+msgstr "Supprimer une portée"
 
 #: templates/RatsSingularities/add.php:11
 #: templates/RatsSingularities/edit.php:16
 #: templates/RatsSingularities/view.php:13
+#, fuzzy
 msgid "List Rats Singularities"
-msgstr ""
+msgstr "Liste des particularités"
 
 #: templates/RatsSingularities/add.php:18
+#, fuzzy
 msgid "Add Rats Singularity"
-msgstr ""
+msgstr "Ajouter une particularité"
 
 #: templates/RatsSingularities/edit.php:23
 #: templates/RatsSingularities/view.php:11
+#, fuzzy
 msgid "Edit Rats Singularity"
-msgstr ""
+msgstr "Editer la particularité"
 
 #: templates/RatsSingularities/index.php:8
 #: templates/RatsSingularities/view.php:14
+#, fuzzy
 msgid "New Rats Singularity"
-msgstr ""
+msgstr "Ajouter une particularité"
 
 #: templates/RatsSingularities/index.php:9
+#, fuzzy
 msgid "Rats Singularities"
-msgstr ""
+msgstr "Particularités"
 
 #: templates/RatsSingularities/view.php:12
 msgid "Delete Rats Singularity"
-msgstr ""
+msgstr "Supprimer "
 
 #: templates/RatsSingularities/view.php:26 templates/Singularities/edit.php:9
 msgid "Singularity"
-msgstr ""
+msgstr "Particularité"
 
 #: templates/Ratteries/add.php:18
+#, fuzzy
 msgid "Record a new rattery"
-msgstr ""
+msgstr "Enregistrer une nouvelle raterie"
 
 #: templates/Ratteries/change_picture.php:20
 #: templates/Ratteries/edit_comment.php:20 templates/Ratteries/locate.php:20
 #: templates/Ratteries/locate.php:21 templates/Ratteries/relocate.php:19
 #: templates/Ratteries/relocate.php:20 templates/Users/edit_comment.php:20
+#, fuzzy
 msgid "Back to rattery sheet"
-msgstr ""
+msgstr "Revenir à la fiche raterie"
 
 #: templates/Ratteries/in_state.php:12
+#, fuzzy
 msgid "Ratteries in state "
-msgstr ""
+msgstr "Rateries dans l'état "
 
 #: templates/Ratteries/index.php:9 templates/Ratteries/my.php:10
 msgid "New Rattery"
-msgstr ""
+msgstr "Nouvelle raterie"
 
 #: templates/Ratteries/index.php:10
 msgid "All Ratteries"
-msgstr ""
+msgstr "Toutes les rateries"
 
 #: templates/Ratteries/locate.php:34
 msgid "Rattery Map"
-msgstr ""
+msgstr "Carte des rateries"
 
 #: templates/Ratteries/locate.php:37
+#, fuzzy
 msgid ""
 "The rattery you asked for has not recorded its zipcode and therefore, cannot "
 "be displayed. Here are the other located ratteries."
 msgstr ""
-"La raterie demandée n’a pas enregistré son code postal et, pour cette "
-"raison, ne peut pas être affichée sur la carte. Voici les rateries dont la "
-"localisation est connue."
+"La raterie demandée n’a pas enregistré son code postal et ne peut pas être "
+"affichée sur la carte. Voici les rateries dont la localisation est connue."
 
 #: templates/Ratteries/locate.php:57 templates/Ratteries/locate.php:75
 msgid "Prefix: "
@@ -4698,90 +4712,107 @@ msgstr "Affixe : "
 
 #: templates/Ratteries/locate.php:57 templates/Ratteries/locate.php:75
 msgid "Owner: "
-msgstr ""
+msgstr "Propriétaire :"
 
 #: templates/Ratteries/locate.php:59 templates/Ratteries/locate.php:77
 msgid "View rattery sheet"
-msgstr ""
+msgstr "Voir la fiche raterie"
 
 #: templates/Ratteries/my.php:14 templates/element/my/sidebar.php:26
 msgid "My ratteries"
-msgstr ""
+msgstr "Mes rateries"
 
 #: templates/Ratteries/my.php:19
+#, fuzzy
 msgid ""
 "You dont have any active rattery at the moment. You can activate one from "
 "the list below, or by adding a new litter."
 msgstr ""
+"Vous n'avez pas de raterie en activité. Vous pouvez en déclarer une dans la "
+"liste ci-dessous, ou bien en ajoutant une nouvelle portée."
 
 #: templates/Ratteries/my.php:21
+#, fuzzy
 msgid ""
 "You dont have any active rattery at the moment. You can register one by "
 "hitting the “New Rattery” button above."
 msgstr ""
+"Vous n'avez pas de raterie en activité. Vous pouvez en créer une en cliquant "
+"sur le bouton \"Nouvelle raterie\"."
 
 #: templates/Ratteries/my.php:32 templates/Ratteries/my.php:94
+#, fuzzy
 msgid "See rattery sheet"
-msgstr ""
+msgstr "Voir la fiche raterie"
 
 #: templates/Ratteries/my.php:42 templates/Ratteries/my.php:104
 #: templates/Ratteries/view.php:186
 msgid "Founded in"
-msgstr ""
+msgstr "Créée en"
 
 #: templates/Ratteries/my.php:43
+#, fuzzy
 msgid "Pause my rattery now"
-msgstr ""
+msgstr "Mettre ma raterie en pause"
 
 #: templates/Ratteries/my.php:46 templates/Ratteries/view.php:190
 #: templates/element/simple_ratteries.php:30
 msgid "Country"
-msgstr ""
+msgstr "Pays"
 
 #: templates/Ratteries/my.php:54 templates/Ratteries/view.php:198
 msgid "Zip Code"
-msgstr ""
+msgstr "Code postal"
 
 #: templates/Ratteries/my.php:56
+#, fuzzy
 msgid "Relocate or remove"
-msgstr ""
+msgstr "Déménager ou supprimer"
 
 #: templates/Ratteries/my.php:57
+#, fuzzy
 msgid "Declare a location to appear on the rattery map"
-msgstr ""
+msgstr "Ajouter une localisation pour apparaître sur la carte des rateries"
 
 #: templates/Ratteries/my.php:62 templates/Ratteries/view.php:202
 #: templates/element/simple_ratteries.php:33
 msgid "Website"
-msgstr ""
+msgstr "Site web"
 
 #: templates/Ratteries/my.php:66 templates/Ratteries/my.php:108
+#, fuzzy
 msgid "Do you currently show your statistics?"
-msgstr ""
+msgstr "Mes statistiques sont-elles visibles ?"
 
 #: templates/Ratteries/my.php:68 templates/Ratteries/my.php:110
+#, fuzzy
 msgid "I want to hide them"
-msgstr ""
+msgstr "Je veux les masquer"
 
 #: templates/Ratteries/my.php:69 templates/Ratteries/my.php:111
+#, fuzzy
 msgid "I want to show them"
-msgstr ""
+msgstr "Je veux les afficher"
 
 #: templates/Ratteries/my.php:90
+#, fuzzy
 msgid "My old ratteries"
-msgstr ""
+msgstr "Mes anciennes rateries"
 
 #: templates/Ratteries/my.php:105
+#, fuzzy
 msgid "Reopen this rattery now"
-msgstr ""
+msgstr "Rouvrir la raterie"
 
 #: templates/Ratteries/named.php:13
+#, fuzzy
 msgid "Ratteries with name or prefix like "
-msgstr ""
+msgstr "Rateries dont le nom ou le préfixe contient "
 
 #: templates/Ratteries/owned_by.php:13
+#, fuzzy
 msgid "Ratteries whose owner’s username is like "
-msgstr ""
+msgstr "Rateries dont le nom du propriétaire contient "
 
 #: templates/Ratteries/register.php:14
 #, fuzzy
@@ -4804,8 +4835,9 @@ msgid "This prefix is already in use"
 msgstr "Ce préfixe est déjà utilisé"
 
 #: templates/Ratteries/relocate.php:29
+#, fuzzy
 msgid "Record New Location of "
-msgstr ""
+msgstr "Sauvegarder le déménagement de "
 
 #: templates/Ratteries/relocate.php:40
 #, fuzzy
@@ -5565,9 +5597,8 @@ msgid "Cancel and go back to user sheet"
 msgstr "Annuler et revenir à la fiche utilisateur"
 
 #: templates/Users/edit.php:30
-#, fuzzy
 msgid "Edit "
-msgstr "Editer"
+msgstr "Editer "
 
 #: templates/Users/edit.php:35 templates/Users/my.php:18
 msgid "Public information"
@@ -5662,7 +5693,6 @@ msgid "Request reset email"
 msgstr "Demander le changement d'adresse mail"
 
 #: templates/Users/my.php:14 templates/element/my/sidebar.php:10
-#, fuzzy
 msgid "My profile"
 msgstr "Mon profil"
 
@@ -5677,12 +5707,10 @@ msgid "See public profile"
 msgstr "Voir le profil public"
 
 #: templates/Users/my.php:51
-#, fuzzy
 msgid "Edit profile"
 msgstr "Editer le profil"
 
 #: templates/Users/my.php:96
-#, fuzzy
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -5725,7 +5753,6 @@ msgid "This username is already in use"
 msgstr "Ce nom d'utilisateur est déjà pris"
 
 #: templates/Users/register.php:16
-#, fuzzy
 msgid "Email address"
 msgstr "Adresse mail"
 
@@ -5915,17 +5942,14 @@ msgid "My Messages"
 msgstr "Mes messages"
 
 #: templates/element/my/rattery.php:5
-#, fuzzy
 msgid "Email:"
-msgstr "Email :"
+msgstr "Adresse mail :"
 
 #: templates/element/my/sidebar.php:11
-#, fuzzy
 msgid "Manage my profile"
 msgstr "Gérer mon profil"
 
 #: templates/element/my/sidebar.php:19
-#, fuzzy
 msgid "Manage my rats"
 msgstr "Gérer mes rats"
 
@@ -5935,7 +5959,6 @@ msgid "Manage my ratteries"
 msgstr "Gérer mes rateries"
 
 #: templates/element/my/sidebar.php:34
-#, fuzzy
 msgid "My Litters"
 msgstr "Mes portées"
 
@@ -6010,7 +6033,6 @@ msgstr "photo"
 #: templates/element/ratteries.php:77 templates/element/ratteries.php:82
 #: templates/element/simple_ratteries.php:79
 #: templates/element/simple_ratteries.php:87
-#, fuzzy
 msgid "See Rattery"
 msgstr "Voir la raterie"
 
@@ -6020,7 +6042,6 @@ msgid "Pup Name"
 msgstr "Nom de naissance"
 
 #: templates/element/simple_rats.php:34
-#, fuzzy
 msgid "Age (mo)"
 msgstr "Âge (mois)"
 
@@ -6030,23 +6051,19 @@ msgid "On?"
 msgstr "Active ?"
 
 #: templates/element/simple_ratteries.php:27
-#, fuzzy
 msgid "Zip code"
 msgstr "Code postal"
 
 #: templates/element/staff_litters.php:6
-#, fuzzy
 msgid "Creator"
 msgstr "Créateur"
 
 #: templates/element/staff_litters.php:8 templates/element/staff_rats.php:9
 #: templates/element/staff_ratteries.php:9
-#, fuzzy
 msgid "Last message"
 msgstr "Dernier message"
 
 #: templates/element/staff_litters.php:25
-#, fuzzy
 msgid "Delete Litter"
 msgstr "Supprimer la portée"
 
@@ -6061,7 +6078,6 @@ msgid "Usual name"
 msgstr "Nom courant"
 
 #: templates/element/staff_rats.php:26
-#, fuzzy
 msgid "Delete Rat"
 msgstr "Supprimer le rat"
 
@@ -6071,7 +6087,6 @@ msgid "Are you sure you want to delete rat # {0}?"
 msgstr "Êtes-vous sûr de vouloir supprimer le rat # {0} ?"
 
 #: templates/element/staff_ratteries.php:26
-#, fuzzy
 msgid "Delete Rattery"
 msgstr "Supprimer la raterie"
 
@@ -6089,34 +6104,33 @@ msgstr "Editer dans la base de données"
 #: templates/element/staff_sidebar.php:20
 #: templates/element/staff_sidebar.php:31
 #: templates/element/staff_sidebar.php:47
-#, fuzzy
 msgid "Delete Sheet"
-msgstr "Supprimer la feuille"
+msgstr "Supprimer la fiche"
 
 #: templates/element/staff_sidebar.php:48
-#, fuzzy
 msgid "You cannot delete this sheet"
-msgstr "Vous ne pouvez pas supprimer cette feuille"
+msgstr "Vous ne pouvez pas supprimer cette fiche"
 
 #: templates/element/statebar.php:9
-#, fuzzy
 msgid "Change state"
 msgstr "Changer l'état"
 
 #: templates/element/tech_sidebar.php:31
+#, fuzzy
 msgid "Laborats"
-msgstr ""
+msgstr "Laborats"
 
 #: templates/element/tech_sidebar.php:35
+#, fuzzy
 msgid "See matching Lab-o-rats entry"
-msgstr ""
+msgstr "Voir la page Lab-o-rats"
 
 #: templates/element/tech_sidebar.php:44
+#, fuzzy
 msgid "No matching Lab-o-rats entry available"
-msgstr ""
+msgstr "Pas de page sur Lab-o-rats"
 
 #: templates/element/variety/add.php:16
-#, fuzzy
 msgid "Add"
 msgstr "Ajouter"
 
@@ -6157,6 +6171,5 @@ msgid "Frequency (in the last 2 years)"
 msgstr "Fréquence (les 2 dernières années)"
 
 #: templates/element/variety/view.php:67
-#, fuzzy
 msgid "Random gallery"
 msgstr "Galerie aléatoire"
