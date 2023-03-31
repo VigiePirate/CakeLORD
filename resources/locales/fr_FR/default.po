@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-03-31 09:08+0200\n"
+"PO-Revision-Date: 2023-03-31 11:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -4459,17 +4459,20 @@ msgid "Sorry, no rat matches your criteria. You can try again above."
 msgstr ""
 
 #: templates/Rats/sex.php:8
+#, fuzzy
 msgid "Rats sex :"
-msgstr ""
+msgstr "Sexe des rats :"
 
 #: templates/Rats/sex.php:13 templates/element/rats.php:11
 #: templates/element/simple_rats.php:13
+#, fuzzy
 msgid "Picture"
-msgstr ""
+msgstr "Photo"
 
 #: templates/Rats/transfer_ownership.php:29
+#, fuzzy
 msgid "Change Owner of "
-msgstr ""
+msgstr "Changer le propriétaire de "
 
 #: templates/Rats/transfer_ownership.php:44
 msgid ""
@@ -4480,67 +4483,81 @@ msgstr ""
 "sélectionner l’utilisateur : <strong>Indépendant</strong>"
 
 #: templates/Rats/transfer_ownership.php:50
+#, fuzzy
 msgid "Search and select new owner username"
-msgstr ""
+msgstr "Chercher et sélectionner un nouveau propriétaire"
 
 #: templates/Rats/transfer_ownership.php:74
+#, fuzzy
 msgid "Transfer ownership"
-msgstr ""
+msgstr "Modifier le propriétaire"
 
 #: templates/Rats/view.php:21 templates/Rats/view.php:52
+#, fuzzy
 msgid "Change Owner"
-msgstr ""
+msgstr "Modifier le propriétaire"
 
 #: templates/Rats/view.php:23
+#, fuzzy
 msgid "You cannot give this rat to another user"
-msgstr ""
+msgstr "Vous ne pouvez pas donner ce rat à un autre utilisateur"
 
 #: templates/Rats/view.php:29 templates/Rats/view.php:59
 #: templates/Ratteries/view.php:27
+#, fuzzy
 msgid "Declare Litter"
-msgstr ""
+msgstr "Créer une portée"
 
 #: templates/Rats/view.php:30 templates/Rats/view.php:60
+#, fuzzy
 msgid "Declare litter from this rat"
-msgstr ""
+msgstr "Créer une portée depuis ce rat"
 
 #: templates/Rats/view.php:43 templates/Rats/view.php:73
+#, fuzzy
 msgid "Declare Rat Death"
-msgstr ""
+msgstr "Déclarer le décès"
 
 #: templates/Rats/view.php:45
+#, fuzzy
 msgid "You cannot declare this rat’s death"
-msgstr ""
+msgstr "Vous ne pouvez pas déclarer le décès de ce rat"
 
 #: templates/Rats/view.php:53
+#, fuzzy
 msgid "Give rat to a new owner"
-msgstr ""
+msgstr "Céder le rat (à un nouveau propriétaire)"
 
 #: templates/Rats/view.php:74
+#, fuzzy
 msgid "Declare rat death"
-msgstr ""
+msgstr "Déclarer le décès"
 
 #: templates/Rats/view.php:82 templates/Rats/view.php:94
 #: templates/element/tech_sidebar.php:42
+#, fuzzy
 msgid "Modify Rat"
-msgstr ""
+msgstr "Modifier le rat"
 
 #: templates/Rats/view.php:84 templates/Ratteries/view.php:77
 #: templates/Users/view.php:50 templates/element/staff_sidebar.php:21
+#, fuzzy
 msgid "You cannot edit this sheet"
-msgstr ""
+msgstr "Vous ne pouvez pas éditer cette fiche"
 
 #: templates/Rats/view.php:96
+#, fuzzy
 msgid "Edit whole rat sheet"
-msgstr ""
+msgstr "Editer la fiche rat"
 
 #: templates/Rats/view.php:102
 msgid "Print"
-msgstr ""
+msgstr "Imprimer"
 
 #: templates/Rats/view.php:107
+#, fuzzy
 msgid "Print pedigree"
-msgstr ""
+msgstr "Imprimer le pedigree"
 
 #: templates/Rats/view.php:147 templates/element/simple_rats.php:19
 #: templates/element/staff_rats.php:5
@@ -4556,8 +4573,9 @@ msgid "Sire"
 msgstr "Père"
 
 #: templates/Rats/view.php:259
+#, fuzzy
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 #: templates/Rats/view.php:266
 msgid "Health"
@@ -4572,24 +4590,29 @@ msgid "Age at death"
 msgstr "Âge au décès"
 
 #: templates/Rats/view.php:278
+#, fuzzy
 msgid "Death date"
-msgstr ""
+msgstr "Date du décès"
 
 #: templates/Rats/view.php:288 templates/element/rats.php:32
+#, fuzzy
 msgid "Death cause"
-msgstr ""
+msgstr "Cause du décès"
 
 #: templates/Rats/view.php:294
+#, fuzzy
 msgid "Euthanized?"
-msgstr ""
+msgstr "Euthanasié ?"
 
 #: templates/Rats/view.php:298
+#, fuzzy
 msgid "Diagnosed by vet?"
-msgstr ""
+msgstr "Diagnostiqué par un vétérinaire ?"
 
 #: templates/Rats/view.php:302
+#, fuzzy
 msgid "Post-mortem analyses?"
-msgstr ""
+msgstr "Analyses post-mortem ?"
 
 #: templates/Rats/view.php:321
 msgid "Bred litters"
