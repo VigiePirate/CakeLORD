@@ -17,9 +17,9 @@
                 <?= h($snap_rat->usual_name) . '<span class="sexcolor_' . h($snap_rat->sex) . '"> ' . h($snap_rat->sex_symbol) . '</span><span>' . h($snap_rat->is_alive_symbol) . '</span>' ?>
             </h1>
 
-            <div class="column column-photo">
+            <div class="column column-photo half-column-photo">
             <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
-                <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier, 'url' => ['action' => 'changePicture', $rat->id]]) ?>
+                <?= $this->Html->image(UPLOADS . $snap_rat->picture, ['alt' => $rat->pedigree_identifier, 'url' => ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
             <?php else : ?>
                 <?= $this->Html->image('UnknownRat.svg') ?>
             <?php endif; ?>
@@ -38,7 +38,7 @@
                 <tr>
                     <th><?= __('Name') ?></th>
                     <?php if (in_array('name', $diff_list)) : ?>
-                        <td class="minus"><?= h($snap_rat['name']) ?></td>
+                        <td class="minus"><?= h($snap_rat->name) ?></td>
                     <?php else : ?>
                         <td><?= h($rat->name) ?></td>
                     <?php endif ; ?>
@@ -46,7 +46,7 @@
                 <tr>
                     <th><?= __('Pup name') ?></th>
                     <?php if (in_array('pup_name', $diff_list)) : ?>
-                        <td class="minus"><?= h($snap_rat['pup_name']) ?></td>
+                        <td class="minus"><?= h($snap_rat->pup_name) ?></td>
                     <?php else : ?>
                         <td><?= h($rat->pup_name) ?></td>
                     <?php endif ; ?>
@@ -64,7 +64,7 @@
                     <?php if (in_array('sex', $diff_list)) : ?>
                         <td class="minus"><?= $snap_rat->sex_name ?></td>
                     <?php else : ?>
-                        <td><?= h($rat->sex) ?></td>
+                        <td><?= h($rat->sex_name) ?></td>
                     <?php endif ; ?>
                 </tr>
                 <tr>
@@ -174,12 +174,12 @@
                     <?php endif ; ?>
                 </tr>
                 <tr>
-                    <?php if (in_array('is_alive', $diff_list)) : ?>
+                    <?php if (in_array('death_date', $diff_list)) : ?>
                         <th><?= $snap_rat->is_alive ? __('Age') : __('Age at death'); ?></th>
                         <td class="minus"><?= h($snap_rat->age_string) ?></td>
                     <?php else : ?>
-                        <th><?= $rat->is_alive ? __('Age') : __('Age at death'); ?></th>
-                        <td><?= h($rat->age_string) ?></td>
+                        <th><?= $snap_rat->is_alive ? __('Age') : __('Age at death'); ?></th>
+                        <td><?= h($snap_rat->age_string) ?></td>
                     <?php endif ; ?>
                 </tr>
                 <tr>
@@ -193,7 +193,7 @@
 
                 <tr>
                     <th><?= __('Death category') ?></th>
-                    <?php if (in_array('death_primary_cause', $diff_list)) : ?>
+                    <?php if (in_array('death_primary_cause_id', $diff_list)) : ?>
                         <td class="minus"><?= $snap_rat->has('death_primary_cause') ? $this->Html->link($snap_rat->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $snap_rat->death_primary_cause->id]) : __('N/A') ?></td>
                     <?php else : ?>
                         <td><?= $rat->has('death_primary_cause') ? $this->Html->link($rat->death_primary_cause->name, ['controller' => 'DeathPrimaryCauses', 'action' => 'view', $rat->death_primary_cause->id]) : __('N/A') ?></td>
@@ -201,8 +201,8 @@
                 </tr>
                 <tr>
                     <th><?= __('Death cause') ?></th>
-                    <?php if (in_array('death_secondary_cause', $diff_list)) : ?>
-                        <td class="minus"><?= $snap_rat->has('death_secondary_cause') ? $this->Html->link($snap_rat->death_primary_cause->name, ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $snap_rat->death_secondary_cause->id]) : __('N/A') ?></td>
+                    <?php if (in_array('death_secondary_cause_id', $diff_list)) : ?>
+                        <td class="minus"><?= $snap_rat->has('death_secondary_cause') ? $this->Html->link($snap_rat->death_secondary_cause->name, ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $snap_rat->death_secondary_cause->id]) : __('N/A') ?></td>
                     <?php else : ?>
                         <td><?= $rat->has('death_secondary_cause') ? $this->Html->link($rat->death_secondary_cause->name, ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $rat->death_secondary_cause->id]) : __('N/A') ?></td>
                     <?php endif ; ?>
@@ -275,9 +275,9 @@
                 <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?>
             </h1>
 
-            <div class="column column-photo">
+            <div class="column column-photo half-column-photo">
             <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
-                <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier, 'url' => ['action' => 'changePicture', $rat->id]]) ?>
+                <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier, 'url' =>  ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
             <?php else : ?>
                 <?= $this->Html->image('UnknownRat.svg') ?>
             <?php endif; ?>
@@ -448,7 +448,7 @@
                 </tr>
                 <tr>
                     <th><?= $rat->is_alive ? __('Age') : __('Age at death'); ?></th>
-                    <?php if (in_array('is_alive', $diff_list)) : ?>
+                    <?php if (in_array('death_date', $diff_list)) : ?>
                         <td class="plus">
                     <?php else : ?>
                         <td>

@@ -313,6 +313,10 @@ table.aside-photo>tbody>tr>th{
   padding: 0.5em;
 }
 
+.half-column-photo {
+  max-height: revert;
+}
+
 .edit-photo > a > img, .edit-photo > a {
   cursor: url('/img/cursor-edit.svg'), auto;
 }
