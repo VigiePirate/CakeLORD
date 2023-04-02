@@ -690,6 +690,7 @@ class RatsController extends AppController
                 'Ratteries',
                 'BirthLitters',
                 'BirthLitters.Contributions',
+                'RatSnapshots',
                 'States'
             ],
             'sortableFields' => [

@@ -20,6 +20,13 @@
                     <td> </td>
                     <td class="actions">
                         <span class="nowrap">
+                            <?php if (! is_null($rat->last_snapshot_id)) :?>
+                                <?= $this->Html->image('/img/icon-diff.svg', [
+                                    'url' => ['controller' => 'RatSnapshots', 'action' => 'diff', $rat->last_snapshot_id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('Compare with last snapshot')])
+                                ?>
+                            <?php endif; ?>
                             <?= $this->Form->postLink(
                                     $this->Html->image('/img/icon-delete.svg', [
                                         'class' => 'action-icon',
