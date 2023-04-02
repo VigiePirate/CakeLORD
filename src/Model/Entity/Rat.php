@@ -389,6 +389,44 @@ class Rat extends Entity
         return trim($variety);
     }
 
+    protected function _getLastSnapshotId()
+    {
+        if (! empty($this->rat_snapshots)) {
+            return $this->rat_snapshots['0']->id;
+        }
+    }
+
+    public function buildFromSnapshot($id)
+    {
+        $snap_rat = new Rat();
+        $snap_diffs = FactoryLocator::get('Table')->get('Rats')->snapCompare($this, $id);
+        $properties = $this->_fields;
+
+        foreach ($properties as $key => $value) {
+            if (in_array($key, array_keys($snap_diffs))) {
+                // if different key is a foreign key to a contained association, fetch and replace the latter
+                $association = substr($key, 0, -3);
+                if (! empty($association) && $this->has($association)) {
+                    $tableName = $this->$association->getSource();
+                    $table = FactoryLocator::get('Table')->get($tableName);
+                    $snap_rat->set($association, $table->get($snap_diffs[$key]));
+                }
+                // in any case, replace the key
+                $snap_rat->set($key, $snap_diffs[$key]);
+            } else {
+                // no difference between snap and rat, copy if and only if it is not an association
+                // (associations where dealt with above)
+                if (isset($this->$key)) {
+                    $foreign_key = $key . '_id';
+                    if (! in_array($foreign_key, array_keys($snap_diffs))) {
+                        $snap_rat->set($key, $this->$key);
+                    }
+                }
+            }
+        }
+        return $snap_rat;
+    }
+
     public function buildFamilyTree($id, $depth)
     {
         $model = FactoryLocator::get('Table')->get('Rats');

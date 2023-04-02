@@ -1,8 +1,8 @@
 <?php
 /**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Rat $rat
- */
+* @var \App\View\AppView $this
+* @var \App\Model\Entity\Rat $rat
+*/
 ?>
 <div class="row">
     <aside class="column">
@@ -15,9 +15,9 @@
                     <?= $this->Html->image('/img/icon-back.svg', [
                         'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
                         'class' => 'side-nav-icon',
-                        'alt' => __('Full Screen')]) ?>
-                        <span class="tooltiptext"><?= __('Back to rat sheet')
-                    ?></span>
+                        'alt' => __('Full Screen')])
+                    ?>
+                <span class="tooltiptext"><?= __('Back to rat sheet')?></span>
                 </div>
                 <div class="tooltip">
                     <?= $this->Html->image('/img/icon-fullscreen.svg', [
@@ -72,8 +72,8 @@
 <?= $this->Html->script('familytree'); ?>
 <?= $this->Html->script('fullscreen'); ?>
 <script>
-// box sizes variables; should probably be in rem
-var boxWidth = 222,
+    // box sizes variables; should probably be in rem
+    var boxWidth = 222,
     boxHeight = 60,
     nodeWidth = 93,
     nodeHeight = 248,
@@ -85,6 +85,6 @@ var boxWidth = 222,
     cousin_separation = 1;
     // data filename
     json = <?= $json ?>;
-setup();
+    setup();
 </script>
 <!-- end family tree -->

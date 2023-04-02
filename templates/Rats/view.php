@@ -195,7 +195,7 @@
                         <td><?= $rat->has('birth_litter') ? $this->Html->link(
                             $rat->birth_litter->dam[0]->usual_name,
                             ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->dam[0]->id])
-                            : 'Unknown or unregistered' ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->dam[0]->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->dam[0]->age_string . ')' : '' ?>
+                            : __('Unknown or unregistered') ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->dam[0]->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->dam[0]->age_string . ')' : '' ?>
                             </td>
                     </tr>
                     <tr>
@@ -205,7 +205,7 @@
                                 $rat->birth_litter->sire[0]->usual_name,
                                 ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire[0]->id]
                                 ) . '<sup>' . $rat->birth_litter->sire[0]->is_alive_symbol . '</sup>' . ' (' . $rat->birth_litter->sire[0]->age_string  . ')'
-                            : 'Unknown or unregistered' ?>
+                            : __('Unknown or unregistered') ?>
                             </td>
                     </tr>
                     <tr>
@@ -414,10 +414,11 @@
                                     <td><?= h($ratSnapshots->state->symbol) ?></td>
                                     <td class="actions">
                                         <span class="nowrap">
-                                            <?= $this->Html->image('/img/icon-view.svg', [
-                                                'url' => ['controller' => 'RatSnapshots', 'action' => 'view', $ratSnapshots->id],
+                                            <?= $this->Html->image('/img/icon-diff.svg', [
+                                                'url' => ['controller' => 'RatSnapshots', 'action' => 'diff', $ratSnapshots->id],
                                                 'class' => 'action-icon',
-                                                'alt' => __('View Snapshot')]) ?>
+                                                'alt' => __('Compare Versions')])
+                                            ?>
                                             <?= $this->Html->image('/img/icon-restore.svg', [
                                                 'url' => ['controller' => 'Rats', 'action' => 'restore', $rat->id, $ratSnapshots->id],
                                                 'class' => 'action-icon',

@@ -26,7 +26,7 @@ class RatSnapshotPolicy implements BeforePolicyInterface
             return true;
         }
     }
-    
+
     /**
      * Check if $user can add RatSnapshot
      *
@@ -69,5 +69,17 @@ class RatSnapshotPolicy implements BeforePolicyInterface
      */
     public function canView(IdentityInterface $user, RatSnapshot $ratSnapshot)
     {
+    }
+
+    /**
+     * Check if $user can view RatSnapshot
+     *
+     * @param \Authorization\IdentityInterface $user The user.
+     * @param \App\Model\Entity\RatSnapshot $ratSnapshot
+     * @return bool
+     */
+    public function canDiff(IdentityInterface $user, RatSnapshot $ratSnapshot)
+    {
+        return true;
     }
 }

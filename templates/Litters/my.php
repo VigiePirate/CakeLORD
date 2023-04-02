@@ -9,7 +9,7 @@
             <?= $this->Html->link(__('Simulate Litter'), ['action' => 'simulate'], ['class' => 'button float-right']) ?>
             <?= $this->Html->link(__('New Litter'), ['action' => 'add'], ['class' => 'button float-right']) ?>
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
+                <div class="sheet-title pretitle"><?= __('{0}’s dashboard', [h($user->username)]) ?></div>
             </div>
             <h1><?= __('My litters') ?> </h1>
             <?= $this->element('litters', [
