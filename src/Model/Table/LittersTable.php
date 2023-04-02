@@ -452,6 +452,10 @@ class LittersTable extends Table
                 }
             }
         } else {
+            // if entity is updated, we dont want to save rats twice
+            // (they have been saved in the rules if it was necessary)
+            $entity->setDirty('offspring_rats', false);
+
             // if entity is updated, check if some contributions must be deleted
             if (isset($entity->contributions)) {
                 $new_contributions = new Collection($entity->contributions);
