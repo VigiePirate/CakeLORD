@@ -177,4 +177,24 @@ class SnapshotBehavior extends Behavior
         }
         return false;
     }
+
+    /**
+     * snapDiffListAsString method
+     *
+     * Compares a snapshot to the current entity, returns the names of the modified fields only (not the values)
+     *
+     * @param EntityInterface $entity
+     * @param Integer $snapshot_id
+     * @return string
+     */
+    public function snapDiffListAsString(EntityInterface $entity, $snapshot_id)
+    {
+        if ($diff_array = $this->snapCompare($entity, $snapshot_id)) {
+            foreach ($diff_array as $key => $value) {
+                $diff_array[$key] = $key;
+            }
+            return implode(', ', $diff_array);
+        }
+        return false;
+    }
 }

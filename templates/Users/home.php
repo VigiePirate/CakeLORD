@@ -9,7 +9,7 @@
             <div class="row row-reverse row-with-avatar">
                 <div class="column-responsive column-80">
                     <div class="sheet-heading">
-                        <div class="sheet-title pretitle"><?= h($user->username) . '’s dashboard' ?></div>
+                        <div class="sheet-title pretitle"><?= __('{0}’s dashboard', [h($user->username)]) ?></div>
                     </div>
                     <h1><?= __('Welcome!') ?></h1>
 

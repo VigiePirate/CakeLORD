@@ -150,7 +150,7 @@ class RatsController extends AppController
 
         $snap_diffs = [];
         foreach ($rat->rat_snapshots as $snapshot) {
-            $snap_diffs[$snapshot->id] = $this->Rats->snapCompareAsString($rat, $snapshot->id);
+            $snap_diffs[$snapshot->id] = $this->Rats->snapDiffListAsString($rat, $snapshot->id);
         }
 
         $user = $this->request->getAttribute('identity');

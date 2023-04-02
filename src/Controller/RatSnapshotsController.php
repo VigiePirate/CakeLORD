@@ -44,6 +44,67 @@ class RatSnapshotsController extends AppController
     }
 
     /**
+     * Diff method
+     *
+     * @param string|null $id Rat Snapshot id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function diff($id = null)
+    {
+        $snapshot = $this->RatSnapshots->get($id, [
+            'contain' => [
+                'Rats',
+                'Rats.States',
+                'Rats.OwnerUsers',
+                'Rats.CreatorUsers',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Contributions',
+                'Rats.Coats',
+                'Rats.Colors',
+                'Rats.Dilutions',
+                'Rats.Eyecolors',
+                'Rats.Earsets',
+                'Rats.Markings',
+                'Rats.Singularities',
+                'Rats.Ratteries',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Sire',
+                'Rats.BirthLitters.Dam',
+                'Rats.DeathPrimaryCauses',
+                'Rats.DeathSecondaryCauses',
+                'States'
+            ],
+        ]);
+
+        $this->Authorization->authorize($snapshot);
+
+        $rat = $snapshot->rat;
+
+        $this->loadModel('States');
+        if($rat->state->is_frozen) {
+            $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);
+            $this->set(compact('next_thawed_state'));
+        }
+        else {
+            $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
+            $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
+            if( !empty($rat->state->next_frozen_state_id) ) {
+                $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
+                $this->set(compact('next_frozen_state'));
+            }
+            $this->set(compact('next_ko_state', 'next_ok_state'));
+        };
+
+        $diff_list = array_keys($this->RatSnapshots->Rats->snapCompare($rat, $snapshot->id));
+        $snap_rat = $rat->buildFromSnapshot($snapshot->id);
+
+        $user = $this->request->getAttribute('identity');
+
+        $this->set(compact('snapshot', 'rat', 'snap_rat', 'diff_list', 'user'));
+    }
+
+    /**
      * Add method
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.

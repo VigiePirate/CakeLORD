@@ -120,3 +120,16 @@ a.statecolor_6 {
 h1 {
   max-width: 95%;
 }
+
+.mini-statebar {
+  padding: 1rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+  background-color: #ffffff;
+  margin-bottom:0.5rem;
+}
+
+.restore-icon {
+  width: 7rem !important;
+  padding: 1.5rem;
+}

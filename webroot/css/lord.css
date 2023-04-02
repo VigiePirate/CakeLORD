@@ -306,6 +306,7 @@ table.aside-photo>tbody>tr>th{
   text-align: center;
   display:block;
   width: 100%;
+  margin-bottom: 1rem !important;
 }
 
 .column-photo > a > img {
@@ -551,6 +552,16 @@ blockquote:before {
   font-weight: bold;
 }
 /* end of states color */
+
+/* diff colors */
+.minus {
+  background-color: #ffefef;
+}
+
+.plus {
+  background-color: #ebfff3;
+}
+
 
 /* Utility */
 .table-responsive {
