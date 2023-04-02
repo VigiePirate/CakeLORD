@@ -54,7 +54,7 @@
                 <tr>
                     <th><?= __('Birth date') ?></th>
                     <?php if (in_array('birth_date', $diff_list)) : ?>
-                        <td class="minus"><?= h($snap_rat['birth_date']->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE])) ?></td>
+                        <td class="minus"><?= h($snap_rat->birth_date->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE])) ?></td>
                     <?php else : ?>
                         <td><?= h($rat->birth_date->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE])) ?></td>
                     <?php endif ; ?>

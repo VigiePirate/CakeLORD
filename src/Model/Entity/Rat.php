@@ -424,6 +424,16 @@ class Rat extends Entity
                 }
             }
         }
+
+        // recast dates from string to dates
+        if ($snap_rat->has('birth_date')) {
+            $snap_rat->set('birth_date', FrozenTime::createFromFormat('Y-m-d', $snap_rat->birth_date));
+        }
+
+        if ($snap_rat->has('death_date')) {
+            $snap_rat->set('death_date', FrozenTime::createFromFormat('Y-m-d', $snap_rat->death_date));
+        }
+
         return $snap_rat;
     }
 
