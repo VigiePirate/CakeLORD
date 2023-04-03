@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-03-31 20:36+0200\n"
+"PO-Revision-Date: 2023-04-03 09:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -4195,134 +4195,169 @@ msgid "Record rat"
 msgstr ""
 
 #: templates/Rats/born_after.php:12
+#, fuzzy
 msgid "Rats born after"
-msgstr ""
+msgstr "Rats nés après"
 
 #: templates/Rats/born_before.php:11
+#, fuzzy
 msgid "Rats born before"
-msgstr ""
+msgstr "Rats nés avant"
 
 #: templates/Rats/change_picture.php:20 templates/Rats/declare_death.php:20
 #: templates/Rats/edit_comment.php:20 templates/Rats/family.php:19
 #: templates/Rats/pedigree.php:19 templates/Rats/transfer_ownership.php:20
+#, fuzzy
 msgid "Back to rat sheet"
-msgstr ""
+msgstr "Revenir à la fiche du rat"
 
 #: templates/Rats/change_picture.php:28
 #: templates/Ratteries/change_picture.php:28
 #: templates/Users/change_picture.php:28
+#, fuzzy
 msgid "Change Picture of "
-msgstr ""
+msgstr "Modifier la photo de "
 
 #: templates/Rats/change_picture.php:41
 #: templates/Ratteries/change_picture.php:41
 #: templates/Users/change_picture.php:37
+#, fuzzy
 msgid "Pictures must be in jpeg, gif or png format."
-msgstr ""
+msgstr "Les photos doivent être au format jpeg, gif ou png."
 
 #: templates/Rats/change_picture.php:45
 #: templates/Ratteries/change_picture.php:45
 #: templates/Users/change_picture.php:41
+#, fuzzy
 msgid "Upload picture"
-msgstr ""
+msgstr "Ajouter une photo"
 
 #: templates/Rats/declare_death.php:29
+#, fuzzy
 msgid "Declare Death of "
-msgstr ""
+msgstr "Déclarer le décès de "
 
 #: templates/Rats/declare_death.php:46
+#, fuzzy
 msgid "Main information"
-msgstr ""
+msgstr "Informations du décès"
 
 #: templates/Rats/declare_death.php:68
+#, fuzzy
 msgid "Complementary information"
-msgstr ""
+msgstr "Informations complémentaires"
 
 #: templates/Rats/declare_death.php:80 templates/Rats/transfer_ownership.php:68
+#, fuzzy
 msgid "Append comments if needed"
-msgstr ""
+msgstr "Editer les commentaires si nécessaire"
 
 #: templates/Rats/declare_death.php:86 templates/element/rats.php:93
 #: templates/element/simple_rats.php:99
+#, fuzzy
 msgid "Declare Death"
-msgstr ""
+msgstr "Déclarer le décès"
 
 #: templates/Rats/edit.php:27 templates/Ratteries/edit.php:26
+#, fuzzy
 msgid "Edit {0}"
-msgstr ""
+msgstr "Editer {0}"
 
 #: templates/Rats/edit.php:149
+#, fuzzy
 msgid "Attach rat to a generic rattery"
-msgstr ""
+msgstr "Modifier l'origine du rat pour une origine générique"
 
 #: templates/Rats/edit.php:164
+#, fuzzy
 msgid "Use with care!"
-msgstr ""
+msgstr "A utiliser avec mille précautions"
 
 #: templates/Rats/edit.php:165
+#, fuzzy
 msgid ""
 "This section allows to change the rat prefix to a generic prefix only. Leave "
 "unselected to keep rat prefix unchanged, or used the rat attach function for "
 "a non-generic prefix."
 msgstr ""
+"Cette section permet de rattacher le rat à une origine générique "
+"(modification préfixe + origine). Pour rattacher le rat à une raterie, "
+"passer par la fiche portée correspondante et utiliser la fonction de "
+"rattachement d'un rat existant."
 
 #: templates/Rats/edit.php:172
+#, fuzzy
 msgid "Save changes"
-msgstr ""
+msgstr "Enregistrer les modifications"
 
 #: templates/Rats/family.php:39
+#, fuzzy
 msgid "Family size"
-msgstr ""
+msgstr "Taille de la famille"
 
 #: templates/Rats/family.php:42
+#, fuzzy
 msgid "Total number of known ancestors:"
-msgstr ""
+msgstr "Total d'ancêtres connus :"
 
 #: templates/Rats/family.php:43 templates/Rats/family.php:47
 #: templates/Rats/family.php:53 templates/Rats/family.php:57
 #: templates/Rats/family.php:61
 msgid "{0, plural,=0{0 rat} =1{1 rat} other{# rats}}"
-msgstr ""
+msgstr "{0, plural,=0{0 rat} =1{1 rat} other{# rats}}"
 
 #: templates/Rats/family.php:46
+#, fuzzy
 msgid "Number of alive ancestors:"
-msgstr ""
+msgstr "Ancêtres encore vivants :"
 
 #: templates/Rats/family.php:52
+#, fuzzy
 msgid "Number of children:"
-msgstr ""
+msgstr "Enfants :"
 
 #: templates/Rats/family.php:56
+#, fuzzy
 msgid "Total number of descendants:"
-msgstr ""
+msgstr "Total de descendants :"
 
 #: templates/Rats/family.php:60
+#, fuzzy
 msgid "Number of alive descendants:"
-msgstr ""
+msgstr "Descendants vivants :"
 
 #: templates/Rats/family.php:65
+#, fuzzy
 msgid "Family health"
-msgstr ""
+msgstr "Longévité de la famille"
 
 #: templates/Rats/family.php:68
+#, fuzzy
 msgid "Ancestors average lifespan:"
-msgstr ""
+msgstr "Longévité moyenne des ascendants :"
 
 #: templates/Rats/family.php:82
+#, fuzzy
 msgid "Descendants average lifespan:"
-msgstr ""
+msgstr "Longévité moyenne des descendants :"
 
 #: templates/Rats/family.php:83
+#, fuzzy
 msgid ""
 "{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} "
 "=1{1 month} other{# months}} – ♂: {2, number})"
 msgstr ""
+"{0, plural, =0{N/A} =1{1 mois} other{# mois}} (♀: {1, plural, =0{N/A} =1{1 "
+"mois} other{# mois}} – ♂: {2, number})"
 
 #: templates/Rats/family.php:87 templates/Rats/family.php:91
+#, fuzzy
 msgid ""
 "{0, number} months (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: "
 "{2, plural, =0{N/A} =1{1 month} other{# months}})"
 msgstr ""
+"{0, number} mois (♀: {1, plural, =0{N/A} =1{1 mois} other{# mois}} – ♂: {2, "
+"plural, =0{N/A} =1{1 mois} other{# mois}})"
 
 #: templates/Rats/from_rattery.php:12
 msgid "Rats from rattery with name or prefix like"
