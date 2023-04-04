@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-04-03 09:39+0200\n"
+"PO-Revision-Date: 2023-04-04 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -3863,169 +3863,201 @@ msgid "(50 % of rats die in this age interval)"
 msgstr ""
 
 #: templates/Lord/stats.php:164
+#, fuzzy
 msgid "Leading death category:"
-msgstr ""
+msgstr "Catégorie de décès la plus courante :"
 
 #: templates/Lord/stats.php:168
+#, fuzzy
 msgid "Leading death cause:"
-msgstr ""
+msgstr "Cause de décès la plus courante :"
 
 #: templates/Lord/stats.php:175
+#, fuzzy
 msgid "Death categories"
-msgstr ""
+msgstr "Catégories de décès"
 
 #: templates/Lord/stats.php:179 templates/Lord/stats.php:204
+#, fuzzy
 msgid "Number of deaths with recorded cause:"
-msgstr ""
+msgstr "Nombre de décédés avec une cause de décès enregistrée :"
 
 #: templates/Lord/stats.php:180 templates/Lord/stats.php:205
+#, fuzzy
 msgid "{0, number} rats ({1, number} % of rats considered as dead)"
-msgstr ""
+msgstr "{0, number} rats ({1, number} % des rats considérés comme décédés)"
 
 #: templates/Lord/stats.php:182 templates/Lord/stats.php:208
 #: templates/Lord/stats.php:233
+#, fuzzy
 msgid "By decreasing frequency:"
-msgstr ""
+msgstr "Par fréquence décroissante :"
 
 #: templates/Lord/stats.php:183
+#, fuzzy
 msgid ""
 "please note that tumours without recorded localization appear as « Autres »"
-msgstr ""
+msgstr "les tumeurs sans localisation précise apparaissent sous « Autres »"
 
 #: templates/Lord/stats.php:191 templates/Lord/stats.php:218
 #: templates/Lord/stats.php:242
+#, fuzzy
 msgid "{0, number} %"
-msgstr ""
+msgstr "{0, number} %"
 
 #: templates/Lord/stats.php:200
+#, fuzzy
 msgid "Most frequent death causes"
-msgstr ""
+msgstr "Causes de décès les plus fréquentes"
 
 #: templates/Lord/stats.php:209
+#, fuzzy
 msgid ""
 "for rats recorded as dead without precise cause, recorded death category is "
 "used instead"
 msgstr ""
+"cause de décès précise le cas échéant, sinon c'est la catégorie de cause de "
+"décès qui est prise en compte"
 
 #: templates/Lord/stats.php:227
+#, fuzzy
 msgid "Most frequent tumours"
-msgstr ""
+msgstr "Tumeurs les plus fréquentes"
 
 #: templates/Lord/stats.php:230
+#, fuzzy
 msgid "Number of tumour-related deaths:"
-msgstr ""
+msgstr "Nombre de décès dus à une tumeur :"
 
 #: templates/Lord/stats.php:231
+#, fuzzy
 msgid "{0, number} rats ({1, number} % of rats with known death cause)"
 msgstr ""
+"{0, number} rats ({1, number} % des rats dont la cause de décès est "
+"renseignée)"
 
 #: templates/Lord/stats.php:234
+#, fuzzy
 msgid "please note that tumour localization could not recorded before 2023"
-msgstr ""
+msgstr "la localisation de la tumeur n'est possible que depuis 2023"
 
 #: templates/Lord/webstats.php:15
 msgid "Site statistics"
-msgstr ""
+msgstr "Statistiques du site"
 
 #: templates/Lord/webstats.php:17
+#, fuzzy
 msgid "Overview"
-msgstr ""
+msgstr "Vue d'ensemble"
 
 #: templates/Lord/webstats.php:26
 msgid " users"
-msgstr ""
+msgstr " utilisateurs"
 
 #: templates/Lord/webstats.php:34
 msgid " ratteries"
-msgstr ""
+msgstr " rateries"
 
 #: templates/Lord/webstats.php:42
 msgid " litters"
-msgstr ""
+msgstr " portées"
 
 #: templates/Lord/webstats.php:50
 msgid " rats"
-msgstr ""
+msgstr " rats"
 
 #: templates/Lord/webstats.php:54
+#, fuzzy
 msgid "By year"
-msgstr ""
+msgstr "Par année"
 
 #: templates/Lord/webstats.php:58
+#, fuzzy
 msgid "Users (by registration)"
-msgstr ""
+msgstr "Utilisateurs (par date d'enregistrement)"
 
 #: templates/Lord/webstats.php:62
+#, fuzzy
 msgid "Ratteries (by registration)"
-msgstr ""
+msgstr "Rats (par date d'enregistrement)"
 
 #: templates/Lord/webstats.php:67
+#, fuzzy
 msgid "Rats (by birth)"
-msgstr ""
+msgstr "Rats (par date de naissance)"
 
 #: templates/Markings/add.php:11 templates/Markings/edit.php:11
 #: templates/Markings/view.php:11
+#, fuzzy
 msgid "Browse marking list"
-msgstr ""
+msgstr "Parcourir la liste des marquages"
 
 #: templates/Markings/edit.php:9 templates/Rats/print.php:45
 #: templates/Rats/view.php:240
 msgid "Marking"
-msgstr ""
+msgstr "Marquage"
 
 #: templates/Markings/index.php:13
+#, fuzzy
 msgid "New Marking"
-msgstr ""
+msgstr "Nouveau marquage"
 
 #: templates/Markings/index.php:14
+#, fuzzy
 msgid "All Markings"
-msgstr ""
+msgstr "Tous les marquages"
 
 #: templates/Markings/index.php:15
+#, fuzzy
 msgid "View marking"
-msgstr ""
+msgstr "Voir le marquage"
 
 #: templates/Markings/index.php:16
+#, fuzzy
 msgid "Edit marking"
-msgstr ""
+msgstr "Editer le marquage"
 
 #: templates/Markings/index.php:17
+#, fuzzy
 msgid "Delete marking"
-msgstr ""
+msgstr "Supprimer le marquage"
 
 #: templates/Messages/add.php:11 templates/Messages/edit.php:16
 #: templates/Messages/view.php:13
 msgid "List Messages"
-msgstr ""
+msgstr "Lister les messages"
 
 #: templates/Messages/add.php:18
+#, fuzzy
 msgid "Add Message"
-msgstr ""
+msgstr "Ajouter un message"
 
 #: templates/Messages/edit.php:23 templates/Messages/view.php:11
 msgid "Edit Message"
-msgstr ""
+msgstr "Editer le message"
 
 #: templates/Messages/index.php:8 templates/Messages/view.php:14
 msgid "New Message"
-msgstr ""
+msgstr "Nouveau message"
 
 #: templates/Messages/index.php:9
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #: templates/Messages/view.php:12
 msgid "Delete Message"
-msgstr ""
+msgstr "Supprimer le message"
 
 #: templates/Messages/view.php:22 templates/UsersConversations/view.php:26
+#, fuzzy
 msgid "Conversation"
-msgstr ""
+msgstr "Discussion"
 
 #: templates/Messages/view.php:26 templates/Users/edit.php:27
 #: templates/UsersConversations/view.php:22
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Utilisateur"
 
 #: templates/Operators/add.php:12 templates/Operators/edit.php:12
 #: templates/Operators/view.php:12
@@ -4073,12 +4105,14 @@ msgid "Operator Id"
 msgstr ""
 
 #: templates/Pages/home.php:44
+#, fuzzy
 msgid "Sign up"
-msgstr ""
+msgstr "Créer un compte"
 
 #: templates/Pages/home.php:45
+#, fuzzy
 msgid "Sign in"
-msgstr ""
+msgstr "Se connecter"
 
 #: templates/RatSnapshots/add.php:11 templates/RatSnapshots/edit.php:16
 #: templates/RatSnapshots/view.php:13
@@ -4106,30 +4140,41 @@ msgid "Delete Rat Snapshot"
 msgstr ""
 
 #: templates/Rats/add.php:19
+#, fuzzy
 msgid "Record a new rat"
-msgstr ""
+msgstr "Enregistrer un nouveau rat"
 
 #: templates/Rats/add.php:42
+#, fuzzy
 msgid ""
 "Please record mandatory information: name and location in comments for a "
 "generic origin, or (at least) mother for a registered rattery."
 msgstr ""
+"Merci de compléter les informations obligatoires : le nom et la localisation "
+"en commentaires pour une origine générique, ou a minima la mère pour une "
+"raterie enregistrée."
 
 #: templates/Rats/add.php:43
+#, fuzzy
 msgid ""
 "If a litter with the same birth date and mother already exists, the rat will "
 "be automatically added to it. If not, a new litter will be created with the "
 "rat."
 msgstr ""
+"Le rat sera automatiquement ajouté à la portée si sa mère existe sur le LORD "
+"et si une fiche portée a déjà été créée. Sinon, une nouvelle fiche portée "
+"sera créée et le rat y sera automatiquement rattaché."
 
 #: templates/Rats/add.php:132
+#, fuzzy
 msgid "The rat will be added to the following litter: "
-msgstr ""
+msgstr "Le rat sera ajouté à la portée suivante : "
 
 #: templates/Rats/add.php:145 templates/Rats/edit.php:33
 #: templates/Rats/print.php:17 templates/Rats/view.php:144
+#, fuzzy
 msgid "Identity"
-msgstr ""
+msgstr "Identité"
 
 #: templates/Rats/add.php:182 templates/Rats/edit.php:66
 #: templates/Rats/print.php:61 templates/Rats/search.php:94
@@ -4138,61 +4183,74 @@ msgstr ""
 #: templates/Users/view.php:70 templates/element/simple_rats.php:40
 #: templates/element/simple_ratteries.php:21 templates/element/staff_rats.php:7
 #: templates/element/staff_ratteries.php:7
+#, fuzzy
 msgid "Owner"
-msgstr ""
+msgstr "Propriétaire"
 
 #: templates/Rats/add.php:184 templates/Rats/edit.php:68
 #: templates/Rats/search.php:71 templates/Rats/search.php:96
 #: templates/Rats/transfer_ownership.php:52 templates/Ratteries/add.php:33
 #: templates/Ratteries/edit.php:43
+#, fuzzy
 msgid "Type here..."
-msgstr ""
+msgstr "Taper ici..."
 
 #: templates/Rats/add.php:233 templates/Rats/edit.php:118
 #: templates/Ratteries/add.php:68
+#, fuzzy
 msgid "Photo"
-msgstr ""
+msgstr "Photo"
 
 #: templates/Rats/add.php:253 templates/Rats/add.php:298
 #: templates/Rats/declare_death.php:48
+#, fuzzy
 msgid "Please enter the death date (or date of last news)"
-msgstr ""
+msgstr "Entrer la date de décès (ou la date des dernières informations)"
 
 #: templates/Rats/add.php:261 templates/Rats/add.php:305
 #: templates/Rats/declare_death.php:51
+#, fuzzy
 msgid "Select the death cause category"
-msgstr ""
+msgstr "Sélectionner la catégorie de cause du décès"
 
 #: templates/Rats/add.php:270 templates/Rats/add.php:314
 #: templates/Rats/declare_death.php:59
+#, fuzzy
 msgid "Select the precise cause of death, if known"
-msgstr ""
+msgstr "Sélectionner la cause précise du décès (si connue)"
 
 #: templates/Rats/add.php:277 templates/Rats/add.php:321
 #: templates/Rats/declare_death.php:65
+#, fuzzy
 msgid ""
 "Please, read carefully information that will appear below to check the "
 "fitness of your choice."
 msgstr ""
+"Merci de lire attentivement les informations suivantes afin de vous aider "
+"dans votre choix."
 
 #: templates/Rats/add.php:282 templates/Rats/add.php:326
 #: templates/Rats/declare_death.php:70
+#, fuzzy
 msgid "The rat was euthanized"
-msgstr ""
+msgstr "Le rat a été euthanasié"
 
 #: templates/Rats/add.php:286 templates/Rats/add.php:330
 #: templates/Rats/declare_death.php:71
+#, fuzzy
 msgid "The diagnosis was confirmed by a veterinary"
-msgstr ""
+msgstr "Le diagnostic a été confirmé par un vétérinaire"
 
 #: templates/Rats/add.php:290 templates/Rats/add.php:334
 #: templates/Rats/declare_death.php:72
+#, fuzzy
 msgid "The diagnosis was confirmed by an autopsy or analyses"
-msgstr ""
+msgstr "Le diagnostic a été confirmé par une autopsie ou des analyses"
 
 #: templates/Rats/add.php:361
+#, fuzzy
 msgid "Record rat"
-msgstr ""
+msgstr "Enregistrer un rat"
 
 #: templates/Rats/born_after.php:12
 #, fuzzy
