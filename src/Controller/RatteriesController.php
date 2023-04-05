@@ -82,7 +82,7 @@ class RatteriesController extends AppController
                 'Rats.States',
                 'Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions',
                 'Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses',
-                'RatterySnapshots'],
+                'RatterySnapshots' => ['sort' => ['RatterySnapshots.created' => 'DESC']], 'RatterySnapshots.States'],
         ]);
 
         $stats = $rattery->wrapStatistics();
@@ -122,9 +122,14 @@ class RatteriesController extends AppController
             $this->set(compact('next_ko_state','next_ok_state'));
         };
 
+        $snap_diffs = [];
+        foreach ($rattery->rattery_snapshots as $snapshot) {
+            $snap_diffs[$snapshot->id] = $this->Ratteries->snapDiffListAsString($rattery, $snapshot->id);
+        }
+
         $user = $this->request->getAttribute('identity');
 
-        $this->set(compact('rattery', 'champion', 'stats', 'user')); // 'offsprings'));
+        $this->set(compact('rattery', 'champion', 'stats', 'snap_diffs', 'user')); // 'offsprings'));
     }
 
     /**

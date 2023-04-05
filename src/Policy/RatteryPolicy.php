@@ -57,6 +57,11 @@ class RatteryPolicy implements BeforePolicyInterface
         return true;
     }
 
+    public function canSeePrivate(IdentityInterface $user, Rattery $rattery)
+    {
+        return $this->isOwner($user, $rattery) || $user->role->is_staff;
+    }
+
     /**
      * Check if $user can edit Rattery whatever role
      *

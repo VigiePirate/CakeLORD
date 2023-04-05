@@ -41,7 +41,7 @@ class LordController extends AppController
         $model = $this->loadModel('Ratteries');
         $query = $model->find('needsStaff')
             ->order('Ratteries.modified DESC')
-            ->contain(['Countries', 'States', 'Users']);
+            ->contain(['Countries', 'States', 'Users', 'RatterySnapshots' => ['sort' => ['RatterySnapshots.created' => 'DESC']]]);
         $count['ratteries'] = $query->count();
         $ratteries = $query->limit(5);
 
