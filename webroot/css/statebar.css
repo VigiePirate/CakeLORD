@@ -121,6 +121,10 @@ h1 {
   max-width: 95%;
 }
 
+h1.half {
+  max-width: 92.5%;
+}
+
 .mini-statebar {
   padding: 1rem;
   border-radius: 0.4rem;

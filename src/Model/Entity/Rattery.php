@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\ORM\TableRegistry;
 use Cake\I18n\FrozenTime;
 use Cake\Datasource\FactoryLocator;
+use Cake\Utility\Inflector;
 use App\Model\Entity\StatisticsTrait;
 use App\Model\Table\RatsTable;
 
@@ -260,5 +262,61 @@ class Rattery extends Entity
 
             return $lifetime;
         }
+    }
+
+    protected function _getLastSnapshotId()
+    {
+        if (! empty($this->rattery_snapshots)) {
+            return $this->rattery_snapshots['0']->id;
+        }
+    }
+
+    public function buildFromSnapshot($id)
+    {
+        $snap_rattery = new Rattery();
+        $snap_diffs = FactoryLocator::get('Table')->get('Ratteries')->snapCompare($this, $id);
+        $properties = $this->_fields;
+
+        foreach ($properties as $key => $value) {
+            if (in_array($key, array_keys($snap_diffs))) {
+                // if different key is a foreign key to a contained association, fetch and replace the latter
+                $association = substr($key, 0, -3);
+                if (! empty($association)) {
+                    if ($this->has($association)) {
+                        $tableName = $this->$association->getSource();
+                        $table = FactoryLocator::get('Table')->get($tableName);
+                        $snap_rattery->set($association, $table->get($snap_diffs[$key]));
+                    } else {
+                        $tableName = Inflector::pluralize(Inflector::classify($association));
+                        if (TableRegistry::getTableLocator()->exists($tableName)) {
+                            $table = FactoryLocator::get('Table')->get($tableName);
+                            $snap_rattery->set($association, $table->get($snap_diffs[$key]));
+                        }
+                    }
+                }
+                // in any case, replace the key
+                $snap_rattery->set($key, $snap_diffs[$key]);
+            } else {
+                // no difference between snap and rat, copy if and only if it is not an association
+                // (associations where dealt with above)
+                if (isset($this->$key)) {
+                    $foreign_key = $key . '_id';
+                    if (! in_array($foreign_key, array_keys($snap_diffs))) {
+                        $snap_rattery->set($key, $this->$key);
+                    }
+                }
+            }
+        }
+
+        // // recast dates from string to dates
+        // if (in_array('birth_date', array_keys($snap_diffs)) && $snap_rat->has('birth_date')) {
+        //     $snap_rat->set('birth_date', FrozenTime::createFromFormat('Y-m-d', $snap_rat->birth_date));
+        // }
+        //
+        // if (in_array('death_date', array_keys($snap_diffs)) && $snap_rat->has('death_date')) {
+        //     $snap_rat->set('death_date', FrozenTime::createFromFormat('Y-m-d', $snap_rat->death_date));
+        // }
+
+        return $snap_rattery;
     }
 }

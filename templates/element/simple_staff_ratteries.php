@@ -20,6 +20,13 @@
                     <td> </td>
                     <td class="actions">
                         <span class="nowrap">
+                            <?php if (! is_null($rattery->last_snapshot_id)) :?>
+                                <?= $this->Html->image('/img/icon-diff.svg', [
+                                    'url' => ['controller' => 'RatterySnapshots', 'action' => 'diff', $rattery->last_snapshot_id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('Diff')])
+                                ?>
+                            <?php endif; ?>
                             <?= $this->Form->postLink(
                                     $this->Html->image('/img/icon-delete.svg', [
                                         'class' => 'action-icon',
