@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-04-06 19:20+0200\n"
+"PO-Revision-Date: 2023-04-06 21:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -2185,7 +2185,7 @@ msgstr ""
 
 #: templates/Conversations/view.php:58 templates/Users/register.php:22
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 #: templates/Conversations/view.php:59 templates/Lord/search.php:91
 #: templates/Roles/view.php:88 templates/Users/my.php:21
@@ -3611,11 +3611,11 @@ msgstr "Configurer les rôles et permissions"
 #: templates/Lord/my.php:100 templates/States/add.php:20
 #: templates/States/edit.php:21
 msgid "States"
-msgstr ""
+msgstr "États des fiches"
 
 #: templates/Lord/my.php:101
 msgid "Configure states and sheet workflow"
-msgstr ""
+msgstr "Configurer les états des fiches et leur cycle de vie"
 
 #: templates/Lord/search.php:12
 #, fuzzy
@@ -3738,9 +3738,8 @@ msgstr "{0, number} rats ({1, number} % de tous les rats)"
 
 #: templates/Lord/stats.php:44 templates/Ratteries/view.php:146
 #: templates/Ratteries/view.php:313 templates/Ratteries/view.php:395
-#, fuzzy
 msgid "declared with known date:"
-msgstr "avec une date de décès connue"
+msgstr "à une date connue :"
 
 #: templates/Lord/stats.php:45 templates/Lord/stats.php:49
 #, fuzzy
@@ -3764,7 +3763,6 @@ msgstr "moyenne :"
 
 #: templates/Lord/stats.php:61 templates/Lord/stats.php:65
 #: templates/Lord/stats.php:69
-#, fuzzy
 msgid "{0, number} months (♀: {1, number} – ♂: {2, number})"
 msgstr "{0, number} mois (♀: {1, number} – ♂: {2, number})"
 
@@ -3787,7 +3785,7 @@ msgstr "maximum :"
 
 #: templates/Lord/stats.php:87
 msgid "Breeding"
-msgstr ""
+msgstr "Élevage"
 
 #: templates/Lord/stats.php:90
 #, fuzzy
@@ -3821,51 +3819,51 @@ msgstr "{0, number} jours ({1, number} années)"
 
 #: templates/Lord/stats.php:107
 msgid "Average rattery productivity:"
-msgstr ""
+msgstr "Productivité moyenne des rateries"
 
 #: templates/Lord/stats.php:108
 msgid "{0, number} litters, {1, number} rats"
-msgstr ""
+msgstr "{0, number} portées, {1, number} rats"
 
 #: templates/Lord/stats.php:111
 msgid "as birth place:"
-msgstr ""
+msgstr "naissances à la raterie :"
 
 #: templates/Lord/stats.php:112
 msgid "{0, number} internal litters"
-msgstr ""
+msgstr "{0, number} portées internes"
 
 #: templates/Lord/stats.php:115
 msgid "as other contributor:"
-msgstr ""
+msgstr "autres contributions :"
 
 #: templates/Lord/stats.php:116
 msgid "{0, number} external litters"
-msgstr ""
+msgstr "{0, number} portées externes"
 
 #: templates/Lord/stats.php:122 templates/Ratteries/view.php:280
 msgid "Average mother age:"
-msgstr ""
+msgstr "Âge maternel moyen :"
 
 #: templates/Lord/stats.php:123 templates/Lord/stats.php:127
 msgid "{0, number} days ({1, number} months)"
-msgstr ""
+msgstr "{0, number} jours ({1, number} mois)"
 
 #: templates/Lord/stats.php:126 templates/Ratteries/view.php:284
 msgid "Average father age:"
-msgstr ""
+msgstr "Âge paternel moyen :"
 
 #: templates/Lord/stats.php:130 templates/Ratteries/view.php:291
 msgid "Average litter size:"
-msgstr ""
+msgstr "Taille moyenne des portées :"
 
 #: templates/Lord/stats.php:131
 msgid "{0, number} pups (debiased estimation: {1, number} pups)"
-msgstr ""
+msgstr "{0, number} ratons (estimation corrigée : {1, number} ratons)"
 
 #: templates/Lord/stats.php:134 templates/Ratteries/view.php:295
 msgid "Average sex ratio:"
-msgstr ""
+msgstr "Proportion des sexes dans les portées :"
 
 #: templates/Lord/stats.php:148
 #, fuzzy
@@ -3892,7 +3890,7 @@ msgstr "(50 % des rats sont morts avant et 50 % après)"
 
 #: templates/Lord/stats.php:156
 msgid "Death peak:"
-msgstr ""
+msgstr "Âge de décès le plus courant :"
 
 #: templates/Lord/stats.php:157
 #, fuzzy
@@ -3966,8 +3964,8 @@ msgid ""
 "for rats recorded as dead without precise cause, recorded death category is "
 "used instead"
 msgstr ""
-"la catégorie du décès tient lieu de cause du décès si cette "
-"dernière n’a pas été renseignée"
+"la catégorie du décès tient lieu de cause du décès si cette dernière n’a pas "
+"été renseignée"
 
 #: templates/Lord/stats.php:227
 #, fuzzy
@@ -4151,9 +4149,8 @@ msgid "Operator Id"
 msgstr ""
 
 #: templates/Pages/home.php:44
-#, fuzzy
 msgid "Sign up"
-msgstr "Créer un compte"
+msgstr "S’inscrire"
 
 #: templates/Pages/home.php:45
 #, fuzzy
@@ -4453,7 +4450,7 @@ msgstr ""
 
 #: templates/Rats/from_rattery.php:12
 msgid "Rats from rattery with name or prefix like"
-msgstr ""
+msgstr "Rats nés dans une raterie dont le nom ou l’affixe ressemble à "
 
 #: templates/Rats/in_state.php:12
 #, fuzzy
@@ -4478,33 +4475,28 @@ msgid "My current colony"
 msgstr "Ma troupe actuelle"
 
 #: templates/Rats/my.php:40 templates/Rats/my.php:86
-#, fuzzy
 msgid "My females"
-msgstr "Mes femelles"
+msgstr "Toutes mes femelles"
 
 #: templates/Rats/my.php:45 templates/Rats/my.php:100
-#, fuzzy
 msgid "My males"
-msgstr "Mes mâles"
+msgstr "Tous mes mâles"
 
 #: templates/Rats/my.php:50
-#, fuzzy
 msgid "My rainbow bridge"
-msgstr "Mon nuage de gruyère"
+msgstr "Sur le nuage de gruyère"
 
 #: templates/Rats/my.php:55 templates/Rats/my.php:128
-#, fuzzy
 msgid "Corrections needed"
-msgstr "A corriger"
+msgstr "Mes fiches à corriger"
 
 #: templates/Rats/my.php:60 templates/Rats/my.php:142
 msgid "Waiting staff action"
-msgstr "En attente d’une action du staff"
+msgstr "Mes fiches en attente d’une action du staff"
 
 #: templates/Rats/my.php:65 templates/Rats/my.php:156
-#, fuzzy
 msgid "All my validated rats"
-msgstr "Tous mes rats validés"
+msgstr "Mes fiches validées"
 
 #: templates/Rats/my.php:114
 msgid "My Rainbow Bridge"
@@ -4656,7 +4648,7 @@ msgstr "Créer une portée"
 
 #: templates/Rats/view.php:30 templates/Rats/view.php:60
 msgid "Declare litter from this rat"
-msgstr "Créer une portée de ce rat"
+msgstr "Créer une portée née de ce rat"
 
 #: templates/Rats/view.php:43 templates/Rats/view.php:73
 #, fuzzy
@@ -4669,9 +4661,8 @@ msgid "You cannot declare this rat’s death"
 msgstr "Vous ne pouvez pas déclarer le décès de ce rat"
 
 #: templates/Rats/view.php:53
-#, fuzzy
 msgid "Give rat to a new owner"
-msgstr "Céder le rat (à un nouveau propriétaire)"
+msgstr "Céder à un nouveau propriétaire"
 
 #: templates/Rats/view.php:74
 #, fuzzy
@@ -5104,9 +5095,8 @@ msgstr "Rats enregistrés comme décédés :"
 
 #: templates/Ratteries/view.php:150 templates/Ratteries/view.php:317
 #: templates/Ratteries/view.php:399
-#, fuzzy
 msgid "presumed dead:"
-msgstr "présumé mort :"
+msgstr "présumés morts :"
 
 #: templates/Ratteries/view.php:157
 msgid "Average lifespan of rats with this prefix:"
@@ -5178,18 +5168,16 @@ msgstr ""
 "peuvent être consultées directement sur les fiches de ces portées."
 
 #: templates/Ratteries/view.php:309 templates/Ratteries/view.php:391
-#, fuzzy
 msgid "Bred rats recorded as deceased:"
-msgstr "Rats élevés enregistrés comme décédés :"
+msgstr "Rats nés à la raterie et décédés :"
 
 #: templates/Ratteries/view.php:323
-#, fuzzy
 msgid "Average lifespan of bred rats:"
-msgstr "Longévité moyenne des rats élevés :"
+msgstr "Longévité moyenne des rats nés à la raterie :"
 
 #: templates/Ratteries/view.php:337
 msgid "Oldest bred rat:"
-msgstr ""
+msgstr "Doyen des rats nés à la raterie :"
 
 #: templates/Ratteries/view.php:339
 #, fuzzy
@@ -5201,9 +5189,8 @@ msgid "No eligible champion"
 msgstr "Pas de rat éligible au titre"
 
 #: templates/Ratteries/view.php:347
-#, fuzzy
 msgid "Death causes statistics"
-msgstr "Statistiques des causes de mortalité"
+msgstr "Statistiques de mortalité"
 
 #: templates/Ratteries/view.php:350
 msgid "Primary death causes by decreasing frequency:"
@@ -5223,7 +5210,7 @@ msgstr ""
 
 #: templates/Ratteries/view.php:423 templates/Users/view.php:120
 msgid "Related entries"
-msgstr ""
+msgstr "Fiches liées"
 
 #: templates/Ratteries/view.php:426
 msgid "Last contributed litters"
@@ -5250,7 +5237,7 @@ msgstr "Rats modifiés récemment"
 
 #: templates/Ratteries/view.php:464
 msgid "See all bred rats"
-msgstr ""
+msgstr "Voir tous les rats nés à la raterie"
 
 #: templates/RatteriesLitters/add.php:11 templates/RatteriesLitters/edit.php:16
 #: templates/RatteriesLitters/view.php:13
@@ -5727,16 +5714,18 @@ msgstr "Éditer "
 
 #: templates/Users/edit.php:35 templates/Users/my.php:18
 msgid "Public information"
-msgstr ""
+msgstr "Informations publiques"
 
 #: templates/Users/edit.php:47 templates/Users/my.php:54
 #: templates/Users/view.php:110
 msgid "About me"
-msgstr ""
+msgstr "À propos de moi"
 
 #: templates/Users/edit.php:55
 msgid "For security reasons, you cannot change your credentials here."
 msgstr ""
+"Pour des raisons de sécurité, vous ne pouvez pas modifier votre adresse mail "
+"ni votre mot de passe sur cette page."
 
 #: templates/Users/edit.php:57 templates/Users/my.php:108
 msgid "Change email"
@@ -5783,11 +5772,11 @@ msgstr "Supprimer l’utilisateur"
 
 #: templates/Users/login.php:6 templates/Users/login.php:18
 msgid "Login"
-msgstr ""
+msgstr "Se connecter"
 
 #: templates/Users/login.php:9
 msgid "Please enter your registration email address and password"
-msgstr "Merci d’entrer votre adresse mail et votre mot de passe"
+msgstr "Veuillez entrer votre adresse mail et votre mot de passe"
 
 #: templates/Users/login.php:15
 #, fuzzy
@@ -5836,7 +5825,7 @@ msgstr "Paramètres"
 
 #: templates/Users/my.php:99
 msgid "Wants Newsletter?"
-msgstr ""
+msgstr "Accepte de recevoir des lettres d'information ?"
 
 #: templates/Users/my.php:102
 #, fuzzy
@@ -5849,7 +5838,7 @@ msgstr "S’abonner"
 
 #: templates/Users/my.php:107
 msgid "Credentials"
-msgstr ""
+msgstr "Données d’accès"
 
 #: templates/Users/named.php:13
 #, fuzzy
@@ -5888,9 +5877,8 @@ msgid "Change Picture"
 msgstr "Changer de photo"
 
 #: templates/Users/view.php:21
-#, fuzzy
 msgid "Upload a new picture"
-msgstr "Télécharger une nouvelle photo"
+msgstr "Changer la photo"
 
 #: templates/Users/view.php:30 templates/Users/view.php:48
 #, fuzzy
@@ -5916,9 +5904,8 @@ msgid "Last Modified Rats"
 msgstr "Derniers rats modifiés"
 
 #: templates/Users/view.php:146
-#, fuzzy
 msgid "See all their rats"
-msgstr "Voir tous leurs rats"
+msgstr "Voir tous ses rats"
 
 #: templates/Users/view.php:161
 #, fuzzy
@@ -5955,17 +5942,16 @@ msgid "alive: "
 msgstr "en vie : "
 
 #: templates/Users/view.php:304
-#, fuzzy
 msgid "Average lifespan of their rats:"
-msgstr "Longévité moyenne de leurs rats :"
+msgstr "Longévité moyenne de ses rats :"
 
 #: templates/Users/view.php:319
 msgid "Their champion:"
-msgstr ""
+msgstr "Son doyen :"
 
 #: templates/Users/view.php:320
 msgid "This user has no eligible champion"
-msgstr ""
+msgstr "Cet utilisateur n’a pas de rat éligible au titre de doyen"
 
 #: templates/UsersConversations/add.php:11
 #: templates/UsersConversations/edit.php:16
@@ -5998,7 +5984,7 @@ msgstr "Supprimer les conversations"
 
 #: templates/element/activitybar.php:7
 msgid "Activity status"
-msgstr "Statut de l'activité"
+msgstr "Statut de la raterie"
 
 #: templates/element/default_sidebar.php:5
 #, fuzzy
@@ -6080,7 +6066,7 @@ msgstr "Gérer mes portées"
 
 #: templates/element/my/sidebar.php:45 templates/element/my/sidebar.php:46
 msgid "Admin site"
-msgstr ""
+msgstr "Accéder à l'arrière-boutique"
 
 #: templates/element/my/statistics.php:1
 #, fuzzy
@@ -6093,12 +6079,11 @@ msgstr "Je vis actuellement avec :"
 
 #: templates/element/my/statistics.php:14
 msgid "In total, I have hosted:"
-msgstr "J'ai partagé mon toit avec :"
+msgstr "J’ai partagé mon toit avec :"
 
 #: templates/element/my/statistics.php:18
-#, fuzzy
 msgid "As owner or creator, I manage the sheets of:"
-msgstr "En tant que propriétaire ou créateur, je gère les fiches de :"
+msgstr "Je gère les fiches de :"
 
 #: templates/element/my/statistics.php:28
 #, fuzzy
