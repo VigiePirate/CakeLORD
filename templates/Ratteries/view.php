@@ -33,7 +33,7 @@
                             <?= $this->Html->image('/img/icon-relocate.svg', [
                                 'url' => [],
                                 'class' => 'side-nav-icon',
-                                'alt' => __('Move')]) ?>
+                                'alt' => __('Relocate')]) ?>
                             <span class="tooltiptext"><?= __('You cannot declare a new location') ?></span>
                         </div>
                         <div class="tooltip disabled">
