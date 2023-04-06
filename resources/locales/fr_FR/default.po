@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-04-06 13:51+0200\n"
+"PO-Revision-Date: 2023-04-06 17:58+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -3603,12 +3603,14 @@ msgstr ""
 
 #: templates/Lord/my.php:96 templates/Roles/add.php:20
 #: templates/Roles/edit.php:21 templates/Roles/view.php:21
+#, fuzzy
 msgid "Roles"
-msgstr ""
+msgstr "Rôles"
 
 #: templates/Lord/my.php:97
+#, fuzzy
 msgid "Configure roles and permissions"
-msgstr ""
+msgstr "Configurer les rôles et permissions"
 
 #: templates/Lord/my.php:100 templates/States/add.php:20
 #: templates/States/edit.php:21
@@ -3620,160 +3622,206 @@ msgid "Configure states and sheet workflow"
 msgstr ""
 
 #: templates/Lord/search.php:12
+#, fuzzy
 msgid "Your search:"
-msgstr ""
+msgstr "Votre recherche :"
 
 #: templates/Lord/search.php:15
+#, fuzzy
 msgid ""
 "Sorry, we haven’t found any rat, rattery or user resembling your keyword. "
 "Please try with another."
 msgstr ""
+"Aucun rat, raterie ou utilisateur ne correspond à votre recherche. Vous "
+"pouvez essayer avec un autre mot-clé."
 
 #: templates/Lord/search.php:19
+#, fuzzy
 msgid ""
 "We have found {0} rats, {1} ratteries and {2} users resembling your keyword. "
 "Up to the 10 most recently modified of each category are shown below. Please "
 "retry with a more specific keyword, or use side buttons below to see browse "
 "all the results in each category."
 msgstr ""
+"Nous avons trouvé {0} rats, {1} rateries et {2} utilisateurs d'après votre "
+"recherche. Seuls les 10 plus récents de chaque catégorie sont affichés ci-"
+"dessous. Vous pouvez essayer avec un nouveau mot-clé, ou cliquer sur le "
+"bouton \"Voir tous les résultats\" pour afficher les résultats complets de "
+"chaque catégorie."
 
 #: templates/Lord/search.php:23
+#, fuzzy
 msgid ""
 "We have found {0} rats, {1} ratteries and {2} users resembling your keyword. "
 "They are all shown below."
 msgstr ""
+"Nous avons trouvé {0} rats, {1} rateries et {2} utilisateurs d'après votre "
+"recherche. Les résultats sont affichés ci-dessous."
 
 #: templates/Lord/search.php:37 templates/Rats/search.php:19
+#, fuzzy
 msgid "Advanced search"
-msgstr ""
+msgstr "Recherche avancée"
 
 #: templates/Lord/search.php:38 templates/Lord/search.php:61
 #: templates/Lord/search.php:82
+#, fuzzy
 msgid "See all results"
-msgstr ""
+msgstr "Voir tous les résultats"
 
 #: templates/Lord/search.php:94 templates/Users/my.php:25
 #: templates/Users/named.php:23 templates/Users/view.php:83
+#, fuzzy
 msgid "Role"
-msgstr ""
+msgstr "Rôle"
 
 #: templates/Lord/stats.php:12 templates/Lord/webstats.php:12
+#, fuzzy
 msgid "About"
-msgstr ""
+msgstr "Statistiques"
 
 #: templates/Lord/stats.php:15
+#, fuzzy
 msgid "Global statistics"
-msgstr ""
+msgstr "Statistiques globales"
 
 #: templates/Lord/stats.php:18
+#, fuzzy
 msgid ""
 "These statistics are computed automatically from users’ data, which can be "
 "inaccurate or incomplete (especially legacy data migrated from the previous "
 "LORD version). Therefore, they must be interpreted carefully. For more "
 "details, please read the FAQ."
 msgstr ""
+"Ces statistiques sont basées sur les données renseignées par les "
+"utilisateurs, qui peuvent être incomplètes ou inexactes (particulièrement "
+"les données migrées de la précédente version du LORD). Elles doivent donc "
+"être interprétées avec précaution. Pour plus de détails, merci de vous "
+"référer à la FAQ."
 
 #: templates/Lord/stats.php:21
 msgid "Demography"
 msgstr ""
 
 #: templates/Lord/stats.php:24
+#, fuzzy
 msgid "Total number of rats:"
-msgstr ""
+msgstr "Nombre total de rats :"
 
 #: templates/Lord/stats.php:25
+#, fuzzy
 msgid "{0, number} rats"
-msgstr ""
+msgstr "{0, number} rats"
 
 #: templates/Lord/stats.php:28 templates/Ratteries/view.php:124
 #: templates/Ratteries/view.php:265
+#, fuzzy
 msgid "females:"
-msgstr ""
+msgstr "femelles :"
 
 #: templates/Lord/stats.php:29 templates/Lord/stats.php:33
+#, fuzzy
 msgid "{0, number} females ({1, number} %)"
-msgstr ""
+msgstr "{0, number} femelles ({1, number} %)"
 
 #: templates/Lord/stats.php:32 templates/Ratteries/view.php:128
 #: templates/Ratteries/view.php:269
+#, fuzzy
 msgid "males:"
-msgstr ""
+msgstr "mâles :"
 
 #: templates/Lord/stats.php:40
+#, fuzzy
 msgid "Rats considered as deceased:"
-msgstr ""
+msgstr "Rats considérés comme décédés :"
 
 #: templates/Lord/stats.php:41
+#, fuzzy
 msgid "{0, number} rats ({1, number} % of all rats)"
-msgstr ""
+msgstr "{0, number} rats ({1, number} % de tous les rats)"
 
 #: templates/Lord/stats.php:44 templates/Ratteries/view.php:146
 #: templates/Ratteries/view.php:313 templates/Ratteries/view.php:395
+#, fuzzy
 msgid "declared with known date:"
-msgstr ""
+msgstr "avec une date de décès connue"
 
 #: templates/Lord/stats.php:45 templates/Lord/stats.php:49
+#, fuzzy
 msgid "{0, number} rats ({1, number} % of deceased rats)"
-msgstr ""
+msgstr "{0, number} rats ({1, number} % des rats décédés)"
 
 #: templates/Lord/stats.php:48
+#, fuzzy
 msgid "presumably dead:"
-msgstr ""
+msgstr "présumés morts :"
 
 #: templates/Lord/stats.php:56
+#, fuzzy
 msgid "Lifespan:"
-msgstr ""
+msgstr "Longévité :"
 
 #: templates/Lord/stats.php:60
+#, fuzzy
 msgid "average:"
-msgstr ""
+msgstr "moyenne :"
 
 #: templates/Lord/stats.php:61 templates/Lord/stats.php:65
 #: templates/Lord/stats.php:69
+#, fuzzy
 msgid "{0, number} months (♀: {1, number} – ♂: {2, number})"
-msgstr ""
+msgstr "{0, number} mois (♀: {1, number} – ♂: {2, number})"
 
 #: templates/Lord/stats.php:64 templates/Users/view.php:307
 #: templates/element/my/statistics.php:31
+#, fuzzy
 msgid "average, infant mortality excluded:"
-msgstr ""
+msgstr "moyenne, mortalité infantile exclue :"
 
 #: templates/Lord/stats.php:68 templates/Users/view.php:311
 #: templates/element/my/statistics.php:35
+#, fuzzy
 msgid "average, accidents also excluded:"
-msgstr ""
+msgstr "moyenne, accidents également exclus :"
 
 #: templates/Lord/stats.php:72
+#, fuzzy
 msgid "maximum:"
-msgstr ""
+msgstr "maximum :"
 
 #: templates/Lord/stats.php:87
 msgid "Breeding"
 msgstr ""
 
 #: templates/Lord/stats.php:90
+#, fuzzy
 msgid "Total number of ratteries:"
-msgstr ""
+msgstr "Nombre total de rateries :"
 
 #: templates/Lord/stats.php:91
+#, fuzzy
 msgid "{0, number} ratteries"
-msgstr ""
+msgstr "{0, number} rateries"
 
 #: templates/Lord/stats.php:94
+#, fuzzy
 msgid "active in the last 2 years:"
-msgstr ""
+msgstr "en activité ces 2 dernières années :"
 
 #: templates/Lord/stats.php:95
+#, fuzzy
 msgid "{0, number} ratteries ({1, number} %)"
-msgstr ""
+msgstr "{0, number} rateries ({1, number} %)"
 
 #: templates/Lord/stats.php:101
+#, fuzzy
 msgid "Average rattery lifetime:"
-msgstr ""
+msgstr "Période d'activité moyenne d'une raterie :"
 
 #: templates/Lord/stats.php:103
+#, fuzzy
 msgid "{0, number} days ({1, number} years)"
-msgstr ""
+msgstr "{0, number} jours ({1, number} années)"
 
 #: templates/Lord/stats.php:107
 msgid "Average rattery productivity:"
