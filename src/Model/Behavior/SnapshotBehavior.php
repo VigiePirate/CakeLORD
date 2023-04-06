@@ -190,10 +190,7 @@ class SnapshotBehavior extends Behavior
     public function snapDiffListAsString(EntityInterface $entity, $snapshot_id)
     {
         if ($diff_array = $this->snapCompare($entity, $snapshot_id)) {
-            foreach ($diff_array as $key => $value) {
-                $diff_array[$key] = $key;
-            }
-            return implode(', ', $diff_array);
+            return implode(', ', array_keys($diff_array));
         }
         return false;
     }
