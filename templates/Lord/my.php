@@ -1,7 +1,7 @@
 <div class="row">
     <aside class="column"/>
         <div class="side-nav">
-            <?= $this->element('my/sidebar') ?>
+            <?= $this->element('my/staffbar') ?>
         </div>
     </aside>
 
@@ -20,21 +20,21 @@
 
             <h3><?= __('Rats') ?></h3>
             <div class="button-small">
-                <?= $this->Html->link(__('See all rats'), ['controller' => 'Rats', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
+                <?= $this->Html->link(__('See all pending rats'), ['controller' => 'Rats', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
             <p><?= __('<strong>{0} rat sheets</strong> are currently waiting for staff action. Most recent are:', [$count['rats']]) ?></p>
             <?= $this->element('simple_staff_rats') ?>
 
             <h3><?= __('Litters') ?></h3>
             <div class="button-small">
-                <?= $this->Html->link(__('See all litters'), ['controller' => 'Litters', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
+                <?= $this->Html->link(__('See all pending litters'), ['controller' => 'Litters', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
             <p><?= __('<strong>{0} litter sheets</strong> are currently waiting for staff action. Most recent are:', [$count['litters']]) ?></p>
             <?= $this->element('simple_staff_litters') ?>
 
             <h3><?= __('Ratteries') ?></h3>
             <div class="button-small">
-                <?= $this->Html->link(__('See all ratteries'), ['controller' => 'Ratteries', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
+                <?= $this->Html->link(__('See all pending ratteries'), ['controller' => 'Ratteries', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
             <p><?= __('<strong>{0} rattery sheets</strong> are currently waiting for staff action. Most recent are:', [$count['ratteries']]) ?><p>
             <?= $this->element('simple_staff_ratteries') ?>
