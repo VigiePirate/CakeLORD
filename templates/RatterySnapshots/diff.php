@@ -9,12 +9,11 @@
         <div class="ratteries view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= __('Snapshot') ?></div>
-                <div class="sheet-markers">
-                    <div class="tooltip-state">
-                        <div class="current-statemark statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></div>
-                        <span class="tooltiptext-state hide-on-mobile"><?= h($rattery->state->name) ?></span>
-                    </div>
-                </div>
+                <?php if (in_array('state_id', $diff_list)) : ?>
+                    <div class="minus current-statemark statecolor_<?php echo h($snapshot->state_id) ?>"><?= h($snapshot->state->symbol) ?></div>
+                <?php else : ?>
+                    <div class="current-statemark statecolor_<?php echo h($snapshot->state_id) ?>"><?= h($snapshot->state->symbol) ?></div>
+                <?php endif ; ?>
             </div>
 
             <h1 class="half"><?= h($snap_rattery->full_name) . '<span class="rotate"> ' . h($snap_rattery->is_inactive_symbol) . '</span>'?></h1> <!-- -->
@@ -139,12 +138,11 @@
         <div class="ratteries view content">
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= $rattery->is_generic ? __('Generic origin') :  __('Rattery') ?></div>
-                <div class="sheet-markers">
-                    <div class="tooltip-state">
-                        <div class="current-statemark statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></div>
-                        <span class="tooltiptext-state hide-on-mobile"><?= h($rattery->state->name) ?></span>
-                    </div>
-                </div>
+                <?php if (in_array('state_id', $diff_list)) : ?>
+                    <div class="plus current-statemark statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></div>
+                <?php else : ?>
+                    <div class="current-statemark statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></div>
+                <?php endif ; ?>
             </div>
 
             <h1 class="half"><?= h($rattery->full_name) . '<span class="rotate"> ' . h($rattery->is_inactive_symbol) . '</span>'?></h1> <!-- -->

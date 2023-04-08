@@ -6,7 +6,7 @@
                 <th><?= $this->Paginator->sort('state_id',__('State')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('is_alive', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('is_active',__('Active?')) ?></th>
+                <th><?= $this->Paginator->sort('is_alive',__('Active?')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('picture', $exceptions)): ?>
                 <th><?= __('picture') ?></th>
@@ -18,7 +18,7 @@
                 <th><?= $this->Paginator->sort('name') ?></th>
             <?php endif; ?>
             <?php if (! in_array('owner_user', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('owner_user') ?></th>
+                <th><?= $this->Paginator->sort('Users.username', __('Owner')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('birth_year', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('birth_year') ?></th>
@@ -27,10 +27,10 @@
                 <th><?= $this->Paginator->sort('zip_code') ?></th>
             <?php endif; ?>
             <?php if (! in_array('country', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('country') ?></th>
+                <th><?= $this->Paginator->sort('Countries.name', __('Country')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('actions', $exceptions)): ?>
-                <th class="actions-title"><?= __('Actions') ?></th>
+                <th class="actions-title col-head"><?= __('Actions') ?></th>
             <?php endif; ?>
         </thead>
         <tbody>
