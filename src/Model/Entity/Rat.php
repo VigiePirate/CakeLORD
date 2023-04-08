@@ -406,18 +406,20 @@ class Rat extends Entity
 
         foreach ($properties as $key => $value) {
             if (in_array($key, array_keys($snap_diffs))) {
-                // if different key is a foreign key to a contained association, fetch and replace the latter
-                $association = substr($key, 0, -3);
-                if (! empty($association)) {
-                    if ($this->has($association)) {
-                        $tableName = $this->$association->getSource();
-                        $table = FactoryLocator::get('Table')->get($tableName);
-                        $snap_rat->set($association, $table->get($snap_diffs[$key]));
-                    } else {
-                        $tableName = Inflector::pluralize(Inflector::classify($association));
-                        if (TableRegistry::getTableLocator()->exists($tableName)) {
+                // if $key is a foreign key to a contained association, fetch and replace the latter
+                if (substr($key, -3) == '_id') {
+                    $association = substr($key, 0, -3);
+                    if (! empty($association)) {
+                        if ($this->has($association)) {
+                            $tableName = $this->$association->getSource();
                             $table = FactoryLocator::get('Table')->get($tableName);
                             $snap_rat->set($association, $table->get($snap_diffs[$key]));
+                        } else {
+                            $tableName = Inflector::pluralize(Inflector::classify($association));
+                            if (TableRegistry::getTableLocator()->exists($tableName)) {
+                                $table = FactoryLocator::get('Table')->get($tableName);
+                                $snap_rat->set($association, $table->get($snap_diffs[$key]));
+                            }
                         }
                     }
                 }
@@ -429,7 +431,7 @@ class Rat extends Entity
                 if (isset($this->$key)) {
                     $foreign_key = $key . '_id';
                     if (! in_array($foreign_key, array_keys($snap_diffs))) {
-                        $snap_rat->set($key, $this->$key);
+                        $snap_rat->set($key, $value);
                     }
                 }
             }
