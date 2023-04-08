@@ -74,27 +74,34 @@ class RatsController extends AppController
         ];
         $females = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'F'])
+            ->order('Rats.birth_date DESC')
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
         $males = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'M'])
+            ->order('Rats.birth_date DESC')
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
         $alive = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => true])
+            ->order('Rats.birth_date DESC')
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
         $departed = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => false])
+            ->order('Rats.birth_date DESC')
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
         //FIXME use need user action, need staff action properties
         $pending = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id' => '4'])
+            ->order('Rats.birth_date DESC')
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
         $waiting = $this->Rats->find()
             ->where([
                 'Rats.owner_user_id' => $user->id,
                 'OR' => [['Rats.state_id' => '3'], ['Rats.state_id' => '5']]])
+            ->order('Rats.birth_date DESC')
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
         $okrats = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id <=' => '2'])
+            ->order('Rats.birth_date DESC')
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
 
         if(! empty($pending->first())) {

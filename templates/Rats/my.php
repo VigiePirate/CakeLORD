@@ -77,6 +77,7 @@
                             'pup_name',
                             'birth_date',
                             'owner_user_id',
+                            'death_cause',
                         ],
                     ]) ?>
                 </div>
