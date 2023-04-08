@@ -6,8 +6,8 @@
             <th><?= $this->Paginator->sort('name', __('Name')) ?></th>
             <th><?= $this->Paginator->sort('Users.username', __('Owner')) ?></th>
             <th><?= $this->Paginator->sort('modified', __('Modified')) ?></th>
-            <th><?= __('Last message') ?></th>
-            <th class="actions-title"><?= __('Actions') ?></th>
+            <th class="col-head"><?= __('Last message') ?></th>
+            <th class="actions-title col-head"><?= __('Actions') ?></th>
         </thead>
         <tbody>
             <?php foreach($ratteries as $rattery): ?>
@@ -20,6 +20,13 @@
                     <td> </td>
                     <td class="actions">
                         <span class="nowrap">
+                            <?php if (! is_null($rattery->last_snapshot_id)) :?>
+                                <?= $this->Html->image('/img/icon-diff.svg', [
+                                    'url' => ['controller' => 'RatterySnapshots', 'action' => 'diff', $rattery->last_snapshot_id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('Compare with last snapshot')])
+                                ?>
+                            <?php endif; ?>
                             <?= $this->Form->postLink(
                                     $this->Html->image('/img/icon-delete.svg', [
                                         'class' => 'action-icon',

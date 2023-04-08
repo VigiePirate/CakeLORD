@@ -10,7 +10,11 @@
 
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= _('Snapshot') ?></div>
-                <div class="current-statemark statecolor_<?php echo h($snapshot->state_id) ?>"><?= h($snapshot->state->symbol) ?></div>
+                <?php if (in_array('state_id', $diff_list)) : ?>
+                    <div class="minus current-statemark statecolor_<?php echo h($snapshot->state_id) ?>"><?= h($snapshot->state->symbol) ?></div>
+                <?php else : ?>
+                    <div class="current-statemark statecolor_<?php echo h($snapshot->state_id) ?>"><?= h($snapshot->state->symbol) ?></div>
+                <?php endif ; ?>
             </div>
 
             <h1>
@@ -266,8 +270,11 @@
 
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= _('Rat') ?></div>
-                    <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?>
-                </div>
+                <?php if (in_array('state_id', $diff_list)) : ?>
+                    <div class="plus current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                <?php else : ?>
+                    <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
+                <?php endif ; ?>
             </div>
 
             <h1>

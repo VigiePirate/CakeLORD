@@ -28,7 +28,22 @@ class RatteriesController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $this->paginate = [
-            'contain' => ['Users', 'Countries', 'States'],
+            'contain' => [
+                'Users',
+                'Countries',
+                'States'
+            ],
+            'sortableFields' => [
+                'state_id',
+                'is_alive',
+                'prefix',
+                'name',
+                'Users.username',
+                'birth_year',
+                'zip_code',
+                'Countries.name',
+                'modified',
+            ]
         ];
         $ratteries = $this->paginate($this->Ratteries);
 
@@ -543,15 +558,13 @@ class RatteriesController extends AppController
         $ratteries = $this->Ratteries->find('needsStaff');
 
         $this->paginate = [
-            'contain' => ['Users', 'States', 'Countries'],
+            'contain' => ['Users', 'States', 'Countries', 'RatterySnapshots'],
             'sortableFields' => ['state_id', 'prefix', 'name', 'Users.username', 'modified']
         ];
 
         $ratteries = $this->paginate($ratteries);
 
-        $this->set([
-            'ratteries' => $ratteries
-        ]);
+        $this->set(compact('ratteries'));
     }
 
     public function autocomplete() {
