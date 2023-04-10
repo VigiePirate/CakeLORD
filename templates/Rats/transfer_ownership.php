@@ -91,7 +91,7 @@
     $(function () {
         $('#jquery-owner-input')
             .on('input', function() {
-                $("#jquery-mother-id").val('');
+                $("#jquery-owner-id").val('');
                 if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
                     $(this).removeClass('autocompleted');
                 }
@@ -121,10 +121,6 @@
                     $("#jquery-owner-input").addClass("autocompleted"); // display the selected text
                     $("#jquery-owner-id").val(ui.item.id); // save selected id to hidden input
                 }
-            });
-
-            $("#jquery-mother-input").on("input", function(){
-                $("#jquery-mother-id").val('');
             });
     });
     </script>
