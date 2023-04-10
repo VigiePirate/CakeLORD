@@ -359,7 +359,7 @@ class RatsTable extends Table
             'validName',
             [
                 'errorField' => 'name',
-                'message' => 'Forbidden: names such as “F1” or “M4” are not allowed.'
+                'message' => __('Forbidden: names such as “F1” or “M4” are not allowed.')
             ]
         );
 
@@ -370,7 +370,7 @@ class RatsTable extends Table
             'bornFuture',
             [
                 'errorField' => 'birth_date',
-                'message' => 'Impossible: this date is in the future.'
+                'message' => __('Impossible: this date is in the future.')
             ]
         );
 
@@ -382,7 +382,7 @@ class RatsTable extends Table
             'rattery_selected',
             [
                 'errorField' => 'rattery_name',
-                'message' => 'We could not find this rattery. Please, select it in the list or type an existing prefix.'
+                'message' => __('We could not find this rattery. Please, select it in the list or type an existing prefix.')
             ]
         );
 
@@ -392,9 +392,9 @@ class RatsTable extends Table
             'validOrigins',
             [
                 'errorField' => 'comments',
-                'message' => 'Incomplete: mandatory information about origins are missing.
+                'message' => __('Incomplete: mandatory information about origins are missing.
                 <ul><li>For a generic origin, please add a comment (name and location, circumstances of the rescue, etc.)</li>
-                <li>For a registered rattery, add at least a mother. Create her first if needed, or chose a generic origin.</li></ul>'
+                <li>For a registered rattery, add at least a mother. Create her first if needed, or chose a generic origin.</li></ul>')
             ]
         );
 
@@ -405,7 +405,7 @@ class RatsTable extends Table
             'hasColor',
             [
                 'errorField' => 'color_id',
-                'message' => 'Please select a color. If you don’t know what to chose, read documentation, or chose “Unknown” and add a picture for help.'
+                'message' => __('Please select a color. If you don’t know what to chose, read documentation, or chose “Unknown” and add a picture for help.')
             ]
         );
 
@@ -415,7 +415,7 @@ class RatsTable extends Table
             'hasCoat',
             [
                 'errorField' => 'coat_id',
-                'message' => 'Please select a coat type.'
+                'message' => __('Please select a coat type.')
             ]
         );
 
@@ -425,7 +425,7 @@ class RatsTable extends Table
             'hasDilution',
             [
                 'errorField' => 'dilution_id',
-                'message' => 'Please select a dilution type.'
+                'message' => __('Please select a dilution type.')
             ]
         );
 
@@ -435,7 +435,7 @@ class RatsTable extends Table
             'hasEarset',
             [
                 'errorField' => 'earset_id',
-                'message' => 'Please select an earset.'
+                'message' => __('Please select an earset.')
             ]
         );
 
@@ -445,7 +445,7 @@ class RatsTable extends Table
             'hasEyecolor',
             [
                 'errorField' => 'eyecolor_id',
-                'message' => 'Please select an eyecolor.'
+                'message' => __('Please select an eyecolor.')
             ]
         );
 
@@ -455,7 +455,7 @@ class RatsTable extends Table
             'hasMarking',
             [
                 'errorField' => 'marking_id',
-                'message' => 'Please select a marking type.'
+                'message' => __('Please select a marking type.')
             ]
         );
 
@@ -466,7 +466,7 @@ class RatsTable extends Table
             'hasNeededPicture',
             [
                 'errorField' => 'picture_file',
-                'message' => 'This rat’s variety is considered as rare. Please upload a good quality picture for verification.'
+                'message' => __('This rat’s variety is considered as rare. Please upload a good quality picture for verification.')
             ]
         );
 
@@ -476,7 +476,7 @@ class RatsTable extends Table
         };
         $rules->add($timeline, [
             'errorField' => 'death_date',
-            'message' => 'Impossible: chosen death date is anterior to birth date. Please check and correct your entry.'
+            'message' => __('Impossible: chosen death date is anterior to birth date. Please check and correct your entry.')
         ]);
 
         // temporary test for dead rats without death date (should not exist but...)
@@ -485,7 +485,7 @@ class RatsTable extends Table
         };
         $rules->add($future, [
             'errorField' => 'death_date',
-            'message' => 'Impossible: this date is in the future. Please check and correct your entry.'
+            'message' => __('Impossible: this date is in the future. Please check and correct your entry.')
         ]);
 
         $rules->add(function ($rat) {
@@ -503,7 +503,7 @@ class RatsTable extends Table
             'canDieInfant',
             [
                 'errorField' => 'death_primary_cause_id',
-                'message' => 'Impossible: your rat was too old at this date to die of “infant mortality”.'
+                'message' => __('Impossible: your rat was too old at this date to die of “infant mortality”.')
             ]
         );
 
@@ -513,7 +513,7 @@ class RatsTable extends Table
             'canDieOldster',
             [
                 'errorField' => 'death_primary_cause_id',
-                'message' => 'Impossible: your rat was too young at this date to die “from old age”.'
+                'message' => __('Impossible: your rat was too young at this date to die “from old age”.')
             ]
         );
 
