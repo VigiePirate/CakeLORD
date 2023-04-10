@@ -97,7 +97,7 @@
                     <?php if (in_array('birth_litter_id', $diff_list)) : ?>
                         <td class="minus"><?= $snap_rat->has('birth_litter') ? $this->Html->link($snap_rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $snap_rat->birth_litter->id]) : '' ?></td>
                     <?php else : ?>
-                        <td><?= $this->Html->link($rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) ?></td>
+                        <td><?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : __('None') ?></td>
                     <?php endif ; ?>
                 </tr>
             </table>
@@ -366,7 +366,7 @@
                     <?php else : ?>
                         <td>
                     <?php endif ; ?>
-                    <?= $this->Html->link($rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) ?></td>
+                    <?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : __('None') ?></td>
                 </tr>
             </table>
 
