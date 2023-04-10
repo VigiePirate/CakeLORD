@@ -59,7 +59,7 @@
                         <td><?= $this->Html->link(h($rattery->name), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id], ['escape' => false]) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('owner_user', $exceptions)): ?>
-                        <td><?= $rattery->has('user') ? $this->Html->link(h($rattery->user->username), ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
+                        <td><?= $rattery->has('user') ? $this->Html->link(h($rattery->user->username), ['controller' => 'Users', 'action' => 'view', $rattery->user->id], ['escape' => false]) : '' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('birth_year', $exceptions)): ?>
                         <td><?= h($rattery->birth_year) ?></td>
