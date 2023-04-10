@@ -275,7 +275,7 @@
 
                 <?php if ($identity->can('seeStaffOnly', $user)) :?>
                 <div class="related">
-                    <h3 class="staff">Statistics</h3>
+                    <h3 class="staff"><?= __('Statistics') ?></h3>
                     <table class="condensed stats">
                         <tr>
                             <th><?= __('Current number of rats:') ?></th>

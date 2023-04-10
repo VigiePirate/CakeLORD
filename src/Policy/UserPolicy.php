@@ -80,7 +80,7 @@ class UserPolicy implements BeforePolicyInterface
     public function canDelete(IdentityInterface $user, User $resource)
     {
         // User can't delete users
-        return false;
+        return $user->role->can_delete;
     }
 
     /**

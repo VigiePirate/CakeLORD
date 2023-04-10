@@ -20,14 +20,14 @@
                     <?php endif ?>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions col-head"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($users as $user): ?>
                 <tr>
                     <td><?= $this->Number->format($user->id) ?></td>
-                    <td><?= $this->Html->link(h($user->username), ['action' => 'view', $user->id]) ?></td>
+                    <td><?= $this->Html->link(h($user->username), ['action' => 'view', $user->id], ['escape' => false]) ?></td>
                     <td><?= $user->has('role') ? $user->role->name : '' ?></td>
                     <?php if (true) : ?> <!-- to be replaced by actual test on is_staff -->
                         <td><?= h($user->email) ?></td>

@@ -63,6 +63,10 @@ class UsersTable extends Table
             'targetForeignKey' => 'conversation_id',
             'joinTable' => 'users_conversations',
         ]);
+        $this->hasMany('Messages', [
+            'className' => 'Messages',
+            'foreignKey' => 'from_user_id',
+        ]);
         $this->hasMany('OwnerRats', [
             'className' => 'Rats',
             'foreignKey' => 'owner_user_id',
@@ -74,6 +78,18 @@ class UsersTable extends Table
         $this->hasMany('Ratteries', [
             'className' => 'Ratteries',
             'foreignKey' => 'owner_user_id',
+        ]);
+        $this->hasMany('Litters', [
+            'className' => 'Litters',
+            'foreignKey' => 'creator_user_id',
+        ]);
+        $this->hasMany('FromIssues', [
+            'className' => 'Issues',
+            'foreignKey' => 'from_user_id',
+        ]);
+        $this->hasMany('ClosingIssues', [
+            'className' => 'Issues',
+            'foreignKey' => 'closing_user_id',
         ]);
     }
 

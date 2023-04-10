@@ -496,16 +496,92 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
+        $associations = [
+            'OwnerRats' => 'Rats',
+            'CreatorRats' => 'Rats',
+            'Ratteries' => 'Ratteries',
+            'Litters' => 'Litters',
+            'FromIssues' => 'Issues',
+            'ClosingIssues' => 'Issues',
+            'Conversations' => 'Conversations',
+            'Messages' => 'Messages',
+        ];
+
+        $user = $this->Users->get($id, ['contain' => array_keys($associations)]);
+
         $this->Authorization->authorize($user);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
-        } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+
+        $count = count($user->owner_rats)
+            + count($user->creator_rats)
+            + count($user->ratteries)
+            + count($user->litters)
+            + count($user->from_issues)
+            + count($user->closing_issues)
+            + count($user->conversations)
+            + count($user->messages);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            // if user has no related entries, it can be deleted
+            if ($count == 0) {
+                if ($this->Users->delete($user)) {
+                    $this->Flash->success(__('The user has been deleted.'));
+                    return $this->redirect(['action' => 'index']);
+                } else {
+                    $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+                    return $this->redirect(['action' => 'delete', $user->id]);
+                }
+            }
+
+            // if user has related entries, they have to be given to a new user before delete
+            // NB: we don't check user existence in database, since new_user_id was fetched by ajax
+            if ($this->request->getData('new_user_id')) {
+                $new_user_id = $this->request->getData('new_user_id');
+                $new_user = $this->Users->get($new_user_id, ['contain' => array_keys($associations)]);
+
+                $new_user->owner_rats = array_merge($new_user->owner_rats, $user->owner_rats);
+                $new_user->creator_rats = array_merge($new_user->creator_rats, $user->creator_rats);
+
+                //FIXME : inactivate old user rattery
+                // $new_user->ratteries = array_merge($new_user->ratteries, $user->ratteries);
+                //
+                // $new_user->litters = array_merge($new_user->litters, $user->litters);
+                // $new_user->from_issues = array_merge($new_user->from_issues, $user->from_issues);
+                // $new_user->closing_issues = array_merge($new_user->closing_issues, $user->closing_issues);
+                // $new_user->conversations = array_merge($new_user->conversations, $user->conversations);
+                // $new_user->messages = array_merge($new_user->messages, $user->messages);
+
+                if ($this->Users->save($new_user)) {
+                    if ($this->Users->delete($user)) {
+                         $this->Flash->success(__('The user has been deleted. All associated entries were transferred to the user below.'));
+                         return $this->redirect(['action' => 'view', $new_user]);
+                     } else {
+                         $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+                         return $this->redirect(['action' => 'delete', $user->id]);
+                     }
+                 } else {
+                     $errors = $new_user->getErrors();
+                     $this->Flash->error(__('The user’s associated entries could not be transferred to the new user. Please, correct them before trying again.'));
+                     $this->set(compact('new_user', 'associations', 'errors'));
+                 }
+            } else {
+                $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+                return $this->redirect(['action' => 'delete', $user->id]);
+            }
         }
 
-        return $this->redirect(['action' => 'index']);
+        if (! isset($errors)) {
+            if ($count != 0) {
+                $this->Flash->warning(__('This user is related to existing database entries. You MUST specify below an existing user to inherit these entries.'));
+            } else {
+                $this->Flash->default(__('This user is not related to any existing database entries and can be safely deleted. Beware, this operation is irreversible!'));
+            }
+        }
+
+        $identity = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($identity) && $identity->can('edit', $user);
+
+        $this->set(compact('user', 'identity', 'count'));
     }
 
     /**

@@ -24,6 +24,8 @@ class ConversationsController extends AppController
         ];
         $conversations = $this->paginate($this->Conversations);
 
+        $this->Authorization->skipAuthorization();
+
         $this->set(compact('conversations'));
     }
 
@@ -39,6 +41,8 @@ class ConversationsController extends AppController
         $conversation = $this->Conversations->get($id, [
             'contain' => ['Rats', 'Ratteries', 'Litters', 'Users', 'Messages'],
         ]);
+
+        $this->Authorization->skipAuthorization();
 
         $this->set('conversation', $conversation);
     }
