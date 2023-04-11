@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Users Model
  *
  * @property \App\Model\Table\RolesTable&\Cake\ORM\Association\BelongsTo $Roles
- * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\BelongsToMany $Conversations
  *
  * @method \App\Model\Entity\User newEmptyEntity()
  * @method \App\Model\Entity\User newEntity(array $data, array $options = [])
@@ -57,15 +56,6 @@ class UsersTable extends Table
         $this->belongsTo('Roles', [
             'foreignKey' => 'role_id',
             'joinType' => 'INNER',
-        ]);
-        $this->belongsToMany('Conversations', [
-            'foreignKey' => 'user_id',
-            'targetForeignKey' => 'conversation_id',
-            'joinTable' => 'users_conversations',
-        ]);
-        $this->hasMany('Messages', [
-            'className' => 'Messages',
-            'foreignKey' => 'from_user_id',
         ]);
         $this->hasMany('OwnerRats', [
             'className' => 'Rats',

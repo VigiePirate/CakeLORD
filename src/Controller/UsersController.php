@@ -259,7 +259,7 @@ class UsersController extends AppController
     public function home()
     {
         $user = $this->Users->get($this->Authentication->getIdentity()->get('id'), [
-            'contain' => ['Roles', 'Conversations'],
+            'contain' => ['Roles'],
         ]);
         $this->Authorization->authorize($user);
 
@@ -350,8 +350,7 @@ class UsersController extends AppController
     {
         $user = $this->Users->get($id, [
             'contain' => [
-                'Roles', 'Conversations',
-                'Ratteries', 'Ratteries.States','Ratteries.Countries',
+                'Roles', 'Ratteries', 'Ratteries.States','Ratteries.Countries',
                 'OwnerRats' => function($q) {
                     return $q
                     ->order('OwnerRats.modified DESC')
@@ -422,8 +421,7 @@ class UsersController extends AppController
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $conversations = $this->Users->Conversations->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'roles', 'conversations'));
+        $this->set(compact('user', 'roles'));
     }
 
     /**

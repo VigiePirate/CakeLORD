@@ -17,7 +17,6 @@ use Geo\Geocoder\Geocoder;
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
- * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\HasMany $Conversations
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
  * @property \App\Model\Table\RatterySnapshotsTable&\Cake\ORM\Association\HasMany $RatterySnapshots
  * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsToMany $Litters
@@ -101,9 +100,6 @@ class RatteriesTable extends Table
         $this->belongsTo('States', [
             'foreignKey' => 'state_id',
             'joinType' => 'INNER',
-        ]);
-        $this->hasMany('Conversations', [
-            'foreignKey' => 'rattery_id',
         ]);
         $this->hasMany('Rats', [
             'foreignKey' => 'rattery_id',

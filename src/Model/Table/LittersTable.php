@@ -18,7 +18,6 @@ use Cake\Collection\Collection;
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
- * @property \App\Model\Table\ConversationsTable&\Cake\ORM\Association\HasMany $Conversations
  * @property \App\Model\Table\LitterSnapshotsTable&\Cake\ORM\Association\HasMany $LitterSnapshots
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $OffspringRats
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsToMany $ParentRats
@@ -78,9 +77,6 @@ class LittersTable extends Table
         $this->belongsTo('States', [
             'foreignKey' => 'state_id',
             'joinType' => 'INNER',
-        ]);
-        $this->hasMany('Conversations', [
-            'foreignKey' => 'litter_id',
         ]);
         $this->hasMany('LitterSnapshots', [
             'foreignKey' => 'litter_id',
