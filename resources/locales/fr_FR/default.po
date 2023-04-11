@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-04-06 21:33+0200\n"
+"PO-Revision-Date: 2023-04-11 08:53+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -3284,39 +3284,46 @@ msgid "Edit this litter"
 msgstr ""
 
 #: templates/Litters/view.php:80
+#, fuzzy
 msgid "You cannot edit this litter"
-msgstr ""
+msgstr "Vous ne pouvez pas éditer cette fiche"
 
 #: templates/Litters/view.php:90
+#, fuzzy
 msgid "Add existing rat"
-msgstr ""
+msgstr "Rattacher un rat"
 
 #: templates/Litters/view.php:91
+#, fuzzy
 msgid "Add an existing rat to this litter"
-msgstr ""
+msgstr "Rattacher un rat à cette portée"
 
 #: templates/Litters/view.php:132
+#, fuzzy
 msgid "Dam: "
-msgstr ""
+msgstr "Mère : "
 
 #: templates/Litters/view.php:141 templates/Litters/view.php:165
 #: templates/Litters/view.php:183
+#, fuzzy
 msgid "Age at litter birth:"
-msgstr ""
+msgstr "Âge à la naissance :"
 
 #: templates/Litters/view.php:145 templates/Litters/view.php:169
 #: templates/Litters/view.php:187
 msgid "Reached age:"
-msgstr ""
+msgstr "Âge "
 
 #: templates/Litters/view.php:149 templates/Litters/view.php:173
 #: templates/Litters/view.php:191
+#, fuzzy
 msgid "Death cause:"
-msgstr ""
+msgstr "Cause de décès :"
 
 #: templates/Litters/view.php:156 templates/Litters/view.php:178
+#, fuzzy
 msgid "Sire: "
-msgstr ""
+msgstr "Père : "
 
 #: templates/Litters/view.php:199
 msgid "Litter summary"
@@ -3326,41 +3333,49 @@ msgstr ""
 #: templates/element/rats.php:17 templates/element/simple_rats.php:22
 #: templates/element/simple_ratteries.php:15
 #: templates/element/staff_ratteries.php:5
+#, fuzzy
 msgid "Prefix"
-msgstr ""
+msgstr "Préfixe"
 
 #: templates/Litters/view.php:206
+#, fuzzy
 msgid "Mating date"
-msgstr ""
+msgstr "Date de saillie"
 
 #: templates/Litters/view.php:210 templates/Rats/print.php:43
 #: templates/Rats/view.php:159 templates/Ratteries/view.php:434
+#, fuzzy
 msgid "Birth date"
-msgstr ""
+msgstr "Date de naissance"
 
 #: templates/Litters/view.php:214
+#, fuzzy
 msgid "Pups number"
-msgstr ""
+msgstr "Nombre de ratons"
 
 #: templates/Litters/view.php:218
 msgid " recorded"
 msgstr ""
 
 #: templates/Litters/view.php:221
+#, fuzzy
 msgid "Stillborn pups"
-msgstr ""
+msgstr "Mort-né(s)"
 
 #: templates/Litters/view.php:225
+#, fuzzy
 msgid "Inbreeding"
-msgstr ""
+msgstr "Consanguinité"
 
 #: templates/Litters/view.php:236
+#, fuzzy
 msgid "Rattery Prefix"
-msgstr ""
+msgstr "Préfixe"
 
 #: templates/Litters/view.php:237
+#, fuzzy
 msgid "Rattery Name"
-msgstr ""
+msgstr "Raterie"
 
 #: templates/Litters/view.php:260
 msgid "Offspring"
@@ -3377,34 +3392,41 @@ msgid "Current survival rate:"
 msgstr ""
 
 #: templates/Litters/view.php:289
+#, fuzzy
 msgid "(all rats of the litter are now dead, or supposed so)"
-msgstr ""
+msgstr "(tous les rats de la portée sont morts ou présumés morts)"
 
 #: templates/Litters/view.php:299 templates/Litters/view.php:303
 #: templates/Litters/view.php:307 templates/Rats/family.php:69
 #: templates/Rats/family.php:73 templates/Rats/family.php:77
+#, fuzzy
 msgid ""
 "{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} "
 "=1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# "
 "months}})"
 msgstr ""
+"{0, plural, =0{N/A} =1{1 mois} other{# mois}} (♀: {1, plural, =0{N/A} =1{1 "
+"mois} other{# mois}} – ♂: {2, plural, =0{N/A} =1{1 mois} other{# mois}})"
 
 #: templates/Litters/view.php:302 templates/Rats/family.php:72
 #: templates/Rats/family.php:86 templates/Ratteries/view.php:161
 #: templates/Ratteries/view.php:327
+#, fuzzy
 msgid "infant mortality excluded:"
-msgstr ""
+msgstr "mortalité infantile exclue :"
 
 #: templates/Litters/view.php:306 templates/Rats/family.php:76
 #: templates/Rats/family.php:90 templates/Ratteries/view.php:165
 #: templates/Ratteries/view.php:331
+#, fuzzy
 msgid "accidents excluded:"
-msgstr ""
+msgstr "accidents exclus :"
 
 #: templates/Litters/view.php:314 templates/Rats/view.php:347
 #: templates/Ratteries/view.php:414 templates/Users/view.php:167
+#, fuzzy
 msgid "Created on {0} by {1}."
-msgstr ""
+msgstr "Fiche créée le {0} par {1}."
 
 #: templates/Litters/view.php:314 templates/Rats/view.php:347
 #: templates/Ratteries/view.php:416 templates/Users/view.php:167
@@ -3490,108 +3512,134 @@ msgid "Event"
 msgstr ""
 
 #: templates/Lord/my.php:13
+#, fuzzy
 msgid "My back office"
-msgstr ""
+msgstr "Mon arrière-boutique"
 
 #: templates/Lord/my.php:19
+#, fuzzy
 msgid "Sheets needing staff action"
-msgstr ""
+msgstr "Fiches en attente de modération"
 
 #: templates/Lord/my.php:23
+#, fuzzy
 msgid "See all rats"
-msgstr ""
+msgstr "Voir tous les rats"
 
 #: templates/Lord/my.php:25
+#, fuzzy
 msgid ""
 "<strong>{0} rat sheets</strong> are currently waiting for staff action. Most "
 "recent are:"
 msgstr ""
+"<strong>{0} fiche rats</strong> sont en attente de modération. Les plus "
+"récentes sont :"
 
 #: templates/Lord/my.php:30
+#, fuzzy
 msgid "See all litters"
-msgstr ""
+msgstr "Voir toutes les portées"
 
 #: templates/Lord/my.php:32
+#, fuzzy
 msgid ""
 "<strong>{0} litter sheets</strong> are currently waiting for staff action. "
 "Most recent are:"
 msgstr ""
+"<strong>{0} fiche portée</strong> requièrent une intervention du staff. Les "
+"plus récentes sont :"
 
 #: templates/Lord/my.php:37
+#, fuzzy
 msgid "See all ratteries"
-msgstr ""
+msgstr "Voir toutes les rateries"
 
 #: templates/Lord/my.php:39
+#, fuzzy
 msgid ""
 "<strong>{0} rattery sheets</strong> are currently waiting for staff action. "
 "Most recent are:"
 msgstr ""
+"<strong>{0} fiches raterie</strong> nécessitent une action du staff. Les "
+"plus récentes :"
 
 #: templates/Lord/my.php:47
+#, fuzzy
 msgid "See all issues"
-msgstr ""
+msgstr "Voir tous les signalements"
 
 #: templates/Lord/my.php:49
+#, fuzzy
 msgid "Open issues"
-msgstr ""
+msgstr "Signalements en cours"
 
 #: templates/Lord/my.php:56
+#, fuzzy
 msgid "Administration"
-msgstr ""
+msgstr "Administration"
 
 #: templates/Lord/my.php:59
+#, fuzzy
 msgid "Coats"
-msgstr ""
+msgstr "Poils"
 
 #: templates/Lord/my.php:60
 msgid "Manage coats"
 msgstr ""
 
 #: templates/Lord/my.php:63
+#, fuzzy
 msgid "Colors"
-msgstr ""
+msgstr "Couleurs"
 
 #: templates/Lord/my.php:64
 msgid "Manage colors"
 msgstr ""
 
 #: templates/Lord/my.php:67
+#, fuzzy
 msgid "Dilutions"
-msgstr ""
+msgstr "Dilutions"
 
 #: templates/Lord/my.php:68 templates/Lord/my.php:76
 msgid "Manage eyecolors"
 msgstr ""
 
 #: templates/Lord/my.php:71
+#, fuzzy
 msgid "Earsets"
-msgstr ""
+msgstr "Oreilles"
 
 #: templates/Lord/my.php:72
 msgid "Manage ear types"
 msgstr ""
 
 #: templates/Lord/my.php:75
+#, fuzzy
 msgid "Eyecolors"
-msgstr ""
+msgstr "Couleurs des yeux"
 
 #: templates/Lord/my.php:79
+#, fuzzy
 msgid "Markings"
-msgstr ""
+msgstr "Marquages"
 
 #: templates/Lord/my.php:80
+#, fuzzy
 msgid "Manage markings"
-msgstr ""
+msgstr "Administrer les marquages"
 
 #: templates/Lord/my.php:83 templates/Rats/add.php:224
 #: templates/Rats/edit.php:109 templates/Rats/print.php:63
 #: templates/Rats/view.php:252
+#, fuzzy
 msgid "Singularities"
-msgstr ""
+msgstr "Particularités"
 
 #: templates/Lord/my.php:84
+#, fuzzy
 msgid "Manage singularities"
-msgstr ""
+msgstr "Gérer les particularités"
 
 #: templates/Lord/my.php:93
 msgid "Configuration"
@@ -3944,9 +3992,11 @@ msgid "By decreasing frequency:"
 msgstr "Par fréquence décroissante :"
 
 #: templates/Lord/stats.php:183
+#, fuzzy
 msgid ""
 "please note that tumours without recorded localization appear as « Autres »"
-msgstr "les tumeurs sans localisation déclarée apparaissent sous « Autres »"
+msgstr ""
+"les tumeurs sans localisation déclarée sont comptabilisées dans « Autres »"
 
 #: templates/Lord/stats.php:191 templates/Lord/stats.php:218
 #: templates/Lord/stats.php:242
