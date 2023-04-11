@@ -471,25 +471,28 @@ class RatsTable extends Table
         );
 
         /* Rules about death date and cause */
-        $timeline = function($rat) {
-            return !( !$rat->is_alive && $rat->birth_date->isFuture($rat->death_date) );
-        };
-        $rules->add($timeline, [
-            'errorField' => 'death_date',
-            'message' => __('Impossible: chosen death date is anterior to birth date. Please check and correct your entry.')
-        ]);
-
-        // temporary test for dead rats without death date (should not exist but...)
-        $future = function($rat) {
-            return !( !$rat->is_alive && !is_null($rat->death_date) && $rat->death_date->isFuture() );
-        };
-        $rules->add($future, [
-            'errorField' => 'death_date',
-            'message' => __('Impossible: this date is in the future. Please check and correct your entry.')
-        ]);
+        $rules->add(function ($rat) {
+            return ! $rat->isBenjaminButton();
+            },
+            'isNotBenjaminButton'
+            [
+                'errorField' => 'death_date',
+                'message' => __('Impossible: chosen death date is anterior to birth date. Please check and correct your entry.')
+            ]
+        );
 
         $rules->add(function ($rat) {
-                return ! $rat->isMathusalem();
+            return ! $rat->isMartyMcFly();
+        },
+            'isNotMartyMcFly',
+            [
+                'errorField' => 'death_date',
+                'message' => __('Impossible: this date is in the future. Please check and correct your entry.')
+            ]
+        );
+
+        $rules->add(function ($rat) {
+            return ! $rat->isMathusalem();
             },
             [
                 'errorField' => 'death_date',
