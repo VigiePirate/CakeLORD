@@ -474,7 +474,7 @@ class RatsTable extends Table
         $rules->add(function ($rat) {
             return ! $rat->isBenjaminButton();
             },
-            'isNotBenjaminButton'
+            'isNotBenjaminButton',
             [
                 'errorField' => 'death_date',
                 'message' => __('Impossible: chosen death date is anterior to birth date. Please check and correct your entry.')
@@ -483,7 +483,7 @@ class RatsTable extends Table
 
         $rules->add(function ($rat) {
             return ! $rat->isMartyMcFly();
-        },
+            },
             'isNotMartyMcFly',
             [
                 'errorField' => 'death_date',
