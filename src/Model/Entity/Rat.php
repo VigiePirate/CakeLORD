@@ -686,6 +686,11 @@ class Rat extends Entity
             && $singularity_condition;
     }
 
+    /* check if rat is dead without date */
+    public function isSherlockHolmes() {
+        return ! $this->is_alive && is_null($this->death_date);
+    }
+
     /* check if rat is dead before being born */
     public function isBenjaminButton() {
         return ! $this->is_alive && ! is_null($this->death_date) && $this->birth_date->isFuture($this->death_date);

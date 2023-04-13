@@ -471,6 +471,17 @@ class RatsTable extends Table
         );
 
         /* Rules about death date and cause */
+
+        $rules->add(function ($rat) {
+            return ! $rat->isSherlockHolmes();
+            },
+            'isNotSherlockHolmes',
+            [
+                'errorField' => 'death_date',
+                'message' => __('Death date is mandatory. If not known, please enter a best effort estimate.')
+            ]
+        );
+
         $rules->add(function ($rat) {
             return ! $rat->isBenjaminButton();
             },
