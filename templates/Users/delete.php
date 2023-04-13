@@ -69,10 +69,10 @@
             <?php else : ?>
                 <table>
                     <thead>
-                        <th>Association</th>
-                        <th>Rule</th>
-                        <th>Message</th>
-                        <th>Sheet</th>
+                        <th><?= __('Association') ?></th>
+                        <th><?= __('Rule') ?></th>
+                        <th><?= __('Message') ?></th>
+                        <th><?= __('Sheet') ?></th>
                     </thead>
                     <tbody>
                         <?php foreach ($errors as $error_field => $error_id) : ?>
@@ -85,7 +85,7 @@
                                         <td>
                                             <?= $this->Html->link(
                                             '#'.$this->Number->format($new_user->$error_field[$error_key]['id']),
-                                            ['controller' => $associations[Inflector::camelize($error_field)], 
+                                            ['controller' => $associations[Inflector::camelize($error_field)],
                                             'action' => 'view', $new_user->$error_field[$error_key]['id']])
                                             ?>
                                         </td>

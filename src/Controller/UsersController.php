@@ -7,6 +7,8 @@ use Cake\Routing\Router;
 use Cake\Mailer\Mailer;
 use Cake\Mailer\MailerAwareTrait;
 use Cake\Chronos\Chronos;
+use Cake\Utility\Inflector;
+use Cake\Collection\Collection;
 
 /**
 * Users Controller
@@ -496,29 +498,25 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        $associations = [
-            'OwnerRats' => 'Rats',
-            'CreatorRats' => 'Rats',
-            'Ratteries' => 'Ratteries',
-            'Litters' => 'Litters',
-            'FromIssues' => 'Issues',
-            'ClosingIssues' => 'Issues',
-            'Conversations' => 'Conversations',
-            'Messages' => 'Messages',
-        ];
-
-        $user = $this->Users->get($id, ['contain' => array_keys($associations)]);
-
+        //$belongsToManyAssociations = $this->Users->associations()->getByType('belongsToMany');
+        $hasManyAssociations = $this->Users->associations()->getByType('hasMany');
+        //$associations = array_merge($belongsToManyAssociations, $hasManyAssociations);
+        $associations = $hasManyAssociations;
+        $contain = [];
+        foreach ($associations as $association) {
+            $relatedModel = $association->getTarget();
+            $contain[] = $relatedModel->getAlias();
+        }
+        $user = $this->Users->get($id, ['contain' => $contain]);
         $this->Authorization->authorize($user);
 
-        $count = count($user->owner_rats)
-            + count($user->creator_rats)
-            + count($user->ratteries)
-            + count($user->litters)
-            + count($user->from_issues)
-            + count($user->closing_issues)
-            + count($user->conversations)
-            + count($user->messages);
+        $count = 0;
+        foreach ($associations as $association) {
+            $relatedModel = $association->getTarget();
+            $count += $this->Users->{$relatedModel->getAlias()}->find()
+                ->where([$association->getForeignKey() => $id])
+                ->count();
+        }
 
         if ($this->request->is(['patch', 'post', 'put'])) {
 
@@ -537,21 +535,20 @@ class UsersController extends AppController
             // NB: we don't check user existence in database, since new_user_id was fetched by ajax
             if ($this->request->getData('new_user_id')) {
                 $new_user_id = $this->request->getData('new_user_id');
-                $new_user = $this->Users->get($new_user_id, ['contain' => array_keys($associations)]);
+                $new_user = $this->Users->get($new_user_id, ['contain' => $contain]);
 
-                $new_user->owner_rats = array_merge($new_user->owner_rats, $user->owner_rats);
-                $new_user->creator_rats = array_merge($new_user->creator_rats, $user->creator_rats);
-
-                //FIXME : inactivate old user rattery
-                // $new_user->ratteries = array_merge($new_user->ratteries, $user->ratteries);
-                //
-                // $new_user->litters = array_merge($new_user->litters, $user->litters);
-                // $new_user->from_issues = array_merge($new_user->from_issues, $user->from_issues);
-                // $new_user->closing_issues = array_merge($new_user->closing_issues, $user->closing_issues);
-                // $new_user->conversations = array_merge($new_user->conversations, $user->conversations);
-                // $new_user->messages = array_merge($new_user->messages, $user->messages);
+                // give $user's associations to $new_user
+                foreach ($associations as $association) {
+                    $relatedModel = $association->getTarget();
+                    $query = $this->Users->{$relatedModel->getAlias()}->query();
+                    $query->update()
+                        ->set([$association->getForeignKey() => $new_user->id])
+                        ->where([$association->getForeignKey() => $id])
+                        ->execute();
+                }
 
                 if ($this->Users->save($new_user)) {
+                    $user = $this->Users->get($id, ['contain' => $contain]);
                     if ($this->Users->delete($user)) {
                          $this->Flash->success(__('The user has been deleted. All associated entries were transferred to the user below.'));
                          return $this->redirect(['action' => 'view', $new_user]);
