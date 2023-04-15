@@ -3,7 +3,6 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
  */
- use Cake\Utility\Inflector;
 ?>
 
 <div class="row">
@@ -34,68 +33,37 @@
 
             <?= $this->Flash->render(); ?>
 
-            <?php if (empty($errors)) : ?>
-                <?php
-                echo $this->Form->create(null, [
-                	'id' => 'jquery-owner-form',
-                ]); ?>
+            <?php
+            echo $this->Form->create(null, [
+            	'id' => 'jquery-owner-form',
+            ]); ?>
 
-                <?php if ($count != 0) : ?>
-                    <fieldset>
-                        <?php
-                            echo $this->Form->control('searchkey', [
-                                'id' => 'jquery-owner-input',
-                                'name' => 'new_user_name',
-                                'label' => __('Search and select the heir’s username'),
-                                'type' => 'text',
-                                'required' => $count != 0,
-                                'placeholder' => __('Type here...'),
-                            ]);
-                            echo $this->Form->control('searchid', [
-                                'id' => 'jquery-owner-id',
-                                'name' => 'new_user_id',
-                                'label' => [
-                                    'class' => 'hide-everywhere',
-                                    'text' => 'Hidden field for ID update'
-                                ],
+            <?php if ($count != 0) : ?>
+                <fieldset>
+                    <?php
+                        echo $this->Form->control('searchkey', [
+                            'id' => 'jquery-owner-input',
+                            'name' => 'new_user_name',
+                            'label' => __('Search and select the heir’s username'),
+                            'type' => 'text',
+                            'required' => $count != 0,
+                            'placeholder' => __('Type here...'),
+                        ]);
+                        echo $this->Form->control('searchid', [
+                            'id' => 'jquery-owner-id',
+                            'name' => 'new_user_id',
+                            'label' => [
                                 'class' => 'hide-everywhere',
-                                'type' => 'text',
-                            ]);
-                        ?>
-                    </fieldset>
-                <?php endif; ?>
-                <?= $this->Form->button(__('Delete user'), ['class' => 'button-staff', 'confirm' => __('Are you sure you want to delete # {0}?', [$user->id])]); ?>
-                <?= $this->Form->end(); ?>
-            <?php else : ?>
-                <table>
-                    <thead>
-                        <th><?= __('Association') ?></th>
-                        <th><?= __('Rule') ?></th>
-                        <th><?= __('Message') ?></th>
-                        <th><?= __('Sheet') ?></th>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($errors as $error_field => $error_id) : ?>
-                            <?php foreach ($error_id as $error_key => $error_value) : ?>
-                                <?php foreach ($error_value as $error_fkey => $error_validation) : ?>
-                                    <?php foreach ($error_validation as $error_rule => $error_message) : ?>
-                                        <td><?= h($error_field) ?> </td>
-                                        <td><?= h($error_rule) ?> </td>
-                                        <td><?= h($error_message) ?> </td>
-                                        <td>
-                                            <?= $this->Html->link(
-                                            '#'.$this->Number->format($new_user->$error_field[$error_key]['id']),
-                                            ['controller' => $associations[Inflector::camelize($error_field)],
-                                            'action' => 'view', $new_user->$error_field[$error_key]['id']])
-                                            ?>
-                                        </td>
-                                    <?php endforeach ; ?>
-                                <?php endforeach ; ?>
-                            <?php endforeach ; ?>
-                        <?php endforeach ; ?>
-                    </tbody>
-                </table>
-            <?php endif ; ?>
+                                'text' => 'Hidden field for ID update'
+                            ],
+                            'class' => 'hide-everywhere',
+                            'type' => 'text',
+                        ]);
+                    ?>
+                </fieldset>
+            <?php endif; ?>
+            <?= $this->Form->button(__('Delete user'), ['class' => 'button-staff', 'confirm' => __('Are you sure you want to delete # {0}?', [$user->id])]); ?>
+            <?= $this->Form->end(); ?>
         </div>
     </div>
 </div>
