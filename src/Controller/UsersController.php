@@ -560,7 +560,7 @@ class UsersController extends AppController
                 if ($this->Users->delete($user)) {
                     $connection->commit();
                     $this->Flash->success(__('The user has been deleted. All associated entries were transferred to the user below.'));
-                    return $this->redirect(['action' => 'view', $new_user->id]);
+                    return $this->redirect(['action' => 'view', $new_user_id]);
                 } else {
                     $connection->rollback();
                     $this->Flash->error(__('The user could not be deleted. Please, try again.'));
