@@ -317,7 +317,12 @@
                     <table class="condensed stats">
                         <tr>
                             <th><?= __('Their champion:') ?></th>
-                            <td><?= empty($champion) ? __('This user has no eligible champion') : $this->Html->link(h($champion->usual_name), ['controller' => 'Rats', 'action' => 'view', $champion->id]) . ' (' . h($champion->champion_age_string) .')'?></td>
+                            <td><?=
+                                empty($champion)
+                                ? __('This user has no eligible champion')
+                                : $this->Html->link(h($champion->usual_name), ['controller' => 'Rats', 'action' => 'view', $champion->id], ['escape' => false]) . ' (' . h($champion->champion_age_string) .')'
+                                ?>
+                            </td>
                         </tr>
                     </table>
                 </div>
