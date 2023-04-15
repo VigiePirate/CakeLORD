@@ -498,9 +498,9 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        //FIXME: deal with belongsToMany associations if any (there are not at the moment, but...)
         //$belongsToManyAssociations = $this->Users->associations()->getByType('belongsToMany');
         $hasManyAssociations = $this->Users->associations()->getByType('hasMany');
-        //$associations = array_merge($belongsToManyAssociations, $hasManyAssociations);
         $associations = $hasManyAssociations;
         $contain = [];
         foreach ($associations as $association) {
@@ -535,43 +535,38 @@ class UsersController extends AppController
             // NB: we don't check user existence in database, since new_user_id was fetched by ajax
             if ($this->request->getData('new_user_id')) {
                 $new_user_id = $this->request->getData('new_user_id');
-                $new_user = $this->Users->get($new_user_id, ['contain' => $contain]);
-
                 $connection = $this->Users->getConnection();
                 $connection->begin();
 
                 try {
                      foreach ($associations as $association) {
-                         $relatedModel = $association->getTarget();
-                         $query = $this->Users->{$relatedModel->getAlias()}->query();
-                         $query->update()
-                             ->set([$association->getForeignKey() => $new_user->id])
+                        $relatedModel = $association->getTarget();
+                        $query = $this->Users->{$relatedModel->getAlias()}->query();
+                        $query->update()
+                             ->set([$association->getForeignKey() => $new_user_id])
                              ->where([$association->getForeignKey() => $id])
                              ->execute();
                      }
-                 } catch (Exception $e) {
-                      $connection->rollback();
-                      $this->Flash->error(__('An error occurred. Please try again later.'));
-                      $this->set(compact('new_user', 'associations'));
-                 }
+                } catch (Exception $e) {
+                    $connection->rollback();
+                    $this->Flash->error(__('The user’s associated entries could not be transferred to the new user. Please, try again.'));
+                    $this->set(compact('new_user'));
+                }
 
-                 if ($this->Users->save($new_user)) {
-                     $user = $this->Users->get($id, ['contain' => $contain]);
-                     if ($this->Users->delete($user)) {
-                         $connection->commit();
-                         $this->Flash->success(__('The user has been deleted. All associated entries were transferred to the user below.'));
-                         return $this->redirect(['action' => 'view', $new_user->id]);
-                     } else {
-                         $connection->rollback();
-                         $this->Flash->error(__('The user could not be deleted. Please, try again.'));
-                         return $this->redirect(['action' => 'delete', $user->id]);
-                     }
-                 } else {
-                     $connection->rollback();
-                     $errors = $new_user->getErrors();
-                     $this->Flash->error(__('The user’s associated entries could not be transferred to the new user. Please, correct them before trying again.'));
-                     $this->set(compact('new_user', 'associations', 'errors'));
-                 }
+                // reload old user to remove entities which are not his property anymore
+                // but still try to contain them as a sanity check!
+                $user = $this->Users->get($id, ['contain' => $contain]);
+
+                if ($this->Users->delete($user)) {
+                    $connection->commit();
+                    $this->Flash->success(__('The user has been deleted. All associated entries were transferred to the user below.'));
+                    return $this->redirect(['action' => 'view', $new_user->id]);
+                } else {
+                    $connection->rollback();
+                    $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+                    return $this->redirect(['action' => 'delete', $user->id]);
+                }
+
             } else {
                 $this->Flash->error(__('The user’s heir could not be found. Please, try again.'));
                 return $this->redirect(['action' => 'delete', $user->id]);
