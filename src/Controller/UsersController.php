@@ -513,9 +513,7 @@ class UsersController extends AppController
         $count = 0;
         foreach ($associations as $association) {
             $relatedModel = $association->getTarget();
-            $count += $this->Users->{$relatedModel->getAlias()}->find()
-                ->where([$association->getForeignKey() => $id])
-                ->count();
+            $count += count($user->{$association->getProperty()});
         }
 
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -526,7 +524,7 @@ class UsersController extends AppController
                     $this->Flash->success(__('The user has been deleted.'));
                     return $this->redirect(['action' => 'index']);
                 } else {
-                    $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+                    $this->Flash->error(__('The user could not be deleted. Too many strings attached.'));
                     return $this->redirect(['action' => 'delete', $user->id]);
                 }
             }
