@@ -106,44 +106,44 @@ $cakeDescription = 'LORD';
     </main>
     <footer>
         <div class="footer_section">
-            <h5>Guides</h5>
-            <a href="/faqs/all">F.A.Q.</a>
-            <a href="/articles/all">Full guides</a>
-            <a href="/articles/all">Code of conduct</a>
-            <a href="/articles/all">Contributing</a>
-            <a href="/articles/all">I want a LORD</a>
+            <h5><?= __('Guides') ?></h5>
+            <a href="/faqs/all"><?= __('F.A.Q.') ?></a>
+            <a href="/articles/all"><?= __('Full guides') ?></a>
+            <a href="/articles/all"><?= __('Code of conduct') ?></a>
+            <a href="/articles/all"><?= __('Contributing') ?></a>
+            <a href="/articles/all"><?= __('I want a LORD') ?></a>
         </div>
         <div class="footer_section">
-            <h5>About</h5>
-            <a href="/articles/all">History</a>
-            <a href="/articles/all">What's New?</a>
-            <a href="/articles/all">Staff</a>
-            <a href="/articles/all">Credits</a>
-            <a href="/articles/all">Legal Notice</a>
+            <h5><?= __('About') ?></h5>
+            <a href="/articles/all"><?= __('History') ?></a>
+            <a href="/articles/all"><?= __('What’s New?') ?></a>
+            <a href="/articles/all"><?= __('Staff') ?></a>
+            <a href="/articles/all"><?= __('Credits') ?></a>
+            <a href="/articles/all"><?= __('Legal Notice') ?></a>
         </div>
         <div class="footer_section">
-            <h5>Statistics</h5>
+            <h5><?= __('Statistics') ?></h5>
             <div class="footer_subsection">
-                <a href="/lord/webstats">Site statistics</a>
-                <a href="/lord/stats">Rat statistics</a>
+                <a href="/lord/webstats"><?= __('Site statistics') ?></a>
+                <a href="/lord/stats"><?= __('Rat statistics') ?></a>
             </div>
-            <h5><a href="/ratteries/locate/">Rattery map</a></h5>
-            <h5>Contact</h5>
+            <h5><a href="/ratteries/locate/"><?= __('Rattery map') ?></a></h5>
+            <h5><?= __('Contact') ?></h5>
         </div>
         <div class="footer_center hide-on-tablet">
             <!--<img src="/img/lord.footer.svg" width="105"/>-->
             <img src="/img/lord.shield.clean.svg" width="110"/>
-            <div class="shieldline">Livre des Origines<br>du <span>Rat</span> Domestique</div> <!-- LORD v2.2 – “Cake” -->
+            <div class="shieldline">Livre des Origines<br>du <span>Rat</span> Domestique</div>
             <div class="versionline">Version 2.2 – “Cake”</div>
         </div>
         <div class="footer_section">
             <div class="footer_subsection">
-                <h5>Links</h5>
-                <a href="/articles/all">Websites</a>
-                <a href="/articles/all">Forums</a>
-                <a href="/articles/all">Associations</a>
-                <a href="/articles/all">Social</a>
-                <a href="/articles/all">Partners</a>
+                <h5><?= __('Links') ?></h5>
+                <a href="/articles/all"><?= __('Websites') ?></a>
+                <a href="/articles/all"><?= __('Forums') ?></a>
+                <a href="/articles/all"><?= __('Associations') ?></a>
+                <a href="/articles/all"><?= __('Social') ?></a>
+                <a href="/articles/all"><?= __('Partners') ?></a>
             </div>
         </div>
         <div class="footer_largersection">
