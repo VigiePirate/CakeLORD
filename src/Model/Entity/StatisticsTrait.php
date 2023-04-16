@@ -431,7 +431,7 @@ trait StatisticsTrait
         }
 
         if ($sex_ratio == -1) {
-            return 'N/A';
+            return __('N/A');
         }
 
         if ($sex_ratio == 0) {

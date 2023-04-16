@@ -61,7 +61,7 @@
                     <td><?= $this->Html->link(h($issue->url), $this->Url->build($issue->url, ['fullBase' => true]), ['target' => '_blank'])?></td>
                 </tr>
                 <tr>
-                    <th class="comment-head"><?= __('Comment') ?></th>
+                    <th class="comment-head"><?= __('Complaint') ?></th>
                     <td class="comment"><?= $this->Commonmark->sanitize($issue->complaint); ?></td>
             </table>
 

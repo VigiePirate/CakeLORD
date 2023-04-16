@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('males:') ?></th>
-                    <td> ⨽ <?=  __('{0, number} females ({1, number} %)', [$male_count, $male_frequency]) ?></td>
+                    <td> ⨽ <?=  __('{0, number} males ({1, number} %)', [$male_count, $male_frequency]) ?></td>
                 </tr>
 
             </table>

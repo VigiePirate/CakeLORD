@@ -121,44 +121,44 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
     <div class="footer_container">
         <footer>
             <div class="footer_section">
-                <h5>Guides</h5>
-                <a href="/faqs/all">F.A.Q.</a>
-                <a href="/articles">Full guides</a>
-                <a href="/articles">Code of conduct</a>
-                <a href="/articles">Contributing</a>
-                <a href="/articles">I want a LORD</a>
+                <h5><?= __('Guides') ?></h5>
+                <a href="/faqs/all"><?= __('F.A.Q.') ?></a>
+                <a href="/articles/all"><?= __('Full guides') ?></a>
+                <a href="/articles/all"><?= __('Code of conduct') ?></a>
+                <a href="/articles/all"><?= __('Contributing') ?></a>
+                <a href="/articles/all"><?= __('I want a LORD') ?></a>
             </div>
             <div class="footer_section">
-                <h5>About</h5>
-                <a href="/articles">History</a>
-                <a href="/articles">What's New?</a>
-                <a href="/articles">Staff</a>
-                <a href="/articles">Credits</a>
-                <a href="/articles">Legal Notice</a>
+                <h5><?= __('About') ?></h5>
+                <a href="/articles/all"><?= __('History') ?></a>
+                <a href="/articles/all"><?= __('What’s New?') ?></a>
+                <a href="/articles/all"><?= __('Staff') ?></a>
+                <a href="/articles/all"><?= __('Credits') ?></a>
+                <a href="/articles/all"><?= __('Legal Notice') ?></a>
             </div>
             <div class="footer_section">
-                <h5>Statistics</h5>
+                <h5><?= __('Statistics') ?></h5>
                 <div class="footer_subsection">
-                    <a href="/lord/webstats">Site statistics</a>
-                    <a href="/lord/stats">Rat statistics</a>
+                    <a href="/lord/webstats"><?= __('Site statistics') ?></a>
+                    <a href="/lord/stats"><?= __('Rat statistics') ?></a>
                 </div>
-                <h5><a href="/ratteries/locate/">Rattery map</a></h5>
-                <h5>Contact</h5>
+                <h5><a href="/ratteries/locate/"><?= __('Rattery map') ?></a></h5>
+                <h5><?= __('Contact') ?></h5>
             </div>
             <div class="footer_center hide-on-tablet">
                 <!--<img src="/img/lord.footer.svg" width="105"/>-->
                 <img src="/img/lord.shield.clean.svg" width="110"/>
-                <div class="shieldline">Livre des Origines<br>du <span>Rat</span> Domestique</div> <!-- LORD v2.2 – “Cake” -->
+                <div class="shieldline">Livre des Origines<br>du <span>Rat</span> Domestique</div>
                 <div class="versionline">Version 2.2 – “Cake”</div>
             </div>
             <div class="footer_section">
                 <div class="footer_subsection">
-                    <h5>Links</h5>
-                    <a href="/articles">Websites</a>
-                    <a href="/articles">Forums</a>
-                    <a href="/articles">Associations</a>
-                    <a href="/articles">Social</a>
-                    <a href="/articles">Partners</a>
+                    <h5><?= __('Links') ?></h5>
+                    <a href="/articles/all"><?= __('Websites') ?></a>
+                    <a href="/articles/all"><?= __('Forums') ?></a>
+                    <a href="/articles/all"><?= __('Associations') ?></a>
+                    <a href="/articles/all"><?= __('Social') ?></a>
+                    <a href="/articles/all"><?= __('Partners') ?></a>
                 </div>
             </div>
             <div class="footer_largersection">
@@ -167,12 +167,13 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                     <div class="hide-on-tablet"></div><a href="https://cakephp.org/"><img src="/img/logo-cake.svg" width="100"/></a><a href="https://github.com/VigiePirate/CakeLORD"><img src="/img/logo-github.svg" width="60"/></a><a href="https://www.srfa.info"><img src="/img/logo-srfa.svg" width="80"/></a>
                 </div>
             <div class="creditline">
-                © 2020 – Tous droits réservés<br>
+                © <?= h(date("Y")) ?> – Tous droits réservés<br>
                 Textes et images non libres de droits<br>
                 Code de l'application distribué sous licence GPL<br>
                 Service gratuit hébergé et maintenu par l'association SRFA
             </div>
-        </footer>
+        </div>
+    </footer>
     </div>
 </body>
 <script>
