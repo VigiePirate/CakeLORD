@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-03-24 18:52+0000\n"
-"PO-Revision-Date: 2023-04-16 18:45+0200\n"
+"PO-Revision-Date: 2023-04-16 20:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -1120,7 +1120,7 @@ msgstr ""
 
 #: src/Model/Entity/Litter.php:79 src/Model/Entity/Litter.php:91
 msgid "{0, plural, =1{1 pup} other{# pups}}"
-msgstr ""
+msgstr "{0, plural, =1{1 raton} other{# ratons}}"
 
 #: src/Model/Entity/Litter.php:81 src/Model/Entity/Litter.php:94
 msgid " with "
@@ -1128,11 +1128,11 @@ msgstr ""
 
 #: src/Model/Entity/Litter.php:83
 msgid " (unknown mother)"
-msgstr ""
+msgstr " (mère inconnue)"
 
 #: src/Model/Entity/Litter.php:96
 msgid " (unknown father)"
-msgstr ""
+msgstr " (père inconnu)"
 
 #: src/Model/Entity/Litter.php:115 src/Model/Entity/Litter.php:135 templates/Users/view.php:305 templates/Users/view.php:308 templates/Users/view.php:312
 msgid "{0, plural, =1{1 month} other{# months}}"
@@ -1140,57 +1140,57 @@ msgstr ""
 
 #: src/Model/Entity/Litter.php:155
 msgid "{0, plural, =0{<1 month} =1{1 month} other{# months}}"
-msgstr "{0} mois"
+msgstr "{0, number} mois"
 
 #: src/Model/Entity/Litter.php:117 src/Model/Entity/Litter.php:137 src/Model/Entity/Litter.php:157
 msgctxt "age"
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #: templates/Litters/view.php:178 templates/Litters/view.php:180 templates/Litters/view.php:184 templates/Litters/view.php:188 templates/Litters/view.php:192
 #: templates/Litters/view.php:207 templates/Ratteries/view.php:446 templates/Ratteries/view.php:447
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #: src/Model/Entity/Rat.php:255
 msgid " d"
-msgstr ""
+msgstr "j"
 
 #: src/Model/Entity/Rat.php:257
 msgid " mo"
-msgstr ""
+msgstr " mois"
 
 #: src/Model/Entity/Rat.php:351
 msgid "Unknown (presumably dead)"
-msgstr ""
+msgstr "Inconnu (présumé mort)"
 
 #: src/Model/Entity/Rat.php:353 templates/Rats/search.php:125
 msgid "Alive"
-msgstr ""
+msgstr "En vie"
 
 #: src/Model/Entity/Rat.php:377
 msgid "presumably dead"
-msgstr ""
+msgstr "présumé mort"
 
 #: src/Model/Entity/Rat.php:379
 msgid "alive"
-msgstr ""
+msgstr "en vie"
 
 #: src/Model/Entity/Rattery.php:251
 msgid " (one-shot rattery)"
-msgstr ""
+msgstr " (raterie-minute)"
 
 #: src/Model/Entity/StatisticsTrait.php:115
 msgid "Male-only"
-msgstr ""
+msgstr "Uniquement des mâles"
 
 #: src/Model/Entity/StatisticsTrait.php:121
 msgid "Female-only"
-msgstr ""
+msgstr "Uniquement des femelles"
 
 #: src/Model/Entity/StatisticsTrait.php:127
 msgid "Balanced (1 male for 1 female)"
-msgstr ""
+msgstr "Équilibrée (1 mâle pour 1 femelle)"
 
 #: src/Model/Entity/StatisticsTrait.php:133 src/Model/Entity/StatisticsTrait.php:443
 msgid "{0, number} (about {1, plural, =1{1 male} other{# males}} for {2, plural, =1{1 female} other{# females}})"
@@ -1198,15 +1198,15 @@ msgstr "{0, number} (environ {1, plural, =1{1 mâle} other{# mâles}} pour {2, p
 
 #: src/Model/Entity/StatisticsTrait.php:137 src/Model/Entity/StatisticsTrait.php:447
 msgid "{0, number} (about {1, plural, =1{1 female} other{# females}} for {2, plural, =1{1 male} other{# males}})"
-msgstr ""
+msgstr "{0, number} (environ {1, plural, =1{1 femelle} other{# femelles}} pour {2, plural, =1{1 mâle} other{# mâles}})"
 
 #: src/Model/Entity/StatisticsTrait.php:430
 msgid "Only females"
-msgstr ""
+msgstr "Uniquement des femelles"
 
 #: src/Model/Entity/StatisticsTrait.php:438
 msgid "Only males"
-msgstr ""
+msgstr "Uniquement des mâles"
 
 #: src/Model/Entity/User.php:201
 msgid "Happy birthday to you!"
@@ -1898,7 +1898,7 @@ msgstr ""
 
 #: templates/Countries/edit.php:19 templates/Issues/add.php:20 templates/Issues/edit.php:19 templates/element/tech_sidebar.php:13
 msgid "Cancel and go back"
-msgstr ""
+msgstr "Annuler et revenir à la fiche"
 
 #: templates/Countries/index.php:9
 msgid "New Country"
@@ -2400,7 +2400,7 @@ msgstr ""
 #: templates/element/litters.php:6 templates/element/ratteries.php:6 templates/element/simple_rats.php:16 templates/element/simple_ratteries.php:6
 #: templates/element/staff_litters.php:4 templates/element/staff_rats.php:4 templates/element/staff_ratteries.php:4
 msgid "State"
-msgstr ""
+msgstr "État"
 
 #: templates/LitterSnapshots/view.php:39 templates/RatSnapshots/view.php:39 templates/Rats/view.php:406 templates/RatterySnapshots/view.php:39
 msgid "Data"
@@ -2860,7 +2860,7 @@ msgstr "Fiche créée le {0} par {1}."
 
 #: templates/Litters/view.php:314 templates/Rats/view.php:347 templates/Ratteries/view.php:416 templates/Users/view.php:167
 msgid "Last modified on {0}."
-msgstr "Modifié pour la dernière fois le {0]."
+msgstr "Modifiée pour la dernière fois le {0}."
 
 #: templates/Litters/view.php:325 templates/Rats/view.php:357 templates/Users/edit.php:53 templates/Users/my.php:64 templates/Users/view.php:178
 msgid "Private information"
@@ -3438,7 +3438,7 @@ msgstr "Utilisateurs (par date d’inscription)"
 
 #: templates/Lord/webstats.php:62
 msgid "Ratteries (by registration)"
-msgstr "Rats (par date d’enregistrement)"
+msgstr "Rateries (par date d’enregistrement)"
 
 #: templates/Lord/webstats.php:67
 #, fuzzy
@@ -4399,7 +4399,7 @@ msgstr "Longévité moyenne des rats portant cet affixe :"
 
 #: templates/Ratteries/view.php:170 templates/Ratteries/view.php:404
 msgid "There aren’t enough rats with consolidated information to compute relevant mortality statistics."
-msgstr "Il n’y a pas assez d’information pour calculer des statistiques de mortalité pertinentes."
+msgstr "Il n’y a pas assez de données pour calculer des statistiques de mortalité pertinentes."
 
 #: templates/Ratteries/view.php:178 templates/Users/view.php:76
 msgid "Information"
@@ -4756,7 +4756,6 @@ msgid "Delete singularity"
 msgstr "Supprimer la particularité"
 
 #: templates/States/add.php:12
-#, fuzzy
 msgid "State list"
 msgstr "Liste des états"
 
