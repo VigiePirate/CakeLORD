@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-04-18 18:03+0000\n"
-"PO-Revision-Date: 2023-04-18 21:33+0200\n"
+"POT-Creation-Date: 2023-04-19 16:08+0000\n"
+"PO-Revision-Date: 2023-04-19 18:11+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -574,6 +574,7 @@ msgstr ""
 "administrateur."
 
 #: src/Controller/LittersController.php:123
+#: src/Controller/LordController.php:185
 msgctxt "litter statistics"
 msgid "Age: between "
 msgstr "Âge : entre "
@@ -766,11 +767,6 @@ msgstr "Rateries"
 #: src/Controller/LordController.php:252
 msgid "Ratteries by registration year"
 msgstr "Rateries par année d’inscription"
-
-#: src/Controller/LordController.php:185
-msgctxt "litter statistics"
-msgid "Age: between"
-msgstr "Âge : entre"
 
 #: src/Controller/LordController.php:205
 msgctxt "sex ratio"
@@ -1440,25 +1436,53 @@ msgstr "Uniquement des femelles"
 msgid "Only males"
 msgstr "Uniquement des mâles"
 
-#: src/Model/Entity/User.php:201
+#: src/Model/Entity/User.php:222
 msgid "Happy birthday to you!"
 msgstr "Joyeux anniversaire!"
 
-#: src/Model/Entity/User.php:229
+#: src/Model/Entity/User.php:250
 msgid "Happy birthday to "
 msgstr "Joyeux anniversaire à "
 
-#: src/Model/Entity/User.php:243
+#: src/Model/Entity/User.php:264
 msgid "You don’t have any rat. Time for adoption?"
 msgstr "Vous n’avez aucun rat. Et si c’était le moment d’adopter ?"
 
-#: src/Model/Entity/User.php:256
+#: src/Model/Entity/User.php:277
 msgid "No rat birthday coming soon"
 msgstr "Pas d’anniversaires à fêter bientôt"
 
-#: src/Model/Entity/User.php:256
+#: src/Model/Entity/User.php:277
 msgid "Rat birthdays coming soon: "
 msgstr "Prochains anniversaires à fêter : "
+
+#: src/Model/Entity/User.php:200
+msgctxt "élision"
+msgid "{0}’s dashboard"
+msgstr "Tableau de bord d’{0}"
+
+#: src/Model/Entity/User.php:204
+msgctxt "contraction (du)"
+msgid "{0}’s dashboard"
+msgstr "Tableau de bord du {0}"
+
+#: src/Model/Entity/User.php:208
+msgctxt "contraction (des)"
+msgid "{0}’s dashboard"
+msgstr "Tableau de bord des {0}"
+
+#: src/Model/Entity/User.php:211
+#, fuzzy
+#| msgid "{0}’s dashboard"
+msgctxt "pas de flexion"
+msgid "{0}’s dashboard"
+msgstr "Tableau de bord de {0}"
+
+#: templates/Litters/my.php:12 templates/Lord/my.php:11
+#: templates/Rats/my.php:13 templates/Ratteries/my.php:12
+#: templates/Users/my.php:11
+msgid "{0}’s dashboard"
+msgstr "Tableau de bord de {0}"
 
 #: src/Model/Table/RatsTable.php:98
 msgid "Sex must be either M or F"
@@ -2109,7 +2133,6 @@ msgstr ""
 #: templates/Rats/sex.php:38 templates/Rats/view.php:386
 #: templates/Ratteries/view.php:518 templates/RatterySnapshots/index.php:29
 #: templates/Users/view.php:265 templates/element/my/messages.php:28
-#: vendor/cakephp/cakephp/src/View/Helper/PaginatorHelper.php:1260
 msgid "View"
 msgstr ""
 
@@ -3374,12 +3397,6 @@ msgstr "Mettre à jour les rateries contributrices"
 #: templates/Litters/my.php:9
 msgid "Simulate Litter"
 msgstr "Simulation de portée"
-
-#: templates/Litters/my.php:12 templates/Lord/my.php:11
-#: templates/Rats/my.php:13 templates/Ratteries/my.php:12
-#: templates/Users/home.php:12 templates/Users/my.php:11
-msgid "{0}’s dashboard"
-msgstr "Tableau de bord de {0}"
 
 #: templates/Litters/my.php:14
 msgid "My litters"
@@ -5517,7 +5534,7 @@ msgstr "Dernières portées"
 msgid "See all contributed litters"
 msgstr "Voir toutes les portées"
 
-#: templates/Ratteries/view.php:437
+#: templates/Ratteries/view.php:437 templates/element/litters.php:24
 #, fuzzy
 msgid "Size"
 msgstr "Taille"
@@ -6046,7 +6063,7 @@ msgstr "Information visible par le staff uniquement"
 msgid "Staff comments"
 msgstr "Commentaires du staff"
 
-#: templates/Users/home.php:14
+#: templates/Users/home.php:16
 #, fuzzy
 msgid "Welcome!"
 msgstr "Bienvenue !"
@@ -6656,6 +6673,10 @@ msgstr "Réseaux sociaux"
 #: templates/layout/default.php:146 templates/layout/fullpage.php:161
 msgid "Partners"
 msgstr "Partenaires"
+
+#~ msgctxt "litter statistics"
+#~ msgid "Age: between"
+#~ msgstr "Âge : entre"
 
 #~ msgid "The conversation has been saved."
 #~ msgstr "La conversation a été enregistrée."

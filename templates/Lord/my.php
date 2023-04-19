@@ -8,7 +8,7 @@
     <div class="column-responsive column-90">
         <div class="users content view">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('{0}’s dashboard', [h($user->username)]) ?></div>
+                <div class="sheet-title pretitle"><?= h($user->dashboard_title) ?></div>
             </div>
             <h1><?= __('My back office') ?> </h1>
         </div>

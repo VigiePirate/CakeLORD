@@ -27,7 +27,7 @@
                 <div class="sheet-title pretitle"><?= __('User') ?></div>
             </div>
 
-            <h1><?= __('Edit ' . h($user->username) . '’s information') ?> </h1>
+            <h1><?= __('Edit {0}', [h($user->username)]) ?> </h1>
 
             <?= $this->Form->create($user, ['type' => 'file']) ?>
 
@@ -39,7 +39,7 @@
                 <?php endif; ?>
                 <?php
                     echo $this->Form->control('localization');
-                    echo $this->Form->control('picture_file', ['type' => 'file']);
+                    echo $this->Form->control('picture_file', ['label' => 'avatar', 'type' => 'file']);
                     echo $this->Form->control('about_me', [
                         'type' => 'textarea',
                         'id' => 'about_me',
@@ -52,12 +52,11 @@
                 <?php if ($identity->can('accessPersonal', $user)) : ?>
                     <legend><?= __('Private information') ?></legend>
                     <p class="helper">
-                        <?= __('For security reasons, you cannot change your credentials here.')
+                        <?= __('For security reasons, you cannot change your credentials here.') ?>
+                        <br/>
+                        <?= $this->Html->link(__('Change email'), ['action' => 'changeEmail'])
                         . ' — '
-                        . $this->Html->link(__('Change email'), ['action' => 'changeEmail'])
-                        . ' — '
-                        . $this->Html->link(__('Change password'), ['action' => 'changePassword'])
-                        ?>
+                        . $this->Html->link(__('Change password'), ['action' => 'changePassword']) ?>
                     </p>
                     <?php
                         echo $this->Form->control('firstname');

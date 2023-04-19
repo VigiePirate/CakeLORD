@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-04-18 18:03+0000\n"
+"POT-Creation-Date: 2023-04-19 16:08+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -511,6 +511,7 @@ msgid "We could not unapprove the sheet. Please retry or contact an administrato
 msgstr ""
 
 #: ./src/Controller/LittersController.php:123
+#: ./src/Controller/LordController.php:185
 msgctxt "litter statistics"
 msgid "Age: between "
 msgstr ""
@@ -716,11 +717,6 @@ msgstr ""
 
 #: ./src/Controller/LordController.php:252
 msgid "Ratteries by registration year"
-msgstr ""
-
-#: ./src/Controller/LordController.php:185
-msgctxt "litter statistics"
-msgid "Age: between"
 msgstr ""
 
 #: ./src/Controller/LordController.php:205
@@ -1297,24 +1293,52 @@ msgstr ""
 msgid "Only males"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:201
+#: ./src/Model/Entity/User.php:222
 msgid "Happy birthday to you!"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:229
+#: ./src/Model/Entity/User.php:250
 msgid "Happy birthday to "
 msgstr ""
 
-#: ./src/Model/Entity/User.php:243
+#: ./src/Model/Entity/User.php:264
 msgid "You don’t have any rat. Time for adoption?"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:256
+#: ./src/Model/Entity/User.php:277
 msgid "No rat birthday coming soon"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:256
+#: ./src/Model/Entity/User.php:277
 msgid "Rat birthdays coming soon: "
+msgstr ""
+
+#: ./src/Model/Entity/User.php:200
+msgctxt "élision"
+msgid "{0}’s dashboard"
+msgstr ""
+
+#: ./src/Model/Entity/User.php:204
+msgctxt "contraction (du)"
+msgid "{0}’s dashboard"
+msgstr ""
+
+#: ./src/Model/Entity/User.php:208
+msgctxt "contraction (des)"
+msgid "{0}’s dashboard"
+msgstr ""
+
+#: ./src/Model/Entity/User.php:211
+msgctxt "pas de flexion"
+msgid "{0}’s dashboard"
+msgstr ""
+
+#: ./templates/Litters/my.php:12
+#: ./templates/Lord/my.php:11
+#: ./templates/Rats/my.php:13
+#: ./templates/Ratteries/my.php:12
+#: ./templates/Users/my.php:11
+msgid "{0}’s dashboard"
 msgstr ""
 
 #: ./src/Model/Table/RatsTable.php:98
@@ -2151,7 +2175,6 @@ msgstr ""
 #: ./templates/RatterySnapshots/index.php:29
 #: ./templates/Users/view.php:265
 #: ./templates/element/my/messages.php:28
-#: ./vendor/cakephp/cakephp/src/View/Helper/PaginatorHelper.php:1260
 msgid "View"
 msgstr ""
 
@@ -3659,15 +3682,6 @@ msgstr ""
 
 #: ./templates/Litters/my.php:9
 msgid "Simulate Litter"
-msgstr ""
-
-#: ./templates/Litters/my.php:12
-#: ./templates/Lord/my.php:11
-#: ./templates/Rats/my.php:13
-#: ./templates/Ratteries/my.php:12
-#: ./templates/Users/home.php:12
-#: ./templates/Users/my.php:11
-msgid "{0}’s dashboard"
 msgstr ""
 
 #: ./templates/Litters/my.php:14
@@ -5704,6 +5718,7 @@ msgid "See all contributed litters"
 msgstr ""
 
 #: ./templates/Ratteries/view.php:437
+#: ./templates/element/litters.php:24
 msgid "Size"
 msgstr ""
 
@@ -6179,7 +6194,7 @@ msgstr ""
 msgid "Staff comments"
 msgstr ""
 
-#: ./templates/Users/home.php:14
+#: ./templates/Users/home.php:16
 msgid "Welcome!"
 msgstr ""
 
