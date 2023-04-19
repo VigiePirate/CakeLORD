@@ -182,7 +182,7 @@ class LordController extends AppController
             'Age' => __('Age'),
             'Age pyramid' => __('Age pyramid'),
             '(presumed) alive rats' => __('(presumed) alive rats'),
-            'Age: between' => __x('litter statistics', 'Age: between'),
+            'Age: between ' => __x('litter statistics', 'Age: between '),
             'and' => __('and'),
             'months' => __('months'),
             'All-time average' => __('All-time average'),

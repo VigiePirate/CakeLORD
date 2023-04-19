@@ -58,15 +58,15 @@
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('average:') ?></th>
-                    <td> ⨽ <?= __('{0, number} months (♀: {1, number} – ♂: {2, number})', [$lifespan, $female_lifespan, $male_lifespan]) ?></td>
+                    <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$lifespan, $female_lifespan, $male_lifespan]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('average, infant mortality excluded:') ?></th>
-                    <td> ⨽ <?= __('{0, number} months (♀: {1, number} – ♂: {2, number})', [$not_infant_lifespan, $not_infant_female_lifespan, $not_infant_male_lifespan]) ?></td>
+                    <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$not_infant_lifespan, $not_infant_female_lifespan, $not_infant_male_lifespan]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('average, accidents also excluded:') ?></th>
-                    <td> ⨽ <?= __('{0, number} months (♀: {1, number} – ♂: {2, number})', [$not_accident_lifespan, $not_accident_female_lifespan, $not_accident_male_lifespan]) ?></td>
+                    <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$not_accident_lifespan, $not_accident_female_lifespan, $not_accident_male_lifespan]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('maximum:') ?></th>
@@ -105,7 +105,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Average rattery productivity:') ?></th>
-                    <td><?= __('{0, number} litters, {1, number} rats', [$litters_by_rattery, $pups_by_rattery]) ?></td>
+                    <td><?= __('{0, number} litters ({1, number} rats)', [$litters_by_rattery, $pups_by_rattery]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('as birth place:') ?></th>
