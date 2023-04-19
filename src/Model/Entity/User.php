@@ -191,6 +191,15 @@ class User extends Entity implements IdentityInterface
         }
     }
 
+    public function _getDashboardTitle()
+    {
+        if (in_array(substr(h($this->username), 0, 1), ['a', 'e', 'i', 'o', 'u', 'y'])) {
+            return __x('with vowel', '{0}’s dashboard', [h($this->username)]);
+        } else {
+            return __x('with consonant', '{0}’s dashboard', [h($this->username)]);
+        }
+    }
+
     public function _getWelcomeString()
     {
         if (
