@@ -181,15 +181,15 @@
                         <table class="caption" align="center">
                             <tr>
                                 <th><?= __('Age at litter birth:') ?></th>
-                                <td><?= __('Unknown') ?></td>
+                                <td><?= __x('age', 'Unknown') ?></td>
                             </tr>
                             <tr>
                                 <th><?= __('Reached age:') ?></th>
-                                <td><?= __('Unknown') ?></td>
+                                <td><?= __x('age', 'Unknown') ?></td>
                             </tr>
                             <tr>
                                 <th><?= __('Death cause:') ?></th>
-                                <td><?= __('Unknown') ?></td>
+                                <td><?= __x('death cause', 'Unknown') ?></td>
                             </tr>
                         </table>
                     <?php endif; ?>

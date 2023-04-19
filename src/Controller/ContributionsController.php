@@ -43,34 +43,6 @@ class ContributionsController extends AppController
     }
 
     /**
-     * Edit method
-     *
-     * @param string|null $id Contribution id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $contribution = $this->Contributions->get($id, [
-            'contain' => [],
-        ]);
-        $this->Authorization->authorize($contribution);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $contribution = $this->Contributions->patchEntity($contribution, $this->request->getData());
-            if ($this->Contributions->save($contribution)) {
-                $this->Flash->success(__('The contribution has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The contribution could not be saved. Please, try again.'));
-        }
-        $ratteries = $this->Contributions->Ratteries->find('list', ['limit' => 200]);
-        $litters = $this->Contributions->Litters->find('list', ['limit' => 200, 'contain' => ['Sire', 'Dam']]);
-        $contributionTypes = $this->Contributions->ContributionTypes->find('list', ['limit' => 200, 'order' => ['priority' => 'ASC']]);
-        $this->set(compact('contribution', 'ratteries', 'litters', 'contributionTypes'));
-    }
-
-    /**
      * Delete method
      *
      * @param string|null $id Contribution id.

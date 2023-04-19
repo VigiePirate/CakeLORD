@@ -6,7 +6,7 @@
                     <th class="col-head"><?= $this->Paginator->sort('state', __('State')) ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('mating_date', $exceptions)): ?>
-                    <th><?= $this->Paginator->sort('mating_date') ?></th>
+                    <th><?= $this->Paginator->sort('mating_date', __('Mating date')) ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('birth_date', $exceptions)): ?>
                     <th><?= $this->Paginator->sort('birth_date') ?></th>
@@ -37,7 +37,7 @@
                         <td><span class="statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></span></td>
                     <?php endif; ?>
                     <?php if (! in_array('mating_date', $exceptions)): ?>
-                        <td><?= h($litter->mating_date) ?></td>
+                        <td><?= isset($litter->mating_date) ? $litter->birth_date->i18nFormat('dd/MM/yyyy') : ''?></td>
                     <?php endif; ?>
                     <?php if (! in_array('birth_date', $exceptions)): ?>
                         <td><?= $litter->birth_date->i18nFormat('dd/MM/yyyy') ?></td>

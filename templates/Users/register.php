@@ -21,7 +21,7 @@
         ]) ?>
         <?= $this->Form->control('password', ['label' => __('Password'), 'required' => true]) ?>
         <legend><?= __('What is the meaning of the letter "R" in the LORD acronym?') ?></legend>
-        <?= $this->Form->control('captcha', ['required' => true]) ?>
+        <?= $this->Form->control('captcha', ['label' => '', 'required' => true]) ?>
     </fieldset>
     <?= $this->Form->button(__('Register')); ?>
     <?= $this->Form->end() ?>

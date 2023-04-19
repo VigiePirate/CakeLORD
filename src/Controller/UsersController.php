@@ -94,11 +94,11 @@ class UsersController extends AppController
                 $rattery_count = $this->Ratteries->pauseZombies();
 
                 if ($rat_count > 0) {
-                    $this->Flash->success($rat_count . __(' rats who were too old have just been automatically set as presumably dead.'));
+                    $this->Flash->success(__('{0, plural, =1{1 rat who was too old has just been automatically set as presumably dead.} other{# rats who were too old have just been automatically set as presumably dead.}}', [$rat_count]));
                 }
 
                 if ($rattery_count > 0) {
-                    $this->Flash->success($rattery_count . __(' ratteries which had no litter for a long time have just been automatically set as inactive.'));
+                    $this->Flash->success(__('{0, plural, =1{1 rattery who has had no litter for a long time has just been automatically set as inactive.} other{# ratteries which had no litter for a long time have just been automatically set as inactive.}}', [$rattery_count]));
                 }
 
                 // blame sheets in needs_user_action state for too long
@@ -107,7 +107,7 @@ class UsersController extends AppController
                     + $this->Ratteries->blameNeglected($this->Ratteries)
                     + $this->Litters->blameNeglected($this->Litters);
                 if ($neglected_count > 0) {
-                    $this->Flash->warning($neglected_count . __(' sheets neglected by users have just been escalated to back-office.'));
+                    $this->Flash->warning(__('{0, plural, =1{1 sheet neglected by users has just been escalated to back-office.} other{# sheets neglected by users have just been escalated to back-office.}}', [$neglected_count]));
                 }
 
                 // delete old unused passkeys and accounts never activated
@@ -119,7 +119,7 @@ class UsersController extends AppController
                     + $this->Litters->find('needsUser')->where(['creator_user_id' => $user->id])->count()
                 );
                 if ($action_needed > 0) {
-                    $this->Flash->error(__('You have {0} sheets to correct! Please, check rats, litters and ratteries from your dashboard and take action soon.', $action_needed));
+                    $this->Flash->error(__('You have {0, plural, =1{1 sheet} other{# sheets}} to correct! Please, check rats, litters and ratteries from your dashboard and take action soon.', [$action_needed]));
                 }
             }
 
@@ -210,6 +210,9 @@ class UsersController extends AppController
                 $this->Flash->error(__('This was not the expected answer! Please, retry if you are not a Replicant.'));
             }
         }
+
+        $user = $this->Users->newEmptyEntity();
+        $this->set(compact('user'));
     }
 
     public function activate($passkey = null)
