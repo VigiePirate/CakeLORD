@@ -21,7 +21,7 @@
                     <th><?= __('Sire') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('pups_number', $exceptions)): ?>
-                    <th><?= $this->Paginator->sort('pups_number','Size') ?></th>
+                    <th><?= $this->Paginator->sort('pups_number', __('Size')) ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('pups_number_stillborn', $exceptions)): ?>
                     <th><?= $this->Paginator->sort('pups_number_stillborn') ?></th>

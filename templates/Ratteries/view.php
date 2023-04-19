@@ -114,19 +114,19 @@
                 <table class="condensed stats">
                     <tr>
                         <th><?= __('Litters recorded under this prefix:') ?></th>
-                        <td><?= h($stats['inLitterCount']) ?> litter<?= h($stats['inLitterCount']<2) ? '' : 's' ?></td>
+                        <td><?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['inLitterCount']]) ?></td>
                     </tr>
                     <tr>
-                        <th><?= ('Rats recorded under this prefix:') ?></th>
-                        <td><?= h($stats['ratCount']) ?> rats</td>
+                        <th><?= __('Rat recorded under this prefix:') ?></th>
+                        <td><?= __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}}', [$stats['ratCount']]) ?>
                     </tr>
                     <tr>
                         <th> ⨽ <?= __('females:') ?></th>
-                        <td> ⨽ <?= h($stats['femaleCount']) . ' females (' . h($stats['femaleProportion']) .' %)' ?></td>
+                        <td> ⨽ <?= __('{0, plural, =0 {No female} =1{1 female} other{# females}} ({1, number} %)', [$stats['femaleCount'], $stats['femaleProportion']]) ?></td>
                     </tr>
                     <tr>
                         <th> ⨽ <?= __('males:') ?></th>
-                        <td> ⨽ <?= h($stats['maleCount']) . ' males (' . h($stats['maleProportion']) .' %)' ?></td>
+                        <td> ⨽ <?= __('{0, plural, =0 {No male} =1{1 male} other{# males}} ({1, number} %)', [$stats['maleCount'], $stats['maleProportion']]) ?></td>
                     </tr>
                 </table>
 
