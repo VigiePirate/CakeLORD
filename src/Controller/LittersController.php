@@ -165,7 +165,7 @@ class LittersController extends AppController
 
                 if (is_null($samelitter)) {
                     if ($this->Litters->save($litter)) {
-                        $this->Flash->warning(__('The litter has been saved and will be examined by the staff soon. Please, check if automatically added contributions are correct!'));
+                        $this->Flash->warning(__('The litter has been saved and will be examined by the staff soon. Please, check if automatically added contributions are correct.'));
                         return $this->redirect(['action' => 'view', $litter->id]);
                     }
                     $this->Flash->error(__('The litter could not be saved. Please, read explanatory messages in the form, check and correct your entry, and try again.'));

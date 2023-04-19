@@ -241,7 +241,7 @@
                         'type' => 'checkbox',
                         'label' => [
                             'class' => 'legend',
-                            'text' => 'Click here to declare death'
+                            'text' => __('Click here to declare death')
                         ],
                     ]);
                 ?>

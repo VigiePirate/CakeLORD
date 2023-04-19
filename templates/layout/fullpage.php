@@ -82,7 +82,7 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                         'method' => 'post',
                         'class' => 'searchbar'],
                     ); ?>
-                        <?= $this->Form->control('name', ['type' => 'text','label' => false,'placeholder' => 'Search...']); ?>
+                        <?= $this->Form->control('name', ['type' => 'text','label' => false,'placeholder' => __('Search...')]); ?>
                         <?= $this->Form->submit(); ?>
                     <?= $this->Form->end(); ?>
                     <!-- Login or access dashboard -->
@@ -95,18 +95,18 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                         :
                         $this->Html->Link(
                             // $this->getRequest()->getSession()->read('Auth.username'),
-                            $this->Html->image("/img/icon-home-closed.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
+                            $this->Html->image("/img/icon-home-closed.svg", ["alt" => __('Dashboard'), "title" => __('Dashboard'), "width" => "40"]),
                             ['controller' => 'Users', 'action' => 'home'],
                             ['escape' => false])
                     ?>
                     <?= ($this->getRequest()->getSession()->check('Auth.id')) ?
                         $this->Html->Link(
-                            $this->Html->image("/img/icon-key.svg", ["alt" => "Logout", "title" => "Log out", "width" => "40"]),
+                            $this->Html->image("/img/icon-key.svg", ["alt" => __('Log out'), "title" => __('Log out'), "width" => "40"]),
                             ['controller' => 'Users', 'action' => 'logout'],
                             ['escape' => false])
                         :
                         $this->Html->Link(
-                            $this->Html->image("/img/icon-key.svg", ["alt" => "Login", "title" => "Log in", "width" => "40"]),
+                            $this->Html->image("/img/icon-key.svg", ["alt" => __('Log in'), "title" => __('Log in'), "width" => "40"]),
                             ['controller' => 'Users', 'action' => 'login'],
                             ['escape' => false])
                     ?>

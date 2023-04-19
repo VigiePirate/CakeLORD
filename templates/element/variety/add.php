@@ -11,7 +11,7 @@
     <div class="column-responsive column-90">
         <div class="coats form content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __($Varieties) ?></div>
+                <div class="sheet-title pretitle"><?= __('Varieties') ?></div>
             </div>
             <h1><?= __('Add') . ' ' . $Variety ?></h1>
             <?= $this->Form->create($variety, ['type' => 'file']) ?>

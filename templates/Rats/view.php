@@ -195,7 +195,7 @@
                         <td><?= $rat->has('birth_litter') ? $this->Html->link(
                             $rat->birth_litter->dam[0]->usual_name,
                             ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->dam[0]->id])
-                            : __('Unknown or unregistered') ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->dam[0]->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->dam[0]->age_string . ')' : '' ?>
+                            : __x('mother', 'Unknown or unregistered') ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->dam[0]->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->dam[0]->age_string . ')' : '' ?>
                             </td>
                     </tr>
                     <tr>
@@ -205,7 +205,7 @@
                                 $rat->birth_litter->sire[0]->usual_name,
                                 ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire[0]->id]
                                 ) . '<sup>' . $rat->birth_litter->sire[0]->is_alive_symbol . '</sup>' . ' (' . $rat->birth_litter->sire[0]->age_string  . ')'
-                            : __('Unknown or unregistered') ?>
+                            : __x('father', 'Unknown or unregistered') ?>
                             </td>
                     </tr>
                     <tr>

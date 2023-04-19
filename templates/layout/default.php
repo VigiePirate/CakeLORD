@@ -68,31 +68,31 @@ $cakeDescription = 'LORD';
                 'method' => 'post',
                 'class' => 'searchbar'],
             ); ?>
-                <?= $this->Form->control('name', ['id' => 'searchbarname', 'type' => 'text', 'label' => false, 'placeholder' => 'Search...']); ?>
+                <?= $this->Form->control('name', ['id' => 'searchbarname', 'type' => 'text', 'label' => false, 'placeholder' => __('Search...')]); ?>
                 <?= $this->Form->submit(); ?>
             <?= $this->Form->end(); ?>
             <!-- Login or access dashboard -->
             <?= ($this->getRequest()->getSession()->check('Auth.id')) ?
                 $this->Html->Link(
                     // $this->getRequest()->getSession()->read('Auth.username'),
-                    $this->Html->image("/img/icon-home-open.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
+                    $this->Html->image("/img/icon-home-open.svg", ["alt" => __('Dashboard'), "title" => __('Dashboard'), "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'home'],
                     ['escape' => false])
                 :
                 $this->Html->Link(
                     // $this->getRequest()->getSession()->read('Auth.username'),
-                    $this->Html->image("/img/icon-home-closed.svg", ["alt" => "Dashboard", "title" => "Dashboard", "width" => "40"]),
+                    $this->Html->image("/img/icon-home-closed.svg", ["alt" => __('Dashboard'), "title" => __('Dashboard'), "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'home'],
                     ['escape' => false])
             ?>
             <?= ($this->getRequest()->getSession()->check('Auth.id')) ?
                 $this->Html->Link(
-                    $this->Html->image("/img/icon-key.svg", ["alt" => "Logout", "title" => "Log out", "width" => "40"]),
+                    $this->Html->image("/img/icon-key.svg", ["alt" => "Logout", "title" => __('Log out'), "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'logout'],
                     ['escape' => false])
                 :
                 $this->Html->Link(
-                    $this->Html->image("/img/icon-key.svg", ["alt" => "Login", "title" => "Log in", "width" => "40"]),
+                    $this->Html->image("/img/icon-key.svg", ["alt" => "Login", "title" => __('Log in'), "width" => "40"]),
                     ['controller' => 'Users', 'action' => 'login', '?' => ['redirect' => $this->getRequest()->getAttribute('here')]],
                     ['escape' => false])
             ?>

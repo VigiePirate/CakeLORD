@@ -17,7 +17,7 @@
             <?php if ($variety->picture != '') : ?>
                 <div class="column-responsive column-66">
                     <div class="sheet-heading">
-                        <div class="sheet-title pretitle"><?= $Variety ?></div>
+                        <div class="sheet-title pretitle"><?= __($Variety) ?></div>
                     </div>
                     <h1><?= h($variety->name) ?></h1>
                     <h2><?= __('Reference information') ?></h2>

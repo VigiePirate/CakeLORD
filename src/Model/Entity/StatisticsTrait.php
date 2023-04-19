@@ -524,7 +524,7 @@ trait StatisticsTrait
 
     public function roundLifespan($options = []) {
         $lifespan = $this->computeLifespan($options)->first();
-        return $lifespan['lifespan'] == 0 ? 'N/A' : round($lifespan['lifespan']/30.5,1);
+        return $lifespan['lifespan'] == 0 ? __('N/A') : round($lifespan['lifespan']/30.5,1);
     }
 
     public function computeAgeDistribution($options = []) {

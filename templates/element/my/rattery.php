@@ -6,7 +6,7 @@
 <table>
 <?php foreach($fields as $field): ?>
     <tr>
-        <th><?= __($field['name']) ?></th>
+        <th><?= $field['name'] ?></th>
         <td><?= h($field['value']) ?></td>
     </tr>
 <?php endforeach; ?>
