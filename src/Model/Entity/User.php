@@ -193,11 +193,23 @@ class User extends Entity implements IdentityInterface
 
     public function _getDashboardTitle()
     {
-        if (in_array(substr(h($this->username), 0, 1), ['a', 'e', 'i', 'o', 'u', 'y'])) {
-            return __x('with vowel', '{0}’s dashboard', [h($this->username)]);
-        } else {
-            return __x('with consonant', '{0}’s dashboard', [h($this->username)]);
+        $vowels = ['a', 'à', 'e', 'è', 'é', 'ê', 'ë', 'i', 'î', 'ï', 'o', 'ô', 'u', 'ù', 'y', 'ÿ',
+                    'A', 'À', 'E', 'È', 'É' ,'Ê', 'Ë', 'I', 'Î', 'Ï', 'O', 'Ô', 'U', 'Û', 'Ü', 'Y'];
+
+        if (in_array(substr($this->username, 0, 1), $vowels)) {
+            return __x('élision', '{0}’s dashboard', [$this->username]);
         }
+
+        if (in_array(substr($this->username, 0, 3), ['le ', 'Le '])) {
+            return __x('contraction (du)', '{0}’s dashboard', [substr($this->username, 3)]);
+        }
+
+        if (in_array(substr($this->username, 0, 4), ['les ', 'Les '])) {
+            return __x('contraction (des)', '{0}’s dashboard', [substr($this->username, 4)]);
+        }
+
+        return __x('pas de flexion', '{0}’s dashboard', [$this->username]);
+
     }
 
     public function _getWelcomeString()

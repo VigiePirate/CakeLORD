@@ -9,7 +9,7 @@
 
             <?= $this->Html->link(__('New Rattery'), ['action' => 'register'], ['class' => 'button float-right']) ?>
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('{0}’s dashboard', [h($user->username)]) ?></div>
+                <div class="sheet-title pretitle"><?= h($user->dashboard_title) ?></div>
             </div>
             <h1><?= __('My ratteries') ?> </h1>
             <?= $this->Flash->render(); ?>
