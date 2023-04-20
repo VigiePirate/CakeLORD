@@ -16,7 +16,8 @@ function showFeedback(cost, jsMessages) {
   }
 
   document.getElementById('cost-comment').innerHTML += costComment;
-  document.getElementById('success-message').style.display = 'revert';
+  document.getElementById('success-message').style.display = 'revert !important';
+  document.getElementById('success-message').classList.remove("hide-everywhere");
   document.getElementById('success-message').onclick = function() {
     this.style.display= 'none';
   };
@@ -83,7 +84,8 @@ worker.onmessage = function(evt) {
     ranks[0] = evt.data.coi;
     document.getElementById('coi').innerHTML = '<span class="pulse">COI = ' + (100*evt.data.coi).toPrecision(4) + ' %';
     if (evt.data.coi > 0) {
-      document.getElementById('coancestry').style.display = 'revert';
+      document.getElementById('coancestry').classList.remove("hide-everywhere");
+      document.getElementById('coancestry').style.display = 'revert !important';
     } else {
       document.getElementById('common').innerHTML = '<span class="pulse"> None </span>';
     }

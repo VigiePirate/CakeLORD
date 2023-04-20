@@ -36,7 +36,7 @@
             </div>
 
             <div id="success-message" class="message success hide-everywhere">
-                Computations took <span id="cost"></span> seconds and are now finished. <span id="cost-comment"></span>
+                <?= __('Computations took <span id="cost"></span> seconds and are now finished.') ?> <span id="cost-comment"></span>
             </div>
 
             <h2><?= __('Summary') ?></h2>
