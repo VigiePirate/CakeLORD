@@ -8,7 +8,7 @@
     <aside class="column">
         <div class="side-nav">
             <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
+                <?= $this->element('default_sidebar', ['help_url' => ['controller' => 'Categories', 'action' => 'help', 6]]) ?>
             </div>
 
             <?php if (! is_null($user)) : ?>
