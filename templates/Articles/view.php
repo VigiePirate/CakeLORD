@@ -24,7 +24,7 @@
 
             <h1><?= h($article->title) ?></h1>
 
-            <div class="markdown">
+            <div class="markdown doc">
                     <?= $this->Commonmark->parse($article->content); ?>
             </div>
 

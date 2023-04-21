@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-04-19 19:43+0000\n"
-"PO-Revision-Date: 2023-04-19 21:52+0200\n"
+"PO-Revision-Date: 2023-04-21 20:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -2819,7 +2819,7 @@ msgstr ""
 #: templates/Faqs/all.php:9 templates/layout/default.php:109
 #: templates/layout/fullpage.php:124
 msgid "Guides"
-msgstr "Documentation"
+msgstr "Aide"
 
 #: templates/Faqs/all.php:11
 msgid "Frequently Asked Questions"

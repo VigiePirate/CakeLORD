@@ -108,18 +108,18 @@ $cakeDescription = 'LORD';
         <div class="footer_section">
             <h5><?= __('Guides') ?></h5>
             <a href="/faqs/all"><?= __('F.A.Q.') ?></a>
-            <a href="/articles/all"><?= __('Full guides') ?></a>
-            <a href="/articles/all"><?= __('Code of conduct') ?></a>
-            <a href="/articles/all"><?= __('Contributing') ?></a>
-            <a href="/articles/all"><?= __('I want a LORD') ?></a>
+            <a href="/articles/view/1"><?= __('Full guides') ?></a>
+            <a href="/articles/view/2"><?= __('Code of conduct') ?></a>
+            <a href="/articles/view/3"><?= __('Contributing') ?></a>
+            <a href="/articles/view/4"><?= __('I want a LORD') ?></a>
         </div>
         <div class="footer_section">
             <h5><?= __('About') ?></h5>
-            <a href="/articles/all"><?= __('History') ?></a>
-            <a href="/articles/all"><?= __('What’s New?') ?></a>
-            <a href="/articles/all"><?= __('Staff') ?></a>
-            <a href="/articles/all"><?= __('Credits') ?></a>
-            <a href="/articles/all"><?= __('Legal Notice') ?></a>
+            <a href="/articles/view/5"><?= __('History') ?></a>
+            <a href="/articles/view/6"><?= __('What’s New?') ?></a>
+            <a href="/articles/view/7"><?= __('Staff') ?></a>
+            <a href="/articles/view/8"><?= __('Credits') ?></a>
+            <a href="/articles/view/9"><?= __('Legal Notice') ?></a>
         </div>
         <div class="footer_section">
             <h5><?= __('Statistics') ?></h5>
@@ -139,11 +139,11 @@ $cakeDescription = 'LORD';
         <div class="footer_section">
             <div class="footer_subsection">
                 <h5><?= __('Links') ?></h5>
-                <a href="/articles/all"><?= __('Websites') ?></a>
-                <a href="/articles/all"><?= __('Forums') ?></a>
-                <a href="/articles/all"><?= __('Associations') ?></a>
-                <a href="/articles/all"><?= __('Social') ?></a>
-                <a href="/articles/all"><?= __('Partners') ?></a>
+                <a href="/articles/view/10"><?= __('Websites') ?></a>
+                <a href="/articles/view/11"><?= __('Forums') ?></a>
+                <a href="/articles/view/12"><?= __('Associations') ?></a>
+                <a href="/articles/view/13"><?= __('Social') ?></a>
+                <a href="/articles/view/14"><?= __('Partners') ?></a>
             </div>
         </div>
         <div class="footer_largersection">
@@ -157,7 +157,6 @@ $cakeDescription = 'LORD';
             Code de l'application distribué sous licence GPL<br>
             Service gratuit hébergé et maintenu par l'association SRFA
         </div>
-    </div>
-</footer>
+    </footer>
 </body>
 </html>
