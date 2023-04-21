@@ -30,7 +30,8 @@
                         'type'=> 'textarea',
                         'id' => 'content',
                         'name' => 'content',
-                        'default' => ' ' ]);
+                        'default' => ' '
+                    ]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

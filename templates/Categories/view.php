@@ -44,40 +44,42 @@
             <div class="related">
                 <h3><?= __('Related Articles') ?></h3>
                 <?php if (!empty($category->articles)) : ?>
-                <div class="table-responsive">
+                <div class="table">
                     <table class="summary">
-                        <tr>
+                        <thead>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Overtitle') ?></th>
                             <th><?= __('Title') ?></th>
                             <th><?= __('Created') ?></th>
                             <th><?= __('Modified') ?></th>
                             <th class="actions-title"><?= __('Actions') ?></th>
-                        </tr>
+                        </thead>
                         <?php foreach ($category->articles as $article) : ?>
-                        <tr>
-                            <td><?= h($article->id) ?></td>
-                            <td><?= h($article->subtitle) ?></td>
-                            <td><?= $this->Html->link(h($article->title), ['controller' => 'Articles', 'action' => 'view', $article->id]) ?></td>
-                            <td><?= h($article->created) ?></td>
-                            <td><?= h($article->modified) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
-                                    'url' => ['controller' => 'Articles', 'action' => 'edit', $article->id],
-                                    'class' => 'action-icon',
-                                    'alt' => __('Edit Category')
-                                ])?>
-                                <?= $this->Form->postLink(
-                                        $this->Html->image('/img/icon-delete.svg', [
-                                            'class' => 'action-icon',
-                                            'alt' => __('Delete Article')
-                                        ]),
-                                        ['action' => 'delete', $article->id],
-                                        ['confirm' => __('Are you sure you want to delete # {0}?', $article->id), 'escape' => false]
-                                    )
-                                ?>
-                            </td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td><?= h($article->id) ?></td>
+                                <td><?= h($article->subtitle) ?></td>
+                                <td><?= $this->Html->link(h($article->title), ['controller' => 'Articles', 'action' => 'view', $article->id], ['escape' => false]) ?></td>
+                                <td><?= h($article->created) ?></td>
+                                <td><?= h($article->modified) ?></td>
+                                <td class="actions">
+                                    <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                                        'url' => ['controller' => 'Articles', 'action' => 'edit', $article->id],
+                                        'class' => 'action-icon',
+                                        'alt' => __('Edit Category')
+                                    ])?>
+                                    <?= $this->Form->postLink(
+                                            $this->Html->image('/img/icon-delete.svg', [
+                                                'class' => 'action-icon',
+                                                'alt' => __('Delete Article')
+                                            ]),
+                                            ['action' => 'delete', $article->id],
+                                            ['confirm' => __('Are you sure you want to delete # {0}?', $article->id), 'escape' => false]
+                                        )
+                                    ?>
+                                </td>
+                            </tr>
+                        </tbody>
                         <?php endforeach; ?>
                     </table>
                 </div>
