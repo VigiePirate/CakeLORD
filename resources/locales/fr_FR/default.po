@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-04-19 19:43+0000\n"
-"PO-Revision-Date: 2023-04-21 20:45+0200\n"
+"PO-Revision-Date: 2023-04-21 21:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -2509,7 +2509,7 @@ msgstr ""
 #: templates/DeathPrimaryCauses/edit.php:21
 #: templates/DeathPrimaryCauses/index.php:9
 msgid "Death Categories"
-msgstr ""
+msgstr "Catégories de décès"
 
 #: templates/DeathPrimaryCauses/add.php:22
 msgid "Add Death Category"
@@ -2659,7 +2659,7 @@ msgstr ""
 #: templates/DeathSecondaryCauses/add.php:20
 #: templates/DeathSecondaryCauses/edit.php:21
 msgid "Death Causes"
-msgstr ""
+msgstr "Causes de décès"
 
 #: templates/DeathSecondaryCauses/add.php:22
 msgid "Add Death Cause"
@@ -6489,9 +6489,8 @@ msgid "No matching Lab-o-rats entry available"
 msgstr "Pas de correspondance trouvée sur le Lab-o-rats"
 
 #: templates/element/variety/add.php:14
-#, fuzzy
 msgid "Varieties"
-msgstr "Particularités"
+msgstr "Variétés"
 
 #: templates/element/variety/add.php:16
 msgid "Add"

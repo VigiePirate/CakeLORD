@@ -42,48 +42,81 @@
         </div>
         <div class="spacer"> </div>
 
-        <div class="view content">
-            <div class="button-small">
-                <?= $this->Html->link(__('See all issues'), ['controller' => 'Issues', 'action' => 'index'], ['class' => 'button button-staff float-right']) ?>
+        <?php if ($user->role->is_staff) : ?>
+            <div class="view content">
+                <div class="button-small">
+                    <?= $this->Html->link(__('See all issues'), ['controller' => 'Issues', 'action' => 'index'], ['class' => 'button button-staff float-right']) ?>
+                </div>
+                <h2><?= __('Open issues') ?></h2>
             </div>
-            <h2><?= __('Open issues') ?></h2>
-        </div>
-        <div class="spacer"> </div>
+            <div class="spacer"> </div>
+        <?php endif; ?>
 
-        <?php if ($user->role->can_configure) : ?>
+        <?php if ($user->role->can_describe || $user->role->can_describe) : ?>
             <div class="spacer"> </div>
             <div class="view content">
-                <h2><?= __('Administration') ?></h2>
-                <table class="condensed">
-                    <tr>
-                        <th><?= $this->Html->link(__('Coats'), ['controller' => 'Coats', 'action' => 'index']) ?></th>
-                        <td><?= __('Manage coats') ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= $this->Html->link(__('Colors'), ['controller' => 'Colors', 'action' => 'index']) ?></th>
-                        <td><?= __('Manage colors') ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= $this->Html->link(__('Dilutions'), ['controller' => 'Dilutions', 'action' => 'index']) ?></th>
-                        <td><?= __('Manage eyecolors') ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= $this->Html->link(__('Earsets'), ['controller' => 'Earsets', 'action' => 'index']) ?></th>
-                        <td><?= __('Manage ear types') ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= $this->Html->link(__('Eyecolors'), ['controller' => 'Eyecolors', 'action' => 'index']) ?></th>
-                        <td><?= __('Manage eyecolors') ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= $this->Html->link(__('Markings'), ['controller' => 'Markings', 'action' => 'index']) ?></th>
-                        <td><?= __('Manage markings') ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= $this->Html->link(__('Singularities'), ['controller' => 'Singularities', 'action' => 'index']) ?></th>
-                        <td><?= __('Manage singularities') ?></td>
-                    </tr>
-                </table>
+                <h2><?= __('Documentation') ?></h2>
+                <?php if ($user->role->can_document) : ?>
+                    <h3><?= __('Guides') ?></h3>
+                    <table class="condensed">
+                        <tr>
+                            <th><?= $this->Html->link(__('Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage categories') ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= $this->Html->link(__('Articles'), ['controller' => 'Articles', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage articles') ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= $this->Html->link(__('FAQs'), ['controller' => 'FAQs', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage FAQs') ?></td>
+                        </tr>
+                    </table>
+                <?php endif; ?>
+                <?php if ($user->role->can_describe) : ?>
+                    <h3><?= __('Varieties') ?></h3>
+                    <table class="condensed">
+                        <tr>
+                            <th><?= $this->Html->link(__('Coats'), ['controller' => 'Coats', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage coats') ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= $this->Html->link(__('Colors'), ['controller' => 'Colors', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage colors') ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= $this->Html->link(__('Dilutions'), ['controller' => 'Dilutions', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage eyecolors') ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= $this->Html->link(__('Earsets'), ['controller' => 'Earsets', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage ear types') ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= $this->Html->link(__('Eyecolors'), ['controller' => 'Eyecolors', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage eyecolors') ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= $this->Html->link(__('Markings'), ['controller' => 'Markings', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage markings') ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= $this->Html->link(__('Singularities'), ['controller' => 'Singularities', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage singularities') ?></td>
+                        </tr>
+                    </table>
+                    <h3><?= __('Death Causes') ?></h3>
+                    <table class="condensed">
+                        <tr>
+                            <th><?= $this->Html->link(__('Death Categories'), ['controller' => 'PrimaryDeathCauses', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage death categories') ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= $this->Html->link(__('Death Causes'), ['controller' => 'PrimaryDeathCauses', 'action' => 'index']) ?></th>
+                            <td><?= __('Manage death causes') ?></td>
+                        </tr>
+                    </table>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
 
