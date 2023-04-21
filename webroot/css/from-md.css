@@ -6,6 +6,10 @@
   margin-bottom: 0rem;
 }
 
+.markdown.doc > * > li {
+  margin-bottom: 1rem;
+}
+
 .markdown > h2, .markdown > h3, .markdown > h4, .markdown > h5,
 .editor-preview > h2, .editor-preview > h3, .editor-preview > h4, .editor-preview > h5 {
   margin-top: 2.5rem;
