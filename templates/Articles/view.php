@@ -29,7 +29,7 @@
             </div>
 
             <div class="signature">
-                &mdash; <?= __x('article', 'Created on {0}', [$article->created->i18nFormat('dd/MM/yyyy')]) ?><?= ($article->modified != $article->created) ? __('Last modified on {0}.', [$article->modified->i18nFormat('dd/MM/yyyy')]) . '.' : '.' ?>
+                &mdash; <?= __x('article', 'Created on {0}. ', [$article->created->i18nFormat('dd/MM/yyyy')]) ?> <?= ($article->modified != $article->created) ? __('Last modified on {0}.', [$article->modified->i18nFormat('dd/MM/yyyy')]) . '.' : '' ?>
             </div>
 
         </div>

@@ -42,6 +42,22 @@ class CategoriesController extends AppController
     }
 
     /**
+     * Help method
+     *
+     * @param string|null $id Category id.
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function help($id = null)
+    {
+        $category = $this->Categories->get($id, [
+            'contain' => ['Articles', 'Faqs'],
+        ]);
+        $this->Authorization->skipAuthorization();
+        $this->set(compact('category'));
+    }
+
+    /**
      * Add method
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.

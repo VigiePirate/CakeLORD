@@ -476,6 +476,10 @@ ul, ol, dl {
   margin-bottom: 0rem;
 }
 
+ul.condensed > li {
+  margin-bottom: 0rem;
+}
+
 blockquote {
   font-family: "Alegreya", serif;
   font-style: italic;
