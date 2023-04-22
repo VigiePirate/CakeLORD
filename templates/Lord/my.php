@@ -68,7 +68,7 @@
                             <td><?= __('Manage articles') ?></td>
                         </tr>
                         <tr>
-                            <th><?= $this->Html->link(__('FAQs'), ['controller' => 'FAQs', 'action' => 'index']) ?></th>
+                            <th><?= $this->Html->link(__('FAQs'), ['controller' => 'Faqs', 'action' => 'index']) ?></th>
                             <td><?= __('Manage FAQs') ?></td>
                         </tr>
                     </table>

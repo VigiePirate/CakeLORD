@@ -6,48 +6,19 @@
 ?>
 <div class="articles index content">
 <h1><?= __('All Articles') ?></h1>
-    <div class="table-responsive">
-        <table class="condensed">
-            <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('category') ?></th>
-                    <th><?= $this->Paginator->sort('subtitle', __('Overtitle')) ?></th>
-                    <th><?= $this->Paginator->sort('title') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions col-head"><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($articles as $article): ?>
-                <tr>
-                    <td><?= $this->Number->format($article->id) ?></td>
-                    <td><?= $this->Html->link($article->category->name, ['controller' => 'Categories', 'action' => 'view', $article->category->id]) ?></td>
-                    <td><?= h($article->subtitle) ?></td>
-                    <td><?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?></td>
-                    <td><?= h($article->created) ?></td>
-                    <td><?= h($article->modified) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->image('/img/icon-view.svg', [
-                            'url' => ['controller' => 'Articles', 'action' => 'view', $article->id],
-                            'class' => 'action-icon',
-                            'alt' => __('View Article')
-                        ])?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
+<section id="sitemap">
+    <?php foreach ($categories as $category) : ?>
+        <?php if (! empty($category->articles)) : ?>
+            <div class="sitemap-category">
+                <h2><?= h($category->name) ?></h2>
+                <ul class="condensed">
+                    <?php foreach ($category->articles as $article) : ?>
+                        <li><?= $this->Html->link(h($article->title), ['controller' => 'Articles', 'action' => 'view', $article->id], ['escape' => false]) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif ; ?>
+    <?php endforeach ; ?>
+</section>
+
 </div>

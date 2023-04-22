@@ -25,7 +25,7 @@
             <?php else : ?>
                 <div class="column-responsive column-100">
                     <div class="sheet-heading">
-                        <div class="sheet-title pretitle"><?= $Variety ?></div>
+                        <div class="sheet-title pretitle"><?= __('$Variety') ?></div>
                     </div>
                     <h1><?= h($variety->name) ?></h1>
                     <table class="condensed">
