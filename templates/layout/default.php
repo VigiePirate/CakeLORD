@@ -108,7 +108,7 @@ $cakeDescription = 'LORD';
         <div class="footer_section">
             <h5><?= __('Guides') ?></h5>
             <a href="/faqs/all"><?= __('F.A.Q.') ?></a>
-            <a href="/articles/view/1"><?= __('Full guides') ?></a>
+            <a href="/articles/all"><?= __('Full guides') ?></a>
             <a href="/articles/view/2"><?= __('Code of conduct') ?></a>
             <a href="/articles/view/3"><?= __('Contributing') ?></a>
             <a href="/articles/view/4"><?= __('I want a LORD') ?></a>

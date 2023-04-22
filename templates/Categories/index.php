@@ -24,6 +24,11 @@
                     <td><?= $this->Number->format($category->position) ?></td>
                     <td><?= $this->Html->link(h($category->name), ['action' => 'view', $category->id]) ?></td>
                     <td class="actions">
+                        <?= $this->Html->image('/img/icon-backoffice.svg', [
+                            'url' => ['controller' => 'Categories', 'action' => 'admin', $category->id],
+                            'class' => 'action-icon',
+                            'alt' => __('Manage Category')
+                        ])?>
                         <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
                             'url' => ['controller' => 'Categories', 'action' => 'edit', $category->id],
                             'class' => 'action-icon',

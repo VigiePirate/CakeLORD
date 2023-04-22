@@ -37,9 +37,11 @@ class ArticlesController extends AppController
      */
     public function all()
     {
-        $articles = $this->paginate($this->Articles, ['contain' => ['Categories']]);
+        $categories = $this->Articles->Categories->find('all', ['contain' => ['Articles']])->where(['id >' => 3]);
+
+        //$articles = $this->paginate($this->Articles, ['contain' => ['Categories']]);
         $this->Authorization->skipAuthorization();
-        $this->set(compact('articles'));
+        $this->set(compact('categories'));
     }
 
     /**
