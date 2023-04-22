@@ -231,6 +231,9 @@ class RatsTable extends Table
         $this->hasMany('RatSnapshots', [
             'foreignKey' => 'rat_id',
         ]);
+        $this->hasMany('RatMessages', [
+            'foreignKey' => 'rat_id',
+        ]);
         $this->belongsToMany('BredLitters', [
             'className' => 'Litters',
             'foreignKey' => 'rat_id',

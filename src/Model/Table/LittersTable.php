@@ -81,6 +81,9 @@ class LittersTable extends Table
         $this->hasMany('LitterSnapshots', [
             'foreignKey' => 'litter_id',
         ]);
+        $this->hasMany('LitterMessages', [
+            'foreignKey' => 'litter_id',
+        ]);
         $this->hasMany('OffspringRats', [
             'className' => 'Rats',
             'foreignKey' => 'litter_id',

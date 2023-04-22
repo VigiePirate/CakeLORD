@@ -97,7 +97,8 @@ class RatteriesController extends AppController
                 'Rats.States',
                 'Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions',
                 'Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses',
-                'RatterySnapshots' => ['sort' => ['RatterySnapshots.created' => 'DESC']], 'RatterySnapshots.States'],
+                'RatterySnapshots' => ['sort' => ['RatterySnapshots.created' => 'DESC']], 'RatterySnapshots.States',
+                'RatteryMessages'],
         ]);
 
         $stats = $rattery->wrapStatistics();
