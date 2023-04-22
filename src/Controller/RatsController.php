@@ -137,7 +137,8 @@ class RatsController extends AppController
             'BredLitters.OffspringRats', 'BredLitters.OffspringRats.Ratteries',
             'BredLitters.OffspringRats.BirthLitters', 'BredLitters.OffspringRats.BirthLitters.Contributions',
             'BredLitters.OffspringRats.OwnerUsers', 'BredLitters.OffspringRats.States', 'BredLitters.OffspringRats.DeathPrimaryCauses', 'BredLitters.OffspringRats.DeathSecondaryCauses',
-            'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States'],
+            'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States',
+            'RatMessages'],
         ]);
 
         $this->loadModel('States');

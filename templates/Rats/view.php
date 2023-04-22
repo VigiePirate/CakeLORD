@@ -192,18 +192,23 @@
                     <tr>
                         <th><?= __('Dam') ?></th>
                         <!-- Display field should be better managed (dagger and age in a "full name with age" field) -->
-                        <td><?= $rat->has('birth_litter') ? $this->Html->link(
-                            $rat->birth_litter->dam[0]->usual_name,
-                            ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->dam[0]->id])
-                            : __x('mother', 'Unknown or unregistered') ?><sup><?= $rat->has('birth_litter') ? $rat->birth_litter->dam[0]->is_alive_symbol : '' ?></sup> <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->dam[0]->age_string . ')' : '' ?>
+                        <td><?= $rat->has('birth_litter')
+                            ? $this->Html->link(
+                                    $rat->birth_litter->dam[0]->usual_name,
+                                    ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->dam[0]->id]
+                                )
+                            : __x('mother', 'Unknown or unregistered')
+                            ?>
+                            <sup><?= $rat->has('birth_litter') ? $rat->birth_litter->dam[0]->is_alive_symbol : '' ?></sup>
+                             <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->dam[0]->age_string . ')' : '' ?>
                             </td>
                     </tr>
                     <tr>
                         <th><?= __('Sire') ?></th>
                         <td><?= ( $rat->has('birth_litter') && !empty($rat->birth_litter->sire) )
                             ? $this->Html->link(
-                                $rat->birth_litter->sire[0]->usual_name,
-                                ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire[0]->id]
+                                    $rat->birth_litter->sire[0]->usual_name,
+                                    ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire[0]->id]
                                 ) . '<sup>' . $rat->birth_litter->sire[0]->is_alive_symbol . '</sup>' . ' (' . $rat->birth_litter->sire[0]->age_string  . ')'
                             : __x('father', 'Unknown or unregistered') ?>
                             </td>
@@ -358,34 +363,26 @@
                 <div class="related">
                     <details>
                         <summary class="staff">
-                            <?= __('Conversations') ?>
+                            <?= __('Messages') ?>
                         </summary>
-                        <?php if (!empty($rat->conversations)) : ?>
+                        <?php if (!empty($rat->rat_messages)) : ?>
+
                         <div class="table-responsive">
-                            <table>
-                                <tr>
+                            <table class="summary">
+                                <thead>
                                     <th><?= __('Id') ?></th>
-                                    <th><?= __('Rat Id') ?></th>
-                                    <th><?= __('Rattery Id') ?></th>
-                                    <th><?= __('Litter Id') ?></th>
+                                    <th><?= __('From User') ?></th>
+                                    <th><?= __('Message') ?></th>
                                     <th><?= __('Created') ?></th>
-                                    <th><?= __('Modified') ?></th>
-                                    <th><?= __('Is Active') ?></th>
                                     <th class="actions"><?= __('Actions') ?></th>
-                                </tr>
-                                <?php foreach ($rat->conversations as $conversations) : ?>
+                                </thead>
+                                <?php foreach ($rat->rat_messages as $message) : ?>
                                 <tr>
-                                    <td><?= h($conversations->id) ?></td>
-                                    <td><?= h($conversations->rat_id) ?></td>
-                                    <td><?= h($conversations->rattery_id) ?></td>
-                                    <td><?= h($conversations->litter_id) ?></td>
-                                    <td><?= h($conversations->created) ?></td>
-                                    <td><?= h($conversations->modified) ?></td>
-                                    <td><?= h($conversations->is_active) ?></td>
+                                    <td><?= h($message->id) ?></td>
+                                    <td><?= h($message->from_user_id) ?></td>
+                                    <td><?= h($message->content) ?></td>
+                                    <td><?= h($message->created->i18nFormat('dd/MM/yyyy')) ?></td>
                                     <td class="actions">
-                                        <?= $this->Html->link(__('View'), ['controller' => 'Conversations', 'action' => 'view', $conversations->id]) ?>
-                                        <?= $this->Html->link(__('Edit'), ['controller' => 'Conversations', 'action' => 'edit', $conversations->id]) ?>
-                                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Conversations', 'action' => 'delete', $conversations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $conversations->id)]) ?>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
