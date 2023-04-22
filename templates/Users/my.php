@@ -1,7 +1,7 @@
 <div class="row">
     <aside class="column"/>
         <div class="side-nav">
-            <?= $this->element('my/sidebar') ?>
+            <?= $this->element('my/sidebar', ['help_url' => ['controller' => 'Categories', 'action' => 'view', 5]]) ?>
         </div>
     </aside>
 

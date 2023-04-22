@@ -1,5 +1,5 @@
 <div class="side-nav-group">
-    <?= $this->element('default_sidebar') ?>
+    <?= $this->element('default_sidebar', ['help_url' => $help_url]) ?>
 </div>
 
 <div class="side-nav-group">
