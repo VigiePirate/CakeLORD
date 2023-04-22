@@ -24,6 +24,24 @@ class CategoriesController extends AppController
     }
 
     /**
+     * Admin view method
+     *
+     * @param string|null $id Category id.
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function admin($id = null)
+    {
+        $category = $this->Categories->get($id, [
+            'contain' => ['Articles', 'Faqs'],
+        ]);
+        $this->Authorization->authorize($category, 'edit');
+        $category_count = $this->Categories->find('all')->count();
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('category', 'category_count', 'user'));
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Category id.
@@ -31,24 +49,6 @@ class CategoriesController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
-    {
-        $category = $this->Categories->get($id, [
-            'contain' => ['Articles', 'Faqs'],
-        ]);
-        $this->Authorization->authorize($category);
-        $category_count = $this->Categories->find('all')->count();
-        $user = $this->request->getAttribute('identity');
-        $this->set(compact('category', 'category_count', 'user'));
-    }
-
-    /**
-     * Help method
-     *
-     * @param string|null $id Category id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function help($id = null)
     {
         $category = $this->Categories->get($id, [
             'contain' => ['Articles', 'Faqs'],
