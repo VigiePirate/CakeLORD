@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-04-19 19:43+0000\n"
-"PO-Revision-Date: 2023-04-21 21:02+0200\n"
+"PO-Revision-Date: 2023-04-22 12:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -6530,10 +6530,8 @@ msgid "Random gallery"
 msgstr "Quelques photos"
 
 #: templates/layout/default.php:71 templates/layout/fullpage.php:85
-#, fuzzy
-#| msgid "Search"
 msgid "Search..."
-msgstr "Rechercher"
+msgstr "Rechercher…"
 
 #: templates/layout/default.php:78 templates/layout/default.php:84
 #: templates/layout/fullpage.php:98
