@@ -7,8 +7,8 @@
           <th><?= __('Litter') ?></th>
           <th><?= $this->Paginator->sort('Users.username', __('Creator')) ?></th>
           <th><?= $this->Paginator->sort('modified', __('Modified')) ?></th>
-          <th><?= __('Last message') ?></th>
-          <th class="actions"><?= __('Actions') ?></th>
+          <th class="col-head"><?= __('Last message') ?></th>
+          <th class="actions col-head"><?= __('Actions') ?></th>
         </tr>
     </thead>
     <tbody>
@@ -20,7 +20,7 @@
           <td><?= $this->Html->link(h($litter->parents_name), ['action' => 'view', $litter->id], ['escape' => false]) ?></td>
           <td><?= $litter->has('user') ? $this->Html->link($litter->user->username, ['controller' => 'Users', 'action' => 'view', $litter->user->id]) : '' ?></td>
           <td><?= $litter->modified->i18nFormat('dd/MM/yyyy') ?></td>
-          <td> </td>
+          <td><?= ! empty($litter->litter_messages) ? mb_strimwidth($litter->litter_messages[0]->content, 0, 64, '...') : '' ?></td>
           <td class="actions">
               <span class="nowrap">
                   <?= $this->Form->postLink(

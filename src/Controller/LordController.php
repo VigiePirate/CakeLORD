@@ -34,6 +34,7 @@ class LordController extends AppController
                 'BirthLitters',
                 'BirthLitters.Contributions',
                 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']],
+                'RatMessages'=> ['sort' => ['RatMessages.created' => 'DESC']],
             ]);
         $count['rats'] = $query->count();
         $rats = $query->limit(5);
@@ -41,14 +42,29 @@ class LordController extends AppController
         $model = $this->loadModel('Ratteries');
         $query = $model->find('needsStaff')
             ->order('Ratteries.modified DESC')
-            ->contain(['Countries', 'States', 'Users', 'RatterySnapshots' => ['sort' => ['RatterySnapshots.created' => 'DESC']]]);
+            ->contain([
+                'Countries',
+                'States',
+                'Users',
+                'RatterySnapshots' => ['sort' => ['RatterySnapshots.created' => 'DESC']],
+                'RatteryMessages'=> ['sort' => ['RatteryMessages.created' => 'DESC']],
+            ]);
         $count['ratteries'] = $query->count();
         $ratteries = $query->limit(5);
 
         $model = $this->loadModel('Litters');
         $query = $model->find('needsStaff')
             ->order('Litters.modified DESC')
-            ->contain(['States', 'Contributions', 'Contributions.Ratteries', 'Sire', 'Dam', 'Users']);
+            ->contain([
+                'States',
+                'Contributions',
+                'Contributions.Ratteries',
+                'Sire',
+                'Dam',
+                'Users',
+                'LitterSnapshots' => ['sort' => ['LitterSnapshots.created' => 'DESC']],
+                'LitterMessages'=> ['sort' => ['LitterMessages.created' => 'DESC']],
+            ]);
         $count['litters'] = $query->count();
         $litters = $query->limit(5);
 

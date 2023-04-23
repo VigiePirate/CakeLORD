@@ -559,8 +559,20 @@ class RatteriesController extends AppController
         $ratteries = $this->Ratteries->find('needsStaff');
 
         $this->paginate = [
-            'contain' => ['Users', 'States', 'Countries', 'RatterySnapshots'],
-            'sortableFields' => ['state_id', 'prefix', 'name', 'Users.username', 'modified']
+            'contain' => [
+                'Users',
+                'States',
+                'Countries',
+                'RatterySnapshots' => ['sort' => ['RatterySnapshots.created' => 'DESC']],
+                'RatteryMessages'=> ['sort' => ['RatteryMessages.created' => 'DESC']],
+            ],
+            'sortableFields' => [
+                'state_id',
+                'prefix',
+                'name',
+                'Users.username',
+                'modified'
+            ]
         ];
 
         $ratteries = $this->paginate($ratteries);

@@ -698,7 +698,8 @@ class RatsController extends AppController
                 'Ratteries',
                 'BirthLitters',
                 'BirthLitters.Contributions',
-                'RatSnapshots',
+                'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']],
+                'RatMessages'=> ['sort' => ['RatMessages.created' => 'DESC']],
                 'States'
             ],
             'sortableFields' => [

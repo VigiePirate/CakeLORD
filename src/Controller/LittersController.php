@@ -597,7 +597,7 @@ class LittersController extends AppController
         $litters = $this->Litters->find('needsStaff');
 
         $this->paginate = [
-            'contain' => ['Users', 'Sire', 'Dam', 'Contributions', 'States'],
+            'contain' => ['Users', 'Sire', 'Dam', 'Contributions', 'States', 'LitterSnapshots', 'LitterMessages'],
             'sortableFields' => ['state_id', 'birth_date', 'id', 'Users.username', 'modified']
         ];
 
