@@ -68,10 +68,17 @@ class LordController extends AppController
         $count['litters'] = $query->count();
         $litters = $query->limit(5);
 
+        $model = $this->loadModel('Issues');
+        $query = $model->findByIsOpen(true)
+            ->order('Issues.created DESC')
+            ->contain(['FromUsers', 'ClosingUsers']);
+        $count['issues'] = $query->count();
+        $issues = $query->limit(5);
+
         $user = $this->request->getAttribute('identity');
         $this->Authorization->authorize($lord);
 
-        $this->set(compact('user', 'count', 'rats', 'litters', 'ratteries'));
+        $this->set(compact('user', 'count', 'rats', 'litters', 'ratteries', 'issues'));
     }
 
     public function search() {

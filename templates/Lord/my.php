@@ -48,6 +48,40 @@
                     <?= $this->Html->link(__('See all issues'), ['controller' => 'Issues', 'action' => 'index'], ['class' => 'button button-staff float-right']) ?>
                 </div>
                 <h2><?= __('Open issues') ?></h2>
+                <p><?= __('<strong>{0} issues</strong> are currently waiting to be treated. Most recent are:', [$count['issues']]) ?><p>
+
+                <div class="table-responsive">
+                    <table class="summary">
+                        <thead>
+                            <tr>
+                                <th><?= __x('issue', 'Created') ?></th>
+                                <th><?= __('From User') ?></th>
+                                <th><?= __('URL') ?></th>
+                                <th><?= __('Complaint') ?></th>
+                                <th class="actions"><?= __('Actions') ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($issues as $issue): ?>
+                            <tr>
+                                <td><?= h($issue->created) ?></td>
+                                <td><?= $issue->has('from_user') ? $this->Html->link($issue->from_user->username, ['controller' => 'Users', 'action' => 'view', $issue->from_user->id]) : '' ?></td>
+                                <td><?= $this->Html->link(h($issue->url), $this->Url->build($issue->url, ['fullBase' => true]))?></td>
+                                <td><?= mb_strimwidth($issue->complaint, 0, 64, '...') ?></td>
+                                <td class="actions">
+                                    <?= $this->Html->image('/img/icon-backoffice.svg', [
+                                        'url' => ['controller' => 'Issues', 'action' => 'view', $issue->id],
+                                        'class' => 'action-icon',
+                                        'alt' => __('Manage Issue')
+                                    ])?>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+
+
             </div>
             <div class="spacer"> </div>
         <?php endif; ?>
