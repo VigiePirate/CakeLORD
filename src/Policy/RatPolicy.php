@@ -112,13 +112,11 @@ class RatPolicy implements BeforePolicyInterface
      */
     public function canStaffEdit(IdentityInterface $user, Rat $rat)
     {
-        return ! $rat->state->needs_user_action && $user->role->can_edit_others;
+        return $rat->state->needs_staff_action && $user->role->can_edit_others;
     }
-    
+
     /**
-     * Check if $user can perform micro edits on rat (change picture, declare death, etc.)
-     *
-     * FIXME: when rat has a birthlitter, also allow owners of contributing ratteries
+     * Check if $user can perform micro edits on rat
      *
      * @param Authorization\IdentityInterface $user The user.
      * @param App\Model\Entity\Rat $rat
@@ -126,7 +124,7 @@ class RatPolicy implements BeforePolicyInterface
      */
     public function canMicroEdit(IdentityInterface $user, Rat $rat)
     {
-        $staff_condition = ! $rat->state->needs_user_action && $user->role->can_edit_others;
+        $staff_condition = $rat->state->needs_staff_action && $user->role->can_edit_others;
 
         $user_condition = ! $rat->state->needs_staff_action &&
             ($this->isOwner($user, $rat) || $this->isCreator($user, $rat) || $this->isBreeder($user, $rat));

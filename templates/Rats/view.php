@@ -196,16 +196,14 @@
                             ? $this->Html->link(
                                     $rat->birth_litter->dam[0]->usual_name,
                                     ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->dam[0]->id]
-                                )
+                                ) . '<sup>' . $rat->birth_litter->dam[0]->is_alive_symbol . '</sup>' . ' (' . $rat->birth_litter->dam[0]->age_string  . ')'
                             : __x('mother', 'Unknown or unregistered')
                             ?>
-                            <sup><?= $rat->has('birth_litter') ? $rat->birth_litter->dam[0]->is_alive_symbol : '' ?></sup>
-                             <?= $rat->has('birth_litter') ? '(' . $rat->birth_litter->dam[0]->age_string . ')' : '' ?>
                             </td>
                     </tr>
                     <tr>
                         <th><?= __('Sire') ?></th>
-                        <td><?= ( $rat->has('birth_litter') && !empty($rat->birth_litter->sire) )
+                        <td><?= ($rat->has('birth_litter') && !empty($rat->birth_litter->sire))
                             ? $this->Html->link(
                                     $rat->birth_litter->sire[0]->usual_name,
                                     ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire[0]->id]
@@ -390,44 +388,47 @@
                         </div>
                         <?php endif; ?>
                     </details>
-                    <details>
-                        <summary class="staff">
-                            <?= __('Snapshots') ?>
-                        </summary>
-                        <?php if (!empty($rat->rat_snapshots)) : ?>
-                        <div class="table-responsive">
-                            <table class="summary">
-                                <thead>
-                                    <th><?= __('Created') ?></th>
-                                    <th><?= __('Differences') ?></th>
-                                    <!-- <th><?= __('Data') ?></th> -->
-                                    <th><?= __('State') ?></th>
-                                    <th class="actions"><?= __('Actions') ?></th>
-                                </thead>
-                                <?php foreach ($rat->rat_snapshots as $ratSnapshots) : ?>
-                                <tr>
-                                    <td><?= h($ratSnapshots->created) ?></td>
-                                    <td><?= h($snap_diffs[$ratSnapshots->id]) ?></td>
-                                    <td><?= h($ratSnapshots->state->symbol) ?></td>
-                                    <td class="actions">
-                                        <span class="nowrap">
-                                            <?= $this->Html->image('/img/icon-diff.svg', [
-                                                'url' => ['controller' => 'RatSnapshots', 'action' => 'diff', $ratSnapshots->id],
-                                                'class' => 'action-icon',
-                                                'alt' => __('Compare Versions')])
-                                            ?>
-                                            <?= $this->Html->image('/img/icon-restore.svg', [
-                                                'url' => ['controller' => 'Rats', 'action' => 'restore', $rat->id, $ratSnapshots->id],
-                                                'class' => 'action-icon',
-                                                'alt' => __('Restore Snapshot')]) ?>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </table>
-                        </div>
-                        <?php endif; ?>
-                    </details>
+
+                    <?php if (! is_null($user) and $user->can('restore', $rat)) : ?>
+                        <details>
+                            <summary class="staff">
+                                <?= __('Snapshots') ?>
+                            </summary>
+                            <?php if (!empty($rat->rat_snapshots)) : ?>
+                            <div class="table-responsive">
+                                <table class="summary">
+                                    <thead>
+                                        <th><?= __('Created') ?></th>
+                                        <th><?= __('Differences') ?></th>
+                                        <!-- <th><?= __('Data') ?></th> -->
+                                        <th><?= __('State') ?></th>
+                                        <th class="actions"><?= __('Actions') ?></th>
+                                    </thead>
+                                    <?php foreach ($rat->rat_snapshots as $ratSnapshots) : ?>
+                                    <tr>
+                                        <td><?= h($ratSnapshots->created) ?></td>
+                                        <td><?= h($snap_diffs[$ratSnapshots->id]) ?></td>
+                                        <td><?= h($ratSnapshots->state->symbol) ?></td>
+                                        <td class="actions">
+                                            <span class="nowrap">
+                                                <?= $this->Html->image('/img/icon-diff.svg', [
+                                                    'url' => ['controller' => 'RatSnapshots', 'action' => 'diff', $ratSnapshots->id],
+                                                    'class' => 'action-icon',
+                                                    'alt' => __('Compare Versions')])
+                                                ?>
+                                                <?= $this->Html->image('/img/icon-restore.svg', [
+                                                    'url' => ['controller' => 'Rats', 'action' => 'restore', $rat->id, $ratSnapshots->id],
+                                                    'class' => 'action-icon',
+                                                    'alt' => __('Restore Snapshot')]) ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </table>
+                            </div>
+                            <?php endif; ?>
+                        </details>
+                    <?php endif ; ?>
                 </div>
             </div>
         <?php endif; ?>

@@ -356,43 +356,44 @@
                     <?php endif; ?>
                 </details>
 
-                <details>
-                    <summary class="staff">
-                        <?= __('Snapshots') ?>
-                    </summary>
-                <?php if (!empty($litter->litter_snapshots)) : ?>
-                    <div class="table-responsive">
-                        <table class="summary">
-                            <thead>
-                                <th><?= __('Created') ?></th>
-                                <th><?= __('Differences') ?></th>
-                                <th><?= __('State') ?></th>
-                                <th class="actions"><?= __('Actions') ?></th>
-                            </thead>
-                            <?php foreach ($litter->litter_snapshots as $litterSnapshots) : ?>
-                            <tr>
-                                <td><?= h($litterSnapshots->created) ?></td>
-                                <td><?= h($snap_diffs[$litterSnapshots->id]) ?></td>
-                                <td><?= h($litterSnapshots->state->symbol) ?></td>
-                                <td class="actions">
-                                    <span class="nowrap">
-                                        <?= $this->Html->image('/img/icon-view.svg', [
-                                            'url' => ['controller' => 'LitterSnapshots', 'action' => 'view', $litterSnapshots->id],
-                                            'class' => 'action-icon',
-                                            'alt' => __('View Snapshot')]) ?>
-                                        <?= $this->Html->image('/img/icon-restore.svg', [
-                                            'url' => ['controller' => 'Litters', 'action' => 'restore', $litter->id, $litterSnapshots->id],
-                                            'class' => 'action-icon',
-                                            'alt' => __('Restore Snapshot')]) ?>
-                                    </span>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </table>
-                    </div>
-                    <?php endif; ?>
-                </details>
-
+                <?php if (! is_null($user) and $user->can('restore', $litter)) : ?>
+                    <details>
+                        <summary class="staff">
+                            <?= __('Snapshots') ?>
+                        </summary>
+                    <?php if (!empty($litter->litter_snapshots)) : ?>
+                        <div class="table-responsive">
+                            <table class="summary">
+                                <thead>
+                                    <th><?= __('Created') ?></th>
+                                    <th><?= __('Differences') ?></th>
+                                    <th><?= __('State') ?></th>
+                                    <th class="actions"><?= __('Actions') ?></th>
+                                </thead>
+                                <?php foreach ($litter->litter_snapshots as $litterSnapshots) : ?>
+                                <tr>
+                                    <td><?= h($litterSnapshots->created) ?></td>
+                                    <td><?= h($snap_diffs[$litterSnapshots->id]) ?></td>
+                                    <td><?= h($litterSnapshots->state->symbol) ?></td>
+                                    <td class="actions">
+                                        <span class="nowrap">
+                                            <?= $this->Html->image('/img/icon-view.svg', [
+                                                'url' => ['controller' => 'LitterSnapshots', 'action' => 'view', $litterSnapshots->id],
+                                                'class' => 'action-icon',
+                                                'alt' => __('View Snapshot')]) ?>
+                                            <?= $this->Html->image('/img/icon-restore.svg', [
+                                                'url' => ['controller' => 'Litters', 'action' => 'restore', $litter->id, $litterSnapshots->id],
+                                                'class' => 'action-icon',
+                                                'alt' => __('Restore Snapshot')]) ?>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        </div>
+                        <?php endif; ?>
+                    </details>
+                <?php endif ; ?>
             <?php endif; ?>
         </div>
     </div>

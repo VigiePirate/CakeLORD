@@ -263,11 +263,11 @@
                             </tr>
                             <tr>
                                 <th> ⨽ <?= __('females:') ?></th>
-                                <td> ⨽ <?= __('{0, plural, =0 {No female} =1{1 female} other{# females}}', [$stats['femaleCount']]) ?> <?= __('({0, number} %)', [$stats['femaleProportion']]) ?></td>
+                                <td> ⨽ <?= __('{0, plural, =0 {No female} =1{1 female} other{# females}} ({1, number} %)', [$stats['femaleCount'], $stats['femaleProportion']]) ?> </td>
                             </tr>
                             <tr>
                                 <th> ⨽ <?= __('males:') ?></th>
-                                <td> ⨽ <?= __('{0, plural, =0 {No male} =1{1 male} other{# males}}', [$stats['maleCount']]) ?> <?= __('({0, number} %)', [$stats['maleProportion']]) ?></td>
+                                <td> ⨽ <?= __('{0, plural, =0 {No male} =1{1 male} other{# males}} ({1, number} %)', [$stats['maleCount'], $stats['maleProportion']]) ?> </td>
                             </tr>
                         </table>
                     </details>
@@ -517,44 +517,46 @@
                         </div>
                         <?php endif; ?>
                     </details>
-                    <details>
-                        <summary class="staff">
-                            <?= __('Snapshots') ?>
-                        </summary>
-                        <?php if (!empty($rattery->rattery_snapshots)) : ?>
-                        <div class="table-responsive">
-                            <table class="summary">
-                                <thead>
-                                    <th><?= __('Created') ?></th>
-                                    <th><?= __('Differences') ?></th>
-                                    <!-- <th><?= __('Data') ?></th> -->
-                                    <th><?= __('State') ?></th>
-                                    <th class="actions"><?= __('Actions') ?></th>
-                                </thead>
-                                <?php foreach ($rattery->rattery_snapshots as $ratterySnapshots) : ?>
-                                <tr>
-                                    <td><?= h($ratterySnapshots->created) ?></td>
-                                    <td><?= h($snap_diffs[$ratterySnapshots->id]) ?></td>
-                                    <td><?= h($ratterySnapshots->state->symbol) ?></td>
-                                    <td class="actions">
-                                        <span class="nowrap">
-                                            <?= $this->Html->image('/img/icon-diff.svg', [
-                                                'url' => ['controller' => 'RatterySnapshots', 'action' => 'diff', $ratterySnapshots->id],
-                                                'class' => 'action-icon',
-                                                'alt' => __('Compare Versions')])
-                                            ?>
-                                            <?= $this->Html->image('/img/icon-restore.svg', [
-                                                'url' => ['controller' => 'Ratteries', 'action' => 'restore', $rattery->id, $ratterySnapshots->id],
-                                                'class' => 'action-icon',
-                                                'alt' => __('Restore Snapshot')]) ?>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </table>
-                        </div>
-                        <?php endif; ?>
-                    </details>
+                    <?php if (! is_null($user) and $user->can('restore', $rattery)) : ?>
+                        <details>
+                            <summary class="staff">
+                                <?= __('Snapshots') ?>
+                            </summary>
+                            <?php if (!empty($rattery->rattery_snapshots)) : ?>
+                            <div class="table-responsive">
+                                <table class="summary">
+                                    <thead>
+                                        <th><?= __('Created') ?></th>
+                                        <th><?= __('Differences') ?></th>
+                                        <!-- <th><?= __('Data') ?></th> -->
+                                        <th><?= __('State') ?></th>
+                                        <th class="actions"><?= __('Actions') ?></th>
+                                    </thead>
+                                    <?php foreach ($rattery->rattery_snapshots as $ratterySnapshots) : ?>
+                                    <tr>
+                                        <td><?= h($ratterySnapshots->created) ?></td>
+                                        <td><?= h($snap_diffs[$ratterySnapshots->id]) ?></td>
+                                        <td><?= h($ratterySnapshots->state->symbol) ?></td>
+                                        <td class="actions">
+                                            <span class="nowrap">
+                                                <?= $this->Html->image('/img/icon-diff.svg', [
+                                                    'url' => ['controller' => 'RatterySnapshots', 'action' => 'diff', $ratterySnapshots->id],
+                                                    'class' => 'action-icon',
+                                                    'alt' => __('Compare Versions')])
+                                                ?>
+                                                <?= $this->Html->image('/img/icon-restore.svg', [
+                                                    'url' => ['controller' => 'Ratteries', 'action' => 'restore', $rattery->id, $ratterySnapshots->id],
+                                                    'class' => 'action-icon',
+                                                    'alt' => __('Restore Snapshot')]) ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </table>
+                            </div>
+                            <?php endif; ?>
+                        </details>
+                    <?php endif ; ?>
                 </div>
             </div>
         <?php endif; ?>

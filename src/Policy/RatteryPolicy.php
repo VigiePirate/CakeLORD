@@ -95,7 +95,7 @@ class RatteryPolicy implements BeforePolicyInterface
      */
     public function canStaffEdit(IdentityInterface $user, Rattery $rattery)
     {
-        return ! $rattery->state->needs_user_action && $user->role->can_edit_others;
+        return $rattery->state->needs_staff_action && $user->role->can_edit_others;
     }
 
     /**
@@ -121,6 +121,18 @@ class RatteryPolicy implements BeforePolicyInterface
     public function canDelete(IdentityInterface $user, Rattery $rattery)
     {
         return $rattery->state->is_frozen && ! $rattery->state->is_reliable && $user->role->can_delete;
+    }
+
+    /**
+     * Check if $user can restore rat from snapshot
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Rattery $rat
+     * @return bool
+     */
+    public function canRestore(IdentityInterface $user, Rattery $rattery)
+    {
+        return $user->role->can_restore;
     }
 
     /**

@@ -96,7 +96,7 @@ class LitterPolicy implements BeforePolicyInterface
      */
     public function canStaffEdit(IdentityInterface $user, Litter $litter)
     {
-        return ! $litter->state->needs_user_action && $user->role->can_edit_others;
+        return $litter->state->needs_staff_action && $user->role->can_edit_others;
     }
 
     public function canAddRat(IdentityInterface $user, Litter $litter)
@@ -140,6 +140,18 @@ class LitterPolicy implements BeforePolicyInterface
     public function canDelete(IdentityInterface $user, Litter $litter)
     {
         return $litter->state->is_frozen && ! $litter->state->is_reliable && $user->role->can_delete;
+    }
+
+    /**
+     * Check if $user can restore litter from snapshot
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canRestore(IdentityInterface $user, Litter $litter)
+    {
+        return $user->role->can_restore;
     }
 
     /**
