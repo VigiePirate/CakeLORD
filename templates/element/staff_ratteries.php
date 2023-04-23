@@ -17,7 +17,7 @@
                     <td><?= $this->Html->link(h($rattery->name), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id], ['escape' => false]) ?></td>
                     <td><?= h($rattery->user->username) ?></td>
                     <td><?= h($rattery->modified->i18nFormat('dd/MM/yyyy')) ?></td>
-                    <td> </td>
+                    <td><?= ! empty($rattery->rattery_messages) ? mb_strimwidth($rattery->rattery_messages[0]->content, 0, 64, '...') : '' ?></td>
                     <td class="actions">
                         <span class="nowrap">
                             <?php if (! is_null($rattery->last_snapshot_id)) :?>
