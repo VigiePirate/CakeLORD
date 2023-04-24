@@ -108,7 +108,7 @@ class RatteryPolicy implements BeforePolicyInterface
     public function canMicroEdit(IdentityInterface $user, Rattery $rattery)
     {
         return (! $rattery->state->needs_staff_action && $this->isOwner($user, $rattery))
-            || (! $rattery->state->needs_user_action && $user->role->can_edit_others);
+            || ($rattery->state->needs_staff_action && $user->role->can_edit_others);
     }
 
     /**
