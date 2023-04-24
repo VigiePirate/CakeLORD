@@ -31,6 +31,8 @@
 
             <h1><?= $rattery->full_name ?></h1>
 
+            <?= $this->Flash->render(); ?>
+
             <?php
             echo $this->Form->create($rattery, [
             	'id' => 'jquery-relocate-form',

@@ -937,8 +937,14 @@ class RatsController extends AppController
     {
         $rat = $this->Rats->get($id, [
             'contain' => [
-                'CreatorUsers','OwnerUsers','States','Ratteries','BirthLitters','BirthLitters.Contributions',
-                'DeathPrimaryCauses','DeathSecondaryCauses',
+                'CreatorUsers',
+                'OwnerUsers',
+                'States',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'DeathPrimaryCauses',
+                'DeathSecondaryCauses',
             ],
         ]);
         $this->Authorization->authorize($rat, 'microEdit');

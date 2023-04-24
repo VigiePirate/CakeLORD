@@ -70,7 +70,7 @@ details:last-of-type {
   margin-bottom:1.5rem;
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, .pretitle a {
   font-weight: bold;
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
   color: #606ebf;
@@ -432,6 +432,11 @@ td,th {
   text-align: right;
 }
 
+.summary > th:last-child,
+.summary > td:last-child {
+  text-align: right;
+}
+
 .nowrap {
   white-space: nowrap;
 }
@@ -483,7 +488,7 @@ ul.condensed > li {
 blockquote {
   font-family: "Alegreya", serif;
   font-style: italic;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   border-left: none;
   margin: 1em 0;
   padding: 0.5em 5rem;
@@ -814,7 +819,7 @@ th {
   border-radius: 0.4rem;
 }
 
-.disabled > .side-nav-icon {
+.disabled > .side-nav-icon, .disabled > .action-icon {
   filter: opacity(0.5) saturate(0.75);
 }
 

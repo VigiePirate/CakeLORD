@@ -65,7 +65,7 @@
                                 ]);
                             ?>
                             <div class="spacer"></div>
-                            <h2><?= __('Staff or contributors') ?></h2>
+                            <h2><?= __('Staff and contributors') ?></h2>
                         <?php else: ?>
                             <?php
                                 echo $this->Form->control('rattery_name_contribution_' . $type->id, [

@@ -21,7 +21,7 @@
                 <th><?= __('Owner') ?></th>
             <?php endif; ?>
             <?php if (! in_array('birth_year', $exceptions)): ?>
-                <th><?= __('Birth year') ?></th>
+                <th><?= __x('rattery', 'Birth year') ?></th>
             <?php endif; ?>
             <?php if (! in_array('zip_code', $exceptions)): ?>
                 <th><?= __('Zip code') ?></th>

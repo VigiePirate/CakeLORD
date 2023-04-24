@@ -39,7 +39,7 @@
                 <?php endif; ?>
                 <?php
                     echo $this->Form->control('localization');
-                    echo $this->Form->control('picture_file', ['label' => 'avatar', 'type' => 'file']);
+                    echo $this->Form->control('picture_file', ['label' => __('Avatar'), 'type' => 'file']);
                     echo $this->Form->control('about_me', [
                         'type' => 'textarea',
                         'id' => 'about_me',
@@ -51,13 +51,15 @@
                 ?>
                 <?php if ($identity->can('accessPersonal', $user)) : ?>
                     <legend><?= __('Private information') ?></legend>
-                    <p class="helper">
-                        <?= __('For security reasons, you cannot change your credentials here.') ?>
-                        <br/>
-                        <?= $this->Html->link(__('Change email'), ['action' => 'changeEmail'])
-                        . ' — '
-                        . $this->Html->link(__('Change password'), ['action' => 'changePassword']) ?>
-                    </p>
+                    <?php if ($identity->id == $user->id) : ?>
+                        <p class="helper">
+                            <?= __('For security reasons, you cannot change your credentials here.') ?>
+                            <br/>
+                            <?= $this->Html->link(__('Change email'), ['action' => 'changeEmail'])
+                            . ' — '
+                            . $this->Html->link(__('Change password'), ['action' => 'changePassword']) ?>
+                        </p>
+                    <?php endif ; ?>
                     <?php
                         echo $this->Form->control('firstname');
                         echo $this->Form->control('lastname');
