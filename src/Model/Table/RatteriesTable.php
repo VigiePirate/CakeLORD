@@ -70,8 +70,6 @@ class RatteriesTable extends Table
                 'country_id',
                 'latitude',
                 'longitude',
-                'is_alive',
-                'picture',
             ],
         ]);
 

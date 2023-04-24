@@ -77,6 +77,12 @@ class LittersTable extends Table
         $this->belongsTo('States', [
             'foreignKey' => 'state_id',
             'joinType' => 'INNER',
+            'safe_properties' => [
+                'state_id',
+                'mating_date',
+                'pups_number_stillborn',
+                'comments'
+            ]
         ]);
         $this->hasMany('LitterSnapshots', [
             'foreignKey' => 'litter_id',
