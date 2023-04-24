@@ -115,7 +115,7 @@ class LitterPolicy implements BeforePolicyInterface
     {
         return (! $litter->state->needs_staff_action && $this->isCreator($user, $litter))
             || (! $litter->state->needs_staff_action && $this->isContributor($user, $litter))
-            || (! $litter->state->needs_user_action && $user->role->can_edit_others);
+            || ($litter->state->needs_staff_action && $user->role->can_edit_others);
     }
 
     /**

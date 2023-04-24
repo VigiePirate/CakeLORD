@@ -172,7 +172,7 @@ class RatsTable extends Table
                 'name',
                 'pup_name',
                 'owner_user_id',
-                'comments'
+                'comments',
             ],
         ]);
 
