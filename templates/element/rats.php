@@ -23,7 +23,7 @@
                 <th><?= $this->Paginator->sort('pup_name') ?></th>
             <?php endif; ?>
             <?php if (! in_array('birth_date', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('birth_date') ?></th>
+                <th><?= $this->Paginator->sort('birth_date', ['label' => __('Birth')]) ?></th>
             <?php endif; ?>
             <?php if (! in_array('age_string', $exceptions)): ?>
                 <th class="col-head"><?= __('Reached Age') ?></th>
@@ -85,6 +85,14 @@
                                     'class' => 'action-icon',
                                     'alt' => __('Edit Rat')])
                                 ?>
+                            <?php else :?>
+                                <span class="disabled">
+                                    <?= $this->Html->image('/img/icon-edit.svg', [
+                                        'url' => '',
+                                        'class' => 'action-icon disabled',
+                                        'alt' => __('Edit Rat')])
+                                    ?>
+                                </span>
                             <?php endif ;?>
                             <?php if (! is_null($user) && $user->can('microEdit', $rat)) : ?>
                                 <?= $this->Html->image('/img/icon-declare-death.svg', [
@@ -93,11 +101,13 @@
                                     'alt' => __('Declare Death')])
                                 ?>
                             <?php else :?>
-                                <?= $this->Html->image('/img/icon-view.svg', [
-                                    'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
-                                    'class' => 'action-icon',
-                                    'alt' => __('View Rat')])
-                                ?>
+                                <span class="disabled">
+                                    <?= $this->Html->image('/img/icon-declare-death.svg', [
+                                        'url' => '',
+                                        'class' => 'action-icon disabled',
+                                        'alt' => __('Declare Death')])
+                                    ?>
+                                </span>
                             <?php endif ;?>
                         </td>
                     <?php endif ;?>
