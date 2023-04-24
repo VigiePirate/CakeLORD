@@ -28,13 +28,13 @@
                 <th><?= __('Pup Name') ?></th>
             <?php endif; ?>
             <?php if (! in_array('birth_date', $exceptions)): ?>
-                <th><?= __('Birth Date') ?></th>
+                <th><?= __('Birth') ?></th>
             <?php endif; ?>
             <?php if (! in_array('age_string', $exceptions)): ?>
                 <th><?= __('Age (mo)') ?></th>
             <?php endif; ?>
             <?php if (! in_array('death_cause', $exceptions)): ?>
-                <th><?= __('Death Cause') ?></th>
+                <th><?= __('Death cause') ?></th>
             <?php endif; ?>
             <?php if (! in_array('owner_user_id', $exceptions)): ?>
                 <th><?= __('Owner') ?></th>
@@ -91,6 +91,14 @@
                                         'class' => 'action-icon',
                                         'alt' => __('Edit Rat')])
                                     ?>
+                                <?php else :?>
+                                    <span class="disabled">
+                                        <?= $this->Html->image('/img/icon-edit.svg', [
+                                            'url' => '',
+                                            'class' => 'action-icon disabled',
+                                            'alt' => __('Edit Rat')])
+                                        ?>
+                                    </span>
                                 <?php endif ;?>
                                 <?php if (! is_null($user) && $user->can('microEdit', $rat)) : ?>
                                     <?= $this->Html->image('/img/icon-declare-death.svg', [
@@ -99,11 +107,13 @@
                                         'alt' => __('Declare Death')])
                                     ?>
                                 <?php else :?>
-                                    <?= $this->Html->image('/img/icon-view.svg', [
-                                        'url' => ['controller' => 'Rats', 'action' => 'view', $rat->id],
-                                        'class' => 'action-icon',
-                                        'alt' => __('View Rat')])
-                                    ?>
+                                    <span class="disabled">
+                                        <?= $this->Html->image('/img/icon-declare-death.svg', [
+                                            'url' => '',
+                                            'class' => 'action-icon disabled',
+                                            'alt' => __('Declare Death')])
+                                        ?>
+                                    </span>
                                 <?php endif ;?>
                             </span>
                         </td>
