@@ -129,7 +129,7 @@
             <h2><?= __('Parents') ?></h2>
             <div class="row">
                 <div class="column-responsive column-50 parent">
-                    <div class="pretitle"><?= __('Dam: ') . h($litter->dam[0]->name) ?></div>
+                    <div class="pretitle"><?= $this->Html->link(__('Dam: ') . h($litter->dam[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id], ['escape' => false]) ?></div>
                     <?php if ($litter->dam[0]->picture != '') : ?>
                         <?= $this->Html->image(UPLOADS . $litter->dam[0]->picture, ['alt' => $litter->dam[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]]) ?>
                     <?php else : ?>
@@ -142,7 +142,7 @@
                             <td><?= h($litter->dam_age_in_months) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Reached age:') ?></th>
+                            <th><?= $litter->dam[0]->is_alive ? __('Current age:') : __('Age at death:') ?></th>
                             <td><?= h($litter->dam[0]->age_string) ?></td>
                         </tr>
                         <tr>
@@ -153,7 +153,7 @@
                 </div>
                 <div class="column-responsive column-50 parent">
                     <?php if (isset($litter->sire[0])) : ?>
-                        <div class="pretitle"><?= __('Sire: ') . h($litter->sire[0]->name) ?></div>
+                        <div class="pretitle"><?= $this->Html->link(__('Sire: ') . h($litter->sire[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id], ['escape' => false]) ?></div>
                         <?php if ($litter->sire[0]->picture != '') : ?>
                             <?= $this->Html->image(UPLOADS . $litter->sire[0]->picture, ['alt' => $litter->sire[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id]]) ?>
                         <?php else : ?>
@@ -166,7 +166,7 @@
                                 <td><?= h($litter->sire_age_in_months) ?></td>
                             </tr>
                             <tr>
-                                <th><?= __('Reached age:') ?></th>
+                                <th><?= $litter->sire[0]->is_alive ? __('Current age:') : __('Age at death:') ?></th>
                                 <td><?= h($litter->sire[0]->age_string) ?></td>
                             </tr>
                             <tr>
@@ -204,7 +204,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Mating date') ?></th>
-                    <td><?= isset($litter->mating_date) ? h($litter->mating_date->i18nFormat('dd/MM/yyyy')) : __('Unknown') ?></td>
+                    <td><?= isset($litter->mating_date) ? h($litter->mating_date->i18nFormat('dd/MM/yyyy')) : __x('date', 'Unknown') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Birth date') ?></th>
@@ -236,8 +236,8 @@
                 <table class="condensed">
                     <thead>
                         <tr>
-                            <th><?= __('Rattery Prefix') ?></th>
-                            <th><?= __('Rattery Name') ?></th>
+                            <th><?= __('Prefix') ?></th>
+                            <th><?= __('Name') ?></th>
                             <th><?= __('Contribution') ?></th>
                         </tr>
                     </thead>

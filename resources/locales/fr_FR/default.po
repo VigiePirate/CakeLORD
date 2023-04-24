@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-04-19 19:43+0000\n"
-"PO-Revision-Date: 2023-04-22 12:09+0200\n"
+"PO-Revision-Date: 2023-04-23 20:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -5416,9 +5416,9 @@ msgid "Bred rats recorded as deceased:"
 msgstr "Rats nés à la raterie et décédés :"
 
 #: templates/Ratteries/view.php:310 templates/Ratteries/view.php:392
-#, fuzzy
 msgid "{0, number} rats ({1, number} % of recorded bred rats)"
-msgstr "{0, number} rats ({1, number} % des rats décédés)"
+msgstr ""
+"{0, number} rats ({1, number} % des rats nés à la raterie et enregistrés)"
 
 #: templates/Ratteries/view.php:323
 msgid "Average lifespan of bred rats:"

@@ -21,7 +21,7 @@
                 <th><?= $this->Paginator->sort('Users.username', __('Owner')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('birth_year', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('birth_year') ?></th>
+                <th><?= $this->Paginator->sort('birth_year', ['label' => __x('rattery', 'Birth year')]) ?></th>
             <?php endif; ?>
             <?php if (! in_array('zip_code', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('zip_code') ?></th>

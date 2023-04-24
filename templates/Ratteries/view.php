@@ -14,18 +14,18 @@
             <?php if (! is_null($user)) : ?>
                 <div class="side-nav-group">
                     <div class="tooltip">
-                        <?= $this->Html->image('/img/icon-locate.svg', [
-                            'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
-                            'class' => 'side-nav-icon',
-                            'alt' => __('See on Map')]) ?>
-                        <span class="tooltiptext"><?= __('See rattery on the map') ?></span>
-                    </div>
-                    <div class="tooltip">
                         <?= $this->Html->image('/img/icon-add-litter.svg', [
                             'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
                             'class' => 'side-nav-icon',
                             'alt' => __('Declare Litter')]) ?>
                         <span class="tooltiptext"><?= __('Declare a litter born here') ?></span>
+                    </div>
+                    <div class="tooltip">
+                        <?= $this->Html->image('/img/icon-locate.svg', [
+                            'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
+                            'class' => 'side-nav-icon',
+                            'alt' => __('See on Map')]) ?>
+                        <span class="tooltiptext"><?= __('See rattery on the map') ?></span>
                     </div>
 
                     <?php if (! $user->can('microEdit', $rattery)) : ?>
