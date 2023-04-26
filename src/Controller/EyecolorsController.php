@@ -13,6 +13,12 @@ use Cake\Chronos\Chronos;
  */
 class EyecolorsController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['view', 'index']);
+    }
+
     /**
      * Index method
      *
@@ -37,7 +43,7 @@ class EyecolorsController extends AppController
     public function view($id = null)
     {
         $eyecolor = $this->Eyecolors->get($id);
-
+        $this->Authorization->skipAuthorization();
         $examples = $this->Eyecolors->Rats->find()
             ->where([
                 ['eyecolor_id' => $id],
@@ -68,6 +74,7 @@ class EyecolorsController extends AppController
     public function add()
     {
         $eyecolor = $this->Eyecolors->newEmptyEntity();
+        $this->Authorization->authorize($eyecolor);
         if ($this->request->is('post')) {
             $eyecolor = $this->Eyecolors->patchEntity($eyecolor, $this->request->getData());
             if ($this->Eyecolors->save($eyecolor)) {
@@ -77,7 +84,8 @@ class EyecolorsController extends AppController
             }
             $this->Flash->error(__('The eyecolor could not be saved. Please, try again.'));
         }
-        $this->set(compact('eyecolor'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('eyecolor', 'user'));
     }
 
     /**
@@ -89,9 +97,8 @@ class EyecolorsController extends AppController
      */
     public function edit($id = null)
     {
-        $eyecolor = $this->Eyecolors->get($id, [
-            'contain' => [],
-        ]);
+        $eyecolor = $this->Eyecolors->get($id);
+        $this->Authorization->authorize($eyecolor);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $eyecolor = $this->Eyecolors->patchEntity($eyecolor, $this->request->getData());
             if ($this->Eyecolors->save($eyecolor)) {
@@ -101,7 +108,8 @@ class EyecolorsController extends AppController
             }
             $this->Flash->error(__('The eyecolor could not be saved. Please, try again.'));
         }
-        $this->set(compact('eyecolor'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('eyecolor', 'user'));
     }
 
     /**
@@ -115,6 +123,7 @@ class EyecolorsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $eyecolor = $this->Eyecolors->get($id);
+        $this->Authorization->authorize($eyecolor);
         if ($this->Eyecolors->delete($eyecolor)) {
             $this->Flash->success(__('The eyecolor has been deleted.'));
         } else {

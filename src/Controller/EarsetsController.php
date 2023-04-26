@@ -13,6 +13,12 @@ use Cake\Chronos\Chronos;
  */
 class EarsetsController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['view', 'index']);
+    }
+
     /**
      * Index method
      *
@@ -37,7 +43,7 @@ class EarsetsController extends AppController
     public function view($id = null)
     {
         $earset = $this->Earsets->get($id);
-
+        $this->Authorization->skipAuthorization();
         $examples = $this->Earsets->Rats->find()
             ->where([
                 ['earset_id' => $id],
@@ -68,6 +74,7 @@ class EarsetsController extends AppController
     public function add()
     {
         $earset = $this->Earsets->newEmptyEntity();
+        $this->Authorization->authorize($earset);
         if ($this->request->is('post')) {
             $earset = $this->Earsets->patchEntity($earset, $this->request->getData());
             if ($this->Earsets->save($earset)) {
@@ -77,7 +84,8 @@ class EarsetsController extends AppController
             }
             $this->Flash->error(__('The earset could not be saved. Please, try again.'));
         }
-        $this->set(compact('earset'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('earset', 'user'));
     }
 
     /**
@@ -89,9 +97,8 @@ class EarsetsController extends AppController
      */
     public function edit($id = null)
     {
-        $earset = $this->Earsets->get($id, [
-            'contain' => [],
-        ]);
+        $earset = $this->Earsets->get($id);
+        $this->Authorization->authorize($earset);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $earset = $this->Earsets->patchEntity($earset, $this->request->getData());
             if ($this->Earsets->save($earset)) {
@@ -101,7 +108,8 @@ class EarsetsController extends AppController
             }
             $this->Flash->error(__('The earset could not be saved. Please, try again.'));
         }
-        $this->set(compact('earset'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('earset', 'user'));
     }
 
     /**
@@ -115,6 +123,7 @@ class EarsetsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $earset = $this->Earsets->get($id);
+        $this->Authorization->authorize($earset);
         if ($this->Earsets->delete($earset)) {
             $this->Flash->success(__('The earset has been deleted.'));
         } else {
