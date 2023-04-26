@@ -60,13 +60,32 @@
                             . $this->Html->link(__('Change password'), ['action' => 'changePassword']) ?>
                         </p>
                     <?php endif ; ?>
-                    <?php
-                        echo $this->Form->control('firstname');
-                        echo $this->Form->control('lastname');
-                        echo $this->Form->control('birth_date', ['empty' => true]);
-                        echo $this->Form->control('sex');
-                        echo $this->Form->control('wants_newsletter');
-                    ?>
+
+                    <div class="row">
+                        <div class="column-responsive column-50">
+                            <?= $this->Form->control('firstname') ?>
+                        </div>
+                        <div class="column-responsive column-50">
+                            <?= $this->Form->control('lastname') ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column-responsive column-50">
+                            <?= $this->Form->control('birth_date', ['empty' => true]) ?>
+                        </div>
+                        <div class="column-responsive column-50">
+                            <?= $this->Form->label('sex', __x('human', 'Sex')) ?>
+                            <?= $this->Form->select('sex', [
+                                'F' => __x('human', 'Female'),
+                                'M' => __x('human', 'Male'),
+                                'X' => __x('human', 'No thanks')
+                            ]) ?>
+                        </div>
+                    </div>
+
+                    <div class="spacer"></div>
+                    <?= $this->Form->control('wants_newsletter', ['label' => __('I accept to receive casual newsletters and other information by email')]); ?>
+
                 <?php endif; ?>
 
                 <?php if ($identity->can('seeStaffOnly', $user)) : ?>

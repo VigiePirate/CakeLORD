@@ -283,4 +283,9 @@ class User extends Entity implements IdentityInterface
         return ($this->is_locked ? '✗' : '✓');
     }
 
+    protected function _getSexString()
+    {
+        return ($this->sex == 'F' ? __x('human', 'Female') : __x('human', 'Male'));
+    }
+
 }

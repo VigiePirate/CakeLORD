@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use ArrayObject;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Datasource\EntityInterface;
+use Cake\Event\EventInterface;
 
 /**
  * Users Model
@@ -171,6 +174,21 @@ class UsersTable extends Table
             ->allowEmptyString('passkey');
 
         return $validator;
+    }
+
+    /**
+     * beforeMarshal method
+     *
+     * @param EventInterface $event
+     * @param ArrayObject $data
+     * @param ArrayObject $options
+     * @return void
+     */
+    public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
+    {
+        if (isset($data['sex']) && $data['sex'] == 'X') {
+            $data['sex'] = '';
+        }
     }
 
     /**

@@ -81,7 +81,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Sex') ?></th>
-                    <td><?= h($user->sex) ?></td>
+                    <td><?= h($user->sex_string) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Failed Login Attempts') ?></th>

@@ -130,7 +130,7 @@ class UserPolicy implements BeforePolicyInterface
      */
     public function canAccessPersonal(IdentityInterface $user, User $resource)
     {
-        return $user->role->can_access_personal;
+        return $this->isSelf($user, $resource) || $user->role->can_access_personal;
     }
 
     /**
