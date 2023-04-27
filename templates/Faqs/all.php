@@ -17,7 +17,7 @@
             <h2><?= $category->name ?></h2>
             <?php foreach ($category->faqs as $faq): ?>
                 <details>
-                    <summary><?= $faq->question ?></summary>
+                    <summary class="faq"><?= $faq->question ?></summary>
                     <div class="markdown answer sanitized-md">
                         <?= $this->Commonmark->sanitize($faq->answer); ?>
                     </div>

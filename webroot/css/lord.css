@@ -48,6 +48,10 @@ summary {
   cursor: pointer;
 }
 
+summary.faq {
+  font-size:1.8rem !important;
+}
+
 summary:focus, summary:hover {
   background-color:#ebeefa;
   outline:none;
