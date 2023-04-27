@@ -15,7 +15,7 @@
             <?php endif; ?>
             <div class="tooltip">
                 <?= $this->Html->image('/img/icon-list.svg', [
-                    'url' => ['controller' => $controller, 'action' => 'index'],
+                    'url' => ['controller' => $controller, 'action' => 'all'],
                     'class' => 'side-nav-icon',
                     'alt' => __('List')]) ?>
                     <span class="tooltiptext"><?= $tooltip ?></span>
