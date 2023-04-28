@@ -46,15 +46,15 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $query = $this->Users->findByEmail($this->request->getData('email'));
             $user = $query->first();
-            if (!empty($user)) {
+            if (! empty($user)) {
                 if ($user->is_locked) {
                     $this->Authentication->logout();
                     return $this->Flash->error(__('Your account is locked, please activate it or contact an administrator.'));
-                } else {
-                    if ($user->failed_login_attempts > 5 && $user->failed_login_last_date->wasWithinLast('15 minutes')) {
-                        $user->failed_login_last_date = Chronos::now();
-                        return $this->Flash->error(__('You have failed too many times to log in recently. Please wait 15 minutes before retry.'));
-                    }
+                }
+                if ($user->failed_login_attempts > 5 && $user->failed_login_last_date->wasWithinLast('15 minutes')) {
+                    $user->failed_login_last_date = Chronos::now();
+                    $this->Authentication->logout();
+                    return $this->Flash->error(__('You have failed too many times to log in recently. Please wait 15 minutes before retry.'));
                 }
             }
         }
@@ -135,7 +135,7 @@ class UsersController extends AppController
         }
 
         // display error if user submitted and authentication failed
-        if ( $this->request->is('post') && !$result->isValid() ) {
+        if ( $this->request->is('post') && ! $result->isValid() ) {
             $this->Flash->error(__('Invalid username or password'));
             // $this->log($result->getStatus());
 

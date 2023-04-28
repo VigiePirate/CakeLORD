@@ -220,6 +220,14 @@ class User extends Entity implements IdentityInterface
             && $this->birth_date->day == FrozenTime::now()->day
         ) {
             return '<b>' . __('Happy birthday to you!') . '</b>';
+        }
+
+        if ($this->created->wasWithinLast('1 month')) {
+            $rookie = __(
+                'Recent member? Need for a guided tour? Read our <b><a href="{0}"> ▶ LORD STARTER KIT ◀</a></b>',
+                [\Cake\Routing\Router::Url(['controller' => 'Articles', 'action' => 'view', 1])]
+            );
+            return $rookie;
         } else {
             return '';
         }
@@ -255,6 +263,11 @@ class User extends Entity implements IdentityInterface
 
     protected function _getComingBirthdayString()
     {
+        // don't show to rookies (for better visibility of the starter kit link)
+        if ($this->created->wasWithinLast('1 month')) {
+            return '';
+        }
+
         $model = FactoryLocator::get('Table')->get('Rats');
         $query = $model->find()->where(['Rats.owner_user_id' => $this->id, 'is_alive' => true])->all();
         $rats = new Collection($query);
