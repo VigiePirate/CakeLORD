@@ -80,7 +80,7 @@ class PictureBehavior extends Behavior
      */
     public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
     {
-        if (! $data['resized']) {
+        if (isset($data['resized']) && ! $data['resized']) {
             $entity->setError('picture_file', ['upload' => __('This image format is not supported. Please choose a jpeg, png or gif file.')]);
             $event->stopPropagation();
             $event->setResult(false);

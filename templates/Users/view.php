@@ -96,15 +96,21 @@
 
                 <?php if (! is_null($identity) && $identity->can('changePicture', $user)) : ?>
                     <div class="column column-photo column-portrait edit-photo">
+                        <?php if ($user->avatar != '' && $user->avatar != 'Unknown.png') : ?>
+                            <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username, 'url' => ['action' => 'changePicture', $user->id]]) ?>
+                        <?php else : ?>
+                            <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
+                        <?php endif; ?>
+                    </div>
                 <?php else : ?>
                     <div class="column column-photo column-portrait">
+                        <?php if ($user->avatar != '' && $user->avatar != 'Unknown.png') : ?>
+                            <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username]) ?>
+                        <?php else : ?>
+                            <?= $this->Html->image('UnknownUser.svg') ?>
+                        <?php endif; ?>
+                    </div>
                 <?php endif ; ?>
-                    <?php if ($user->avatar != '' && $user->avatar != 'Unknown.png') : ?>
-                        <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username, 'url' => ['action' => 'changePicture', $user->id]]) ?>
-                    <?php else : ?>
-                        <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
-                    <?php endif; ?>
-                </div>
             </div>
 
             <h2><?= __('About me') ?></h2>

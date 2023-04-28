@@ -467,11 +467,23 @@ class UsersController extends AppController
         $this->Authorization->authorize($user);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user, ['checkRules' => false])) {
-                $this->Flash->success(__('The user’s new avatar has been saved.'));
-                return $this->redirect(['action' => 'view', $user->id]);
+
+            if ($this->request->getData('action') === 'delete') {
+                $user->avatar = '';
+                if ($this->Users->save($user, ['checkRules' => false])) {
+                    $this->Flash->success(__('The user’s avatar has been deleted.'));
+                    return $this->redirect(['action' => 'view', $user->id]);
+                }
+                $this->Flash->error(__('The user’s new avatar could not be deleted. Please, try again.'));
             }
-            $this->Flash->error(__('The user’s new picture could not be saved. Please, try again.'));
+
+            if ($this->request->getData('action') === 'upload') {
+                if ($this->Users->save($user, ['checkRules' => false])) {
+                    $this->Flash->success(__('The user’s new avatar has been saved.'));
+                    return $this->redirect(['action' => 'view', $user->id]);
+                }
+                $this->Flash->error(__('The user’s new picture could not be saved. Please, try again.'));
+            }
         }
         $this->Flash->default(__('Pictures must be in jpeg, gif or png format.') . ' ' . __x('pictures', 'If too large, they will be automatically resized.'));
         $this->set(compact('user'));

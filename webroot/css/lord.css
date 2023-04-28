@@ -321,11 +321,25 @@ table.aside-photo>tbody>tr>th{
   max-height: revert;
 }
 
-.edit-photo > a > img, .edit-photo > a {
-  cursor: url('/img/cursor-edit.svg'), auto;
+.edit-photo > a {
+  position: relative;
+  display: inline-block;
 }
 
-.edit-photo > a > img :hover, .edit-photo > a :hover{
+.edit-photo > a:before {
+  content: "";
+  display: none;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  background: url('/img/cursor-edit.svg') no-repeat center center;
+}
+
+.edit-photo > a:hover:before, .edit-photo > a > img :hover, .edit-photo > a :hover {
+  display: block;
+  cursor: pointer;
   background-color: #c3c8e6;
 }
 

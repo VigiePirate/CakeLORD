@@ -41,7 +41,8 @@
             <fieldset>
                 <?= $this->Form->control('picture_file', ['type' => 'file']) ?>
             </fieldset>
-            <?= $this->Form->button(__('Upload picture')); ?>
+            <?= $this->Form->button(__('Upload picture'), ['name' => 'action', 'value' => 'upload']) ?>
+            <?= $this->Form->button(__('Delete picture'), ['name' => 'action', 'value' => 'delete', 'class' => 'button-staff']) ?>
             <?= $this->Form->end(); ?>
         </div>
     </div>
