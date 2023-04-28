@@ -58,13 +58,13 @@ class PictureBehavior extends Behavior
                 return;
             } else {
                 $tmpName = $this->resizePic($picture);
+                $data['resized'] = $tmpName;
                 $data[$this->config['field_name']] = $tmpName;
                 if ($this->config['thumbnail']) {
                     $data['picture_thumbnail'] = 'thumb.' . $tmpName;
                 }
             }
         }
-        return;
     }
 
     /**
@@ -80,9 +80,16 @@ class PictureBehavior extends Behavior
      */
     public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
     {
-        $entity->setDirty($this->config['field_name'], $data->offsetExists('picture_file'));
-        if (array_key_exists('thumbnail', $this->config)) {
-            $entity->setDirty('picture_thumbnail', $data->offsetExists('picture_file') && $this->config['thumbnail']);
+        if (! $data['resized']) {
+            $entity->setError('picture_file', ['upload' => __('This image format is not supported. Please choose a jpeg, png or gif file.')]);
+            $event->stopPropagation();
+            $event->setResult(false);
+            return;
+        } else {
+            $entity->setDirty($this->config['field_name'], $data->offsetExists('picture_file'));
+            if (array_key_exists('thumbnail', $this->config)) {
+                $entity->setDirty('picture_thumbnail', $data->offsetExists('picture_file') && $this->config['thumbnail']);
+            }
         }
     }
 
@@ -123,7 +130,7 @@ class PictureBehavior extends Behavior
     {
         /* Check media type */
         $type = $picture->getClientMediaType();
-        if($type != 'image/jpeg' && $type != 'image/png' && 'image/gif'){
+        if($type != 'image/jpeg' && $type != 'image/png' && $type != 'image/gif'){
             return false;
         }
 
