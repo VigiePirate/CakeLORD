@@ -489,6 +489,32 @@ class UsersController extends AppController
         $this->set(compact('user'));
     }
 
+    /**
+     * EditComment method
+     *
+     * @param string|null $id Rat id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function editComment($id = null)
+    {
+        $user = $this->Users->get($id);
+        $this->Authorization->authorize($user, 'edit');
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('Your new comment about yourself has been saved.'));
+                return $this->redirect(['action' => 'view', $user->id]);
+            }
+            $this->Flash->error(__('Your new comment about yourself could not be saved. Please, try again.'));
+        }
+
+        $identity = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($identity) && $identity->can('edit', $user);
+
+        $this->set(compact('user', 'identity', 'show_staff'));
+    }
+
     /* switch newsletter preferences */
     public function switchNewsletter($id = null) {
         $user = $this->Users->get($id);

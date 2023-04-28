@@ -24,7 +24,7 @@
                     <?php if ($user->avatar != '' && $user->avatar != 'Unknown.png') : ?>
                         <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username]) ?>
                     <?php else : ?>
-                        <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
+                        <?= $this->Html->image('UnknownUser.svg') ?>
                     <?php endif; ?>
                 </div>
             </div>

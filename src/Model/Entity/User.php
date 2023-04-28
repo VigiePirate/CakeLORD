@@ -298,7 +298,17 @@ class User extends Entity implements IdentityInterface
 
     protected function _getSexString()
     {
-        return ($this->sex == 'F' ? __x('human', 'Female') : __x('human', 'Male'));
+        if ($this->sex == 'F') {
+            return  __x('grammar', 'Feminine');
+        }
+
+        if ($this->sex == 'M') {
+            return  __x('grammar', 'Maculine');
+        }
+
+        if ($this->sex == '') {
+            return  __x('grammar', 'Neutral');
+        }
     }
 
 }

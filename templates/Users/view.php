@@ -14,11 +14,11 @@
                 <?php if ($identity->can('edit', $user)) : ?>
                     <div class="side-nav-group">
                         <div class="tooltip">
-                            <?= $this->Html->image('/img/icon-picture.svg', [
-                                'url' => ['controller' => 'Users', 'action' => 'changePicture', $user->id],
+                            <?= $this->Html->image('/img/icon-comment.svg', [
+                                'url' => ['controller' => 'Users', 'action' => 'editComment', $user->id],
                                 'class' => 'side-nav-icon',
-                                'alt' => __('Change Picture')]) ?>
-                            <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
+                                'alt' => __('Edit Comment')]) ?>
+                            <span class="tooltiptext"><?= __('Edit comment') ?></span>
                         </div>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-edit.svg', [
@@ -35,11 +35,11 @@
                 <?php else : ?>
                     <div class="side-nav-group">
                         <div class="tooltip disabled">
-                            <?= $this->Html->image('/img/icon-picture.svg', [
+                            <?= $this->Html->image('/img/icon-comment.svg', [
                                 'url' => [],
                                 'class' => 'side-nav-icon',
-                                'alt' => __('Change Picture')]) ?>
-                            <span class="tooltiptext"><?= __('You cannot upload a new picture') ?></span>
+                                'alt' => __('Edit Comment')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot edit the comment') ?></span>
                         </div>
                         <div class="tooltip disabled">
                             <?= $this->Html->image('/img/icon-edit.svg', [
@@ -220,8 +220,8 @@
                             <td><?= h($user->birth_date) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Sex') ?></th>
-                            <td><?= h($user->sex) ?></td>
+                            <th><?= __x('grammar', 'Grammatical Gender') ?></th>
+                            <td><?= h($user->sex_string) ?></td>
                         </tr>
                         <tr>
                             <th><?= __('Failed Login Attempts') ?></th>
@@ -232,7 +232,7 @@
                             <td><?= h($user->failed_login_last_date) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Wants Newsletter') ?></th>
+                            <th><?= __('Wants Newsletter?') ?></th>
                             <td><?= $user->wants_newsletter ? __('Yes') : __('No'); ?></td>
                         </tr>
                         <tr>

@@ -74,11 +74,11 @@
                             <?= $this->Form->control('birth_date', ['empty' => true]) ?>
                         </div>
                         <div class="column-responsive column-50">
-                            <?= $this->Form->label('sex', __x('human', 'Sex')) ?>
+                            <?= $this->Form->label('sex', __x('grammar', 'Grammatical Gender')) ?>
                             <?= $this->Form->select('sex', [
-                                'F' => __x('human', 'Female'),
-                                'M' => __x('human', 'Male'),
-                                'X' => __x('human', 'No thanks')
+                                'F' => __x('grammar', 'Feminine'),
+                                'M' => __x('grammar', 'Masculine'),
+                                'X' => __x('grammar', 'Neutral')
                             ]) ?>
                         </div>
                     </div>

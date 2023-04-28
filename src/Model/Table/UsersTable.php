@@ -186,6 +186,7 @@ class UsersTable extends Table
      */
     public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
     {
+        // hack to give a non-empty label to the empty option in select input
         if (isset($data['sex']) && $data['sex'] == 'X') {
             $data['sex'] = '';
         }
