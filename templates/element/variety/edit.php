@@ -26,7 +26,8 @@
                         'type' => 'textarea',
                         'id' => 'description',
                         'name' => 'description',
-                        'default' => !empty($variety->description) ? $variety->description : '-'
+                        'value' => ! empty($variety->description) ? $variety->description : '',
+                        'required' => false
                     ]);
                     echo $this->Form->control('is_picture_mandatory', ['label' => __('Mandatory picture?')]);
                 ?>

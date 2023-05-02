@@ -97,9 +97,7 @@ class DilutionsController extends AppController
      */
     public function edit($id = null)
     {
-        $dilution = $this->Dilutions->get($id, [
-            'contain' => [],
-        ]);
+        $dilution = $this->Dilutions->get($id);
         $this->Authorization->authorize($dilution);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dilution = $this->Dilutions->patchEntity($dilution, $this->request->getData());
