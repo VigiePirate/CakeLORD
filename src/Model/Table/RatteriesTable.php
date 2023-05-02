@@ -134,14 +134,14 @@ class RatteriesTable extends Table
             ->maxLength('prefix', 4)
             ->requirePresence('prefix', 'create')
             ->notEmptyString('prefix')
-            ->add('prefix', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->add('prefix', 'unique', ['rule' => 'validateUnique', 'provider' => 'table', 'message' => __('This prefix is already in use. Please choose another one.')]);
 
         $validator
             ->scalar('name')
             ->maxLength('name', 70)
             ->requirePresence('name', 'create')
             ->notEmptyString('name')
-            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table', 'message' => __('This rattery name is already in use. Please choose another one.')]);
 
         $validator
             ->scalar('birth_year')
