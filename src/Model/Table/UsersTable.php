@@ -102,7 +102,7 @@ class UsersTable extends Table
             ->email('email')
             ->requirePresence('email', 'create')
             ->notEmptyString('email')
-            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table', 'message' => __('This email is already in use. If you have lost your password, please use the password recovery tool.'));
+            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table', 'message' => __('This email is already in use. If you have lost your password, please use the password recovery tool.')]);
 
         $validator
             ->scalar('password')
