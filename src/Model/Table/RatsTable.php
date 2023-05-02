@@ -390,9 +390,9 @@ class RatsTable extends Table
             },
             'validOrigins',
             [
-                'errorField' => 'comments',
+                'errorField' => 'origin_errors',
                 'message' => __('Incomplete: mandatory information about origins are missing.
-                <ul><li>For a generic origin, please add a comment (name and location, circumstances of the rescue, etc.)</li>
+                <ul><li>For a generic origin (any origin but registered ratteries), please add relevant information in comments: name and location, circumstances of the rescue, etc.</li>
                 <li>For a registered rattery, add at least a mother. Create her first if needed, or chose a generic origin.</li></ul>')
             ]
         );

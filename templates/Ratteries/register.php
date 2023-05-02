@@ -4,16 +4,16 @@
             <div class="side-nav-group">
                 <?= $this->element('default_sidebar') ?>
             </div>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-back.svg', [
+                        'url' => ['controller' => 'users', 'action' => 'my'],
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Back')]) ?>
+                    <span class="tooltiptext"><?= __('Cancel and go back to dashboard') ?></span>
+                </div>
+            </diV>
         </div>
-        <div class="side-nav-group">
-            <div class="tooltip">
-                <?= $this->Html->image('/img/icon-back.svg', [
-                    'url' => ['controller' => 'users', 'action' => 'my'],
-                    'class' => 'side-nav-icon',
-                    'alt' => __('Back')]) ?>
-                <span class="tooltiptext"><?= __('Cancel and go back to dashboard') ?></span>
-            </div>
-        </diV>
     </aside>
     <div class="column-responsive column-90">
         <div class="ratteries form content">

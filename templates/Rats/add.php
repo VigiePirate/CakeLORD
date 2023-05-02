@@ -38,10 +38,14 @@
                             ?>
                         </div>
                         <div class="column-responsive column-50">
-                            <div class="message">
-                                <p><?= __('Please record mandatory information: name and location in comments for a generic origin, or (at least) mother for a registered rattery.')?></p>
-                                <?= __('If a litter with the same birth date and mother already exists, the rat will be automatically added to it. If not, a new litter will be created with the rat.') ?>
-                            </div>
+                            <?php if ($this->Form->isFieldError('origin_errors')) : ?>
+                                <?= $this->Form->error('origin_errors', null, ['escape' => false]); ?>
+                            <?php else : ?>
+                                <div class="message">
+                                    <p> <?= __('Please record mandatory information: name and location in comments for a generic origin, or (at least) mother for a registered rattery.') ?></p>
+                                    <?= __('If a litter with the same birth date and mother already exists, the rat will be automatically added to it. If not, a new litter will be created with the rat.') ?>
+                                </div>
+                            <?php endif ; ?>
                         </div>
                     </div>
 
@@ -53,7 +57,6 @@
                             'type' => 'radio',
                             'hiddenField' => false,
                             'empty' => __('None of the above (I will select a registered rattery below)'),
-                            'checked' => 'checked'
                         ]);
                     ?>
 
@@ -183,6 +186,7 @@
                                 'type' => 'text',
                                 'placeholder' => __('Type here...'),
                                 'empty' => true,
+                                'value' => isset($data['owner_username']) ? $data['owner_username'] : $user->username,
                             ]);
                             echo $this->Form->control('owner_user_id', [
                                 'id' => 'jquery-owner-id',
@@ -194,6 +198,7 @@
                                 'class' => 'hide-everywhere',
                                 'type' => 'text',
                                 'empty' => true,
+                                'value' => isset($data['owner_user_id']) ? $data['owner_user_id'] : $user->id,
                             ]);
                         ?>
                     </div>
@@ -402,7 +407,7 @@
     $(function () {
         $('#jquery-owner-input')
             .on('input', function() {
-                $("#jquery-mother-id").val('');
+                $("#jquery-owner-id").val('');
                 if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
                     $(this).removeClass('autocompleted');
                 }
