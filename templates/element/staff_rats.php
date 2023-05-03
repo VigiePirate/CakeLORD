@@ -3,11 +3,11 @@
         <thead>
                 <th><?= $this->Paginator->sort('state_id', __('State')) ?></th>
                 <th><?= $this->Paginator->sort('pedigree_identifier', __('Identifier')) ?></th>
-                <th><?= __('Usual name') ?></th>
+                <th class="col-head"><?= __('Usual name') ?></th>
                 <th><?= $this->Paginator->sort('OwnerUsers.username', __('Owner')) ?></th>
                 <th><?= $this->Paginator->sort('modified', __('Modified')) ?></th>
-                <th><?= __('Last message') ?></th>
-                <th class="actions-title"><?= __('Actions') ?></th>
+                <th class="col-head"><?= __('Last message') ?></th>
+                <th class="actions-title col-head"><?= __('Actions') ?></th>
         </thead>
         <tbody>
             <?php foreach($rats as $rat): ?>

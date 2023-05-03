@@ -32,7 +32,7 @@
                 <th class="col-head"><?= __('Death cause') ?></th>
             <?php endif; ?>
             <?php if (! in_array('owner_user_id', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('owner_user_id','Owner') ?></th>
+                <th><?= $this->Paginator->sort('OwnerUsers.username','Owner') ?></th>
             <?php endif; ?>
             <?php if (! in_array('sex', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('sex','Sex') ?></th>

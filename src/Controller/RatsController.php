@@ -676,13 +676,27 @@ class RatsController extends AppController
         ]);
 
         $this->paginate = [
-            'contain' => ['OwnerUsers','Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
+            'contain' => [
+                'OwnerUsers',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'States'
+            ],
+            'sortableFields' => [
+                'pedigree_identifier',
+                'name',
+                'birth_date',
+                'OwnerUsers.username',
+                'sex'
+            ]
         ];
         $rats = $this->paginate($rats);
 
         $this->set([
             'rats' => $rats,
-            'inState' => $inState
+            'inState' => $inState,
+            'user' => $this->request->getAttribute('identity'),
         ]);
     }
 
