@@ -10,6 +10,11 @@
   margin-bottom: 1rem;
 }
 
+.markdown table td img {
+  padding-top: 1rem !important;
+  width: 4em !important;
+}
+
 .markdown > h2, .markdown > h3, .markdown > h4, .markdown > h5,
 .editor-preview > h2, .editor-preview > h3, .editor-preview > h4, .editor-preview > h5 {
   margin-top: 2.5rem;
