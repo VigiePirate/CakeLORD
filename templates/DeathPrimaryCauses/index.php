@@ -11,7 +11,7 @@
         <table class="condensed">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <!-- <th><?= $this->Paginator->sort('id') ?></th> -->
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('is_infant', __('Infant?')) ?></th>
                     <th><?= $this->Paginator->sort('is_accident', __('Accidental?')) ?></th>
@@ -23,10 +23,9 @@
                 <?php foreach ($deathPrimaryCauses as $deathPrimaryCause): ?>
                 <tr>
                     <td><?= $this->Html->link(
-                        $this->Number->format($deathPrimaryCause->id),
+                        h($deathPrimaryCause->name),
                         ['action' => 'view', $deathPrimaryCause->id]
                     )?></td>
-                    <td><?= h($deathPrimaryCause->name) ?></td>
                     <td><?= $deathPrimaryCause->is_infant ? '✓' : '' ?></td>
                     <td><?= $deathPrimaryCause->is_accident ? '✓' : '' ?></td>
                     <td><?= $deathPrimaryCause->is_oldster ? '✓' : '' ?></td>

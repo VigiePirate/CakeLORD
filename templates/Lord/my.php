@@ -142,11 +142,11 @@
                     <h3><?= __('Death Causes') ?></h3>
                     <table class="condensed">
                         <tr>
-                            <th><?= $this->Html->link(__('Death Categories'), ['controller' => 'PrimaryDeathCauses', 'action' => 'index']) ?></th>
+                            <th><?= $this->Html->link(__('Death Categories'), ['controller' => 'DeathPrimaryCauses', 'action' => 'index']) ?></th>
                             <td><?= __('Manage death categories') ?></td>
                         </tr>
                         <tr>
-                            <th><?= $this->Html->link(__('Death Causes'), ['controller' => 'PrimaryDeathCauses', 'action' => 'index']) ?></th>
+                            <th><?= $this->Html->link(__('Death Causes'), ['controller' => 'DeathSecondaryCauses', 'action' => 'index']) ?></th>
                             <td><?= __('Manage death causes') ?></td>
                         </tr>
                     </table>
