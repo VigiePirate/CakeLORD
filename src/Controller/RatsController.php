@@ -676,13 +676,27 @@ class RatsController extends AppController
         ]);
 
         $this->paginate = [
-            'contain' => ['OwnerUsers','Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
+            'contain' => [
+                'OwnerUsers',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'States'
+            ],
+            'sortableFields' => [
+                'pedigree_identifier',
+                'name',
+                'birth_date',
+                'OwnerUsers.username',
+                'sex'
+            ]
         ];
         $rats = $this->paginate($rats);
 
         $this->set([
             'rats' => $rats,
-            'inState' => $inState
+            'inState' => $inState,
+            'user' => $this->request->getAttribute('identity'),
         ]);
     }
 
@@ -887,12 +901,26 @@ class RatsController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
-            if ($this->Rats->save($rat, ['checkRules' => false])) {
-                $this->Flash->warning(__('The rat’s new picture has been saved. A staff member still has to validate it.'));
-                return $this->redirect(['action' => 'view', $rat->id]);
+
+            if ($this->request->getData('action') === 'delete') {
+                $rat->picture = '';
+                $rat->picture_thumbnail = '';
+                if ($this->Rats->save($rat, ['checkRules' => false])) {
+                    $this->Flash->success(__('The rat’s picture has been deleted.'));
+                    return $this->redirect(['action' => 'view', $rat->id]);
+                }
+                $this->Flash->error(__('The rat’s picture could not be deleted. Please, try again.'));
             }
-            $this->Flash->error(__('The rat’s new picture could not be saved. Please, try again.'));
+
+            if ($this->request->getData('action') === 'upload') {
+                if ($this->Rats->save($rat, ['checkRules' => false])) {
+                    $this->Flash->warning(__('The rat’s new picture has been saved. A staff member still has to validate it.'));
+                    return $this->redirect(['action' => 'view', $rat->id]);
+                }
+                $this->Flash->error(__('The rat’s new picture could not be saved. Please, try again.'));
+            }
         }
+        $this->Flash->default(__('Pictures must be in jpeg, gif or png format.') . ' ' . __x('pictures', 'If too large, they will be automatically resized.'));
         $this->set(compact('rat'));
     }
 

@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use ArrayObject;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Datasource\EntityInterface;
+use Cake\Event\EventInterface;
 
 /**
  * Users Model
@@ -99,7 +102,7 @@ class UsersTable extends Table
             ->email('email')
             ->requirePresence('email', 'create')
             ->notEmptyString('email')
-            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table', 'message' => __('This email is already in use. If you have lost your password, please use the password recovery tool.')]);
 
         $validator
             ->scalar('password')
@@ -112,7 +115,7 @@ class UsersTable extends Table
             ->maxLength('username', 45)
             ->requirePresence('username', 'create')
             ->notEmptyString('username')
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table', 'message' => __('This username is already in use. Please choose another one.')]);
 
         $validator
             ->scalar('firstname')
@@ -171,6 +174,22 @@ class UsersTable extends Table
             ->allowEmptyString('passkey');
 
         return $validator;
+    }
+
+    /**
+     * beforeMarshal method
+     *
+     * @param EventInterface $event
+     * @param ArrayObject $data
+     * @param ArrayObject $options
+     * @return void
+     */
+    public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
+    {
+        // hack to give a non-empty label to the empty option in select input
+        if (isset($data['sex']) && $data['sex'] == 'X') {
+            $data['sex'] = '';
+        }
     }
 
     /**

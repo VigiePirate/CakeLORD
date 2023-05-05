@@ -172,15 +172,21 @@
 
                 <?php if (! is_null($user) && $user->can('microEdit', $rat)) : ?>
                     <div class="column column-photo edit-photo">
+                        <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
+                            <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier, 'url' => ['action' => 'changePicture', $rat->id]]) ?>
+                        <?php else : ?>
+                            <?= $this->Html->image('UnknownRat.svg', ['url' => ['action' => 'changePicture', $rat->id]]) ?>
+                        <?php endif; ?>
+                    </div>
                 <?php else : ?>
                     <div class="column column-photo">
+                        <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
+                            <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier]) ?>
+                        <?php else : ?>
+                            <?= $this->Html->image('UnknownRat.svg') ?>
+                        <?php endif; ?>
+                    </div>
                 <?php endif ; ?>
-                    <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
-                        <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier, 'url' => ['action' => 'changePicture', $rat->id]]) ?>
-                    <?php else : ?>
-                        <?= $this->Html->image('UnknownRat.svg', ['url' => ['action' => 'changePicture', $rat->id]]) ?>
-                    <?php endif; ?>
-                </div>
 
             </div>
             <h2><?= __('Origins') ?></h2>

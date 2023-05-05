@@ -6,8 +6,13 @@
   margin-bottom: 0rem;
 }
 
-.markdown.doc > * > li {
-  margin-bottom: 1rem;
+.markdown.doc > * > li, li > ul > li {
+  margin-bottom: 0.75rem;
+}
+
+.markdown table td img {
+  padding-top: 1rem !important;
+  width: 4em !important;
 }
 
 .markdown > h2, .markdown > h3, .markdown > h4, .markdown > h5,

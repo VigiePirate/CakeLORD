@@ -380,14 +380,28 @@ class RatteriesController extends AppController
     {
         $rattery = $this->Ratteries->get($id, ['contain' => 'States']);
         $this->Authorization->authorize($rattery, 'microEdit');
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
-            if ($this->Ratteries->save($rattery, ['checkRules' => false])) {
-                $this->Flash->success(__('The rattery’s new picture has been saved.'));
-                return $this->redirect(['action' => 'view', $rattery->id]);
+
+            if ($this->request->getData('action') === 'delete') {
+                $rattery->picture = '';
+                if ($this->Ratteries->save($rattery, ['checkRules' => false])) {
+                    $this->Flash->success(__('The rattery’s picture has been deleted.'));
+                    return $this->redirect(['action' => 'view', $rattery->id]);
+                }
+                $this->Flash->error(__('The rattery’s picture could not be deleted. Please, try again.'));
             }
-            $this->Flash->error(__('The rattery’s new picture could not be saved. Please, try again.'));
+
+            if ($this->request->getData('action') === 'upload') {
+                if ($this->Ratteries->save($rattery, ['checkRules' => false])) {
+                    $this->Flash->success(__('The rattery’s new picture has been saved.'));
+                    return $this->redirect(['action' => 'view', $rattery->id]);
+                }
+                $this->Flash->error(__('The rattery’s new picture could not be saved. Please, try again.'));
+            }
         }
+        $this->Flash->default(__('Pictures must be in jpeg, gif or png format.') . ' ' . __x('pictures', 'If too large, they will be automatically resized.'));
         $this->set(compact('rattery'));
     }
 

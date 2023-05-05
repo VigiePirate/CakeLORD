@@ -14,11 +14,11 @@
                 <?php if ($identity->can('edit', $user)) : ?>
                     <div class="side-nav-group">
                         <div class="tooltip">
-                            <?= $this->Html->image('/img/icon-picture.svg', [
-                                'url' => ['controller' => 'Users', 'action' => 'changePicture', $user->id],
+                            <?= $this->Html->image('/img/icon-comment.svg', [
+                                'url' => ['controller' => 'Users', 'action' => 'editComment', $user->id],
                                 'class' => 'side-nav-icon',
-                                'alt' => __('Change Picture')]) ?>
-                            <span class="tooltiptext"><?= __('Upload a new picture') ?></span>
+                                'alt' => __('Edit Comment')]) ?>
+                            <span class="tooltiptext"><?= __('Edit comment') ?></span>
                         </div>
                         <div class="tooltip">
                             <?= $this->Html->image('/img/icon-edit.svg', [
@@ -35,11 +35,11 @@
                 <?php else : ?>
                     <div class="side-nav-group">
                         <div class="tooltip disabled">
-                            <?= $this->Html->image('/img/icon-picture.svg', [
+                            <?= $this->Html->image('/img/icon-comment.svg', [
                                 'url' => [],
                                 'class' => 'side-nav-icon',
-                                'alt' => __('Change Picture')]) ?>
-                            <span class="tooltiptext"><?= __('You cannot upload a new picture') ?></span>
+                                'alt' => __('Edit Comment')]) ?>
+                            <span class="tooltiptext"><?= __('You cannot edit the comment') ?></span>
                         </div>
                         <div class="tooltip disabled">
                             <?= $this->Html->image('/img/icon-edit.svg', [
@@ -96,15 +96,21 @@
 
                 <?php if (! is_null($identity) && $identity->can('changePicture', $user)) : ?>
                     <div class="column column-photo column-portrait edit-photo">
+                        <?php if ($user->avatar != '' && $user->avatar != 'Unknown.png') : ?>
+                            <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username, 'url' => ['action' => 'changePicture', $user->id]]) ?>
+                        <?php else : ?>
+                            <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
+                        <?php endif; ?>
+                    </div>
                 <?php else : ?>
                     <div class="column column-photo column-portrait">
+                        <?php if ($user->avatar != '' && $user->avatar != 'Unknown.png') : ?>
+                            <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username]) ?>
+                        <?php else : ?>
+                            <?= $this->Html->image('UnknownUser.svg') ?>
+                        <?php endif; ?>
+                    </div>
                 <?php endif ; ?>
-                    <?php if ($user->avatar != '' && $user->avatar != 'Unknown.png') : ?>
-                        <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username, 'url' => ['action' => 'changePicture', $user->id]]) ?>
-                    <?php else : ?>
-                        <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
-                    <?php endif; ?>
-                </div>
             </div>
 
             <h2><?= __('About me') ?></h2>
@@ -214,8 +220,8 @@
                             <td><?= h($user->birth_date) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Sex') ?></th>
-                            <td><?= h($user->sex) ?></td>
+                            <th><?= __x('grammar', 'Grammatical Gender') ?></th>
+                            <td><?= h($user->sex_string) ?></td>
                         </tr>
                         <tr>
                             <th><?= __('Failed Login Attempts') ?></th>
@@ -226,7 +232,7 @@
                             <td><?= h($user->failed_login_last_date) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Wants Newsletter') ?></th>
+                            <th><?= __('Wants Newsletter?') ?></th>
                             <td><?= $user->wants_newsletter ? __('Yes') : __('No'); ?></td>
                         </tr>
                         <tr>
@@ -236,42 +242,6 @@
                     </table>
                 </div>
                 <?php endif ;?>
-
-                <div class="related">
-                    <h3 class="staff"><?= __('Related Conversations') ?></h3>
-                    <?php if (!empty($user->conversations)) : ?>
-                    <div class="table-responsive">
-                        <table>
-                            <tr>
-                                <th><?= __('Id') ?></th>
-                                <th><?= __('Rat Id') ?></th>
-                                <th><?= __('Rattery Id') ?></th>
-                                <th><?= __('Litter Id') ?></th>
-                                <th><?= __('Created') ?></th>
-                                <th><?= __('Modified') ?></th>
-                                <th><?= __('Is Active') ?></th>
-                                <th class="actions"><?= __('Actions') ?></th>
-                            </tr>
-                            <?php foreach ($user->conversations as $conversations) : ?>
-                            <tr>
-                                <td><?= h($conversations->id) ?></td>
-                                <td><?= h($conversations->rat_id) ?></td>
-                                <td><?= h($conversations->rattery_id) ?></td>
-                                <td><?= h($conversations->litter_id) ?></td>
-                                <td><?= h($conversations->created) ?></td>
-                                <td><?= h($conversations->modified) ?></td>
-                                <td><?= h($conversations->is_active) ?></td>
-                                <td class="actions">
-                                    <?= $this->Html->link(__('View'), ['controller' => 'Conversations', 'action' => 'view', $conversations->id]) ?>
-                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Conversations', 'action' => 'edit', $conversations->id]) ?>
-                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Conversations', 'action' => 'delete', $conversations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $conversations->id)]) ?>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </table>
-                    </div>
-                    <?php endif; ?>
-                </div>
 
                 <?php if ($identity->can('seeStaffOnly', $user)) :?>
                 <div class="related">

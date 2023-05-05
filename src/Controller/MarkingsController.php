@@ -13,6 +13,12 @@ use Cake\Chronos\Chronos;
  */
 class MarkingsController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['view', 'index']);
+    }
+
     /**
      * Index method
      *
@@ -37,7 +43,7 @@ class MarkingsController extends AppController
     public function view($id = null)
     {
         $marking = $this->Markings->get($id);
-
+        $this->Authorization->skipAuthorization();
         $examples = $this->Markings->Rats->find()
             ->where([
                 ['marking_id' => $id],
@@ -68,6 +74,7 @@ class MarkingsController extends AppController
     public function add()
     {
         $marking = $this->Markings->newEmptyEntity();
+        $this->Authorization->authorize($marking);
         if ($this->request->is('post')) {
             $marking = $this->Markings->patchEntity($marking, $this->request->getData());
             if ($this->Markings->save($marking)) {
@@ -77,7 +84,9 @@ class MarkingsController extends AppController
             }
             $this->Flash->error(__('The marking could not be saved. Please, try again.'));
         }
-        $this->set(compact('marking'));
+
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('marking', 'user'));
     }
 
     /**
@@ -92,6 +101,7 @@ class MarkingsController extends AppController
         $marking = $this->Markings->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->authorize($marking);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $marking = $this->Markings->patchEntity($marking, $this->request->getData());
             if ($this->Markings->save($marking)) {
@@ -101,7 +111,8 @@ class MarkingsController extends AppController
             }
             $this->Flash->error(__('The marking could not be saved. Please, try again.'));
         }
-        $this->set(compact('marking'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('marking', 'user'));
     }
 
     /**
@@ -115,6 +126,7 @@ class MarkingsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $marking = $this->Markings->get($id);
+        $this->Authorization->authorize($marking);
         if ($this->Markings->delete($marking)) {
             $this->Flash->success(__('The marking has been deleted.'));
         } else {

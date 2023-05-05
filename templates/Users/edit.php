@@ -60,13 +60,32 @@
                             . $this->Html->link(__('Change password'), ['action' => 'changePassword']) ?>
                         </p>
                     <?php endif ; ?>
-                    <?php
-                        echo $this->Form->control('firstname');
-                        echo $this->Form->control('lastname');
-                        echo $this->Form->control('birth_date', ['empty' => true]);
-                        echo $this->Form->control('sex');
-                        echo $this->Form->control('wants_newsletter');
-                    ?>
+
+                    <div class="row">
+                        <div class="column-responsive column-50">
+                            <?= $this->Form->control('firstname') ?>
+                        </div>
+                        <div class="column-responsive column-50">
+                            <?= $this->Form->control('lastname') ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column-responsive column-50">
+                            <?= $this->Form->control('birth_date', ['empty' => true]) ?>
+                        </div>
+                        <div class="column-responsive column-50">
+                            <?= $this->Form->label('sex', __x('grammar', 'Grammatical Gender')) ?>
+                            <?= $this->Form->select('sex', [
+                                'F' => __x('grammar', 'Feminine'),
+                                'M' => __x('grammar', 'Masculine'),
+                                'X' => __x('grammar', 'Neutral')
+                            ]) ?>
+                        </div>
+                    </div>
+
+                    <div class="spacer"></div>
+                    <?= $this->Form->control('wants_newsletter', ['label' => __('I accept to receive casual newsletters and other information by email')]); ?>
+
                 <?php endif; ?>
 
                 <?php if ($identity->can('seeStaffOnly', $user)) : ?>

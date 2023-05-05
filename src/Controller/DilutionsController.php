@@ -13,7 +13,6 @@ use Cake\Chronos\Chronos;
  */
 class DilutionsController extends AppController
 {
-
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -75,6 +74,7 @@ class DilutionsController extends AppController
     public function add()
     {
         $dilution = $this->Dilutions->newEmptyEntity();
+        $this->Authorization->authorize($dilution);
         if ($this->request->is('post')) {
             $dilution = $this->Dilutions->patchEntity($dilution, $this->request->getData());
             if ($this->Dilutions->save($dilution)) {
@@ -84,7 +84,8 @@ class DilutionsController extends AppController
             }
             $this->Flash->error(__('The dilution could not be saved. Please, try again.'));
         }
-        $this->set(compact('dilution'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('dilution', 'user'));
     }
 
     /**
@@ -96,9 +97,8 @@ class DilutionsController extends AppController
      */
     public function edit($id = null)
     {
-        $dilution = $this->Dilutions->get($id, [
-            'contain' => [],
-        ]);
+        $dilution = $this->Dilutions->get($id);
+        $this->Authorization->authorize($dilution);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dilution = $this->Dilutions->patchEntity($dilution, $this->request->getData());
             if ($this->Dilutions->save($dilution)) {
@@ -108,7 +108,8 @@ class DilutionsController extends AppController
             }
             $this->Flash->error(__('The dilution could not be saved. Please, try again.'));
         }
-        $this->set(compact('dilution'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('dilution', 'user'));
     }
 
     /**
@@ -122,6 +123,7 @@ class DilutionsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $dilution = $this->Dilutions->get($id);
+        $this->Authorization->authorize($dilution);
         if ($this->Dilutions->delete($dilution)) {
             $this->Flash->success(__('The dilution has been deleted.'));
         } else {

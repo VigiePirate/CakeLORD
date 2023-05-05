@@ -30,16 +30,16 @@
 
             <h1><?= h($user->username) ?></h1>
 
+            <?= $this->Flash->render(); ?>
+
             <?php
                 echo $this->Form->create($user, ['type' => 'file']); ?>
                 <fieldset>
-                    <div class="message default">
-                        <?= __('Pictures must be in jpeg, gif or png format.') ?> <?= (' They will be resized to a maximum of 900 pixels wide and 600 pixels high.') ?>
-                    </div>
                     <?= $this->Form->control('picture_file', ['type' => 'file']) ?>
                 </fieldset>
-                <?= $this->Form->button(__('Upload picture')); ?>
-                <?= $this->Form->end(); 
+                <?= $this->Form->button(__('Upload picture'), ['name' => 'action', 'value' => 'upload']) ?>
+                <?= $this->Form->button(__('Delete picture'), ['name' => 'action', 'value' => 'delete', 'class' => 'button-staff']) ?>
+                <?= $this->Form->end();
             ?>
         </div>
     </div>

@@ -46,15 +46,15 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $query = $this->Users->findByEmail($this->request->getData('email'));
             $user = $query->first();
-            if (!empty($user)) {
+            if (! empty($user)) {
                 if ($user->is_locked) {
                     $this->Authentication->logout();
                     return $this->Flash->error(__('Your account is locked, please activate it or contact an administrator.'));
-                } else {
-                    if ($user->failed_login_attempts > 5 && $user->failed_login_last_date->wasWithinLast('15 minutes')) {
-                        $user->failed_login_last_date = Chronos::now();
-                        return $this->Flash->error(__('You have failed too many times to log in recently. Please wait 15 minutes before retry.'));
-                    }
+                }
+                if ($user->failed_login_attempts > 5 && $user->failed_login_last_date->wasWithinLast('15 minutes')) {
+                    $user->failed_login_last_date = Chronos::now();
+                    $this->Authentication->logout();
+                    return $this->Flash->error(__('You have failed too many times to log in recently. Please wait 15 minutes before retry.'));
                 }
             }
         }
@@ -135,7 +135,7 @@ class UsersController extends AppController
         }
 
         // display error if user submitted and authentication failed
-        if ( $this->request->is('post') && !$result->isValid() ) {
+        if ( $this->request->is('post') && ! $result->isValid() ) {
             $this->Flash->error(__('Invalid username or password'));
             // $this->log($result->getStatus());
 
@@ -467,13 +467,52 @@ class UsersController extends AppController
         $this->Authorization->authorize($user);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user, ['checkRules' => false])) {
-                $this->Flash->success(__('The user’s new avatar has been saved.'));
+
+            if ($this->request->getData('action') === 'delete') {
+                $user->avatar = '';
+                if ($this->Users->save($user, ['checkRules' => false])) {
+                    $this->Flash->success(__('The user’s avatar has been deleted.'));
+                    return $this->redirect(['action' => 'view', $user->id]);
+                }
+                $this->Flash->error(__('The user’s new avatar could not be deleted. Please, try again.'));
+            }
+
+            if ($this->request->getData('action') === 'upload') {
+                if ($this->Users->save($user, ['checkRules' => false])) {
+                    $this->Flash->success(__('The user’s new avatar has been saved.'));
+                    return $this->redirect(['action' => 'view', $user->id]);
+                }
+                $this->Flash->error(__('The user’s new picture could not be saved. Please, try again.'));
+            }
+        }
+        $this->Flash->default(__('Pictures must be in jpeg, gif or png format.') . ' ' . __x('pictures', 'If too large, they will be automatically resized.'));
+        $this->set(compact('user'));
+    }
+
+    /**
+     * EditComment method
+     *
+     * @param string|null $id Rat id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function editComment($id = null)
+    {
+        $user = $this->Users->get($id);
+        $this->Authorization->authorize($user, 'edit');
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('Your new comment about yourself has been saved.'));
                 return $this->redirect(['action' => 'view', $user->id]);
             }
-            $this->Flash->error(__('The user’s new picture could not be saved. Please, try again.'));
+            $this->Flash->error(__('Your new comment about yourself could not be saved. Please, try again.'));
         }
-        $this->set(compact('user'));
+
+        $identity = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($identity) && $identity->can('edit', $user);
+
+        $this->set(compact('user', 'identity', 'show_staff'));
     }
 
     /* switch newsletter preferences */

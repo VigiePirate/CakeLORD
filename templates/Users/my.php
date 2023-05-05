@@ -7,6 +7,10 @@
 
     <div class="column-responsive column-90">
         <div class="users view content">
+
+            <?= $this->Html->link(__('See public profile'), ['controller' => 'Users', 'action' => 'view', $user->id], ['class' => 'button float-right']) ?>
+            <?= $this->Html->link(__('Edit profile'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'button float-right']) ?>
+
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= h($user->dashboard_title) ?></div>
             </div>
@@ -35,20 +39,13 @@
                         </tr>
                     </table>
                 </div>
-                <div class="column column-photo edit-photo column-portrait">
+                <div class="column column-photo edit-photo">
                     <?php if ($user->avatar != '' && $user->avatar != 'Unknown.png') : ?>
                         <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username, 'url' => ['action' => 'changePicture', $user->id]]) ?>
                     <?php else : ?>
                         <?= $this->Html->image('UnknownUser.svg', ['url' => ['action' => 'changePicture', $user->id]]) ?>
                     <?php endif; ?>
                 </div>
-            </div>
-
-            <div class="button-small">
-                <?= $this->Html->link(__('See public profile'), ['controller' => 'Users', 'action' => 'view', $user->id], ['class' => 'button float-right']) ?>
-            </div>
-            <div class="button-small">
-                <?= $this->Html->link(__('Edit profile'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'button float-right']) ?>
             </div>
 
             <h2><?= __('About me') ?></h2>
@@ -61,7 +58,7 @@
             </div>
 
             <div class="spacer"></div>
-            <h2><?= __('Private information') ?></h2>
+            <h2 class="staff"><?= __('Private information') ?></h2>
             <table class="aside-photo">
                 <tr>
                     <th><?= __('Email') ?></th>
@@ -80,8 +77,8 @@
                     <td><?= h($user->birth_date) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Sex') ?></th>
-                    <td><?= h($user->sex) ?></td>
+                    <th><?= __x('grammar', 'Grammatical Gender') ?></th>
+                    <td><?= h($user->sex_string) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Failed Login Attempts') ?></th>
@@ -93,7 +90,7 @@
                 </tr>
             </table>
 
-            <h2><?= __('Settings') ?></h2>
+            <h2 class="staff"><?= __('Settings') ?></h2>
             <table class="aside-photo">
                 <tr>
                     <th><?= __('Wants Newsletter?') ?></th>

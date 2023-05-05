@@ -7,19 +7,21 @@
             <table class="condensed">
                 <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('id') ?></th>
+                        <!-- <th><?= $this->Paginator->sort('id') ?></th> -->
                         <th><?= $this->Paginator->sort('name') ?></th>
                         <th><?= $this->Paginator->sort('genotype') ?></th>
-                        <th><?= $this->Paginator->sort('is_picture_mandatory', __('Mandatory picture?')) ?></th>
+                        <th><?= $this->Paginator->sort('description') ?></th>
+                        <th><?= $this->Paginator->sort('is_picture_mandatory', __('Photo?')) ?></th>
                         <th class="actions col-head"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($varieties as $variety): ?>
                     <tr>
-                        <td><?= $this->Number->format($variety->id) ?></td>
+                        <!-- <td><?= $this->Number->format($variety->id) ?></td> -->
                         <td><?= $this->Html->link(h($variety->name), ['action' => 'view', $variety->id]) ?></td>
                         <td><?= h($variety->genotype) ?></td>
+                        <td><?= substr(h($variety->description), 0, strpos(h($variety->description), ".")) ?></td>
                         <td><?= $variety->is_picture_mandatory ? '✓' : '' ?></td>
                         <td class="actions">
                             <?= $this->Html->image('/img/icon-view.svg', [
