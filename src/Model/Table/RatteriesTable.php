@@ -70,6 +70,7 @@ class RatteriesTable extends Table
                 'country_id',
                 'latitude',
                 'longitude',
+                'is_alive',
             ],
         ]);
 
@@ -200,6 +201,16 @@ class RatteriesTable extends Table
         $rules->add($rules->existsIn(['owner_user_id'], 'Users'));
         $rules->add($rules->existsIn(['country_id'], 'Countries'));
         $rules->add($rules->existsIn(['state_id'], 'States'));
+
+        // $rules->add(function ($rattery) {
+        //         return $rattery->coherentActivityState();
+        //     },
+        //     'coherentActivityState',
+        //     [
+        //         'errorField' => 'name',
+        //         'message' => 'The rattery just declared a recent litter, but we could not set it as active.'
+        //     ]
+        // );
 
         // /* A given owner cannot have several active ratteries */
         // $rules->add(function ($rattery) {
