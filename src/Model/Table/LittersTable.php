@@ -291,10 +291,10 @@ class LittersTable extends Table
             },
             'validOrigins',
             [
-                'errorField' => 'comments',
-                'message' => 'Incomplete: mandatory information about origins are missing.
-                <ul><li>For a generic origin, please add a comment (name and location, circumstances of the rescue, etc.)</li>
-                <li>For a registered rattery, add at least a mother. Create her first if needed, or chose a generic origin.</li></ul>'
+                'errorField' => 'origin_errors',
+                'message' => __('Incomplete: mandatory information about origins are missing.
+                <ul><li>For a generic origin (any origin but registered ratteries), please add relevant information in comments: name and location, circumstances of the rescue, etc.</li>
+                <li>For a registered rattery, add at least a mother. Create her first if needed, or chose a generic origin.</li></ul>')
             ]
         );
 
@@ -506,7 +506,7 @@ class LittersTable extends Table
             //FIXME check if rattery has sisters to deactivate them? in the Rattery rules maybe?
             if (! $rattery->is_alive && $now->diffInDays($entity->birth_date) < RatteriesTable::MAXIMAL_INACTIVITY) {
                 $rattery->is_alive = true;
-                $ratteries->save($rattery, ['atomic' => false]);
+                $ratteries->save($rattery, ['atomic' => false, 'associated' => []]);
             }
         }
     }
