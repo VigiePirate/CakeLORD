@@ -108,6 +108,19 @@ class Rattery extends Entity
         return $this->country->name;
     }
 
+    // /* Rule : active rattery = litter born in the last 2 years */
+    // public function coherentActivityState() {
+    //     $litters = $this->bred_litters
+    //     foreach ($this->offspring_rats as $rat) {
+    //         $rat->birth_date = $this->birth_date;
+    //         if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
+    //             return false;
+    //         }
+    //     }
+    //     $rats->addBehavior('State');
+    //     return true;
+    // }
+
     // /* Rule : one active rattery per user */
     // public function checkSisters()
     // {

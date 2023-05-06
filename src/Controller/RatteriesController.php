@@ -60,7 +60,7 @@ class RatteriesController extends AppController
         $this->Authorization->skipAuthorization();
         $user = $this->Authentication->getIdentity();
         $this->paginate = [
-            'contain' => ['Users', 'Countries', 'States'],
+            'contain' => ['Contributions', 'Users', 'Users.Ratteries', 'Countries', 'States'],
         ];
         $alive_ratteries = $this->paginate($this->Ratteries->find()->where([
                 'owner_user_id' => $user->id,
@@ -72,6 +72,9 @@ class RatteriesController extends AppController
                 'is_alive' => false,
             ])->order('Ratteries.created DESC')
         );
+
+        $users = $this->loadModel('Users');
+        $user = $users->get($user->id, ['contain' => ['Ratteries']]);
         $this->set(compact('alive_ratteries', 'closed_ratteries', 'user'));
     }
 
@@ -339,7 +342,7 @@ class RatteriesController extends AppController
             // check last litter; if too old, fail and require a litter recording
             $recent = $rattery->countLitters(['rattery_id' => $rattery->id, 'DATEDIFF(NOW(), birth_date) <=' => \App\Model\Table\RatteriesTable::MAXIMAL_INACTIVITY]);
             if ($recent == 0) {
-                $this->Flash->error('This rattery had no litter for a long time and cannot be manually reopened. Record a litter with it first, and it will be automatically reopened.');
+                $this->Flash->error('Ratteries without recently recorded litters cannot be manually opened. Record a litter with it, it will be automatically reopened.');
             } else {
                 $rattery->is_alive = true;
                 if ($this->Ratteries->save($rattery)) {

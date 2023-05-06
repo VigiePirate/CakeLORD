@@ -15,8 +15,8 @@
             <?= $this->Flash->render(); ?>
 
             <?php if (! is_null($alive_ratteries) && $alive_ratteries->isEmpty()) : ?>
-                <?php if (! is_null($closed_ratteries) && $closed_ratteries->isEmpty()) : ?>
-                    <div class="message default"><?= __('You dont have any active rattery at the moment. You can activate one from the list below, or by adding a new litter.') ?></div>
+                <?php if (! is_null($closed_ratteries) && ! $closed_ratteries->isEmpty()) : ?>
+                    <div class="message default"><?= __('You dont have any active rattery at the moment. You can activate your last rattery from the list below, or by adding a new litter.') ?></div>
                 <?php else : ?>
                     <div class="message default"><?= __('You dont have any active rattery at the moment. You can register one by hitting the “New Rattery” button above.') ?></div>
                 <?php endif ; ?>
@@ -53,7 +53,7 @@
                                 <tr>
                                     <th><?= __('Zip Code') ?></th>
                                     <td><?= $rattery->has('zip_code') ?
-                                        h($rattery->zip_code) . ' — ' . $this->Html->link(__('Relocate or remove'), ['action' => 'relocate', $rattery->id]) :
+                                        ($rattery->zip_code == '' ? __x('zipcode', 'Unknown') : $this->Number->format(h($rattery->zip_code))) . ' — ' . $this->Html->link(__('Relocate or remove'), ['action' => 'relocate', $rattery->id]) :
                                         $this->Html->link(__('Declare a location to appear on the rattery map'), ['action' => 'relocate', $rattery->id])
                                         ?>
                                     </td>
@@ -102,7 +102,15 @@
                             <table class="aside-photo">
                                 <tr>
                                     <th><?= __('Founded in') ?></th>
-                                    <td><?= ($rattery->birth_year != '0000') ? h($rattery->birth_year) : h(substr($stats['activityYears'],0,4)) ?> — <?= $this->Html->link(__('Reopen this rattery now'), ['action' => 'reopen', $rattery->id]) ?></td>
+                                    <td><?= ($rattery->birth_year != '0000') ? h($rattery->birth_year) : h(substr($stats['activityYears'],0,4)) ?>
+                                        <?php if ($rattery->id == $user->main_rattery->id) : ?>
+                                            <?php if (empty($rattery->contributions)) : ?>
+                                                — <?= $this->Html->link(__('Declare a litter to open this rattery'), ['controller' => 'Litters', 'action' => 'add']) ?>
+                                            <?php else : ?>
+                                                — <?= $this->Html->link(__('Reopen this rattery now'), ['action' => 'reopen', $rattery->id]) ?>
+                                            <?php endif ; ?>
+                                        <?php endif ; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><?= __('Do you currently show your statistics?') ?></th>
