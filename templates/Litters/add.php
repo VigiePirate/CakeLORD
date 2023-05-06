@@ -54,10 +54,14 @@
                         ?>
                     </div>
                     <div class="column-responsive column-50">
-                        <div class="message">
-                            <p><?= __('Please record mandatory information: (at least) a mother, and for generic origins, a name and location in comments.')?></p>
-                            <?= __('If a litter with the same birth date and mother already exists, you will be redirected to it to avoid duplicates.') ?>
-                        </div>
+                        <?php if ($this->Form->isFieldError('origin_errors')) : ?>
+                            <?= $this->Form->error('origin_errors', null, ['escape' => false]); ?>
+                        <?php else : ?>
+                            <div class="message">
+                                <p> <?= __('Please record mandatory information: name and location in comments for a generic origin, or (at least) mother for a registered rattery.') ?></p>
+                                <?= __('If a litter with the same birth date and mother already exists, the rat will be automatically added to it. If not, a new litter will be created with the rat.') ?>
+                            </div>
+                        <?php endif ; ?>
                     </div>
                 </div>
 
