@@ -185,8 +185,7 @@
                                 'label' => __('Owner'),
                                 'type' => 'text',
                                 'placeholder' => __('Type here...'),
-                                'empty' => true,
-                                'value' => isset($data['owner_username']) ? $data['owner_username'] : $user->username,
+                                'empty' => true
                             ]);
                             echo $this->Form->control('owner_user_id', [
                                 'id' => 'jquery-owner-id',
@@ -198,7 +197,6 @@
                                 'class' => 'hide-everywhere',
                                 'type' => 'text',
                                 'empty' => true,
-                                'value' => isset($data['owner_user_id']) ? $data['owner_user_id'] : $user->id,
                             ]);
                         ?>
                     </div>
