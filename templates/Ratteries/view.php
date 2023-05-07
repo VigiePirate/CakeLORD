@@ -13,13 +13,23 @@
 
             <?php if (! is_null($user)) : ?>
                 <div class="side-nav-group">
-                    <div class="tooltip">
-                        <?= $this->Html->image('/img/icon-add-litter.svg', [
-                            'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
-                            'class' => 'side-nav-icon',
-                            'alt' => __('Declare Litter')]) ?>
-                        <span class="tooltiptext"><?= __('Declare a litter born here') ?></span>
-                    </div>
+                    <?php if ($rattery->id == $rattery->user->main_rattery->id) : ?>
+                        <div class="tooltip">
+                            <?= $this->Html->image('/img/icon-add-litter.svg', [
+                                'url' => ['controller' => 'Litters', 'action' => 'add'], //pass rattery id as contributor ? $rattery->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Declare Litter')]) ?>
+                            <span class="tooltiptext"><?= __('Declare a litter born here') ?></span>
+                        </div>
+                    <?php else : ?>
+                        <div class="tooltip disabled">
+                            <?= $this->Html->image('/img/icon-add-litter.svg', [
+                                'url' => '',
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Declare Litter')]) ?>
+                            <span class="tooltiptext"><?= __('This rattery is definitely closed') ?></span>
+                        </div>
+                    <?php endif; ?>
                     <div class="tooltip">
                         <?= $this->Html->image('/img/icon-locate.svg', [
                             'url' => ['controller' => 'Ratteries', 'action' => 'locate', $rattery->id],
@@ -196,7 +206,7 @@
                             </tr>
                             <tr>
                                 <th><?= __('Zip Code') ?></th>
-                                <td><?= h($rattery->zip_code) ?></td>
+                                <td><?= $rattery->zip_code == '' ? '' : $this->Number->format(h($rattery->zip_code)) ?></td>
                             </tr>
                             <tr>
                                 <th><?= __('Website') ?></th>

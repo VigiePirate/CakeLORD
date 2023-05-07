@@ -349,14 +349,18 @@ class RatteriesController extends AppController
             $sisters = $rattery->user->ratteries;
             foreach ($sisters as $sister) {
                 if ($sister->id != $rattery->id && $sister->is_alive) {
-                    $this->Flash->error('You already have an active rattery. If you want to reopen another, you have to pause your current rattery first.');
+                    $this->Flash->error(__('You already have an active rattery. If you want to open another, you first have to pause your current rattery below.'));
                     return $this->redirect(['action' => 'view', $sister->id]);
+                }
+                if ($sister->id != $rattery->id && $sister->created->isPast($rattery->created)) {
+                    $this->Flash->error(__('This rattery is definitely closed, since you opened another rattery inbetween. You cannot reopen it.'));
+                    return $this->redirect(['action' => 'view', $id]);
                 }
             }
             // check last litter; if too old, fail and require a litter recording
             $recent = $rattery->countLitters(['rattery_id' => $rattery->id, 'DATEDIFF(NOW(), birth_date) <=' => \App\Model\Table\RatteriesTable::MAXIMAL_INACTIVITY]);
             if ($recent == 0) {
-                $this->Flash->error('Ratteries without recently recorded litters cannot be manually opened. Record a litter with it, it will be automatically reopened.');
+                $this->Flash->error(__('Ratteries without recently recorded litters cannot be manually opened. Record a litter with it, it will be automatically reopened.'));
             } else {
                 $rattery->is_alive = true;
                 if ($this->Ratteries->save($rattery)) {

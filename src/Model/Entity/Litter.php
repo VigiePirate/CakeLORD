@@ -181,6 +181,19 @@ class Litter extends Entity
         return ! is_null($this->contributions) && ! is_null($this->contributions['0']->rattery_id);
     }
 
+    public function hasActivableBirthPlace()
+    {
+        if (! is_null($this->contributions) && ! is_null($this->contributions['0']->rattery_id)) {
+            $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
+            $rattery = $ratteries->get($this->contributions['0']->rattery_id, ['contain' => ['Users', 'Users.Ratteries']]);
+            return ($rattery->id == $rattery->user->main_rattery->id);
+        }
+        // the error has been or will be catched by rule "hasBirthPlace"
+        else {
+            return true;
+        }
+    }
+
     public function hasMother()
     {
         if(! empty($this->parent_rats)) {

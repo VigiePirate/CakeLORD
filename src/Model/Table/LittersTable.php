@@ -285,6 +285,17 @@ class LittersTable extends Table
             ]
         );
 
+        /* Birth place cannot be a definitely closed rattery */
+        $rules->add(function($litter) {
+                return $litter->hasActivableBirthPlace();
+            },
+            'rattery_closed',
+            [
+                'errorField' => 'rattery_name',
+                'message' => 'This rattery has been definitely closed. Please, select an eligible rattery (either active, or  the last active rattery of its owner).'
+            ]
+        );
+
         /* Mandatory origin information */
         $rules->addCreate(function ($litter) {
                 return $litter->hasValidOrigins();
