@@ -83,25 +83,39 @@ class RatteriesController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $rattery = $this->Ratteries->get($id, [
-            'contain' => ['Users', 'Countries', 'States',
+            'contain' => [
+                'Users',
+                'Users.Ratteries',
+                'Countries',
+                'States',
                 'Litters' => function($q) {
                     return $q
                     ->order('birth_date DESC')
                     ->limit(10);
                 },
                 'Litters.States',
-                'Litters.Sire', 'Litters.Dam', 'Litters.Contributions',
-                'Litters.Sire.BirthLitters.Contributions', 'Litters.Dam.BirthLitters.Contributions',
+                'Litters.Sire',
+                'Litters.Dam',
+                'Litters.Contributions',
+                'Litters.Sire.BirthLitters.Contributions',
+                'Litters.Dam.BirthLitters.Contributions',
                 'Rats' => function($q) {
                     return $q
                     ->order('Rats.modified DESC')
                     ->limit(10);
                 },
                 'Rats.States',
-                'Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions',
-                'Rats.DeathPrimaryCauses','Rats.DeathSecondaryCauses',
-                'RatterySnapshots' => ['sort' => ['RatterySnapshots.created' => 'DESC']], 'RatterySnapshots.States',
-                'RatteryMessages'],
+                'Rats.Ratteries',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Contributions',
+                'Rats.DeathPrimaryCauses',
+                'Rats.DeathSecondaryCauses',
+                'RatterySnapshots' => [
+                    'sort' => ['RatterySnapshots.created' => 'DESC']
+                ],
+                'RatterySnapshots.States',
+                'RatteryMessages'
+            ],
         ]);
 
         $stats = $rattery->wrapStatistics();
