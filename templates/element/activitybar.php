@@ -19,17 +19,26 @@
                         ?>
                     </div>
                 <?php else : ?>
-                    <div class="current-statemark">
-                        <span class="rotate"><?= h($rattery->is_alive_symbol) ?></span>
-                    </div>
-                    <div class="staff-action-symbol">&numsp;⮞</div>
-                    <div class="statemark">
-                        <?= $this->Html->link(
-                            h($rattery->next_alive_symbol),
-                            ['action' => 'reopen', $rattery->id],
-                            ['class' => 'sun'])
-                        ?>
-                    </div>
+                    <?php if ($rattery->id == $rattery->user->main_rattery->id) : ?>
+                        <div class="current-statemark">
+                            <span class="rotate"><?= h($rattery->is_alive_symbol) ?></span>
+                        </div>
+                        <div class="staff-action-symbol">&numsp;⮞</div>
+                        <div class="statemark">
+                            <?= $this->Html->link(
+                                h($rattery->next_alive_symbol),
+                                ['action' => 'reopen', $rattery->id],
+                                ['class' => 'sun'])
+                            ?>
+                        </div>
+                    <?php else : ?>
+                        <div class="tooltip-state">
+                            <div class="current-statemark">
+                                <span class="rotate"><?= h($rattery->is_alive_symbol) ?></span>
+                            </div>
+                            <span class="tooltiptext-state hide-on-mobile"><?= __('This rattery is definitely closed') ?></span>
+                        </div>
+                    <?php endif ; ?>
                 <?php endif; ?>
             </div>
         </div>

@@ -33,7 +33,7 @@
 }
 
 /* Tooltip container */
-.tooltip {
+.tooltip, .tooltip-state {
   position: relative;
   display: inline-block;
   /* border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
@@ -51,8 +51,8 @@
   font-size: 1.4rem;
   /* Position the tooltip text */
   position: absolute;
-  top: 2.8rem;
-  right: 9.75rem;
+  top: 1rem;
+  right: 5.33rem;
   z-index: 99;
 }
 

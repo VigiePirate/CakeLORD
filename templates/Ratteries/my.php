@@ -109,6 +109,8 @@
                                             <?php else : ?>
                                                 — <?= $this->Html->link(__('Reopen this rattery now'), ['action' => 'reopen', $rattery->id]) ?>
                                             <?php endif ; ?>
+                                        <?php else : ?>
+                                            —  <?= __('This rattery is definitely closed') ?>
                                         <?php endif ; ?>
                                     </td>
                                 </tr>
