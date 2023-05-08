@@ -352,7 +352,7 @@ class RatteriesController extends AppController
                     $this->Flash->error(__('You already have an active rattery. If you want to open another, you first have to pause your current rattery below.'));
                     return $this->redirect(['action' => 'view', $sister->id]);
                 }
-                if ($sister->id != $rattery->id && $sister->created->isPast($rattery->created)) {
+                if ($sister->id != $rattery->id && $sister->created->gte($rattery->created)) {
                     $this->Flash->error(__('This rattery is definitely closed, since you opened another rattery inbetween. You cannot reopen it.'));
                     return $this->redirect(['action' => 'view', $id]);
                 }
