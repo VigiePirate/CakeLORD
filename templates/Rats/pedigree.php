@@ -46,7 +46,7 @@
                 <div class="sheet-title pretitle"><?= _('Rat family tree') ?></div>
                 <div class="tooltip-state">
                     <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
-                    <span class="tooltiptext-state hide-on-mobile"><?= h($rat->state->name) ?></span>
+                    <span class="tooltiptext-state"><?= h($rat->state->name) ?></span>
                 </div>
             </div>
 

@@ -34,6 +34,7 @@ $cakeDescription = 'LORD';
 
     <?= $this->Html->css('milligram.min.css') ?>
     <?= $this->Html->css('lord.css') ?>
+    <?= $this->Html->css('mobile.css') ?>
     <?= $this->Html->css('from-md.css') ?>
 
     <?= $this->fetch('meta') ?>
