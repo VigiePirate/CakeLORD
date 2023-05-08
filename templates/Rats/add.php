@@ -356,7 +356,7 @@
 
                 <?php echo $this->Form->hidden('creator_user_id', [
                     'name' => 'creator_user_id',
-                    'value' => $creator,
+                    'value' => $creator_id,
                 ]);
             ?>
 

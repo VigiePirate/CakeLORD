@@ -292,13 +292,15 @@ class RatsController extends AppController
         ]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
-        $creator = $this->Authentication->getIdentity()->get('id');
+        $creator_id = $this->Authentication->getIdentity()->get('id');
 
         $litter_id = $this->request->getParam('pass');
         if (empty($litter_id)) {
             $from_litter = false;
             $generic = $this->Rats->Ratteries->find()->where(['is_generic IS' => true]);
-            $rattery = $this->Rats->Ratteries->findByOwnerUserId($creator)->where(['is_alive IS' => true]);
+            $rattery = (! empty($this->Rats->Ratteries->find('activeFromUser', ['users' => $creator_id])))
+                        ? $this->Rats->Ratteries->find('activeFromUser', ['users' => $creator_id])
+                        : $this->Rats->Ratteries->find('mostRecentFromUser', ['users' => $creator_id]);
             $origins = $generic->all()->append($rattery)->combine('id', 'full_name');
             $this->set(compact('from_litter', 'origins'));
         } else {
@@ -321,7 +323,7 @@ class RatsController extends AppController
             'singularities',
             'deathPrimaryCauses',
             'states',
-            'creator',
+            'creator_id',
         ));
     }
 
