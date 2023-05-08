@@ -414,7 +414,9 @@ class Rat extends Entity
                         if ($this->has($association)) {
                             $tableName = $this->$association->getSource();
                             $table = FactoryLocator::get('Table')->get($tableName);
-                            $snap_rat->set($association, $table->get($snap_diffs[$key]));
+                            if (! is_null($snap_diffs[$key])) {
+                                $snap_rat->set($association, $table->get($snap_diffs[$key]));
+                            }
                         } else {
                             $tableName = Inflector::pluralize(Inflector::classify($association));
                             if (TableRegistry::getTableLocator()->exists($tableName)) {
