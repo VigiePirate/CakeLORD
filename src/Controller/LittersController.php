@@ -199,7 +199,9 @@ class LittersController extends AppController
         $ratteries = $this->loadModel('Ratteries');
         $creator_id = $this->Authentication->getIdentity()->get('id');
         $generic = $ratteries->find()->where(['is_generic IS' => true]);
-        $rattery = $ratteries->find('lastActiveFromUser', ['users' => $creator_id]);
+        $rattery = (! empty($ratteries->find('activeFromUser', ['users' => $creator_id])))
+                    ? $ratteries->find('activeFromUser', ['users' => $creator_id])
+                    : $ratteries->find('mostRecentFromUser', ['users' => $creator_id]);
         $origins = $generic->all()->append($rattery)->combine('id', 'full_name');
 
         $this->set(compact('litter', 'origins', 'from_parent'));

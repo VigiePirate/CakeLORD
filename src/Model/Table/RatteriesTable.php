@@ -316,7 +316,30 @@ class RatteriesTable extends Table
         return $query;
     }
 
-    public function findLastActiveFromUser(Query $query, array $options)
+    // Find user's active rattery
+    public function findActiveFromUser(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['users'])) {
+            $query->leftJoinWith('Users')
+                  ->where([
+                      'Users.id IS' => null,
+                  ]);
+        } else {
+            $query->innerJoinWith('Users')
+                  ->where(['Users.id IS' => $options['users'], 'is_alive' => true])
+                  ->order(['Ratteries.created' => 'DESC'])
+                  ->limit(1);
+        }
+
+        return $query;
+    }
+
+    // Find user's most recently created rattery
+    public function findMostRecentFromUser(Query $query, array $options)
     {
         $query = $query
             ->select()
@@ -334,7 +357,6 @@ class RatteriesTable extends Table
                   ->limit(1);
         }
 
-        //return $query->group(['Ratteries.id']);
         return $query;
     }
 
