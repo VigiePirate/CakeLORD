@@ -477,7 +477,7 @@ td:last-child, th:last-child {
 }
 
 @media screen and (max-width: 640px) {
-    table {
+    /* table {
         border-spacing: 0;
         display: flex;
         width: 100%
@@ -523,7 +523,7 @@ td:last-child, th:last-child {
 
     table td:last-child, table th:last-child {
         padding-right: 1.2rem
-    }
+    } */
 }
 
 b, strong {

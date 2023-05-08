@@ -20,7 +20,7 @@
                 <th><?= $this->Paginator->sort('name') ?></th>
             <?php endif; ?>
             <?php if (! in_array('pup_name', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('pup_name') ?></th>
+                <th class="hide-on-mobile"><?= $this->Paginator->sort('pup_name') ?></th>
             <?php endif; ?>
             <?php if (! in_array('birth_date', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('birth_date', ['label' => __('Birth')]) ?></th>
@@ -60,7 +60,7 @@
                         <td><?= h($rat->name) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('pup_name', $exceptions)): ?>
-                        <td><?= h($rat->pup_name) ?></td>
+                        <td class="hide-on-mobile"><?= h($rat->pup_name) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('birth_date', $exceptions)): ?>
                         <td><?= h($rat->birth_date->i18nFormat('dd/MM/yyyy')) ?></td>
@@ -115,17 +115,18 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-</div>
 
-<?php if (! in_array('paginator', $exceptions)): ?>
-<div class="paginator">
-    <ul class="pagination">
-        <?= $this->Paginator->first('<< ' . __('first')) ?>
-        <?= $this->Paginator->prev('< ' . __('previous')) ?>
-        <?= $this->Paginator->numbers() ?>
-        <?= $this->Paginator->next(__('next') . ' >') ?>
-        <?= $this->Paginator->last(__('last') . ' >>') ?>
-    </ul>
-    <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+    <?php if (! in_array('paginator', $exceptions)): ?>
+    <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('first')) ?>
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <div class="hide-on-mobile"><?= $this->Paginator->numbers() ?></div>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->last(__('last') . ' >>') ?>
+        </ul>
+        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+    </div>
+
 </div>
 <?php endif; ?>
