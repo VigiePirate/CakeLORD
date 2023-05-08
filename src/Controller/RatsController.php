@@ -298,7 +298,7 @@ class RatsController extends AppController
         if (empty($litter_id)) {
             $from_litter = false;
             $generic = $this->Rats->Ratteries->find()->where(['is_generic IS' => true]);
-            $rattery = (! empty($this->Rats->Ratteries->find('activeFromUser', ['users' => $creator_id])))
+            $rattery = (! is_null($this->Rats->Ratteries->find('activeFromUser', ['users' => $creator_id])->first()))
                         ? $this->Rats->Ratteries->find('activeFromUser', ['users' => $creator_id])
                         : $this->Rats->Ratteries->find('mostRecentFromUser', ['users' => $creator_id]);
             $origins = $generic->all()->append($rattery)->combine('id', 'full_name');
