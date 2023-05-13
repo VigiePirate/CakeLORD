@@ -12,6 +12,10 @@
                 <div class="sheet-title pretitle"><?= h($user->dashboard_title) ?></div>
             </div>
             <h1><?= __('My litters') ?> </h1>
+
+        </div>
+        <div class="spacer"></div>
+        <div class="users view content">  
             <?= $this->element('litters', [
                 'rubric' => '',
                 'litters' => $litters,
