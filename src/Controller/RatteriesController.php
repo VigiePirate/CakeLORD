@@ -75,7 +75,8 @@ class RatteriesController extends AppController
 
         $users = $this->loadModel('Users');
         $user = $users->get($user->id, ['contain' => ['Ratteries']]);
-        $this->set(compact('alive_ratteries', 'closed_ratteries', 'user'));
+        $identity = $this->request->getAttribute('identity');
+        $this->set(compact('alive_ratteries', 'closed_ratteries', 'user', 'identity'));
     }
 
     /* rattery sheet for all users, including statistics */
