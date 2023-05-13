@@ -16,11 +16,13 @@
             </div>
 
             <h1><?= __('My profile') ?> </h1>
-
+        </div>
+        <div class="spacer"></div>
+        <div class="users view content">  
             <div class="row row-with-photo">
                 <div class="column-responsive column-66">
                     <h2><?= __('Public information') ?></h2>
-                    <table class="aside-photo">
+                    <table class="aside-photo unfold">
                         <tr>
                             <th><?= __('Username') ?></th>
                             <td><?= h($user->username) ?></td>
@@ -56,10 +58,11 @@
                     </div>
                 </blockquote>
             </div>
-
-            <div class="spacer"></div>
+        </div>
+        <div class="spacer"></div>
+        <div class="users view content">
             <h2 class="staff"><?= __('Private information') ?></h2>
-            <table class="aside-photo">
+            <table class="unfold">
                 <tr>
                     <th><?= __('Email') ?></th>
                     <td><?= h($user->email) ?></td>
@@ -89,9 +92,11 @@
                     <td><?= h($user->failed_login_last_date) ?></td>
                 </tr>
             </table>
-
+        </div>
+        <div class="spacer"></div>
+        <div class="users view content">
             <h2 class="staff"><?= __('Settings') ?></h2>
-            <table class="aside-photo">
+            <table class="unfold">
                 <tr>
                     <th><?= __('Wants Newsletter?') ?></th>
                     <td><?=
