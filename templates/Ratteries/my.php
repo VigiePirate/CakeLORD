@@ -39,6 +39,10 @@
 
                             <table class="aside-photo">
                                 <tr>
+                                    <th><?= __('State') ?></th>
+                                    <td><span class="statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></span> — <?= h($rattery->state->name) ?></td>
+                                </tr>
+                                <tr>
                                     <th><?= __('Founded in') ?></th>
                                     <td><?= ($rattery->birth_year != '0000') ? h($rattery->birth_year) : h(substr($stats['activityYears'],0,4)) ?> — <?= $this->Html->link(__('Pause my rattery now'), ['action' => 'pause', $rattery->id]) ?></td>
                                 </tr>
@@ -99,7 +103,11 @@
                     <div class="row row-reverse row-with-photo">
                         <div class="column-responsive column-80">
 
-                            <table class="aside-photo">
+                            <table class="aside-photo unfold">
+                                <tr>
+                                    <th><?= __('State') ?></th>
+                                    <td><span class="statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></span> — <?= h($rattery->state->name) ?></td>
+                                </tr>
                                 <tr>
                                     <th><?= __('Founded in') ?></th>
                                     <td><?= ($rattery->birth_year != '0000') ? h($rattery->birth_year) : h(substr($stats['activityYears'],0,4)) ?>
@@ -107,7 +115,11 @@
                                             <?php if (empty($rattery->contributions)) : ?>
                                                 — <?= $this->Html->link(__('Declare a litter to open this rattery'), ['controller' => 'Litters', 'action' => 'add']) ?>
                                             <?php else : ?>
+                                                <?php if ($identity->can('microEdit', $rattery)) : ?>
                                                 — <?= $this->Html->link(__('Reopen this rattery now'), ['action' => 'reopen', $rattery->id]) ?>
+                                                <?php else : ?>
+                                                — <?= __('This rattery is cannot be reopened for the moment.') ?>
+                                                <?php endif ; ?>
                                             <?php endif ; ?>
                                         <?php else : ?>
                                             —  <?= __('This rattery is definitely closed') ?>
