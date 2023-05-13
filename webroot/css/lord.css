@@ -1258,3 +1258,60 @@ svg {
   margin-top: 1.5em;
   padding: 0em 0.75em 0em 0.25em;
 }
+
+/** Mozilla Firefox specials */
+@-moz-document url-prefix() {
+  h1 {
+    -webkit-text-stroke: 0.01em #6076bf;
+    letter-spacing: -0.04em;
+  }
+
+  h2 {
+    -webkit-text-stroke: 0.01em #6076bf;
+    letter-spacing: -0.05em;
+  }
+
+  h3, summary {
+    -webkit-text-stroke: 0.01em #6076bf;
+    letter-spacing: -0.04em;
+  }
+
+  h4, h5, .pretitle {
+    -webkit-text-stroke: 0.01em #6076bf;
+    letter-spacing: -0.04em;
+  }
+
+  b, strong, th {
+    letter-spacing: -0.02em;
+  }
+
+  .footer_section h5 {
+    -webkit-text-stroke: 0.01em #bfc9ff;
+    letter-spacing: -0.04em;
+  }
+
+  .top-nav-title a {
+    -webkit-text-stroke: 0.02em #ffffff;
+    letter-spacing: -0.01em;
+  }
+
+  .top-nav-title a {
+    -webkit-text-stroke: 0.02em #bfc9ff;
+  }
+
+  .sexcolor_M, .sexcolor_F {
+    -webkit-text-stroke: revert;
+  }
+
+  .sexcolor_F {
+    -webkit-text-stroke: 0.02em #ff99cc;
+  }
+
+  .sexcolor_M {
+    -webkit-text-stroke: 0.02em #99ccff;
+  }
+
+  .shieldline {
+    letter-spacing: -0.02em;
+  }
+}
