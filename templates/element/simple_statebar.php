@@ -23,11 +23,11 @@
                 ['class' => 'statecolor_' . $sheet->state->next_ko_state_id])
             ?>
         </div>
-        <div class="staff-action-symbol">⮜&numsp;</div>
+        <div class="staff-action-symbol"><?= $this->Html->image('arrow-left.svg') ?>&numsp;</div>
         <div class="current-statemark statecolor_<?php echo h($sheet->state_id) ?>">
             <?= h($sheet->state->symbol) ?>
         </div>
-        <div class="staff-action-symbol">&numsp;⮞</div>
+        <div class="staff-action-symbol">&numsp;<?= $this->Html->image('arrow-right.svg') ?></div>
         <div class="statemark">
             <?= $this->Html->link(
                 $next_ok_state->symbol,
@@ -48,11 +48,11 @@
                 ['class' => 'statecolor_' . $sheet->state->next_ko_state_id])
             ?>
         </div>
-        <div class="staff-action-symbol">⮜&numsp;</div>
+        <div class="staff-action-symbol"><?= $this->Html->image('arrow-left.svg') ?>&numsp;</div>
         <div class="current-statemark statecolor_<?php echo h($sheet->state_id) ?>">
             <?= h($sheet->state->symbol) ?>
         </div>
-        <div class="staff-action-symbol">&numsp;⮞</div>
+        <div class="staff-action-symbol">&numsp;<?= $this->Html->image('arrow-right.svg') ?></div>
         <div class="statemark">
             <?= $this->Html->link(
                 $next_frozen_state->symbol,
@@ -71,7 +71,7 @@
                 ['class' => 'statecolor_' . $sheet->state->next_thawed_state_id])
             ?>
         </div>
-        <div class="staff-action-symbol">⮜&numsp;</div>
+        <div class="staff-action-symbol"><?= $this->Html->image('arrow-left.svg') ?>&numsp;</div>
         <div class="current-statemark statecolor_<?php echo h($sheet->state_id) ?>">
             <?= h($sheet->state->symbol) ?>
         </div>
@@ -79,7 +79,7 @@
         <div class="current-statemark statecolor_<?php echo h($sheet->state_id) ?>">
             <?= h($sheet->state->symbol) ?>
         </div>
-        <div class="staff-action-symbol">&numsp;⮞</div>
+        <div class="staff-action-symbol">&numsp;<?= $this->Html->image('arrow-right.svg') ?></div>
         <div class="statemark">
             <?= $this->Html->link(
                 $next_thawed_state->symbol,

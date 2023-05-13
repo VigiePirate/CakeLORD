@@ -25,11 +25,12 @@
 }
 
 .staff-action-symbol{
-  font-size:2rem;
-  font-family: "Imprima", "Roboto";
   line-height:1;
-  color:#b1000c;
   padding:0.5rem;
+}
+
+.staff-action-symbol img {
+  width: 1.5rem;
 }
 
 /* Tooltip container */
@@ -136,4 +137,13 @@ h1.half {
 .restore-icon {
   width: 7rem !important;
   padding: 1.5rem;
+}
+
+@media screen and (max-width: 640px) {
+  .staff-action-symbol {
+    padding: 0.25rem;
+  }
+  .staff-action-symbol img {
+    width: 1.33rem;
+  }
 }
