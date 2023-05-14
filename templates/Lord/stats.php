@@ -19,7 +19,7 @@
             </div>
 
             <h2><?= __('Demography') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Total number of rats:') ?></th>
                     <td><?=  __('{0, number} rats', [$rat_count]) ?></td>
@@ -32,10 +32,9 @@
                     <th> ⨽ <?= __('males:') ?></th>
                     <td> ⨽ <?=  __('{0, number} males ({1, number} %)', [$male_count, $male_frequency]) ?></td>
                 </tr>
-
             </table>
 
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Rats considered as deceased:') ?></th>
                     <td><?=  __('{0, number} rats ({1, number} % of all rats)', [$dead_rat_count, $dead_rat_frequency]) ?></td>
@@ -50,7 +49,7 @@
                 </tr>
             </table>
 
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
 
                 <tr>
                     <th><?= __('Lifespan:') ?></th>
@@ -85,7 +84,7 @@
             </div>
 
             <h2><?= __('Breeding') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Total number of ratteries:') ?></th>
                     <td><?= __('{0, number} ratteries', [$rattery_count]) ?></td>
@@ -96,7 +95,7 @@
                 </tr>
 
             </table>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Average rattery lifetime:') ?></th>
                     <td>
@@ -117,7 +116,7 @@
                 </tr>
             </table>
 
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Average mother age:') ?></th>
                     <td><?= __('{0, number} days ({1, number} months)', [round($avg_mother_age), round($avg_mother_age/30.5,1)]) ?></td>
@@ -147,7 +146,7 @@
 
             <h2><?= __('Mortality') ?></h2>
 
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Median death age:') ?></th>
                     <td><?= __('{0, number} months', [$median]) ?> <span class="comment"><?= __('(50 % of rats die before this age, 50 % after)') ?></span></td>
@@ -174,7 +173,7 @@
 
             <h3><?= __('Death categories') ?></h3>
 
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Number of deaths with recorded cause:') ?></th>
                     <td><?= __('{0, number} rats ({1, number} % of rats considered as dead)', [$knowingly_dead_rat_count, round($knowingly_dead_rat_count/$dead_rat_count,2)*100]) ?></td>
@@ -199,7 +198,7 @@
 
             <h3><?= __('Most frequent death causes') ?></h3>
 
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Number of deaths with recorded cause:') ?></th>
                     <td><?= __('{0, number} rats ({1, number} % of rats considered as dead)', [$knowingly_dead_rat_count, round($knowingly_dead_rat_count/$dead_rat_count,2)*100]) ?></td>
@@ -225,7 +224,7 @@
             </table>
 
             <h3><?= __('Most frequent tumours') ?></h3>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Number of tumour-related deaths:') ?></th>
                     <td><?= __('{0, number} rats ({1, number} % of rats with known death cause)', [$tumour_dead_count, round($tumour_dead_count/$knowingly_dead_rat_count,4)*100]) ?></td>

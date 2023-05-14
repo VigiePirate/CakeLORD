@@ -146,4 +146,7 @@ h1.half {
   .staff-action-symbol img {
     width: 1.33rem;
   }
+  h1 {
+    margin-top:-1rem;
+  }
 }

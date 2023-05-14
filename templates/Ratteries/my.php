@@ -6,12 +6,14 @@
     </aside>
     <div class="column-responsive column-90">
         <div class="users view content">
-
-            <?= $this->Html->link(__('New Rattery'), ['action' => 'register'], ['class' => 'button float-right']) ?>
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= h($user->dashboard_title) ?></div>
+                <div class="button-dashboard">
+                    <?= $this->Html->link(__('New Rattery'), ['action' => 'register'], ['class' => 'button float-right']) ?>
+                </div>
             </div>
             <h1><?= __('My ratteries') ?> </h1>
+
             <?= $this->Flash->render(); ?>
 
             <?php if (! is_null($alive_ratteries) && $alive_ratteries->isEmpty()) : ?>
@@ -28,16 +30,17 @@
                 <div class="spacer"></div>
                 <div class="users view content">
 
-                    <div class="button-small">
-                        <?= $this->Html->link(__('See rattery sheet'), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id], ['class' => 'button float-right']) ?>
+                    <div class="sheet-heading">
+                        <h2><?= h($rattery->full_name) ?></h2>
+                        <div class="button-small">
+                            <?= $this->Html->link(__('See rattery sheet'), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id], ['class' => 'button float-right']) ?>
+                        </div>
                     </div>
-
-                    <h2><?= h($rattery->full_name) ?></h2>
 
                     <div class="row row-reverse row-with-photo">
                         <div class="column-responsive column-80">
 
-                            <table class="aside-photo">
+                            <table class="aside-photo unfold">
                                 <tr>
                                     <th><?= __('State') ?></th>
                                     <td><span class="statecolor_<?php echo h($rattery->state_id) ?>"><?= h($rattery->state->symbol) ?></span> — <?= h($rattery->state->name) ?></td>
@@ -91,14 +94,15 @@
             </div>
             <div class="spacer"></div>
             <div class="users view content">
-                <h2><?= __('My old ratteries') ?>
+                <h2><?= __('My old ratteries') ?></h2>
                 <?php foreach($closed_ratteries as $rattery) : ?>
 
-                    <div class="button-small">
-                        <?= $this->Html->link(__('See rattery sheet'), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id], ['class' => 'button float-right']) ?>
+                    <div class="sheet-heading">
+                        <h3><?= h($rattery->full_name) . '<span class="rotate"> ' . h($rattery->is_inactive_symbol) . '</span>' ?></h3>
+                        <div class="button-small">
+                            <?= $this->Html->link(__('See rattery sheet'), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id], ['class' => 'button float-right']) ?>
+                        </div>
                     </div>
-
-                    <h3><?= h($rattery->full_name) . '<span class="rotate"> ' . h($rattery->is_inactive_symbol) . '</span>' ?></h3>
 
                     <div class="row row-reverse row-with-photo">
                         <div class="column-responsive column-80">
@@ -139,6 +143,8 @@
                     </div>
                 <?php endforeach ; ?>
             <?php endif; ?>
-        <!-- </div> -->
+        </div>
     </div>
 </div>
+
+<?= $this->Html->css('statebar.css') ?>

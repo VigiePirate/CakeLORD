@@ -49,7 +49,8 @@ class LittersController extends AppController
                 return $q->where([
                     'Ratteries.owner_user_id' => $user->id,
                 ]);
-            });
+            })
+            ->order('Litters.birth_date DESC');
 
         $this->paginate = [
             'contain' => ['Users', 'States', 'Sire', 'Dam', 'Contributions'],

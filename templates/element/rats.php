@@ -1,6 +1,7 @@
 <?php if ($rubric != '') : ?>
     <h2><?= h($rubric) ?></h2>
 <?php endif; ?>
+
 <div class="table-responsive">
     <table class="condensed">
         <thead>

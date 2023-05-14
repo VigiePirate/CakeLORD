@@ -70,8 +70,8 @@
                 <div class="sheet-title pretitle"><?= __('Owner') ?></div> <!-- h($user->role->name) -->
             </div>
             <h1><?= h($user->username) ?></h1>
-            <div class="row row-with-photo">
-                <div class="column-responsive column-66">
+            <div class="row row-reverse row-with-photo">
+                <div class="column-responsive column-60">
 
                     <h2><?= __('Information') ?></h2>
                     <table class="aside-photo">
@@ -198,7 +198,7 @@
                 <?php if ($identity->can('accessPersonal', $user)) :?>
                 <div class="related">
                     <h3 class='staff'><?= __('User information') ?></h3>
-                    <table class="condensed">
+                    <table class="condensed unfold">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <td><?= $this->Number->format($user->id) ?></td>
@@ -246,7 +246,7 @@
                 <?php if ($identity->can('seeStaffOnly', $user)) :?>
                 <div class="related">
                     <h3 class="staff"><?= __('Statistics') ?></h3>
-                    <table class="condensed stats">
+                    <table class="condensed stats unfold">
                         <tr>
                             <th><?= __('Current number of rats:') ?></th>
                             <td><?=
@@ -269,7 +269,7 @@
                         </tr>
                     </table>
 
-                    <table class="condensed stats">
+                    <table class="condensed stats unfold">
                         <tr>
                             <th><?= __('Average lifespan of their rats:') ?></th>
                             <td><?= __('{0, plural, =1{1 month} other{# months}}', [h($avg_lifespan)]) ?> (♀: <?= h($female_avg_lifespan) ?> – ♂: <?= h($male_avg_lifespan) ?>) </td>
@@ -284,7 +284,7 @@
                         </tr>
                     </table>
 
-                    <table class="condensed stats">
+                    <table class="condensed stats unfold">
                         <tr>
                             <th><?= __('Their champion:') ?></th>
                             <td><?=

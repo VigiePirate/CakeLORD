@@ -7,7 +7,18 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar') ?>
+            </div>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-back.svg', [
+                        'url' => 'javascript:history.back()',
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Back')]) ?>
+                        <span class="tooltiptext"><?= __('Back') ?></span>
+                    </div>
+            </div>
         </div>
     </aside>
     <div class="column-responsive column-90">

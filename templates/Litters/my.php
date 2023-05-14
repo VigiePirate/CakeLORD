@@ -6,18 +6,27 @@
     </aside>
     <div class="column-responsive column-90">
         <div class="litters view content">
-            <?= $this->Html->link(__('Simulate Litter'), ['action' => 'simulate'], ['class' => 'button float-right']) ?>
-            <?= $this->Html->link(__('New Litter'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-            <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= h($user->dashboard_title) ?></div>
+            <div class="title-with-button">
+                <div>
+                    <div class="sheet-heading">
+                        <div class="sheet-title pretitle"><?= h($user->dashboard_title) ?></div>
+                        <div class="button-dashboard">
+                            <?= $this->Html->link(__('New Litter'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+                        </div>
+                    </div>
+                    <h1><?= __('My litters') ?> </h1>
+                </div>
             </div>
-            <h1><?= __('My litters') ?> </h1>
 
         </div>
         <div class="spacer"></div>
-        <div class="users view content">  
+        <div class="users view content">
+
+            <div class="button-small">
+                <?= $this->Html->link(__('Simulate Litter'), ['action' => 'simulate'], ['class' => 'button float-right']) ?>
+            </div>
             <?= $this->element('litters', [
-                'rubric' => '',
+                'rubric' => __('All my past litters'),
                 'litters' => $litters,
                 'exceptions' => [
                     'mating_date',
@@ -28,3 +37,5 @@
         </div>
     </div>
 </div>
+
+<?= $this->Html->css('statebar.css') ?>

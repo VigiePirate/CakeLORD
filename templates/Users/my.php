@@ -7,21 +7,23 @@
 
     <div class="column-responsive column-90">
         <div class="users view content">
-
-            <?= $this->Html->link(__('See public profile'), ['controller' => 'Users', 'action' => 'view', $user->id], ['class' => 'button float-right']) ?>
-            <?= $this->Html->link(__('Edit profile'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'button float-right']) ?>
-
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= h($user->dashboard_title) ?></div>
+                <div class="button-dashboard">
+                    <?= $this->Html->link(__('Edit profile'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'button float-right']) ?>
+                </div>
             </div>
-
             <h1><?= __('My profile') ?> </h1>
         </div>
         <div class="spacer"></div>
-        <div class="users view content">  
-            <div class="row row-with-photo">
-                <div class="column-responsive column-66">
-                    <h2><?= __('Public information') ?></h2>
+        <div class="users view content">
+            <div class="button-small float-right">
+                <?= $this->Html->link(__('See public profile'), ['controller' => 'Users', 'action' => 'view', $user->id], ['class' => 'button float-right']) ?>
+            </div>
+            <h2><?= __('Public information') ?></h2>
+            <div class="row row-reverse row-with-photo">
+                <div class="column-responsive column-80">
+
                     <table class="aside-photo unfold">
                         <tr>
                             <th><?= __('Username') ?></th>
@@ -112,22 +114,8 @@
                     . $this->Html->link(__('Change password'), ['action' => 'changePassword']) ?></td>
                 </tr>
             </table>
-
-
-            <!-- <?= $this->element('card', [
-                'image' => $user->avatar,
-                'rubric' => $user->username,
-                $user->username => [
-                    'Email:' => h($user->email) . ' (' . ($user->has('role') ? $this->Html->link($user->role->name, ['controller' => 'Roles', 'action' => 'view', $user->role->id]) : '') . ')',
-                    'First Name:' => h($user->firstname),
-                    'Last Name:' => h($user->lastname),
-                    'Sex:' => $user->sex,
-                    'Birth Date:' => $user->birth_date,
-                    'Localization:' => h($user->localization),
-                    'About Me:' => h($user->about_me),
-                    'Wants Newsletter:' => $user->wants_newsletter ? __('Yes') : __('No'),
-                ]
-            ]) ?> -->
         </div>
     </div>
 </div>
+
+<?= $this->Html->css('statebar.css') ?>

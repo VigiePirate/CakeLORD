@@ -8,14 +8,15 @@
     <div class="column-responsive column-90">
 
         <div class="users content view" id="one-panel">
-            <?= $this->Html->link(__('New Rat'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= h($user->dashboard_title) ?></div>
+                <div class="button-dashboard">
+                    <?= $this->Html->link(__('New Rat'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+                </div>
             </div>
             <h1><?= __('My rats') ?> </h1>
-
             <?= $this->Flash->render(); ?>
-
         </div>
 
         <div class="spacer"> </div>
@@ -171,3 +172,4 @@
 </div>
 
 <?= $this->Html->css('tabs.css') ?>
+<?= $this->Html->css('statebar.css') ?>
