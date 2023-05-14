@@ -66,7 +66,11 @@
     display:inline-block;
     margin-bottom:2rem;
   }
+  .show-on-mobile {
+    display: none;
+  }
 }
+
 
 @media screen and (max-width: 640px) {
   html {
@@ -75,6 +79,7 @@
   .hide-on-mobile {
     display:none;
   }
+
   .pagination li:not(:first-child):not(:nth-child(2)):not(:nth-last-child(2)):not(:last-child)
   {
     display: none;
@@ -106,12 +111,54 @@
     width: 4rem;
     padding: 0.5rem;
   }
-  /* .asc:after {
-    content: " \2192";
+
+  /* tables */
+
+  table {
+    display: table;
+    width: 100%;
   }
-  .desc:after {
-    content: " \2190";
-  } */
+
+  table tbody {
+    white-space: normal;
+    display: table-row-group;
+  }
+
+  table tbody tr {
+    border-right: none;
+    display: table-row;
+  }
+
+  table td,
+  table th {
+    display: table-cell;
+    padding: 0rem 1rem;
+  }
+
+  table thead td, table thead th {
+    padding: 0rem 1rem;
+  }
+
+  table td:first-child, table th:first-child {
+    padding-left: 0rem;
+  }
+
+  table.unfold {
+    width: 100%;
+  }
+
+  table.unfold th {
+    display: block;
+    width: 100%;
+  }
+  table.unfold td {
+    display: block;
+    margin-left: 10%;
+  }
+
+  table.condensed.stats>tbody>tr>th {
+    width: 100%;
+  }
 
   /* this should be replaced by the appropriate flex */
   .spacer{
@@ -140,14 +187,21 @@
 
   .column-photo, .column-portrait {
     max-height: unset;
-    margin-top: 0;
+    margin-top: -1.5rem !important;
   }
 
   /* Tooltip container */
-  .tooltiptext, .tooltiptext::after, .tooltiptext-staff, .tooltiptext-staff::after{
+  /* .tooltiptext, .tooltiptext::after, .tooltiptext-staff, .tooltiptext-staff::after{
     padding: 0 !important;
     visibility: hidden !important;
     max-width: 0px !important;
     overflow: hidden !important;
+  } */
+
+  .button-dashboard a {
+    font-size:1.4rem;
+    padding: 0.5rem 1rem;
+    height: 2.8rem;
+    line-height: 1.2;
   }
 }

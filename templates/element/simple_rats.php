@@ -10,10 +10,11 @@
     <?php endif; ?>
         <thead>
             <?php if (! in_array('picture', $exceptions)): ?>
-                <th><?= __('Picture') ?></th>
+                <th class="hide-on-mobile"><?= __('Picture') ?></th>
             <?php endif; ?>
             <?php if (! in_array('state_id', $exceptions)): ?>
-                <th><?= __('State') ?></th>
+                <th class="hide-on-mobile"><?= __('State') ?></th>
+                <th class="show-on-mobile">OK</th>
             <?php endif; ?>
             <?php if (! in_array('pedigree_identifier', $exceptions)): ?>
                 <th><?= __('Identifier') ?></th>
@@ -43,14 +44,14 @@
                 <th><?= __('Sex') ?></th>
             <?php endif; ?>
             <?php if (! in_array('actions', $exceptions)): ?>
-                <th class="actions-title"><?= __('Actions') ?></th>
+                <th class="actions-title hide-on-mobile"><?= __('Actions') ?></th>
             <?php endif; ?>
     </thead>
         <tbody>
             <?php foreach($rats as $rat): ?>
                 <tr>
                     <?php if (! in_array('picture', $exceptions)): ?>
-                        <td><?= isset($rat->picture_thumbnail) ? $this->Html->image(UPLOADS . $rat->picture_thumbnail, ['alt' => $rat->name]) : '' ?></td>
+                        <td class="hide-on-mobile"><?= isset($rat->picture_thumbnail) ? $this->Html->image(UPLOADS . $rat->picture_thumbnail, ['alt' => $rat->name]) : '' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('state_id', $exceptions)): ?>
                         <td><span class="statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></span></td>
@@ -83,7 +84,7 @@
                         <td class="sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('actions', $exceptions)): ?>
-                        <td class="actions">
+                        <td class="actions hide-on-mobile">
                             <span class="nowrap">
                                 <?php if (! is_null($user) && $user->can('edit', $rat)) : ?>
                                     <?= $this->Html->image('/img/icon-edit.svg', [

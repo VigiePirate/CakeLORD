@@ -15,10 +15,10 @@
                     <th><?= $this->Paginator->sort('full_name') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('dam', $exceptions)): ?>
-                    <th><?= __('Dam') ?></th>
+                    <th class="col-head"><?= __('Dam') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('sire', $exceptions)): ?>
-                    <th><?= __('Sire') ?></th>
+                    <th class="col-head"><?= __('Sire') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('pups_number', $exceptions)): ?>
                     <th><?= $this->Paginator->sort('pups_number', __('Size')) ?></th>
@@ -46,10 +46,12 @@
                         <td><?= $this->Html->link(h($litter->full_name), ['controller' => 'Litters', 'action' => 'view', $litter->id], ['escape' => false]) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('dam', $exceptions)): ?>
-                        <td><?= isset($litter->dam[0]) ? $this->Html->link(h($litter->dam[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id], ['escape' => false]) : '-' ?></td>
+                        <!-- <td><?= isset($litter->dam[0]) ? $this->Html->link(h($litter->dam[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id], ['escape' => false]) : '-' ?></td> -->
+                        <td><?= isset($litter->dam[0]) ? h($litter->dam[0]->name) : '-' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('sire', $exceptions)): ?>
-                        <td><?= isset($litter->sire[0]) ? $this->Html->link(h($litter->sire[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id], ['escape' => false]) : '-' ?></td>
+                        <!-- <td><?= isset($litter->sire[0]) ? $this->Html->link(h($litter->sire[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id], ['escape' => false]) : '-' ?></td> -->
+                        <td><?= isset($litter->sire[0]) ? h($litter->sire[0]->name) : '-' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('pups_number', $exceptions)): ?>
                         <td><?= h($litter->pups_number) ?></td>

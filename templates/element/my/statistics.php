@@ -1,6 +1,6 @@
 <h2><?= __('My Statistics') ?></h2>
 
-<table class="condensed stats">
+<table class="condensed stats unfold">
     <tr>
         <th><?= __('I currently live with:') ?></th>
         <td><?=
@@ -23,7 +23,7 @@
     </tr>
 </table>
 
-<table class="condensed stats">
+<table class="condensed stats unfold">
     <tr>
         <th><?= __('Average lifespan of my rats:') ?></th>
         <td><?= __('{0, number} months', [h($avg_lifespan)]) ?> (♀: <?= h($female_avg_lifespan) ?> – ♂: <?= h($male_avg_lifespan) ?>) </td>
@@ -38,7 +38,7 @@
     </tr>
 </table>
 
-<table class="condensed stats">
+<table class="condensed stats unfold">
     <tr>
         <th><?= __('My champion:') ?></th>
         <td><?=

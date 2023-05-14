@@ -190,7 +190,7 @@
 
             </div>
             <h2><?= __('Origins') ?></h2>
-                <table class="condensed">
+                <table class="condensed unfold">
                     <tr>
                         <th><?= __('Birth place') ?></th>
                         <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
@@ -265,7 +265,7 @@
                                 foreach($rat->singularities as $singularity) {
                                     array_push($link_array, $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]));
                                 }
-                                $string = empty($link_array) ? __('None') : implode(", ", $link_array);
+                                $string = empty($link_array) ? __x('singularity', 'None') : implode(", ", $link_array);
                                 echo $string;
                             ?>
                         </td>
@@ -273,7 +273,7 @@
                 </table>
 
             <h2><?= __('Health') ?></h2>
-            <table class="condensed">
+            <table class="condensed unfold">
                 <tr>
                     <th><?= __('Is alive?') ?></th>
                     <td><?= $rat->is_alive ? __('Yes') : __('No'); ?></td>

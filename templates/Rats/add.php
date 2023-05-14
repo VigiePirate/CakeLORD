@@ -7,7 +7,18 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar', ['help_url' => ['controller' => 'Articles', 'action' => 'view', 25]]) ?>
+            <div class="side-nav-group">
+                <?= $this->element('default_sidebar', ['help_url' => ['controller' => 'Articles', 'action' => 'view', 25]]) ?>
+            </div>
+            <div class="side-nav-group">
+                <div class="tooltip">
+                    <?= $this->Html->image('/img/icon-back.svg', [
+                        'url' => 'javascript:history.back()',
+                        'class' => 'side-nav-icon',
+                        'alt' => __('Back')]) ?>
+                        <span class="tooltiptext"><?= __('Back') ?></span>
+                    </div>
+            </div>
         </div>
     </aside>
 
