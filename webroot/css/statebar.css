@@ -141,12 +141,31 @@ h1.half {
 
 @media screen and (max-width: 640px) {
   .staff-action-symbol {
-    padding: 0.25rem;
+    padding: 0rem;
   }
   .staff-action-symbol img {
-    width: 1.33rem;
+    width: 1.25rem;
   }
   h1 {
     margin-top:-1rem;
   }
+
+  .current-statemark {
+    font-size:2rem;
+    line-height:1;
+    font-weight: normal;
+    padding: 0.75rem 1rem;
+    box-shadow: 0px -7px 14px 0 rgb(60 66 87 / 10%) inset, 0px 6px 6px 0 rgb(0 0 0 / 7%) inset;
+    border-radius:20em;
+    min-width: 1.33em;
+  }
+
+  .statemark, a.statemark, a.statemark:visited {
+    font-size: 1.75rem;
+    line-height: 1;
+    font-weight: normal;
+    padding: 0.33rem 0.5rem;
+    min-width: 1.33em;
+  }
+
 }

@@ -9,6 +9,15 @@
   .top-nav-title a img{
     width: 6rem;
   }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+
   footer {
     display:grid;
     justify-items:center;
@@ -198,10 +207,18 @@
     overflow: hidden !important;
   } */
 
+  .tooltiptext, .tooltiptext-staff {
+    display:none;
+  }
+
   .button-dashboard a {
     font-size:1.4rem;
     padding: 0.5rem 1rem;
     height: 2.8rem;
     line-height: 1.2;
+  }
+
+  .parent img {
+    height: auto;
   }
 }

@@ -13,14 +13,15 @@
                 <th class="hide-on-mobile"><?= __('Picture') ?></th>
             <?php endif; ?>
             <?php if (! in_array('state_id', $exceptions)): ?>
-                <th class="hide-on-mobile"><?= __('State') ?></th>
-                <th class="show-on-mobile">OK</th>
+                <!-- <th class="hide-on-mobile"><?= __('State') ?></th>
+                <th class="show-on-mobile">&nbsp;</th> -->
+                <th><?= __('State') ?></th>
             <?php endif; ?>
             <?php if (! in_array('pedigree_identifier', $exceptions)): ?>
                 <th><?= __('Identifier') ?></th>
             <?php endif; ?>
             <?php if (! in_array('prefix', $exceptions)): ?>
-                <th><?= __('Prefix') ?></th>
+                <th class="hide-on-mobile"><?= __('Prefix') ?></th>
             <?php endif; ?>
             <?php if (! in_array('name', $exceptions)): ?>
                 <th><?= __('Name') ?></th>
@@ -32,7 +33,7 @@
                 <th><?= __('Birth') ?></th>
             <?php endif; ?>
             <?php if (! in_array('age_string', $exceptions)): ?>
-                <th><?= __('Age (mo)') ?></th>
+                <th><?= __('Age') ?></th>
             <?php endif; ?>
             <?php if (! in_array('death_cause', $exceptions)): ?>
                 <th><?= __('Death cause') ?></th>
@@ -41,7 +42,7 @@
                 <th><?= __('Owner') ?></th>
             <?php endif; ?>
             <?php if (! in_array('sex', $exceptions)): ?>
-                <th><?= __('Sex') ?></th>
+                <th class="parent"><?= __('Sex') ?></th>
             <?php endif; ?>
             <?php if (! in_array('actions', $exceptions)): ?>
                 <th class="actions-title hide-on-mobile"><?= __('Actions') ?></th>
@@ -60,7 +61,7 @@
                         <td><?= $this->Html->link($rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $rat->id]) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('prefix', $exceptions)): ?>
-                        <td><span class="nowrap"><?= h($rat->double_prefix) ?></span></td>
+                        <td class="hide-on-mobile"><span class="nowrap"><?= h($rat->double_prefix) ?></span></td>
                     <?php endif; ?>
                     <?php if (! in_array('name', $exceptions)): ?>
                         <td><?= h($rat->name) ?></td>
@@ -72,7 +73,7 @@
                         <td><?= h($rat->birth_date->i18nFormat('dd/MM/yyyy')) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('age_string', $exceptions)): ?>
-                        <td><?= $rat->age <= 54 ? h($rat->age) . ' mo' : '– ?? –' ?></td>
+                        <td class="nowrap"><?= $rat->age <= 54 ? h($rat->age) . __(' mo') : '– ?? –' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('death_cause', $exceptions)): ?>
                         <td><?= h($rat->short_death_cause) ?></td>
@@ -81,7 +82,7 @@
                         <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('sex', $exceptions)): ?>
-                        <td class="sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></td>
+                        <td class="parent sexcolor_<?php echo h($rat->sex) ?>"><?= h($rat->sex_symbol) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('actions', $exceptions)): ?>
                         <td class="actions hide-on-mobile">

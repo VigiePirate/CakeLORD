@@ -28,7 +28,7 @@
                         <div class="sheet-title pretitle"><?= __('$Variety') ?></div>
                     </div>
                     <h1><?= h($variety->name) ?></h1>
-                    <table class="condensed">
+                    <table class="condensed unfold">
             <?php endif ?>
                         <tr>
                             <th><?= __('Name') ?></th>
