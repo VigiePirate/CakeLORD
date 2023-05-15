@@ -121,7 +121,7 @@
                 <div class="message"><?= __('This is a generic prefix. It does not correspond to an actual rattery. Therefore, only limited information is shown.') ?></div>
                 <h2><?= __('Statistics') ?></h2>
                 <h3><?= __('Breeding statistics') ?></h3>
-                <table class="condensed stats">
+                <table class="condensed stats unfold">
                     <tr>
                         <th><?= __('Litters recorded under this prefix:') ?></th>
                         <td><?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['inLitterCount']]) ?></td>
@@ -147,7 +147,7 @@
                     <?php if ($stats['ratCount'] == 0 && $stats['outRatCount'] == 0) : ?>
                         <div class="message error"><?= __('No recorded rat is associated with this origin.') ?></div>
                     <?php else : ?>
-                        <table class="condensed stats">
+                        <table class="condensed stats unfold">
                             <tr>
                                 <th><?= __('Rats recorded as deceased:') ?></th>
                                 <td><?=  __('{0, number} rats ({1, number} % of recorded rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
@@ -162,7 +162,7 @@
                             </tr>
                         </table>
                         <?php if ($stats['deadRatCount'] > 9) : ?>
-                            <table class="condensed stats">
+                            <table class="condensed stats unfold">
                                 <tr>
                                     <th><?= __('Average lifespan of rats with this prefix:') ?></th>
                                     <td><?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAge'], $stats['deadFemaleAge'], $stats['deadMaleAge']]) ?></td>
@@ -250,13 +250,13 @@
                 <?php else : ?>
                     <details open>
                         <summary><?= __('Breeding statistics') ?></summary>
-                        <table class="condensed stats">
+                        <table class="condensed stats unfold">
                             <tr>
                                 <th><?= __('Breeding activity period:') ?></th>
                                 <td><?= h($stats['activityYears']) ?></td>
                             </tr>
                         </table>
-                        <table class="condensed stats">
+                        <table class="condensed stats unfold">
                             <tr>
                                 <th><?= __('Total breeding activity:') ?></th>
                                 <td><?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['inLitterCount']+$stats['outLitterCount']]) ?>,
@@ -271,7 +271,7 @@
                                 <td> ⨽ <?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['outLitterCount']]) ?>, <?= __('{0, plural, =1{1 pup} other{# pups}}', [$stats['outRatCount']]) ?><!--, with xx different partner ratteries--></td>
                             </tr>
                         </table>
-                        <table class="condensed stats">
+                        <table class="condensed stats unfold">
                             <tr>
                                 <th><?= __('Rat records (born in the rattery):') ?></th>
                                 <td><?= __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}}', [$stats['ratCount']]) ?>
@@ -290,7 +290,7 @@
                     <?php if($rattery->wants_statistic) : ?>
                         <details>
                             <summary><?= __('More breeding statistics') ?></summary>
-                            <table class="condensed stats">
+                            <table class="condensed stats unfold">
                                 <tr>
                                     <th><?= __('Average mother age:') ?></th>
                                     <td><?= __('{0, number} days ({1, number} months)', [round($stats['avg_mother_age']), round($stats['avg_mother_age']/30.5,1)]) ?></td>
@@ -319,7 +319,7 @@
                             <?php if ($stats['deadRatCount'] > 9) : ?>
                                 <details open>
                                     <summary><?= __('Lifespan statistics') ?></summary>
-                                    <table class="condensed stats">
+                                    <table class="condensed stats unfold">
                                         <tr>
                                             <th><?= __('Bred rats recorded as deceased:') ?></th>
                                             <td><?=  __('{0, number} rats ({1, number} % of recorded bred rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
@@ -333,7 +333,7 @@
                                             <td> ⨽ <?= __('{0, number} rats ({1, number} %)', [$stats['lostRatCount'], $stats['lostRatProportion']]) ?></td>
                                         </tr>
                                     </table>
-                                    <table class="condensed stats">
+                                    <table class="condensed stats unfold">
                                         <tr>
                                             <th><?= __('Average lifespan of bred rats:') ?></th>
                                             <td><?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAge'], $stats['deadFemaleAge'], $stats['deadMaleAge']]) ?></td>
@@ -347,7 +347,7 @@
                                             <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeHealthy'], $stats['deadRatAgeHealthy'], $stats['deadRatAgeHealthy']]) ?></td>
                                         </tr>
                                     </table>
-                                    <table class="condensed stats">
+                                    <table class="condensed stats unfold">
                                         <tr>
                                             <th><?= __('Oldest bred rat:') ?></th>
                                             <td><?= ! is_null($champion)
@@ -401,7 +401,7 @@
                             <?php else : ?>
                                 <details open>
                                     <summary><?= __('Lifespan statistics') ?></summary>
-                                    <table class="condensed stats">
+                                    <table class="condensed stats unfold">
                                         <tr>
                                             <th><?= __('Bred rats recorded as deceased:') ?></th>
                                             <td><?=  __('{0, number} rats ({1, number} % of recorded bred rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
@@ -457,15 +457,26 @@
                             <?php foreach ($rattery->litters as $litter): ?>
                             <tr>
                                 <td><span class="statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></span></td>
-                                <td><?= $litter->has('birth_date') ? h($litter->birth_date->i18nFormat('dd/MM/yyyy')) : __('Unknown date') ?></td>
-                                <td><?= !empty($litter->dam) ? h($litter->dam[0]->usual_name) : __('Unknown') ?></td>
-                                <td><?= !empty($litter->sire) ? h($litter->sire[0]->usual_name) : __('Unknown') ?></td>
+                                <td><?= $this->Html->link($litter->birth_date->i18nFormat('dd/MM/yyyy'), ['controller' => 'Litters', 'action' => 'view', $litter->id]) ?></td>
+                                <td><?= !empty($litter->dam) ? h($litter->dam[0]->usual_name) : __x('mother', 'Unknown') ?></td>
+                                <td><?= !empty($litter->sire) ? h($litter->sire[0]->usual_name) : __x('father', 'Unknown') ?></td>
                                 <td><?= $this->Number->format($litter->pups_number) ?></td>
-                                <td class="actions">
-                                    <?= $this->Html->image('/img/icon-view.svg', [
-                                        'url' => ['controller' => 'Litters', 'action' => 'view', $litter->id],
-                                        'class' => 'action-icon',
-                                        'alt' => __('See Litter')]) ?>
+                                <td class="actions hide-on-mobile">
+                                    <?php if (! is_null($user) && $user->can('edit', $litter)) : ?>
+                                        <?= $this->Html->image('/img/icon-edit.svg', [
+                                            'url' => ['controller' => 'Litters', 'action' => 'edit', $litter->id],
+                                            'class' => 'action-icon',
+                                            'alt' => __('Edit Litter')])
+                                        ?>
+                                    <?php else :?>
+                                        <span class="disabled">
+                                            <?= $this->Html->image('/img/icon-edit.svg', [
+                                                'url' => '',
+                                                'class' => 'action-icon disabled',
+                                                'alt' => __('Edit Litter')])
+                                            ?>
+                                        </span>
+                                    <?php endif ;?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

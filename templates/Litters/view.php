@@ -130,7 +130,7 @@
             <div class="row">
                 <div class="column-responsive column-50 parent">
                     <div class="pretitle"><?= $this->Html->link(__('Dam: ') . h($litter->dam[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id], ['escape' => false]) ?></div>
-                    <?php if ($litter->dam[0]->picture != '') : ?>
+                    <?php if ($litter->dam[0]->picture != '' && $litter->dam[0]->picture != 'Unknown.png') : ?>
                         <?= $this->Html->image(UPLOADS . $litter->dam[0]->picture, ['alt' => $litter->dam[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]]) ?>
                     <?php else : ?>
                         <?= $this->Html->image('UnknownMother.png', ['alt' => $litter->dam[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]]) ?>
@@ -154,7 +154,7 @@
                 <div class="column-responsive column-50 parent">
                     <?php if (isset($litter->sire[0])) : ?>
                         <div class="pretitle"><?= $this->Html->link(__('Sire: ') . h($litter->sire[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id], ['escape' => false]) ?></div>
-                        <?php if ($litter->sire[0]->picture != '') : ?>
+                        <?php if ($litter->sire[0]->picture != '' && $litter->dam[0]->picture != 'Unknown.png') : ?>
                             <?= $this->Html->image(UPLOADS . $litter->sire[0]->picture, ['alt' => $litter->sire[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id]]) ?>
                         <?php else : ?>
                             <?= $this->Html->image('UnknownFather.png', ['alt' => $litter->dam[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->sire[0]->id]]) ?>

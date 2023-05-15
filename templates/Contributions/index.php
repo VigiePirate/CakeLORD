@@ -10,7 +10,7 @@
         <table class="condensed">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <!-- <th><?= $this->Paginator->sort('id') ?></th> -->
                     <th><?= $this->Paginator->sort('rattery_id') ?></th>
                     <th><?= $this->Paginator->sort('litter_id') ?></th>
                     <th><?= $this->Paginator->sort('contribution_type_id') ?></th>
@@ -20,7 +20,7 @@
             <tbody>
                 <?php foreach ($contributions as $contribution): ?>
                 <tr>
-                    <td><?= $this->Number->format($contribution->id) ?></td>
+                    <!-- <td><?= $this->Number->format($contribution->id) ?></td> -->
                     <td><?= $contribution->has('rattery') ? $this->Html->link($contribution->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id]) : '' ?></td>
                     <td><?= $contribution->has('litter') ? $this->Html->link($contribution->litter->full_name, ['controller' => 'Litters', 'action' => 'view', $contribution->litter->id]) : '' ?></td>
                     <td><?= h($contribution->contribution_type->name) ?></td>

@@ -10,7 +10,7 @@
                     <div class="current-statemark sun">
                         <?= h($rattery->is_alive_symbol) ?>
                     </div>
-                    <div class="staff-action-symbol">&numsp;⮞</div>
+                    <div class="staff-action-symbol">&numsp;<?= $this->Html->image('arrow-right.svg') ?></div>
                     <div class="statemark">
                         <?= $this->Html->link(
                             h($rattery->next_alive_symbol),
@@ -23,7 +23,7 @@
                         <div class="current-statemark">
                             <span class="rotate"><?= h($rattery->is_alive_symbol) ?></span>
                         </div>
-                        <div class="staff-action-symbol">&numsp;⮞</div>
+                        <div class="staff-action-symbol">&numsp;<?= $this->Html->image('arrow-right.svg') ?></div>
                         <div class="statemark">
                             <?= $this->Html->link(
                                 h($rattery->next_alive_symbol),

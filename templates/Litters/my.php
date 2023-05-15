@@ -31,7 +31,9 @@
                 'exceptions' => [
                     'mating_date',
                     'full_name',
+                    //'dam', 'sire', 'birth_date',
                     'pups_number_stillborn',
+                    'actions'
                 ],
             ]) ?>
         </div>

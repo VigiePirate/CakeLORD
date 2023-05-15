@@ -12,7 +12,7 @@
                         'class' => 'lockbar-icon',
                         'alt' => __('Locked')]) ?>
                     </div>
-                    <div class="staff-action-symbol">&numsp;⮞</div>
+                    <div class="staff-action-symbol">&numsp;<?= $this->Html->image('arrow-right.svg') ?></div>
                     <div class="statemark">
                         <?=
                             $this->Html->image('/img/icon-unlock.svg', [
@@ -28,7 +28,7 @@
                         'class' => 'lockbar-icon',
                         'alt' => __('Unlocked')]) ?>
                     </div>
-                    <div class="staff-action-symbol">&numsp;⮞</div>
+                    <div class="staff-action-symbol">&numsp;<?= $this->Html->image('arrow-right.svg') ?></div>
                     <div class="statemark">
                         <?=
                             $this->Html->image('/img/icon-lock.svg', [

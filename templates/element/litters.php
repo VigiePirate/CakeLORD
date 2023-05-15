@@ -9,10 +9,10 @@
                     <th><?= $this->Paginator->sort('mating_date', __('Mating date')) ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('birth_date', $exceptions)): ?>
-                    <th><?= $this->Paginator->sort('birth_date') ?></th>
+                    <th><?= $this->Paginator->sort('birth_date', __x('litter', 'Birth date')) ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('full_name', $exceptions)): ?>
-                    <th><?= $this->Paginator->sort('full_name') ?></th>
+                    <th><?= $this->Paginator->sort('full_name', __x('litter full designation', 'Litter')) ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('dam', $exceptions)): ?>
                     <th class="col-head"><?= __('Dam') ?></th>
@@ -40,7 +40,12 @@
                         <td><?= isset($litter->mating_date) ? $litter->birth_date->i18nFormat('dd/MM/yyyy') : ''?></td>
                     <?php endif; ?>
                     <?php if (! in_array('birth_date', $exceptions)): ?>
-                        <td><?= $litter->birth_date->i18nFormat('dd/MM/yyyy') ?></td>
+                        <!-- add link on birth date if full name is not shown -->
+                        <?php if (in_array('full_name', $exceptions)): ?>
+                            <td><?= $this->Html->link($litter->birth_date->i18nFormat('dd/MM/yyyy'), ['controller' => 'Litters', 'action' => 'view', $litter->id], ['escape' => false]) ?></td>
+                        <?php else : ?>
+                            <td><?= $litter->birth_date->i18nFormat('dd/MM/yyyy') ?></td>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <?php if (! in_array('full_name', $exceptions)): ?>
                         <td><?= $this->Html->link(h($litter->full_name), ['controller' => 'Litters', 'action' => 'view', $litter->id], ['escape' => false]) ?></td>
@@ -60,7 +65,7 @@
                         <td><?= h($litter->pups_number_stillborn) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('actions', $exceptions)): ?>
-                        <td class="actions">
+                        <td class="actions hide-on-mobile">
                             <?= $this->Html->image('/img/icon-view.svg', [
                                 'url' => ['controller' => 'Litters', 'action' => 'view', $litter->id],
                                 'class' => 'action-icon',

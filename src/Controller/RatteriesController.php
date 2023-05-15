@@ -637,7 +637,7 @@ class RatteriesController extends AppController
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rattery, 'changeState');
         if ($this->Ratteries->freeze($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
-            $this->Flash->success(__('This rat sheet is now frozen.'));
+            $this->Flash->success(__('This rattery sheet is now frozen.'));
         } else {
             $this->Flash->error(__('We could not freeze the sheet. Please retry or contact an administrator.'));
         }
@@ -650,7 +650,7 @@ class RatteriesController extends AppController
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rattery, 'editFrozen');
         if ($this->Ratteries->thaw($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
-            $this->Flash->success(__('This rat sheet is now unfrozen.'));
+            $this->Flash->success(__('This rattery sheet is now unfrozen.'));
         } else {
             $this->Flash->error(__('We could not thaw the sheet. Please retry or contact an administrator.'));
         }
@@ -663,7 +663,7 @@ class RatteriesController extends AppController
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rattery, 'changeState');
         if ($this->Ratteries->approve($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
-            $this->Flash->success(__('This rat sheet has been approved.'));
+            $this->Flash->success(__('This rattery sheet has been approved.'));
         } else {
             $this->Flash->error(__('We could not approve the sheet. Please retry or contact an administrator.'));
         }
@@ -676,7 +676,7 @@ class RatteriesController extends AppController
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rattery, 'changeState');
         if ($this->Ratteries->blame($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
-            $this->Flash->success(__('This rat sheet has been unapproved.'));
+            $this->Flash->success(__('This rattery sheet has been unapproved.'));
         } else {
             $this->Flash->error(__('We could not unapprove the sheet. Please retry or contact an administrator.'));
         }
