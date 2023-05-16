@@ -28,7 +28,7 @@ class RatsController extends AppController
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions([
             'index', 'view',
-            'named', 'fromRattery', 'ownedBy', 'sex',
+            'named', 'fromRattery', 'ownedBy', 'byOwner', 'sex',
             'search', 'results',
             'pedigree', 'parentsTree', 'childrenTree', 'print',
         ]);
@@ -565,7 +565,7 @@ class RatsController extends AppController
     /**
      * ownedBy method
      *
-     * Search rats by ratteries.
+     * Search rats by owner user name like.
      *
      * @param
      * @return
@@ -589,6 +589,28 @@ class RatsController extends AppController
         $rats = $this->paginate($rats);
 
         $this->set(compact('rats', 'owners'));
+    }
+
+    /**
+     * byOwner method
+     *
+     * Search rats by owner user id.
+     *
+     * @param
+     * @return
+     */
+    public function byOwner()
+    {
+        $this->Authorization->skipAuthorization();
+        $owners = $this->request->getParam('pass');
+        $owner = $this->Rats->OwnerUsers->get($owners);
+        $rats = $this->Rats->find('byOwnerId', ['owners' => $owners])->order('Rats.birth_date DESC');
+        $this->paginate = [
+            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
+        ];
+        $rats = $this->paginate($rats);
+
+        $this->set(compact('rats', 'owner'));
     }
 
     /**

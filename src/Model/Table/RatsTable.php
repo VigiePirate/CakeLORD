@@ -831,6 +831,27 @@ class RatsTable extends Table
         return $query->group(['Rats.id']);
     }
 
+    public function findByOwnerId(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['owners'])) {
+            $query->leftJoinWith('OwnerUsers')
+                  ->where([
+                      'OwnerUsers.id IS' => null,
+                  ]);
+        } else {
+            $query->innerJoinWith('OwnerUsers')
+                  ->where([
+                          'OwnerUsers.id' => implode($options['owners']),
+                ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
     public function findSex(Query $query, array $options)
     {
         $query = $query

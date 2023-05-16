@@ -229,9 +229,9 @@ class Rat extends Entity
             return $age = __x('age', 'Unknown');
         }
         if (! $this->_fields['is_alive'] ) {
-            $age = $this->has('death_date')
+            $age = $this->has('death_date') && $this->death_secondary_cause_id != 1
                 ? __('{0, plural, =0{< 1 month} =1{1 month} other{# months}}', [$this->age])
-                : ('Unknown') ;
+                : x('age', 'Unknown') ;
             return $age;
         }  else {
             if($this->age < 1) {
@@ -249,12 +249,12 @@ class Rat extends Entity
             return $age = __('Negative age?!');
         }
         if ($this->age > RatsTable::MAXIMAL_AGE_MONTHS) {
-            return $age = __x('age', 'unknown');
+            return $age = '– ?? –';
         }
         if (! $this->_fields['is_alive'] ) {
-            $age = $this->has('death_date')
-                ? __('{0} mo', [$this->age])
-                : __x('age', 'unknown') ;
+            $age = $this->has('death_date') && $this->death_secondary_cause_id != 1
+                ? __x('age in short form', '{0} mo', [$this->age])
+                : __x('age', '– ?? –') ;
             return $age;
         }  else {
             if($this->age < 1) {
