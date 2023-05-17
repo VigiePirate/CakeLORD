@@ -219,15 +219,15 @@
                     </tr>
                     <tr>
                         <th><?= __('Genealogy') ?></th>
-                        <td><?= $rat->has('birth_litter') ? $this->Html->link('See birth litter sheet', ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) . ' (parents and siblings)' : 'Not attached to any litter' ?></td>
+                        <td><?= $rat->has('birth_litter') ? $this->Html->link(__('See birth litter sheet'), ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) . ' (parents and siblings)' : 'Not attached to any litter' ?></td>
                     </tr>
                     <tr>
                         <th></th>
-                        <td><?= $this->Html->link('See interactive family tree', ['controller' => 'Rats', 'action' => 'pedigree', $rat->id]) ?> (all direct ascendants and descendants)</td>
+                        <td><?= $this->Html->link(__('See interactive family tree'), ['controller' => 'Rats', 'action' => 'pedigree', $rat->id]) ?> (all direct ascendants and descendants)</td>
                     </tr>
                     <tr>
                         <th></th>
-                        <td><?= $this->Html->link('See family report', ['controller' => 'Rats', 'action' => 'family', $rat->id]) ?> (family size and lifespan statistics)</td>
+                        <td><?= $this->Html->link(__('See family report'), ['controller' => 'Rats', 'action' => 'family', $rat->id]) ?> (family size and lifespan statistics)</td>
                     </tr>
                 </table>
 
@@ -282,10 +282,10 @@
                     <th><?= $rat->is_alive ? __('Age') : __('Age at death'); ?></th>
                     <td><?= h($rat->age_string) ?></td>
                 </tr>
-                <?php if (!$rat->is_alive && (!$rat->has('death_secondary_cause') || $rat->death_secondary_cause->id != '1')) : ?>
+                <?php if (! $rat->is_alive && (! $rat->has('death_secondary_cause') || $rat->death_secondary_cause->id != '1')) : ?>
                     <tr>
                         <th><?= __('Death date') ?></th>
-                        <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : 'Unknown' ?></td>
+                        <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : __('Unknown') ?></td>
                     </tr>
                 <?php endif; ?>
                 <?php if (!$rat->is_alive) : ?>
@@ -405,7 +405,7 @@
                                 <table class="summary">
                                     <thead>
                                         <th><?= __('Created') ?></th>
-                                        <th><?= __('Differences') ?></th>
+                                        <th><?= __('Differences with current version') ?></th>
                                         <!-- <th><?= __('Data') ?></th> -->
                                         <th><?= __('State') ?></th>
                                         <th class="actions"><?= __('Actions') ?></th>

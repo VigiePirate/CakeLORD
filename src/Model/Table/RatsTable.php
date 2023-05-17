@@ -810,6 +810,27 @@ class RatsTable extends Table
         return $query->group(['Rats.id']);
     }
 
+    public function findByRatteryId(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['ratteries'])) {
+            $query->leftJoinWith('Ratteries')
+                  ->where([
+                      'Ratteries.id IS' => null,
+                  ]);
+        } else {
+            $query->innerJoinWith('Ratteries')
+                  ->where([
+                          'Ratteries.id' => implode($options['ratteries']),
+                ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
     public function findOwnedBy(Query $query, array $options)
     {
         $query = $query
@@ -996,7 +1017,12 @@ class RatsTable extends Table
                 'death_euthanized' => '0',
                 'death_diagnosed' => '0',
                 'death_necropsied' => '0',
-                'comments' => $query->func()->concat(['comments' => 'identifier', 'CHAR (10)' => 'identifier', 'CHAR (13)' => 'identifier', $comment]),
+                'comments' => $query->func()->concat([
+                    $query->func()->coalesce(['comments' => 'identifier', '']),
+                    'CHAR (10)' => 'identifier',
+                    'CHAR (13)' => 'identifier',
+                    $comment
+                ]),
             ])
             ->execute();
 

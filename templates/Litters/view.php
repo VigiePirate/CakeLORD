@@ -197,7 +197,7 @@
             </div>
 
             <h2><?= __('Litter summary') ?></h2>
-            <table class="condensed">
+            <table class="condensed unfold">
                 <tr>
                     <th><?= __('Prefix') ?></th>
                     <td><?= $litter->contributions[0]->rattery->prefix ?><?= !empty($litter->contributions[1]) ? ('-' . $litter->contributions[1]->rattery->prefix) : '' ?></td>
@@ -236,18 +236,18 @@
                 <table class="condensed">
                     <thead>
                         <tr>
-                            <th><?= __('Prefix') ?></th>
-                            <th><?= __('Name') ?></th>
+                            <!-- <th><?= __('Prefix') ?></th> -->
+                            <th><?= __('Raterie') ?></th>
                             <th><?= __('Contribution') ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($litter->contributions as $contribution) : ?>
                         <tr>
-                            <td><?= h($contribution->rattery->prefix) ?></td>
-                            <td>
+                            <!-- <td><?= h($contribution->rattery->prefix) ?></td> -->
+                            <td class="nowrap">
                                 <?= $this->Html->link(
-                                    h($contribution->rattery->name),
+                                    h($contribution->rattery->full_name),
                                     ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id],
                                     ['escape' => false]
                                 )?>
@@ -282,7 +282,7 @@
                 </div>
             <?php endif; ?>
 
-            <table class="condensed">
+            <table class="condensed unfold">
                 <tr>
                     <th><?= __('Current survival rate:') ?></th>
                     <td>
@@ -296,7 +296,7 @@
                     </td>
                 </tr>
             </table>
-            <table class="condensed">
+            <table class="condensed unfold">
                 <tr>
                     <th><?= __('Average lifespan:') ?></th>
                     <td><?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['lifespan'], $stats['female_lifespan'], $stats['male_lifespan']]) ?></td>

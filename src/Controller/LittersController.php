@@ -76,8 +76,8 @@ class LittersController extends AppController
                 'Users', 'States', 'OffspringRats', 'OffspringRats.States',
                 'Sire.Ratteries', 'Sire.BirthLitters', 'Sire.BirthLitters.Contributions',
                 'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions',
-                'Sire', 'Sire.Markings', 'Sire.Dilutions', 'Sire.Colors', 'Sire.Coats', 'Sire.Earsets','Sire.DeathPrimaryCauses','Sire.DeathSecondaryCauses',
-                'Dam', 'Dam.Markings', 'Dam.Dilutions', 'Dam.Colors', 'Dam.Coats', 'Dam.Earsets','Dam.DeathPrimaryCauses','Dam.DeathSecondaryCauses',
+                'Sire', 'Sire.Markings', 'Sire.Dilutions', 'Sire.Colors', 'Sire.Coats', 'Sire.Earsets', 'Sire.Singularities', 'Sire.DeathPrimaryCauses','Sire.DeathSecondaryCauses',
+                'Dam', 'Dam.Markings', 'Dam.Dilutions', 'Dam.Colors', 'Dam.Coats', 'Dam.Earsets', 'Dam.Singularities', 'Dam.DeathPrimaryCauses','Dam.DeathSecondaryCauses',
                 'Ratteries', 'Contributions', 'LitterSnapshots', 'LitterSnapshots.States', 'LitterMessages'
             ],
         ]);
