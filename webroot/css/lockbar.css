@@ -22,11 +22,12 @@
 }
 
 .staff-action-symbol{
-  font-size:2rem;
-  font-family: "Imprima", "Roboto";
   line-height:1;
-  color:#b1000c;
   padding:0.5rem;
+}
+
+.staff-action-symbol img {
+  width: 1.5rem;
 }
 
 .staff-heading {
@@ -44,4 +45,13 @@
 .lockbar-icon {
   padding: 0.5rem;
   width:4.5rem;
+}
+
+@media screen and (max-width: 640px) {
+  .staff-action-symbol {
+    padding: 0rem;
+  }
+  .staff-action-symbol img {
+    width: 1.25rem;
+  }
 }

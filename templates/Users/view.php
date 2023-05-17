@@ -149,7 +149,7 @@
                     <summary><?= __('Last Modified Rats') ?></summary>
                     <?php if (!empty($user->owner_rats)) : ?>
                         <div class="button-raised">
-                            <?= $this->Html->link(__('See all their rats'), ['controller' => 'Rats', 'action' => 'ownedBy', $user->username], ['class' => 'button float-right']) ?>
+                            <?= $this->Html->link(__('See all their rats'), ['controller' => 'Rats', 'action' => 'byOwner', $user->id], ['class' => 'button float-right']) ?>
                         </div>
                         <?= $this->element('simple_rats', [
                             'rubric' => __(''),
@@ -272,14 +272,14 @@
                     <table class="condensed stats unfold">
                         <tr>
                             <th><?= __('Average lifespan of their rats:') ?></th>
-                            <td><?= __('{0, plural, =1{1 month} other{# months}}', [h($avg_lifespan)]) ?> (♀: <?= h($female_avg_lifespan) ?> – ♂: <?= h($male_avg_lifespan) ?>) </td>
+                            <td><?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [h($avg_lifespan), h($female_avg_lifespan), h($male_avg_lifespan)]) ?></td>
                             <tr>
                                 <th> ⨽ <?= __('average, infant mortality excluded:') ?></th>
-                                <td> ⨽ <?= __('{0, plural, =1{1 month} other{# months}}', [h($not_infant_lifespan)]) ?> (♀: <?= h($not_infant_female_lifespan) ?> – ♂: <?= h($not_infant_male_lifespan) ?>)
+                                <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [h($not_infant_lifespan), h($not_infant_female_lifespan), h($not_infant_male_lifespan)]) ?></td>
                             </tr>
                             <tr>
                                 <th> ⨽ <?= __('average, accidents also excluded:') ?></th>
-                                <td> ⨽ <?= __('{0, plural, =1{1 month} other{# months}}', [h($not_accident_lifespan)]) ?> (♀: <?= h($not_accident_female_lifespan) ?> – ♂: <?= h($not_accident_male_lifespan) ?>)
+                                <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [h($not_accident_lifespan), h($not_accident_female_lifespan), h($not_accident_male_lifespan)]) ?></td>
                             </tr>
                         </tr>
                     </table>

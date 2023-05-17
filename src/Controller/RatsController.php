@@ -604,9 +604,26 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $owners = $this->request->getParam('pass');
         $owner = $this->Rats->OwnerUsers->get($owners);
-        $rats = $this->Rats->find('byOwnerId', ['owners' => $owners])->order('Rats.birth_date DESC');
+        $rats = $this->Rats->find('byOwnerId', ['owners' => $owners]);
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
+            'contain' => [
+                'OwnerUsers',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'DeathPrimaryCauses',
+                'DeathSecondaryCauses',
+                'States'
+            ],
+            'sortableFields' => [            
+                'state_id',
+                'pedigree_identifier',
+                'Ratteries.prefix',
+                'name',
+                'pup_name',
+                'birth_date',
+                'sex'
+            ],
         ];
         $rats = $this->paginate($rats);
 

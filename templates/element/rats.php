@@ -6,16 +6,16 @@
     <table class="condensed">
         <thead>
             <?php if (! in_array('state_id', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('state_id','State')?></th>
+                <th><?= $this->Paginator->sort('state_id', ['label' => __('State')]) ?></th>
             <?php endif; ?>
             <?php if (! in_array('picture', $exceptions)): ?>
                 <th class="col-head"><?= __('Picture') ?></th>
             <?php endif; ?>
             <?php if (! in_array('pedigree_identifier', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('pedigree_identifier','Identifier') ?></th>
+                <th><?= $this->Paginator->sort('pedigree_identifier', __('Identifier')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('prefix', $exceptions)): ?>
-                <th class="col-head"><?= __('Prefix') ?></th>
+                <th class="col-head"><?= $this->Paginator->sort('Ratteries.prefix', __('Prefix')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('name', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('name') ?></th>
@@ -33,7 +33,7 @@
                 <th class="col-head"><?= __('Death cause') ?></th>
             <?php endif; ?>
             <?php if (! in_array('owner_user_id', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('OwnerUsers.username','Owner') ?></th>
+                <th><?= $this->Paginator->sort('OwnerUsers.username', __('Owner')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('sex', $exceptions)): ?>
                 <th><?= $this->Paginator->sort('sex','Sex') ?></th>
@@ -58,7 +58,7 @@
                         <td><span class="nowrap"><?= h($rat->double_prefix) ?></span></td>
                     <?php endif; ?>
                     <?php if (! in_array('name', $exceptions)): ?>
-                        <td><?= h($rat->name) ?></td>
+                        <td><?= h($rat->name) ?><sup><?= h($rat->is_alive_symbol) ?></sup></td>
                     <?php endif; ?>
                     <?php if (! in_array('pup_name', $exceptions)): ?>
                         <td class="hide-on-mobile"><?= h($rat->pup_name) ?></td>

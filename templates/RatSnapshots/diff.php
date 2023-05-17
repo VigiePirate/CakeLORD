@@ -191,7 +191,7 @@
                     <?php if (in_array('death_date', $diff_list)) : ?>
                         <td class="minus"><?= $snap_rat->has('death_date') ? h($snap_rat->death_date->i18nFormat('dd/MM/yyyy')) : __('N/A') ?></td>
                     <?php else : ?>
-                        <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : __('ND') ?></td>
+                        <td><?= $rat->has('death_date') ? h($rat->death_date->i18nFormat('dd/MM/yyyy')) : __('N/A') ?></td>
                     <?php endif ; ?>
                 </tr>
 

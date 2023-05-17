@@ -64,7 +64,7 @@
                         <td class="hide-on-mobile"><span class="nowrap"><?= h($rat->double_prefix) ?></span></td>
                     <?php endif; ?>
                     <?php if (! in_array('name', $exceptions)): ?>
-                        <td><?= h($rat->name) ?></td>
+                        <td><?= h($rat->name) ?><sup><?= h($rat->is_alive_symbol) ?></sup></td>
                     <?php endif; ?>
                     <?php if (! in_array('pup_name', $exceptions)): ?>
                         <td><?= h($rat->pup_name) ?></td>
@@ -73,7 +73,7 @@
                         <td><?= h($rat->birth_date->i18nFormat('dd/MM/yyyy')) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('age_string', $exceptions)): ?>
-                        <td class="nowrap"><?= $rat->age <= 54 ? h($rat->age) . __(' mo') : '– ?? –' ?></td>
+                        <td class="nowrap"><?= $rat->short_age_string ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('death_cause', $exceptions)): ?>
                         <td><?= h($rat->short_death_cause) ?></td>

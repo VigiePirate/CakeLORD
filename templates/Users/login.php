@@ -7,7 +7,7 @@
     <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('Please enter your registration email address and password') ?></legend>
-        <?= $this->Form->control('email', ['required' => true]) ?>
+        <?= $this->Form->control('email', ['required' => true, 'label' => __('Email address')]) ?>
         <?= $this->Form->control('password', ['required' => true]) ?>
     </fieldset>
 

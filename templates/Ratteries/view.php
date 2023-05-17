@@ -446,11 +446,11 @@
                         <thead>
                             <tr>
                                 <th><?= __('State') ?></th>
-                                <th><?= __('Birth date') ?></th>
+                                <th><?= __x('litter', 'Birth date') ?></th>
                                 <th><?= __('Dam') ?></th>
                                 <th><?= __('Sire') ?></th>
                                 <th><?= __('Size') ?></th>
-                                <th class="actions"><?= __('Actions') ?></th>
+                                <th class="actions hide-on-mobile"><?= __('Actions') ?></th>
                             </tr>
                         </thead>
                         <tbody>
