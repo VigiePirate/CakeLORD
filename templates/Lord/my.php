@@ -22,21 +22,21 @@
             <div class="button-small">
                 <?= $this->Html->link(__('See all pending rats'), ['controller' => 'Rats', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
-            <p><?= __('<strong>{0} rat sheets</strong> are currently waiting for staff action. Most recent are:', [$count['rats']]) ?></p>
+            <p><?= __('<strong>{0, plural, =1{1 rat sheet is} other{# rat sheets are}}</strong> are currently waiting for staff action. Most recent are:', [$count['rats']]) ?></p>
             <?= $this->element('simple_staff_rats') ?>
 
             <h3><?= __('Litters') ?></h3>
             <div class="button-small">
                 <?= $this->Html->link(__('See all pending litters'), ['controller' => 'Litters', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
-            <p><?= __('<strong>{0} litter sheets</strong> are currently waiting for staff action. Most recent are:', [$count['litters']]) ?></p>
+            <p><?= __('<strong>{0, plural, =1{1 litter sheet is} other{# litter sheets are}}</strong> currently waiting for staff action. Most recent are:', [$count['litters']]) ?></p>
             <?= $this->element('simple_staff_litters') ?>
 
             <h3><?= __('Ratteries') ?></h3>
             <div class="button-small">
                 <?= $this->Html->link(__('See all pending ratteries'), ['controller' => 'Ratteries', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
-            <p><?= __('<strong>{0} rattery sheets</strong> are currently waiting for staff action. Most recent are:', [$count['ratteries']]) ?><p>
+            <p><?= __('<strong>{0, plural, =1{1 rattery sheet is} other{# rattery sheets are}}</strong> currently waiting for staff action. Most recent are:', [$count['ratteries']]) ?><p>
             <?= $this->element('simple_staff_ratteries') ?>
 
         </div>
@@ -48,7 +48,7 @@
                     <?= $this->Html->link(__('See all issues'), ['controller' => 'Issues', 'action' => 'index'], ['class' => 'button button-staff float-right']) ?>
                 </div>
                 <h2><?= __('Open issues') ?></h2>
-                <p><?= __('<strong>{0} issues</strong> are currently waiting to be treated. Most recent are:', [$count['issues']]) ?><p>
+                <p><?= __('<strong>{0, plural, =1{1 issue is} other{# issues are}}</strong> currently waiting to be treated. Most recent are:', [$count['issues']]) ?><p>
 
                 <div class="table-responsive">
                     <table class="summary">

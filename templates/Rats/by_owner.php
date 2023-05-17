@@ -14,9 +14,9 @@
             'rubric' => __(''),
             'exceptions' => [
                 'picture',
-                'pup_name',
-                //'age_string',
-                //'death_cause',
+                //'pup_name',
+                'age_string',
+                'death_cause',
                 'owner_user_id',
                 'actions',
             ],
