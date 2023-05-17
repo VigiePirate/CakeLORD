@@ -28,7 +28,7 @@ class RatsController extends AppController
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions([
             'index', 'view',
-            'named', 'fromRattery', 'ownedBy', 'byOwner', 'sex',
+            'named', 'fromRattery', 'byRattery', 'ownedBy', 'byOwner', 'sex',
             'search', 'results',
             'pedigree', 'parentsTree', 'childrenTree', 'print',
         ]);
@@ -563,6 +563,50 @@ class RatsController extends AppController
     }
 
     /**
+     * fromRattery method
+     *
+     * Search rats by ratteries.
+     *
+     * @param
+     * @return
+     */
+    public function byRattery()
+    {
+        $this->Authorization->skipAuthorization();
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
+        $ratteries = $this->request->getParam('pass');
+        $rattery = $this->Rats->Ratteries->get($ratteries);
+        $rats = $this->Rats->find('byRatteryId', [
+            'ratteries' => $ratteries
+        ]);
+
+        $this->paginate = [
+            'contain' => [
+                'OwnerUsers',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'DeathPrimaryCauses',
+                'DeathSecondaryCauses',
+                'States'
+            ],
+            'sortableFields' => [
+                'state_id',
+                'pedigree_identifier',
+                'Ratteries.prefix',
+                'name',
+                'pup_name',
+                'birth_date',
+                'sex'
+            ],
+        ];
+        $rats = $this->paginate($rats);
+
+        $this->set(compact('rats', 'rattery'));
+    }
+
+    /**
      * ownedBy method
      *
      * Search rats by owner user name like.
@@ -615,7 +659,7 @@ class RatsController extends AppController
                 'DeathSecondaryCauses',
                 'States'
             ],
-            'sortableFields' => [            
+            'sortableFields' => [
                 'state_id',
                 'pedigree_identifier',
                 'Ratteries.prefix',

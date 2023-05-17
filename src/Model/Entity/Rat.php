@@ -225,13 +225,14 @@ class Rat extends Entity
         if ($this->age < 0) { // Should raise exception
             return $age = __('Negative age?!');
         }
-        if ($this->age > RatsTable::MAXIMAL_AGE_MONTHS) {
-            return $age = __x('age', 'Unknown');
+        // zombie waiting for staff to log in
+        if ($this->_fields['is_alive'] && $this->age > RatsTable::MAXIMAL_AGE_MONTHS) {
+            return $age = __x('age', 'Doubtful');
         }
         if (! $this->_fields['is_alive'] ) {
             $age = $this->has('death_date') && $this->death_secondary_cause_id != 1
                 ? __('{0, plural, =0{< 1 month} =1{1 month} other{# months}}', [$this->age])
-                : x('age', 'Unknown') ;
+                : __x('age', 'Unknown') ;
             return $age;
         }  else {
             if($this->age < 1) {
@@ -355,11 +356,11 @@ class Rat extends Entity
 
     protected function _getShortDeathCause()
     {
-        if (!$this->is_alive) {
-            if (!isset($this->death_primary_cause)) {
+        if (! $this->is_alive) {
+            if (! isset($this->death_primary_cause)) {
                 return __x('death cause', 'Unknown'); // should raise exception
             }
-            if(isset($this->death_secondary_cause)) {
+            if (isset($this->death_secondary_cause)) {
                 $cause = h($this->death_secondary_cause->name);
             } else {
                 $cause = h($this->death_primary_cause->name);
@@ -389,7 +390,7 @@ class Rat extends Entity
         $marking = ($this->marking_id == 1 || $dilution != '') ? '' : $this->marking->name;
         $marking .= ' ' . ($this->singularity_string == '' ? '' : $this->singularity_string);
         $variety = $dilution . ' ' . $color . ' ' . $marking . ' ' . $earset . ' ' . $coat;
-        return trim($variety);
+        return ucfirst(strtolower(trim($variety)));
     }
 
     protected function _getLastSnapshotId()

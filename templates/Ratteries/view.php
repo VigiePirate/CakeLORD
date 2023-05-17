@@ -487,7 +487,7 @@
                 <details open>
                     <summary><?= __('Recently modified rats') ?></summary>
                     <div class="button-raised">
-                        <?= $this->Html->link(__('See all bred rats'), ['controller' => 'Rats', 'action' => 'fromRattery', $rattery->prefix], ['class' => 'button float-right']) ?>
+                        <?= $this->Html->link(__('See all bred rats'), ['controller' => 'Rats', 'action' => 'byRattery', $rattery->id], ['class' => 'button float-right']) ?>
                     </div>
                     <?= $this->element('simple_rats', [ //rats
                         'rubric' => __(''),
