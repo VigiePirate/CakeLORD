@@ -359,7 +359,7 @@ class RatteriesController extends AppController
                 }
             }
             // check last litter; if too old, fail and require a litter recording
-            $recent = $rattery->countLitters(['rattery_id' => $rattery->id, 'DATEDIFF(NOW(), birth_date) <=' => \App\Model\Table\RatteriesTable::MAXIMAL_INACTIVITY]);
+            $recent = $rattery->countLitters(['rattery_id' => $rattery->id, 'DATEDIFF(NOW(), birth_date) <=' => \App\Model\Table\RatteriesTable::MAXIMAL_INACTIVITY], false);
             if ($recent == 0) {
                 $this->Flash->error(__('Ratteries without recently recorded litters cannot be manually opened. Record a litter with it, it will be automatically reopened.'));
             } else {

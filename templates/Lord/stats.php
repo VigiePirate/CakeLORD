@@ -472,11 +472,9 @@
     // Litter size distribution
     var littersize_norm = <?= $nongeneric_litter_count ?>;
     var littersize_json = <?php echo $littersize_distribution; ?>;
-    var littersize_labels = littersize_json.map(function(e) {
-        return e.size;
-    });
-    var littersize_data = littersize_json.map(function(e) {
-        return 100*e.count/littersize_norm;
+    var littersize_labels = Object.keys(littersize_json);
+    var littersize_data = (Object.values(littersize_json)).map(function (e) {
+        return 100*e/littersize_norm;
     });
     var littersize_max = Math.max(...littersize_data);
     var littersize_colors = littersize_data.map(function(e) {
@@ -813,7 +811,7 @@
                             return label;
                         },
                         title: function(context) {
-                            var title = jsLegends["Age: between"]+ " "+ context[0].label+ jsLegends["and"]+ " " + (parseInt(context[0].label)+1).toString() + " " + jsLegends["months"];
+                            var title = jsLegends["Age: between "]+ context[0].label+ jsLegends[" and "] + (parseInt(context[0].label)+1).toString() + jsLegends[" months"];
                             return title;
                         }
                     }
