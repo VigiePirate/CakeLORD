@@ -892,7 +892,7 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States', 'Ratteries',
+            'contain' => ['Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'Singularities', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States', 'Ratteries',
             'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
             'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
             'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
@@ -904,7 +904,7 @@ class RatsController extends AppController
             'BredLitters.OffspringRats.Coats','BredLitters.OffspringRats.Colors','BredLitters.OffspringRats.Dilutions','BredLitters.OffspringRats.Markings','BredLitters.OffspringRats.Earsets',
             'BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
             'BredLitters.OffspringRats.BirthLitters','BredLitters.OffspringRats.BirthLitters.Contributions',
-            'Singularities'],
+            'CreatorUsers'],
         ]);
 
         $family = [
@@ -921,7 +921,8 @@ class RatsController extends AppController
         ];
 
         $json = json_encode($family);
-        $this->set(compact('rat', 'json'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('rat', 'json', 'user'));
     }
 
     public function family($id = null) {
