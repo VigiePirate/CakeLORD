@@ -15,6 +15,8 @@ use Cake\Routing\Router;
 class RatsController extends AppController
 {
 
+    protected $searchable_only;
+
     public function initialize(): void
     {
         parent::initialize();
@@ -32,7 +34,9 @@ class RatsController extends AppController
             'search', 'results',
             'pedigree', 'parentsTree', 'childrenTree', 'print',
         ]);
-        /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
+
+        $identity = $this->request->getAttribute('identity');
+        $this->searchable_only = is_null($identity) || ! $identity->can('filterByState', $this->Rats);
     }
     /**
      * Index method
@@ -45,7 +49,7 @@ class RatsController extends AppController
         $this->paginate = [
             'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
-        $rats = $this->paginate($this->Rats);
+        $rats = $this->paginate($this->Rats, ['searchable_only' => $this->searchable_only]);
         $this->set(compact('rats'));
     }
 
@@ -191,6 +195,7 @@ class RatsController extends AppController
                 $samelitter = $litters->find('fromBirth', [
                     'birth_date' => $data['birth_date'],
                     'mother_id' => $data['mother_id'],
+                    'searchable_only' => $this->searchable_only
                 ])
                 ->contain(['ParentRats', 'Contributions'])
                 ->first();
@@ -440,6 +445,7 @@ class RatsController extends AppController
              $new_search = false;
              $rats = $this->Rats->find('multisearch', [
                  'options' => $options,
+                 'searchable_only' => $this->searchable_only
              ]);
              $this->paginate = [
                  'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'BirthLitters.Ratteries', 'States'],
@@ -523,7 +529,8 @@ class RatsController extends AppController
         //
         // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('named', [
-            'names' => $names
+            'names' => $names,
+            'searchable_only' => $this->searchable_only,
         ]);
 
         // Pass variables into the view template context.
@@ -551,7 +558,8 @@ class RatsController extends AppController
         $ratteries = $this->request->getParam('pass');
 
         $rats = $this->Rats->find('fromRattery', [
-            'ratteries' => $ratteries
+            'ratteries' => $ratteries,
+            'searchable_only' => $this->searchable_only
         ]);
 
         $this->paginate = [
@@ -578,7 +586,8 @@ class RatsController extends AppController
         $ratteries = $this->request->getParam('pass');
         $rattery = $this->Rats->Ratteries->get($ratteries);
         $rats = $this->Rats->find('byRatteryId', [
-            'ratteries' => $ratteries
+            'ratteries' => $ratteries,
+            'searchable_only' => $this->searchable_only
         ]);
 
         $this->paginate = [
@@ -623,7 +632,8 @@ class RatsController extends AppController
         //
         // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('ownedBy', [
-            'owners' => $owners
+            'owners' => $owners,
+            'searchable_only' => $this->searchable_only
         ]);
 
         // Pass variables into the view template context.
@@ -648,7 +658,7 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $owners = $this->request->getParam('pass');
         $owner = $this->Rats->OwnerUsers->get($owners);
-        $rats = $this->Rats->find('byOwnerId', ['owners' => $owners]);
+        $rats = $this->Rats->find('byOwnerId', ['owners' => $owners, 'searchable_only' => $this->searchable_only]);
         $this->paginate = [
             'contain' => [
                 'OwnerUsers',
@@ -691,7 +701,8 @@ class RatsController extends AppController
         //
         // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('sex', [
-            'sex' => $sex
+            'sex' => $sex,
+            'searchable_only' => $this->searchable_only
         ]);
 
         // Pass variables into the view template context.
@@ -716,7 +727,8 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $bornBefore = $this->request->getParam('pass');
         $rats = $this->Rats->find('bornBefore', [
-            'bornBefore' => $bornBefore
+            'bornBefore' => $bornBefore,
+            'searchable_only' => $this->searchable_only
         ]);
 
         // Pass variables into the view template context.
@@ -737,7 +749,8 @@ class RatsController extends AppController
         $bornAfter = $this->request->getParam('pass');
 
         $rats = $this->Rats->find('bornAfter', [
-            'bornAfter' => $bornAfter
+            'bornAfter' => $bornAfter,
+            'searchable_only' => $this->searchable_only
         ]);
 
         $this->paginate = [
@@ -756,9 +769,7 @@ class RatsController extends AppController
         $this->Authorization->authorize($this->Rats, 'filterByState');
 
         $inState = $this->request->getParam('pass');
-        $rats = $this->Rats->find('inState', [
-            'inState' => $inState
-        ]);
+        $rats = $this->Rats->find('inState', ['inState' => $inState]);
 
         $this->paginate = [
             'contain' => [
@@ -822,13 +833,13 @@ class RatsController extends AppController
             $sex = $this->request->getQuery('sex');
 
             if (! is_null($sex)) {
-                $items = $this->Rats->find('incipit', ['names' => [$searchkey]])
+                $items = $this->Rats->find('incipit', ['names' => [$searchkey], 'searchable_only' => $this->searchable_only])
                     ->where(['sex IS' => $sex])
                     ->select(['id',
                         'label' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')"
                     ]);
             } else {
-                $items = $this->Rats->find('identified', ['names' => [$searchkey]])
+                $items = $this->Rats->find('identified', ['names' => [$searchkey], 'searchable_only' => $this->searchable_only]])
                     ->select(['id',
                         'label' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')"
                     ]);

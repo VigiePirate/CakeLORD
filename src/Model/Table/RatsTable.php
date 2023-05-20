@@ -325,6 +325,15 @@ class RatsTable extends Table
         }
     }
 
+    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    {
+        if (isset($options['searchable_only']) && $options['searchable_only']) {
+            $query->innerJoinWith('States', function ($q) {
+                return $q->where(['is_searchable' => true]);
+            });
+        }
+    }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -570,6 +579,13 @@ class RatsTable extends Table
     /*
      * Finder functions
      */
+
+     public function findSearchable(Query $query, array $options)
+    {
+        return $query->innerJoinWith('States', function ($q) {
+            return $q->where(['is_searchable' => true]);
+        });
+    }
 
      public function findMultisearch(Query $query, array $options)
      {
