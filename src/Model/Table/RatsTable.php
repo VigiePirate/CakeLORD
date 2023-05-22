@@ -839,9 +839,7 @@ class RatsTable extends Table
                   ]);
         } else {
             $query->innerJoinWith('Ratteries')
-                  ->where([
-                          'Ratteries.id' => implode($options['ratteries']),
-                ]);
+                  ->where(['Ratteries.id' => implode($options['ratteries'])]);
         }
 
         return $query->group(['Rats.id']);
@@ -998,7 +996,7 @@ class RatsTable extends Table
             ->where([
                 'sex' => 'M'
             ])
-            ->contain(['Ratteries']);
+            ->contain(['Ratteries', 'Singularities']);
     }
 
     public function findFemales(Query $query, array $options)
@@ -1007,7 +1005,7 @@ class RatsTable extends Table
             ->where([
                 'sex' => 'F'
             ])
-            ->contain(['Ratteries']);
+            ->contain(['Ratteries', 'Singularities']);
     }
 
     public function findZombies(Query $query, array $options)

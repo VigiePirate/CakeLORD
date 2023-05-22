@@ -297,7 +297,7 @@ class Rat extends Entity
     {
         $start = $this->birth_date->modify('+ 5 months');
         $end = $this->birth_date->modify('+ 9 months');
-        return $start->i18nFormat('dd/MM/yyyy') . '-' . $end->i18nFormat('dd/MM/yyyy');
+        return $start->i18nFormat('dd/MM/YY') . '-' . $end->i18nFormat('dd/MM/YY');
     }
 
     protected function isBirthday()

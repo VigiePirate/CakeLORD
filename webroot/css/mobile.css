@@ -44,7 +44,7 @@
     width:auto;
   }
   .hide-on-tablet {
-    display:none;
+    display:none !important;
   }
   #gallery {
     /* line-height: 1;*/
@@ -86,7 +86,7 @@
     font-size: 56.25%;
   }
   .hide-on-mobile {
-    display:none;
+    display:none !important;
   }
 
   .pagination li:not(:first-child):not(:nth-child(2)):not(:nth-last-child(2)):not(:last-child)
@@ -167,6 +167,10 @@
 
   table.condensed.stats>tbody>tr>th {
     width: 100%;
+  }
+
+  table thead td:first-child, table thead th:first-child {
+    padding-left: 1rem;
   }
 
   /* this should be replaced by the appropriate flex */

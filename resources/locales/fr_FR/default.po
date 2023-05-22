@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-05-16 18:57+0000\n"
-"PO-Revision-Date: 2023-05-16 21:15+0200\n"
+"PO-Revision-Date: 2023-05-22 19:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -374,7 +374,7 @@ msgstr "Affixe : "
 
 #: src/Controller/LittersController.php:311
 msgid "Mating window: "
-msgstr "Fenêtre correspondante: "
+msgstr "Saillies conseillées : "
 
 #: src/Controller/LittersController.php:319
 #: src/Controller/LittersController.php:903
@@ -633,7 +633,7 @@ msgstr "Moyenne (toutes années confondues):"
 
 #: src/Controller/LordController.php:213
 msgid "Average lifespan by birth year"
-msgstr "Espérance de vie moyenne par année de naissance"
+msgstr "Par année de naissance"
 
 #: src/Controller/LordController.php:214
 msgid "Birth year"
@@ -674,7 +674,7 @@ msgstr "Taille de la portée (nombre de ratons)"
 
 #: src/Controller/LordController.php:222
 msgid "Proportion of litters (%)"
-msgstr "Statistiques de portées (%)"
+msgstr "Proportion des portées (%)"
 
 #: src/Controller/LordController.php:223
 msgid "Litter size distribution (% of litters)"
@@ -682,7 +682,7 @@ msgstr "Répartition de la taille des portées (% des portées)"
 
 #: src/Controller/LordController.php:224
 msgid "% of litters"
-msgstr "% de portées"
+msgstr "% des portées"
 
 #: src/Controller/LordController.php:225 templates/Litters/view.php:225
 msgid "pups"
@@ -698,11 +698,11 @@ msgstr "Répartition du nombre de ratons par sexe (% des portées)"
 
 #: src/Controller/LordController.php:229
 msgid "Mortality distribution"
-msgstr "Taux de mortalité"
+msgstr "Répartition des décès"
 
 #: src/Controller/LordController.php:230
 msgid "Mortality probability"
-msgstr "Probabilités de mortalité"
+msgstr "Probabilité de décès"
 
 #: src/Controller/LordController.php:231
 msgid "Death probabilities (%)"
@@ -710,7 +710,7 @@ msgstr "Probabilités de décès (%)"
 
 #: src/Controller/LordController.php:232
 msgid "All-time survival and mortality by age"
-msgstr "Survivance et mortalité de tous temps par âge"
+msgstr "Survie et mortalité, toutes années confondues, par classe d’âge"
 
 #: src/Controller/LordController.php:233
 msgid "% of all rats reach this age"
@@ -1718,11 +1718,11 @@ msgstr "Ce nom d’utilisateur est déjà pris. Veuillez en choisir un autre."
 
 #: src/View/Helper/CommonMarkHelper.php:47 templates/Articles/delete.php:31
 msgid "“"
-msgstr "« "
+msgstr "« "
 
 #: src/View/Helper/CommonMarkHelper.php:48 templates/Articles/delete.php:31
 msgid "”"
-msgstr " »"
+msgstr " »"
 
 #: templates/Articles/add.php:12 templates/Articles/edit.php:12
 #: templates/Articles/view.php:12
@@ -4263,10 +4263,8 @@ msgid "Average rattery productivity:"
 msgstr "Productivité moyenne d’une raterie :"
 
 #: templates/Lord/stats.php:107
-#, fuzzy
-#| msgid "{0, number} litters, {1, number} rats"
 msgid "{0, number} litters ({1, number} rats)"
-msgstr "{0, number} portées, {1, number} rats"
+msgstr "{0, number} portées ({1, number} rats)"
 
 #: templates/Lord/stats.php:110
 msgid "as birth place:"

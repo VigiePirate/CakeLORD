@@ -81,6 +81,11 @@ h1, h2, h3, h4, h5, .pretitle a {
   hyphens: manual;
 }
 
+.pretitle a:hover, .pretitle a:focus, .pretitle a:hover {
+  /*background-color: #ebeefa;*/
+  background-color: #edf0fc;
+}
+
 h1 {
   font-size:3.6rem; /* 3.6 */
   line-height:1.25;
@@ -290,7 +295,7 @@ input:read-only {
 /* Tables */
 
 tr:hover {
-  background-color:#ebeefa;
+  background-color: #ebeefa;
 }
 
 table {
