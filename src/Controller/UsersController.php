@@ -197,7 +197,7 @@ class UsersController extends AppController
                         $this->Flash->success(__('Your account has been created, but must be activated before you can log in. Check your email for your activation link.'));
                     } else {
                         $this->set(compact('user'));
-                        $this->Flash->error(__('Error sending email! Please contact an administrator.')); // . $email->smtpError);
+                        $this->Flash->error(__('Error sending email. Please, contact an administrator.')); // . $email->smtpError);
                     }
                     return $this->redirect(['action' => 'login']);
                 } else {
@@ -669,7 +669,7 @@ class UsersController extends AppController
                     if ($mailer) {
                         $this->Flash->success(__('Check your email for your reset password link'));
                     } else {
-                        $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
+                        $this->Flash->error(__('Error sending email. Please, contact an administrator.')); // . $email->smtpError);
                     }
                     return $this->redirect(['action' => 'login']);
                 }
@@ -811,7 +811,7 @@ class UsersController extends AppController
                             $this->Flash->warning(__('Your email has been modified. Your accound must now be reactivated. Please, check your new email for your confirmation link.'));
                             $this->Authentication->logout();
                         } else {
-                            $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
+                            $this->Flash->error(__('Error sending email. Please, contact an administrator.')); // . $email->smtpError);
                         }
                         return $this->redirect(['action' => 'login']);
                     } else {

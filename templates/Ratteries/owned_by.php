@@ -10,7 +10,7 @@
     <div class="sheet-heading">
         <div class="sheet-title pretitle"><?= __('Search Results') ?></div>
     </div>
-    <h1><?= __('Ratteries whose owner’s username is like ') . ' ' . __('« ') . h(implode('"',$users)) . __(' »')?></h1> <!-- should be “ ” -->
+    <h1><?= __('Ratteries whose owner’s username is like ') . __('“{0}”', [h(implode('"', $users))]) ?></h1>
     <?= $this->element('ratteries', [
         'rubric' => __(''),
         'ratteries' => $ratteries,

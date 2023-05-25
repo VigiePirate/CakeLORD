@@ -202,7 +202,7 @@
                             </tr>
                             <tr>
                                 <th><?= __('Birth date') ?></th>
-                                <td><?= h($rat->birth_date->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE])) ?></td>
+                                <td><?= ucfirst(h($rat->birth_date->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE]))) ?></td>
                             </tr>
                             <tr>
                                 <th><?= __('Sex') ?></th>
@@ -264,15 +264,15 @@
                         </tr>
                         <tr>
                             <th><?= __('Genealogy') ?></th>
-                            <td><?= $rat->has('birth_litter') ? $this->Html->link(__('See birth litter sheet'), ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) . ' (parents and siblings)' : 'Not attached to any litter' ?></td>
+                            <td><?= $rat->has('birth_litter') ? $this->Html->link(__('See birth litter sheet'), ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) . __(' (parents and siblings)') : __('Not attached to any litter') ?></td>
                         </tr>
                         <tr>
                             <th></th>
-                            <td><?= $this->Html->link(__('See interactive family tree'), ['controller' => 'Rats', 'action' => 'pedigree', $rat->id]) ?> (all direct ascendants and descendants)</td>
+                            <td><?= $this->Html->link(__('See interactive family tree'), ['controller' => 'Rats', 'action' => 'pedigree', $rat->id]) ?> <?= __('(all direct ascendants and descendants)') ?></td>
                         </tr>
                         <tr>
                             <th></th>
-                            <td><?= $this->Html->link(__('See family report'), ['controller' => 'Rats', 'action' => 'family', $rat->id]) ?> (family size and lifespan statistics)</td>
+                            <td><?= $this->Html->link(__('See family report'), ['controller' => 'Rats', 'action' => 'family', $rat->id]) ?> <?= __('(family size and lifespan statistics)') ?></td>
                         </tr>
                     </table>
 

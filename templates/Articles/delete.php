@@ -28,7 +28,7 @@
                 <div class="sheet-title pretitle"><?= __('Articles') ?></div>
             </div>
 
-            <h1><?= __('Delete ') . __('“') . h($article->title) . __('”') ?></h1>
+            <h1><?= __x('article', '“Delete {0}”', [h($article->title)]) ?></h1>
 
             <details>
                 <summary>

@@ -218,7 +218,7 @@ input[type='button'], input[type='reset'], input[type='submit'] {
 }
 
 
-.button-group, .button-small {
+.button-group, .button-small, .button-medium {
    margin-left: auto;
 }
 
@@ -229,20 +229,16 @@ input[type='button'], input[type='reset'], input[type='submit'] {
   line-height: 1.2;
 }
 
-/* .title-with-button {
-  display:flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: initial;
-  justify-content: space-between;
-} */
+.button-medium {
+  margin-top: 0.5rem !important;
+}
 
-/* .dashboard-button {
-    font-size:1.6rem;
-    padding: 0.5rem 1rem;
-    height: 2.8rem;
-    line-height: 1.2;
-} */
+.button-medium a {
+  font-size:1.4rem;
+  padding: 0.5rem 1rem;
+  height: 2.8rem;
+  line-height: 1.2;
+}
 
 textarea {
   height:auto;

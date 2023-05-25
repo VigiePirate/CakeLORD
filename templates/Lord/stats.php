@@ -161,11 +161,11 @@
                 </tr>
                 <tr>
                     <th><?= __('Leading death category:') ?></th>
-                    <td><?= '« ' . h($primaries[0]['name']) . ' »'?> <span class="comment"> <?=' ('. h(100*round($primaries[0]['count']/$knowingly_dead_rat_count,2)) . ' % of declared deaths)'?></span></td>
+                    <td><?= __('“{0}”', [h($primaries[0]['name'])]) ?> <span class="comment"> <?= __('({0} % of declared deaths)', [h(100*round($primaries[0]['count']/$knowingly_dead_rat_count,2))]) ?></span></td>
                 </tr>
                 <tr>
                     <th><?= __('Leading death cause:') ?></th>
-                    <td><?= '« ' . h($secondaries[0]['name']) . ' »'?> <span class="comment"> <?=' ('. h(100*round($secondaries[0]['count']/$knowingly_dead_rat_count,2)) . ' % of declared deaths)'?></span></td>
+                    <td><?= __('“{0}”', [h($secondaries[0]['name'])]) ?> <span class="comment"> <?= __('({0} % of declared deaths)', [h(100*round($secondaries[0]['count']/$knowingly_dead_rat_count,2))]) ?></span></td>
                 </tr>
             </table>
 
@@ -175,7 +175,7 @@
 
             <table class="condensed stats unfold">
                 <tr>
-                    <th><?= __('Number of deaths with recorded cause:') ?></th>
+                    <th><?= __('Number of recorded deaths:') ?></th>
                     <td><?= __('{0, number} rats ({1, number} % of rats considered as dead)', [$knowingly_dead_rat_count, round($knowingly_dead_rat_count/$dead_rat_count,2)*100]) ?></td>
                 </tr>
                 <tr><th><?= __('By decreasing frequency:') ?></th>

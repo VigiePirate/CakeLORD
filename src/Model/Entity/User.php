@@ -296,11 +296,11 @@ class User extends Entity implements IdentityInterface
         }
 
         if ($this->sex == 'M') {
-            return  __x('grammar', 'Maculine');
+            return  __x('grammar', 'Masculine');
         }
 
         if ($this->sex == '') {
-            return  __x('grammar', 'Neutral');
+            return  __x('grammar', 'Custom');
         }
     }
 

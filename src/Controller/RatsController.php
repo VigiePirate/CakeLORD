@@ -205,7 +205,7 @@ class RatsController extends AppController
                     $data['rattery_id'] = $samelitter->contributions[0]->rattery_id;
                     $rat = $this->Rats->patchEntity($rat, $data, $rat_options);
                     if ($this->Rats->save($rat)) {
-                        $this->Flash->success(__('The rat has been saved and attached to the above litter.'));
+                        $this->Flash->success(__('The rat has been saved and attached to the litter below.'));
                         return $this->redirect(['controller' => 'Litters', 'action' => 'view', $samelitter->id]);
                     } else {
                         $this->Flash->error(__('The rat could not be saved. Please, read explanatory messages in the form, check and correct your entry, and try again.'));

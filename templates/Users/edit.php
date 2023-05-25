@@ -78,7 +78,7 @@
                             <?= $this->Form->select('sex', [
                                 'F' => __x('grammar', 'Feminine'),
                                 'M' => __x('grammar', 'Masculine'),
-                                'X' => __x('grammar', 'Neutral')
+                                'X' => __x('grammar', 'Custom')
                             ]) ?>
                         </div>
                     </div>

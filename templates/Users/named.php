@@ -10,8 +10,7 @@
     <div class="sheet-heading">
         <div class="sheet-title pretitle"><?= __('Search Results') ?></div>
     </div>
-    <h1><?= __('Users with username like ') . ' ' . __('« ') . h(implode('"',$names)) . __(' »')?></h1> <!-- should be “ ” -->
-
+    <h1><?= __('Users with username like ') . __('“{0}”', [h(implode('"', $names))]) ?></h1>
     <div class="table-responsive">
         <table class="condensed">
             <thead>
