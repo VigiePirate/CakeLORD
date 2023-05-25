@@ -88,16 +88,21 @@ trait StatisticsTrait
 
     public function countRats($options = [], $exclude_generic = false) {
         $model = FactoryLocator::get('Table')->get('Rats');
+        $query = $model->find();
+
         $filter = [];
         if (! empty($options)) {
             $filter = array_merge($filter, $options);
         }
 
-        $query = $model->find()
-            ->where($filter)
-            ->innerJoinWith('States', function ($q) {
+        $query->where($filter);
+
+        // exclude unreliable sheets everywhere but on user personal stats
+        if (! isset($options['owner_user_id']) && ! isset($options['creator_user_id'])) {
+            $query->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
             });
+        }
 
         if ($exclude_generic) {
             $query = $query
@@ -614,10 +619,14 @@ trait StatisticsTrait
         $lifespan = $model
             ->find()
             ->contain(['DeathPrimaryCauses'])
-            ->where($filter)
-            ->innerJoinWith('States', function ($q) {
-                return $q->where(['is_reliable IS' => true]);
+            ->where($filter);
+
+        // exclude unreliable sheets everywhere but on user personal stats
+        if (! isset($options['owner_user_id'])) {
+            $lifespan->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
             });
+        }
 
         $lifespan = $lifespan
             ->select(['lifespan' => 'ROUND(AVG(DATEDIFF(death_date,birth_date)))'])
