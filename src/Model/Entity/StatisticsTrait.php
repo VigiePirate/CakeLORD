@@ -10,15 +10,17 @@ use App\Model\Table\RatsTable;
 
 trait StatisticsTrait
 {
-    public function countAll($name, $options = [])
+    public function countAll($name, $options = [], $has_state = true)
     {
-        $model = FactoryLocator::get('Table')->get($name);
-        return $model->find()
-            ->where($options)
-            ->innerJoinWith('States', function ($q) {
+        $query = FactoryLocator::get('Table')->get($name)->find()->where($options);
+
+        if ($has_state) {
+            $query->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
-            })
-            ->count();
+            });
+        }
+
+        return $query->count();
     }
 
     public function countMy($name, $key, $options = [])
@@ -68,19 +70,22 @@ trait StatisticsTrait
         return round (100 * $model / $all, 2);
     }
 
-    public function countAllByCreationYear($name, $options = [])
+    public function countAllByCreationYear($name, $options = [], $has_state = true)
     {
         $model = FactoryLocator::get('Table')->get($name);
         $filter = ['created !=' => '1981-08-01'];
         if (! empty($options)) {
             $filter = array_merge($filter, $options);
         }
-        $histogram = $model->find()
-            ->where($filter)
-            ->innerJoinWith('States', function ($q) {
+        $histogram = $model->find()->where($filter);
+
+        if ($has_state) {
+            $histogram->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
-            })
-            ->select(['year' => 'YEAR(created)', 'count' => 'COUNT(id)'])
+            });
+        }
+
+        $histogram->select(['year' => 'YEAR(created)', 'count' => 'COUNT('.$name.'.id)'])
             ->group('year')
             ->order(['year' => 'ASC']);
         return $histogram;
@@ -126,7 +131,7 @@ trait StatisticsTrait
             ->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
             })
-            ->select(['year' => 'YEAR(birth_date)', 'count' => 'COUNT(id)'])
+            ->select(['year' => 'YEAR(birth_date)', 'count' => 'COUNT(Rats.id)'])
             ->group('year')
             ->order(['year' => 'ASC']);
         return $histogram;

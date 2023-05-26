@@ -261,12 +261,12 @@ class LordController extends AppController
     {
         $lord = new Lord();
         $this->Authorization->skipAuthorization();
-        $user_count = $lord->countAll('Users');
+        $user_count = $lord->countAll('Users', [], false);
         $rattery_count = $lord->countAll('Ratteries');
         $litter_count = $lord->countAll('Litters');
         $rat_count = $lord->countAll('Rats');
         $rat_birth = json_encode($lord->countRatsByYear());
-        $user_creation = json_encode($lord->countAllByCreationYear('Users'));
+        $user_creation = json_encode($lord->countAllByCreationYear('Users', [], false));
         $rattery_creation = json_encode($lord->countAllByCreationYear('Ratteries'));
 
         $js_legends = json_encode([
