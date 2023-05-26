@@ -286,7 +286,7 @@ class User extends Entity implements IdentityInterface
 
     protected function _getLockedSymbol()
     {
-        return ($this->is_locked ? '✗' : '✓');
+        return ($this->is_locked ? '✗' : '');
     }
 
     protected function _getSexString()

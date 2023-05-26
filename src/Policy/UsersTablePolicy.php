@@ -11,4 +11,15 @@ use Authorization\IdentityInterface;
  */
 class UsersTablePolicy
 {
+    /**
+     * Check if $user can see lists of users
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Table\UsersTable $users The users table.
+     * @return bool
+     */
+    public function canIndex(IdentityInterface $user, UsersTable $users)
+    {
+        return $user->role->can_access_personal;
+    }
 }

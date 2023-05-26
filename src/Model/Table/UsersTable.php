@@ -224,7 +224,14 @@ class UsersTable extends Table
             ]);
         } else {
             // Find rats with parts of the string in that name
-            $query->where(['Users.username LIKE' => '%'.implode($options['names']).'%']);
+            $query->where([
+                'OR' => [
+                    'Users.username LIKE' => '%'.implode($options['names']).'%',
+                    'Users.firstname LIKE' => '%'.implode($options['names']).'%',
+                    'Users.lastname LIKE' => '%'.implode($options['names']).'%',
+                    'Users.email LIKE' => '%'.implode($options['names']).'%',
+                ]
+            ]);
         }
 
         return $query->group(['Users.id']);

@@ -334,12 +334,11 @@ class UsersController extends AppController
     public function index()
     {
         $this->Authorization->skipAuthorization();
-        $this->paginate = [
-            'contain' => ['Roles'],
-        ];
+        $this->paginate = ['contain' => ['Roles']];
         $users = $this->paginate($this->Users);
-
-        $this->set(compact('users'));
+        $identity = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($identity) && $identity->can('index', $this->Users);
+        $this->set(compact('users', 'identity', 'show_staff'));
     }
 
     /**
@@ -941,6 +940,7 @@ class UsersController extends AppController
     public function named()
     {
         $names = $this->request->getParam('pass');
+        $this->Authorization->authorize($this->Users, 'index');
 
         $users = $this->Users->find('named', [
             'names' => $names

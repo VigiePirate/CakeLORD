@@ -11,45 +11,53 @@
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <?php if ($show_staff) : ?>
+                        <th><?= $this->Paginator->sort('id') ?></th>
+                    <?php endif ; ?>
                     <th><?= $this->Paginator->sort('username') ?></th>
                     <th><?= $this->Paginator->sort('role_id') ?></th>
-                    <?php if (true) : ?> <!-- to be replaced by actual test on is_staff -->
+                    <?php if ($show_staff) : ?>
                         <th><?= $this->Paginator->sort('email') ?></th>
                         <th><?= $this->Paginator->sort('is_locked', __('Locked?')) ?></th>
                     <?php endif ?>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions col-head"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('created', __x('user', 'Created')) ?></th>
+                    <th><?= $this->Paginator->sort('modified', __x('user', 'Modified')) ?></th>
+                    <?php if ($show_staff) : ?>
+                        <th class="actions col-head"><?= __('Actions') ?></th>
+                    <?php endif ; ?>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($users as $user): ?>
                 <tr>
-                    <td><?= $this->Number->format($user->id) ?></td>
+                    <?php if ($show_staff) : ?>
+                        <td><?= $this->Number->format($user->id) ?></td>
+                    <?php endif ; ?>
                     <td><?= $this->Html->link(h($user->username), ['action' => 'view', $user->id], ['escape' => false]) ?></td>
                     <td><?= $user->has('role') ? $user->role->name : '' ?></td>
-                    <?php if (true) : ?> <!-- to be replaced by actual test on is_staff -->
+                    <?php if ($show_staff) : ?>
                         <td><?= h($user->email) ?></td>
-                        <td><?= $user->is_locked ? '✓' : '' ?></td>
+                        <td><?= $user->locked_symbol ?></td>
                     <?php endif ?>
                     <td><?= $user->created->i18nFormat('dd/MM/yyyy') ?></td>
                     <td><?= $user->modified->i18nFormat('dd/MM/yyyy') ?></td>
-                    <td class="actions">
-                        <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
-                            'url' => ['controller' => 'Users', 'action' => 'edit', $user->id],
-                            'class' => 'action-icon',
-                            'alt' => __('Edit User')]) ?>
-                        <?= $this->Form->postLink(
-                                $this->Html->image('/img/icon-delete.svg', [
-                                    'class' => 'action-icon',
-                                    'alt' => __('Delete User')
-                                ]),
-                                ['action' => 'delete', $user->id],
-                                ['confirm' => __('Are you sure you want to delete country # {0}?', $user->id), 'escape' => false]
-                            )
-                        ?>
-                    </td>
+                    <?php if ($show_staff) : ?>
+                        <td class="actions">
+                            <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                                'url' => ['controller' => 'Users', 'action' => 'edit', $user->id],
+                                'class' => 'action-icon',
+                                'alt' => __('Edit User')]) ?>
+                            <?= $this->Form->postLink(
+                                    $this->Html->image('/img/icon-delete.svg', [
+                                        'class' => 'action-icon',
+                                        'alt' => __('Delete User')
+                                    ]),
+                                    ['action' => 'delete', $user->id],
+                                    ['confirm' => __('Are you sure you want to delete country # {0}?', $user->id), 'escape' => false]
+                                )
+                            ?>
+                        </td>
+                    <?php endif ?>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
