@@ -17,8 +17,6 @@
                     <th class="hide-on-mobile"><?= __('Picture') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('state_id', $exceptions)): ?>
-                    <!-- <th class="hide-on-mobile"><?= __('State') ?></th>
-                    <th class="show-on-mobile">&nbsp;</th> -->
                     <th><?= __('State') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('pedigree_identifier', $exceptions)): ?>
@@ -31,7 +29,7 @@
                     <th><?= __('Name') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('pup_name', $exceptions)): ?>
-                    <th><?= __('Pup Name') ?></th>
+                    <th class="hide-on-mobile"><?= __('Pup Name') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('birth_date', $exceptions)): ?>
                     <th><?= __('Birth') ?></th>
@@ -71,7 +69,7 @@
                             <td><?= h($rat->name) ?><sup><?= h($rat->is_alive_symbol) ?></sup></td>
                         <?php endif; ?>
                         <?php if (! in_array('pup_name', $exceptions)): ?>
-                            <td><?= h($rat->pup_name) ?></td>
+                            <td class="hide-on-mobile"><?= h($rat->pup_name) ?></td>
                         <?php endif; ?>
                         <?php if (! in_array('birth_date', $exceptions)): ?>
                             <td><?= h($rat->birth_date->i18nFormat('dd/MM/yyyy')) ?></td>

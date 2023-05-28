@@ -71,7 +71,7 @@
     </div>
 
     <div class="signature">
-        &mdash; Created by LORD on <?= h(date("d/m/Y")) ?>, for whatever purpose it may serve, without any liability whatsoever.
+        &mdash; <?= __('Created by LORD on {0}, for whatever purpose it may serve, without any liability whatsoever.', [h(date("d/m/Y"))]) ?>
     </div>
 </div>
 

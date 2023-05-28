@@ -15,7 +15,7 @@
             <h1><?= __('Global statistics') ?></h1>
 
             <div class="message warning">
-                <?= __('These statistics are computed automatically from users’ data, which can be inaccurate or incomplete (especially legacy data migrated from the previous LORD version). Therefore, they must be interpreted carefully. For more details, please read the FAQ.') ?>
+                <?= __('These statistics are computed automatically from users’ data, which can be inaccurate or incomplete (especially legacy data migrated from the previous LORD version). Therefore, they must be interpreted carefully. For more details, please read the guide.') ?>
             </div>
 
             <h2><?= __('Demography') ?></h2>

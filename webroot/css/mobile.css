@@ -169,9 +169,9 @@
     width: 100%;
   }
 
-  table thead td:first-child, table thead th:first-child {
+  /* table thead td:first-child, table thead th:first-child {
     padding-left: 1rem;
-  }
+  } */
 
   /* this should be replaced by the appropriate flex */
   .spacer{
@@ -236,4 +236,8 @@
   .parent img {
     height: auto;
   }
+
+  /* table:not(.unfold) tbody  {
+    white-space: nowrap;
+  } */
 }
