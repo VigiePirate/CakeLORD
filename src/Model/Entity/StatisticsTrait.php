@@ -10,12 +10,13 @@ use App\Model\Table\RatsTable;
 
 trait StatisticsTrait
 {
-    public function countAll($name, $options = [], $has_state = true)
+    public function countAll($name, $options = [])
     {
-        $query = FactoryLocator::get('Table')->get($name)->find()->where($options);
+        $model = FactoryLocator::get('Table')->get($name);
+        $query = $model->find()->where($options);
 
-        if ($has_state) {
-            $query->innerJoinWith('States', function ($q) {
+        if ($model->associations()->has('States')) {
+            $query = $query->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
             });
         }
@@ -51,9 +52,13 @@ trait StatisticsTrait
             $query = $query->where($options);
         }
 
-        return $query->innerJoinWith('States', function ($q) {
-            return $q->where(['States.is_reliable IS' => true]);
-        })->count();
+        if ($model->associations()->has('States')) {
+            $query = $query->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            });
+        }
+
+        return $query->count();
     }
 
     public function frequencyOfMy($name, $key, $options = [])
@@ -70,7 +75,7 @@ trait StatisticsTrait
         return round (100 * $model / $all, 2);
     }
 
-    public function countAllByCreationYear($name, $options = [], $has_state = true)
+    public function countAllByCreationYear($name, $options = [])
     {
         $model = FactoryLocator::get('Table')->get($name);
         $filter = ['created !=' => '1981-08-01'];
@@ -79,8 +84,8 @@ trait StatisticsTrait
         }
         $histogram = $model->find()->where($filter);
 
-        if ($has_state) {
-            $histogram->innerJoinWith('States', function ($q) {
+        if ($model->associations()->has('States')) {
+            $histogram = $histogram->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
             });
         }
