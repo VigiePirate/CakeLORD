@@ -188,10 +188,10 @@ class LordController extends AppController
         $litters_by_birthplace = $lord->computeLittersByRattery(['Contributions.contribution_type_id' => '1']);
         $litters_by_contributor = $lord->computeLittersByRattery(['Contributions.contribution_type_id >' => '1']);
         $pups_by_rattery = $lord->computePupsByRattery();
-        $avg_sex_ratio = $lord->computeLitterSexRatioInWords(['OffspringRats.rattery_id >' => '6'], 100);
+        $avg_sex_ratio = $lord->computeLitterSexRatioInWords([], 100);
 
         //FIXME: use $rattery->is_generic property
-        $nongeneric_litter_count = $lord->countLitters(['rattery_id >' => '6']);
+        $nongeneric_litter_count = $lord->countLitters([], true);
         $littersize_distribution = json_encode($lord->computeLitterSizeDistribution()->toArray());
         $females_in_litter_distribution = json_encode($lord->computeLitterSexDistribution(['sex' => 'F']));
         $males_in_litter_distribution = json_encode($lord->computeLitterSexDistribution(['sex' => 'M']));
@@ -206,8 +206,9 @@ class LordController extends AppController
             'Age pyramid' => __('Age pyramid'),
             '(presumed) alive rats' => __('(presumed) alive rats'),
             'Age: between ' => __x('litter statistics', 'Age: between '),
-            'and' => __('and'),
+            ' and ' => __(' and '),
             'months' => __('months'),
+            ' months' => __(' months'),
             'All-time average' => __('All-time average'),
             'All-time average:' => __('All-time average:'),
             'Average lifespan by birth year' => __('Average lifespan by birth year'),
@@ -229,6 +230,8 @@ class LordController extends AppController
             'Mortality distribution' => __('Mortality distribution'),
             'Mortality probability' => __('Mortality probability'),
             'Death probabilities (%)' => __('Death probabilities (%)'),
+            'Survival rate' => __('Survival rate'),
+            'Survival rate (%)' => __('Survival rate (%)'),
             'All-time survival and mortality by age' => __('All-time survival and mortality by age'),
             '% of all rats reach this age' => __('% of all rats reach this age'),
             '% of all deaths occur in rats of this age' => __('% of all deaths occur in rats of this age'),

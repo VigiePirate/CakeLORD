@@ -13,7 +13,15 @@ trait StatisticsTrait
     public function countAll($name, $options = [])
     {
         $model = FactoryLocator::get('Table')->get($name);
-        return $model->find()->where($options)->count();
+        $query = $model->find()->where($options);
+
+        if ($model->associations()->has('States')) {
+            $query = $query->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            });
+        }
+
+        return $query->count();
     }
 
     public function countMy($name, $key, $options = [])
@@ -23,7 +31,12 @@ trait StatisticsTrait
         if (! empty($options)) {
             $filter = array_merge($filter, $options);
         }
-        return $model->find()->where($filter)->count();
+        return $model->find()
+            ->where($filter)
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
+            ->count();
     }
 
     public function countHaving($name, $key, $options = [])
@@ -37,6 +50,12 @@ trait StatisticsTrait
 
         if (! empty($options)) {
             $query = $query->where($options);
+        }
+
+        if ($model->associations()->has('States')) {
+            $query = $query->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            });
         }
 
         return $query->count();
@@ -63,21 +82,46 @@ trait StatisticsTrait
         if (! empty($options)) {
             $filter = array_merge($filter, $options);
         }
-        $histogram = $model->find()
-            ->where($filter)
-            ->select(['year' => 'YEAR(created)', 'count' => 'COUNT(id)'])
+        $histogram = $model->find()->where($filter);
+
+        if ($model->associations()->has('States')) {
+            $histogram = $histogram->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            });
+        }
+
+        $histogram->select(['year' => 'YEAR(created)', 'count' => 'COUNT('.$name.'.id)'])
             ->group('year')
             ->order(['year' => 'ASC']);
         return $histogram;
     }
 
-    public function countRats($options = []) {
+    public function countRats($options = [], $exclude_generic = false) {
         $model = FactoryLocator::get('Table')->get('Rats');
+        $query = $model->find();
+
         $filter = [];
         if (! empty($options)) {
             $filter = array_merge($filter, $options);
         }
-        return $model->find()->where($filter)->count();
+
+        $query->where($filter);
+
+        // exclude unreliable sheets everywhere but on user personal stats
+        if (! isset($options['owner_user_id']) && ! isset($options['creator_user_id'])) {
+            $query->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            });
+        }
+
+        if ($exclude_generic) {
+            $query = $query
+                ->innerJoinWith('Ratteries', function ($q) {
+                    return $q->where(['Ratteries.is_generic IS' => false]);
+                });
+        }
+
+        return $query->count();
     }
 
     public function countRatsByYear()
@@ -89,7 +133,10 @@ trait StatisticsTrait
         }
         $histogram = $model->find()
             ->where($filter)
-            ->select(['year' => 'YEAR(birth_date)', 'count' => 'COUNT(id)'])
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
+            ->select(['year' => 'YEAR(birth_date)', 'count' => 'COUNT(Rats.id)'])
             ->group('year')
             ->order(['year' => 'ASC']);
         return $histogram;
@@ -108,8 +155,22 @@ trait StatisticsTrait
             $filter_M = array_merge($filter_M, $options);
         }
 
-        $females = $model->find()->where($filter_F)->leftJoinWith('BirthLitters.Contributions')->distinct()->count();
-        $males = $model->find()->where($filter_M)->leftJoinWith('BirthLitters.Contributions')->distinct()->count();
+        $females = $model->find()
+            ->where($filter_F)
+            ->leftJoinWith('BirthLitters.Contributions')
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
+            ->distinct()
+            ->count();
+        $males = $model->find()
+            ->where($filter_M)
+            ->leftJoinWith('BirthLitters.Contributions')
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
+            ->distinct()
+            ->count();
 
         if ($females == 0) {
             return __('Male-only');
@@ -156,6 +217,9 @@ trait StatisticsTrait
 
         $histogram = $model->find()
             ->where($filter)
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
             ->contain(['DeathPrimaryCauses', 'DeathSecondaryCauses'])
             ->select([
                 'id' => 'Rats.death_primary_cause_id',
@@ -183,6 +247,9 @@ trait StatisticsTrait
 
         $histogram_1 = $model
             ->where($filter_1)
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
             ->contain(['DeathSecondaryCauses'])
             ->select([
                 'name' => 'DeathSecondaryCauses.name',
@@ -203,6 +270,9 @@ trait StatisticsTrait
 
         $histogram_2 = FactoryLocator::get('Table')->get('Rats')->find()
             ->where($filter_2)
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
             ->contain(['DeathSecondaryCauses','DeathPrimaryCauses'])
             ->select([
                 'name' => 'concat("*", DeathPrimaryCauses.name)',
@@ -235,6 +305,9 @@ trait StatisticsTrait
 
         $histogram = $model->find()
             ->where($filter)
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
             ->contain(['DeathSecondaryCauses'])
             ->select([
                 'name' => 'DeathSecondaryCauses.name',
@@ -247,17 +320,47 @@ trait StatisticsTrait
 
     public function countRatteries($options = []) {
         $model = FactoryLocator::get('Table')->get('Ratteries');
-        return $model->find()->where($options)->count();
+        return $model
+            ->find()
+            ->where($options)
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
+            ->count();
     }
 
-    public function countLitters($options = []) {
+    public function countLitters($options = [], $exclude_generic = false) {
         $model = FactoryLocator::get('Table')->get('Litters');
-        return $model->find()->where($options)->innerJoinWith('Contributions')->count();
+        $query = $model
+            ->find()
+            ->where($options)
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            });
+
+        if ($exclude_generic) {
+            $query = $query
+                ->innerJoinWith('Contributions')
+                ->innerJoinWith('Contributions.Ratteries', function ($q) {
+                    return $q->where(['Ratteries.is_generic IS' => false]);
+                });
+        } else {
+            $query = $query->innerJoinWith('Contributions');
+        }
+
+        return $query->count();
     }
 
     public function countContributions($options = []) {
         $model = FactoryLocator::get('Table')->get('Contributions');
-        return $model->find()->where($options)->innerJoinWith('Litters')->count();
+        return $model
+            ->find()
+            ->where($options)
+            ->innerJoinWith('Litters')
+            ->innerJoinWith('Litters.States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
+            ->count();
     }
 
     public function countPups($options = []) {
@@ -265,7 +368,9 @@ trait StatisticsTrait
         $pups = $model->find()
             ->select(['sum' => 'SUM(Litters.pups_number)'])
             ->where($options)
-            ->innerJoinWith('Litters')
+            ->innerJoinWith('Litters.States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
             ->first();
 
         return is_null($pups['sum']) ? 0 : $pups['sum'] ;
@@ -286,7 +391,11 @@ trait StatisticsTrait
                 'lifetime' => 'DATEDIFF(MAX(Litters.birth_date),MIN(Litters.birth_date))'
             ])
             ->innerJoinWith('Litters')
-            ->where(['rattery_id >' => 6])
+            ->innerJoinWith('Ratteries', function ($q) {
+                return $q->innerJoinWith('States', function ($q) {
+                    return $q->where(['States.is_reliable IS' => true]);
+                })->where(['Ratteries.is_generic IS' => false]);
+            })
             ->group('rattery_id')
             ->enableAutoFields(true) // should be replaced by selecting only useful fields
             ->enableHydration(false)
@@ -297,13 +406,13 @@ trait StatisticsTrait
     }
 
     public function computeLittersByRattery($litter_options = [], $rattery_options = []) {
-        $litter_count = $this->countLitters(array_merge($litter_options, ['Contributions.rattery_id >' => '6']));
+        $litter_count = $this->countLitters($litter_options, true);
         $rattery_count = $this->countRatteries(array_merge($rattery_options, ['is_generic IS' => false]));
         return round($litter_count/$rattery_count,1);
     }
 
     public function computePupsByRattery($rat_options = [], $rattery_options = []) {
-        $rat_count = $this->countRats(array_merge($rat_options, ['rattery_id >' => '6']));
+        $rat_count = $this->countRats($rat_options, true);
         $rattery_count = $this->countRatteries(array_merge($rattery_options, ['is_generic IS' => false]));
         return round($rat_count/$rattery_count,1);
     }
@@ -312,7 +421,7 @@ trait StatisticsTrait
         $model = FactoryLocator::get('Table')->get('Litters');
 
         $filter = [
-            'Dam.id >' => 1, // exclude unknown mother (should be replaced by a test on States.is_reliable)
+            'Dam.id >' => 1,
             'Litters.birth_date !=' => '1981-08-01',
             'Dam.birth_date !=' => '1981-08-01',
             'Dam.birth_date IS NOT' => null
@@ -329,6 +438,9 @@ trait StatisticsTrait
             ->where($filter)
             ->leftJoinWith('Dam')
             ->leftJoinWith('Contributions')
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['is_reliable IS' => true]);
+            })
             ->enableAutoFields(true)
             ->first();
         return $avg['avg'];
@@ -338,7 +450,7 @@ trait StatisticsTrait
         $model = FactoryLocator::get('Table')->get('Litters');
 
         $filter = [
-            'Sire.id >' => 2, // exclude unknown father (should be replaced by a test on States.is_reliable)
+            'Sire.id >' => 2,
             'Litters.birth_date !=' => '1981-08-01',
             'Sire.birth_date !=' => '1981-08-01',
             'Sire.birth_date IS NOT' => null
@@ -355,6 +467,9 @@ trait StatisticsTrait
             ->where($filter)
             ->leftJoinWith('Sire')
             ->leftJoinWith('Contributions')
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['is_reliable IS' => true]);
+            })
             ->enableAutoFields(true)
             ->first();
         return $avg['avg'];
@@ -362,34 +477,44 @@ trait StatisticsTrait
 
     public function computeAvgLitterSize($options = []) {
         $model = FactoryLocator::get('Table')->get('Litters');
-        $filter = ['Contributions.rattery_id >' => '6'];
+        //$filter = ['Contributions.rattery_id >' => '6'];
+        $filter = [];
         if (! empty($options)) {
             $filter = array_merge($filter, $options);
         }
         $avg = $model->find()
             ->select(['avg' => 'AVG(pups_number)'])
             ->leftJoinWith('Contributions')
+            ->innerJoinWith('Contributions.Ratteries', function ($q) {
+                return $q->where(['Ratteries.is_generic IS' => false]);
+            })
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['is_reliable IS' => true]);
+            })
             ->enableAutoFields(true)
             ->where($filter)
             ->first();
-        return round(floatval($avg['avg']),1);
+        return round(floatval($avg['avg']), 1);
     }
 
-    // should exclude generic ratteries as an option
-    // (for litter sex count, since there are litters with generic prefix)
-    // (average global stat should exclude them however)
     public function computeLitterSexes($options = []) {
         $query = FactoryLocator::get('Table')->get('Litters')
             ->find()
             ->where($options)
-            ->innerJoinWith('OffspringRats');
+            ->innerJoinWith('OffspringRats')
+            ->innerJoinWith('OffspringRats.Ratteries', function ($q) {
+                return $q->where(['Ratteries.is_generic IS' => false]);
+            })
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['is_reliable IS' => true]);
+            });
 
         $females = $query->newExpr()->case()->when(['sex' => 'F'])->then(1, 'integer');
         $males = $query->newExpr()->case()->when(['sex' => 'M'])->then(1, 'integer');
 
         $query = $query
             ->select([
-                'litter_id' => 'litter_id',
+                'litter_id' => 'OffspringRats.litter_id',
                 'F' => $query->func()->count($females),
                 'M' => $query->func()->count($males)
             ])
@@ -424,7 +549,7 @@ trait StatisticsTrait
     }
 
     public function computeLitterSexRatioInWords($options = [], $max_denominator = 10) {
-        $sex_ratio = round($this->computeLitterSexRatio($options),3);
+        $sex_ratio = round($this->computeLitterSexRatio($options), 3);
 
         if ($sex_ratio == -2) {
             return __('Only females');
@@ -468,14 +593,18 @@ trait StatisticsTrait
                 'size' => 'pups_number',
                 'count' => 'COUNT(Litters.id)',
             ])
-            ->matching('Contributions.Ratteries', function ($q) {
+            ->innerJoinWith('Contributions.Ratteries', function ($q) {
                 return $q->where(['Ratteries.is_generic IS' => false]);
+            })
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['is_reliable IS' => true]);
             })
             ->enableAutoFields(true)
             ->enableHydration(false)
             ->group('size')
             ->order(['size' => 'ASC']);
-        return $histogram;
+
+        return $histogram->all()->combine('size', 'count');
     }
 
     public function computeLifespan($options = []) {
@@ -497,7 +626,17 @@ trait StatisticsTrait
             $filter = array_merge($filter,$options);
         }
 
-        $lifespan = $model->find()->contain(['DeathPrimaryCauses'])->where($filter);
+        $lifespan = $model
+            ->find()
+            ->contain(['DeathPrimaryCauses'])
+            ->where($filter);
+
+        // exclude unreliable sheets everywhere but on user personal stats
+        if (! isset($options['owner_user_id'])) {
+            $lifespan->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            });
+        }
 
         $lifespan = $lifespan
             ->select(['lifespan' => 'ROUND(AVG(DATEDIFF(death_date,birth_date)))'])
@@ -540,7 +679,12 @@ trait StatisticsTrait
             $filter = array_merge($filter, $options);
         }
 
-        $pyramid = $model->find()->where($filter);
+        $pyramid = $model
+            ->find()
+            ->where($filter)
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['is_reliable IS' => true]);
+            });
 
         $pyramid = $pyramid
             ->select(['months' => 'FLOOR(DATEDIFF(NOW(),birth_date)/30.5)', 'count' => 'COUNT(Rats.id)'])
@@ -571,7 +715,13 @@ trait StatisticsTrait
             $filter = array_merge($filter,$options);
         }
 
-        $mortality = $model->find()->contain(['DeathPrimaryCauses'])->where($filter);
+        $mortality = $model
+            ->find()
+            ->contain(['DeathPrimaryCauses'])
+            ->where($filter)
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['is_reliable IS' => true]);
+            });
 
         $mortality = $mortality
             ->select(['months' => 'FLOOR(DATEDIFF(death_date,birth_date)/30.5)', 'count' => 'COUNT(Rats.id)'])

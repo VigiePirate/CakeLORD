@@ -13,6 +13,12 @@ use Cake\Chronos\Chronos;
  */
 class SingularitiesController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['view', 'index']);
+    }
+
     /**
      * Index method
      *
@@ -94,9 +100,7 @@ class SingularitiesController extends AppController
      */
     public function edit($id = null)
     {
-        $singularity = $this->Singularities->get($id, [
-            'contain' => ['Rats'],
-        ]);
+        $singularity = $this->Singularities->get($id);
         $this->Authorization->authorize($singularity);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $singularity = $this->Singularities->patchEntity($singularity, $this->request->getData());

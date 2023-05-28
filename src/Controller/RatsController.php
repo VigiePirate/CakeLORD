@@ -15,6 +15,8 @@ use Cake\Routing\Router;
 class RatsController extends AppController
 {
 
+    protected $searchable_only;
+
     public function initialize(): void
     {
         parent::initialize();
@@ -32,7 +34,9 @@ class RatsController extends AppController
             'search', 'results',
             'pedigree', 'parentsTree', 'childrenTree', 'print',
         ]);
-        /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
+
+        $identity = $this->request->getAttribute('identity');
+        $this->searchable_only = is_null($identity) || ! $identity->can('filterByState', $this->Rats);
     }
     /**
      * Index method
@@ -45,7 +49,7 @@ class RatsController extends AppController
         $this->paginate = [
             'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
         ];
-        $rats = $this->paginate($this->Rats);
+        $rats = $this->paginate($this->Rats, ['searchable_only' => $this->searchable_only]);
         $this->set(compact('rats'));
     }
 
@@ -191,6 +195,7 @@ class RatsController extends AppController
                 $samelitter = $litters->find('fromBirth', [
                     'birth_date' => $data['birth_date'],
                     'mother_id' => $data['mother_id'],
+                    'searchable_only' => $this->searchable_only
                 ])
                 ->contain(['ParentRats', 'Contributions'])
                 ->first();
@@ -200,7 +205,7 @@ class RatsController extends AppController
                     $data['rattery_id'] = $samelitter->contributions[0]->rattery_id;
                     $rat = $this->Rats->patchEntity($rat, $data, $rat_options);
                     if ($this->Rats->save($rat)) {
-                        $this->Flash->success(__('The rat has been saved and attached to the above litter.'));
+                        $this->Flash->success(__('The rat has been saved and attached to the litter below.'));
                         return $this->redirect(['controller' => 'Litters', 'action' => 'view', $samelitter->id]);
                     } else {
                         $this->Flash->error(__('The rat could not be saved. Please, read explanatory messages in the form, check and correct your entry, and try again.'));
@@ -440,6 +445,7 @@ class RatsController extends AppController
              $new_search = false;
              $rats = $this->Rats->find('multisearch', [
                  'options' => $options,
+                 'searchable_only' => $this->searchable_only
              ]);
              $this->paginate = [
                  'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'BirthLitters.Ratteries', 'States'],
@@ -523,7 +529,8 @@ class RatsController extends AppController
         //
         // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('named', [
-            'names' => $names
+            'names' => $names,
+            'searchable_only' => $this->searchable_only,
         ]);
 
         // Pass variables into the view template context.
@@ -551,7 +558,8 @@ class RatsController extends AppController
         $ratteries = $this->request->getParam('pass');
 
         $rats = $this->Rats->find('fromRattery', [
-            'ratteries' => $ratteries
+            'ratteries' => $ratteries,
+            'searchable_only' => $this->searchable_only
         ]);
 
         $this->paginate = [
@@ -578,7 +586,8 @@ class RatsController extends AppController
         $ratteries = $this->request->getParam('pass');
         $rattery = $this->Rats->Ratteries->get($ratteries);
         $rats = $this->Rats->find('byRatteryId', [
-            'ratteries' => $ratteries
+            'ratteries' => $ratteries,
+            'searchable_only' => $this->searchable_only
         ]);
 
         $this->paginate = [
@@ -623,7 +632,8 @@ class RatsController extends AppController
         //
         // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('ownedBy', [
-            'owners' => $owners
+            'owners' => $owners,
+            'searchable_only' => $this->searchable_only
         ]);
 
         // Pass variables into the view template context.
@@ -648,7 +658,7 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $owners = $this->request->getParam('pass');
         $owner = $this->Rats->OwnerUsers->get($owners);
-        $rats = $this->Rats->find('byOwnerId', ['owners' => $owners]);
+        $rats = $this->Rats->find('byOwnerId', ['owners' => $owners, 'searchable_only' => $this->searchable_only]);
         $this->paginate = [
             'contain' => [
                 'OwnerUsers',
@@ -691,7 +701,8 @@ class RatsController extends AppController
         //
         // Use the RatsTable to find named rats.
         $rats = $this->Rats->find('sex', [
-            'sex' => $sex
+            'sex' => $sex,
+            'searchable_only' => $this->searchable_only
         ]);
 
         // Pass variables into the view template context.
@@ -716,7 +727,8 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $bornBefore = $this->request->getParam('pass');
         $rats = $this->Rats->find('bornBefore', [
-            'bornBefore' => $bornBefore
+            'bornBefore' => $bornBefore,
+            'searchable_only' => $this->searchable_only
         ]);
 
         // Pass variables into the view template context.
@@ -737,7 +749,8 @@ class RatsController extends AppController
         $bornAfter = $this->request->getParam('pass');
 
         $rats = $this->Rats->find('bornAfter', [
-            'bornAfter' => $bornAfter
+            'bornAfter' => $bornAfter,
+            'searchable_only' => $this->searchable_only
         ]);
 
         $this->paginate = [
@@ -756,9 +769,7 @@ class RatsController extends AppController
         $this->Authorization->authorize($this->Rats, 'filterByState');
 
         $inState = $this->request->getParam('pass');
-        $rats = $this->Rats->find('inState', [
-            'inState' => $inState
-        ]);
+        $rats = $this->Rats->find('inState', ['inState' => $inState]);
 
         $this->paginate = [
             'contain' => [
@@ -822,13 +833,13 @@ class RatsController extends AppController
             $sex = $this->request->getQuery('sex');
 
             if (! is_null($sex)) {
-                $items = $this->Rats->find('incipit', ['names' => [$searchkey]])
+                $items = $this->Rats->find('incipit', ['names' => [$searchkey], 'searchable_only' => $this->searchable_only])
                     ->where(['sex IS' => $sex])
                     ->select(['id',
                         'label' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')"
                     ]);
             } else {
-                $items = $this->Rats->find('identified', ['names' => [$searchkey]])
+                $items = $this->Rats->find('identified', ['names' => [$searchkey], 'searchable_only' => $this->searchable_only])
                     ->select(['id',
                         'label' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')"
                     ]);
@@ -892,7 +903,7 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States', 'Ratteries',
+            'contain' => ['Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'Singularities', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States', 'Ratteries',
             'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
             'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
             'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
@@ -904,7 +915,7 @@ class RatsController extends AppController
             'BredLitters.OffspringRats.Coats','BredLitters.OffspringRats.Colors','BredLitters.OffspringRats.Dilutions','BredLitters.OffspringRats.Markings','BredLitters.OffspringRats.Earsets',
             'BredLitters.OffspringRats.DeathPrimaryCauses','BredLitters.OffspringRats.DeathSecondaryCauses',
             'BredLitters.OffspringRats.BirthLitters','BredLitters.OffspringRats.BirthLitters.Contributions',
-            'Singularities'],
+            'CreatorUsers'],
         ]);
 
         $family = [
@@ -921,7 +932,8 @@ class RatsController extends AppController
         ];
 
         $json = json_encode($family);
-        $this->set(compact('rat', 'json'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('rat', 'json', 'user'));
     }
 
     public function family($id = null) {

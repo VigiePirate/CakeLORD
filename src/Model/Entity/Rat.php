@@ -297,7 +297,7 @@ class Rat extends Entity
     {
         $start = $this->birth_date->modify('+ 5 months');
         $end = $this->birth_date->modify('+ 9 months');
-        return $start->i18nFormat('dd/MM/yyyy') . '-' . $end->i18nFormat('dd/MM/yyyy');
+        return $start->i18nFormat('dd/MM/YY') . '-' . $end->i18nFormat('dd/MM/YY');
     }
 
     protected function isBirthday()
@@ -388,9 +388,9 @@ class Rat extends Entity
         $earset = ($this->earset_id == 1) ? '' : $this->earset->name;
         // don't write marking if rat has a dilution
         $marking = ($this->marking_id == 1 || $dilution != '') ? '' : $this->marking->name;
-        $marking .= ' ' . ($this->singularity_string == '' ? '' : $this->singularity_string);
+        $marking .= ' ' . $this->singularity_string;
         $variety = $dilution . ' ' . $color . ' ' . $marking . ' ' . $earset . ' ' . $coat;
-        return ucfirst(strtolower(trim($variety)));
+        return ucfirst(mb_strtolower(trim($variety)));
     }
 
     protected function _getLastSnapshotId()

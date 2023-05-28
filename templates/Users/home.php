@@ -20,7 +20,7 @@
                     <p><?= $user->rat_birthday_string ?></p>
                     <p><?= $user->coming_birthday_string ?></p>
                 </div>
-                <div class="column column-photo">
+                <div class="hide-on-mobile column column-photo">
                     <?php if ($user->avatar != '' && $user->avatar != 'Unknown.png') : ?>
                         <?= $this->Html->image(UPLOADS . $user->avatar, ['alt' => $user->username]) ?>
                     <?php else : ?>

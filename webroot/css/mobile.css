@@ -44,7 +44,7 @@
     width:auto;
   }
   .hide-on-tablet {
-    display:none;
+    display:none !important;
   }
   #gallery {
     /* line-height: 1;*/
@@ -86,7 +86,7 @@
     font-size: 56.25%;
   }
   .hide-on-mobile {
-    display:none;
+    display:none !important;
   }
 
   .pagination li:not(:first-child):not(:nth-child(2)):not(:nth-last-child(2)):not(:last-child)
@@ -169,6 +169,10 @@
     width: 100%;
   }
 
+  /* table thead td:first-child, table thead th:first-child {
+    padding-left: 1rem;
+  } */
+
   /* this should be replaced by the appropriate flex */
   .spacer{
     width: 1.5rem;
@@ -218,7 +222,22 @@
     line-height: 1.2;
   }
 
+  .button-medium {
+    margin-top: 1rem !important;
+  }
+
+  .button-medium a {
+    font-size:1.2rem;
+    padding: 0.5rem 1rem;
+    height: 2.4rem;
+    line-height: 1.2;
+  }
+
   .parent img {
     height: auto;
   }
+
+  /* table:not(.unfold) tbody  {
+    white-space: nowrap;
+  } */
 }

@@ -15,7 +15,7 @@
             <h1><?= __('Global statistics') ?></h1>
 
             <div class="message warning">
-                <?= __('These statistics are computed automatically from users’ data, which can be inaccurate or incomplete (especially legacy data migrated from the previous LORD version). Therefore, they must be interpreted carefully. For more details, please read the FAQ.') ?>
+                <?= __('These statistics are computed automatically from users’ data, which can be inaccurate or incomplete (especially legacy data migrated from the previous LORD version). Therefore, they must be interpreted carefully. For more details, please read the guide.') ?>
             </div>
 
             <h2><?= __('Demography') ?></h2>
@@ -161,11 +161,11 @@
                 </tr>
                 <tr>
                     <th><?= __('Leading death category:') ?></th>
-                    <td><?= '« ' . h($primaries[0]['name']) . ' »'?> <span class="comment"> <?=' ('. h(100*round($primaries[0]['count']/$knowingly_dead_rat_count,2)) . ' % of declared deaths)'?></span></td>
+                    <td><?= __('“{0}”', [h($primaries[0]['name'])]) ?> <span class="comment"> <?= __('({0} % of declared deaths)', [h(100*round($primaries[0]['count']/$knowingly_dead_rat_count,2))]) ?></span></td>
                 </tr>
                 <tr>
                     <th><?= __('Leading death cause:') ?></th>
-                    <td><?= '« ' . h($secondaries[0]['name']) . ' »'?> <span class="comment"> <?=' ('. h(100*round($secondaries[0]['count']/$knowingly_dead_rat_count,2)) . ' % of declared deaths)'?></span></td>
+                    <td><?= __('“{0}”', [h($secondaries[0]['name'])]) ?> <span class="comment"> <?= __('({0} % of declared deaths)', [h(100*round($secondaries[0]['count']/$knowingly_dead_rat_count,2))]) ?></span></td>
                 </tr>
             </table>
 
@@ -175,7 +175,7 @@
 
             <table class="condensed stats unfold">
                 <tr>
-                    <th><?= __('Number of deaths with recorded cause:') ?></th>
+                    <th><?= __('Number of recorded deaths:') ?></th>
                     <td><?= __('{0, number} rats ({1, number} % of rats considered as dead)', [$knowingly_dead_rat_count, round($knowingly_dead_rat_count/$dead_rat_count,2)*100]) ?></td>
                 </tr>
                 <tr><th><?= __('By decreasing frequency:') ?></th>
@@ -472,11 +472,9 @@
     // Litter size distribution
     var littersize_norm = <?= $nongeneric_litter_count ?>;
     var littersize_json = <?php echo $littersize_distribution; ?>;
-    var littersize_labels = littersize_json.map(function(e) {
-        return e.size;
-    });
-    var littersize_data = littersize_json.map(function(e) {
-        return 100*e.count/littersize_norm;
+    var littersize_labels = Object.keys(littersize_json);
+    var littersize_data = (Object.values(littersize_json)).map(function (e) {
+        return 100*e/littersize_norm;
     });
     var littersize_max = Math.max(...littersize_data);
     var littersize_colors = littersize_data.map(function(e) {
@@ -813,7 +811,7 @@
                             return label;
                         },
                         title: function(context) {
-                            var title = jsLegends["Age: between"]+ " "+ context[0].label+ jsLegends["and"]+ " " + (parseInt(context[0].label)+1).toString() + " " + jsLegends["months"];
+                            var title = jsLegends["Age: between "]+ context[0].label+ jsLegends[" and "] + (parseInt(context[0].label)+1).toString() + jsLegends[" months"];
                             return title;
                         }
                     }

@@ -71,6 +71,7 @@ class RatteriesTable extends Table
                 'latitude',
                 'longitude',
                 'is_alive',
+                'comments'
             ],
         ]);
 

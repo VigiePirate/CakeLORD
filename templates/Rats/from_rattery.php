@@ -9,7 +9,7 @@
     <div class="sheet-heading">
         <div class="sheet-title pretitle"><?= __('Search Results') ?></div>
     </div>
-    <h1><?= __('Rats from rattery with name or prefix like') . ' ' . __('« ') . h(implode('"',$ratteries)) . __(' »')?></h1> <!-- should be “ ” -->
+    <h1><?= __('Rats from rattery with name or prefix like ') . __('“{0}”', [h(implode('"', $ratteries))]) ?></h1>
         <?= $this->element('rats', [ //rats
             'rubric' => __(''),
             'exceptions' => [

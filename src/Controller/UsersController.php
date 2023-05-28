@@ -197,7 +197,7 @@ class UsersController extends AppController
                         $this->Flash->success(__('Your account has been created, but must be activated before you can log in. Check your email for your activation link.'));
                     } else {
                         $this->set(compact('user'));
-                        $this->Flash->error(__('Error sending email! Please contact an administrator.')); // . $email->smtpError);
+                        $this->Flash->error(__('Error sending email. Please, contact an administrator.')); // . $email->smtpError);
                     }
                     return $this->redirect(['action' => 'login']);
                 } else {
@@ -334,12 +334,11 @@ class UsersController extends AppController
     public function index()
     {
         $this->Authorization->skipAuthorization();
-        $this->paginate = [
-            'contain' => ['Roles'],
-        ];
+        $this->paginate = ['contain' => ['Roles']];
         $users = $this->paginate($this->Users);
-
-        $this->set(compact('users'));
+        $identity = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($identity) && $identity->can('index', $this->Users);
+        $this->set(compact('users', 'identity', 'show_staff'));
     }
 
     /**
@@ -669,7 +668,7 @@ class UsersController extends AppController
                     if ($mailer) {
                         $this->Flash->success(__('Check your email for your reset password link'));
                     } else {
-                        $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
+                        $this->Flash->error(__('Error sending email. Please, contact an administrator.')); // . $email->smtpError);
                     }
                     return $this->redirect(['action' => 'login']);
                 }
@@ -811,7 +810,7 @@ class UsersController extends AppController
                             $this->Flash->warning(__('Your email has been modified. Your accound must now be reactivated. Please, check your new email for your confirmation link.'));
                             $this->Authentication->logout();
                         } else {
-                            $this->Flash->error(__('Error sending email: ')); // . $email->smtpError);
+                            $this->Flash->error(__('Error sending email. Please, contact an administrator.')); // . $email->smtpError);
                         }
                         return $this->redirect(['action' => 'login']);
                     } else {
@@ -941,8 +940,30 @@ class UsersController extends AppController
     public function named()
     {
         $names = $this->request->getParam('pass');
+        $this->Authorization->skipAuthorization();
 
         $users = $this->Users->find('named', [
+            'names' => $names
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['Ratteries', 'Roles'],
+        ];
+        $users = $this->paginate($users);
+
+        $this->set([
+            'users' => $users,
+            'names' => $names
+        ]);
+    }
+
+    public function private()
+    {
+        $names = $this->request->getParam('pass');
+        $this->Authorization->authorize($this->Users, 'index');
+
+        $users = $this->Users->find('private', [
             'names' => $names
         ]);
 

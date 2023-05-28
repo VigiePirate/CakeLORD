@@ -253,7 +253,7 @@ class Rattery extends Entity
             ->first();
 
         if (empty($productivity)) {
-            $productivity = $this->countLitters($options);
+            $productivity = $this->countLitters($options, false);
         }
 
         if (is_null($lifetimes['first_birth'])) {

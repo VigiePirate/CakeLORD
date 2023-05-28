@@ -325,6 +325,15 @@ class RatsTable extends Table
         }
     }
 
+    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    {
+        if (isset($options['searchable_only']) && $options['searchable_only']) {
+            $query->innerJoinWith('States', function ($q) {
+                return $q->where(['is_searchable' => true]);
+            });
+        }
+    }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -570,6 +579,13 @@ class RatsTable extends Table
     /*
      * Finder functions
      */
+
+     public function findSearchable(Query $query, array $options)
+    {
+        return $query->innerJoinWith('States', function ($q) {
+            return $q->where(['is_searchable' => true]);
+        });
+    }
 
      public function findMultisearch(Query $query, array $options)
      {
@@ -823,9 +839,7 @@ class RatsTable extends Table
                   ]);
         } else {
             $query->innerJoinWith('Ratteries')
-                  ->where([
-                          'Ratteries.id' => implode($options['ratteries']),
-                ]);
+                  ->where(['Ratteries.id' => implode($options['ratteries'])]);
         }
 
         return $query->group(['Rats.id']);
@@ -982,7 +996,7 @@ class RatsTable extends Table
             ->where([
                 'sex' => 'M'
             ])
-            ->contain(['Ratteries']);
+            ->contain(['Ratteries', 'Singularities']);
     }
 
     public function findFemales(Query $query, array $options)
@@ -991,7 +1005,7 @@ class RatsTable extends Table
             ->where([
                 'sex' => 'F'
             ])
-            ->contain(['Ratteries']);
+            ->contain(['Ratteries', 'Singularities']);
     }
 
     public function findZombies(Query $query, array $options)

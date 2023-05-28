@@ -220,10 +220,6 @@
                             <td><?= h($user->birth_date) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __x('grammar', 'Grammatical Gender') ?></th>
-                            <td><?= h($user->sex_string) ?></td>
-                        </tr>
-                        <tr>
                             <th><?= __('Failed Login Attempts') ?></th>
                             <td><?= $this->Number->format($user->failed_login_attempts) ?></td>
                         </tr>
@@ -250,7 +246,7 @@
                         <tr>
                             <th><?= __('Current number of rats:') ?></th>
                             <td><?=
-                                $alive_rat_count!=0 ?
+                                $alive_rat_count !=0 ?
                                 h($alive_rat_count) . ' ' . __('rats') . ' (♀: ' . h($alive_female_count) . ' – ♂: ' . h($alive_male_count) . ')' :
                                 __('No rat at the moment')
                                 ?>
@@ -272,14 +268,14 @@
                     <table class="condensed stats unfold">
                         <tr>
                             <th><?= __('Average lifespan of their rats:') ?></th>
-                            <td><?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [h($avg_lifespan), h($female_avg_lifespan), h($male_avg_lifespan)]) ?></td>
+                            <td><?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [h($avg_lifespan), h($female_avg_lifespan), h($male_avg_lifespan)]) ?></td>
                             <tr>
                                 <th> ⨽ <?= __('average, infant mortality excluded:') ?></th>
-                                <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [h($not_infant_lifespan), h($not_infant_female_lifespan), h($not_infant_male_lifespan)]) ?></td>
+                                <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [h($not_infant_lifespan), h($not_infant_female_lifespan), h($not_infant_male_lifespan)]) ?></td>
                             </tr>
                             <tr>
                                 <th> ⨽ <?= __('average, accidents also excluded:') ?></th>
-                                <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [h($not_accident_lifespan), h($not_accident_female_lifespan), h($not_accident_male_lifespan)]) ?></td>
+                                <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [h($not_accident_lifespan), h($not_accident_female_lifespan), h($not_accident_male_lifespan)]) ?></td>
                             </tr>
                         </tr>
                     </table>

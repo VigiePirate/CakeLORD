@@ -97,7 +97,7 @@
                     <?php if (in_array('birth_litter_id', $diff_list)) : ?>
                         <td class="minus"><?= $snap_rat->has('birth_litter') ? $this->Html->link($snap_rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $snap_rat->birth_litter->id]) : '' ?></td>
                     <?php else : ?>
-                        <td><?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : __('None') ?></td>
+                        <td><?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : __x('litter', 'None') ?></td>
                     <?php endif ; ?>
                 </tr>
             </table>
@@ -160,7 +160,7 @@
                             foreach($rat->singularities as $singularity) {
                                 array_push($link_array, $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]));
                             }
-                            $string = empty($link_array) ? __('None') : implode(", ", $link_array);
+                            $string = empty($link_array) ? __x('singularity', 'None') : implode(", ", $link_array);
                             echo $string;
                         ?>
                     </td>
@@ -366,7 +366,7 @@
                     <?php else : ?>
                         <td>
                     <?php endif ; ?>
-                    <?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : __('None') ?></td>
+                    <?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : __x('litter', 'None') ?></td>
                 </tr>
             </table>
 
@@ -435,7 +435,7 @@
                             foreach($rat->singularities as $singularity) {
                                 array_push($link_array, $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]));
                             }
-                            $string = empty($link_array) ? __('None') : implode(", ", $link_array);
+                            $string = empty($link_array) ? __x('singularity', 'None') : implode(", ", $link_array);
                             echo $string;
                         ?>
                     </td>

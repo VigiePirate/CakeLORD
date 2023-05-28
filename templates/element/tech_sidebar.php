@@ -1,4 +1,9 @@
 <!-- generic sidebar for technical tables -->
+
+<?php
+    $labo = 'http://laborats.weebly.com/' . h(preg_replace('/\s+/', '-', str_replace('é', 'eacute', mb_strtolower($object->name)))) . '.html';
+?>
+
 <div class="side-nav">
     <div class="side-nav-group">
         <?= $this->element('default_sidebar', isset($help_url) ? $help_url : ['controller' => 'Faqs', 'action' => 'all']) ?>
@@ -21,15 +26,15 @@
                     <span class="tooltiptext"><?= $tooltip ?></span>
             </div>
             <?php if (isset($is_labo) && $is_labo) : ?>
-                <?php if (@get_headers('http://laborats.weebly.com/' . h(preg_replace('/\s+/', '-', strtolower($object->name))) . '.html')['0'] != 'HTTP/1.1 404 Not Found'
-                    && @get_headers('http://laborats.weebly.com/' . h(preg_replace('/\s+/', '-', strtolower($object->name))) . '.html')['0'] != 'HTTP/1.1 400 Bad Request')
+                <?php if (@get_headers($labo)['0'] != 'HTTP/1.1 404 Not Found'
+                    && @get_headers($labo)['0'] != 'HTTP/1.1 400 Bad Request')
                 : ?>
                     <div class="tooltip">
                         <?= $this->Html->link(
                             $this->Html->image('/img/icon-laborats.svg', [
                                 'class' => 'side-nav-icon',
                                 'alt' => __('Laborats')]),
-                                'http://laborats.weebly.com/' . h(preg_replace('/\s+/', '-', strtolower($object->name))) . '.html',
+                                $labo,
                                 ['escape' => false, 'target' => '_blank']
                             ); ?>
                             <span class="tooltiptext"><?= __('See matching Lab-o-rats entry') ?></span>

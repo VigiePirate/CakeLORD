@@ -62,24 +62,14 @@
                     <?php endif ; ?>
 
                     <div class="row">
-                        <div class="column-responsive column-50">
-                            <?= $this->Form->control('firstname') ?>
-                        </div>
-                        <div class="column-responsive column-50">
-                            <?= $this->Form->control('lastname') ?>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="column-responsive column-50">
+                        <div class="column-responsive column-20">
                             <?= $this->Form->control('birth_date', ['empty' => true]) ?>
                         </div>
-                        <div class="column-responsive column-50">
-                            <?= $this->Form->label('sex', __x('grammar', 'Grammatical Gender')) ?>
-                            <?= $this->Form->select('sex', [
-                                'F' => __x('grammar', 'Feminine'),
-                                'M' => __x('grammar', 'Masculine'),
-                                'X' => __x('grammar', 'Neutral')
-                            ]) ?>
+                        <div class="column-responsive column-40">
+                            <?= $this->Form->control('firstname') ?>
+                        </div>
+                        <div class="column-responsive column-40">
+                            <?= $this->Form->control('lastname') ?>
                         </div>
                     </div>
 
@@ -89,7 +79,7 @@
                 <?php endif; ?>
 
                 <?php if ($identity->can('seeStaffOnly', $user)) : ?>
-                    <legend><?= __('Staff-only information') ?></legend>
+                    <legend class="staff"><?= __('Staff-only information') ?></legend>
                         <?= $this->Form->control('email'); ?>
                         <?= $this->Form->control('is_locked'); ?>
                         <?= $this->Form->control('staff_comments', [

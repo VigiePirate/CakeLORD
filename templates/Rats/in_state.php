@@ -9,7 +9,7 @@
     <div class="sheet-heading">
         <div class="sheet-title pretitle"><?= __('Search Results') ?></div>
     </div>
-    <h1><?= __('Rats in state ') . ' ' . __('« ') . h(implode('"',$inState)) . __(' »')?></h1> <!-- should be “ ” -->
+    <h1><?= __('Rats in state {0}', [h(implode('"',$inState))]) ?></h1>
         <?= $this->element('rats', [ //rats
             'rubric' => __(''),
             'exceptions' => [

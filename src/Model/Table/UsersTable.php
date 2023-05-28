@@ -224,7 +224,38 @@ class UsersTable extends Table
             ]);
         } else {
             // Find rats with parts of the string in that name
-            $query->where(['Users.username LIKE' => '%'.implode($options['names']).'%']);
+            $query->where([
+                'Users.username LIKE' => '%'.implode($options['names']).'%',
+            ]);
+        }
+
+        return $query->group(['Users.id']);
+    }
+
+    public function findPrivate(Query $query, array $options)
+    {
+        $columns = [
+            'Users.id', 'Users.username', 'Users.role_id'
+        ];
+
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['names'])) {
+            $query->where([
+                'OR' => ['Users.username IS' => null],
+            ]);
+        } else {
+            // Find rats with parts of the string in that name
+            $query->where([
+                'OR' => [
+                    'Users.username LIKE' => '%'.implode($options['names']).'%',
+                    'Users.firstname LIKE' => '%'.implode($options['names']).'%',
+                    'Users.lastname LIKE' => '%'.implode($options['names']).'%',
+                    'Users.email LIKE' => '%'.implode($options['names']).'%',
+                ]
+            ]);
         }
 
         return $query->group(['Users.id']);
