@@ -23,7 +23,7 @@
                     echo $this->Form->control('firstname');
                     echo $this->Form->control('lastname');
                     echo $this->Form->control('birth_date', ['empty' => true]);
-                    echo $this->Form->control('sex');
+                    // echo $this->Form->control('sex');
                     echo $this->Form->control('localization');
                     echo $this->Form->control('avatar');
                     echo $this->Form->control('about_me');

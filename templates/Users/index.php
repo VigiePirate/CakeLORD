@@ -5,7 +5,9 @@
  */
 ?>
 <div class="users index content">
-    <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <?php if ($show_staff) : ?>
+        <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
+    <?php endif ; ?>
     <h1><?= __('All Users') ?></h1>
     <div class="table-responsive">
         <table>
@@ -19,9 +21,10 @@
                     <?php if ($show_staff) : ?>
                         <th><?= $this->Paginator->sort('email') ?></th>
                         <th><?= $this->Paginator->sort('is_locked', __('Locked?')) ?></th>
+                        <th><?= $this->Paginator->sort('created', __x('user', 'Created')) ?></th>
+                        <th><?= $this->Paginator->sort('modified', __x('user', 'Modified')) ?></th>
+                        <th><?= $this->Paginator->sort('successful_login_last_date', __x('date', 'Last login')) ?></th>
                     <?php endif ?>
-                    <th><?= $this->Paginator->sort('created', __x('user', 'Created')) ?></th>
-                    <th><?= $this->Paginator->sort('modified', __x('user', 'Modified')) ?></th>
                     <?php if ($show_staff) : ?>
                         <th class="actions col-head"><?= __('Actions') ?></th>
                     <?php endif ; ?>
@@ -38,9 +41,10 @@
                     <?php if ($show_staff) : ?>
                         <td><?= h($user->email) ?></td>
                         <td><?= $user->locked_symbol ?></td>
+                        <td><?= $user->created->i18nFormat('dd/MM/yyyy') ?></td>
+                        <td><?= $user->modified->i18nFormat('dd/MM/yyyy') ?></td>
+                        <td><?= is_null($user->successful_login_last_date) ? __('N/A') : $user->successful_login_last_date->i18nFormat('dd/MM/yyyy') ?></td>
                     <?php endif ?>
-                    <td><?= $user->created->i18nFormat('dd/MM/yyyy') ?></td>
-                    <td><?= $user->modified->i18nFormat('dd/MM/yyyy') ?></td>
                     <?php if ($show_staff) : ?>
                         <td class="actions">
                             <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [

@@ -80,7 +80,7 @@
     <div class="spacer"> </div>
     <div class="lord index content">
         <div class="sheet-heading">
-            <h2><?= __('Ratteries') ?></h2>
+            <h2><?= __('Users') ?></h2>
             <div class="button-medium">
                 <?= $count['users'] > 10 ? $this->Html->link(__('See all results'), ['controller' => 'Users', 'action' => 'named', h(implode('"', $names))], ['class' => 'button float-right']) : '' ?>
             </div>
@@ -90,7 +90,6 @@
             <table class="summary">
                 <thead>
                     <tr>
-                        <th><?= __('State') ?></th>
                         <th><?= __('Username') ?></th>
                         <th><?= __('Rattery') ?></th>
                         <th><?= __('Localization') ?></th>
@@ -100,7 +99,6 @@
                 <tbody>
                     <?php foreach ($users as $user): ?>
                     <tr>
-                        <td><b><?= h($user->locked_symbol) ?></b></td>
                         <td><?= $this->Html->link($user->username, ['controller' => 'Users', 'action' => 'view', $user->id]) ?></td>
                         <td><?= h($user->main_rattery_name) ?></td>
                         <td><?= h($user->localization) ?></td>

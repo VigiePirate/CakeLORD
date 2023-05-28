@@ -82,10 +82,6 @@
                     <td><?= h($user->birth_date) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __x('grammar', 'Grammatical Gender') ?></th>
-                    <td><?= h($user->sex_string) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Failed Login Attempts') ?></th>
                     <td><?= $this->Number->format($user->failed_login_attempts) ?></td>
                 </tr>

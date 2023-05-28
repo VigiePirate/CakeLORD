@@ -940,9 +940,30 @@ class UsersController extends AppController
     public function named()
     {
         $names = $this->request->getParam('pass');
-        $this->Authorization->authorize($this->Users, 'index');
+        $this->Authorization->skipAuthorization();
 
         $users = $this->Users->find('named', [
+            'names' => $names
+        ]);
+
+        // Pass variables into the view template context.
+        $this->paginate = [
+            'contain' => ['Ratteries', 'Roles'],
+        ];
+        $users = $this->paginate($users);
+
+        $this->set([
+            'users' => $users,
+            'names' => $names
+        ]);
+    }
+
+    public function private()
+    {
+        $names = $this->request->getParam('pass');
+        $this->Authorization->authorize($this->Users, 'index');
+
+        $users = $this->Users->find('private', [
             'names' => $names
         ]);
 
