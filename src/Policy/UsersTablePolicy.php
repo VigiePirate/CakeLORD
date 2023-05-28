@@ -5,12 +5,28 @@ namespace App\Policy;
 
 use App\Model\Table\UsersTable;
 use Authorization\IdentityInterface;
+use Authorization\Policy\BeforePolicyInterface;
 
 /**
  * Users policy
  */
-class UsersTablePolicy
+class UsersTablePolicy implements BeforePolicyInterface
 {
+    /**
+     * Open all for admin
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Table\UsersTable $resource
+     * @param ?? $action
+     * @return bool
+     */
+    public function before($user, $resource, $action)
+    {
+        if ($user->getOriginalData()->is_root) {
+            return true;
+        };
+    }
+
     /**
      * Check if $user can see lists of users
      *
