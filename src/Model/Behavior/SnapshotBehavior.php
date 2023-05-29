@@ -118,7 +118,7 @@ class SnapshotBehavior extends Behavior
     }
 
     /**
-     * snapLoad method
+     * snapDelete method
      *
      * Deletes a snapshot belonging to the entity.
      *

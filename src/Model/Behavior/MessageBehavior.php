@@ -10,8 +10,9 @@ use Cake\ORM\Behavior;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\Routing\Router;
+use Cake\Collection\Collection;
 
-class MessagesBehavior extends Behavior
+class MessageBehavior extends Behavior
 {
     protected $_defaultConfig = [
         'repository' => 'Messages',
@@ -109,7 +110,7 @@ class MessagesBehavior extends Behavior
      * @param integer $message_number
      * @return void
      */
-    public function getLastMessages(EntityInterface $entity, integer $n)
+    public function getLastMessages(EntityInterface $entity, int $n)
     {
         return;
     }
@@ -124,7 +125,7 @@ class MessagesBehavior extends Behavior
      * @param integer $message_number
      * @return void
      */
-    public function getNextMessage(EntityInterface $entity, integer $message_number)
+    public function getNextMessage(EntityInterface $entity, int $message_number)
     {
         return;
     }
