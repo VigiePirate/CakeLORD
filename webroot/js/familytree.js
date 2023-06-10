@@ -33,7 +33,21 @@ function setup() {
       svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     })
     // Offset so that first pan and zoom does not jump back to the origin
-    .translate([w/factor+42, h/2]);
+    .translate([w/factor+48, h/2]);
+
+  if (json._children.length != 0) {
+    var button2 = d3.select("#familytree").append("ellipse")
+      .text("◀◀")
+      .attr("class", "pedigree-button2")
+      .on('click', function(){
+          d3.selectAll("g.person").each(function (d, i) {
+            var onClickFunc = d3.select(this).on("click");
+            if (d.collapsed && d.hasOwnProperty('_children') && d.more_children == 1) {
+              onClickFunc.apply(this, [d, i]);
+            }
+          })
+      });
+    }
 
   var svg = d3.select("#familytree").append("svg")
     .attr("id", "mysvg")
@@ -52,18 +66,6 @@ function setup() {
         d3.selectAll("g.person").each(function (d, i) {
           var onClickFunc = d3.select(this).on("click");
           if (d.collapsed && d.hasOwnProperty('_parents') && d.more_parents == 1) {
-            onClickFunc.apply(this, [d, i]);
-          }
-        })
-    });
-
-  var button2 = d3.select("#familytree").append("ellipse")
-    .text("◀◀")
-    .attr("class", "pedigree-button2")
-    .on('click', function(){
-        d3.selectAll("g.person").each(function (d, i) {
-          var onClickFunc = d3.select(this).on("click");
-          if (d.collapsed && d.hasOwnProperty('_children') && d.more_children == 1) {
             onClickFunc.apply(this, [d, i]);
           }
         })
