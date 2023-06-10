@@ -1,6 +1,6 @@
 function showFeedback(cost, jsMessages) {
   document.getElementById('waiting-message').style.display = 'none';
-  document.getElementById('cost').innerHTML = Math.trunc(cost)/1000;
+  document.getElementById('cost').innerHTML = i18n.format(Math.trunc(cost)/1000);
   var costComment;
 
   if (cost <= 2500) {
@@ -40,49 +40,90 @@ function init(partialTree, ancestorIndex, jsMessages) {
 
 // launch worker
 var worker = new Worker('/js/inbreeding-worker.js');
+var i18n = new Intl.NumberFormat();
 var ranks = [];
 var op;
+var unit;
 
 // treat messages
 worker.onmessage = function(evt) {
-
   if (evt.data.max_depth != undefined) {
-    document.getElementById('max_depth').innerHTML = '<span class="pulse">' + evt.data.max_depth + '</span> generations';
+    if (evt.data.max_depth < 2) {
+      unit = evt.data.jsMessages[5];
+    } else {
+      unit = evt.data.jsMessages[6];
+    }
+    document.getElementById('max_depth').innerHTML = '<span class="pulse">' + i18n.format(evt.data.max_depth) + '</span> ' + unit;
   }
 
   if (evt.data.min_depth != undefined) {
-    document.getElementById('min_depth').innerHTML = '<span class="pulse">' + evt.data.min_depth + '</span> generations';
+    if (evt.data.min_depth < 2) {
+      unit = evt.data.jsMessages[5];
+    } else {
+      unit = evt.data.jsMessages[6];
+    }
+    document.getElementById('min_depth').innerHTML = '<span class="pulse">' + i18n.format(evt.data.min_depth) + '</span> ' + unit;
   }
 
   if (evt.data.known != undefined) {
-    document.getElementById('known').innerHTML = '<span class="pulse">' + evt.data.known + '</span> rats';
+    if (evt.data.known < 2) {
+      unit = evt.data.jsMessages[7];
+    } else {
+      unit = evt.data.jsMessages[8];
+    }
+    document.getElementById('known').innerHTML = '<span class="pulse">' + i18n.format(evt.data.known) + '</span> ' + unit;
   }
 
   if (evt.data.distinct != undefined) {
-    document.getElementById('distinct').innerHTML = '<span class="pulse">' + evt.data.distinct + '</span> rats';
+    if (evt.data.distinct < 2) {
+      unit = evt.data.jsMessages[7];
+    } else {
+      unit = evt.data.jsMessages[8];
+    }
+    document.getElementById('distinct').innerHTML = '<span class="pulse">' + i18n.format(evt.data.distinct) + '</span> ' + unit;
   }
 
   if (evt.data.founding != undefined) {
-    document.getElementById('founding').innerHTML = '<span class="pulse">' + evt.data.founding + '</span> rats';
+    if (evt.data.founding < 2) {
+      unit = evt.data.jsMessages[7];
+    } else {
+      unit = evt.data.jsMessages[8];
+    }
+    document.getElementById('founding').innerHTML = '<span class="pulse">' + i18n.format(evt.data.founding) + '</span> ' + unit;
   }
 
   if (evt.data.common != undefined) {
-    document.getElementById('common').innerHTML = '<span class="pulse">' + evt.data.common + '</span> rats';
+    if (evt.data.common < 2) {
+      unit = evt.data.jsMessages[7];
+    } else {
+      unit = evt.data.jsMessages[8];
+    }
+    document.getElementById('common').innerHTML = '<span class="pulse">' + i18n.format(evt.data.common) + '</span> ' + unit;
   }
 
   if (evt.data.avk5 != undefined) {
+    if (evt.data.avk5 < 2) {
+      var unit = evt.data.jsMessages[7];
+    } else {
+      unit = evt.data.jsMessages[8];
+    }
     op = evt.data.approx ? ' ≃ ' : ' = ';
-    document.getElementById('avk5').innerHTML = '<span class="pulse">AVK<sub>5</sub>' + op + evt.data.avk5 + ' %';
+    document.getElementById('avk5').innerHTML = '<span class="pulse">AVK<sub>5</sub>' + op + i18n.format(evt.data.avk5) + ' %';
   }
 
   if (evt.data.avk10 != undefined) {
+    if (evt.data.known < 2) {
+      unit = evt.data.jsMessages[7];
+    } else {
+      unit = evt.data.jsMessages[8];
+    }
     op = evt.data.approx ? ' ≃ ' : ' = ';
-    document.getElementById('avk10').innerHTML = '<span class="pulse">AVK<sub>10</sub>' + op + evt.data.avk10 + ' %';
+    document.getElementById('avk10').innerHTML = '<span class="pulse">AVK<sub>10</sub>' + op + i18n.format(evt.data.avk10) + ' %';
   }
 
   if (evt.data.coi != undefined) {
     ranks[0] = evt.data.coi;
-    document.getElementById('coi').innerHTML = '<span class="pulse">COI = ' + (100*evt.data.coi).toPrecision(4) + ' %';
+    document.getElementById('coi').innerHTML = '<span class="pulse">COI = ' + i18n.format((100*evt.data.coi).toPrecision(4)) + ' %';
     if (evt.data.coi > 0) {
       document.getElementById('coancestry').classList.remove("hide-everywhere");
       document.getElementById('coancestry').style.display = 'revert !important';
@@ -92,7 +133,7 @@ worker.onmessage = function(evt) {
   }
 
   if (evt.data.coancestor != undefined) {
-    document.getElementById('coancestry-global').innerHTML = ((100*evt.data.coi).toPrecision(3) ? (100*evt.data.coi).toPrecision(3) : '< 0.01') + ' %';
+    document.getElementById('coancestry-global').innerHTML = (100*evt.data.coi).toPrecision(3) ? i18n.format((100*evt.data.coi).toPrecision(3)) + ' %' : '< ' + i18n.format(0.01) + ' %';
 
     var table = document.getElementById("coancestry-table");
     var id = evt.data.coancestor.id;
@@ -122,7 +163,7 @@ worker.onmessage = function(evt) {
       contrast = Math.log2(1+evt.data.coancestor.contribution/evt.data.coi);
       rectangle.style.width = (15+100*contrast) + '%';
       rectangle.style.opacity = 0.25+0.75*contrast;
-      rectangle.innerHTML = ((100*evt.data.coancestor.contribution).toFixed(3) >= 0.01 ? (100*evt.data.coancestor.contribution).toFixed(2) : '< 0.01') + ' %';
+      rectangle.innerHTML = ((100*evt.data.coancestor.contribution).toFixed(3) >= 0.01 ? i18n.format((100*evt.data.coancestor.contribution).toFixed(2)) : '< 0.01') + ' %';
     }
   }
 
