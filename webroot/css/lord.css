@@ -1266,24 +1266,29 @@ svg {
 
 .pedigree-button1, .pedigree-button2 {
   color: #663300;
-  background-color: #ebeefa;
+  background-color: #ffffff;
   cursor: pointer;
   letter-spacing: -0.2em;
-  border-radius: 10em;
+  border-radius: 20em / 10em;
+  border: 1px solid #663300;
+}
+
+.pedigree-button1:hover, .pedigree-button2:hover {
+  background-color: #c3c8e6;
 }
 
 .pedigree-button1 {
   position: absolute;
-  margin-left: -3em;
+  margin-left: -3.5em;
   margin-top: 1.5em;
-  padding: 0em 0.5em;
+  padding: 0em 0.75em;
 }
 
 .pedigree-button2 {
   position: absolute;
-  margin-left: -6em;
+  margin-left: 0.75em;
   margin-top: 1.5em;
-  padding: 0em 0.75em 0em 0.25em;
+  padding: 0em 1em 0em 0.5em;
 }
 
 /** Mozilla Firefox specials */
