@@ -320,7 +320,11 @@ class LittersController extends AppController
             __('Quite a lot, but I have seen worse.'),
             __('Wow! that was pretty intense.'),
             __('Oops, we hope your device is not smoking.'),
-            __('You know some LORD’s developers in person, don’t you?')
+            __('You know some LORD’s developers in person, don’t you?'),
+            __('generation'),
+            __('generations'),
+            __('rat'),
+            __('rats')
         ]);
 
         $this->set(compact('litter', 'sire', 'dam', 'json', 'genealogy_json', 'index_json', 'js_messages'));
@@ -904,9 +908,13 @@ class LittersController extends AppController
             __('Quite a lot, but I have seen worse.'),
             __('Wow! that was pretty intense.'),
             __('Oops, we hope your device is not smoking.'),
-            __('You know some LORD’s developers in person, don’t you?')
+            __('You know some LORD’s developers in person, don’t you?'),
+            __('generation'),
+            __('generations'),
+            __('rat'),
+            __('rats')
         ]);
-
+        
         $this->set(compact('litter', 'genealogy_json', 'index_json', 'js_messages'));
     }
 

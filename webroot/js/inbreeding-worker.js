@@ -232,6 +232,7 @@ onmessage = function(evt) {
     distinct: distinct,
     founding: founding,
     common: common,
+    jsMessages: jsMessages,
   });
 
   // expand tree iteratively and update values everytime they changed
@@ -244,46 +245,46 @@ onmessage = function(evt) {
     new_max_depth = findMaxDepth(fullTree);
     if (new_max_depth != max_depth) {
       max_depth = new_max_depth;
-      postMessage({max_depth: max_depth});
+      postMessage({max_depth: max_depth, jsMessages: jsMessages});
     }
 
     new_min_depth = findMinDepth(fullTree);
     if (new_min_depth != min_depth) {
       min_depth = new_min_depth;
-      postMessage({min_depth: min_depth});
+      postMessage({min_depth: min_depth, jsMessages: jsMessages});
     }
 
     if (done_avk5 == false && min_depth >= 5) {
       avk5 = computeAvk(fullTree, 5);
-      postMessage({avk5: avk5, approx: false});
+      postMessage({avk5: avk5, approx: false, jsMessages: jsMessages});
       done_avk5 = true;
     }
 
     if (done_avk10 == false && min_depth >= 10) {
       avk10 = computeAvk(fullTree, 10);
-      postMessage({avk10: avk10, approx: false});
+      postMessage({avk10: avk10, approx: false, jsMessages: jsMessages});
       done_avk10 = true;
     }
 
     new_known = Object.keys(fullTree).length;
     if (new_known != known) {
-      postMessage({known: new_known});
+      postMessage({known: new_known, jsMessages: jsMessages});
     }
   }
 
   // first evaluation of common ancestors before entering actual coi computation
-  postMessage({common: common});
+  postMessage({common: common, jsMessages: jsMessages});
 
   // if avks are still uncomputed, it is time to approximate them from uncomplete tree
   if (done_avk5 == false) {
     avk5 = computeAvk(fullTree, 5);
-    postMessage({avk5: avk5, approx: true});
+    postMessage({avk5: avk5, approx: true, jsMessages: jsMessages});
     done_avk5 = true;
   }
 
   if (done_avk10 == false) {
     avk10 = computeAvk(fullTree, 10);
-    postMessage({avk10: avk10, approx: true});
+    postMessage({avk10: avk10, approx: true, jsMessages: jsMessages});
     done_avk10 = true;
   }
 
@@ -291,7 +292,7 @@ onmessage = function(evt) {
   let coefs = {}; // init coefs object that will be filled with coancestors coi's
   // output = computeInbreeding(fullTree, ancestorIndex, coefs);
   output = computeInbreeding(fullTree, coefs, ancestorIndex, true);
-  postMessage({coi: output.coi});
+  postMessage({coi: output.coi, jsMessages: jsMessages});
 
   endTime = performance.now();
   cost = Math.trunc(endTime - startTime);
