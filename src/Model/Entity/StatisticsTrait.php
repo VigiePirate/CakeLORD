@@ -31,12 +31,16 @@ trait StatisticsTrait
         if (! empty($options)) {
             $filter = array_merge($filter, $options);
         }
-        return $model->find()
-            ->where($filter)
-            ->innerJoinWith('States', function ($q) {
+
+        $query = $model->find()->where($filter);
+
+        if ($model->associations()->has('States')) {
+            $query = $query->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
-            })
-            ->count();
+            });
+        }
+
+        return $query->count();
     }
 
     public function countHaving($name, $key, $options = [])
