@@ -109,21 +109,22 @@
                     <div class="button-raised">
                         <?= $this->Html->link(__('See all rats in this state'), ['controller' => 'Rats', 'action' => 'inState', $state->id], ['class' => 'button float-right']) ?>
                     </div>
-                    <table><tr><td><strong><?= $counts['rats'] ?> <?= __('rat sheets') ?></strong> <?= __('are currently in this state.') ?> </td></tr></table>
+                    <table><tr><td><?= __('{0, plural, =0{No rat sheet is} =1{<strong>1 rat sheet</strong> is} other{<strong># rat sheets</strong> are} currently in this state.', [$counts['rats']]) ?></td></tr></table>
                 </details>
                 <details>
                     <summary><?= __('Related ratteries') ?></summary>
                     <div class="button-raised">
                         <?= $this->Html->link(__('See all ratteries in this state'), ['controller' => 'Ratteries', 'action' => 'inState', $state->id], ['class' => 'button float-right']) ?>
                     </div>
-                    <table><tr><td><strong><?= $counts['ratteries'] ?> <?= __('rattery sheets') ?></strong> <?= __('are currently in this state.') ?> </td></tr></table>
+                    <table><tr><td><?= __('{0, plural, =0{No rattery sheet is} =1{<strong>1 rattery sheet</strong> is} other{<strong># rattery sheets</strong> are} currently in this state.', [$counts['ratteries']]) ?></td></tr></table>
+
                 </details>
                 <details>
                     <summary><?= __('Related litters') ?></summary>
                     <div class="button-raised">
                         <?= $this->Html->link(__('See all litters in this state'), ['controller' => 'Litters', 'action' => 'inState', $state->id], ['class' => 'button float-right']) ?>
                     </div>
-                    <table><tr><td><strong><?= $counts['litters'] ?> <?= __('litter sheets') ?></strong> <?= __('are currently in this state.') ?> </td></tr></table>
+                    <table><tr><td><strong><?= __('{0, plural, =0{No litter sheet is} =1{<strong>1 litter sheet</strong> is} other{<strong># litter sheets</strong> are} currently in this state.', [$counts['litters']]) ?></td></tr></table>
                 </details>
             </div>
         </div>

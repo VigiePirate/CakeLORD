@@ -47,7 +47,7 @@
                             <?= $this->Html->image('/img/icon-view.svg', [
                                 'url' => ['controller' => 'countries', 'action' => 'view', $country->id],
                                 'class' => 'action-icon',
-                                'alt' => __('See Litter')]) ?>
+                                'alt' => __('See Country')]) ?>
                             </td>
                     <?php endif; ?>
                 </tr>

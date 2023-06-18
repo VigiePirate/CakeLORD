@@ -260,7 +260,7 @@
                     <tr>
                         <th><?= __('Pups number') ?></th>
                         <td>
-                            <?= __('{0, plural, =0{None} =1{1 pup} other{# pups}}', [$this->Number->format($litter->pups_number)]) ?>
+                            <?= __('{0, plural, =0{No pup} =1{1 pup} other{# pups}}', [$litter->pups_number]) ?>
                             <?= __('(♀: {0, plural, =0{0 recorded} =1{1 recorded} other{# recorded}} – ♂: {1, plural, =0{0 recorded} =1{1 recorded} other{# recorded}})', [
                                 ! empty($stats['sexes']) ? $this->Number->format($stats['sexes'][0]['F']) : '0',
                                 ! empty($stats['sexes']) ? $this->Number->format($stats['sexes'][0]['M']) : '0'
@@ -269,7 +269,7 @@
                         </tr>
                     <tr>
                         <th><?= __('Stillborn pups') ?></th>
-                        <td><?= __('{0, plural, =0{None} =1{1 pup} other{# pups}}', [$litter->pups_number_stillborn]) ?></td>
+                        <td><?= __('{0, plural, =0{No pup} =1{1 pup} other{# pups}}', [$litter->pups_number_stillborn]) ?></td>
                     </tr>
                     <tr>
                         <th><?= __('Inbreeding') ?></th>
@@ -333,11 +333,11 @@
                         <tr>
                             <th><?= __('Current survival rate:') ?></th>
                             <td>
-                                <?= __('{0, number} %', [$this->Number->format($stats['survivors'])]) ?>
+                                <?= __('{0, number} %', [$stats['survivors']]) ?>
                             <span class="comment">
                                 <?= $stats['survivors'] == 0
                                     ? __('(all rats of the litter are now dead, or supposed so)')
-                                    : __x('age', '(at {0})')
+                                    : __x('age', '(at {0, plural, =0{0 month} =1{1 month} other{# months}})', [$stats['max_age']])
                                  ?>
                             </span>
                             </td>

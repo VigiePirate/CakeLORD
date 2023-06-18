@@ -124,7 +124,7 @@
                                 <?= $this->Html->image('/img/icon-edit.svg', [
                                     'url' => [],
                                     'class' => 'side-nav-icon',
-                                    'alt' => __('Modify Rat')
+                                    'alt' => __('Edit Rat')
                                 ]) ?>
                                 <span class="tooltiptext"><?= __('You cannot edit this sheet') ?></span>
                             </div>
@@ -136,7 +136,7 @@
                                         'action' => 'edit', $rat->id,
                                     ],
                                     'class' => 'side-nav-icon',
-                                    'alt' => __('Modify Rat')
+                                    'alt' => __('Edit Rat')
                                 ]) ?>
                                 <span class="tooltiptext"><?= __('Edit whole rat sheet') ?></span>
                             </div>

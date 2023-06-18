@@ -35,59 +35,63 @@
             <h2><?= __('Permissions') ?></h2>
             <table>
                 <tr>
-                    <th><?= __('Is Root') ?></th>
+                    <th><?= __('Is root') ?></th>
                     <td><?= $role->is_root ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Is Admin') ?></th>
+                    <th><?= __('Is administrator') ?></th>
                     <td><?= $role->is_admin ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Is Staff') ?></th>
+                    <th><?= __('Is a staff member') ?></th>
                     <td><?= $role->is_staff ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Can Change State') ?></th>
+                    <th><?= __('Can change sheet states') ?></th>
                     <td><?= $role->can_change_state ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Can Edit Others') ?></th>
+                    <th><?= __('Can edit other users and their sheets') ?></th>
                     <td><?= $role->can_edit_others ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Can Edit Frozen') ?></th>
+                    <th><?= __('Can edit frozen sheets') ?></th>
                     <td><?= $role->can_edit_frozen ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Can Delete') ?></th>
+                    <th><?= __('Can delete sheets') ?></th>
                     <td><?= $role->can_delete ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Can Configure') ?></th>
+                    <th><?= __('Can configure system (states, roles)') ?></th>
                     <td><?= $role->can_configure ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Can Restore') ?></th>
+                    <th><?= __('Can restore snapshots') ?></th>
                     <td><?= $role->can_restore ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Can Document') ?></th>
+                    <th><?= __('Can add and edit documentation (articles, FAQs...)') ?></th>
                     <td><?= $role->can_document ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Can Describe') ?></th>
+                    <th><?= __('Can add and edit descriptive sheets (varieties, death causes...)') ?></th>
                     <td><?= $role->can_describe ? __('Yes') : __('No'); ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Can access other users personal data') ?></th>
+                    <td><?= $role->can_access_personal ? __('Yes') : __('No'); ?></td>
                 </tr>
             </table>
             <div class="related">
                 <?php if ($role->is_staff && !empty($role->users)) : ?>
                 <h2><?= __('Related Users') ?></h2>
                 <div class="table-responsive">
-                    <table>
+                    <table class="condensed unfold">
                         <tr>
                             <th><?= __('Username') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
+                            <th><?= __x('user', 'Created') ?></th>
+                            <th><?= __x('user', 'Modified') ?></th>
                             <th class="actions col-head"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($role->users as $user) : ?>

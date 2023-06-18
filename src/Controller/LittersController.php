@@ -318,7 +318,7 @@ class LittersController extends AppController
         $js_messages = json_encode([
             __('Easy peasy.'),
             __('Quite a lot, but I have seen worse.'),
-            __('Wow! that was pretty intense.'),
+            __('Wow, that was pretty intense!'),
             __('Oops, we hope your device is not smoking.'),
             __('You know some LORD’s developers in person, don’t you?'),
             __('generation'),
@@ -906,7 +906,7 @@ class LittersController extends AppController
         $js_messages = json_encode([
             __('Easy peasy.'),
             __('Quite a lot, but I have seen worse.'),
-            __('Wow! that was pretty intense.'),
+            __('Wow, that was pretty intense!'),
             __('Oops, we hope your device is not smoking.'),
             __('You know some LORD’s developers in person, don’t you?'),
             __('generation'),
@@ -914,7 +914,7 @@ class LittersController extends AppController
             __('rat'),
             __('rats')
         ]);
-        
+
         $this->set(compact('litter', 'genealogy_json', 'index_json', 'js_messages'));
     }
 

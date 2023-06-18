@@ -54,20 +54,20 @@
 
     <h2><?= __('Permissions') ?></h2>
     <div class="table-responsive">
-        <table>
+        <table class="summary roles">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
-                    <th><?= $this->Paginator->sort('can_change_state', __('State editor?')) ?></th>
-                    <th><?= $this->Paginator->sort('can_edit_others', __('Others editor?')) ?></th>
-                    <th><?= $this->Paginator->sort('can_edit_frozen', __('Frozen editor?')) ?></th>
-                    <th><?= $this->Paginator->sort('can_delete', __('Deletor?')) ?></th>
-                    <th><?= $this->Paginator->sort('can_configure', __('Configurator?')) ?></th>
-                    <th><?= $this->Paginator->sort('can_restore', __('Restorator?')) ?></th>
-                    <th><?= $this->Paginator->sort('can_document', __('Documenter?')) ?></th>
-                    <th><?= $this->Paginator->sort('can_describe', __('Describer?')) ?></th>
-                    <th><?= $this->Paginator->sort('can_access_personal', __('Personal?')) ?></th>
+                    <th><?= $this->Paginator->sort('can_change_state', __('State editor')) ?></th>
+                    <th><?= $this->Paginator->sort('can_edit_others', __('Others editor')) ?></th>
+                    <th><?= $this->Paginator->sort('can_edit_frozen', __('Frozen editor')) ?></th>
+                    <th><?= $this->Paginator->sort('can_delete', __('Deletor')) ?></th>
+                    <th><?= $this->Paginator->sort('can_configure', __('Configurator')) ?></th>
+                    <th><?= $this->Paginator->sort('can_restore', __('Restorator')) ?></th>
+                    <th><?= $this->Paginator->sort('can_document', __('Documenter')) ?></th>
+                    <th><?= $this->Paginator->sort('can_describe', __('Describer')) ?></th>
+                    <th><?= $this->Paginator->sort('can_access_personal', __('Personal')) ?></th>
                 </tr>
             </thead>
             <tbody>

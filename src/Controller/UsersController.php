@@ -136,7 +136,7 @@ class UsersController extends AppController
 
         // display error if user submitted and authentication failed
         if ( $this->request->is('post') && ! $result->isValid() ) {
-            $this->Flash->error(__('Invalid username or password'));
+            $this->Flash->error(__('Invalid username or password.'));
             // $this->log($result->getStatus());
 
             // if user exists but invalid password, update failed login fields
@@ -666,9 +666,9 @@ class UsersController extends AppController
 
                     $mailer = $this->getMailer('User')->send('sendResetEmail', [$url, $user]);
                     if ($mailer) {
-                        $this->Flash->success(__('Check your email for your reset password link'));
+                        $this->Flash->success(__('Check your email for your reset password link.'));
                     } else {
-                        $this->Flash->error(__('Error sending email. Please, contact an administrator.')); // . $email->smtpError);
+                        $this->Flash->error(__('Error sending email. Please, retry or contact an administrator.')); // . $email->smtpError);
                     }
                     return $this->redirect(['action' => 'login']);
                 }
