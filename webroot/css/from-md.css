@@ -66,3 +66,11 @@ blockquote .markdown h3, blockquote .markdown h4, blockquote .markdown h5 {
 blockquote .markdown a {
   font-style: normal;
 }
+
+p img {
+  max-width: 90%;
+}
+
+p:has(img) {
+  text-align:center;
+}
