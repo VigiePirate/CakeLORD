@@ -481,7 +481,7 @@ class Litter extends Entity
             $prefix = $first->prefix;
         }
         $second = $this->sire->owner_user->main_rattery;
-        if (! empty($second)) {
+        if (! empty($second) && $prefix != $second->prefix) {
             $prefix .= '-' . $second->prefix;
         }
 
