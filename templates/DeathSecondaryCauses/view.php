@@ -10,7 +10,7 @@
                 'controller' => 'DeathSecondaryCauses',
                 'object' => $deathSecondaryCause,
                 'tooltip' => __('Browse death cause list'),
-                'help_url' =>  ['controller' => 'Articles', 'action' => 'index'],
+                'help_url' =>  ['controller' => 'Articles', 'action' => 'view', 20],
                 'show_staff' => $show_staff
             ])
         ?>
