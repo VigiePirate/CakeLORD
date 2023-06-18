@@ -205,8 +205,8 @@ class Rat extends Entity
     protected function _getAge()
     {
         $agedate = FrozenTime::now();
-        /* debug while waiting for data conformity:
-        there shouldn't be a death date if the rat is alive, but... */
+
+        // replace today by death date if rat is dead
         if (! $this->is_alive && isset($this->_fields['death_date'])) {
             $agedate = $this->_fields['death_date'];
         }
@@ -214,7 +214,7 @@ class Rat extends Entity
         // Compute diffInDays and round it rather than diffInMonths for consistency:
         // we want 1 month age for a 20 days rat rather than 0
         if (isset($this->birth_date)) {
-            return round($agedate->diffInDays($this->_fields['birth_date'], true)/30.5);
+            return round($this->_fields['birth_date']->diffInDays($agedate, false)/30.5);
         } else {
             return -1; // Should raise exception
         }
@@ -697,12 +697,12 @@ class Rat extends Entity
 
     /* check if rat is dead before being born */
     public function isBenjaminButton() {
-        return ! $this->is_alive && ! is_null($this->death_date) && $this->birth_date->isFuture($this->death_date);
+        return ! is_null($this->death_date) && $this->birth_date->gte($this->death_date);
     }
 
     /* check if rat is dead in the future */
     public function isMartyMcFly() {
-        return ! $this->is_alive && ! is_null($this->death_date) && $this->death_date->isFuture();
+        return ! is_null($this->death_date) && $this->death_date->isFuture();
     }
 
     /* check if rat is young enough to be eligible to infant mortality */
