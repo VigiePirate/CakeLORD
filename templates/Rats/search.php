@@ -7,7 +7,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->element('default_sidebar') ?>
+            <?= $this->element('default_sidebar', ['help_url' => ['controller' => 'Articles', 'action' => 'view', 22]]) ?>
         </div>
     </aside>
     <div class="column-responsive column-90">
@@ -48,7 +48,7 @@
                                     'default' => true,
                                     'label' => [
                                         'class' => 'minicheck',
-                                        'text' => 'Female',
+                                        'text' => __('Female'),
                                     ],
                                 ]);
                                 echo $this->Form->control('sex_m', [
@@ -56,7 +56,7 @@
                                     'default' => true,
                                     'label' => [
                                         'class' => 'minicheck',
-                                        'text' => 'Male',
+                                        'text' => __('Male'),
                                     ],
                                 ]);
                             ?>
@@ -115,7 +115,7 @@
 
                     <div class="row">
                         <div class="column-responsive column-20">
-                            <label><?= __('State') ?></label>
+                            <label><?= __('Health') ?></label>
                             <?php
                                 echo $this->Form->control('alive', [
                                     'type' => 'checkbox',
@@ -137,12 +137,12 @@
                         </div>
                         <div class="column-responsive column-40">
                             <?php
-                                echo $this->Form->control('birth_date_after', ['type' => 'date', 'label' => 'Born after...']);
+                                echo $this->Form->control('birth_date_after', ['type' => 'date', 'label' => __('Born after...')]);
                             ?>
                         </div>
                         <div class="column-responsive column-40">
                             <?php
-                                echo $this->Form->control('birth_date_before', ['type' => 'date', 'label' => 'Born before...']);
+                                echo $this->Form->control('birth_date_before', ['type' => 'date', 'label' => __('Born before...')]);
                             ?>
                         </div>
                     </div>

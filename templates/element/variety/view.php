@@ -4,6 +4,7 @@
                 'controller' => $Varieties,
                 'object' => $variety,
                 'tooltip' => $tooltip,
+                'help_url' =>  ['controller' => 'Articles', 'action' => 'view', 19],
                 'show_staff' => $show_staff,
                 'user' => $user,
                 'is_labo' => true
@@ -36,7 +37,7 @@
                         </tr>
                         <tr>
                             <th><?= __('Genotype') ?></th>
-                            <td><?= h($variety->genotype) ?></td>
+                            <td><?= $variety->genotype ?></td>
                         </tr>
                         <tr>
                             <th><?= __('Mandatory picture?') ?></th>

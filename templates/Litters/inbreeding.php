@@ -8,7 +8,7 @@
     <aside class="column">
         <div class="side-nav">
             <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
+                <?= $this->element('default_sidebar', ['help_url' => ['controller' => 'Articles', 'action' => 'view', 36]]) ?>
             </div>
             <div class="side-nav-group">
                 <div class="tooltip">
@@ -41,7 +41,7 @@
 
             <h2><?= __('Summary') ?></h2>
 
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Longest family tree branch') ?></th>
                     <td id="max_depth">
