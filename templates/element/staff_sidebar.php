@@ -9,8 +9,8 @@
         <?= $this->Html->image('/img/icon-edit-as-staff.svg', [
             'url' => ['controller' => $controller, 'action' => 'edit', $object->id],
             'class' => 'side-nav-icon',
-            'alt' => __('Edit in database')]) ?>
-        <span class="tooltiptext-staff"><?= __('Edit in database') ?></span>
+            'alt' => __('Edit as staff')]) ?>
+        <span class="tooltiptext-staff"><?= __('Edit as staff') ?></span>
     </div>
     <?php else : ?>
         <div class="tooltip-staff disabled">

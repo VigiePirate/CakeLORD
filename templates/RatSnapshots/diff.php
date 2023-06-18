@@ -549,8 +549,8 @@
             <?= $this->Html->image('/img/icon-restore.svg', [
                 'url' => ['controller' => 'rats', 'action' => 'restore', $rat->id, $snapshot->id],
                 'class' => 'side-nav-icon restore-icon',
-                'alt' => __('Edit in database')]) ?>
-            <span class="tooltiptext-staff"><?= __('Edit in database') ?></span>
+                'alt' => __('Restore')]) ?>
+            <span class="tooltiptext-staff"><?= __('Restore') ?></span>
         </div>
     </div>
 

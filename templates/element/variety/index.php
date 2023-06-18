@@ -20,7 +20,7 @@
                     <tr>
                         <!-- <td><?= $this->Number->format($variety->id) ?></td> -->
                         <td><?= $this->Html->link(h($variety->name), ['action' => 'view', $variety->id]) ?></td>
-                        <td><?= h($variety->genotype) ?></td>
+                        <td><?= $variety->genotype ?></td>
                         <td><?= substr(h($variety->description), 0, strpos(h($variety->description), ".")) ?></td>
                         <td><?= $variety->is_picture_mandatory ? '✓' : '' ?></td>
                         <td class="actions">

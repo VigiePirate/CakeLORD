@@ -50,7 +50,7 @@ class StatesController extends AppController
 
         $counts = [
             'rats' => $state->countMy('rats', 'state'),
-            'ratteries' => $state->countMy('rats', 'state'),
+            'ratteries' => $state->countMy('ratteries', 'state'),
             'litters' => $state->countMy('litters', 'state')
         ];
 

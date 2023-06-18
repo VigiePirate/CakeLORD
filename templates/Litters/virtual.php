@@ -60,7 +60,7 @@
 
             <h3><?= __('Summary') ?></h3>
 
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Longest family tree branch') ?></th>
                     <td id="max_depth">
