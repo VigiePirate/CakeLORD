@@ -328,6 +328,15 @@ table.aside-photo>tbody>tr>th{
   width: 44.5%; /* why? */
 }
 
+table.roles>thead>tr>th {
+  white-space: normal;
+  line-height: 1.1;
+}
+
+table.roles>thead>tr>th, table.roles>tbody>tr>td {
+  text-align:center !important;
+}
+
 .column-photo {
   max-height: 24rem;
   overflow: visible; /* hidden ? */
