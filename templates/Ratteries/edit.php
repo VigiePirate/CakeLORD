@@ -57,13 +57,11 @@
                         'value' => $rattery->user_id,
                     ]);
 
-                    echo $this->Form->control('birth_year');
-                    echo $this->Form->control('is_alive');
-                    echo $this->Form->control('is_generic');
-                    echo $this->Form->control('district');
-                    echo $this->Form->control('zip_code');
+                    echo $this->Form->control('birth_year', ['label' => __('Creation year')]);
+                    echo $this->Form->control('district', ['label' => __('Localization (region, district, city...)')]);
+                    echo $this->Form->control('zip_code', ['label' => __('Zipcode (will be used in rattery map)')]);
                     echo $this->Form->control('country_id', ['options' => $countries]);
-                    echo $this->Form->control('website');
+                    echo $this->Form->control('website', ['label' => __x('long', 'Website')]);
 
                     echo $this->Form->control('comments', [
                         'name' => 'comments',
@@ -74,8 +72,11 @@
                         ]
                     ]);
 
-                    echo $this->Form->control('wants_statistic');
+                    echo $this->Form->control('wants_statistic', ['label' => __('Check this box if you want to see and publish your statistics')]);
+                    echo $this->Form->control('wants_statistic', ['label' => __('Check this box if the rattery is active, uncheck it to declare it inactive')]);
+                    echo $this->Form->control('is_generic', ['label' => __('Check this box to declare the rattery as generic')]);
                 ?>
+
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>
