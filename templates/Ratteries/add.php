@@ -56,13 +56,13 @@
                         'empty' => true,
                     ]);
 
-                    echo $this->Form->control('birth_year');
+                    echo $this->Form->control('birth_year', __('Creation year'));
                     echo $this->Form->control('is_alive');
                     echo $this->Form->control('is_generic');
-                    echo $this->Form->control('district');
+                    echo $this->Form->control('district', __('Localization (region, district, city...)'));
                     echo $this->Form->control('zip_code');
                     echo $this->Form->control('country_id', ['options' => $countries]);
-                    echo $this->Form->control('website');
+                    echo $this->Form->control('website', __x('long', 'Website'));
 
                     echo $this->Form->control('comments', [
                         'name' => 'comments',
@@ -73,10 +73,10 @@
                         ]
                     ]);
 
-                    echo $this->Form->control('wants_statistic');
+                    echo $this->Form->control('wants_statistic', __('Show statistics'));
                     echo $this->Form->control('picture_file', [
                         'type' => 'file',
-                        'label' => __('Photo')
+                        'label' => __('Logotype')
                     ]);
 
                 ?>

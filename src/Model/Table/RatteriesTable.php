@@ -147,7 +147,13 @@ class RatteriesTable extends Table
 
         $validator
             ->scalar('birth_year')
-            ->allowEmptyString('birth_year');
+            ->allowEmptyString('birth_year')
+            ->add('birth_year', [
+                'length' => [
+                    'rule' => ['maxLength', 4],
+                    'message' => 'Please enter the year, and only the year, in 4 digits format.',
+                ]
+            ]);
 
         $validator
             ->boolean('is_alive')

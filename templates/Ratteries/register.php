@@ -25,14 +25,23 @@
                 <?php
                     echo $this->Form->control('prefix', ['error' => ['The provided value is invalid' => __('This prefix is already in use')]]);
                     echo $this->Form->control('name');
-                    echo $this->Form->control('birth_year');
-                    echo $this->Form->control('district');
-                    echo $this->Form->control('zip_code');
+                    echo $this->Form->control('birth_year', ['label' => __('Creation year')]);
+                    echo $this->Form->control('district', ['label' => __('Localization (region, district, city...)')]);
+                    echo $this->Form->control('zip_code', ['label' => __('Zipcode (will be used in rattery map)')]);
                     echo $this->Form->control('country_id', ['options' => $countries]);
-                    echo $this->Form->control('website');
-                    echo $this->Form->control('comments');
-                    echo $this->Form->control('wants_statistic');
-                    echo $this->Form->control('picture_file', ['type' => 'file']);
+                    echo $this->Form->control('website', ['label' => __x('long', 'Website')]);
+
+                    echo $this->Form->control('comments', [
+                        'name' => 'comments',
+                        'label' => __('Comments'),
+                        'rows' => '5',
+                        "error" => [
+                            "escape" => false
+                        ]
+                    ]);
+
+                    echo $this->Form->control('wants_statistic', ['label' => __('Check this box if you want to see and publish your statistics')]);
+                    echo $this->Form->control('picture_file', ['label' => __('Logotype'), 'type' => 'file']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
@@ -40,3 +49,27 @@
         </div>
     </div>
 </div>
+
+<!-- Easy MDE -->
+<?= $this->Html->css('easymde.css') ?>
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
+<script>
+    var easyMDE = new EasyMDE({
+        minHeight: "20rem",
+        spellChecker: false,
+        inputStyle: "contenteditable",
+        nativeSpellcheck: true,
+        previewImagesInEditor: true,
+        promptURLs: true,
+        sideBySideFullscreen: false,
+        toolbar: [
+            "bold", "italic", "strikethrough", "|",
+            "unordered-list", "ordered-list", "table", "|",
+            "link", "|",
+            "side-by-side", "fullscreen", "preview", "|",
+            "guide"
+        ]
+    });
+    easyMDE.toggleSideBySide();
+</script>
