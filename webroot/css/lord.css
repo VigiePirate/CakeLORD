@@ -1147,6 +1147,20 @@ footer {
   margin-bottom: 2.0rem;
 }
 
+.input.checkbox label.consent {
+  margin-top: 2rem;
+  font-family: "Alegreya";
+  font-style: italic;
+  font-weight: normal;
+  font-size: 1.8rem;
+  display: block;
+}
+
+.input.checkbox label.consent a {
+  font-style: normal;
+  font-size: 1.7rem;
+}
+
 /* Paginator */
 .paginator {
   text-align: right;
