@@ -30,7 +30,7 @@
                 <th><?= __('Country') ?></th>
             <?php endif; ?>
             <?php if (! in_array('website', $exceptions)): ?>
-                <th class="actions-title"><?= __('Website') ?></th>
+                <th class="actions-title"><?= __x('short', 'Website') ?></th>
             <?php endif; ?>
             <?php if (! in_array('actions', $exceptions)): ?>
                 <th class="actions-title"><?= __('Actions') ?></th>

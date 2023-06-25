@@ -23,6 +23,11 @@
             <h1><?=__('Simulate a litter') ?></h1>
 
             <?= $this->Flash->render() ?>
+
+            <div class="message default" onclick="this.classList.add('hidden')">
+                <?= __('Litter simulation can take several minutes and drain your battery. We do not recommend the use of this feature on smartphones.') ?>
+            </div>
+
             <?= $this->Form->setValueSources(['context', 'data'])->create($litter) ?>
 
             <fieldset>

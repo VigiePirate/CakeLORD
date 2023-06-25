@@ -259,7 +259,7 @@ class LittersTable extends Table
             'mother_selected',
             [
                 'errorField' => 'mother_name',
-                'message' => 'We could not find the mother. Please, select it in the list or type its complete pedigree identifier.'
+                'message' => __('We could not find the mother. Please, select it in the list or type its complete pedigree identifier.')
             ]
         );
 
@@ -270,7 +270,7 @@ class LittersTable extends Table
             'father_selected',
             [
                 'errorField' => 'father_name',
-                'message' => 'We could not find the father. Please, select it in the list or type its complete pedigree identifier.'
+                'message' => __('We could not find the father. Please, select it in the list or type its complete pedigree identifier.')
             ]
         );
 
@@ -281,7 +281,7 @@ class LittersTable extends Table
             'rattery_selected',
             [
                 'errorField' => 'rattery_name',
-                'message' => 'We could not find this rattery. Please, select it in the list or type an existing prefix.'
+                'message' => __('We could not find this rattery. Please, select it in the list or type an existing prefix.')
             ]
         );
 
@@ -292,7 +292,7 @@ class LittersTable extends Table
             'rattery_closed',
             [
                 'errorField' => 'rattery_name',
-                'message' => 'This rattery has been definitely closed. Please, select an eligible rattery (either active, or  the last active rattery of its owner).'
+                'message' => __('This rattery has been definitely closed. Please, select an eligible rattery (either active, or the last active rattery of its owner).')
             ]
         );
 
@@ -316,7 +316,7 @@ class LittersTable extends Table
             'bornFuture',
             [
                 'errorField' => 'birth_date',
-                'message' => 'Impossible: this date is in the future.'
+                'message' => __('Impossible: this date is in the future.')
             ]
         );
 
@@ -327,7 +327,7 @@ class LittersTable extends Table
             'abnormalPregnancy',
             [
                 'errorField' => 'mating_date',
-                'message' => 'Impossible: mating happens at least 20 days and at most 25 days before birth.'
+                'message' => __('Impossible: mating happens at least 20 days and at most 25 days before birth.')
             ]
         );
 
@@ -338,7 +338,7 @@ class LittersTable extends Table
             'wasBornMother',
             [
                 'errorField' => 'birth_date',
-                'message' => 'Impossible: mother had not been born at this date.'
+                'message' => __('Impossible: mother had not been born at this date.')
             ]
         );
 
@@ -348,7 +348,7 @@ class LittersTable extends Table
             'wasBornFather',
             [
                 'errorField' => 'birth_date',
-                'message' => 'Impossible: father had not been born at this date.'
+                'message' => __('Impossible: father had not been born at this date.')
             ]
         );
 
@@ -359,7 +359,7 @@ class LittersTable extends Table
             'wasAliveMother',
             [
                 'errorField' => 'birth_date',
-                'message' => 'Impossible: mother was dead at this date.'
+                'message' => __('Impossible: mother was dead at this date.')
             ]
         );
 
@@ -369,7 +369,7 @@ class LittersTable extends Table
             'wasAliveFather',
             [
                 'errorField' => 'birth_date',
-                'message' => 'Impossible: father was dead too long before this date.'
+                'message' => __('Impossible: father was dead too long before this date.')
             ]
         );
 
@@ -379,7 +379,7 @@ class LittersTable extends Table
             'areCompatibleParents',
             [
                 'errorField' => 'father_name',
-                'message' => 'Impossible: father and mother were never alive at the same time.'
+                'message' => __('Impossible: father and mother were never alive at the same time.')
             ]
         );
 
@@ -390,7 +390,7 @@ class LittersTable extends Table
             'homogeneousBirthDates',
             [
                 'errorField' => 'birth_date',
-                'message' => 'Something went wrong when updating offspring birth dates.'
+                'message' => __('Something went wrong when updating offspring birth dates.')
             ]
         );
 
@@ -400,7 +400,7 @@ class LittersTable extends Table
             'homogeneousPrefixes',
             [
                 'errorField' => 'rattery_name_contribution_1',
-                'message' => 'Something went wrong when updating offspring prefixes.'
+                'message' => __('Something went wrong when updating offspring prefixes.')
             ]
         );
 
@@ -411,7 +411,7 @@ class LittersTable extends Table
             'tooManyPups',
             [
                 'errorField' => 'pups_number',
-                'message' => 'Impossible: lower than the number of recorded pups.'
+                'message' => __('Impossible: lower than the number of recorded pups.')
             ]
         );
 
@@ -421,7 +421,7 @@ class LittersTable extends Table
             'tooManyStillborn',
             [
                 'errorField' => 'pups_number_stillborn',
-                'message' => 'Impossible: larger than the total number of pups.'
+                'message' => __('Impossible: larger than the total number of pups.')
             ]
         );
 

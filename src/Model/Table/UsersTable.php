@@ -190,6 +190,11 @@ class UsersTable extends Table
         if (isset($data['sex']) && $data['sex'] == 'X') {
             $data['sex'] = '';
         }
+
+        // trick for browsers autofill
+        if (isset($data['nickname'])) {
+            $data['username'] = $data['nickname'];
+        }
     }
 
     /**

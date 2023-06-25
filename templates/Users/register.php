@@ -1,12 +1,14 @@
 <?= $this->Flash->render() ?>
 
+<?php $this->assign('title', __('Sign up')) ?>
+
 <div class="users form index content">
     <h1><?= __('Register') ?></h1>
     <?= $this->Form->create($user) ?>
     <fieldset>
         <legend><?= __('In order to create your account, please fill in this form') ?></legend>
 
-        <?= $this->Form->control('username', [
+        <?= $this->Form->control('nickname', [
             'label' => __('Username'),
             'required' => true,
             'error' => [
@@ -17,6 +19,7 @@
         <?= $this->Form->control('email', [
             'label' => __('Email address'),
             'required' => true,
+            'autocomplete' => 'off',
             'error' => [
                 'The provided value is invalid' =>  __('This email is already in use')
             ]
@@ -32,7 +35,7 @@
                 'default' => false,
                 'required' => true,
                 'label' => [
-                    'text' => __('I have read the site’s {0} and its {1} and I agree to all terms and conditions', [
+                    'text' => __('I have read the site’s {0} and its {1} and I agree to all terms and conditions.', [
                         $this->Html->link(__('Legal Notice'), ['controller' => 'Articles', 'action' => 'view', 9]),
                         $this->Html->link(__('Code of conduct'), ['controller' => 'Articles', 'action' => 'view', 9])
                     ]),
