@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Rattery[]|\Cake\Collection\CollectionInterface $ratteries
  */
 ?>
+<?php $this->assign('title', __('Back office')) ?>
 
 <div class="ratteries index content">
     <div class="sheet-heading">

@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\Litter $litter
  */
 ?>
+
+<?php $this->assign('title', __('Litters')) ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">

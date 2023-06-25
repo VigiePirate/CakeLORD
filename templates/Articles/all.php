@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\Article[]|\Cake\Collection\CollectionInterface $articles
  */
 ?>
+
+<?php $this->assign('title',__('All Articles')) ?>
+
 <div class="articles index content">
 <h1><?= __('All Articles') ?></h1>
 <section id="sitemap">

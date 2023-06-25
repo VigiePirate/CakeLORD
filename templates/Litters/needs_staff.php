@@ -5,6 +5,8 @@
  */
 ?>
 
+<?php $this->assign('title', __('Back office')) ?>
+
 <div class="litters index content">
     <div class="sheet-heading">
         <div class="sheet-title pretitle"><?= __('Back office') ?></div>

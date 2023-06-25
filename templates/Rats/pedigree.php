@@ -5,6 +5,8 @@
 */
 ?>
 
+<?php $this->assign('title', h($rat->usual_name)) ?>
+
 <?php if (! $rat->state->is_visible && (is_null($user) || (! is_null($user) && ! $user->can('seePrivate', $rat)))) : ?>
     <div class="row">
         <aside class="column">

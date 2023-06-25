@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Rattery $rattery
  */
 ?>
+<?php $this->assign('title', h($user->username)) ?>
 
 <div class="row">
     <aside class="column">

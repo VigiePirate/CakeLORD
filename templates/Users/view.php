@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
+
+<?php $this->assign('title', h($user->username)) ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">

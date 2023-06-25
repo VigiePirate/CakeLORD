@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
+
+<?php $this->assign('title', __('All users')) ?>
+
 <div class="users index content">
     <?php if ($show_staff) : ?>
         <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>

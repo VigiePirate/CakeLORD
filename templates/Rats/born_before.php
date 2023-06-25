@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\Rat[]|\Cake\Collection\CollectionInterface $rats
  */
 ?>
+
+<?php $this->assign('title', __('Search')) ?>
+
 <div class="rats index content">
     <div class="sheet-heading">
         <div class="sheet-title pretitle"><?= __('Search Results') ?></div>

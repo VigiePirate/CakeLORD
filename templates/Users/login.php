@@ -1,6 +1,8 @@
 <!-- in /templates/Users/login.php -->
 <?= $this->Flash->render() ?>
 
+<?php $this->assign('title', __('Login') ?>
+
 <div class="users form content">
 
     <h1><?= __('Login') ?></h1>

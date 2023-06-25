@@ -5,6 +5,8 @@
 */
 ?>
 
+<?php $this->assign('title', h($rattery->full_name)) ?>
+
 <?php if (! $rattery->state->is_visible && (is_null($user) || (! is_null($user) && ! $user->can('seePrivate', $rattery)))) : ?>
     <div class="row">
         <aside class="column">

@@ -5,6 +5,8 @@
  */
 ?>
 
+<?php $this->assign('title', h($litter->full_name)) ?>
+
 <?php if (! $litter->state->is_visible && (is_null($user) || (! is_null($user) && ! $user->can('seePrivate', $litter)))) : ?>
     <div class="row">
         <aside class="column">

@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\Category $category
  */
 ?>
+
+<?php $this->assign('title', h($category->name)) ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav-group">

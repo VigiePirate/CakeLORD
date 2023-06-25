@@ -5,6 +5,8 @@
  */
 ?>
 
+<?php $this->assign('title', __('Advanced search')) ?>
+
 <div class="lord index content">
     <div class="sheet-heading">
         <div class="sheet-title pretitle"><?= __('Search Results') ?></div>

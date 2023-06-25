@@ -1,5 +1,7 @@
 <?= $this->Flash->render() ?>
 
+<?php $this->assign('title', h($user->username)) ?>
+
 <div class="users form index content">
     <h1><?= __('Reset Password') ?></h1>
     <?= $this->Form->create() ?>

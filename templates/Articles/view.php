@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\Article $article
  */
 ?>
+
+<?php $this->assign('title', h($article->title)) ?>
+
 <div class="row">
     <aside class="column">
         <?= $this->element('tech_sidebar', [
