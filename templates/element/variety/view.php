@@ -1,3 +1,5 @@
+<?php $this->assign('title', __($Variety) . ' - ' . h($variety->name)) ?>
+
 <div class="row">
     <aside class="column">
         <?= $this->element('tech_sidebar', [

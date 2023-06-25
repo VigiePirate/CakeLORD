@@ -5,6 +5,8 @@
  */
 ?>
 
+<?php $this->assign('title', h($rat->usual_name)) ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">

@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\Country $country
  */
 ?>
+
+<?php $this->assign('title', h($country->name)) ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">

@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\Litter $litter
  */
 ?>
+
+<?php $this->assign('title', __('Virtual Litter')) ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">
@@ -36,7 +39,7 @@
                 <div class="sheet-title pretitle"><?= __('Litters') ?></div>
             </div>
 
-            <h1><?= __('Virtual litter: ') . h($dam->usual_name) . ' × ' . h($sire->usual_name) ?></h1>
+            <h1><?= __('Virtual litter: {0} × {1}', [h($dam->usual_name), h($sire->usual_name)]) ?></h1>
 
             <div id="waiting-message" class="message warning">
                 <?= $this->Html->image('/img/icon-warning-spinner.gif', ['class' => 'action-icon'])

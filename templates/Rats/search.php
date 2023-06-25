@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\Rat $rat
  */
 ?>
+
+<?php $this->assign('title', __('Search')) ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">

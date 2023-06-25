@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\Rat $rat
  */
 ?>
+
+<?php $this->assign('title', __('Family of {0}', [h($rat->usual_name)]) ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">
@@ -24,7 +27,7 @@
     <div class="column-responsive column-90">
         <div class="rats view content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= _('Family report') ?></div>
+                <div class="sheet-title pretitle"><?= __('Family report') ?></div>
                 <div class="tooltip-state">
                     <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
                     <span class="tooltiptext-state hide-on-mobile"><?= h($rat->state->name) ?></span>

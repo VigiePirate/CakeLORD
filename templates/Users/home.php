@@ -1,3 +1,5 @@
+<?php $this->assign('title', __('Dashboard')) ?>
+
 <div class="row">
     <aside class="column"/>
         <div class="side-nav">

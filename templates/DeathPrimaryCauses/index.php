@@ -4,6 +4,8 @@
  * @var \App\Model\Entity\DeathPrimaryCause[]|\Cake\Collection\CollectionInterface $deathPrimaryCauses
  */
 ?>
+<?php $this->assign('title', __('Death Categories')) ?>
+
 <div class="deathPrimaryCauses index content">
     <?= $this->Html->link(__('New Death Category'), ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>
     <h1><?= __('Death Categories') ?></h1>

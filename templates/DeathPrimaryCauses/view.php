@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\DeathPrimaryCause $deathPrimaryCause
  */
 ?>
+
+<?php $this->assign('title', h($deathPrimaryCause->name)) ?>
+
 <div class="row">
     <aside class="column">
         <?= $this->element('tech_sidebar', [

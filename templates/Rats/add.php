@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\Rat $rat
  */
 ?>
+
+<?php $this->assign('title', __('Add rat')) ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">
@@ -177,7 +180,7 @@
                                     'class' => 'miniradio',
                                 ],
                                 'required' => 'required',
-                                'options' => ['M' => 'Male', 'F' => 'Female'],
+                                'options' => ['M' => __('Male'), 'F' => __('Female')],
                             ]);
                         ?>
                     </div>

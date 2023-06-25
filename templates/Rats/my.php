@@ -1,3 +1,5 @@
+<?php $this->assign('title', __('My rats')) ?>
+
 <div class="row">
     <aside class="column"/>
         <div class="side-nav">
