@@ -5,6 +5,8 @@
  */
 ?>
 
+<?php $this->assign('title', h($rat->usual_name)) ?>
+
 <?php if (! $rat->state->is_visible && (is_null($user) || (! is_null($user) && ! $user->can('seePrivate', $rat)))) : ?>
     <div class="row">
         <aside class="column">
@@ -170,7 +172,7 @@
         <div class="column-responsive column-90">
             <div class="rats view content">
                 <div class="sheet-heading">
-                    <div class="sheet-title pretitle"><?= _('Rat') ?></div>
+                    <div class="sheet-title pretitle"><?= __('Rat') ?></div>
                     <div class="tooltip-state">
                         <div class="current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
                         <span class="tooltiptext-state hide-on-mobile"><?= h($rat->state->name) ?></span>
@@ -277,14 +279,19 @@
                     </table>
 
                 <h2><?= __('Description') ?></h2>
+                    <!-- <div class="text">
+                        <blockquote>
+                            <?= h($rat->variety) ?>
+                        </blockquote>
+                    </div> -->
                     <table class="condensed">
+                        <tr>
+                            <th><?= __('Variety') ?></th>
+                            <td><?= $rat->variety ?></td>
+                        </tr>
                         <tr>
                             <th><?= __('Color') ?></th>
                             <td><?= $rat->has('color') ? $this->Html->link($rat->color->name, ['controller' => 'Colors', 'action' => 'view', $rat->color->id]) : '' ?></td>
-                        </tr>
-                        <tr>
-                            <th><?= __('Eyecolor') ?></th>
-                            <td><?= $rat->has('eyecolor') ? $this->Html->link($rat->eyecolor->name, ['controller' => 'Eyecolors', 'action' => 'view', $rat->eyecolor->id]) : '' ?></td>
                         </tr>
                         <tr>
                             <th><?= __('Dilution') ?></th>
@@ -301,6 +308,10 @@
                         <tr>
                             <th><?= __('Coat') ?></th>
                             <td><?= $rat->has('coat') ? $this->Html->link($rat->coat->name, ['controller' => 'Coats', 'action' => 'view', $rat->coat->id]) : '' ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Eyecolor') ?></th>
+                            <td><?= $rat->has('eyecolor') ? $this->Html->link($rat->eyecolor->name, ['controller' => 'Eyecolors', 'action' => 'view', $rat->eyecolor->id]) : '' ?></td>
                         </tr>
                         <tr>
                             <th><?= __('Singularities') ?></th>

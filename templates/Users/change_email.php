@@ -1,5 +1,7 @@
 <?= $this->Flash->render() ?>
 
+<?php $this->assign('title', h($user->username)) ?>
+
 <div class="users form index content">
     <h1><?= __('Reset Email') ?></h1>
     <?= $this->Form->create(null, ['autocomplete' => 'off']) ?>
@@ -23,9 +25,9 @@
 
         <legend><?= __('Enter New Email') ?></legend>
         <p class="helper"><?= __('Please note that an activation link message will be sent to this address. If the entered address is invalid, your account will be locked.') ?></p>
-        <?= $this->Form->control('new_email', ['type' => 'email', 'required' => true, 'autocomplete' => 'new-email']) ?>
-        <?= $this->Form->control('confirm_email', ['type' => 'email', 'required' => true, 'autocomplete' => 'do-not-autofill']) ?>
+        <?= $this->Form->control('new_email', ['label' => __('New email'), 'type' => 'email', 'required' => true, 'autocomplete' => 'new-email']) ?>
+        <?= $this->Form->control('confirm_email', ['label' => __('Confirm new email'), 'type' => 'email', 'required' => true, 'autocomplete' => 'do-not-autofill']) ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit new email')); ?>
+    <?= $this->Form->button(__('Submit')); ?>
     <?= $this->Form->end() ?>
 </div>

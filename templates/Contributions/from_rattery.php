@@ -4,8 +4,10 @@
  * @var \App\Model\Entity\Contribution[]|\Cake\Collection\CollectionInterface $contributions
  */
 ?>
+<?php $this->assign('title', __('All Contributions from {0}', [h($ratteries->name)])) ?>
+
 <div class="contributions index content">
-    <h1><?= __('All Contributions from ') . h($ratteries->name) ?></h1>
+    <h1><?= __('All Contributions from {0}', [h($ratteries->name)]) ?></h1>
     <div class="table-responsive">
         <table class="condensed">
             <thead>

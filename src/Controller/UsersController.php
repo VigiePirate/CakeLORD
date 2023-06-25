@@ -172,7 +172,7 @@ class UsersController extends AppController
         // regardless of anything, redirect if user is logged in
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
-            $this->Flash->error('You already have an account, on which you are logged in.');
+            $this->Flash->error(__('You already have an account, on which you are logged in.'));
             return $this->redirect(['controller' => 'users', 'action' => 'my']);
         }
 
@@ -242,7 +242,7 @@ class UsersController extends AppController
                     $user->failed_login_attempts = 0;
                     $user->failed_login_last_date = null;
                     if($this->Users->save($user)) {
-                        $this->Flash->success('Your account has been activated. You can now log in and complete your profile. Welcome on LORD!');
+                        $this->Flash->success(__('Your account has been activated. You can now log in and complete your profile. Welcome on LORD!'));
                         return $this->redirect(['action' => 'login']);
                     } else {
                         return $this->Flash->error(__('Something went wrong. Please, try again or contact an administrator.'));
@@ -521,9 +521,9 @@ class UsersController extends AppController
 
         $user->wants_newsletter = ! $user->wants_newsletter;
         if ($this->Users->save($user)) {
-            $this->Flash->success('Your newsletter preferences have been updated.');
+            $this->Flash->success(__('Your newsletter preferences have been updated.'));
         } else {
-            $this->Flash->error('We could not update your newsletter preferences. Please try again.');
+            $this->Flash->error(__('We could not update your newsletter preferences. Please try again.'));
         }
         return $this->redirect(['action' => 'my']);
     }
@@ -747,7 +747,7 @@ class UsersController extends AppController
                 $authenticator = $this->Authentication->getAuthenticationService()->loadAuthenticator('Authentication.Form');
                 $result = $authenticator->authenticate($this->request);
                 if (! $result->isValid()) {
-                    $this->Flash->error('We could not confirm your identity (incorrect old password). Please retry.');
+                    $this->Flash->error(__('We could not confirm your identity (incorrect old password). Please retry.'));
                     return $this->redirect(['action' => 'changePassword']);
                 }
                 // check if the two passwords are identical
@@ -788,7 +788,7 @@ class UsersController extends AppController
                 $authenticator = $this->Authentication->getAuthenticationService()->loadAuthenticator('Authentication.Form');
                 $result = $authenticator->authenticate($this->request);
                 if (! $result->isValid()) {
-                    $this->Flash->error('We could not confirm your identity (incorrect old password). Please retry.');
+                    $this->Flash->error(__('We could not confirm your identity (incorrect old password). Please retry.'));
                     return $this->redirect(['action' => 'changeEmail']);
                 }
                 // check if the two emails are identical
@@ -828,7 +828,7 @@ class UsersController extends AppController
         $this->Authorization->skipAuthorization();
         $identity = $this->request->getAttribute('identity');
         if (empty($passkey)) {
-            $this->Flash->error('Invalid activation link. Please check your email or try again');
+            $this->Flash->error(__('Invalid activation link. Please check your email or try again'));
             return $this->redirect(['action' => 'register']);
         } else {
            // check passkey and unlock user
@@ -837,13 +837,13 @@ class UsersController extends AppController
 
            // if a user is connected but try the activation link from another account email, we must fail!
            if (empty($user) || (! is_null($identity) && $user->id != $identity->id)) {
-               $this->Flash->error('Invalid confirmation link. Please, check your email inbox or contact an administrator.');
+               $this->Flash->error(__('Invalid confirmation link. Please, check your email inbox or contact an administrator.'));
                return $this->redirect(['action' => 'login']);
            } else {
                // check if activation link is expired
                if (!$user->failed_login_last_date->wasWithinLast('24 hours')) {
                    $this->Users->delete($user);
-                   $this->Flash->error('Expired confirmation link. Please, contact an administrator to unlock your account.');
+                   $this->Flash->error(__('Expired confirmation link. Please, contact an administrator to unlock your account.'));
                    return $this->redirect(['action' => 'register']);
                } else {
                    // activate
@@ -855,7 +855,7 @@ class UsersController extends AppController
                        if (! is_null($identity)) {
                            $this->Authentication->logout();
                        }
-                       $this->Flash->success('Your email change has been confirmed. You can now log in with your new credentials.');
+                       $this->Flash->success(__('Your email change has been confirmed. You can now log in with your new credentials.'));
                        return $this->redirect(['action' => 'login']);
                    } else {
                        return $this->Flash->error(__('Something went wrong. Please, try again or contact an administrator.'));
@@ -905,13 +905,13 @@ class UsersController extends AppController
         $user = $this->Users->get($id);
         $this->Authorization->authorize($user, 'lock');
         if (! $user->is_locked) {
-            $this->Flash->warning('This user was already unlocked.');
+            $this->Flash->warning(__('This user was already unlocked.'));
         } else {
             $user->is_locked = false;
             if ($this->Users->save($user)) {
-                $this->Flash->success('This user is now unlocked.');
+                $this->Flash->success(__('This user is now unlocked.'));
             } else {
-                $this->Flash->error('This user could not be unlocked. Please try again.');
+                $this->Flash->error(__('This user could not be unlocked. Please try again.'));
             }
         }
 
