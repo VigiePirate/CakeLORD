@@ -106,7 +106,8 @@ class LitterPolicy implements BeforePolicyInterface
 
     public function canManageContributions(IdentityInterface $user, Litter $litter)
     {
-        return (! $litter->state->needs_staff_action && $this->isCreator($user, $litter))
+        return ($litter->state->is_default && $this->isCreator($user, $litter))
+            || (! $litter->state->needs_staff_action && $this->isCreator($user, $litter))
             || (! $litter->state->needs_staff_action && $this->isContributor($user, $litter))
             || ($litter->state->needs_staff_action && $user->role->can_edit_others);
     }
