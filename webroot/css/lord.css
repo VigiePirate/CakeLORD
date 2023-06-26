@@ -1240,6 +1240,7 @@ svg {
   border-radius: 0.4rem;
   width: 100%;
   text-align: center;
+  touch-action: none;
 }
 
 .person rect {
