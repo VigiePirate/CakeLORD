@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php $this->assign('title', __('New Rattery') ?>
+<?php $this->assign('title', __('New Rattery')) ?>
 
 <div class="row">
     <aside class="column">
@@ -59,13 +59,11 @@
                         'empty' => true,
                     ]);
 
-                    echo $this->Form->control('birth_year', __('Creation year'));
-                    echo $this->Form->control('is_alive');
-                    echo $this->Form->control('is_generic');
-                    echo $this->Form->control('district', __('Localization (region, district, city...)'));
+                    echo $this->Form->control('birth_year', ['label' => __('Creation year')]);
+                    echo $this->Form->control('district', ['label' => __('Localization (region, district, city...)')]);
                     echo $this->Form->control('zip_code');
                     echo $this->Form->control('country_id', ['options' => $countries]);
-                    echo $this->Form->control('website', __x('long', 'Website'));
+                    echo $this->Form->control('website', ['label' => __x('long', 'Website')]);
 
                     echo $this->Form->control('comments', [
                         'name' => 'comments',
@@ -76,7 +74,10 @@
                         ]
                     ]);
 
-                    echo $this->Form->control('wants_statistic', __('Show statistics'));
+                    echo $this->Form->control('wants_statistic', ['label' => __('Check this box if you want to see and publish your statistics')]);
+                    echo $this->Form->control('wants_statistic', ['label' => __('Check this box if the rattery is active, uncheck it to declare it inactive')]);
+                    echo $this->Form->control('is_generic', ['label' => __('Check this box to declare the rattery as generic')]);
+                
                     echo $this->Form->control('picture_file', [
                         'type' => 'file',
                         'label' => __('Logotype')

@@ -6,7 +6,7 @@
 
 <div class="side-nav">
     <div class="side-nav-group">
-        <?= $this->element('default_sidebar', isset($help_url) ? $help_url : ['controller' => 'Faqs', 'action' => 'all']) ?>
+        <?= $this->element('default_sidebar', ['help_url' => isset($help_url) ? $help_url : ['controller' => 'Faqs', 'action' => 'all']]) ?>
     </div>
     <div class="side-nav-group">
         <?php if (isset($can_cancel) && $can_cancel) : ?>
