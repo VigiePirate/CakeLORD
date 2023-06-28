@@ -240,6 +240,12 @@ class LittersController extends AppController
         $this->Authorization->authorize($litter, 'add');
 
         $parents = $this->request->getParam('pass');
+
+        if (count($parents) != 2) {
+            $this->Flash->error(__('We could not find the parents you indicated. Please, ensure you selected them properly in the list, or retry with their identifiers.'));
+            return $this->redirect(['action' => 'simulate']);
+        }
+
         $data['mother_id'] = $parents[0];
         $data['father_id'] = $parents[1];
 
