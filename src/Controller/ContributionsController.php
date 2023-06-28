@@ -84,6 +84,7 @@ class ContributionsController extends AppController
         // Pass variables into the view template context.
         $this->paginate = [
             'contain' => ['Litters', 'Litters.States', 'Litters.Sire', 'Litters.Dam', 'Ratteries', 'ContributionTypes'],
+            'sortableFields' => ['Litters.birth_date', 'ContributionTypes.name', 'Litters.pups_number']
         ];
         $contributions = $this->paginate($contributions);
 
