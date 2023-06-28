@@ -368,6 +368,7 @@ class Rat extends Entity
             // trim cause before first comma or parenthesis for concision
             $cause = strpos($cause, "(") ? substr($cause, 0, strpos($cause, "(")) : $cause;
             if( strlen($cause) > 12 ) {
+                $cause = strpos($cause, " ou ") ? substr($cause, 0, strpos($cause, " ou ")) . ', etc.' : $cause;
                 $cause = strpos($cause, "," , 12) ? substr($cause, 0, strpos($cause, "," , 12)) . ', etc.' : $cause;
             }
         } else {
