@@ -15,7 +15,8 @@
                     'tooltip' => 'Browse Rattery List',
                     'can_cancel' => true,
                     'show_staff' => $show_staff,
-                    'user' => $user
+                    'user' => $user,
+                    'help_url' => ['controller' => 'Articles', 'action' => 'view', 29]
                 ])
             ?>
         </div>
@@ -77,6 +78,12 @@
                     echo $this->Form->control('wants_statistic', ['label' => __('Check this box if you want to see and publish your statistics')]);
                     echo $this->Form->control('wants_statistic', ['label' => __('Check this box if the rattery is active, uncheck it to declare it inactive')]);
                     echo $this->Form->control('is_generic', ['label' => __('Check this box to declare the rattery as generic')]);
+
+                    echo $this->Form->control('picture_file', [
+                        'type' => 'file',
+                        'label' => __('Logotype')
+                    ]);
+
                 ?>
 
             </fieldset>
