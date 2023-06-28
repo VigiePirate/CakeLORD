@@ -12,18 +12,20 @@
         <table class="condensed">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('litter_id') ?></th>
-                    <th><?= $this->Paginator->sort('contribution_type_id') ?></th>
+                    <th><?= $this->Paginator->sort('Litters.birth_date', ['label' => __x('litter', 'Birth date')]) ?></th>
+                    <th class="col-head"><?= __('Parents') ?></th>
+                    <th><?= $this->Paginator->sort('ContributionTypes.name', ['label' => __('Contribution Type')]) ?></th>
+                    <th><?= $this->Paginator->sort('Litters.pups_number', ['label' => __('Size')]) ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($contributions as $contribution): ?>
                 <tr>
-                    <td><?= $this->Number->format($contribution->id) ?></td>
-                    <td><?= $contribution->has('litter') ? $this->Html->link($contribution->litter->full_name, ['controller' => 'Litters', 'action' => 'view', $contribution->litter->id]) : '' ?></td>
+                    <td><?= $contribution->has('litter') ? $this->Html->link($contribution->litter->birth_date, ['controller' => 'Litters', 'action' => 'view', $contribution->litter->id]) : '' ?></td>
+                    <td><?= $contribution->has('litter') ? $contribution->litter->parents_name : '' ?></td>
                     <td><?= $contribution->has('contribution_type') ? h($contribution->contribution_type->name) : '' ?></td>
+                    <td><?= $contribution->has('litter') ? $contribution->litter->pups_number : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
                             'url' => ['controller' => 'Contributions', 'action' => 'manageContributions', $contribution->litter->id],
