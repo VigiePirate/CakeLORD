@@ -271,7 +271,7 @@
                         </tr>
                     <tr>
                         <th><?= __('Stillborn pups') ?></th>
-                        <td><?= __('{0, plural, =0{No pup} =1{1 pup} other{# pups}}', [$litter->pups_number_stillborn]) ?></td>
+                        <td><?= __('{0, plural, =0{No stillborn pup} =1{1 stillborn pup} other{# stillborn pups}}', [$litter->pups_number_stillborn]) ?></td>
                     </tr>
                     <tr>
                         <th><?= __('Inbreeding') ?></th>
