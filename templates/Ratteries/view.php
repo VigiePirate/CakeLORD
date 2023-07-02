@@ -312,15 +312,15 @@
                                 <tr>
                                     <th><?= __('Total breeding activity:') ?></th>
                                     <td><?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['inLitterCount']+$stats['outLitterCount']]) ?>,
-                                        <?= __('{0, plural, =1{1 pup} other{# pups}}', [$stats['inRatCount']+$stats['outRatCount']]) ?>
+                                        <?= __('{0, plural, =0{No pup} =1{1 pup} other{# pups}}', [$stats['inRatCount']+$stats['outRatCount']]) ?>
                                 </tr>
                                 <tr>
                                     <th> ⨽ <?= __('internal (born in the rattery):') ?></th>
-                                    <td> ⨽ <?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['inLitterCount']]) ?>, <?= __('{0, plural, =1{1 pup} other{# pups}}', [$stats['inRatCount']]) ?></td>
+                                    <td> ⨽ <?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['inLitterCount']]) ?>, <?= __('{0, plural, =0{No pup} =1{1 pup} other{# pups}}', [$stats['inRatCount']]) ?></td>
                                 </tr>
                                 <tr>
                                     <th> ⨽ <?= __('external (other contributed litters):') ?></th>
-                                    <td> ⨽ <?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['outLitterCount']]) ?>, <?= __('{0, plural, =1{1 pup} other{# pups}}', [$stats['outRatCount']]) ?><!--, with xx different partner ratteries--></td>
+                                    <td> ⨽ <?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['outLitterCount']]) ?>, <?= __('{0, plural, =0{No pup} =1{1 pup} other{# pups}}', [$stats['outRatCount']]) ?><!--, with xx different partner ratteries--></td>
                                 </tr>
                             </table>
 
@@ -358,7 +358,7 @@
                                     </tr>
                                     <tr>
                                         <th><?= __('Average litter size:') ?></th>
-                                        <td><?= __('{0, plural, =1{1 pup} other{# pups}} per litter', [$stats['avg_litter_size']]) ?></td>
+                                        <td><?= __('{0, plural, =0{No pup} =1{1 pup} other{# pups}} per litter', [$stats['avg_litter_size']]) ?></td>
                                     </tr>
                                     <tr>
                                         <th><?= __('Average sex ratio:') ?></th>

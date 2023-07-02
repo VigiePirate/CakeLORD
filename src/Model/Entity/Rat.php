@@ -389,7 +389,7 @@ class Rat extends Entity
         $earset = ($this->earset_id == 1) ? '' : $this->earset->name;
         // don't write marking if rat has a dilution
         $marking = ($this->marking_id == 1 || $dilution != '') ? '' : $this->marking->name;
-        $marking .= ' ' . $this->singularity_string;
+        $marking .= ' ' . str_replace(',', '', $this->singularity_string);
         $variety = $dilution . ' ' . $color . ' ' . $marking . ' ' . $earset . ' ' . $coat;
         return ucfirst(mb_strtolower(trim($variety)));
     }
