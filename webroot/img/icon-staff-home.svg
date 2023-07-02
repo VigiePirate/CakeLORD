@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0beta1 (fe3e306, 2019-09-17)"
+   sodipodi:docname="icon-staff-home.svg"
+   version="1.1"
+   viewBox="0 0 60 60"
+   data-name="Layer 1"
+   id="Layer_1">
+  <metadata
+     id="metadata15">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>icon-staff-home</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:current-layer="Layer_1"
+     inkscape:window-maximized="1"
+     inkscape:window-y="-9"
+     inkscape:window-x="-9"
+     inkscape:cy="39.814382"
+     inkscape:cx="-2.3839985"
+     inkscape:zoom="8"
+     showgrid="false"
+     id="namedview13"
+     inkscape:window-height="1001"
+     inkscape:window-width="1920"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     inkscape:document-rotation="0"
+     bordercolor="#666666"
+     pagecolor="#ffffff">
+    <inkscape:grid
+       id="grid832"
+       type="xygrid" />
+  </sodipodi:namedview>
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient1459"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop1457" />
+    </linearGradient>
+    <style
+       id="style2">.cls-1{fill:#630;}.cls-2{fill:none;stroke:#630;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.5px;}</style>
+  </defs>
+  <title
+     id="title6">icon-staff-home</title>
+  <path
+     sodipodi:nodetypes="cscccccccccccccsssssccccccccc"
+     inkscape:connector-curvature="0"
+     id="path2"
+     d="m 58.57615,24.68436 2.5e-5,-3e-6 L 31.853406,2.6777143 c -0.0029,-0.00287 -0.0073,-0.00436 -0.01166,-0.00733 -0.110761,-0.091817 -0.233182,-0.1654141 -0.355603,-0.2382842 -0.04444,-0.026238 -0.08379,-0.060478 -0.129708,-0.084527 -0.102747,-0.053921 -0.212051,-0.089628 -0.319169,-0.1304374 -0.728374,-0.2942585 -1.416926,-0.1484866 -2.088445,0.00583 -0.102747,0.039351 -0.20768,0.073602 -0.306053,0.1246075 -0.167082,0.1023001 -0.34165,0.2270829 -0.48677,0.3235381 -0.0029,0.00218 -0.0065,0.00366 -0.0095,0.00654 L 1.4237556,24.684357 c -1.24242711,1.023091 -1.42022998,2.860136 -0.3964102,4.102563 0.576399,0.69955 1.4107561,1.061712 2.251673,1.061712 12.4869746,0.06439 6.5808604,13.515723 6.5808604,24.451422 0,1.60969 1.3050962,3.113162 2.9147872,3.113162 0,0 5.080263,-0.02329 8.625996,-0.02329 0,0 -4.677516,-20.520903 8.59821,-20.617191 13.486369,-0.09782 6.917552,20.631948 7.471232,20.628591 3.949311,-0.02394 9.753704,0.01189 9.753704,0.01189 1.60969,0 2.914787,-1.503478 2.914787,-3.113168 2.130423,-13.589931 -7.551395,-24.45215 6.577946,-24.45215 h 0.0044 0.0044 0.126794 l -0.01311,-0.01311 c 0.800109,-0.03206 1.584187,-0.381838 2.133625,-1.048595 1.023818,-1.242428 0.846016,-3.079473 -0.396412,-4.101835 z"
+     style="fill:#663300;fill-opacity:1;stroke:#663300;stroke-width:0.728696;stroke-opacity:1" />
+</svg>

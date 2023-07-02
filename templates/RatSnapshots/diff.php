@@ -25,7 +25,7 @@
             <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
                 <?= $this->Html->image(UPLOADS . $snap_rat->picture, ['alt' => $rat->pedigree_identifier, 'url' => ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
             <?php else : ?>
-                <?= $this->Html->image('UnknownRat.svg') ?>
+                <?= $this->Html->image('UnknownRat.svg', ['alt' => $rat->pedigree_identifier, 'url' => ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
             <?php endif; ?>
             </div>
 
@@ -286,7 +286,7 @@
             <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
                 <?= $this->Html->image(UPLOADS . $rat->picture, ['alt' => $rat->pedigree_identifier, 'url' =>  ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
             <?php else : ?>
-                <?= $this->Html->image('UnknownRat.svg') ?>
+                <?= $this->Html->image('UnknownRat.svg', ['alt' => $rat->pedigree_identifier, 'url' => ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
             <?php endif; ?>
             </div>
 

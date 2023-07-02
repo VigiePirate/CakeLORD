@@ -49,3 +49,12 @@
         <span class="tooltiptext-staff"><?= __('See all litters') ?></span>
     </div>
 </div>
+<div class="side-nav-group">
+    <div class="tooltip">
+        <?= $this->Html->image('/img/icon-staff-home.svg', [
+            'url' => ['controller' => 'Users', 'action' => 'home'],
+            'class' => 'side-nav-icon',
+            'alt' => __('My dashboard')]) ?>
+        <span class="tooltiptext"><?= __('Dashboard') ?></span>
+    </div>
+</div>
