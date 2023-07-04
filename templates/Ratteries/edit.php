@@ -27,7 +27,7 @@
                 <div class="sheet-title pretitle"><?= __('Ratteries') ?></div>
             </div>
             <h1><?=__('Edit {0}', [h($rattery->full_name)]) ?></h1>
-            <?= $this->Form->setValueSources(['context', 'data'])->create($rattery) ?>
+            <?= $this->Form->setValueSources(['context', 'data'])->create($rattery, ['type' => 'file']) ?>
             <fieldset>
                 <?php
                     echo $this->Form->control('prefix', [
