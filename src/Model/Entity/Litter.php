@@ -6,6 +6,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 use Cake\I18n\FrozenTime;
 //use Cake\ORM\Locator\LocatorAwareTrait;
+use Cake\Collection\Collection;
 use Cake\Datasource\FactoryLocator;
 use App\Model\Entity\StatisticsTrait;
 use App\Model\Table\RatsTable;
@@ -363,15 +364,13 @@ class Litter extends Entity
 
     }
 
-    public function offspringCount() {
-        return count($this->offspring_rats);
-    }
-
     /* Statistics */
 
     // survival rate in litter does not use StatisticsTrait because of right censoring
     public function computeIntermediateSurvivalRate($offsprings = []) {
-        $total = $this->offspringCount();
+        $offsprings = new Collection($offsprings);
+        $total = $offsprings->count();
+
         $ages = [];
         $k_max = min([RatsTable::MAXIMAL_AGE_MONTHS, $this->max_age]);
         foreach($offsprings as $offspring) {
@@ -411,7 +410,7 @@ class Litter extends Entity
         $stats['female_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
         $stats['male_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
 
-        $stats['survivors'] = $this->pups_number == 0 ? 0 : 100 * round($this->countMy('rats', 'litter', ['is_alive IS' => true])/$this->pups_number,2);
+        $stats['survivors'] = $this->pups_number == 0 ? 0 : 100 * round($this->countMy('rats', 'litter', ['is_alive IS' => true, 'litter_id' => $this->id])/$this->pups_number,2);
         $stats['survival'] = $this->computeIntermediateSurvivalRate($offsprings);
 
         return $stats;

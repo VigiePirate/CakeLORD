@@ -34,7 +34,7 @@ trait StatisticsTrait
 
         $query = $model->find()->where($filter);
 
-        if ($model->associations()->has('States')) {
+        if (! isset($options['litter_id']) && $model->associations()->has('States')) {
             $query = $query->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
             });
@@ -636,7 +636,7 @@ trait StatisticsTrait
             ->where($filter);
 
         // exclude unreliable sheets everywhere but on user personal stats
-        if (! isset($options['owner_user_id'])) {
+        if (! isset($options['owner_user_id']) && ! isset($options['Rats.litter_id'])) {
             $lifespan->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
             });

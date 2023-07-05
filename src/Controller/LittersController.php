@@ -93,7 +93,13 @@ class LittersController extends AppController
                                 });
         $offsprings = $this->paginate($offspringsQuery);
 
-        $stats = $litter->wrapStatistics($offsprings);
+        // exclude lost rats from statistics
+        $stats_offsprings = $this->paginate($offspringsQuery->where(['OR' => [
+            'death_secondary_cause_id !=' => '1',
+            'death_secondary_cause_id IS' => null,
+        ]]));
+
+        $stats = $litter->wrapStatistics($stats_offsprings);
 
         $this->loadModel('States');
         if($litter->state->is_frozen) {
