@@ -175,6 +175,16 @@ class Litter extends Entity
         }
     }
 
+    protected function _getReliablePupsNumber()
+    {
+        $total = count($this->offspring_rats);
+        $offspring = new Collection($this->offspring_rats);
+        $lost = $offspring->filter(function ($rat, $key) {
+            return $rat->death_secondary_cause_id == '1';
+        })->count();
+        return ($total-$lost);
+    }
+
     /* rules */
 
     public function hasBirthPlace()
@@ -410,7 +420,12 @@ class Litter extends Entity
         $stats['female_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
         $stats['male_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
 
-        $stats['survivors'] = $this->pups_number == 0 ? 0 : 100 * round($this->countMy('rats', 'litter', ['is_alive IS' => true, 'litter_id' => $this->id])/$this->pups_number,2);
+        $stats['survivors'] = $this->reliable_pups_number == 0
+            ? 0
+            : 100 * round($this->countMy('rats', 'litter', [
+                'is_alive IS' => true,
+                'litter_id' => $this->id,
+                ])/$this->reliable_pups_number,2);
         $stats['survival'] = $this->computeIntermediateSurvivalRate($offsprings);
 
         return $stats;
