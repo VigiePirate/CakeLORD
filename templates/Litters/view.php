@@ -339,7 +339,7 @@
                             <span class="comment">
                                 <?= $stats['survivors'] == 0
                                     ? __('(all rats of the litter are now dead, or supposed so)')
-                                    : __x('age', '(at {0, plural, =0{0 month} =1{1 month} other{# months}})', [$stats['max_age']])
+                                    : __('(at {0})', [$stats['max_age']]);
                                  ?>
                             </span>
                             </td>

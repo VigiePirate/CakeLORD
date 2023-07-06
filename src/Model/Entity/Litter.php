@@ -169,7 +169,10 @@ class Litter extends Entity
     {
         if (isset($this->birth_date)) {
             $agedate = $this->birth_date;
-            return __('{0, plural, =0{<1 month} =1{1 month} other{# months}}', [$agedate->diffInMonths()]);
+            $now = \Cake\I18n\FrozenTime::now();
+            //TODO: replace by age in human form: months weeks days etc.
+            //return __('{0, plural, =0{<1 month} =1{1 month} other{# months}}', [$agedate->diffInMonths()]);
+            return $now->timeAgoInWords(['from' => $agedate, 'accuracy' => ['year' => 'day']]);
         } else { // should raise exception
             return __x('age', 'Unknown');
         }
