@@ -102,6 +102,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <script>
+    var jsMessages = <?php echo $js_messages; ?>;
+
     $(function() {
 
     	$('#primaries').change(function() {
@@ -115,7 +117,7 @@
                     $("#secondaries option").remove();
                     $('#secondaries').append($("<option></option>").attr("value","").text(""));
                     $('#secondary-desc').empty();
-                    $('#secondary-desc').append("Please, read carefully information that will appear below to check the fitness of your choice.");
+                    $('#secondary-desc').append(jsMessages[0]);
                     for (var item in data.items) {
                         var x = document.getElementById("secondaries");
                         var option = document.createElement("option");
@@ -142,7 +144,7 @@
                     var p = document.getElementById("secondary-desc");
                     var comment = data.items['0'].value;
                     if (comment == "-") {
-                        p.innerHTML = "Please answer the following questions about euthanasia, diagnostics and analyses.";
+                        p.innerHTML = jsMessages[1];
                     } else {
                         p.innerHTML = comment;
                     }

@@ -317,6 +317,11 @@ class RatsController extends AppController
 
         $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')->order(['id' => 'ASC']);
 
+        $js_messages = json_encode([
+            __('Please, read carefully information that will appear below to check the fitness of your choice.'),
+            __('Please answer the following questions about euthanasia, diagnostics and analyses.'),
+        ]);
+
         $this->set(compact(
             'rat',
             'colors',
@@ -329,6 +334,7 @@ class RatsController extends AppController
             'deathPrimaryCauses',
             'states',
             'creator_id',
+            'js_messages'
         ));
     }
 
@@ -1089,7 +1095,11 @@ class RatsController extends AppController
             $this->Flash->default(__('We are sorry for your loss. Please fill the information below to record the rat death. Date and primary cause are mandatory.'));
         }
         $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')->order(['id' => 'ASC']);
-        $this->set(compact('rat','deathPrimaryCauses'));
+        $js_messages = json_encode([
+            __('Please, read carefully information that will appear below to check the fitness of your choice.'),
+            __('Please answer the following questions about euthanasia, diagnostics and analyses.'),
+        ]);
+        $this->set(compact('rat','deathPrimaryCauses', 'js_messages'));
     }
 
     /**

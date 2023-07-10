@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-07-02 17:29+0000\n"
+"POT-Creation-Date: 2023-07-06 19:05+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -152,8 +152,8 @@ msgstr ""
 #: ./src/Controller/DeathPrimaryCausesController.php:57
 #: ./src/Controller/DeathSecondaryCausesController.php:58
 #: ./src/Controller/DeathSecondaryCausesController.php:59
-#: ./src/Controller/LittersController.php:706
-#: ./src/Controller/LittersController.php:707
+#: ./src/Controller/LittersController.php:712
+#: ./src/Controller/LittersController.php:713
 #: ./src/Model/Entity/Rattery.php:209
 #: ./src/Model/Entity/Rattery.php:210
 #: ./src/Model/Entity/Rattery.php:260
@@ -316,106 +316,106 @@ msgstr ""
 msgid "The litter snapshot could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:119
+#: ./src/Controller/LittersController.php:125
 #: ./src/Controller/LordController.php:233
 msgid "Survival rate"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:120
+#: ./src/Controller/LittersController.php:126
 #: ./src/Controller/LordController.php:203
 msgid "Age (in months)"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:121
+#: ./src/Controller/LittersController.php:127
 #: ./src/Controller/LordController.php:234
 msgid "Survival rate (%)"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:122
+#: ./src/Controller/LittersController.php:128
 msgid "Survival rate by age"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:123
+#: ./src/Controller/LittersController.php:129
 msgid " % of litter pups reached this age"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:169
+#: ./src/Controller/LittersController.php:175
 msgid "The litter has been saved and will be examined by the staff soon. Please, check if automatically added contributions are correct."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:172
+#: ./src/Controller/LittersController.php:178
 msgid "The litter could not be saved. Please, read explanatory messages in the form, check and correct your entry, and try again."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:174
+#: ./src/Controller/LittersController.php:180
 msgid "This litter already exists. You can add rats to it directly."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:178
+#: ./src/Controller/LittersController.php:184
 msgid "Only registered users are allowed to register a new litter. Please sign in or sign up before proceeding."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:182
+#: ./src/Controller/LittersController.php:188
 msgid "Please record the litter’s main information below. You will be able to add rats to the litter just after."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:245
+#: ./src/Controller/LittersController.php:251
 msgid "We could not find the parents you indicated. Please, ensure you selected them properly in the list, or retry with their identifiers."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:313
+#: ./src/Controller/LittersController.php:319
 msgid "Virtual litter"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:316
+#: ./src/Controller/LittersController.php:322
 msgid "Expected prefix: "
 msgstr ""
 
-#: ./src/Controller/LittersController.php:317
+#: ./src/Controller/LittersController.php:323
 msgid "Mating window: "
 msgstr ""
 
-#: ./src/Controller/LittersController.php:325
-#: ./src/Controller/LittersController.php:913
+#: ./src/Controller/LittersController.php:331
+#: ./src/Controller/LittersController.php:919
 msgid "Easy peasy."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:326
-#: ./src/Controller/LittersController.php:914
+#: ./src/Controller/LittersController.php:332
+#: ./src/Controller/LittersController.php:920
 msgid "Quite a lot, but I have seen worse."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:327
-#: ./src/Controller/LittersController.php:915
+#: ./src/Controller/LittersController.php:333
+#: ./src/Controller/LittersController.php:921
 msgid "Wow, that was pretty intense!"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:328
-#: ./src/Controller/LittersController.php:916
+#: ./src/Controller/LittersController.php:334
+#: ./src/Controller/LittersController.php:922
 msgid "Oops, we hope your device is not smoking."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:329
-#: ./src/Controller/LittersController.php:917
+#: ./src/Controller/LittersController.php:335
+#: ./src/Controller/LittersController.php:923
 msgid "You know some LORD’s developers in person, don’t you?"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:330
-#: ./src/Controller/LittersController.php:918
+#: ./src/Controller/LittersController.php:336
+#: ./src/Controller/LittersController.php:924
 #: ./templates/Litters/inbreeding_approx.php:39
 #: ./templates/Litters/inbreeding_approx.php:44
 msgid "generation"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:331
-#: ./src/Controller/LittersController.php:919
+#: ./src/Controller/LittersController.php:337
+#: ./src/Controller/LittersController.php:925
 #: ./templates/Litters/inbreeding_approx.php:39
 #: ./templates/Litters/inbreeding_approx.php:44
 msgid "generations"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:332
-#: ./src/Controller/LittersController.php:920
+#: ./src/Controller/LittersController.php:338
+#: ./src/Controller/LittersController.php:926
 #: ./templates/Litters/inbreeding_approx.php:49
 #: ./templates/Litters/inbreeding_approx.php:54
 #: ./templates/Litters/inbreeding_approx.php:59
@@ -423,8 +423,8 @@ msgstr ""
 msgid "rat"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:333
-#: ./src/Controller/LittersController.php:921
+#: ./src/Controller/LittersController.php:339
+#: ./src/Controller/LittersController.php:927
 #: ./templates/Litters/inbreeding_approx.php:49
 #: ./templates/Litters/inbreeding_approx.php:54
 #: ./templates/Litters/inbreeding_approx.php:59
@@ -435,123 +435,123 @@ msgstr ""
 msgid "rats"
 msgstr ""
 
-#: ./src/Controller/LittersController.php:368
+#: ./src/Controller/LittersController.php:374
 msgid "The litter has been saved. If parents were edited, you might have to manually correct contributions."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:372
+#: ./src/Controller/LittersController.php:378
 msgid "The litter could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:389
+#: ./src/Controller/LittersController.php:395
 msgid "For data coherence, modifications of litters are restricted. Please, contact a staff member to change parents or birth date."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:416
+#: ./src/Controller/LittersController.php:422
 msgid "Your new comment about the litter has been saved."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:419
+#: ./src/Controller/LittersController.php:425
 msgid "Your new comment about the litter could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:454
+#: ./src/Controller/LittersController.php:460
 msgid "The litter’s contributing ratteries have been updated."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:457
+#: ./src/Controller/LittersController.php:463
 msgid "The litter’s contributing ratteries could not be updated. Please, try again."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:459
+#: ./src/Controller/LittersController.php:465
 msgid "You can add, edit or delete contributing ratteries below. Please, contact a staff member to edit the birth place."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:520
+#: ./src/Controller/LittersController.php:526
 msgid "This rat has been successfully attached to the requested birth litter. Pups number might have to be checked."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:528
+#: ./src/Controller/LittersController.php:534
 msgid "We could not attach the selected rat to this litter."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:554
+#: ./src/Controller/LittersController.php:560
 msgid "The litter has been deleted."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:556
+#: ./src/Controller/LittersController.php:562
 msgid "The litter could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:577
-#: ./src/Controller/RatsController.php:499
+#: ./src/Controller/LittersController.php:583
+#: ./src/Controller/RatsController.php:504
 #: ./src/Controller/RatteriesController.php:261
 msgid "The snapshot has been restored."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:579
-#: ./src/Controller/RatsController.php:501
+#: ./src/Controller/LittersController.php:585
+#: ./src/Controller/RatsController.php:506
 #: ./src/Controller/RatteriesController.php:263
 msgid "The snapshot could not be loaded. Please, try again."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:885
+#: ./src/Controller/LittersController.php:891
 msgid "This litter has a long or complicated family tree. We had to truncate it in order to compute (reasonably) approximate results."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:887
+#: ./src/Controller/LittersController.php:893
 msgid "Good news! This litter’s family tree is simple enough and we managed to compute exact results."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:933
+#: ./src/Controller/LittersController.php:939
 msgid "This litter sheet is now frozen."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:935
-#: ./src/Controller/RatsController.php:1138
+#: ./src/Controller/LittersController.php:941
+#: ./src/Controller/RatsController.php:1147
 #: ./src/Controller/RatteriesController.php:642
 msgid "We could not freeze the sheet. Please retry or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:947
+#: ./src/Controller/LittersController.php:953
 msgid "This litter sheet is now unfrozen."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:949
-#: ./src/Controller/RatsController.php:1152
+#: ./src/Controller/LittersController.php:955
+#: ./src/Controller/RatsController.php:1161
 #: ./src/Controller/RatteriesController.php:655
 msgid "We could not thaw the sheet. Please retry or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:960
-#: ./src/Controller/RatsController.php:1164
+#: ./src/Controller/LittersController.php:966
+#: ./src/Controller/RatsController.php:1173
 msgid "This rat sheet has been approved."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:962
-#: ./src/Controller/RatsController.php:1166
+#: ./src/Controller/LittersController.php:968
+#: ./src/Controller/RatsController.php:1175
 #: ./src/Controller/RatteriesController.php:668
 msgid "We could not approve the sheet. Please retry or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:973
-#: ./src/Controller/RatsController.php:1178
+#: ./src/Controller/LittersController.php:979
+#: ./src/Controller/RatsController.php:1187
 msgid "This rat sheet has been unapproved."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:975
-#: ./src/Controller/RatsController.php:1180
+#: ./src/Controller/LittersController.php:981
+#: ./src/Controller/RatsController.php:1189
 #: ./src/Controller/RatteriesController.php:681
 msgid "We could not unapprove the sheet. Please retry or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:124
+#: ./src/Controller/LittersController.php:130
 #: ./src/Controller/LordController.php:208
 msgctxt "litter statistics"
 msgid "Age: between "
 msgstr ""
 
-#: ./src/Controller/LittersController.php:125
+#: ./src/Controller/LittersController.php:131
 msgctxt "litter statistics"
 msgid " and "
 msgstr ""
@@ -560,7 +560,7 @@ msgstr ""
 msgid " and "
 msgstr ""
 
-#: ./src/Controller/LittersController.php:126
+#: ./src/Controller/LittersController.php:132
 msgctxt "litter statistics"
 msgid " months"
 msgstr ""
@@ -827,7 +827,7 @@ msgid "You have rat sheets to correct!"
 msgstr ""
 
 #: ./src/Controller/RatsController.php:208
-msgid "The rat has been saved and attached to the above litter."
+msgid "The rat has been saved and attached to the litter below."
 msgstr ""
 
 #: ./src/Controller/RatsController.php:211
@@ -849,7 +849,7 @@ msgid "The rat and its birth litter could not be saved. Please, read explanatory
 msgstr ""
 
 #: ./src/Controller/RatsController.php:245
-#: ./src/Controller/RatsController.php:368
+#: ./src/Controller/RatsController.php:373
 msgid "The rat has been saved."
 msgstr ""
 
@@ -857,81 +857,93 @@ msgstr ""
 msgid "Please record the rat’s information below. When in doubt, please check documentation before entering data."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:371
+#: ./src/Controller/RatsController.php:321
+#: ./src/Controller/RatsController.php:1098
+#: ./templates/Rats/add.php:294
+#: ./templates/Rats/add.php:338
+#: ./templates/Rats/declare_death.php:67
+msgid "Please, read carefully information that will appear below to check the fitness of your choice."
+msgstr ""
+
+#: ./src/Controller/RatsController.php:376
 msgid "The rat could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:386
+#: ./src/Controller/RatsController.php:391
 msgid "For data coherence, modifications of rats are restricted. Please, contact a staff member to change origins or birth date."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:416
+#: ./src/Controller/RatsController.php:421
 msgid "The rat has been deleted."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:418
+#: ./src/Controller/RatsController.php:423
 msgid "The rat could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1006
+#: ./src/Controller/RatsController.php:1011
 msgid "The rat’s picture has been deleted."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1009
+#: ./src/Controller/RatsController.php:1014
 msgid "The rat’s picture could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1014
+#: ./src/Controller/RatsController.php:1019
 msgid "The rat’s new picture has been saved. A staff member still has to validate it."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1017
+#: ./src/Controller/RatsController.php:1022
 msgid "The rat’s new picture could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1020
+#: ./src/Controller/RatsController.php:1025
 #: ./src/Controller/RatteriesController.php:426
 #: ./src/Controller/UsersController.php:487
 msgid "Pictures must be in jpeg, gif or png format."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1045
+#: ./src/Controller/RatsController.php:1050
 msgid "The rat has been transferred to its new owner."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1048
+#: ./src/Controller/RatsController.php:1053
 msgid "The rat ownership could not be changed. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1084
+#: ./src/Controller/RatsController.php:1089
 msgid "Sorry for your loss. Your rat’s death has been recorded."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1087
+#: ./src/Controller/RatsController.php:1092
 msgid "Your rat’s death could not be recorded. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1089
+#: ./src/Controller/RatsController.php:1094
 msgid "We are sorry for your loss. Please fill the information below to record the rat death. Date and primary cause are mandatory."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1115
+#: ./src/Controller/RatsController.php:1099
+msgid "Please answer the following questions about euthanasia, diagnostics and analyses."
+msgstr ""
+
+#: ./src/Controller/RatsController.php:1124
 msgid "Your new comment about the rat has been saved."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1118
+#: ./src/Controller/RatsController.php:1127
 msgid "Your new comment about the rat could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1136
+#: ./src/Controller/RatsController.php:1145
 msgid "This rat sheet is now frozen."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1150
+#: ./src/Controller/RatsController.php:1159
 msgid "This rat sheet is now unfrozen."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1020
+#: ./src/Controller/RatsController.php:1025
 #: ./src/Controller/RatteriesController.php:426
 #: ./src/Controller/UsersController.php:487
 msgctxt "pictures"
@@ -1299,47 +1311,43 @@ msgstr ""
 msgid "This image format is not supported. Please choose a jpeg, png or gif file."
 msgstr ""
 
-#: ./src/Model/Entity/Litter.php:81
+#: ./src/Model/Entity/Litter.php:82
 msgid "Unknown mother"
 msgstr ""
 
-#: ./src/Model/Entity/Litter.php:87
+#: ./src/Model/Entity/Litter.php:88
 msgid "Unknown father"
 msgstr ""
 
-#: ./src/Model/Entity/Litter.php:95
-#: ./src/Model/Entity/Litter.php:107
+#: ./src/Model/Entity/Litter.php:96
+#: ./src/Model/Entity/Litter.php:108
 msgid "{0, plural, =1{1 pup} other{# pups}}"
 msgstr ""
 
-#: ./src/Model/Entity/Litter.php:97
-#: ./src/Model/Entity/Litter.php:110
+#: ./src/Model/Entity/Litter.php:98
+#: ./src/Model/Entity/Litter.php:111
 msgid " with "
 msgstr ""
 
-#: ./src/Model/Entity/Litter.php:99
+#: ./src/Model/Entity/Litter.php:100
 msgid " (unknown mother)"
 msgstr ""
 
-#: ./src/Model/Entity/Litter.php:112
+#: ./src/Model/Entity/Litter.php:113
 msgid " (unknown father)"
 msgstr ""
 
-#: ./src/Model/Entity/Litter.php:131
-#: ./src/Model/Entity/Litter.php:151
+#: ./src/Model/Entity/Litter.php:132
+#: ./src/Model/Entity/Litter.php:152
 #: ./src/Model/Entity/Rat.php:241
 #: ./templates/DeathPrimaryCauses/view.php:108
 #: ./templates/DeathSecondaryCauses/view.php:64
 msgid "{0, plural, =1{1 month} other{# months}}"
 msgstr ""
 
-#: ./src/Model/Entity/Litter.php:171
-msgid "{0, plural, =0{<1 month} =1{1 month} other{# months}}"
-msgstr ""
-
-#: ./src/Model/Entity/Litter.php:133
-#: ./src/Model/Entity/Litter.php:153
-#: ./src/Model/Entity/Litter.php:173
+#: ./src/Model/Entity/Litter.php:134
+#: ./src/Model/Entity/Litter.php:154
+#: ./src/Model/Entity/Litter.php:177
 #: ./src/Model/Entity/Rat.php:235
 #: ./templates/Litters/view.php:233
 #: ./templates/Litters/view.php:237
@@ -4009,6 +4017,10 @@ msgstr ""
 msgid "(all rats of the litter are now dead, or supposed so)"
 msgstr ""
 
+#: ./templates/Litters/view.php:342
+msgid "(at {0})"
+msgstr ""
+
 #: ./templates/Litters/view.php:351
 #: ./templates/Litters/view.php:355
 #: ./templates/Litters/view.php:359
@@ -4080,11 +4092,6 @@ msgstr ""
 #: ./templates/Rats/view.php:484
 #: ./templates/Ratteries/view.php:632
 msgid "Restore Snapshot"
-msgstr ""
-
-#: ./templates/Litters/view.php:342
-msgctxt "age"
-msgid "(at {0, plural, =0{0 month} =1{1 month} other{# months}})"
 msgstr ""
 
 #: ./templates/Litters/virtual.php:8
@@ -5021,12 +5028,6 @@ msgstr ""
 msgid "Select the precise cause of death, if known"
 msgstr ""
 
-#: ./templates/Rats/add.php:294
-#: ./templates/Rats/add.php:338
-#: ./templates/Rats/declare_death.php:67
-msgid "Please, read carefully information that will appear below to check the fitness of your choice."
-msgstr ""
-
 #: ./templates/Rats/add.php:299
 #: ./templates/Rats/add.php:343
 #: ./templates/Rats/declare_death.php:72
@@ -5553,6 +5554,7 @@ msgid "Check this box to declare the rattery as generic"
 msgstr ""
 
 #: ./templates/Ratteries/add.php:83
+#: ./templates/Ratteries/change_picture.php:43
 #: ./templates/Ratteries/edit.php:84
 #: ./templates/Ratteries/register.php:46
 msgid "Logotype"
