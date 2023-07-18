@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-07-06 19:05+0000\n"
-"PO-Revision-Date: 2023-07-10 19:36+0200\n"
+"PO-Revision-Date: 2023-07-18 20:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -883,9 +883,7 @@ msgstr ""
 
 #: src/Controller/RatsController.php:226
 msgid "The rat has been saved as well as its birth litter, and attached to it."
-msgstr ""
-"Le rat a été enregistré comme les autres ratons de sa portée et rattaché à "
-"celle-ci."
+msgstr "Le rat a été enregistré, ainsi que sa portée de rattachement."
 
 #: src/Controller/RatsController.php:234
 msgid "The rat has been saved, but could not be attached to any litter."
@@ -1312,8 +1310,8 @@ msgid ""
 "Check your email for your activation link."
 msgstr ""
 "Votre compte a été créé. Il doit être activé avant que vous puissiez vous y "
-"connecter : consultez votre adresse mail, votre lien d’activation y a été "
-"envoyé."
+"connecter : consultez votre adresse mail, votre lien d’activation y a été "
+"envoyé. Pensez à vérifier également dans les spams !"
 
 #: src/Controller/UsersController.php:200
 #: src/Controller/UsersController.php:813
@@ -4201,7 +4199,7 @@ msgid ""
 "other{<b># users</b>}} resembling your keyword. They are all shown below."
 msgstr ""
 "Nous avons trouvé {0, plural, =0{0 rat} =1{<b>1 rat</b>} other{<b># rats</"
-"b>}}, {1, plural, =0{<b>0 raterie</b>} =1{<b>1 rateries</b>} other{<b># "
+"b>}}, {1, plural, =0{<b>0 raterie</b>} =1{<b>1 raterie</b>} other{<b># "
 "rateries</b>}} et {2, plural, =0{<b>0 propriétaire</b>} =1{<b>1 "
 "propriétaire</b>} other{<b># propriétaires</b>}} correspondant à votre "
 "recherche. Tous les résultats sont affichés ci-dessous."
@@ -5512,7 +5510,7 @@ msgstr "Fiches rateries en attente d’une action du staff"
 
 #: templates/Ratteries/owned_by.php:13
 msgid "Ratteries whose owner’s username is like "
-msgstr "Rateries dont le psuedonyme du propriétaire contient "
+msgstr "Rateries dont le pseudonyme du propriétaire contient "
 
 #: templates/Ratteries/register.php:15
 msgid "Cancel and go back to dashboard"
