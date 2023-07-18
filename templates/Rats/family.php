@@ -87,7 +87,7 @@
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('infant mortality excluded:') ?></th>
-                    <td> ⨽ <?= __('{0, number} months (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['desc_not_infant_lifespan'], $stats['desc_female_not_infant_lifespan'], $stats['desc_male_not_infant_lifespan']]) ?></td>
+                    <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['desc_not_infant_lifespan'], $stats['desc_female_not_infant_lifespan'], $stats['desc_male_not_infant_lifespan']]) ?></td>
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('accidents excluded:') ?></th>
