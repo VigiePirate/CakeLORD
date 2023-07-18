@@ -32,7 +32,7 @@
                                         'class' => 'action-icon',
                                         'alt' => __('Delete Rattery')
                                     ]),
-                                    ['action' => 'delete', $rattery->id],
+                                    ['controller' => 'ratteries', 'action' => 'delete', $rattery->id],
                                     ['confirm' => __('Are you sure you want to delete rattery # {0}?', $rattery->id), 'escape' => false]
                                 )
                             ?>

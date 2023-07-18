@@ -24,7 +24,7 @@
                                           'class' => 'action-icon',
                                           'alt' => __('Delete Litter')
                                       ]),
-                                      ['action' => 'delete', $litter->id],
+                                      ['controller' => 'litters', 'action' => 'delete', $litter->id],
                                       ['confirm' => __('Are you sure you want to delete litter # {0}?', $litter->id), 'escape' => false]
                                   )
                               ?>
