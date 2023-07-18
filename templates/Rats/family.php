@@ -91,7 +91,7 @@
                 </tr>
                 <tr>
                     <th> ⨽ <?= __('accidents excluded:') ?></th>
-                    <td> ⨽ <?= __('{0, number} months (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['desc_not_accident_lifespan'], $stats['desc_female_not_accident_lifespan'], $stats['desc_male_not_accident_lifespan']]) ?></td>
+                    <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['desc_not_accident_lifespan'], $stats['desc_female_not_accident_lifespan'], $stats['desc_male_not_accident_lifespan']]) ?></td>
                 </tr>
             </table>
         </div>

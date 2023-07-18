@@ -36,7 +36,7 @@
             <?php
                 echo $this->Form->create($user, ['type' => 'file']); ?>
                 <fieldset>
-                    <?= $this->Form->control('picture_file', ['type' => 'file']) ?>
+                    <?= $this->Form->control('picture_file', ['label' => __('Logotype'), 'type' => 'file']) ?>
                 </fieldset>
                 <?= $this->Form->button(__('Upload picture'), ['name' => 'action', 'value' => 'upload']) ?>
                 <?= $this->Form->button(__('Delete picture'), ['name' => 'action', 'value' => 'delete', 'class' => 'button-staff']) ?>

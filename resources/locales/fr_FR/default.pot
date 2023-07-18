@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-07-06 19:05+0000\n"
+"POT-Creation-Date: 2023-07-18 18:24+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -484,13 +484,13 @@ msgid "The litter could not be deleted. Please, try again."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:583
-#: ./src/Controller/RatsController.php:504
+#: ./src/Controller/RatsController.php:505
 #: ./src/Controller/RatteriesController.php:261
 msgid "The snapshot has been restored."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:585
-#: ./src/Controller/RatsController.php:506
+#: ./src/Controller/RatsController.php:507
 #: ./src/Controller/RatteriesController.php:263
 msgid "The snapshot could not be loaded. Please, try again."
 msgstr ""
@@ -508,7 +508,7 @@ msgid "This litter sheet is now frozen."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:941
-#: ./src/Controller/RatsController.php:1147
+#: ./src/Controller/RatsController.php:1148
 #: ./src/Controller/RatteriesController.php:642
 msgid "We could not freeze the sheet. Please retry or contact an administrator."
 msgstr ""
@@ -518,29 +518,29 @@ msgid "This litter sheet is now unfrozen."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:955
-#: ./src/Controller/RatsController.php:1161
+#: ./src/Controller/RatsController.php:1162
 #: ./src/Controller/RatteriesController.php:655
 msgid "We could not thaw the sheet. Please retry or contact an administrator."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:966
-#: ./src/Controller/RatsController.php:1173
+#: ./src/Controller/RatsController.php:1174
 msgid "This rat sheet has been approved."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:968
-#: ./src/Controller/RatsController.php:1175
+#: ./src/Controller/RatsController.php:1176
 #: ./src/Controller/RatteriesController.php:668
 msgid "We could not approve the sheet. Please retry or contact an administrator."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:979
-#: ./src/Controller/RatsController.php:1187
+#: ./src/Controller/RatsController.php:1188
 msgid "This rat sheet has been unapproved."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:981
-#: ./src/Controller/RatsController.php:1189
+#: ./src/Controller/RatsController.php:1190
 #: ./src/Controller/RatteriesController.php:681
 msgid "We could not unapprove the sheet. Please retry or contact an administrator."
 msgstr ""
@@ -849,7 +849,7 @@ msgid "The rat and its birth litter could not be saved. Please, read explanatory
 msgstr ""
 
 #: ./src/Controller/RatsController.php:245
-#: ./src/Controller/RatsController.php:373
+#: ./src/Controller/RatsController.php:374
 msgid "The rat has been saved."
 msgstr ""
 
@@ -858,92 +858,93 @@ msgid "Please record the rat’s information below. When in doubt, please check 
 msgstr ""
 
 #: ./src/Controller/RatsController.php:321
-#: ./src/Controller/RatsController.php:1098
+#: ./src/Controller/RatsController.php:1099
 #: ./templates/Rats/add.php:294
 #: ./templates/Rats/add.php:338
 #: ./templates/Rats/declare_death.php:67
 msgid "Please, read carefully information that will appear below to check the fitness of your choice."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:376
+#: ./src/Controller/RatsController.php:322
+#: ./src/Controller/RatsController.php:1100
+msgid "Please answer the following questions about euthanasia, diagnostics and analyses."
+msgstr ""
+
+#: ./src/Controller/RatsController.php:377
 msgid "The rat could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:391
+#: ./src/Controller/RatsController.php:392
 msgid "For data coherence, modifications of rats are restricted. Please, contact a staff member to change origins or birth date."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:421
+#: ./src/Controller/RatsController.php:422
 msgid "The rat has been deleted."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:423
+#: ./src/Controller/RatsController.php:424
 msgid "The rat could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1011
+#: ./src/Controller/RatsController.php:1012
 msgid "The rat’s picture has been deleted."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1014
+#: ./src/Controller/RatsController.php:1015
 msgid "The rat’s picture could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1019
+#: ./src/Controller/RatsController.php:1020
 msgid "The rat’s new picture has been saved. A staff member still has to validate it."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1022
+#: ./src/Controller/RatsController.php:1023
 msgid "The rat’s new picture could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1025
+#: ./src/Controller/RatsController.php:1026
 #: ./src/Controller/RatteriesController.php:426
 #: ./src/Controller/UsersController.php:487
 msgid "Pictures must be in jpeg, gif or png format."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1050
+#: ./src/Controller/RatsController.php:1051
 msgid "The rat has been transferred to its new owner."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1053
+#: ./src/Controller/RatsController.php:1054
 msgid "The rat ownership could not be changed. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1089
+#: ./src/Controller/RatsController.php:1090
 msgid "Sorry for your loss. Your rat’s death has been recorded."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1092
+#: ./src/Controller/RatsController.php:1093
 msgid "Your rat’s death could not be recorded. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1094
+#: ./src/Controller/RatsController.php:1095
 msgid "We are sorry for your loss. Please fill the information below to record the rat death. Date and primary cause are mandatory."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1099
-msgid "Please answer the following questions about euthanasia, diagnostics and analyses."
-msgstr ""
-
-#: ./src/Controller/RatsController.php:1124
+#: ./src/Controller/RatsController.php:1125
 msgid "Your new comment about the rat has been saved."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1127
+#: ./src/Controller/RatsController.php:1128
 msgid "Your new comment about the rat could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1145
+#: ./src/Controller/RatsController.php:1146
 msgid "This rat sheet is now frozen."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1159
+#: ./src/Controller/RatsController.php:1160
 msgid "This rat sheet is now unfrozen."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1025
+#: ./src/Controller/RatsController.php:1026
 #: ./src/Controller/RatteriesController.php:426
 #: ./src/Controller/UsersController.php:487
 msgctxt "pictures"
@@ -1157,7 +1158,7 @@ msgid "You already have an account, on which you are logged in."
 msgstr ""
 
 #: ./src/Controller/UsersController.php:197
-msgid "Your account has been created, but must be activated before you can log in. Check your email for your activation link."
+msgid "Your account has been created, but must be activated before you can log in. Check your email for your activation link, including your spam folder if you can’t find it!"
 msgstr ""
 
 #: ./src/Controller/UsersController.php:200

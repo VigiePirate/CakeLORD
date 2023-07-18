@@ -194,7 +194,7 @@ class UsersController extends AppController
                     $url = Router::Url(['controller' => 'users', 'action' => 'activate'], true) . '/' . $passkey;
                     $mailer = $this->getMailer('User')->send('sendActivationEmail', [$url, $user]);
                     if ($mailer) {
-                        $this->Flash->success(__('Your account has been created, but must be activated before you can log in. Check your email for your activation link, including your spam folder if you can’t find it!));
+                        $this->Flash->success(__('Your account has been created, but must be activated before you can log in. Check your email for your activation link, including your spam folder if you can’t find it!'));
                     } else {
                         $this->set(compact('user'));
                         $this->Flash->error(__('Error sending email. Please, contact an administrator.')); // . $email->smtpError);
