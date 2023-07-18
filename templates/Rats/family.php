@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php $this->assign('title', __('Family of {0}', [h($rat->usual_name)]) ?>
+<?php $this->assign('title', __('Family of {0}', [h($rat->usual_name)])) ?>
 
 <div class="row">
     <aside class="column">
