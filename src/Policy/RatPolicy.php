@@ -100,7 +100,7 @@ class RatPolicy implements BeforePolicyInterface
      */
     public function canOwnerEdit(IdentityInterface $user, Rat $rat)
     {
-        return ! $rat->state->needs_staff_action && $this->isOwner($user, $rat);
+        return ! $rat->state->needs_staff_action && ($this->isOwner($user, $rat) || $this->isCreator($user, $rat));
     }
 
     /**

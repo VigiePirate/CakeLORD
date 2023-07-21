@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php $this->assign('title', h($litter->full_name) ?>
+<?php $this->assign('title', h($litter->full_name)) ?>
 
 <div class="row">
     <aside class="column">
