@@ -60,6 +60,10 @@ class LittersTable extends Table
             'repository' => 'LitterSnapshots',
             'entityField' => 'litter_id',
         ]);
+        $this->addBehavior('Message', [
+            'repository' => 'LitterMessages',
+            'entityField' => 'litter_id',
+        ]);
         $this->addBehavior('State', [
             'safe_properties' => [
                 'modified',
