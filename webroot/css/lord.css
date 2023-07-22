@@ -587,33 +587,33 @@ blockquote:before {
 
 /* should be read from states table later ('css property' field) */
 .statecolor_1 {
-  color: #1f9d55;
-  font-weight: bold;
+  color: #1f9d55 !important;
+  font-weight: bold !important;
 }
 
 .statecolor_2 {
-  color: #1f9d55;
-  font-weight: bold;
+  color: #1f9d55 !important;
+  font-weight: bold !important;
 }
 
 .statecolor_3 {
-  color: #ff8c1b;
-  font-weight: bold;
+  color: #ff8c1b !important;
+  font-weight: bold !important;
 }
 
 .statecolor_4 {
-  color: #cc1f1a;
-  font-weight: bold;
+  color: #cc1f1a !important;
+  font-weight: bold !important;
 }
 
 .statecolor_5 {
-  color: #663300;
-  font-weight: bold;
+  color: #663300 !important;
+  font-weight: bold !important;
 }
 
 .statecolor_6 {
-  color: #343740;
-  font-weight: bold;
+  color: #343740 !important;
+  font-weight: bold !important;
 }
 /* end of states color */
 
