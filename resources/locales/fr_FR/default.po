@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-07-18 18:24+0000\n"
-"PO-Revision-Date: 2023-07-18 20:25+0200\n"
+"POT-Creation-Date: 2023-07-22 19:22+0000\n"
+"PO-Revision-Date: 2023-07-22 21:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -548,53 +548,53 @@ msgstr ""
 "Bonne nouvelle! La généalogie de cette portée est assez simple et les "
 "données compilées sont donc exactes."
 
-#: src/Controller/LittersController.php:939
+#: src/Controller/LittersController.php:948
 msgid "This litter sheet is now frozen."
 msgstr "La fiche de cette portée est verrouillée."
 
-#: src/Controller/LittersController.php:941
-#: src/Controller/RatsController.php:1148
-#: src/Controller/RatteriesController.php:642
+#: src/Controller/LittersController.php:950
+#: src/Controller/RatsController.php:1162
+#: src/Controller/RatteriesController.php:649
 msgid ""
 "We could not freeze the sheet. Please retry or contact an administrator."
 msgstr ""
 "Impossible de verrouiller la fiche. Veuillez réessayer ou de contacter un "
 "administrateur."
 
-#: src/Controller/LittersController.php:953
+#: src/Controller/LittersController.php:962
 msgid "This litter sheet is now unfrozen."
 msgstr "La fiche de cette portée est déverrouillée."
 
-#: src/Controller/LittersController.php:955
-#: src/Controller/RatsController.php:1162
-#: src/Controller/RatteriesController.php:655
+#: src/Controller/LittersController.php:964
+#: src/Controller/RatsController.php:1183
+#: src/Controller/RatteriesController.php:662
 msgid "We could not thaw the sheet. Please retry or contact an administrator."
 msgstr ""
 "Impossible de déverrouiller cette fiche. Veuillez réessayer ou de contacter "
 "un administrateur."
 
-#: src/Controller/LittersController.php:966
-#: src/Controller/RatsController.php:1174
+#: src/Controller/LittersController.php:975
+#: src/Controller/RatsController.php:1201
 msgid "This rat sheet has been approved."
 msgstr "La fiche de ce rat a été validée."
 
-#: src/Controller/LittersController.php:968
-#: src/Controller/RatsController.php:1176
-#: src/Controller/RatteriesController.php:668
+#: src/Controller/LittersController.php:977
+#: src/Controller/RatsController.php:1204
+#: src/Controller/RatteriesController.php:675
 msgid ""
 "We could not approve the sheet. Please retry or contact an administrator."
 msgstr ""
 "Impossible de valider cette fiche. Veuillez réessayer ou de contacter un "
 "administrateur."
 
-#: src/Controller/LittersController.php:979
-#: src/Controller/RatsController.php:1188
+#: src/Controller/LittersController.php:988
+#: src/Controller/RatsController.php:1223
 msgid "This rat sheet has been unapproved."
 msgstr "Cette fiche a été invalidée."
 
-#: src/Controller/LittersController.php:981
-#: src/Controller/RatsController.php:1190
-#: src/Controller/RatteriesController.php:681
+#: src/Controller/LittersController.php:990
+#: src/Controller/RatsController.php:1226
+#: src/Controller/RatteriesController.php:688
 msgid ""
 "We could not unapprove the sheet. Please retry or contact an administrator."
 msgstr ""
@@ -970,7 +970,7 @@ msgstr "Impossible d’enregistrer la nouvelle photo. Veuillez réessayer."
 
 #: src/Controller/RatsController.php:1026
 #: src/Controller/RatteriesController.php:426
-#: src/Controller/UsersController.php:487
+#: src/Controller/UsersController.php:485
 msgid "Pictures must be in jpeg, gif or png format."
 msgstr "Les photos doivent être au format jpeg, gif ou png."
 
@@ -1009,17 +1009,31 @@ msgstr ""
 "Impossible d’enregistrer votre nouveau commentaire à propos de ce rat. "
 "Veuillez réessayer."
 
-#: src/Controller/RatsController.php:1146
+#: src/Controller/RatsController.php:1155
+#: src/Controller/RatsController.php:1176
+#: src/Controller/RatsController.php:1197
+#: src/Controller/RatsController.php:1219
+msgid "automatic"
+msgstr "automatique"
+
+#: src/Controller/RatsController.php:1159
 msgid "This rat sheet is now frozen."
 msgstr "La fiche de ce rat est désormais gelée."
 
 #: src/Controller/RatsController.php:1160
+#: src/Controller/RatsController.php:1181
+#: src/Controller/RatsController.php:1202
+#: src/Controller/RatsController.php:1224
+msgid "Moderation message was: "
+msgstr "Le message modératif ajouté sera :"
+
+#: src/Controller/RatsController.php:1180
 msgid "This rat sheet is now unfrozen."
 msgstr "La fiche de ce rat est désormais déverrouillée."
 
 #: src/Controller/RatsController.php:1026
 #: src/Controller/RatteriesController.php:426
-#: src/Controller/UsersController.php:487
+#: src/Controller/UsersController.php:485
 msgctxt "pictures"
 msgid "If too large, they will be automatically resized."
 msgstr "Les photos trop grandes dimensions seront automatiquement réduites."
@@ -1151,19 +1165,19 @@ msgstr ""
 "carte des rateries, nous vous recommandons d'enregistrer toutes les "
 "informations facultatives."
 
-#: src/Controller/RatteriesController.php:640
+#: src/Controller/RatteriesController.php:647
 msgid "This rattery sheet is now frozen."
 msgstr "La fiche de cette raterie est désormais gelée."
 
-#: src/Controller/RatteriesController.php:653
+#: src/Controller/RatteriesController.php:660
 msgid "This rattery sheet is now unfrozen."
 msgstr "La fiche de cette raterie est désormais déverrouillée."
 
-#: src/Controller/RatteriesController.php:666
+#: src/Controller/RatteriesController.php:673
 msgid "This rattery sheet has been approved."
 msgstr "La fiche de cette raterie a été validée."
 
-#: src/Controller/RatteriesController.php:679
+#: src/Controller/RatteriesController.php:686
 msgid "This rattery sheet has been unapproved."
 msgstr "La fiche de cette raterie a été invalidée."
 
@@ -1291,7 +1305,7 @@ msgid ""
 "You have {0, plural, =1{1 sheet} other{# sheets}} to correct! Please, check "
 "rats, litters and ratteries from your dashboard and take action soon."
 msgstr ""
-"Vous avez {0, plural, =1{une fiche} other{# fiche}} à corriger ! Consultez "
+"Vous avez {0, plural, =1{une fiche} other{# fiches}} à corriger ! Consultez "
 "votre tableau de bord et effectuez rapidement les modifications demandées."
 
 #: src/Controller/UsersController.php:139
@@ -1314,30 +1328,30 @@ msgstr ""
 "connecter : consultez votre adresse mail, votre lien d’activation y a été "
 "envoyé. Pensez à vérifier également dans les spams !"
 
-#: src/Controller/UsersController.php:200
-#: src/Controller/UsersController.php:813
+#: src/Controller/UsersController.php:201
+#: src/Controller/UsersController.php:811
 msgid "Error sending email. Please, contact an administrator."
 msgstr ""
 "Une erreur s’est produite lors de l’envoi du message. Veuillez contacter un "
 "membre de l’équipe."
 
-#: src/Controller/UsersController.php:205
-#: src/Controller/UsersController.php:248
-#: src/Controller/UsersController.php:817
-#: src/Controller/UsersController.php:861
+#: src/Controller/UsersController.php:206
+#: src/Controller/UsersController.php:246
+#: src/Controller/UsersController.php:815
+#: src/Controller/UsersController.php:859
 msgid "Something went wrong. Please, try again or contact an administrator."
 msgstr ""
 "Une erreur s’est produite. Merci de réessayer ou de contacter un "
 "administrateur."
 
-#: src/Controller/UsersController.php:210
+#: src/Controller/UsersController.php:209
 msgid ""
 "This was not the expected answer! Please, retry if you are not a Replicant."
 msgstr ""
 "Ceci n’était pas la réponse attendue. Veuillez réessayer, si vous n’êtes pas "
 "un Réplicant."
 
-#: src/Controller/UsersController.php:245
+#: src/Controller/UsersController.php:243
 msgid ""
 "Your account has been activated. You can now log in and complete your "
 "profile. Welcome on LORD!"
@@ -1345,59 +1359,59 @@ msgstr ""
 "Votre compte a été activé. Vous pouvez désormais vous y connecter et "
 "compléter votre profil. Bienvenue sur le LORD !"
 
-#: src/Controller/UsersController.php:419
-#: src/Controller/UsersController.php:445
+#: src/Controller/UsersController.php:417
+#: src/Controller/UsersController.php:443
 msgid "The user has been saved."
 msgstr "L’utilisateur a été enregistré."
 
-#: src/Controller/UsersController.php:423
-#: src/Controller/UsersController.php:448
+#: src/Controller/UsersController.php:421
+#: src/Controller/UsersController.php:446
 msgid "The user could not be saved. Please, try again."
 msgstr "Impossible d’enregistrer l’utilisateur. Merci de réessayer."
 
-#: src/Controller/UsersController.php:473
+#: src/Controller/UsersController.php:471
 msgid "The user’s avatar has been deleted."
 msgstr "L’avatar a été supprimé."
 
-#: src/Controller/UsersController.php:476
+#: src/Controller/UsersController.php:474
 msgid "The user’s new avatar could not be deleted. Please, try again."
 msgstr "Impossible de supprimer l’avatar. Veuillez réessayer."
 
-#: src/Controller/UsersController.php:481
+#: src/Controller/UsersController.php:479
 msgid "The user’s new avatar has been saved."
 msgstr "Le nouvel avatar est enregistré."
 
-#: src/Controller/UsersController.php:484
+#: src/Controller/UsersController.php:482
 msgid "The user’s new picture could not be saved. Please, try again."
 msgstr "Impossible d'enregistrer le nouvel avatar. Merci de réessayer."
 
-#: src/Controller/UsersController.php:505
+#: src/Controller/UsersController.php:503
 msgid "Your new comment about yourself has been saved."
 msgstr "Le commentaire a été enregistré."
 
-#: src/Controller/UsersController.php:508
+#: src/Controller/UsersController.php:506
 msgid "Your new comment about yourself could not be saved. Please, try again."
 msgstr "Impossible d’enregistrer le commentaire. Veuillez réessayer."
 
-#: src/Controller/UsersController.php:524
+#: src/Controller/UsersController.php:522
 msgid "Your newsletter preferences have been updated."
 msgstr "Vos préférences d’envoi de newsletter ont été mises à jour."
 
-#: src/Controller/UsersController.php:526
+#: src/Controller/UsersController.php:524
 msgid "We could not update your newsletter preferences. Please try again."
 msgstr ""
 "Impossible de mettre à jour vos préférences d’envoi de newletters. Veuillez "
 "réessayer."
 
-#: src/Controller/UsersController.php:563
+#: src/Controller/UsersController.php:561
 msgid "The user has been deleted."
 msgstr "L’utilisateur a été supprimé."
 
-#: src/Controller/UsersController.php:566
+#: src/Controller/UsersController.php:564
 msgid "The user could not be deleted. Too many strings attached."
 msgstr "Impossible de supprimer l’utilisateur. Il a trop de fils à la patte."
 
-#: src/Controller/UsersController.php:589
+#: src/Controller/UsersController.php:587
 msgid ""
 "The user’s associated entries could not be transferred to the new user. "
 "Please, try again."
@@ -1405,7 +1419,7 @@ msgstr ""
 "Les fiches liées à cet utilisateur n’ont pas pu être transférées à "
 "l'héritier que vous avez désigné. Veuillez réessayer."
 
-#: src/Controller/UsersController.php:599
+#: src/Controller/UsersController.php:597
 msgid ""
 "The user has been deleted. All associated entries were transferred to the "
 "user below."
@@ -1413,16 +1427,16 @@ msgstr ""
 "L’utilisateur a été supprimé. Toutes ses fiches ont été transmises au nouvel "
 "utilisateur ci-dessous."
 
-#: src/Controller/UsersController.php:603
+#: src/Controller/UsersController.php:601
 msgid "The user could not be deleted. Please, try again."
 msgstr "Impossible de supprimer lutilisateur. Merci de réessayer."
 
-#: src/Controller/UsersController.php:608
+#: src/Controller/UsersController.php:606
 msgid "The user’s heir could not be found. Please, try again."
 msgstr ""
 "Impossible de trouver l’héritier que vous avez désigné. Veuillez réessayer."
 
-#: src/Controller/UsersController.php:615
+#: src/Controller/UsersController.php:613
 msgid ""
 "This user is related to existing database entries. You MUST specify below an "
 "existing user to inherit these entries."
@@ -1430,7 +1444,7 @@ msgstr ""
 "Cet utilisateur est le propriétaire d’une ou plusieurs fiches. Vous DEVEZ "
 "choisir ci-dessous l’utilisateur qui héritera de ces fiches."
 
-#: src/Controller/UsersController.php:617
+#: src/Controller/UsersController.php:615
 msgid ""
 "This user is not related to any existing database entries and can be safely "
 "deleted. Beware, this operation is irreversible!"
@@ -1438,27 +1452,27 @@ msgstr ""
 "Cet utilisateur n’est propriétaire d’aucune fiche et peut être supprimé en "
 "toute sécurité. Attention, cette opération est irréversible !"
 
-#: src/Controller/UsersController.php:669
+#: src/Controller/UsersController.php:667
 msgid "Check your email for your reset password link."
 msgstr ""
 "Un lien vous a été renvoyé par mail ; suivez-le pour réinitialisez votre mot "
 "de passe."
 
-#: src/Controller/UsersController.php:671
+#: src/Controller/UsersController.php:669
 msgid "Error sending email. Please, retry or contact an administrator."
 msgstr ""
 "Une erreur s’est produite lors de l’envoi du message. Veuillez réessayer ou "
 "contacter un membre de l’équipe."
 
-#: src/Controller/UsersController.php:750
-#: src/Controller/UsersController.php:791
+#: src/Controller/UsersController.php:748
+#: src/Controller/UsersController.php:789
 msgid ""
 "We could not confirm your identity (incorrect old password). Please retry."
 msgstr ""
 "Impossible de confirmer votre identité (mot de passe incorrect). Veuillez "
 "réessayer."
 
-#: src/Controller/UsersController.php:810
+#: src/Controller/UsersController.php:808
 msgid ""
 "Your email has been modified. Your accound must now be reactivated. Please, "
 "check your new email for your confirmation link."
@@ -1466,13 +1480,13 @@ msgstr ""
 "Votre adresse mail a été modifiée. Vous devez maintenant réactiver votre "
 "compte en cliquant sur le lien de confirmation envoyé par mail."
 
-#: src/Controller/UsersController.php:831
+#: src/Controller/UsersController.php:829
 msgid "Invalid activation link. Please check your email or try again"
 msgstr ""
 "Ce lien d’activation est invalide. Veuillez vérifier votre email et "
 "réessayer."
 
-#: src/Controller/UsersController.php:840
+#: src/Controller/UsersController.php:838
 msgid ""
 "Invalid confirmation link. Please, check your email inbox or contact an "
 "administrator."
@@ -1480,7 +1494,7 @@ msgstr ""
 "Ce lien de confirmation est invalide. Veuillez vérifier vos emails ou "
 "contactez un administrateur."
 
-#: src/Controller/UsersController.php:846
+#: src/Controller/UsersController.php:844
 msgid ""
 "Expired confirmation link. Please, contact an administrator to unlock your "
 "account."
@@ -1488,7 +1502,7 @@ msgstr ""
 "Ce lien de confirmation est expiré. Veuillez contacter un membre de l’équipe "
 "pour déverrouiller votre compte."
 
-#: src/Controller/UsersController.php:858
+#: src/Controller/UsersController.php:856
 msgid ""
 "Your email change has been confirmed. You can now log in with your new "
 "credentials."
@@ -1496,17 +1510,21 @@ msgstr ""
 "Votre changement d’adresse mail a bien été pris en compte. Vous pouvez "
 "désormais vous connecter avec cette nouvelle adresse."
 
-#: src/Controller/UsersController.php:908
+#: src/Controller/UsersController.php:906
 msgid "This user was already unlocked."
 msgstr "Le compte de cet utilisateur est déjà verrouillé."
 
-#: src/Controller/UsersController.php:912
+#: src/Controller/UsersController.php:910
 msgid "This user is now unlocked."
 msgstr "Le compte de cet utilisateur a été déverrouillé."
 
-#: src/Controller/UsersController.php:914
+#: src/Controller/UsersController.php:912
 msgid "This user could not be unlocked. Please try again."
 msgstr "Impossible de déverrouiller ce compte utilisateur. Veuillez réessayer."
+
+#: src/Mailer/UserMailer.php:16
+msgid "Reset your Password"
+msgstr "Modifier le mot de passe"
 
 #: src/Mailer/UserMailer.php:30
 msgid "Activate your Account"
@@ -1967,7 +1985,7 @@ msgstr ""
 "considérée comme fermée, car elle n'a eu aucune portée depuis plusieurs "
 "années.**"
 
-#: src/Model/Table/UsersTable.php:105
+#: src/Model/Table/UsersTable.php:212
 msgid ""
 "This email is already in use. If you have lost your password, please use the "
 "password recovery tool."
@@ -1975,7 +1993,7 @@ msgstr ""
 "Cette adresse mail est déjà utilisée. Veuillez utiliser l’outil de "
 "récupération de mot de passe si vous avez perdu le vôtre."
 
-#: src/Model/Table/UsersTable.php:118
+#: src/Model/Table/UsersTable.php:221 src/Model/Table/UsersTable.php:230
 msgid "This username is already in use. Please choose another one."
 msgstr "Ce nom d’utilisateur est déjà pris. Veuillez en choisir un autre."
 
@@ -3893,7 +3911,12 @@ msgstr "(à {0})"
 #: templates/Litters/view.php:351 templates/Litters/view.php:355
 #: templates/Litters/view.php:359 templates/Rats/family.php:72
 #: templates/Rats/family.php:76 templates/Rats/family.php:80
-#: templates/Rats/family.php:86
+#: templates/Rats/family.php:86 templates/Rats/family.php:90
+#: templates/Rats/family.php:94 templates/Users/view.php:274
+#: templates/Users/view.php:277 templates/Users/view.php:281
+#: templates/element/my/statistics.php:29
+#: templates/element/my/statistics.php:32
+#: templates/element/my/statistics.php:36
 msgid ""
 "{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} "
 "=1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# "
@@ -4818,7 +4841,8 @@ msgstr "Le rat sera attaché à la portée suivante : "
 msgid "Type here..."
 msgstr "Entrez votre recherche ici..."
 
-#: templates/Rats/add.php:250 templates/Rats/edit.php:123
+#: templates/Rats/add.php:250 templates/Rats/change_picture.php:44
+#: templates/Rats/edit.php:123
 msgid "Photo"
 msgstr "Photo"
 
@@ -5006,14 +5030,6 @@ msgstr "Durée de vie moyenne des ascendants :"
 #: templates/Rats/family.php:85
 msgid "Descendants average lifespan:"
 msgstr "Durée de vie moyenne des descendants :"
-
-#: templates/Rats/family.php:90 templates/Rats/family.php:94
-msgid ""
-"{0, number} months (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: "
-"{2, plural, =0{N/A} =1{1 month} other{# months}})"
-msgstr ""
-"{0, number} mois (♀: {1, plural, =0{ND} =1{1 mois} other{# mois}} – ♂: {2, "
-"plural, =0{ND} =1{1 mois} other{# mois}})"
 
 #: templates/Rats/from_rattery.php:12
 msgid "Rats from rattery with name or prefix like "
@@ -5348,6 +5364,7 @@ msgstr "Cochez cette case pour enregistrer une « origine générique »"
 
 #: templates/Ratteries/add.php:83 templates/Ratteries/change_picture.php:43
 #: templates/Ratteries/edit.php:84 templates/Ratteries/register.php:46
+#: templates/Users/change_picture.php:39
 msgid "Logotype"
 msgstr "Logo"
 
@@ -6311,7 +6328,7 @@ msgstr "Se connecter"
 msgid "Please enter your registration email address and password"
 msgstr "Veuillez entrer votre adresse mail et votre mot de passe"
 
-#: templates/Users/login.php:12 templates/Users/register.php:20
+#: templates/Users/login.php:12 templates/Users/register.php:17
 msgid "Email address"
 msgstr "Adresse mail"
 
@@ -6400,7 +6417,7 @@ msgstr "Utilisateurs dont le psuedonyme contient "
 msgid "Users with username, name or mail like "
 msgstr "Utilisateurs dont le pseudonyme, nom ou mail contient "
 
-#: templates/Users/register.php:6 templates/Users/register.php:50
+#: templates/Users/register.php:6 templates/Users/register.php:44
 msgid "Register"
 msgstr "S’enregistrer"
 
@@ -6408,23 +6425,15 @@ msgstr "S’enregistrer"
 msgid "In order to create your account, please fill in this form"
 msgstr "Pour créer votre compte, veuillez remplir le formulaire suivant"
 
-#: templates/Users/register.php:15
-msgid "This username is already in use"
-msgstr "Ce nom d’utilisateur est déjà pris"
-
-#: templates/Users/register.php:24
-msgid "This email is already in use"
-msgstr "Cette adresse mail est déjà utilisée"
-
-#: templates/Users/register.php:27
+#: templates/Users/register.php:21
 msgid "Password"
 msgstr "Mot de passe"
 
-#: templates/Users/register.php:29
+#: templates/Users/register.php:23
 msgid "What is the meaning of the letter \"R\" in the LORD acronym?"
 msgstr "Que signifie la lettre \"R\" dans l’acronyme LORD ?"
 
-#: templates/Users/register.php:38
+#: templates/Users/register.php:32
 msgid ""
 "I have read the site’s {0} and its {1} and I agree to all terms and "
 "conditions."
@@ -6432,12 +6441,12 @@ msgstr ""
 "J’ai lu les {0} et le {1} du site et j’en accepte tous les termes et "
 "conditions."
 
-#: templates/Users/register.php:39 templates/layout/default.php:123
+#: templates/Users/register.php:33 templates/layout/default.php:123
 #: templates/layout/fullpage.php:138
 msgid "Legal Notice"
 msgstr "Mentions légales"
 
-#: templates/Users/register.php:40 templates/layout/default.php:113
+#: templates/Users/register.php:34 templates/layout/default.php:113
 #: templates/layout/fullpage.php:128
 msgid "Code of conduct"
 msgstr "Code de conduite"
@@ -6509,13 +6518,6 @@ msgstr "en vie : "
 #: templates/Users/view.php:273
 msgid "Average lifespan of their rats:"
 msgstr "Longévité moyenne de ses rats :"
-
-#: templates/Users/view.php:274 templates/Users/view.php:277
-#: templates/Users/view.php:281 templates/element/my/statistics.php:29
-#: templates/element/my/statistics.php:32
-#: templates/element/my/statistics.php:36
-msgid "{0, number} months (♀: {1, number} months – ♂: {2, number} months)"
-msgstr "{0, number} mois (♀: {1, number} mois – ♂: {2, number} mois)"
 
 #: templates/Users/view.php:288
 msgid "Their champion:"
@@ -6797,9 +6799,13 @@ msgstr "Supprimer la fiche"
 msgid "You cannot delete this sheet"
 msgstr "Vous ne pouvez pas supprimer cette fiche"
 
-#: templates/element/statebar.php:9
+#: templates/element/statebar.php:11
 msgid "Change state"
 msgstr "Modération"
+
+#: templates/element/statebar.php:23
+msgid "Add customized message about moderation decision"
+msgstr "Personnaliser le message modératif"
 
 #: templates/element/tech_sidebar.php:36
 msgid "Laborats"
@@ -7096,6 +7102,22 @@ msgstr "Réseaux sociaux"
 #: templates/layout/default.php:147 templates/layout/fullpage.php:162
 msgid "Partners"
 msgstr "Partenaires"
+
+#~ msgid ""
+#~ "{0, number} months (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} –"
+#~ " ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})"
+#~ msgstr ""
+#~ "{0, number} mois (♀: {1, plural, =0{ND} =1{1 mois} other{# mois}} – ♂: "
+#~ "{2, plural, =0{ND} =1{1 mois} other{# mois}})"
+
+#~ msgid "This username is already in use"
+#~ msgstr "Ce nom d’utilisateur est déjà pris"
+
+#~ msgid "This email is already in use"
+#~ msgstr "Cette adresse mail est déjà utilisée"
+
+#~ msgid "{0, number} months (♀: {1, number} months – ♂: {2, number} months)"
+#~ msgstr "{0, number} mois (♀: {1, number} mois – ♂: {2, number} mois)"
 
 #~ msgid "{0, plural, =0{<1 month} =1{1 month} other{# months}}"
 #~ msgstr "{0, number} mois"

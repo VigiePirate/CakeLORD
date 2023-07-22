@@ -930,6 +930,15 @@ class LittersController extends AppController
         $this->set(compact('litter', 'genealogy_json', 'index_json', 'js_messages'));
     }
 
+    /* State changes */
+
+    public function moderate($id) {
+        if ($this->request->is('post')) {
+            $decision = $this->request->getData('decision');
+            $this->$decision($id);
+        }
+    }
+
     public function freeze($id)
     {
         $this->request->allowMethod(['get', 'freeze']);
