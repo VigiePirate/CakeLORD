@@ -10,19 +10,13 @@
 
         <?= $this->Form->control('nickname', [
             'label' => __('Username'),
-            'required' => true,
-            'error' => [
-                'The provided value is invalid' => __('This username is already in use')
-            ]
+            'required' => true
         ]) ?>
 
         <?= $this->Form->control('email', [
             'label' => __('Email address'),
             'required' => true,
-            'autocomplete' => 'off',
-            'error' => [
-                'The provided value is invalid' =>  __('This email is already in use')
-            ]
+            'autocomplete' => 'off'
         ]) ?>
         <?= $this->Form->control('password', ['label' => __('Password'), 'required' => true]) ?>
 

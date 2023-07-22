@@ -101,8 +101,7 @@ class UsersTable extends Table
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->notEmptyString('email')
-            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table', 'message' => __('This email is already in use. If you have lost your password, please use the password recovery tool.')]);
+            ->notEmptyString('email');
 
         $validator
             ->scalar('password')
@@ -114,8 +113,7 @@ class UsersTable extends Table
             ->scalar('username')
             ->maxLength('username', 45)
             ->requirePresence('username', 'create')
-            ->notEmptyString('username')
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table', 'message' => __('This username is already in use. Please choose another one.')]);
+            ->notEmptyString('username');
 
         $validator
             ->scalar('firstname')
@@ -206,8 +204,33 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->isUnique(['username']));
+        $rules->add(
+            $rules->isUnique(['email']),
+            'validEmail',
+            [
+                'errorField' => 'email',
+                'message' => __('This email is already in use. If you have lost your password, please use the password recovery tool.'),
+            ]
+        );
+
+        $rules->addCreate(
+            $rules->isUnique(['username']),
+            'validName',
+            [
+                'errorField' => 'nickname',
+                'message' => __('This username is already in use. Please choose another one.'),
+            ]
+        );
+
+        $rules->addUpdate(
+            $rules->isUnique(['username']),
+            'validName',
+            [
+                'errorField' => 'username',
+                'message' => __('This username is already in use. Please choose another one.'),
+            ]
+        );
+
         $rules->add($rules->existsIn(['role_id'], 'Roles'));
 
         return $rules;

@@ -191,27 +191,25 @@ class UsersController extends AppController
                 $user->failed_login_attempts = 1;
 
                 if ($this->Users->save($user)) {
-                    $url = Router::Url(['controller' => 'users', 'action' => 'activate'], true) . '/' . $passkey;
+                    $url = Router::Url(['controller' => 'users', 'action' => 'activate', $passkey], true);
                     $mailer = $this->getMailer('User')->send('sendActivationEmail', [$url, $user]);
                     if ($mailer) {
                         $this->Flash->success(__('Your account has been created, but must be activated before you can log in. Check your email for your activation link, including your spam folder if you can’t find it!'));
-                    } else {
                         $this->set(compact('user'));
-                        $this->Flash->error(__('Error sending email. Please, contact an administrator.')); // . $email->smtpError);
+                        return $this->redirect(['action' => 'login']);
+                    } else {
+                        $this->Flash->error(__('Error sending email. Please, contact an administrator.'));
+                        $this->set(compact('user'));
+                        return $this->redirect(['action' => 'register']);
                     }
-                    return $this->redirect(['action' => 'login']);
                 } else {
-                    $this->set(compact('user'));
                     $this->Flash->error(__('Something went wrong. Please, try again or contact an administrator.'));
-                    // return $this->redirect(['action' => 'register']);
                 }
             } else {
-                $this->set(compact('user'));
                 $this->Flash->error(__('This was not the expected answer! Please, retry if you are not a Replicant.'));
             }
         }
 
-        $user = $this->Users->newEmptyEntity();
         $this->set(compact('user'));
     }
 
