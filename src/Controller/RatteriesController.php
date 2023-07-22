@@ -631,6 +631,13 @@ class RatteriesController extends AppController
 
     /* State changes */
 
+    public function moderate($id) {
+        if ($this->request->is('post')) {
+            $decision = $this->request->getData('decision');
+            $this->$decision($id);
+        }
+    }
+
     public function freeze($id)
     {
         $this->request->allowMethod(['get', 'freeze']);

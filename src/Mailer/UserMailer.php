@@ -13,7 +13,7 @@ class UserMailer extends Mailer
     ->setFrom(['contact@srfa.info' => 'Livre des Origines du Rat Domestique'])
     ->setSender('contact@srfa.info', 'Livre des Origines du Rat Domestique')
     ->setTo($user->email)
-    ->setSubject('Reset your Password')
+    ->setSubject(__('Reset your Password'))
     ->setViewVars(['url' => $url, 'username' => $user->username])
     ->setEmailFormat('both')
     ->viewBuilder()
