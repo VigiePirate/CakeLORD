@@ -1213,7 +1213,6 @@ class RatsController extends AppController
 
         if ($this->request->is('post')) {
             $message = $this->request->getData('content');
-            dd($message);
         } else {
             $message = __('automatic');
         }

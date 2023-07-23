@@ -266,8 +266,9 @@
 
 <div class="spacer"></div>
 
-<div class="row">
+<?php echo $this->Form->create($rattery, ['type' => 'post', 'url' => ['controller' => 'Ratteries', 'action' => 'moderate', $rattery->id]]); ?>
 
+<div class="row">
     <div class="column-responsive column-50">
         <div class="tooltip-staff">
             <?= $this->Html->image('/img/icon-restore.svg', [
@@ -284,5 +285,7 @@
         </div>
     </div>
 </div>
+
+<?= $this->Form->end(); ?>
 
 <?= $this->Html->css('statebar.css') ?>

@@ -23,9 +23,9 @@
 
             <div class="column column-photo half-column-photo">
             <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
-                <?= $this->Html->image(UPLOADS . $snap_rat->picture, ['alt' => $rat->pedigree_identifier, 'url' => ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
+                <?= $this->Html->image(UPLOADS . $snap_rat->picture, ['alt' => $snap_rat->pedigree_identifier, 'url' => ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
             <?php else : ?>
-                <?= $this->Html->image('UnknownRat.svg', ['alt' => $rat->pedigree_identifier, 'url' => ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
+                <?= $this->Html->image('UnknownRat.svg', ['alt' => $snap_rat->pedigree_identifier, 'url' => ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
             <?php endif; ?>
             </div>
 
@@ -94,7 +94,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Birth litter') ?></th>
-                    <?php if (in_array('birth_litter_id', $diff_list)) : ?>
+                    <?php if (in_array('litter_id', $diff_list)) : ?>
                         <td class="minus"><?= $snap_rat->has('birth_litter') ? $this->Html->link($snap_rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $snap_rat->birth_litter->id]) : '' ?></td>
                     <?php else : ?>
                         <td><?= $rat->has('birth_litter') ? $this->Html->link($rat->birth_litter->parents_name, ['controller' => 'Litters', 'action' => 'view', $rat->birth_litter->id]) : __x('litter', 'None') ?></td>
@@ -542,8 +542,9 @@
 
 <div class="spacer"></div>
 
-<div class="row">
+<?php echo $this->Form->create($rat, ['type' => 'post', 'url' => ['controller' => 'Rats', 'action' => 'moderate', $rat->id]]); ?>
 
+<div class="row">
     <div class="column-responsive column-50">
         <div class="tooltip-staff">
             <?= $this->Html->image('/img/icon-restore.svg', [
@@ -561,5 +562,6 @@
     </div>
 </div>
 
+<?= $this->Form->end(); ?>
 
 <?= $this->Html->css('statebar.css') ?>
