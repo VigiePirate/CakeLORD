@@ -12,10 +12,8 @@
                 <div class="sheet-markers">
                     <?= $this->element('simple_statebar', ['sheet' => $sheet, 'user' => $user]) ?>
                 </div>
-
             </div>
             <div>
-
                 <?php
                     echo $this->Form->control('content', [
                         'type' => 'textarea',

@@ -640,7 +640,7 @@ class RatteriesController extends AppController
 
     public function freeze($id)
     {
-        $this->request->allowMethod(['get', 'freeze']);
+        $this->request->allowMethod(['get', 'post']);
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rattery, 'changeState');
         if ($this->Ratteries->freeze($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
@@ -653,7 +653,7 @@ class RatteriesController extends AppController
 
     public function thaw($id)
     {
-        $this->request->allowMethod(['get', 'thaw']);
+        $this->request->allowMethod(['get', 'post']);
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rattery, 'editFrozen');
         if ($this->Ratteries->thaw($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
@@ -666,7 +666,7 @@ class RatteriesController extends AppController
 
     public function approve($id)
     {
-        $this->request->allowMethod(['get', 'approve']);
+        $this->request->allowMethod(['get', 'post']);
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rattery, 'changeState');
         if ($this->Ratteries->approve($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
@@ -679,7 +679,7 @@ class RatteriesController extends AppController
 
     public function blame($id)
     {
-        $this->request->allowMethod(['get', 'blame']);
+        $this->request->allowMethod(['get', 'post']);
         $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rattery, 'changeState');
         if ($this->Ratteries->blame($rattery) && $this->Ratteries->save($rattery, ['checkRules' => false])) {
