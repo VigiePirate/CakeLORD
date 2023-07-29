@@ -18,6 +18,8 @@ class RatMessagesController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
+
         $this->paginate = [
             'contain' => ['Rats', 'Users'],
         ];
@@ -35,6 +37,8 @@ class RatMessagesController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
+
         $ratMessage = $this->RatMessages->get($id, [
             'contain' => ['Rats', 'Users'],
         ]);
