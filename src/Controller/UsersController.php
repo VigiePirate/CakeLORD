@@ -176,13 +176,13 @@ class UsersController extends AppController
             return $this->redirect(['controller' => 'users', 'action' => 'my']);
         }
 
-        if ($this->request->is('post')) {
+        $user = $this->Users->newEmptyEntity();
+
+        if ($this->request->is('post')) {    
+            $user = $this->Users->patchEntity($user, $this->request->getData());
 
             // check captcha
             //FIXME: place captcha question/answer in app local config
-            $user = $this->Users->newEmptyEntity();
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-
             if (strtolower($this->request->getData('captcha')) == 'rat' || strtolower($this->request->getData('captcha')) == 'rats') {
                 $passkey = uniqid('', true);
                 $user->passkey = $passkey;
