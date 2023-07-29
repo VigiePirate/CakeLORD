@@ -496,7 +496,7 @@ class RatsController extends AppController
      */
     public function restore($id = null, $snapshot_id = null)
     {
-        $rat = $this->Rats->get($id, ['contain' => ['Ratteries']]);
+        $rat = $this->Rats->get($id, ['contain' => ['Ratteries', 'States']]);
         $this->Authorization->authorize($rat);
         $this->Rats->removeBehavior('State');
         if ($this->Rats->snapRestore($rat, $snapshot_id)) {

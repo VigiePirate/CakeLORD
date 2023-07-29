@@ -263,7 +263,7 @@ class RatteriesController extends AppController
      */
     public function restore($id = null, $snapshot_id = null)
     {
-        $rattery = $this->Ratteries->get($id);
+        $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rattery);
         if ($this->Ratteries->snapRestore($rattery, $snapshot_id)) {
             $this->Flash->success(__('The snapshot has been restored.'));

@@ -590,7 +590,7 @@ class LittersController extends AppController
      */
     public function restore($id = null, $snapshot_id = null)
     {
-        $litter = $this->Litters->get($id);
+        $litter = $this->Litters->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($litter);
         if ($this->Litters->snapRestore($litter, $snapshot_id)) {
             $this->Flash->success(__('The snapshot has been restored.'));
