@@ -92,24 +92,23 @@ class RatsController extends AppController
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => false])
             ->order('Rats.birth_date DESC')
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
-        //FIXME use need user action, need staff action properties
         $pending = $this->Rats->find()
-            ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id' => '4'])
+            ->where(['Rats.owner_user_id' => $user->id, 'States.needs_staff_action' => true])
             ->order('Rats.birth_date DESC')
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
         $waiting = $this->Rats->find()
             ->where([
                 'Rats.owner_user_id' => $user->id,
-                'OR' => [['Rats.state_id' => '3'], ['Rats.state_id' => '5']]])
+                'OR' => [['Rats.state_id' => '3'], ['States.needs_user_action' => true]]])
             ->order('Rats.birth_date DESC')
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
         $okrats = $this->Rats->find()
-            ->where(['Rats.owner_user_id' => $user->id, 'Rats.state_id <=' => '2'])
+            ->where(['Rats.owner_user_id' => $user->id, 'States.needs_user_action' => false, 'States.needs_staff_action' => false])
             ->order('Rats.birth_date DESC')
             ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
 
         if(! empty($pending->first())) {
-            $this->Flash->error(__('You have rat sheets to correct!'));
+            $this->Flash->error(__('You have one or several sheets to correct! Please check them below.'));
         }
         $this->set(compact('females', 'males', 'alive', 'departed', 'pending', 'waiting', 'okrats', 'user'));
     }

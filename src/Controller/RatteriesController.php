@@ -72,6 +72,14 @@ class RatteriesController extends AppController
                 'is_alive' => false,
             ])->order('Ratteries.created DESC')
         );
+        $pending = $this->Ratteries->find()->contain(['States'])->where([
+                'owner_user_id' => $user->id,
+                'States.needs_user_action' => true
+            ]);
+
+        if(! empty($pending->first())) {
+            $this->Flash->error(__('You have one or several sheets to correct! Please check them below.'));
+        }
 
         $users = $this->loadModel('Users');
         $user = $users->get($user->id, ['contain' => ['Ratteries']]);

@@ -17,6 +17,7 @@
                         </div>
                     </div>
                     <h1><?= __('My litters') ?> </h1>
+                    <?= $this->Flash->render() ?>
                 </div>
             </div>
 
