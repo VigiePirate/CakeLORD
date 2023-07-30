@@ -373,9 +373,9 @@ class RatteriesController extends AppController
             } else {
                 $rattery->is_alive = true;
                 if ($this->Ratteries->save($rattery)) {
-                    $this->Flash->success('This rattery is now officially active.');
+                    $this->Flash->success(__('This rattery is now officially active.'));
                 } else {
-                    $this->Flash->error('This rattery could not be declared active. Please try again.');
+                    $this->Flash->error(__('This rattery could not be declared active. Please try again.'));
                 }
             }
         }
@@ -390,9 +390,9 @@ class RatteriesController extends AppController
 
         $rattery->wants_statistic = ! $rattery->wants_statistic;
         if ($this->Ratteries->save($rattery)) {
-            $this->Flash->success('Your statistics settings have been updated.');
+            $this->Flash->success(__('Your statistics settings have been updated.'));
         } else {
-            $this->Flash->error('We could not update your statistics preferences. Please try again.');
+            $this->Flash->error(__('We could not update your statistics preferences. Please try again.'));
         }
         return $this->redirect(['action' => 'my']);
     }

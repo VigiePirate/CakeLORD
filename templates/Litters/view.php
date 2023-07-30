@@ -518,6 +518,9 @@
                       min: 0,
                       max: 48,
                       suggestedMax: 48,
+                      font: {
+                          size: 10
+                      }
                   },
                   title: {
                       display: true,

@@ -731,7 +731,7 @@
                     },
                     ticks: {
                         font: {
-                            size: 12
+                            size: 10
                         }
                     },
                 },
