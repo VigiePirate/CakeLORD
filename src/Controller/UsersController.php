@@ -445,8 +445,11 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $roles = $this->Users->Roles->find('list')->order('id ASC');
         $identity = $this->request->getAttribute('identity');
+        $roles = $this->Users->Roles->find('list')
+            ->where(['id >=' => $identity->getRoleId()])
+            ->order('id ASC');
+
         $this->set(compact('user', 'roles', 'identity'));
     }
 

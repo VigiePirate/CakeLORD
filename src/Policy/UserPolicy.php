@@ -178,7 +178,8 @@ class UserPolicy implements BeforePolicyInterface
      */
     public function canPromote(IdentityInterface $user, User $resource)
     {
-        return $user->role->can_configure;
+        return $user->role->is_staff // $user->role->can_configure
+            && ($user->id == $resource->id || (int) $user->role_id < (int) $resource->role_id);
     }
 
     /**

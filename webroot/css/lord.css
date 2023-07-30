@@ -1178,9 +1178,13 @@ footer {
 .disabled:hover,
 .disabled a,
 .prev.disabled a,
-.next.disabled a {
+.next.disabled a,
+{
   cursor: not-allowed;
   color: #606c76;
+}
+input[readonly] {
+     cursor: not-allowed !important;
 }
 .asc:after {
   content: " \2193";
