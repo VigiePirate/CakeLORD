@@ -200,7 +200,12 @@ class Litter extends Entity
         if (! is_null($this->contributions) && ! is_null($this->contributions['0']->rattery_id)) {
             $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
             $rattery = $ratteries->get($this->contributions['0']->rattery_id, ['contain' => ['Users', 'Users.Ratteries']]);
-            return ($rattery->id == $rattery->user->main_rattery->id);
+
+            if ($rattery->is_generic) {
+                return true;
+            } else {
+                return ($rattery->id == $rattery->user->main_rattery->id);
+            }
         }
         // the error has been or will be catched by rule "hasBirthPlace"
         else {

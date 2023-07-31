@@ -421,7 +421,9 @@ class RatteriesTable extends Table
                 'rattery_id' => 'rattery_id',
                 'latest' => 'DATEDIFF(NOW(), MAX(Litters.birth_date))'
             ])
+            ->where(['Ratteries.is_generic IS' => false])
             ->innerJoinWith('Litters')
+            ->leftJoinWith('Ratteries')
             ->group('rattery_id')
             ->enableAutoFields(true) // should be replaced by selecting only useful fields
             ->enableHydration(false)
