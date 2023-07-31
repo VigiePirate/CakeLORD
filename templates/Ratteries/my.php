@@ -49,7 +49,15 @@
                                 </tr>
                                 <tr>
                                     <th><?= __('Founded in') ?></th>
-                                    <td><?= ($rattery->birth_year != '0000') ? h($rattery->birth_year) : h(substr($stats['activityYears'],0,4)) ?> — <?= $this->Html->link(__('Pause my rattery now'), ['action' => 'pause', $rattery->id]) ?></td>
+                                    <td>
+                                        <?= ($rattery->birth_year != '0000')
+                                            ? h($rattery->birth_year)
+                                            : h(substr($stats['activityYears'],0,4))
+                                        ?>
+                                        <?php if ($identity->can('microEdit', $rattery)) : ?>
+                                            <?= ' — ' . $this->Html->link(__('Pause my rattery now'), ['action' => 'pause', $rattery->id]) ?>
+                                        <?php endif ; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><?= __('Country') ?></th>
@@ -61,22 +69,35 @@
                                 </tr>
                                 <tr>
                                     <th><?= __('Zip Code') ?></th>
-                                    <td><?= $rattery->has('zip_code') ?
-                                        ($rattery->zip_code == '' ? __x('zipcode', 'Unknown') : $this->Number->format(h($rattery->zip_code))) . ' — ' . $this->Html->link(__('Relocate or remove'), ['action' => 'relocate', $rattery->id]) :
-                                        $this->Html->link(__('Declare a location to appear on the rattery map'), ['action' => 'relocate', $rattery->id])
-                                        ?>
-                                    </td>
+                                    <?php if ($identity->can('microEdit', $rattery)) : ?>
+                                        <td><?= (! $rattery->has('zip_code') || $rattery->zip_code == '')
+                                            ? __x('zipcode', 'Unknown') . ' — ' . $this->Html->link(__('Declare one for the rattery map'), ['action' => 'relocate', $rattery->id])
+                                            :  $this->Number->format(h($rattery->zip_code)) . ' — ' . $this->Html->link(__('Relocate or remove'), ['action' => 'relocate', $rattery->id])
+                                            ?>
+                                        </td>
+                                    <?php else : ?>
+                                        <td><?= (! $rattery->has('zip_code') || $rattery->zip_code == '')
+                                            ? __x('zipcode', 'Unknown')
+                                            :  $this->Number->format(h($rattery->zip_code)) . ' — ' . $this->Html->link(__('Relocate or remove'), ['action' => 'relocate', $rattery->id])
+                                            ?>
+                                        </td>
+                                    <?php endif ; ?>
                                 </tr>
                                 <tr>
                                     <th><?= __('Website') ?></th>
-                                    <td><?= $rattery->website ? $this->Html->link(h($rattery->website)) : '' ?></td>
+                                    <td><?= $rattery->website ? $this->Html->link(h($rattery->website)) : __('No declared website') ?></td>
                                 </tr>
                                 <tr>
                                     <th><?= __('Do you currently show your statistics?') ?></th>
-                                    <td><?= $rattery->wants_statistic
-                                            ? __('Yes') . ' — '. $this->Html->link(__('I want to hide them'), ['action' => 'switchStats', $rattery->id])
-                                            : __('No') . ' — ' . $this->Html->link(__('I want to show them'), ['action' => 'switchStats', $rattery->id])
-                                        ?>
+                                    <td>
+                                        <?php if ($identity->can('microEdit', $rattery)) : ?>
+                                            <?= $rattery->wants_statistic
+                                                ? __('Yes') . ' — ' . $this->Html->link(__('I want to hide them'), ['action' => 'switchStats', $rattery->id])
+                                                : __('No') . ' — ' . $this->Html->link(__('I want to show them'), ['action' => 'switchStats', $rattery->id])
+                                            ?>
+                                        <?php else : ?>
+                                            <?= $rattery->wants_statistic ? __('Yes') : __('No') ?>
+                                        <?php endif ; ?>
                                     </td>
                                 </tr>
                             </table>

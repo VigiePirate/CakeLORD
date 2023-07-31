@@ -139,15 +139,6 @@ class RatteriesController extends AppController
             $champion = null;
         }
 
-        // $offspringsQuery = $this->Ratteries->Rats
-        //                         ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses']])
-        //                         ->matching('Ratteries', function (\Cake\ORM\Query $query) use ($rattery) {
-        //                             return $query->where([
-        //                                 'Ratteries.id' => $rattery->id
-        //                             ]);
-        //                         });
-        // $offsprings = $this->paginate($offspringsQuery);
-
         /* statebar */
         $this->loadModel('States');
         if($rattery->state->is_frozen) {
