@@ -421,8 +421,9 @@ class RatteriesController extends AppController
                 }
                 $this->Flash->error(__('The rattery’s new picture could not be saved. Please, try again.'));
             }
+        } else {
+            $this->Flash->default(__('Pictures must be in jpeg, gif or png format and less than 8 MB.') . ' ' . __x('pictures', 'Large images will be automatically resized.'));
         }
-        $this->Flash->default(__('Pictures must be in jpeg, gif or png format.') . ' ' . __x('pictures', 'If too large, they will be automatically resized.'));
         $this->set(compact('rattery'));
     }
 

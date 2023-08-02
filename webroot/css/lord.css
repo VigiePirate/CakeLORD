@@ -38,6 +38,11 @@ p {
   align-items: flex-start;
 }
 
+.row-hfill {
+  display: flex;
+  justify-content: space-between;
+}
+
 summary {
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
   font-weight: bold;

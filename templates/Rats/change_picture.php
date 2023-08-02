@@ -38,13 +38,16 @@
 
             <?= $this->Flash->render(); ?>
 
-            <?php
-            echo $this->Form->create($rat, ['type' => 'file']); ?>
+            <?php echo $this->Form->create($rat, ['type' => 'file']); ?>
+
             <fieldset>
                 <?= $this->Form->control('picture_file', ['label' => __('Photo'), 'type' => 'file']) ?>
+                <div class="row-hfill">
+                    <div><?= $this->Form->button(__('Upload picture'), ['name' => 'action', 'value' => 'upload']) ?></div>
+                    <div><?= $this->Form->button(__('Delete picture'), ['name' => 'action', 'value' => 'delete', 'class' => 'button-staff']) ?></div>
+                </div>
             </fieldset>
-            <?= $this->Form->button(__('Upload picture'), ['name' => 'action', 'value' => 'upload']) ?>
-            <?= $this->Form->button(__('Delete picture'), ['name' => 'action', 'value' => 'delete', 'class' => 'button-staff']) ?>
+
             <?= $this->Form->end(); ?>
         </div>
     </div>

@@ -80,6 +80,6 @@ class RatSnapshotPolicy implements BeforePolicyInterface
      */
     public function canDiff(IdentityInterface $user, RatSnapshot $ratSnapshot)
     {
-        return $user->role->can_restore;
+        return $user->role->can_change_state;
     }
 }
