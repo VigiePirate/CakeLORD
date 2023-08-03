@@ -1,6 +1,6 @@
 <?= $this->Flash->render() ?>
 
-<?php $this->assign('title', __('Request new password') ?>
+<?php $this->assign('title', __('Request new password')) ?>
 
 <div class="users form index content">
 

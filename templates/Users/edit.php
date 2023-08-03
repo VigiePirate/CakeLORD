@@ -35,12 +35,21 @@
 
             <fieldset>
                 <legend><?= __('Public information') ?></legend>
-                <?= $this->Form->control('username'); ?>
-                <?php if ($identity->can('promote', $user)) : ?>
-                    <?= $this->Form->control('role_id', ['options' => $roles]); ?>
+
+                <?php if ($identity->can('seeStaffOnly', $user)) : ?>
+                    <?= $this->Form->control('username'); ?>
+                    <?php if ($identity->can('promote', $user)) : ?>
+                        <?= $this->Form->control('role_id', ['options' => $roles]); ?>
+                    <?php else : ?>
+                        <?= $this->Form->control('rolename', ['type' =>'text', 'label' => __('Role'), 'value' => $user->role->name, 'readonly' => true]); ?>
+                    <?php endif; ?>
+                <?php else : ?>
+                    <?= $this->Form->control('username', ['readonly' => true]); ?>
+                    <?= $this->Form->control('rolename', ['type' =>'text', 'label' => __('Role'), 'value' => $user->role->name, 'readonly' => true]); ?>
                 <?php endif; ?>
+
                 <?php
-                    echo $this->Form->control('localization');
+                    echo $this->Form->control('localization', ['label' => __('Localization (region, district, city...)')]);
                     echo $this->Form->control('picture_file', ['label' => __('Avatar'), 'type' => 'file']);
                     echo $this->Form->control('about_me', [
                         'type' => 'textarea',

@@ -132,13 +132,23 @@
                     </div>
                     <?php if ($user->is_staff) : ?>
                         <div class="side-nav-group">
-                            <div class="tooltip-staff">
-                                <?= $this->Html->image('/img/icon-attach-rat.svg', [
-                                    'url' => ['controller' => 'Litters', 'action' => 'attachRat', $litter->id],
-                                    'class' => 'side-nav-icon',
-                                    'alt' => __('Add existing rat')]) ?>
-                                <span class="tooltiptext-staff"><?= __('Add an existing rat to this litter') ?></span>
-                            </div>
+                            <?php if (! is_null($user) && $user->can('staffEdit', $litter)) : ?>
+                                <div class="tooltip-staff">
+                                    <?= $this->Html->image('/img/icon-attach-rat.svg', [
+                                        'url' => ['controller' => 'Litters', 'action' => 'attachRat', $litter->id],
+                                        'class' => 'side-nav-icon',
+                                        'alt' => __('Add existing rat')]) ?>
+                                    <span class="tooltiptext-staff"><?= __('Add an existing rat to this litter') ?></span>
+                                </div>
+                            <?php else :?>
+                                <div class="tooltip-staff disabled">
+                                    <?= $this->Html->image('/img/icon-attach-rat.svg', [
+                                        'url' => [],
+                                        'class' => 'side-nav-icon',
+                                        'alt' => __('Add existing rat')]) ?>
+                                    <span class="tooltiptext-staff"><?= __('You cannot add an existing rat to this litter') ?></span>
+                                </div>
+                            <?php endif; ?>
                             <?= $this->element('staff_sidebar', [
                                 'controller' => 'Litters',
                                 'object' => $litter,
@@ -508,6 +518,9 @@
                       min: 0,
                       max: 48,
                       suggestedMax: 48,
+                      font: {
+                          size: 10
+                      }
                   },
                   title: {
                       display: true,

@@ -9,6 +9,7 @@ use Cake\I18n\FrozenTime;
 use Cake\Collection\Collection;
 use Cake\Datasource\FactoryLocator;
 use App\Model\Entity\StatisticsTrait;
+use App\Model\Table\LittersTable;
 use App\Model\Table\RatsTable;
 
 /**
@@ -200,7 +201,12 @@ class Litter extends Entity
         if (! is_null($this->contributions) && ! is_null($this->contributions['0']->rattery_id)) {
             $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
             $rattery = $ratteries->get($this->contributions['0']->rattery_id, ['contain' => ['Users', 'Users.Ratteries']]);
-            return ($rattery->id == $rattery->user->main_rattery->id);
+
+            if ($rattery->is_generic) {
+                return true;
+            } else {
+                return ($rattery->id == $rattery->user->main_rattery->id);
+            }
         }
         // the error has been or will be catched by rule "hasBirthPlace"
         else {
@@ -257,6 +263,18 @@ class Litter extends Entity
     public function isBornFuture()
     {
         return $this->birth_date->isFuture();
+    }
+
+    public function hasTooCloseSiblings()
+    {
+        $dam = (new Collection($this->parent_rats))->match(['sex' => 'F'])->toList();
+
+        $concurrents = FactoryLocator::get('Table')->get('Litters')->find('fromBirthRange', [
+            'birth_date' => $this->birth_date,
+            'mother_id' => $dam[0]->id,
+        ]);
+
+        return ! empty($concurrents->toArray());
     }
 
     public function isAbnormalPregnancy()
@@ -337,10 +355,12 @@ class Litter extends Entity
     public function homogeneizeBirthDates() {
         $rats = FactoryLocator::get('Table')->get('rats');
         $rats->removeBehavior('State');
-        foreach ($this->offspring_rats as $rat) {
-            $rat->birth_date = $this->birth_date;
-            if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
-                return false;
+        if (! is_null($this->offspring_rats)) {
+            foreach ($this->offspring_rats as $rat) {
+                $rat->birth_date = $this->birth_date;
+                if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
+                    return false;
+                }
             }
         }
         $rats->addBehavior('State');
@@ -351,12 +371,14 @@ class Litter extends Entity
     public function homogeneizePrefixes() {
         $rats = FactoryLocator::get('Table')->get('rats');
         $rats->removeBehavior('State');
-        foreach ($this->offspring_rats as $rat) {
-            $rat->rattery_id = $this->contributions['0']->rattery_id;
-            $rat->is_pedigree_custom = true;
-            if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
-                $rats->addBehavior('State');
-                return false;
+        if (! is_null($this->offspring_rats)) {
+            foreach ($this->offspring_rats as $rat) {
+                $rat->rattery_id = $this->contributions['0']->rattery_id;
+                $rat->is_pedigree_custom = true;
+                if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
+                    $rats->addBehavior('State');
+                    return false;
+                }
             }
         }
         $rats->addBehavior('State');
@@ -374,6 +396,16 @@ class Litter extends Entity
 
     public function checkStillbornCount() {
         return $this->pups_number >= $this->pups_number_stillborn;
+
+    }
+
+    public function checkMaxPupCount() {
+        return $this->pups_number <= LittersTable::MAXIMAL_PUP_NUMBER;
+
+    }
+
+    public function checkMaxStillbornCount() {
+        return $this->pups_number <= LittersTable::MAXIMAL_PUP_NUMBER;
 
     }
 

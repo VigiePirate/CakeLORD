@@ -72,6 +72,14 @@ class RatteriesController extends AppController
                 'is_alive' => false,
             ])->order('Ratteries.created DESC')
         );
+        $pending = $this->Ratteries->find()->contain(['States'])->where([
+                'owner_user_id' => $user->id,
+                'States.needs_user_action' => true
+            ]);
+
+        if(! empty($pending->first())) {
+            $this->Flash->error(__('You have one or several sheets to correct! Please check them below.'));
+        }
 
         $users = $this->loadModel('Users');
         $user = $users->get($user->id, ['contain' => ['Ratteries']]);
@@ -130,15 +138,6 @@ class RatteriesController extends AppController
         } else {
             $champion = null;
         }
-
-        // $offspringsQuery = $this->Ratteries->Rats
-        //                         ->find('all', ['contain' => ['States', 'DeathPrimaryCauses','DeathSecondaryCauses']])
-        //                         ->matching('Ratteries', function (\Cake\ORM\Query $query) use ($rattery) {
-        //                             return $query->where([
-        //                                 'Ratteries.id' => $rattery->id
-        //                             ]);
-        //                         });
-        // $offsprings = $this->paginate($offspringsQuery);
 
         /* statebar */
         $this->loadModel('States');
@@ -255,7 +254,7 @@ class RatteriesController extends AppController
      */
     public function restore($id = null, $snapshot_id = null)
     {
-        $rattery = $this->Ratteries->get($id);
+        $rattery = $this->Ratteries->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rattery);
         if ($this->Ratteries->snapRestore($rattery, $snapshot_id)) {
             $this->Flash->success(__('The snapshot has been restored.'));
@@ -365,9 +364,9 @@ class RatteriesController extends AppController
             } else {
                 $rattery->is_alive = true;
                 if ($this->Ratteries->save($rattery)) {
-                    $this->Flash->success('This rattery is now officially active.');
+                    $this->Flash->success(__('This rattery is now officially active.'));
                 } else {
-                    $this->Flash->error('This rattery could not be declared active. Please try again.');
+                    $this->Flash->error(__('This rattery could not be declared active. Please try again.'));
                 }
             }
         }
@@ -382,9 +381,9 @@ class RatteriesController extends AppController
 
         $rattery->wants_statistic = ! $rattery->wants_statistic;
         if ($this->Ratteries->save($rattery)) {
-            $this->Flash->success('Your statistics settings have been updated.');
+            $this->Flash->success(__('Your statistics settings have been updated.'));
         } else {
-            $this->Flash->error('We could not update your statistics preferences. Please try again.');
+            $this->Flash->error(__('We could not update your statistics preferences. Please try again.'));
         }
         return $this->redirect(['action' => 'my']);
     }
@@ -422,8 +421,9 @@ class RatteriesController extends AppController
                 }
                 $this->Flash->error(__('The rattery’s new picture could not be saved. Please, try again.'));
             }
+        } else {
+            $this->Flash->default(__('Pictures must be in jpeg, gif or png format and less than 8 MB.') . ' ' . __x('pictures', 'Large images will be automatically resized.'));
         }
-        $this->Flash->default(__('Pictures must be in jpeg, gif or png format.') . ' ' . __x('pictures', 'If too large, they will be automatically resized.'));
         $this->set(compact('rattery'));
     }
 

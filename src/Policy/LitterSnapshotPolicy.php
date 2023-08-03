@@ -26,7 +26,7 @@ class LitterSnapshotPolicy implements BeforePolicyInterface
             return true;
         }
     }
-    
+
     /**
      * Check if $user can add LitterSnapshot
      *

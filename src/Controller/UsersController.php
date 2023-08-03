@@ -106,6 +106,7 @@ class UsersController extends AppController
                 $neglected_count = $this->Rats->blameNeglected($this->Rats)
                     + $this->Ratteries->blameNeglected($this->Ratteries)
                     + $this->Litters->blameNeglected($this->Litters);
+                    
                 if ($neglected_count > 0) {
                     $this->Flash->warning(__('{0, plural, =1{1 sheet neglected by users has just been escalated to back-office.} other{# sheets neglected by users have just been escalated to back-office.}}', [$neglected_count]));
                 }
@@ -176,13 +177,13 @@ class UsersController extends AppController
             return $this->redirect(['controller' => 'users', 'action' => 'my']);
         }
 
+        $user = $this->Users->newEmptyEntity();
+
         if ($this->request->is('post')) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
 
             // check captcha
             //FIXME: place captcha question/answer in app local config
-            $user = $this->Users->newEmptyEntity();
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-
             if (strtolower($this->request->getData('captcha')) == 'rat' || strtolower($this->request->getData('captcha')) == 'rats') {
                 $passkey = uniqid('', true);
                 $user->passkey = $passkey;
@@ -445,8 +446,11 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $roles = $this->Users->Roles->find('list')->order('id ASC');
         $identity = $this->request->getAttribute('identity');
+        $roles = $this->Users->Roles->find('list')
+            ->where(['id >=' => $identity->getRoleId()])
+            ->order('id ASC');
+
         $this->set(compact('user', 'roles', 'identity'));
     }
 
@@ -481,8 +485,9 @@ class UsersController extends AppController
                 }
                 $this->Flash->error(__('The user’s new picture could not be saved. Please, try again.'));
             }
+        } else {
+            $this->Flash->default(__('Pictures must be in jpeg, gif or png format and less than 8 MB.') . ' ' . __x('pictures', 'Large images will be automatically resized.'));
         }
-        $this->Flash->default(__('Pictures must be in jpeg, gif or png format.') . ' ' . __x('pictures', 'If too large, they will be automatically resized.'));
         $this->set(compact('user'));
     }
 
@@ -635,7 +640,7 @@ class UsersController extends AppController
         // regardless of anything, redirect if user is logged in
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
-            $this->Flash->default('You are logged in, you can change your password directly from here.');
+            $this->Flash->default(__('You are logged in, you can change your password directly from here.'));
             return $this->redirect(['controller' => 'users', 'action' => 'changePassword']);
         }
 
@@ -648,7 +653,7 @@ class UsersController extends AppController
             } else {
 
                 if ($user->is_locked) {
-                    $this->Flash->error('Your account is locked. Please activate it or contact an administrator');
+                    $this->Flash->error(__('Your account is locked. Please activate it or contact an administrator'));
                     return $this->redirect(['action' => 'login']); //FIXME: redirect to a contact form
                 }
 
@@ -682,12 +687,12 @@ class UsersController extends AppController
         // regardless of anything, redirect if user is logged in
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
-            $this->Flash->default('You are logged in, you can change your password directly from here.');
+            $this->Flash->default(__('You are logged in, you can change your password directly from here.'));
             return $this->redirect(['controller' => 'users', 'action' => 'changePassword']);
         }
 
         if (empty($passkey)) {
-            $this->Flash->error('Invalid passkey. Please check your email or try again.');
+            $this->Flash->error(__('Invalid passkey. Please check your email or try again.'));
             return $this->redirect(['action' => 'lostPassword']);
         }
 
@@ -696,17 +701,17 @@ class UsersController extends AppController
         $user = $query->first();
         // check if user exists
         if (empty($user)) {
-            $this->Flash->error('Invalid passkey. Please check your email or try again');
+            $this->Flash->error(__('Invalid passkey. Please check your email or try again'));
             return $this->redirect(['action' => 'lostPassword']);
         } else {
             // check if user is locked
             if ($user->is_locked) {
-                $this->Flash->error('Your account is locked. Please contact an administrator');
+                $this->Flash->error(__('Your account is locked. Please contact an administrator'));
                 return $this->redirect(['action' => 'login']); // fixme: redirect to a contact form
             }
             // check if passkey is expired
             if (! $user->failed_login_last_date->wasWithinLast('24 hours')) {
-                $this->Flash->error('Expired passkey. Please generate a new one, check your email and try again');
+                $this->Flash->error(__('Expired passkey. Please generate a new one, check your email and try again'));
                 return $this->redirect(['action' => 'lostPassword']);
             }
 
@@ -716,13 +721,13 @@ class UsersController extends AppController
                 $confirmPassword = $this->request->getData('confirm_password');
                 // check if the two passwords are identical
                 if ($newPassword != $confirmPassword) {
-                    $this->Flash->error('Passwords are different. Please retry.');
+                    $this->Flash->error(__('Passwords are different. Please retry.'));
                     return $this->redirect(['action' => 'resetPassword', $passkey]);
                 } else {
                     $user->password = $newPassword;
                     $user->passkey = null;
                     $this->Users->save($user);
-                    $this->Flash->success('Your password has been updated.');
+                    $this->Flash->success(__('Your password has been updated.'));
                     return $this->redirect(['action' => 'login']);
                 }
             }

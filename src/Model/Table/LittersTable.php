@@ -41,6 +41,10 @@ use Cake\Collection\Collection;
  */
 class LittersTable extends Table
 {
+    const MAXIMAL_PUP_NUMBER = 24;
+    const MINIMAL_PREGNANCY_DURATION = 21;
+    const MAXIMAL_PREGNANCY_DURATION = 25;
+
     /**
      * Initialize method
      *
@@ -58,6 +62,10 @@ class LittersTable extends Table
         $this->addBehavior('Timestamp');
         $this->addBehavior('Snapshot', [
             'repository' => 'LitterSnapshots',
+            'entityField' => 'litter_id',
+        ]);
+        $this->addBehavior('Message', [
+            'repository' => 'LitterMessages',
             'entityField' => 'litter_id',
         ]);
         $this->addBehavior('State', [
@@ -286,7 +294,7 @@ class LittersTable extends Table
         );
 
         /* Birth place cannot be a definitely closed rattery */
-        $rules->add(function($litter) {
+        $rules->addCreate(function($litter) {
                 return $litter->hasActivableBirthPlace();
             },
             'rattery_closed',
@@ -320,6 +328,17 @@ class LittersTable extends Table
             ]
         );
 
+        /* No birth near existing one from the same mother */
+        $rules->add(function ($litter) {
+                return ! $litter->hasTooCloseSiblings();
+            },
+            'hasCloseSiblings',
+            [
+                'errorField' => 'birth_date',
+                'message' => __('Impossible: the date is too close from the birth of another litter with the same mother.')
+            ]
+        );
+
         /* Mating should be 20-28 days before birth */
         $rules->add(function($litter) {
                 return ! $litter->isAbnormalPregnancy();
@@ -327,7 +346,9 @@ class LittersTable extends Table
             'abnormalPregnancy',
             [
                 'errorField' => 'mating_date',
-                'message' => __('Impossible: mating happens at least 20 days and at most 25 days before birth.')
+                'message' => __('Impossible: mating happens at least {0} days and at most {1} days before birth.', [
+                    LittersTable::MINIMAL_PREGNANCY_DURATION, LittersTable::MAXIMAL_PREGNANCY_DURATION
+                ]),
             ]
         );
 
@@ -425,6 +446,26 @@ class LittersTable extends Table
             ]
         );
 
+        $rules->add(function($litter) {
+                return $litter->checkMaxPupCount();
+            },
+            'tooManyPups',
+            [
+                'errorField' => 'pups_number',
+                'message' => __('Impossible: rats do not have such large litters.')
+            ]
+        );
+
+        $rules->add(function($litter) {
+                return $litter->checkMaxStillbornCount();
+            },
+            'tooManyPups',
+            [
+                'errorField' => 'pups_number_stillborn',
+                'message' => __('Impossible: rats do not have such large litters.')
+            ]
+        );
+
         return $rules;
     }
 
@@ -474,6 +515,7 @@ class LittersTable extends Table
 
             // if entity is updated, check if some contributions must be deleted
             if (isset($entity->contributions)) {
+
                 $new_contributions = new Collection($entity->contributions);
                 $types = $new_contributions->extract('contribution_type_id')->toArray();
                 foreach ($entity->getOriginal('contributions') as $old_contribution) {
@@ -487,8 +529,9 @@ class LittersTable extends Table
                             return ($contrib->contribution_type_id === $type && $contrib->contribution_type_id != 1);
                         })->first();
 
-                        if (! is_null($concurrent)) {
-                            if (! $output = $contributions->delete($old_contribution, ['atomic' => false])) {
+                        // check that concurrent is not actually the same
+                        if (! is_null($concurrent) && $concurrent->id != $old_contribution->id) {
+                            if (! $output = $contributions->delete($old_contribution)) {
                                 return false;
                             }
                         }
@@ -575,6 +618,26 @@ class LittersTable extends Table
             ->matching('ParentRats', function ($q) use ($mother_id) {
                 return $q->where(['ParentRats.id' => $mother_id]);
             });
+
+        return $query->group(['Litters.id']);
+    }
+
+    public function findFromBirthRange(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        $birth_date = $options['birth_date'];
+        $mother_id = $options['mother_id'];
+        $query = $query
+            ->matching('ParentRats', function ($q) use ($mother_id) {
+                return $q->where(['ParentRats.id' => $mother_id]);
+            })
+            ->where([
+                'Litters.birth_date >=' => $birth_date->modify('-'.LittersTable::MINIMAL_PREGNANCY_DURATION.' days'),
+                'Litters.birth_date <=' => $birth_date->modify('+'.LittersTable::MINIMAL_PREGNANCY_DURATION.' days')
+            ]);
 
         return $query->group(['Litters.id']);
     }

@@ -38,6 +38,11 @@ p {
   align-items: flex-start;
 }
 
+.row-hfill {
+  display: flex;
+  justify-content: space-between;
+}
+
 summary {
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
   font-weight: bold;
@@ -1178,9 +1183,13 @@ footer {
 .disabled:hover,
 .disabled a,
 .prev.disabled a,
-.next.disabled a {
+.next.disabled a,
+{
   cursor: not-allowed;
   color: #606c76;
+}
+input[readonly] {
+     cursor: not-allowed !important;
 }
 .asc:after {
   content: " \2193";

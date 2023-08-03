@@ -167,6 +167,10 @@ class RatsTable extends Table
             'repository' => 'RatSnapshots',
             'entityField' => 'rat_id',
         ]);
+        $this->addBehavior('Message', [
+            'repository' => 'RatMessages',
+            'entityField' => 'rat_id',
+        ]);
         $this->addBehavior('State', [
             'safe_properties' => [
                 'name',

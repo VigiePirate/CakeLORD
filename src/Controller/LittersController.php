@@ -59,6 +59,19 @@ class LittersController extends AppController
 
         $litters = $this->paginate($litters);
 
+        $pending = $this->Litters->find()
+            ->matching('Contributions.Ratteries', function (\Cake\ORM\Query $q) use ($user) {
+                return $q->where([
+                    'Ratteries.owner_user_id' => $user->id,
+                ]);
+            })
+            ->contain(['States'])
+            ->where(['States.needs_user_action' => true]);
+
+        if(! empty($pending->first())) {
+            $this->Flash->error(__('You have one or several sheets to correct! Please check them below.'));
+        }
+
         $this->set(compact('litters', 'user'));
     }
 
@@ -418,7 +431,7 @@ class LittersController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData());
-            if ($this->Litters->save($litter)) {
+            if ($this->Litters->save($litter, ['associated' => []])) {
                 $this->Flash->success(__('Your new comment about the litter has been saved.'));
                 return $this->redirect(['action' => 'view', $litter->id]);
             }
@@ -577,7 +590,7 @@ class LittersController extends AppController
      */
     public function restore($id = null, $snapshot_id = null)
     {
-        $litter = $this->Litters->get($id);
+        $litter = $this->Litters->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($litter);
         if ($this->Litters->snapRestore($litter, $snapshot_id)) {
             $this->Flash->success(__('The snapshot has been restored.'));
@@ -941,7 +954,7 @@ class LittersController extends AppController
 
     public function freeze($id)
     {
-        $this->request->allowMethod(['get', 'freeze']);
+        $this->request->allowMethod(['get', 'post']);
         $litter = $this->Litters->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($litter, 'changeState');
         if ($this->Litters->freeze($litter) && $this->Litters->save($litter, ['checkRules' => false])) {
@@ -955,7 +968,7 @@ class LittersController extends AppController
 
     public function thaw($id)
     {
-        $this->request->allowMethod(['get', 'thaw']);
+        $this->request->allowMethod(['get', 'post']);
         $litter = $this->Litters->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($litter, 'editFrozen');
         if ($this->Litters->thaw($litter) && $this->Litters->save($litter, ['checkRules' => false])) {
@@ -968,7 +981,7 @@ class LittersController extends AppController
 
     public function approve($id)
     {
-        $this->request->allowMethod(['get', 'approve']);
+        $this->request->allowMethod(['get', 'post']);
         $litter = $this->Litters->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($litter, 'changeState');
         if ($this->Litters->approve($litter) && $this->Litters->save($litter, ['checkRules' => false])) {
@@ -981,7 +994,7 @@ class LittersController extends AppController
 
     public function blame($id)
     {
-        $this->request->allowMethod(['get', 'blame']);
+        $this->request->allowMethod(['get', 'post']);
         $litter = $this->Litters->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($litter, 'changeState');
         if ($this->Litters->blame($litter) && $this->Litters->save($litter, ['checkRules' => false])) {

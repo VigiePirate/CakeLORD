@@ -87,9 +87,9 @@ class SnapshotBehavior extends Behavior
      */
     public function snapRestore(EntityInterface $entity, $snapshot_id)
     {
-        $this->getTable()->removeBehavior('Picture');
+        $this->table()->removeBehavior('Picture');
         if ($entity->set($this->snapLoad($entity, $snapshot_id), ['guard' => false])) {
-            if ($this->getTable()->save($entity, ['checkRules' => false])) {
+            if ($this->table()->save($entity, ['checkRules' => false])) {
                 return $this->snapDelete($entity, $snapshot_id);
             }
         }
@@ -118,7 +118,7 @@ class SnapshotBehavior extends Behavior
     }
 
     /**
-     * snapLoad method
+     * snapDelete method
      *
      * Deletes a snapshot belonging to the entity.
      *

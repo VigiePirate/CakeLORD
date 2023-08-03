@@ -59,7 +59,7 @@
                         <td><?= $rattery->has('user') ? $this->Html->link($rattery->user->username, ['controller' => 'Users', 'action' => 'view', $rattery->user->id]) : '' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('birth_year', $exceptions)): ?>
-                        <td><?= h($rattery->birth_year) ?></td>
+                        <td><?= ($rattery->is_generic || $rattery->birth_year == '0000') ? __('N/A') : h($rattery->birth_year) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('zip_code', $exceptions)): ?>
                         <td><?= h($rattery->zip_code) ?></td>

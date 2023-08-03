@@ -87,6 +87,14 @@ class User extends Entity implements IdentityInterface
     /**
      * Authentication\IdentityInterface method
      */
+    public function getRoleId()
+    {
+        return $this->role_id;
+    }
+
+    /**
+     * Authentication\IdentityInterface method
+     */
     public function getOriginalData()
     {
         return $this;
