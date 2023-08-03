@@ -7553,4 +7553,3 @@ msgstr ""
 #: ./templates/layout/fullpage.php:162
 msgid "Partners"
 msgstr ""
-
