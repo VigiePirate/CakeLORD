@@ -431,7 +431,7 @@ class LittersController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $litter = $this->Litters->patchEntity($litter, $this->request->getData());
-            if ($this->Litters->save($litter)) {
+            if ($this->Litters->save($litter, ['associated' => []])) {
                 $this->Flash->success(__('Your new comment about the litter has been saved.'));
                 return $this->redirect(['action' => 'view', $litter->id]);
             }

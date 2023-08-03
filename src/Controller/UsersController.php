@@ -106,6 +106,7 @@ class UsersController extends AppController
                 $neglected_count = $this->Rats->blameNeglected($this->Rats)
                     + $this->Ratteries->blameNeglected($this->Ratteries)
                     + $this->Litters->blameNeglected($this->Litters);
+                    
                 if ($neglected_count > 0) {
                     $this->Flash->warning(__('{0, plural, =1{1 sheet neglected by users has just been escalated to back-office.} other{# sheets neglected by users have just been escalated to back-office.}}', [$neglected_count]));
                 }

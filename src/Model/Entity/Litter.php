@@ -342,10 +342,12 @@ class Litter extends Entity
     public function homogeneizeBirthDates() {
         $rats = FactoryLocator::get('Table')->get('rats');
         $rats->removeBehavior('State');
-        foreach ($this->offspring_rats as $rat) {
-            $rat->birth_date = $this->birth_date;
-            if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
-                return false;
+        if (! is_null($this->offspring_rats)) {
+            foreach ($this->offspring_rats as $rat) {
+                $rat->birth_date = $this->birth_date;
+                if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
+                    return false;
+                }
             }
         }
         $rats->addBehavior('State');
@@ -356,12 +358,14 @@ class Litter extends Entity
     public function homogeneizePrefixes() {
         $rats = FactoryLocator::get('Table')->get('rats');
         $rats->removeBehavior('State');
-        foreach ($this->offspring_rats as $rat) {
-            $rat->rattery_id = $this->contributions['0']->rattery_id;
-            $rat->is_pedigree_custom = true;
-            if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
-                $rats->addBehavior('State');
-                return false;
+        if (! is_null($this->offspring_rats)) {
+            foreach ($this->offspring_rats as $rat) {
+                $rat->rattery_id = $this->contributions['0']->rattery_id;
+                $rat->is_pedigree_custom = true;
+                if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
+                    $rats->addBehavior('State');
+                    return false;
+                }
             }
         }
         $rats->addBehavior('State');

@@ -290,7 +290,7 @@ class LittersTable extends Table
         );
 
         /* Birth place cannot be a definitely closed rattery */
-        $rules->add(function($litter) {
+        $rules->addCreate(function($litter) {
                 return $litter->hasActivableBirthPlace();
             },
             'rattery_closed',
@@ -478,6 +478,7 @@ class LittersTable extends Table
 
             // if entity is updated, check if some contributions must be deleted
             if (isset($entity->contributions)) {
+
                 $new_contributions = new Collection($entity->contributions);
                 $types = $new_contributions->extract('contribution_type_id')->toArray();
                 foreach ($entity->getOriginal('contributions') as $old_contribution) {
@@ -491,8 +492,9 @@ class LittersTable extends Table
                             return ($contrib->contribution_type_id === $type && $contrib->contribution_type_id != 1);
                         })->first();
 
-                        if (! is_null($concurrent)) {
-                            if (! $output = $contributions->delete($old_contribution, ['atomic' => false])) {
+                        // check that concurrent is not actually the same
+                        if (! is_null($concurrent) && $concurrent->id != $old_contribution->id) {
+                            if (! $output = $contributions->delete($old_contribution)) {
                                 return false;
                             }
                         }

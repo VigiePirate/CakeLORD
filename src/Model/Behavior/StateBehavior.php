@@ -151,8 +151,12 @@ class StateBehavior extends Behavior
             $this->blame($value);
             return $value;
         });
+        if ($table->saveMany($entities, ['checkRules' => false, 'associated' => []])) {
+            return $entities->count();
+        } else {
+            return -1; //FIXME should raise exception
+        }
 
-        $table->saveMany($entities, ['associated' => []]);
-        return $entities->count();
     }
+
 }
