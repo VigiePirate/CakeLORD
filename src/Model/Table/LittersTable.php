@@ -41,6 +41,10 @@ use Cake\Collection\Collection;
  */
 class LittersTable extends Table
 {
+    const MAXIMAL_PUP_NUMBER = 24;
+    const MINIMAL_PREGNANCY_DURATION = 21;
+    const MAXIMAL_PREGNANCY_DURATION = 25;
+
     /**
      * Initialize method
      *
@@ -324,6 +328,17 @@ class LittersTable extends Table
             ]
         );
 
+        /* No birth near existing one from the same mother */
+        $rules->add(function ($litter) {
+                return ! $litter->hasTooCloseSiblings();
+            },
+            'hasCloseSiblings',
+            [
+                'errorField' => 'birth_date',
+                'message' => __('Impossible: the date is too close from the birth of another litter with the same mother.')
+            ]
+        );
+
         /* Mating should be 20-28 days before birth */
         $rules->add(function($litter) {
                 return ! $litter->isAbnormalPregnancy();
@@ -331,7 +346,9 @@ class LittersTable extends Table
             'abnormalPregnancy',
             [
                 'errorField' => 'mating_date',
-                'message' => __('Impossible: mating happens at least 20 days and at most 25 days before birth.')
+                'message' => __('Impossible: mating happens at least {0} days and at most {1} days before birth.', [
+                    LittersTable::MINIMAL_PREGNANCY_DURATION, LittersTable::MAXIMAL_PREGNANCY_DURATION
+                ]),
             ]
         );
 
@@ -426,6 +443,26 @@ class LittersTable extends Table
             [
                 'errorField' => 'pups_number_stillborn',
                 'message' => __('Impossible: larger than the total number of pups.')
+            ]
+        );
+
+        $rules->add(function($litter) {
+                return $litter->checkMaxPupCount();
+            },
+            'tooManyPups',
+            [
+                'errorField' => 'pups_number',
+                'message' => __('Impossible: rats do not have such large litters.')
+            ]
+        );
+
+        $rules->add(function($litter) {
+                return $litter->checkMaxStillbornCount();
+            },
+            'tooManyPups',
+            [
+                'errorField' => 'pups_number_stillborn',
+                'message' => __('Impossible: rats do not have such large litters.')
             ]
         );
 
@@ -581,6 +618,26 @@ class LittersTable extends Table
             ->matching('ParentRats', function ($q) use ($mother_id) {
                 return $q->where(['ParentRats.id' => $mother_id]);
             });
+
+        return $query->group(['Litters.id']);
+    }
+
+    public function findFromBirthRange(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        $birth_date = $options['birth_date'];
+        $mother_id = $options['mother_id'];
+        $query = $query
+            ->matching('ParentRats', function ($q) use ($mother_id) {
+                return $q->where(['ParentRats.id' => $mother_id]);
+            })
+            ->where([
+                'Litters.birth_date >=' => $birth_date->modify('-'.LittersTable::MINIMAL_PREGNANCY_DURATION.' days'),
+                'Litters.birth_date <=' => $birth_date->modify('+'.LittersTable::MINIMAL_PREGNANCY_DURATION.' days')
+            ]);
 
         return $query->group(['Litters.id']);
     }

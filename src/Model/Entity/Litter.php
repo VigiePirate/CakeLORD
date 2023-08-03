@@ -9,6 +9,7 @@ use Cake\I18n\FrozenTime;
 use Cake\Collection\Collection;
 use Cake\Datasource\FactoryLocator;
 use App\Model\Entity\StatisticsTrait;
+use App\Model\Table\LittersTable;
 use App\Model\Table\RatsTable;
 
 /**
@@ -264,6 +265,18 @@ class Litter extends Entity
         return $this->birth_date->isFuture();
     }
 
+    public function hasTooCloseSiblings()
+    {
+        $dam = (new Collection($this->parent_rats))->match(['sex' => 'F'])->toList();
+
+        $concurrents = FactoryLocator::get('Table')->get('Litters')->find('fromBirthRange', [
+            'birth_date' => $this->birth_date,
+            'mother_id' => $dam[0]->id,
+        ]);
+
+        return ! empty($concurrents->toArray());
+    }
+
     public function isAbnormalPregnancy()
     // normal pregnancy duration are taken from AFRMA sheets
     // superfetation is not allowed now
@@ -383,6 +396,16 @@ class Litter extends Entity
 
     public function checkStillbornCount() {
         return $this->pups_number >= $this->pups_number_stillborn;
+
+    }
+
+    public function checkMaxPupCount() {
+        return $this->pups_number <= LittersTable::MAXIMAL_PUP_NUMBER;
+
+    }
+
+    public function checkMaxStillbornCount() {
+        return $this->pups_number <= LittersTable::MAXIMAL_PUP_NUMBER;
 
     }
 
