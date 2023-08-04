@@ -56,6 +56,13 @@
                 <?php endif; ?>
                 <?php if (isset($show_staff) && $show_staff && ! is_null($identity) && $identity->is_staff) : ?>
                     <div class="side-nav-group">
+                        <div class="tooltip-staff">
+                            <?= $this->Html->image('/img/icon-email.svg', [
+                                'url' => ['controller' => 'Users', 'action' => 'sendEmail', $user->id],
+                                'class' => 'side-nav-icon',
+                                'alt' => __('Send email')]) ?>
+                            <span class="tooltiptext-staff"><?= __('Send email') ?></span>
+                        </div>
                         <?= $this->element('staff_sidebar', [
                             'controller' => 'Users',
                             'object' => $user,
