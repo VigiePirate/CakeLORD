@@ -508,10 +508,13 @@ trait StatisticsTrait
             ->innerJoinWith('OffspringRats')
             ->innerJoinWith('OffspringRats.Ratteries', function ($q) {
                 return $q->where(['Ratteries.is_generic IS' => false]);
-            })
-            ->innerJoinWith('States', function ($q) {
-                return $q->where(['is_reliable IS' => true]);
             });
+
+        if (! isset($options['litter_id']) && $model->associations()->has('States')) {
+            $query = $query->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            });
+        }
 
         $females = $query->newExpr()->case()->when(['sex' => 'F'])->then(1, 'integer');
         $males = $query->newExpr()->case()->when(['sex' => 'M'])->then(1, 'integer');
