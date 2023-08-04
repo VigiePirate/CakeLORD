@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="SVGRoot"
+   version="1.1"
+   viewBox="0 0 64 64"
+   height="64px"
+   width="64px">
+  <defs
+     id="defs830" />
+  <metadata
+     id="metadata833">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     style="fill:#b1000c;fill-opacity:1"
+     id="g12"
+     transform="matrix(1.171731,0.11860975,-0.11860975,1.171731,3.7221344,-2.6298534)">
+    <g
+       style="fill:#b1000c;fill-opacity:1"
+       id="g10">
+      <path
+         style="fill:#b1000c;fill-opacity:1"
+         d="m 25.044,24.134 c 0.848,0.431 2.305,0.289 3.055,-0.297 L 49.16,7.399 C 48.222,6.751 47.011,6.342 45.699,6.085 c 0,0 -12.807,-0.539 -20.843,0.242 C 16.822,7.107 4.357,10.102 4.357,10.102 3.103,10.622 2,11.253 1.209,12.058 Z"
+         id="path2" />
+      <path
+         style="fill:#b1000c;fill-opacity:1"
+         d="m 53.456,40.312 c 0.219,-0.562 0.318,-1.188 0.249,-1.911 l -2.717,-27.96 c -0.015,-0.149 -0.059,-0.277 -0.085,-0.417 l -16.9,13.191 z"
+         id="path4" />
+      <path
+         style="fill:#b1000c;fill-opacity:1"
+         d="m 31.483,25.179 -1.451,1.134 c -0.857,0.667 -1.976,1.07 -3.121,1.182 -1.145,0.11 -2.318,-0.068 -3.287,-0.56 L 21.994,26.109 5.856,47.077 c 0.657,0.263 1.38,0.47 2.155,0.629 0,0 13.446,0.434 20.83,-0.365 8.272,-0.848 20.511,-3.651 20.511,-3.651 0.74,-0.321 1.411,-0.667 2.001,-1.046 z"
+         id="path6" />
+      <path
+         style="fill:#b1000c;fill-opacity:1"
+         d="m 0.008,14.969 c 10e-4,0.142 -0.017,0.274 -0.002,0.423 l 2.717,27.961 c 0.07,0.722 0.295,1.32 0.626,1.835 L 19.145,24.666 Z"
+         id="path8" />
+    </g>
+  </g>
+</svg>

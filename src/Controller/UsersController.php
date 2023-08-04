@@ -922,6 +922,12 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'view', $user->id]);
     }
 
+    public function sendEmail($id = null) {
+        $user = $this->Users->get($id);
+        $this->Authorization->authorize($user, 'seePrivate');
+        $this->set(compact('user'));
+    }
+
     /**
     * Finders *
     **/
