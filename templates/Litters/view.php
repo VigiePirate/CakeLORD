@@ -274,8 +274,8 @@
                         <td>
                             <?= __('{0, plural, =0{No pup} =1{1 pup} other{# pups}}', [$litter->pups_number]) ?>
                             <?= __('(♀: {0, plural, =0{0 recorded} =1{1 recorded} other{# recorded}} – ♂: {1, plural, =0{0 recorded} =1{1 recorded} other{# recorded}})', [
-                                ! empty($stats['sexes']) ? $this->Number->format($stats['sexes'][0]['F']) : '0',
-                                ! empty($stats['sexes']) ? $this->Number->format($stats['sexes'][0]['M']) : '0'
+                                ! empty($stats['sexes']) ? $stats['sexes'][0]['F'] : 0,
+                                ! empty($stats['sexes']) ? $stats['sexes'][0]['M'] : 0
                                 ]
                             )?>
                         </tr>
