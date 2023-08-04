@@ -571,11 +571,13 @@ class RatsTable extends Table
                 $litters = \Cake\Datasource\FactoryLocator::get('Table')->get('Litters');
                 $litters->removeBehavior('State');
                 $litter = $litters->get($entity->litter_id);
-                $count = $litter->countMy('rats', 'litter');
+                // explicitly pass litter id to by-pass States.is_reliable filtering
+                $count = $litter->countMy('rats', 'litter', ['litter_id' => $litter->id]);
                 if ($litter->pups_number < $count) {
                     $litter->pups_number = $litter->pups_number + 1;
-                    $litters->save($litter, ['checkRules' => false, 'atomic' => false]);
+                    $litters->save($litter, ['checkRules' => false, 'associated' => []]);
                 }
+                $litters->addBehavior('State');
             }
         }
     }
@@ -584,141 +586,129 @@ class RatsTable extends Table
      * Finder functions
      */
 
-     public function findSearchable(Query $query, array $options)
+    public function findSearchable(Query $query, array $options)
     {
         return $query->innerJoinWith('States', function ($q) {
             return $q->where(['is_searchable' => true]);
         });
     }
 
-     public function findMultisearch(Query $query, array $options)
-     {
-         $query = $query
+    public function findMultisearch(Query $query, array $options)
+    {
+        $query = $query
             ->select()
             ->distinct();
 
-         $options = $options['options'];
+        $options = $options['options'];
 
-         // name
-         if( !empty($options['namekey']) ) {
-             $query->where([
-                 'OR' => [
-                     'Rats.name LIKE' => '%'.$options['namekey'].'%',
-                     'Rats.pup_name LIKE' => '%'.$options['namekey'].'%',
-                 ],
-             ]);
-         }
+        // name
+        if( !empty($options['namekey']) ) {
+            $query->where([
+                'OR' => [
+                    'Rats.name LIKE' => '%'.$options['namekey'].'%',
+                    'Rats.pup_name LIKE' => '%'.$options['namekey'].'%',
+                ],
+            ]);
+        }
 
-         // sex are checkboxes, cannot be empty
-         // the only case where you have to filter is when sex_m and sex_f are different
-         if( $options['sex_f'] xor $options['sex_m']) {
-             $sexOption = $options['sex_f'] ? 'F' : 'M';
-             $query->where([
-                 'Rats.sex IS' => $sexOption,
-             ]);
-         }
+        // sex are checkboxes, cannot be empty
+        // the only case where you have to filter is when sex_m and sex_f are different
+        if ($options['sex_f'] xor $options['sex_m']) {
+            $sexOption = $options['sex_f'] ? 'F' : 'M';
+            $query->where([
+                'Rats.sex IS' => $sexOption,
+            ]);
+        }
 
-         // rattery
-         if( !empty($options['rattery_id']) ) {
-             $query->where([
-                 'Rats.rattery_id IS' => $options['rattery_id'],
-             ]);
-         }
+        // rattery
+        if (!empty($options['rattery_id'])) {
+            $query->where([
+                'Rats.rattery_id IS' => $options['rattery_id'],
+            ]);
+        }
 
-         // FIXME: dirty quickfix
-         if( !empty($options['rattery_name']) ) {
-             $query
-                ->contain('BirthLitters.Ratteries')
-                ->where([
-                    'Ratteries.prefix IS' => substr($options['rattery_name'], 0, 3),
+        // FIXME: dirty quickfix
+        if (!empty($options['rattery_name'])) {
+         $query
+            ->contain('BirthLitters.Ratteries')
+            ->where([
+                'Ratteries.prefix IS' => substr($options['rattery_name'], 0, 3),
+            ]);
+        }
+
+        // owner
+        if (!empty($options['owner_user_id'])) {
+            $query->where([
+                'Rats.owner_user_id IS' => $options['owner_user_id'],
+            ]);
+        }
+
+        // alive/dead are checkboxes, cannot be empty
+        // the only case where you have to filter is when sex_m and sex_f are different
+        if ($options['alive'] xor $options['deceased']) {
+            $aliveOption = $options['alive'] ? true : false;
+            $query->where([
+                'Rats.is_alive IS' => $aliveOption,
+            ]);
+        }
+
+        // dates
+        if (!empty($options['birth_date_before'])) {
+            $query->where([
+                'Rats.birth_date <=' => $options['birth_date_before'],
+            ]);
+        }
+
+        if( !empty($options['birth_date_after']) ) {
+            $query->where([
+                'Rats.birth_date >=' => $options['birth_date_after'],
+            ]);
+        }
+
+        // Colors (multiple options authorized)
+        if (!empty($options['colors'])) {
+            $query->where([
+                'Rats.color_id IN' => $options['colors'],
+            ]);
+        }
+
+        // simple (hasOne) physical criteria
+        if (!empty($options['eyecolor_id'])) {
+            $query->where([
+                'Rats.eyecolor_id IS' => $options['eyecolor_id'],
+            ]);
+        }
+        if( !empty($options['dilution_id']) ) {
+            $query->where([
+                'Rats.dilution_id IS' => $options['dilution_id'],
+            ]);
+        }
+        if( !empty($options['marking_id']) ) {
+            $query->where([
+                'Rats.marking_id IS' => $options['marking_id'],
+            ]);
+        }
+        if (!empty($options['earset_id'])) {
+            $query->where([
+                'Rats.earset_id IS' => $options['earset_id'],
+            ]);
+        }
+        if (!empty($options['coat_id'])) {
+            $query->where([
+                'Rats.coat_id IS' => $options['coat_id'],
+            ]);
+        }
+
+        // singularities (belongToMany)
+        if (!empty($options['singularity_id'])) {
+            $query->matching('Singularities', function (\Cake\ORM\Query $query) use ($options) {
+                return $query->where([
+                    'Singularities.id' => $options['singularity_id'],
                 ]);
-         }
-
-         // owner
-         if( !empty($options['owner_user_id']) ) {
-             $query->where([
-                 'Rats.owner_user_id IS' => $options['owner_user_id'],
-             ]);
-         }
-
-         // alive/dead are checkboxes, cannot be empty
-         // the only case where you have to filter is when sex_m and sex_f are different
-         if( $options['alive'] xor $options['deceased']) {
-             $aliveOption = $options['alive'] ? true : false;
-             $query->where([
-                 'Rats.is_alive IS' => $aliveOption,
-             ]);
-         }
-
-         // dates
-         if( !empty($options['birth_date_before']) ) {
-             $query->where([
-                 'Rats.birth_date <=' => $options['birth_date_before'],
-             ]);
-         }
-
-         if( !empty($options['birth_date_after']) ) {
-             $query->where([
-                 'Rats.birth_date >=' => $options['birth_date_after'],
-             ]);
-         }
-
-         // Colors (multiple options authorized)
-         if( !empty($options['colors']) ) {
-             $query->where([
-                 'Rats.color_id IN' => $options['colors'],
-             ]);
-         }
-
-         // simple (hasOne) physical criteria
-         if( !empty($options['eyecolor_id']) ) {
-             $query->where([
-                 'Rats.eyecolor_id IS' => $options['eyecolor_id'],
-             ]);
-         }
-         if( !empty($options['dilution_id']) ) {
-             $query->where([
-                 'Rats.dilution_id IS' => $options['dilution_id'],
-             ]);
-         }
-         if( !empty($options['marking_id']) ) {
-             $query->where([
-                 'Rats.marking_id IS' => $options['marking_id'],
-             ]);
-         }
-         if( !empty($options['earset_id']) ) {
-             $query->where([
-                 'Rats.earset_id IS' => $options['earset_id'],
-             ]);
-         }
-         if( !empty($options['coat_id']) ) {
-             $query->where([
-                 'Rats.coat_id IS' => $options['coat_id'],
-             ]);
-         }
-
-         // singularities (belongToMany)
-         if( !empty($options['singularity_id']) ) {
-             $query->matching('Singularities', function (\Cake\ORM\Query $query) use ($options) {
-                 return $query->where([
-                     'Singularities.id' => $options['singularity_id'],
-                 ]);
-             });
-         }
-         return $query->group(['Rats.id']);
-     }
-
-    // public function findHavingSingularity(Query $query, array $options)
-    // {
-    //     if( !empty($options['singularity_id']) ) {
-    //         $query->matching('Singularities', function ($query) use ($options) {
-    //             return $query->where([
-    //                 'Singularities.id' => $options['singularity_id'],
-    //             ]);
-    //         });
-    //     }
-    //     return $query->group(['Rats.id']);
-    // }
+            });
+        }
+        return $query->group(['Rats.id']);
+    }
 
     public function findNamed(Query $query, array $options)
     {

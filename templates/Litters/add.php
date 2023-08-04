@@ -210,7 +210,7 @@
                         <?= $this->Form->control('birth_date'); ?>
                     </div>
                     <div class="column-responsive column-50">
-                        <?= $this->Form->control('mating_date', ['empty' => true]); ?>
+                        <?= $this->Form->control('mating_date', ['empty' => true, 'label' => __('Mating date')]); ?>
                     </div>
                 </div>
 
