@@ -505,14 +505,14 @@ trait StatisticsTrait
         $query = FactoryLocator::get('Table')->get('Litters')
             ->find()
             ->where($options)
-            ->innerJoinWith('OffspringRats')
-            ->innerJoinWith('OffspringRats.Ratteries', function ($q) {
-                return $q->where(['Ratteries.is_generic IS' => false]);
-            });
+            ->innerJoinWith('OffspringRats');
 
         if (! isset($options['litter_id'])) {
             $query = $query->innerJoinWith('States', function ($q) {
-                return $q->where(['States.is_reliable IS' => true]);
+                return $q->where(['States.is_reliable IS' => true])
+                    ->innerJoinWith('OffspringRats.Ratteries', function ($q) {
+                        return $q->where(['Ratteries.is_generic IS' => false]);
+                    });
             });
         }
 
