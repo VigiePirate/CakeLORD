@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<?php $this->assign('title', h($user->username)) ?>
+<?php $this->assign('title', __('Contact')) ?>
 
 <div class="row">
     <aside class="column">
@@ -12,36 +12,32 @@
             <div class="side-nav-group">
                 <?= $this->element('default_sidebar') ?>
             </div>
-            <div class="side-nav-group">
-                <div class="tooltip">
-                    <?= $this->Html->image('/img/icon-back.svg', [
-                        'url' => ['controller' => 'Users', 'action' => 'view', $user->id],
-                        'class' => 'side-nav-icon',
-                        'alt' => __('Full Screen')]) ?>
-                        <span class="tooltiptext"><?= __('Back to user sheet') ?></span>
-                </div>
-            </div>
         </div>
     </aside>
     <div class="column-responsive column-90">
         <div class="rats form content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= __('Send email to') ?></div>
+                <div class="sheet-title pretitle"><?= __('Help') ?></div>
             </div>
 
-            <h1><?= h($user->username) ?></h1>
+            <h1><?= __('Contact us') ?></h1>
+
+            <?= $this->Flash->render(); ?>
 
             <?php echo $this->Form->create(null); ?>
 
+            <fieldset>
             <?php
                 echo $this->Form->control('email_content', [
                     'name' => 'email_content',
-                    'label' => '',
+                    'label' => __('Your message'),
                     'value' => '',
                     'rows' => '5',
                 ]);
             ?>
 
+            <?= $this->Form->control('captcha', ['label' => __('What is the meaning of the letter "D" in the LORD acronym?'), 'required' => true]) ?>
+            </fieldset>
             <?= $this->Form->button(__('Send email')); ?>
             <?= $this->Form->end(); ?>
         </div>
