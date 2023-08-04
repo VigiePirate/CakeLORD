@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-08-03 17:13+0000\n"
+"POT-Creation-Date: 2023-08-04 18:22+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -157,8 +157,8 @@ msgstr ""
 #: ./src/Model/Entity/Rattery.php:209
 #: ./src/Model/Entity/Rattery.php:210
 #: ./src/Model/Entity/Rattery.php:260
-#: ./src/Model/Entity/StatisticsTrait.php:563
-#: ./src/Model/Entity/StatisticsTrait.php:670
+#: ./src/Model/Entity/StatisticsTrait.php:566
+#: ./src/Model/Entity/StatisticsTrait.php:673
 #: ./templates/RatSnapshots/diff.php:192
 #: ./templates/RatSnapshots/diff.php:194
 #: ./templates/RatSnapshots/diff.php:201
@@ -1255,8 +1255,8 @@ msgstr ""
 
 #: ./src/Controller/UsersController.php:207
 #: ./src/Controller/UsersController.php:247
-#: ./src/Controller/UsersController.php:820
-#: ./src/Controller/UsersController.php:864
+#: ./src/Controller/UsersController.php:821
+#: ./src/Controller/UsersController.php:865
 msgid "Something went wrong. Please, try again or contact an administrator."
 msgstr ""
 
@@ -1392,31 +1392,31 @@ msgstr ""
 msgid "Your email has been modified. Your accound must now be reactivated. Please, check your new email for your confirmation link."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:834
-msgid "Invalid activation link. Please check your email or try again"
+#: ./src/Controller/UsersController.php:835
+msgid "Invalid activation link. Please check your email or try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:843
+#: ./src/Controller/UsersController.php:844
 msgid "Invalid confirmation link. Please, check your email inbox or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:849
+#: ./src/Controller/UsersController.php:850
 msgid "Expired confirmation link. Please, contact an administrator to unlock your account."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:861
+#: ./src/Controller/UsersController.php:862
 msgid "Your email change has been confirmed. You can now log in with your new credentials."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:911
+#: ./src/Controller/UsersController.php:912
 msgid "This user was already unlocked."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:915
+#: ./src/Controller/UsersController.php:916
 msgid "This user is now unlocked."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:917
+#: ./src/Controller/UsersController.php:918
 msgid "This user could not be unlocked. Please try again."
 msgstr ""
 
@@ -1595,20 +1595,20 @@ msgid "Balanced (1 male for 1 female)"
 msgstr ""
 
 #: ./src/Model/Entity/StatisticsTrait.php:198
-#: ./src/Model/Entity/StatisticsTrait.php:572
+#: ./src/Model/Entity/StatisticsTrait.php:575
 msgid "{0, number} (about {1, plural, =1{1 male} other{# males}} for {2, plural, =1{1 female} other{# females}})"
 msgstr ""
 
 #: ./src/Model/Entity/StatisticsTrait.php:202
-#: ./src/Model/Entity/StatisticsTrait.php:576
+#: ./src/Model/Entity/StatisticsTrait.php:579
 msgid "{0, number} (about {1, plural, =1{1 female} other{# females}} for {2, plural, =1{1 male} other{# males}})"
 msgstr ""
 
-#: ./src/Model/Entity/StatisticsTrait.php:559
+#: ./src/Model/Entity/StatisticsTrait.php:562
 msgid "Only females"
 msgstr ""
 
-#: ./src/Model/Entity/StatisticsTrait.php:567
+#: ./src/Model/Entity/StatisticsTrait.php:570
 msgid "Only males"
 msgstr ""
 
@@ -1807,7 +1807,7 @@ msgstr ""
 msgid "Impossible: your rat was too young at this date to die “from old age”."
 msgstr ""
 
-#: ./src/Model/Table/RatsTable.php:1028
+#: ./src/Model/Table/RatsTable.php:1018
 msgid "**This sheet was automatically updated to set the rat as dead, as it was too old to be still alive.**"
 msgstr ""
 
@@ -1828,7 +1828,11 @@ msgid "This email is already in use. If you have lost your password, please use 
 msgstr ""
 
 #: ./src/Model/Table/UsersTable.php:221
+msgid "This email is already in use."
+msgstr ""
+
 #: ./src/Model/Table/UsersTable.php:230
+#: ./src/Model/Table/UsersTable.php:239
 msgid "This username is already in use. Please choose another one."
 msgstr ""
 
@@ -3796,6 +3800,12 @@ msgstr ""
 msgid "Dates"
 msgstr ""
 
+#: ./templates/Litters/add.php:213
+#: ./templates/Litters/view.php:265
+#: ./templates/element/litters.php:9
+msgid "Mating date"
+msgstr ""
+
 #: ./templates/Litters/add.php:217
 msgid "Pups"
 msgstr ""
@@ -4229,11 +4239,6 @@ msgstr ""
 #: ./templates/element/staff_litters.php:6
 #: ./templates/element/staff_ratteries.php:5
 msgid "Prefix"
-msgstr ""
-
-#: ./templates/Litters/view.php:265
-#: ./templates/element/litters.php:9
-msgid "Mating date"
 msgstr ""
 
 #: ./templates/Litters/view.php:273
@@ -7553,3 +7558,4 @@ msgstr ""
 #: ./templates/layout/fullpage.php:162
 msgid "Partners"
 msgstr ""
+

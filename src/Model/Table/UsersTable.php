@@ -204,12 +204,21 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add(
+        $rules->addCreate(
             $rules->isUnique(['email']),
             'validEmail',
             [
                 'errorField' => 'email',
                 'message' => __('This email is already in use. If you have lost your password, please use the password recovery tool.'),
+            ]
+        );
+
+        $rules->addUpdate(
+            $rules->isUnique(['email']),
+            'validEmail',
+            [
+                'errorField' => 'new_email',
+                'message' => __('This email is already in use.'),
             ]
         );
 
