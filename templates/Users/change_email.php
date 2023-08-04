@@ -4,7 +4,7 @@
 
 <div class="users form index content">
     <h1><?= __('Reset Email') ?></h1>
-    <?= $this->Form->create(null, ['autocomplete' => 'off']) ?>
+    <?= $this->Form->create($user, ['autocomplete' => 'off']) ?>
     <fieldset>
         <?php if (!is_null($user)) : ?>
             <legend><?= __('Enter Old Password') ?></legend>

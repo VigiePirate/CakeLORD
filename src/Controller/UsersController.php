@@ -106,7 +106,7 @@ class UsersController extends AppController
                 $neglected_count = $this->Rats->blameNeglected($this->Rats)
                     + $this->Ratteries->blameNeglected($this->Ratteries)
                     + $this->Litters->blameNeglected($this->Litters);
-                    
+
                 if ($neglected_count > 0) {
                     $this->Flash->warning(__('{0, plural, =1{1 sheet neglected by users has just been escalated to back-office.} other{# sheets neglected by users have just been escalated to back-office.}}', [$neglected_count]));
                 }
@@ -219,14 +219,14 @@ class UsersController extends AppController
         $this->Authorization->skipAuthorization();
 
         if (empty($passkey)) {
-            $this->Flash->error('Invalid activation link. Please check your email or try again');
+            $this->Flash->error('Invalid activation link. Please check your email or try again.');
             return $this->redirect(['action' => 'register']);
         } else {
             $query = $this->Users->findByPasskey($passkey);
             $user = $query->first();
 
             if (empty($user)) {
-                $this->Flash->error('Invalid activation link. Please check your email or try again');
+                $this->Flash->error('Invalid activation link. Please check your email or try again.');
                 return $this->redirect(['action' => 'register']);
             } else {
                 // check if activation link is expired; if so, delete account
@@ -807,7 +807,7 @@ class UsersController extends AppController
                     $user->failed_login_attempts = 1;
 
                     if ($this->Users->save($user)) {
-                        $url = Router::Url(['controller' => 'users', 'action' => 'confirm-email'], true) . '/' . $user->passkey;
+                        $url = Router::Url(['controller' => 'users', 'action' => 'confirm-email', $user->passkey], true);
                         $mailer = $this->getMailer('User')->send('sendConfirmationEmail', [$url, $user]);
                         if ($mailer) {
                             $this->Flash->warning(__('Your email has been modified. Your accound must now be reactivated. Please, check your new email for your confirmation link.'));
@@ -815,10 +815,11 @@ class UsersController extends AppController
                         } else {
                             $this->Flash->error(__('Error sending email. Please, contact an administrator.')); // . $email->smtpError);
                         }
+                        $this->set(compact('user'));
                         return $this->redirect(['action' => 'login']);
                     } else {
                         $this->Flash->error(__('Something went wrong. Please, try again or contact an administrator.'));
-                        return $this->redirect(['action' => 'changeEmail']);
+                        $this->set(compact('user'));
                     }
                 }
             } else {
@@ -831,7 +832,7 @@ class UsersController extends AppController
         $this->Authorization->skipAuthorization();
         $identity = $this->request->getAttribute('identity');
         if (empty($passkey)) {
-            $this->Flash->error(__('Invalid activation link. Please check your email or try again'));
+            $this->Flash->error(__('Invalid activation link. Please check your email or try again.'));
             return $this->redirect(['action' => 'register']);
         } else {
            // check passkey and unlock user
