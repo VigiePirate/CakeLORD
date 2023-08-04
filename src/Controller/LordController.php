@@ -17,7 +17,7 @@ class LordController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['search', 'webstats']);
+        $this->Authentication->addUnauthenticatedActions(['search', 'webstats', 'contact']);
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
 
@@ -280,5 +280,20 @@ class LordController extends AppController
 
         $this->set(compact('user_count', 'rattery_count', 'litter_count', 'rat_count',
             'user_creation', 'rattery_creation', 'rat_birth', 'js_legends'));
+    }
+
+    public function contact() {
+        $lord = new Lord();
+        $this->Authorization->skipAuthorization();
+
+        if ($this->request->is('post')) {
+            if (strtolower($this->request->getData('captcha')) == 'domestique') {
+                // proceed...
+            } else {
+                $this->Flash->error(__('This was not the expected answer!'));
+            }
+        } else {
+            $this->Flash->default(__('We advise you to...'));
+        }
     }
 }
