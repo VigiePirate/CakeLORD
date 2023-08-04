@@ -510,7 +510,7 @@ trait StatisticsTrait
                 return $q->where(['Ratteries.is_generic IS' => false]);
             });
 
-        if (! isset($options['litter_id']) && $model->associations()->has('States')) {
+        if (! isset($options['litter_id'])) {
             $query = $query->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
             });
