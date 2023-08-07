@@ -17,7 +17,7 @@ class LordController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['search', 'webstats', 'contact']);
+        $this->Authentication->addUnauthenticatedActions(['parse', 'search', 'webstats', 'contact']);
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
 
@@ -81,15 +81,19 @@ class LordController extends AppController
         $this->set(compact('user', 'count', 'rats', 'litters', 'ratteries', 'issues'));
     }
 
-    public function search() {
-
+    public function parse() {
         $this->Authorization->skipAuthorization();
 
         if($this->request->is(['post'])) {
-            $names = [$this->request->getData('name')];
-        } else {
-                $names = $this->request->getParam('pass');
+            $key = $this->request->getData('key');
+            $this->redirect(['action' => 'search', $key]);
         }
+    }
+
+    public function search() {
+        $this->Authorization->skipAuthorization();
+
+        $names = $this->request->getParam('pass');
 
         $model = $this->loadModel('Rats');
         $query = $model->find('identified', ['names' => $names])

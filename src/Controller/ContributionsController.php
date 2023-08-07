@@ -11,6 +11,12 @@ namespace App\Controller;
  */
 class ContributionsController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['fromRattery']);
+    }
+
     /**
      * Index method
      *

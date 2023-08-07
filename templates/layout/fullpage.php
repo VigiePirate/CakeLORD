@@ -73,19 +73,23 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                     <a href="/" class="hide-on-mobile">Livre des Origines <br>du <span>Rat</span> Domestique</td></a>
                 </div>
                 <div class="top-nav-links">
+
                     <!-- Search form -->
-                    <?= $this->Form->create(
-                        null,
-                        ['url' => [
-                            'controller' => 'Lord',
-                            'action' => 'search'],
-                        'type' => 'post',
-                        'method' => 'post',
-                        'class' => 'searchbar'],
-                    ); ?>
-                        <?= $this->Form->control('name', ['type' => 'text','label' => false,'placeholder' => __('Search...')]); ?>
-                        <?= $this->Form->submit(); ?>
+                    <?=
+                        $this->Form->create(
+                            null,
+                            [
+                                'url' => ['controller' => 'Lord', 'action' => 'parse'],
+                                'type' => 'post',
+                                'method' => 'post',
+                                'class' => 'searchbar'
+                            ],
+                        );
+                    ?>
+                    <?= $this->Form->control('key', ['type' => 'text', 'label' => false, 'placeholder' => __('Search...')]); ?>
+                    <?= $this->Form->submit(); ?>
                     <?= $this->Form->end(); ?>
+
                     <!-- Login or access dashboard -->
                     <?= ($this->getRequest()->getSession()->check('Auth.id')) ?
                         $this->Html->Link(
@@ -144,7 +148,7 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                     <a href="/lord/stats"><?= __('Rat statistics') ?></a>
                 </div>
                 <h5><a href="/ratteries/locate/"><?= __('Rattery map') ?></a></h5>
-                <h5><?= __('Contact') ?></h5>
+                <h5><a href="/lord/contact/"><?= __('Contact') ?></a></h5>
             </div>
             <div class="footer_center hide-on-tablet">
                 <!--<img src="/img/lord.footer.svg" width="105"/>-->
