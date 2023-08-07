@@ -217,7 +217,7 @@ class UsersTable extends Table
             $rules->isUnique(['email']),
             'validEmail',
             [
-                'errorField' => 'new_email',
+                'errorField' => 'new_address',
                 'message' => __('This email is already in use.'),
             ]
         );
