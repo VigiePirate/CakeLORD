@@ -159,7 +159,13 @@
                     <summary><?= __('Last Modified Rats') ?></summary>
                     <?php if (!empty($user->owner_rats)) : ?>
                         <div class="button-raised">
-                            <?= $this->Html->link(__('See all their rats'), ['controller' => 'Rats', 'action' => 'byOwner', $user->id], ['class' => 'button float-right']) ?>
+                            <?=
+                                $this->Html->link(
+                                    __('See all their rats'),
+                                    ['controller' => 'Rats', 'action' => 'byOwner', $user->id, '?' => ['sort' => 'birth_date', 'direction' => 'DESC']], 
+                                    ['class' => 'button float-right'],
+                                )
+                            ?>
                         </div>
                         <?= $this->element('simple_rats', [
                             'rubric' => __(''),

@@ -496,7 +496,7 @@
                     <details open>
                         <summary><?= __('Last contributed litters') ?></summary>
                         <div class="button-raised">
-                            <?= $this->Html->link(__x('litters', 'See all'), ['controller' => 'Contributions', 'action' => 'fromRattery', $rattery->id], ['class' => 'button float-right']) ?>
+                            <?= $this->Html->link(__x('litters', 'See all'), ['controller' => 'Contributions', 'action' => 'fromRattery', $rattery->id, '?' => ['sort' => 'Litters.birth_date', 'direction' => 'DESC']], ['class' => 'button float-right']) ?>
                         </div>
                         <div class="table-responsive">
                             <table class="summary">
@@ -545,7 +545,7 @@
                     <details open>
                         <summary><?= __('Recently modified rats') ?></summary>
                         <div class="button-raised">
-                            <?= $this->Html->link(__x('rats', 'See all'), ['controller' => 'Rats', 'action' => 'byRattery', $rattery->id], ['class' => 'button float-right']) ?>
+                            <?= $this->Html->link(__x('rats', 'See all'), ['controller' => 'Rats', 'action' => 'byRattery', $rattery->id, '?' => ['sort' => 'birth_date', 'direction' => 'DESC']], ['class' => 'button float-right']) ?>
                         </div>
                         <?= $this->element('simple_rats', [ //rats
                             'rubric' => __(''),
