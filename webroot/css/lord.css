@@ -500,6 +500,8 @@ td,th {
 .comment, em {
   font-family: "Alegreya", serif;
   font-style: italic;
+  font-size: 1.7rem;
+  line-height: 1.1;
 }
 
 td.comment > p, td.comment > * > li {
