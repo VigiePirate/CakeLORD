@@ -778,15 +778,19 @@ class UsersController extends AppController
     }
 
     public function changeEmail() {
+
         $result = $this->Authentication->getResult();
         $user = $this->Users->get($this->Authentication->getIdentity()->get('id'));
+
         if ($result->isValid()) {
             $this->Authorization->authorize($user);
             if ($this->request->is('post')) {
+
                 // check password, save user, send activation email and redirect
                 $password = $this->request->getData('password');
-                $new_email = $this->request->getData('new_email');
-                $confirm_email = $this->request->getData('confirm_email');
+                $new_email = $this->request->getData('new_address');
+                $confirm_email = $this->request->getData('confirm_address');
+
                 // check if old password is correct for security
                 $authenticator = $this->Authentication->getAuthenticationService()->loadAuthenticator('Authentication.Form');
                 $result = $authenticator->authenticate($this->request);
@@ -794,11 +798,13 @@ class UsersController extends AppController
                     $this->Flash->error(__('We could not confirm your identity (incorrect old password). Please retry.'));
                     return $this->redirect(['action' => 'changeEmail']);
                 }
+
                 // check if the two emails are identical
                 if ($new_email != $confirm_email) {
                     $this->Flash->error('Emails are different. Please, check your entry and retry.');
                     return $this->redirect(['action' => 'changeEmail']);
                 } else {
+
                     // update user and send activation link
                     $user->email = $new_email;
                     $user->passkey = uniqid('', true);
@@ -825,6 +831,9 @@ class UsersController extends AppController
             } else {
                 $this->set(compact('user'));
             }
+        } else {
+            $this->Flash->error(__('You must be logged in to use this feature.'));
+            return $this->redirect(['action' => 'login']);
         }
     }
 
