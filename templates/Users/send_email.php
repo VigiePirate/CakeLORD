@@ -42,7 +42,7 @@
                 ]);
             ?>
 
-            <?= $this->Form->button(__('Send email')); ?>
+            <?= $this->Form->button(__x('button', 'Send email')); ?>
             <?= $this->Form->end(); ?>
         </div>
     </div>

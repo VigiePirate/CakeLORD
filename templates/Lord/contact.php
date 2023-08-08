@@ -28,42 +28,28 @@
 
             <fieldset>
             <?php
+                echo $this->Form->control('initiator_email', [
+                    'label' => __('Your email address'),
+                    'type' => 'email',
+                    'required' => true,
+                ]);
+
                 echo $this->Form->control('email_content', [
                     'name' => 'email_content',
                     'label' => __('Your message'),
                     'value' => '',
-                    'rows' => '5',
+                    'rows' => '10',
                 ]);
             ?>
 
-            <?= $this->Form->control('captcha', ['label' => __('What is the meaning of the letter "D" in the LORD acronym?'), 'required' => true]) ?>
+            <?= $this->Form->control('captcha', [
+                'label' => __('What is the meaning of the letter "D" in the LORD acronym?'),
+                'required' => true,
+                ])
+            ?>
             </fieldset>
-            <?= $this->Form->button(__('Send email')); ?>
+            <?= $this->Form->button(__x('button', 'Send email')); ?>
             <?= $this->Form->end(); ?>
         </div>
     </div>
 </div>
-
-<!-- Easy MDE -->
-<?= $this->Html->css('easymde.css') ?>
-<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
-
-<script>
-    var easyMDE = new EasyMDE({
-        minHeight: "20rem",
-        spellChecker: false,
-        inputStyle: "contenteditable",
-        nativeSpellcheck: true,
-        previewImagesInEditor: true,
-        promptURLs: true,
-        sideBySideFullscreen: false,
-        toolbar: [
-            "bold", "italic", "strikethrough", "|",
-            "unordered-list", "ordered-list", "table", "|",
-            "link", "|",
-            "side-by-side", "fullscreen", "preview", "|",
-            "guide"
-        ]
-    });
-    easyMDE.toggleSideBySide();
-</script>

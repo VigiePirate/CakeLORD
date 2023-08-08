@@ -3,11 +3,15 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Chronos\Chronos;
+use Cake\Mailer\Mailer;
+use Cake\Mailer\MailerAwareTrait;
 use App\Model\Entity\Lord;
 use App\Model\Table\RatsTable;
 
 class LordController extends AppController
 {
+    use MailerAwareTrait;
+
     public function initialize(): void
     {
         parent::initialize();
@@ -17,7 +21,7 @@ class LordController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['parse', 'search', 'webstats', 'contact']);
+        $this->Authentication->addUnauthenticatedActions(['parse', 'search', 'webstats', 'contact', 'theEnd']);
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
 
@@ -287,14 +291,21 @@ class LordController extends AppController
     }
 
     public function contact() {
-        $lord = new Lord();
         $this->Authorization->skipAuthorization();
 
         if ($this->request->is('post')) {
             if (strtolower($this->request->getData('captcha')) == 'domestique') {
-                // proceed...
+                $initiator = $this->request->getData('initiator_email');
+                $message = $this->request->getData('email_content');
+                $mailer = $this->getMailer('Lord')->send('sendContactEmail', [$initiator, $message]);
+                if ($mailer) {
+                    $this->Flash->success(__('Your email was sent to the LORD shared mailbox. It will be processed next time a staff member will check it. Thank you for your patience.'));
+                } else {
+                    $this->Flash->error(__('Error sending email. Please, retry or contact us by another mean.')); // . $email->smtpError);
+                }
+
             } else {
-                $this->Flash->error(__('This was not the expected answer!'));
+                $this->Flash->error(__('This was not the expected answer! Sorry to insist, but we must check that you are not spam, sausage, spam, spam, bacon, spam, tomato and spam to protect our mailbox.'));
             }
         } else {
             $this->Flash->default(

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-08-07 19:17+0000\n"
+"POT-Creation-Date: 2023-08-08 18:30+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -342,17 +342,17 @@ msgid "You have one or several sheets to correct! Please check them below."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:138
-#: ./src/Controller/LordController.php:237
+#: ./src/Controller/LordController.php:241
 msgid "Survival rate"
 msgstr ""
 
 #: ./src/Controller/LittersController.php:139
-#: ./src/Controller/LordController.php:207
+#: ./src/Controller/LordController.php:211
 msgid "Age (in months)"
 msgstr ""
 
 #: ./src/Controller/LittersController.php:140
-#: ./src/Controller/LordController.php:238
+#: ./src/Controller/LordController.php:242
 msgid "Survival rate (%)"
 msgstr ""
 
@@ -571,7 +571,7 @@ msgid "We could not unapprove the sheet. Please retry or contact an administrato
 msgstr ""
 
 #: ./src/Controller/LittersController.php:143
-#: ./src/Controller/LordController.php:212
+#: ./src/Controller/LordController.php:216
 msgctxt "litter statistics"
 msgid "Age: between "
 msgstr ""
@@ -581,7 +581,7 @@ msgctxt "litter statistics"
 msgid " and "
 msgstr ""
 
-#: ./src/Controller/LordController.php:213
+#: ./src/Controller/LordController.php:217
 msgid " and "
 msgstr ""
 
@@ -590,7 +590,7 @@ msgctxt "litter statistics"
 msgid " months"
 msgstr ""
 
-#: ./src/Controller/LordController.php:215
+#: ./src/Controller/LordController.php:219
 msgid " months"
 msgstr ""
 
@@ -612,19 +612,19 @@ msgstr ""
 msgid "The log could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/LordController.php:205
+#: ./src/Controller/LordController.php:209
 msgid "Females"
 msgstr ""
 
-#: ./src/Controller/LordController.php:206
+#: ./src/Controller/LordController.php:210
 msgid "Males"
 msgstr ""
 
-#: ./src/Controller/LordController.php:208
+#: ./src/Controller/LordController.php:212
 msgid "Number of alive rats"
 msgstr ""
 
-#: ./src/Controller/LordController.php:209
+#: ./src/Controller/LordController.php:213
 #: ./templates/RatSnapshots/diff.php:182
 #: ./templates/RatSnapshots/diff.php:185
 #: ./templates/RatSnapshots/diff.php:457
@@ -633,31 +633,31 @@ msgstr ""
 msgid "Age"
 msgstr ""
 
-#: ./src/Controller/LordController.php:210
+#: ./src/Controller/LordController.php:214
 msgid "Age pyramid"
 msgstr ""
 
-#: ./src/Controller/LordController.php:211
+#: ./src/Controller/LordController.php:215
 msgid "(presumed) alive rats"
 msgstr ""
 
-#: ./src/Controller/LordController.php:214
+#: ./src/Controller/LordController.php:218
 msgid "months"
 msgstr ""
 
-#: ./src/Controller/LordController.php:216
+#: ./src/Controller/LordController.php:220
 msgid "All-time average"
 msgstr ""
 
-#: ./src/Controller/LordController.php:217
+#: ./src/Controller/LordController.php:221
 msgid "All-time average:"
 msgstr ""
 
-#: ./src/Controller/LordController.php:218
+#: ./src/Controller/LordController.php:222
 msgid "Average lifespan by birth year"
 msgstr ""
 
-#: ./src/Controller/LordController.php:219
+#: ./src/Controller/LordController.php:223
 msgid "Birth year"
 msgstr ""
 
@@ -667,88 +667,88 @@ msgctxt "rattery"
 msgid "Birth year"
 msgstr ""
 
-#: ./src/Controller/LordController.php:220
+#: ./src/Controller/LordController.php:224
 msgid "Average lifespan (in days)"
 msgstr ""
 
-#: ./src/Controller/LordController.php:221
+#: ./src/Controller/LordController.php:225
 #: ./templates/Litters/view.php:360
 msgid "Average lifespan:"
 msgstr ""
 
-#: ./src/Controller/LordController.php:222
+#: ./src/Controller/LordController.php:226
 msgid "Life expectancy"
 msgstr ""
 
-#: ./src/Controller/LordController.php:223
+#: ./src/Controller/LordController.php:227
 msgid "days"
 msgstr ""
 
-#: ./src/Controller/LordController.php:224
+#: ./src/Controller/LordController.php:228
 msgid "Rats born in"
 msgstr ""
 
-#: ./src/Controller/LordController.php:225
+#: ./src/Controller/LordController.php:229
 msgid "Total litter size"
 msgstr ""
 
-#: ./src/Controller/LordController.php:226
+#: ./src/Controller/LordController.php:230
 msgid "Litter size (number of pups)"
 msgstr ""
 
-#: ./src/Controller/LordController.php:227
+#: ./src/Controller/LordController.php:231
 msgid "Proportion of litters (%)"
 msgstr ""
 
-#: ./src/Controller/LordController.php:228
+#: ./src/Controller/LordController.php:232
 msgid "Litter size distribution (% of litters)"
 msgstr ""
 
-#: ./src/Controller/LordController.php:229
+#: ./src/Controller/LordController.php:233
 msgid "% of litters"
 msgstr ""
 
-#: ./src/Controller/LordController.php:230
+#: ./src/Controller/LordController.php:234
 msgid "pups"
 msgstr ""
 
-#: ./src/Controller/LordController.php:231
+#: ./src/Controller/LordController.php:235
 msgid "Number of pups of the given sex"
 msgstr ""
 
-#: ./src/Controller/LordController.php:232
+#: ./src/Controller/LordController.php:236
 msgid "Litter size distribution by sex (% of litters)"
 msgstr ""
 
-#: ./src/Controller/LordController.php:234
+#: ./src/Controller/LordController.php:238
 msgid "Mortality distribution"
 msgstr ""
 
-#: ./src/Controller/LordController.php:235
+#: ./src/Controller/LordController.php:239
 msgid "Mortality probability"
 msgstr ""
 
-#: ./src/Controller/LordController.php:236
+#: ./src/Controller/LordController.php:240
 msgid "Death probabilities (%)"
 msgstr ""
 
-#: ./src/Controller/LordController.php:239
+#: ./src/Controller/LordController.php:243
 msgid "All-time survival and mortality by age"
 msgstr ""
 
-#: ./src/Controller/LordController.php:240
+#: ./src/Controller/LordController.php:244
 msgid "% of all rats reach this age"
 msgstr ""
 
-#: ./src/Controller/LordController.php:241
+#: ./src/Controller/LordController.php:245
 msgid "% of all deaths occur in rats of this age"
 msgstr ""
 
-#: ./src/Controller/LordController.php:242
+#: ./src/Controller/LordController.php:246
 msgid "% of all rats reaching this age die in the following month"
 msgstr ""
 
-#: ./src/Controller/LordController.php:277
+#: ./src/Controller/LordController.php:281
 #: ./templates/Lord/my.php:23
 #: ./templates/Lord/search.php:42
 #: ./templates/Lord/webstats.php:50
@@ -758,21 +758,21 @@ msgstr ""
 msgid "Rats"
 msgstr ""
 
-#: ./src/Controller/LordController.php:278
+#: ./src/Controller/LordController.php:282
 msgid "Rats by birth year"
 msgstr ""
 
-#: ./src/Controller/LordController.php:279
+#: ./src/Controller/LordController.php:283
 #: ./templates/Lord/search.php:85
 #: ./templates/Lord/webstats.php:26
 msgid "Users"
 msgstr ""
 
-#: ./src/Controller/LordController.php:280
+#: ./src/Controller/LordController.php:284
 msgid "Users by registration year"
 msgstr ""
 
-#: ./src/Controller/LordController.php:281
+#: ./src/Controller/LordController.php:285
 #: ./templates/Litters/view.php:292
 #: ./templates/Lord/my.php:37
 #: ./templates/Lord/search.php:66
@@ -784,19 +784,27 @@ msgstr ""
 msgid "Ratteries"
 msgstr ""
 
-#: ./src/Controller/LordController.php:282
+#: ./src/Controller/LordController.php:286
 msgid "Ratteries by registration year"
 msgstr ""
 
-#: ./src/Controller/LordController.php:297
-msgid "This was not the expected answer!"
+#: ./src/Controller/LordController.php:302
+msgid "Your email was sent to the LORD shared mailbox. It will be processed next time a staff member will check it. Thank you for your patience."
 msgstr ""
 
-#: ./src/Controller/LordController.php:301
+#: ./src/Controller/LordController.php:304
+msgid "Error sending email. Please, retry or contact us by another mean."
+msgstr ""
+
+#: ./src/Controller/LordController.php:308
+msgid "This was not the expected answer! Sorry to insist, but we must check that you are not spam, sausage, spam, spam, bacon, spam, tomato and spam to protect our mailbox."
+msgstr ""
+
+#: ./src/Controller/LordController.php:312
 msgid "\n                    We strongly advised to consider alternative contact means before using this contact form, since our mailbox might not be regularly checked. Here are the recommended contact methods:\n\n                    <ul>\n                        <li>\n                            If you can connect to your LORD account, please use the “report” feature from the most appropriate sheet.\n                        </li>\n                        <li>\n                            If you have or can create an account on <a href={0} class=\"flash\">our support forum</a>, please try and reach out there.\n                        </li>\n                    </ul>\n\n                    If none of these solutions suit you, you can proceed with the following form. We will do our best to answer your request in a timely manner.\n                    "
 msgstr ""
 
-#: ./src/Controller/LordController.php:233
+#: ./src/Controller/LordController.php:237
 msgctxt "sex ratio"
 msgid "Litters with"
 msgstr ""
@@ -1258,6 +1266,7 @@ msgstr ""
 
 #: ./src/Controller/UsersController.php:202
 #: ./src/Controller/UsersController.php:822
+#: ./src/Controller/UsersController.php:945
 msgid "Error sending email. Please, contact an administrator."
 msgstr ""
 
@@ -1432,16 +1441,32 @@ msgstr ""
 msgid "This user could not be unlocked. Please try again."
 msgstr ""
 
-#: ./src/Mailer/UserMailer.php:16
+#: ./src/Controller/UsersController.php:942
+msgid "The email was sent to the user."
+msgstr ""
+
+#: ./src/Mailer/LordMailer.php:19
+msgid "Message Sent Through the LORD Contact Form"
+msgstr ""
+
+#: ./src/Mailer/UserMailer.php:17
 msgid "Reset your Password"
 msgstr ""
 
-#: ./src/Mailer/UserMailer.php:30
+#: ./src/Mailer/UserMailer.php:32
 msgid "Activate your Account"
 msgstr ""
 
-#: ./src/Mailer/UserMailer.php:46
+#: ./src/Mailer/UserMailer.php:48
 msgid "Confirm your New Email"
+msgstr ""
+
+#: ./src/Mailer/UserMailer.php:64
+msgid "A Staff Member Sent You a Message"
+msgstr ""
+
+#: ./src/Mailer/UserMailer.php:81
+msgid "Message Sent Through the Contact Form"
 msgstr ""
 
 #: ./src/Model/Behavior/PictureBehavior.php:84
@@ -3362,11 +3387,13 @@ msgstr ""
 
 #: ./templates/Error/error400.php:68
 #: ./templates/Error/error500.php:61
+#: ./templates/Lord/the_end.php:14
 msgid "Go Back"
 msgstr ""
 
 #: ./templates/Error/error400.php:69
 #: ./templates/Error/error500.php:62
+#: ./templates/Lord/the_end.php:15
 msgid "Get Help"
 msgstr ""
 
@@ -4434,15 +4461,23 @@ msgstr ""
 msgid "Contact us"
 msgstr ""
 
-#: ./templates/Lord/contact.php:33
-msgid "Your message"
+#: ./templates/Lord/contact.php:32
+msgid "Your email address"
 msgstr ""
 
 #: ./templates/Lord/contact.php:39
+msgid "Your message"
+msgstr ""
+
+#: ./templates/Lord/contact.php:46
 msgid "What is the meaning of the letter \"D\" in the LORD acronym?"
 msgstr ""
 
-#: ./templates/Lord/contact.php:41
+#: ./templates/Lord/contact.php:51
+msgctxt "button"
+msgid "Send email"
+msgstr ""
+
 #: ./templates/Users/send_email.php:45
 #: ./templates/Users/view.php:63
 #: ./templates/Users/view.php:64
@@ -4967,6 +5002,10 @@ msgstr ""
 
 #: ./templates/Lord/stats.php:235
 msgid "please note that tumour localization could not recorded before 2023"
+msgstr ""
+
+#: ./templates/Lord/the_end.php:7
+msgid "The End of the LORD"
 msgstr ""
 
 #: ./templates/Lord/webstats.php:17
@@ -7492,8 +7531,16 @@ msgstr ""
 msgid "<p>Hi, {0} !</p>\n\n<p>You have modified your registration email. Please click on the link below to confirm it:</p>\n\n<p><a href=\"{1}\">Click here to confirm your new email address</a></p>\n\n<p>or copy and paste this link in your browser : {1}</p>\n\n<p>If you haven’t asked for an email change, please ignore this message or contact an administrator.</p>"
 msgstr ""
 
+#: ./templates/email/html/contact_email.php:3
+msgid "<p>{0} sent the following message through the LORD contact form:</p>\n\n<p>“{1}”</p>\n\n"
+msgstr ""
+
 #: ./templates/email/html/reset_password.php:3
 msgid "<p>Hi, {0} !</p>\n\n<p>You have asked for a password reset link. Please click on the link below to reset your password:</p>\n\n<p><a href=\"{1}\">Click here to reset Your password</a></p>\n\n<p>or copy and paste this link in your browser : {1}</p>\n\n<p>If you haven’t asked for a password reset, please ignore this message or contact an administrator.</p>"
+msgstr ""
+
+#: ./templates/email/html/staff_email.php:3
+msgid "<p>Hi, {0} !</p>\n\n<p>A staff member has sent you the following message:</p>\n\n<p>“{1}”</p>\n\n<p>Please, pay attention to all requests from our staff, and remember that they all are unpaid volunteers. Your compliance to their demands ensures the quality of LORD data. Thank you for your understanding.</p>"
 msgstr ""
 
 #: ./templates/email/text/activate.php:3
@@ -7504,8 +7551,16 @@ msgstr ""
 msgid "Hi, {0} !\n\nYou have modified your registration email. Please copy and paste this link in your browser to reset your password:\n\n{1}\n\nIf you haven’t asked for a password reset, please ignore this message or contact an administrator."
 msgstr ""
 
+#: ./templates/email/text/contact_email.php:3
+msgid "{0} sent the following message through the LORD contact form:\n\n“{1}”\n\n"
+msgstr ""
+
 #: ./templates/email/text/reset_password.php:3
 msgid "Hi, {0} !\n\nYou have asked for a password reset link. Please copy and paste this link in your browser to reset your password:\n\n{1}\n\nIf you haven’t asked for a password reset, please ignore this message or contact an administrator."
+msgstr ""
+
+#: ./templates/email/text/staff_email.php:3
+msgid "Hi, {0} !\n\nA staff member has sent you the following message:\n\n“{1}”\n\nPlease, pay attention to all requests from our staff, and remember that they all are unpaid volunteers. Your compliance to their demands ensures the quality of LORD data. Thank you for your understanding."
 msgstr ""
 
 #: ./templates/layout/default.php:74
