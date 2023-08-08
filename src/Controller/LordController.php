@@ -297,7 +297,25 @@ class LordController extends AppController
                 $this->Flash->error(__('This was not the expected answer!'));
             }
         } else {
-            $this->Flash->default(__('We advise you to...'));
+            $this->Flash->default(
+                __('
+                    We strongly advised to consider alternative contact means before using this contact form, since our mailbox might not be regularly checked. Here are the recommended contact methods:
+
+                    <ul>
+                        <li>
+                            If you can connect to your LORD account, please use the “report” feature from the most appropriate sheet.
+                        </li>
+                        <li>
+                            If you have or can create an account on <a href={0} class="flash">our support forum</a>, please try and reach out there.
+                        </li>
+                    </ul>
+
+                    If none of these solutions suit you, you can proceed with the following form. We will do our best to answer your request in a timely manner.
+                    ',
+                    ["https://www.srfa.info/forums/forum/229-lord/"]
+                ),
+                ['escape' => false],
+            );
         }
     }
 }

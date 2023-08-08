@@ -933,7 +933,19 @@ class UsersController extends AppController
 
     public function sendEmail($id = null) {
         $user = $this->Users->get($id);
-        $this->Authorization->authorize($user, 'seePrivate');
+        $this->Authorization->authorize($user, 'accessPersonal');
+
+        if ($this->request->is('post')) {
+            $message = $this->request->getData('email_content');
+            $mailer = $this->getMailer('User')->send('sendStaffEmail', [$message, $user]);
+            if ($mailer) {
+                $this->Flash->success(__('The email was sent to the user.'));
+                return $this->redirect(['action' => 'view', $user->id]);
+            } else {
+                $this->Flash->error(__('Error sending email. Please, contact an administrator.')); // . $email->smtpError);
+            }
+        }
+
         $this->set(compact('user'));
     }
 
