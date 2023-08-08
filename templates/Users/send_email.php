@@ -37,7 +37,6 @@
                 echo $this->Form->control('email_content', [
                     'name' => 'email_content',
                     'label' => '',
-                    'value' => '',
                     'rows' => '5',
                 ]);
             ?>
