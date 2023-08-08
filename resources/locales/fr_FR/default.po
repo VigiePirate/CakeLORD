@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-08-07 19:17+0000\n"
-"PO-Revision-Date: 2023-08-07 21:31+0200\n"
+"POT-Creation-Date: 2023-08-08 18:30+0000\n"
+"PO-Revision-Date: 2023-08-08 20:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -333,17 +333,17 @@ msgstr ""
 "dessous."
 
 #: src/Controller/LittersController.php:138
-#: src/Controller/LordController.php:237
+#: src/Controller/LordController.php:241
 msgid "Survival rate"
 msgstr "Taux de survie"
 
 #: src/Controller/LittersController.php:139
-#: src/Controller/LordController.php:207
+#: src/Controller/LordController.php:211
 msgid "Age (in months)"
 msgstr "Âge (en mois)"
 
 #: src/Controller/LittersController.php:140
-#: src/Controller/LordController.php:238
+#: src/Controller/LordController.php:242
 msgid "Survival rate (%)"
 msgstr "Taux de survie (%)"
 
@@ -629,7 +629,7 @@ msgstr ""
 "administrateur."
 
 #: src/Controller/LittersController.php:143
-#: src/Controller/LordController.php:212
+#: src/Controller/LordController.php:216
 msgctxt "litter statistics"
 msgid "Age: between "
 msgstr "Âge : entre "
@@ -639,7 +639,7 @@ msgctxt "litter statistics"
 msgid " and "
 msgstr " et "
 
-#: src/Controller/LordController.php:213
+#: src/Controller/LordController.php:217
 msgid " and "
 msgstr " et "
 
@@ -648,7 +648,7 @@ msgctxt "litter statistics"
 msgid " months"
 msgstr " mois"
 
-#: src/Controller/LordController.php:215
+#: src/Controller/LordController.php:219
 msgid " months"
 msgstr " mois"
 
@@ -668,49 +668,49 @@ msgstr "Le fichier journal a été supprimé."
 msgid "The log could not be deleted. Please, try again."
 msgstr "Impossible de supprimer le fichier journal. Veuillez réessayer."
 
-#: src/Controller/LordController.php:205
+#: src/Controller/LordController.php:209
 msgid "Females"
 msgstr "Femelles"
 
-#: src/Controller/LordController.php:206
+#: src/Controller/LordController.php:210
 msgid "Males"
 msgstr "Mâles"
 
-#: src/Controller/LordController.php:208
+#: src/Controller/LordController.php:212
 msgid "Number of alive rats"
 msgstr "Nombre de rats vivants"
 
-#: src/Controller/LordController.php:209 templates/RatSnapshots/diff.php:182
+#: src/Controller/LordController.php:213 templates/RatSnapshots/diff.php:182
 #: templates/RatSnapshots/diff.php:185 templates/RatSnapshots/diff.php:457
 #: templates/Rats/view.php:338 templates/element/simple_rats.php:38
 msgid "Age"
 msgstr "Âge"
 
-#: src/Controller/LordController.php:210
+#: src/Controller/LordController.php:214
 msgid "Age pyramid"
 msgstr "Pyramide des âges"
 
-#: src/Controller/LordController.php:211
+#: src/Controller/LordController.php:215
 msgid "(presumed) alive rats"
 msgstr "rats (présumés) en vie"
 
-#: src/Controller/LordController.php:214
+#: src/Controller/LordController.php:218
 msgid "months"
 msgstr "mois"
 
-#: src/Controller/LordController.php:216
+#: src/Controller/LordController.php:220
 msgid "All-time average"
 msgstr "Moyenne (toutes années confondues)"
 
-#: src/Controller/LordController.php:217
+#: src/Controller/LordController.php:221
 msgid "All-time average:"
 msgstr "Moyenne (toutes années confondues):"
 
-#: src/Controller/LordController.php:218
+#: src/Controller/LordController.php:222
 msgid "Average lifespan by birth year"
 msgstr "Par année de naissance"
 
-#: src/Controller/LordController.php:219
+#: src/Controller/LordController.php:223
 msgid "Birth year"
 msgstr "Année de naissance"
 
@@ -719,107 +719,107 @@ msgctxt "rattery"
 msgid "Birth year"
 msgstr "Fondée en"
 
-#: src/Controller/LordController.php:220
+#: src/Controller/LordController.php:224
 msgid "Average lifespan (in days)"
 msgstr "Durée de vie moyenne (en jours)"
 
-#: src/Controller/LordController.php:221 templates/Litters/view.php:360
+#: src/Controller/LordController.php:225 templates/Litters/view.php:360
 msgid "Average lifespan:"
 msgstr "Durée de vie moyenne :"
 
-#: src/Controller/LordController.php:222
+#: src/Controller/LordController.php:226
 msgid "Life expectancy"
 msgstr "Espérance de vie"
 
-#: src/Controller/LordController.php:223
+#: src/Controller/LordController.php:227
 msgid "days"
 msgstr "jours"
 
-#: src/Controller/LordController.php:224
+#: src/Controller/LordController.php:228
 msgid "Rats born in"
 msgstr "Rats nés en"
 
-#: src/Controller/LordController.php:225
+#: src/Controller/LordController.php:229
 msgid "Total litter size"
 msgstr "Taille totale de la portée"
 
-#: src/Controller/LordController.php:226
+#: src/Controller/LordController.php:230
 msgid "Litter size (number of pups)"
 msgstr "Taille de la portée (nombre de ratons)"
 
-#: src/Controller/LordController.php:227
+#: src/Controller/LordController.php:231
 msgid "Proportion of litters (%)"
 msgstr "Proportion des portées (%)"
 
-#: src/Controller/LordController.php:228
+#: src/Controller/LordController.php:232
 msgid "Litter size distribution (% of litters)"
 msgstr "Répartition de la taille des portées (% des portées)"
 
-#: src/Controller/LordController.php:229
+#: src/Controller/LordController.php:233
 msgid "% of litters"
 msgstr "% des portées"
 
-#: src/Controller/LordController.php:230
+#: src/Controller/LordController.php:234
 msgid "pups"
 msgstr "ratons"
 
-#: src/Controller/LordController.php:231
+#: src/Controller/LordController.php:235
 msgid "Number of pups of the given sex"
 msgstr "Nombre de ratons du sexe défini"
 
-#: src/Controller/LordController.php:232
+#: src/Controller/LordController.php:236
 msgid "Litter size distribution by sex (% of litters)"
 msgstr "Répartition du nombre de ratons par sexe (% des portées)"
 
-#: src/Controller/LordController.php:234
+#: src/Controller/LordController.php:238
 msgid "Mortality distribution"
 msgstr "Répartition des décès"
 
-#: src/Controller/LordController.php:235
+#: src/Controller/LordController.php:239
 msgid "Mortality probability"
 msgstr "Probabilité de décès"
 
-#: src/Controller/LordController.php:236
+#: src/Controller/LordController.php:240
 msgid "Death probabilities (%)"
 msgstr "Probabilités de décès (%)"
 
-#: src/Controller/LordController.php:239
+#: src/Controller/LordController.php:243
 msgid "All-time survival and mortality by age"
 msgstr "Survie et mortalité, toutes années confondues, par classe d’âge"
 
-#: src/Controller/LordController.php:240
+#: src/Controller/LordController.php:244
 msgid "% of all rats reach this age"
 msgstr "% de tous les rats atteignent cet âge"
 
-#: src/Controller/LordController.php:241
+#: src/Controller/LordController.php:245
 msgid "% of all deaths occur in rats of this age"
 msgstr "% des décès surviennent chez les rats de cet âge"
 
-#: src/Controller/LordController.php:242
+#: src/Controller/LordController.php:246
 msgid "% of all rats reaching this age die in the following month"
 msgstr "% de tous les rats atteignant cet âge meurent dans les mois suivants"
 
-#: src/Controller/LordController.php:277 templates/Lord/my.php:23
+#: src/Controller/LordController.php:281 templates/Lord/my.php:23
 #: templates/Lord/search.php:42 templates/Lord/webstats.php:50
 #: templates/Rats/add.php:31 templates/Rats/edit.php:28
 #: templates/Rats/search.php:19
 msgid "Rats"
 msgstr "Rats"
 
-#: src/Controller/LordController.php:278
+#: src/Controller/LordController.php:282
 msgid "Rats by birth year"
 msgstr "Rats par année de naissance"
 
-#: src/Controller/LordController.php:279 templates/Lord/search.php:85
+#: src/Controller/LordController.php:283 templates/Lord/search.php:85
 #: templates/Lord/webstats.php:26
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: src/Controller/LordController.php:280
+#: src/Controller/LordController.php:284
 msgid "Users by registration year"
 msgstr "Utilisateurs par année d’inscription"
 
-#: src/Controller/LordController.php:281 templates/Litters/view.php:292
+#: src/Controller/LordController.php:285 templates/Litters/view.php:292
 #: templates/Lord/my.php:37 templates/Lord/search.php:66
 #: templates/Lord/webstats.php:34 templates/Ratteries/add.php:30
 #: templates/Ratteries/edit.php:27 templates/Ratteries/locate.php:31
@@ -827,15 +827,37 @@ msgstr "Utilisateurs par année d’inscription"
 msgid "Ratteries"
 msgstr "Rateries"
 
-#: src/Controller/LordController.php:282
+#: src/Controller/LordController.php:286
 msgid "Ratteries by registration year"
 msgstr "Rateries par année d’inscription"
 
-#: src/Controller/LordController.php:297
-msgid "This was not the expected answer!"
-msgstr "Ceci n’était pas la réponse attendue !"
+#: src/Controller/LordController.php:302
+msgid ""
+"Your email was sent to the LORD shared mailbox. It will be processed next "
+"time a staff member will check it. Thank you for your patience."
+msgstr ""
+"Votre message a bien été envoyé. Il sera pris en charge dès qu’un membre de "
+"l’équipe consultera la messagerie électronique du LORD. Merci de votre "
+"patience."
 
-#: src/Controller/LordController.php:301
+#: src/Controller/LordController.php:304
+msgid "Error sending email. Please, retry or contact us by another mean."
+msgstr ""
+"Une erreur s’est produite lors de l’envoi du message. Veuillez réessayer ou "
+"nous contacter par un autre moyen."
+
+#: src/Controller/LordController.php:308
+msgid ""
+"This was not the expected answer! Sorry to insist, but we must check that "
+"you are not spam, sausage, spam, spam, bacon, spam, tomato and spam to "
+"protect our mailbox."
+msgstr ""
+"Vous n’avez pas donné la réponse attendue ! Nous sommes désolés de devoir "
+"insister, mais nous devons vérifier que vous n’êtes pas du spam, saucisse, "
+"spam, spam, bacon, spam, tomate et spam afin de protéger notre messagerie "
+"électronique."
+
+#: src/Controller/LordController.php:312
 msgid ""
 "\n"
 "                    We strongly advised to consider alternative contact "
@@ -881,7 +903,7 @@ msgstr ""
 "demande dans les meilleurs délais.\n"
 "                    "
 
-#: src/Controller/LordController.php:233
+#: src/Controller/LordController.php:237
 msgctxt "sex ratio"
 msgid "Litters with"
 msgstr "Portées de"
@@ -1459,6 +1481,7 @@ msgstr ""
 
 #: src/Controller/UsersController.php:202
 #: src/Controller/UsersController.php:822
+#: src/Controller/UsersController.php:945
 msgid "Error sending email. Please, contact an administrator."
 msgstr ""
 "Une erreur s’est produite lors de l’envoi du message. Veuillez contacter un "
@@ -1698,17 +1721,33 @@ msgstr "Le compte de cet utilisateur a été déverrouillé."
 msgid "This user could not be unlocked. Please try again."
 msgstr "Impossible de déverrouiller ce compte utilisateur. Veuillez réessayer."
 
-#: src/Mailer/UserMailer.php:16
+#: src/Controller/UsersController.php:942
+msgid "The email was sent to the user."
+msgstr "Le message a été envoyé par mail à l’utilisateur."
+
+#: src/Mailer/LordMailer.php:19
+msgid "Message Sent Through the LORD Contact Form"
+msgstr "Message envoyé par le formulaire de contact du LORD"
+
+#: src/Mailer/UserMailer.php:17
 msgid "Reset your Password"
 msgstr "Modifier le mot de passe"
 
-#: src/Mailer/UserMailer.php:30
+#: src/Mailer/UserMailer.php:32
 msgid "Activate your Account"
 msgstr "Veuillez activer votre compte"
 
-#: src/Mailer/UserMailer.php:46
+#: src/Mailer/UserMailer.php:48
 msgid "Confirm your New Email"
 msgstr "Veuillez confirmer votre nouvelle adresse mail"
+
+#: src/Mailer/UserMailer.php:64
+msgid "A Staff Member Sent You a Message"
+msgstr "Un membre de l’équipe du LORD vous a envoyé un message"
+
+#: src/Mailer/UserMailer.php:81
+msgid "Message Sent Through the Contact Form"
+msgstr "Message envoyé par le formulaire de contact"
 
 #: src/Model/Behavior/PictureBehavior.php:84
 msgid ""
@@ -3352,10 +3391,12 @@ msgid "noes!"
 msgstr "noes !"
 
 #: templates/Error/error400.php:68 templates/Error/error500.php:61
+#: templates/Lord/the_end.php:14
 msgid "Go Back"
 msgstr "Retour"
 
 #: templates/Error/error400.php:69 templates/Error/error500.php:62
+#: templates/Lord/the_end.php:15
 msgid "Get Help"
 msgstr "Aide"
 
@@ -4305,16 +4346,25 @@ msgstr "Aide"
 msgid "Contact us"
 msgstr "Nous contacter"
 
-#: templates/Lord/contact.php:33
+#: templates/Lord/contact.php:32
+msgid "Your email address"
+msgstr "Votre adresse email"
+
+#: templates/Lord/contact.php:39
 msgid "Your message"
 msgstr "Votre message"
 
-#: templates/Lord/contact.php:39
+#: templates/Lord/contact.php:46
 msgid "What is the meaning of the letter \"D\" in the LORD acronym?"
 msgstr "Que signifie la lettre \"D\" dans l’acronyme LORD ?"
 
-#: templates/Lord/contact.php:41 templates/Users/send_email.php:45
-#: templates/Users/view.php:63 templates/Users/view.php:64
+#: templates/Lord/contact.php:51
+msgctxt "button"
+msgid "Send email"
+msgstr "Envoyer le mail"
+
+#: templates/Users/send_email.php:45 templates/Users/view.php:63
+#: templates/Users/view.php:64
 msgid "Send email"
 msgstr "Envoyer un mail"
 
@@ -4851,6 +4901,10 @@ msgstr ""
 #: templates/Lord/stats.php:235
 msgid "please note that tumour localization could not recorded before 2023"
 msgstr "la localisation de la tumeur ne peut être renseignée que depuis 2023"
+
+#: templates/Lord/the_end.php:7
+msgid "The End of the LORD"
+msgstr "La fin du LORD"
 
 #: templates/Lord/webstats.php:17 templates/layout/default.php:131
 #: templates/layout/fullpage.php:147
@@ -7304,6 +7358,19 @@ msgstr ""
 "<p>Si vous n’avez pas demandé de changement d’adresse, vous pouvez ignorer "
 "ce message ou contacter un membre de l’équipe..</p>"
 
+#: templates/email/html/contact_email.php:3
+msgid ""
+"<p>{0} sent the following message through the LORD contact form:</p>\n"
+"\n"
+"<p>“{1}”</p>\n"
+"\n"
+msgstr ""
+"<p>{0} a utilisé le formulaire de contact du LORD pour envoyer le message "
+"suivant :</p>\n"
+"\n"
+"<p>“{1}”</p>\n"
+"\n"
+
 #: templates/email/html/reset_password.php:3
 msgid ""
 "<p>Hi, {0} !</p>\n"
@@ -7329,6 +7396,30 @@ msgstr ""
 "\n"
 "<p>Si vous n’avez pas demandé à réinitialiser votre mot de passe, vous "
 "pouvez ignorer ce message ou contacter un membre de l’équipe..</p>"
+
+#: templates/email/html/staff_email.php:3
+msgid ""
+"<p>Hi, {0} !</p>\n"
+"\n"
+"<p>A staff member has sent you the following message:</p>\n"
+"\n"
+"<p>“{1}”</p>\n"
+"\n"
+"<p>Please, pay attention to all requests from our staff, and remember that "
+"they all are unpaid volunteers. Your compliance to their demands ensures the "
+"quality of LORD data. Thank you for your understanding.</p>"
+msgstr ""
+"<p>Bonjour, {0} !</p>\n"
+"\n"
+"<p>Un membre de l’équipe de modération vous a envoyé le message suivant :</"
+"p>\n"
+"\n"
+"<p>“{1}”</p>\n"
+"\n"
+"<p>Nous vous remercions de bien vouloir prêter attention à toutes les "
+"demandes émanant de notre équipe de modération, et nous vous rappelons que "
+"tous ses membres sont bénévoles. Répondre à leurs demandes permet d'assurer "
+"la qualité des données du LORD. Merci de votre compréhension.</p>"
 
 #: templates/email/text/activate.php:3
 msgid ""
@@ -7381,6 +7472,19 @@ msgstr ""
 "Si vous n’avez pas demandé de changement d’adresse, vous pouvez ignorer ce "
 "message ou contacter un membre de l’équipe."
 
+#: templates/email/text/contact_email.php:3
+msgid ""
+"{0} sent the following message through the LORD contact form:\n"
+"\n"
+"“{1}”\n"
+"\n"
+msgstr ""
+"{0} a utilisé le formulaire de contact du LORD pour envoyer le message "
+"suivant :\n"
+"\n"
+"“{1}”\n"
+"\n"
+
 #: templates/email/text/reset_password.php:3
 msgid ""
 "Hi, {0} !\n"
@@ -7402,6 +7506,29 @@ msgstr ""
 "\n"
 "Si vous n’avez pas demandé à réinitialiser votre mot de passe, vous pouvez "
 "ignorer ce message ou contacter un membre de l’équipe.."
+
+#: templates/email/text/staff_email.php:3
+msgid ""
+"Hi, {0} !\n"
+"\n"
+"A staff member has sent you the following message:\n"
+"\n"
+"“{1}”\n"
+"\n"
+"Please, pay attention to all requests from our staff, and remember that they "
+"all are unpaid volunteers. Your compliance to their demands ensures the "
+"quality of LORD data. Thank you for your understanding."
+msgstr ""
+"Bonjour, {0} !\n"
+"\n"
+"Un membre de l’équipe de modération vous a envoyé le message suivant :\n"
+"\n"
+"“{1}”\n"
+"\n"
+"Nous vous remercions de bien vouloir prêter attention à toutes les demandes "
+"émanant de notre équipe de modération, et nous vous rappelons que tous ses "
+"membres sont bénévoles. Répondre à leurs demandes permet d'assurer la "
+"qualité des données du LORD. Merci de votre compréhension."
 
 #: templates/layout/default.php:74 templates/layout/fullpage.php:89
 msgid "Search..."
@@ -7474,6 +7601,9 @@ msgstr "Réseaux sociaux"
 #: templates/layout/default.php:150 templates/layout/fullpage.php:166
 msgid "Partners"
 msgstr "Partenaires"
+
+#~ msgid "This was not the expected answer!"
+#~ msgstr "Ceci n’était pas la réponse attendue !"
 
 #~ msgctxt "pictures"
 #~ msgid "If too large (up to 8 MB), they will be automatically resized."
