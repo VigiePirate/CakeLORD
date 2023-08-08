@@ -501,21 +501,23 @@ trait StatisticsTrait
         return round(floatval($avg['avg']), 1);
     }
 
-    public function computeLitterSexes($options = []) {
+    public function computeLitterSexes($options = [])
+    {
         $query = FactoryLocator::get('Table')->get('Litters')
             ->find()
             ->where($options)
             ->innerJoinWith('OffspringRats');
 
         if (! isset($options['litter_id'])) {
-            $query = $query->innerJoinWith('States', function ($q) {
-                return $q->where(['States.is_reliable IS' => true])
-                    ->innerJoinWith('OffspringRats.Ratteries', function ($q) {
-                        return $q->where(['Ratteries.is_generic IS' => false]);
-                    });
-            });
+            $query = $query
+                ->innerJoinWith('OffspringRats.Ratteries', function ($q) {
+                    return $q->where(['Ratteries.is_generic IS' => false]);
+                })
+                ->innerJoinWith('States', function ($q) {
+                    return $q->where(['is_reliable IS' => true]);
+                });
         }
-
+        
         $females = $query->newExpr()->case()->when(['sex' => 'F'])->then(1, 'integer');
         $males = $query->newExpr()->case()->when(['sex' => 'M'])->then(1, 'integer');
 
