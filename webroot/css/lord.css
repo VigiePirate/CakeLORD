@@ -504,7 +504,8 @@ td,th {
   line-height: 1.1;
 }
 
-td.comment > p, td.comment > * > li {
+td.comment > p, td.comment > * > li
+{
   margin-bottom: unset;
 }
 
@@ -528,6 +529,21 @@ ol li::marker {
 ul, ol, dl {
   padding-left: 1.5em;
   margin-bottom: 2rem;
+}
+
+.message > ul > li {
+  margin-bottom: 0rem;
+}
+
+.message > ul {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+a.flash, a.flash:visited {
+  font-weight: bold;
+  font-family: "Roboto Condensed", "Imprima", sans-serif;
+  color: inherit;
 }
 
 .error-message > ul li::marker {

@@ -31,7 +31,7 @@
 
             <h1><?= h($user->username) ?></h1>
 
-            <?php echo $this->Form->create(null); ?>
+            <?php echo $this->Form->create(null, ['type' => 'post']); ?>
 
             <?php
                 echo $this->Form->control('email_content', [
