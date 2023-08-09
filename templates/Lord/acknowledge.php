@@ -18,7 +18,7 @@
 
     <div class="text message-text">
         <blockquote>
-            <?= h($message); ?>
+            <?= nl2br($message) ?>
         </blockquote>
     </div>
 
