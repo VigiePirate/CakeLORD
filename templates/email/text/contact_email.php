@@ -6,7 +6,7 @@ __('{0} sent the following message through the LORD contact form:
 
 ',
 
-[h($initiator), h($message)]
+[$initiator, nl2br($message)],
 
 )
 

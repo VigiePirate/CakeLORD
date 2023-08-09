@@ -318,10 +318,10 @@ class LordController extends AppController
     {
         $this->Authorization->skipAuthorization();
 
-        if ($this->request->is('post')) {
+        if ($this->request->is('post') && ! array_key_exists('message', $this->request->getData())) {
             if (strtolower($this->request->getData('captcha')) == 'domestique') {
                 $initiator = $this->request->getData('initiator_email');
-                $message = $this->request->getData('email_content');
+                $message = h($this->request->getData('email_content'));
                 $mailer = $this->getMailer('Lord')->send('sendContactEmail', [$initiator, $message]);
                 if ($mailer) {
                     $this->set(compact('message'));
@@ -335,6 +335,8 @@ class LordController extends AppController
                 $this->set(compact($message));
                 return $this->redirect(['action => contact']);
             }
+        } else {
+            return $this->redirect(['action' => 'contact']);
         }
     }
 }

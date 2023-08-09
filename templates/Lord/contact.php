@@ -35,6 +35,7 @@
                 ]);
 
                 echo $this->Form->control('email_content', [
+                    'type' => 'textarea',
                     'name' => 'email_content',
                     'label' => __('Your message'),
                     'rows' => '10',
