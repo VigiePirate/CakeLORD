@@ -279,11 +279,6 @@
                     </table>
 
                 <h2><?= __('Description') ?></h2>
-                    <!-- <div class="text">
-                        <blockquote>
-                            <?= h($rat->variety) ?>
-                        </blockquote>
-                    </div> -->
                     <table class="condensed">
                         <tr>
                             <th><?= __('Variety') ?></th>
