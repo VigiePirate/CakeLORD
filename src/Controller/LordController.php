@@ -21,7 +21,7 @@ class LordController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['parse', 'search', 'webstats', 'contact', 'theEnd']);
+        $this->Authentication->addUnauthenticatedActions(['parse', 'search', 'webstats', 'contact', 'acknowledge']);
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
 
@@ -293,40 +293,48 @@ class LordController extends AppController
     public function contact() {
         $this->Authorization->skipAuthorization();
 
+        $this->Flash->default(
+            __('
+                We strongly advised to consider alternative contact means before using this contact form, since our mailbox might not be regularly checked. Here are the recommended contact methods:
+
+                <ul>
+                    <li>
+                        If you can connect to your LORD account, please use the “report” feature from the most appropriate sheet.
+                    </li>
+                    <li>
+                        If you have or can create an account on <a href={0} class="flash">our support forum</a>, please try and reach out there.
+                    </li>
+                </ul>
+
+                If none of these solutions suit you, you can proceed with the following form. We will do our best to answer your request in a timely manner.
+                ',
+                ["https://www.srfa.info/forums/forum/229-lord/"]
+            ),
+            ['escape' => false],
+        );
+    }
+
+    public function acknowledge()
+    {
+        $this->Authorization->skipAuthorization();
+
         if ($this->request->is('post')) {
             if (strtolower($this->request->getData('captcha')) == 'domestique') {
                 $initiator = $this->request->getData('initiator_email');
                 $message = $this->request->getData('email_content');
                 $mailer = $this->getMailer('Lord')->send('sendContactEmail', [$initiator, $message]);
                 if ($mailer) {
-                    $this->Flash->success(__('Your email was sent to the LORD shared mailbox. It will be processed next time a staff member will check it. Thank you for your patience.'));
+                    $this->set(compact('message'));
+                    return;
                 } else {
                     $this->Flash->error(__('Error sending email. Please, retry or contact us by another mean.')); // . $email->smtpError);
+                    return $this->redirect(['action => contact']);
                 }
-
             } else {
                 $this->Flash->error(__('This was not the expected answer! Sorry to insist, but we must check that you are not spam, sausage, spam, spam, bacon, spam, tomato and spam to protect our mailbox.'));
+                $this->set(compact($message));
+                return $this->redirect(['action => contact']);
             }
-        } else {
-            $this->Flash->default(
-                __('
-                    We strongly advised to consider alternative contact means before using this contact form, since our mailbox might not be regularly checked. Here are the recommended contact methods:
-
-                    <ul>
-                        <li>
-                            If you can connect to your LORD account, please use the “report” feature from the most appropriate sheet.
-                        </li>
-                        <li>
-                            If you have or can create an account on <a href={0} class="flash">our support forum</a>, please try and reach out there.
-                        </li>
-                    </ul>
-
-                    If none of these solutions suit you, you can proceed with the following form. We will do our best to answer your request in a timely manner.
-                    ',
-                    ["https://www.srfa.info/forums/forum/229-lord/"]
-                ),
-                ['escape' => false],
-            );
         }
     }
 }

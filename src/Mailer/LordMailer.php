@@ -12,10 +12,11 @@ class LordMailer extends Mailer
     $options = Configure::read('EmailSettings');
     $this
     ->setTransport('gandi')
-    ->setFrom($initiator)
+    ->setFrom($options['from'])
     ->setSender($options['sender_mail'], $options['sender_name'])
     ->setTo($options['sender_mail'])
     ->setReplyTo($initiator)
+    ->setCc($initiator)
     ->setSubject(__('Message Sent Through the LORD Contact Form'))
     ->setViewVars(['initiator' => $initiator, 'message' => $message])
     ->setEmailFormat('both')

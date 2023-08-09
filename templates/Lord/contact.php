@@ -24,7 +24,7 @@
 
             <?= $this->Flash->render(); ?>
 
-            <?php echo $this->Form->create(null); ?>
+            <?php echo $this->Form->create(null, ['type' => 'post', 'url' => ['action' => 'acknowledge']]); ?>
 
             <fieldset>
             <?php

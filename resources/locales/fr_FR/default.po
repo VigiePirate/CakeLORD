@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-08-08 18:30+0000\n"
-"PO-Revision-Date: 2023-08-08 20:42+0200\n"
+"POT-Creation-Date: 2023-08-09 11:31+0000\n"
+"PO-Revision-Date: 2023-08-09 13:41+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -154,8 +154,8 @@ msgstr "Impossible de supprimer le pays. Veuillez réessayer."
 #: src/Controller/LittersController.php:725
 #: src/Controller/LittersController.php:726 src/Model/Entity/Rattery.php:209
 #: src/Model/Entity/Rattery.php:210 src/Model/Entity/Rattery.php:260
-#: src/Model/Entity/StatisticsTrait.php:566
-#: src/Model/Entity/StatisticsTrait.php:673 templates/RatSnapshots/diff.php:192
+#: src/Model/Entity/StatisticsTrait.php:568
+#: src/Model/Entity/StatisticsTrait.php:675 templates/RatSnapshots/diff.php:192
 #: templates/RatSnapshots/diff.php:194 templates/RatSnapshots/diff.php:201
 #: templates/RatSnapshots/diff.php:203 templates/RatSnapshots/diff.php:209
 #: templates/RatSnapshots/diff.php:211 templates/RatSnapshots/diff.php:472
@@ -682,7 +682,7 @@ msgstr "Nombre de rats vivants"
 
 #: src/Controller/LordController.php:213 templates/RatSnapshots/diff.php:182
 #: templates/RatSnapshots/diff.php:185 templates/RatSnapshots/diff.php:457
-#: templates/Rats/view.php:338 templates/element/simple_rats.php:38
+#: templates/Rats/view.php:333 templates/element/simple_rats.php:38
 msgid "Age"
 msgstr "Âge"
 
@@ -831,22 +831,58 @@ msgstr "Rateries"
 msgid "Ratteries by registration year"
 msgstr "Rateries par année d’inscription"
 
-#: src/Controller/LordController.php:302
+#: src/Controller/LordController.php:297
 msgid ""
-"Your email was sent to the LORD shared mailbox. It will be processed next "
-"time a staff member will check it. Thank you for your patience."
+"\n"
+"                We strongly advised to consider alternative contact means "
+"before using this contact form, since our mailbox might not be regularly "
+"checked. Here are the recommended contact methods:\n"
+"\n"
+"                <ul>\n"
+"                    <li>\n"
+"                        If you can connect to your LORD account, please use "
+"the “report” feature from the most appropriate sheet.\n"
+"                    </li>\n"
+"                    <li>\n"
+"                        If you have or can create an account on <a href={0} "
+"class=\"flash\">our support forum</a>, please try and reach out there.\n"
+"                    </li>\n"
+"                </ul>\n"
+"\n"
+"                If none of these solutions suit you, you can proceed with "
+"the following form. We will do our best to answer your request in a timely "
+"manner.\n"
+"                "
 msgstr ""
-"Votre message a bien été envoyé. Il sera pris en charge dès qu’un membre de "
-"l’équipe consultera la messagerie électronique du LORD. Merci de votre "
-"patience."
+"\n"
+"                Nous vous conseillons d’envisager d’autres moyens de contact "
+"avant d’employer ce formulaire, notre messagerie n’étant pas relevée "
+"régulièrement. Les méthodes à privilégier sont les suivantes :\n"
+"\n"
+"                <ul>\n"
+"                    <li>\n"
+"                        Si vous pouvez vous connecter à votre compte LORD, "
+"utilisez la fonction « signaler » depuis la fiche appropriée.\n"
+"                    </li>\n"
+"                    <li>\n"
+"                        Si vous possédez ou pouvez créer un compte sur notre "
+"<a href={0} class=\"flash\">forum de support</a>, joignez-nous plutôt là-"
+"bas.\n"
+"                    </li>\n"
+"                </ul>\n"
+"\n"
+"                Si aucune de ces solutions ne vous convient, remplissez le "
+"formulaire suivant. Nous ferons notre possible pour répondre à votre demande "
+"dans les meilleurs délais.\n"
+"                "
 
-#: src/Controller/LordController.php:304
+#: src/Controller/LordController.php:330
 msgid "Error sending email. Please, retry or contact us by another mean."
 msgstr ""
 "Une erreur s’est produite lors de l’envoi du message. Veuillez réessayer ou "
 "nous contacter par un autre moyen."
 
-#: src/Controller/LordController.php:308
+#: src/Controller/LordController.php:334
 msgid ""
 "This was not the expected answer! Sorry to insist, but we must check that "
 "you are not spam, sausage, spam, spam, bacon, spam, tomato and spam to "
@@ -856,52 +892,6 @@ msgstr ""
 "insister, mais nous devons vérifier que vous n’êtes pas du spam, saucisse, "
 "spam, spam, bacon, spam, tomate et spam afin de protéger notre messagerie "
 "électronique."
-
-#: src/Controller/LordController.php:312
-msgid ""
-"\n"
-"                    We strongly advised to consider alternative contact "
-"means before using this contact form, since our mailbox might not be "
-"regularly checked. Here are the recommended contact methods:\n"
-"\n"
-"                    <ul>\n"
-"                        <li>\n"
-"                            If you can connect to your LORD account, please "
-"use the “report” feature from the most appropriate sheet.\n"
-"                        </li>\n"
-"                        <li>\n"
-"                            If you have or can create an account on <a "
-"href={0} class=\"flash\">our support forum</a>, please try and reach out "
-"there.\n"
-"                        </li>\n"
-"                    </ul>\n"
-"\n"
-"                    If none of these solutions suit you, you can proceed "
-"with the following form. We will do our best to answer your request in a "
-"timely manner.\n"
-"                    "
-msgstr ""
-"\n"
-"                    Nous vous conseillons d’envisager d’autres moyens de "
-"contact avant d’employer ce formulaire, notre messagerie n’étant pas relevée "
-"régulièrement. Les méthodes à privilégier sont les suivantes :\n"
-"\n"
-"                    <ul>\n"
-"                        <li>\n"
-"                            Si vous pouvez vous connecter à votre compte "
-"LORD, utilisez la fonction « signaler » depuis la fiche appropriée.\n"
-"                        </li>\n"
-"                        <li>\n"
-"                            Si vous possédez ou pouvez créer un compte sur "
-"notre <a href={0} class=\"flash\">forum de support</a>, joignez-nous plutôt "
-"là-bas.\n"
-"                        </li>\n"
-"                    </ul>\n"
-"\n"
-"                    Si aucune de ces solutions ne vous convient, remplissez "
-"le formulaire suivant. Nous ferons notre possible pour répondre à votre "
-"demande dans les meilleurs délais.\n"
-"                    "
 
 #: src/Controller/LordController.php:237
 msgctxt "sex ratio"
@@ -1725,7 +1715,7 @@ msgstr "Impossible de déverrouiller ce compte utilisateur. Veuillez réessayer.
 msgid "The email was sent to the user."
 msgstr "Le message a été envoyé par mail à l’utilisateur."
 
-#: src/Mailer/LordMailer.php:19
+#: src/Mailer/LordMailer.php:20
 msgid "Message Sent Through the LORD Contact Form"
 msgstr "Message envoyé par le formulaire de contact du LORD"
 
@@ -1801,7 +1791,7 @@ msgid "Unknown"
 msgstr "Inconnue"
 
 #: templates/Litters/view.php:237 templates/Litters/view.php:239
-#: templates/Rats/view.php:344
+#: templates/Rats/view.php:339
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -1901,7 +1891,7 @@ msgid "Balanced (1 male for 1 female)"
 msgstr "Équilibrée (1 mâle pour 1 femelle)"
 
 #: src/Model/Entity/StatisticsTrait.php:198
-#: src/Model/Entity/StatisticsTrait.php:575
+#: src/Model/Entity/StatisticsTrait.php:577
 msgid ""
 "{0, number} (about {1, plural, =1{1 male} other{# males}} for {2, plural, "
 "=1{1 female} other{# females}})"
@@ -1910,7 +1900,7 @@ msgstr ""
 "=1{1 femelle} other{# femelles}})"
 
 #: src/Model/Entity/StatisticsTrait.php:202
-#: src/Model/Entity/StatisticsTrait.php:579
+#: src/Model/Entity/StatisticsTrait.php:581
 msgid ""
 "{0, number} (about {1, plural, =1{1 female} other{# females}} for {2, "
 "plural, =1{1 male} other{# males}})"
@@ -1918,11 +1908,11 @@ msgstr ""
 "{0, number} (environ {1, plural, =1{1 femelle} other{# femelles}} pour {2, "
 "plural, =1{1 mâle} other{# mâles}})"
 
-#: src/Model/Entity/StatisticsTrait.php:562
+#: src/Model/Entity/StatisticsTrait.php:564
 msgid "Only females"
 msgstr "Uniquement des femelles"
 
-#: src/Model/Entity/StatisticsTrait.php:570
+#: src/Model/Entity/StatisticsTrait.php:572
 msgid "Only males"
 msgstr "Uniquement des mâles"
 
@@ -2321,7 +2311,7 @@ msgstr "Titre"
 #: templates/LitterSnapshots/view.php:34 templates/Litters/view.php:404
 #: templates/Litters/view.php:431 templates/Messages/view.php:34
 #: templates/RatMessages/view.php:34 templates/RatSnapshots/view.php:34
-#: templates/Rats/view.php:436 templates/Rats/view.php:463
+#: templates/Rats/view.php:431 templates/Rats/view.php:458
 #: templates/Ratteries/view.php:587 templates/Ratteries/view.php:613
 #: templates/RatteryMessages/view.php:34 templates/RatterySnapshots/view.php:34
 msgid "Created"
@@ -2387,7 +2377,7 @@ msgstr "Éditer la notice"
 #: templates/RatMessages/add.php:12 templates/RatMessages/edit.php:12
 #: templates/RatMessages/index.php:20 templates/RatMessages/view.php:10
 #: templates/RatSnapshots/index.php:18 templates/Rats/sex.php:22
-#: templates/Rats/view.php:437 templates/Rats/view.php:467
+#: templates/Rats/view.php:432 templates/Rats/view.php:462
 #: templates/Ratteries/view.php:510 templates/Ratteries/view.php:588
 #: templates/Ratteries/view.php:617 templates/RatteryMessages/add.php:12
 #: templates/RatteryMessages/edit.php:12 templates/RatteryMessages/index.php:20
@@ -2538,7 +2528,7 @@ msgstr ""
 #: templates/Articles/view.php:35 templates/Litters/view.php:48
 #: templates/Litters/view.php:380 templates/RatSnapshots/diff.php:537
 #: templates/Rats/pedigree.php:48 templates/Rats/view.php:47
-#: templates/Rats/view.php:412 templates/Ratteries/view.php:50
+#: templates/Rats/view.php:407 templates/Ratteries/view.php:50
 #: templates/Ratteries/view.php:487 templates/Users/view.php:189
 msgid "Last modified on {0}."
 msgstr "Dernière modification le {0}."
@@ -2589,7 +2579,7 @@ msgstr "Informations de référence"
 #: templates/Litters/view.php:401 templates/Messages/view.php:30
 #: templates/Operators/view.php:30 templates/Operators/view.php:40
 #: templates/RatMessages/view.php:30 templates/RatSnapshots/view.php:30
-#: templates/Rats/view.php:433 templates/Ratteries/view.php:584
+#: templates/Rats/view.php:428 templates/Ratteries/view.php:584
 #: templates/RatteryMessages/view.php:30 templates/RatterySnapshots/view.php:30
 #: templates/Roles/view.php:27 templates/States/view.php:32
 #: templates/Users/view.php:219
@@ -2723,7 +2713,7 @@ msgstr "Liste des types de poil"
 
 #: templates/Coats/edit.php:9 templates/RatSnapshots/diff.php:148
 #: templates/RatSnapshots/diff.php:422 templates/Rats/print.php:57
-#: templates/Rats/view.php:309
+#: templates/Rats/view.php:304
 msgid "Coat"
 msgstr "Type de poil"
 
@@ -2754,7 +2744,7 @@ msgstr "Parcourir la liste des couleurs"
 
 #: templates/Colors/edit.php:9 templates/RatSnapshots/diff.php:108
 #: templates/RatSnapshots/diff.php:376 templates/Rats/print.php:26
-#: templates/Rats/search.php:162 templates/Rats/view.php:293
+#: templates/Rats/search.php:162 templates/Rats/view.php:288
 #: templates/States/view.php:44
 msgid "Color"
 msgstr "Couleur"
@@ -2868,7 +2858,7 @@ msgstr "Génotype 2"
 #: templates/Litters/edit.php:46 templates/Operators/view.php:44
 #: templates/RatSnapshots/diff.php:241 templates/RatSnapshots/diff.php:523
 #: templates/Rats/add.php:359 templates/Rats/declare_death.php:76
-#: templates/Rats/edit.php:127 templates/Rats/view.php:374
+#: templates/Rats/edit.php:127 templates/Rats/view.php:369
 #: templates/Ratteries/add.php:70 templates/Ratteries/edit.php:71
 #: templates/Ratteries/register.php:38
 msgid "Comments"
@@ -3112,7 +3102,7 @@ msgstr "Supprimer la catégorie de décès"
 #: templates/DeathSecondaryCauses/add.php:26
 #: templates/DeathSecondaryCauses/edit.php:27
 #: templates/RatSnapshots/diff.php:199 templates/RatSnapshots/diff.php:476
-#: templates/Rats/view.php:349
+#: templates/Rats/view.php:344
 msgid "Death category"
 msgstr "Catégorie du décès"
 
@@ -3136,8 +3126,8 @@ msgstr "Cause réservée aux jeunes rats ?"
 #: templates/RatSnapshots/diff.php:234 templates/RatSnapshots/diff.php:236
 #: templates/RatSnapshots/diff.php:454 templates/RatSnapshots/diff.php:501
 #: templates/RatSnapshots/diff.php:510 templates/RatSnapshots/diff.php:519
-#: templates/Rats/view.php:335 templates/Rats/view.php:360
-#: templates/Rats/view.php:364 templates/Rats/view.php:368
+#: templates/Rats/view.php:330 templates/Rats/view.php:355
+#: templates/Rats/view.php:359 templates/Rats/view.php:363
 #: templates/Ratteries/my.php:95 templates/Ratteries/my.php:99
 #: templates/Ratteries/my.php:159 templates/RatteryMessages/view.php:39
 #: templates/RatteryMessages/view.php:43
@@ -3171,8 +3161,8 @@ msgstr "Oui"
 #: templates/RatSnapshots/diff.php:234 templates/RatSnapshots/diff.php:236
 #: templates/RatSnapshots/diff.php:454 templates/RatSnapshots/diff.php:501
 #: templates/RatSnapshots/diff.php:510 templates/RatSnapshots/diff.php:519
-#: templates/Rats/view.php:335 templates/Rats/view.php:360
-#: templates/Rats/view.php:364 templates/Rats/view.php:368
+#: templates/Rats/view.php:330 templates/Rats/view.php:355
+#: templates/Rats/view.php:359 templates/Rats/view.php:363
 #: templates/Ratteries/my.php:96 templates/Ratteries/my.php:99
 #: templates/Ratteries/my.php:160 templates/RatteryMessages/view.php:39
 #: templates/RatteryMessages/view.php:43
@@ -3327,7 +3317,7 @@ msgstr "Parcourir la liste des dilutions"
 
 #: templates/Dilutions/edit.php:9 templates/RatSnapshots/diff.php:124
 #: templates/RatSnapshots/diff.php:394 templates/Rats/print.php:39
-#: templates/Rats/view.php:297
+#: templates/Rats/view.php:292
 msgid "Dilution"
 msgstr "Dilution"
 
@@ -3358,7 +3348,7 @@ msgstr "Voir la liste des types d’oreilles"
 
 #: templates/Earsets/edit.php:9 templates/RatSnapshots/diff.php:140
 #: templates/RatSnapshots/diff.php:413 templates/Rats/print.php:51
-#: templates/Rats/view.php:305
+#: templates/Rats/view.php:300
 msgid "Earset"
 msgstr "Type d’oreilles"
 
@@ -3407,7 +3397,7 @@ msgstr "Voir la liste des couleurs des yeux"
 
 #: templates/Eyecolors/edit.php:9 templates/RatSnapshots/diff.php:116
 #: templates/RatSnapshots/diff.php:385 templates/Rats/print.php:33
-#: templates/Rats/view.php:313
+#: templates/Rats/view.php:308
 msgid "Eyecolor"
 msgstr "Couleur des yeux"
 
@@ -3509,7 +3499,7 @@ msgstr "Tous les signalements"
 #: templates/Issues/edit.php:56 templates/Issues/index.php:17
 #: templates/Issues/solve.php:49 templates/Issues/view.php:49
 #: templates/Litters/view.php:402 templates/Lord/my.php:60
-#: templates/Rats/view.php:434 templates/Ratteries/view.php:585
+#: templates/Rats/view.php:429 templates/Ratteries/view.php:585
 msgid "From User"
 msgstr "Signalé par"
 
@@ -3677,7 +3667,7 @@ msgid "Delete Litter Snapshot"
 msgstr "Supprimer le snapshot de portée"
 
 #: templates/LitterSnapshots/view.php:26 templates/Litters/view.php:433
-#: templates/RatSnapshots/view.php:26 templates/Rats/view.php:466
+#: templates/RatSnapshots/view.php:26 templates/Rats/view.php:461
 #: templates/Ratteries/my.php:47 templates/Ratteries/my.php:135
 #: templates/Ratteries/view.php:505 templates/Ratteries/view.php:616
 #: templates/RatterySnapshots/view.php:26 templates/States/index.php:14
@@ -3693,7 +3683,7 @@ msgid "State"
 msgstr "État"
 
 #: templates/LitterSnapshots/view.php:39 templates/RatSnapshots/view.php:39
-#: templates/Rats/view.php:465 templates/Ratteries/view.php:615
+#: templates/Rats/view.php:460 templates/Ratteries/view.php:615
 #: templates/RatterySnapshots/view.php:39
 msgid "Data"
 msgstr "Données"
@@ -4056,7 +4046,7 @@ msgstr ""
 
 #: templates/Litters/view.php:48 templates/Litters/view.php:380
 #: templates/RatSnapshots/diff.php:262 templates/Rats/pedigree.php:48
-#: templates/Rats/view.php:47 templates/Rats/view.php:412
+#: templates/Rats/view.php:47 templates/Rats/view.php:407
 #: templates/Ratteries/view.php:48 templates/Ratteries/view.php:485
 msgid "Created on {0} by {1}."
 msgstr "Fiche créée le {0} par {1}."
@@ -4271,23 +4261,23 @@ msgstr "accidents exclus :"
 msgid "No rat has been yet attached to this litter."
 msgstr "Aucun rat n’a encore été rattaché à cette portée."
 
-#: templates/Litters/view.php:391 templates/Rats/view.php:422
+#: templates/Litters/view.php:391 templates/Rats/view.php:417
 #: templates/Ratteries/view.php:573 templates/Users/edit.php:64
 #: templates/Users/my.php:68 templates/Users/view.php:200
 msgid "Private information"
 msgstr "Informations confidentielles"
 
 #: templates/Litters/view.php:394 templates/Messages/index.php:9
-#: templates/Rats/view.php:426 templates/Ratteries/view.php:577
+#: templates/Rats/view.php:421 templates/Ratteries/view.php:577
 msgid "Messages"
 msgstr "Messages"
 
-#: templates/Litters/view.php:403 templates/Rats/view.php:435
+#: templates/Litters/view.php:403 templates/Rats/view.php:430
 #: templates/Ratteries/view.php:586
 msgid "Message"
 msgstr "Message"
 
-#: templates/Litters/view.php:425 templates/Rats/view.php:457
+#: templates/Litters/view.php:425 templates/Rats/view.php:452
 #: templates/Ratteries/view.php:607
 msgid "Snapshots"
 msgstr "Snapshots"
@@ -4300,7 +4290,7 @@ msgstr "Différences"
 msgid "View Snapshot"
 msgstr "Voir le snapshot"
 
-#: templates/Litters/view.php:450 templates/Rats/view.php:484
+#: templates/Litters/view.php:450 templates/Rats/view.php:479
 #: templates/Ratteries/view.php:634
 msgid "Restore Snapshot"
 msgstr "Restaurer le snapshot"
@@ -4333,10 +4323,41 @@ msgstr "Arbre généalogique"
 msgid "Pedigree analysis"
 msgstr "Analyse du pedigree"
 
-#: templates/Lord/contact.php:7 templates/layout/default.php:135
-#: templates/layout/fullpage.php:151
+#: templates/Lord/acknowledge.php:9 templates/Lord/contact.php:7
+#: templates/layout/default.php:135 templates/layout/fullpage.php:151
 msgid "Contact"
 msgstr "Contact"
+
+#: templates/Lord/acknowledge.php:11
+msgid "Message follow-up"
+msgstr "Suivi du message"
+
+#: templates/Lord/acknowledge.php:14
+msgid ""
+"Your email was sent to the LORD shared mailbox. Your request be processed "
+"next time a staff member will check it. Thank you for your patience."
+msgstr ""
+"Votre message a bien été envoyé. Votre demande sera prise en charge dès "
+"qu’un bénévole consultera la messagerie. Merci de votre patience."
+
+#: templates/Lord/acknowledge.php:17
+msgid "Here is the message you sent. A carbon copy was sent to your address."
+msgstr ""
+"Voici le message que vous nous avez envoyé. Une copie a été envoyée à votre "
+"adresse email."
+
+#: templates/Lord/acknowledge.php:27
+msgid ""
+"We remind you that you can also seek help in our <a href=\"{0}\">FAQ</a> or "
+"on our <a href=\"{1}\">support forum</a>."
+msgstr ""
+"Nous vous rappelons que vous pouvez également chercher des réponses dans "
+"notre <a href=\"{0}\">FAQ</a> ou sur notre <a href=\"{1}\">forum de support</"
+"a>."
+
+#: templates/Lord/acknowledge.php:35
+msgid "Back to Home"
+msgstr "Retour à l’accueil"
 
 #: templates/Lord/contact.php:20 templates/element/default_sidebar.php:13
 msgid "Help"
@@ -4354,17 +4375,16 @@ msgstr "Votre adresse email"
 msgid "Your message"
 msgstr "Votre message"
 
-#: templates/Lord/contact.php:46
+#: templates/Lord/contact.php:45
 msgid "What is the meaning of the letter \"D\" in the LORD acronym?"
 msgstr "Que signifie la lettre \"D\" dans l’acronyme LORD ?"
 
-#: templates/Lord/contact.php:51
+#: templates/Lord/contact.php:50 templates/Users/send_email.php:44
 msgctxt "button"
 msgid "Send email"
 msgstr "Envoyer le mail"
 
-#: templates/Users/send_email.php:45 templates/Users/view.php:63
-#: templates/Users/view.php:64
+#: templates/Users/view.php:63 templates/Users/view.php:64
 msgid "Send email"
 msgstr "Envoyer un mail"
 
@@ -4499,7 +4519,7 @@ msgstr "Administrer les marquages"
 #: templates/Lord/my.php:140 templates/RatSnapshots/diff.php:156
 #: templates/RatSnapshots/diff.php:431 templates/Rats/add.php:241
 #: templates/Rats/edit.php:114 templates/Rats/print.php:63
-#: templates/Rats/view.php:317
+#: templates/Rats/view.php:312
 msgid "Singularities"
 msgstr "Particularités"
 
@@ -4954,7 +4974,7 @@ msgstr "Liste des marquages"
 
 #: templates/Markings/edit.php:9 templates/RatSnapshots/diff.php:132
 #: templates/RatSnapshots/diff.php:403 templates/Rats/print.php:45
-#: templates/Rats/view.php:301
+#: templates/Rats/view.php:296
 msgid "Marking"
 msgstr "Marquage"
 
@@ -5140,43 +5160,43 @@ msgid "Birth litter"
 msgstr "Portée de rattachement"
 
 #: templates/RatSnapshots/diff.php:170 templates/RatSnapshots/diff.php:445
-#: templates/Rats/search.php:121 templates/Rats/view.php:331
+#: templates/Rats/search.php:121 templates/Rats/view.php:326
 msgid "Health"
 msgstr "Santé"
 
 #: templates/RatSnapshots/diff.php:173 templates/RatSnapshots/diff.php:448
-#: templates/Rats/view.php:334
+#: templates/Rats/view.php:329
 msgid "Is alive?"
 msgstr "En vie ?"
 
 #: templates/RatSnapshots/diff.php:182 templates/RatSnapshots/diff.php:185
-#: templates/RatSnapshots/diff.php:457 templates/Rats/view.php:338
+#: templates/RatSnapshots/diff.php:457 templates/Rats/view.php:333
 msgid "Age at death"
 msgstr "Âge au décès"
 
 #: templates/RatSnapshots/diff.php:190 templates/RatSnapshots/diff.php:466
-#: templates/Rats/view.php:343
+#: templates/Rats/view.php:338
 msgid "Death date"
 msgstr "Date du décès"
 
 #: templates/RatSnapshots/diff.php:207 templates/RatSnapshots/diff.php:485
-#: templates/Rats/view.php:353 templates/element/rats.php:33
+#: templates/Rats/view.php:348 templates/element/rats.php:33
 #: templates/element/simple_rats.php:41
 msgid "Death cause"
 msgstr "Cause du décès"
 
 #: templates/RatSnapshots/diff.php:216 templates/RatSnapshots/diff.php:495
-#: templates/Rats/view.php:359
+#: templates/Rats/view.php:354
 msgid "Euthanized?"
 msgstr "Euthanasie ?"
 
 #: templates/RatSnapshots/diff.php:224 templates/RatSnapshots/diff.php:504
-#: templates/Rats/view.php:363
+#: templates/Rats/view.php:358
 msgid "Diagnosed by vet?"
 msgstr "Diagnostic vétérinaire ?"
 
 #: templates/RatSnapshots/diff.php:232 templates/RatSnapshots/diff.php:513
-#: templates/Rats/view.php:367
+#: templates/Rats/view.php:362
 msgid "Post-mortem analyses?"
 msgstr "Analyses post-mortem ?"
 
@@ -5192,7 +5212,7 @@ msgid "None"
 msgstr "Aucune"
 
 #: templates/RatSnapshots/diff.php:163 templates/RatSnapshots/diff.php:438
-#: templates/Rats/view.php:324
+#: templates/Rats/view.php:319
 msgctxt "singularity"
 msgid "None"
 msgstr "Aucune"
@@ -5683,23 +5703,23 @@ msgstr "Statistiques familiales"
 msgid "(family size and lifespan statistics)"
 msgstr "(taille de la famille et statistiques de longévité)"
 
-#: templates/Rats/view.php:289
+#: templates/Rats/view.php:284
 msgid "Variety"
 msgstr "Variété"
 
-#: templates/Rats/view.php:386
+#: templates/Rats/view.php:381
 msgid "Bred litters"
 msgstr "Ses portées"
 
-#: templates/Rats/view.php:395
+#: templates/Rats/view.php:390
 msgid "See litter"
 msgstr "Voir la portée"
 
-#: templates/Rats/view.php:464
+#: templates/Rats/view.php:459
 msgid "Differences with current version"
 msgstr "Différences avec la dernière version"
 
-#: templates/Rats/view.php:479 templates/Ratteries/view.php:629
+#: templates/Rats/view.php:474 templates/Ratteries/view.php:629
 msgid "Compare Versions"
 msgstr "Comparer les versions"
 

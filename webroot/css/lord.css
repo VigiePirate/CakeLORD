@@ -222,7 +222,6 @@ input[type='button'], input[type='reset'], input[type='submit'] {
   line-height: 1.2;
 }
 
-
 .button-group, .button-small, .button-medium {
    margin-left: auto;
 }
@@ -243,6 +242,11 @@ input[type='button'], input[type='reset'], input[type='submit'] {
   padding: 0.5rem 1rem;
   height: 2.8rem;
   line-height: 1.2;
+}
+
+.message-button {
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
 }
 
 textarea {
@@ -579,6 +583,11 @@ blockquote:before {
   position: absolute;
   left: 0rem;
   top: -2.5rem;
+}
+
+.button-text {
+  width: 90%;
+  padding-left: 10%;
 }
 
 .float-right {
@@ -1098,6 +1107,10 @@ footer {
 }
 .related {
   margin-top: 2rem;
+}
+.message-text {
+  width: 90%;
+  padding-left: 10%;
 }
 
 /* Flash messages */
