@@ -141,7 +141,8 @@ class RatPolicy implements BeforePolicyInterface
      */
     public function canDelete(IdentityInterface $user, Rat $rat)
     {
-        return $rat->state->is_frozen && ! $rat->state->is_reliable && $user->role->can_delete;
+        return $user->role->can_delete
+            && (($rat->state->is_frozen && ! $rat->state->is_reliable) || ($rat->state->is_default));
     }
 
     /**
