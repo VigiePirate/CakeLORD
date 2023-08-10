@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <h1><?= $rat->usual_name . ' (' . $rat->pedigree_identifier . ')' ?></h1>
+            <h1><?= $rat->usual_name ?> (<?= $rat->pedigree_identifier ?>)</h1>
 
             <?php
             echo $this->Form->create($rat, [

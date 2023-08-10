@@ -31,7 +31,8 @@
 #jquery-owner-input::placeholder,
 #jquery-rattery-input::placeholder,
 #jquery-mother-input::placeholder,
-#jquery-father-input::placeholder
+#jquery-father-input::placeholder,
+#jquery-rat-input::placeholder
  {
   color: #707e8a;
   opacity: 1;
