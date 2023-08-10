@@ -69,17 +69,18 @@ class UserMailer extends Mailer
     return $this;
   }
 
-  public function sendContactEmail($message, $initiator)
+  public function sendContactEmail($initiator, $message)
   {
     $options = Configure::read('EmailSettings');
     $this
     ->setTransport('gandi')
-    ->setFrom($initiator)
+    ->setFrom($options['from'])
     ->setSender($options['sender_mail'], $options['sender_name'])
     ->setTo($options['sender_mail'])
     ->setReplyTo($initiator)
-    ->setSubject(__('Message Sent Through the Contact Form'))
-    ->setViewVars(['message' => $message, 'username' => $initiator])
+    ->setCc($initiator)
+    ->setSubject(__('Message Sent Through the LORD Contact Form'))
+    ->setViewVars(['initiator' => $initiator, 'message' => $message])
     ->setEmailFormat('both')
     ->viewBuilder()
     ->setTemplate('contact_email');

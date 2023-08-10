@@ -322,7 +322,7 @@ class LordController extends AppController
             if (strtolower($this->request->getData('captcha')) == 'domestique') {
                 $initiator = $this->request->getData('initiator_email');
                 $message = h($this->request->getData('email_content'));
-                $mailer = $this->getMailer('Lord')->send('sendContactEmail', [$initiator, $message]);
+                $mailer = $this->getMailer('User')->send('sendContactEmail', [$initiator, $message]);
                 if ($mailer) {
                     $this->set(compact('message'));
                     return;

@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-08-09 17:54+0000\n"
-"PO-Revision-Date: 2023-08-09 20:02+0200\n"
+"POT-Creation-Date: 2023-08-10 11:44+0000\n"
+"PO-Revision-Date: 2023-08-10 13:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -1715,10 +1715,6 @@ msgstr "Impossible de déverrouiller ce compte utilisateur. Veuillez réessayer.
 msgid "The email was sent to the user."
 msgstr "Le message a été envoyé par mail à l’utilisateur."
 
-#: src/Mailer/LordMailer.php:20
-msgid "Message Sent Through the LORD Contact Form"
-msgstr "Message envoyé par le formulaire de contact du LORD"
-
 #: src/Mailer/UserMailer.php:17
 msgid "Reset your Password"
 msgstr "Modifier le mot de passe"
@@ -1735,9 +1731,9 @@ msgstr "Veuillez confirmer votre nouvelle adresse mail"
 msgid "A Staff Member Sent You a Message"
 msgstr "Un membre de l’équipe du LORD vous a envoyé un message"
 
-#: src/Mailer/UserMailer.php:81
-msgid "Message Sent Through the Contact Form"
-msgstr "Message envoyé par le formulaire de contact"
+#: src/Mailer/UserMailer.php:82
+msgid "Message Sent Through the LORD Contact Form"
+msgstr "Message envoyé par le formulaire de contact du LORD"
 
 #: src/Model/Behavior/PictureBehavior.php:84
 msgid ""
@@ -7380,13 +7376,14 @@ msgstr ""
 
 #: templates/email/html/contact_email.php:3
 msgid ""
-"<p>{0} sent the following message through the LORD contact form:</p>\n"
+"<p>Someone ({0}) sent the following message through the LORD contact form:</"
+"p>\n"
 "\n"
 "<p>“{1}”</p>\n"
 "\n"
 msgstr ""
-"<p>{0} a utilisé le formulaire de contact du LORD pour envoyer le message "
-"suivant :</p>\n"
+"<p>Quelqu’un ({0}) a utilisé le formulaire de contact du LORD pour envoyer "
+"le message suivant :</p>\n"
 "\n"
 "<p>« {1} »</p>\n"
 "\n"
@@ -7494,13 +7491,13 @@ msgstr ""
 
 #: templates/email/text/contact_email.php:3
 msgid ""
-"{0} sent the following message through the LORD contact form:\n"
+"Someone ({0}) sent the following message through the LORD contact form:\n"
 "\n"
 "“{1}”\n"
 "\n"
 msgstr ""
-"{0} a utilisé le formulaire de contact du LORD pour envoyer le message "
-"suivant :\n"
+"Quelqu’un ({0}) a utilisé le formulaire de contact du LORD pour envoyer le "
+"message suivant :\n"
 "\n"
 "« {1} »\n"
 "\n"
@@ -7621,6 +7618,9 @@ msgstr "Réseaux sociaux"
 #: templates/layout/default.php:150 templates/layout/fullpage.php:166
 msgid "Partners"
 msgstr "Partenaires"
+
+#~ msgid "Message Sent Through the Contact Form"
+#~ msgstr "Message envoyé par le formulaire de contact"
 
 #~ msgid "This was not the expected answer!"
 #~ msgstr "Ceci n’était pas la réponse attendue !"
