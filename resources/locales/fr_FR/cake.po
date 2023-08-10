@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CakePHP 4.4.7\n"
-"POT-Creation-Date: 2023-04-18 18:03+0000\n"
-"PO-Revision-Date: 2023-07-18 20:30+0200\n"
+"POT-Creation-Date: 2023-08-10 10:55+0000\n"
+"PO-Revision-Date: 2023-08-10 13:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -49,11 +49,11 @@ msgstr "Une erreur interne est survenue."
 
 #: vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php:390
 msgid "Missing or incorrect CSRF cookie type."
-msgstr ""
+msgstr "CSRF cookie absent ou incorrect."
 
 #: vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php:394
 msgid "Missing or invalid CSRF cookie."
-msgstr ""
+msgstr "CSRF cookie absent ou invalide."
 
 #: vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php:417
 #: vendor/cakephp/cakephp/src/Http/Middleware/SessionCsrfProtectionMiddleware.php:265
@@ -61,14 +61,16 @@ msgid ""
 "CSRF token from either the request body or request headers did not match or "
 "is missing."
 msgstr ""
+"Les jetons CSRF du corps et de l'en-tête de la requête sont manquants ou "
+"discordants."
 
 #: vendor/cakephp/cakephp/src/Http/Middleware/SessionCsrfProtectionMiddleware.php:247
 msgid "Missing or incorrect CSRF session key"
-msgstr ""
+msgstr "La clef de session CSRF est manquante ou incorrecte"
 
 #: vendor/cakephp/cakephp/src/Http/Response.php:1489
 msgid "The requested file contains `..` and will not be read."
-msgstr ""
+msgstr "Le fichier associé à la requête contient `..` et ne sera pas lu."
 
 #: vendor/cakephp/cakephp/src/Http/Response.php:1497
 msgid "The requested file was not found"
@@ -76,29 +78,29 @@ msgstr "Le fichier est introuvable"
 
 #: vendor/cakephp/cakephp/src/I18n/Number.php:116
 msgid "{0,number,#,###.##} KB"
-msgstr ""
+msgstr "{0,number,#,###.##} KB"
 
 #: vendor/cakephp/cakephp/src/I18n/Number.php:118
 msgid "{0,number,#,###.##} MB"
-msgstr ""
+msgstr "{0,number,#,###.##} MB"
 
 #: vendor/cakephp/cakephp/src/I18n/Number.php:120
 msgid "{0,number,#,###.##} GB"
-msgstr ""
+msgstr "{0,number,#,###.##} GB"
 
 #: vendor/cakephp/cakephp/src/I18n/Number.php:122
 msgid "{0,number,#,###.##} TB"
-msgstr ""
+msgstr "{0,number,#,###.##} TB"
 
 #: vendor/cakephp/cakephp/src/I18n/Number.php:114
 msgid "{0,number,integer} Byte"
 msgid_plural "{0,number,integer} Bytes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "octet"
+msgstr[1] "octets"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:86
 msgid "{0} from now"
-msgstr ""
+msgstr "dans {0}"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:86
 msgid "{0} ago"
@@ -190,7 +192,7 @@ msgstr "il y a %s"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:410
 msgid "on %s"
-msgstr ""
+msgstr "le %s"
 
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:53
 #: vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:132
@@ -256,27 +258,27 @@ msgstr "Cette valeur n’existe pas"
 #: vendor/cakephp/cakephp/src/ORM/RulesChecker.php:232
 msgid "Cannot modify row: a constraint for the `{0}` association fails."
 msgstr ""
-"Impossible de modifier une ligne : la contrainte pour l'association `{0}` "
-"n'est pas respectée"
+"La ligne ne peut pas être modifiée : une contrainte liée à l'association "
+"avec `{0}` échoue."
 
 #: vendor/cakephp/cakephp/src/ORM/RulesChecker.php:270
 msgid "The count does not match {0}{1}"
-msgstr ""
+msgstr "Les comptes ne correspond pas {0}{1}"
 
-#: vendor/cakephp/cakephp/src/Utility/Text.php:923
+#: vendor/cakephp/cakephp/src/Utility/Text.php:916
 msgid "and"
 msgstr "et"
 
-#: vendor/cakephp/cakephp/src/Validation/Validator.php:2539
+#: vendor/cakephp/cakephp/src/Validation/Validator.php:2543
 msgid "This field is required"
 msgstr "Ce champ est obligatoire"
 
-#: vendor/cakephp/cakephp/src/Validation/Validator.php:2559
+#: vendor/cakephp/cakephp/src/Validation/Validator.php:2563
 #: vendor/cakephp/cakephp/src/View/Form/ArrayContext.php:249
 msgid "This field cannot be left empty"
 msgstr "Ce champ doit être rempli"
 
-#: vendor/cakephp/cakephp/src/Validation/Validator.php:2711
+#: vendor/cakephp/cakephp/src/Validation/Validator.php:2715
 msgid "The provided value is invalid"
 msgstr "La valeur est incorrecte"
 

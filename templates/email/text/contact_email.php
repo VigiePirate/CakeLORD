@@ -1,6 +1,6 @@
 <?=
 
-__('{0} sent the following message through the LORD contact form:
+__('Someone ({0}) sent the following message through the LORD contact form:
 
 “{1}”
 
