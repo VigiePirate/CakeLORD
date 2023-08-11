@@ -402,27 +402,6 @@ class RatsController extends AppController
         ));
     }
 
-    // /**
-    //  * Delete method
-    //  *
-    //  * @param string|null $id Rat id.
-    //  * @return \Cake\Http\Response|null Redirects to index.
-    //  * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-    //  */
-    // public function delete($id = null)
-    // {
-    //     $this->request->allowMethod(['post', 'delete']);
-    //     $rat = $this->Rats->get($id);
-    //     $this->Authorization->authorize($rat);
-    //     if ($this->Rats->delete($rat)) {
-    //         $this->Flash->success(__('The rat has been deleted.'));
-    //     } else {
-    //         $this->Flash->error(__('The rat could not be deleted. Please, try again.'));
-    //     }
-    //
-    //     return $this->redirect(['action' => 'index']);
-    // }
-
     /**
      * Delete method
      *
@@ -432,30 +411,33 @@ class RatsController extends AppController
      */
     public function delete($id = null)
     {
-        $hasManyAssociations = $this->Rats->associations()->getByType('hasMany'); // RatSnapshots, RatMessages
-        $belongsToManyAssociations = $this->Rats->associations()->getByType('belongsToMany'); // BredLitters and Singularities
+        $rat = $this->Rats->get($id, [
+            'contain' => [
+                'Ratteries',
+                'BredLitters',
+                'BredLitters.Contributions',
+                'BredLitters.Sire',
+                'BredLitters.Dam',
+                'BredLitters.Users',
+                'BredLitters.States',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'BirthLitters.Contributions.Ratteries',
+                'RatMessages',
+                'RatSnapshots',
+                'RatSnapshots.States',
+                'States'
+            ]
+        ]);
 
-        $all_associations = array_merge($hasManyAssociations, $belongsToManyAssociations);
-
-        $contain = ['BirthLitters', 'Ratteries', 'BirthLitters.Contributions', 'BirthLitters.Contributions.Ratteries', 'States'];
-        foreach ($all_associations as $association) {
-            $relatedModel = $association->getTarget();
-            $contain[] = $relatedModel->getAlias();
-        }
-
-        $rat = $this->Rats->get($id, ['contain' => $contain]);
         $this->Authorization->authorize($rat);
 
-        $count = 0;
-        foreach ($hasManyAssociations as $association) {
-            $relatedModel = $association->getTarget();
-            $count += count($rat->{$association->getProperty()});
-        }
+        $deletable = count($rat->bred_litters) == 0;
 
         if ($this->request->is(['patch', 'post', 'put'])) {
 
-        // if rat has no related entries, it can be deleted
-            if ($count == 0) {
+            // if rat has no bred litters, it can be deleted
+            if ($deletable) {
                 if ($this->Rats->delete($rat)) {
                     $this->Flash->success(__('The rat sheet has been deleted.'));
                     return $this->redirect(['action' => 'index']);
@@ -464,61 +446,24 @@ class RatsController extends AppController
                     return $this->redirect(['action' => 'delete', $rat->id]);
                 }
             }
-
-        // if rat has related entries, they have to be given to a new rat before delete
-        // cascade delete is optionnally permitted for hasMany associations
-           if ($this->request->getData('new_rat_id')) {
-                $new_rat_id = $this->request->getData('new_rat_id');
-                // $connection = $this->Users->getConnection();
-                // $connection->begin();
-                //
-                // try {
-                //      foreach ($associations as $association) {
-                //         $relatedModel = $association->getTarget();
-                //         $query = $this->Users->{$relatedModel->getAlias()}->query();
-                //         $query->update()
-                //              ->set([$association->getForeignKey() => $new_user_id])
-                //              ->where([$association->getForeignKey() => $id])
-                //              ->execute();
-                //      }
-                // } catch (Exception $e) {
-                //     $connection->rollback();
-                //     $this->Flash->error(__('The user’s associated entries could not be transferred to the new user. Please, try again.'));
-                //     $this->set(compact('new_user'));
-                // }
-
-                // // reload old user to remove entities which are not his property anymore
-                // // but still try to contain them as a sanity check!
-                // $user = $this->Users->get($id, ['contain' => $contain]);
-                //
-                // if ($this->Users->delete($user)) {
-                //     $connection->commit();
-                //     $this->Flash->success(__('The user has been deleted. All associated entries were transferred to the user below.'));
-                //     return $this->redirect(['action' => 'view', $new_user_id]);
-                // } else {
-                //     $connection->rollback();
-                //     $this->Flash->error(__('The user could not be deleted. Please, try again.'));
-                //     return $this->redirect(['action' => 'delete', $user->id]);
-                // }
-
-            } else {
-                $this->Flash->error(__('The rat’s doppelgänger could not be found. Please, try again.'));
-                return $this->redirect(['action' => 'delete', $rat->id]);
-            }
         }
-        //
-        if (! isset($errors)) {
-            if ($count != 0) {
-                $this->Flash->warning(__('This rat is related to existing database entries. You MUST specify below an existing rat to inherit these entries.'));
-            } else {
-                $this->Flash->default(__('This rat is not related to any existing database entries and can be safely deleted. Beware, this operation is irreversible!'));
-            }
+
+        if ($deletable) {
+            $this->Flash->default(__('This rat has no offspring and can be deleted. Related messages and snapshots will be deleted. This operation is irreversible!'));
+
+        } else {
+            $this->Flash->error(__('This rat has offspring. You must edit or delete their bred litters before being allowed to delete the sheet.'));
         }
-        //
+
+        $snap_diffs = [];
+        foreach ($rat->rat_snapshots as $snapshot) {
+            $snap_diffs[$snapshot->id] = $this->Rats->snapDiffListAsString($rat, $snapshot->id);
+        }
+
         $identity = $this->request->getAttribute('identity');
         $show_staff = ! is_null($identity) && $identity->can('edit', $rat);
 
-        $this->set(compact('rat', 'identity', 'count'));
+        $this->set(compact('rat', 'identity', 'deletable', 'snap_diffs'));
     }
 
     /** Search functions **/

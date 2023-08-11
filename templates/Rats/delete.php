@@ -5,6 +5,8 @@
  */
 ?>
 
+<?php $this->assign('title', __('Delete')) ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">
@@ -33,88 +35,90 @@
 
             <?= $this->Flash->render(); ?>
 
-            <?php
-            echo $this->Form->create(null, [
-            	'id' => 'jquery-owner-form',
-            ]); ?>
+            <?php if ($deletable) : ?>
+                <h2 class="staff"><?= __('Review snapshots and messages before suppression') ?></h2>
 
-            <?php if ($count != 0) : ?>
-                <fieldset>
-                    <?php
-                        echo $this->Form->control('searchkey', [
-                            'id' => 'jquery-rat-input',
-                            'name' => 'new_rat_name',
-                            'label' => __('Search and select the heir’s name or identifier (must have the same birth date)'),
-                            'type' => 'text',
-                            'required' => $count != 0,
-                            'placeholder' => __('Type here...'),
-                        ]);
-                        echo $this->Form->control('searchid', [
-                            'id' => 'jquery-rat-id',
-                            'name' => 'new_rat_id',
-                            'label' => [
-                                'class' => 'hide-everywhere',
-                                'text' => 'Hidden field for ID update'
-                            ],
-                            'class' => 'hide-everywhere',
-                            'type' => 'text',
-                        ]);
+                <details>
+                    <summary class="staff">
+                        <?= __('Messages') ?>
+                    </summary>
+                    <?php if (!empty($rat->rat_messages)) : ?>
 
-                        echo $this->Form->control('cascade_delete', [
-                            'type' => 'checkbox',
-                            'label' => __('Click here to delete related messages and snapshots (only offspring will be transferred)')
-                        ]);
-                    ?>
-                </fieldset>
-            <?php endif; ?>
-            <?= $this->Form->button(__('Delete rat sheet'), ['class' => 'button-staff', 'confirm' => __('Are you sure you want to delete # {0}?', [$rat->id])]); ?>
-            <?= $this->Form->end(); ?>
+                    <div class="table-responsive">
+                        <table class="summary">
+                            <thead>
+                                <th><?= __('Id') ?></th>
+                                <th><?= __('From User') ?></th>
+                                <th><?= __('Message') ?></th>
+                                <th><?= __('Created') ?></th>
+                                <th class="actions"><?= __('Actions') ?></th>
+                            </thead>
+                            <?php foreach ($rat->rat_messages as $message) : ?>
+                            <tr>
+                                <td><?= h($message->id) ?></td>
+                                <td><?= h($message->from_user_id) ?></td>
+                                <td><?= h($message->content) ?></td>
+                                <td><?= h($message->created->i18nFormat('dd/MM/yyyy')) ?></td>
+                                <td class="actions">
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                    <?php endif; ?>
+                </details>
+
+                <details>
+                    <summary class="staff">
+                        <?= __('Snapshots') ?>
+                    </summary>
+                    <?php if (!empty($rat->rat_snapshots)) : ?>
+                    <div class="table-responsive">
+                        <table class="summary">
+                            <thead>
+                                <th><?= __('Created') ?></th>
+                                <th><?= __('Differences with current version') ?></th>
+                                <!-- <th><?= __('Data') ?></th> -->
+                                <th><?= __('State') ?></th>
+                                <th class="actions"><?= __('Actions') ?></th>
+                            </thead>
+                            <?php foreach ($rat->rat_snapshots as $ratSnapshots) : ?>
+                            <tr>
+                                <td><?= h($ratSnapshots->created) ?></td>
+                                <td><?= h($snap_diffs[$ratSnapshots->id]) ?></td>
+                                <td><?= h($ratSnapshots->state->symbol) ?></td>
+                                <td class="actions">
+                                    <span class="nowrap">
+                                        <?= $this->Html->image('/img/icon-diff.svg', [
+                                            'url' => ['controller' => 'RatSnapshots', 'action' => 'diff', $ratSnapshots->id],
+                                            'class' => 'action-icon',
+                                            'alt' => __('Compare Versions')])
+                                        ?>
+                                        <?= $this->Html->image('/img/icon-restore.svg', [
+                                            'url' => ['controller' => 'Rats', 'action' => 'restore', $rat->id, $ratSnapshots->id],
+                                            'class' => 'action-icon',
+                                            'alt' => __('Restore Snapshot')]) ?>
+                                    </span>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                    <?php endif; ?>
+                </details>
+
+                <?php
+                    echo $this->Form->create(null);
+                    echo $this->Form->button(__('Delete rat sheet'), [
+                        'class' => 'button-staff',
+                        'confirm' => __('Are you sure you want to delete rat #{0} with all its messages and snapshots?', [$rat->id])
+                    ]);
+                    echo $this->Form->end();
+                ?>
+            <?php else : ?>
+                <h2 class="staff"><?= __('Review bred litters before the rat sheet can be deleted') ?></h2>
+                <?= $this->element('simple_staff_litters', ['litters' => $rat->bred_litters]) ?>
+            <?php endif ; ?>
         </div>
     </div>
 </div>
-
-<?php $this->append('css');?>
-	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-<?php $this->end();?>
-<?= $this->Html->css('ajax.css') ?>
-<?php $this->append('script');?>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script>
-    $(function () {
-        $('#jquery-rat-input')
-            .on('input', function() {
-                $("#jquery-rat-id").val('');
-                if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
-                    $(this).removeClass('autocompleted');
-                }
-            })
-            .autocomplete({
-                minLength: 3,
-                source: function (request, response) {
-                    $.ajax({
-                        url: '/rats/autocomplete.json',
-                        dataType: 'json',
-                        data: {
-                            'searchkey': $('#jquery-rat-input').val(),
-                        },
-                        success: function (data) {
-                            response(data.items);
-                        },
-                        open: function () {
-                            $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-                        },
-                        close: function () {
-                            $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-                        }
-                    });
-                },
-                select: function (event, ui) {
-                    $("#jquery-rat-input").val(ui.item.value); // display the selected text
-                    $("#jquery-rat-input").addClass("autocompleted"); // display the selected text
-                    $("#jquery-rat-id").val(ui.item.id); // save selected id to hidden input
-                }
-            });
-    });
-    </script>
-<?php $this->end(); ?>
