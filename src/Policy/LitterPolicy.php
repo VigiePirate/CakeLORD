@@ -140,7 +140,8 @@ class LitterPolicy implements BeforePolicyInterface
      */
     public function canDelete(IdentityInterface $user, Litter $litter)
     {
-        return $litter->state->is_frozen && ! $litter->state->is_reliable && $user->role->can_delete;
+        return $user->role->can_delete
+            && (($litter->state->is_frozen && ! $litter->state->is_reliable) || ($litter->state->is_default));
     }
 
     /**

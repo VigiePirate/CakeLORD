@@ -410,6 +410,75 @@ class LittersController extends AppController
     }
 
     /**
+     * Delete method
+     *
+     * @param string|null $id Litter id.
+     * @return \Cake\Http\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function delete($id = null)
+    {
+        $litter = $this->Litters->get($id, [
+            'contain' => [
+                'ParentRats',
+                'Dam',
+                'Sire',
+                'Dam.BirthLitters.Contributions',
+                'Dam.BirthLitters.Contributions.Ratteries',
+                'Sire.BirthLitters.Contributions',
+                'Sire.BirthLitters.Contributions.Ratteries',
+                'OffspringRats',
+                'OffspringRats.OwnerUsers',
+                'OffspringRats.Ratteries',
+                'OffspringRats.States',
+                'OffspringRats.BirthLitters',
+                'OffspringRats.BirthLitters.Contributions',
+                'Contributions',
+                'Contributions.Ratteries',
+                'LitterMessages',
+                'LitterSnapshots',
+                'LitterSnapshots.States',
+                'States'
+            ]
+        ]);
+
+        $this->Authorization->authorize($litter);
+
+        $deletable = count($litter->offspring_rats) == 0;
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            // if litter has no attached offspring, it can be deleted
+            if ($deletable) {
+                if ($this->Litters->delete($litter)) {
+                    $this->Flash->success(__('The litter sheet has been deleted. You can inform its creator by mail from their sheet.'));
+                    return $this->redirect(['controller' => 'Users', 'action' => 'view', $litter->user_id]);
+                } else {
+                    $this->Flash->error(__('The litter sheet could not be deleted. It was not its time.'));
+                    return $this->redirect(['action' => 'delete', $litter->id]);
+                }
+            }
+        }
+
+        if ($deletable) {
+            $this->Flash->default(__('This litter can be deleted. Related messages and snapshots will be deleted. This operation is irreversible!'));
+
+        } else {
+            $this->Flash->error(__('Some rats are attached to this litter. You must edit their birth litters before being allowed to delete the litter sheet.'));
+        }
+
+        $snap_diffs = [];
+        foreach ($litter->litter_snapshots as $snapshot) {
+            $snap_diffs[$snapshot->id] = $this->Litters->snapDiffListAsString($litter, $snapshot->id);
+        }
+
+        $identity = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($identity) && $identity->can('edit', $litter);
+
+        $this->set(compact('litter', 'identity', 'deletable', 'snap_diffs'));
+    }
+
+    /**
      * EditComment method
      *
      * @param string|null $id Litter id.
@@ -420,6 +489,7 @@ class LittersController extends AppController
     {
         $litter = $this->Litters->get($id, [
             'contain' => [
+                'ParentRats',
                 'Ratteries',
                 'Contributions',
                 'Sire',
@@ -555,27 +625,6 @@ class LittersController extends AppController
         $show_staff = !is_null($user) && $user->can('staffEdit', $litter);
 
         $this->set(compact('litter', 'user', 'show_staff'));
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Litter id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $litter = $this->Litters->get($id);
-        $this->Authorization->authorize($litter);
-        if ($this->Litters->delete($litter)) {
-            $this->Flash->success(__('The litter has been deleted.'));
-        } else {
-            $this->Flash->error(__('The litter could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
     }
 
     /**
