@@ -94,9 +94,11 @@ class LittersTable extends Table
         ]);
         $this->hasMany('LitterSnapshots', [
             'foreignKey' => 'litter_id',
+            'dependent' => true,
         ]);
         $this->hasMany('LitterMessages', [
             'foreignKey' => 'litter_id',
+            'dependent' => true,
         ]);
         $this->hasMany('OffspringRats', [
             'className' => 'Rats',
@@ -329,7 +331,7 @@ class LittersTable extends Table
         );
 
         /* No birth near existing one from the same mother */
-        $rules->add(function ($litter) {
+        $rules->addCreate(function ($litter) {
                 return ! $litter->hasTooCloseSiblings();
             },
             'hasCloseSiblings',

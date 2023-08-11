@@ -32,7 +32,7 @@
                 <?= $this->Html->link(__('See all pending litters'), ['controller' => 'Litters', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
             <p><?= __('<strong>{0, plural, =1{1 litter sheet is} other{# litter sheets are}}</strong> currently waiting for staff action. Most recent are:', [$count['litters']]) ?></p>
-            <?= $this->element('simple_staff_litters') ?>
+            <?= $this->element('simple_staff_litters', ['identity' => $user]) ?>
 
             <h3><?= __('Ratteries') ?></h3>
             <div class="button-small">
