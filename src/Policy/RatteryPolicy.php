@@ -120,7 +120,8 @@ class RatteryPolicy implements BeforePolicyInterface
      */
     public function canDelete(IdentityInterface $user, Rattery $rattery)
     {
-        return $rattery->state->is_frozen && ! $rattery->state->is_reliable && $user->role->can_delete;
+        return $user->role->can_delete
+            && (($rattery->state->is_frozen && ! $rattery->state->is_reliable) || ($rattery->state->is_default));
     }
 
     /**
