@@ -6,6 +6,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\FrozenTime;
+use Cake\Collection\Collection;
 use Cake\Datasource\FactoryLocator;
 use Cake\Utility\Inflector;
 use App\Model\Entity\StatisticsTrait;
@@ -217,12 +218,16 @@ class Rattery extends Entity
             $stats['avg_litter_size'] = $this->computeAvgLitterSize(['Contributions.rattery_id' => $this->id]);
             $stats['debiased_avg_litter_size'] = $this->computeAvgLitterSize(['Contributions.rattery_id' => $this->id, 'pups_number >=' => '6', 'pups_number <=' => '16']);
 
-            // Currently compute at the rat-level. Switch to litter-level?
-            $stats['avg_sex_ratio'] = $this->computeRatSexRatioInWords([
-                'OR' => [
-                    'Contributions.rattery_id' => $this->id,
-                    'Rats.rattery_id' => $this->id // for rats with rattery_id but no litter_id
-                ]], 12);
+            // load copy of the rattery with all litters ($this is limited to the 10 most recent litters)
+            $rattery_id = $this->id;
+            $copy = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries')->get($this->id, ['contain' => ['Litters']]);
+            $avg_sex_ratio = (new Collection($copy->litters))
+                ->map(function ($value, $key) use ($rattery_id) {
+                    return $value->computeLitterSexRatio(['litter_id' => $value->id]);
+                })
+                ->avg();
+
+            $stats['avg_sex_ratio'] = $this->computeLitterSexRatioInWords([], 10, $avg_sex_ratio);
 
             $stats['primaries'] = $this->countRatsByPrimaryDeath(['rattery_id' => $this->id])->toArray();
             $stats['secondaries'] = $this->countRatsBySecondaryDeath(['rattery_id' => $this->id]);

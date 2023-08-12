@@ -481,11 +481,12 @@ trait StatisticsTrait
 
     public function computeAvgLitterSize($options = []) {
         $model = FactoryLocator::get('Table')->get('Litters');
-        //$filter = ['Contributions.rattery_id >' => '6'];
+
         $filter = [];
         if (! empty($options)) {
             $filter = array_merge($filter, $options);
         }
+
         $avg = $model->find()
             ->select(['avg' => 'AVG(pups_number)'])
             ->leftJoinWith('Contributions')
@@ -498,6 +499,7 @@ trait StatisticsTrait
             ->enableAutoFields(true)
             ->where($filter)
             ->first();
+
         return round(floatval($avg['avg']), 1);
     }
 
@@ -517,7 +519,7 @@ trait StatisticsTrait
                     return $q->where(['is_reliable IS' => true]);
                 });
         }
-        
+
         $females = $query->newExpr()->case()->when(['sex' => 'F'])->then(1, 'integer');
         $males = $query->newExpr()->case()->when(['sex' => 'M'])->then(1, 'integer');
 
@@ -557,8 +559,10 @@ trait StatisticsTrait
         }
     }
 
-    public function computeLitterSexRatioInWords($options = [], $max_denominator = 10) {
-        $sex_ratio = round($this->computeLitterSexRatio($options), 3);
+    public function computeLitterSexRatioInWords($options = [], $max_denominator = 10, $sex_ratio = null) {
+        if (is_null($sex_ratio)) {
+            $sex_ratio = round($this->computeLitterSexRatio($options), 3);
+        }
 
         if ($sex_ratio == -2) {
             return __('Only females');

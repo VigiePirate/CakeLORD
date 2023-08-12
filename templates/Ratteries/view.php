@@ -232,6 +232,7 @@
                                 <div class="message"><?= __('There aren’t enough rats with consolidated information to compute relevant mortality statistics.') ?></div>
                             <?php endif; ?>
                         <?php endif; ?>
+                    </div>
                     <?php endif; ?>
 
                 <?php else : ?> <!-- non generic rattery -->
@@ -298,7 +299,7 @@
 
                     <h2><?= __('Statistics') ?></h2>
                     <?php if ($stats['ratCount'] == 0 && $stats['outRatCount'] == 0) : ?>
-                        <div class="message error"><?= __('No recorded rat was born in (or in partnership with) this rattery.') ?></div>
+                        <div class="message error"><?= __('No rat born in (or in partnership with) this rattery has a recorded and validated sheet.') ?></div>
                     <?php else : ?>
                         <details open>
                             <summary><?= __('Breeding statistics') ?></summary>
@@ -310,7 +311,7 @@
                             </table>
                             <table class="condensed stats unfold">
                                 <tr>
-                                    <th><?= __('Total breeding activity:') ?></th>
+                                    <th><?= __('Declared litters:') ?></th>
                                     <td><?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['inLitterCount']+$stats['outLitterCount']]) ?>,
                                         <?= __('{0, plural, =0{no pup} =1{1 pup} other{# pups}}', [$stats['inRatCount']+$stats['outRatCount']]) ?>
                                 </tr>
@@ -326,41 +327,51 @@
                                 </tr>
                             </table>
 
+                            <table class="condensed stats unfold">
+                                <tr>
+                                    <th><?= __('Rat records (born in the rattery):') ?></th>
+                                    <td><?= __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}}', [$stats['ratCount']]) ?>
+                                </tr>
+                                <tr>
+                                    <th> ⨽ <?= __('females:') ?></th>
+                                    <td> ⨽ <?= __('{0, plural, =0 {No female} =1{1 female} other{# females}} ({1, number} %)', [$stats['femaleCount'], $stats['femaleProportion']]) ?> </td>
+                                </tr>
+                                <tr>
+                                    <th> ⨽ <?= __('males:') ?></th>
+                                    <td> ⨽ <?= __('{0, plural, =0 {No male} =1{1 male} other{# males}} ({1, number} %)', [$stats['maleCount'], $stats['maleProportion']]) ?> </td>
+                                </tr>
+                            </table>
+
                         </details>
 
                         <?php if($rattery->wants_statistic) : ?>
                             <details>
-                                <summary><?= __('Birth place statistics') ?></summary>
-                                <table class="condensed stats unfold">
-                                    <tr>
-                                        <th><?= __('Rat records (born in the rattery):') ?></th>
-                                        <td><?= __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}}', [$stats['ratCount']]) ?>
-                                    </tr>
-                                    <tr>
-                                        <th> ⨽ <?= __('females:') ?></th>
-                                        <td> ⨽ <?= __('{0, plural, =0 {No female} =1{1 female} other{# females}} ({1, number} %)', [$stats['femaleCount'], $stats['femaleProportion']]) ?> </td>
-                                    </tr>
-                                    <tr>
-                                        <th> ⨽ <?= __('males:') ?></th>
-                                        <td> ⨽ <?= __('{0, plural, =0 {No male} =1{1 male} other{# males}} ({1, number} %)', [$stats['maleCount'], $stats['maleProportion']]) ?> </td>
-                                    </tr>
-                                </table>
+                                <summary><?= __x('rattery', 'Litter statistics') ?></summary>
 
                                 <table class="condensed stats unfold">
                                     <tr>
                                         <th><?= __('Average mother age:') ?></th>
-                                        <td><?= __('{0, number} days ({1, number} months)', [round($stats['avg_mother_age']), round($stats['avg_mother_age']/30.5,1)]) ?></td>
+                                        <td><?= ($stats['avg_mother_age'] >= 1) ?
+                                            __('{0, number} days ({1, number} months)', [round($stats['avg_mother_age']), round($stats['avg_mother_age']/30.5,1)])
+                                            : __('N/A')
+                                            ?>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th><?= __('Average father age:') ?></th>
-                                        <td><?= ($stats['avg_father_age'] != 0) ?
+                                        <td><?= ($stats['avg_father_age'] >= 1) ?
                                             __('{0, number} days ({1, number} months)', [round($stats['avg_father_age']), round($stats['avg_father_age']/30.5,1)]) :
-                                            __('This rattery only had litters of unknown fathers')
-                                            ?> </td>
+                                            __('N/A')
+                                            ?>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th><?= __('Average litter size:') ?></th>
-                                        <td><?= __('{0, plural, =0{No pup} =1{1 pup} other{# pups}} per litter', [$stats['avg_litter_size']]) ?></td>
+                                        <td><?= ($stats['avg_litter_size'] >= 1) ?
+                                             __('{0, plural, =0{No pup} =1{1 pup} other{# pups}} per litter', [$stats['avg_litter_size']]) :
+                                            __('N/A')
+                                            ?>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th><?= __('Average sex ratio:') ?></th>
@@ -488,79 +499,83 @@
                             : '' ?>
                     </div>
                 </div>
-                <div class="spacer"> </div>
-                <div class="ratteries view content">
 
-                    <h2><?= __('Related entries') ?></h2>
+                <?php if ($stats['ratCount'] > 0 || ($stats['inLitterCount'] + $stats['outLitterCount']) > 0) : ?>
+                    <div class="spacer"> </div>
+                    <div class="ratteries view content">
+                        <h2><?= __('Related entries') ?></h2>
 
-                    <details open>
-                        <summary><?= __('Last contributed litters') ?></summary>
-                        <div class="button-raised">
-                            <?= $this->Html->link(__x('litters', 'See all'), ['controller' => 'Contributions', 'action' => 'fromRattery', $rattery->id, '?' => ['sort' => 'Litters.birth_date', 'direction' => 'DESC']], ['class' => 'button float-right']) ?>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="summary">
-                                <thead>
-                                    <tr>
-                                        <th><?= __('State') ?></th>
-                                        <th><?= __x('litter', 'Birth date') ?></th>
-                                        <th><?= __('Dam') ?></th>
-                                        <th><?= __('Sire') ?></th>
-                                        <th><?= __('Size') ?></th>
-                                        <th class="actions hide-on-mobile"><?= __('Actions') ?></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($rattery->litters as $litter): ?>
-                                    <tr>
-                                        <td><span class="statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></span></td>
-                                        <td><?= $this->Html->link($litter->birth_date->i18nFormat('dd/MM/yyyy'), ['controller' => 'Litters', 'action' => 'view', $litter->id]) ?></td>
-                                        <td><?= !empty($litter->dam) ? h($litter->dam[0]->usual_name) : __x('mother', 'Unknown') ?></td>
-                                        <td><?= !empty($litter->sire) ? h($litter->sire[0]->usual_name) : __x('father', 'Unknown') ?></td>
-                                        <td><?= $this->Number->format($litter->pups_number) ?></td>
-                                        <td class="actions hide-on-mobile">
-                                            <?php if (! is_null($user) && $user->can('edit', $litter)) : ?>
-                                                <?= $this->Html->image('/img/icon-edit.svg', [
-                                                    'url' => ['controller' => 'Litters', 'action' => 'edit', $litter->id],
-                                                    'class' => 'action-icon',
-                                                    'alt' => __('Edit Litter')])
-                                                ?>
-                                            <?php else :?>
-                                                <span class="disabled">
-                                                    <?= $this->Html->image('/img/icon-edit.svg', [
-                                                        'url' => '',
-                                                        'class' => 'action-icon disabled',
-                                                        'alt' => __('Edit Litter')])
-                                                    ?>
-                                                </span>
-                                            <?php endif ;?>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </details>
-
-                    <details open>
-                        <summary><?= __('Recently modified rats') ?></summary>
-                        <div class="button-raised">
-                            <?= $this->Html->link(__x('rats', 'See all'), ['controller' => 'Rats', 'action' => 'byRattery', $rattery->id, '?' => ['sort' => 'birth_date', 'direction' => 'DESC']], ['class' => 'button float-right']) ?>
-                        </div>
-                        <?= $this->element('simple_rats', [ //rats
-                            'rubric' => __(''),
-                            'rats' =>  $rattery->rats,//$offsprings,
-                            'exceptions' => [
-                                'picture',
-                                'owner_user_id',
-                                'death_primary_cause',
-                                'death_secondary_cause',
-                            ],
-                        ]) ?>
-                    </details>
-
-                <?php endif; ?> <!-- end non generic rattery part -->
-            </div>
+                        <?php if ($stats['inLitterCount'] + $stats['outLitterCount']) : ?>
+                            <details open>
+                                <summary><?= __('Last contributed litters') ?></summary>
+                                <div class="button-raised">
+                                    <?= $this->Html->link(__x('litters', 'See all'), ['controller' => 'Contributions', 'action' => 'fromRattery', $rattery->id, '?' => ['sort' => 'Litters.birth_date', 'direction' => 'DESC']], ['class' => 'button float-right']) ?>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="summary">
+                                        <thead>
+                                            <tr>
+                                                <th><?= __('State') ?></th>
+                                                <th><?= __x('litter', 'Birth date') ?></th>
+                                                <th><?= __('Dam') ?></th>
+                                                <th><?= __('Sire') ?></th>
+                                                <th><?= __('Size') ?></th>
+                                                <th class="actions hide-on-mobile"><?= __('Actions') ?></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($rattery->litters as $litter): ?>
+                                            <tr>
+                                                <td><span class="statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></span></td>
+                                                <td><?= $this->Html->link($litter->birth_date->i18nFormat('dd/MM/yyyy'), ['controller' => 'Litters', 'action' => 'view', $litter->id]) ?></td>
+                                                <td><?= !empty($litter->dam) ? h($litter->dam[0]->usual_name) : __x('mother', 'Unknown') ?></td>
+                                                <td><?= !empty($litter->sire) ? h($litter->sire[0]->usual_name) : __x('father', 'Unknown') ?></td>
+                                                <td><?= $this->Number->format($litter->pups_number) ?></td>
+                                                <td class="actions hide-on-mobile">
+                                                    <?php if (! is_null($user) && $user->can('edit', $litter)) : ?>
+                                                        <?= $this->Html->image('/img/icon-edit.svg', [
+                                                            'url' => ['controller' => 'Litters', 'action' => 'edit', $litter->id],
+                                                            'class' => 'action-icon',
+                                                            'alt' => __('Edit Litter')])
+                                                        ?>
+                                                    <?php else :?>
+                                                        <span class="disabled">
+                                                            <?= $this->Html->image('/img/icon-edit.svg', [
+                                                                'url' => '',
+                                                                'class' => 'action-icon disabled',
+                                                                'alt' => __('Edit Litter')])
+                                                            ?>
+                                                        </span>
+                                                    <?php endif ;?>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </details>
+                        <?php endif ; ?>
+                        <?php if ($stats['ratCount'] > 0) : ?>
+                            <details open>
+                                <summary><?= __('Recently modified rats') ?></summary>
+                                <div class="button-raised">
+                                    <?= $this->Html->link(__x('rats', 'See all'), ['controller' => 'Rats', 'action' => 'byRattery', $rattery->id, '?' => ['sort' => 'birth_date', 'direction' => 'DESC']], ['class' => 'button float-right']) ?>
+                                </div>
+                                <?= $this->element('simple_rats', [ //rats
+                                    'rubric' => __(''),
+                                    'rats' =>  $rattery->rats,//$offsprings,
+                                    'exceptions' => [
+                                        'picture',
+                                        'owner_user_id',
+                                        'death_primary_cause',
+                                        'death_secondary_cause',
+                                    ],
+                                ]) ?>
+                            </details>
+                        <?php endif ; ?>
+                    </div>
+                <?php endif ; ?>
+            <?php endif ; ?> <!-- end non generic rattery part -->
 
             <?= $this->element('activitybar') ?>
 
@@ -644,7 +659,6 @@
                     </div>
                 </div>
             <?php endif; ?>
-
         </div>
     </div>
 <?php endif ; ?>
