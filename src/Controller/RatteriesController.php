@@ -249,6 +249,7 @@ class RatteriesController extends AppController
                 'RatteryMessages',
                 'RatterySnapshots',
                 'RatterySnapshots.States',
+                'OwnerUsers',
                 'States'
             ]
         ]);
