@@ -27,15 +27,21 @@
                                     'alt' => __('Diff')])
                                 ?>
                             <?php endif; ?>
-                            <?= $this->Form->postLink(
-                                    $this->Html->image('/img/icon-delete.svg', [
-                                        'class' => 'action-icon',
-                                        'alt' => __('Delete Rattery')
-                                    ]),
-                                    ['controller' => 'ratteries', 'action' => 'delete', $rattery->id],
-                                    ['confirm' => __('Are you sure you want to delete rattery # {0}?', $rattery->id), 'escape' => false]
-                                )
-                            ?>
+                            <?php if (! is_null($user) && $user->can('delete', $rattery)) : ?>
+                                <?= $this->Html->image('/img/icon-delete.svg', [
+                                    'url' => ['controller' => 'Ratteries', 'action' => 'delete', $rattery->id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('Delete Rattery')
+                                ])?>
+                            <?php else :?>
+                                <span class="disabled">
+                                    <?= $this->Html->image('/img/icon-delete.svg', [
+                                        'url' => '',
+                                        'class' => 'action-icon disabled',
+                                        'alt' => __('Delete Rattery')])
+                                    ?>
+                                </span>
+                            <?php endif ;?>
                         </span>
                     </td>
                 </tr>

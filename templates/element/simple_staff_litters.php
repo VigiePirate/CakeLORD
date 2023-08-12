@@ -19,22 +19,6 @@
                       <td><?= ! empty($litter->litter_messages) ? mb_strimwidth($litter->litter_messages[0]->content, 0, 48, '...') : '' ?></td>
                       <td class="actions">
                           <span class="nowrap">
-                              <?php if (! is_null($identity) && $identity->can('edit', $litter)) : ?>
-                                  <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
-                                      'url' => ['controller' => 'Litters', 'action' => 'edit', $litter->id],
-                                      'class' => 'action-icon',
-                                      'alt' => __('Edit Litter')
-                                  ])?>
-                              <?php else :?>
-                                  <span class="disabled">
-                                      <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
-                                          'url' => '',
-                                          'class' => 'action-icon disabled',
-                                          'alt' => __('Edit Litter')])
-                                      ?>
-                                  </span>
-                              <?php endif ;?>
-
                               <?php if (! is_null($identity) && $identity->can('delete', $litter)) : ?>
                                   <?= $this->Html->image('/img/icon-delete.svg', [
                                       'url' => ['controller' => 'Litters', 'action' => 'delete', $litter->id],

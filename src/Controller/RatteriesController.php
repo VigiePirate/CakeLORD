@@ -659,7 +659,9 @@ class RatteriesController extends AppController
 
         $ratteries = $this->paginate($ratteries);
 
-        $this->set(compact('ratteries'));
+        $user = $this->request->getAttribute('identity');
+
+        $this->set(compact('ratteries', 'user'));
     }
 
     public function autocomplete() {
