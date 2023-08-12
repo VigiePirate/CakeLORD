@@ -230,16 +230,62 @@ class RatteriesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $rattery = $this->Ratteries->get($id);
+        $rattery = $this->Ratteries->get($id, [
+            'contain' => [
+                'Litters',
+                'Litters.Users',
+                'Litters.Dam',
+                'Litters.Sire',
+                'Litters.Dam.BirthLitters.Contributions',
+                'Litters.Dam.BirthLitters.Contributions.Ratteries',
+                'Litters.Sire.BirthLitters.Contributions',
+                'Litters.Sire.BirthLitters.Contributions.Ratteries',
+                'Litters.States',
+                'Rats',
+                'Rats.OwnerUsers',
+                'Rats.Ratteries',
+                'Rats.BirthLitters.Contributions',
+                'Rats.States',
+                'RatteryMessages',
+                'RatterySnapshots',
+                'RatterySnapshots.States',
+                'States'
+            ]
+        ]);
+
         $this->Authorization->authorize($rattery);
-        if ($this->Ratteries->delete($rattery)) {
-            $this->Flash->success(__('The rattery has been deleted.'));
-        } else {
-            $this->Flash->error(__('The rattery could not be deleted. Please, try again.'));
+
+        $deletable = count($rattery->litters + $rattery->rats) == 0;
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            // if litter has no attached offspring, it can be deleted
+            if ($deletable) {
+                if ($this->Ratteries->delete($rattery)) {
+                    $this->Flash->success(__('The rattery sheet has been deleted. You can inform its creator by mail from their sheet below.'));
+                    return $this->redirect(['controller' => 'Users', 'action' => 'view', $rattery->owner_user_id]);
+                } else {
+                    $this->Flash->error(__('The rattery sheet could not be deleted. Some are tougher than others.'));
+                    return $this->redirect(['action' => 'delete', $rattery->id]);
+                }
+            }
         }
 
-        return $this->redirect(['action' => 'index']);
+        if ($deletable) {
+            $this->Flash->default(__('This rattery can be deleted. Related messages and snapshots will be deleted. This operation is irreversible!'));
+        } else {
+            $this->Flash->error(__('This rattery contributed to some litters or gave its prefix to some rats. It cannot be deleted, except if you manually reaffect all properties below to another rattery. This is not recommended.'));
+        }
+
+        $snap_diffs = [];
+        foreach ($rattery->rattery_snapshots as $snapshot) {
+            $snap_diffs[$snapshot->id] = $this->Ratteries->snapDiffListAsString($rattery, $snapshot->id);
+        }
+
+        $identity = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($identity) && $identity->can('edit', $rattery);
+
+        $this->set(compact('rattery', 'identity', 'deletable', 'snap_diffs'));
     }
 
     /**

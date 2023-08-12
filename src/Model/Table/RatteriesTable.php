@@ -110,9 +110,11 @@ class RatteriesTable extends Table
         ]);
         $this->hasMany('RatterySnapshots', [
             'foreignKey' => 'rattery_id',
+            'dependent' => true,
         ]);
         $this->hasMany('RatteryMessages', [
             'foreignKey' => 'rattery_id',
+            'dependent' => true,
         ]);
         $this->belongsToMany('Litters', [
             'through' => 'Contributions',
