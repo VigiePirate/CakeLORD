@@ -451,7 +451,7 @@ class LittersController extends AppController
             // if litter has no attached offspring, it can be deleted
             if ($deletable) {
                 if ($this->Litters->delete($litter)) {
-                    $this->Flash->success(__('The litter sheet has been deleted. You can inform its creator by mail from their sheet.'));
+                    $this->Flash->success(__('The litter sheet has been deleted. You can inform its creator by mail from their sheet below.'));
                     return $this->redirect(['controller' => 'Users', 'action' => 'view', $litter->user_id]);
                 } else {
                     $this->Flash->error(__('The litter sheet could not be deleted. It was not its time.'));

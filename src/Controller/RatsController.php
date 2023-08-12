@@ -439,8 +439,8 @@ class RatsController extends AppController
             // if rat has no bred litters, it can be deleted
             if ($deletable) {
                 if ($this->Rats->delete($rat)) {
-                    $this->Flash->success(__('The rat sheet has been deleted.'));
-                    return $this->redirect(['action' => 'index']);
+                    $this->Flash->success(__('The rat sheet has been deleted. You can inform its creator by mail from their sheet below.'));
+                    return $this->redirect(['controller' => 'Users', 'action' => 'view', $rat->creator_user_id]);
                 } else {
                     $this->Flash->error(__('The rat sheet could not be deleted. It still wanted to live.'));
                     return $this->redirect(['action' => 'delete', $rat->id]);
