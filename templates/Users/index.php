@@ -54,15 +54,21 @@
                                 'url' => ['controller' => 'Users', 'action' => 'edit', $user->id],
                                 'class' => 'action-icon',
                                 'alt' => __('Edit User')]) ?>
-                            <?= $this->Form->postLink(
-                                    $this->Html->image('/img/icon-delete.svg', [
-                                        'class' => 'action-icon',
-                                        'alt' => __('Delete User')
-                                    ]),
-                                    ['action' => 'delete', $user->id],
-                                    ['confirm' => __('Are you sure you want to delete country # {0}?', $user->id), 'escape' => false]
-                                )
-                            ?>
+                            <?php if (! is_null($identity) && $identity->can('delete', $user)) : ?>
+                                <?= $this->Html->image('/img/icon-delete.svg', [
+                                    'url' => ['controller' => 'Users', 'action' => 'delete', $user->id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('Delete User')
+                                ])?>
+                            <?php else :?>
+                                <span class="disabled">
+                                    <?= $this->Html->image('/img/icon-delete.svg', [
+                                        'url' => '',
+                                        'class' => 'action-icon disabled',
+                                        'alt' => __('Delete User')])
+                                    ?>
+                                </span>
+                            <?php endif ;?>
                         </td>
                     <?php endif ?>
                 </tr>

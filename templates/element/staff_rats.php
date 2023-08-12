@@ -27,15 +27,21 @@
                                     'alt' => __('Compare with last snapshot')])
                                 ?>
                             <?php endif; ?>
-                            <?= $this->Form->postLink(
-                                    $this->Html->image('/img/icon-delete.svg', [
-                                        'class' => 'action-icon',
-                                        'alt' => __('Delete Rat')
-                                    ]),
-                                    ['action' => 'delete', $rat->id],
-                                    ['confirm' => __('Are you sure you want to delete rat # {0}?', $rat->id), 'escape' => false]
-                                )
-                            ?>
+                            <?php if (! is_null($user) && $user->can('delete', $rat)) : ?>
+                                <?= $this->Html->image('/img/icon-delete.svg', [
+                                    'url' => ['controller' => 'Rats', 'action' => 'delete', $rat->id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('Delete Litter')
+                                ])?>
+                            <?php else :?>
+                                <span class="disabled">
+                                    <?= $this->Html->image('/img/icon-delete.svg', [
+                                        'url' => '',
+                                        'class' => 'action-icon disabled',
+                                        'alt' => __('Delete Litter')])
+                                    ?>
+                                </span>
+                            <?php endif ;?>
                         </span>
                     </td>
                 </tr>
