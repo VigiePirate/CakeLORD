@@ -383,7 +383,7 @@ class LittersController extends AppController
             $litter = $this->Litters->patchEntity($litter, $this->request->getData(), [
                 'associated' => ['ParentRats', 'Contributions', 'Contributions.Ratteries']
             ]);
-            if ($this->Litters->save($litter)) {
+            if ($this->Litters->save($litter, ['contain' => ['ParentRats' => function ($q) {return $q->select(['id']);}]])) {
                 $this->Flash->success(__('The litter has been saved. If parents were edited, you might have to manually correct contributions.'));
 
                 return $this->redirect(['action' => 'view', $litter->id]);
@@ -391,16 +391,8 @@ class LittersController extends AppController
             $this->Flash->error(__('The litter could not be saved. Please, try again.'));
         }
 
-        foreach ($litter->parent_rats as $parent) {
-            if ($parent->sex == 'F') {
-                $mother = ['name' => $parent->name . ' ('. $parent->pedigree_identifier .')', 'id' => $parent->id];
-                $this->set(compact('mother'));
-            }
-            if ($parent->sex == 'M') {
-                $father = ['name' => $parent->name . ' ('. $parent->pedigree_identifier .')', 'id' => $parent->id];
-                $this->set(compact('father'));
-            }
-        }
+        $mother = $litter->dam[0];
+        $father = $litter->sire[0];
 
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('staffEdit', $litter);
@@ -684,8 +676,11 @@ class LittersController extends AppController
 
         $ratteries = $this->paginate($litters);
 
+        $identity = $this->request->getAttribute('identity');
+
         $this->set([
-            'litters' => $litters
+            'litters' => $litters,
+            'identity' => $identity,
         ]);
     }
 

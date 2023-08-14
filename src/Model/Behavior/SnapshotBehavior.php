@@ -3,6 +3,7 @@
 namespace App\Model\Behavior;
 
 use ArrayObject;
+use Cake\Collection\Collection;
 use Cake\Datasource\FactoryLocator;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
@@ -45,7 +46,7 @@ class SnapshotBehavior extends Behavior
      */
     public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        $this->snapShoot($entity);
+        $this->snapShoot($entity, $options->getArrayCopy());
     }
 
     /**
@@ -57,11 +58,11 @@ class SnapshotBehavior extends Behavior
      * @param EntityInterface $entity
      * @return void
      */
-    public function snapShoot(EntityInterface $entity)
+    public function snapShoot(EntityInterface $entity, $options = [])
     {
         // Do nothing if the entity is new
         if (! $entity->isNew()) {
-            $saved_entity = $this->table()->get($entity->id);
+            $saved_entity = $this->table()->get($entity->id, $options);
             $snapshot_values = [
                 'data' => json_encode($saved_entity),
                 $this->config['entityField'] => $saved_entity->id,
@@ -152,7 +153,7 @@ class SnapshotBehavior extends Behavior
             if ($snapshot_data = $this->snapLoad($entity, $snapshot_id)) {
                 $raw_entity = $this->table()->get($entity->id);
                 $entity_data = json_decode(json_encode($raw_entity), true);
-                return array_diff_assoc($snapshot_data,$entity_data);
+                return array_diff_assoc($snapshot_data, $entity_data);
             }
         }
         return false;
@@ -171,7 +172,12 @@ class SnapshotBehavior extends Behavior
     {
         if ($diff_array = $this->snapCompare($entity, $snapshot_id)) {
             foreach ($diff_array as $key => $value) {
-                $diff_array[$key] = $key . ': ' . $value;
+                if (is_scalar($value)) {
+                    $diff_array[$key] = $key . ': ' . $value;
+                } else {
+                    $collection = new Collection($value);
+                    $diff_array[$key] = $key . ': [' . implode(", ", $collection->extract('id')->toArray()) . ']';
+                }
             }
             return implode(', ', $diff_array);
         }

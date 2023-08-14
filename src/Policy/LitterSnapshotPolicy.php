@@ -70,4 +70,16 @@ class LitterSnapshotPolicy implements BeforePolicyInterface
     public function canView(IdentityInterface $user, LitterSnapshot $litterSnapshot)
     {
     }
+
+    /**
+     * Check if $user can view diff between Rat and RatSnapshot
+     *
+     * @param \Authorization\IdentityInterface $user The user.
+     * @param \App\Model\Entity\LitterSnapshot $litterSnapshot
+     * @return bool
+     */
+    public function canDiff(IdentityInterface $user, LitterSnapshot $litterSnapshot)
+    {
+        return $user->role->can_change_state;
+    }
 }

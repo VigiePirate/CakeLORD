@@ -29,7 +29,7 @@
             <?= $this->Flash->render() ?>
 
             <fieldset>
-                <?= $this->Form->control('mating_date', ['empty' => true]) ?>
+                <?= $this->Form->control('mating_date', ['label' => __('Mating date'), 'empty' => true]) ?>
 
                 <div class="row">
                     <div class="column-responsive column-50">
@@ -93,7 +93,7 @@
                                     'id' => 'jquery-mother-input',
                                     'name' => 'mother_name',
                                     'label' => __('Mother'),
-                                    'value' => $mother['name'],
+                                    'value' => $mother->form_name,
                                 ]);
                                 echo $this->Form->control('mother_id', [
                                     'id' => 'jquery-mother-id',
@@ -104,7 +104,7 @@
                                     ],
                                     'class' => 'hide-everywhere',
                                     'type' => 'text',
-                                    'value' => $mother['id'],
+                                    'value' => $mother->id,
                                 ]);
                             ?>
                         </div>
@@ -114,7 +114,7 @@
                                         'id' => 'jquery-father-input',
                                         'name' => 'father_name',
                                         'label' => __('Father'),
-                                        'value' => $father['name'],
+                                        'value' => $father->form_name,
                                     ]);
                                     echo $this->Form->control('father_id', [
                                         'id' => 'jquery-father-id',
@@ -125,7 +125,7 @@
                                         ],
                                         'class' => 'hide-everywhere',
                                         'type' => 'text',
-                                        'value' => $father['id'],
+                                        'value' => $father->id,
                                     ]);
                                 ?>
                         </div>

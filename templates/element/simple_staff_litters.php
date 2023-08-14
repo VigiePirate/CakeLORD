@@ -19,6 +19,13 @@
                       <td><?= ! empty($litter->litter_messages) ? mb_strimwidth($litter->litter_messages[0]->content, 0, 48, '...') : '' ?></td>
                       <td class="actions">
                           <span class="nowrap">
+                              <?php if (! is_null($litter->last_snapshot_id)) :?>
+                                  <?= $this->Html->image('/img/icon-diff.svg', [
+                                      'url' => ['controller' => 'LitterSnapshots', 'action' => 'diff', $litter->last_snapshot_id],
+                                      'class' => 'action-icon',
+                                      'alt' => __('Diff')])
+                                  ?>
+                              <?php endif; ?>
                               <?php if (! is_null($identity) && $identity->can('delete', $litter)) : ?>
                                   <?= $this->Html->image('/img/icon-delete.svg', [
                                       'url' => ['controller' => 'Litters', 'action' => 'delete', $litter->id],

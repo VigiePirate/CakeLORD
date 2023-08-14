@@ -189,6 +189,66 @@ class Litter extends Entity
         return ($total-$lost);
     }
 
+    protected function _getLastSnapshotId()
+    {
+        if (! empty($this->litter_snapshots)) {
+            return $this->litter_snapshots['0']->id;
+        }
+    }
+
+    public function buildFromSnapshot($id)
+    {
+        $snap_litter = new Litter();
+        $snap_diffs = FactoryLocator::get('Table')->get('Litters')->snapCompare($this, $id);
+        $properties = $this->_fields;
+
+        foreach ($properties as $key => $value) {
+            if (in_array($key, array_keys($snap_diffs))) {
+                // if $key is a foreign key to a contained association, fetch and replace the latter
+                if (substr($key, -3) == '_id') {
+                    $association = substr($key, 0, -3);
+                    if (! empty($association)) {
+                        if ($this->has($association)) {
+                            $tableName = $this->$association->getSource();
+                            $table = FactoryLocator::get('Table')->get($tableName);
+                            if (! is_null($snap_diffs[$key])) {
+                                $snap_litter->set($association, $table->get($snap_diffs[$key]));
+                            }
+                        } else {
+                            $tableName = Inflector::pluralize(Inflector::classify($association));
+                            if (TableRegistry::getTableLocator()->exists($tableName)) {
+                                $table = FactoryLocator::get('Table')->get($tableName);
+                                $snap_litter->set($association, $table->get($snap_diffs[$key]));
+                            }
+                        }
+                    }
+                }
+                // in any case, replace the key
+                $snap_litter->set($key, $snap_diffs[$key]);
+            } else {
+                // no difference between snap and litter, copy if and only if it is not an association
+                // (associations where dealt with above)
+                if (isset($this->$key)) {
+                    $foreign_key = $key . '_id';
+                    if (! in_array($foreign_key, array_keys($snap_diffs))) {
+                        $snap_litter->set($key, $value);
+                    }
+                }
+            }
+        }
+
+        // recast dates from string to dates
+        if (in_array('birth_date', array_keys($snap_diffs)) && $snap_litter->has('birth_date')) {
+            $snap_litter->set('birth_date', FrozenTime::createFromFormat('Y-m-d', $snap_litter->birth_date));
+        }
+
+        if (in_array('mating_date', array_keys($snap_diffs)) && $snap_litter->has('mating_date')) {
+            $snap_litter->set('mating_date', FrozenTime::createFromFormat('Y-m-d', $snap_litter->mating_date));
+        }
+
+        return $snap_litter;
+    }
+
     /* rules */
 
     public function hasBirthPlace()

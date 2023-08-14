@@ -256,7 +256,7 @@
                         </tr>
                         <tr>
                             <th><?= __('Sire') ?></th>
-                            <td><?= ($rat->has('birth_litter') && !empty($rat->birth_litter->sire))
+                            <td><?= ($rat->has('birth_litter') && ! empty($rat->birth_litter->sire))
                                 ? $this->Html->link(
                                         $rat->birth_litter->sire[0]->usual_name,
                                         ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->sire[0]->id]
