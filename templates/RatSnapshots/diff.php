@@ -9,7 +9,7 @@
         <div class="rats view content">
 
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= _('Snapshot') ?></div>
+                <div class="sheet-title pretitle"><?= __('Snapshot') ?></div>
                 <?php if (in_array('state_id', $diff_list)) : ?>
                     <div class="minus current-statemark statecolor_<?php echo h($snapshot->state_id) ?>"><?= h($snapshot->state->symbol) ?></div>
                 <?php else : ?>
@@ -269,7 +269,7 @@
         <div class="rats view content">
 
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= _('Rat') ?></div>
+                <div class="sheet-title pretitle"><?= __('Rat') ?></div>
                 <?php if (in_array('state_id', $diff_list)) : ?>
                     <div class="plus current-statemark statecolor_<?php echo h($rat->state_id) ?>"><?= h($rat->state->symbol) ?></div>
                 <?php else : ?>

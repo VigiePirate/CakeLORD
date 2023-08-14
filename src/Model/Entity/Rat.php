@@ -139,6 +139,11 @@ class Rat extends Entity
         return $doublePrefix;
     }
 
+    protected function _getFormName()
+    {
+        return $this->name . ' (' . $this->pedigree_identifier . ')';
+    }
+
     protected function _getFullName()
     {
         return $this->pedigree_identifier . ' ' . $this->name . $this->is_alive_symbol;

@@ -45,6 +45,74 @@ class LitterSnapshotsController extends AppController
     }
 
     /**
+     * Diff method
+     *
+     * @param string|null $id Rat Snapshot id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function diff($id = null)
+    {
+        $snapshot = $this->LitterSnapshots->get($id, [
+            'contain' => [
+                'Litters',
+                'Litters.Contributions',
+                'Litters.Contributions.ContributionTypes',
+                'Litters.Contributions.Ratteries',
+                'Litters.Dam',
+                'Litters.Dam.BirthLitters.Contributions.Ratteries',
+                'Litters.Sire',
+                'Litters.Sire.BirthLitters.Contributions.Ratteries',
+                'Litters.ParentRats',
+                'Litters.States',
+                'States'
+            ],
+        ]);
+
+        $this->Authorization->authorize($snapshot);
+
+        $litter = $snapshot->litter;
+
+        $this->loadModel('States');
+        if($litter->state->is_frozen) {
+            $next_thawed_state = $this->States->get($litter->state->next_thawed_state_id);
+            $this->set(compact('next_thawed_state'));
+        }
+        else {
+            $next_ko_state = $this->States->get($litter->state->next_ko_state_id);
+            $next_ok_state = $this->States->get($litter->state->next_ok_state_id);
+            if (! empty($litter->state->next_frozen_state_id) ) {
+                $next_frozen_state = $this->States->get($litter->state->next_frozen_state_id);
+                $this->set(compact('next_frozen_state'));
+            }
+            $this->set(compact('next_ko_state', 'next_ok_state'));
+        };
+
+        $diff_array = $this->LitterSnapshots->Litters->snapCompare($litter, $snapshot->id);
+        $diff_list = array_keys($diff_array);
+        $snap_litter = $litter->buildFromSnapshot($snapshot->id);
+
+        // add parents to diff list (snapped through association)
+        if (in_array('parent_rats', $diff_list)) {
+            $contain = ['Ratteries', 'BirthLitters.Contributions.Ratteries'];
+            $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
+            foreach ($diff_array['parent_rats'] as $parent_id) {
+                $parent = $rats->get($parent_id['id'], ['contain' => $contain]);
+                if ($parent->sex == 'F') {
+                    $snap_litter->dam[0] = $parent;
+                }
+                if ($parent->sex == 'M') {
+                    $snap_litter->sire[0] = $parent;
+                }
+            }
+        }
+
+        $user = $this->request->getAttribute('identity');
+
+        $this->set(compact('snapshot', 'litter', 'snap_litter', 'diff_list', 'user'));
+    }
+
+    /**
      * Add method
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
