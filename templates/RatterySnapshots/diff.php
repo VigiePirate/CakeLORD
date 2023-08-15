@@ -19,8 +19,8 @@
             <h1 class="half"><?= h($snap_rattery->full_name) . '<span class="rotate"> ' . h($snap_rattery->is_inactive_symbol) . '</span>'?></h1> <!-- -->
 
             <div class="column column-photo half-column-photo">
-            <?php if ($rattery->picture != '' && $rattery->picture != 'Unknown.png') : ?>
-                <?= $this->Html->image(UPLOADS . $rattery->picture, ['alt' => $rattery->prefix]) ?>
+            <?php if ($snap_rattery->picture != '' && $snap_rattery->picture != 'Unknown.png') : ?>
+                <?= $this->Html->image(UPLOADS . $snap_rattery->picture, ['alt' => $snap_rattery->prefix]) ?>
             <?php else : ?>
                 <?= $this->Html->image('UnknownRattery.svg') ?>
             <?php endif; ?>
@@ -145,7 +145,12 @@
                 <?php endif ; ?>
             </div>
 
-            <h1 class="half"><?= h($rattery->full_name) . '<span class="rotate"> ' . h($rattery->is_inactive_symbol) . '</span>'?></h1> <!-- -->
+            <h1 class="half link-title">
+                <?=
+                    $this->Html->link(h($rattery->full_name), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id])
+                    . '<span class="rotate"> ' . h($rattery->is_inactive_symbol) . '</span>'
+                ?>
+            </h1>
 
             <div class="column column-photo half-column-photo">
             <?php if ($rattery->picture != '' && $rattery->picture != 'Unknown.png') : ?>

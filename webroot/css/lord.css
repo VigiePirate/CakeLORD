@@ -79,14 +79,15 @@ details:last-of-type {
   margin-bottom:1.5rem;
 }
 
-h1, h2, h3, h4, h5, .pretitle a {
+h1, h2, h3, h4, h5, .pretitle a, .link-title a {
   font-weight: bold;
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
   color: #606ebf;
   hyphens: manual;
 }
 
-.pretitle a:hover, .pretitle a:focus, .pretitle a:hover {
+.pretitle a:hover, .pretitle a:focus,
+.link-title a:hover, .link-title a:focus {
   /*background-color: #ebeefa;*/
   background-color: #edf0fc;
 }

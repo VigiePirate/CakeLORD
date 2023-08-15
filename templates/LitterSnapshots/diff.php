@@ -155,8 +155,8 @@
                 <?php endif ; ?>
             </div>
 
-            <h1>
-                <?= __('Litter #{0}', [$litter->id]) ?>
+            <h1 class="link-title">
+                <?= $this->Html->link(__('Litter #{0}', [$litter->id]), ['controller' => 'Litters', 'action' => 'view', $litter->id]) ?>
             </h1>
 
             <h2><?= __('Parents') ?></h2>
