@@ -546,9 +546,21 @@ class LittersController extends AppController
     {
         $litter = $this->Litters->get($id, [
             'contain' => [
-                'Sire', 'Sire.Ratteries', 'Sire.BirthLitters', 'Sire.BirthLitters.Contributions',
-                'Dam', 'Dam.Ratteries', 'Dam.BirthLitters', 'Dam.BirthLitters.Contributions',
-                'ParentRats', 'OffspringRats', 'OffspringRats.DeathPrimaryCauses', 'Ratteries', 'Contributions', 'Contributions.Ratteries', 'States'
+                'Sire',
+                'Sire.Ratteries',
+                'Sire.BirthLitters',
+                'Sire.BirthLitters.Contributions',
+                'Dam',
+                'Dam.Ratteries',
+                'Dam.BirthLitters',
+                'Dam.BirthLitters.Contributions',
+                'ParentRats',
+                'OffspringRats',
+                'OffspringRats.DeathPrimaryCauses',
+                'Ratteries',
+                'Contributions',
+                'Contributions.Ratteries',
+                'States'
             ],
         ]);
 
@@ -560,7 +572,7 @@ class LittersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $this->Litters->patchEntity($litter, $this->request->getData(), ['associated' => ['Contributions', 'OffspringRats']]);
 
-            if ($this->Litters->save($litter)) {
+            if ($this->Litters->save($litter, ['contain' => 'Contributions'])) {
                 $this->Flash->success(__('The litter’s contributing ratteries have been updated.'));
                 return $this->redirect(['action' => 'view', $litter->id]);
             }

@@ -107,6 +107,22 @@ class LitterSnapshotsController extends AppController
             }
         }
 
+        // process contributions
+        if (in_array('contributions', $diff_list)) {
+            $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
+            $snap_litter->contributions = [];
+            foreach ($diff_array['contributions'] as $contribution_snap) {
+                $contribution = $contributions->newEmptyEntity();
+                $contribution = $contributions->patchEntity($contribution, $contribution_snap, [
+                    'associated' => [
+                        'ContributionTypes' => ['validate' => false],
+                        'Ratteries' => ['validate' => false],
+                    ]
+                ]);
+                array_push($snap_litter->contributions, $contribution);
+            }
+        }
+
         $user = $this->request->getAttribute('identity');
 
         $this->set(compact('snapshot', 'litter', 'snap_litter', 'diff_list', 'user'));

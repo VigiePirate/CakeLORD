@@ -185,7 +185,7 @@ class LitterPolicy implements BeforePolicyInterface
      */
     protected function isCreator(IdentityInterface $user, Litter $litter)
     {
-        return $litter->owner_user_id == $user->getIdentifier();
+        return $litter->creator_user_id == $user->getIdentifier();
     }
 
     // contributors are owners of contributing ratteries and owners of parents

@@ -68,6 +68,9 @@ class SnapshotBehavior extends Behavior
                 $this->config['entityField'] => $saved_entity->id,
                 'state_id' => $saved_entity->state_id,
             ];
+            //if ($this->table()->getAlias() == 'Litters') {
+                //dd($saved_entity);
+            //}
             $new_snapshot = $this->SnapshotsTable->newEntity($snapshot_values);
             if (! $this->SnapshotsTable->save($new_snapshot)) {
                 $event->stopPropagation();
