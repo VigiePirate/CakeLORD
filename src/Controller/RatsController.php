@@ -122,23 +122,53 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $rat = $this->Rats->get($id, [
-            'contain' => ['OwnerUsers', 'CreatorUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions',
-            'BirthLitters.Sire', 'BirthLitters.Sire.BirthLitters', 'BirthLitters.Sire.BirthLitters.Contributions',
-            'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters', 'BirthLitters.Dam.BirthLitters.Contributions',
-            'Colors', 'Eyecolors', 'Dilutions', 'Markings', 'Earsets', 'Coats', 'Singularities',
-            'DeathPrimaryCauses', 'DeathSecondaryCauses', 'States',
-            'BredLitters' => function($q) {
-                return $q
-                ->order('birth_date DESC')
-                ->limit(10);
-            },
-            'BredLitters.Contributions', 'BredLitters.Ratteries',
-            'BredLitters.Sire', 'BredLitters.Sire.BirthLitters', 'BredLitters.Sire.BirthLitters.Contributions',
-            'BredLitters.Dam', 'BredLitters.Dam.BirthLitters', 'BredLitters.Dam.BirthLitters.Contributions',
-            'BredLitters.OffspringRats', 'BredLitters.OffspringRats.Ratteries',
-            'BredLitters.OffspringRats.BirthLitters', 'BredLitters.OffspringRats.BirthLitters.Contributions',
-            'BredLitters.OffspringRats.OwnerUsers', 'BredLitters.OffspringRats.States', 'BredLitters.OffspringRats.DeathPrimaryCauses', 'BredLitters.OffspringRats.DeathSecondaryCauses',
-            'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']], 'RatSnapshots.States', 'RatMessages'],
+            'contain' => [
+                'OwnerUsers',
+                'CreatorUsers',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Ratteries',
+                'BirthLitters.Contributions',
+                'BirthLitters.Sire',
+                'BirthLitters.Sire.BirthLitters',
+                'BirthLitters.Sire.BirthLitters.Contributions',
+                'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters',
+                'BirthLitters.Dam.BirthLitters.Contributions',
+                'Colors',
+                'Eyecolors',
+                'Dilutions',
+                'Markings',
+                'Earsets',
+                'Coats',
+                'Singularities',
+                'DeathPrimaryCauses',
+                'DeathSecondaryCauses',
+                'States',
+                'BredLitters' => function($q) {
+                    return $q
+                    ->order('birth_date DESC')
+                    ->limit(10);
+                },
+                'BredLitters.Contributions',
+                'BredLitters.Ratteries',
+                'BredLitters.Sire',
+                'BredLitters.Sire.BirthLitters',
+                'BredLitters.Sire.BirthLitters.Contributions',
+                'BredLitters.Dam',
+                'BredLitters.Dam.BirthLitters',
+                'BredLitters.Dam.BirthLitters.Contributions',
+                'BredLitters.OffspringRats',
+                'BredLitters.OffspringRats.Ratteries',
+                'BredLitters.OffspringRats.BirthLitters',
+                'BredLitters.OffspringRats.BirthLitters.Contributions',
+                'BredLitters.OffspringRats.OwnerUsers',
+                'BredLitters.OffspringRats.States',
+                'BredLitters.OffspringRats.DeathPrimaryCauses',
+                'BredLitters.OffspringRats.DeathSecondaryCauses',
+                'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']],
+                'RatSnapshots.States',
+                'RatMessages'
+            ],
         ]);
 
         $this->loadModel('States');
@@ -158,7 +188,7 @@ class RatsController extends AppController
 
         $snap_diffs = [];
         foreach ($rat->rat_snapshots as $snapshot) {
-            $snap_diffs[$snapshot->id] = $this->Rats->snapDiffListAsString($rat, $snapshot->id);
+            $snap_diffs[$snapshot->id] = $this->Rats->snapDiffListAsString($rat, $snapshot->id, ['contain' => ['Singularities' => function ($q) {return $q->select(['id']);}]]);
         }
 
         $user = $this->request->getAttribute('identity');
@@ -366,7 +396,7 @@ class RatsController extends AppController
             } else {
                 $rat->is_pedigree_custom = true;
             }
-            if ($this->Rats->save($rat)) {
+            if ($this->Rats->save($rat, ['contain' => ['Singularities' => function ($q) {return $q->select(['id']);}]])) {
                 $this->Flash->success(__('The rat has been saved.'));
                 return $this->redirect(['action' => 'view', $id]);
             }

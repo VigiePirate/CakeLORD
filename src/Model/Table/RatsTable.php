@@ -549,6 +549,31 @@ class RatsTable extends Table
     }
 
     /**
+     * beforeSave method
+     *
+     *
+     *
+     * @param EventInterface $event
+     * @param EntityInterface $entity
+     * @param ArrayObject $options
+     * @return void
+     */
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
+        if (! $entity->isNew() && isset($entity->singularities)) {
+            // if singularities were edited, the association must be fixed after snapshot was taken
+            $model = \Cake\Datasource\FactoryLocator::get('Table')->get('Singularities');
+            $swap_singularities = $entity->singularities;
+            $entity->singularities = [];
+            foreach ($swap_singularities as $swap_singularity) {
+                $singularity = $model->get($swap_singularity['id']);
+                array_push($entity->singularities, $singularity);
+            }
+            $entity->setDirty('singularities', true);
+        }
+    }
+
+    /**
      * afterSave method
      *
      * Update litter count after adding a rat

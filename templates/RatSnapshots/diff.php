@@ -154,16 +154,29 @@
                 </tr>
                 <tr>
                     <th><?= __('Singularities') ?></th>
-                    <td>
-                        <?php
-                            $link_array = [];
-                            foreach($rat->singularities as $singularity) {
-                                array_push($link_array, $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]));
-                            }
-                            $string = empty($link_array) ? __x('singularity', 'None') : implode(", ", $link_array);
-                            echo $string;
-                        ?>
-                    </td>
+                    <?php if (in_array('singularities', $diff_list)) : ?>
+                        <td class="minus">
+                            <?php
+                                $link_array = [];
+                                foreach($snap_rat->singularities as $singularity) {
+                                    array_push($link_array, $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]));
+                                }
+                                $string = empty($link_array) ? __x('singularity', 'None') : implode(", ", $link_array);
+                                echo $string;
+                            ?>
+                        </td>
+                    <?php else : ?>
+                        <td>
+                            <?php
+                                $link_array = [];
+                                foreach($rat->singularities as $singularity) {
+                                    array_push($link_array, $this->Html->link($singularity->name, ['controller' => 'Singularities', 'action' => 'view', $singularity->id]));
+                                }
+                                $string = empty($link_array) ? __x('singularity', 'None') : implode(", ", $link_array);
+                                echo $string;
+                            ?>
+                        </td>
+                    <?php endif; ?>
                 </tr>
             </table>
 
@@ -431,7 +444,11 @@
                 </tr>
                 <tr>
                     <th><?= __('Singularities') ?></th>
+                    <?php if (in_array('singularities', $diff_list)) : ?>
+                        <td class="plus">
+                    <?php else : ?>
                     <td>
+                    <?php endif; ?>
                         <?php
                             $link_array = [];
                             foreach($rat->singularities as $singularity) {

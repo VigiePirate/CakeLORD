@@ -96,8 +96,19 @@ class RatSnapshotsController extends AppController
             $this->set(compact('next_ko_state', 'next_ok_state'));
         };
 
-        $diff_list = array_keys($this->RatSnapshots->Rats->snapCompare($rat, $snapshot->id));
+        $diff_array = $this->RatSnapshots->Rats->snapCompare($rat, $snapshot->id);
+        $diff_list = array_keys($diff_array);
         $snap_rat = $rat->buildFromSnapshot($snapshot->id);
+
+        // process singularities separately (snapped through association)
+        if (in_array('singularities', $diff_list)) {
+            $singularities = \Cake\Datasource\FactoryLocator::get('Table')->get('Singularities');
+            $snap_rat->singularities = [];
+            foreach ($diff_array['singularities'] as $singularity_id) {
+                $singularity = $singularities->get($singularity_id['id']);
+                array_push($snap_rat->singularities, $singularity);
+            }
+        }
 
         $user = $this->request->getAttribute('identity');
 
