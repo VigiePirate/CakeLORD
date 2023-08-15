@@ -635,7 +635,7 @@
                                         <tr>
                                             <td><?= h($ratterySnapshots->created) ?></td>
                                             <td><?= h($snap_diffs[$ratterySnapshots->id]) ?></td>
-                                            <td><?= h($ratterySnapshots->state->symbol) ?></td>
+                                            <td><span class="statecolor_<?php echo h($ratterySnapshots->state_id) ?>"><?= h($ratterySnapshots->state->symbol) ?></span></td>
                                             <td class="actions">
                                                 <span class="nowrap">
                                                     <?= $this->Html->image('/img/icon-diff.svg', [
