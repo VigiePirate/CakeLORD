@@ -45,9 +45,6 @@
                         'name' => 'comments',
                         'label' => __('Comments'),
                         'rows' => '5',
-                        "error" => [
-                            "escape" => false
-                        ]
                     ]);
                 ?>
 

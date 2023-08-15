@@ -515,6 +515,17 @@ class LittersTable extends Table
             // (they have been saved in the rules if it was necessary)
             $entity->setDirty('offspring_rats', false);
 
+            // if parents were edited, the parent_rats association must be fixed after snapshot was taken
+            if (isset($entity->parent_rats)) {
+                $swap_parents = $entity->parent_rats;
+                $entity->parent_rats = [];
+                foreach ($swap_parents as $swap_parent) {
+                    $parent = $rats->get($swap_parent['id']);
+                    array_push($entity->parent_rats, $parent);
+                }
+                $entity->setDirty('parent_rats', true);
+            }
+            
             // if entity is updated, check if some contributions must be deleted
             if (isset($entity->contributions)) {
 

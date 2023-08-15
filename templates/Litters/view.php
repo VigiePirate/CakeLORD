@@ -440,10 +440,13 @@
                                         <td><?= h($litterSnapshots->state->symbol) ?></td>
                                         <td class="actions">
                                             <span class="nowrap">
-                                                <?= $this->Html->image('/img/icon-view.svg', [
-                                                    'url' => ['controller' => 'LitterSnapshots', 'action' => 'view', $litterSnapshots->id],
-                                                    'class' => 'action-icon',
-                                                    'alt' => __('View Snapshot')]) ?>
+                                                <?php if (! is_null($litter->last_snapshot_id)) :?>
+                                                    <?= $this->Html->image('/img/icon-diff.svg', [
+                                                        'url' => ['controller' => 'LitterSnapshots', 'action' => 'diff', $litterSnapshots->id],
+                                                        'class' => 'action-icon',
+                                                        'alt' => __('Diff')])
+                                                    ?>
+                                                <?php endif; ?>
                                                 <?= $this->Html->image('/img/icon-restore.svg', [
                                                     'url' => ['controller' => 'Litters', 'action' => 'restore', $litter->id, $litterSnapshots->id],
                                                     'class' => 'action-icon',

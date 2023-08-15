@@ -131,7 +131,7 @@ class LittersController extends AppController
 
         $snap_diffs = [];
         foreach ($litter->litter_snapshots as $snapshot) {
-            $snap_diffs[$snapshot->id] = $this->Litters->snapCompareAsString($litter, $snapshot->id);
+            $snap_diffs[$snapshot->id] = $this->Litters->snapCompareAsString($litter, $snapshot->id, ['contain' => ['ParentRats' => function ($q) {return $q->select(['id']);}]]);
         }
 
         $js_legends = json_encode([
