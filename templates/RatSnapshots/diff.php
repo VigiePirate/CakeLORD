@@ -22,7 +22,7 @@
             </h1>
 
             <div class="column column-photo half-column-photo">
-            <?php if ($rat->picture != '' && $rat->picture != 'Unknown.png') : ?>
+            <?php if ($snap_rat->picture != '' && $snap_rat->picture != 'Unknown.png') : ?>
                 <?= $this->Html->image(UPLOADS . $snap_rat->picture, ['alt' => $snap_rat->pedigree_identifier, 'url' => ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
             <?php else : ?>
                 <?= $this->Html->image('UnknownRat.svg', ['alt' => $snap_rat->pedigree_identifier, 'url' => ['controller' => 'rats', 'action' => 'view', $rat->id]]) ?>
@@ -277,9 +277,11 @@
                 <?php endif ; ?>
             </div>
 
-            <h1>
-                <!-- to be improved -->
-                <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?>
+            <h1 class="link-title">
+                <?=
+                    $this->Html->link(h($rat->usual_name), ['controller' => 'Rats', 'action' => 'view', $rat->id])
+                    . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>'
+                ?>
             </h1>
 
             <div class="column column-photo half-column-photo">
