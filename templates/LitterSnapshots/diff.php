@@ -96,10 +96,10 @@
             </table>
 
             <h2><?= __('Ratteries') ?></h2>
-            <?php if (!empty($litter->contributions)) : ?>
+            <?php if (! empty($snap_litter->contributions)) : ?>
                 <div class="table-responsive">
                     <table class="condensed stats">
-                        <?php foreach ($litter->contributions as $contribution) : ?>
+                        <?php foreach ($snap_litter->contributions as $contribution) : ?>
                             <tr>
                                 <th>
                                     <?php
@@ -107,7 +107,11 @@
                                         echo strpos($name, "(") ? substr($name, 0, strpos($name, "(")) : $name;
                                     ?>
                                 </th>
-                                <td class="nowrap">
+                                <?php if (in_array('contributions', $diff_list)) : ?>
+                                    <td class="minus">
+                                <?php else : ?>
+                                    <td>
+                                <?php endif ; ?>
                                     <?= $this->Html->link(
                                         h($contribution->rattery->full_name),
                                         ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id],
@@ -223,7 +227,7 @@
                 </tr>
                 <tr>
                     <th><?= __x('short', 'Stillborn pups') ?></th>
-                    <?php if (in_array('pups_number', $diff_list)) : ?>
+                    <?php if (in_array('pups_number_stillborn', $diff_list)) : ?>
                         <td class="plus">
                     <?php else : ?>
                         <td>
@@ -233,27 +237,31 @@
             </table>
 
             <h2><?= __('Ratteries') ?></h2>
-            <?php if (!empty($litter->contributions)) : ?>
+            <?php if (! empty($litter->contributions)) : ?>
                 <div class="table-responsive">
                     <table class="condensed stats">
-                        <?php foreach ($litter->contributions as $contribution) : ?>
-                            <tr>
-                                <th>
-                                    <?php
-                                        $name = $contribution->contribution_type->name;
-                                        echo strpos($name, "(") ? substr($name, 0, strpos($name, "(")) : $name;
-                                    ?>
-                                </th>
-                                <td class="nowrap">
-                                    <?= $this->Html->link(
-                                        h($contribution->rattery->full_name),
-                                        ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id],
-                                        ['escape' => false]
-                                    )?>
-                                </td>
+                    <?php foreach ($litter->contributions as $contribution) : ?>
+                        <tr>
+                            <th>
+                                <?php
+                                    $name = $contribution->contribution_type->name;
+                                    echo strpos($name, "(") ? substr($name, 0, strpos($name, "(")) : $name;
+                                ?>
+                            </th>
+                            <?php if (in_array('contributions', $diff_list)) : ?>
+                                <td class="plus">
+                            <?php else : ?>
+                                <td>
+                            <?php endif ; ?>
+                                <?= $this->Html->link(
+                                    h($contribution->rattery->full_name),
+                                    ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id],
+                                    ['escape' => false]
+                                )?>
+                            </td>
 
-                            </tr>
-                        <?php endforeach ; ?>
+                        </tr>
+                    <?php endforeach ; ?>
                     </table>
                 </div>
             <?php endif; ?>

@@ -525,7 +525,7 @@ class LittersTable extends Table
                 }
                 $entity->setDirty('parent_rats', true);
             }
-            
+
             // if entity is updated, check if some contributions must be deleted
             if (isset($entity->contributions)) {
 
