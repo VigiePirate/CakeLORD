@@ -35,17 +35,19 @@
                 </tr>
                 <tr>
                     <th><?= __('Sire') ?></th>
-                    <?php if ($snap_litter->sire[0]->id != $litter->sire[0]->id) : ?>
-                        <td class="minus">
-                    <?php else : ?>
-                        <td>
+                    <?php if ($snap_litter->has('sire') && ! empty($snap_litter->sire)) : ?>
+                        <?php if ($snap_litter->sire[0]->id != $litter->sire[0]->id) : ?>
+                            <td class="minus">
+                        <?php else : ?>
+                            <td>
+                        <?php endif ; ?>
+                            <?=
+                                $snap_litter->has('sire')
+                                ? $snap_litter->sire[0]->usual_name
+                                : __x('father', 'Unknown or unregistered')
+                            ?>
+                        </td>
                     <?php endif ; ?>
-                        <?=
-                            $snap_litter->has('sire')
-                            ? $snap_litter->sire[0]->usual_name
-                            : __x('father', 'Unknown or unregistered')
-                        ?>
-                    </td>
                 </tr>
             </table>
 
@@ -74,21 +76,21 @@
                 <tr>
                     <th><?= __('Pups number') ?></th>
                     <?php if (in_array('pups_number', $diff_list)) : ?>
-                        <td class="plus">
+                        <td class="minus">
                     <?php else : ?>
                         <td>
                     <?php endif ; ?>
-                        <?= __('{0, plural, =0{No pup} =1{1 pup} other{# pups}}', [$litter->pups_number]) ?>
+                        <?= __('{0, plural, =0{No pup} =1{1 pup} other{# pups}}', [$snap_litter->pups_number]) ?>
                     </td>
                 </tr>
                 <tr>
                     <th><?= __x('short', 'Stillborn pups') ?></th>
-                    <?php if (in_array('pups_number', $diff_list)) : ?>
-                        <td class="plus">
+                    <?php if (in_array('pups_number_stillborn', $diff_list)) : ?>
+                        <td class="minus">
                     <?php else : ?>
                         <td>
                     <?php endif ; ?>
-                        <?= __('{0, plural, =0{No stillborn pup} =1{1 stillborn pup} other{# stillborn pups}}', [$litter->pups_number_stillborn]) ?>
+                        <?= __('{0, plural, =0{No stillborn pup} =1{1 stillborn pup} other{# stillborn pups}}', [$snap_litter->pups_number_stillborn]) ?>
                     </td>
                 </tr>
             </table>
@@ -171,17 +173,19 @@
                 </tr>
                 <tr>
                     <th><?= __('Sire') ?></th>
-                    <?php if ($snap_litter->sire[0]->id != $litter->sire[0]->id) : ?>
-                        <td class="plus">
-                    <?php else : ?>
-                        <td>
+                    <?php if ($litter->has('sire') && ! empty($litter->sire)) : ?>
+                        <?php if ($snap_litter->sire[0]->id != $litter->sire[0]->id) : ?>
+                            <td class="plus">
+                        <?php else : ?>
+                            <td>
+                        <?php endif ; ?>
+                            <?=
+                                $litter->has('sire')
+                                ? $litter->sire[0]->usual_name
+                                : __x('father', 'Unknown or unregistered')
+                            ?>
+                        </td>
                     <?php endif ; ?>
-                        <?=
-                            $litter->has('sire')
-                            ? $litter->sire[0]->usual_name
-                            : __x('father', 'Unknown or unregistered')
-                        ?>
-                    </td>
                 </tr>
             </table>
 

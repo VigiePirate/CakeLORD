@@ -92,7 +92,7 @@ class LitterSnapshotsController extends AppController
         $diff_list = array_keys($diff_array);
         $snap_litter = $litter->buildFromSnapshot($snapshot->id);
 
-        // add parents to diff list (snapped through association)
+        // process parents separately (snapped through association)
         if (in_array('parent_rats', $diff_list)) {
             $contain = ['Ratteries', 'BirthLitters.Contributions.Ratteries'];
             $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
