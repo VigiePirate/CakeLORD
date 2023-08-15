@@ -437,7 +437,7 @@
                                     <tr>
                                         <td><?= h($litterSnapshots->created) ?></td>
                                         <td><?= h($snap_diffs[$litterSnapshots->id]) ?></td>
-                                        <td><?= h($litterSnapshots->state->symbol) ?></td>
+                                        <td><span class="statecolor_<?php echo h($litterSnapshots->state_id) ?>"><?= h($litterSnapshots->state->symbol) ?></span></td>
                                         <td class="actions">
                                             <span class="nowrap">
                                                 <?php if (! is_null($litter->last_snapshot_id)) :?>
