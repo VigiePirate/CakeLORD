@@ -66,7 +66,7 @@
                 <tr>
                     <th><?= __('Birth date') ?></th>
                     <?php if (in_array('birth_date', $diff_list)) : ?>
-                        <td class="plus">
+                        <td class="minus">
                     <?php else : ?>
                         <td>
                     <?php endif ; ?>
@@ -99,28 +99,34 @@
             <?php if (! empty($snap_litter->contributions)) : ?>
                 <div class="table-responsive">
                     <table class="condensed stats">
-                        <?php foreach ($snap_litter->contributions as $contribution) : ?>
-                            <tr>
-                                <th>
+                        <?php foreach ($types as $type) : ?>
+                            <?php if (in_array($type->id, array_keys($snap_ratteries)) || in_array($type->id, array_keys($litter_ratteries))) : ?>
+                                <tr>
+                                    <th>
                                     <?php
-                                        $name = $contribution->contribution_type->name;
+                                        $name = $type->name;
                                         echo strpos($name, "(") ? substr($name, 0, strpos($name, "(")) : $name;
                                     ?>
                                 </th>
-                                <?php if (in_array('contributions', $diff_list)) : ?>
+                                <?php if (
+                                    ! isset($snap_ratteries[$type->id])
+                                    || ! isset($litter_ratteries[$type->id])
+                                    || $snap_ratteries[$type->id]->id != $litter_ratteries[$type->id]->id
+                                    ) :
+                                ?>
                                     <td class="minus">
                                 <?php else : ?>
                                     <td>
                                 <?php endif ; ?>
                                     <?= $this->Html->link(
-                                        h($contribution->rattery->full_name),
-                                        ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id],
+                                        h($snap_ratteries[$type->id]->full_name),
+                                        ['controller' => 'Ratteries', 'action' => 'view', $snap_ratteries[$type->id]->id],
                                         ['escape' => false]
                                     )?>
                                 </td>
-
                             </tr>
-                        <?php endforeach ; ?>
+                            <?php endif ; ?>
+                        <?php endforeach ;?>
                     </table>
                 </div>
             <?php endif; ?>
@@ -240,28 +246,38 @@
             <?php if (! empty($litter->contributions)) : ?>
                 <div class="table-responsive">
                     <table class="condensed stats">
-                    <?php foreach ($litter->contributions as $contribution) : ?>
-                        <tr>
-                            <th>
-                                <?php
-                                    $name = $contribution->contribution_type->name;
-                                    echo strpos($name, "(") ? substr($name, 0, strpos($name, "(")) : $name;
+                        <?php foreach ($types as $type) : ?>
+                            <?php if (in_array($type->id, array_keys($snap_ratteries)) || in_array($type->id, array_keys($litter_ratteries))) : ?>
+                                <tr>
+                                    <th>
+                                    <?php
+                                        $name = $type->name;
+                                        echo strpos($name, "(") ? substr($name, 0, strpos($name, "(")) : $name;
+                                    ?>
+                                </th>
+                                <?php if (
+                                    ! isset($snap_ratteries[$type->id])
+                                    || ! isset($litter_ratteries[$type->id])
+                                    || $snap_ratteries[$type->id]->id != $litter_ratteries[$type->id]->id
+                                    ) :
                                 ?>
-                            </th>
-                            <?php if (in_array('contributions', $diff_list)) : ?>
-                                <td class="plus">
-                            <?php else : ?>
-                                <td>
+                                    <td class="plus">
+                                <?php else : ?>
+                                    <td>
+                                <?php endif ; ?>
+                                    <?=
+                                        isset($litter_ratteries[$type->id])
+                                        ? $this->Html->link(
+                                            h($litter_ratteries[$type->id]->full_name),
+                                            ['controller' => 'Ratteries', 'action' => 'view', $litter_ratteries[$type->id]->id],
+                                            ['escape' => false]
+                                            )
+                                        : ''
+                                    ?>
+                                </td>
+                            </tr>
                             <?php endif ; ?>
-                                <?= $this->Html->link(
-                                    h($contribution->rattery->full_name),
-                                    ['controller' => 'Ratteries', 'action' => 'view', $contribution->rattery->id],
-                                    ['escape' => false]
-                                )?>
-                            </td>
-
-                        </tr>
-                    <?php endforeach ; ?>
+                        <?php endforeach ;?>
                     </table>
                 </div>
             <?php endif; ?>

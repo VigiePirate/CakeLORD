@@ -430,12 +430,14 @@ class Litter extends Entity
     // offspring of a litter must have coherent prefix
     public function homogeneizePrefixes() {
         $rats = FactoryLocator::get('Table')->get('rats');
-        $rats->removeBehavior('State');
+        if ($rats->hasBehavior('State')) {
+            $rats->removeBehavior('State');
+        }
         if (! is_null($this->offspring_rats)) {
             foreach ($this->offspring_rats as $rat) {
                 $rat->rattery_id = $this->contributions['0']->rattery_id;
                 $rat->is_pedigree_custom = true;
-                if (! $rats->save($rat, ['checkrules' => false, 'atomic' => false])) {
+                if (! $rats->save($rat, ['checkrules' => false])) {
                     $rats->addBehavior('State');
                     return false;
                 }
