@@ -118,11 +118,15 @@
                                 <?php else : ?>
                                     <td>
                                 <?php endif ; ?>
-                                    <?= $this->Html->link(
-                                        h($snap_ratteries[$type->id]->full_name),
-                                        ['controller' => 'Ratteries', 'action' => 'view', $snap_ratteries[$type->id]->id],
-                                        ['escape' => false]
-                                    )?>
+                                    <?=
+                                        isset($snap_ratteries[$type->id])
+                                        ? $this->Html->link(
+                                            h($snap_ratteries[$type->id]->full_name),
+                                            ['controller' => 'Ratteries', 'action' => 'view', $snap_ratteries[$type->id]->id],
+                                            ['escape' => false]
+                                            )
+                                        : ''
+                                    ?>
                                 </td>
                             </tr>
                             <?php endif ; ?>

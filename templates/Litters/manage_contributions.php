@@ -52,6 +52,7 @@
                                     'name' => 'rattery_name_contribution_' . $type->id,
                                     'label' => $type->name,
                                     'type' => 'text',
+                                    'required' => 'true',
                                     'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['name'] : __('Type and select the rattery’s name or prefix here...')
                                 ]);
 
@@ -77,6 +78,7 @@
                                     'label' => $type->name,
                                     'type' => 'text',
                                     'value' => $previous[$type->id]['name'],
+                                    'required' => 'true',
                                     'readonly' => true,
                                 ]);
 
@@ -121,24 +123,12 @@
                     ?>
                 <?php endforeach ; ?>
 
-                <!-- also pass litter id and previous contributions to cover all cases -->
+                <!-- also pass litter id to marshal contributions with replace strategy -->
                 <?php
-                    for ($k = 0; $k <= count($litter->contributions)-1; $k++) {
-                        echo $this->Form->control('contributions.'.$k.'.id', [
+                    echo $this->Form->control('litter_id', [
                             'type' => 'hidden',
-                            'value' => $litter->contributions[$k]->id,
+                            'value' => $litter->id,
                         ]);
-
-                        echo $this->Form->control('contributions.'.$k.'.contribution_type_id', [
-                            'type' => 'hidden',
-                            'value' => $litter->contributions[$k]->contribution_type_id,
-                        ]);
-
-                        echo $this->Form->control('contributions.'.$k.'.rattery_id', [
-                            'type' => 'hidden',
-                            'value' => $litter->contributions[$k]->rattery_id,
-                        ]);
-                    }
                 ?>
 
             </fieldset>

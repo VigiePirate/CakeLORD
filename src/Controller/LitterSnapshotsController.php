@@ -109,9 +109,10 @@ class LitterSnapshotsController extends AppController
         }
 
         // process contributions
+        $contribution_types = \Cake\Datasource\FactoryLocator::get('Table')->get('ContributionTypes');
+
         if (in_array('contributions', $diff_list)) {
             $contributions = \Cake\Datasource\FactoryLocator::get('Table')->get('Contributions');
-            $contribution_types = \Cake\Datasource\FactoryLocator::get('Table')->get('ContributionTypes');
             $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
             $snap_litter->contributions = [];
             foreach ($diff_array['contributions'] as $contribution_snap) {
@@ -120,6 +121,8 @@ class LitterSnapshotsController extends AppController
                 $contribution->contribution_type = $contribution_types->get($contribution->contribution_type_id);
                 array_push($snap_litter->contributions, $contribution);
             }
+        } else {
+            $snap_litter->contributions = $litter->contributions;
         }
 
         // intersect available contribution types on both sides to align diff display
