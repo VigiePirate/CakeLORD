@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-08-16 18:23+0000\n"
-"PO-Revision-Date: 2023-08-16 20:24+0200\n"
+"POT-Creation-Date: 2023-08-16 19:42+0000\n"
+"PO-Revision-Date: 2023-08-16 21:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -1260,6 +1260,18 @@ msgstr ""
 "Seuls les membres enregistrés peuvent enregistrer une nouvelle raterie. "
 "Veuillez vous enregistrer ou vous connecter avant de continuer."
 
+#: src/Controller/RatteriesController.php:368
+msgid "This rattery was already inactive."
+msgstr "Cette raterie est déjà considérée comme inactive."
+
+#: src/Controller/RatteriesController.php:372
+msgid "This rattery is now officially inactive."
+msgstr "Cette raterie est désormais officiellement en pause."
+
+#: src/Controller/RatteriesController.php:374
+msgid "This rattery could not be declared inactive. Please try again."
+msgstr "Impossible de mettre cette raterie en pause. Veuillez réessayer."
+
 #: src/Controller/RatteriesController.php:399
 msgid ""
 "You already have an active rattery. If you want to open another, you first "
@@ -2045,7 +2057,7 @@ msgctxt "grammar"
 msgid "Custom"
 msgstr "Personnalisé"
 
-#: src/Model/Table/LittersTable.php:273
+#: src/Model/Table/LittersTable.php:280
 msgid ""
 "We could not find the mother. Please, select it in the list or type its "
 "complete pedigree identifier."
@@ -2053,7 +2065,7 @@ msgstr ""
 "Impossible de trouver la mère indiquée. Veuillez la sélectionner dans la "
 "liste ou entrez son numéro de pedigree complet."
 
-#: src/Model/Table/LittersTable.php:284
+#: src/Model/Table/LittersTable.php:291
 msgid ""
 "We could not find the father. Please, select it in the list or type its "
 "complete pedigree identifier."
@@ -2061,7 +2073,7 @@ msgstr ""
 "Impossible de trouver le père indiqué. Veuillez le sélectionner dans la "
 "liste ou entrez son numéro de pedigree complet."
 
-#: src/Model/Table/LittersTable.php:295 src/Model/Table/RatsTable.php:399
+#: src/Model/Table/LittersTable.php:302 src/Model/Table/RatsTable.php:399
 msgid ""
 "We could not find this rattery. Please, select it in the list or type an "
 "existing prefix."
@@ -2069,7 +2081,7 @@ msgstr ""
 "Impossible de trouver la raterie indiquée. Veuillez la sélectionner dans la "
 "liste ou d’entrer un affixe existant."
 
-#: src/Model/Table/LittersTable.php:306
+#: src/Model/Table/LittersTable.php:313
 msgid ""
 "This rattery has been definitely closed. Please, select an eligible rattery "
 "(either active, or the last active rattery of its owner)."
@@ -2078,7 +2090,7 @@ msgstr ""
 "éligible (soit une raterie active, soit la dernière raterie en date de son "
 "propriétaire)."
 
-#: src/Model/Table/LittersTable.php:317 src/Model/Table/RatsTable.php:409
+#: src/Model/Table/LittersTable.php:324 src/Model/Table/RatsTable.php:409
 msgid ""
 "Incomplete: mandatory information about origins are missing.\n"
 "                <ul><li>For a generic origin (any origin but registered "
@@ -2096,63 +2108,63 @@ msgstr ""
 "après avoir créé sa fiche si nécessaire. Si elle n’est pas connue, vous "
 "devez choisir une origine générique.</li></ul>"
 
-#: src/Model/Table/LittersTable.php:330 src/Model/Table/RatsTable.php:387
+#: src/Model/Table/LittersTable.php:337 src/Model/Table/RatsTable.php:387
 msgid "Impossible: this date is in the future."
 msgstr "Erreur : cette date n'est pas encore passée."
 
-#: src/Model/Table/LittersTable.php:341
+#: src/Model/Table/LittersTable.php:348
 msgid ""
 "Impossible: the date is too close from the birth of another litter with the "
 "same mother."
 msgstr "Erreur : la mère a une autre portée trop proche de cette date."
 
-#: src/Model/Table/LittersTable.php:352
+#: src/Model/Table/LittersTable.php:359
 msgid ""
 "Impossible: mating happens at least {0} days and at most {1} days before "
 "birth."
 msgstr "Erreur : les saillies ont lieu {0} à {1} jours avant la naissance."
 
-#: src/Model/Table/LittersTable.php:365
+#: src/Model/Table/LittersTable.php:372
 msgid "Impossible: mother had not been born at this date."
 msgstr "Erreur : la mère n’était pas née à cette date."
 
-#: src/Model/Table/LittersTable.php:375
+#: src/Model/Table/LittersTable.php:382
 msgid "Impossible: father had not been born at this date."
 msgstr "Erreur : le père n’était pas né à cette date."
 
-#: src/Model/Table/LittersTable.php:386
+#: src/Model/Table/LittersTable.php:393
 msgid "Impossible: mother was dead at this date."
 msgstr "Erreur : la mère était décédée à cette date."
 
-#: src/Model/Table/LittersTable.php:396
+#: src/Model/Table/LittersTable.php:403
 msgid "Impossible: father was dead too long before this date."
 msgstr "Erreur : le père est décédé trop longtemps avant cette date."
 
-#: src/Model/Table/LittersTable.php:406
+#: src/Model/Table/LittersTable.php:413
 msgid "Impossible: father and mother were never alive at the same time."
 msgstr "Erreur : le père et la mère n’ont jamais été vivants en même temps."
 
-#: src/Model/Table/LittersTable.php:417
+#: src/Model/Table/LittersTable.php:424
 msgid "Something went wrong when updating offspring birth dates."
 msgstr ""
 "Une erreur s’est produite lors de la mise à jour des dates de naissance des "
 "ratons de la portée."
 
-#: src/Model/Table/LittersTable.php:427
+#: src/Model/Table/LittersTable.php:434
 msgid "Something went wrong when updating offspring prefixes."
 msgstr ""
 "Une erreur s’est produite lors de la mise à jour des affixes des ratons de "
 "la portée."
 
-#: src/Model/Table/LittersTable.php:438
+#: src/Model/Table/LittersTable.php:445
 msgid "Impossible: lower than the number of recorded pups."
 msgstr "Erreur : c'est moins que le nombre de ratons déjà enregistrés."
 
-#: src/Model/Table/LittersTable.php:448
+#: src/Model/Table/LittersTable.php:455
 msgid "Impossible: larger than the total number of pups."
 msgstr "Erreur : c'est plus que le nombre total de ratons."
 
-#: src/Model/Table/LittersTable.php:458 src/Model/Table/LittersTable.php:468
+#: src/Model/Table/LittersTable.php:465 src/Model/Table/LittersTable.php:475
 msgid "Impossible: rats do not have such large litters."
 msgstr "Erreur : il n’y a pas autant de petits dans une portée de rats."
 
@@ -2329,7 +2341,7 @@ msgstr "Surtitre"
 #: templates/LitterMessages/add.php:29 templates/LitterMessages/edit.php:34
 #: templates/LitterSnapshots/add.php:25 templates/LitterSnapshots/edit.php:30
 #: templates/Litters/add.php:239 templates/Litters/attach_rat.php:67
-#: templates/Litters/edit.php:132 templates/Messages/add.php:24
+#: templates/Litters/edit.php:134 templates/Messages/add.php:24
 #: templates/Messages/edit.php:29 templates/Operators/add.php:31
 #: templates/Operators/edit.php:27 templates/RatMessages/add.php:29
 #: templates/RatMessages/edit.php:34 templates/RatSnapshots/add.php:25
@@ -3909,7 +3921,7 @@ msgid "Type and select the rattery’s name or prefix here..."
 msgstr "Entrez et sélectionnez le nom de la raterie ici..."
 
 #: templates/Litters/add.php:123 templates/Litters/add.php:144
-#: templates/Litters/edit.php:92 templates/Litters/simulate.php:41
+#: templates/Litters/edit.php:94 templates/Litters/simulate.php:41
 #: templates/Rats/add.php:106
 msgid "Mother"
 msgstr "Mère"
@@ -3920,7 +3932,7 @@ msgid "Type and select the mother’s name or identifier here..."
 msgstr "Entrez et sélectionnez le nom ou l’identifiant de la mère…"
 
 #: templates/Litters/add.php:167 templates/Litters/add.php:188
-#: templates/Litters/edit.php:113 templates/Litters/simulate.php:63
+#: templates/Litters/edit.php:115 templates/Litters/simulate.php:63
 #: templates/Rats/add.php:127
 msgid "Father"
 msgstr "Père"
@@ -4054,7 +4066,7 @@ msgstr "Nombre de petits"
 msgid "Stillborn pups count"
 msgstr "Nombre de petits mort-nés"
 
-#: templates/Litters/edit.php:82 templates/Litters/manage_contributions.php:48
+#: templates/Litters/edit.php:84 templates/Litters/manage_contributions.php:48
 #: templates/Rats/edit.php:147
 msgid "Staff-only"
 msgstr "Réservé au staff"

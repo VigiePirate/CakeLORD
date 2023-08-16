@@ -365,13 +365,13 @@ class RatteriesController extends AppController
         $this->Authorization->authorize($rattery, 'microEdit');
 
         if (! $rattery->is_alive) {
-            $this->Flash->warning('This rattery was already inactive.');
+            $this->Flash->warning(__('This rattery was already inactive.'));
         } else {
             $rattery->is_alive = false;
             if ($this->Ratteries->save($rattery)) {
-                $this->Flash->success('This rattery is now officially inactive.');
+                $this->Flash->success(__('This rattery is now officially inactive.'));
             } else {
-                $this->Flash->error('This rattery could not be declared inactive. Please try again.');
+                $this->Flash->error(__('This rattery could not be declared inactive. Please try again.'));
             }
         }
 
