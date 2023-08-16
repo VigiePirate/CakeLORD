@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Collection\Collection;
 
 /**
  * LitterSnapshots Controller
@@ -121,9 +122,23 @@ class LitterSnapshotsController extends AppController
             }
         }
 
+        // intersect available contribution types on both sides to align diff display
+        $snap_ratteries = (new Collection($snap_litter->contributions))->combine('contribution_type_id', 'rattery')->toArray();
+        $litter_ratteries = (new Collection($litter->contributions))->combine('contribution_type_id', 'rattery')->toArray();
+        $types = $contribution_types->find('all');
+
         $user = $this->request->getAttribute('identity');
 
-        $this->set(compact('snapshot', 'litter', 'snap_litter', 'diff_list', 'user'));
+        $this->set(compact(
+            'snapshot',
+            'litter',
+            'snap_litter',
+            'diff_list',
+            'snap_ratteries',
+            'litter_ratteries',
+            'types',
+            'user')
+        );
     }
 
     /**
