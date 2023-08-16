@@ -73,7 +73,6 @@ class LittersTable extends Table
                 'modified',
                 'state_id',
                 'pups_number',
-                'contributions',
                 'comments',
             ],
         ]);
@@ -204,8 +203,9 @@ class LittersTable extends Table
             }
         }
 
-        // javacript fallback for rattery
-        if (! isset($data['contributions']) && (! isset($data['rattery_id']) || empty($data['rattery_id']))) {
+        // javacript fallback for rattery at litter creation
+        // FIXME: replace ugly test by proper case management
+        if (! isset($data['contributions']) && ! isset($data['rattery_name_contribution_1']) && (! isset($data['rattery_id']) || empty($data['rattery_id']))) {
             if (isset($data['generic_rattery_id']) && ! empty($data['generic_rattery_id'])) {
                 $data['rattery_id'] = $data['generic_rattery_id'];
             } else {
@@ -222,7 +222,7 @@ class LittersTable extends Table
         }
 
         // litter creation => no contribution declared
-        if (! isset($data['contributions'])) {
+        if (! isset($data['contributions']) && ! isset($data['rattery_name_contribution_1'])) {
             $data['contributions'] = [
                 [
                     'contribution_type_id' => '1',
@@ -232,16 +232,16 @@ class LittersTable extends Table
         } else {
             // contributions have been manually edited; replace litter contributions by form data
             // FIXME assumes there are at most 9 contribution types
+
             if (isset($data['rattery_name_contribution_1'])) {
                 $keys = array_keys((array)$data);
                 foreach ($keys as $key) {
                     if (substr($key, 0, -1) == 'rattery_id_contribution_') {
                         $k = intval(substr($key, -1));
-                        if ($k > 1 && strlen($data['rattery_id_contribution_'.$k]) != 0 ) {
+                        if ($k >= 1 && strlen($data['rattery_id_contribution_'.$k]) != 0 ) {
                             $data['contributions'][$k-1]['rattery_id'] = $data['rattery_id_contribution_'.$k];
                             $data['contributions'][$k-1]['contribution_type_id'] = $k;
-                        } else {
-                            unset($data['contributions'][$k]);
+                            $data['contributions'][$k-1]['litter_id'] = $data['litter_id'];
                         }
                     }
                 }
@@ -531,7 +531,7 @@ class LittersTable extends Table
             if (isset($entity->contributions)) {
                 $old_contributions = $entity->getOriginal('contributions');
 
-                // if $entity->contributions contains arrays, we come from snapRestore : need to convert it to entities
+                // if $entity->contributions contains arrays, we come from snapRestore : we need to convert it to entities
                 // if $entity->contributions contains contributions, we come from manageContributions : nothing to do
                 if (is_array($entity->contributions[0])) {
                     $swap_contributions = $entity->contributions;

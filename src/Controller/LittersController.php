@@ -557,7 +557,6 @@ class LittersController extends AppController
                 'ParentRats',
                 'OffspringRats',
                 'OffspringRats.DeathPrimaryCauses',
-                'Ratteries',
                 'Contributions',
                 'Contributions.Ratteries',
                 'States'
@@ -570,7 +569,9 @@ class LittersController extends AppController
         $contribution_types = $this->ContributionTypes->find('all')->order('priority ASC');
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $this->Litters->patchEntity($litter, $this->request->getData(), ['associated' => ['Contributions', 'OffspringRats']]);
+            $this->Litters->patchEntity($litter, $this->request->getData(), [
+                'associated' => ['Contributions', 'Contributions.Ratteries', 'OffspringRats']
+            ]);
 
             if ($this->Litters->save($litter, [
                     'contain' => [
