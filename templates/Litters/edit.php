@@ -65,15 +65,17 @@
                             'type' => 'hidden',
                             'value' => $litter->contributions[$k]->id,
                         ]);
-
                         echo $this->Form->control('contributions.'.$k.'.contribution_type_id', [
                             'type' => 'hidden',
                             'value' => $litter->contributions[$k]->contribution_type_id,
                         ]);
-
                         echo $this->Form->control('contributions.'.$k.'.rattery_id', [
                             'type' => 'hidden',
                             'value' => $litter->contributions[$k]->rattery_id,
+                        ]);
+                        echo $this->Form->control('contributions.'.$k.'.litter_id', [
+                            'type' => 'hidden',
+                            'value' => $litter->contributions[$k]->litter_id,
                         ]);
                     }
                 ?>

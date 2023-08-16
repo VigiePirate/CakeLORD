@@ -205,7 +205,11 @@ class LittersTable extends Table
 
         // javacript fallback for rattery at litter creation
         // FIXME: replace ugly test by proper case management
-        if (! isset($data['contributions']) && ! isset($data['rattery_name_contribution_1']) && (! isset($data['rattery_id']) || empty($data['rattery_id']))) {
+        if (
+            ! isset($data['contributions'])
+            && ! isset($data['rattery_name_contribution_1'])
+            && (! isset($data['rattery_id']) || empty($data['rattery_id']))
+        ) {
             if (isset($data['generic_rattery_id']) && ! empty($data['generic_rattery_id'])) {
                 $data['rattery_id'] = $data['generic_rattery_id'];
             } else {
@@ -221,27 +225,30 @@ class LittersTable extends Table
             }
         }
 
-        // litter creation => no contribution declared
-        if (! isset($data['contributions']) && ! isset($data['rattery_name_contribution_1'])) {
-            $data['contributions'] = [
-                [
-                    'contribution_type_id' => '1',
-                    'rattery_id' => $data['rattery_id'],
-                ]
-            ];
-        } else {
-            // contributions have been manually edited; replace litter contributions by form data
-            // FIXME assumes there are at most 9 contribution types
+        if (! isset($data['contributions'])) {
 
-            if (isset($data['rattery_name_contribution_1'])) {
-                $keys = array_keys((array)$data);
-                foreach ($keys as $key) {
-                    if (substr($key, 0, -1) == 'rattery_id_contribution_') {
-                        $k = intval(substr($key, -1));
-                        if ($k >= 1 && strlen($data['rattery_id_contribution_'.$k]) != 0 ) {
-                            $data['contributions'][$k-1]['rattery_id'] = $data['rattery_id_contribution_'.$k];
-                            $data['contributions'][$k-1]['contribution_type_id'] = $k;
-                            $data['contributions'][$k-1]['litter_id'] = $data['litter_id'];
+            // litter creation case, first contribution must be created
+            if (! isset($data['rattery_name_contribution_1'])) {
+                $data['contributions'] = [
+                    [
+                        'contribution_type_id' => '1',
+                        'rattery_id' => $data['rattery_id'],
+                    ]
+                ];
+            } else {
+                // contributions have been manually edited; replace litter contributions by form data
+                // FIXME assumes there are at most 9 contribution types
+
+                if (isset($data['rattery_name_contribution_1'])) {
+                    $keys = array_keys((array)$data);
+                    foreach ($keys as $key) {
+                        if (substr($key, 0, -1) == 'rattery_id_contribution_') {
+                            $k = intval(substr($key, -1));
+                            if ($k >= 1 && strlen($data['rattery_id_contribution_'.$k]) != 0 ) {
+                                $data['contributions'][$k-1]['rattery_id'] = $data['rattery_id_contribution_'.$k];
+                                $data['contributions'][$k-1]['contribution_type_id'] = $k;
+                                $data['contributions'][$k-1]['litter_id'] = $data['litter_id'];
+                            }
                         }
                     }
                 }
