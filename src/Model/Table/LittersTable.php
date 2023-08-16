@@ -130,6 +130,7 @@ class LittersTable extends Table
         ]);
         $this->hasMany('Contributions', [
             'finder' => 'Ordered',
+            'saveStrategy' => 'replace',
         ]);
     }
 
@@ -528,28 +529,19 @@ class LittersTable extends Table
 
             // if entity is updated, check if some contributions must be deleted
             if (isset($entity->contributions)) {
+                $old_contributions = $entity->getOriginal('contributions');
 
-                $new_contributions = new Collection($entity->contributions);
-                $types = $new_contributions->extract('contribution_type_id')->toArray();
-                foreach ($entity->getOriginal('contributions') as $old_contribution) {
-                    $type = $old_contribution->contribution_type_id;
-                    // delete old contribution if optional and absent from new
-                    if (! in_array($type, $types) && $type != 1) {
-                        $contributions->delete($old_contribution);
-                    } else {
-                        // check if a new contribution replace the old one
-                        $concurrent = $new_contributions->filter(function ($contrib, $key) use ($type) {
-                            return ($contrib->contribution_type_id === $type && $contrib->contribution_type_id != 1);
-                        })->first();
-
-                        // check that concurrent is not actually the same
-                        if (! is_null($concurrent) && $concurrent->id != $old_contribution->id) {
-                            if (! $output = $contributions->delete($old_contribution)) {
-                                return false;
-                            }
-                        }
+                // if $entity->contributions contains arrays, we come from snapRestore : need to convert it to entities
+                // if $entity->contributions contains contributions, we come from manageContributions : nothing to do
+                if (is_array($entity->contributions[0])) {
+                    $swap_contributions = $entity->contributions;
+                    $entity->contributions = [];
+                    foreach ($swap_contributions as $swap_contribution) {
+                        array_push($entity->contributions, $contributions->newEntity($swap_contribution));
                     }
                 }
+
+                $entity->setDirty('contributions', true);
             }
         }
     }

@@ -572,7 +572,19 @@ class LittersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $this->Litters->patchEntity($litter, $this->request->getData(), ['associated' => ['Contributions', 'OffspringRats']]);
 
-            if ($this->Litters->save($litter, ['contain' => 'Contributions'])) {
+            if ($this->Litters->save($litter, [
+                    'contain' => [
+                        'Contributions' => [
+                            'fields' => [
+                                'id',
+                                'contribution_type_id',
+                                'litter_id',
+                                'rattery_id'
+                            ]
+                        ]
+                    ]
+                ])
+            ) {
                 $this->Flash->success(__('The litter’s contributing ratteries have been updated.'));
                 return $this->redirect(['action' => 'view', $litter->id]);
             }
@@ -672,7 +684,7 @@ class LittersController extends AppController
      */
     public function restore($id = null, $snapshot_id = null)
     {
-        $litter = $this->Litters->get($id, ['contain' => ['States']]);
+        $litter = $this->Litters->get($id, ['contain' => ['Contributions', 'States']]);
         $this->Authorization->authorize($litter);
         if ($this->Litters->snapRestore($litter, $snapshot_id)) {
             $this->Flash->success(__('The snapshot has been restored.'));
