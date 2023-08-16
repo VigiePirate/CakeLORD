@@ -234,6 +234,7 @@
                         <?php endif; ?>
                     </div>
                     <?php endif; ?>
+                </div>
 
                 <?php else : ?> <!-- non generic rattery -->
                     <div class="row row-reverse row-with-photo">

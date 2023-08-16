@@ -227,7 +227,12 @@ class Rattery extends Entity
                 })
                 ->avg();
 
-            $stats['avg_sex_ratio'] = $this->computeLitterSexRatioInWords([], 10, $avg_sex_ratio);
+            // Compute at the rat-level (pooling by litter is ill-posed)
+            $stats['avg_sex_ratio'] = $this->computeRatSexRatioInWords([
+                'OR' => [
+                    'Contributions.rattery_id' => $this->id,
+                    'Rats.rattery_id' => $this->id // for rats with rattery_id but no litter_id
+                ]], 12);
 
             $stats['primaries'] = $this->countRatsByPrimaryDeath(['rattery_id' => $this->id])->toArray();
             $stats['secondaries'] = $this->countRatsBySecondaryDeath(['rattery_id' => $this->id]);

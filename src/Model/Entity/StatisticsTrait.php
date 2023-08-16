@@ -909,8 +909,8 @@ trait StatisticsTrait
 
     /* UTILITIES */
     function computeFareyApproximation($val, $lim) {
-        if($val < 0) {
-            list($n, $d) = farey(-$val, $lim);
+        if ($val < 0) {
+            list($n, $d) = $this->computeFareyApproximation(-$val, $lim);
             return array(-$n, $d);
         }
         $z = $lim - $lim;
