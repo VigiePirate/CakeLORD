@@ -20,7 +20,7 @@ class StateBehavior extends Behavior
         'repository' => 'States',
         'safe_properties' => ['modified', 'state_id'],
         'explanation_form_field' => 'side_message',
-        'neglection_delay' => '-15 days',
+        'neglection_delay' => '15 days',
     ];
 
     /**
@@ -43,6 +43,7 @@ class StateBehavior extends Behavior
         $this->Identity = Router::getRequest()->getAttribute('identity');
         $this->previous_state = null;
         $this->new_state = null;
+        $this->now = \Cake\Chronos\Chronos::now();
         $this->service_message_content = '';
         $this->user_message_content = '';
     }
@@ -109,10 +110,38 @@ class StateBehavior extends Behavior
             'identity' => $this->Identity,
             'previous_state' => $this->previous_state,
             'new_state' => $this->new_state,
+            'emitted' => $this->now,
             'user_message_content' => $this->user_message_content,
             'service_message_content' => $this->service_message_content,
         ]);
         $this->table()->getEventManager()->dispatch($state_event);
+    }
+
+    /**
+     * ChangeState method
+     *
+     * Actually modify the entity state and prepare the change event
+     * circumstances and messages.
+     *
+     * @param EntityInterface $entity
+     * @param int $new_state_id
+     * @param array $context
+     * @return boolean
+     */
+    public function changeState(EntityInterface $entity, int $new_state_id, array $context)
+    {
+        if ($entity->has('state') && isset($new_state_id)) {
+            $this->previous_state = $entity->state;
+            $entity->state_id = $new_state_id;
+            $this->new_state = $this->States->get($entity->state_id);
+            $this->service_message_content = __("{1} by {0} on this sheet on {2,date,medium} {2,time,short}",
+                $this->Identity->username,
+                $context['action'],
+                \Cake\Chronos\Chronos::now()
+            );
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -126,11 +155,9 @@ class StateBehavior extends Behavior
     public function approve(EntityInterface $entity)
     {
         if ($entity->has('state') && $entity->state->next_ok_state_id) {
-            $this->previous_state = $entity->state;
-            $entity->state_id = $entity->state->next_ok_state_id;
-            $this->new_state = $this->States->get($entity->state_id);
-            $this->service_message_content = __("{0} approved this sheet on {1,date,medium} {1,time,short}", $this->Identity->username, \Cake\Chronos\Chronos::now());
-            return true;
+            if ($this->changeState($entity, $entity->state->next_ok_state_id, ['action' => 'approve'])) {
+                return true;
+            }
         }
         return false;
     }
@@ -146,11 +173,9 @@ class StateBehavior extends Behavior
     public function blame(EntityInterface $entity)
     {
         if ($entity->has('state') && $entity->state->next_ko_state_id) {
-            $this->previous_state = $entity->state;
-            $entity->state_id = $entity->state->next_ko_state_id;
-            $this->new_state = $this->States->get($entity->state_id);
-            $this->service_message_content = __("{0} blamed this sheet on {1,date,medium} {1,time,short}", $this->Identity->username, \Cake\Chronos\Chronos::now());
-            return true;
+            if ($this->changeState($entity, $entity->state->next_ko_state_id, ['action' => 'blame'])) {
+                return true;
+            }
         }
         return false;
     }
@@ -166,11 +191,9 @@ class StateBehavior extends Behavior
     public function freeze(EntityInterface $entity)
     {
         if ($entity->has('state') && $entity->state->next_frozen_state_id) {
-            $this->previous_state = $entity->state;
-            $entity->state_id = $entity->state->next_frozen_state_id;
-            $this->new_state = $this->States->get($entity->state_id);
-            $this->service_message_content = __("{0} froze this sheet on {1,date,medium} {1,time,short}", $this->Identity->username, \Cake\Chronos\Chronos::now());
-            return true;
+            if ($this->changeState($entity, $entity->state->next_frozen_state_id, ['action' => 'freeze'])) {
+                return true;
+            }
         }
         return false;
     }
@@ -186,11 +209,9 @@ class StateBehavior extends Behavior
     public function thaw(EntityInterface $entity)
     {
         if ($entity->has('state') && $entity->state->next_thawed_state_id) {
-            $this->previous_state = $entity->state;
-            $entity->state_id = $entity->state->next_thawed_state_id;
-            $this->new_state = $this->States->get($entity->state_id);
-            $this->service_message_content = __("{0} thawed this sheet on {1,date,medium} {1,time,short}", $this->Identity->username, \Cake\Chronos\Chronos::now());
-            return true;
+            if ($this->changeState($entity, $entity->state->next_frozen_state_id, ['action' => 'thaw'])) {
+                return true;
+            }
         }
         return false;
     }
@@ -206,7 +227,7 @@ class StateBehavior extends Behavior
      */
     public function blameNeglected(Table $table) {
         $query = $table->find('needsUser')->contain('States');
-        $query = $query->where(['modified <= ' => \Cake\Chronos\Chronos::today()->modify($this->config['neglection_delay'])]);
+        $query = $query->where(['modified <= ' => \Cake\Chronos\Chronos::today()->modify('-'.$this->config['neglection_delay'])]);
         $entities = $query->all()->map(function ($value, $key) {
             $this->blame($value);
             return $value;
