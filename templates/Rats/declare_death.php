@@ -79,11 +79,13 @@
                         'type' => 'textarea',
                         'id' => 'comments',
                         'name' => 'comments',
-                        'label' => __('Append comments if needed'),
+                        'label' => __('Amend sheet comments'),
                         'value' => $rat->comments,
                         'rows' => '5',
                     ]);
                 ?>
+
+                <?= $this->element('side_message_control') ?>
             </fieldset>
             <?= $this->Form->button(__('Declare Death')); ?>
             <?= $this->Form->end(); ?>
