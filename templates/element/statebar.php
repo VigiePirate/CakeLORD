@@ -14,14 +14,7 @@
                 </div>
             </div>
             <div>
-                <?php
-                    echo $this->Form->control('content', [
-                        'type' => 'textarea',
-                        'name' => 'content',
-                        'label' => __('Add customized message about moderation decision'),
-                        'rows' => '5'
-                    ]);
-                ?>
+                <?= $this->element('side_message_control') ?>
             </div>
         <?= $this->Form->end(); ?>
     </div>

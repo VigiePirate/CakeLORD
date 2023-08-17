@@ -1219,15 +1219,8 @@ class RatsController extends AppController
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rat, 'changeState');
 
-        if ($this->request->is('post')) {
-            $message = $this->request->getData('content');
-        } else {
-            $message = __('automatic');
-        }
-
         if ($this->Rats->freeze($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet is now frozen.'));
-            $this->Flash->default(__('Moderation message was: ') . h($message));
         } else {
             $this->Flash->error(__('We could not freeze the sheet. Please retry or contact an administrator.'));
         }
@@ -1240,15 +1233,8 @@ class RatsController extends AppController
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rat, 'editFrozen');
 
-        if ($this->request->is('post')) {
-            $message = $this->request->getData('content');
-        } else {
-            $message = __('automatic');
-        }
-
         if ($this->Rats->thaw($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet is now unfrozen.'));
-            $this->Flash->default(__('Moderation message was: ') . h($message));
         } else {
             $this->Flash->error(__('We could not thaw the sheet. Please retry or contact an administrator.'));
         }
@@ -1261,15 +1247,8 @@ class RatsController extends AppController
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rat, 'changeState');
 
-        if ($this->request->is('post')) {
-            $message = $this->request->getData('content');
-        } else {
-            $message = __('automatic');
-        }
-
         if ($this->Rats->approve($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet has been approved.'));
-            $this->Flash->default(__('Moderation message was: ') . h($message));
         } else {
             $this->Flash->error(__('We could not approve the sheet. Please retry or contact an administrator.'));
         }
@@ -1282,15 +1261,8 @@ class RatsController extends AppController
         $rat = $this->Rats->get($id, ['contain' => ['States']]);
         $this->Authorization->authorize($rat, 'changeState');
 
-        if ($this->request->is('post')) {
-            $message = $this->request->getData('content');
-        } else {
-            $message = __('automatic');
-        }
-
         if ($this->Rats->blame($rat) && $this->Rats->save($rat, ['checkRules' => false])) {
             $this->Flash->success(__('This rat sheet has been unapproved.'));
-            $this->Flash->default(__('Moderation message was: ') . h($message));
         } else {
             $this->Flash->error(__('We could not unapprove the sheet. Please retry or contact an administrator.'));
         }
