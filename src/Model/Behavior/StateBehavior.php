@@ -40,15 +40,15 @@ class StateBehavior extends Behavior
         }
         $this->config = $this->getConfig();
         $this->States = FactoryLocator::get('Table')->get($this->config['repository']);
-        $this->Identity = $identity = Router::getRequest()->getAttribute('identity');
+        $this->Identity = Router::getRequest()->getAttribute('identity');
         $this->previous_state = null;
         $this->new_state = null;
-        $this->user_message = '';
-        $this->service_message = '';
+        $this->service_message_content = '';
+        $this->user_message_content = '';
     }
 
     /**
-     * afterMarshall method
+     * afterMarshal method
      *
      * get the user message associated to the state change (if any), and keep it
      * for the event to dispatch in the afterSave method.
@@ -59,10 +59,10 @@ class StateBehavior extends Behavior
      * @param ArrayObject $options
      * @return boolean
      */
-    public function afterMarshall(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
+    public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
     {
         if (isset($data[$this->config->explanation_form_field])) {
-            $this->user_message = $data[$this->config->explanation_form_field];
+            $this->user_message_content = $data[$this->config->explanation_form_field];
         }
         return true;
     }
@@ -105,15 +105,14 @@ class StateBehavior extends Behavior
      */
     public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        $state_event = new Event('State.modified', $entity, [
-            'entity' => $entity,
+        $state_event = new Event('Model.State.modified', $entity, [
             'identity' => $this->Identity,
             'previous_state' => $this->previous_state,
             'new_state' => $this->new_state,
-            'user_message' => $this->user_message,
-            'service_message' => $this->service_message,
+            'user_message_content' => $this->user_message_content,
+            'service_message_content' => $this->service_message_content,
         ]);
-        $this->States->getEventManager()->dispatch($state_event);
+        $this->table()->getEventManager()->dispatch($state_event);
     }
 
     /**
@@ -130,7 +129,7 @@ class StateBehavior extends Behavior
             $this->previous_state = $entity->state;
             $entity->state_id = $entity->state->next_ok_state_id;
             $this->new_state = $this->States->get($entity->state_id);
-            $this->service_message = __("{0} approved this sheet on {1,date}", $this->Identity->username, \Cake\Chronos\Chronos::now());
+            $this->service_message_content = __("{0} approved this sheet on {1,date,medium} {1,time,short}", $this->Identity->username, \Cake\Chronos\Chronos::now());
             return true;
         }
         return false;
@@ -150,7 +149,7 @@ class StateBehavior extends Behavior
             $this->previous_state = $entity->state;
             $entity->state_id = $entity->state->next_ko_state_id;
             $this->new_state = $this->States->get($entity->state_id);
-            $this->service_message = __("{0} blamed this sheet on {1,date}", $this->Identity->username, \Cake\Chronos\Chronos::now());
+            $this->service_message_content = __("{0} blamed this sheet on {1,date,medium} {1,time,short}", $this->Identity->username, \Cake\Chronos\Chronos::now());
             return true;
         }
         return false;
@@ -170,7 +169,7 @@ class StateBehavior extends Behavior
             $this->previous_state = $entity->state;
             $entity->state_id = $entity->state->next_frozen_state_id;
             $this->new_state = $this->States->get($entity->state_id);
-            $this->service_message = __("{0} froze this sheet on {1,date}", $this->Identity->username, \Cake\Chronos\Chronos::now());
+            $this->service_message_content = __("{0} froze this sheet on {1,date,medium} {1,time,short}", $this->Identity->username, \Cake\Chronos\Chronos::now());
             return true;
         }
         return false;
@@ -190,7 +189,7 @@ class StateBehavior extends Behavior
             $this->previous_state = $entity->state;
             $entity->state_id = $entity->state->next_thawed_state_id;
             $this->new_state = $this->States->get($entity->state_id);
-            $this->service_message = __("{0} thawed this sheet on {1,date}", $this->Identity->username, \Cake\Chronos\Chronos::now());
+            $this->service_message_content = __("{0} thawed this sheet on {1,date,medium} {1,time,short}", $this->Identity->username, \Cake\Chronos\Chronos::now());
             return true;
         }
         return false;
