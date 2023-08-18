@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-08-17 17:38+0000\n"
+"POT-Creation-Date: 2023-08-18 11:47+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -544,8 +544,8 @@ msgid "This litter sheet is now frozen."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:1061
-#: ./src/Controller/RatsController.php:1225
-#: ./src/Controller/RatteriesController.php:698
+#: ./src/Controller/RatsController.php:1227
+#: ./src/Controller/RatteriesController.php:699
 msgid "We could not freeze the sheet. Please retry or contact an administrator."
 msgstr ""
 
@@ -554,30 +554,30 @@ msgid "This litter sheet is now unfrozen."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:1075
-#: ./src/Controller/RatsController.php:1239
-#: ./src/Controller/RatteriesController.php:711
+#: ./src/Controller/RatsController.php:1241
+#: ./src/Controller/RatteriesController.php:712
 msgid "We could not thaw the sheet. Please retry or contact an administrator."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:1086
-#: ./src/Controller/RatsController.php:1251
+#: ./src/Controller/RatsController.php:1253
 msgid "This rat sheet has been approved."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:1088
-#: ./src/Controller/RatsController.php:1253
-#: ./src/Controller/RatteriesController.php:724
+#: ./src/Controller/RatsController.php:1255
+#: ./src/Controller/RatteriesController.php:725
 msgid "We could not approve the sheet. Please retry or contact an administrator."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:1099
-#: ./src/Controller/RatsController.php:1265
+#: ./src/Controller/RatsController.php:1267
 msgid "This rat sheet has been unapproved."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:1101
-#: ./src/Controller/RatsController.php:1267
-#: ./src/Controller/RatteriesController.php:737
+#: ./src/Controller/RatsController.php:1269
+#: ./src/Controller/RatteriesController.php:738
 msgid "We could not unapprove the sheet. Please retry or contact an administrator."
 msgstr ""
 
@@ -923,7 +923,7 @@ msgid "Please record the rat’s information below. When in doubt, please check 
 msgstr ""
 
 #: ./src/Controller/RatsController.php:347
-#: ./src/Controller/RatsController.php:1169
+#: ./src/Controller/RatsController.php:1170
 #: ./templates/Rats/add.php:294
 #: ./templates/Rats/add.php:338
 #: ./templates/Rats/declare_death.php:67
@@ -931,7 +931,7 @@ msgid "Please, read carefully information that will appear below to check the fi
 msgstr ""
 
 #: ./src/Controller/RatsController.php:348
-#: ./src/Controller/RatsController.php:1170
+#: ./src/Controller/RatsController.php:1171
 msgid "Please answer the following questions about euthanasia, diagnostics and analyses."
 msgstr ""
 
@@ -981,39 +981,39 @@ msgstr ""
 msgid "Pictures must be in jpeg, gif or png format and less than 8 MB."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1121
+#: ./src/Controller/RatsController.php:1122
 msgid "The rat has been transferred to its new owner."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1124
+#: ./src/Controller/RatsController.php:1125
 msgid "The rat ownership could not be changed. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1160
+#: ./src/Controller/RatsController.php:1161
 msgid "Sorry for your loss. Your rat’s death has been recorded."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1163
+#: ./src/Controller/RatsController.php:1164
 msgid "Your rat’s death could not be recorded. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1165
+#: ./src/Controller/RatsController.php:1166
 msgid "We are sorry for your loss. Please fill the information below to record the rat death. Date and primary cause are mandatory."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1195
+#: ./src/Controller/RatsController.php:1197
 msgid "Your new comment about the rat has been saved."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1198
+#: ./src/Controller/RatsController.php:1200
 msgid "Your new comment about the rat could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1223
+#: ./src/Controller/RatsController.php:1225
 msgid "This rat sheet is now frozen."
 msgstr ""
 
-#: ./src/Controller/RatsController.php:1237
+#: ./src/Controller/RatsController.php:1239
 msgid "This rat sheet is now unfrozen."
 msgstr ""
 
@@ -1122,39 +1122,39 @@ msgstr ""
 msgid "The rattery’s new picture could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatteriesController.php:494
+#: ./src/Controller/RatteriesController.php:495
 msgid "Your new comment about the rattery has been saved."
 msgstr ""
 
-#: ./src/Controller/RatteriesController.php:497
+#: ./src/Controller/RatteriesController.php:498
 msgid "Your new comment about the rattery could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatteriesController.php:554
+#: ./src/Controller/RatteriesController.php:555
 msgid "The new location of your rattery has been recorded."
 msgstr ""
 
-#: ./src/Controller/RatteriesController.php:557
+#: ./src/Controller/RatteriesController.php:558
 msgid "Your rattery’s new location could not be recorded. Please, try again."
 msgstr ""
 
-#: ./src/Controller/RatteriesController.php:559
+#: ./src/Controller/RatteriesController.php:560
 msgid "Please fill the information below to record your rattery new location. Country is mandatory.\n            If you do not live in France and wish to appear on the map, it is recommended that you add optional localization information."
 msgstr ""
 
-#: ./src/Controller/RatteriesController.php:696
+#: ./src/Controller/RatteriesController.php:697
 msgid "This rattery sheet is now frozen."
 msgstr ""
 
-#: ./src/Controller/RatteriesController.php:709
+#: ./src/Controller/RatteriesController.php:710
 msgid "This rattery sheet is now unfrozen."
 msgstr ""
 
-#: ./src/Controller/RatteriesController.php:722
+#: ./src/Controller/RatteriesController.php:723
 msgid "This rattery sheet has been approved."
 msgstr ""
 
-#: ./src/Controller/RatteriesController.php:735
+#: ./src/Controller/RatteriesController.php:736
 msgid "This rattery sheet has been unapproved."
 msgstr ""
 
@@ -1958,7 +1958,7 @@ msgstr ""
 #: ./templates/LitterSnapshots/edit.php:30
 #: ./templates/Litters/add.php:239
 #: ./templates/Litters/attach_rat.php:67
-#: ./templates/Litters/edit.php:134
+#: ./templates/Litters/edit.php:135
 #: ./templates/Messages/add.php:24
 #: ./templates/Messages/edit.php:29
 #: ./templates/Operators/add.php:31
@@ -3949,7 +3949,7 @@ msgstr ""
 
 #: ./templates/Litters/add.php:100
 #: ./templates/Litters/manage_contributions.php:56
-#: ./templates/Litters/manage_contributions.php:108
+#: ./templates/Litters/manage_contributions.php:109
 #: ./templates/Rats/add.php:84
 msgid "Type and select the rattery’s name or prefix here..."
 msgstr ""
@@ -4298,8 +4298,8 @@ msgstr ""
 msgid "Manage Litter Contributions of"
 msgstr ""
 
-#: ./templates/Litters/manage_contributions.php:72
-msgid "Staff and contributors"
+#: ./templates/Litters/manage_contributions.php:73
+msgid "Other contributions"
 msgstr ""
 
 #: ./templates/Litters/manage_contributions.php:135
@@ -5675,14 +5675,14 @@ msgstr ""
 msgid "Change Picture of "
 msgstr ""
 
-#: ./templates/Rats/change_picture.php:46
-#: ./templates/Ratteries/change_picture.php:45
+#: ./templates/Rats/change_picture.php:49
+#: ./templates/Ratteries/change_picture.php:48
 #: ./templates/Users/change_picture.php:41
 msgid "Upload picture"
 msgstr ""
 
-#: ./templates/Rats/change_picture.php:47
-#: ./templates/Ratteries/change_picture.php:46
+#: ./templates/Rats/change_picture.php:50
+#: ./templates/Ratteries/change_picture.php:49
 #: ./templates/Users/change_picture.php:42
 msgid "Delete picture"
 msgstr ""
@@ -5704,11 +5704,6 @@ msgid "Amend sheet comments"
 msgstr ""
 
 #: ./templates/Rats/declare_death.php:89
-#: ./templates/element/statebar.php:18
-msgid "Add custom notification message"
-msgstr ""
-
-#: ./templates/Rats/declare_death.php:92
 #: ./templates/element/rats.php:102
 #: ./templates/element/rats.php:109
 #: ./templates/element/simple_rats.php:111
@@ -7564,6 +7559,14 @@ msgstr ""
 #: ./templates/element/simple_ratteries.php:79
 #: ./templates/element/simple_ratteries.php:87
 msgid "See Rattery"
+msgstr ""
+
+#: ./templates/element/side_message_control.php:14
+msgid "Explain staff intervention"
+msgstr ""
+
+#: ./templates/element/side_message_control.php:19
+msgid "Explanation is optional. If provided, it will be included in a notification visible to all stakeholders."
 msgstr ""
 
 #: ./templates/element/simple_rats.php:32

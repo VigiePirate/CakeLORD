@@ -68,8 +68,9 @@
                                     'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['id'] : null
                                 ]);
                             ?>
+                            <?= $this->element('side_message_control', ['sheet' => $litter]) ?>
                             <div class="spacer"></div>
-                            <h2><?= __('Staff and contributors') ?></h2>
+                            <h2><?= __('Other contributions') ?></h2>
                         <?php else: ?>
                             <?php
                                 echo $this->Form->control('rattery_name_contribution_' . $type->id, [
@@ -130,7 +131,6 @@
                             'value' => $litter->id,
                         ]);
                 ?>
-
             </fieldset>
             <?= $this->Form->button(__('Update Contributions')); ?>
             <?= $this->Form->end(); ?>

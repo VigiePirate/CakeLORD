@@ -84,8 +84,7 @@
                         'rows' => '5',
                     ]);
                 ?>
-
-                <?= $this->element('side_message_control') ?>
+                <?= $this->element('side_message_control', ['sheet' => $rat]) ?>
             </fieldset>
             <?= $this->Form->button(__('Declare Death')); ?>
             <?= $this->Form->end(); ?>

@@ -37,19 +37,19 @@
             <h1><?= $rat->usual_name . ' (' . $rat->pedigree_identifier . ')' ?></h1>
 
             <?php echo $this->Form->create($rat); ?>
-
-            <?php
-                echo $this->Form->control('comments', [
-                    'name' => 'comments',
-                    'label' => '',
-                    'value' => $rat->comments,
-                    'rows' => '5',
-                    "error" => [
-                        "escape" => false
-                    ]
-                ]);
-            ?>
-
+            <fieldset>
+                <?php
+                    echo $this->Form->control('comments', [
+                        'name' => 'comments',
+                        'label' => '',
+                        'value' => $rat->comments,
+                        'rows' => '5',
+                        "error" => [
+                            "escape" => false
+                        ]
+                    ]);
+                ?>
+            </fieldset>
             <?= $this->Form->button(__('Save comment')); ?>
             <?= $this->Form->end(); ?>
         </div>
