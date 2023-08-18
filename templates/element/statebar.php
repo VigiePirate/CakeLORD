@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div>
-                <?= $this->element('side_message_control') ?>
+                <?= $this->element('side_message_control', ['sheet' => $sheet]) ?>
             </div>
         <?= $this->Form->end(); ?>
     </div>

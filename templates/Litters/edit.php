@@ -129,6 +129,7 @@
                                 ?>
                         </div>
                     </div>
+                <?= $this->element('side_message_control', ['sheet' => $litter]) ?>
                 <?php endif ; ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

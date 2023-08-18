@@ -172,7 +172,7 @@
                         </div>
                     </div>
                 <?php endif ; ?>
-
+                <?= $this->element('side_message_control', ['sheet' => $rat]) ?>
             </fieldset>
             <?= $this->Form->button(__('Save changes')) ?>
             <?= $this->Form->end() ?>

@@ -83,7 +83,7 @@
                         'type' => 'file',
                         'label' => __('Logotype')
                     ]);
-
+                    echo $this->element('side_message_control', ['sheet' => $rattery]);
                 ?>
 
             </fieldset>

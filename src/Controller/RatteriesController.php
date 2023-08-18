@@ -471,7 +471,8 @@ class RatteriesController extends AppController
         } else {
             $this->Flash->default(__('Pictures must be in jpeg, gif or png format and less than 8 MB.') . ' ' . __x('pictures', 'Large images will be automatically resized.'));
         }
-        $this->set(compact('rattery'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('rattery', 'user'));
     }
 
     /**

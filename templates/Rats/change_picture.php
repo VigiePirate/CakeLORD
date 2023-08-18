@@ -42,11 +42,13 @@
 
             <fieldset>
                 <?= $this->Form->control('picture_file', ['label' => __('Photo'), 'type' => 'file']) ?>
-                <div class="row-hfill">
-                    <div><?= $this->Form->button(__('Upload picture'), ['name' => 'action', 'value' => 'upload']) ?></div>
-                    <div><?= $this->Form->button(__('Delete picture'), ['name' => 'action', 'value' => 'delete', 'class' => 'button-staff']) ?></div>
-                </div>
+                <?= $this->element('side_message_control', ['sheet' => $rat]) ?>
             </fieldset>
+
+            <div class="row-hfill">
+                <div><?= $this->Form->button(__('Upload picture'), ['name' => 'action', 'value' => 'upload']) ?></div>
+                <div><?= $this->Form->button(__('Delete picture'), ['name' => 'action', 'value' => 'delete', 'class' => 'button-staff']) ?></div>
+            </div>
 
             <?= $this->Form->end(); ?>
         </div>
