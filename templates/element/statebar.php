@@ -14,7 +14,15 @@
                 </div>
             </div>
             <div>
-                <?= $this->element('side_message_control', ['sheet' => $sheet]) ?>
+                <?php
+                    echo $this->Form->control('side_message', [
+                        'type' => 'textarea',
+                        'name' => 'side_message',
+                        'label' => __('Explain staff intervention'),
+                        'rows' => '5'
+                    ]);
+                ?>
+                <p class="sub-legend"><?= __('Explanation is optional. If provided, it will be included in a notification visible to all stakeholders.') ?></p>
             </div>
         <?= $this->Form->end(); ?>
     </div>
