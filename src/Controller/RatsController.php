@@ -400,11 +400,19 @@ class RatsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
             $rat = $this->Rats->patchEntity($rat, $data);
-            if (isset($data['generic_rattery_id']) && $data['update_identifier']) {
-                $ratteries = $this->loadModel('Ratteries');
-                $prefix = $ratteries->get($data['generic_rattery_id'])->prefix;
-                $rat->pedigree_identifier =  $prefix . $rat->id . $rat->sex;
-                $rat->is_pedigree_custom = false;
+            if ($data['update_identifier']) {
+                if (isset($data['generic_rattery_id'])  && $data['generic_rattery_id'] != "") {
+                    // prefix change
+                    $ratteries = $this->loadModel('Ratteries');
+                    $prefix = $ratteries->get($data['generic_rattery_id'])->prefix;
+                    $rat->pedigree_identifier =  $prefix . $rat->id . $rat->sex;
+                    $rat->is_pedigree_custom = false;
+                }
+                else {
+                    // sex change only
+                    $old_identifier = $rat->pedigree_identifier;
+                    $rat->pedigree_identifier =  substr($old_identifier, 0, -1) . $rat->sex;
+                }
             } else {
                 $rat->is_pedigree_custom = true;
             }
