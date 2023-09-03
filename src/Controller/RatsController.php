@@ -426,6 +426,16 @@ class RatsController extends AppController
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
         $generic = $this->Rats->Ratteries->find()->where(['is_generic IS' => true])->all()->combine('id', 'full_name');
 
+        $placeholders = json_encode([
+            'colors' => __('Type here to filter colors...'),
+            'eyecolors' => __('Type here to filter eyecolors...'),
+            'coats' => __('Type here to filter coats...'),
+            'dilutions' => __('Type here to filter dilutions...'),
+            'earsets' => __('Type here to filter earsets...'),
+            'markings' => __('Type here to filter markings...'),
+            'singularities' => __('Type here to filter singularities...'),
+        ]);
+
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('staffEdit', $rat);
 
@@ -438,6 +448,7 @@ class RatsController extends AppController
             'earsets',
             'coats',
             'singularities',
+            'placeholders',
             'generic',
             'user',
             'show_staff'

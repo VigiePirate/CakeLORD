@@ -81,6 +81,10 @@
     border: 1px solid #6f7db3;
 }
 
+.selectize-control.multi .selectize-input > div.active {
+   color: #6076bf;
+}
+
 .selectize-control.multi .selectize-input input {
     /* color: #606c76; */
     font-family: inherit;
