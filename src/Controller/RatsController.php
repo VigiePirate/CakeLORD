@@ -348,6 +348,16 @@ class RatsController extends AppController
             __('Please answer the following questions about euthanasia, diagnostics and analyses.'),
         ]);
 
+        $placeholders = json_encode([
+            'colors' => __('Type here to filter colors...'),
+            'eyecolors' => __('Type here to filter eyecolors...'),
+            'coats' => __('Type here to filter coats...'),
+            'dilutions' => __('Type here to filter dilutions...'),
+            'earsets' => __('Type here to filter earsets...'),
+            'markings' => __('Type here to filter markings...'),
+            'singularities' => __('Type here to filter singularities...'),
+        ]);
+
         $this->set(compact(
             'rat',
             'colors',
@@ -360,7 +370,8 @@ class RatsController extends AppController
             'deathPrimaryCauses',
             'states',
             'creator_id',
-            'js_messages'
+            'js_messages',
+            'placeholders'
         ));
     }
 
@@ -417,7 +428,7 @@ class RatsController extends AppController
 
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('staffEdit', $rat);
-    
+
         $this->set(compact(
             'rat',
             'colors',
@@ -539,7 +550,18 @@ class RatsController extends AppController
          $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
          $states = $this->Rats->States->find('list', ['limit' => 200]);
          $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
-         $this->set(compact('rat', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'states', 'singularities'));
+
+         $placeholders = json_encode([
+             'colors' => __('Type here to filter colors...'),
+             'eyecolors' => __('Type here to filter eyecolors...'),
+             'coats' => __('Type here to filter coats...'),
+             'dilutions' => __('Type here to filter dilutions...'),
+             'earsets' => __('Type here to filter earsets...'),
+             'markings' => __('Type here to filter markings...'),
+             'singularities' => __('Type here to filter singularities...'),
+         ]);
+
+         $this->set(compact('rat', 'colors', 'eyecolors', 'dilutions', 'markings', 'earsets', 'coats', 'states', 'singularities', 'placeholders'));
      }
 
     public function results() {

@@ -241,7 +241,7 @@ class Rat extends Entity
             return $age;
         }  else {
             if($this->age < 1) {
-                return $age = __('{0, plural, =1{1 day} other{# days}}', [$this->precise_age]);
+                return $age = __('{0, plural, =0{1 day} =1{1 day} other{# days}}', [$this->precise_age]);
             } else {
                 return $age = __('{0, plural, =1{1 month} other{# months}}', [$this->age]);
             }
