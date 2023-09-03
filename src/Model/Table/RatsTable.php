@@ -545,6 +545,18 @@ class RatsTable extends Table
             ]
         );
 
+        /* Sex change limitations */
+
+        $rules->addUpdate(function ($rat) {
+            return ! $rat->isTransParent();
+            },
+            'isTransParent',
+            [
+                'errorField' => 'sex',
+                'message' => __('The sex of rats with registered offspring cannot be changed.')
+            ]
+        );
+
         return $rules;
     }
 

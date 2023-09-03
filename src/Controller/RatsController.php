@@ -381,6 +381,7 @@ class RatsController extends AppController
                 'Ratteries',
                 'DeathPrimaryCauses',
                 'DeathSecondaryCauses',
+                'BredLitters',
                 'States'
             ],
         ]);
@@ -401,6 +402,8 @@ class RatsController extends AppController
                 return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
+        } else {
+            $this->Flash->warning( __('For data coherence, modifications of rats are restricted. Please, contact a staff member to change origins or birth date.'));
         }
 
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
@@ -414,9 +417,7 @@ class RatsController extends AppController
 
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('staffEdit', $rat);
-
-        $this->Flash->warning( __('For data coherence, modifications of rats are restricted. Please, contact a staff member to change origins or birth date.'));
-
+    
         $this->set(compact(
             'rat',
             'colors',
