@@ -86,7 +86,7 @@
                 <tr>
                     <th><?= __('Birth place') ?></th>
 
-                    <?php if (in_array('birth_place', $diff_list)) : ?>
+                    <?php if (in_array('rattery_id', $diff_list)) : ?>
                         <td class="minus"><?= $snap_rat->has('rattery') ? $this->Html->link($snap_rat->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $snap_rat->rattery->id]) : '' ?></td>
                     <?php else : ?>
                         <td><?= $rat->has('rattery') ? $this->Html->link($rat->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $rat->rattery->id]) : '' ?></td>
