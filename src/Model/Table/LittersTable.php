@@ -271,7 +271,7 @@ class LittersTable extends Table
         // $rules->add($rules->isUnique(['birth_date', 'parents._ids']));
 
         /* Mother existence */
-        $rules->addCreate(function($litter) {
+        $rules->add(function($litter) {
                 return $litter->hasMother();
             },
             'mother_selected',
