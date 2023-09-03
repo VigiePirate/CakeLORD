@@ -306,6 +306,10 @@ input:read-only {
     line-height: 1.5 !important;
 }
 
+.placeholder {
+  color: #707e8a;
+}
+
 /* Tables */
 
 tr:hover {
