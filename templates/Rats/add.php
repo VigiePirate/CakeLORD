@@ -576,51 +576,52 @@
     });
     </script>
     <script>
+    var placeholders = <?= $placeholders ?>;
         $(function () {
             $("#jquery-color-select").selectize( {
-                placeholder: 'Type here to filter colors...',
+                placeholder: placeholders['colors'],
                 maxItems: 1,
                 plugins: ['remove_button']
             });
         });
         $(function () {
             $("#jquery-eyecolor-select").selectize( {
-                placeholder: 'Type here to filter eyecolors...',
+                placeholder: placeholders['eyecolors'],
                 maxItems: 1,
                 plugins: ['remove_button']
             });
         });
         $(function () {
             $("#jquery-coat-select").selectize( {
-                placeholder: 'Type here to filter coats...',
+                placeholder: placeholders['coats'],
                 maxItems: 1,
                 plugins: ['remove_button']
             });
         });
         $(function () {
             $("#jquery-dilution-select").selectize( {
-                placeholder: 'Type here to filter dilutions...',
+                placeholder: placeholders['dilutions'],
                 maxItems: 1,
                 plugins: ['remove_button']
             });
         });
         $(function () {
             $("#jquery-earset-select").selectize( {
-                placeholder: 'Type here to filter earsets...',
+                placeholder: placeholders['earsets'],
                 maxItems: 1,
                 plugins: ['remove_button']
             });
         });
         $(function () {
             $("#jquery-marking-select").selectize( {
-                placeholder: 'Type here to filter markings...',
+                placeholder: placeholders['markings'],
                 maxItems: 1,
                 plugins: ['remove_button']
             });
         });
         $(function () {
             $("#jquery-singularity-select").selectize( {
-                placeholder: 'Type here to filter singularities...',
+                placeholder: placeholders['singularities'],
                 maxItems: 8,
                 plugins: ['remove_button']
             });
@@ -628,8 +629,6 @@
     </script>
 
     <script>
-
-
     $(function() {
         $('#is-dead').on('change', function() {
             var show_death = $(this).is(':checked');

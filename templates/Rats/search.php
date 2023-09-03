@@ -166,18 +166,18 @@
                     <div class="row">
                         <div class="column-responsive column-50">
                         <?php
-                            echo $this->Form->control('eyecolor_id', ['empty' => true, 'default' => 0, 'options' => $eyecolors]);
-                            echo $this->Form->control('dilution_id', ['empty' => true, 'default' => 0, 'options' => $dilutions]);
-                            echo $this->Form->control('marking_id', ['empty' => true, 'default' => 0, 'options' => $markings]);
+                            echo $this->Form->control('eyecolor_id', ['id' => 'jquery-eyecolor-select', 'empty' => true, 'default' => 0, 'options' => $eyecolors]);
+                            echo $this->Form->control('dilution_id', ['id' => 'jquery-dilution-select', 'empty' => true, 'default' => 0, 'options' => $dilutions]);
+                            echo $this->Form->control('marking_id', ['id' => 'jquery-marking-select', 'empty' => true, 'default' => 0, 'options' => $markings]);
                         ?>
                         </div>
                         <div class="column-responsive column-50">
                         <?php
-                            echo $this->Form->control('earset_id', ['empty' => true, 'default' => 0, 'options' => $earsets]);
-                            echo $this->Form->control('coat_id', ['empty' => true, 'default' => 0, 'options' => $coats]);
-                            /*echo $this->Form->control('singularities._ids', ['empty' => true, 'default' => 0, 'options' => $singularities, 'size' => '13', 'style' => 'height:auto;']);*/
-                            echo $this->Form->control('singularity_id', ['empty' => true, 'default' => 0, 'options' => $singularities]);
+                            echo $this->Form->control('earset_id', ['id' => 'jquery-earset-select', 'empty' => true, 'default' => 0, 'options' => $earsets]);
+                            echo $this->Form->control('coat_id', ['id' => 'jquery-coat-select', 'empty' => true, 'default' => 0, 'options' => $coats]);
+                            echo $this->Form->control('singularity_id', ['id' => 'jquery-singularity-select', 'empty' => true, 'default' => 0, 'options' => $singularities]);
                         ?>
+
                         </div>
                     </div>
                 </fieldset>
@@ -320,11 +320,55 @@
     });
     </script>
     <script>
-    $(function () {
-        $("#jquery-color-select").selectize( {
-            placeholder : 'Type here...',
-            maxItems: 8,
+    var placeholders = <?= $placeholders ?>;
+        $(function () {
+            $("#jquery-color-select").selectize( {
+                placeholder: placeholders['colors'],
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
         });
-     });
+        $(function () {
+            $("#jquery-eyecolor-select").selectize( {
+                placeholder: placeholders['eyecolors'],
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
+        });
+        $(function () {
+            $("#jquery-coat-select").selectize( {
+                placeholder: placeholders['coats'],
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
+        });
+        $(function () {
+            $("#jquery-dilution-select").selectize( {
+                placeholder: placeholders['dilutions'],
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
+        });
+        $(function () {
+            $("#jquery-earset-select").selectize( {
+                placeholder: placeholders['earsets'],
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
+        });
+        $(function () {
+            $("#jquery-marking-select").selectize( {
+                placeholder: placeholders['markings'],
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
+        });
+        $(function () {
+            $("#jquery-singularity-select").selectize( {
+                placeholder: placeholders['singularities'],
+                maxItems: 1,
+                plugins: ['remove_button']
+            });
+        });
     </script>
 <?php $this->end();
