@@ -128,6 +128,43 @@ trait StatisticsTrait
         return $query->count();
     }
 
+    public function countRatsByContributor($rattery_id, $options = []) {
+        $model = FactoryLocator::get('Table')->get('Rats');
+
+        $filter1 = ['Rats.rattery_id' => $rattery_id];
+        $filter2 = [
+            'Rats.rattery_id !=' => $rattery_id,
+            'Contributions.rattery_id' => $rattery_id,
+            'Contributions.contribution_type_id >' => 1
+        ];
+
+        if (! empty($options)) {
+            $filter1 = array_merge($filter1, $options);
+            $filter2 = array_merge($filter2, $options);
+        }
+
+        $result1 = $model
+            ->find()
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
+            ->where($filter1)
+            ->count();
+
+        $result2 = $model
+            ->find()
+            ->innerJoinWith('BirthLitters.Contributions', function ($q) use ($rattery_id) {
+                return $q->where(['Contributions.rattery_id' => $rattery_id]);
+            })
+            ->innerJoinWith('States', function ($q) {
+                return $q->where(['States.is_reliable IS' => true]);
+            })
+            ->where($filter2)
+            ->count();
+
+        return ($result1 + $result2);
+    }
+
     public function countRatsByYear()
     {
         $model = FactoryLocator::get('Table')->get('Rats');

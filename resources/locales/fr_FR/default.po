@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-09-03 15:37+0000\n"
-"PO-Revision-Date: 2023-09-03 18:52+0200\n"
+"POT-Creation-Date: 2023-09-03 17:47+0000\n"
+"PO-Revision-Date: 2023-09-03 19:48+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -152,16 +152,16 @@ msgstr "Impossible de supprimer le pays. Veuillez réessayer."
 #: src/Controller/DeathSecondaryCausesController.php:58
 #: src/Controller/DeathSecondaryCausesController.php:59
 #: src/Controller/LittersController.php:823
-#: src/Controller/LittersController.php:824 src/Model/Entity/Rattery.php:210
-#: src/Model/Entity/Rattery.php:211 src/Model/Entity/Rattery.php:270
-#: src/Model/Entity/StatisticsTrait.php:572
-#: src/Model/Entity/StatisticsTrait.php:679 templates/RatSnapshots/diff.php:205
+#: src/Controller/LittersController.php:824 src/Model/Entity/Rattery.php:211
+#: src/Model/Entity/Rattery.php:212 src/Model/Entity/Rattery.php:271
+#: src/Model/Entity/StatisticsTrait.php:608
+#: src/Model/Entity/StatisticsTrait.php:715 templates/RatSnapshots/diff.php:205
 #: templates/RatSnapshots/diff.php:207 templates/RatSnapshots/diff.php:214
 #: templates/RatSnapshots/diff.php:216 templates/RatSnapshots/diff.php:222
 #: templates/RatSnapshots/diff.php:224 templates/RatSnapshots/diff.php:491
 #: templates/RatSnapshots/diff.php:501 templates/RatSnapshots/diff.php:510
-#: templates/Ratteries/view.php:357 templates/Ratteries/view.php:365
-#: templates/Ratteries/view.php:373 templates/Users/index.php:49
+#: templates/Ratteries/view.php:356 templates/Ratteries/view.php:364
+#: templates/Ratteries/view.php:372 templates/Users/index.php:49
 #: templates/Users/private.php:34 templates/element/ratteries.php:62
 msgid "N/A"
 msgstr "ND"
@@ -569,13 +569,13 @@ msgid "We could not attach the selected rat to this litter."
 msgstr "Nous n’avons pas réussi à rattacher le rat sélectionné à cette portée."
 
 #: src/Controller/LittersController.php:691
-#: src/Controller/RatsController.php:586
+#: src/Controller/RatsController.php:608
 #: src/Controller/RatteriesController.php:307
 msgid "The snapshot has been restored."
 msgstr "La sauvegarde a été restaurée."
 
 #: src/Controller/LittersController.php:693
-#: src/Controller/RatsController.php:588
+#: src/Controller/RatsController.php:610
 #: src/Controller/RatteriesController.php:309
 msgid "The snapshot could not be loaded. Please, try again."
 msgstr "Nous n’avons pas pu charger cette sauvegarde. Veuillez réessayer."
@@ -602,7 +602,7 @@ msgid "This litter sheet is now frozen."
 msgstr "La fiche de cette portée est verrouillée."
 
 #: src/Controller/LittersController.php:1061
-#: src/Controller/RatsController.php:1239
+#: src/Controller/RatsController.php:1261
 #: src/Controller/RatteriesController.php:699
 msgid ""
 "We could not freeze the sheet. Please retry or contact an administrator."
@@ -615,7 +615,7 @@ msgid "This litter sheet is now unfrozen."
 msgstr "La fiche de cette portée est déverrouillée."
 
 #: src/Controller/LittersController.php:1075
-#: src/Controller/RatsController.php:1253
+#: src/Controller/RatsController.php:1275
 #: src/Controller/RatteriesController.php:712
 msgid "We could not thaw the sheet. Please retry or contact an administrator."
 msgstr ""
@@ -623,12 +623,12 @@ msgstr ""
 "un administrateur."
 
 #: src/Controller/LittersController.php:1086
-#: src/Controller/RatsController.php:1265
+#: src/Controller/RatsController.php:1287
 msgid "This rat sheet has been approved."
 msgstr "La fiche de ce rat a été validée."
 
 #: src/Controller/LittersController.php:1088
-#: src/Controller/RatsController.php:1267
+#: src/Controller/RatsController.php:1289
 #: src/Controller/RatteriesController.php:725
 msgid ""
 "We could not approve the sheet. Please retry or contact an administrator."
@@ -637,12 +637,12 @@ msgstr ""
 "administrateur."
 
 #: src/Controller/LittersController.php:1099
-#: src/Controller/RatsController.php:1279
+#: src/Controller/RatsController.php:1301
 msgid "This rat sheet has been unapproved."
 msgstr "Cette fiche a été invalidée."
 
 #: src/Controller/LittersController.php:1101
-#: src/Controller/RatsController.php:1281
+#: src/Controller/RatsController.php:1303
 #: src/Controller/RatteriesController.php:738
 msgid ""
 "We could not unapprove the sheet. Please retry or contact an administrator."
@@ -1035,7 +1035,7 @@ msgstr ""
 "Veuillez compléter les informations ci-dessous. En cas de doute, merci de "
 "consulter la documentation avant toute chose."
 
-#: src/Controller/RatsController.php:347 src/Controller/RatsController.php:1182
+#: src/Controller/RatsController.php:347 src/Controller/RatsController.php:1204
 #: templates/Rats/add.php:294 templates/Rats/add.php:338
 #: templates/Rats/declare_death.php:67
 msgid ""
@@ -1045,7 +1045,7 @@ msgstr ""
 "Veuillez lire attentivement les informations qui apparaîtront ici afin de "
 "vérifier votre choix."
 
-#: src/Controller/RatsController.php:348 src/Controller/RatsController.php:1183
+#: src/Controller/RatsController.php:348 src/Controller/RatsController.php:1205
 msgid ""
 "Please answer the following questions about euthanasia, diagnostics and "
 "analyses."
@@ -1053,31 +1053,38 @@ msgstr ""
 "Veuillez répondre aux questions suivantes (euthanasie, diagnostic "
 "vétérinaire, réalisation d’analyses)."
 
-#: src/Controller/RatsController.php:352
+#: src/Controller/RatsController.php:352 src/Controller/RatsController.php:430
+#: src/Controller/RatsController.php:566
 msgid "Type here to filter colors..."
 msgstr "Tapez ici pour filtrer la liste des couleurs…"
 
-#: src/Controller/RatsController.php:353
+#: src/Controller/RatsController.php:353 src/Controller/RatsController.php:431
+#: src/Controller/RatsController.php:567
 msgid "Type here to filter eyecolors..."
 msgstr "Tapez ici pour filtrer la liste des couleurs d’yeux…"
 
-#: src/Controller/RatsController.php:354
+#: src/Controller/RatsController.php:354 src/Controller/RatsController.php:432
+#: src/Controller/RatsController.php:568
 msgid "Type here to filter coats..."
 msgstr "Tapez ici pour filtrer la liste des types de poils…"
 
-#: src/Controller/RatsController.php:355
+#: src/Controller/RatsController.php:355 src/Controller/RatsController.php:433
+#: src/Controller/RatsController.php:569
 msgid "Type here to filter dilutions..."
 msgstr "Tapez ici pour filtrer la liste des dilutions…"
 
-#: src/Controller/RatsController.php:356
+#: src/Controller/RatsController.php:356 src/Controller/RatsController.php:434
+#: src/Controller/RatsController.php:570
 msgid "Type here to filter earsets..."
 msgstr "Tapez ici pour filtrer la liste des types d’oreilles…"
 
-#: src/Controller/RatsController.php:357
+#: src/Controller/RatsController.php:357 src/Controller/RatsController.php:435
+#: src/Controller/RatsController.php:571
 msgid "Type here to filter markings..."
 msgstr "Tapez ici pour filtrer la liste des marquages…"
 
-#: src/Controller/RatsController.php:358
+#: src/Controller/RatsController.php:358 src/Controller/RatsController.php:436
+#: src/Controller/RatsController.php:572
 msgid "Type here to filter singularities..."
 msgstr "Tapez ici pour filtrer la liste des particularités…"
 
@@ -1094,7 +1101,7 @@ msgstr ""
 "restreinte. Veuillez contacter un administrateur pour changer les origines "
 "ou la date de naissance."
 
-#: src/Controller/RatsController.php:484
+#: src/Controller/RatsController.php:495
 msgid ""
 "The rat sheet has been deleted. You can inform its creator by mail from "
 "their sheet below."
@@ -1102,11 +1109,11 @@ msgstr ""
 "La fiche du rat a été supprimée. Vous pouvez en informer son propriétaire "
 "par mail depuis sa fiche ci-dessous."
 
-#: src/Controller/RatsController.php:487
+#: src/Controller/RatsController.php:498
 msgid "The rat sheet could not be deleted. It still wanted to live."
 msgstr "Impossible de supprimer la fiche du rat. Elle voulait encore vivre."
 
-#: src/Controller/RatsController.php:494
+#: src/Controller/RatsController.php:505
 msgid ""
 "This rat has no offspring and can be deleted. Related messages and snapshots "
 "will be deleted. This operation is irreversible!"
@@ -1115,7 +1122,7 @@ msgstr ""
 "et sauvegardes liées seront supprimées aussi. Cette opération est "
 "irréversible !"
 
-#: src/Controller/RatsController.php:497
+#: src/Controller/RatsController.php:508
 msgid ""
 "This rat has offspring. You must edit or delete their bred litters before "
 "being allowed to delete the sheet."
@@ -1123,15 +1130,15 @@ msgstr ""
 "Ce rat a une descendance enregistrée. Vous devez modifier ou supprimer ses "
 "portées avant de pouvoir supprimer sa fiche."
 
-#: src/Controller/RatsController.php:1093
+#: src/Controller/RatsController.php:1115
 msgid "The rat’s picture has been deleted."
 msgstr "La photo de ce rat a été est supprimé."
 
-#: src/Controller/RatsController.php:1096
+#: src/Controller/RatsController.php:1118
 msgid "The rat’s picture could not be deleted. Please, try again."
 msgstr "Impossible de supprimer cette photo. Veuillez réessayer."
 
-#: src/Controller/RatsController.php:1101
+#: src/Controller/RatsController.php:1123
 msgid ""
 "The rat’s new picture has been saved. A staff member still has to validate "
 "it."
@@ -1139,34 +1146,34 @@ msgstr ""
 "La nouvelle photo du rat a été enregistrée. Elle passera par l’approbation "
 "d’un membre du staff."
 
-#: src/Controller/RatsController.php:1104
+#: src/Controller/RatsController.php:1126
 msgid "The rat’s new picture could not be saved. Please, try again."
 msgstr "Impossible d’enregistrer la nouvelle photo. Veuillez réessayer."
 
-#: src/Controller/RatsController.php:1107
+#: src/Controller/RatsController.php:1129
 #: src/Controller/RatteriesController.php:472
 #: src/Controller/UsersController.php:489
 msgid "Pictures must be in jpeg, gif or png format and less than 8 MB."
 msgstr ""
 "Les photos doivent être au format jpeg, gif ou png et peser moins de 8 Mo."
 
-#: src/Controller/RatsController.php:1134
+#: src/Controller/RatsController.php:1156
 msgid "The rat has been transferred to its new owner."
 msgstr "La fiche du rat a été transférée à son nouveau propriétaire."
 
-#: src/Controller/RatsController.php:1137
+#: src/Controller/RatsController.php:1159
 msgid "The rat ownership could not be changed. Please, try again."
 msgstr "Impossible de changer le propriétaire du rat. Veuillez réessayer."
 
-#: src/Controller/RatsController.php:1173
+#: src/Controller/RatsController.php:1195
 msgid "Sorry for your loss. Your rat’s death has been recorded."
 msgstr "Toutes nos condoléances. Le décès de votre rat a bien été enregistré."
 
-#: src/Controller/RatsController.php:1176
+#: src/Controller/RatsController.php:1198
 msgid "Your rat’s death could not be recorded. Please, try again."
 msgstr "Impossible d’enregistrer le décès de votre rat. Veuillez réessayer."
 
-#: src/Controller/RatsController.php:1178
+#: src/Controller/RatsController.php:1200
 msgid ""
 "We are sorry for your loss. Please fill the information below to record the "
 "rat death. Date and primary cause are mandatory."
@@ -1175,25 +1182,25 @@ msgstr ""
 "enregistrer le décès de votre rat. La date et la catégorie de décès sont "
 "obligatoires."
 
-#: src/Controller/RatsController.php:1209
+#: src/Controller/RatsController.php:1231
 msgid "Your new comment about the rat has been saved."
 msgstr "Votre commentaire a été enregistré."
 
-#: src/Controller/RatsController.php:1212
+#: src/Controller/RatsController.php:1234
 msgid "Your new comment about the rat could not be saved. Please, try again."
 msgstr ""
 "Impossible d’enregistrer votre nouveau commentaire à propos de ce rat. "
 "Veuillez réessayer."
 
-#: src/Controller/RatsController.php:1237
+#: src/Controller/RatsController.php:1259
 msgid "This rat sheet is now frozen."
 msgstr "La fiche de ce rat est désormais gelée."
 
-#: src/Controller/RatsController.php:1251
+#: src/Controller/RatsController.php:1273
 msgid "This rat sheet is now unfrozen."
 msgstr "La fiche de ce rat est désormais déverrouillée."
 
-#: src/Controller/RatsController.php:1107
+#: src/Controller/RatsController.php:1129
 #: src/Controller/RatteriesController.php:472
 #: src/Controller/UsersController.php:489
 msgctxt "pictures"
@@ -1934,12 +1941,12 @@ msgctxt "zipcode"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: templates/Ratteries/view.php:532
+#: templates/Ratteries/view.php:531
 msgctxt "mother"
 msgid "Unknown"
 msgstr "Inconnue"
 
-#: templates/Ratteries/view.php:533
+#: templates/Ratteries/view.php:532
 msgctxt "father"
 msgid "Unknown"
 msgstr "Inconnu"
@@ -2003,24 +2010,24 @@ msgctxt "death cause"
 msgid "Unknown (presumably dead)"
 msgstr "Inconnue (rat présumé mort)"
 
-#: src/Model/Entity/Rattery.php:276
+#: src/Model/Entity/Rattery.php:277
 msgid " (one-shot rattery)"
 msgstr " (raterie-minute)"
 
-#: src/Model/Entity/StatisticsTrait.php:180
+#: src/Model/Entity/StatisticsTrait.php:216
 msgid "Male-only"
 msgstr "Uniquement des mâles"
 
-#: src/Model/Entity/StatisticsTrait.php:186
+#: src/Model/Entity/StatisticsTrait.php:222
 msgid "Female-only"
 msgstr "Uniquement des femelles"
 
-#: src/Model/Entity/StatisticsTrait.php:192
+#: src/Model/Entity/StatisticsTrait.php:228
 msgid "Balanced (1 male for 1 female)"
 msgstr "Équilibrée (1 mâle pour 1 femelle)"
 
-#: src/Model/Entity/StatisticsTrait.php:198
-#: src/Model/Entity/StatisticsTrait.php:581
+#: src/Model/Entity/StatisticsTrait.php:234
+#: src/Model/Entity/StatisticsTrait.php:617
 msgid ""
 "{0, number} (about {1, plural, =1{1 male} other{# males}} for {2, plural, "
 "=1{1 female} other{# females}})"
@@ -2028,8 +2035,8 @@ msgstr ""
 "{0, number} (environ {1, plural, =1{1 mâle} other{# mâles}} pour {2, plural, "
 "=1{1 femelle} other{# femelles}})"
 
-#: src/Model/Entity/StatisticsTrait.php:202
-#: src/Model/Entity/StatisticsTrait.php:585
+#: src/Model/Entity/StatisticsTrait.php:238
+#: src/Model/Entity/StatisticsTrait.php:621
 msgid ""
 "{0, number} (about {1, plural, =1{1 female} other{# females}} for {2, "
 "plural, =1{1 male} other{# males}})"
@@ -2037,11 +2044,11 @@ msgstr ""
 "{0, number} (environ {1, plural, =1{1 femelle} other{# femelles}} pour {2, "
 "plural, =1{1 mâle} other{# mâles}})"
 
-#: src/Model/Entity/StatisticsTrait.php:568
+#: src/Model/Entity/StatisticsTrait.php:604
 msgid "Only females"
 msgstr "Uniquement des femelles"
 
-#: src/Model/Entity/StatisticsTrait.php:576
+#: src/Model/Entity/StatisticsTrait.php:612
 msgid "Only males"
 msgstr "Uniquement des mâles"
 
@@ -2448,7 +2455,7 @@ msgstr "Titre"
 #: templates/Rats/delete.php:53 templates/Rats/delete.php:79
 #: templates/Rats/view.php:431 templates/Rats/view.php:458
 #: templates/Ratteries/delete.php:53 templates/Ratteries/delete.php:79
-#: templates/Ratteries/view.php:603 templates/Ratteries/view.php:629
+#: templates/Ratteries/view.php:602 templates/Ratteries/view.php:628
 #: templates/RatteryMessages/view.php:34 templates/RatterySnapshots/view.php:34
 msgid "Created"
 msgstr "Créée le"
@@ -2517,8 +2524,8 @@ msgstr "Éditer la notice"
 #: templates/Rats/delete.php:83 templates/Rats/sex.php:22
 #: templates/Rats/view.php:432 templates/Rats/view.php:462
 #: templates/Ratteries/delete.php:54 templates/Ratteries/delete.php:83
-#: templates/Ratteries/view.php:524 templates/Ratteries/view.php:604
-#: templates/Ratteries/view.php:633 templates/RatteryMessages/add.php:12
+#: templates/Ratteries/view.php:523 templates/Ratteries/view.php:603
+#: templates/Ratteries/view.php:632 templates/RatteryMessages/add.php:12
 #: templates/RatteryMessages/edit.php:12 templates/RatteryMessages/index.php:20
 #: templates/RatteryMessages/view.php:10
 #: templates/RatterySnapshots/index.php:18 templates/Roles/index.php:21
@@ -2668,7 +2675,7 @@ msgstr ""
 #: templates/Litters/view.php:380 templates/RatSnapshots/diff.php:556
 #: templates/Rats/pedigree.php:48 templates/Rats/view.php:47
 #: templates/Rats/view.php:407 templates/Ratteries/view.php:50
-#: templates/Ratteries/view.php:499 templates/Users/view.php:189
+#: templates/Ratteries/view.php:498 templates/Users/view.php:189
 msgid "Last modified on {0}."
 msgstr "Dernière modification le {0}."
 
@@ -2720,7 +2727,7 @@ msgstr "Informations de référence"
 #: templates/Operators/view.php:40 templates/RatMessages/view.php:30
 #: templates/RatSnapshots/view.php:30 templates/Rats/delete.php:50
 #: templates/Rats/view.php:428 templates/Ratteries/delete.php:50
-#: templates/Ratteries/view.php:600 templates/RatteryMessages/view.php:30
+#: templates/Ratteries/view.php:599 templates/RatteryMessages/view.php:30
 #: templates/RatterySnapshots/view.php:30 templates/Roles/view.php:27
 #: templates/States/view.php:32 templates/Users/view.php:219
 msgid "Id"
@@ -3002,7 +3009,7 @@ msgstr "Génotype 2"
 #: templates/Litters/edit.php:46 templates/Operators/view.php:44
 #: templates/RatSnapshots/diff.php:254 templates/RatSnapshots/diff.php:542
 #: templates/Rats/add.php:359 templates/Rats/declare_death.php:76
-#: templates/Rats/edit.php:127 templates/Rats/view.php:369
+#: templates/Rats/edit.php:126 templates/Rats/view.php:369
 #: templates/Ratteries/add.php:70 templates/Ratteries/edit.php:71
 #: templates/Ratteries/register.php:38
 msgid "Comments"
@@ -3051,7 +3058,7 @@ msgstr "Parents"
 msgid "Contribution Type"
 msgstr "Type de contribution"
 
-#: templates/Contributions/from_rattery.php:18 templates/Ratteries/view.php:523
+#: templates/Contributions/from_rattery.php:18 templates/Ratteries/view.php:522
 #: templates/element/litters.php:24
 msgid "Size"
 msgstr "Taille"
@@ -3069,7 +3076,7 @@ msgstr "Supprimer la contribution"
 msgid "Are you sure you want to delete contribution # {0}?"
 msgstr "Voulez-vous vraiment supprimer la contribution n°{0}?"
 
-#: templates/Contributions/from_rattery.php:15 templates/Ratteries/view.php:520
+#: templates/Contributions/from_rattery.php:15 templates/Ratteries/view.php:519
 #: templates/element/litters.php:12
 msgctxt "litter"
 msgid "Birth date"
@@ -3377,7 +3384,7 @@ msgstr "Supprimer la cause de décès"
 #: templates/DeathPrimaryCauses/view.php:96
 #: templates/DeathSecondaryCauses/view.php:52 templates/Litters/view.php:336
 #: templates/Lord/stats.php:1 templates/Lord/webstats.php:1
-#: templates/Ratteries/view.php:174 templates/Ratteries/view.php:301
+#: templates/Ratteries/view.php:174 templates/Ratteries/view.php:300
 #: templates/Users/view.php:260 templates/layout/default.php:129
 #: templates/layout/fullpage.php:145
 msgid "Statistics"
@@ -3649,7 +3656,7 @@ msgstr "Tous les signalements"
 #: templates/Litters/delete.php:51 templates/Litters/view.php:402
 #: templates/Lord/my.php:60 templates/Rats/delete.php:51
 #: templates/Rats/view.php:429 templates/Ratteries/delete.php:51
-#: templates/Ratteries/view.php:601
+#: templates/Ratteries/view.php:600
 msgid "From User"
 msgstr "Signalé par"
 
@@ -3805,13 +3812,13 @@ msgid "Litter #{0}"
 msgstr "Portée n°{0}"
 
 #: templates/LitterSnapshots/diff.php:27 templates/LitterSnapshots/diff.php:179
-#: templates/Rats/view.php:246 templates/Ratteries/view.php:521
+#: templates/Rats/view.php:246 templates/Ratteries/view.php:520
 #: templates/element/litters.php:18
 msgid "Dam"
 msgstr "Mère"
 
 #: templates/LitterSnapshots/diff.php:37 templates/LitterSnapshots/diff.php:189
-#: templates/Rats/view.php:258 templates/Ratteries/view.php:522
+#: templates/Rats/view.php:258 templates/Ratteries/view.php:521
 #: templates/element/litters.php:21
 msgid "Sire"
 msgstr "Père"
@@ -3892,8 +3899,8 @@ msgstr "Supprimer le snapshot de portée"
 #: templates/Litters/view.php:433 templates/RatSnapshots/view.php:26
 #: templates/Rats/delete.php:82 templates/Rats/view.php:461
 #: templates/Ratteries/delete.php:82 templates/Ratteries/my.php:47
-#: templates/Ratteries/my.php:135 templates/Ratteries/view.php:519
-#: templates/Ratteries/view.php:632 templates/RatterySnapshots/view.php:26
+#: templates/Ratteries/my.php:135 templates/Ratteries/view.php:518
+#: templates/Ratteries/view.php:631 templates/RatterySnapshots/view.php:26
 #: templates/States/index.php:14 templates/element/litters.php:6
 #: templates/element/rats.php:9 templates/element/ratteries.php:6
 #: templates/element/simple_rats.php:20
@@ -3909,7 +3916,7 @@ msgstr "État"
 #: templates/LitterSnapshots/view.php:39 templates/Litters/delete.php:81
 #: templates/RatSnapshots/view.php:39 templates/Rats/delete.php:81
 #: templates/Rats/view.php:460 templates/Ratteries/delete.php:81
-#: templates/Ratteries/view.php:631 templates/RatterySnapshots/view.php:39
+#: templates/Ratteries/view.php:630 templates/RatterySnapshots/view.php:39
 msgid "Data"
 msgstr "Données"
 
@@ -4016,7 +4023,7 @@ msgid "Stillborn pup count"
 msgstr "Nombre de petits mort-nés"
 
 #: templates/Litters/add.php:231 templates/Rats/add.php:363
-#: templates/Rats/edit.php:131
+#: templates/Rats/edit.php:130
 msgid "Additional information"
 msgstr "Informations complémentaires"
 
@@ -4045,7 +4052,7 @@ msgstr "Rat"
 msgid "Type and select the rat’s name or identifier here..."
 msgstr "Entrez et sélectionnez le nom ou l’identifiant du rat…"
 
-#: templates/Litters/attach_rat.php:61 templates/Rats/edit.php:161
+#: templates/Litters/attach_rat.php:61 templates/Rats/edit.php:160
 msgid "Update pedigree identifier?"
 msgstr "Mettre à jour le numéro de pedigree ?"
 
@@ -4062,19 +4069,19 @@ msgstr "Vérifier les sauvegardes et les messages avant suppression"
 #: templates/Litters/delete.php:43 templates/Litters/view.php:394
 #: templates/Messages/index.php:9 templates/Rats/delete.php:43
 #: templates/Rats/view.php:421 templates/Ratteries/delete.php:43
-#: templates/Ratteries/view.php:593
+#: templates/Ratteries/view.php:592
 msgid "Messages"
 msgstr "Messages"
 
 #: templates/Litters/delete.php:52 templates/Litters/view.php:403
 #: templates/Rats/delete.php:52 templates/Rats/view.php:430
-#: templates/Ratteries/delete.php:52 templates/Ratteries/view.php:602
+#: templates/Ratteries/delete.php:52 templates/Ratteries/view.php:601
 msgid "Message"
 msgstr "Message"
 
 #: templates/Litters/delete.php:73 templates/Litters/view.php:425
 #: templates/Rats/delete.php:73 templates/Rats/view.php:452
-#: templates/Ratteries/delete.php:73 templates/Ratteries/view.php:623
+#: templates/Ratteries/delete.php:73 templates/Ratteries/view.php:622
 msgid "Snapshots"
 msgstr "Snapshots"
 
@@ -4085,13 +4092,13 @@ msgstr "Différences avec la dernière version"
 
 #: templates/Litters/delete.php:95 templates/Rats/delete.php:95
 #: templates/Rats/view.php:474 templates/Ratteries/delete.php:95
-#: templates/Ratteries/view.php:645
+#: templates/Ratteries/view.php:644
 msgid "Compare Versions"
 msgstr "Comparer les versions"
 
 #: templates/Litters/delete.php:100 templates/Litters/view.php:453
 #: templates/Rats/delete.php:100 templates/Rats/view.php:479
-#: templates/Ratteries/delete.php:100 templates/Ratteries/view.php:650
+#: templates/Ratteries/delete.php:100 templates/Ratteries/view.php:649
 msgid "Restore Snapshot"
 msgstr "Restaurer le snapshot"
 
@@ -4124,7 +4131,7 @@ msgid "Stillborn pups count"
 msgstr "Nombre de petits mort-nés"
 
 #: templates/Litters/edit.php:84 templates/Litters/manage_contributions.php:48
-#: templates/Rats/edit.php:147
+#: templates/Rats/edit.php:146
 msgid "Staff-only"
 msgstr "Réservé au staff"
 
@@ -4331,7 +4338,7 @@ msgstr ""
 #: templates/Litters/view.php:48 templates/Litters/view.php:380
 #: templates/RatSnapshots/diff.php:275 templates/Rats/pedigree.php:48
 #: templates/Rats/view.php:47 templates/Rats/view.php:407
-#: templates/Ratteries/view.php:48 templates/Ratteries/view.php:497
+#: templates/Ratteries/view.php:48 templates/Ratteries/view.php:496
 msgid "Created on {0} by {1}."
 msgstr "Fiche créée le {0} par {1}."
 
@@ -4508,13 +4515,13 @@ msgstr ""
 
 #: templates/Litters/view.php:364 templates/Rats/family.php:75
 #: templates/Rats/family.php:89 templates/Ratteries/view.php:223
-#: templates/Ratteries/view.php:410
+#: templates/Ratteries/view.php:409
 msgid "infant mortality excluded:"
 msgstr "mortalité infantile exclue :"
 
 #: templates/Litters/view.php:368 templates/Rats/family.php:79
 #: templates/Rats/family.php:93 templates/Ratteries/view.php:227
-#: templates/Ratteries/view.php:414
+#: templates/Ratteries/view.php:413
 msgid "accidents excluded:"
 msgstr "accidents exclus :"
 
@@ -4523,12 +4530,12 @@ msgid "No rat has been yet attached to this litter."
 msgstr "Aucun rat n’a encore été rattaché à cette portée."
 
 #: templates/Litters/view.php:391 templates/Rats/view.php:417
-#: templates/Ratteries/view.php:589 templates/Users/edit.php:64
+#: templates/Ratteries/view.php:588 templates/Users/edit.php:64
 #: templates/Users/my.php:68 templates/Users/view.php:200
 msgid "Private information"
 msgstr "Informations confidentielles"
 
-#: templates/Litters/view.php:432 templates/Ratteries/view.php:630
+#: templates/Litters/view.php:432 templates/Ratteries/view.php:629
 msgid "Differences"
 msgstr "Différences"
 
@@ -4761,7 +4768,7 @@ msgstr "Administrer les marquages"
 
 #: templates/Lord/my.php:140 templates/RatSnapshots/diff.php:156
 #: templates/RatSnapshots/diff.php:446 templates/Rats/add.php:241
-#: templates/Rats/edit.php:114 templates/Rats/print.php:63
+#: templates/Rats/edit.php:113 templates/Rats/print.php:63
 #: templates/Rats/view.php:312
 msgid "Singularities"
 msgstr "Particularités"
@@ -4868,7 +4875,7 @@ msgid "Username"
 msgstr "Pseudonyme"
 
 #: templates/Lord/search.php:97 templates/Ratteries/my.php:67
-#: templates/Ratteries/view.php:258 templates/RatterySnapshots/diff.php:76
+#: templates/Ratteries/view.php:257 templates/RatterySnapshots/diff.php:76
 #: templates/RatterySnapshots/diff.php:210 templates/Users/my.php:39
 #: templates/Users/view.php:97
 msgid "Localization"
@@ -4915,7 +4922,7 @@ msgid "{0, number} rats"
 msgstr "{0, number} rats"
 
 #: templates/Lord/stats.php:30 templates/Ratteries/view.php:186
-#: templates/Ratteries/view.php:337
+#: templates/Ratteries/view.php:336
 msgid "females:"
 msgstr "femelles :"
 
@@ -4924,7 +4931,7 @@ msgid "{0, number} females ({1, number} %)"
 msgstr "{0, number} femelles ({1, number} %)"
 
 #: templates/Lord/stats.php:34 templates/Ratteries/view.php:190
-#: templates/Ratteries/view.php:341
+#: templates/Ratteries/view.php:340
 msgid "males:"
 msgstr "mâles :"
 
@@ -4941,7 +4948,7 @@ msgid "{0, number} rats ({1, number} % of all rats)"
 msgstr "{0, number} rats ({1, number} % de tous les rats)"
 
 #: templates/Lord/stats.php:45 templates/Ratteries/view.php:208
-#: templates/Ratteries/view.php:396 templates/Ratteries/view.php:478
+#: templates/Ratteries/view.php:395 templates/Ratteries/view.php:477
 msgid "declared with known date:"
 msgstr "à une date connue :"
 
@@ -4964,8 +4971,8 @@ msgstr "moyenne :"
 #: templates/Lord/stats.php:62 templates/Lord/stats.php:66
 #: templates/Lord/stats.php:70 templates/Ratteries/view.php:220
 #: templates/Ratteries/view.php:224 templates/Ratteries/view.php:228
-#: templates/Ratteries/view.php:407 templates/Ratteries/view.php:411
-#: templates/Ratteries/view.php:415
+#: templates/Ratteries/view.php:406 templates/Ratteries/view.php:410
+#: templates/Ratteries/view.php:414
 msgid "{0, number} months (♀: {1, number} months – ♂: {2, number} months)"
 msgstr "{0, number} mois (♀: {1, number} mois – ♂: {2, number} mois)"
 
@@ -5035,20 +5042,20 @@ msgstr "autres contributions :"
 msgid "{0, number} external litters"
 msgstr "{0, number} portées externes"
 
-#: templates/Lord/stats.php:123 templates/Ratteries/view.php:354
+#: templates/Lord/stats.php:123 templates/Ratteries/view.php:353
 msgid "Average mother age:"
 msgstr "Âge maternel moyen :"
 
 #: templates/Lord/stats.php:124 templates/Lord/stats.php:128
-#: templates/Ratteries/view.php:356 templates/Ratteries/view.php:364
+#: templates/Ratteries/view.php:355 templates/Ratteries/view.php:363
 msgid "{0, number} days ({1, number} months)"
 msgstr "{0, number} jours ({1, number} mois)"
 
-#: templates/Lord/stats.php:127 templates/Ratteries/view.php:362
+#: templates/Lord/stats.php:127 templates/Ratteries/view.php:361
 msgid "Average father age:"
 msgstr "Âge paternel moyen :"
 
-#: templates/Lord/stats.php:131 templates/Ratteries/view.php:370
+#: templates/Lord/stats.php:131 templates/Ratteries/view.php:369
 msgid "Average litter size:"
 msgstr "Taille moyenne des portées :"
 
@@ -5056,7 +5063,7 @@ msgstr "Taille moyenne des portées :"
 msgid "{0, number} pups (debiased estimation: {1, number} pups)"
 msgstr "{0, number} ratons (estimation corrigée : {1, number} ratons)"
 
-#: templates/Lord/stats.php:135 templates/Ratteries/view.php:378
+#: templates/Lord/stats.php:135 templates/Ratteries/view.php:377
 msgid "Average sex ratio:"
 msgstr "Proportion des sexes dans les portées :"
 
@@ -5385,7 +5392,7 @@ msgstr "Sexe"
 #: templates/Rats/add.php:199 templates/Rats/edit.php:69
 #: templates/Rats/print.php:61 templates/Rats/search.php:97
 #: templates/Rats/view.php:214 templates/Ratteries/add.php:45
-#: templates/Ratteries/edit.php:44 templates/Ratteries/view.php:246
+#: templates/Ratteries/edit.php:44 templates/Ratteries/view.php:245
 #: templates/RatterySnapshots/diff.php:49
 #: templates/RatterySnapshots/diff.php:183 templates/Users/view.php:80
 #: templates/element/rats.php:36 templates/element/ratteries.php:21
@@ -5490,7 +5497,7 @@ msgid "Type here..."
 msgstr "Entrez votre recherche ici…"
 
 #: templates/Rats/add.php:250 templates/Rats/change_picture.php:44
-#: templates/Rats/edit.php:123
+#: templates/Rats/edit.php:122
 msgid "Photo"
 msgstr "Photo"
 
@@ -5621,15 +5628,15 @@ msgstr "Réviser les portées du rat avant la suppression de sa fiche"
 msgid "Edit {0}"
 msgstr "Éditer {0}"
 
-#: templates/Rats/edit.php:154
+#: templates/Rats/edit.php:153
 msgid "Attach rat to a generic rattery"
 msgstr "Remplacer l’origine du rat par une origine générique"
 
-#: templates/Rats/edit.php:169
+#: templates/Rats/edit.php:168
 msgid "Use with care!"
 msgstr "À utiliser avec mille précautions !"
 
-#: templates/Rats/edit.php:170
+#: templates/Rats/edit.php:169
 msgid ""
 "This section allows to change the rat prefix to a generic prefix only. Leave "
 "unselected to keep rat prefix unchanged, or used the rat attach function for "
@@ -5641,7 +5648,7 @@ msgstr ""
 "rattachement d’un rat existant. Ne rien cocher pour laisser l’origine et "
 "l’identifiant inchangés."
 
-#: templates/Rats/edit.php:177
+#: templates/Rats/edit.php:176
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
@@ -6014,7 +6021,7 @@ msgctxt "long"
 msgid "Website"
 msgstr "Site internet"
 
-#: templates/Ratteries/my.php:87 templates/Ratteries/view.php:266
+#: templates/Ratteries/my.php:87 templates/Ratteries/view.php:265
 #: templates/RatterySnapshots/diff.php:94
 #: templates/RatterySnapshots/diff.php:228
 msgid "Website"
@@ -6112,7 +6119,7 @@ msgid "See rattery sheet"
 msgstr "Voir la fiche raterie"
 
 #: templates/Ratteries/my.php:51 templates/Ratteries/my.php:139
-#: templates/Ratteries/view.php:250 templates/RatterySnapshots/diff.php:58
+#: templates/Ratteries/view.php:249 templates/RatterySnapshots/diff.php:58
 #: templates/RatterySnapshots/diff.php:192
 msgid "Founded in"
 msgstr "Créée en"
@@ -6121,14 +6128,14 @@ msgstr "Créée en"
 msgid "Pause my rattery now"
 msgstr "Mettre ma raterie en pause"
 
-#: templates/Ratteries/my.php:63 templates/Ratteries/view.php:254
+#: templates/Ratteries/my.php:63 templates/Ratteries/view.php:253
 #: templates/RatterySnapshots/diff.php:67
 #: templates/RatterySnapshots/diff.php:201 templates/element/ratteries.php:30
 #: templates/element/simple_ratteries.php:30
 msgid "Country"
 msgstr "Pays"
 
-#: templates/Ratteries/my.php:71 templates/Ratteries/view.php:262
+#: templates/Ratteries/my.php:71 templates/Ratteries/view.php:261
 #: templates/RatterySnapshots/diff.php:85
 #: templates/RatterySnapshots/diff.php:219
 msgid "Zip Code"
@@ -6277,7 +6284,7 @@ msgstr ""
 "Cet affixe est générique, il ne correspond pas réellement à une raterie. Les "
 "informations affichées sont donc limitées."
 
-#: templates/Ratteries/view.php:175 templates/Ratteries/view.php:306
+#: templates/Ratteries/view.php:175 templates/Ratteries/view.php:305
 msgid "Breeding statistics"
 msgstr "Statistiques de reproduction"
 
@@ -6285,8 +6292,8 @@ msgstr "Statistiques de reproduction"
 msgid "Litters recorded under this prefix:"
 msgstr "Portées enregistrées sous cet affixe :"
 
-#: templates/Ratteries/view.php:179 templates/Ratteries/view.php:316
-#: templates/Ratteries/view.php:321 templates/Ratteries/view.php:326
+#: templates/Ratteries/view.php:179 templates/Ratteries/view.php:315
+#: templates/Ratteries/view.php:320 templates/Ratteries/view.php:325
 msgid "{0, plural, =0{0 litter} =1{1 litter} other{# litters}}"
 msgstr "{0, plural,=0{Aucune portée} =1{1 portée} other{# portées}}"
 
@@ -6294,23 +6301,23 @@ msgstr "{0, plural,=0{Aucune portée} =1{1 portée} other{# portées}}"
 msgid "Rat recorded under this prefix:"
 msgstr "Rats enregistrés sous cet affixe :"
 
-#: templates/Ratteries/view.php:183 templates/Ratteries/view.php:334
+#: templates/Ratteries/view.php:183 templates/Ratteries/view.php:333
 msgid "{0, plural, =0 {No rat} =1{1 rat} other{# rats}}"
 msgstr "{0, plural,=0{Aucun rat} =1{1 rat} other{# rats}}"
 
-#: templates/Ratteries/view.php:187 templates/Ratteries/view.php:338
+#: templates/Ratteries/view.php:187 templates/Ratteries/view.php:337
 msgid ""
 "{0, plural, =0 {No female} =1{1 female} other{# females}} ({1, number} %)"
 msgstr ""
 "{0, plural, =0{Aucune femelle} =1{1 femelle} other{# femelles}} ({1, "
 "number} %)"
 
-#: templates/Ratteries/view.php:191 templates/Ratteries/view.php:342
+#: templates/Ratteries/view.php:191 templates/Ratteries/view.php:341
 msgid "{0, plural, =0 {No male} =1{1 male} other{# males}} ({1, number} %)"
 msgstr "{0, plural,=0{Aucun mâle} =1{1 mâle} other{# mâles}} ({1, number} %)"
 
-#: templates/Ratteries/view.php:195 templates/Ratteries/view.php:389
-#: templates/Ratteries/view.php:471
+#: templates/Ratteries/view.php:195 templates/Ratteries/view.php:388
+#: templates/Ratteries/view.php:470
 msgid "Lifespan statistics"
 msgstr "Statistiques de longévité"
 
@@ -6331,13 +6338,13 @@ msgid "{0, number} rats ({1, number} % of recorded rats)"
 msgstr "{0, number} rats ({1, number} % des rats enregistrés)"
 
 #: templates/Ratteries/view.php:209 templates/Ratteries/view.php:213
-#: templates/Ratteries/view.php:397 templates/Ratteries/view.php:401
-#: templates/Ratteries/view.php:479 templates/Ratteries/view.php:483
+#: templates/Ratteries/view.php:396 templates/Ratteries/view.php:400
+#: templates/Ratteries/view.php:478 templates/Ratteries/view.php:482
 msgid "{0, number} rats ({1, number} %)"
 msgstr "{0, number} rats ({1, number} %)"
 
-#: templates/Ratteries/view.php:212 templates/Ratteries/view.php:400
-#: templates/Ratteries/view.php:482
+#: templates/Ratteries/view.php:212 templates/Ratteries/view.php:399
+#: templates/Ratteries/view.php:481
 msgid "presumed dead:"
 msgstr "présumés morts :"
 
@@ -6345,7 +6352,7 @@ msgstr "présumés morts :"
 msgid "Average lifespan of rats with this prefix:"
 msgstr "Longévité moyenne des rats portant cet affixe :"
 
-#: templates/Ratteries/view.php:232 templates/Ratteries/view.php:487
+#: templates/Ratteries/view.php:232 templates/Ratteries/view.php:486
 msgid ""
 "There aren’t enough rats with consolidated information to compute relevant "
 "mortality statistics."
@@ -6353,11 +6360,11 @@ msgstr ""
 "Il n’y a pas assez de données pour calculer des statistiques de mortalité "
 "pertinentes."
 
-#: templates/Ratteries/view.php:242 templates/Users/view.php:86
+#: templates/Ratteries/view.php:241 templates/Users/view.php:86
 msgid "Information"
 msgstr "Informations"
 
-#: templates/Ratteries/view.php:303
+#: templates/Ratteries/view.php:302
 msgid ""
 "No rat born in (or in partnership with) this rattery has a recorded and "
 "validated sheet."
@@ -6365,36 +6372,36 @@ msgstr ""
 "Aucun rat n’est enregistré et validé comme né dans (ou en partenariat avec) "
 "cette raterie."
 
-#: templates/Ratteries/view.php:309
+#: templates/Ratteries/view.php:308
 msgid "Breeding activity period:"
 msgstr "Période d’activité :"
 
-#: templates/Ratteries/view.php:315
+#: templates/Ratteries/view.php:314
 msgid "Declared litters:"
 msgstr "Portées déclarées :"
 
-#: templates/Ratteries/view.php:317 templates/Ratteries/view.php:322
-#: templates/Ratteries/view.php:327
+#: templates/Ratteries/view.php:316 templates/Ratteries/view.php:321
+#: templates/Ratteries/view.php:326
 msgid "{0, plural, =0{no pup} =1{1 pup} other{# pups}}"
 msgstr "{0, plural, =0{aucun raton} =1{1 raton} other{# ratons}}"
 
-#: templates/Ratteries/view.php:320
+#: templates/Ratteries/view.php:319
 msgid "internal (born in the rattery):"
 msgstr "internes (naissances à la raterie) :"
 
-#: templates/Ratteries/view.php:325
+#: templates/Ratteries/view.php:324
 msgid "external (other contributed litters):"
 msgstr "externes (portées en partenariat) :"
 
-#: templates/Ratteries/view.php:333
-msgid "Rat records (born in the rattery):"
-msgstr "Nombre de fiches rats (nés à la raterie) :"
+#: templates/Ratteries/view.php:332
+msgid "All rat records :"
+msgstr "Nombre de fiches rat enregistrées :"
 
-#: templates/Ratteries/view.php:372
+#: templates/Ratteries/view.php:371
 msgid "{0, plural, =0{No pup} =1{1 pup} other{# pups}} per litter"
 msgstr "{0, plural, =0{Aucun raton} =1{1 raton} other{# ratons}} par portée"
 
-#: templates/Ratteries/view.php:385
+#: templates/Ratteries/view.php:384
 msgid ""
 "This rattery only had external litters. Mortality statistics can be "
 "consulted on each of their contributed litter sheets."
@@ -6402,44 +6409,44 @@ msgstr ""
 "Cette raterie n’a que des portées externes. Les statistiques de mortalité "
 "peuvent être consultées directement sur les fiches de ces portées."
 
-#: templates/Ratteries/view.php:392 templates/Ratteries/view.php:474
+#: templates/Ratteries/view.php:391 templates/Ratteries/view.php:473
 msgid "Bred rats recorded as deceased:"
 msgstr "Rats nés à la raterie et décédés :"
 
-#: templates/Ratteries/view.php:393 templates/Ratteries/view.php:475
+#: templates/Ratteries/view.php:392 templates/Ratteries/view.php:474
 msgid "{0, number} rats ({1, number} % of recorded bred rats)"
 msgstr ""
 "{0, number} rats ({1, number} % des rats nés à la raterie et enregistrés)"
 
-#: templates/Ratteries/view.php:406
+#: templates/Ratteries/view.php:405
 msgid "Average lifespan of bred rats:"
 msgstr "Longévité moyenne des rats nés à la raterie :"
 
-#: templates/Ratteries/view.php:420
+#: templates/Ratteries/view.php:419
 msgid "Oldest bred rat:"
 msgstr "Doyen des rats nés à la raterie :"
 
-#: templates/Ratteries/view.php:422
+#: templates/Ratteries/view.php:421
 msgid " (deceased at {0})"
 msgstr " (décédé à {0})"
 
-#: templates/Ratteries/view.php:423
+#: templates/Ratteries/view.php:422
 msgid "No eligible champion"
 msgstr "Pas de rat éligible au titre"
 
-#: templates/Ratteries/view.php:430
+#: templates/Ratteries/view.php:429
 msgid "Death causes statistics"
 msgstr "Statistiques de mortalité"
 
-#: templates/Ratteries/view.php:433
+#: templates/Ratteries/view.php:432
 msgid "Primary death causes by decreasing frequency:"
 msgstr "Catégories de décès par fréquence décroissante :"
 
-#: templates/Ratteries/view.php:451
+#: templates/Ratteries/view.php:450
 msgid "Secondary death causes by decreasing frequency:"
 msgstr "Causes de décès par fréquence décroissante :"
 
-#: templates/Ratteries/view.php:491
+#: templates/Ratteries/view.php:490
 msgid ""
 "The owner of this rattery does not wish to show their full breeding and "
 "mortality statistics."
@@ -6447,33 +6454,33 @@ msgstr ""
 "Le propriétaire de cette raterie ne souhaite pas afficher les statistiques "
 "détaillées de son élevage."
 
-#: templates/Ratteries/view.php:507 templates/Users/view.php:136
+#: templates/Ratteries/view.php:506 templates/Users/view.php:136
 msgid "Related entries"
 msgstr "Fiches liées"
 
-#: templates/Ratteries/view.php:511
+#: templates/Ratteries/view.php:510
 msgid "Last contributed litters"
 msgstr "Dernières portées"
 
-#: templates/Ratteries/view.php:540 templates/Ratteries/view.php:547
+#: templates/Ratteries/view.php:539 templates/Ratteries/view.php:546
 msgid "Edit Litter"
 msgstr "Éditer la portée"
 
-#: templates/Ratteries/view.php:561
+#: templates/Ratteries/view.php:560
 msgid "Recently modified rats"
 msgstr "Derniers rats mis à jour"
 
-#: templates/Ratteries/view.php:350
+#: templates/Ratteries/view.php:349
 msgctxt "rattery"
 msgid "Litter statistics"
 msgstr "Statistiques des portées"
 
-#: templates/Ratteries/view.php:513
+#: templates/Ratteries/view.php:512
 msgctxt "litters"
 msgid "See all"
 msgstr "Toutes les portées"
 
-#: templates/Ratteries/view.php:563
+#: templates/Ratteries/view.php:562
 msgctxt "rats"
 msgid "See all"
 msgstr "Tous les rats"
@@ -7860,6 +7867,9 @@ msgstr "Réseaux sociaux"
 #: templates/layout/default.php:150 templates/layout/fullpage.php:166
 msgid "Partners"
 msgstr "Partenaires"
+
+#~ msgid "Rat records (born in the rattery):"
+#~ msgstr "Nombre de fiches rats :"
 
 #~ msgid "Staff and contributors"
 #~ msgstr "Staff et propriétaires"

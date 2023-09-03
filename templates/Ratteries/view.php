@@ -329,7 +329,7 @@
 
                             <table class="condensed stats unfold">
                                 <tr>
-                                    <th><?= __('Rat records (born in the rattery):') ?></th>
+                                    <th><?= __('All rat records :') ?></th>
                                     <td><?= __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}}', [$stats['ratCount']]) ?>
                                 </tr>
                                 <tr>
@@ -389,15 +389,15 @@
                                         <table class="condensed stats unfold">
                                             <tr>
                                                 <th><?= __('Bred rats recorded as deceased:') ?></th>
-                                                <td><?=  __('{0, number} rats ({1, number} % of recorded bred rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
+                                                <td><?=  __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}} ({1, number} % of recorded bred rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
                                             </tr>
                                             <tr>
                                                 <th> ⨽ <?= __('declared with known date:') ?></th>
-                                                <td> ⨽ <?= __('{0, number} rats ({1, number} %)', [$stats['deadRatCount'], $stats['followedRatProportion']]) ?></td>
+                                                <td> ⨽ <?= __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}} ({1, number} %)', [$stats['deadRatCount'], $stats['followedRatProportion']]) ?></td>
                                             </tr>
                                             <tr>
                                                 <th> ⨽ <?= __('presumed dead:') ?></th>
-                                                <td> ⨽ <?= __('{0, number} rats ({1, number} %)', [$stats['lostRatCount'], $stats['lostRatProportion']]) ?></td>
+                                                <td> ⨽ <?= __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}} ({1, number} %)', [$stats['lostRatCount'], $stats['lostRatProportion']]) ?></td>
                                             </tr>
                                         </table>
                                         <table class="condensed stats unfold">

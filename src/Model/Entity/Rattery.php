@@ -151,12 +151,12 @@ class Rattery extends Entity
         $stats['inLitterCount'] = $this->countContributions(['rattery_id' => $this->id, 'contribution_type_id' => '1']);
         $stats['outLitterCount'] = $this->countContributions(['rattery_id' => $this->id, 'contribution_type_id >' => '1']);
 
-        $stats['inRatCount'] = $this->countPups(['rattery_id' => $this->id, 'contribution_type_id' => '1']);;
-        $stats['outRatCount'] = $this->countPups(['rattery_id' => $this->id, 'contribution_type_id >' => '1']);;
+        $stats['inRatCount'] = $this->countPups(['rattery_id' => $this->id, 'contribution_type_id' => '1']);
+        $stats['outRatCount'] = $this->countPups(['rattery_id' => $this->id, 'contribution_type_id >' => '1']);
 
-        $stats['ratCount'] = $this->countMy('Rats', 'rattery');
-        $stats['femaleCount'] = $this->countRats(['rattery_id' => $this->id, 'sex' => 'F']);
-        $stats['maleCount'] = $this->countRats(['rattery_id' => $this->id, 'sex' => 'M']);
+        $stats['ratCount'] = $this->countRatsByContributor($this->id);
+        $stats['femaleCount'] = $this->countRatsByContributor($this->id, ['sex' => 'F']);
+        $stats['maleCount'] = $this->countRatsByContributor($this->id, ['sex' => 'M']);
 
         if (! $this->is_generic) {
             $stats['activityYears'] = $this->lifetimeInWords(['rattery_id' => $this->id], $stats['inLitterCount']+$stats['outLitterCount']);
