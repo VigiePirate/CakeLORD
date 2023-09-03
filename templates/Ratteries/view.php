@@ -232,7 +232,6 @@
                                 <div class="message"><?= __('There aren’t enough rats with consolidated information to compute relevant mortality statistics.') ?></div>
                             <?php endif; ?>
                         <?php endif; ?>
-                    </div>
                     <?php endif; ?>
                 </div>
 

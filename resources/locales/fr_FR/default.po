@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2023-09-03 15:37+0000\n"
-"PO-Revision-Date: 2023-09-03 17:43+0200\n"
+"PO-Revision-Date: 2023-09-03 18:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -6388,7 +6388,7 @@ msgstr "externes (portées en partenariat) :"
 
 #: templates/Ratteries/view.php:333
 msgid "Rat records (born in the rattery):"
-msgstr "Nombre de fiches rats :"
+msgstr "Nombre de fiches rats (nés à la raterie) :"
 
 #: templates/Ratteries/view.php:372
 msgid "{0, plural, =0{No pup} =1{1 pup} other{# pups}} per litter"
