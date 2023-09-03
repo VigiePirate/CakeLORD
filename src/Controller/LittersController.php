@@ -473,7 +473,7 @@ class LittersController extends AppController
             if ($deletable) {
                 if ($this->Litters->delete($litter)) {
                     $this->Flash->success(__('The litter sheet has been deleted. You can inform its creator by mail from their sheet below.'));
-                    return $this->redirect(['controller' => 'Users', 'action' => 'view', $litter->user_id]);
+                    return $this->redirect(['controller' => 'Users', 'action' => 'view', $litter->creator_user_id]);
                 } else {
                     $this->Flash->error(__('The litter sheet could not be deleted. It was not its time.'));
                     return $this->redirect(['action' => 'delete', $litter->id]);
