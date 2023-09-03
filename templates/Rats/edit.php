@@ -54,7 +54,7 @@
                                     'class' => 'miniradio',
                                 ],
                                 'required' => 'required',
-                                'options' => ['M' => 'Male', 'F' => 'Female'],
+                                'options' => ['M' => __('Male'), 'F' => __('Female')],
                             ]);
                         ?>
                     </div>

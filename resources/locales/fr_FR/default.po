@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-08-18 11:47+0000\n"
-"PO-Revision-Date: 2023-08-18 13:51+0200\n"
+"POT-Creation-Date: 2023-08-27 20:15+0000\n"
+"PO-Revision-Date: 2023-08-27 22:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -1559,6 +1559,22 @@ msgstr ""
 "Ceci n’était pas la réponse attendue. Veuillez réessayer, si vous n’êtes pas "
 "un Réplicant."
 
+#: src/Controller/UsersController.php:222
+#: src/Controller/UsersController.php:229
+#: src/Controller/UsersController.php:844
+msgid "Invalid activation link. Please check your email or try again."
+msgstr ""
+"Ce lien d’activation est invalide. Veuillez vérifier votre email et "
+"réessayer."
+
+#: src/Controller/UsersController.php:235
+msgid ""
+"Expired activation link. Your account has been deleted. Please, register "
+"again and check your email right away."
+msgstr ""
+"Ce lien d’activation a expiré et votre compte a été supprimé. Veuillez vous "
+"inscrire à nouveau et vérifier votre email tout de suite après."
+
 #: src/Controller/UsersController.php:244
 msgid ""
 "Your account has been activated. You can now log in and complete your "
@@ -1708,10 +1724,12 @@ msgstr ""
 "vérifier votre email et réessayer."
 
 #: src/Controller/UsersController.php:724
+#: src/Controller/UsersController.php:758
 msgid "Passwords are different. Please retry."
 msgstr "Vous avez entré deux mots de passe différents. Veuillez réessayer."
 
 #: src/Controller/UsersController.php:730
+#: src/Controller/UsersController.php:764
 msgid "Your password has been updated."
 msgstr "Votre mot de passe a été mis à jour."
 
@@ -1723,6 +1741,23 @@ msgstr ""
 "Impossible de confirmer votre identité (mot de passe incorrect). Veuillez "
 "réessayer."
 
+#: src/Controller/UsersController.php:767
+msgid ""
+"Your password could not be updated. Please, retry or contact an "
+"administrator."
+msgstr ""
+"Impossible de mettre à jour votre mot de passe. Veuillez réessayer ou de "
+"contacter un administrateur."
+
+#: src/Controller/UsersController.php:775
+#: src/Controller/UsersController.php:835
+msgid "You must be logged in to use this feature."
+msgstr "Vous devez être connecté pour utiliser cette fonctionnalité."
+
+#: src/Controller/UsersController.php:804
+msgid "Emails are different. Please, check your entry and retry."
+msgstr "Vous avez entré deux mots de passe différents. Veuillez réessayer."
+
 #: src/Controller/UsersController.php:819
 msgid ""
 "Your email has been modified. Your accound must now be reactivated. Please, "
@@ -1730,16 +1765,6 @@ msgid ""
 msgstr ""
 "Votre adresse mail a été modifiée. Vous devez maintenant réactiver votre "
 "compte en cliquant sur le lien de confirmation envoyé par mail."
-
-#: src/Controller/UsersController.php:835
-msgid "You must be logged in to use this feature."
-msgstr "Vous devez être connecté pour utiliser cette fonctionnalité."
-
-#: src/Controller/UsersController.php:844
-msgid "Invalid activation link. Please check your email or try again."
-msgstr ""
-"Ce lien d’activation est invalide. Veuillez vérifier votre email et "
-"réessayer."
 
 #: src/Controller/UsersController.php:853
 msgid ""
@@ -1764,6 +1789,18 @@ msgid ""
 msgstr ""
 "Votre changement d’adresse mail a bien été pris en compte. Vous pouvez "
 "désormais vous connecter avec cette nouvelle adresse."
+
+#: src/Controller/UsersController.php:895
+msgid "This user was already locked."
+msgstr "Le compte de cet utilisateur est déjà verrouillé."
+
+#: src/Controller/UsersController.php:899
+msgid "This user is now locked."
+msgstr "Le compte de cet utilisateur a été déverrouillé."
+
+#: src/Controller/UsersController.php:901
+msgid "This user could not be locked. Please try again."
+msgstr "Impossible de déverrouiller ce compte utilisateur. Veuillez réessayer."
 
 #: src/Controller/UsersController.php:921
 msgid "This user was already unlocked."
@@ -7348,10 +7385,12 @@ msgid "See Rattery"
 msgstr "Voir la raterie"
 
 #: templates/element/side_message_control.php:14
+#: templates/element/statebar.php:21
 msgid "Explain staff intervention"
 msgstr "Expliquer l’intervention du staff"
 
 #: templates/element/side_message_control.php:19
+#: templates/element/statebar.php:25
 msgid ""
 "Explanation is optional. If provided, it will be included in a notification "
 "visible to all stakeholders."

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-08-18 11:47+0000\n"
+"POT-Creation-Date: 2023-08-27 20:15+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -1305,6 +1305,16 @@ msgstr ""
 msgid "This was not the expected answer! Please, retry if you are not a Replicant."
 msgstr ""
 
+#: ./src/Controller/UsersController.php:222
+#: ./src/Controller/UsersController.php:229
+#: ./src/Controller/UsersController.php:844
+msgid "Invalid activation link. Please check your email or try again."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:235
+msgid "Expired activation link. Your account has been deleted. Please, register again and check your email right away."
+msgstr ""
+
 #: ./src/Controller/UsersController.php:244
 msgid "Your account has been activated. You can now log in and complete your profile. Welcome on LORD!"
 msgstr ""
@@ -1417,10 +1427,12 @@ msgid "Expired passkey. Please generate a new one, check your email and try agai
 msgstr ""
 
 #: ./src/Controller/UsersController.php:724
+#: ./src/Controller/UsersController.php:758
 msgid "Passwords are different. Please retry."
 msgstr ""
 
 #: ./src/Controller/UsersController.php:730
+#: ./src/Controller/UsersController.php:764
 msgid "Your password has been updated."
 msgstr ""
 
@@ -1429,16 +1441,21 @@ msgstr ""
 msgid "We could not confirm your identity (incorrect old password). Please retry."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:819
-msgid "Your email has been modified. Your accound must now be reactivated. Please, check your new email for your confirmation link."
+#: ./src/Controller/UsersController.php:767
+msgid "Your password could not be updated. Please, retry or contact an administrator."
 msgstr ""
 
+#: ./src/Controller/UsersController.php:775
 #: ./src/Controller/UsersController.php:835
 msgid "You must be logged in to use this feature."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:844
-msgid "Invalid activation link. Please check your email or try again."
+#: ./src/Controller/UsersController.php:804
+msgid "Emails are different. Please, check your entry and retry."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:819
+msgid "Your email has been modified. Your accound must now be reactivated. Please, check your new email for your confirmation link."
 msgstr ""
 
 #: ./src/Controller/UsersController.php:853
@@ -1451,6 +1468,18 @@ msgstr ""
 
 #: ./src/Controller/UsersController.php:871
 msgid "Your email change has been confirmed. You can now log in with your new credentials."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:895
+msgid "This user was already locked."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:899
+msgid "This user is now locked."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:901
+msgid "This user could not be locked. Please try again."
 msgstr ""
 
 #: ./src/Controller/UsersController.php:921
@@ -7562,10 +7591,12 @@ msgid "See Rattery"
 msgstr ""
 
 #: ./templates/element/side_message_control.php:14
+#: ./templates/element/statebar.php:21
 msgid "Explain staff intervention"
 msgstr ""
 
 #: ./templates/element/side_message_control.php:19
+#: ./templates/element/statebar.php:25
 msgid "Explanation is optional. If provided, it will be included in a notification visible to all stakeholders."
 msgstr ""
 
