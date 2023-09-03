@@ -106,7 +106,9 @@
                             'name' => 'rattery_name_contribution_' . $type->id,
                             'label' => $type->name,
                             'type' => 'text',
-                            'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['name'] : __('Type and select the rattery’s name or prefix here...')
+                            'class' => 'placeholder',
+                            'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['name'] : __('Type and select the rattery’s name or prefix here...'),
+                            'placeholder' => __('Type and select the rattery’s name or prefix here...')
                         ]);
 
                         echo $this->Form->control('rattery_id_contribution_' . $type->id, [

@@ -3,6 +3,7 @@ function autocompleteRattery(visible, hidden) {
     $(window).on('load', function() {
         if (! $(hidden).val() == '') {
             $(visible).addClass("autocompleted");
+            $(visible).removeClass("placeholder");
         }
     });
 
@@ -10,7 +11,8 @@ function autocompleteRattery(visible, hidden) {
       .on('input', function() {
           $(hidden).val('');
           if ($(visible).val() === '' || $(visible).val() === $(visible).attr('placeholder')) {
-              $(this).removeClass('autocompleted');
+              $(this).removeClass("autocompleted");
+              $(this).addClass("placeholder");
           }
       })
 
