@@ -755,6 +755,12 @@ class Rat extends Entity
             && $this->age > RatsTable::MAXIMAL_AGE_MONTHS;
     }
 
+    /* check if the rat’s sex can be changed */
+    public function isTransParent()
+    {
+        return in_array('sex', $this->getDirty()) && ! empty($this->bred_litters);
+    }
+
     /* family statistics */
 
     public function computeDescendance($id, &$descendance)
