@@ -324,7 +324,7 @@
         $(function () {
             $("#jquery-color-select").selectize( {
                 placeholder: placeholders['colors'],
-                maxItems: 1,
+                maxItems: 8,
                 plugins: ['remove_button']
             });
         });
