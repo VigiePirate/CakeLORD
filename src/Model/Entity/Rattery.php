@@ -154,6 +154,7 @@ class Rattery extends Entity
         $stats['inRatCount'] = $this->countPups(['rattery_id' => $this->id, 'contribution_type_id' => '1']);
         $stats['outRatCount'] = $this->countPups(['rattery_id' => $this->id, 'contribution_type_id >' => '1']);
 
+        $stats['sheetCount'] = $this->countMy('Rats', 'rattery'); // birthplace only
         $stats['ratCount'] = $this->countRatsByContributor($this->id);
         $stats['femaleCount'] = $this->countRatsByContributor($this->id, ['sex' => 'F']);
         $stats['maleCount'] = $this->countRatsByContributor($this->id, ['sex' => 'M']);
@@ -172,7 +173,7 @@ class Rattery extends Entity
                     'DATEDIFF(NOW(), birth_date) >' => RatsTable::MAXIMAL_AGE
                 ]
             ]);
-            $stats['deadRatProportion'] = round(100*$stats['presumedDeadRatCount'] / $stats['ratCount'], 1);
+            $stats['deadRatProportion'] = round(100*$stats['presumedDeadRatCount'] / $stats['sheetCount'], 1);
             $stats['deadRatCount'] = $this->countRats([
                 'rattery_id' => $this->id,
                 'is_alive IS' => false,
