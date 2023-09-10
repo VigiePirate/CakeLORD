@@ -37,6 +37,7 @@ class MessageBehavior extends Behavior
         $this->config = $this->getConfig();
         $this->MessagesTable = FactoryLocator::get('Table')->get($config['repository']);
         $this->table()->getEventManager()->on('Model.State.modified', [$this, 'queueMessage']);
+        $this->table()->getEventManager()->on('Model.Snapshot.restored', [$this, 'queueMessage']);
     }
 
     /**
@@ -53,19 +54,22 @@ class MessageBehavior extends Behavior
         $entity = $event->getSubject();
         $data = $event->getData();
         $identity = $data['identity'];
+        $messages = [];
 
-        $message = $this->MessagesTable->newEntity([
-            $this->config['entityField'] => $entity->id,
-            'from_user_id' => $identity->id,
-            'created' => $data['emitted'],
-            'content' => $data['service_message_content'],
-            'is_staff_request' => $data['new_state']->needs_user_action,
-            'is_automatically_generated' => true,
-        ]);
+        foreach ($data['messages'] as $entry) {
+            $messages[] = $this->MessagesTable->newEntity([
+                $this->config['entityField'] => $entity->id,
+                'from_user_id' => $identity->id,
+                'created' => $data['emitted'],
+                'content' => $entry['content'],
+                'is_staff_request' => $identity->role->is_staff && $data['new_state']->needs_user_action,
+                'is_automatically_generated' => $entry['is_automatically_generated'],
+            ]);
+        }
 
         $user_name = $identity->username;
         $user_is_staff = $identity->role->is_staff;
-        dd($message);
+        $this->MessagesTable->saveMany($messages);
         return;
     }
 

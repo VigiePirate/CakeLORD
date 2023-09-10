@@ -1250,11 +1250,26 @@ class RatsController extends AppController
 
     /* State changes */
 
-    public function moderate($id) {
-        if ($this->request->is('post')) {
-            $decision = $this->request->getData('decision');
-            $this->$decision($id);
-        }
+    public function moderate($id)
+    {
+        $rat = $this->Rats->get($id, [
+            'contain' => [
+                'States',
+            ],
+        ]);
+        $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+        if ($this->Rats->save($rat, ['checkRules' => false])) {
+            $this->Flash->success(__('This rat sheet is now ' . _($rat->state->name) . '.'));
+            $this->Flash->default(__('Moderation message was: ') . $this->request->getData('content'));
+        } else {
+            $this->Flash->error(__('We could not moderate the sheet. Please retry or contact an administrator.'));
+        };
+        return $this->redirect(['action' => 'view', $rat->id]);
+
+        #if ($this->request->is('post')) {
+        #    $decision = $this->request->getData('decision');
+        #    $this->$decision($id);
+        #}
     }
 
     public function freeze($id)
