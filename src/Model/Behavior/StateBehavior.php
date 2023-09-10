@@ -19,7 +19,9 @@ class StateBehavior extends Behavior
     protected $_defaultConfig = [
         'repository' => 'States',
         'safe_properties' => ['modified', 'state_id'],
-        'explanation_form_field' => 'side_message',
+        'decision_form_field' => 'decision',
+        'explanation_form_field' => 'content',
+        #'explanation_form_field' => 'side_message',
         'neglection_delay' => '15 days',
     ];
 
@@ -44,8 +46,24 @@ class StateBehavior extends Behavior
         $this->previous_state = null;
         $this->new_state = null;
         $this->now = \Cake\Chronos\Chronos::now();
-        $this->service_message_content = '';
-        $this->user_message_content = '';
+        $this->messages = [];
+    }
+
+    /**
+     * beforeMarshal method
+     *
+     * get the user message associated to the state change (if any), and keep it
+     * for the event to dispatch in the afterSave method.
+     *
+     * @param EventInterface $event
+     * @param EntityInterface $entity
+     * @param ArrayObject $data
+     * @param ArrayObject $options
+     * @return boolean
+     */
+    public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
+    {
+        return true;
     }
 
     /**
@@ -56,14 +74,21 @@ class StateBehavior extends Behavior
      *
      * @param EventInterface $event
      * @param EntityInterface $entity
-     * @param ArrayObject $options
+     * @param ArrayObject $data
      * @param ArrayObject $options
      * @return boolean
      */
     public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
     {
-        if (isset($data[$this->config->explanation_form_field])) {
-            $this->user_message_content = $data[$this->config->explanation_form_field];
+        if (isset($data[$this->config['explanation_form_field']])) {
+            $this->messages[] = [
+                'content' => $data[$this->config['explanation_form_field']],
+                'is_automatically_generated' => false,
+            ];
+        }
+        if (isset($data[$this->config['decision_form_field']])) {
+            $decision = $data[$this->config['decision_form_field']];
+            return $this->$decision($entity);
         }
         return true;
     }
@@ -111,8 +136,7 @@ class StateBehavior extends Behavior
             'previous_state' => $this->previous_state,
             'new_state' => $this->new_state,
             'emitted' => $this->now,
-            'user_message_content' => $this->user_message_content,
-            'service_message_content' => $this->service_message_content,
+            'messages' => $this->messages,
         ]);
         $this->table()->getEventManager()->dispatch($state_event);
     }
@@ -134,11 +158,14 @@ class StateBehavior extends Behavior
             $this->previous_state = $entity->state;
             $entity->state_id = $new_state_id;
             $this->new_state = $this->States->get($entity->state_id);
-            $this->service_message_content = __("{1} by {0} on this sheet on {2,date,medium} {2,time,short}",
-                $this->Identity->username,
-                $context['action'],
-                \Cake\Chronos\Chronos::now()
-            );
+            $this->messages[] = [
+                'content' => __("{1} by {0} on this sheet on {2,date,medium} {2,time,short}",
+                                $this->Identity->username,
+                                $context['action'],
+                                $this->now,
+                ),
+                'is_automatically_generated' => true,
+            ];
             return true;
         }
         return false;
