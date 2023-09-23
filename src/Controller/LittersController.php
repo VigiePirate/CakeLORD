@@ -1038,7 +1038,12 @@ class LittersController extends AppController
             __('rats')
         ]);
 
-        $this->set(compact('litter', 'genealogy_json', 'index_json', 'js_messages'));
+        $this->set(compact(
+            'litter',
+            'genealogy_json',
+            'index_json',
+            'js_messages'
+        ));
     }
 
     /* State changes */

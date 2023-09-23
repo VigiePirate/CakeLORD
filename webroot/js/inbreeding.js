@@ -121,9 +121,13 @@ worker.onmessage = function(evt) {
     document.getElementById('avk10').innerHTML = '<span class="pulse">AVK<sub>10</sub>' + op + i18n.format(evt.data.avk10) + ' %';
   }
 
+  if (evt.data.coi5 != undefined) {
+    document.getElementById('coi5').innerHTML = '<span class="pulse">COI<sub>5</sub> = ' + i18n.format((100*evt.data.coi5).toPrecision(3)) + ' %';
+  }
+
   if (evt.data.coi != undefined) {
     ranks[0] = evt.data.coi;
-    document.getElementById('coi').innerHTML = '<span class="pulse">COI = ' + i18n.format((100*evt.data.coi).toPrecision(4)) + ' %';
+    document.getElementById('coi').innerHTML = '<span class="pulse">COI<sub>∞</sub> = ' + i18n.format((100*evt.data.coi).toPrecision(4)) + ' %';
     if (evt.data.coi > 0) {
       document.getElementById('coancestry').classList.remove("hide-everywhere");
       document.getElementById('coancestry').style.display = 'revert !important';
