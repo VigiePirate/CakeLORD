@@ -1,10 +1,12 @@
 function computeInbreeding(tree, coefs, ancestorIndex, verbose)
 {
-  let output = {coi: 0};
+  let output = {coi: 0, coi5: 0};
   if (verbose) {
     output.contributions = {};
+    output.contributions5 = {};
   }
   let contributions = {};
+  let contributions5 = {};
 
   // find candidate coancestors (duplicates in tree)
   // count occurrences of each (returns an object {id1: count1, id2: count2})
@@ -18,6 +20,7 @@ function computeInbreeding(tree, coefs, ancestorIndex, verbose)
   for (let candidate of candidates) {
 
     contributions[candidate] = 0;
+    contributions5[candidate] = 0;
 
     // find all paths to candidate in tree, separating maternal and paternal
     let fpaths = Object.keys(tree).filter(function(c) {return tree[c] === candidate && c.slice(0,1) === 'F'});
@@ -69,11 +72,26 @@ function computeInbreeding(tree, coefs, ancestorIndex, verbose)
 
             // calculate the contribution of the ancestor through this pair of paths
             contributions[candidate] += 1/2**(fpLength + mpLength - 1)*(1 + coefs[candidate]);
+
+            // add contributions to 5-gen approx if candidate is close enough
+            if (fpLength <= 5 && mpLength <= 5) {
+              contributions5[candidate] += 1/2**(fpLength + mpLength - 1)*(1 + coefs[candidate]);
+            }
+
           }
         }
       }
     }
     // send messages
+    if (contributions5[candidate] > 0) {
+      output.coi5 += contributions5[candidate];
+      if (verbose) {
+        postMessage({
+          coi5: output.coi5,
+        })
+      }
+    }
+
     if (contributions[candidate] > 0) {
       output.coi += contributions[candidate];
       if (verbose) {
@@ -292,7 +310,7 @@ onmessage = function(evt) {
   let coefs = {}; // init coefs object that will be filled with coancestors coi's
   // output = computeInbreeding(fullTree, ancestorIndex, coefs);
   output = computeInbreeding(fullTree, coefs, ancestorIndex, true);
-  postMessage({coi: output.coi, jsMessages: jsMessages});
+  postMessage({coi: output.coi, coi5: output.coi5, jsMessages: jsMessages});
 
   endTime = performance.now();
   cost = Math.trunc(endTime - startTime);
