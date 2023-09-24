@@ -69,19 +69,24 @@
                     <td>AVK<sub>5</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= h($coefficients['avk5']) ?> %</td>
                 </tr>
 
-                <tr>
+                <!-- <tr>
                     <th><?= __('Ancestor loss coefficient (10G)') ?></th>
                     <td>AVK<sub>10</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= h($coefficients['avk10']) ?> %</td>
+                </tr> -->
+
+                <tr>
+                    <th><?= __('Coefficient of Inbreeding (5G)') ?></th>
+                    <td>COI<sub>5</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= h(round($coefficients['coi5'],2)) ?> %</td>
                 </tr>
 
                 <tr>
-                    <th><?= __('Coefficient of Inbreeding') ?></th>
-                    <td>COI  <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= h(round($coefficients['coi'],2)) ?> %</td>
+                    <th><?= __('Coefficient of Inbreeding (16G)') ?></th>
+                    <td>COI<sub>16</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= h(round($coefficients['coi16'],2)) ?> %</td>
                 </tr>
 
             </table>
 
-            <?php if ($coefficients['coi'] != 0) : ?>
+            <?php if ($coefficients['coi16'] != 0) : ?>
 
                 <h2><?= __('Coancestry analysis') ?></h2>
 
