@@ -746,7 +746,7 @@ class LittersController extends AppController
      * Returns a flat table with [$path => $rat_id] rows
      *
      */
-    public function genealogy($id, $path, &$genealogy, $approx = false)
+    public function genealogy($id, $path, &$genealogy, $approx = false, $limit = 17)
     {
         $this->Authorization->skipAuthorization();
         $this->loadModel('Rats');
@@ -768,7 +768,7 @@ class LittersController extends AppController
                     $genealogy[$new_path] = $parent['id'];
                 } else {
                     // since we have never been there, we continue exploring upwards
-                    $approx = $this->genealogy($parent['litter_id'], $new_path, $genealogy, $approx);
+                    $approx = $this->genealogy($parent['litter_id'], $new_path, $genealogy, $approx, $limit-1);
                     $genealogy[$new_path] = $parent['id'];
                 }
             } else {
@@ -788,7 +788,7 @@ class LittersController extends AppController
                         if (! empty($ancestors)) {
                             // FIXME : some better criteria to decide to copy or not?
                             // copy only ancestors which might bring significant inbreeding, but copy more if low copy root
-                            $limit = 30 - 2*strlen($copy_path);
+                            $limit = $limit-1; //30 - 2*strlen($copy_path);
                             foreach($ancestors as $ancestor_path => $ancestor_id) {
                                 if (strlen($ancestor_path) < $limit) {
                                     // replace prefixes and write in genealogy
@@ -995,8 +995,18 @@ class LittersController extends AppController
         $limit = 17;
         $genealogy = [];
         $sub_coefs = [];
-        $approx = $this->genealogy($id, '', $genealogy, false);
-        $coefficients = $this->coefficients($genealogy, $sub_coefs, $limit, $approx, true);
+        $approx = $this->genealogy($id, '', $genealogy, false, $limit);
+        $coefficients_16 = $this->coefficients($genealogy, $sub_coefs, $limit, $approx, true);
+
+        $limit = 6;
+        //$genealogy = [];
+        $sub_coefs = [];
+        //$approx = $this->genealogy($id, '', $genealogy, false, $limit);
+        $coefficients_5 = $this->coefficients($genealogy, $sub_coefs, $limit, $approx, true);
+
+        $coefficients = $coefficients_16;
+        $coefficients['coi16'] = $coefficients['coi'];
+        $coefficients['coi5'] = $coefficients_5['coi'];
 
         if ($coefficients['approx']) {
            $this->Flash->warning(__('This litter has a long or complicated family tree. We had to truncate it in order to compute (reasonably) approximate results.'));
