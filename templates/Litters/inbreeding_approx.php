@@ -46,27 +46,27 @@
 
                 <tr>
                     <th><?= __('Number of known ancestors') ?></th>
-                    <td><?= $coefficients['approx'] ? '⩾ ' : '' ?><?= h($coefficients['ancestor_number'])?>  <?= $coefficients['ancestor_number'] > 1 ? __('rats') : __('rat') ?></td>
+                    <td><?= $coefficients['approx'] ? '⩾ ' : '' ?><?= __('{0, plural, =0{None} =1{1 rat} other{# rats}}', [$coefficients['ancestor_number']]) ?></td>
                 </tr>
 
                 <tr>
                     <th><?= __('Number of distinct ancestors') ?></th>
-                    <td><?= h($coefficients['distinct_number'])?>  <?= $coefficients['distinct_number'] > 1 ? __('rats') : __('rat') ?></td>
+                    <td><?= $coefficients['approx'] ? '⩾ ' : '' ?><?= __('{0, plural, =0{None} =1{1 rat} other{# rats}}', [$coefficients['distinct_number']]) ?> </td>
                 </tr>
 
                 <tr>
                     <th><?= __('Number of founding ancestors') ?></th>
-                    <td><?= h($coefficients['founder_number'])?>  <?= ($coefficients['founder_number'] > 1 ? __('rats') : __('rat')) ?></td>
+                    <td><?= $coefficients['approx'] ? '⩾ ' : '' ?><?= __('{0, plural, =0{None} =1{1 rat} other{# rats}}', [$coefficients['founder_number']]) ?> </td>
                 </tr>
 
                 <tr>
                     <th><?= __('Number of common ancestors') ?></th>
-                    <td><?= $coefficients['approx'] ? '⩾ ' : '' ?><?= h($coefficients['common_number'])?>  <?= $coefficients['common_number'] > 1 ? __('rats') : __('rat') ?></td>
+                    <td><?= $coefficients['approx'] ? '⩾ ' : '' ?> <?= __('{0, plural, =0{None} =1{1 rat} other{# rats}}', [$coefficients['common_number']]) ?> </td>
                 </tr>
 
                 <tr>
                     <th><?= __('Ancestor loss coefficient (5G)') ?></th>
-                    <td>AVK<sub>5</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= h($coefficients['avk5']) ?> %</td>
+                    <td>AVK<sub>5</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= $this->Number->format($coefficients['avk5']) ?> %</td>
                 </tr>
 
                 <!-- <tr>
@@ -76,12 +76,12 @@
 
                 <tr>
                     <th><?= __('Coefficient of Inbreeding (5G)') ?></th>
-                    <td>COI<sub>5</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= h(round($coefficients['coi5'],2)) ?> %</td>
+                    <td>COI<sub>5</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= $this->Number->format(round($coefficients['coi5'],2)) ?> %</td>
                 </tr>
 
                 <tr>
                     <th><?= __('Coefficient of Inbreeding (16G)') ?></th>
-                    <td>COI<sub>16</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= h(round($coefficients['coi16'],2)) ?> %</td>
+                    <td>COI<sub>16</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= $this->Number->format(round($coefficients['coi16'],2)) ?> %</td>
                 </tr>
 
             </table>
@@ -94,7 +94,7 @@
 
                     <th>
                         <div style="opacity:1; width:100%">
-                            <?= round($coefficients['coi'],2) != 0 ? h(round($coefficients['coi'],2)) : '< 0.01' ?> %
+                            <?= round($coefficients['coi'],2) != 0 ? $this->Number->format(round($coefficients['coi'],2)) : '< ' . $this->Number->format(0.01) ?> %
                         </div>
                     </th>
                     <td>
@@ -105,13 +105,14 @@
                         <tr>
                             <td class="th">
                                 <div style="opacity:<?= h(0.25+0.75*log(1+$contrib['coi']/$coefficients['coi'],2)) ?>; width:<?= h(round(15+100*log(1+$contrib['coi']/$coefficients['coi'],2))) ?>%;">
-                                    <?= round($contrib['coi'],2) != 0 ? h(round($contrib['coi'],2)) : '< 0.01' ?> %
+                                    <?= round($contrib['coi'],2) != 0 ? $this->Number->format(round($contrib['coi'],2)) : '< ' . $this->Number->format(0.01) ?> %
                                 </div>
                             </td>
                             <td>
                                  + <?= $this->Html->link(
                                      $contrib['name'],
-                                     ['controller' => 'Rats', 'action' => 'view', $ancestor]) ?>
+                                     ['controller' => 'Rats', 'action' => 'view', $ancestor]) ?> (<?= $contrib['count'] ?>)
+
                             </td>
                         </tr>
                     <?php endforeach ?>
