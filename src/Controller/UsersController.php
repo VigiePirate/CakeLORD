@@ -260,11 +260,13 @@ class UsersController extends AppController
      */
     public function home()
     {
-        $user = $this->Users->get($this->Authentication->getIdentity()->get('id'), [
+        $identity = $this->Authentication->getIdentity();
+        $user = $this->Users->get($identity->get('id'), [
             'contain' => ['Roles'],
         ]);
         $this->Authorization->authorize($user);
 
+        //FIXME: place in a wrapStatistics method in User entity
         $rat_count = $user->countRats(['owner_user_id' => $user->id]);
         $female_count = $user->countRats(['owner_user_id' => $user->id, 'sex' => 'F']);
         $male_count = $user->countRats(['owner_user_id' => $user->id, 'sex' => 'M']);
@@ -291,6 +293,13 @@ class UsersController extends AppController
             $champion = $this->loadModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
         }
 
+        // Messages
+        // $rat_messages = $identity->applyScope('index', $this->RatMessages->find('entitled'));
+        $this->loadModel('RatMessages');
+        $rat_messages = $this->RatMessages->find('entitled', ['user_id' => $user->id]);
+        $total = $rat_messages->count();
+
+        // Date
         $now = \Cake\I18n\FrozenTime::now();
         $today = $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE]);
         $hour = $now->i18nFormat([\IntlDateFormatter::NONE, \IntlDateFormatter::SHORT]);
@@ -302,7 +311,8 @@ class UsersController extends AppController
             'avg_lifespan','female_avg_lifespan','male_avg_lifespan',
             'not_infant_lifespan', 'not_infant_female_lifespan', 'not_infant_male_lifespan',
             'not_accident_lifespan', 'not_accident_female_lifespan', 'not_accident_male_lifespan',
-            'champion'
+            'champion',
+            'total'
         ));
     }
 

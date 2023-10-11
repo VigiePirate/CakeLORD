@@ -104,4 +104,23 @@ class RatMessagesTable extends Table
 
         return $rules;
     }
+
+    public function findEntitled(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        $user_id = $options['user_id'];
+
+        if (empty($user_id)) {
+            return $query;
+        } else {
+            
+        }
+
+        return $query->group(['RatMessages.id']);
+    }
+
+
 }

@@ -471,7 +471,7 @@
                                         <table class="condensed stats unfold">
                                             <tr>
                                                 <th><?= __('Bred rats recorded as deceased:') ?></th>
-                                                <td><?=  __('{0, number} rats ({1, number} % of recorded bred rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
+                                                <td><?=  __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}} ({1, number} % of recorded bred rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
                                             </tr>
                                             <tr>
                                                 <th> ⨽ <?= __('declared with known date:') ?></th>
