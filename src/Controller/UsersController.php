@@ -921,6 +921,8 @@ class UsersController extends AppController
             $this->Flash->warning(__('This user was already unlocked.'));
         } else {
             $user->is_locked = false;
+            $user->failed_login_attempts = 0;
+            $user->failed_login_last_date = null;
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('This user is now unlocked.'));
             } else {
