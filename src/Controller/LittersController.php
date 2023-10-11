@@ -788,7 +788,7 @@ class LittersController extends AppController
                         if (! empty($ancestors)) {
                             // FIXME : some better criteria to decide to copy or not?
                             // copy only ancestors which might bring significant inbreeding, but copy more if low copy root
-                            $limit = $limit-1; //30 - 2*strlen($copy_path);
+                            // $limit = 30 - 2*strlen($copy_path);
                             foreach($ancestors as $ancestor_path => $ancestor_id) {
                                 if (strlen($ancestor_path) < $limit) {
                                     // replace prefixes and write in genealogy
@@ -849,6 +849,7 @@ class LittersController extends AppController
              });
 
              $paths = array_keys($paths);
+             $count = count($paths);
 
              $f_paths = array_filter($paths, function ($input) {return $input[0] == 'F';});
              $m_paths = array_filter($paths, function ($input) {return $input[0] == 'M';});
@@ -912,7 +913,7 @@ class LittersController extends AppController
 
              if ($contribution > 0) {
                  $coi += $contribution;
-                 $coancestry[$duplicate] = ['coi' => 100*$contribution]; // ['coi' => round(100 * $contribution,2)];
+                 $coancestry[$duplicate] = ['coi' => 100*$contribution, 'count' => $count]; // ['coi' => round(100 * $contribution,2)];
 
                  if ($flag) {
                      $name = $this->Rats->get($duplicate, [
@@ -977,7 +978,7 @@ class LittersController extends AppController
         // $unknown = (2**($level+1)-2)-$known;
         $unique = count(array_unique($avk_genealogy));
         // $avk = 100*round(($unique + $unknown)/($known + $unknown), 2);
-        $avk = 100*round($unique/$known, 2);
+        $avk = 100*round($unique/$known, 3);
         return $avk;
     }
 
@@ -999,9 +1000,7 @@ class LittersController extends AppController
         $coefficients_16 = $this->coefficients($genealogy, $sub_coefs, $limit, $approx, true);
 
         $limit = 6;
-        //$genealogy = [];
         $sub_coefs = [];
-        //$approx = $this->genealogy($id, '', $genealogy, false, $limit);
         $coefficients_5 = $this->coefficients($genealogy, $sub_coefs, $limit, $approx, true);
 
         $coefficients = $coefficients_16;
@@ -1045,7 +1044,8 @@ class LittersController extends AppController
             __('generation'),
             __('generations'),
             __('rat'),
-            __('rats')
+            __('rats'),
+            __x('ancestor', 'None')
         ]);
 
         $this->set(compact(
