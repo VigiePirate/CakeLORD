@@ -103,7 +103,7 @@ worker.onmessage = function(evt) {
 
   if (evt.data.avk5 != undefined) {
     if (evt.data.avk5 < 2) {
-      var unit = evt.data.jsMessages[7];
+      unit = evt.data.jsMessages[7];
     } else {
       unit = evt.data.jsMessages[8];
     }
@@ -111,15 +111,15 @@ worker.onmessage = function(evt) {
     document.getElementById('avk5').innerHTML = '<span class="pulse">AVK<sub>5</sub>' + op + i18n.format(evt.data.avk5) + ' %';
   }
 
-  if (evt.data.avk10 != undefined) {
-    if (evt.data.known < 2) {
-      unit = evt.data.jsMessages[7];
-    } else {
-      unit = evt.data.jsMessages[8];
-    }
-    op = evt.data.approx ? ' ≃ ' : ' = ';
-    document.getElementById('avk10').innerHTML = '<span class="pulse">AVK<sub>10</sub>' + op + i18n.format(evt.data.avk10) + ' %';
-  }
+  // if (evt.data.avk10 != undefined) {
+  //   if (evt.data.known < 2) {
+  //     unit = evt.data.jsMessages[7];
+  //   } else {
+  //     unit = evt.data.jsMessages[8];
+  //   }
+  //   op = evt.data.approx ? ' ≃ ' : ' = ';
+  //   document.getElementById('avk10').innerHTML = '<span class="pulse">AVK<sub>10</sub>' + op + i18n.format(evt.data.avk10) + ' %';
+  // }
 
   if (evt.data.coi5 != undefined) {
     document.getElementById('coi5').innerHTML = '<span class="pulse">COI<sub>5</sub> = ' + i18n.format((100*evt.data.coi5).toPrecision(3)) + ' %';
@@ -132,7 +132,7 @@ worker.onmessage = function(evt) {
       document.getElementById('coancestry').classList.remove("hide-everywhere");
       document.getElementById('coancestry').style.display = 'revert !important';
     } else {
-      document.getElementById('common').innerHTML = '<span class="pulse"> None </span>';
+      document.getElementById('common').innerHTML = '<span class="pulse">' + evt.data.jsMessages[9] + '</span>';
     }
   }
 
@@ -142,6 +142,7 @@ worker.onmessage = function(evt) {
     var table = document.getElementById("coancestry-table");
     var id = evt.data.coancestor.id;
     var name = evt.data.coancestor.name;
+    var count = evt.data.coancestor.count;
     var row = document.getElementById("id-" + id);
     var contrast;
 
@@ -160,14 +161,14 @@ worker.onmessage = function(evt) {
       contrast = Math.log2(1+evt.data.coancestor.contribution/evt.data.coi);
       rectangle.style.width = (15+100*contrast) + '%';
       rectangle.style.opacity = 0.25+0.75*contrast;
-      rectangle.innerHTML = ((100*evt.data.coancestor.contribution).toFixed(3) >= 0.01 ? (100*evt.data.coancestor.contribution).toFixed(2) : '< 0.01') + ' %';
-      dataCell.innerHTML = '<span class="pulse">+ <a href=/rats/view/' + id + '>' + name + '</span></a>';
+      rectangle.innerHTML = ((100*evt.data.coancestor.contribution).toFixed(3) >= 0.01 ? i18n.format((100*evt.data.coancestor.contribution).toFixed(2)) + ' %' : '< ' + i18n.format(0.01) + ' %');
+      dataCell.innerHTML = '<span class="pulse">+ <a href=/rats/view/' + id + '>' + name  + '</span></a>' + ' (' + evt.data.coancestor.count + ')';
     } else { // already seen: just update
       var rectangle = document.getElementById("rect-" + id);
       contrast = Math.log2(1+evt.data.coancestor.contribution/evt.data.coi);
       rectangle.style.width = (15+100*contrast) + '%';
       rectangle.style.opacity = 0.25+0.75*contrast;
-      rectangle.innerHTML = ((100*evt.data.coancestor.contribution).toFixed(3) >= 0.01 ? i18n.format((100*evt.data.coancestor.contribution).toFixed(2)) : '< 0.01') + ' %';
+      rectangle.innerHTML = ((100*evt.data.coancestor.contribution).toFixed(3) >= 0.01 ? i18n.format((100*evt.data.coancestor.contribution).toFixed(2)) + ' %' : '< ' + i18n.format(0.01) + ' %');
     }
   }
 

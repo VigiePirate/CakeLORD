@@ -1,4 +1,4 @@
-function computeInbreeding(tree, coefs, ancestorIndex, verbose)
+function computeInbreeding(tree, coefs, ancestorIndex, jsMessages, verbose)
 {
   let output = {coi: 0, coi5: 0};
   if (verbose) {
@@ -67,7 +67,7 @@ function computeInbreeding(tree, coefs, ancestorIndex, verbose)
                   subTree[key.slice(refpathLength)] = tree[key];
                 }
               }
-              coefs[candidate] = computeInbreeding(subTree, coefs, ancestorIndex, false).coi;
+              coefs[candidate] = computeInbreeding(subTree, coefs, ancestorIndex, jsMessages, false).coi;
             }
 
             // calculate the contribution of the ancestor through this pair of paths
@@ -88,6 +88,7 @@ function computeInbreeding(tree, coefs, ancestorIndex, verbose)
       if (verbose) {
         postMessage({
           coi5: output.coi5,
+          jsMessages: jsMessages,
         })
       }
     }
@@ -96,7 +97,7 @@ function computeInbreeding(tree, coefs, ancestorIndex, verbose)
       output.coi += contributions[candidate];
       if (verbose) {
         output.contributions[candidate] = contributions[candidate];
-        postMessage({common: Object.keys(output.contributions).length});
+        postMessage({common: Object.keys(output.contributions).length, jsMessages: jsMessages});
         // update all values since coi has changed and is used for display normalization
         for (let coancestor of candidates) {
           if (contributions[coancestor] > 0) {
@@ -105,8 +106,10 @@ function computeInbreeding(tree, coefs, ancestorIndex, verbose)
               coancestor: {
                 id: coancestor,
                 name: ancestorIndex[coancestor]['name'],
-                contribution: contributions[coancestor]
-              }
+                contribution: contributions[coancestor],
+                count: counts[coancestor]
+              },
+              jsMessages: jsMessages,
             });
           }
         }
@@ -163,10 +166,10 @@ function truncateTree(tree, level) {
 }
 
 function computeAvk(tree, level) {
-  var approxTree = truncateTree(tree,level);
-  var approxKnown = Object.keys(approxTree).length;
+  var approxTree = truncateTree(tree, level);
+  var approxKnown = Object.values(approxTree).length;
   var approxDistinct = [...new Set(Object.values(approxTree))].length;
-  return Math.round(100*approxDistinct/approxKnown);
+  return Math.round(1000*approxDistinct/approxKnown)/10;
 }
 
 function findMaxDepth(tree)
@@ -216,18 +219,15 @@ function initCommon(tree)
 onmessage = function(evt) {
 
   var startTime = performance.now();
-  var endTime, cost;
-
-  var max_depth, new_max_depth,
-      min_depth, new_min_depth,
-      known, new_known,
-      distinct, new_distinct,
-      founding, new_founding,
-      common, new_common;
-
-  var avk5, avk10;
-  var done_avk5 = false;
-  var done_avk10 = false;
+  var endTime,
+      cost,
+      max_depth,
+      min_depth,
+      known,
+      distinct,
+      founding,
+      common,
+      avk5;
 
   var cakeData = JSON.parse(evt.data);
   var partialTree = cakeData.partialTree;
@@ -272,18 +272,6 @@ onmessage = function(evt) {
       postMessage({min_depth: min_depth, jsMessages: jsMessages});
     }
 
-    if (done_avk5 == false && min_depth >= 5) {
-      avk5 = computeAvk(fullTree, 5);
-      postMessage({avk5: avk5, approx: false, jsMessages: jsMessages});
-      done_avk5 = true;
-    }
-
-    if (done_avk10 == false && min_depth >= 10) {
-      avk10 = computeAvk(fullTree, 10);
-      postMessage({avk10: avk10, approx: false, jsMessages: jsMessages});
-      done_avk10 = true;
-    }
-
     new_known = Object.keys(fullTree).length;
     if (new_known != known) {
       postMessage({known: new_known, jsMessages: jsMessages});
@@ -293,23 +281,13 @@ onmessage = function(evt) {
   // first evaluation of common ancestors before entering actual coi computation
   postMessage({common: common, jsMessages: jsMessages});
 
-  // if avks are still uncomputed, it is time to approximate them from uncomplete tree
-  if (done_avk5 == false) {
-    avk5 = computeAvk(fullTree, 5);
-    postMessage({avk5: avk5, approx: true, jsMessages: jsMessages});
-    done_avk5 = true;
-  }
-
-  if (done_avk10 == false) {
-    avk10 = computeAvk(fullTree, 10);
-    postMessage({avk10: avk10, approx: true, jsMessages: jsMessages});
-    done_avk10 = true;
-  }
+  avk5 = computeAvk(fullTree, 5);
+  postMessage({avk5: avk5, approx: (min_depth < 6), jsMessages: jsMessages});
 
   // start coi computations -- messages will be sent from there
   let coefs = {}; // init coefs object that will be filled with coancestors coi's
   // output = computeInbreeding(fullTree, ancestorIndex, coefs);
-  output = computeInbreeding(fullTree, coefs, ancestorIndex, true);
+  output = computeInbreeding(fullTree, coefs, ancestorIndex, jsMessages, true);
   postMessage({coi: output.coi, coi5: output.coi5, jsMessages: jsMessages});
 
   endTime = performance.now();
