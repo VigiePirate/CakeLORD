@@ -79,7 +79,13 @@
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= __('Owner') ?></div> <!-- h($user->role->name) -->
             </div>
-            <h1><?= h($user->username) ?></h1>
+            <h1>
+                <?= h($user->username) .
+                    ($user->is_locked && isset($show_staff) && $show_staff && ! is_null($identity) && $identity->is_staff
+                    ? '<sup>' . $this->Html->image('/img/icon-lock.svg', ['class' => 'action-icon']) . '</sup>'
+                    : '')
+                ?>
+            </h1>
             <div class="row row-reverse row-with-photo">
                 <div class="column-responsive column-60">
 
@@ -162,7 +168,7 @@
                             <?=
                                 $this->Html->link(
                                     __('See all their rats'),
-                                    ['controller' => 'Rats', 'action' => 'byOwner', $user->id, '?' => ['sort' => 'birth_date', 'direction' => 'DESC']], 
+                                    ['controller' => 'Rats', 'action' => 'byOwner', $user->id, '?' => ['sort' => 'birth_date', 'direction' => 'DESC']],
                                     ['class' => 'button float-right'],
                                 )
                             ?>
