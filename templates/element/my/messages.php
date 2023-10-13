@@ -8,4 +8,4 @@
 
 <?= $this->Flash->render() ?>
 
-<p><?= __('<strong>{0, plural, =0{You haven’t received any message} =1{You have received one message} other{You have received # messages}} since your last connection.', [$total]) ?></p>
+<p><?= __('{0, plural, =0{You haven’t received any message} =1{You have received <strong>one</strong> message} other{You have received <strong>#</strong> messages}} since your last connection.', [$total]) ?></p>

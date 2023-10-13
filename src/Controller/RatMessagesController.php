@@ -21,8 +21,17 @@ class RatMessagesController extends AppController
         $this->Authorization->skipAuthorization();
 
         $this->paginate = [
-            'contain' => ['Rats', 'Users'],
+            'contain' => [
+                'Rats',
+                'Rats.States',
+                'Rats.OwnerUsers',
+                'Rats.Ratteries',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Contributions',
+                'Users',
+            ]
         ];
+
         $ratMessages = $this->paginate($this->RatMessages);
 
         $this->set(compact('ratMessages'));

@@ -12,7 +12,7 @@
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('created') ?></th>
+                    <th><?= $this->Paginator->sort('created', __x('issue', 'Created')) ?></th>
                     <th><?= $this->Paginator->sort('from_user_id', __('From User')) ?></th>
                     <th><?= $this->Paginator->sort('url', __('URL')) ?></th>
                     <th><?= $this->Paginator->sort('closed') ?></th>

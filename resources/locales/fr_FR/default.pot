@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-09-07 18:57+0000\n"
+"POT-Creation-Date: 2023-10-12 19:47+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -404,62 +404,54 @@ msgid "Mating window: "
 msgstr ""
 
 #: ./src/Controller/LittersController.php:373
-#: ./src/Controller/LittersController.php:1030
+#: ./src/Controller/LittersController.php:1039
 msgid "Easy peasy."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:374
-#: ./src/Controller/LittersController.php:1031
+#: ./src/Controller/LittersController.php:1040
 msgid "Quite a lot, but I have seen worse."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:375
-#: ./src/Controller/LittersController.php:1032
+#: ./src/Controller/LittersController.php:1041
 msgid "Wow, that was pretty intense!"
 msgstr ""
 
 #: ./src/Controller/LittersController.php:376
-#: ./src/Controller/LittersController.php:1033
+#: ./src/Controller/LittersController.php:1042
 msgid "Oops, we hope your device is not smoking."
 msgstr ""
 
 #: ./src/Controller/LittersController.php:377
-#: ./src/Controller/LittersController.php:1034
+#: ./src/Controller/LittersController.php:1043
 msgid "You know some LORD’s developers in person, don’t you?"
 msgstr ""
 
 #: ./src/Controller/LittersController.php:378
-#: ./src/Controller/LittersController.php:1035
+#: ./src/Controller/LittersController.php:1044
 #: ./templates/Litters/inbreeding_approx.php:39
 #: ./templates/Litters/inbreeding_approx.php:44
 msgid "generation"
 msgstr ""
 
 #: ./src/Controller/LittersController.php:379
-#: ./src/Controller/LittersController.php:1036
+#: ./src/Controller/LittersController.php:1045
 #: ./templates/Litters/inbreeding_approx.php:39
 #: ./templates/Litters/inbreeding_approx.php:44
 msgid "generations"
 msgstr ""
 
 #: ./src/Controller/LittersController.php:380
-#: ./src/Controller/LittersController.php:1037
-#: ./templates/Litters/inbreeding_approx.php:49
-#: ./templates/Litters/inbreeding_approx.php:54
-#: ./templates/Litters/inbreeding_approx.php:59
-#: ./templates/Litters/inbreeding_approx.php:64
+#: ./src/Controller/LittersController.php:1046
 msgid "rat"
 msgstr ""
 
 #: ./src/Controller/LittersController.php:381
-#: ./src/Controller/LittersController.php:1038
-#: ./templates/Litters/inbreeding_approx.php:49
-#: ./templates/Litters/inbreeding_approx.php:54
-#: ./templates/Litters/inbreeding_approx.php:59
-#: ./templates/Litters/inbreeding_approx.php:64
-#: ./templates/Users/view.php:266
-#: ./templates/Users/view.php:273
-#: ./templates/Users/view.php:278
+#: ./src/Controller/LittersController.php:1047
+#: ./templates/Users/view.php:272
+#: ./templates/Users/view.php:279
+#: ./templates/Users/view.php:284
 msgid "rats"
 msgstr ""
 
@@ -531,51 +523,51 @@ msgstr ""
 msgid "The snapshot could not be loaded. Please, try again."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:1002
+#: ./src/Controller/LittersController.php:1011
 msgid "This litter has a long or complicated family tree. We had to truncate it in order to compute (reasonably) approximate results."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:1004
+#: ./src/Controller/LittersController.php:1013
 msgid "Good news! This litter’s family tree is simple enough and we managed to compute exact results."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:1059
+#: ./src/Controller/LittersController.php:1074
 msgid "This litter sheet is now frozen."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:1061
+#: ./src/Controller/LittersController.php:1076
 #: ./src/Controller/RatsController.php:1269
 #: ./src/Controller/RatteriesController.php:699
 msgid "We could not freeze the sheet. Please retry or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:1073
+#: ./src/Controller/LittersController.php:1088
 msgid "This litter sheet is now unfrozen."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:1075
+#: ./src/Controller/LittersController.php:1090
 #: ./src/Controller/RatsController.php:1283
 #: ./src/Controller/RatteriesController.php:712
 msgid "We could not thaw the sheet. Please retry or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:1086
+#: ./src/Controller/LittersController.php:1101
 #: ./src/Controller/RatsController.php:1295
 msgid "This rat sheet has been approved."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:1088
+#: ./src/Controller/LittersController.php:1103
 #: ./src/Controller/RatsController.php:1297
 #: ./src/Controller/RatteriesController.php:725
 msgid "We could not approve the sheet. Please retry or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:1099
+#: ./src/Controller/LittersController.php:1114
 #: ./src/Controller/RatsController.php:1309
 msgid "This rat sheet has been unapproved."
 msgstr ""
 
-#: ./src/Controller/LittersController.php:1101
+#: ./src/Controller/LittersController.php:1116
 #: ./src/Controller/RatsController.php:1311
 #: ./src/Controller/RatteriesController.php:738
 msgid "We could not unapprove the sheet. Please retry or contact an administrator."
@@ -603,6 +595,25 @@ msgstr ""
 
 #: ./src/Controller/LordController.php:219
 msgid " months"
+msgstr ""
+
+#: ./src/Controller/LittersController.php:1048
+msgctxt "ancestor"
+msgid "None"
+msgstr ""
+
+#: ./templates/RatSnapshots/diff.php:100
+#: ./templates/RatSnapshots/diff.php:384
+msgctxt "litter"
+msgid "None"
+msgstr ""
+
+#: ./templates/RatSnapshots/diff.php:164
+#: ./templates/RatSnapshots/diff.php:175
+#: ./templates/RatSnapshots/diff.php:457
+#: ./templates/Rats/view.php:319
+msgctxt "singularity"
+msgid "None"
 msgstr ""
 
 #: ./src/Controller/LogsController.php:54
@@ -794,7 +805,7 @@ msgstr ""
 #: ./templates/Ratteries/add.php:30
 #: ./templates/Ratteries/edit.php:27
 #: ./templates/Ratteries/locate.php:31
-#: ./templates/Users/view.php:140
+#: ./templates/Users/view.php:146
 msgid "Ratteries"
 msgstr ""
 
@@ -1332,7 +1343,7 @@ msgstr ""
 
 #: ./src/Controller/UsersController.php:202
 #: ./src/Controller/UsersController.php:832
-#: ./src/Controller/UsersController.php:955
+#: ./src/Controller/UsersController.php:957
 msgid "Error sending email. Please, contact an administrator."
 msgstr ""
 
@@ -1528,15 +1539,15 @@ msgstr ""
 msgid "This user was already unlocked."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:935
+#: ./src/Controller/UsersController.php:937
 msgid "This user is now unlocked."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:937
+#: ./src/Controller/UsersController.php:939
 msgid "This user could not be unlocked. Please try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:952
+#: ./src/Controller/UsersController.php:954
 msgid "The email was sent to the user."
 msgstr ""
 
@@ -2440,7 +2451,7 @@ msgstr ""
 #: ./templates/Rats/view.php:407
 #: ./templates/Ratteries/view.php:50
 #: ./templates/Ratteries/view.php:498
-#: ./templates/Users/view.php:189
+#: ./templates/Users/view.php:195
 msgid "Last modified on {0}."
 msgstr ""
 
@@ -2511,7 +2522,7 @@ msgstr ""
 #: ./templates/RatterySnapshots/view.php:30
 #: ./templates/Roles/view.php:27
 #: ./templates/States/view.php:32
-#: ./templates/Users/view.php:219
+#: ./templates/Users/view.php:225
 msgid "Id"
 msgstr ""
 
@@ -3097,8 +3108,8 @@ msgstr ""
 #: ./templates/Ratteries/named.php:15
 #: ./templates/Ratteries/owned_by.php:15
 #: ./templates/Ratteries/view.php:565
-#: ./templates/Users/view.php:143
-#: ./templates/Users/view.php:171
+#: ./templates/Users/view.php:149
+#: ./templates/Users/view.php:177
 msgid ""
 msgstr ""
 
@@ -3235,8 +3246,8 @@ msgstr ""
 #: ./templates/States/view.php:76
 #: ./templates/States/view.php:80
 #: ./templates/Users/my.php:104
-#: ./templates/Users/view.php:248
-#: ./templates/Users/view.php:252
+#: ./templates/Users/view.php:254
+#: ./templates/Users/view.php:258
 #: ./templates/element/variety/view.php:46
 msgid "Yes"
 msgstr ""
@@ -3294,8 +3305,8 @@ msgstr ""
 #: ./templates/States/view.php:76
 #: ./templates/States/view.php:80
 #: ./templates/Users/my.php:105
-#: ./templates/Users/view.php:248
-#: ./templates/Users/view.php:252
+#: ./templates/Users/view.php:254
+#: ./templates/Users/view.php:258
 #: ./templates/element/variety/view.php:46
 msgid "No"
 msgstr ""
@@ -3353,7 +3364,7 @@ msgstr ""
 #: ./templates/Lord/webstats.php:1
 #: ./templates/Ratteries/view.php:174
 #: ./templates/Ratteries/view.php:300
-#: ./templates/Users/view.php:260
+#: ./templates/Users/view.php:266
 #: ./templates/layout/default.php:129
 #: ./templates/layout/fullpage.php:145
 msgid "Statistics"
@@ -4337,14 +4348,11 @@ msgstr ""
 
 #: ./templates/Litters/inbreeding.php:98
 #: ./templates/Litters/inbreeding_approx.php:73
-#: ./templates/Litters/virtual.php:117
-msgid "Ancestor loss coefficient (10G)"
+msgid "Coefficient of Inbreeding (5G)"
 msgstr ""
 
 #: ./templates/Litters/inbreeding.php:105
-#: ./templates/Litters/inbreeding_approx.php:78
-#: ./templates/Litters/virtual.php:124
-msgid "Coefficient of Inbreeding"
+msgid "Coefficient of Inbreeding (total)"
 msgstr ""
 
 #: ./templates/Litters/inbreeding.php:114
@@ -4365,6 +4373,17 @@ msgstr ""
 
 #: ./templates/Litters/inbreeding.php:128
 msgid "server-side, full-PHP approximate analysis"
+msgstr ""
+
+#: ./templates/Litters/inbreeding_approx.php:49
+#: ./templates/Litters/inbreeding_approx.php:54
+#: ./templates/Litters/inbreeding_approx.php:59
+#: ./templates/Litters/inbreeding_approx.php:64
+msgid "{0, plural, =0{None} =1{1 rat} other{# rats}}"
+msgstr ""
+
+#: ./templates/Litters/inbreeding_approx.php:78
+msgid "Coefficient of Inbreeding (16G)"
 msgstr ""
 
 #: ./templates/Litters/index.php:8
@@ -4622,9 +4641,9 @@ msgstr ""
 #: ./templates/Rats/family.php:86
 #: ./templates/Rats/family.php:90
 #: ./templates/Rats/family.php:94
-#: ./templates/Users/view.php:287
-#: ./templates/Users/view.php:290
-#: ./templates/Users/view.php:294
+#: ./templates/Users/view.php:293
+#: ./templates/Users/view.php:296
+#: ./templates/Users/view.php:300
 #: ./templates/element/my/statistics.php:29
 #: ./templates/element/my/statistics.php:32
 #: ./templates/element/my/statistics.php:36
@@ -4656,7 +4675,7 @@ msgstr ""
 #: ./templates/Ratteries/view.php:588
 #: ./templates/Users/edit.php:64
 #: ./templates/Users/my.php:68
-#: ./templates/Users/view.php:200
+#: ./templates/Users/view.php:206
 msgid "Private information"
 msgstr ""
 
@@ -4699,6 +4718,14 @@ msgstr ""
 
 #: ./templates/Litters/virtual.php:62
 msgid "Pedigree analysis"
+msgstr ""
+
+#: ./templates/Litters/virtual.php:117
+msgid "Ancestor loss coefficient (10G)"
+msgstr ""
+
+#: ./templates/Litters/virtual.php:124
+msgid "Coefficient of Inbreeding"
 msgstr ""
 
 #: ./templates/Lord/acknowledge.php:9
@@ -4967,7 +4994,7 @@ msgstr ""
 #: ./templates/Roles/view.php:92
 #: ./templates/Users/my.php:31
 #: ./templates/Users/register.php:12
-#: ./templates/Users/view.php:89
+#: ./templates/Users/view.php:95
 msgid "Username"
 msgstr ""
 
@@ -4977,7 +5004,7 @@ msgstr ""
 #: ./templates/RatterySnapshots/diff.php:76
 #: ./templates/RatterySnapshots/diff.php:210
 #: ./templates/Users/my.php:39
-#: ./templates/Users/view.php:97
+#: ./templates/Users/view.php:103
 msgid "Localization"
 msgstr ""
 
@@ -4985,7 +5012,7 @@ msgstr ""
 #: ./templates/Users/edit.php:44
 #: ./templates/Users/edit.php:48
 #: ./templates/Users/my.php:35
-#: ./templates/Users/view.php:93
+#: ./templates/Users/view.php:99
 msgid "Role"
 msgstr ""
 
@@ -5081,13 +5108,13 @@ msgid "{0, number} months (♀: {1, number} months – ♂: {2, number} mont
 msgstr ""
 
 #: ./templates/Lord/stats.php:65
-#: ./templates/Users/view.php:289
+#: ./templates/Users/view.php:295
 #: ./templates/element/my/statistics.php:31
 msgid "average, infant mortality excluded:"
 msgstr ""
 
 #: ./templates/Lord/stats.php:69
-#: ./templates/Users/view.php:293
+#: ./templates/Users/view.php:299
 #: ./templates/element/my/statistics.php:35
 msgid "average, accidents also excluded:"
 msgstr ""
@@ -5609,20 +5636,6 @@ msgstr ""
 #: ./templates/RatSnapshots/diff.php:532
 #: ./templates/Rats/view.php:362
 msgid "Post-mortem analyses?"
-msgstr ""
-
-#: ./templates/RatSnapshots/diff.php:100
-#: ./templates/RatSnapshots/diff.php:384
-msgctxt "litter"
-msgid "None"
-msgstr ""
-
-#: ./templates/RatSnapshots/diff.php:164
-#: ./templates/RatSnapshots/diff.php:175
-#: ./templates/RatSnapshots/diff.php:457
-#: ./templates/Rats/view.php:319
-msgctxt "singularity"
-msgid "None"
 msgstr ""
 
 #: ./templates/RatSnapshots/edit.php:23
@@ -6554,7 +6567,7 @@ msgid "There aren’t enough rats with consolidated information to compute relev
 msgstr ""
 
 #: ./templates/Ratteries/view.php:241
-#: ./templates/Users/view.php:86
+#: ./templates/Users/view.php:92
 msgid "Information"
 msgstr ""
 
@@ -6644,7 +6657,7 @@ msgid "The owner of this rattery does not wish to show their full breeding and m
 msgstr ""
 
 #: ./templates/Ratteries/view.php:506
-#: ./templates/Users/view.php:136
+#: ./templates/Users/view.php:142
 msgid "Related entries"
 msgstr ""
 
@@ -7154,7 +7167,7 @@ msgstr ""
 
 #: ./templates/Users/edit.php:58
 #: ./templates/Users/my.php:57
-#: ./templates/Users/view.php:126
+#: ./templates/Users/view.php:132
 msgid "About me"
 msgstr ""
 
@@ -7269,37 +7282,37 @@ msgid "See public profile"
 msgstr ""
 
 #: ./templates/Users/my.php:43
-#: ./templates/Users/view.php:101
+#: ./templates/Users/view.php:107
 msgid "Main rattery"
 msgstr ""
 
 #: ./templates/Users/my.php:71
-#: ./templates/Users/view.php:223
+#: ./templates/Users/view.php:229
 msgid "Email"
 msgstr ""
 
 #: ./templates/Users/my.php:75
-#: ./templates/Users/view.php:227
+#: ./templates/Users/view.php:233
 msgid "Firstname"
 msgstr ""
 
 #: ./templates/Users/my.php:79
-#: ./templates/Users/view.php:231
+#: ./templates/Users/view.php:237
 msgid "Lastname"
 msgstr ""
 
 #: ./templates/Users/my.php:83
-#: ./templates/Users/view.php:235
+#: ./templates/Users/view.php:241
 msgid "Birth Date"
 msgstr ""
 
 #: ./templates/Users/my.php:87
-#: ./templates/Users/view.php:239
+#: ./templates/Users/view.php:245
 msgid "Failed Login Attempts"
 msgstr ""
 
 #: ./templates/Users/my.php:91
-#: ./templates/Users/view.php:243
+#: ./templates/Users/view.php:249
 msgid "Failed Login Last Date"
 msgstr ""
 
@@ -7308,7 +7321,7 @@ msgid "Settings"
 msgstr ""
 
 #: ./templates/Users/my.php:101
-#: ./templates/Users/view.php:247
+#: ./templates/Users/view.php:253
 msgid "Wants Newsletter?"
 msgstr ""
 
@@ -7383,68 +7396,68 @@ msgstr ""
 msgid "Edit whole user sheet"
 msgstr ""
 
-#: ./templates/Users/view.php:152
+#: ./templates/Users/view.php:158
 msgid "This user doesn’t have any rattery."
 msgstr ""
 
-#: ./templates/Users/view.php:159
+#: ./templates/Users/view.php:165
 msgid "Last Modified Rats"
 msgstr ""
 
-#: ./templates/Users/view.php:164
+#: ./templates/Users/view.php:170
 msgid "See all their rats"
 msgstr ""
 
-#: ./templates/Users/view.php:183
+#: ./templates/Users/view.php:189
 msgid "This user doesn’t have any rat."
 msgstr ""
 
-#: ./templates/Users/view.php:189
+#: ./templates/Users/view.php:195
 msgid "Created on {0}."
 msgstr ""
 
-#: ./templates/Users/view.php:204
+#: ./templates/Users/view.php:210
 msgid "Staff Comments"
 msgstr ""
 
-#: ./templates/Users/view.php:216
+#: ./templates/Users/view.php:222
 msgid "User information"
 msgstr ""
 
-#: ./templates/Users/view.php:251
+#: ./templates/Users/view.php:257
 msgid "Is Locked"
 msgstr ""
 
-#: ./templates/Users/view.php:263
+#: ./templates/Users/view.php:269
 msgid "Current number of rats:"
 msgstr ""
 
-#: ./templates/Users/view.php:267
+#: ./templates/Users/view.php:273
 #: ./templates/element/my/statistics.php:9
 msgid "No rat at the moment"
 msgstr ""
 
-#: ./templates/Users/view.php:272
+#: ./templates/Users/view.php:278
 msgid "Total number of owned rats:"
 msgstr ""
 
-#: ./templates/Users/view.php:276
+#: ./templates/Users/view.php:282
 msgid "Managed sheets (as owner or creator):"
 msgstr ""
 
-#: ./templates/Users/view.php:279
+#: ./templates/Users/view.php:285
 msgid "alive: "
 msgstr ""
 
-#: ./templates/Users/view.php:286
+#: ./templates/Users/view.php:292
 msgid "Average lifespan of their rats:"
 msgstr ""
 
-#: ./templates/Users/view.php:301
+#: ./templates/Users/view.php:307
 msgid "Their champion:"
 msgstr ""
 
-#: ./templates/Users/view.php:304
+#: ./templates/Users/view.php:310
 msgid "This user has no eligible champion"
 msgstr ""
 
@@ -7501,7 +7514,7 @@ msgid "See All Messages"
 msgstr ""
 
 #: ./templates/element/my/messages.php:11
-msgid "<strong>{0, plural, =0{You haven’t received any message} =1{You have received one message} other{You have received # messages}} since your last connection."
+msgid "{0, plural, =0{You haven’t received any message} =1{You have received <strong>one</strong> message} other{You have received <strong>#</strong> messages}} since your last connection."
 msgstr ""
 
 #: ./templates/element/my/rattery.php:5
