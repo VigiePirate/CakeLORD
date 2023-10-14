@@ -20,8 +20,8 @@ class StateBehavior extends Behavior
         'repository' => 'States',
         'safe_properties' => ['modified', 'state_id'],
         'decision_form_field' => 'decision',
-        'explanation_form_field' => 'content',
-        #'explanation_form_field' => 'side_message',
+        #'explanation_form_field' => 'content',
+        'explanation_form_field' => 'side_message',
         'neglection_delay' => '15 days',
     ];
 
@@ -159,11 +159,10 @@ class StateBehavior extends Behavior
             $entity->state_id = $new_state_id;
             $this->new_state = $this->States->get($entity->state_id);
             $this->messages[] = [
-                'content' => __("{1} by {0} on this sheet on {2,date,medium} {2,time,short}",
-                                $this->Identity->username,
+                'content' => __("The sheet was {0} as a result of an action by {1}.)",    
                                 $context['action'],
-                                $this->now,
-                ),
+                                $this->Identity->username,
+                            ),
                 'is_automatically_generated' => true,
             ];
             return true;
@@ -182,7 +181,7 @@ class StateBehavior extends Behavior
     public function approve(EntityInterface $entity)
     {
         if ($entity->has('state') && $entity->state->next_ok_state_id) {
-            if ($this->changeState($entity, $entity->state->next_ok_state_id, ['action' => 'approve'])) {
+            if ($this->changeState($entity, $entity->state->next_ok_state_id, ['action' => __('approved')])) {
                 return true;
             }
         }
@@ -200,7 +199,7 @@ class StateBehavior extends Behavior
     public function blame(EntityInterface $entity)
     {
         if ($entity->has('state') && $entity->state->next_ko_state_id) {
-            if ($this->changeState($entity, $entity->state->next_ko_state_id, ['action' => 'blame'])) {
+            if ($this->changeState($entity, $entity->state->next_ko_state_id, ['action' => __('blamed')])) {
                 return true;
             }
         }
@@ -218,7 +217,7 @@ class StateBehavior extends Behavior
     public function freeze(EntityInterface $entity)
     {
         if ($entity->has('state') && $entity->state->next_frozen_state_id) {
-            if ($this->changeState($entity, $entity->state->next_frozen_state_id, ['action' => 'freeze'])) {
+            if ($this->changeState($entity, $entity->state->next_frozen_state_id, ['action' => __('frozen')])) {
                 return true;
             }
         }
@@ -236,7 +235,7 @@ class StateBehavior extends Behavior
     public function thaw(EntityInterface $entity)
     {
         if ($entity->has('state') && $entity->state->next_thawed_state_id) {
-            if ($this->changeState($entity, $entity->state->next_frozen_state_id, ['action' => 'thaw'])) {
+            if ($this->changeState($entity, $entity->state->next_frozen_state_id, ['action' => __('thawed')])) {
                 return true;
             }
         }

@@ -671,6 +671,31 @@ blockquote:before {
   background-color: #ebfff3;
 }
 
+.highlightable {
+  /* border-collapse: collapse; */
+  border-collapse: separate;
+  border-spacing: 0 2px;
+  margin-top: -2px;
+}
+
+.highlight-row {
+  background-color: #ffefef;
+  border: solid #ef5753 1px;
+  border-style: solid none;
+  border-radius: 1rem;
+  padding: 2px;
+}
+
+tr.highlight-row > td:first-child {
+    border-left-style: none;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+tr.highlight-row > td:last-child {
+    border-right-style: none;
+    border-bottom-right-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
 
 /* Utility */
 .table-responsive {

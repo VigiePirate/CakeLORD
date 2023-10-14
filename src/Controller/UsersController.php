@@ -296,7 +296,12 @@ class UsersController extends AppController
         // Messages
         // $rat_messages = $identity->applyScope('index', $this->RatMessages->find('entitled'));
         $this->loadModel('RatMessages');
-        $rat_messages = $this->RatMessages->find('entitled', ['user_id' => $user->id]);
+        $my_messages = $this->RatMessages
+                        ->find('fromUser', ['user_id' => $user->id])
+                        ->order(['RatMessages.created DESC']);
+        $rat_messages = $this->RatMessages
+                        ->find('entitled', ['user_id' => $user->id, 'time_limit' => $my_messages->first()->created])
+                        ->order(['RatMessages.created DESC']);
         $total = $rat_messages->count();
 
         // Date
@@ -312,7 +317,7 @@ class UsersController extends AppController
             'not_infant_lifespan', 'not_infant_female_lifespan', 'not_infant_male_lifespan',
             'not_accident_lifespan', 'not_accident_female_lifespan', 'not_accident_male_lifespan',
             'champion',
-            'total'
+            'total', 'rat_messages',
         ));
     }
 

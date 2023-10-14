@@ -105,6 +105,34 @@ class RatMessagesTable extends Table
         return $rules;
     }
 
+    public function findFromUser(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        $user_id = $options['user_id'];
+
+        if (empty($user_id)) {
+            return $query;
+        } else {
+            $query
+                ->contain([
+                    'Rats',
+                    'Rats.Ratteries',
+                    'Rats.CreatorUsers',
+                    'Rats.OwnerUsers',
+                    'Rats.BirthLitters',
+                    'Rats.BirthLitters.Contributions',
+                    'Rats.States',
+                    'Users'
+                ])
+                ->where(['from_user_id' => $user_id]);
+        }
+
+        return $query->group(['RatMessages.id']);
+    }
+
     public function findEntitled(Query $query, array $options)
     {
         $query = $query
@@ -116,7 +144,24 @@ class RatMessagesTable extends Table
         if (empty($user_id)) {
             return $query;
         } else {
-            
+            $query
+                ->contain([
+                    'Rats',
+                    'Rats.Ratteries',
+                    'Rats.CreatorUsers',
+                    'Rats.OwnerUsers',
+                    'Rats.BirthLitters',
+                    'Rats.BirthLitters.Contributions',
+                    'Rats.States',
+                    'Users'
+                ])
+                ->where([
+                    'OR' => [
+                        'CreatorUsers.id' => $user_id,
+                        'OwnerUsers.id' => $user_id,
+                    ],
+                    'RatMessages.created >=' => $options['time_limit']
+                ]);
         }
 
         return $query->group(['RatMessages.id']);

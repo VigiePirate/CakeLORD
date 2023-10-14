@@ -1259,8 +1259,8 @@ class RatsController extends AppController
         ]);
         $rat = $this->Rats->patchEntity($rat, $this->request->getData());
         if ($this->Rats->save($rat, ['checkRules' => false])) {
-            $this->Flash->success(__('This rat sheet is now ' . _($rat->state->name) . '.'));
-            $this->Flash->default(__('Moderation message was: ') . $this->request->getData('content'));
+            $this->Flash->success(__('This rat sheet is now: {0}.', [$rat->state->name]));
+            $this->Flash->default(__('Moderation message was: {0}', [$this->request->getData('side_message')]));
         } else {
             $this->Flash->error(__('We could not moderate the sheet. Please retry or contact an administrator.'));
         };
