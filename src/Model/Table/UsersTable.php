@@ -159,6 +159,14 @@ class UsersTable extends Table
             ->allowEmptyDateTime('failed_login_last_date');
 
         $validator
+            ->dateTime('successful_login_last_date')
+            ->allowEmptyDateTime('successful_login_last_date');
+
+        $validator
+            ->dateTime('successful_login_previous_date')
+            ->allowEmptyDateTime('successful_login_previous_date');
+
+        $validator
             ->boolean('is_locked')
             ->notEmptyString('is_locked');
 

@@ -69,6 +69,7 @@ class UsersController extends AppController
             $user = $this->Users->get($this->Authentication->getIdentityData('id'), ['contain' => 'Roles']);
 
             // update last login fields
+            $user->successful_login_previous_date = $user->successful_login_last_date;
             $user->successful_login_last_date = Chronos::now();
             $user->failed_login_attempts = 0;
             $user->failed_login_last_date = null;
