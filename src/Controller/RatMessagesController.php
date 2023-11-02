@@ -23,12 +23,19 @@ class RatMessagesController extends AppController
         $this->paginate = [
             'contain' => [
                 'Rats',
-                'Rats.States',
-                'Rats.OwnerUsers',
                 'Rats.Ratteries',
+                'Rats.CreatorUsers',
+                'Rats.OwnerUsers',
                 'Rats.BirthLitters',
                 'Rats.BirthLitters.Contributions',
-                'Users',
+                // in order to know if each message is the last one for this rat
+                'Rats.RatMessages' =>  function($q) {
+                    return $q
+                    ->order('RatMessages.created DESC')
+                    ->limit(1);
+                },
+                'Rats.States',
+                'Users'
             ]
         ];
 

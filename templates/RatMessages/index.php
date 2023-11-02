@@ -23,7 +23,19 @@
             </thead>
             <tbody>
                 <?php foreach ($ratMessages as $ratMessage): ?>
-                <tr>
+
+                <?php if (
+                            $ratMessage->rat->state->needs_user_action
+                            && $ratMessage->is_staff_request
+                            && ! $ratMessage->is_automatically_generated
+                            && count($ratMessage->rat->rat_messages) != 0
+                            && $ratMessage->id == $ratMessage->rat->rat_messages[0]->id
+                        ) : ?>
+                    <tr class="highlight-row">
+                <?php else : ?>
+                    <tr>
+                <?php endif; ?>
+
                     <td><?= h($ratMessage->created) ?></td>
                     <td><?= $ratMessage->has('rat') ? $this->Html->link($ratMessage->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratMessage->rat->id]) : '' ?></td>
                     <td><?= h($ratMessage->rat->usual_name) ?></td>

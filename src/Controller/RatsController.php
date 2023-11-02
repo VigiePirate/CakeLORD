@@ -17,11 +17,11 @@ class RatsController extends AppController
 
     protected $searchable_only;
 
-    public function initialize(): void
-    {
-        parent::initialize();
-        /* $this->loadComponent('Security'); */
-    }
+    // public function initialize(): void
+    // {
+    //     parent::initialize();
+    //     /* $this->loadComponent('Security'); */
+    // }
 
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
@@ -29,10 +29,20 @@ class RatsController extends AppController
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions([
-            'index', 'view',
-            'named', 'fromRattery', 'byRattery', 'ownedBy', 'byOwner', 'sex',
-            'search', 'results',
-            'pedigree', 'parentsTree', 'childrenTree', 'print',
+            'index',
+            'view',
+            'named',
+            'fromRattery',
+            'byRattery',
+            'ownedBy',
+            'byOwner',
+            'sex',
+            'search',
+            'results',
+            'pedigree',
+            'parentsTree',
+            'childrenTree',
+            'print',
         ]);
 
         $identity = $this->request->getAttribute('identity');
@@ -167,7 +177,8 @@ class RatsController extends AppController
                 'BredLitters.OffspringRats.DeathSecondaryCauses',
                 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']],
                 'RatSnapshots.States',
-                'RatMessages'
+                'RatMessages' => ['sort' => ['RatMessages.created' => 'DESC']],
+                'RatMessages.Users',
             ],
         ]);
 
@@ -938,7 +949,8 @@ class RatsController extends AppController
         ];
         $rats = $this->paginate($rats);
 
-        $this->set(compact('rats'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('rats', 'user'));
     }
 
     /* Autocomplete for forms function */
@@ -1259,17 +1271,46 @@ class RatsController extends AppController
         ]);
         $rat = $this->Rats->patchEntity($rat, $this->request->getData());
         if ($this->Rats->save($rat, ['checkRules' => false])) {
-            $this->Flash->success(__('This rat sheet is now: {0}.', [$rat->state->name]));
-            $this->Flash->default(__('Moderation message was: {0}', [$this->request->getData('side_message')]));
+            // state_id is up to date but not $rat->state entity; reload for updated flash message
+            $this->loadModel('States');
+            $this->Flash->success(__('This rat sheet is now in state: {0}.', [$this->States->get($rat->state_id)->name]));
+            if (! empty($this->request->getData('side_message'))) {
+                $this->Flash->default(__('The following custom moderation message has been sent: {0}', [$this->request->getData('side_message')]));
+            }
         } else {
             $this->Flash->error(__('We could not moderate the sheet. Please retry or contact an administrator.'));
         };
         return $this->redirect(['action' => 'view', $rat->id]);
+    }
 
-        #if ($this->request->is('post')) {
-        #    $decision = $this->request->getData('decision');
-        #    $this->$decision($id);
-        #}
+    public function dispute($id) {
+        $rat = $this->Rats->get($id, [
+            'contain' => [
+                'States',
+                'RatMessages' => ['sort' => 'RatMessages.created DESC'],
+                'RatMessages.Rats.States',
+                'RatMessages.Users'
+            ],
+        ]);
+
+        $this->Authorization->authorize($rat);
+
+        if ($this->request->is('post')) {
+            // send back to staff and emit message
+            $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+
+            if ($this->Rats->save($rat, ['checkRules' => false])) {
+                $this->Flash->success(__('The sheet has been sent back to staff with your message.'));
+                return $this->redirect(['action' => 'view', $rat->id]);
+            } else {
+                dd($rat);
+            }
+        }
+
+        // form
+
+        //return $this->redirect(['action' => 'view', $rat->id]);
+        $this->set(compact('rat'));
     }
 
     public function freeze($id)

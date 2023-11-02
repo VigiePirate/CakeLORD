@@ -80,7 +80,7 @@ class StateBehavior extends Behavior
      */
     public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
     {
-        if (isset($data[$this->config['explanation_form_field']])) {
+        if (isset($data[$this->config['explanation_form_field']]) && ! empty($data[$this->config['explanation_form_field']])) {
             $this->messages[] = [
                 'content' => $data[$this->config['explanation_form_field']],
                 'is_automatically_generated' => false,
@@ -159,7 +159,7 @@ class StateBehavior extends Behavior
             $entity->state_id = $new_state_id;
             $this->new_state = $this->States->get($entity->state_id);
             $this->messages[] = [
-                'content' => __("The sheet was {0} as a result of an action by {1}.)",    
+                'content' => __("The sheet was {0} as a result of an action by {1}.)",
                                 $context['action'],
                                 $this->Identity->username,
                             ),

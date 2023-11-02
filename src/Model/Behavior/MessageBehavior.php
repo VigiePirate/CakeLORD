@@ -61,7 +61,7 @@ class MessageBehavior extends Behavior
                 $this->config['entityField'] => $entity->id,
                 'from_user_id' => $identity->id,
                 'created' => $data['emitted'],
-                'content' => $entry['content'],
+                'content' => $entry['content'], // FIXME probleme ici si pas de side message???
                 'is_staff_request' => $identity->role->is_staff && $data['new_state']->needs_user_action,
                 'is_automatically_generated' => $entry['is_automatically_generated'],
             ]);

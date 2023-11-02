@@ -175,6 +175,19 @@ class RatPolicy implements BeforePolicyInterface
     }
 
     /**
+     * Check if $user can send a sheet to back-office when it needs user action
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Rat $rat
+     * @return bool
+     */
+    public function canDispute(IdentityInterface $user, Rat $rat)
+    {
+        return $user->can_change_state
+            || $rat->state->needs_user_action && ($this->isOwner($user, $rat) || $this->isCreator($user, $rat));
+    }
+
+    /**
      * Auxiliaries
      */
     protected function isOwner(IdentityInterface $user, Rat $rat)

@@ -294,21 +294,31 @@ class UsersController extends AppController
             $champion = $this->loadModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
         }
 
-        // Messages
-        // $rat_messages = $identity->applyScope('index', $this->RatMessages->find('entitled'));
-        $this->loadModel('RatMessages');
-        $my_messages = $this->RatMessages
-                        ->find('fromUser', ['user_id' => $user->id])
-                        ->order(['RatMessages.created DESC']);
-        $rat_messages = $this->RatMessages
-                        ->find('entitled', ['user_id' => $user->id, 'time_limit' => $my_messages->first()->created])
-                        ->order(['RatMessages.created DESC']);
-        $total = $rat_messages->count();
-
         // Date
         $now = \Cake\I18n\FrozenTime::now();
         $today = $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE]);
         $hour = $now->i18nFormat([\IntlDateFormatter::NONE, \IntlDateFormatter::SHORT]);
+
+        // Messages
+        // $rat_messages = $identity->applyScope('index', $this->RatMessages->find('entitled'));
+        $this->loadModel('RatMessages');
+        $rat_delay = $this->loadModel('Rats')->behaviors()->get('State')->config['neglection_delay'];
+        if ($now->modify('-'.$rat_delay)->isPast($user->successful_login_previous_date)) {
+            $rat_message_delay = $now->modify('-'.$rat_delay);
+        } else {
+            $rat_message_delay = $user->successful_login_previous_date;
+        }
+
+        $rat_messages = $this->RatMessages
+                        ->find('latest', ['user_id' => $user->id, 'delay' => $rat_message_delay])
+                        ->order(['RatMessages.created DESC']);
+
+        $total = $rat_messages->count();
+
+        $sub_total = $this->Rats->find('needsUser')
+                                ->where(['OR' => ['owner_user_id' => $user->id, 'creator_user_id' => $user->id]])
+                                ->distinct()
+                                ->count();
 
         $this->set(compact('user', 'today', 'hour',
             'rat_count', 'female_count', 'male_count',
@@ -318,7 +328,7 @@ class UsersController extends AppController
             'not_infant_lifespan', 'not_infant_female_lifespan', 'not_infant_male_lifespan',
             'not_accident_lifespan', 'not_accident_female_lifespan', 'not_accident_male_lifespan',
             'champion',
-            'total', 'rat_messages',
+            'rat_messages', 'total', 'sub_total'
         ));
     }
 

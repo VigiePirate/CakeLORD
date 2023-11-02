@@ -6,6 +6,7 @@ namespace App\Model\Table;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\Datasource\FactoryLocator;
 use Cake\Validation\Validator;
 
 /**
@@ -133,38 +134,40 @@ class RatMessagesTable extends Table
         return $query->group(['RatMessages.id']);
     }
 
-    public function findEntitled(Query $query, array $options)
+    public function findLatest(Query $query, array $options)
     {
         $query = $query
             ->select()
             ->distinct();
 
-        $user_id = $options['user_id'];
-
-        if (empty($user_id)) {
+        if (empty($options['user_id']) || empty($options['delay'])) {
             return $query;
         } else {
-            $query
-                ->contain([
-                    'Rats',
-                    'Rats.Ratteries',
-                    'Rats.CreatorUsers',
-                    'Rats.OwnerUsers',
-                    'Rats.BirthLitters',
-                    'Rats.BirthLitters.Contributions',
-                    'Rats.States',
-                    'Users'
-                ])
-                ->where([
-                    'OR' => [
-                        'CreatorUsers.id' => $user_id,
-                        'OwnerUsers.id' => $user_id,
-                    ],
-                    'RatMessages.created >=' => $options['time_limit']
-                ]);
+            $filter = [
+                'OR' => [
+                    'CreatorUsers.id' => $options['user_id'],
+                    'OwnerUsers.id' => $options['user_id'],
+                ],
+                'RatMessages.created >=' => $options['delay']
+            ];
         }
 
-        return $query->group(['RatMessages.id']);
+        $query
+            ->order('RatMessages.created DESC')
+            ->contain([
+                'Rats',
+                'Rats.RatMessages' => ['sort' => 'RatMessages.created DESC'],
+                'Rats.Ratteries',
+                'Rats.CreatorUsers',
+                'Rats.OwnerUsers',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Contributions',
+                'Rats.States',
+                'Users'
+            ])
+            ->where($filter);
+
+        return $query;
     }
 
 
