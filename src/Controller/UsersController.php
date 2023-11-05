@@ -313,12 +313,50 @@ class UsersController extends AppController
                         ->find('latest', ['user_id' => $user->id, 'delay' => $rat_message_delay])
                         ->order(['RatMessages.created DESC']);
 
-        $total = $rat_messages->count();
-
-        $sub_total = $this->Rats->find('needsUser')
+        $count['rat_total'] = $rat_messages->count();
+        $count['rat_sub_total'] = $this->Rats->find('needsUser')
                                 ->where(['OR' => ['owner_user_id' => $user->id, 'creator_user_id' => $user->id]])
                                 ->distinct()
                                 ->count();
+
+        $this->loadModel('LitterMessages');
+        $litter_delay = $this->loadModel('Litters')->behaviors()->get('State')->config['neglection_delay'];
+        if ($now->modify('-'.$litter_delay)->isPast($user->successful_login_previous_date)) {
+            $litter_message_delay = $now->modify('-'.$litter_delay);
+        } else {
+            $litter_message_delay = $user->successful_login_previous_date;
+        }
+
+        $litter_messages = $this->LitterMessages
+                        ->find('latest', ['user_id' => $user->id, 'delay' => $litter_message_delay])
+                        ->order(['LitterMessages.created DESC']);
+
+        $count['litter_total'] = $litter_messages->count();
+        $count['litter_sub_total'] = $this->Litters->find('needsUser')
+                                ->where(['creator_user_id' => $user->id])
+                                ->distinct()
+                                ->count();
+
+        $this->loadModel('RatteryMessages');
+        $rattery_delay = $this->loadModel('Ratteries')->behaviors()->get('State')->config['neglection_delay'];
+        if ($now->modify('-'.$rattery_delay)->isPast($user->successful_login_previous_date)) {
+            $rattery_message_delay = $now->modify('-'.$rattery_delay);
+        } else {
+            $rattery_message_delay = $user->successful_login_previous_date;
+        }
+
+        $rattery_messages = $this->RatteryMessages
+                        ->find('latest', ['user_id' => $user->id, 'delay' => $rattery_message_delay])
+                        ->order(['RatteryMessages.created DESC']);
+
+        $count['rattery_total'] = $rattery_messages->count();
+        $count['rattery_sub_total'] = $this->Ratteries->find('needsUser')
+                                ->where(['owner_user_id' => $user->id])
+                                ->distinct()
+                                ->count();
+
+        $count['total'] = $count['rat_total'] + $count['litter_total'] + $count['rattery_total'];
+        $count['sub_total'] = $count['rat_sub_total'] + $count['litter_sub_total'] + $count['rattery_sub_total'];
 
         $this->set(compact('user', 'today', 'hour',
             'rat_count', 'female_count', 'male_count',
@@ -328,7 +366,7 @@ class UsersController extends AppController
             'not_infant_lifespan', 'not_infant_female_lifespan', 'not_infant_male_lifespan',
             'not_accident_lifespan', 'not_accident_female_lifespan', 'not_accident_male_lifespan',
             'champion',
-            'rat_messages', 'total', 'sub_total'
+            'rat_messages', 'litter_messages', 'rattery_messages', 'count'
         ));
     }
 
@@ -349,6 +387,21 @@ class UsersController extends AppController
         $this->Authorization->authorize($user);
 
         $this->set('user', $user);
+    }
+
+    public function messages()
+    {
+        $user = $this->Users->get($this->Authentication->getIdentity()->get('id'), [
+            'contain' => ['Roles', 'Ratteries'],
+        ]);
+        $this->Authorization->authorize($user, 'my');
+
+        $this->loadModel('RatMessages');
+        $rat_messages = $this->RatMessages
+                        ->find('entitled', ['user_id' => $user->id])
+                        ->order(['RatMessages.created DESC']);
+
+        $this->set(compact('user', 'rat_messages'));
     }
 
     /**
@@ -679,7 +732,7 @@ class UsersController extends AppController
             } else {
 
                 if ($user->is_locked) {
-                    $this->Flash->error(__('Your account is locked. Please activate it or contact an administrator'));
+                    $this->Flash->error(__('Your account is locked. Please activate it or contact an administrator.'));
                     return $this->redirect(['action' => 'login']); //FIXME: redirect to a contact form
                 }
 
@@ -727,17 +780,17 @@ class UsersController extends AppController
         $user = $query->first();
         // check if user exists
         if (empty($user)) {
-            $this->Flash->error(__('Invalid passkey. Please check your email or try again'));
+            $this->Flash->error(__('Invalid passkey. Please check your email or try again.'));
             return $this->redirect(['action' => 'lostPassword']);
         } else {
             // check if user is locked
             if ($user->is_locked) {
-                $this->Flash->error(__('Your account is locked. Please contact an administrator'));
+                $this->Flash->error(__('Your account is locked. Please contact an administrator.'));
                 return $this->redirect(['action' => 'login']); // fixme: redirect to a contact form
             }
             // check if passkey is expired
             if (! $user->failed_login_last_date->wasWithinLast('24 hours')) {
-                $this->Flash->error(__('Expired passkey. Please generate a new one, check your email and try again'));
+                $this->Flash->error(__('Expired passkey. Please generate a new one, check your email and try again.'));
                 return $this->redirect(['action' => 'lostPassword']);
             }
 

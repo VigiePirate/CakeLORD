@@ -134,6 +134,30 @@ class RatMessagesTable extends Table
         return $query->group(['RatMessages.id']);
     }
 
+    public function findEntitled(Query $query, array $options) {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['user_id'])) {
+            $query->leftJoinWith('Rats')
+                ->where([
+                  'CreatorUsers.id' => null,
+                  'OwnerUsers.id' => null,
+                ]);
+        } else {
+            $query->innerJoinWith('Rats')
+                ->where([
+                  'OR' => [
+                      'CreatorUsers.id' => $options['user_id'],
+                      'OwnerUsers.id' => $options['user_id'],
+                  ]
+                ]);
+        }
+
+        return $query->group(['Rats.id']);
+    }
+
     public function findLatest(Query $query, array $options)
     {
         $query = $query
@@ -169,6 +193,4 @@ class RatMessagesTable extends Table
 
         return $query;
     }
-
-
 }

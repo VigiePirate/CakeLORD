@@ -104,4 +104,49 @@ class RatteryMessagesTable extends Table
 
         return $rules;
     }
+
+    public function findEntitled(Query $query, array $options) {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['user_id'])) {
+            $query->leftJoinWith('Ratteries')
+                ->where(['Ratteries.user_id' => null]);
+        } else {
+            $query->innerJoinWith('Ratteries')
+                ->where(['Ratteries.user_id' => $options['user_id']]);
+        }
+
+        return $query->group(['Ratteries.id']);
+    }
+
+    public function findLatest(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['user_id']) || empty($options['delay'])) {
+            return $query;
+        } else {
+            $filter = [
+                'owner_user_id' => $options['user_id'],
+                'RatteryMessages.created >=' => $options['delay']
+            ];
+        }
+
+        $query
+            ->order('RatteryMessages.created DESC')
+            ->contain([
+                'Ratteries',
+                'Ratteries.RatteryMessages' => ['sort' => 'RatteryMessages.created DESC'],
+                'Ratteries.Users',
+                'Ratteries.States',
+                'Users'
+            ])
+            ->where($filter);
+
+        return $query;
+    }
 }
