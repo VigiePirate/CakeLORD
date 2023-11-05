@@ -20,9 +20,9 @@
 
             <?php if (! is_null($alive_ratteries) && $alive_ratteries->isEmpty()) : ?>
                 <?php if (! is_null($closed_ratteries) && ! $closed_ratteries->isEmpty()) : ?>
-                    <div class="message default"><?= __('You dont have any active rattery at the moment. You can activate your last rattery from the list below, or by adding a new litter.') ?></div>
+                    <div class="message default"><?= __('You don’t have any active rattery at the moment. You can activate your last rattery from the list below, or by adding a new litter.') ?></div>
                 <?php else : ?>
-                    <div class="message default"><?= __('You dont have any active rattery at the moment. You can register one by hitting the “New Rattery” button above.') ?></div>
+                    <div class="message default"><?= __('You don’t have any active rattery at the moment. You can register one by hitting the “New Rattery” button above.') ?></div>
                 <?php endif ; ?>
             <?php else : ?>
 

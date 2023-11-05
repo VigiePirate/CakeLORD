@@ -55,13 +55,17 @@
             </div>
 
             <h2><?= __('About me') ?></h2>
-            <div class="text">
-                <blockquote>
-                    <div class="markdown">
-                        <?= $this->Commonmark->sanitize($user->about_me); ?>
-                    </div>
-                </blockquote>
-            </div>
+            <?php if ($user->about_me == '') : ?>
+                <div class="message default"><?= __('You haven’t completed your bio yet. You can edit your profile from the button above to introduce yourself.') ?></div>
+            <?php else : ?>
+                <div class="text">
+                    <blockquote>
+                        <div class="markdown">
+                            <?= $this->Commonmark->sanitize($user->about_me); ?>
+                        </div>
+                    </blockquote>
+                </div>
+            <?php endif ; ?>
         </div>
         <div class="spacer"></div>
         <div class="users view content">
