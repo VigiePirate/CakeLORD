@@ -110,12 +110,17 @@ class StateBehavior extends Behavior
             $this->new_state = $initial_state;
             $entity->set('state_id', $initial_state->id);
             return $entity->state_id;
-        } elseif (! empty(array_diff($entity->getDirty(), $this->config['safe_properties']))) {
-            return $this->blame($entity);
         } else {
-            // All the changes are in the safe list
-            // return $this->approve($entity);
-            return true;
+            if (
+                ! empty(array_diff($entity->getDirty(), $this->config['safe_properties']))
+                || ! empty($entity->getDirty()) && ! $entity->state->is_reliable
+            ) {
+                return $this->blame($entity);
+            } else {
+                // All the changes are in the safe list
+                // return $this->approve($entity);
+                return true;
+            }
         }
     }
 
