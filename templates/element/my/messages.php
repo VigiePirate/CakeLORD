@@ -14,7 +14,7 @@
     <?php else : ?>
         <?= __('You haven’t received any notification recently.') ?>
     <?php endif ; ?>
-    <?=  __('You can access your notification history from the button opposite.') ?>
+    <?=  __('You can access your notification history from the buttons opposite.') ?>
     <br/>
     <?php if ($count['sub_total'] > 0) : ?>
         <?= __('{0, plural, =1 {<strong>One notification</strong> calls for action and is highlighted below} other{<strong># notification</strong> call for action and are highlighted below}}</strong>. Please pay particular attention to {0, plural, =1{it} other{them}}.', [$count['sub_total']]) ?>
@@ -22,11 +22,14 @@
 </p>
 <br/>
 
-<?php if ($count['rat_total']) : ?>
-    <div class="button-small">
-        <?= $this->Html->link(__('All rat notifications'), ['controller' => 'RatMessages', 'action' => 'my'], ['class' => 'button float-right']) ?>
-    </div>
-    <h3><?= __('Rats') ?></h3>
+
+<div class="button-small">
+    <?= $this->Html->link(__('All rat notifications'), ['controller' => 'RatMessages', 'action' => 'my'], ['class' => 'button float-right']) ?>
+</div>
+<h3 class="shortlist"><?= __('Rats') ?></h3>
+<?php if ($count['rat_total'] == 0) : ?>
+    <p><?= __('No recent notification.') ?><p>
+<?php else : ?>
     <div class="table-responsive">
         <table class="summary highlightable">
             <thead>
@@ -88,13 +91,67 @@
     </div>
 <?php endif; ?>
 
+<div class="button-small">
+    <?= $this->Html->link(__('All rattery notifications'), ['controller' => 'RatteryMessages', 'action' => 'my'], ['class' => 'button float-right']) ?>
+</div>
+<h3 class="shortlist"><?= __('Ratteries') ?></h3>
+<?php if ($count['rattery_total'] == 0) : ?>
+    <p><?= __('No recent notification.') ?></p>
+<?php else : ?>
+    <div class="table-responsive">
+        <table class="summary highlightable">
+            <thead>
+                <tr>
+                    <th><?= __('State') ?></th>
+                    <th><?= __x('message', 'About') ?></th>
+                    <!-- <th><?= __('Staff?') ?></th>
+                    <th><?= __('Auto?') ?></th> -->
+                    <th><?= __('Message') ?></th>
 
-<?php if ($count['litter_total']) : ?>
-    <div class="button-small">
-        <?= $this->Html->link(__('All litter notifications'), ['controller' => 'LitterMessages', 'action' => 'my'], ['class' => 'button float-right']) ?>
+                    <!-- <th class="actions"><?= __('Sheet') ?></th> -->
+
+                    <th><?= __x('message', 'Sent by') ?></th>
+                    <th><?= __x('message', 'Created') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($rattery_messages as $ratteryMessage): ?>
+                    <?php if ($ratteryMessage->id == $ratteryMessage->rattery->rattery_messages[0]->id) : ?> <!-- FIXME: getting the most recent message for each litter should be made earlier -->
+                        <?php if (
+                                    $ratteryMessage->rattery->state->needs_user_action
+                                    && $ratteryMessage->is_staff_request
+                                    && ! $ratteryMessage->is_automatically_generated
+                                ) : ?>
+                            <tr class="highlight-row">
+                        <?php else : ?>
+                            <tr>
+                        <?php endif ; ?>
+                        <td><span class="statecolor_<?php echo h($ratteryMessage->rattery->state_id) ?>"><?= h($ratteryMessage->rattery->state->symbol) ?></span></td>
+                            <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
+                            <td><?= mb_strimwidth($ratteryMessage->content, 0, 256, '...') ?></td>
+                            <td>
+                                <?=
+                                    $ratteryMessage->has('user') && ! $ratteryMessage->is_automatically_generated
+                                    ? h($ratteryMessage->user->username)
+                                    : __('LORD')
+                                ?>
+                            </td>
+                            <td><?= h($ratteryMessage->created->i18nFormat('dd/MM/yyyy')) ?></td>
+                        </tr>
+                    <?php endif ; ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
-    <h3><?= __('Litters') ?></h3>
+<?php endif; ?>
 
+<div class="button-small">
+    <?= $this->Html->link(__('All litter notifications'), ['controller' => 'LitterMessages', 'action' => 'my'], ['class' => 'button float-right']) ?>
+</div>
+<h3 class="shortlist"><?= __('Litters') ?></h3>
+<?php if ($count['litter_total'] == 0) : ?>
+    <p><?= __('No recent notification.') ?></p>
+<?php else : ?>
     <div class="table-responsive">
         <table class="summary highlightable">
             <thead>
@@ -136,59 +193,6 @@
                                 ?>
                             </td>
                             <td><?= h($litterMessage->created->i18nFormat('dd/MM/yyyy')) ?></td>
-                        </tr>
-                    <?php endif ; ?>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-<?php endif; ?>
-
-<?php if ($count['rattery_total']) : ?>
-    <div class="button-small">
-        <?= $this->Html->link(__('All rattery notifications'), ['controller' => 'RatteryMessages', 'action' => 'my'], ['class' => 'button float-right']) ?>
-    </div>
-    <h3><?= __('Ratteries') ?></h3>
-
-    <div class="table-responsive">
-        <table class="summary highlightable">
-            <thead>
-                <tr>
-                    <th><?= __('State') ?></th>
-                    <th><?= __x('message', 'About') ?></th>
-                    <!-- <th><?= __('Staff?') ?></th>
-                    <th><?= __('Auto?') ?></th> -->
-                    <th><?= __('Message') ?></th>
-
-                    <!-- <th class="actions"><?= __('Sheet') ?></th> -->
-
-                    <th><?= __x('message', 'Sent by') ?></th>
-                    <th><?= __x('message', 'Created') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($rattery_messages as $ratteryMessage): ?>
-                    <?php if ($ratteryMessage->id == $ratteryMessage->rattery->rattery_messages[0]->id) : ?> <!-- FIXME: getting the most recent message for each litter should be made earlier -->
-                        <?php if (
-                                    $ratteryMessage->rattery->state->needs_user_action
-                                    && $ratteryMessage->is_staff_request
-                                    && ! $ratteryMessage->is_automatically_generated
-                                ) : ?>
-                            <tr class="highlight-row">
-                        <?php else : ?>
-                            <tr>
-                        <?php endif ; ?>
-                        <td><span class="statecolor_<?php echo h($ratteryMessage->rattery->state_id) ?>"><?= h($ratteryMessage->rattery->state->symbol) ?></span></td>
-                            <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
-                            <td><?= mb_strimwidth($ratteryMessage->content, 0, 256, '...') ?></td>
-                            <td>
-                                <?=
-                                    $ratteryMessage->has('user') && ! $ratteryMessage->is_automatically_generated
-                                    ? h($ratteryMessage->user->username)
-                                    : __('LORD')
-                                ?>
-                            </td>
-                            <td><?= h($ratteryMessage->created->i18nFormat('dd/MM/yyyy')) ?></td>
                         </tr>
                     <?php endif ; ?>
                 <?php endforeach; ?>

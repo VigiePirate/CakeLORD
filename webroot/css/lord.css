@@ -103,6 +103,14 @@ h1 span, h3 span {
   font-size: 75%;
 }
 
+.shortlist {
+  margin-bottom:.25rem !important;
+}
+
+.shortlist + p {
+  padding-left: 0.75rem !important;
+}
+
 /* ugly stuff that should be improved later for on/off ratteries */
 .rotate {
   display:inline-block;
@@ -623,11 +631,13 @@ blockquote:before {
 .sexcolor_F {
   color: #ff99cc;
   font-weight:bold;
+  -webkit-text-stroke: 0.01em #ff99cc;
 }
 
 .sexcolor_M {
   color: #99ccff;
   font-weight:bold;
+  -webkit-text-stroke: 0.01em #99ccff;
 }
 
 /* should be read from states table later ('css property' field) */

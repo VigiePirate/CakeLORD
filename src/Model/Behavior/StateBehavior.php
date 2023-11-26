@@ -111,14 +111,10 @@ class StateBehavior extends Behavior
             $entity->set('state_id', $initial_state->id);
             return $entity->state_id;
         } else {
-            if (
-                ! empty(array_diff($entity->getDirty(), $this->config['safe_properties']))
-                || ! empty($entity->getDirty()) && ! $entity->state->is_reliable
-            ) {
+            if (! empty(array_diff($entity->getDirty(), $this->config['safe_properties']))) {
                 return $this->blame($entity);
             } else {
                 // All the changes are in the safe list
-                // return $this->approve($entity);
                 return true;
             }
         }
@@ -164,9 +160,11 @@ class StateBehavior extends Behavior
             $entity->state_id = $new_state_id;
             $this->new_state = $this->States->get($entity->state_id);
             $this->messages[] = [
-                'content' => __("The sheet was {0} as a result of an action by {1}.)",
-                                $context['action'],
-                                $this->Identity->username,
+                'content' => __("The sheet was {0} as a result of an action by {1}.",
+                                [
+                                    $context['action'],
+                                    $this->Identity->username
+                                ]
                             ),
                 'is_automatically_generated' => true,
             ];

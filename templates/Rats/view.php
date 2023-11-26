@@ -40,7 +40,7 @@
                     <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?>
                 </h1>
                 <div class="message error">
-                    <?= __('Due to its state in back-office, this sheet can only be entirely viewed by its owner and by staff members.') ?>
+                    <?= __('Due to its state in back-office, this sheet can be viewed only by authorized people.') ?>
                 </div>
 
                 <div class="signature">
@@ -184,7 +184,7 @@
                     <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?>
                 </h1>
 
-                <?php if ($rat->state->needs_user_action && $user->can('ownerEdit', $rat)) : ?>
+                <?php if ($rat->state->needs_user_action && ! is_null($user) && $user->can('ownerEdit', $rat)) : ?>
                     <div class="message error">
                         <p><?= __('This sheet needs correction. Here is the latest message staff sent you about it.') ?></p>
                         <div class="text">
@@ -194,7 +194,7 @@
                         </div>
                         <p>
                             <?=
-                                __('Please <a href={0} class="flash">edit the sheet</a> to comply with staff requirements or <a href={1} class="flash">click here to send it back to staff</a>.',
+                                __('Please take action to comply with staff requirements. You can <a href={0} class="flash">edit the sheet</a> or <a href={1} class="flash">answer and send it back to staff</a>.',
                                 [
                                     $this->Url->build(['controller' => 'Rats', 'action' => 'edit', $rat->id]),
                                     $this->Url->build(['controller' => 'Rats', 'action' => 'dispute', $rat->id])
@@ -446,16 +446,16 @@
                                         <th><?= __x('message', 'Created') ?></th>
                                         <th><?= __x('message', 'Sent by') ?></th>
                                         <th><?= __('Message') ?></th>
-                                        <th><?= __('Actions') ?></th>
+                                        <th><?= __('Auto?') ?></th>
 
                                     </thead>
                                     <?php foreach ($rat->rat_messages as $message) : ?>
                                     <tr>
-                                        <td><?= h($message->created->i18nFormat('dd/MM/yyyy HH:mm')) ?></td>
+                                        <td class="nowrap"><?= h($message->created->i18nFormat('dd/MM/yyyy HH:mm')) ?></td>
                                         <td><?= h($message->user->username) ?></td>
                                         <td><?= h($message->content) ?></td>
                                         <td>
-                                            <?php if (! is_null($user) && $user->can('delete', $message)) : ?>
+                                            <!-- <?php if (! is_null($user) && $user->can('delete', $message)) : ?>
                                                 <?= $this->Html->image('/img/icon-delete.svg', [
                                                     'url' => ['controller' => 'RatMessages', 'action' => 'delete', $message->id],
                                                     'class' => 'action-icon',
@@ -469,7 +469,8 @@
                                                         'alt' => __('Delete Message')])
                                                     ?>
                                                 </span>
-                                            <?php endif ;?>
+                                            <?php endif ;?> -->
+                                            <?= $message->is_automatically_generated ? '✓' : ''  ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

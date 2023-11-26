@@ -120,9 +120,7 @@ class UsersController extends AppController
                     + $this->Ratteries->find('needsUser')->where(['owner_user_id' => $user->id])->count()
                     + $this->Litters->find('needsUser')->where(['creator_user_id' => $user->id])->count()
                 );
-                if ($action_needed > 0) {
-                    $this->Flash->error(__('You have {0, plural, =1{1 sheet} other{# sheets}} to correct! Please, check rats, litters and ratteries from your dashboard and take action soon.', [$action_needed]));
-                }
+
             }
 
             $target = $this->Authentication->getLoginRedirect();
@@ -131,6 +129,11 @@ class UsersController extends AppController
                     'controller' => 'Users',
                     'action' => 'home',
                 ];
+            } else {
+                // show alert only if not redirecting to home
+                if ($target != '/users/home' && $action_needed > 0) {
+                    $this->Flash->error(__('You have {0, plural, =1{1 sheet} other{# sheets}} to correct! Please, check rats, litters and ratteries from your dashboard and take action soon.', [$action_needed]));
+                }
             }
 
             return $this->redirect($target);
@@ -293,6 +296,10 @@ class UsersController extends AppController
         if(!empty($champion)) {
             $champion = $this->loadModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
         }
+
+        $count['my_rats'] = $managed_rat_count;
+        $count['my_ratteries'] = $user->countMy('ratteries', 'owner_user');
+        $count['my_litters'] = $user->countMy('litters', 'creator_user');
 
         // Date
         $now = \Cake\I18n\FrozenTime::now();

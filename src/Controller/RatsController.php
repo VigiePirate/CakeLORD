@@ -14,20 +14,12 @@ use Cake\Routing\Router;
  */
 class RatsController extends AppController
 {
-
     protected $searchable_only;
-
-    // public function initialize(): void
-    // {
-    //     parent::initialize();
-    //     /* $this->loadComponent('Security'); */
-    // }
 
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        // Configure the login action to not require authentication, preventing
-        // the infinite redirect loop issue
+
         $this->Authentication->addUnauthenticatedActions([
             'index',
             'view',
@@ -47,6 +39,13 @@ class RatsController extends AppController
 
         $identity = $this->request->getAttribute('identity');
         $this->searchable_only = is_null($identity) || ! $identity->can('filterByState', $this->Rats);
+
+        /* FIXME
+         * The previous call to "can" counts as an authorization check
+         * Methods which don't perform their authorization check own won't raise an issue!!
+         * This problem can be avoided by patching the Authorization plugin with an uncheckAuthorization() method
+        */
+        //$this->Authorization->uncheckAuthorization();
     }
     /**
      * Index method
@@ -1303,13 +1302,11 @@ class RatsController extends AppController
                 $this->Flash->success(__('The sheet has been sent back to staff with your message.'));
                 return $this->redirect(['action' => 'view', $rat->id]);
             } else {
-                dd($rat);
+                $this->Flash->success(__('Something went wrong. Please, try again or contact an administrator.'));
+                return $this->redirect(['action' => 'view', $rat->id]);
             }
         }
 
-        // form
-
-        //return $this->redirect(['action' => 'view', $rat->id]);
         $this->set(compact('rat'));
     }
 

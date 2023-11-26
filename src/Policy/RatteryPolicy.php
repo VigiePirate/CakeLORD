@@ -154,6 +154,19 @@ class RatteryPolicy implements BeforePolicyInterface
     }
 
     /**
+     * Check if $user can send a sheet to back-office when it needs user action
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Rattery $rattery
+     * @return bool
+     */
+    public function canDispute(IdentityInterface $user, Rattery $rattery)
+    {
+        return (! $rattery->state->needs_staff_action && $user->can_change_state)
+            || ($rattery->state->needs_user_action && $this->isOwner($user, $rattery));
+    }
+
+    /**
      * Auxiliaries
      */
     protected function isOwner(IdentityInterface $user, Rattery $rattery)

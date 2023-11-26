@@ -181,6 +181,19 @@ class LitterPolicy implements BeforePolicyInterface
     }
 
     /**
+     * Check if $user can send a sheet to back-office when it needs user action
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canDispute(IdentityInterface $user, Litter $litter)
+    {
+        return (! $litter->state->needs_staff_action && $user->can_change_state)
+            || ($litter->state->needs_user_action && ($this->isCreator($user, $litter) || $this->isContributor($user, $rat)));
+    }
+
+    /**
      * Auxiliaries
      */
     protected function isCreator(IdentityInterface $user, Litter $litter)
