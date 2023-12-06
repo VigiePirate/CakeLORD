@@ -129,4 +129,31 @@ class RatMessagesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * My method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function my()
+    {
+        $user = $this->Authentication->getIdentity();
+        $this->Authorization->skipAuthorization();
+        $this->paginate = [
+            'contain' => [
+                'Rats',
+                'Rats.Ratteries',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Contributions',
+                'Rats.States',
+                'Rats.RatMessages' => ['sort' => 'RatMessages.created DESC'],
+                'Users',
+            ],
+        ];
+        $ratMessages = $this->RatMessages->find('entitled', ['user_id' => $user->id]);
+
+        $this->paginate($ratMessages);
+
+        $this->set(compact('ratMessages'));
+    }
 }

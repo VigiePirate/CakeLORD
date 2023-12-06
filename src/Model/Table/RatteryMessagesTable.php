@@ -112,13 +112,13 @@ class RatteryMessagesTable extends Table
 
         if (empty($options['user_id'])) {
             $query->leftJoinWith('Ratteries')
-                ->where(['Ratteries.user_id' => null]);
+                ->where(['Ratteries.owner_user_id' => null]);
         } else {
             $query->innerJoinWith('Ratteries')
-                ->where(['Ratteries.user_id' => $options['user_id']]);
+                ->where(['Ratteries.owner_user_id' => $options['user_id']]);
         }
 
-        return $query->group(['Ratteries.id']);
+        return $query; //->group(['RatteryMessages.id']);
     }
 
     public function findLatest(Query $query, array $options)

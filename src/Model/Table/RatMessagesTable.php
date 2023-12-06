@@ -146,7 +146,7 @@ class RatMessagesTable extends Table
                   'OwnerUsers.id' => null,
                 ]);
         } else {
-            $query->innerJoinWith('Rats')
+            $query->contain(['Rats', 'Rats.CreatorUsers', 'Rats.OwnerUsers'])
                 ->where([
                   'OR' => [
                       'CreatorUsers.id' => $options['user_id'],
@@ -155,7 +155,7 @@ class RatMessagesTable extends Table
                 ]);
         }
 
-        return $query->group(['Rats.id']);
+        return $query->group(['RatMessages.id']);
     }
 
     public function findLatest(Query $query, array $options)
@@ -172,7 +172,7 @@ class RatMessagesTable extends Table
                     'CreatorUsers.id' => $options['user_id'],
                     'OwnerUsers.id' => $options['user_id'],
                 ],
-                'RatMessages.created >=' => $options['delay']
+                'RatMessages.created >=' => $options['delay'],
             ];
         }
 
@@ -191,6 +191,7 @@ class RatMessagesTable extends Table
             ])
             ->where($filter);
 
-        return $query;
+        return $query->group(['RatMessages.id']);
+        //->order(['RatMessages.created DESC'])->group(['Rats.id']);
     }
 }

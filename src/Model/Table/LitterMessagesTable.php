@@ -118,7 +118,7 @@ class LitterMessagesTable extends Table
                 ->where(['creator_user_id' => $options['user_id']]);
         }
 
-        return $query->group(['Litters.id']);
+        return $query; //->group(['Litters.id']);
     }
 
     public function findLatest(Query $query, array $options)

@@ -65,8 +65,6 @@ class RatsController extends AppController
     /**
      * My method
      *
-     * FIXME: hardcoded states to be replaced by query on state->needs_staff_action, state->needs_user_action
-     *
      * @return \Cake\Http\Response|null
      */
     public function my()

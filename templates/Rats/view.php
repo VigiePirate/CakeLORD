@@ -447,7 +447,6 @@
                                         <th><?= __x('message', 'Sent by') ?></th>
                                         <th><?= __('Message') ?></th>
                                         <th><?= __('Auto?') ?></th>
-
                                     </thead>
                                     <?php foreach ($rat->rat_messages as $message) : ?>
                                     <tr>
