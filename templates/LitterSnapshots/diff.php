@@ -307,6 +307,11 @@
 
 <?php echo $this->Form->create($litter, ['type' => 'post', 'url' => ['controller' => 'Litters', 'action' => 'moderate', $litter->id]]); ?>
 
+<div class="content">
+    <?= $this->element('side_message_control', ['sheet' => $litter]) ?>
+</div>
+<div class="spacer"></div>
+
 <div class="row">
     <div class="column-responsive column-50">
         <div class="tooltip-staff">

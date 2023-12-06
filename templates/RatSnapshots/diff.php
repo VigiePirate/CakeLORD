@@ -563,6 +563,11 @@
 
 <?php echo $this->Form->create($rat, ['type' => 'post', 'url' => ['controller' => 'Rats', 'action' => 'moderate', $rat->id]]); ?>
 
+<div class="content">
+    <?= $this->element('side_message_control', ['sheet' => $rat]) ?>
+</div>
+<div class="spacer"></div>
+
 <div class="row">
     <div class="column-responsive column-50">
         <div class="tooltip-staff">

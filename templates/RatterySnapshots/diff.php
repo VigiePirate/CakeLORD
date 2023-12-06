@@ -273,6 +273,11 @@
 
 <?php echo $this->Form->create($rattery, ['type' => 'post', 'url' => ['controller' => 'Ratteries', 'action' => 'moderate', $rattery->id]]); ?>
 
+<div class="content">
+    <?= $this->element('side_message_control', ['sheet' => $rattery]) ?>
+</div>
+<div class="spacer"></div>
+
 <div class="row">
     <div class="column-responsive column-50">
         <div class="tooltip-staff">
