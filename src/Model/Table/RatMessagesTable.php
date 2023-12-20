@@ -177,10 +177,19 @@ class RatMessagesTable extends Table
         }
 
         $query
-            ->order('RatMessages.created DESC')
+            //->order('RatMessages.created DESC')
+            ->leftJoinWith('Rats.RatMessages', function ($q) {
+                    return $q
+                        ->order('RatMessages.created DESC')
+                        ->limit(1);
+                })
             ->contain([
                 'Rats',
-                'Rats.RatMessages' => ['sort' => 'RatMessages.created DESC'],
+                //'Rats.RatMessages' => ['sort' => 'RatMessages.created DESC'],
+                // 'Rats.RatMessages' => function ($q) {
+                //     return $q->order('RatMessages.created DESC');
+                // },
+                // ['sort' => 'RatMessages.created DESC', 'limit' => 1],
                 'Rats.Ratteries',
                 'Rats.CreatorUsers',
                 'Rats.OwnerUsers',
@@ -192,6 +201,7 @@ class RatMessagesTable extends Table
             ->where($filter);
 
         return $query->group(['RatMessages.id']);
+        //return $query->group(['Rats.id']);
         //->order(['RatMessages.created DESC'])->group(['Rats.id']);
     }
 }

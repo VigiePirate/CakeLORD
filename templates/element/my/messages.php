@@ -63,42 +63,27 @@
                 </thead>
                 <tbody>
                     <?php foreach ($rat_messages as $ratMessage): ?>
-                        <?php if ($ratMessage->id == $ratMessage->rat->rat_messages[0]->id) : ?> <!-- FIXME: getting the most recent message for each rat should be made earlier -->
-                            <?php if (
-                                        $ratMessage->rat->state->needs_user_action
-                                        && $ratMessage->is_staff_request
-                                        && ! $ratMessage->is_automatically_generated
-                                    ) : ?>
-                                <tr class="highlight-row">
-                            <?php else : ?>
-                                <tr>
-                            <?php endif ; ?>
-                            <td><span class="statecolor_<?php echo h($ratMessage->rat->state_id) ?>"><?= h($ratMessage->rat->state->symbol) ?></span></td>
-                                <td><?= $ratMessage->has('rat') ? $this->Html->link($ratMessage->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratMessage->rat->id]) : '' ?></td>
-                                <td><?= h($ratMessage->rat->usual_name) ?></td>
-                                    <!-- <td><?= $ratMessage->is_staff_request ? '✓' : '' ?></td>
-                                <td><?= $ratMessage->is_automatically_generated ? '✓' : '' ?></td> -->
-                                <td><?= mb_strimwidth($ratMessage->content, 0, 256, '...') ?></td>
-                                <!-- <td><span class="statecolor_<?php echo h($ratMessage->rat->state_id) ?>"><?= h($ratMessage->rat->state->symbol) ?></span></td> -->
-
-                                <!-- <td class="actions">
-                                    <?= $this->Html->image('/img/icon-rat.svg', [
-                                        'url' => ['controller' => 'Ratteries', 'action' => 'view', $ratMessage->rat->id],
-                                        'class' => 'action-icon',
-                                        'alt' => __('See Rat')])
-                                    ?>
-                                </td> -->
-
-                                <td>
-                                    <?=
-                                        $ratMessage->has('user') && ! $ratMessage->is_automatically_generated
-                                        ? h($ratMessage->user->username)
-                                        : __('LORD')
-                                    ?>
-                                </td>
-                                <td><?= h($ratMessage->created->i18nFormat('dd/MM/yyyy')) ?></td>
-                            </tr>
+                        <?php if ($ratMessage->rat->state->needs_user_action) : ?>
+                            <tr class="highlight-row">
+                        <?php else : ?>
+                            <tr>
                         <?php endif ; ?>
+                        <td><span class="statecolor_<?php echo h($ratMessage->rat->state_id) ?>"><?= h($ratMessage->rat->state->symbol) ?></span></td>
+                            <td><?= $ratMessage->has('rat') ? $this->Html->link($ratMessage->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratMessage->rat->id]) : '' ?></td>
+                            <td><?= h($ratMessage->rat->usual_name) ?></td>
+                                <!-- <td><?= $ratMessage->is_staff_request ? '✓' : '' ?></td>
+                            <td><?= $ratMessage->is_automatically_generated ? '✓' : '' ?></td> -->
+                            <td><?= mb_strimwidth($ratMessage->content, 0, 256, '...') ?></td>
+
+                            <td>
+                                <?=
+                                    $ratMessage->has('user') && ! $ratMessage->is_automatically_generated
+                                    ? h($ratMessage->user->username)
+                                    : __('LORD')
+                                ?>
+                            </td>
+                            <td><?= h($ratMessage->created->i18nFormat('dd/MM/yyyy')) ?></td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -144,29 +129,27 @@
                 </thead>
                 <tbody>
                     <?php foreach ($rattery_messages as $ratteryMessage): ?>
-                        <?php if ($ratteryMessage->id == $ratteryMessage->rattery->rattery_messages[0]->id) : ?> <!-- FIXME: getting the most recent message for each litter should be made earlier -->
-                            <?php if (
-                                        $ratteryMessage->rattery->state->needs_user_action
-                                        && $ratteryMessage->is_staff_request
-                                        && ! $ratteryMessage->is_automatically_generated
-                                    ) : ?>
-                                <tr class="highlight-row">
-                            <?php else : ?>
-                                <tr>
-                            <?php endif ; ?>
-                            <td><span class="statecolor_<?php echo h($ratteryMessage->rattery->state_id) ?>"><?= h($ratteryMessage->rattery->state->symbol) ?></span></td>
-                                <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
-                                <td><?= mb_strimwidth($ratteryMessage->content, 0, 256, '...') ?></td>
-                                <td>
-                                    <?=
-                                        $ratteryMessage->has('user') && ! $ratteryMessage->is_automatically_generated
-                                        ? h($ratteryMessage->user->username)
-                                        : __('LORD')
-                                    ?>
-                                </td>
-                                <td><?= h($ratteryMessage->created->i18nFormat('dd/MM/yyyy')) ?></td>
-                            </tr>
+                        <?php if (
+                                    $ratteryMessage->rattery->state->needs_user_action
+                                    && $ratteryMessage->is_staff_request
+                                    && ! $ratteryMessage->is_automatically_generated
+                                ) : ?>
+                            <tr class="highlight-row">
+                        <?php else : ?>
+                            <tr>
                         <?php endif ; ?>
+                        <td><span class="statecolor_<?php echo h($ratteryMessage->rattery->state_id) ?>"><?= h($ratteryMessage->rattery->state->symbol) ?></span></td>
+                            <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
+                            <td><?= mb_strimwidth($ratteryMessage->content, 0, 256, '...') ?></td>
+                            <td>
+                                <?=
+                                    $ratteryMessage->has('user') && ! $ratteryMessage->is_automatically_generated
+                                    ? h($ratteryMessage->user->username)
+                                    : __('LORD')
+                                ?>
+                            </td>
+                            <td><?= h($ratteryMessage->created->i18nFormat('dd/MM/yyyy')) ?></td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -213,32 +196,26 @@
                 </thead>
                 <tbody>
                     <?php foreach ($litter_messages as $litterMessage): ?>
-                        <?php if ($litterMessage->id == $litterMessage->litter->litter_messages[0]->id) : ?> <!-- FIXME: getting the most recent message for each litter should be made earlier -->
-                            <?php if (
-                                        $litterMessage->litter->state->needs_user_action
-                                        && $litterMessage->is_staff_request
-                                        && ! $litterMessage->is_automatically_generated
-                                    ) : ?>
+                        <?php if ($litterMessage->litter->state->needs_user_action) : ?>
                                 <tr class="highlight-row">
-                            <?php else : ?>
-                                <tr>
-                            <?php endif ; ?>
-                            <td><span class="statecolor_<?php echo h($litterMessage->litter->state_id) ?>"><?= h($litterMessage->litter->state->symbol) ?></span></td>
-                                <td><?= $litterMessage->has('litter') ? $this->Html->link($litterMessage->litter->birth_date, ['controller' => 'Litters', 'action' => 'view', $litterMessage->litter->id]) : '' ?></td>
-                                <td><?= $litterMessage->has('litter') ? h($litterMessage->litter->parents_name) : '' ?></td>
-                                    <!-- <td><?= $litterMessage->is_staff_request ? '✓' : '' ?></td>
-                                <td><?= $litterMessage->is_automatically_generated ? '✓' : '' ?></td> -->
-                                <td><?= mb_strimwidth($litterMessage->content, 0, 256, '...') ?></td>
-                                <td>
-                                    <?=
-                                        $litterMessage->has('user') && ! $litterMessage->is_automatically_generated
-                                        ? h($litterMessage->user->username)
-                                        : __('LORD')
-                                    ?>
-                                </td>
-                                <td><?= h($litterMessage->created->i18nFormat('dd/MM/yyyy')) ?></td>
-                            </tr>
+                        <?php else : ?>
+                            <tr>
                         <?php endif ; ?>
+                        <td><span class="statecolor_<?php echo h($litterMessage->litter->state_id) ?>"><?= h($litterMessage->litter->state->symbol) ?></span></td>
+                            <td><?= $litterMessage->has('litter') ? $this->Html->link($litterMessage->litter->birth_date, ['controller' => 'Litters', 'action' => 'view', $litterMessage->litter->id]) : '' ?></td>
+                            <td><?= $litterMessage->has('litter') ? h($litterMessage->litter->parents_name) : '' ?></td>
+                                <!-- <td><?= $litterMessage->is_staff_request ? '✓' : '' ?></td>
+                            <td><?= $litterMessage->is_automatically_generated ? '✓' : '' ?></td> -->
+                            <td><?= mb_strimwidth($litterMessage->content, 0, 256, '...') ?></td>
+                            <td>
+                                <?=
+                                    $litterMessage->has('user') && ! $litterMessage->is_automatically_generated
+                                    ? h($litterMessage->user->username)
+                                    : __('LORD')
+                                ?>
+                            </td>
+                            <td><?= h($litterMessage->created->i18nFormat('dd/MM/yyyy')) ?></td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -271,11 +248,10 @@
 
         <?php foreach ($rat_messages as $ratMessage): ?>
             <?php if (
-                            $ratMessage->id == $ratMessage->rat->rat_messages[0]->id
-                            && $ratMessage->rat->state->needs_user_action
-                            && $ratMessage->is_staff_request
-                            && ! $ratMessage->is_automatically_generated
-                        ) :
+                        $ratMessage->rat->state->needs_user_action
+                        && $ratMessage->is_staff_request
+                        && ! $ratMessage->is_automatically_generated
+                    ) :
             ?>
                 <table class="highlighted notification">
             <?php else : ?>

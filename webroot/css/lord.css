@@ -696,10 +696,14 @@ blockquote:before {
 
 .highlight-row {
   background-color: #ffefef;
-  border: solid #ef5753 1px;
+  border: solid #ffffff 1px;
   border-style: solid none;
   border-radius: 1rem;
   padding: 2px;
+}
+
+.highlight-row:hover, .highlight-row:focus {
+  background-color: #ffe1e1;
 }
 
 tr.highlight-row > td:first-child {

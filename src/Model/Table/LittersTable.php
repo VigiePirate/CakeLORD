@@ -578,6 +578,22 @@ class LittersTable extends Table
         }
     }
 
+    public function findEntitledBy(Query $query, array $options)
+    {
+        $query = $query
+            ->select('id')
+            ->distinct();
+
+        if (empty($options['user_id'])) {
+            $query->leftJoinWith('Users')
+                  ->where(['Users.id IS' => null]);
+        } else {
+            $query->innerJoinWith('Users')
+                  ->where(['Users.id' => $options['user_id']]);
+        }
+        return $query->group(['Litters.id']);
+    }
+
     public function findInState(Query $query, array $options)
     {
         $query = $query
