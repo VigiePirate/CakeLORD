@@ -30,6 +30,8 @@ use App\Model\Entity\StatisticsTrait;
  * @property int $role_id
  * @property int $failed_login_attempts
  * @property \Cake\I18n\FrozenTime|null $failed_login_last_date
+ * @property \Cake\I18n\FrozenTime|null $successful_login_last_date
+ * @property \Cake\I18n\FrozenTime|null $successful_login_previous_date
  * @property bool $is_locked
  * @property string|null $passkey
  * @property string|null $staff_comments
@@ -67,6 +69,8 @@ class User extends Entity implements IdentityInterface
         'role_id' => true,
         'failed_login_attempts' => true,
         'failed_login_last_date' => true,
+        'successful_login_last_date' => true,
+        'successful_login_previous_date' => true,
         'is_locked' => true,
         'passkey' => false,
         'staff_comments' => true,

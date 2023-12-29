@@ -109,4 +109,34 @@ class RatteryMessagesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * My method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function my()
+    {
+        $user = $this->Authentication->getIdentity();
+        $this->Authorization->skipAuthorization();
+        $this->paginate = [
+            'contain' => [
+                'Ratteries',
+                'Ratteries.RatteryMessages' => ['sort' => 'RatteryMessages.created DESC'],
+                'Ratteries.States',
+                'Users',
+            ],
+            'sortableFields' => [
+                'created',
+                'is_staff_request',
+                'is_automatically_generated',
+                'Ratteries.prefix',
+                'Users.username',
+            ]
+        ];
+        $ratteryMessages = $this->RatteryMessages->find('entitled', ['user_id' => $user->id]);
+        $this->paginate($ratteryMessages);
+
+        $this->set(compact('ratteryMessages'));
+    }
 }

@@ -14,29 +14,38 @@ use Cake\Routing\Router;
  */
 class RatsController extends AppController
 {
-
     protected $searchable_only;
-
-    public function initialize(): void
-    {
-        parent::initialize();
-        /* $this->loadComponent('Security'); */
-    }
 
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        // Configure the login action to not require authentication, preventing
-        // the infinite redirect loop issue
+
         $this->Authentication->addUnauthenticatedActions([
-            'index', 'view',
-            'named', 'fromRattery', 'byRattery', 'ownedBy', 'byOwner', 'sex',
-            'search', 'results',
-            'pedigree', 'parentsTree', 'childrenTree', 'print',
+            'index',
+            'view',
+            'named',
+            'fromRattery',
+            'byRattery',
+            'ownedBy',
+            'byOwner',
+            'sex',
+            'search',
+            'results',
+            'pedigree',
+            'parentsTree',
+            'childrenTree',
+            'print',
         ]);
 
         $identity = $this->request->getAttribute('identity');
         $this->searchable_only = is_null($identity) || ! $identity->can('filterByState', $this->Rats);
+
+        /* FIXME
+         * The previous call to "can" counts as an authorization check
+         * Methods which don't perform their authorization check own won't raise an issue!!
+         * This problem can be avoided by patching the Authorization plugin with an uncheckAuthorization() method
+        */
+        //$this->Authorization->uncheckAuthorization();
     }
     /**
      * Index method
@@ -55,8 +64,6 @@ class RatsController extends AppController
 
     /**
      * My method
-     *
-     * FIXME: hardcoded states to be replaced by query on state->needs_staff_action, state->needs_user_action
      *
      * @return \Cake\Http\Response|null
      */
@@ -167,7 +174,8 @@ class RatsController extends AppController
                 'BredLitters.OffspringRats.DeathSecondaryCauses',
                 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']],
                 'RatSnapshots.States',
-                'RatMessages'
+                'RatMessages' => ['sort' => ['RatMessages.created' => 'DESC']],
+                'RatMessages.Users',
             ],
         ]);
 
@@ -938,7 +946,8 @@ class RatsController extends AppController
         ];
         $rats = $this->paginate($rats);
 
-        $this->set(compact('rats'));
+        $user = $this->request->getAttribute('identity');
+        $this->set(compact('rats', 'user'));
     }
 
     /* Autocomplete for forms function */
@@ -1250,11 +1259,53 @@ class RatsController extends AppController
 
     /* State changes */
 
-    public function moderate($id) {
+    public function moderate($id)
+    {
+        $rat = $this->Rats->get($id, [
+            'contain' => [
+                'States',
+            ],
+        ]);
+        $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+        if ($this->Rats->save($rat, ['checkRules' => false])) {
+            // state_id is up to date but not $rat->state entity; reload for updated flash message
+            $this->loadModel('States');
+            $this->Flash->success(__('This rat sheet is now in state: {0}.', [$this->States->get($rat->state_id)->name]));
+            if (! empty($this->request->getData('side_message'))) {
+                $this->Flash->default(__('The following custom moderation message has been sent: {0}', [$this->request->getData('side_message')]));
+            }
+        } else {
+            $this->Flash->error(__('We could not moderate the sheet. Please retry or contact an administrator.'));
+        };
+        return $this->redirect(['action' => 'view', $rat->id]);
+    }
+
+    public function dispute($id) {
+        $rat = $this->Rats->get($id, [
+            'contain' => [
+                'States',
+                'RatMessages' => ['sort' => 'RatMessages.created DESC'],
+                'RatMessages.Rats.States',
+                'RatMessages.Users'
+            ],
+        ]);
+
+        $this->Authorization->authorize($rat);
+
         if ($this->request->is('post')) {
-            $decision = $this->request->getData('decision');
-            $this->$decision($id);
+            // send back to staff and emit message
+            $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+
+            if ($this->Rats->save($rat, ['checkRules' => false])) {
+                $this->Flash->success(__('The sheet has been sent back to staff with your message.'));
+                return $this->redirect(['action' => 'view', $rat->id]);
+            } else {
+                $this->Flash->success(__('Something went wrong. Please, try again or contact an administrator.'));
+                return $this->redirect(['action' => 'view', $rat->id]);
+            }
         }
+
+        $this->set(compact('rat'));
     }
 
     public function freeze($id)

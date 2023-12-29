@@ -329,6 +329,22 @@ class RatteriesTable extends Table
         return $query;
     }
 
+    public function findEntitledBy(Query $query, array $options)
+    {
+        $query = $query
+            ->select('id')
+            ->distinct();
+
+        if (empty($options['user_id'])) {
+            $query->leftJoinWith('Users')
+                  ->where(['Users.id IS' => null]);
+        } else {
+            $query->innerJoinWith('Users')
+                  ->where(['Users.id' => $options['user_id']]);
+        }
+        return $query->group(['Ratteries.id']);
+    }
+
     // Find user's active rattery
     public function findActiveFromUser(Query $query, array $options)
     {

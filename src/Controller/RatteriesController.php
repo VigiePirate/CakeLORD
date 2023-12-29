@@ -120,10 +120,14 @@ class RatteriesController extends AppController
                 'Rats.DeathPrimaryCauses',
                 'Rats.DeathSecondaryCauses',
                 'RatterySnapshots' => [
-                    'sort' => ['RatterySnapshots.created' => 'DESC']
+                    'sort' => ['
+                        RatterySnapshots.created' => 'DESC',
+                    ],
                 ],
                 'RatterySnapshots.States',
-                'RatteryMessages'
+                'RatteryMessages' => ['sort' => 'RatteryMessages.created DESC'],
+                'RatteryMessages.Ratteries.States',
+                'RatteryMessages.Users'
             ],
         ]);
 
@@ -682,10 +686,52 @@ class RatteriesController extends AppController
     /* State changes */
 
     public function moderate($id) {
+        $rattery = $this->Ratteries->get($id, [
+            'contain' => [
+                'States',
+            ],
+        ]);
+        $this->Authorization->authorize($rattery, 'changeState');
+        $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
+        if ($this->Ratteries->save($rattery, ['checkRules' => false])) {
+            // state_id is up to date but not $rat->state entity; reload for updated flash message
+            $this->loadModel('States');
+            $this->Flash->success(__('This rattery sheet is now in state: {0}.', [$this->States->get($rattery->state_id)->name]));
+            if (! empty($this->request->getData('side_message'))) {
+                $this->Flash->default(__('The following custom moderation message has been sent: {0}', [$this->request->getData('side_message')]));
+            }
+        } else {
+            $this->Flash->error(__('We could not moderate the sheet. Please retry or contact an administrator.'));
+        };
+        return $this->redirect(['action' => 'view', $rattery->id]);
+    }
+
+    public function dispute($id) {
+        $rattery = $this->Ratteries->get($id, [
+            'contain' => [
+                'States',
+                'RatteryMessages' => ['sort' => 'RatteryMessages.created DESC'],
+                'RatteryMessages.Ratteries.States',
+                'RatteryMessages.Users'
+            ],
+        ]);
+
+        $this->Authorization->authorize($rattery);
+
         if ($this->request->is('post')) {
-            $decision = $this->request->getData('decision');
-            $this->$decision($id);
+            // send back to staff and emit message
+            $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
+
+            if ($this->Ratteries->save($rattery, ['checkRules' => false])) {
+                $this->Flash->success(__('The sheet has been sent back to staff with your message.'));
+                return $this->redirect(['action' => 'view', $rattery->id]);
+            } else {
+                $this->Flash->success(__('Something went wrong. Please, try again or contact an administrator.'));
+                return $this->redirect(['action' => 'view', $rattery->id]);
+            }
         }
+
+        $this->set(compact('rattery'));
     }
 
     public function freeze($id)

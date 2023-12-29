@@ -41,7 +41,7 @@
                 <h1><?= h($litter->full_name) ?></h1>
 
                 <div class="message error">
-                    <?= __('Due to its state in back-office, this sheet can only be entirely viewed by its owner and by staff members.') ?>
+                    <?= __('Due to its state in back-office, this sheet can be viewed only by authorized people.') ?>
                 </div>
 
                 <div class="signature">
@@ -173,7 +173,25 @@
 
                 <h1><?= h($litter->full_name) ?></h1>
 
-                <?= $this->Flash->render() ?>
+                <?php if ($litter->state->needs_user_action && ! is_null($user) && $user->can('ownerEdit', $litter)) : ?>
+                    <div class="message error">
+                        <p><?= __('This sheet needs correction. Here is the latest message staff sent you about it.') ?></p>
+                        <div class="text">
+                            <blockquote>
+                                <?= ! empty($litter->litter_messages) ? $litter->litter_messages[0]->content : '' ?>
+                            </blockquote>
+                        </div>
+                        <p>
+                            <?=
+                                __('Please take action to comply with staff requirements. You can <a href={0} class="flash">edit the sheet</a> or <a href={1} class="flash">answer and send it back to staff</a>.',
+                                [
+                                    $this->Url->build(['controller' => 'Litters', 'action' => 'edit', $litter->id]),
+                                    $this->Url->build(['controller' => 'Litters', 'action' => 'dispute', $litter->id])
+                                ])
+                            ?>
+                        </p>
+                    </div>
+                <?php endif ;?>
 
                 <?php if ($litter->comments) : ?>
                     <div class="text">
@@ -395,27 +413,25 @@
                         </summary>
                         <?php if (!empty($litter->litter_messages)) : ?>
 
-                        <div class="table-responsive">
-                            <table class="summary">
-                                <thead>
-                                    <th><?= __('Id') ?></th>
-                                    <th><?= __('From User') ?></th>
-                                    <th><?= __('Message') ?></th>
-                                    <th><?= __('Created') ?></th>
-                                    <th class="actions"><?= __('Actions') ?></th>
-                                </thead>
-                                <?php foreach ($litter->litter_messages as $message) : ?>
-                                <tr>
-                                    <td><?= h($message->id) ?></td>
-                                    <td><?= h($message->from_user_id) ?></td>
-                                    <td><?= h($message->content) ?></td>
-                                    <td><?= h($message->created->i18nFormat('dd/MM/yyyy')) ?></td>
-                                    <td class="actions">
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </table>
-                        </div>
+                            <div class="table-responsive">
+                                <table class="summary">
+                                    <thead>
+                                        <th><?= __x('message', 'Created') ?></th>
+                                        <th><?= __x('message', 'Sent by') ?></th>
+                                        <th><?= __('Message') ?></th>
+                                        <th><?= __('Auto?') ?></th>
+
+                                    </thead>
+                                    <?php foreach ($litter->litter_messages as $message) : ?>
+                                    <tr>
+                                        <td class="nowrap"><?= h($message->created->i18nFormat('dd/MM/yyyy HH:mm')) ?></td>
+                                        <td><?= h($message->user->username) ?></td>
+                                        <td><?= h($message->content) ?></td>
+                                        <td><?= $message->is_automatically_generated ? '✓' : ''  ?></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </table>
+                            </div>
                         <?php endif; ?>
                     </details>
 

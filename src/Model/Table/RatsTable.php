@@ -920,6 +920,31 @@ class RatsTable extends Table
         return $query->group(['Rats.id']);
     }
 
+    public function findEntitledBy(Query $query, array $options)
+    {
+        $query = $query
+            ->select('id')
+            ->distinct();
+
+        if (empty($options['user_id'])) {
+            $query->leftJoinWith('OwnerUsers')
+                  ->leftJoinWith('CreatorUsers')
+                  ->where([
+                      'CreatorUsers.id IS' => null,
+                      'OwnerUsers.id IS' => null,
+                  ]);
+        } else {
+            $query->innerJoinWith('OwnerUsers')
+                  ->innerJoinWith('CreatorUsers')
+                  ->where(['OR' => [
+                      'CreatorUsers.id' => $options['user_id'],
+                      'OwnerUsers.id' => $options['user_id'],
+                  ],
+                ]);
+        }
+        return $query->group(['Rats.id']);
+    }
+
     public function findSex(Query $query, array $options)
     {
         $query = $query

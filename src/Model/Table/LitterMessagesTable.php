@@ -104,4 +104,43 @@ class LitterMessagesTable extends Table
 
         return $rules;
     }
+
+    public function findEntitled(Query $query, array $options) {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['user_id'])) {
+            $query->leftJoinWith('Litters')
+                ->where(['creator_user_id' => null]);
+        } else {
+            $query->innerJoinWith('Litters')
+                ->where(['creator_user_id' => $options['user_id']]);
+        }
+
+        return $query; //->group(['Litters.id']);
+    }
+
+    public function findLatest(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['litters'])) {
+            return $query;
+        } else {
+            $litters = $options['litters'];
+            $query
+                ->innerJoinWith('Litters', function ($q) use ($litters) {
+                   return $q->where(['Litters.id IN' => $litters]);
+               });
+        }
+
+        if (! empty($options['litter_message_delay'])) {
+            $query->where(['LitterMessages.created >=' => $options['litter_message_delay']]);
+        }
+
+        return $query->order(['LitterMessages.created' => 'DESC']);
+    }
 }

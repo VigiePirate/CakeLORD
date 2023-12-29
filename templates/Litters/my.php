@@ -28,17 +28,24 @@
             <div class="button-small">
                 <?= $this->Html->link(__('Simulate Litter'), ['action' => 'simulate'], ['class' => 'button float-right']) ?>
             </div>
-            <?= $this->element('litters', [
-                'rubric' => __('All my past litters'),
-                'litters' => $litters,
-                'exceptions' => [
-                    'mating_date',
-                    'full_name',
-                    //'dam', 'sire', 'birth_date',
-                    'pups_number_stillborn',
-                    'actions'
-                ],
-            ]) ?>
+
+            <?php if ($litters->isEmpty()) : ?>
+                <h3><?= __('All my past litters') ?></h3>
+                <div class="message default"><?= __('You haven’t contributed to any declared litter. You can simulate or record one from corresponding buttons.') ?></div>
+            <?php else : ?>
+                <?= $this->element('litters', [
+                        'rubric' => __('All my past litters'),
+                        'litters' => $litters,
+                        'exceptions' => [
+                            'mating_date',
+                            'full_name',
+                            //'dam', 'sire', 'birth_date',
+                            'pups_number_stillborn',
+                            'actions'
+                        ],
+                    ])
+                ?>
+            <?php endif ; ?>
         </div>
     </div>
 </div>

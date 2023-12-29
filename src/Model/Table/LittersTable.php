@@ -206,7 +206,8 @@ class LittersTable extends Table
         // javacript fallback for rattery at litter creation
         // FIXME: replace ugly test by proper case management
         if (
-            ! isset($data['contributions'])
+            ! isset($data['side_message'])
+            && ! isset($data['contributions'])
             && ! isset($data['rattery_name_contribution_1'])
             && (! isset($data['rattery_id']) || empty($data['rattery_id']))
         ) {
@@ -225,7 +226,7 @@ class LittersTable extends Table
             }
         }
 
-        if (! isset($data['contributions'])) {
+        if (! isset($data['side_message']) && ! isset($data['contributions'])) {
 
             // litter creation case, first contribution must be created
             if (! isset($data['rattery_name_contribution_1'])) {
@@ -575,6 +576,22 @@ class LittersTable extends Table
                 $ratteries->save($rattery, ['atomic' => false, 'associated' => []]);
             }
         }
+    }
+
+    public function findEntitledBy(Query $query, array $options)
+    {
+        $query = $query
+            ->select('id')
+            ->distinct();
+
+        if (empty($options['user_id'])) {
+            $query->leftJoinWith('Users')
+                  ->where(['Users.id IS' => null]);
+        } else {
+            $query->innerJoinWith('Users')
+                  ->where(['Users.id' => $options['user_id']]);
+        }
+        return $query->group(['Litters.id']);
     }
 
     public function findInState(Query $query, array $options)

@@ -6,6 +6,7 @@ use ArrayObject;
 use Cake\Datasource\FactoryLocator;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
+use Cake\Event\EventListenerInterface;
 use Cake\ORM\Behavior;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
@@ -35,25 +36,8 @@ class MessageBehavior extends Behavior
     {
         $this->config = $this->getConfig();
         $this->MessagesTable = FactoryLocator::get('Table')->get($config['repository']);
-    }
-
-    /**
-     * afterSave method
-     *
-     * Send automatic notifications once the object is saved.
-     *
-     * @param EventInterface $event
-     * @param EntityInterface $entity
-     * @param ArrayObject $options
-     * @return void
-     */
-    public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
-    {
-        $identity = Router::getRequest()->getAttribute('identity');
-        $user_name = $identity->username;
-        $user_email = $identity->email;
-        $user_wants_email = $identity->wants_newsletter;
-        return;
+        $this->table()->getEventManager()->on('Model.State.modified', [$this, 'queueMessage']);
+        $this->table()->getEventManager()->on('Model.Snapshot.restored', [$this, 'queueMessage']);
     }
 
     /**
@@ -65,11 +49,27 @@ class MessageBehavior extends Behavior
      * @param EntityInterface $entity
      * @return void
      */
-    public function queueMessage(EntityInterface $entity)
+    public function queueMessage(EventInterface $event)
     {
-        $identity = Router::getRequest()->getAttribute('identity');
+        $entity = $event->getSubject();
+        $data = $event->getData();
+        $identity = $data['identity'];
+        $messages = [];
+
+        foreach ($data['messages'] as $entry) {
+            $messages[] = $this->MessagesTable->newEntity([
+                $this->config['entityField'] => $entity->id,
+                'from_user_id' => $identity->id,
+                'created' => $data['emitted'],
+                'content' => $entry['content'], // FIXME probleme ici si pas de side message???
+                'is_staff_request' => $identity->role->is_staff && $data['new_state']->needs_user_action,
+                'is_automatically_generated' => $entry['is_automatically_generated'],
+            ]);
+        }
+
         $user_name = $identity->username;
         $user_is_staff = $identity->role->is_staff;
+        $this->MessagesTable->saveMany($messages);
         return;
     }
 

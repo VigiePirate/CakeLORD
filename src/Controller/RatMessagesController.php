@@ -21,8 +21,24 @@ class RatMessagesController extends AppController
         $this->Authorization->skipAuthorization();
 
         $this->paginate = [
-            'contain' => ['Rats', 'Users'],
+            'contain' => [
+                'Rats',
+                'Rats.Ratteries',
+                'Rats.CreatorUsers',
+                'Rats.OwnerUsers',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Contributions',
+                // in order to know if each message is the last one for this rat
+                'Rats.RatMessages' =>  function($q) {
+                    return $q
+                    ->order('RatMessages.created DESC')
+                    ->limit(1);
+                },
+                'Rats.States',
+                'Users'
+            ]
         ];
+
         $ratMessages = $this->paginate($this->RatMessages);
 
         $this->set(compact('ratMessages'));
@@ -112,5 +128,39 @@ class RatMessagesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * My method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function my()
+    {
+        $user = $this->Authentication->getIdentity();
+        $this->Authorization->skipAuthorization();
+        $this->paginate = [
+            'contain' => [
+                'Rats',
+                'Rats.Ratteries',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Contributions',
+                'Rats.States',
+                'Users',
+            ],
+            'sortableFields' => [
+                'created',
+                'is_staff_request',
+                'is_automatically_generated',
+                'Rats.pedigree_identifier',
+                'Users.username',            
+            ]
+        ];
+
+        $ratMessages = $this->RatMessages->find('entitled', ['user_id' => $user->id]);
+
+        $this->paginate($ratMessages);
+
+        $this->set(compact('ratMessages'));
     }
 }

@@ -69,11 +69,6 @@
                     <td>AVK<sub>5</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= $this->Number->format($coefficients['avk5']) ?> %</td>
                 </tr>
 
-                <!-- <tr>
-                    <th><?= __('Ancestor loss coefficient (10G)') ?></th>
-                    <td>AVK<sub>10</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= h($coefficients['avk10']) ?> %</td>
-                </tr> -->
-
                 <tr>
                     <th><?= __('Coefficient of Inbreeding (5G)') ?></th>
                     <td>COI<sub>5</sub> <?= $coefficients['approx'] ? '≃' : '=' ?>  <?= $this->Number->format(round($coefficients['coi5'],2)) ?> %</td>

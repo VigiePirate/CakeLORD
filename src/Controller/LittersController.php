@@ -117,10 +117,17 @@ class LittersController extends AppController
                 'Ratteries',
                 'Contributions',
                 'LitterSnapshots' => [
-                    'sort' => ['LitterSnapshots.created' => 'DESC'],
+                    'sort' => [
+                        'LitterSnapshots.created' => 'DESC',
+                    ],
                 ],
                 'LitterSnapshots.States',
-                'LitterMessages'
+                'LitterMessages' => [
+                    'sort' => [
+                        'LitterMessages.created DESC',
+                    ],
+                ],
+                'LitterMessages.Users',
             ],
         ]);
 
@@ -1059,10 +1066,54 @@ class LittersController extends AppController
     /* State changes */
 
     public function moderate($id) {
+        $litter = $this->Litters->get($id, [
+            'contain' => [
+                'States',
+            ],
+        ]);
+
+        $this->Authorization->authorize($litter, 'changeState');
+
+        $litter = $this->Litters->patchEntity($litter, $this->request->getData());
+        if ($this->Litters->save($litter, ['checkRules' => false])) {
+            // state_id is up to date but not $rat->state entity; reload for updated flash message
+            $this->loadModel('States');
+            $this->Flash->success(__('This litter sheet is now in state: {0}.', [$this->States->get($litter->state_id)->name]));
+            if (! empty($this->request->getData('side_message'))) {
+                $this->Flash->default(__('The following custom moderation message has been sent: {0}', [$this->request->getData('side_message')]));
+            }
+        } else {
+            $this->Flash->error(__('We could not moderate the sheet. Please retry or contact an administrator.'));
+        };
+        return $this->redirect(['action' => 'view', $litter->id]);
+    }
+
+    public function dispute($id) {
+        $litter = $this->Litters->get($id, [
+            'contain' => [
+                'States',
+                'LitterMessages' => ['sort' => 'LitterMessages.created DESC'],
+                'LitterMessages.Litters.States',
+                'LitterMessages.Users'
+            ],
+        ]);
+
+        $this->Authorization->authorize($litter);
+
         if ($this->request->is('post')) {
-            $decision = $this->request->getData('decision');
-            $this->$decision($id);
+            // send back to staff and emit message
+            $litter = $this->Litters->patchEntity($litter, $this->request->getData());
+
+            if ($this->Litters->save($litter, ['checkRules' => false])) {
+                $this->Flash->success(__('The sheet has been sent back to staff with your message.'));
+                return $this->redirect(['action' => 'view', $litter->id]);
+            } else {
+                $this->Flash->success(__('Something went wrong. Please, try again or contact an administrator.'));
+                return $this->redirect(['action' => 'view', $litter->id]);
+            }
         }
+
+        $this->set(compact('litter'));
     }
 
     public function freeze($id)

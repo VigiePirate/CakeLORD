@@ -6,6 +6,7 @@ namespace App\Model\Table;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\Datasource\FactoryLocator;
 use Cake\Validation\Validator;
 
 /**
@@ -103,5 +104,80 @@ class RatMessagesTable extends Table
         $rules->add($rules->existsIn('from_user_id', 'Users'), ['errorField' => 'from_user_id']);
 
         return $rules;
+    }
+
+    public function findFromUser(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        $user_id = $options['user_id'];
+
+        if (empty($user_id)) {
+            return $query;
+        } else {
+            $query
+                ->contain([
+                    'Rats',
+                    'Rats.Ratteries',
+                    'Rats.CreatorUsers',
+                    'Rats.OwnerUsers',
+                    'Rats.BirthLitters',
+                    'Rats.BirthLitters.Contributions',
+                    'Rats.States',
+                    'Users'
+                ])
+                ->where(['from_user_id' => $user_id]);
+        }
+
+        return $query->group(['RatMessages.id']);
+    }
+
+    public function findEntitled(Query $query, array $options) {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['user_id'])) {
+            $query->leftJoinWith('Rats')
+                ->where([
+                  'CreatorUsers.id' => null,
+                  'OwnerUsers.id' => null,
+                ]);
+        } else {
+            $query->contain(['Rats', 'Rats.CreatorUsers', 'Rats.OwnerUsers'])
+                ->where([
+                  'OR' => [
+                      'CreatorUsers.id' => $options['user_id'],
+                      'OwnerUsers.id' => $options['user_id'],
+                  ]
+                ]);
+        }
+
+        return $query->group(['RatMessages.id']);
+    }
+
+    public function findLatest(Query $query, array $options)
+    {
+        $query = $query
+            ->select()
+            ->distinct();
+
+        if (empty($options['rats'])) {
+            return $query;
+        } else {
+            $rats = $options['rats'];
+            $query
+                ->innerJoinWith('Rats', function ($q) use ($rats) {
+                   return $q->where(['Rats.id IN' => $rats]);
+               });
+        }
+
+        if (! empty($options['rat_message_delay'])) {
+            $query->where(['RatMessages.created >=' => $options['rat_message_delay']]);
+        }
+
+        return $query->order(['RatMessages.created' => 'DESC']);
     }
 }

@@ -1,4 +1,6 @@
-<h3><?= h($rubric) ?></h3>
+<?php if ($rubric != '') : ?>
+    <h3><?= h($rubric) ?></h3>
+<?php endif; ?>
 <div class="table-responsive">
     <table class="summary">
         <thead>

@@ -103,6 +103,14 @@ h1 span, h3 span {
   font-size: 75%;
 }
 
+.shortlist {
+  margin-bottom:.25rem !important;
+}
+
+.shortlist + p {
+  padding-left: 0.75rem !important;
+}
+
 /* ugly stuff that should be improved later for on/off ratteries */
 .rotate {
   display:inline-block;
@@ -623,11 +631,13 @@ blockquote:before {
 .sexcolor_F {
   color: #ff99cc;
   font-weight:bold;
+  -webkit-text-stroke: 0.01em #ff99cc;
 }
 
 .sexcolor_M {
   color: #99ccff;
   font-weight:bold;
+  -webkit-text-stroke: 0.01em #99ccff;
 }
 
 /* should be read from states table later ('css property' field) */
@@ -671,6 +681,70 @@ blockquote:before {
   background-color: #ebfff3;
 }
 
+.highlighted {
+  background-color: #ffefef;
+  border-style: none;
+  border-radius: 1rem;
+}
+
+.highlightable {
+  /* border-collapse: collapse; */
+  border-collapse: separate;
+  border-spacing: 0 2px;
+  margin-top: -2px;
+}
+
+.highlight-row {
+  background-color: #ffefef;
+  border: solid #ffffff 1px;
+  border-style: solid none;
+  border-radius: 1rem;
+  padding: 2px;
+}
+
+.highlight-row:hover, .highlight-row:focus {
+  background-color: #ffe1e1;
+}
+
+tr.highlight-row > td:first-child {
+    border-left-style: none;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+tr.highlight-row > td:last-child {
+    border-right-style: none;
+    border-bottom-right-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.notification {
+  table-layout: fixed;
+}
+
+.notification>tbody>tr>th {
+  vertical-align: top;
+}
+
+.notification>tbody>tr:first-of-type>th {
+  color: #606ebf;
+  font-size: larger;
+  width: 10ch;
+  overflow: visible;
+}
+
+.notification>tbody>tr:first-of-type>th>a {
+  font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
+  color: #606ebf;
+  font-size: 1.8rem;
+  width: 10ch;
+  overflow: visible;
+}
+
+.notification>tbody>tr:first-of-type>td {
+  font-size: larger;
+  text-align: right;
+  min-width: 85%;
+}
 
 /* Utility */
 .table-responsive {

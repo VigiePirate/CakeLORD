@@ -40,7 +40,7 @@
                     <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?>
                 </h1>
                 <div class="message error">
-                    <?= __('Due to its state in back-office, this sheet can only be entirely viewed by its owner and by staff members.') ?>
+                    <?= __('Due to its state in back-office, this sheet can be viewed only by authorized people.') ?>
                 </div>
 
                 <div class="signature">
@@ -184,7 +184,25 @@
                     <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?>
                 </h1>
 
-                <?= $this->Flash->render() ?>
+                <?php if ($rat->state->needs_user_action && ! is_null($user) && $user->can('ownerEdit', $rat)) : ?>
+                    <div class="message error">
+                        <p><?= __('This sheet needs correction. Here is the latest message staff sent you about it.') ?></p>
+                        <div class="text">
+                            <blockquote>
+                                <?= ! empty($rat->rat_messages) ? $rat->rat_messages[0]->content : '' ?>
+                            </blockquote>
+                        </div>
+                        <p>
+                            <?=
+                                __('Please take action to comply with staff requirements. You can <a href={0} class="flash">edit the sheet</a> or <a href={1} class="flash">answer and send it back to staff</a>.',
+                                [
+                                    $this->Url->build(['controller' => 'Rats', 'action' => 'edit', $rat->id]),
+                                    $this->Url->build(['controller' => 'Rats', 'action' => 'dispute', $rat->id])
+                                ])
+                            ?>
+                        </p>
+                    </div>
+                <?php endif ;?>
 
                 <div class="row row-reverse row-with-photo">
                     <div class="column-responsive column-60">
@@ -425,19 +443,33 @@
                             <div class="table-responsive">
                                 <table class="summary">
                                     <thead>
-                                        <th><?= __('Id') ?></th>
-                                        <th><?= __('From User') ?></th>
+                                        <th><?= __x('message', 'Created') ?></th>
+                                        <th><?= __x('message', 'Sent by') ?></th>
                                         <th><?= __('Message') ?></th>
-                                        <th><?= __('Created') ?></th>
-                                        <th class="actions"><?= __('Actions') ?></th>
+                                        <th><?= __('Auto?') ?></th>
                                     </thead>
                                     <?php foreach ($rat->rat_messages as $message) : ?>
                                     <tr>
-                                        <td><?= h($message->id) ?></td>
-                                        <td><?= h($message->from_user_id) ?></td>
+                                        <td class="nowrap"><?= h($message->created->i18nFormat('dd/MM/yyyy HH:mm')) ?></td>
+                                        <td><?= h($message->user->username) ?></td>
                                         <td><?= h($message->content) ?></td>
-                                        <td><?= h($message->created->i18nFormat('dd/MM/yyyy')) ?></td>
-                                        <td class="actions">
+                                        <td>
+                                            <!-- <?php if (! is_null($user) && $user->can('delete', $message)) : ?>
+                                                <?= $this->Html->image('/img/icon-delete.svg', [
+                                                    'url' => ['controller' => 'RatMessages', 'action' => 'delete', $message->id],
+                                                    'class' => 'action-icon',
+                                                    'alt' => __('Delete Message')
+                                                ])?>
+                                            <?php else :?>
+                                                <span class="disabled">
+                                                    <?= $this->Html->image('/img/icon-delete.svg', [
+                                                        'url' => '',
+                                                        'class' => 'action-icon disabled',
+                                                        'alt' => __('Delete Message')])
+                                                    ?>
+                                                </span>
+                                            <?php endif ;?> -->
+                                            <?= $message->is_automatically_generated ? '✓' : ''  ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

@@ -1,9 +1,13 @@
+<?php use Cake\Datasource\QueryInterface; ?>
+
 <?php if ($rubric != '') : ?>
     <h2><?= h($rubric) ?></h2>
 <?php endif; ?>
 
-<?php if (empty($rats)) : ?>
-    <div class="table-responsive"></div>
+<!-- for rats/my tab -->
+<?php if ($rats instanceof QueryInterface && $rats->all()->isEmpty()) : ?>
+    <div class="message default"><?= __('You haven’t any rat in this category.') ?></div>
+
 <?php else : ?>
     <div class="table-responsive">
         <!-- in tabs, style is that of 'rats' element -->

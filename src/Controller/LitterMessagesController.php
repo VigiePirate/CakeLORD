@@ -109,4 +109,39 @@ class LitterMessagesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * My method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function my()
+    {
+        $user = $this->Authentication->getIdentity();
+        $this->Authorization->skipAuthorization();
+        $this->paginate = [
+            'contain' => [
+                'Litters',
+                'Litters.Sire',
+                'Litters.Sire.BirthLitters.Contributions',
+                'Litters.Dam',
+                'Litters.Dam.BirthLitters.Contributions',
+                'Litters.LitterMessages' => ['sort' => 'LitterMessages.created DESC'],
+                'Litters.States',
+                'Users',
+            ],
+            'sortableFields' => [
+                'created',
+                'is_staff_request',
+                'is_automatically_generated',
+                'Litters.birth_date',
+                'Users.username',
+            ]
+        ];
+        $litterMessages = $this->LitterMessages->find('entitled', ['user_id' => $user->id]);
+
+        $this->paginate($litterMessages);
+
+        $this->set(compact('litterMessages'));
+    }
 }

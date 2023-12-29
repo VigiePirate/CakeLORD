@@ -5,34 +5,51 @@
  */
 ?>
 <div class="ratMessages index content">
-    <?= $this->Html->link(__('New Rat Message'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Rat Messages') ?></h3>
+    <h1><?= __('Rat Messages') ?></h1>
     <div class="table-responsive">
-        <table>
+        <table class="summary">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('rat_id') ?></th>
-                    <th><?= $this->Paginator->sort('from_user_id') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('is_staff_request') ?></th>
-                    <th><?= $this->Paginator->sort('is_automatically_generated') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('created', __x('message', 'Created')) ?></th>
+                    <th><?= $this->Paginator->sort('pedigree_identifier', __('Identifier')) ?></th>
+                    <th class="col-head"><?= __('Usual name') ?></th>
+                    <th><?= $this->Paginator->sort('from_user_id', __x('message', 'Sent by')) ?></th>
+
+                    <th><?= $this->Paginator->sort('is_staff_request', __('Staff?')) ?></th>
+                    <th><?= $this->Paginator->sort('is_automatically_generated', __('Auto?')) ?></th>
+                    <th class="col-head"><?= __('Content') ?></th>
+                    <th class="actions col-head"><?= __('Sheet') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($ratMessages as $ratMessage): ?>
-                <tr>
-                    <td><?= $this->Number->format($ratMessage->id) ?></td>
-                    <td><?= $ratMessage->has('rat') ? $this->Html->link($ratMessage->rat->full_name, ['controller' => 'Rats', 'action' => 'view', $ratMessage->rat->id]) : '' ?></td>
-                    <td><?= $ratMessage->has('user') ? $this->Html->link($ratMessage->user->username, ['controller' => 'Users', 'action' => 'view', $ratMessage->user->id]) : '' ?></td>
+
+                <?php if (
+                            $ratMessage->rat->state->needs_user_action
+                            && $ratMessage->is_staff_request
+                            && ! $ratMessage->is_automatically_generated
+                            && count($ratMessage->rat->rat_messages) != 0
+                            && $ratMessage->id == $ratMessage->rat->rat_messages[0]->id
+                        ) : ?>
+                    <tr class="highlight-row">
+                <?php else : ?>
+                    <tr>
+                <?php endif; ?>
+
                     <td><?= h($ratMessage->created) ?></td>
-                    <td><?= h($ratMessage->is_staff_request) ?></td>
-                    <td><?= h($ratMessage->is_automatically_generated) ?></td>
+                    <td><?= $ratMessage->has('rat') ? $this->Html->link($ratMessage->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratMessage->rat->id]) : '' ?></td>
+                    <td><?= h($ratMessage->rat->usual_name) ?></td>
+                    <td><?= $ratMessage->has('user') ? $this->Html->link($ratMessage->user->username, ['controller' => 'Users', 'action' => 'view', $ratMessage->user->id]) : '' ?></td>
+
+                    <td><?= $ratMessage->is_staff_request ? '✓' : '' ?></td>
+                    <td><?= $ratMessage->is_automatically_generated ? '✓' : '' ?></td>
+                    <td><?= mb_strimwidth($ratMessage->content, 0, 64, '...') ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $ratMessage->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $ratMessage->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $ratMessage->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratMessage->id)]) ?>
+                        <?= $this->Html->image('/img/icon-rat.svg', [
+                            'url' => ['controller' => 'Ratteries', 'action' => 'view', $ratMessage->rat->id],
+                            'class' => 'action-icon',
+                            'alt' => __('See Rat')])
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
