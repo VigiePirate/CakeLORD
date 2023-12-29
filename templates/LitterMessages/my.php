@@ -14,12 +14,12 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('created', __x('message', 'Created')) ?></th>
-                    <th><?= $this->Paginator->sort('from_user_id', __x('message', 'Sent by')) ?></th>
-                    <th><?= $this->Paginator->sort('birth_date', __x('message', 'About')) ?></th>
+                    <th><?= $this->Paginator->sort('Users.username', __x('message', 'Sent by')) ?></th>
+                    <th><?= $this->Paginator->sort('Litters.birth_date', __x('message', 'About')) ?></th>
                     <th class="col-head"><?= __('Parents') ?></th>
                     <th class="col-head"><?= __x('message', 'Content') ?></th>
                     <th><?= $this->Paginator->sort('is_staff_request', __('Staff?')) ?></th>
-                    <th><?= $this->Paginator->sort('is_automatically_genelittered', __('Auto?')) ?></th>
+                    <th><?= $this->Paginator->sort('is_automatically_generated', __('Auto?')) ?></th>
                 </tr>
             </thead>
             <tbody>

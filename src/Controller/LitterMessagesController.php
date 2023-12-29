@@ -130,6 +130,13 @@ class LitterMessagesController extends AppController
                 'Litters.States',
                 'Users',
             ],
+            'sortableFields' => [
+                'created',
+                'is_staff_request',
+                'is_automatically_generated',
+                'Litters.birth_date',
+                'Users.username',
+            ]
         ];
         $litterMessages = $this->LitterMessages->find('entitled', ['user_id' => $user->id]);
 

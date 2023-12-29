@@ -14,8 +14,8 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('created', __x('message', 'Created')) ?></th>
-                    <th><?= $this->Paginator->sort('from_user_id', __x('message', 'Sent by')) ?></th>
-                    <th><?= $this->Paginator->sort('prefix', __x('message', 'About')) ?></th>
+                    <th><?= $this->Paginator->sort('Users.username', __x('message', 'Sent by')) ?></th>
+                    <th><?= $this->Paginator->sort('Ratteries.prefix', __x('message', 'About')) ?></th>
                     <th class="col-head"><?= __x('message', 'Content') ?></th>
                     <th><?= $this->Paginator->sort('is_staff_request', __('Staff?')) ?></th>
                     <th><?= $this->Paginator->sort('is_automatically_generated', __('Auto?')) ?></th>

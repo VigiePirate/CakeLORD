@@ -126,6 +126,13 @@ class RatteryMessagesController extends AppController
                 'Ratteries.States',
                 'Users',
             ],
+            'sortableFields' => [
+                'created',
+                'is_staff_request',
+                'is_automatically_generated',
+                'Ratteries.prefix',
+                'Users.username',
+            ]
         ];
         $ratteryMessages = $this->RatteryMessages->find('entitled', ['user_id' => $user->id]);
         $this->paginate($ratteryMessages);

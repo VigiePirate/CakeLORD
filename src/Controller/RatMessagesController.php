@@ -148,6 +148,13 @@ class RatMessagesController extends AppController
                 'Rats.States',
                 'Users',
             ],
+            'sortableFields' => [
+                'created',
+                'is_staff_request',
+                'is_automatically_generated',
+                'Rats.pedigree_identifier',
+                'Users.username',            
+            ]
         ];
 
         $ratMessages = $this->RatMessages->find('entitled', ['user_id' => $user->id]);

@@ -15,7 +15,7 @@
                 <tr>
                     <th><?= $this->Paginator->sort('created', __x('message', 'Created')) ?></th>
                     <th><?= $this->Paginator->sort('from_user_id', __x('message', 'Sent by')) ?></th>
-                    <th><?= $this->Paginator->sort('pedigree_identifier', __x('message', 'About')) ?></th>
+                    <th><?= $this->Paginator->sort('Rats.pedigree_identifier', __x('message', 'About')) ?></th>
                     <th class="col-head"><?= __('Usual name') ?></th>
                     <th class="col-head"><?= __x('message', 'Content') ?></th>
                     <th><?= $this->Paginator->sort('is_staff_request', __('Staff?')) ?></th>
@@ -25,7 +25,7 @@
             <tbody>
                 <?php foreach ($ratMessages as $ratMessage): ?>
                     <tr>
-                        <td><?= $ratMessage->id . ' ' . h($ratMessage->created) ?></td>
+                        <td><?= h($ratMessage->created) ?></td>
                         <td><?= $ratMessage->has('user') ? h($ratMessage->user->username) : '' ?></td>
                         <td><?= $ratMessage->has('rat') ? $this->Html->link($ratMessage->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratMessage->rat->id]) : '' ?></td>
                         <td><?= h($ratMessage->rat->usual_name) ?></td>
