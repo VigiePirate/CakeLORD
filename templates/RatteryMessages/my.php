@@ -23,26 +23,14 @@
             </thead>
             <tbody>
                 <?php foreach ($ratteryMessages as $ratteryMessage): ?>
-                    <?php if (
-                                $ratteryMessage->rattery->state->needs_user_action
-                                && $ratteryMessage->is_staff_request
-                                && ! $ratteryMessage->is_automatically_generated
-                                && count($ratteryMessage->rattery->rattery_messages) != 0
-                                && $ratteryMessage->id == $ratteryMessage->rattery->rattery_messages[0]->id
-                            ) :
-                    ?>
-                        <tr class="highlight-row">
-                    <?php else : ?>
-                        <tr>
-                    <?php endif; ?>
-
-                    <td><?= h($ratteryMessage->created) ?></td>
-                    <td><?= $ratteryMessage->has('user') ? h($ratteryMessage->user->username) : '' ?></td>
-                    <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
-                    <td><?= mb_strimwidth($ratteryMessage->content, 0, 64, '...') ?></td>
-                    <td><?= $ratteryMessage->is_staff_request ? '✓' : '' ?></td>
-                    <td><?= $ratteryMessage->is_automatically_generated ? '✓' : '' ?></td>
-                </tr>
+                    <tr>
+                        <td><?= h($ratteryMessage->created) ?></td>
+                        <td><?= $ratteryMessage->has('user') ? h($ratteryMessage->user->username) : '' ?></td>
+                        <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
+                        <td><?= mb_strimwidth($ratteryMessage->content, 0, 64, '...') ?></td>
+                        <td><?= $ratteryMessage->is_staff_request ? '✓' : '' ?></td>
+                        <td><?= $ratteryMessage->is_automatically_generated ? '✓' : '' ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>

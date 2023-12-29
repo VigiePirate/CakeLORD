@@ -24,27 +24,15 @@
             </thead>
             <tbody>
                 <?php foreach ($litterMessages as $litterMessage): ?>
-                    <?php if (
-                                $litterMessage->litter->state->needs_user_action
-                                && $litterMessage->is_staff_request
-                                && ! $litterMessage->is_automatically_genelittered
-                                && count($litterMessage->litter->litter_messages) != 0
-                                && $litterMessage->id == $litterMessage->litter->litter_messages[0]->id
-                            ) :
-                    ?>
-                        <tr class="highlight-row">
-                    <?php else : ?>
-                        <tr>
-                    <?php endif; ?>
-
-                    <td><?= h($litterMessage->created) ?></td>
-                    <td><?= $litterMessage->has('user') ? h($litterMessage->user->username) : '' ?></td>
-                    <td><?= $litterMessage->has('litter') ? $this->Html->link($litterMessage->litter->birth_date, ['controller' => 'litters', 'action' => 'view', $litterMessage->litter->id]) : '' ?></td>
-                    <td><?= $litterMessage->has('litter') ? h($litterMessage->litter->parents_name) : '' ?></td>
-                    <td><?= mb_strimwidth($litterMessage->content, 0, 128, '...') ?></td>
-                    <td><?= $litterMessage->is_staff_request ? '✓' : '' ?></td>
-                    <td><?= $litterMessage->is_automatically_generated ? '✓' : '' ?></td>
-                </tr>
+                    <tr>
+                        <td><?= h($litterMessage->created) ?></td>
+                        <td><?= $litterMessage->has('user') ? h($litterMessage->user->username) : '' ?></td>
+                        <td><?= $litterMessage->has('litter') ? $this->Html->link($litterMessage->litter->birth_date, ['controller' => 'litters', 'action' => 'view', $litterMessage->litter->id]) : '' ?></td>
+                        <td><?= $litterMessage->has('litter') ? h($litterMessage->litter->parents_name) : '' ?></td>
+                        <td><?= mb_strimwidth($litterMessage->content, 0, 128, '...') ?></td>
+                        <td><?= $litterMessage->is_staff_request ? '✓' : '' ?></td>
+                        <td><?= $litterMessage->is_automatically_generated ? '✓' : '' ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
