@@ -164,44 +164,20 @@ class RatMessagesTable extends Table
             ->select()
             ->distinct();
 
-        if (empty($options['user_id']) || empty($options['delay'])) {
+        if (empty($options['rats'])) {
             return $query;
         } else {
-            $filter = [
-                'OR' => [
-                    'CreatorUsers.id' => $options['user_id'],
-                    'OwnerUsers.id' => $options['user_id'],
-                ],
-                'RatMessages.created >=' => $options['delay'],
-            ];
+            $rats = $options['rats'];
+            $query
+                ->innerJoinWith('Rats', function ($q) use ($rats) {
+                   return $q->where(['Rats.id IN' => $rats]);
+               });
         }
 
-        $query
-            //->order('RatMessages.created DESC')
-            ->leftJoinWith('Rats.RatMessages', function ($q) {
-                    return $q
-                        ->order('RatMessages.created DESC')
-                        ->limit(1);
-                })
-            ->contain([
-                'Rats',
-                //'Rats.RatMessages' => ['sort' => 'RatMessages.created DESC'],
-                // 'Rats.RatMessages' => function ($q) {
-                //     return $q->order('RatMessages.created DESC');
-                // },
-                // ['sort' => 'RatMessages.created DESC', 'limit' => 1],
-                'Rats.Ratteries',
-                'Rats.CreatorUsers',
-                'Rats.OwnerUsers',
-                'Rats.BirthLitters',
-                'Rats.BirthLitters.Contributions',
-                'Rats.States',
-                'Users'
-            ])
-            ->where($filter);
+        if (! empty($options['rat_message_delay'])) {
+            $query->where(['RatMessages.created >=' => $options['rat_message_delay']]);
+        }
 
-        return $query->group(['RatMessages.id']);
-        //return $query->group(['Rats.id']);
-        //->order(['RatMessages.created DESC'])->group(['Rats.id']);
+        return $query->order(['RatMessages.created' => 'DESC']);
     }
 }

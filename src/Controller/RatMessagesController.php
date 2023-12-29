@@ -146,10 +146,10 @@ class RatMessagesController extends AppController
                 'Rats.BirthLitters',
                 'Rats.BirthLitters.Contributions',
                 'Rats.States',
-                'Rats.RatMessages' => ['sort' => 'RatMessages.created DESC'],
                 'Users',
             ],
         ];
+
         $ratMessages = $this->RatMessages->find('entitled', ['user_id' => $user->id]);
 
         $this->paginate($ratMessages);

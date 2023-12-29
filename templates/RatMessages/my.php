@@ -24,27 +24,15 @@
             </thead>
             <tbody>
                 <?php foreach ($ratMessages as $ratMessage): ?>
-                    <?php if (
-                                $ratMessage->rat->state->needs_user_action
-                                && $ratMessage->is_staff_request
-                                && ! $ratMessage->is_automatically_generated
-                                && count($ratMessage->rat->rat_messages) != 0
-                                && $ratMessage->id == $ratMessage->rat->rat_messages[0]->id
-                            ) :
-                    ?>
-                        <tr class="highlight-row">
-                    <?php else : ?>
-                        <tr>
-                    <?php endif; ?>
-
-                    <td><?= h($ratMessage->created) ?></td>
-                    <td><?= $ratMessage->has('user') ? h($ratMessage->user->username) : '' ?></td>
-                    <td><?= $ratMessage->has('rat') ? $this->Html->link($ratMessage->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratMessage->rat->id]) : '' ?></td>
-                    <td><?= h($ratMessage->rat->usual_name) ?></td>
-                    <td><?= mb_strimwidth($ratMessage->content, 0, 64, '...') ?></td>
-                    <td><?= $ratMessage->is_staff_request ? '✓' : '' ?></td>
-                    <td><?= $ratMessage->is_automatically_generated ? '✓' : '' ?></td>
-                </tr>
+                    <tr>
+                        <td><?= $ratMessage->id . ' ' . h($ratMessage->created) ?></td>
+                        <td><?= $ratMessage->has('user') ? h($ratMessage->user->username) : '' ?></td>
+                        <td><?= $ratMessage->has('rat') ? $this->Html->link($ratMessage->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratMessage->rat->id]) : '' ?></td>
+                        <td><?= h($ratMessage->rat->usual_name) ?></td>
+                        <td><?= mb_strimwidth($ratMessage->content, 0, 64, '...') ?></td>
+                        <td><?= $ratMessage->is_staff_request ? '✓' : '' ?></td>
+                        <td><?= $ratMessage->is_automatically_generated ? '✓' : '' ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>

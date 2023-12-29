@@ -317,27 +317,57 @@ class UsersController extends AppController
         }
 
     	$rats = $this->Rats->find('entitledBy', ['user_id' => $user->id]);
-    	$query = $this->RatMessages
-                ->find()
-                ->innerJoinWith('Rats', function ($q) use ($rats) {
-                   return $q->where(['Rats.id IN' => $rats]);
-                })
-                ->where([
-                   'RatMessages.created >=' => $rat_message_delay,
-                ])
-                ->order(['RatMessages.created' => 'DESC'])
-                ->group(['Rats.id'])
-                ->contain([
-                    'Rats.Ratteries',
-                    'Rats.BirthLitters',
-                    'Rats.BirthLitters.Contributions',
-                    'Rats.States',
-                    'Users',
-                ]);
+    	$query = $this->RatMessages->find('latest', ['rats' => $rats, 'rat_message_delay' => $rat_message_delay]);
 
-        $rat_messages = $query->all();
+        $rat_messages = $query
+            ->contain([
+                'Rats.Ratteries',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Contributions',
+                'Rats.States',
+                'Users',
+            ])
+            ->all();
+
+        $rat_last_messages_ids = $query
+            ->where(['is_automatically_generated IS' => false])
+            ->group(['Rats.id'])
+            ->order(['RatMessages.id' => 'DESC'])
+            ->all()->extract('id')->toList();
+
         $count['rat_total'] = $query->count();
-        $count['rat_sub_total'] = $rats->find('needsUser')
+        $count['rat_sub_total'] = $rats
+            ->find('needsUser')
+            ->distinct()
+            ->count();
+
+        $this->loadModel('RatteryMessages');
+        $rattery_delay = $this->loadModel('Ratteries')->behaviors()->get('State')->config['neglection_delay'];
+        if ($now->modify('-'.$rattery_delay)->isPast($user->successful_login_previous_date)) {
+            $rattery_message_delay = $now->modify('-'.$rattery_delay);
+        } else {
+            $rattery_message_delay = $user->successful_login_previous_date;
+        }
+
+        $ratteries = $this->Ratteries->find('entitledBy', ['user_id' => $user->id]);
+    	$query = $this->RatteryMessages->find('latest', ['ratteries' => $ratteries, 'rattery_message_delay' => $rattery_message_delay]);
+        $rattery_messages = $query
+            ->contain([
+                'Ratteries',
+                'Ratteries.Users',
+                'Ratteries.States',
+                'Users'
+            ])
+            ->all();
+
+        $rattery_last_messages_ids = $query
+            ->where(['is_automatically_generated IS' => false])
+            ->group(['Ratteries.id'])
+            ->order(['RatteryMessages.id' => 'DESC'])
+            ->all()->extract('id')->toList();
+
+        $count['rattery_total'] = $query->count();
+        $count['rattery_sub_total'] = $ratteries->find('needsUser')
                                     ->distinct()
                                     ->count();
 
@@ -349,64 +379,35 @@ class UsersController extends AppController
             $litter_message_delay = $user->successful_login_previous_date;
         }
 
-        $litters = $this->Litters->find('entitledBy', ['user_id' => $user->id]);
-    	$query = $this->LitterMessages
-                ->find()
-                ->innerJoinWith('Litters', function ($q) use ($litters) {
-                   return $q->where(['Litters.id IN' => $litters]);
-                })
-                ->where([
-                   'LitterMessages.created >=' => $litter_message_delay,
-                ])
-                ->order(['LitterMessages.created' => 'DESC'])
-                ->group(['Litters.id'])
-                ->contain([
-                    'Litters',
-                    'Litters.Contributions',
-                    'Litters.Sire',
-                    'Litters.Dam',
-                    'Litters.Users',
-                    'Litters.States',
-                    'Users',
-                ]);
+        $litters = $this->Litters
+            ->find('entitledBy', ['user_id' => $user->id]);
 
-        $litter_messages = $query->all();
+        $query = $this->LitterMessages
+            ->find('latest', ['litters' => $litters, 'litter_message_delay' => $litter_message_delay]);
+
+        $litter_messages = $query
+            ->contain([
+                'Litters',
+                'Litters.Contributions',
+                'Litters.Sire',
+                'Litters.Dam',
+                'Litters.Users',
+                'Litters.States',
+                'Users',
+            ])
+            ->all();
+
+        $litter_last_messages_ids = $query
+            ->where(['is_automatically_generated IS' => false])
+            ->group(['Litters.id'])
+            ->order(['LitterMessages.id' => 'DESC'])
+            ->all()->extract('id')->toList();
+
         $count['litter_total'] = $query->count();
-        $count['litter_sub_total'] = $litters->find('needsUser')
-                                    ->distinct()
-                                    ->count();
-
-        $this->loadModel('RatteryMessages');
-        $rattery_delay = $this->loadModel('Ratteries')->behaviors()->get('State')->config['neglection_delay'];
-        if ($now->modify('-'.$rattery_delay)->isPast($user->successful_login_previous_date)) {
-            $rattery_message_delay = $now->modify('-'.$rattery_delay);
-        } else {
-            $rattery_message_delay = $user->successful_login_previous_date;
-        }
-
-        $ratteries = $this->Ratteries->find('entitledBy', ['user_id' => $user->id]);
-    	$query = $this->RatteryMessages
-                ->find()
-                ->innerJoinWith('Ratteries', function ($q) use ($ratteries) {
-                   return $q->where(['Ratteries.id IN' => $ratteries]);
-                })
-                ->where([
-                   'RatteryMessages.created >=' => $rattery_message_delay,
-                ])
-                ->order(['RatteryMessages.created' => 'DESC'])
-                ->group(['Ratteries.id'])
-                ->contain([
-                    'Ratteries',
-                    'Ratteries.Users',
-                    'Ratteries.States',
-                    'Users'
-                ]);
-
-        $rattery_messages = $query->all();
-        $count['rattery_total'] = $query->count();
-        $count['rattery_sub_total'] = $ratteries->find('needsUser')
-                                    ->distinct()
-                                    ->count();
+        $count['litter_sub_total'] = $litters
+            ->find('needsUser')
+            ->distinct()
+            ->count();
 
         $count['total'] = $count['rat_total'] + $count['litter_total'] + $count['rattery_total'];
         $count['sub_total'] = $count['rat_sub_total'] + $count['litter_sub_total'] + $count['rattery_sub_total'];
@@ -419,9 +420,9 @@ class UsersController extends AppController
             'not_infant_lifespan', 'not_infant_female_lifespan', 'not_infant_male_lifespan',
             'not_accident_lifespan', 'not_accident_female_lifespan', 'not_accident_male_lifespan',
             'champion',
-            'rat_messages',
-            'litter_messages',
-            'rattery_messages',
+            'rat_messages', 'rat_last_messages_ids',
+            'litter_messages', 'litter_last_messages_ids',
+            'rattery_messages', 'rattery_last_messages_ids',
             'count',
         ));
     }

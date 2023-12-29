@@ -127,26 +127,20 @@ class RatteryMessagesTable extends Table
             ->select()
             ->distinct();
 
-        if (empty($options['user_id']) || empty($options['delay'])) {
+        if (empty($options['ratteries'])) {
             return $query;
         } else {
-            $filter = [
-                'owner_user_id' => $options['user_id'],
-                'RatteryMessages.created >=' => $options['delay']
-            ];
+            $ratteries = $options['ratteries'];
+            $query
+                ->innerJoinWith('Ratteries', function ($q) use ($ratteries) {
+                   return $q->where(['Ratteries.id IN' => $ratteries]);
+               });
         }
 
-        $query
-            ->order('RatteryMessages.created DESC')
-            ->contain([
-                'Ratteries',
-                'Ratteries.RatteryMessages' => ['sort' => 'RatteryMessages.created DESC'],
-                'Ratteries.Users',
-                'Ratteries.States',
-                'Users'
-            ])
-            ->where($filter);
+        if (! empty($options['rattery_message_delay'])) {
+            $query->where(['RatteryMessages.created >=' => $options['rattery_message_delay']]);
+        }
 
-        return $query;
+        return $query->order(['RatteryMessages.created' => 'DESC']);
     }
 }

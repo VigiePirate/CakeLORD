@@ -127,29 +127,20 @@ class LitterMessagesTable extends Table
             ->select()
             ->distinct();
 
-        if (empty($options['user_id']) || empty($options['delay'])) {
+        if (empty($options['litters'])) {
             return $query;
         } else {
-            $filter = [
-                'creator_user_id' => $options['user_id'],
-                'LitterMessages.created >=' => $options['delay']
-            ];
+            $litters = $options['litters'];
+            $query
+                ->innerJoinWith('Litters', function ($q) use ($litters) {
+                   return $q->where(['Litters.id IN' => $litters]);
+               });
         }
 
-        $query
-            ->order('LitterMessages.created DESC')
-            ->contain([
-                'Litters',
-                'Litters.Contributions',
-                'Litters.Sire',
-                'Litters.Dam',
-                'Litters.LitterMessages' => ['sort' => 'LitterMessages.created DESC'],
-                'Litters.Users',
-                'Litters.States',
-                'Users'
-            ])
-            ->where($filter);
+        if (! empty($options['litter_message_delay'])) {
+            $query->where(['LitterMessages.created >=' => $options['litter_message_delay']]);
+        }
 
-        return $query;
+        return $query->order(['LitterMessages.created' => 'DESC']);
     }
 }

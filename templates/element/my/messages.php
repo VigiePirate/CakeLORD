@@ -63,7 +63,7 @@
                 </thead>
                 <tbody>
                     <?php foreach ($rat_messages as $ratMessage): ?>
-                        <?php if ($ratMessage->rat->state->needs_user_action) : ?>
+                        <?php if ($ratMessage->rat->state->needs_user_action && in_array($ratMessage->id, $rat_last_messages_ids)) : ?>
                             <tr class="highlight-row">
                         <?php else : ?>
                             <tr>
@@ -129,11 +129,7 @@
                 </thead>
                 <tbody>
                     <?php foreach ($rattery_messages as $ratteryMessage): ?>
-                        <?php if (
-                                    $ratteryMessage->rattery->state->needs_user_action
-                                    && $ratteryMessage->is_staff_request
-                                    && ! $ratteryMessage->is_automatically_generated
-                                ) : ?>
+                        <?php if ($ratteryMessage->rattery->state->needs_user_action && in_array($ratteryMessage->id, $rattery_last_messages_ids)) : ?>
                             <tr class="highlight-row">
                         <?php else : ?>
                             <tr>
@@ -196,7 +192,7 @@
                 </thead>
                 <tbody>
                     <?php foreach ($litter_messages as $litterMessage): ?>
-                        <?php if ($litterMessage->litter->state->needs_user_action) : ?>
+                        <?php if ($litterMessage->litter->state->needs_user_action && in_array($litterMessage->id, $litter_last_messages_ids)) : ?>
                                 <tr class="highlight-row">
                         <?php else : ?>
                             <tr>
@@ -247,12 +243,7 @@
     <?php else : ?>
 
         <?php foreach ($rat_messages as $ratMessage): ?>
-            <?php if (
-                        $ratMessage->rat->state->needs_user_action
-                        && $ratMessage->is_staff_request
-                        && ! $ratMessage->is_automatically_generated
-                    ) :
-            ?>
+            <?php if ($ratMessage->rat->state->needs_user_action && in_array($ratMessage->id, $rat_last_messages_ids)) : ?>
                 <table class="highlighted notification">
             <?php else : ?>
                 <table class="notification">
@@ -319,12 +310,7 @@
     <?php else : ?>
 
         <?php foreach ($rattery_messages as $ratteryMessage): ?>
-            <?php if (
-                $ratteryMessage->rattery->state->needs_user_action
-                && $ratteryMessage->is_staff_request
-                && ! $ratteryMessage->is_automatically_generated
-                ) :
-            ?>
+            <?php if ($ratteryMessage->rattery->state->needs_user_action && in_array($ratteryMessage->id, $rattery_last_messages_ids)) : ?>
                 <table class="highlighted notification">
             <?php else : ?>
                 <table class="notification">
@@ -391,12 +377,7 @@
     <?php else : ?>
 
         <?php foreach ($litter_messages as $litterMessage): ?>
-            <?php if (
-                $litterMessage->litter->state->needs_user_action
-                && $litterMessage->is_staff_request
-                && ! $litterMessage->is_automatically_generated
-                ) :
-            ?>
+            <?php if ($litterMessage->litter->state->needs_user_action && in_array($litterMessage->id, $litter_last_messages_ids)) : ?>
                 <table class="highlighted notification">
             <?php else : ?>
                 <table class="notification">
