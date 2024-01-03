@@ -414,7 +414,8 @@ class UsersController extends AppController
 
         // FIXME: use a collection to split result instead of using twice the same query
         $model = $this->loadModel('Issues');
-        $recently_solved_issues = $model->findByFromUserId($user->id)->where(['is_open IS' => false, 'closed >=' => $user->successful_login_previous_date])->contain(['ClosingUsers'])->order('Issues.created DESC')->all();
+        $issue_delay = is_null($user->successful_login_previous_date) ? $user->created : $user->successful_login_previous_date;
+        $recently_solved_issues = $model->findByFromUserId($user->id)->where(['is_open IS' => false, 'closed >=' => $issue_delay])->contain(['ClosingUsers'])->order('Issues.created DESC')->all();
         $open_issues = $model->findByFromUserId($user->id)->where(['is_open IS' => true])->contain(['ClosingUsers'])->order('Issues.created DESC')->all();
         $count['recently_solved_issues'] = count($recently_solved_issues);
         $count['open_issues'] = count($open_issues);
