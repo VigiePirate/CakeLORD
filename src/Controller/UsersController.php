@@ -412,6 +412,13 @@ class UsersController extends AppController
         $count['total'] = $count['rat_total'] + $count['litter_total'] + $count['rattery_total'];
         $count['sub_total'] = $count['rat_sub_total'] + $count['litter_sub_total'] + $count['rattery_sub_total'];
 
+        // FIXME: use a collection to split result instead of using twice the same query
+        $model = $this->loadModel('Issues');
+        $recently_solved_issues = $model->findByFromUserId($user->id)->where(['is_open IS' => false, 'closed >=' => $user->successful_login_previous_date])->contain(['ClosingUsers'])->order('Issues.created DESC')->all();
+        $open_issues = $model->findByFromUserId($user->id)->where(['is_open IS' => true])->contain(['ClosingUsers'])->order('Issues.created DESC')->all();
+        $count['recently_solved_issues'] = count($recently_solved_issues);
+        $count['open_issues'] = count($open_issues);
+
         $this->set(compact('user', 'today', 'hour',
             'rat_count', 'female_count', 'male_count',
             'alive_rat_count', 'alive_female_count', 'alive_male_count',
@@ -423,6 +430,7 @@ class UsersController extends AppController
             'rat_messages', 'rat_last_messages_ids',
             'litter_messages', 'litter_last_messages_ids',
             'rattery_messages', 'rattery_last_messages_ids',
+            'recently_solved_issues', 'open_issues',
             'count',
         ));
     }

@@ -847,7 +847,7 @@ class Rat extends Entity
             'Rats.id !=' => $this->id,
             'Rats.id >' => '2', // to be replaced by unreliable state on unknown mother and father
             'is_alive IS' => true,
-            'DATEDIFF(NOW(), birth_date) <' => RatsTable::MAXIMAL_AGE
+            'DATEDIFF(NOW(), birth_date) <' => RatsTable::MAXIMAL_AGE,
         ]);
 
         $stats['asc_lifespan'] = $this->roundLifespan(['Rats.id IN' => $ancestry, 'Rats.id !=' => $this->id]);

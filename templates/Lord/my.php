@@ -82,8 +82,6 @@
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
             <div class="spacer"> </div>
         <?php endif; ?>

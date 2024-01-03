@@ -267,8 +267,7 @@ class RatteriesTable extends Table
     {
       $query = $query
       ->select()
-      ->distinct()
-      ->order(['prefix' => 'ASC']);
+      ->distinct();
 
       if (empty($options['names'])) {
         $query->where([

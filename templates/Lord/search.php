@@ -65,7 +65,10 @@
         <div class="sheet-heading">
             <h2><?= __('Ratteries') ?></h2>
             <div class="button-medium">
-                <?= $count['ratteries'] > 10 ? $this->Html->link(__('See all results'), ['controller' => 'Ratteries', 'action' => 'named', h(implode('"', $names))], ['class' => 'button float-right']) : '' ?>
+                <?= $count['ratteries'] > 10
+                    ? $this->Html->link(__('See all results'), ['controller' => 'Ratteries', 'action' => 'named', h(implode('"', $names))], ['class' => 'button float-right'])
+                    : ''
+                ?>
             </div>
         </div>
 

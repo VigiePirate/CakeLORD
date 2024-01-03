@@ -353,42 +353,48 @@
 
                     <h2><?= __('Statistics') ?></h2>
 
-                    <?php if ($stats['survivors'] > 0) : ?>
-                        <div class="message warning">
-                            <?= __('Lifespan is computed only on deceased rats. Please note that litter statistics will be accurate only after the last survivor’s death.') ?>
-                        </div>
-                    <?php endif; ?>
+                    <?php if ($litter->reliable_pups_number != 0) : ?>
 
-                    <table class="condensed unfold">
-                        <tr>
-                            <th><?= __('Current survival rate:') ?></th>
-                            <td>
-                                <?= __('{0, number} %', [$stats['survivors']]) ?>
-                            <span class="comment">
-                                <?= $stats['survivors'] == 0
-                                    ? __('(all rats of the litter are now dead, or supposed so)')
-                                    : __('(at {0})', [$stats['max_age']]);
-                                 ?>
-                            </span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="condensed unfold">
-                        <tr>
-                            <th><?= __('Average lifespan:') ?></th>
-                            <td><?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['lifespan'], $stats['female_lifespan'], $stats['male_lifespan']]) ?></td>
-                        </tr>
-                        <tr>
-                            <th> ⨽ <?= __('infant mortality excluded:') ?></th>
-                            <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['not_infant_lifespan'], $stats['female_not_infant_lifespan'], $stats['male_not_infant_lifespan']]) ?></td>
-                        </tr>
-                        <tr>
-                            <th> ⨽ <?= __('accidents excluded:') ?></th>
-                            <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['not_accident_lifespan'], $stats['female_not_accident_lifespan'], $stats['male_not_accident_lifespan']]) ?></td>
-                        </tr>
-                    </table>
+                        <?php if ($stats['survivors'] > 0) : ?>
+                            <div class="message warning">
+                                <?= __('Lifespan is computed only on deceased rats. Please note that litter statistics will be accurate only after the last survivor’s death.') ?>
+                            </div>
+                        <?php endif; ?>
 
-                    <canvas id="mortality-chart"></canvas>
+                        <table class="condensed unfold">
+                            <tr>
+                                <th><?= __('Current survival rate:') ?></th>
+                                <td>
+                                    <?= __('{0, number} %', [$stats['survivors']]) ?>
+                                <span class="comment">
+                                    <?= $stats['survivors'] == 0
+                                        ? __('(all rats of the litter are now dead, or supposed so)')
+                                        : __('(at {0})', [$stats['max_age']]);
+                                     ?>
+                                </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="condensed unfold">
+                            <tr>
+                                <th><?= __('Average lifespan:') ?></th>
+                                <td><?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['lifespan'], $stats['female_lifespan'], $stats['male_lifespan']]) ?></td>
+                            </tr>
+                            <tr>
+                                <th> ⨽ <?= __('infant mortality excluded:') ?></th>
+                                <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['not_infant_lifespan'], $stats['female_not_infant_lifespan'], $stats['male_not_infant_lifespan']]) ?></td>
+                            </tr>
+                            <tr>
+                                <th> ⨽ <?= __('accidents excluded:') ?></th>
+                                <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['not_accident_lifespan'], $stats['female_not_accident_lifespan'], $stats['male_not_accident_lifespan']]) ?></td>
+                            </tr>
+                        </table>
+
+                        <canvas id="mortality-chart"></canvas>
+
+                    <?php else : ?>
+                        <div class="message"><?= __('There aren’t enough rats with consolidated information to compute relevant mortality statistics.') ?></div>
+                    <?php endif ; ?>
 
                 <?php else : ?>
                     <div class="message warning" onclick="this.classList.add('hidden')"><?= __('No rat has been yet attached to this litter.') ?></div>

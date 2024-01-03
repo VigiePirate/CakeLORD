@@ -480,7 +480,7 @@ class RatsTable extends Table
             'hasNeededPicture',
             [
                 'errorField' => 'picture_file',
-                'message' => __('This rat’s variety is considered as rare. Please upload a good quality picture for verification.')
+                'message' => __('This rat’s variety is rare or often misidentified. Please upload a good quality picture for verification.')
             ]
         );
 
