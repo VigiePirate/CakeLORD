@@ -10,9 +10,9 @@ class UserMailer extends Mailer
   public function sendResetEmail($url, $user)
   {
     $this
-    ->setTransport('gandi')
-    ->setFrom(['contact@srfa.info' => 'Livre des Origines du Rat Domestique'])
-    ->setSender('contact@srfa.info', 'Livre des Origines du Rat Domestique')
+    ->setTransport('srfa')
+    ->setFrom(['lord@srfa.info' => 'Livre des Origines du Rat Domestique'])
+    ->setSender('lord@srfa.info', 'Livre des Origines du Rat Domestique')
     ->setTo($user->email)
     ->setSubject(__('Reset your Password'))
     ->setViewVars(['url' => $url, 'username' => $user->username])
@@ -25,9 +25,9 @@ class UserMailer extends Mailer
   public function sendActivationEmail($url, $user)
   {
     $this
-    ->setTransport('gandi')
-    ->setFrom(['contact@srfa.info' => 'Livre des Origines du Rat Domestique'])
-    ->setSender('contact@srfa.info', 'Livre des Origines du Rat Domestique')
+    ->setTransport('srfa')
+    ->setFrom(['lord@srfa.info' => 'Livre des Origines du Rat Domestique'])
+    ->setSender('lord@srfa.info', 'Livre des Origines du Rat Domestique')
     ->setTo($user->email)
     ->setSubject(__('Activate your Account'))
     ->setViewVars(['url' => $url, 'username' => $user->username])
@@ -41,7 +41,7 @@ class UserMailer extends Mailer
   {
     $options = Configure::read('EmailSettings');
     $this
-    ->setTransport('gandi')
+    ->setTransport('srfa')
     ->setFrom($options['from'])
     ->setSender($options['sender_mail'], $options['sender_name'])
     ->setTo($user->email)
@@ -57,7 +57,7 @@ class UserMailer extends Mailer
   {
     $options = Configure::read('EmailSettings');
     $this
-    ->setTransport('gandi')
+    ->setTransport('srfa')
     ->setFrom($options['from'])
     ->setSender($options['sender_mail'], $options['sender_name'])
     ->setTo($user->email)
@@ -73,7 +73,7 @@ class UserMailer extends Mailer
   {
     $options = Configure::read('EmailSettings');
     $this
-    ->setTransport('gandi')
+    ->setTransport('srfa')
     ->setFrom($options['from'])
     ->setSender($options['sender_mail'], $options['sender_name'])
     ->setTo($options['sender_mail'])

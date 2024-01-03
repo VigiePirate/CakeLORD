@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2024-01-03 18:17+0000\n"
-"PO-Revision-Date: 2024-01-03 19:19+0100\n"
+"PO-Revision-Date: 2024-01-03 21:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -1895,7 +1895,7 @@ msgstr "Impossible de déverrouiller ce compte utilisateur. Veuillez réessayer.
 
 #: src/Controller/UsersController.php:1088
 msgid "The email was sent to the user."
-msgstr "Le  a été envoyé par mail à l’utilisateur."
+msgstr "Le message a été envoyé par mail à l’utilisateur."
 
 #: src/Mailer/UserMailer.php:17
 msgid "Reset your Password"
