@@ -660,7 +660,27 @@ class RatsController extends AppController
 
         // Pass variables into the view template context.
         $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'States', 'BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries'],
+            'contain' => [
+                'OwnerUsers',
+                'Ratteries',
+                'States',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'BirthLitters.Ratteries'
+            ],
+            'order' => [
+                'birth_date' => 'desc',
+            ],
+            'sortableFields' => [
+                'state_id',
+                'pedigree_identifier',
+                'Ratteries.prefix',
+                'name',
+                'pup_name',
+                'birth_date',
+                'OwnerUsers.username',
+                'sex'
+            ]
         ];
         $rats = $this->paginate($rats);
 

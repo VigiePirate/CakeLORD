@@ -29,7 +29,7 @@
 
     <div class="tooltip">
         <?= $this->Html->image('/img/icon-litter.svg', [
-            'url' => ['controller' => 'Litters', 'action' => 'my'],
+            'url' => ['controller' => 'Litters', 'action' => 'my', '?sort=birth_date&direction=desc'],
             'class' => 'side-nav-icon',
             'alt' => __('My Litters')]) ?>
         <span class="tooltiptext"><?= __('Manage my litters') ?></span>

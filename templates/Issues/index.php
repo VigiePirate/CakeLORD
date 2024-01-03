@@ -5,8 +5,8 @@
  */
 ?>
 <div class="issues index content">
-    <?= $this->Html->link(__('See Closed Issues'), ['action' => 'closed'], ['class' => 'button button-staff float-right']) ?>
-    <?= $this->Html->link(__('See All Issues'), ['action' => 'all'], ['class' => 'button button-staff float-right']) ?>
+    <?= $this->Html->link(__('Closed Issues'), ['action' => 'closed'], ['class' => 'button button-staff float-right']) ?>
+    <?= $this->Html->link(__('All Issues'), ['action' => 'all'], ['class' => 'button button-staff float-right']) ?>
 
     <h1><?= __('Open Issues') ?></h1>
     <div class="table-responsive">

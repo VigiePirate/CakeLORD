@@ -414,7 +414,7 @@ trait StatisticsTrait
             })
             ->first();
 
-        return is_null($pups['sum']) ? 0 : $pups['sum'] ;
+        return is_null($pups['sum']) ? 0 : intval($pups['sum']) ;
     }
 
     public function computeAvgRatteryLifetime($options = []) {

@@ -173,7 +173,11 @@ class Rattery extends Entity
                     'DATEDIFF(NOW(), birth_date) >' => RatsTable::MAXIMAL_AGE
                 ]
             ]);
-            $stats['deadRatProportion'] = round(100*$stats['presumedDeadRatCount'] / $stats['sheetCount'], 1);
+            if ($stats['sheetCount'] != 0) {
+                $stats['deadRatProportion'] = round(100*$stats['presumedDeadRatCount'] / $stats['sheetCount'], 1);
+            } else {
+                $stats['deadRatProportion'] = 100;
+            }
             $stats['deadRatCount'] = $this->countRats([
                 'rattery_id' => $this->id,
                 'is_alive IS' => false,

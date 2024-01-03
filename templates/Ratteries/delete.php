@@ -118,7 +118,7 @@
             <?php else : ?>
                 <h2 class="staff"><?= __('Review litters and rats before the rattery sheet can be deleted') ?></h2>
                 <h3 class="staff"><?= __('Litters') ?></h3>
-                <?= $this->element('simple_staff_litters', ['litters' => $rattery->litters]) ?>
+                <?= $this->element('simple_staff_litters', ['litters' => $rattery->litters, 'identity' => $user]) ?>
                 <h3 class="staff"><?= __('Rats') ?></h3>
                 <?= $this->element('simple_staff_rats', ['rats' => $rattery->rats]) ?>
             <?php endif ; ?>

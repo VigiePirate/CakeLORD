@@ -211,7 +211,7 @@
                     </table>
 
                     <h3><?= __('Lifespan statistics') ?></h3>
-                    <?php if($stats['ratCount'] == 0 && $stats['outRatCount'] > 0) : ?>
+                    <?php if($stats['sheetCount'] == 0 && $stats['outRatCount'] > 0) : ?>
                         <div class="message"><?= __('This prefix is only used in external litters.') ?></div>
                     <?php else : ?>
                         <?php if ($stats['ratCount'] == 0 && $stats['outRatCount'] == 0) : ?>
@@ -220,15 +220,15 @@
                             <table class="condensed stats unfold">
                                 <tr>
                                     <th><?= __('Rats recorded as deceased:') ?></th>
-                                    <td><?=  __('{0, number} rats ({1, number} % of recorded rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
+                                    <td><?=  __('{0, plural, =0{No rat} =1{1 rat} other{# rats}} ({1, number} % of recorded rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
                                 </tr>
                                 <tr>
                                     <th> ⨽ <?= __('declared with known date:') ?></th>
-                                    <td> ⨽ <?= __('{0, number} rats ({1, number} %)', [$stats['deadRatCount'], $stats['followedRatProportion']]) ?></td>
+                                    <td> ⨽ <?= __('{0, plural, =0{No rat} =1{1 rat} other{# rats}} ({1, number} %)', [$stats['deadRatCount'], $stats['followedRatProportion']]) ?></td>
                                 </tr>
                                 <tr>
                                     <th> ⨽ <?= __('presumed dead:') ?></th>
-                                    <td> ⨽ <?= __('{0, number} rats ({1, number} %)', [$stats['lostRatCount'], $stats['lostRatProportion']]) ?></td>
+                                    <td> ⨽ <?= __('{0, plural, =0{No rat} =1{1 rat} other{# rats}} ({1, number} %)', [$stats['lostRatCount'], $stats['lostRatProportion']]) ?></td>
                                 </tr>
                             </table>
                             <?php if ($stats['deadRatCount'] > 9) : ?>
@@ -398,8 +398,11 @@
                                 </table>
                             </details>
 
-                            <?php if($stats['ratCount'] == 0 && $stats['outRatCount'] > 0) : ?>
-                                <div class="message"><?= __('This rattery only had external litters. Mortality statistics can be consulted on each of their contributed litter sheets.') ?> </div>
+                            <?php if($stats['sheetCount'] == 0 && $stats['outRatCount'] > 0) : ?>
+                                <details open>
+                                    <summary><?= __('Lifespan statistics') ?></summary>
+                                    <div class="message"><?= __('This rattery only had external litters. Lifespan statistics can be consulted on each of their contributed litter sheets.') ?> </div>
+                                </details>
                             <?php else : ?>
                                 <?php if ($stats['deadRatCount'] > 9) : ?>
                                     <details open>
@@ -518,7 +521,7 @@
                     </div>
                 </div>
 
-                <?php if ($stats['ratCount'] > 0 || ($stats['inLitterCount'] + $stats['outLitterCount']) > 0) : ?>
+                <?php if ($stats['sheetCount'] > 0 || ($stats['inLitterCount'] + $stats['outLitterCount']) > 0) : ?>
                     <div class="spacer"> </div>
                     <div class="ratteries view content">
                         <h2><?= __('Related entries') ?></h2>
@@ -573,7 +576,7 @@
                                 </div>
                             </details>
                         <?php endif ; ?>
-                        <?php if ($stats['ratCount'] > 0) : ?>
+                        <?php if ($stats['sheetCount'] > 0) : ?>
                             <details open>
                                 <summary><?= __('Recently modified rats') ?></summary>
                                 <div class="button-raised">

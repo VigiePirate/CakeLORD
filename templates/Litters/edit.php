@@ -113,7 +113,7 @@
                                         'id' => 'jquery-father-input',
                                         'name' => 'father_name',
                                         'label' => __('Father'),
-                                        'value' => $father->form_name,
+                                        'value' => ! is_null($father) ? $father->form_name : null,
                                     ]);
                                     echo $this->Form->control('father_id', [
                                         'id' => 'jquery-father-id',
@@ -124,7 +124,7 @@
                                         ],
                                         'class' => 'hide-everywhere',
                                         'type' => 'text',
-                                        'value' => $father->id,
+                                        'value' => ! is_null($father) ? $father->id : null,
                                     ]);
                                 ?>
                         </div>

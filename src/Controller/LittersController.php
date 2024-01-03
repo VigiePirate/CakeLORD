@@ -49,12 +49,13 @@ class LittersController extends AppController
                 return $q->where([
                     'Ratteries.owner_user_id' => $user->id,
                 ]);
-            })
-            ->order('Litters.birth_date DESC');
+            });
+            //->order('Litters.birth_date DESC');
 
         $this->paginate = [
             'contain' => ['Users', 'States', 'Sire', 'Dam', 'Contributions'],
-            'sortableFields' => ['birth_date', 'pups_number'],
+            'order' => ['birth_date' => 'desc'],
+            'sortableFields' => ['state_id', 'birth_date', 'pups_number'],
         ];
 
         $litters = $this->paginate($litters);
@@ -428,7 +429,11 @@ class LittersController extends AppController
         }
 
         $mother = $litter->dam[0];
-        $father = $litter->sire[0];
+        if (! empty($litter->sire)) {
+            $father = $litter->sire[0];
+        } else {
+            $father = null;
+        }
 
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('staffEdit', $litter);

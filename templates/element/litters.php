@@ -3,7 +3,7 @@
     <table class="condensed">
         <thead>
                 <?php if (! in_array('state', $exceptions)): ?>
-                    <th class="col-head"><?= $this->Paginator->sort('state', __('State')) ?></th>
+                    <th class="col-head"><?= $this->Paginator->sort('state_id', __('State')) ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('mating_date', $exceptions)): ?>
                     <th><?= $this->Paginator->sort('mating_date', __('Mating date')) ?></th>

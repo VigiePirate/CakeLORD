@@ -36,10 +36,9 @@
             <?= $this->element('my/messages') ?>
         </div>
         <div class="spacer"> </div>
-        <div class="users view content">
-            <?= $this->element('my/issues') ?>
-        </div>
-        <div class="spacer"> </div>
+
+        <?= $this->element('my/issues') ?>
+
         <div class="users view content">
             <?= $this->element('my/statistics') ?>
         </div>

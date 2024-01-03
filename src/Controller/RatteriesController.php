@@ -251,9 +251,10 @@ class RatteriesController extends AppController
                 'Rats.BirthLitters.Contributions',
                 'Rats.States',
                 'RatteryMessages',
+                'RatteryMessages.Users',
                 'RatterySnapshots',
                 'RatterySnapshots.States',
-                'OwnerUsers',
+                'Users',
                 'States'
             ]
         ]);
@@ -287,10 +288,10 @@ class RatteriesController extends AppController
             $snap_diffs[$snapshot->id] = $this->Ratteries->snapDiffListAsString($rattery, $snapshot->id);
         }
 
-        $identity = $this->request->getAttribute('identity');
-        $show_staff = ! is_null($identity) && $identity->can('edit', $rattery);
+        $user = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($user) && $user->can('edit', $rattery);
 
-        $this->set(compact('rattery', 'identity', 'deletable', 'snap_diffs'));
+        $this->set(compact('rattery', 'user', 'deletable', 'snap_diffs'));
     }
 
     /**
@@ -585,7 +586,23 @@ class RatteriesController extends AppController
         ]);
 
         $this->paginate = [
-            'contain' => ['Users', 'Countries', 'States'],
+            'contain' => [
+                'Users',
+                'Countries',
+                'States'],
+            'order' => [
+                'prefix' => 'asc'
+            ],
+            'sortableFields' => [
+                'state_id',
+                'is_alive',
+                'prefix',
+                'name',
+                'Users.username',
+                'birth_year',
+                'zip_code',
+                'Countries.name'
+            ]
         ];
         $ratteries = $this->paginate($ratteries);
 
