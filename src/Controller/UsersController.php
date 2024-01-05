@@ -69,7 +69,7 @@ class UsersController extends AppController
             $user = $this->Users->get($this->Authentication->getIdentityData('id'), ['contain' => 'Roles']);
 
             // update last login fields
-            $user->successful_login_previous_date = $user->successful_login_last_date;
+            $user->successful_login_previous_date = is_null($user->successful_login_last_date) ? $this->created : $user->successful_login_last_date;
             $user->successful_login_last_date = Chronos::now();
             $user->failed_login_attempts = 0;
             $user->failed_login_last_date = null;
@@ -218,7 +218,7 @@ class UsersController extends AppController
         $this->set(compact('user'));
     }
 
-    public function activate($passkey = null)
+    public function ($passkey = null)
     {
         $this->Authorization->skipAuthorization();
 
@@ -234,7 +234,7 @@ class UsersController extends AppController
                 return $this->redirect(['action' => 'register']);
             } else {
                 // check if activation link is expired; if so, delete account
-                if (!$user->failed_login_last_date->wasWithinLast('24 hours')) {
+                if (! $user->failed_login_last_date->wasWithinLast('24 hours')) {
                     $this->Users->delete($user);
                     $this->Flash->error(__('Expired activation link. Your account has been deleted. Please, register again and check your email right away.'));
                     return $this->redirect(['action' => 'register']);
@@ -305,15 +305,18 @@ class UsersController extends AppController
         $now = \Cake\I18n\FrozenTime::now();
         $today = $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::NONE]);
         $hour = $now->i18nFormat([\IntlDateFormatter::NONE, \IntlDateFormatter::SHORT]);
+        $date_limit = is_null($user->successful_login_previous_date) ? $user->created : $user->successful_login_previous_date;
 
         // Messages
         // $rat_messages = $identity->applyScope('index', $this->RatMessages->find('entitled'));
+
+
         $this->loadModel('RatMessages');
         $rat_delay = $this->loadModel('Rats')->behaviors()->get('State')->config['neglection_delay'];
-        if ($now->modify('-'.$rat_delay)->isPast($user->successful_login_previous_date)) {
+        if ($now->modify('-'.$rat_delay)->isPast($date_limit)) {
             $rat_message_delay = $now->modify('-'.$rat_delay);
         } else {
-            $rat_message_delay = $user->successful_login_previous_date;
+            $rat_message_delay = $date_limit;
         }
 
     	$rats = $this->Rats->find('entitledBy', ['user_id' => $user->id]);
@@ -343,10 +346,10 @@ class UsersController extends AppController
 
         $this->loadModel('RatteryMessages');
         $rattery_delay = $this->loadModel('Ratteries')->behaviors()->get('State')->config['neglection_delay'];
-        if ($now->modify('-'.$rattery_delay)->isPast($user->successful_login_previous_date)) {
+        if ($now->modify('-'.$rattery_delay)->isPast($date_limit)) {
             $rattery_message_delay = $now->modify('-'.$rattery_delay);
         } else {
-            $rattery_message_delay = $user->successful_login_previous_date;
+            $rattery_message_delay = $date_limit;
         }
 
         $ratteries = $this->Ratteries->find('entitledBy', ['user_id' => $user->id]);
@@ -373,10 +376,10 @@ class UsersController extends AppController
 
         $this->loadModel('LitterMessages');
         $litter_delay = $this->loadModel('Litters')->behaviors()->get('State')->config['neglection_delay'];
-        if ($now->modify('-'.$litter_delay)->isPast($user->successful_login_previous_date)) {
+        if ($now->modify('-'.$litter_delay)->isPast($date_limit)) {
             $litter_message_delay = $now->modify('-'.$litter_delay);
         } else {
-            $litter_message_delay = $user->successful_login_previous_date;
+            $litter_message_delay = $date_limit;
         }
 
         $litters = $this->Litters
@@ -414,8 +417,7 @@ class UsersController extends AppController
 
         // FIXME: use a collection to split result instead of using twice the same query
         $model = $this->loadModel('Issues');
-        $issue_delay = is_null($user->successful_login_previous_date) ? $user->created : $user->successful_login_previous_date;
-        $recently_solved_issues = $model->findByFromUserId($user->id)->where(['is_open IS' => false, 'closed >=' => $issue_delay])->contain(['ClosingUsers'])->order('Issues.created DESC')->all();
+        $recently_solved_issues = $model->findByFromUserId($user->id)->where(['is_open IS' => false, 'closed >=' => $date_limit])->contain(['ClosingUsers'])->order('Issues.created DESC')->all();
         $open_issues = $model->findByFromUserId($user->id)->where(['is_open IS' => true])->contain(['ClosingUsers'])->order('Issues.created DESC')->all();
         $count['recently_solved_issues'] = count($recently_solved_issues);
         $count['open_issues'] = count($open_issues);

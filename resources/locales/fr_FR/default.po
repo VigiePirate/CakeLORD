@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2024-01-03 18:17+0000\n"
-"PO-Revision-Date: 2024-01-03 21:46+0100\n"
+"PO-Revision-Date: 2024-01-04 21:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -93,7 +93,7 @@ msgstr "La compatibilité a été enregistrée."
 #: src/Controller/CompatibilitiesController.php:68
 #: src/Controller/CompatibilitiesController.php:93
 msgid "The compatibility could not be saved. Please, try again."
-msgstr "Impossible d’enregistrer la compatibilité.  Veuillez réessayer."
+msgstr "Impossible d’enregistrer la compatibilité. Veuillez réessayer."
 
 #: src/Controller/CompatibilitiesController.php:111
 msgid "The compatibility has been deleted."
@@ -292,20 +292,20 @@ msgstr "Impossible de supprimer le signalement. Veuillez réessayer."
 #: src/Controller/LitterMessagesController.php:56
 #: src/Controller/LitterMessagesController.php:82
 msgid "The litter message has been saved."
-msgstr "Le  a été enregistré."
+msgstr "La notification a été enregistrée."
 
 #: src/Controller/LitterMessagesController.php:60
 #: src/Controller/LitterMessagesController.php:86
 msgid "The litter message could not be saved. Please, try again."
-msgstr "Impossible d’enregistrer le . Veuillez réessayer."
+msgstr "Impossible d’enregistrer la notification. Veuillez réessayer."
 
 #: src/Controller/LitterMessagesController.php:105
 msgid "The litter message has been deleted."
-msgstr "Le  a été supprimée."
+msgstr "La notification a été supprimée."
 
 #: src/Controller/LitterMessagesController.php:107
 msgid "The litter message could not be deleted. Please, try again."
-msgstr "Impossible de supprimer le . Veuillez réessayer."
+msgstr "Impossible de supprimer la notification. Veuillez réessayer."
 
 #: src/Controller/LitterSnapshotsController.php:158
 #: src/Controller/LitterSnapshotsController.php:184
@@ -597,7 +597,7 @@ msgstr "L’état de cette fiche est passé à : {0}."
 #: src/Controller/RatsController.php:1295
 #: src/Controller/RatteriesController.php:718
 msgid "The following custom moderation message has been sent: {0}"
-msgstr "Le  explicatif suivant a été notifié : {0}"
+msgstr "Le message explicatif suivant a été notifié : {0}"
 
 #: src/Controller/LittersController.php:1091
 #: src/Controller/RatsController.php:1298
@@ -1009,7 +1009,7 @@ msgstr "Impossible de supprimer l’opérateur. Veuillez réessayer."
 #: src/Controller/RatMessagesController.php:76
 #: src/Controller/RatMessagesController.php:102
 msgid "The rat message has been saved."
-msgstr "Le  a été enregistré."
+msgstr "La notification a été enregistrée."
 
 #: src/Controller/RatMessagesController.php:80
 #: src/Controller/RatMessagesController.php:106
@@ -1018,7 +1018,7 @@ msgstr "Impossible d’enregistrer le . Veuillez réessayer."
 
 #: src/Controller/RatMessagesController.php:125
 msgid "The rat message has been deleted."
-msgstr "Le  a été supprimé."
+msgstr "La notification a été supprimée."
 
 #: src/Controller/RatMessagesController.php:127
 msgid "The rat message could not be deleted. Please, try again."
@@ -1465,7 +1465,7 @@ msgstr "La fiche de cette raterie a été invalidée."
 #: src/Controller/RatteryMessagesController.php:56
 #: src/Controller/RatteryMessagesController.php:82
 msgid "The rattery message has been saved."
-msgstr "Le  a été enregistré."
+msgstr "La notification a été enregistrée."
 
 #: src/Controller/RatteryMessagesController.php:60
 #: src/Controller/RatteryMessagesController.php:86
@@ -1474,7 +1474,7 @@ msgstr "Impossible d’enregistrer le . Veuillez réessayer."
 
 #: src/Controller/RatteryMessagesController.php:105
 msgid "The rattery message has been deleted."
-msgstr "Le  a été supprimée."
+msgstr "La notification a été supprimée."
 
 #: src/Controller/RatteryMessagesController.php:107
 msgid "The rattery message could not be deleted. Please, try again."
@@ -4251,9 +4251,9 @@ msgid ""
 "you still want to proceed, type your answer before clicking the button."
 msgstr ""
 "Vous avez choisi de renvoyer votre fiche au service après-vente sans la "
-"modifier. Veuillez bien vérifier le contenu du dernier  de l’équipe, et, si "
-"vous souhaitez continuer, entrez votre réponse à ce  avant d’appuyer sur le "
-"bouton."
+"modifier. Veuillez bien vérifier le contenu du dernier message de l’équipe, "
+"et, si vous souhaitez continuer, entrez votre réponse à ce message avant "
+"d’appuyer sur le bouton."
 
 #: templates/Litters/dispute.php:37 templates/Rats/dispute.php:37
 #: templates/Ratteries/dispute.php:37
@@ -4495,7 +4495,7 @@ msgid ""
 "one from corresponding buttons."
 msgstr ""
 "Vous n’avez contribué à aucune portée déclarée. Vous pouvez en simuler ou en "
-"enregistrer une depuis les boutons correspondants."
+"enregistrer une depuis les boutons ci-contre."
 
 #: templates/Litters/needs_staff.php:8 templates/Litters/needs_staff.php:12
 #: templates/Lord/my.php:1 templates/Rats/needs_staff.php:8
@@ -4826,14 +4826,14 @@ msgid ""
 "Your email was sent to the LORD shared mailbox. Your request be processed "
 "next time a staff member will check it. Thank you for your patience."
 msgstr ""
-"Votre  a bien été envoyé. Votre demande sera prise en charge dès qu’un "
-"bénévole consultera la rie. Merci de votre patience."
+"Votre message a bien été envoyé. Votre demande sera prise en charge dès "
+"qu’un bénévole consultera la messagerie. Merci de votre patience."
 
 #: templates/Lord/acknowledge.php:17
 msgid "Here is the message you sent. A carbon copy was sent to your address."
 msgstr ""
-"Voici le  que vous nous avez envoyé. Une copie a été envoyée à votre adresse "
-"email."
+"Voici le message que vous nous avez envoyé. Une copie a été envoyée à votre "
+"adresse email."
 
 #: templates/Lord/acknowledge.php:27
 msgid ""
@@ -7941,7 +7941,7 @@ msgstr ""
 "<p>ou copiez et collez ce lien dans votre navigateur : {1}</p>\n"
 "\n"
 "<p>Si vous n’avez pas demandé de changement d’adresse, vous pouvez ignorer "
-"ce  ou contacter un membre de l’équipe..</p>"
+"ce message ou contacter un membre de l’équipe..</p>"
 
 #: templates/email/html/contact_email.php:3
 msgid ""
@@ -7952,7 +7952,7 @@ msgid ""
 "\n"
 msgstr ""
 "<p>Quelqu’un ({0}) a utilisé le formulaire de contact du LORD pour envoyer "
-"le  suivant :</p>\n"
+"le message suivant :</p>\n"
 "\n"
 "<p>« {1} »</p>\n"
 "\n"
@@ -7981,7 +7981,7 @@ msgstr ""
 "<p>ou copiez et coller ce lien dans votre navigateur : {1}</p>\n"
 "\n"
 "<p>Si vous n’avez pas demandé à réinitialiser votre mot de passe, vous "
-"pouvez ignorer ce  ou contacter un membre de l’équipe..</p>"
+"pouvez ignorer ce message ou contacter un membre de l’équipe.</p>"
 
 #: templates/email/html/staff_email.php:3
 msgid ""
@@ -7997,7 +7997,8 @@ msgid ""
 msgstr ""
 "<p>Bonjour, {0} !</p>\n"
 "\n"
-"<p>Un membre de l’équipe de modération vous a envoyé le  suivant :</p>\n"
+"<p>Un membre de l’équipe de modération vous a envoyé le message suivant :</"
+"p>\n"
 "\n"
 "<p>“{1}”</p>\n"
 "\n"
@@ -8054,8 +8055,8 @@ msgstr ""
 "\n"
 "{1}\n"
 "\n"
-"Si vous n’avez pas demandé de changement d’adresse, vous pouvez ignorer ce  "
-"ou contacter un membre de l’équipe."
+"Si vous n’avez pas demandé de changement d’adresse, vous pouvez ignorer ce "
+"message ou contacter un membre de l’équipe."
 
 #: templates/email/text/contact_email.php:3
 msgid ""
@@ -8064,8 +8065,8 @@ msgid ""
 "“{1}”\n"
 "\n"
 msgstr ""
-"Quelqu’un ({0}) a utilisé le formulaire de contact du LORD pour envoyer le  "
-"suivant :\n"
+"Quelqu’un ({0}) a utilisé le formulaire de contact du LORD pour envoyer le "
+"message suivant :\n"
 "\n"
 "« {1} »\n"
 "\n"
@@ -8090,7 +8091,7 @@ msgstr ""
 "{1}\n"
 "\n"
 "Si vous n’avez pas demandé à réinitialiser votre mot de passe, vous pouvez "
-"ignorer ce  ou contacter un membre de l’équipe.."
+"ignorer ce message ou contacter un membre de l’équipe.."
 
 #: templates/email/text/staff_email.php:3
 msgid ""
@@ -8106,7 +8107,7 @@ msgid ""
 msgstr ""
 "Bonjour, {0} !\n"
 "\n"
-"Un membre de l’équipe de modération vous a envoyé le  suivant :\n"
+"Un membre de l’équipe de modération vous a envoyé le message suivant :\n"
 "\n"
 "“{1}”\n"
 "\n"
