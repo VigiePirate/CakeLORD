@@ -218,7 +218,7 @@ class UsersController extends AppController
         $this->set(compact('user'));
     }
 
-    public function ($passkey = null)
+    public function activate($passkey = null)
     {
         $this->Authorization->skipAuthorization();
 
