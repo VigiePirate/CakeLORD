@@ -55,11 +55,9 @@ class RatsController extends AppController
     public function index()
     {
         $this->Authorization->skipAuthorization();
-        $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
-        ];
-        $rats = $this->paginate($this->Rats, ['searchable_only' => $this->searchable_only]);
-        $this->set(compact('rats'));
+        $query = $this->Rats->find('all', ['searchable_only' => $this->searchable_only])
+            ->contain(['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States']);
+        $this->set('rats', $this->paginate($query));
     }
 
     /**
@@ -71,46 +69,46 @@ class RatsController extends AppController
     {
         $user = $this->Authentication->getIdentity();
         $this->Authorization->skipAuthorization();
-        $this->paginate = [
-            'contain' => [
-                'Ratteries',
-                'OwnerUsers',
-                'States',
-                'DeathPrimaryCauses',
-                'DeathSecondaryCauses',
-                'BirthLitters',
-                'BirthLitters.Contributions',
-                'BirthLitters.Ratteries'
-            ],
+
+        $contain = [
+            'Ratteries',
+            'OwnerUsers',
+            'States',
+            'DeathPrimaryCauses',
+            'DeathSecondaryCauses',
+            'BirthLitters',
+            'BirthLitters.Contributions',
+            'BirthLitters.Ratteries'
         ];
+
         $females = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'F'])
             ->order('Rats.birth_date DESC')
-            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+            ->contain($contain);
         $males = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'M'])
             ->order('Rats.birth_date DESC')
-            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+            ->contain($contain);
         $alive = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => true])
             ->order('Rats.birth_date DESC')
-            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+            ->contain($contain);
         $departed = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => false])
             ->order('Rats.birth_date DESC')
-            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+            ->contain($contain);
         $pending = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'States.needs_user_action' => true])
             ->order('Rats.birth_date DESC')
-            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+            ->contain($contain);
         $waiting = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'States.needs_staff_action' => true])
             ->order('Rats.birth_date DESC')
-            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+            ->contain($contain);
         $okrats = $this->Rats->find()
             ->where(['Rats.owner_user_id' => $user->id, 'States.needs_user_action' => false, 'States.needs_staff_action' => false])
             ->order('Rats.birth_date DESC')
-            ->contain(['Ratteries','OwnerUsers', 'States', 'DeathPrimaryCauses', 'DeathSecondaryCauses','BirthLitters','BirthLitters.Contributions','BirthLitters.Ratteries']);
+            ->contain($contain);
 
         if(! empty($pending->first())) {
             $this->Flash->error(__('You have one or several sheets to correct! Please check them below.'));
@@ -179,16 +177,16 @@ class RatsController extends AppController
             ],
         ]);
 
-        $this->loadModel('States');
+        $states = $this->fetchModel('States');
         if($rat->state->is_frozen) {
-            $next_thawed_state = $this->States->get($rat->state->next_thawed_state_id);
+            $next_thawed_state = $states->get($rat->state->next_thawed_state_id);
             $this->set(compact('next_thawed_state'));
         }
         else {
-            $next_ko_state = $this->States->get($rat->state->next_ko_state_id);
-            $next_ok_state = $this->States->get($rat->state->next_ok_state_id);
+            $next_ko_state = $states->get($rat->state->next_ko_state_id);
+            $next_ok_state = $states->get($rat->state->next_ok_state_id);
             if( !empty($rat->state->next_frozen_state_id) ) {
-                $next_frozen_state = $this->States->get($rat->state->next_frozen_state_id);
+                $next_frozen_state = $states->get($rat->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }
             $this->set(compact('next_ko_state', 'next_ok_state'));
@@ -411,7 +409,7 @@ class RatsController extends AppController
             if ($data['update_identifier']) {
                 if (isset($data['generic_rattery_id'])  && $data['generic_rattery_id'] != "") {
                     // prefix change
-                    $ratteries = $this->loadModel('Ratteries');
+                    $ratteries = $this->fetchModel('Ratteries');
                     $prefix = $ratteries->get($data['generic_rattery_id'])->prefix;
                     $rat->pedigree_identifier =  $prefix . $rat->id . $rat->sex;
                     $rat->is_pedigree_custom = false;
@@ -554,18 +552,38 @@ class RatsController extends AppController
          $options = $this->request->getQueryParams();
 
          if( empty($options) ) {
-             $new_search = true;
+            $new_search = true;
          } else {
-             $new_search = false;
-             $rats = $this->Rats->find('multisearch', [
+            $new_search = false;
+            $rats = $this->Rats
+             ->find('multisearch', [
                  'options' => $options,
                  'searchable_only' => $this->searchable_only
+             ])
+             ->contain([
+                 'OwnerUsers',
+                 'Ratteries',
+                 'BirthLitters',
+                 'BirthLitters.Contributions',
+                 'BirthLitters.Ratteries',
+                 'States'
              ]);
-             $this->paginate = [
-                 'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'BirthLitters.Ratteries', 'States'],
-             ];
-             $rats = $this->paginate($rats);
-             $this->set(compact('rats','options'));
+
+            $settings = [
+                'sortableFields' => [
+                    'state_id',
+                    'pedigree_identifier',
+                    'Ratteries.prefix',
+                    'name',
+                    'pup_name',
+                    'birth_date',
+                    'OwnerUsers.username',
+                    'sex'
+                ]
+            ];
+
+            $rats = $this->paginate($rats, $settings);
+            $this->set(compact('rats','options'));
          }
          $this->set(compact('new_search'));
 
@@ -653,21 +671,22 @@ class RatsController extends AppController
 
         //
         // Use the RatsTable to find named rats.
-        $rats = $this->Rats->find('named', [
-            'names' => $names,
-            'searchable_only' => $this->searchable_only,
-        ]);
-
-        // Pass variables into the view template context.
-        $this->paginate = [
-            'contain' => [
+        $rats = $this->Rats
+            ->find('named', [
+                'names' => $names,
+                'searchable_only' => $this->searchable_only,
+            ])
+            ->contain([
                 'OwnerUsers',
                 'Ratteries',
                 'States',
                 'BirthLitters',
                 'BirthLitters.Contributions',
                 'BirthLitters.Ratteries'
-            ],
+            ]);
+
+        // Pass variables into the view template context.
+        $settings = [
             'order' => [
                 'birth_date' => 'desc',
             ],
@@ -682,7 +701,8 @@ class RatsController extends AppController
                 'sex'
             ]
         ];
-        $rats = $this->paginate($rats);
+
+        $rats = $this->paginate($rats, $settings);
 
         $this->set(compact('rats', 'names'));
     }
@@ -702,14 +722,19 @@ class RatsController extends AppController
         // the passed URL path segments in the request.
         $ratteries = $this->request->getParam('pass');
 
-        $rats = $this->Rats->find('fromRattery', [
-            'ratteries' => $ratteries,
-            'searchable_only' => $this->searchable_only
-        ]);
+        $rats = $this->Rats
+            ->find('fromRattery', [
+                'ratteries' => $ratteries,
+                'searchable_only' => $this->searchable_only
+            ])
+            ->contain([
+                'OwnerUsers',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'States'
+            ]);
 
-        $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
-        ];
         $rats = $this->paginate($rats);
 
         $this->set(compact('rats', 'ratteries'));
@@ -730,13 +755,12 @@ class RatsController extends AppController
         // the passed URL path segments in the request.
         $ratteries = $this->request->getParam('pass');
         $rattery = $this->Rats->Ratteries->get($ratteries);
-        $rats = $this->Rats->find('byRatteryId', [
-            'ratteries' => $ratteries,
-            'searchable_only' => $this->searchable_only
-        ]);
-
-        $this->paginate = [
-            'contain' => [
+        $rats = $this->Rats
+            ->find('byRatteryId', [
+                'ratteries' => $ratteries,
+                'searchable_only' => $this->searchable_only
+            ])
+            ->contain([
                 'OwnerUsers',
                 'Ratteries',
                 'BirthLitters',
@@ -744,6 +768,11 @@ class RatsController extends AppController
                 'DeathPrimaryCauses',
                 'DeathSecondaryCauses',
                 'States'
+            ]);
+
+        $settings = [
+            'order' => [
+                'birth_date' => 'desc',
             ],
             'sortableFields' => [
                 'state_id',
@@ -755,7 +784,7 @@ class RatsController extends AppController
                 'sex'
             ],
         ];
-        $rats = $this->paginate($rats);
+        $rats = $this->paginate($rats, $settings);
 
         $this->set(compact('rats', 'rattery'));
     }
@@ -771,22 +800,23 @@ class RatsController extends AppController
     public function ownedBy()
     {
         $this->Authorization->skipAuthorization();
-        // The 'pass' key is provided by CakePHP and contains all
-        // the passed URL path segments in the request.
         $owners = $this->request->getParam('pass');
-        //
-        // Use the RatsTable to find named rats.
-        $rats = $this->Rats->find('ownedBy', [
-            'owners' => $owners,
-            'searchable_only' => $this->searchable_only
-        ]);
 
-        // Pass variables into the view template context.
-        $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
-        ];
+        $rats = $this->Rats
+            ->find('ownedBy', [
+                'owners' => $owners,
+                'searchable_only' => $this->searchable_only
+            ])
+            ->contain([
+                'OwnerUsers',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'States'
+            ],
+        );
+
         $rats = $this->paginate($rats);
-
         $this->set(compact('rats', 'owners'));
     }
 
@@ -803,9 +833,9 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $owners = $this->request->getParam('pass');
         $owner = $this->Rats->OwnerUsers->get($owners);
-        $rats = $this->Rats->find('byOwnerId', ['owners' => $owners, 'searchable_only' => $this->searchable_only]);
-        $this->paginate = [
-            'contain' => [
+        $rats = $this->Rats
+            ->find('byOwnerId', ['owners' => $owners, 'searchable_only' => $this->searchable_only])
+            ->contain([
                 'OwnerUsers',
                 'Ratteries',
                 'BirthLitters',
@@ -813,6 +843,11 @@ class RatsController extends AppController
                 'DeathPrimaryCauses',
                 'DeathSecondaryCauses',
                 'States'
+            ]);
+
+        $settings = [
+            'order' => [
+                'birth_date' => 'desc',
             ],
             'sortableFields' => [
                 'state_id',
@@ -824,39 +859,9 @@ class RatsController extends AppController
                 'sex'
             ],
         ];
-        $rats = $this->paginate($rats);
 
+        $rats = $this->paginate($rats, $settings);
         $this->set(compact('rats', 'owner'));
-    }
-
-    /**
-     * sex method
-     *
-     * Search rats by sex.
-     *
-     * @param
-     * @return
-     */
-    public function sex()
-    {
-        $this->Authorization->skipAuthorization();
-        // The 'pass' key is provided by CakePHP and contains all
-        // the passed URL path segments in the request.
-        $sex = $this->request->getParam('pass');
-        //
-        // Use the RatsTable to find named rats.
-        $rats = $this->Rats->find('sex', [
-            'sex' => $sex,
-            'searchable_only' => $this->searchable_only
-        ]);
-
-        // Pass variables into the view template context.
-        $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
-        ];
-        $rats = $this->paginate($rats);
-
-        $this->set(compact('rats', 'sex'));
     }
 
     /**
@@ -871,15 +876,22 @@ class RatsController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $bornBefore = $this->request->getParam('pass');
-        $rats = $this->Rats->find('bornBefore', [
-            'bornBefore' => $bornBefore,
-            'searchable_only' => $this->searchable_only
-        ]);
+        $rats = $this->Rats
+            ->find('bornBefore', [
+                'bornBefore' => $bornBefore,
+                'searchable_only' => $this->searchable_only
+            ])
+            ->contain([
+                'OwnerUsers',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'DeathPrimaryCauses',
+                'DeathSecondaryCauses',
+                'States'
+            ]);
 
         // Pass variables into the view template context.
-        $this->paginate = [
-            'contain' => ['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
-        ];
         $rats = $this->paginate($rats);
 
         $this->set([
@@ -893,14 +905,21 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $bornAfter = $this->request->getParam('pass');
 
-        $rats = $this->Rats->find('bornAfter', [
-            'bornAfter' => $bornAfter,
-            'searchable_only' => $this->searchable_only
-        ]);
+        $rats = $this->Rats
+            ->find('bornAfter', [
+                'bornAfter' => $bornAfter,
+                'searchable_only' => $this->searchable_only
+            ])
+            ->contain([
+                'OwnerUsers',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'DeathPrimaryCauses',
+                'DeathSecondaryCauses',
+                'States'
+            ]);
 
-        $this->paginate = [
-            'contain' => ['OwnerUsers','Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'],
-        ];
         $rats = $this->paginate($rats);
 
         $this->set([
@@ -914,16 +933,20 @@ class RatsController extends AppController
         $this->Authorization->authorize($this->Rats, 'filterByState');
 
         $inState = $this->request->getParam('pass');
-        $rats = $this->Rats->find('inState', ['inState' => $inState]);
+        $rats = $this->Rats
+            ->find('inState', ['inState' => $inState])
+            ->contain(
+                [
+                    'OwnerUsers',
+                    'Ratteries',
+                    'BirthLitters',
+                    'BirthLitters.Contributions',
+                    'DeathPrimaryCauses',
+                    'DeathSecondaryCauses',
+                    'States'
+                ]);
 
-        $this->paginate = [
-            'contain' => [
-                'OwnerUsers',
-                'Ratteries',
-                'BirthLitters',
-                'BirthLitters.Contributions',
-                'States'
-            ],
+        $settings = [
             'sortableFields' => [
                 'pedigree_identifier',
                 'name',
@@ -932,7 +955,7 @@ class RatsController extends AppController
                 'sex'
             ]
         ];
-        $rats = $this->paginate($rats);
+        $rats = $this->paginate($rats, $settings);
 
         $this->set([
             'rats' => $rats,
@@ -945,10 +968,9 @@ class RatsController extends AppController
     {
         $this->Authorization->authorize($this->Rats, 'filterByState');
 
-        $rats = $this->Rats->find('needsStaff');
-
-        $this->paginate = [
-            'contain' => [
+        $rats = $this->Rats
+            ->find('needsStaff')
+            ->contain([
                 'OwnerUsers',
                 'Ratteries',
                 'BirthLitters',
@@ -956,6 +978,11 @@ class RatsController extends AppController
                 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']],
                 'RatMessages'=> ['sort' => ['RatMessages.created' => 'DESC']],
                 'States'
+            ]);
+
+        $settings = [
+            'order' => [
+                'modified' => 'desc',
             ],
             'sortableFields' => [
                 'state_id',
@@ -964,7 +991,7 @@ class RatsController extends AppController
                 'modified',
             ]
         ];
-        $rats = $this->paginate($rats);
+        $rats = $this->paginate($rats, $settings);
 
         $user = $this->request->getAttribute('identity');
         $this->set(compact('rats', 'user'));
@@ -1222,12 +1249,13 @@ class RatsController extends AppController
         ]);
         $this->Authorization->authorize($rat, 'microEdit');
 
+        $death_primary_causes_model = $this->fetchModel('DeathPrimaryCauses');
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat->is_alive = false;
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
-            // load death causes model and append rat association with it for rules on is_oldster/is_infant
-            $this->loadModel('DeathPrimaryCauses');
-            $rat->death_primary_cause = $this->DeathPrimaryCauses->get($rat->death_primary_cause_id);
+            // refresh rat association with death primary causes for rules on is_oldster/is_infant
+            $rat->death_primary_cause = $death_primary_causes_model->get($rat->death_primary_cause_id);
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('Sorry for your loss. Your rat’s death has been recorded.'));
                 return $this->redirect(['action' => 'view', $rat->id]);
@@ -1236,13 +1264,13 @@ class RatsController extends AppController
         } else {
             $this->Flash->default(__('We are sorry for your loss. Please fill the information below to record the rat death. Date and primary cause are mandatory.'));
         }
-        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')->order(['id' => 'ASC']);
+        $deathPrimaryCauses = $death_primary_causes_model->find('list')->order(['id' => 'ASC']);
         $js_messages = json_encode([
             __('Please, read carefully information that will appear below to check the fitness of your choice.'),
             __('Please answer the following questions about euthanasia, diagnostics and analyses.'),
         ]);
         $user = $this->request->getAttribute('identity');
-        $this->set(compact('rat','deathPrimaryCauses', 'js_messages', 'user'));
+        $this->set(compact('rat', 'deathPrimaryCauses', 'js_messages', 'user'));
     }
 
     /**
@@ -1288,9 +1316,8 @@ class RatsController extends AppController
         ]);
         $rat = $this->Rats->patchEntity($rat, $this->request->getData());
         if ($this->Rats->save($rat, ['checkRules' => false])) {
-            // state_id is up to date but not $rat->state entity; reload for updated flash message
-            $this->loadModel('States');
-            $this->Flash->success(__('This rat sheet is now in state: {0}.', [$this->States->get($rat->state_id)->name]));
+            // state_id is up to date but not $rat->state entity, reload for updated flash message
+            $this->Flash->success(__('This rat sheet is now in state: {0}.', [$this->fetchModel('States')->get($rat->state_id)->name]));
             if (! empty($this->request->getData('side_message'))) {
                 $this->Flash->default(__('The following custom moderation message has been sent: {0}', [$this->request->getData('side_message')]));
             }

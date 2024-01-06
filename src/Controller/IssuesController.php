@@ -26,13 +26,11 @@ class IssuesController extends AppController
     {
         $this->Authorization->authorize($this->Issues);
         $identity = $this->request->getAttribute('identity');
-        $this->paginate = [
-            'contain' => ['FromUsers', 'ClosingUsers'],
-        ];
-
-        $query = $identity->applyScope('index', $this->Issues->findByIsOpen(true));
+        $query = $identity->applyScope(
+            'index',
+            $this->Issues->findByIsOpen(true)->contain(['FromUsers', 'ClosingUsers'])
+        );
         $issues = $this->paginate($query);
-
         $this->set(compact('issues'));
     }
 
@@ -45,12 +43,11 @@ class IssuesController extends AppController
     {
         $this->Authorization->authorize($this->Issues, 'index');
         $identity = $this->request->getAttribute('identity');
-        $this->paginate = [
-            'contain' => ['FromUsers', 'ClosingUsers'],
-        ];
-        $query = $identity->applyScope('index', $this->Issues->find());
+        $query = $identity->applyScope(
+            'index',
+            $this->Issues->find()->contain(['FromUsers', 'ClosingUsers']),
+        );
         $issues = $this->paginate($query);
-
         $this->set(compact('issues'));
     }
 
@@ -63,12 +60,11 @@ class IssuesController extends AppController
     {
         $this->Authorization->authorize($this->Issues, 'index');
         $identity = $this->request->getAttribute('identity');
-        $this->paginate = [
-            'contain' => ['FromUsers', 'ClosingUsers'],
-        ];
-        $query = $identity->applyScope('index', $this->Issues->findByIsOpen(false));
+        $query = $identity->applyScope(
+            'index',
+            $this->Issues->findByIsOpen(false)->contain(['FromUsers', 'ClosingUsers']),
+        );
         $issues = $this->paginate($query);
-
         $this->set(compact('issues'));
     }
 

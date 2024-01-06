@@ -82,19 +82,29 @@ class ContributionsController extends AppController
         $this->Authorization->skipAuthorization();
         $ratteries = $this->request->getParam('pass');
 
-        // Use the ContributionsTable to find contributions from the rattery.
-        $contributions = $this->Contributions->find('fromRattery', [
-            'ratteries' => $ratteries
-        ]);
+        $query = $this->Contributions
+            ->find('fromRattery', [
+                'ratteries' => $ratteries
+            ])
+            ->contain([
+                'Litters',
+                'Litters.States',
+                'Litters.Sire',
+                'Litters.Dam',
+                'Ratteries',
+                'ContributionTypes',
+            ]);
 
-        // Pass variables into the view template context.
-        $this->paginate = [
-            'contain' => ['Litters', 'Litters.States', 'Litters.Sire', 'Litters.Dam', 'Ratteries', 'ContributionTypes'],
-            'sortableFields' => ['Litters.birth_date', 'ContributionTypes.name', 'Litters.pups_number']
+        $settings = [
+            'sortableFields' => [
+                'Litters.birth_date',
+                'ContributionTypes.name',
+                'Litters.pups_number'
+            ]
         ];
-        $contributions = $this->paginate($contributions);
 
-        $ratteries = $this->loadModel('Ratteries')->get(array_map('intval', $ratteries));
+        $contributions = $this->paginate($query, $settings);
+        $ratteries = $this->fetchModel('Ratteries')->get(array_map('intval', $ratteries));
 
         $this->set(compact('contributions', 'ratteries'));
     }

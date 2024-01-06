@@ -12,7 +12,7 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('category') ?></th>
+                    <th><?= $this->Paginator->sort('Categories.name', __('Category')) ?></th>
                     <th><?= $this->Paginator->sort('subtitle', __('Overtitle')) ?></th>
                     <th><?= $this->Paginator->sort('title') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>

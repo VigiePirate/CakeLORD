@@ -60,6 +60,7 @@ use App\Model\Table\RatsTable;
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\State $state
  * @property \App\Model\Entity\Conversation[] $conversations
+ * @property \App\Model\Entity\RatMessage[] $rat_messages
  * @property \App\Model\Entity\RatSnapshot[] $rat_snapshots
  * @property \App\Model\Entity\Litter[] $litters
  * @property \App\Model\Entity\Singularity[] $singularities
@@ -120,6 +121,7 @@ class Rat extends Entity
         'creator_user' => false,
         'state' => true,
         'conversations' => true,
+        'rat_messages' => true,
         'rat_snapshots' => true,
         'litters' => true,
         'singularities' => true,

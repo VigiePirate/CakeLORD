@@ -84,15 +84,15 @@ class UsersController extends AppController
                 $this->Users->save($user);
             }
 
-            $this->loadModel('Rats');
+            $rats = $this->fetchModel('Rats');
 
             // check user role: if staff, execute routines (zombie killing, rattery closing, etc.)
             if ($user->role->is_staff) {
 
-                $rat_count = $this->Rats->killZombies();
+                $rat_count = $rats->killZombies();
 
-                $this->loadModel('Ratteries');
-                $rattery_count = $this->Ratteries->pauseZombies();
+                $ratteries = $this->fetchModel('Ratteries');
+                $rattery_count = $ratteries->pauseZombies();
 
                 if ($rat_count > 0) {
                     $this->Flash->success(__('{0, plural, =1{1 rat who was too old has just been automatically set as presumably dead.} other{# rats who were too old have just been automatically set as presumably dead.}}', [$rat_count]));
@@ -103,10 +103,10 @@ class UsersController extends AppController
                 }
 
                 // blame sheets in needs_user_action state for too long
-                $this->loadModel('Litters');
-                $neglected_count = $this->Rats->blameNeglected($this->Rats)
-                    + $this->Ratteries->blameNeglected($this->Ratteries)
-                    + $this->Litters->blameNeglected($this->Litters);
+                $litters = $this->fetchModel('Litters');
+                $neglected_count = $rats->blameNeglected($rats)
+                    + $ratteries->blameNeglected($ratteries)
+                    + $litters->blameNeglected($litters);
 
                 if ($neglected_count > 0) {
                     $this->Flash->warning(__('{0, plural, =1{1 sheet neglected by users has just been escalated to back-office.} other{# sheets neglected by users have just been escalated to back-office.}}', [$neglected_count]));
@@ -116,9 +116,9 @@ class UsersController extends AppController
                 $this->Users->removeExpiredPasskeys();
 
                 $action_needed = (
-                    $this->Rats->find('needsUser')->where(['owner_user_id' => $user->id])->count()
-                    + $this->Ratteries->find('needsUser')->where(['owner_user_id' => $user->id])->count()
-                    + $this->Litters->find('needsUser')->where(['creator_user_id' => $user->id])->count()
+                    $rats->find('needsUser')->where(['owner_user_id' => $user->id])->count()
+                    + $ratteries->find('needsUser')->where(['owner_user_id' => $user->id])->count()
+                    + $litters->find('needsUser')->where(['creator_user_id' => $user->id])->count()
                 );
 
             }
@@ -294,7 +294,7 @@ class UsersController extends AppController
 
         $champion = $user->findChampion(['Rats.owner_user_id' => $user->id]);
         if(!empty($champion)) {
-            $champion = $this->loadModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
+            $champion = $this->fetchModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
         }
 
         $count['my_rats'] = $managed_rat_count;
@@ -310,17 +310,16 @@ class UsersController extends AppController
         // Messages
         // $rat_messages = $identity->applyScope('index', $this->RatMessages->find('entitled'));
 
-
-        $this->loadModel('RatMessages');
-        $rat_delay = $this->loadModel('Rats')->behaviors()->get('State')->config['neglection_delay'];
+        $rats_model = $this->fetchModel('Rats');
+        $rat_delay = $rats_model->behaviors()->get('State')->config['neglection_delay'];
         if ($now->modify('-'.$rat_delay)->isPast($date_limit)) {
             $rat_message_delay = $now->modify('-'.$rat_delay);
         } else {
             $rat_message_delay = $date_limit;
         }
 
-    	$rats = $this->Rats->find('entitledBy', ['user_id' => $user->id]);
-    	$query = $this->RatMessages->find('latest', ['rats' => $rats, 'rat_message_delay' => $rat_message_delay]);
+    	$rats = $rats_model->find('entitledBy', ['user_id' => $user->id]);
+    	$query = $this->fetchModel('RatMessages')->find('latest', ['rats' => $rats, 'rat_message_delay' => $rat_message_delay]);
 
         $rat_messages = $query
             ->contain([
@@ -344,16 +343,16 @@ class UsersController extends AppController
             ->distinct()
             ->count();
 
-        $this->loadModel('RatteryMessages');
-        $rattery_delay = $this->loadModel('Ratteries')->behaviors()->get('State')->config['neglection_delay'];
+        $ratteries_model = $this->fetchModel('Ratteries');
+        $rattery_delay = $ratteries_model->behaviors()->get('State')->config['neglection_delay'];
         if ($now->modify('-'.$rattery_delay)->isPast($date_limit)) {
             $rattery_message_delay = $now->modify('-'.$rattery_delay);
         } else {
             $rattery_message_delay = $date_limit;
         }
 
-        $ratteries = $this->Ratteries->find('entitledBy', ['user_id' => $user->id]);
-    	$query = $this->RatteryMessages->find('latest', ['ratteries' => $ratteries, 'rattery_message_delay' => $rattery_message_delay]);
+        $ratteries = $ratteries_model->find('entitledBy', ['user_id' => $user->id]);
+    	$query = $this->fetchModel('RatteryMessages')->find('latest', ['ratteries' => $ratteries, 'rattery_message_delay' => $rattery_message_delay]);
         $rattery_messages = $query
             ->contain([
                 'Ratteries',
@@ -374,18 +373,18 @@ class UsersController extends AppController
                                     ->distinct()
                                     ->count();
 
-        $this->loadModel('LitterMessages');
-        $litter_delay = $this->loadModel('Litters')->behaviors()->get('State')->config['neglection_delay'];
+        $litters_model = $this->fetchModel('Litters');
+        $litter_delay = $litters_model->behaviors()->get('State')->config['neglection_delay'];
         if ($now->modify('-'.$litter_delay)->isPast($date_limit)) {
             $litter_message_delay = $now->modify('-'.$litter_delay);
         } else {
             $litter_message_delay = $date_limit;
         }
 
-        $litters = $this->Litters
+        $litters = $litters_model
             ->find('entitledBy', ['user_id' => $user->id]);
 
-        $query = $this->LitterMessages
+        $query = $this->fetchModel('LitterMessages')
             ->find('latest', ['litters' => $litters, 'litter_message_delay' => $litter_message_delay]);
 
         $litter_messages = $query
@@ -416,7 +415,7 @@ class UsersController extends AppController
         $count['sub_total'] = $count['rat_sub_total'] + $count['litter_sub_total'] + $count['rattery_sub_total'];
 
         // FIXME: use a collection to split result instead of using twice the same query
-        $model = $this->loadModel('Issues');
+        $model = $this->fetchModel('Issues');
         $recently_solved_issues = $model->findByFromUserId($user->id)->where(['is_open IS' => false, 'closed >=' => $date_limit])->contain(['ClosingUsers'])->order('Issues.created DESC')->all();
         $open_issues = $model->findByFromUserId($user->id)->where(['is_open IS' => true])->contain(['ClosingUsers'])->order('Issues.created DESC')->all();
         $count['recently_solved_issues'] = count($recently_solved_issues);
@@ -457,21 +456,6 @@ class UsersController extends AppController
         $this->set('user', $user);
     }
 
-    public function messages()
-    {
-        $user = $this->Users->get($this->Authentication->getIdentity()->get('id'), [
-            'contain' => ['Roles', 'Ratteries'],
-        ]);
-        $this->Authorization->authorize($user, 'my');
-
-        $this->loadModel('RatMessages');
-        $rat_messages = $this->RatMessages
-                        ->find('entitled', ['user_id' => $user->id])
-                        ->order(['RatMessages.created DESC']);
-
-        $this->set(compact('user', 'rat_messages'));
-    }
-
     /**
      * Index method
      *
@@ -480,8 +464,7 @@ class UsersController extends AppController
     public function index()
     {
         $this->Authorization->skipAuthorization();
-        $this->paginate = ['contain' => ['Roles']];
-        $users = $this->paginate($this->Users);
+        $users = $this->paginate($this->Users->find()->contain(['Roles']));
         $identity = $this->request->getAttribute('identity');
         $show_staff = ! is_null($identity) && $identity->can('index', $this->Users);
         $this->set(compact('users', 'identity', 'show_staff'));
@@ -532,8 +515,8 @@ class UsersController extends AppController
         $not_accident_male_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false,'DeathPrimaryCauses.is_accident IS' => false]);
 
         $champion = $user->findChampion(['Rats.owner_user_id' => $user->id]);
-        if(!empty($champion)) {
-            $champion = $this->loadModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
+        if (! empty($champion)) {
+            $champion = $this->fetchModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
         }
 
         $identity = $this->request->getAttribute('identity');
@@ -1127,10 +1110,7 @@ class UsersController extends AppController
         ]);
 
         // Pass variables into the view template context.
-        $this->paginate = [
-            'contain' => ['Ratteries', 'Roles'],
-        ];
-        $users = $this->paginate($users);
+        $users = $this->paginate($users->find()->contain(['Ratteries', 'Roles']));
 
         $this->set([
             'users' => $users,
@@ -1143,14 +1123,13 @@ class UsersController extends AppController
         $names = $this->request->getParam('pass');
         $this->Authorization->authorize($this->Users, 'index');
 
-        $users = $this->Users->find('private', [
-            'names' => $names
-        ]);
+        $users = $this->Users
+            ->find('private', [
+                'names' => $names
+            ])
+            ->contain(['Ratteries', 'Roles']);
 
         // Pass variables into the view template context.
-        $this->paginate = [
-            'contain' => ['Ratteries', 'Roles'],
-        ];
         $users = $this->paginate($users);
 
         $this->set([

@@ -24,18 +24,14 @@ class FaqsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Categories'],
-        ];
         $this->Authorization->skipAuthorization();
-        $faqs = $this->paginate($this->Faqs);
-
+        $faqs = $this->paginate($this->Faqs->find()->contain(['Categories']));
         $this->set(compact('faqs'));
     }
 
     public function all()
     {
-        $categories = $this->loadModel('Categories')
+        $categories = $this->fetchModel('Categories')
             ->find('all')
             ->contain('Faqs')
             ->order(['position' => 'ASC']);

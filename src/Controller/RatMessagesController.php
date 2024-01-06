@@ -20,8 +20,9 @@ class RatMessagesController extends AppController
     {
         $this->Authorization->skipAuthorization();
 
-        $this->paginate = [
-            'contain' => [
+        $query = $this->RatMessages
+            ->find()
+            ->contain([
                 'Rats',
                 'Rats.Ratteries',
                 'Rats.CreatorUsers',
@@ -36,10 +37,9 @@ class RatMessagesController extends AppController
                 },
                 'Rats.States',
                 'Users'
-            ]
-        ];
+            ]);
 
-        $ratMessages = $this->paginate($this->RatMessages);
+        $ratMessages = $this->paginate($query);
 
         $this->set(compact('ratMessages'));
     }
@@ -139,27 +139,31 @@ class RatMessagesController extends AppController
     {
         $user = $this->Authentication->getIdentity();
         $this->Authorization->skipAuthorization();
-        $this->paginate = [
-            'contain' => [
-                'Rats',
-                'Rats.Ratteries',
-                'Rats.BirthLitters',
-                'Rats.BirthLitters.Contributions',
-                'Rats.States',
-                'Users',
+        $settings = [
+            'order' => [
+                'created' => 'desc',
             ],
             'sortableFields' => [
                 'created',
                 'is_staff_request',
                 'is_automatically_generated',
                 'Rats.pedigree_identifier',
-                'Users.username',            
+                'Users.username',
             ]
         ];
 
-        $ratMessages = $this->RatMessages->find('entitled', ['user_id' => $user->id]);
+        $query = $this->RatMessages
+            ->find('entitled', ['user_id' => $user->id])
+            ->contain([
+                'Rats',
+                'Rats.Ratteries',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Contributions',
+                'Rats.States',
+                'Users',
+            ]);
 
-        $this->paginate($ratMessages);
+        $ratMessages = $this->paginate($query, $settings);
 
         $this->set(compact('ratMessages'));
     }

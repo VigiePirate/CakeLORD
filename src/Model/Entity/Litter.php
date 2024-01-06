@@ -29,6 +29,7 @@ use App\Model\Table\RatsTable;
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\State $state
  * @property \App\Model\Entity\Conversation[] $conversations
+ * @property \App\Model\Entity\LitterMessage[] $litter_messages
  * @property \App\Model\Entity\LitterSnapshot[] $litter_snapshots
  * @property \App\Model\Entity\Rat[] $parent_rats
  * @property \App\Model\Entity\Rattery[] $ratteries
@@ -58,7 +59,7 @@ class Litter extends Entity
         'modified' => true,
         'user' => true,
         'state' => true,
-        'conversations' => true,
+        'litter_messages' => true,
         'litter_snapshots' => true,
         'parent_rats' => true,
         'ratteries' => true,

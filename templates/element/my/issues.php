@@ -8,8 +8,6 @@
 
             <h2><?= __('My Issues') ?></h2>
 
-            <!-- <p><?= __('<strong>{0, plural, =1{1 issue is} other{# issues are}}</strong> currently waiting to be treated. Most recent are:', [$count['issues']]) ?><p> -->
-
             <?php if ($count['recently_solved_issues']) :?>
                 <h3 class="shortlist"><?= __('Recently solved') ?> </h3>
 

@@ -28,6 +28,7 @@ use Cake\Collection\Collection;
  * @property \App\Model\Table\DeathSecondaryCausesTable&\Cake\ORM\Association\BelongsTo $DeathSecondaryCauses
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
+ * @property \App\Model\Table\RatMessagesTable&\Cake\ORM\Association\HasMany $RatMessages
  * @property \App\Model\Table\RatSnapshotsTable&\Cake\ORM\Association\HasMany $RatSnapshots
  * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsToMany $BredLitters
  * @property \App\Model\Table\SingularitiesTable&\Cake\ORM\Association\BelongsToMany $Singularities

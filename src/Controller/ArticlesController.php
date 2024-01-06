@@ -25,8 +25,19 @@ class ArticlesController extends AppController
      */
     public function index()
     {
-        $articles = $this->paginate($this->Articles, ['contain' => ['Categories']]);
         $this->Authorization->authorize($this->Articles);
+        $query = $this->Articles->find()->contain(['Categories']);
+        $settings = [
+            'sortableFields' => [
+                'id',
+                'Categories.name',
+                'subtitle',
+                'title',
+                'created',
+                'modified'
+            ]
+        ];
+        $articles = $this->paginate($query, $settings);
         $this->set(compact('articles'));
     }
 
@@ -37,10 +48,8 @@ class ArticlesController extends AppController
      */
     public function all()
     {
-        $categories = $this->Articles->Categories->find('all', ['contain' => ['Articles']])->where(['id >' => 3]);
-
-        //$articles = $this->paginate($this->Articles, ['contain' => ['Categories']]);
         $this->Authorization->skipAuthorization();
+        $categories = $this->Articles->Categories->find('all', ['contain' => ['Articles']])->where(['id >' => 3]);
         $this->set(compact('categories'));
     }
 
@@ -70,6 +79,7 @@ class ArticlesController extends AppController
     {
         $article = $this->Articles->newEmptyEntity();
         $this->Authorization->authorize($article);
+
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
@@ -78,8 +88,8 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
-        $this->loadModel('Categories');
-        $categories = $this->Categories->find('list', ['limit' => 200]);
+
+        $categories = $this->fetchModel('Categories')->find('list', ['limit' => 200]);
         $this->set(compact('article', 'categories'));
     }
 

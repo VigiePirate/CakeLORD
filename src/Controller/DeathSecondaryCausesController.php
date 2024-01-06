@@ -18,9 +18,9 @@ class DeathSecondaryCausesController extends AppController
      */
     public function index()
     {
-        $this->paginate = ['contain' => ['DeathPrimaryCauses']];
-        $deathSecondaryCauses = $this->paginate($this->DeathSecondaryCauses);
         $this->Authorization->skipAuthorization();
+        $query = $this->DeathSecondaryCauses->find()->contain(['DeathPrimaryCauses']);
+        $deathSecondaryCauses = $this->paginate($query);
         $user = $this->request->getAttribute('identity');
         $this->set(compact('deathSecondaryCauses', 'user'));
     }

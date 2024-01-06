@@ -18,6 +18,7 @@ use Cake\Collection\Collection;
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
+ * @property \App\Model\Table\LitterMessagesTable&\Cake\ORM\Association\HasMany $LitterMessages
  * @property \App\Model\Table\LitterSnapshotsTable&\Cake\ORM\Association\HasMany $LitterSnapshots
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $OffspringRats
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\BelongsToMany $ParentRats

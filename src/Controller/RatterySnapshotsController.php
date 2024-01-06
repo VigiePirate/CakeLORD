@@ -19,11 +19,7 @@ class RatterySnapshotsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Ratteries', 'States'],
-        ];
-        $ratterySnapshots = $this->paginate($this->RatterySnapshots);
-
+        $ratterySnapshots = $this->paginate($this->RatterySnapshots->find()->contain(['Ratteries', 'States']));
         $this->set(compact('ratterySnapshots'));
     }
 
@@ -65,16 +61,16 @@ class RatterySnapshotsController extends AppController
 
         $rattery = $snapshot->rattery;
 
-        $this->loadModel('States');
+        $states = $this->fetchModel('States');
         if($rattery->state->is_frozen) {
-            $next_thawed_state = $this->States->get($rattery->state->next_thawed_state_id);
+            $next_thawed_state = $states->get($rattery->state->next_thawed_state_id);
             $this->set(compact('next_thawed_state'));
         }
         else {
-            $next_ko_state = $this->States->get($rattery->state->next_ko_state_id);
-            $next_ok_state = $this->States->get($rattery->state->next_ok_state_id);
+            $next_ko_state = $states->get($rattery->state->next_ko_state_id);
+            $next_ok_state = $states->get($rattery->state->next_ok_state_id);
             if( !empty($rattery->state->next_frozen_state_id) ) {
-                $next_frozen_state = $this->States->get($rattery->state->next_frozen_state_id);
+                $next_frozen_state = $states->get($rattery->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }
             $this->set(compact('next_ko_state', 'next_ok_state'));

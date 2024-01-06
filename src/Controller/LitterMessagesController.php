@@ -18,11 +18,8 @@ class LitterMessagesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Litters', 'Users'],
-        ];
-        $litterMessages = $this->paginate($this->LitterMessages);
-
+        $this->Authorization->authorize($this->LitterMessages);
+        $litterMessages = $this->paginate($this->LitterMessages->find()->contain(['Litters', 'Users']));
         $this->set(compact('litterMessages'));
     }
 
@@ -119,17 +116,8 @@ class LitterMessagesController extends AppController
     {
         $user = $this->Authentication->getIdentity();
         $this->Authorization->skipAuthorization();
-        $this->paginate = [
-            'contain' => [
-                'Litters',
-                'Litters.Sire',
-                'Litters.Sire.BirthLitters.Contributions',
-                'Litters.Dam',
-                'Litters.Dam.BirthLitters.Contributions',
-                'Litters.LitterMessages' => ['sort' => 'LitterMessages.created DESC'],
-                'Litters.States',
-                'Users',
-            ],
+
+        $settings = [
             'sortableFields' => [
                 'created',
                 'is_staff_request',
@@ -138,10 +126,21 @@ class LitterMessagesController extends AppController
                 'Users.username',
             ]
         ];
-        $litterMessages = $this->LitterMessages->find('entitled', ['user_id' => $user->id]);
 
-        $this->paginate($litterMessages);
+        $query = $this->LitterMessages
+            ->find('entitled', ['user_id' => $user->id])
+            ->contain([
+                'Litters',
+                'Litters.Sire',
+                'Litters.Sire.BirthLitters.Contributions',
+                'Litters.Dam',
+                'Litters.Dam.BirthLitters.Contributions',
+                'Litters.LitterMessages' => ['sort' => 'LitterMessages.created DESC'],
+                'Litters.States',
+                'Users',
+            ]);
 
+        $litterMessages = $this->paginate($query, $settings);
         $this->set(compact('litterMessages'));
     }
 }

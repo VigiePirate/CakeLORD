@@ -38,6 +38,7 @@ use App\Model\Table\RatsTable;
  * @property \App\Model\Entity\State $state
  * @property \App\Model\Entity\Conversation[] $conversations
  * @property \App\Model\Entity\Rat[] $rats
+ * @property \App\Model\Entity\RatteryMessage[] $rattery_messages
  * @property \App\Model\Entity\RatterySnapshot[] $rattery_snapshots
  * @property \App\Model\Entity\Litter[] $litters
  */
@@ -76,8 +77,8 @@ class Rattery extends Entity
         'user' => true,
         'country' => true,
         'state' => true,
-        'conversations' => true,
         'rats' => true,
+        'rattery_messages' => true,
         'rattery_snapshots' => true,
         'litters' => true,
     ];

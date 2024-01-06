@@ -26,11 +26,7 @@ class LittersController extends AppController
     public function index()
     {
         $this->Authorization->skipAuthorization();
-        $this->paginate = [
-            'contain' => ['Users', 'States', 'Sire', 'Dam'],
-        ];
-        $litters = $this->paginate($this->Litters);
-
+        $litters = $this->paginate($this->Litters->find()->contain(['Users', 'States', 'Sire', 'Dam']));
         $this->set(compact('litters'));
     }
 
@@ -44,21 +40,20 @@ class LittersController extends AppController
         $this->Authorization->skipAuthorization();
         $user = $this->Authentication->getIdentity();
 
-        $litters = $this->Litters->find()
+        $query = $this->Litters->find()
             ->matching('Contributions.Ratteries', function (\Cake\ORM\Query $q) use ($user) {
                 return $q->where([
                     'Ratteries.owner_user_id' => $user->id,
                 ]);
-            });
-            //->order('Litters.birth_date DESC');
+            })
+            ->contain(['Users', 'States', 'Sire', 'Dam', 'Contributions']);
 
-        $this->paginate = [
-            'contain' => ['Users', 'States', 'Sire', 'Dam', 'Contributions'],
+        $settings = [
             'order' => ['birth_date' => 'desc'],
             'sortableFields' => ['state_id', 'birth_date', 'pups_number'],
         ];
 
-        $litters = $this->paginate($litters);
+        $litters = $this->paginate($query, $settings);
 
         $pending = $this->Litters->find()
             ->matching('Contributions.Ratteries', function (\Cake\ORM\Query $q) use ($user) {
@@ -140,27 +135,29 @@ class LittersController extends AppController
                                     return $query->where([
                                         'BirthLitters.id' => $litter->id
                                     ]);
-                                });
+                                })
+                                ->order(['OffspringRats.name' => 'asc']);
+
         $offsprings = $this->paginate($offspringsQuery);
 
         // exclude lost rats from statistics
-        $stats_offsprings = $this->paginate($offspringsQuery->where(['OR' => [
+        $stats_offsprings = $offspringsQuery->where(['OR' => [
             'death_secondary_cause_id !=' => '1',
             'death_secondary_cause_id IS' => null,
-        ]]));
+        ]]);
 
         $stats = $litter->wrapStatistics($stats_offsprings);
 
-        $this->loadModel('States');
+        $states = $this->fetchModel('States');
         if($litter->state->is_frozen) {
-            $next_thawed_state = $this->States->get($litter->state->next_thawed_state_id);
+            $next_thawed_state = $states->get($litter->state->next_thawed_state_id);
             $this->set(compact('next_thawed_state'));
         }
         else {
-            $next_ko_state = $this->States->get($litter->state->next_ko_state_id);
-            $next_ok_state = $this->States->get($litter->state->next_ok_state_id);
+            $next_ko_state = $states->get($litter->state->next_ko_state_id);
+            $next_ok_state = $states->get($litter->state->next_ok_state_id);
             if( !empty($litter->state->next_frozen_state_id) ) {
-                $next_frozen_state = $this->States->get($litter->state->next_frozen_state_id);
+                $next_frozen_state = $states->get($litter->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }
             $this->set(compact('next_ko_state','next_ok_state'));
@@ -241,7 +238,7 @@ class LittersController extends AppController
         $parent_id = $this->request->getParam('pass');
         if (! empty($parent_id)) {
             $from_parent = true;
-            $rats = $this->loadModel('Rats');
+            $rats = $this->fetchModel('Rats');
             $parent = $rats->get($parent_id, ['contain' => 'Ratteries']);
             if ($parent->sex == 'F') {
                 $mother = ['name' => $parent->name . ' ('. $parent->pedigree_identifier .')', 'id' => $parent->id];
@@ -253,7 +250,7 @@ class LittersController extends AppController
         } else {
             $from_parent = false;
         }
-        $ratteries = $this->loadModel('Ratteries');
+        $ratteries = $this->fetchModel('Ratteries');
         $creator_id = $this->Authentication->getIdentity()->get('id');
         $generic = $ratteries->find()->where(['is_generic IS' => true]);
         $rattery = (! is_null($ratteries->find('activeFromUser', ['users' => $creator_id])->first()))
@@ -308,7 +305,7 @@ class LittersController extends AppController
         $data['birth_date'] = \Cake\I18n\FrozenTime::today();
 
         $user_id = $this->Authentication->getIdentity()->get('id');
-        $user = $this->loadModel('Users')->get($user_id, ['contain' => 'Ratteries']);
+        $user = $this->fetchModel('Users')->get($user_id, ['contain' => 'Ratteries']);
         if (empty($user->main_rattery)) {
             $data['rattery_id'] = 1;
         } else {
@@ -328,7 +325,7 @@ class LittersController extends AppController
         $index_json = json_encode($index);
 
         // create fake offspring to init family tree
-        $rats = $this->loadModel('Rats');
+        $rats = $this->fetchModel('Rats');
         $dam = $rats->get($parents[0], ['contain' => ['Ratteries', 'Coats', 'Colors', 'Dilutions', 'Markings', 'Earsets', 'OwnerUsers', 'OwnerUsers.Ratteries']]);
         $sire = $rats->get($parents[1], ['contain' => ['Ratteries', 'Coats', 'Colors', 'Dilutions', 'Markings', 'Earsets', 'OwnerUsers', 'OwnerUsers.Ratteries']]);
         $parents = [];
@@ -577,8 +574,7 @@ class LittersController extends AppController
 
         $this->Authorization->authorize($litter);
 
-        $this->loadModel('ContributionTypes');
-        $contribution_types = $this->ContributionTypes->find('all')->order('priority ASC');
+        $contribution_types = $this->fetchModel('ContributionTypes')->find('all')->order('priority ASC');
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $this->Litters->patchEntity($litter, $this->request->getData(), [
@@ -648,7 +644,7 @@ class LittersController extends AppController
         $this->Authorization->authorize($litter, 'staffEdit');
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $rats = $this->loadModel('Rats');
+            $rats = $this->fetchModel('Rats');
             $data = $this->request->getData();
             $rat = $rats->get($data['rat_id']);
 
@@ -713,41 +709,51 @@ class LittersController extends AppController
         $this->Authorization->authorize($this->Litters);
 
         $inState = $this->request->getParam('pass');
-        $litters = $this->Litters->find('inState', [
-            'inState' => $inState
-        ]);
+        $litters = $this->Litters
+            ->find('inState', [
+                'inState' => $inState
+            ])
+            ->contain(['Users', 'Sire', 'Dam', 'Contributions', 'States']);
 
-        // Pass variables into the view template context.
-        $this->paginate = [
-            'contain' => ['Users', 'Sire', 'Dam', 'Contributions', 'States'],
-        ];
         $litters = $this->paginate($litters);
 
-        $this->set([
-            'litters' => $litters,
-            'inState' => $inState
-        ]);
+        $this->set(compact('litters', 'inState'));
     }
 
     public function needsStaff()
     {
         $this->Authorization->authorize($this->Litters, 'filterByState');
 
-        $litters = $this->Litters->find('needsStaff');
+        $litters = $this->Litters
+            ->find('needsStaff')
+            ->contain([
+                'Users',
+                'Sire',
+                'Dam',
+                'Contributions',
+                'States',
+                'LitterSnapshots' => ['sort' => ['LitterSnapshots.created' => 'DESC']],
+                'LitterMessages' => ['sort' => ['LitterMessages.created' => 'DESC']],
+            ]);
 
-        $this->paginate = [
-            'contain' => ['Users', 'Sire', 'Dam', 'Contributions', 'States', 'LitterSnapshots', 'LitterMessages'],
-            'sortableFields' => ['state_id', 'birth_date', 'id', 'Users.username', 'modified']
+        $settings = [
+            'order' => [
+                'modified' => 'desc',
+            ],
+            'sortableFields' => [
+                'state_id',
+                'birth_date',
+                'id',
+                'Users.username',
+                'modified'
+            ]
         ];
 
-        $ratteries = $this->paginate($litters);
+        $litters = $this->paginate($litters, $settings);
 
         $identity = $this->request->getAttribute('identity');
 
-        $this->set([
-            'litters' => $litters,
-            'identity' => $identity,
-        ]);
+        $this->set(compact('litters', 'identity'));
     }
 
     /**
@@ -761,8 +767,8 @@ class LittersController extends AppController
     public function genealogy($id, $path, &$genealogy, $approx = false, $limit = 17)
     {
         $this->Authorization->skipAuthorization();
-        $this->loadModel('Rats');
-        $parents = $this->Rats->find()
+
+        $parents = $this->fetchModel('Rats')->find()
             ->select(['id', 'litter_id', 'sex'])
             ->matching('BredLitters', function ($query) use ($id) {
                 return $query->where(['BredLitters.id' => $id]);
@@ -830,7 +836,7 @@ class LittersController extends AppController
      public function coefficients($genealogy = null, &$sub_coefs = [], $limit = 17, $approx = false, $flag = true)
      {
          $this->Authorization->skipAuthorization();
-         if($genealogy == null) {
+         if ($genealogy == null) {
              $coefficients = [
                  'coi' => __('N/A'),
                  'avk' => __('N/A'),
@@ -928,7 +934,7 @@ class LittersController extends AppController
                  $coancestry[$duplicate] = ['coi' => 100*$contribution, 'count' => $count]; // ['coi' => round(100 * $contribution,2)];
 
                  if ($flag) {
-                     $name = $this->Rats->get($duplicate, [
+                     $name = $this->fetchModel('Rats')->get($duplicate, [
                          'contain' => [
                              'Ratteries','BirthLitters','BirthLitters.Contributions',
                          ]
@@ -1082,8 +1088,7 @@ class LittersController extends AppController
         $litter = $this->Litters->patchEntity($litter, $this->request->getData());
         if ($this->Litters->save($litter, ['checkRules' => false])) {
             // state_id is up to date but not $rat->state entity; reload for updated flash message
-            $this->loadModel('States');
-            $this->Flash->success(__('This litter sheet is now in state: {0}.', [$this->States->get($litter->state_id)->name]));
+            $this->Flash->success(__('This litter sheet is now in state: {0}.', [$this->fetchModel('States')->get($litter->state_id)->name]));
             if (! empty($this->request->getData('side_message'))) {
                 $this->Flash->default(__('The following custom moderation message has been sent: {0}', [$this->request->getData('side_message')]));
             }

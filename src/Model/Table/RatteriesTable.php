@@ -18,6 +18,7 @@ use Geo\Geocoder\Geocoder;
  * @property \App\Model\Table\CountriesTable&\Cake\ORM\Association\BelongsTo $Countries
  * @property \App\Model\Table\StatesTable&\Cake\ORM\Association\BelongsTo $States
  * @property \App\Model\Table\RatsTable&\Cake\ORM\Association\HasMany $Rats
+ * @property \App\Model\Table\RatteryMessagesTable&\Cake\ORM\Association\HasMany $RatteryMessages
  * @property \App\Model\Table\RatterySnapshotsTable&\Cake\ORM\Association\HasMany $RatterySnapshots
  * @property \App\Model\Table\LittersTable&\Cake\ORM\Association\BelongsToMany $Litters
  *

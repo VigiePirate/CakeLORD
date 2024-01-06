@@ -18,11 +18,7 @@ class RatteryMessagesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Ratteries', 'Users'],
-        ];
-        $ratteryMessages = $this->paginate($this->RatteryMessages);
-
+        $ratteryMessages = $this->paginate($this->RatteryMessages->find()->contain(['Ratteries', 'Users']));
         $this->set(compact('ratteryMessages'));
     }
 
@@ -119,12 +115,9 @@ class RatteryMessagesController extends AppController
     {
         $user = $this->Authentication->getIdentity();
         $this->Authorization->skipAuthorization();
-        $this->paginate = [
-            'contain' => [
-                'Ratteries',
-                'Ratteries.RatteryMessages' => ['sort' => 'RatteryMessages.created DESC'],
-                'Ratteries.States',
-                'Users',
+        $settings = [
+            'order' => [
+                'created' => 'desc',
             ],
             'sortableFields' => [
                 'created',
@@ -134,8 +127,16 @@ class RatteryMessagesController extends AppController
                 'Users.username',
             ]
         ];
-        $ratteryMessages = $this->RatteryMessages->find('entitled', ['user_id' => $user->id]);
-        $this->paginate($ratteryMessages);
+        $ratteryMessages = $this->RatteryMessages
+            ->find('entitled', ['user_id' => $user->id])
+            ->contain([
+                'Ratteries',
+                'Ratteries.RatteryMessages' => ['sort' => 'RatteryMessages.created DESC'],
+                'Ratteries.States',
+                'Users',
+            ]);
+
+        $this->paginate($ratteryMessages, $settings);
 
         $this->set(compact('ratteryMessages'));
     }

@@ -20,11 +20,7 @@ class LitterSnapshotsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Litters', 'States'],
-        ];
-        $litterSnapshots = $this->paginate($this->LitterSnapshots);
-
+        $litterSnapshots = $this->paginate($this->LitterSnapshots->contain(['Litters', 'States']));
         $this->set(compact('litterSnapshots'));
     }
 
@@ -74,16 +70,16 @@ class LitterSnapshotsController extends AppController
 
         $litter = $snapshot->litter;
 
-        $this->loadModel('States');
+        $states = $this->fetchModel('States');
         if($litter->state->is_frozen) {
-            $next_thawed_state = $this->States->get($litter->state->next_thawed_state_id);
+            $next_thawed_state = $states->get($litter->state->next_thawed_state_id);
             $this->set(compact('next_thawed_state'));
         }
         else {
-            $next_ko_state = $this->States->get($litter->state->next_ko_state_id);
-            $next_ok_state = $this->States->get($litter->state->next_ok_state_id);
+            $next_ko_state = $states->get($litter->state->next_ko_state_id);
+            $next_ok_state = $states->get($litter->state->next_ok_state_id);
             if (! empty($litter->state->next_frozen_state_id) ) {
-                $next_frozen_state = $this->States->get($litter->state->next_frozen_state_id);
+                $next_frozen_state = $states->get($litter->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }
             $this->set(compact('next_ko_state', 'next_ok_state'));
@@ -96,7 +92,8 @@ class LitterSnapshotsController extends AppController
         // process parents separately (snapped through association)
         if (in_array('parent_rats', $diff_list)) {
             $contain = ['Ratteries', 'BirthLitters.Contributions.Ratteries'];
-            $rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
+            //$rats = \Cake\Datasource\FactoryLocator::get('Table')->get('Rats');
+            $rats = $this->fetchModel('Rats');
             foreach ($diff_array['parent_rats'] as $parent_id) {
                 $parent = $rats->get($parent_id['id'], ['contain' => $contain]);
                 if ($parent->sex == 'F') {

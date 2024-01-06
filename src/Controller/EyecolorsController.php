@@ -29,7 +29,7 @@ class EyecolorsController extends AppController
         $eyecolors = $this->paginate($this->Eyecolors);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
-        $show_staff = !is_null($user) && $user->can('add', $this->Eyecolors);
+        $show_staff = ! is_null($user) && $user->can('add', $this->Eyecolors);
         $this->set(compact('eyecolors', 'user', 'show_staff'));
     }
 

@@ -27,11 +27,9 @@ class RatteriesController extends AppController
     public function index()
     {
         $this->Authorization->skipAuthorization();
-        $this->paginate = [
-            'contain' => [
-                'Users',
-                'Countries',
-                'States'
+        $settings = [
+            'order' => [
+                'prefix' => 'asc',
             ],
             'sortableFields' => [
                 'state_id',
@@ -45,8 +43,8 @@ class RatteriesController extends AppController
                 'modified',
             ]
         ];
-        $ratteries = $this->paginate($this->Ratteries);
 
+        $ratteries = $this->paginate($this->Ratteries->find()->contain(['Users', 'Countries', 'States']), $settings);
         $this->set(compact('ratteries'));
     }
 
@@ -59,18 +57,20 @@ class RatteriesController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $user = $this->Authentication->getIdentity();
-        $this->paginate = [
-            'contain' => ['Contributions', 'Users', 'Users.Ratteries', 'Countries', 'States'],
-        ];
+
         $alive_ratteries = $this->paginate($this->Ratteries->find()->where([
                 'owner_user_id' => $user->id,
                 'is_alive' => true,
-            ])->order('Ratteries.created DESC')
+            ])
+            ->contain(['Contributions', 'Users', 'Users.Ratteries', 'Countries', 'States'])
+            ->order('Ratteries.created DESC')
         );
         $closed_ratteries = $this->paginate($this->Ratteries->find()->where([
                 'owner_user_id' => $user->id,
                 'is_alive' => false,
-            ])->order('Ratteries.created DESC')
+            ])
+            ->contain(['Contributions', 'Users', 'Users.Ratteries', 'Countries', 'States'])
+            ->order('Ratteries.created DESC')
         );
         $pending = $this->Ratteries->find()->contain(['States'])->where([
                 'owner_user_id' => $user->id,
@@ -81,7 +81,7 @@ class RatteriesController extends AppController
             $this->Flash->error(__('You have one or several sheets to correct! Please check them below.'));
         }
 
-        $users = $this->loadModel('Users');
+        $users = $this->fetchModel('Users');
         $user = $users->get($user->id, ['contain' => ['Ratteries']]);
         $identity = $this->request->getAttribute('identity');
         $this->set(compact('alive_ratteries', 'closed_ratteries', 'user', 'identity'));
@@ -134,7 +134,7 @@ class RatteriesController extends AppController
         $stats = $rattery->wrapStatistics();
 
         if (! $rattery->is_generic && $stats['deadRatCount'] > 0) {
-            $rats = $this->loadModel('Rats');
+            $rats = $this->fetchModel('Rats');
             $champion = $rattery->findChampion(['rattery_id' => $rattery->id]);
             if(! is_null($champion)) {
                 $champion = $rats->get($champion->id, ['contain' => ['Ratteries', 'BirthLitters', 'BirthLitters.Ratteries', 'BirthLitters.Contributions']]);
@@ -144,16 +144,16 @@ class RatteriesController extends AppController
         }
 
         /* statebar */
-        $this->loadModel('States');
+        $states = $this->fetchModel('States');
         if($rattery->state->is_frozen) {
-            $next_thawed_state = $this->States->get($rattery->state->next_thawed_state_id);
+            $next_thawed_state = $states->get($rattery->state->next_thawed_state_id);
             $this->set(compact('next_thawed_state'));
         }
         else {
-            $next_ko_state = $this->States->get($rattery->state->next_ko_state_id);
-            $next_ok_state = $this->States->get($rattery->state->next_ok_state_id);
+            $next_ko_state = $states->get($rattery->state->next_ko_state_id);
+            $next_ok_state = $states->get($rattery->state->next_ok_state_id);
             if( !empty($rattery->state->next_frozen_state_id) ) {
-                $next_frozen_state = $this->States->get($rattery->state->next_frozen_state_id);
+                $next_frozen_state = $states->get($rattery->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }
             $this->set(compact('next_ko_state','next_ok_state'));
@@ -581,15 +581,17 @@ class RatteriesController extends AppController
 
         $names = $this->request->getParam('pass');
 
-        $ratteries = $this->Ratteries->find('named', [
-            'names' => $names
-        ]);
-
-        $this->paginate = [
-            'contain' => [
+        $ratteries = $this->Ratteries
+            ->find('named', [
+                'names' => $names
+            ])
+            ->contain([
                 'Users',
                 'Countries',
-                'States'],
+                'States'
+            ]);
+
+        $settings = [
             'order' => [
                 'prefix' => 'asc'
             ],
@@ -604,7 +606,7 @@ class RatteriesController extends AppController
                 'Countries.name'
             ]
         ];
-        $ratteries = $this->paginate($ratteries);
+        $ratteries = $this->paginate($ratteries, $settings);
 
         $this->set([
             'ratteries' => $ratteries,
@@ -625,15 +627,17 @@ class RatteriesController extends AppController
         $this->Authorization->skipAuthorization();
         $users = $this->request->getParam('pass');
 
-        $ratteries = $this->Ratteries->find('ownedBy', [
-            'users' => $users
-        ]);
+        $ratteries = $this->Ratteries
+            ->find('ownedBy', [
+                'users' => $users
+            ])
+            ->contain([
+                'Users',
+                'States',
+                'Countries'
+            ]);
 
-        $this->paginate = [
-            'contain' => ['Users', 'States','Countries'],
-        ];
         $ratteries = $this->paginate($ratteries);
-
         $this->set(compact('ratteries', 'users'));
     }
 
@@ -642,13 +646,16 @@ class RatteriesController extends AppController
         $this->Authorization->authorize($this->Ratteries);
 
         $inState = $this->request->getParam('pass');
-        $ratteries = $this->Ratteries->find('inState', [
-            'inState' => $inState
-        ]);
+        $ratteries = $this->Ratteries
+            ->find('inState', [
+                'inState' => $inState
+            ])
+            ->contain([
+                'Users',
+                'States',
+                'Countries'
+            ]);
 
-        $this->paginate = [
-            'contain' => ['Users', 'States', 'Countries'],
-        ];
         $ratteries = $this->paginate($ratteries);
 
         $this->set([
@@ -661,15 +668,19 @@ class RatteriesController extends AppController
     {
         $this->Authorization->authorize($this->Ratteries, 'filterByState');
 
-        $ratteries = $this->Ratteries->find('needsStaff');
-
-        $this->paginate = [
-            'contain' => [
+        $ratteries = $this->Ratteries
+            ->find('needsStaff')
+            ->contain([
                 'Users',
                 'States',
                 'Countries',
                 'RatterySnapshots' => ['sort' => ['RatterySnapshots.created' => 'DESC']],
                 'RatteryMessages'=> ['sort' => ['RatteryMessages.created' => 'DESC']],
+            ]);
+
+        $settings = [
+            'order' => [
+                'modified' => 'desc'
             ],
             'sortableFields' => [
                 'state_id',
@@ -680,7 +691,7 @@ class RatteriesController extends AppController
             ]
         ];
 
-        $ratteries = $this->paginate($ratteries);
+        $ratteries = $this->paginate($ratteries, $settings);
 
         $user = $this->request->getAttribute('identity');
 
@@ -711,9 +722,8 @@ class RatteriesController extends AppController
         $this->Authorization->authorize($rattery, 'changeState');
         $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
         if ($this->Ratteries->save($rattery, ['checkRules' => false])) {
-            // state_id is up to date but not $rat->state entity; reload for updated flash message
-            $this->loadModel('States');
-            $this->Flash->success(__('This rattery sheet is now in state: {0}.', [$this->States->get($rattery->state_id)->name]));
+            // state_id is up to date but not $rat->state entity, reload for updated flash message
+            $this->Flash->success(__('This rattery sheet is now in state: {0}.', [$this->fetchModel('States')->get($rattery->state_id)->name]));
             if (! empty($this->request->getData('side_message'))) {
                 $this->Flash->default(__('The following custom moderation message has been sent: {0}', [$this->request->getData('side_message')]));
             }

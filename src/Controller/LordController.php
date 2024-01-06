@@ -28,7 +28,7 @@ class LordController extends AppController
     public function my() {
         $lord = new Lord();
 
-        $model = $this->loadModel('Rats');
+        $model = $this->fetchModel('Rats');
         $query = $model->find('needsStaff')
             ->order('Rats.modified DESC')
             ->contain([
@@ -43,7 +43,7 @@ class LordController extends AppController
         $count['rats'] = $query->count();
         $rats = $query->limit(5);
 
-        $model = $this->loadModel('Ratteries');
+        $model = $this->fetchModel('Ratteries');
         $query = $model->find('needsStaff')
             ->order('Ratteries.modified DESC')
             ->contain([
@@ -56,7 +56,7 @@ class LordController extends AppController
         $count['ratteries'] = $query->count();
         $ratteries = $query->limit(5);
 
-        $model = $this->loadModel('Litters');
+        $model = $this->fetchModel('Litters');
         $query = $model->find('needsStaff')
             ->order('Litters.modified DESC')
             ->contain([
@@ -72,7 +72,7 @@ class LordController extends AppController
         $count['litters'] = $query->count();
         $litters = $query->limit(5);
 
-        $model = $this->loadModel('Issues');
+        $model = $this->fetchModel('Issues');
         $query = $model->findByIsOpen(true)
             ->order('Issues.created DESC')
             ->contain(['FromUsers', 'ClosingUsers']);
@@ -99,21 +99,21 @@ class LordController extends AppController
 
         $names = $this->request->getParam('pass');
 
-        $model = $this->loadModel('Rats');
+        $model = $this->fetchModel('Rats');
         $query = $model->find('identified', ['names' => $names])
             ->order('Rats.modified DESC')
             ->contain(['States', 'OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions']);
         $count['rats'] = $query->count();
         $rats = $query->limit(10);
 
-        $model = $this->loadModel('Ratteries');
+        $model = $this->fetchModel('Ratteries');
         $query = $model->find('named', ['names' => $names])
             ->order('Ratteries.modified DESC')
             ->contain(['Countries', 'States', 'Users']);
         $count['ratteries'] = $query->count();
         $ratteries = $query->limit(10);
 
-        $model = $this->loadModel('Users');
+        $model = $this->fetchModel('Users');
         $query = $model->find('named', ['names' => $names])
             ->order('Users.modified DESC')
             ->contain(['Roles', 'Ratteries']);
@@ -127,7 +127,7 @@ class LordController extends AppController
     {
         $lord = new Lord();
         $this->Authorization->skipAuthorization();
-        $rats = $this->loadModel('Rats');
+        $rats = $this->fetchModel('Rats');
 
         $rat_count = $lord->countAll('Rats');
         $female_count = $lord->countRats(['sex' => 'F']);

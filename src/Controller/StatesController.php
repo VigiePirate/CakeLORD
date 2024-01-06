@@ -26,12 +26,9 @@ class StatesController extends AppController
     public function index()
     {
         $this->Authorization->skipAuthorization();
-        $this->paginate = [
-            'contain' => ['NextOkStates', 'NextKoStates', 'NextFrozenStates', 'NextThawedStates'],
-        ];
-        $states = $this->paginate($this->States);
-
-        $this->set(compact('states'));
+        $query = $this->States->find()
+            ->contain(['NextOkStates', 'NextKoStates', 'NextFrozenStates', 'NextThawedStates']);
+        $this->set('states', $this->paginate($query));
     }
 
     /**
