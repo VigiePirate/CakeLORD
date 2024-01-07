@@ -327,6 +327,32 @@ class LordController extends AppController
             'user_creation', 'rattery_creation', 'rat_birth', 'js_legends'));
     }
 
+    public function hallOfFame() {
+        $this->Authorization->skipAuthorization();
+        $lord = new Lord();
+
+        // ratteries by number of litters
+        $contributions = $this->fetchModel('Contributions')->find();
+        $ratteries = $contributions->select([
+                'rattery_id' => 'rattery_id',
+                'rattery_prefix' => 'Ratteries.prefix',
+                'rattery_name' => 'Ratteries.name',
+                'count' => $contributions->func()->count('*')
+            ])
+            ->contain('Ratteries')
+            ->where([
+                'Ratteries.is_generic' => false,
+                //'contribution_type_id' => 1
+            ])
+            ->group('rattery_id')
+            ->order(['count' => 'desc'])
+            ->limit(10)
+            ->all()
+            ->toArray();
+
+        $this->set(compact('ratteries'));
+}
+
     public function contact() {
         $this->Authorization->skipAuthorization();
 
