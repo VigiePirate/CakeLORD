@@ -62,6 +62,8 @@ class LitterSnapshotsController extends AppController
                 'Litters.Sire.BirthLitters.Contributions.Ratteries',
                 'Litters.ParentRats',
                 'Litters.States',
+                'Litters.LitterMessages'  => ['sort' => ['LitterMessages.created' => 'DESC']],
+                'Litters.LitterMessages.Users',
                 'States'
             ],
         ]);

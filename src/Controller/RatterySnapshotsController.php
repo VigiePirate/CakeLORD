@@ -53,6 +53,8 @@ class RatterySnapshotsController extends AppController
                 'Ratteries.Countries',
                 'Ratteries.Users',
                 'Ratteries.States',
+                'Ratteries.RatteryMessages'  => ['sort' => ['RatteryMessages.created' => 'DESC']],
+                'Ratteries.RatteryMessages.Users',
                 'States',
             ]
         ]);
