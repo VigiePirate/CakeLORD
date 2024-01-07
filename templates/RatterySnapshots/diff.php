@@ -147,7 +147,7 @@
 
             <h1 class="half link-title">
                 <?=
-                    $this->Html->link(h($rattery->full_name), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id])
+                    $this->Html->link(h($rattery->full_name), ['controller' => 'Ratteries', 'action' => 'view', $rattery->id], ['escape' => false])
                     . '<span class="rotate"> ' . h($rattery->is_inactive_symbol) . '</span>'
                 ?>
             </h1>
@@ -267,6 +267,37 @@
 
         </div>
     </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="rattery view content">
+    <details open>
+        <summary class="staff">
+            <?= __('Messages') ?>
+        </summary>
+        <?php if (! empty($rattery->rattery_messages)) : ?>
+
+        <div class="table-responsive">
+            <table class="summary">
+                <thead>
+                    <th><?= __x('message', 'Created') ?></th>
+                    <th><?= __x('message', 'Sent by') ?></th>
+                    <th><?= __('Message') ?></th>
+                    <th><?= __('Auto?') ?></th>
+                </thead>
+                <?php foreach ($rattery->rattery_messages as $message) : ?>
+                <tr>
+                    <td class="nowrap"><?= h($message->created->i18nFormat('dd/MM/yyyy HH:mm')) ?></td>
+                    <td><?= h($message->user->username) ?></td>
+                    <td><?= h($message->content) ?></td>
+                    <td><?= $message->is_automatically_generated ? '✓' : ''  ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+        <?php endif; ?>
+    </details>
 </div>
 
 <div class="spacer"></div>

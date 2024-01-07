@@ -69,6 +69,8 @@ class RatSnapshotsController extends AppController
                 'Rats.BirthLitters.Dam',
                 'Rats.DeathPrimaryCauses',
                 'Rats.DeathSecondaryCauses',
+                'Rats.RatMessages'  => ['sort' => ['RatMessages.created' => 'DESC']],
+                'Rats.RatMessages.Users',
                 'States'
             ],
         ]);

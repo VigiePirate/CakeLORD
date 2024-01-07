@@ -79,6 +79,10 @@ details:last-of-type {
   margin-bottom:1.5rem;
 }
 
+details[open]:last-of-type {
+  margin-bottom:0 !important;
+}
+
 h1, h2, h3, h4, h5, .pretitle a, .link-title a {
   font-weight: bold;
   font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
