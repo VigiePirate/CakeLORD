@@ -711,11 +711,11 @@ class UsersController extends AppController
                 try {
                      foreach ($associations as $association) {
                         $relatedModel = $association->getTarget();
-                        $query = $this->Users->{$relatedModel->getAlias()}->query();
-                        $query->update()
-                             ->set([$association->getForeignKey() => $new_user_id])
-                             ->where([$association->getForeignKey() => $id])
-                             ->execute();
+                        $query = $this->Users->{$relatedModel->getAlias()}
+                            ->updateQuery()
+                            ->set([$association->getForeignKey() => $new_user_id])
+                            ->where([$association->getForeignKey() => $id])
+                            ->execute();
                      }
                 } catch (Exception $e) {
                     $connection->rollback();

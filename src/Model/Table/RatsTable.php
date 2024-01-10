@@ -607,8 +607,7 @@ class RatsTable extends Table
     {
         if ($entity->isNew()) {
             // force pedigree_identifier writing
-            $this->query()
-                ->update()
+            $this->updateQuery()
                 ->set(['pedigree_identifier' => $entity->pedigree_identifier])
                 ->where(['id' => $entity->id])
                 ->execute();
