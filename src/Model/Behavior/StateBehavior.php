@@ -168,6 +168,7 @@ class StateBehavior extends Behavior
                             ),
                 'is_automatically_generated' => true,
             ];
+
             return true;
         }
         return false;

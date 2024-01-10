@@ -7,9 +7,13 @@ use Cake\Collection\Collection;
 use Cake\Datasource\FactoryLocator;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
+use Cake\Event\Event;
+use Cake\Event\EventManager;
 use Cake\ORM\Behavior;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
+use Cake\ORM\Table;
+use Cake\Routing\Router;
 
 class SnapshotBehavior extends Behavior
 {
@@ -32,6 +36,10 @@ class SnapshotBehavior extends Behavior
     {
         $this->config = $this->getConfig();
         $this->SnapshotsTable = FactoryLocator::get('Table')->get($config['repository']);
+
+        $this->Identity = Router::getRequest()->getAttribute('identity');
+        $this->now = \Cake\Chronos\Chronos::now();
+        $this->messages = [];
     }
 
     /**
@@ -68,9 +76,6 @@ class SnapshotBehavior extends Behavior
                 $this->config['entityField'] => $saved_entity->id,
                 'state_id' => $saved_entity->state_id,
             ];
-            //if ($this->table()->getAlias() == 'Litters') {
-                //dd($saved_entity);
-            //}
             $new_snapshot = $this->SnapshotsTable->newEntity($snapshot_values);
             if (! $this->SnapshotsTable->save($new_snapshot)) {
                 $event->stopPropagation();
@@ -97,6 +102,20 @@ class SnapshotBehavior extends Behavior
 
         if ($entity->set($this->snapLoad($entity, $snapshot_id), ['guard' => false])) {
             if ($this->table()->save($entity, ['checkRules' => false])) {
+
+                // create message
+                $snap_event = new Event('Model.Snapshot.restored', $entity, [
+                    'identity' => $this->Identity,
+                    'emitted' => $this->now,
+                    'messages' => [
+                        [
+                            'content' => __('A snapshot of the sheet has been restored by {0}.', [$this->Identity->username]),
+                            'is_automatically_generated' => true
+                        ]
+                    ],
+                ]);
+                $this->table()->getEventManager()->dispatch($snap_event);
+
                 return $this->snapDelete($entity, $snapshot_id);
             }
         }
