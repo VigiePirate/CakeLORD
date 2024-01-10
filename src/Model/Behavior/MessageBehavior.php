@@ -38,6 +38,7 @@ class MessageBehavior extends Behavior
         $this->MessagesTable = FactoryLocator::get('Table')->get($config['repository']);
         $this->table()->getEventManager()->on('Model.State.modified', [$this, 'queueMessage']);
         $this->table()->getEventManager()->on('Model.Snapshot.restored', [$this, 'queueMessage']);
+        $this->table()->getEventManager()->on('Model.Rats.deceased', [$this, 'queueMessage']);
     }
 
     /**
@@ -61,7 +62,7 @@ class MessageBehavior extends Behavior
                 $this->config['entityField'] => $entity->id,
                 'from_user_id' => $identity->id,
                 'created' => $data['emitted'],
-                'content' => $entry['content'], // FIXME probleme ici si pas de side message???
+                'content' => $entry['content'],
                 'is_staff_request' => $identity->role->is_staff && $data['new_state']->needs_user_action,
                 'is_automatically_generated' => $entry['is_automatically_generated'],
             ]);

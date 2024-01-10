@@ -10,7 +10,10 @@ use Cake\ORM\Table;
 use Cake\Datasource\EntityInterface;
 use Cake\Validation\Validator;
 use Cake\Event\EventInterface;
+use Cake\Event\Event;
+use Cake\Event\EventManager;
 use Cake\Collection\Collection;
+use Cake\Routing\Router;
 
 /**
  * Rats Model
@@ -252,6 +255,10 @@ class RatsTable extends Table
             'targetForeignKey' => 'singularity_id',
             'joinTable' => 'rats_singularities',
         ]);
+
+        // Event related
+        $this->Identity = Router::getRequest()->getAttribute('identity');
+        $this->now = \Cake\Chronos\Chronos::now();
     }
 
     /**
@@ -619,6 +626,23 @@ class RatsTable extends Table
                 }
                 $litters->addBehavior('State');
             }
+        }
+
+        if (! $entity->is_alive && in_array('is_alive', $entity->getDirty())) {
+            $death_event = new Event('Model.Rats.deceased', $entity, [
+                'identity' => $this->Identity,
+                //'previous_state' => $this->previous_state,
+                //'new_state' => $this->new_state,
+                'emitted' => $this->now,
+                //'messages' => $this->messages,
+                'messages' => [
+                    [
+                        'content' => __('{0} declared the death of this rat.', [$this->Identity->username]),
+                        'is_automatically_generated' => true
+                    ]
+                ],
+            ]);
+            $this->getEventManager()->dispatch($death_event);
         }
     }
 

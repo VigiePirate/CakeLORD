@@ -705,7 +705,7 @@ class Rat extends Entity
 
     /* check if rat is dead before being born */
     public function isBenjaminButton() {
-        return ! is_null($this->death_date) && $this->birth_date->gt($this->death_date);
+        return ! is_null($this->death_date) && $this->birth_date->greaterThan($this->death_date);
     }
 
     /* check if rat is dead in the future */
