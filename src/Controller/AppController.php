@@ -68,11 +68,11 @@ class AppController extends Controller
     public function beforeRender(EventInterface $event)
     {
         # Handle Ajax requests, as RequestHandlerComponent is deprecated
-        if ($this->request->is('ajax')) {
-            $this->viewBuilder()->setClassName('Ajax');
-        }
+        #if ($this->request->is('ajax')) {
+        #    $this->viewBuilder()->setClassName('Ajax');
+        #}
 
-        parent::beforeRender($event);
+        #parent::beforeRender($event);
     }
 
 
