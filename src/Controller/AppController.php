@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Event\EventInterface;
 
 /**
  * Application Controller
@@ -41,6 +42,7 @@ class AppController extends Controller
     {
         parent::initialize();
 
+        # RequestHandler Component is deprecated in 5.0
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
@@ -56,6 +58,23 @@ class AppController extends Controller
          */
         $this->loadComponent('FormProtection');
     }
+
+    /**
+     * beforeRender callback.
+     *
+     * @param \Cake\Event\EventInterface $event Event.
+     * @return \Cake\Http\Response|null|void
+     */
+    public function beforeRender(EventInterface $event)
+    {
+        # Handle Ajax requests, as RequestHandlerComponent is deprecated
+        if ($this->request->is('ajax')) {
+            $this->viewBuilder()->setClassName('Ajax');
+        }
+
+        parent::beforeRender($event);
+    }
+
 
     public function isAuthorized($user) {
         // Root can access anything anywhere

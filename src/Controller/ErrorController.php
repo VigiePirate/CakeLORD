@@ -32,6 +32,7 @@ class ErrorController extends AppController
      */
     public function initialize(): void
     {
+        # RequestHandler Component is deprecated in 5.0
         $this->loadComponent('RequestHandler');
     }
 
