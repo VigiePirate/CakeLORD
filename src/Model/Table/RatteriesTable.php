@@ -462,9 +462,9 @@ class RatteriesTable extends Table
                 'is_alive IS' => true
             ]);
 
-        $count = $query->select()->count();
+        $count = $query->count();
 
-        $query->update()
+        $this->updateQuery()
             ->set([
                 'is_alive' => false,
                 'comments' => $query->func()->concat(['comments' => 'identifier', 'CHAR (10)' => 'identifier', 'CHAR (13)' => 'identifier', $comment])
