@@ -1101,10 +1101,9 @@ class RatsTable extends Table
 
     // default death cause is hardcoded, should be configured as 'is_default' in corresponding tables
     public function killZombies() {
-        $query = $this->find('zombies');
-        $count = $query->select()->count();
+        $count = $this->find('zombies')->count();
         $comment = __('**This sheet was automatically updated to set the rat as dead, as it was too old to be still alive.**');
-        $query->update()
+        $this->updateQuery()
             ->set([
                 'is_alive' => false,
                 'death_date' => \Cake\I18n\FrozenTime::now(),
