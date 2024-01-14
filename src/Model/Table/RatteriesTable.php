@@ -464,12 +464,18 @@ class RatteriesTable extends Table
 
         $count = $query->count();
 
-        $this->updateQuery()
-            ->set([
-                'is_alive' => false,
-                'comments' => $query->func()->concat(['comments' => 'identifier', 'CHAR (10)' => 'identifier', 'CHAR (13)' => 'identifier', $comment])
-            ])
-            ->execute();
+        if ($count > 0) {
+            $this->updateQuery()
+                ->where([
+                    'id IN' => $ids,
+                    'is_alive IS' => true
+                ]);
+                ->set([
+                    'is_alive' => false,
+                    'comments' => $query->func()->concat(['comments' => 'identifier', 'CHAR (10)' => 'identifier', 'CHAR (13)' => 'identifier', $comment])
+                ])
+                ->execute();
+        }
 
         return $count;
     }

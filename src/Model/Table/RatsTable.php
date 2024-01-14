@@ -1102,24 +1102,32 @@ class RatsTable extends Table
     // default death cause is hardcoded, should be configured as 'is_default' in corresponding tables
     public function killZombies() {
         $count = $this->find('zombies')->count();
-        $comment = __('**This sheet was automatically updated to set the rat as dead, as it was too old to be still alive.**');
-        $this->updateQuery()
-            ->set([
-                'is_alive' => false,
-                'death_date' => \Cake\I18n\FrozenTime::now(),
-                'death_primary_cause_id' => '1',
-                'death_secondary_cause_id' => '1',
-                'death_euthanized' => '0',
-                'death_diagnosed' => '0',
-                'death_necropsied' => '0',
-                'comments' => $query->func()->concat([
-                    $query->func()->coalesce(['comments' => 'identifier', '']),
-                    'CHAR (10)' => 'identifier',
-                    'CHAR (13)' => 'identifier',
-                    $comment
-                ]),
-            ])
-            ->execute();
+
+        if ($count > 0) {
+            $query = $this->find('zombies');
+            $comment = __('**This sheet was automatically updated to set the rat as dead, as it was too old to be still alive.**');
+            $this
+                ->updateQuery()
+                ->where([
+                    'id IN' => $query->all()->extract('id')->toArray()
+                ])
+                ->set([
+                    'is_alive' => false,
+                    'death_date' => \Cake\I18n\FrozenTime::now(),
+                    'death_primary_cause_id' => '1',
+                    'death_secondary_cause_id' => '1',
+                    'death_euthanized' => '0',
+                    'death_diagnosed' => '0',
+                    'death_necropsied' => '0',
+                    'comments' => $query->func()->concat([
+                        $query->func()->coalesce(['comments' => 'identifier', '']),
+                        'CHAR (10)' => 'identifier',
+                        'CHAR (13)' => 'identifier',
+                        $comment
+                    ]),
+                ])
+                ->execute();
+            }
 
         return $count;
     }
