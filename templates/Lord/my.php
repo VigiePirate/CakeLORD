@@ -20,25 +20,23 @@
 
             <h2><?= __('Sheets needing staff action') ?></h2>
 
-            <h3><?= __('Rats') ?></h3>
             <div class="button-small">
                 <?= $this->Html->link(__('See all pending rats'), ['controller' => 'Rats', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
-            <p><?= __('<strong>{0, plural, =1{1 rat sheet is} other{# rat sheets are}}</strong> are currently waiting for staff action. Most recent are:', [$count['rats']]) ?></p>
+            <h3><?= __('Rats') ?> (<?= $count['rats'] ?>)</h3>
             <?= $this->element('simple_staff_rats') ?>
 
-            <h3><?= __('Litters') ?></h3>
+
             <div class="button-small">
                 <?= $this->Html->link(__('See all pending litters'), ['controller' => 'Litters', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
-            <p><?= __('<strong>{0, plural, =1{1 litter sheet is} other{# litter sheets are}}</strong> currently waiting for staff action. Most recent are:', [$count['litters']]) ?></p>
+            <h3><?= __('Litters') ?> (<?= $count['litters'] ?>)</h3>
             <?= $this->element('simple_staff_litters', ['identity' => $user]) ?>
 
-            <h3><?= __('Ratteries') ?></h3>
             <div class="button-small">
                 <?= $this->Html->link(__('See all pending ratteries'), ['controller' => 'Ratteries', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
-            <p><?= __('<strong>{0, plural, =1{1 rattery sheet is} other{# rattery sheets are}}</strong> currently waiting for staff action. Most recent are:', [$count['ratteries']]) ?><p>
+            <h3><?= __('Ratteries') ?> (<?= $count['ratteries'] ?>)</h3>
             <?= $this->element('simple_staff_ratteries') ?>
 
         </div>
@@ -49,39 +47,40 @@
                 <div class="button-small">
                     <?= $this->Html->link(__('See all issues'), ['controller' => 'Issues', 'action' => 'index'], ['class' => 'button button-staff float-right']) ?>
                 </div>
-                <h2><?= __('Open issues') ?></h2>
-                <p><?= __('<strong>{0, plural, =1{1 issue is} other{# issues are}}</strong> currently waiting to be treated. Most recent are:', [$count['issues']]) ?><p>
+                <h2><?= __('Open issues') ?> (<?= $count['issues'] ?>)</h2>
 
-                <div class="table-responsive">
-                    <table class="summary">
-                        <thead>
-                            <tr>
-                                <th><?= __x('issue', 'Created') ?></th>
-                                <th><?= __('From User') ?></th>
-                                <th><?= __('URL') ?></th>
-                                <th><?= __('Complaint') ?></th>
-                                <th class="actions"><?= __('Actions') ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($issues as $issue): ?>
-                            <tr>
-                                <td><?= h($issue->created) ?></td>
-                                <td><?= $issue->has('from_user') ? $this->Html->link($issue->from_user->username, ['controller' => 'Users', 'action' => 'view', $issue->from_user->id]) : '' ?></td>
-                                <td><?= $this->Html->link(h($issue->url), $this->Url->build($issue->url, ['fullBase' => true]))?></td>
-                                <td><?= mb_strimwidth($issue->complaint, 0, 64, '...') ?></td>
-                                <td class="actions">
-                                    <?= $this->Html->image('/img/icon-backoffice.svg', [
-                                        'url' => ['controller' => 'Issues', 'action' => 'view', $issue->id],
-                                        'class' => 'action-icon',
-                                        'alt' => __('Manage Issue')
-                                    ])?>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
+                <?php if ($issues->count()) : ?>
+                    <div class="table-responsive">
+                        <table class="summary">
+                            <thead>
+                                <tr>
+                                    <th><?= __x('issue', 'Created') ?></th>
+                                    <th><?= __('From User') ?></th>
+                                    <th><?= __('URL') ?></th>
+                                    <th><?= __('Complaint') ?></th>
+                                    <th class="actions"><?= __('Actions') ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($issues as $issue): ?>
+                                <tr>
+                                    <td><?= h($issue->created) ?></td>
+                                    <td><?= $issue->has('from_user') ? $this->Html->link($issue->from_user->username, ['controller' => 'Users', 'action' => 'view', $issue->from_user->id]) : '' ?></td>
+                                    <td><?= $this->Html->link(h($issue->url), $this->Url->build($issue->url, ['fullBase' => true]))?></td>
+                                    <td><?= mb_strimwidth($issue->complaint, 0, 64, '...') ?></td>
+                                    <td class="actions">
+                                        <?= $this->Html->image('/img/icon-backoffice.svg', [
+                                            'url' => ['controller' => 'Issues', 'action' => 'view', $issue->id],
+                                            'class' => 'action-icon',
+                                            'alt' => __('Manage Issue')
+                                        ])?>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif ; ?>
             </div>
             <div class="spacer"> </div>
         <?php endif; ?>
