@@ -330,31 +330,35 @@ class LittersController extends AppController
         $sire = $rats->get($parents[1], ['contain' => ['Ratteries', 'Coats', 'Colors', 'Dilutions', 'Markings', 'Earsets', 'OwnerUsers', 'OwnerUsers.Ratteries']]);
         $parents = [];
 
-        array_push($parents,
-        [
-            'id' => rand() . '_' . $dam->id,
-            'true_id' => $dam->id,
-            'name' => $dam->usual_name,
-            'link' => \Cake\Routing\Router::Url(['controller' => 'Rats', 'action' => 'view', $dam->id]),
-            'sex' => 'F',
-            'description' => $dam->variety,
-            'death'=> $dam->short_death_cause . ' (' . $dam->short_age_string . ')',
-            'more_parents' => is_null($dam->litter_id) ? 0 : 1,
-            '_parents' => [],
-        ]);
+        if (! is_null($dam)) {
+            array_push($parents,
+            [
+                'id' => rand() . '_' . $dam->id,
+                'true_id' => $dam->id,
+                'name' => $dam->usual_name,
+                'link' => \Cake\Routing\Router::Url(['controller' => 'Rats', 'action' => 'view', $dam->id]),
+                'sex' => 'F',
+                'description' => $dam->variety,
+                'death'=> $dam->short_death_cause . ' (' . $dam->short_age_string . ')',
+                'more_parents' => is_null($dam->litter_id) ? 0 : 1,
+                '_parents' => [],
+            ]);
+        }
 
-        array_push($parents,
-        [
-            'id' => rand() . '_' . $sire->id,
-            'true_id' => $sire->id,
-            'name' => $sire->usual_name,
-            'link' => \Cake\Routing\Router::Url(['controller' => 'Rats', 'action' => 'view', $sire->id]),
-            'sex' => 'M',
-            'description' => $sire->variety,
-            'death'=> $sire->short_death_cause . ' (' . $sire->short_age_string . ')',
-            'more_parents' => is_null($sire) ? 0 : 1,
-            '_parents' => [],
-        ]);
+        if (! is_null($sire)) {
+            array_push($parents,
+            [
+                'id' => rand() . '_' . $sire->id,
+                'true_id' => $sire->id,
+                'name' => $sire->usual_name,
+                'link' => \Cake\Routing\Router::Url(['controller' => 'Rats', 'action' => 'view', $sire->id]),
+                'sex' => 'M',
+                'description' => $sire->variety,
+                'death'=> $sire->short_death_cause . ' (' . $sire->short_age_string . ')',
+                'more_parents' => is_null($sire->litter_id) ? 0 : 1,
+                '_parents' => [],
+            ]);
+        }
 
         $litter->dam = $dam;
         $litter->sire = $sire;
@@ -383,7 +387,8 @@ class LittersController extends AppController
             __('generation'),
             __('generations'),
             __('rat'),
-            __('rats')
+            __('rats'),
+            __x('ancestor', 'None')
         ]);
 
         $this->set(compact('litter', 'sire', 'dam', 'json', 'genealogy_json', 'index_json', 'js_messages'));

@@ -114,7 +114,14 @@
                 </tr>
 
                 <tr>
-                    <th><?= __('Coefficient of Inbreeding') ?></th>
+                    <th><?= __('Coefficient of Inbreeding (5G)') ?></th>
+                    <td id="coi5">
+                        <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><?= __('Coefficient of Inbreeding (total)') ?></th>
                     <td id="coi">
                         <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
                     </td>
