@@ -114,13 +114,6 @@
                 </tr>
 
                 <tr>
-                    <th><?= __('Ancestor loss coefficient (10G)') ?></th>
-                    <td class="loading" id="avk10">
-                        <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
-                    </td>
-                </tr>
-
-                <tr>
                     <th><?= __('Coefficient of Inbreeding') ?></th>
                     <td id="coi">
                         <?= $this->Html->image('/img/icon-spinner.gif', ['class' => 'action-icon']) ?>
