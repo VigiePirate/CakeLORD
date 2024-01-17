@@ -75,7 +75,7 @@
                     </tr>
                     <tr>
                         <th><?= __('By User') ?></th>
-                        <td><?= $issue->has('closing_user') ? $this->Html->link($issue->from_user->username, ['controller' => 'Users', 'action' => 'view', $issue->from_user->id]) : '' ?></td>
+                        <td><?= $issue->has('closing_user') ? $this->Html->link($issue->closing_user->username, ['controller' => 'Users', 'action' => 'view', $issue->closing_user->id]) : '' ?></td>
                     </tr>
                     <tr>
                         <th class="comment-head"><?= __('Comment') ?></th>
