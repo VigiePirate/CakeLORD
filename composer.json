@@ -18,7 +18,7 @@
         "league/commonmark": "^2.2",
         "mobiledetect/mobiledetectlib": "^2.8",
         "php-http/cakephp-adapter": "^0.3.0",
-        "php-http/message": "^1.8.0",
+        "php-http/message": "1.10.0",
         "symfony/http-client": "^7.0"
     },
     "require-dev": {
