@@ -319,23 +319,20 @@ class UsersController extends AppController
         }
 
     	$rats = $rats_model->find('entitledBy', ['user_id' => $user->id]);
-    	$query = $this->fetchModel('RatMessages')->find('latest', ['rats' => $rats, 'rat_message_delay' => $rat_message_delay]);
-
-        $rat_messages = $query
+    	$query = $this->fetchModel('RatMessages')
+            ->find('latest', ['rats' => $rats, 'rat_message_delay' => $rat_message_delay])
             ->contain([
                 'Rats.Ratteries',
                 'Rats.BirthLitters',
                 'Rats.BirthLitters.Contributions',
                 'Rats.States',
                 'Users',
-            ])
-            ->all();
+            ]);
 
+        $rat_messages = $query->all();
         $rat_last_messages_ids = $query
-            ->where(['is_automatically_generated IS' => false])
-            ->group(['Rats.id'])
-            ->order(['RatMessages.id' => 'DESC'])
-            ->all()->extract('id')->toList();
+            ->where(['is_automatically_generated' => false])
+            ->limit(1)->all()->extract('id')->toList();
 
         $count['rat_total'] = $query->count();
         $count['rat_sub_total'] = $rats
@@ -352,21 +349,22 @@ class UsersController extends AppController
         }
 
         $ratteries = $ratteries_model->find('entitledBy', ['user_id' => $user->id]);
-    	$query = $this->fetchModel('RatteryMessages')->find('latest', ['ratteries' => $ratteries, 'rattery_message_delay' => $rattery_message_delay]);
-        $rattery_messages = $query
+    	$query = $this->fetchModel('RatteryMessages')
+            ->find('latest', [
+                'ratteries' => $ratteries,
+                'rattery_message_delay' => $rattery_message_delay
+            ])
             ->contain([
                 'Ratteries',
                 'Ratteries.Users',
                 'Ratteries.States',
                 'Users'
-            ])
-            ->all();
+            ]);
 
+        $rattery_messages = $query->all();
         $rattery_last_messages_ids = $query
-            ->where(['is_automatically_generated IS' => false])
-            ->group(['Ratteries.id'])
-            ->order(['RatteryMessages.id' => 'DESC'])
-            ->all()->extract('id')->toList();
+            ->where(['is_automatically_generated' => false])
+            ->limit(1)->all()->extract('id')->toList();
 
         $count['rattery_total'] = $query->count();
         $count['rattery_sub_total'] = $ratteries->find('needsUser')
@@ -385,9 +383,10 @@ class UsersController extends AppController
             ->find('entitledBy', ['user_id' => $user->id]);
 
         $query = $this->fetchModel('LitterMessages')
-            ->find('latest', ['litters' => $litters, 'litter_message_delay' => $litter_message_delay]);
-
-        $litter_messages = $query
+            ->find('latest', [
+                'litters' => $litters,
+                'litter_message_delay' => $litter_message_delay
+            ])
             ->contain([
                 'Litters',
                 'Litters.Contributions',
@@ -396,14 +395,12 @@ class UsersController extends AppController
                 'Litters.Users',
                 'Litters.States',
                 'Users',
-            ])
-            ->all();
+            ]);
 
+        $litter_messages = $query->all();
         $litter_last_messages_ids = $query
-            ->where(['is_automatically_generated IS' => false])
-            ->group(['Litters.id'])
-            ->order(['LitterMessages.id' => 'DESC'])
-            ->all()->extract('id')->toList();
+            ->where(['is_automatically_generated' => false])
+            ->limit(1)->all()->extract('id')->toList();
 
         $count['litter_total'] = $query->count();
         $count['litter_sub_total'] = $litters
