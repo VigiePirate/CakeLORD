@@ -1087,7 +1087,7 @@ class UsersController extends AppController
 
     public function autocomplete() {
         $this->Authorization->skipAuthorization();
-        if ($this->request->is(['ajax'])) {
+        if ($this->request->is('ajax')) {
             $items = $this->Users->find('all')
                 ->select(['id', 'value' => 'username', 'label' => 'username'])
                 ->where([
