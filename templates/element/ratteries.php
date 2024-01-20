@@ -62,10 +62,10 @@
                         <td><?= ($rattery->is_generic || $rattery->birth_year == '0000') ? __('N/A') : h($rattery->birth_year) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('zip_code', $exceptions)): ?>
-                        <td><?= h($rattery->zip_code) ?></td>
+                        <td><?= $rattery->is_generic ? __('N/A') : h($rattery->zip_code) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('country', $exceptions)): ?>
-                        <td><?= h($rattery->country->name) ?></td>
+                        <td><?= $rattery->is_generic ? __('N/A') : h($rattery->country->name) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('actions', $exceptions)): ?>
                         <td class="actions">
