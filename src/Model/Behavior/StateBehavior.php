@@ -159,13 +159,20 @@ class StateBehavior extends Behavior
             $this->previous_state = $entity->state;
             $entity->state_id = $new_state_id;
             $this->new_state = $this->States->get($entity->state_id);
-            $this->messages[] = [
-                'content' => __("The sheet was {0} as a result of an action by {1}.",
+
+            if ($context['negligence']) {
+                $content = __("The sheet was not corrected as required in due time and escalated to back-office.");
+            } else {
+                $content = __("The sheet was {0} as a result of an action by {1}.",
                                 [
                                     $context['action'],
                                     $this->Identity->username
                                 ]
-                            ),
+                            );
+            }
+
+            $this->messages[] = [
+                'content' => $content,
                 'is_automatically_generated' => true,
             ];
 
@@ -200,10 +207,10 @@ class StateBehavior extends Behavior
      * @param EntityInterface $entity
      * @return boolean
      */
-    public function blame(EntityInterface $entity)
+    public function blame(EntityInterface $entity, bool $negligence=false)
     {
         if ($entity->has('state') && $entity->state->next_ko_state_id) {
-            if ($this->changeState($entity, $entity->state->next_ko_state_id, ['action' => __('blamed')])) {
+            if ($this->changeState($entity, $entity->state->next_ko_state_id, ['action' => __('blamed'), 'negligence' => $negligence])) {
                 return true;
             }
         }
@@ -259,7 +266,7 @@ class StateBehavior extends Behavior
         $query = $table->find('needsUser')->contain('States');
         $query = $query->where(['modified <= ' => \Cake\Chronos\Chronos::today()->modify('-'.$this->config['neglection_delay'])]);
         $entities = $query->all()->map(function ($value, $key) {
-            $this->blame($value);
+            $this->blame($value, true);
             return $value;
         });
         if ($table->saveMany($entities, ['checkRules' => false, 'associated' => []])) {
