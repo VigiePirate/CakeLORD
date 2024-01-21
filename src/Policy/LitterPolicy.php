@@ -84,7 +84,7 @@ class LitterPolicy implements BeforePolicyInterface
      */
     public function canOwnerEdit(IdentityInterface $user, Litter $litter)
     {
-        return ! $litter->state->needs_staff_action && $this->isContributor($user, $litter);
+        return ! $litter->state->needs_staff_action && ($this->isContributor($user, $litter) || $this->isCreator($user, $litter));
     }
 
     /**

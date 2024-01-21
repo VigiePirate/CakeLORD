@@ -11,6 +11,7 @@ use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\Validation\Validator;
 use Cake\Collection\Collection;
+use Cake\I18n\FrozenTime;
 
 
 /**
@@ -208,8 +209,7 @@ class LittersTable extends Table
         // FIXME: replace ugly test by proper case management
         if (
             ! isset($data['side_message'])
-            && ! isset($data['contributions'])
-            && ! isset($data['rattery_name_contribution_1'])
+            && (! isset($data['rattery_name_contribution_1']))
             && (! isset($data['rattery_id']) || empty($data['rattery_id']))
         ) {
             if (isset($data['generic_rattery_id']) && ! empty($data['generic_rattery_id'])) {
@@ -227,35 +227,33 @@ class LittersTable extends Table
             }
         }
 
-        if (! isset($data['side_message']) && ! isset($data['contributions'])) {
+        // litter creation case: first contribution must be created
+        if (! isset($data['side_message']) && ! isset($data['rattery_name_contribution_1'])) {
+            $data['contributions'] = [
+                [
+                    'contribution_type_id' => '1',
+                    'rattery_id' => $data['rattery_id'],
+                ]
+            ];
+        }
 
-            // litter creation case, first contribution must be created
-            if (! isset($data['rattery_name_contribution_1'])) {
-                $data['contributions'] = [
-                    [
-                        'contribution_type_id' => '1',
-                        'rattery_id' => $data['rattery_id'],
-                    ]
-                ];
-            } else {
-                // contributions have been manually edited; replace litter contributions by form data
-                // FIXME assumes there are at most 9 contribution types
-
-                if (isset($data['rattery_name_contribution_1'])) {
-                    $keys = array_keys((array)$data);
-                    foreach ($keys as $key) {
-                        if (substr($key, 0, -1) == 'rattery_id_contribution_') {
-                            $k = intval(substr($key, -1));
-                            if ($k >= 1 && strlen($data['rattery_id_contribution_'.$k]) != 0 ) {
-                                $data['contributions'][$k-1]['rattery_id'] = $data['rattery_id_contribution_'.$k];
-                                $data['contributions'][$k-1]['contribution_type_id'] = $k;
-                                $data['contributions'][$k-1]['litter_id'] = $data['litter_id'];
-                            }
-                        }
+        // litter edition (with or without side message)
+        if (isset($data['rattery_name_contribution_1'])) {
+            // contributions have been manually edited; replace litter contributions by form data
+            // FIXME assumes there are at most 9 contribution types
+            $keys = array_keys((array)$data);
+            foreach ($keys as $key) {
+                if (substr($key, 0, -1) == 'rattery_id_contribution_') {
+                    $k = intval(substr($key, -1));
+                    if ($k >= 1 && strlen($data['rattery_id_contribution_'.$k]) != 0 ) {
+                        $data['contributions'][$k-1]['rattery_id'] = $data['rattery_id_contribution_'.$k];
+                        $data['contributions'][$k-1]['contribution_type_id'] = $k;
+                        $data['contributions'][$k-1]['litter_id'] = $data['litter_id'];
                     }
                 }
             }
         }
+
         return;
     }
 
@@ -568,11 +566,16 @@ class LittersTable extends Table
     public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
         $ratteries = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries');
-        $now = \Cake\I18n\FrozenTime::now();
+
+        // set dates
+        $now = FrozenTime::today();
+        if (is_string($entity->birth_date)) {
+            $birth_date = FrozenTime::createFromFormat('Y-m-d', $entity->birth_date);
+        }
         foreach ($entity->contributions as $contribution) {
             $rattery = $ratteries->get($contribution->rattery_id, ['contain' => ['Countries', 'Users']]);
             //FIXME check if rattery has sisters to deactivate them? in the Rattery rules maybe?
-            if (! $rattery->is_alive && $now->diffInDays($entity->birth_date) < RatteriesTable::MAXIMAL_INACTIVITY) {
+            if (! $rattery->is_alive && $now->diffInDays($birth_date) < RatteriesTable::MAXIMAL_INACTIVITY) {
                 $rattery->is_alive = true;
                 $ratteries->save($rattery, ['atomic' => false, 'associated' => []]);
             }
