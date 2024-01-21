@@ -77,8 +77,7 @@
                                             ?>
                                         </td>
 
-                                        <!-- <td><?= $ratMessage->is_staff_request ? '✓' : '' ?></td> -->
-                                        <td><?= mb_strimwidth($ratMessage->content, 0, 256, '...') ?></td>
+                                        <td class="ellipsis" onclick="toggleMessage(this)"><?= h($ratMessage->content) ?></td>
                                         <td><?= $ratMessage->is_automatically_generated ? '✓' : '' ?></td>
                                     </tr>
                                 <?php endforeach; ?>

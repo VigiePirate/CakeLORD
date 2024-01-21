@@ -80,6 +80,21 @@
   }
 }
 
+@media (min-width: 810px) {
+  .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-width: 64rem;
+  }
+
+  .no-ellipsis {
+    max-width: 64rem;
+  }
+}
+
 
 @media screen and (max-width: 640px) {
   html {

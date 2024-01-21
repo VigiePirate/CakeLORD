@@ -43,7 +43,7 @@
 
                     <td><?= $ratMessage->is_staff_request ? '✓' : '' ?></td>
                     <td><?= $ratMessage->is_automatically_generated ? '✓' : '' ?></td>
-                    <td><?= mb_strimwidth($ratMessage->content, 0, 64, '...') ?></td>
+                    <td class="ellipsis" onclick="toggleMessage(this)"><?= h($ratMessage->content) ?></td>
                     <td class="actions">
                         <?= $this->Html->image('/img/icon-rat.svg', [
                             'url' => ['controller' => 'Ratteries', 'action' => 'view', $ratMessage->rat->id],

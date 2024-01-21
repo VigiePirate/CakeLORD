@@ -27,7 +27,7 @@
                         <td><?= h($ratteryMessage->created) ?></td>
                         <td><?= $ratteryMessage->has('user') ? h($ratteryMessage->user->username) : '' ?></td>
                         <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
-                        <td><?= mb_strimwidth($ratteryMessage->content, 0, 64, '...') ?></td>
+                        <td class="ellipsis" onclick="toggleMessage(this)"><?= h($ratteryMessage->content) ?></td>
                         <td><?= $ratteryMessage->is_staff_request ? '✓' : '' ?></td>
                         <td><?= $ratteryMessage->is_automatically_generated ? '✓' : '' ?></td>
                     </tr>

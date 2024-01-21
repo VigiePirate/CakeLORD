@@ -26,9 +26,7 @@
                             <tr>
                                 <td><?= h($issue->created->i18nFormat('dd/MM/yyyy')) ?></td>
                                 <td><?= $this->Html->link(h($issue->url), $this->Url->build($issue->url, ['fullBase' => true]))?></td>
-                                <td><?= mb_strimwidth($issue->handling, 0, 255, '...') ?></td>
-                                <!-- <td><?= h($issue->complaint) ?></td>
-                                <td><?= h($issue->handling) ?></td> -->
+                                <td class="ellipsis" onclick="toggleMessage(this)"><?= h($issue->handling) ?></td>
                                 <td class="actions">
                                     <?= $this->Html->image('/img/icon-view.svg', [
                                         'url' => ['controller' => 'Issues', 'action' => 'view', $issue->id],
@@ -62,7 +60,7 @@
                             <tr>
                                 <td><?= h($issue->created->i18nFormat('dd/MM/yyyy')) ?></td>
                                 <td><?= $this->Html->link(h($issue->url), $this->Url->build($issue->url, ['fullBase' => true]))?></td>
-                                <td><?= mb_strimwidth($issue->complaint, 0, 96, '...') ?></td>
+                                <td class="ellipsis" onclick="toggleMessage(this)"><?= h($issue->complaint) ?></td>
                                 <td class="actions">
                                     <?= $this->Html->image('/img/icon-view.svg', [
                                         'url' => ['controller' => 'Issues', 'action' => 'view', $issue->id],

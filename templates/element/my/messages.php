@@ -51,12 +51,7 @@
                         <th><?= __('State') ?></th>
                         <th><?= __x('message', 'About') ?></th>
                         <th><?= __('Usual name') ?></th>
-                        <!-- <th><?= __('Staff?') ?></th>
-                        <th><?= __('Auto?') ?></th> -->
                         <th><?= __x('message', 'Content') ?></th>
-
-                        <!-- <th class="actions"><?= __('Sheet') ?></th> -->
-
                         <th><?= __x('message', 'Sent by') ?></th>
                         <th><?= __x('message', 'Created') ?></th>
                     </tr>
@@ -71,9 +66,7 @@
                         <td><span class="statecolor_<?php echo h($ratMessage->rat->state_id) ?>"><?= h($ratMessage->rat->state->symbol) ?></span></td>
                             <td><?= $ratMessage->has('rat') ? $this->Html->link($ratMessage->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratMessage->rat->id]) : '' ?></td>
                             <td><?= h($ratMessage->rat->usual_name) ?></td>
-                                <!-- <td><?= $ratMessage->is_staff_request ? '✓' : '' ?></td>
-                            <td><?= $ratMessage->is_automatically_generated ? '✓' : '' ?></td> -->
-                            <td><?= mb_strimwidth($ratMessage->content, 0, 256, '...') ?></td>
+                            <td class="ellipsis" onclick="toggleMessage(this)"><?= h($ratMessage->content) ?></td>
 
                             <td>
                                 <?=
@@ -136,7 +129,7 @@
                         <?php endif ; ?>
                         <td><span class="statecolor_<?php echo h($ratteryMessage->rattery->state_id) ?>"><?= h($ratteryMessage->rattery->state->symbol) ?></span></td>
                             <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
-                            <td><?= mb_strimwidth($ratteryMessage->content, 0, 256, '...') ?></td>
+                            <td class="ellipsis" onclick="toggleMessage(this)"><?= h($ratteryMessage->content) ?></td>
                             <td>
                                 <?=
                                     $ratteryMessage->has('user') && ! $ratteryMessage->is_automatically_generated
@@ -200,9 +193,7 @@
                         <td><span class="statecolor_<?php echo h($litterMessage->litter->state_id) ?>"><?= h($litterMessage->litter->state->symbol) ?></span></td>
                             <td><?= $litterMessage->has('litter') ? $this->Html->link($litterMessage->litter->birth_date, ['controller' => 'Litters', 'action' => 'view', $litterMessage->litter->id]) : '' ?></td>
                             <td><?= $litterMessage->has('litter') ? h($litterMessage->litter->parents_name) : '' ?></td>
-                                <!-- <td><?= $litterMessage->is_staff_request ? '✓' : '' ?></td>
-                            <td><?= $litterMessage->is_automatically_generated ? '✓' : '' ?></td> -->
-                            <td><?= mb_strimwidth($litterMessage->content, 0, 256, '...') ?></td>
+                            <td class="ellipsis" onclick="toggleMessage(this)"><?= h($litterMessage->content) ?></td>
                             <td>
                                 <?=
                                     $litterMessage->has('user') && ! $litterMessage->is_automatically_generated

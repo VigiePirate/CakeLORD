@@ -18,7 +18,7 @@
                   <td><?= $this->Html->link($litter->full_name, ['controller' => 'Litters', 'action' => 'view', $litter->id]) ?></td>
                   <td><?= $litter->has('user') ? $this->Html->link($litter->user->username, ['controller' => 'Users', 'action' => 'view', $litter->user->id]) : '' ?></td>
                   <td><?= $litter->modified->i18nFormat('dd/MM/yyyy') ?></td>
-                  <td><?= ! empty($litter->litter_messages) ? mb_strimwidth($litter->litter_messages[0]->content, 0, 48, '...') : '' ?></td>
+                  <td class="ellipsis" onclick="toggleMessage(this)"><?= ! empty($litter->litter_messages) ? h($litter->litter_messages[0]->content) : '' ?></td>
                   <td class="actions">
                       <span class="nowrap">
                           <?php if (! is_null($litter->last_snapshot_id)) :?>
