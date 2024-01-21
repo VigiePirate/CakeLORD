@@ -18,7 +18,7 @@
                         <td><?= h($rat->usual_name) ?></td>
                         <td><?= $rat->has('owner_user') ? $this->Html->link($rat->owner_user->username, ['controller' => 'Users', 'action' => 'view', $rat->owner_user->id]) : '' ?></td>
                         <td><?= h($rat->modified->i18nFormat('dd/MM/yyyy')) ?></td>
-                        <td><?= ! empty($rat->rat_messages) ? mb_strimwidth($rat->rat_messages[0]->content, 0, 48, '...') : '' ?></td>
+                        <td class="ellipsis" onclick="toggleMessage(this)"><?= ! empty($rat->rat_messages) ? h($rat->rat_messages[0]->content) : '' ?></td>
                         <td class="actions">
                             <span class="nowrap">
                                 <?php if (! is_null($rat->last_snapshot_id)) :?>

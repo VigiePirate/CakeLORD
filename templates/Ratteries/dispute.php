@@ -78,7 +78,7 @@
                                         </td>
 
                                         <!-- <td><?= $ratteryMessage->is_staff_request ? '✓' : '' ?></td> -->
-                                        <td><?= mb_strimwidth($ratteryMessage->content, 0, 256, '...') ?></td>
+                                        <td class="ellipsis" onclick="toggleMessage(this)"><?= h($ratteryMessage->content) ?></td>
                                         <td><?= $ratteryMessage->is_automatically_generated ? '✓' : '' ?></td>
                                     </tr>
                                 <?php endforeach; ?>

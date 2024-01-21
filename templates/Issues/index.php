@@ -26,7 +26,7 @@
                     <td><?= h($issue->created) ?></td>
                     <td><?= $issue->has('from_user') ? $this->Html->link($issue->from_user->username, ['controller' => 'Users', 'action' => 'view', $issue->from_user->id]) : '' ?></td>
                     <td><?= $this->Html->link(h($issue->url), $this->Url->build($issue->url, ['fullBase' => true]))?></td>
-                    <td><?= mb_strimwidth($issue->complaint, 0, 64, '...') ?></td>
+                    <td class="ellipsis" onclick="toggleMessage(this)"><?= h($issue->complaint) ?></td>
                     <td class="actions">
                         <?= $this->Html->image('/img/icon-view.svg', [
                             'url' => ['controller' => 'Issues', 'action' => 'view', $issue->id],

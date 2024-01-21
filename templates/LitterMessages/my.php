@@ -29,7 +29,7 @@
                         <td><?= $litterMessage->has('user') ? h($litterMessage->user->username) : '' ?></td>
                         <td><?= $litterMessage->has('litter') ? $this->Html->link($litterMessage->litter->birth_date, ['controller' => 'litters', 'action' => 'view', $litterMessage->litter->id]) : '' ?></td>
                         <td><?= $litterMessage->has('litter') ? h($litterMessage->litter->parents_name) : '' ?></td>
-                        <td><?= mb_strimwidth($litterMessage->content, 0, 128, '...') ?></td>
+                        <td class="ellipsis" onclick="toggleMessage(this)"><?= h($litterMessage->content) ?></td>
                         <td><?= $litterMessage->is_staff_request ? '✓' : '' ?></td>
                         <td><?= $litterMessage->is_automatically_generated ? '✓' : '' ?></td>
                     </tr>
