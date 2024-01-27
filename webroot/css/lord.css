@@ -281,7 +281,15 @@ legend, label {
   font-family:"Alegreya",serif;
   font-style:italic;
   color: #90a2b1;
-  margin-top: -1.75rem;
+  margin-top: -1.25rem;
+  margin-bottom: 2rem;
+  line-height:1.25;
+  vertical-align: top;
+}
+
+.tight-legend {
+  margin-top: -1.75rem !important;
+  margin-bottom: 1.5rem !important;
 }
 
 .input.radio label:not(:first-child) {

@@ -324,7 +324,7 @@ class RatsTable extends Table
      */
     public function afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
     {
-        if($entity->isNew()) {
+        if ($entity->isNew()) {
             // default values
             $entity->is_alive = isset($data['is_alive']) ? $data['is_alive'] : true;
             $entity->is_pedigree_custom = false;
@@ -336,6 +336,12 @@ class RatsTable extends Table
             if (isset($data['rattery_id'])) {
                 $entity->rattery = \Cake\Datasource\FactoryLocator::get('Table')->get('Ratteries')->get($entity->rattery_id);
             }
+
+            // reload death associations for add form
+            if (! $entity->is_alive && isset($entity->death_secondary_cause_id)) {
+                $entity->death_secondary_cause = \Cake\Datasource\FactoryLocator::get('Table')->get('DeathSecondaryCauses')->get($entity->death_secondary_cause_id);
+            }
+
         }
     }
 

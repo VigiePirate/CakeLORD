@@ -22,7 +22,7 @@
                         'rows' => '5'
                     ]);
                 ?>
-                <p class="sub-legend"><?= __('Explanation is optional. If provided, it will be included in a notification visible to all stakeholders.') ?></p>
+                <p class="sub-legend tight-legend"><?= __('Explanation is optional. If provided, it will be included in a notification visible to all stakeholders.') ?></p>
             </div>
         <?= $this->Form->end(); ?>
     </div>

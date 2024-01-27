@@ -157,5 +157,4 @@ class DeathSecondaryCausesController extends AppController
             $this->viewBuilder()->setOption('serialize', ['items']);
         }
     }
-
 }

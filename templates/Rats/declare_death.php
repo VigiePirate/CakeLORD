@@ -47,7 +47,11 @@
             <fieldset>
                 <legend><?= __('Main information') ?></legend>
                 <?php
-                    echo $this->Form->control('death_date', ['label' => __('Please enter the death date (or date of last news)'), 'empty' => true, 'required' => true]);
+                    echo $this->Form->control('death_date', [
+                        'label' => __('Please enter the death date (or date of last news)'),
+                        'empty' => true,
+                        'required' => is_null($rat->death_date)
+                    ]);
                     echo $this->Form->control('death_primary_cause_id', [
                         'id' => 'primaries',
                         'label' => __('Select the death cause category'),
@@ -55,18 +59,38 @@
                         'empty' => true,
                         'required' => true
                     ]);
+
+                ?>
+
+                <div id="primary-desc" class="sub-legend">
+                    <?php if (! is_null($rat->death_primary_cause_id) && is_null($rat->death_secondary_cause_id)) : ?>
+                        <div><?= $rat->death_primary_cause->description ?></div>
+                    <?php else : ?>
+                        <div><?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?></div>
+                    <?php endif ; ?>
+                </div>
+
+                <?php
                     echo $this->Form->control('death_secondary_cause_select', [
                         'id' => 'secondaries',
                         'name' => 'death_secondary_cause_id',
                         'label' => __('Select the precise cause of death, if known'),
+                        'options' => isset($deathSecondaryCauses) ? $deathSecondaryCauses : '',
+                        'value' => ! is_null($rat->death_secondary_cause_id) ? $rat->death_secondary_cause_id : '',
                         'empty' => true,
                         'type' => 'select']);
                 ?>
-                <div id="secondary-desc" class="message warning">
+
+                <div id="secondary-desc" class="sub-legend">
                     <div class="markdown">
-                        <?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?>
+                        <?php if (! is_null($rat->death_secondary_cause_id)) : ?>
+                            <?= $rat->death_secondary_cause->description ?>
+                        <?php else : ?>
+                            <?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?>
+                        <?php endif ; ?>
                     </div>
                 </div>
+                
                 <legend><?= __('Complementary information') ?></legend>
                 <?php
                     echo $this->Form->control('death_euthanized', ['label' => __('The rat was euthanized')]); //,'Was the rat euthanized?');
@@ -98,6 +122,7 @@
 	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
 <?php $this->end();?>
 <?= $this->Html->css('ajax.css') ?>
+<?= $this->Html->css('selectize.milligram.css') ?>
 <?php $this->append('script');?>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -134,24 +159,49 @@
 
     <script>
     $(function() {
-        $('#secondaries').change(function() {
-    		$.ajax({
-                url: '/death-secondary-causes/description.json',
-                dataType: 'json',
-                data: {
-                    'id': $('#secondaries').val(),
-                },
-                success: function(data) {
-                    var p = document.getElementById("secondary-desc");
-                    var comment = data.items['0'].value;
-                    if (comment == "-") {
-                        p.innerHTML = jsMessages[1];
-                    } else {
-                        p.innerHTML = comment;
-                    }
-                },
+        $('#primaries')
+            .change(function() {
+        		$.ajax({
+                    url: '/death-primary-causes/description.json',
+                    dataType: 'json',
+                    data: {
+                        'id': $('#primaries').val(),
+                    },
+                    success: function(data) {
+                        var p = document.getElementById("primary-desc");
+                        var comment = data.items['0'].value;
+                        if (comment == "-") {
+                            p.innerHTML = jsMessages[1];
+                        } else {
+                            p.innerHTML = comment;
+                        }
+                    },
+                });
             });
-        });
+    });
+    </script>
+
+    <script>
+    $(function() {
+        $('#secondaries')
+            .change(function() {
+        		$.ajax({
+                    url: '/death-secondary-causes/description.json',
+                    dataType: 'json',
+                    data: {
+                        'id': $('#secondaries').val(),
+                    },
+                    success: function(data) {
+                        var p = document.getElementById("secondary-desc");
+                        var comment = data.items['0'].value;
+                        if (comment == "-") {
+                            p.innerHTML = jsMessages[1];
+                        } else {
+                            p.innerHTML = comment;
+                        }
+                    },
+                });
+            });
     });
     </script>
 
@@ -180,34 +230,3 @@
     });
     easyMDE.toggleSideBySide();
 </script>
-
-<!-- /* $(function () {
-    $('#jquery-primary-select'). ...somefunction...  ({
-        source: function (request, response) {
-            $.ajax({
-
-                url: '/death-secondary-causes/find-by-primary.json',
-                dataType: 'json',
-                data: {
-                    'deathprimarykey': $('#jquery-primary-select').val(),
-                },
-                success: function (data) {
-                    console.log(data.items);
-                    response(data.items);
-                },
-                open: function () {
-                    $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-                },
-                close: function () {
-                    $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-                }
-            });
-        },
-        select: function (event, ui) {
-            $("#jquery-secondary-select").val(ui.item.value); // display the selected text
-            $("#jquery-secondary-desc").val(ui.item.label);
-            $("#jquery-secondary-id").val(ui.item.id); // save selected id to hidden input
-            console.log(ui.item);
-        }
-    });
-}); */ -->
