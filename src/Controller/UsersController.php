@@ -114,14 +114,13 @@ class UsersController extends AppController
 
                 // delete old unused passkeys and accounts never activated
                 $this->Users->removeExpiredPasskeys();
-
-                $action_needed = (
-                    $rats->find('needsUser')->where(['owner_user_id' => $user->id])->count()
-                    + $ratteries->find('needsUser')->where(['owner_user_id' => $user->id])->count()
-                    + $litters->find('needsUser')->where(['creator_user_id' => $user->id])->count()
-                );
-
             }
+
+            $action_needed = (
+                $rats->find('needsUser')->where(['owner_user_id' => $user->id])->count()
+                + $ratteries->find('needsUser')->where(['owner_user_id' => $user->id])->count()
+                + $litters->find('needsUser')->where(['creator_user_id' => $user->id])->count()
+            );
 
             $target = $this->Authentication->getLoginRedirect();
             if (! $target) {
@@ -132,7 +131,7 @@ class UsersController extends AppController
             } else {
                 // show alert only if not redirecting to home
                 if ($target != '/users/home' && $action_needed > 0) {
-                    $this->Flash->error(__('You have {0, plural, =1{1 sheet} other{# sheets}} to correct! Please, check rats, litters and ratteries from your dashboard and take action soon.', [$action_needed]));
+                    $this->Flash->error(__('You have {0, plural, =1 {<strong>one sheet</strong>} other{<strong># sheets</strong>}}</strong> to correct. Please, check rats, litters and ratteries from your dashboard and take action soon.', [$action_needed]));
                 }
             }
 
@@ -330,6 +329,7 @@ class UsersController extends AppController
             ]);
 
         $rat_messages = $query->all();
+
         $rat_last_messages_ids = $query
             ->where(['is_automatically_generated' => false])
             ->limit(1)->all()->extract('id')->toList();
@@ -409,7 +409,9 @@ class UsersController extends AppController
             ->count();
 
         $count['total'] = $count['rat_total'] + $count['litter_total'] + $count['rattery_total'];
-        $count['sub_total'] = $count['rat_sub_total'] + $count['litter_sub_total'] + $count['rattery_sub_total'];
+        // some sheets need user action without being associated to a non-automatic recent notification
+        $count['sheet_sub_total'] = $count['rat_sub_total'] + $count['litter_sub_total'] + $count['rattery_sub_total'];
+        $count['message_sub_total'] = count($rat_last_messages_ids) + count($litter_last_messages_ids) + count($rattery_last_messages_ids);
 
         // FIXME: use a collection to split result instead of using twice the same query
         $model = $this->fetchModel('Issues');
