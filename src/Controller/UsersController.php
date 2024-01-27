@@ -131,7 +131,7 @@ class UsersController extends AppController
             } else {
                 // show alert only if not redirecting to home
                 if ($target != '/users/home' && $action_needed > 0) {
-                    $this->Flash->error(__('You have {0, plural, =1 {<strong>one sheet</strong>} other{<strong># sheets</strong>}}</strong> to correct. Please, check rats, litters and ratteries from your dashboard and take action soon.', [$action_needed]));
+                    $this->Flash->error(__('You have {0, plural, =1 {<strong>one sheet</strong>} other{<strong># sheets</strong>}} to correct. Please, check rats, litters and ratteries from your dashboard and take action soon.', [$action_needed]));
                 }
             }
 

@@ -123,6 +123,144 @@
                     ])
                 ?>
 
+                <div class="spacer"></div>
+
+                <?php
+                    echo $this->Form->control('is_dead', [
+                        'type' => 'checkbox',
+                        'value' => $rat->is_alive,
+                        'label' => [
+                            'class' => 'legend',
+                            'text' => __('Click here to declare death or edit death information')
+                        ],
+                    ]);
+                ?>
+
+                <?php if (isset($rat->is_alive) && ! $rat->is_alive) :?>
+
+                    <div id="death_div">
+                        <?php
+                            echo $this->Form->control('death_date', [
+                                'label' => __('Please enter the death date (or date of last news)'),
+                                'id' => 'death_date',
+                                'empty' => true,
+                                'required' => true,
+                            ]);
+
+                            echo $this->Form->control('death_primary_cause_id', [
+                                'id' => 'primaries',
+                                'label' => __('Select the death cause category'),
+                                'options' => $deathPrimaryCauses,
+                                'empty' => true,
+                                'required' => true,
+                            ]);
+                        ?>
+
+                        <div id="primary-desc" class="sub-legend">
+                            <?php if (! is_null($rat->death_primary_cause_id) && is_null($rat->death_secondary_cause_id)) : ?>
+                                <div><?= $rat->death_primary_cause->description ?></div>
+                            <?php else : ?>
+                                <div><?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?></div>
+                            <?php endif ; ?>
+                        </div>
+
+                        <?php
+                            echo $this->Form->control('death_secondary_cause_select', [
+                                'id' => 'secondaries',
+                                'name' => 'death_secondary_cause_id',
+                                'label' => __('Select the precise cause of death, if known'),
+                                'options' => isset($deathSecondaryCauses) ? $deathSecondaryCauses : '',
+                                'value' => ! is_null($rat->death_secondary_cause_id) ? $rat->death_secondary_cause_id : '',
+                                'empty' => true,
+                                'type' => 'select']);
+                        ?>
+
+                        <div id="secondary-desc" class="sub-legend">
+                            <div class="markdown">
+                                <?php if (! is_null($rat->death_secondary_cause_id)) : ?>
+                                    <?= $rat->death_secondary_cause->description ?>
+                                <?php else : ?>
+                                    <?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?>
+                                <?php endif ; ?>
+                            </div>
+                        </div>
+
+                        <?php
+                            echo $this->Form->control('death_euthanized', [
+                                'label' => __('The rat was euthanized'),
+                            ]);
+
+                            echo $this->Form->control('death_diagnosed', [
+                                'label' => __('The diagnosis was confirmed by a veterinary'),
+                            ]);
+
+                            echo $this->Form->control('death_necropsied', [
+                                'label' => __('The diagnosis was confirmed by an autopsy or analyses'),
+                            ]);
+                        ?>
+                    </div>
+
+                <!-- edit alive rat -->
+                <?php else : ?>
+                    <div id="death_div" class="hide-everywhere">
+                        <?php
+                            echo $this->Form->control('death_date', [
+                                'label' => __('Please enter the death date (or date of last news)'),
+                                'id' => 'death_date',
+                                'empty' => true,
+                            ]);
+
+                            echo $this->Form->control('death_primary_cause_id', [
+                                'id' => 'primaries',
+                                'label' => __('Select the death cause category'),
+                                'options' => $deathPrimaryCauses,
+                                'empty' => true,
+                                'required' => false,
+                            ]);
+
+                        ?>
+
+                        <div id="primary-desc" class="sub-legend">
+                            <div><?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?></div>
+                        </div>
+
+                        <?php
+                            echo $this->Form->control('death_secondary_cause_select', [
+                                'id' => 'secondaries',
+                                'name' => 'death_secondary_cause_id',
+                                'label' => __('Select the precise cause of death, if known'),
+                                'empty' => true,
+                                'value' => ! is_null($rat->death_secondary_cause_id) ? $rat->death_secondary_cause_id : '',
+                                'type' => 'select',
+                            ]);
+                        ?>
+
+                        <div id="secondary-desc" class="sub-legend">
+                            <div class="markdown">
+                                <?php if (! is_null($rat->death_secondary_cause_id)) : ?>
+                                    <?= $rat->death_secondary_cause->description ?>
+                                <?php else : ?>
+                                    <?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?>
+                                <?php endif ; ?>
+                            </div>
+                        </div>
+
+                        <?php
+                            echo $this->Form->control('death_euthanized', [
+                                'label' => __('The rat was euthanized'),
+                            ]); //,'Was the rat euthanized?');
+
+                            echo $this->Form->control('death_diagnosed', [
+                                'label' => __('The diagnosis was confirmed by a veterinary'),
+                            ]); //,'Was the diagnosis confirmed by a veterinary?');
+
+                            echo $this->Form->control('death_necropsied', [
+                                'label' => __('The diagnosis was confirmed by an autopsy or analyses'),
+                            ]); //,'Was the diagnosis confirmed by a necropsy or analyses?');
+                        ?>
+                    </div>
+                <?php endif ; ?>
+
                 <legend><?= __('Comments') ?></legend>
                 <?php
                     echo $this->Form->control('comments', [
@@ -170,8 +308,23 @@
                             </div>
                         </div>
                     </div>
+
+                    <?= $this->element('side_message_control', ['sheet' => $rat]) ?>
+
+                <?php else : ?>
+                    <?php
+                        echo $this->Form->control('side_message', [
+                            'type' => 'textarea',
+                            'name' => 'side_message',
+                            'label' => __('Optional notification'),
+                            'rows' => '5',
+                            'required' => true,
+                        ]);
+                    ?>
+
+                    <p class="sub-legend tight-legend"><?= __('You can add here a request or message. If provided, it will be included in a notification visible to all stakeholders.') ?></p>
                 <?php endif ; ?>
-                <?= $this->element('side_message_control', ['sheet' => $rat]) ?>
+
             </fieldset>
             <?= $this->Form->button(__('Save changes')) ?>
             <?= $this->Form->end() ?>
@@ -296,6 +449,98 @@
             });
         });
     </script>
+
+    <!-- death -->
+    <script>
+    var jsMessages = <?php echo $js_messages; ?>;
+
+    $(function() {
+        $('#is-dead').on('change', function() {
+            var show_death = $(this).is(':checked');
+            if (show_death === true) {
+                $('#death_div').removeClass("hide-everywhere");
+                $('#death_date').prop('required', true);
+                $('#primaries').prop('required', true);
+            } else {
+                $('#death_div').addClass("hide-everywhere");
+                $('#death_date').prop('required', false);
+                $('#primaries').prop('required', false);
+            };
+        });
+
+    	$('#primaries').change(function() {
+    		$.ajax({
+                url: '/death-secondary-causes/find-by-primary.json',
+                dataType: 'json',
+                data: {
+                    'deathprimarykey': $('#primaries').val(),
+                },
+    			success: function(data) {
+                    $("#secondaries option").remove();
+                    $('#secondaries').append($("<option></option>").attr("value","").text(""));
+                    $('#secondary-desc').empty();
+                    $('#secondary-desc').append(jsMessages[0]);
+                    for (var item in data.items) {
+                        var x = document.getElementById("secondaries");
+                        var option = document.createElement("option");
+                        option.value = data.items[item].id;
+                        option.text = data.items[item].value;
+                        x.add(option);
+                    }
+                },
+            });
+    	});
+    });
+    </script>
+
+    <script>
+    $(function() {
+        $('#primaries')
+            .change(function() {
+        		$.ajax({
+                    url: '/death-primary-causes/description.json',
+                    dataType: 'json',
+                    data: {
+                        'id': $('#primaries').val(),
+                    },
+                    success: function(data) {
+                        var p = document.getElementById("primary-desc");
+                        var comment = data.items['0'].value;
+                        if (comment == "-") {
+                            p.innerHTML = jsMessages[1];
+                        } else {
+                            p.innerHTML = comment;
+                        }
+                    },
+                });
+            });
+    });
+    </script>
+
+    <script>
+    $(function() {
+        $('#secondaries')
+            .change(function() {
+        		$.ajax({
+                    url: '/death-secondary-causes/description.json',
+                    dataType: 'json',
+                    data: {
+                        'id': $('#secondaries').val(),
+                    },
+                    success: function(data) {
+                        var p = document.getElementById("secondary-desc");
+                        var comment = data.items['0'].value;
+                        if (comment == "-") {
+                            p.innerHTML = jsMessages[1];
+                        } else {
+                            p.innerHTML = comment;
+                        }
+                    },
+                });
+            });
+    });
+    </script>
+
 <?php $this->end(); ?>
 
 <!-- Easy MDE -->

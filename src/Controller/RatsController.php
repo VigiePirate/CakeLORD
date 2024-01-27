@@ -217,8 +217,16 @@ class RatsController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             $rat_options = [
-                'associated' => ['Ratteries', 'BirthLitters', 'Singularities' => ['onlyIds' => true], 'DeathPrimaryCauses'],
-                'accessibleFields' => ['pedigree_identifier' => true],
+                'associated' => [
+                    'Ratteries',
+                    'BirthLitters',
+                    'Singularities' => ['onlyIds' => true],
+                    'DeathPrimaryCauses',
+                    'DeathSecondaryCauses'
+                ],
+                'accessibleFields' => [
+                    'pedigree_identifier' => true
+                ],
             ];
 
             if (! empty($data['mother_name'])) {
@@ -280,6 +288,18 @@ class RatsController extends AppController
                     $this->Flash->error(__('The rat could not be saved. Please, read explanatory messages in the form, check and correct your entry, and try again.'));
                 }
             }
+
+        // update death information for form
+        if (! $rat->is_alive && ! is_null($rat->death_primary_cause_id)) {
+            $death_secondary_causes_model = $this->fetchModel('DeathSecondaryCauses');
+            $deathSecondaryCauses = $death_secondary_causes_model
+                ->find('all')
+                ->select(['id', 'name'])
+                ->where(['death_primary_cause_id IS' => $rat->death_primary_cause_id])
+                ->order(['id' => 'ASC'])
+                ->all()->combine('id', 'name')->toArray();
+            $this->set(compact('deathSecondaryCauses'));
+        }
 
         // form
         } else {
@@ -440,6 +460,18 @@ class RatsController extends AppController
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
         $generic = $this->Rats->Ratteries->find()->where(['is_generic IS' => true])->all()->combine('id', 'full_name');
 
+        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')->order(['id' => 'ASC']);
+        if (! $rat->is_alive && ! is_null($rat->death_primary_cause_id)) {
+            $death_secondary_causes_model = $this->fetchModel('DeathSecondaryCauses');
+            $deathSecondaryCauses = $death_secondary_causes_model
+                ->find('all')
+                ->select(['id', 'name'])
+                ->where(['death_primary_cause_id IS' => $rat->death_primary_cause_id])
+                ->order(['id' => 'ASC'])
+                ->all()->combine('id', 'name')->toArray();
+            $this->set(compact('deathSecondaryCauses'));
+        }
+
         $placeholders = json_encode([
             'colors' => __('Type here to filter colors...'),
             'eyecolors' => __('Type here to filter eyecolors...'),
@@ -453,6 +485,11 @@ class RatsController extends AppController
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('staffEdit', $rat);
 
+        $js_messages = json_encode([
+            __('Please, read carefully information that will appear below to check the fitness of your choice.'),
+            __('Please answer the following questions about euthanasia, diagnostics and analyses.'),
+        ]);
+
         $this->set(compact(
             'rat',
             'colors',
@@ -462,7 +499,9 @@ class RatsController extends AppController
             'earsets',
             'coats',
             'singularities',
+            'deathPrimaryCauses',
             'placeholders',
+            'js_messages',
             'generic',
             'user',
             'show_staff'

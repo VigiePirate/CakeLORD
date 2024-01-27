@@ -128,4 +128,16 @@ class DeathPrimaryCausesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function description() {
+        if ($this->request->is(['ajax'])) {
+            $this->Authorization->skipAuthorization();
+            $items = $this->DeathPrimaryCauses
+                ->find('all')
+                ->select(['id' => 'id', 'value' => 'description'])
+                ->where(['id IS' => $this->request->getQuery('id')]);
+            $this->set('items', $items);
+            $this->viewBuilder()->setOption('serialize', ['items']);
+        }
+    }
 }
