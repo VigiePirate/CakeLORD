@@ -1,12 +1,14 @@
 <div class="sheet-heading">
     <h2><?= __('My Notifications') ?></h2>
-
-    <!-- <div class="button-small">
-        <?= $this->Html->link(__('All Notifications'), ['controller' => 'Users', 'action' => 'messages'], ['class' => 'button float-right']) ?>
-    </div> -->
 </div>
 
 <?= $this->Flash->render() ?>
+
+<?php if ($count['sheet_sub_total'] > 0) : ?>
+    <div class="message error">
+        <?= __('You have {0, plural, =1 {<strong>one sheet</strong>} other{<strong># sheets</strong>}} to correct. Please, check rats, litters and ratteries from your sidebar and take action soon.', [$count['sheet_sub_total']]) ?>
+    </div>
+<?php endif ;?>
 
 <p>
     <?php if ($count['total'] > 0) :?>
@@ -16,8 +18,8 @@
     <?php endif ; ?>
     <?=  __('You can access your notification history from the buttons opposite.') ?>
     <br/>
-    <?php if ($count['sub_total'] > 0) : ?>
-        <?= __('{0, plural, =1 {<strong>One notification</strong> calls for action and is highlighted below} other{<strong># notification</strong> call for action and are highlighted below}}</strong>. Please pay particular attention to {0, plural, =1{it} other{them}}.', [$count['sub_total']]) ?>
+    <?php if ($count['message_sub_total'] > 0) : ?>
+        <?= __('{0, plural, =1 {<strong>One notification</strong> calls for action and is highlighted below} other{<strong># notification</strong> call for action and are highlighted below}}</strong>. Please pay particular attention to {0, plural, =1{it} other{them}}.', [$count['message_sub_total']]) ?>
     <?php endif ; ?>
 </p>
 <br/>

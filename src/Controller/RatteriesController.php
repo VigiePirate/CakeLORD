@@ -78,7 +78,7 @@ class RatteriesController extends AppController
             ]);
 
         if(! empty($pending->first())) {
-            $this->Flash->error(__('You have one or several sheets to correct! Please check them below.'));
+            $this->Flash->error(__('You have {0, plural, =1 {<strong>one sheet</strong>} other{<strong># sheets</strong>}} to correct. Please check below and take action soon.', [$pending->count()]));
         }
 
         $users = $this->fetchModel('Users');

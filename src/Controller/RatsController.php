@@ -111,7 +111,7 @@ class RatsController extends AppController
             ->contain($contain);
 
         if(! empty($pending->first())) {
-            $this->Flash->error(__('You have one or several sheets to correct! Please check them below.'));
+            $this->Flash->error(__('You have {0, plural, =1 {<strong>one sheet</strong>} other{<strong># sheets</strong>}} to correct. Please check below and take action soon.', [$pending->count()]));
         }
         $this->set(compact('females', 'males', 'alive', 'departed', 'pending', 'waiting', 'okrats', 'user'));
     }
@@ -1265,6 +1265,17 @@ class RatsController extends AppController
             $this->Flash->default(__('We are sorry for your loss. Please fill the information below to record the rat death. Date and primary cause are mandatory.'));
         }
         $deathPrimaryCauses = $death_primary_causes_model->find('list')->order(['id' => 'ASC']);
+        if (! $rat->is_alive && ! is_null($rat->death_primary_cause_id)) {
+            $death_secondary_causes_model = $this->fetchModel('DeathSecondaryCauses');
+            $deathSecondaryCauses = $death_secondary_causes_model
+                ->find('all')
+                ->select(['id', 'name'])
+                ->where(['death_primary_cause_id IS' => $rat->death_primary_cause_id])
+                ->order(['id' => 'ASC'])
+                ->all()->combine('id', 'name')->toArray();
+            $this->set(compact('deathSecondaryCauses'));
+        }
+
         $js_messages = json_encode([
             __('Please, read carefully information that will appear below to check the fitness of your choice.'),
             __('Please answer the following questions about euthanasia, diagnostics and analyses.'),
