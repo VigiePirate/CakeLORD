@@ -65,7 +65,10 @@ class LittersController extends AppController
             ->where(['States.needs_user_action' => true]);
 
         if(! empty($pending->first())) {
-            $this->Flash->error(__('You have {0, plural, =1 {<strong>one sheet</strong>} other{<strong># sheets</strong>}} to correct. Please check below and take action soon.', [$pending->count()]));
+            $this->Flash->error(
+                __('You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to correct. Please check below and take action soon.', [$pending->count()]), 
+                ['escape' => false]
+            );
         }
 
         $this->set(compact('litters', 'user'));
@@ -101,6 +104,7 @@ class LittersController extends AppController
                 'Sire.Singularities',
                 'Sire.DeathPrimaryCauses',
                 'Sire.DeathSecondaryCauses',
+                'Sire.States',
                 'Dam',
                 'Dam.Markings',
                 'Dam.Dilutions',
@@ -110,6 +114,7 @@ class LittersController extends AppController
                 'Dam.Singularities',
                 'Dam.DeathPrimaryCauses',
                 'Dam.DeathSecondaryCauses',
+                'Dam.States',
                 'Ratteries',
                 'Contributions',
                 'LitterSnapshots' => [

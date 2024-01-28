@@ -178,7 +178,7 @@
                         <p><?= __('This sheet needs correction. Here is the latest message staff sent you about it.') ?></p>
                         <div class="text">
                             <blockquote>
-                                <?= ! empty($litter->litter_messages) ? $litter->litter_messages[0]->content : '' ?>
+                                <?= ! empty($litter->litter_messages) ? nl2br($litter->litter_messages[0]->content) : '' ?>
                             </blockquote>
                         </div>
                         <p>
@@ -206,27 +206,47 @@
                 <h2><?= __('Parents') ?></h2>
                 <div class="row">
                     <div class="column-responsive column-50 parent">
-                        <div class="pretitle"><?= $this->Html->link(__('Dam: ') . h($litter->dam[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id], ['escape' => false]) ?></div>
-                        <?php if ($litter->dam[0]->picture != '' && $litter->dam[0]->picture != 'Unknown.png') : ?>
-                            <?= $this->Html->image(UPLOADS . $litter->dam[0]->picture, ['alt' => $litter->dam[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]]) ?>
+                        <?php if (! ($litter->dam[0]->state->is_frozen && ! $litter->dam[0]->state->is_reliable) || $litter->dam[0]->id != 1) : ?>
+                            <div class="pretitle"><?= $this->Html->link(__('Dam: ') . h($litter->dam[0]->name), ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id], ['escape' => false]) ?></div>
+                            <?php if ($litter->dam[0]->picture != '' && $litter->dam[0]->picture != 'Unknown.png') : ?>
+                                <?= $this->Html->image(UPLOADS . $litter->dam[0]->picture, ['alt' => $litter->dam[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]]) ?>
+                            <?php else : ?>
+                                <?= $this->Html->image('UnknownMother.png', ['alt' => $litter->dam[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]]) ?>
+                            <?php endif; ?>
+                            <p><?= h($litter->dam[0]->variety) ?><p>
+                            <table class="caption" align="center">
+                                <tr>
+                                    <th><?= __('Age at litter birth:') ?></th>
+                                    <td><?= h($litter->dam_age_in_months) ?></td>
+                                </tr>
+                                <tr>
+                                    <th><?= $litter->dam[0]->is_alive ? __('Current age:') : __('Age at death:') ?></th>
+                                    <td><?= h($litter->dam[0]->age_string) ?></td>
+                                </tr>
+                                <tr>
+                                    <th><?= __('Death cause:') ?></th>
+                                    <td><?= h($litter->dam[0]->main_death_cause) ?></td>
+                                </tr>
+                            </table>
                         <?php else : ?>
-                            <?= $this->Html->image('UnknownMother.png', ['alt' => $litter->dam[0]->pedigree_identifier, 'url' => ['controller' => 'Rats', 'action' => 'view', $litter->dam[0]->id]]) ?>
-                        <?php endif; ?>
-                        <p><?= h($litter->dam[0]->variety) ?><p>
-                        <table class="caption" align="center">
-                            <tr>
-                                <th><?= __('Age at litter birth:') ?></th>
-                                <td><?= h($litter->dam_age_in_months) ?></td>
-                            </tr>
-                            <tr>
-                                <th><?= $litter->dam[0]->is_alive ? __('Current age:') : __('Age at death:') ?></th>
-                                <td><?= h($litter->dam[0]->age_string) ?></td>
-                            </tr>
-                            <tr>
-                                <th><?= __('Death cause:') ?></th>
-                                <td><?= h($litter->dam[0]->main_death_cause) ?></td>
-                            </tr>
-                        </table>
+                            <div class="pretitle"><?= __('Dam: ') . __x('mother', 'Unknown') ?></div>
+                            <?= $this->Html->image('UnknownMother.png', ['alt' => 'Unknown rat' ]) ?>
+                            <p><?= __('Unknown') ?><p>
+                            <table class="caption" align="center">
+                                <tr>
+                                    <th><?= __('Age at litter birth:') ?></th>
+                                    <td><?= __x('age', 'Unknown') ?></td>
+                                </tr>
+                                <tr>
+                                    <th><?= __('Reached age:') ?></th>
+                                    <td><?= __x('age', 'Unknown') ?></td>
+                                </tr>
+                                <tr>
+                                    <th><?= __('Death cause:') ?></th>
+                                    <td><?= __x('death cause', 'Unknown') ?></td>
+                                </tr>
+                            </table>
+                        <?php endif ; ?>
                     </div>
                     <div class="column-responsive column-50 parent">
                         <?php if (isset($litter->sire[0])) : ?>
@@ -252,8 +272,8 @@
                                 </tr>
                             </table>
                         <?php else : ?>
-                            <div class="pretitle"><?= __('Sire: ') . __('Unknown') ?></div>
-                            <?= $this->Html->image('UnknownFather.png', ['alt' => 'Unknown rat' ]) ?>
+                            <div class="pretitle"><?= __('Sire: ') . __x('father', 'Unknown') ?></div>
+                            <?= $this->Html->image('UnknownFather.png', ['alt' => 'Unknown rat']) ?>
                             <p><?= __('Unknown') ?><p>
                             <table class="caption" align="center">
                                 <tr>

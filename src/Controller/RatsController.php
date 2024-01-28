@@ -111,7 +111,10 @@ class RatsController extends AppController
             ->contain($contain);
 
         if(! empty($pending->first())) {
-            $this->Flash->error(__('You have {0, plural, =1 {<strong>one sheet</strong>} other{<strong># sheets</strong>}} to correct. Please check below and take action soon.', [$pending->count()]));
+            $this->Flash->error(
+                __('You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to correct. Please check below and take action soon.', [$pending->count()]),
+                ['escape' => false]
+            );
         }
         $this->set(compact('females', 'males', 'alive', 'departed', 'pending', 'waiting', 'okrats', 'user'));
     }
@@ -135,9 +138,12 @@ class RatsController extends AppController
                 'BirthLitters.Ratteries',
                 'BirthLitters.Contributions',
                 'BirthLitters.Sire',
+                'BirthLitters.Sire.States',
                 'BirthLitters.Sire.BirthLitters',
                 'BirthLitters.Sire.BirthLitters.Contributions',
-                'BirthLitters.Dam', 'BirthLitters.Dam.BirthLitters',
+                'BirthLitters.Dam',
+                'BirthLitters.Dam.States', 
+                'BirthLitters.Dam.BirthLitters',
                 'BirthLitters.Dam.BirthLitters.Contributions',
                 'Colors',
                 'Eyecolors',
@@ -448,7 +454,7 @@ class RatsController extends AppController
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
         } else {
-            $this->Flash->warning( __('For data coherence, modifications of rats are restricted. Please, contact a staff member to change origins or birth date.'));
+            $this->Flash->warning( __('For data coherence, modifications of rats are restricted. Please, use the “optional notification” field at the end of this form to request origins or birth date change.'));
         }
 
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
