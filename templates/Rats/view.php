@@ -189,7 +189,7 @@
                         <p><?= __('This sheet needs correction. Here is the latest message staff sent you about it.') ?></p>
                         <div class="text">
                             <blockquote>
-                                <?= ! empty($rat->rat_messages) ? $rat->rat_messages[0]->content : '' ?>
+                                <?= ! empty($rat->rat_messages) ? nl2br($rat->rat_messages[0]->content) : '' ?>
                             </blockquote>
                         </div>
                         <p>
@@ -267,7 +267,8 @@
                                 ? $this->Html->link(
                                         $rat->birth_litter->dam[0]->usual_name,
                                         ['controller' => 'Rats', 'action' => 'view', $rat->birth_litter->dam[0]->id]
-                                    ) . '<sup>' . $rat->birth_litter->dam[0]->is_alive_symbol . '</sup>' . ' (' . $rat->birth_litter->dam[0]->age_string  . ')'
+                                    ) . '<sup>' . $rat->birth_litter->dam[0]->is_alive_symbol . '</sup>'
+                                    . ' (' . $rat->birth_litter->dam[0]->age_string . ')'
                                 : __x('mother', 'Unknown or unregistered')
                                 ?>
                                 </td>

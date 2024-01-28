@@ -233,8 +233,8 @@ class Rat extends Entity
             return $age = __('Negative age?!');
         }
         // zombie waiting for staff to log in
-        if ($this->_fields['is_alive'] && $this->age > RatsTable::MAXIMAL_AGE_MONTHS) {
-            return $age = __x('age', 'Doubtful');
+        if ($this->age > RatsTable::MAXIMAL_AGE_MONTHS || ($this->state->is_frozen && ! $this->state->is_reliable)) {
+            return $age = '– ?? –'; //__x('age', 'Doubtful');
         }
         if (! $this->_fields['is_alive'] ) {
             $age = $this->has('death_date') && $this->death_secondary_cause_id != 1
@@ -253,6 +253,11 @@ class Rat extends Entity
     // used in pedigree only
     protected function _getShortAgeString()
     {
+        // Unknown mother and unknown father
+        if ($this->id == 1 || $this->id == 2) {
+            return __x('age', '– ?? –');
+        }
+
         if ($this->age < 0) { // Should raise exception
             return $age = __('Negative age?!');
         }
@@ -342,6 +347,11 @@ class Rat extends Entity
 
     protected function _getMainDeathCause() // same as ShortDeathCause without the trim
     {
+        // Unknown mother and unknown father
+        if ($this->id == 1 || $this->id == 2) {
+            return __('No information');
+        }
+
         if(!$this->is_alive) {
             if(!isset($this->death_primary_cause)) {
                 return __x('death cause', 'Unknown'); // should raise exception
@@ -363,6 +373,11 @@ class Rat extends Entity
 
     protected function _getShortDeathCause()
     {
+        // Unknown mother and unknown father
+        if ($this->id == 1 || $this->id == 2) {
+            return __('No information');
+        }
+
         if (! $this->is_alive) {
             if (! isset($this->death_primary_cause)) {
                 return __x('death cause', 'Unknown'); // should raise exception
@@ -390,6 +405,11 @@ class Rat extends Entity
 
     protected function _getVariety()
     {
+
+        if ($this->id == 1 || $this->id == 2) {
+            return __('No information');
+        }
+
         $dilution = ($this->dilution_id == 1) ? '' : $this->dilution->name;
         $color = ($this->color_id == 1) ? '' : $this->color->name;
         $coat = ($this->coat_id == 1) ? '' : $this->coat->name;
@@ -520,7 +540,7 @@ class Rat extends Entity
     {
         $parents = [];
 
-        if(!empty($this->birth_litter->dam[0])) {
+        if (! empty($this->birth_litter->dam[0])) {
             array_push($parents,
             [
                 'id' => rand() . '_' . $this->birth_litter->dam[0]->id,
@@ -535,7 +555,7 @@ class Rat extends Entity
             ]);
         }
 
-        if(!empty($this->birth_litter->sire[0])) {
+        if (! empty($this->birth_litter->sire[0])) {
             array_push($parents,
             [
                 'id' => rand() . '_' . $this->birth_litter->sire[0]->id,
