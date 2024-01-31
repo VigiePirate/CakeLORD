@@ -21,7 +21,7 @@
                     <th class="col-head"><?= __('Sire') ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('pups_number', $exceptions)): ?>
-                    <th><?= $this->Paginator->sort('pups_number', __('Size')) ?></th>
+                    <th class="actions"><?= $this->Paginator->sort('pups_number', __('Size')) ?></th>
                 <?php endif; ?>
                 <?php if (! in_array('pups_number_stillborn', $exceptions)): ?>
                     <th><?= $this->Paginator->sort('pups_number_stillborn') ?></th>
@@ -37,7 +37,7 @@
                         <td><span class="statecolor_<?php echo h($litter->state_id) ?>"><?= h($litter->state->symbol) ?></span></td>
                     <?php endif; ?>
                     <?php if (! in_array('mating_date', $exceptions)): ?>
-                        <td><?= isset($litter->mating_date) ? $litter->birth_date->i18nFormat('dd/MM/yyyy') : ''?></td>
+                        <td><?= isset($litter->mating_date) ? $litter->birth_date->i18nFormat('dd/MM/yyyy') : __('N/A') ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('birth_date', $exceptions)): ?>
                         <!-- add link on birth date if full name is not shown -->
@@ -59,7 +59,7 @@
                         <td><?= isset($litter->sire[0]) ? h($litter->sire[0]->name) : '-' ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('pups_number', $exceptions)): ?>
-                        <td><?= h($litter->pups_number) ?></td>
+                        <td class="actions"><?= h($litter->pups_number) ?></td>
                     <?php endif; ?>
                     <?php if (! in_array('pups_number_stillborn', $exceptions)): ?>
                         <td><?= h($litter->pups_number_stillborn) ?></td>

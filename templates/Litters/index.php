@@ -17,6 +17,7 @@
             'full_name',
             'mating_date',
             'pups_number_stillborn',
+            'actions'
         ],
     ]) ?>
 </div>
