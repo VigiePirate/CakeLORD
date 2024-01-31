@@ -129,7 +129,19 @@
                                 ?>
                         </div>
                     </div>
-                <?= $this->element('side_message_control', ['sheet' => $litter]) ?>
+                    <?= $this->element('side_message_control', ['sheet' => $litter]) ?>
+                <?php else : ?>
+                    <?php
+                        echo $this->Form->control('side_message', [
+                            'type' => 'textarea',
+                            'name' => 'side_message',
+                            'label' => __('Optional notification'),
+                            'rows' => '5',
+                            'required' => true,
+                        ]);
+                    ?>
+
+                    <p class="sub-legend tight-legend"><?= __('You can add here a request or message. If provided, it will be included in a notification visible to all stakeholders.') ?></p>
                 <?php endif ; ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
