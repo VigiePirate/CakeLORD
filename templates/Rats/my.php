@@ -23,13 +23,23 @@
 
         <div class="spacer"> </div>
         <div class="tab-wrapper">
-            <input class="radio" id="one" name="group" type="radio" checked>
-            <input class="radio" id="two" name="group" type="radio">
-            <input class="radio" id="three" name="group" type="radio">
-            <input class="radio" id="four" name="group" type="radio">
-            <input class="radio" id="five" name="group" type="radio">
-            <input class="radio" id="six" name="group" type="radio">
-            <input class="radio" id="seven" name="group" type="radio">
+            <?php if ($pending->count()) : ?>
+                <input class="radio" id="one" name="group" type="radio">
+                <input class="radio" id="two" name="group" type="radio">
+                <input class="radio" id="three" name="group" type="radio">
+                <input class="radio" id="four" name="group" type="radio">
+                <input class="radio" id="five" name="group" type="radio" checked>
+                <input class="radio" id="six" name="group" type="radio">
+                <input class="radio" id="seven" name="group" type="radio">
+            <?php else : ?>
+                <input class="radio" id="one" name="group" type="radio" checked>
+                <input class="radio" id="two" name="group" type="radio">
+                <input class="radio" id="three" name="group" type="radio">
+                <input class="radio" id="four" name="group" type="radio">
+                <input class="radio" id="five" name="group" type="radio">
+                <input class="radio" id="six" name="group" type="radio">
+                <input class="radio" id="seven" name="group" type="radio">
+            <?php endif ; ?>
 
             <div class="tabs">
                 <label class="tab" id="one-tab" for="one">

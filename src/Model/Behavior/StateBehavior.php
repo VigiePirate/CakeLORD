@@ -246,7 +246,7 @@ class StateBehavior extends Behavior
     public function thaw(EntityInterface $entity)
     {
         if ($entity->has('state') && $entity->state->next_thawed_state_id) {
-            if ($this->changeState($entity, $entity->state->next_frozen_state_id, ['action' => __('thawed')])) {
+            if ($this->changeState($entity, $entity->state->next_thawed_state_id, ['action' => __('thawed')])) {
                 return true;
             }
         }

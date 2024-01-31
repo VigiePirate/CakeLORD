@@ -110,9 +110,11 @@ class RatsController extends AppController
             ->order('Rats.birth_date DESC')
             ->contain($contain);
 
-        if(! empty($pending->first())) {
+        $count = $pending->count();
+
+        if ($count) {
             $this->Flash->error(
-                __('You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to correct. Please check below and take action soon.', [$pending->count()]),
+                __('You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to correct. Please check below and take action soon.', [$count]),
                 ['escape' => false]
             );
         }
@@ -142,7 +144,7 @@ class RatsController extends AppController
                 'BirthLitters.Sire.BirthLitters',
                 'BirthLitters.Sire.BirthLitters.Contributions',
                 'BirthLitters.Dam',
-                'BirthLitters.Dam.States', 
+                'BirthLitters.Dam.States',
                 'BirthLitters.Dam.BirthLitters',
                 'BirthLitters.Dam.BirthLitters.Contributions',
                 'Colors',

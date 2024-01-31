@@ -592,8 +592,24 @@ class LittersTable extends Table
             $query->leftJoinWith('Users')
                   ->where(['Users.id IS' => null]);
         } else {
-            $query->innerJoinWith('Users')
-                  ->where(['Users.id' => $options['user_id']]);
+            $user_id = $options['user_id'];
+
+            $query2 = $query->cleanCopy();
+
+            $query1 = $query
+                ->innerJoinWith('Users')
+                ->contain('States')
+                ->where(['Users.id' => $options['user_id']]);
+
+            $query2 = $query2
+                ->contain(['Contributions', 'States'])
+                ->matching('Contributions.Ratteries', function (\Cake\ORM\Query $q) use ($user_id) {
+                  return $q->where([
+                      'Ratteries.owner_user_id' => $user_id,
+                  ]);
+              });
+
+            $query = $query1->union($query2);
         }
         return $query->group(['Litters.id']);
     }
@@ -633,8 +649,8 @@ class LittersTable extends Table
         return $query
             ->select()
             ->distinct()
-            ->where(['States.needs_user_action IS' => true])
             ->contain(['States', 'Contributions'])
+            ->where(['States.needs_user_action IS' => true])
             ->group(['Litters.id']);
     }
 
