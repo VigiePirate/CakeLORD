@@ -586,6 +586,10 @@ class LittersController extends AppController
                 'associated' => ['Contributions', 'Contributions.Ratteries', 'OffspringRats']
             ]);
 
+            // silent edit of contributions is authorized just after litter creation
+            if ($litter->state->is_default) {
+                $this->Litters->removeBehavior('State');
+            }
             if ($this->Litters->save($litter, [
                     'contain' => [
                         'Contributions' => [
@@ -600,8 +604,13 @@ class LittersController extends AppController
                 ])
             ) {
                 $this->Flash->success(__('The litter’s contributing ratteries have been updated.'));
+                // silent edit of contributions is authorized just after litter creation
+                if ($litter->state->is_default) {
+                    $this->Litters->addBehavior('State');
+                }
                 return $this->redirect(['action' => 'view', $litter->id]);
             }
+            //$this->Litters->addBehavior('State');
             $this->Flash->error(__('The litter’s contributing ratteries could not be updated. Please, try again.'));
         } else {
             $this->Flash->default(__('You can add, edit or delete contributing ratteries below. Please, contact a staff member to edit the birth place.'));
