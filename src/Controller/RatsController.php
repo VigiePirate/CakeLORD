@@ -1350,6 +1350,19 @@ class RatsController extends AppController
         $this->Authorization->authorize($rat, 'microEdit');
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rat = $this->Rats->patchEntity($rat, $this->request->getData());
+
+            if ($rat->state->needs_user_action) {
+                // remove comments from safe properties to trigger state change
+                $this->Rats->removeBehavior('State');
+                $this->Rats->addBehavior('State', [
+                    'safe_properties' => [
+                        'name',
+                        'pup_name',
+                        'owner_user_id',
+                    ],
+                ]);
+            }
+
             if ($this->Rats->save($rat)) {
                 $this->Flash->success(__('Your new comment about the rat has been saved.'));
                 return $this->redirect(['action' => 'view', $rat->id]);
