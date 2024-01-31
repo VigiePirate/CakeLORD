@@ -6,12 +6,14 @@
 
 <?php if ($count['sheet_sub_total'] > 0) : ?>
     <div class="message error">
-        <?= __('You have {0, plural, =1 {<strong>one sheet</strong>} other{<strong># sheets</strong>}} to correct. Please, check rats, litters and ratteries from your sidebar and take action soon.', [$count['sheet_sub_total']]) ?>
+        <?= __('You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to correct. Please, check rats, litters and ratteries from your sidebar and take action soon.', [$count['sheet_sub_total']]) ?>
     </div>
 <?php endif ;?>
 
 <p>
     <?php if ($count['total'] > 0) :?>
+        <?=  __('Notifications concern not only your own sheets, but also all the sheets you have rights on.') ?>
+        <br/>
         <?= __('Only your most recent notifications are shown below.') ?>
     <?php else : ?>
         <?= __('You haven’t received any notification recently.') ?>
@@ -68,7 +70,7 @@
                         <td><span class="statecolor_<?php echo h($ratMessage->rat->state_id) ?>"><?= h($ratMessage->rat->state->symbol) ?></span></td>
                             <td><?= $ratMessage->has('rat') ? $this->Html->link($ratMessage->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratMessage->rat->id]) : '' ?></td>
                             <td><?= h($ratMessage->rat->usual_name) ?></td>
-                            <td class="ellipsis" onclick="toggleMessage(this)"><?= h($ratMessage->content) ?></td>
+                            <td class="ellipsis" onclick="toggleMessage(this)"><?= nl2br(h($ratMessage->content)) ?></td>
 
                             <td>
                                 <?=
@@ -131,7 +133,7 @@
                         <?php endif ; ?>
                         <td><span class="statecolor_<?php echo h($ratteryMessage->rattery->state_id) ?>"><?= h($ratteryMessage->rattery->state->symbol) ?></span></td>
                             <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
-                            <td class="ellipsis" onclick="toggleMessage(this)"><?= h($ratteryMessage->content) ?></td>
+                            <td class="ellipsis" onclick="toggleMessage(this)"><?= nl2br(h($ratteryMessage->content)) ?></td>
                             <td>
                                 <?=
                                     $ratteryMessage->has('user') && ! $ratteryMessage->is_automatically_generated
@@ -195,7 +197,7 @@
                         <td><span class="statecolor_<?php echo h($litterMessage->litter->state_id) ?>"><?= h($litterMessage->litter->state->symbol) ?></span></td>
                             <td><?= $litterMessage->has('litter') ? $this->Html->link($litterMessage->litter->birth_date, ['controller' => 'Litters', 'action' => 'view', $litterMessage->litter->id]) : '' ?></td>
                             <td><?= $litterMessage->has('litter') ? h($litterMessage->litter->parents_name) : '' ?></td>
-                            <td class="ellipsis" onclick="toggleMessage(this)"><?= h($litterMessage->content) ?></td>
+                            <td class="ellipsis" onclick="toggleMessage(this)"><?= nl2br(h($litterMessage->content)) ?></td>
                             <td>
                                 <?=
                                     $litterMessage->has('user') && ! $litterMessage->is_automatically_generated

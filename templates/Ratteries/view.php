@@ -172,7 +172,7 @@
                         <p><?= __('This sheet needs correction. Here is the latest message staff sent you about it.') ?></p>
                         <div class="text">
                             <blockquote>
-                                <?= ! empty($rattery->rattery_messages) ? $rattery->rattery_messages[0]->content : '' ?>
+                                <?= ! empty($rattery->rattery_messages) ? nl2br($rattery->rattery_messages[0]->content) : '' ?>
                             </blockquote>
                         </div>
                         <p>

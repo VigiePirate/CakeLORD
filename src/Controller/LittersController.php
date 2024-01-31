@@ -40,12 +40,10 @@ class LittersController extends AppController
         $this->Authorization->skipAuthorization();
         $user = $this->Authentication->getIdentity();
 
-        $query = $this->Litters->find()
-            ->matching('Contributions.Ratteries', function (\Cake\ORM\Query $q) use ($user) {
-                return $q->where([
-                    'Ratteries.owner_user_id' => $user->id,
-                ]);
-            })
+        $litter_ids = $this->Litters->find('entitledBy', ['user_id' => $user->id]);
+        $query = $this->Litters
+            ->find()
+            ->where(['Litters.id IN' => $litter_ids])
             ->contain(['Users', 'States', 'Sire', 'Dam', 'Contributions']);
 
         $settings = [
@@ -55,18 +53,15 @@ class LittersController extends AppController
 
         $litters = $this->paginate($query, $settings);
 
-        $pending = $this->Litters->find()
-            ->matching('Contributions.Ratteries', function (\Cake\ORM\Query $q) use ($user) {
-                return $q->where([
-                    'Ratteries.owner_user_id' => $user->id,
-                ]);
-            })
-            ->contain(['States'])
-            ->where(['States.needs_user_action' => true]);
+        $pending = $this->Litters
+            ->find('needsUser')
+            ->where(['Litters.id in' => $litter_ids]);
 
-        if(! empty($pending->first())) {
+        $count = $pending->count();
+
+        if ($count) {
             $this->Flash->error(
-                __('You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to correct. Please check below and take action soon.', [$pending->count()]), 
+                __('You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to correct. Please check below and take action soon.', [$count]),
                 ['escape' => false]
             );
         }

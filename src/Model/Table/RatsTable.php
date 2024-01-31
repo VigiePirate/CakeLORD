@@ -956,6 +956,10 @@ class RatsTable extends Table
             ->select('id')
             ->distinct();
 
+        if (isset($options['level']) && $options['level'] == 2) {
+            $query2 = $query->cleanCopy();
+        }
+
         if (empty($options['user_id'])) {
             $query->leftJoinWith('OwnerUsers')
                   ->leftJoinWith('CreatorUsers')
@@ -964,14 +968,31 @@ class RatsTable extends Table
                       'OwnerUsers.id IS' => null,
                   ]);
         } else {
-            $query->innerJoinWith('OwnerUsers')
+            // owner or creator
+            $query1 = $query->innerJoinWith('OwnerUsers')
                   ->innerJoinWith('CreatorUsers')
+                  ->contain('States')
                   ->where(['OR' => [
                       'CreatorUsers.id' => $options['user_id'],
                       'OwnerUsers.id' => $options['user_id'],
                   ],
                 ]);
+
+            // owner of a contributing rattery in birth litter
+            if (isset($options['level']) && $options['level'] == 2) {
+                $user_id = $options['user_id'];
+                $litters = \Cake\Datasource\FactoryLocator::get('Table')->get('Litters')
+                    ->find('entitledBy', ['user_id' => $user_id]);
+                $query2->contain('States')
+                    ->where(['litter_id IN' => $litters, 'States.needs_user_action' => true]);
+
+                // join results
+                $query = $query1->union($query2);
+            } else {
+                $query = $query1;
+            }
         }
+
         return $query->group(['Rats.id']);
     }
 

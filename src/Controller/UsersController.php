@@ -85,13 +85,13 @@ class UsersController extends AppController
             }
 
             $rats = $this->fetchModel('Rats');
+            $ratteries = $this->fetchModel('Ratteries');
+            $litters = $this->fetchModel('Litters');
 
             // check user role: if staff, execute routines (zombie killing, rattery closing, etc.)
             if ($user->role->is_staff) {
 
-                $rat_count = $rats->killZombies();
-
-                $ratteries = $this->fetchModel('Ratteries');
+                $rat_count = $rats->killZombies();    
                 $rattery_count = $ratteries->pauseZombies();
 
                 if ($rat_count > 0) {
@@ -103,7 +103,7 @@ class UsersController extends AppController
                 }
 
                 // blame sheets in needs_user_action state for too long
-                $litters = $this->fetchModel('Litters');
+
                 $neglected_count = $rats->blameNeglected($rats)
                     + $ratteries->blameNeglected($ratteries)
                     + $litters->blameNeglected($litters);
@@ -116,11 +116,26 @@ class UsersController extends AppController
                 $this->Users->removeExpiredPasskeys();
             }
 
-            $action_needed = (
-                $rats->find('needsUser')->where(['owner_user_id' => $user->id])->count()
-                + $ratteries->find('needsUser')->where(['owner_user_id' => $user->id])->count()
-                + $litters->find('needsUser')->where(['creator_user_id' => $user->id])->count()
-            );
+            $my_rats = $rats->find('entitledBy', ['user_id' => $user->id]);
+            if ($my_rats->count()) {
+                $rats_in_need = $my_rats->find('needsUser')->count();
+            } else {
+                $rats_in_need = 0;
+            }
+
+            $my_ratteries = $ratteries->find('entitledBy', ['user_id' => $user->id]);
+            if ($my_ratteries->count()) {
+                $ratteries_in_need = $my_ratteries->find('needsUser')->count();
+            } else {
+                $ratteries_in_need = 0;
+            }
+
+            $litters_in_need_ids =  $litters->find('entitledBy', ['user_id' => $user->id]);
+            if ($litters_in_need_ids->count()) {
+                $litters_in_need = $litters->find('needsUser')->where(['Litters.id in' => $litters_in_need_ids])->count();
+            }
+
+            $action_needed = $rats_in_need + $ratteries_in_need + $litters_in_need;
 
             $target = $this->Authentication->getLoginRedirect();
             if (! $target) {
@@ -131,7 +146,7 @@ class UsersController extends AppController
             } else {
                 // show alert only if not redirecting to home
                 if ($target != '/users/home' && $action_needed > 0) {
-                    $this->Flash->error(__('You have {0, plural, =1 {<strong>one sheet</strong>} other{<strong># sheets</strong>}} to correct. Please, check rats, litters and ratteries from your dashboard and take action soon.', [$action_needed]));
+                    $this->Flash->error(__('You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to correct. Please, check rats, litters and ratteries from your dashboard and take action soon.', [$action_needed]), ['escape' => false]);
                 }
             }
 
@@ -307,7 +322,6 @@ class UsersController extends AppController
         $date_limit = is_null($user->successful_login_previous_date) ? $user->created : $user->successful_login_previous_date;
 
         // Messages
-        // $rat_messages = $identity->applyScope('index', $this->RatMessages->find('entitled'));
 
         $rats_model = $this->fetchModel('Rats');
         $rat_delay = $rats_model->behaviors()->get('State')->config['neglection_delay'];
@@ -317,8 +331,9 @@ class UsersController extends AppController
             $rat_message_delay = $date_limit;
         }
 
-    	$rats = $rats_model->find('entitledBy', ['user_id' => $user->id]);
-    	$query = $this->fetchModel('RatMessages')
+        // all rats I'm concerned with, corresponding notifications, and those to be highlighted
+    	$rats = $rats_model->find('entitledBy', ['user_id' => $user->id, 'level' => 2]);
+        $rat_messages = $this->fetchModel('RatMessages')
             ->find('latest', ['rats' => $rats, 'rat_message_delay' => $rat_message_delay])
             ->contain([
                 'Rats.Ratteries',
@@ -326,19 +341,23 @@ class UsersController extends AppController
                 'Rats.BirthLitters.Contributions',
                 'Rats.States',
                 'Users',
-            ]);
+            ])
+            ->order(['RatMessages.created' => 'DESC'])
+            ->all();
 
-        $rat_messages = $query->all();
-
-        $rat_last_messages_ids = $query
-            ->where(['is_automatically_generated' => false])
+        $rat_last_messages_ids = $this->fetchModel('RatMessages')
+            ->find('latest', ['rats' => $rats, 'rat_message_delay' => $rat_message_delay])
+            ->where(['is_automatically_generated' => false, 'is_staff_request' => true])
+            ->order(['RatMessages.created' => 'DESC'])
             ->limit(1)->all()->extract('id')->toList();
 
-        $count['rat_total'] = $query->count();
-        $count['rat_sub_total'] = $rats
-            ->find('needsUser')
-            ->distinct()
-            ->count();
+        $count['rat_total'] = $rat_messages->count();
+
+        // rats I'm primarily responsible for, and how many of them need attention
+        $rats_in_need = $rats_model
+            ->find('entitledBy', ['user_id' => $user->id, 'level' => 1])
+            ->find('needsUser');
+        $count['rat_sub_total'] = $rats_in_need->count();
 
         $ratteries_model = $this->fetchModel('Ratteries');
         $rattery_delay = $ratteries_model->behaviors()->get('State')->config['neglection_delay'];
@@ -349,7 +368,9 @@ class UsersController extends AppController
         }
 
         $ratteries = $ratteries_model->find('entitledBy', ['user_id' => $user->id]);
-    	$query = $this->fetchModel('RatteryMessages')
+        $ratteries_in_need = $ratteries_model->find('entitledBy', ['user_id' => $user->id])->find('needsUser');
+
+    	$rattery_messages = $this->fetchModel('RatteryMessages')
             ->find('latest', [
                 'ratteries' => $ratteries,
                 'rattery_message_delay' => $rattery_message_delay
@@ -359,17 +380,20 @@ class UsersController extends AppController
                 'Ratteries.Users',
                 'Ratteries.States',
                 'Users'
-            ]);
+            ])
+            ->order(['RatteryMessages.created' => 'DESC'])
+            ->all();
 
-        $rattery_messages = $query->all();
-        $rattery_last_messages_ids = $query
-            ->where(['is_automatically_generated' => false])
+        $rattery_last_messages_ids = $this->fetchModel('RatteryMessages')
+            ->find('latest', [
+                'ratteries' => $ratteries_in_need,
+                'rattery_message_delay' => $rattery_message_delay
+            ])
+            ->where(['is_automatically_generated' => false, 'is_staff_request' => true])
             ->limit(1)->all()->extract('id')->toList();
 
-        $count['rattery_total'] = $query->count();
-        $count['rattery_sub_total'] = $ratteries->find('needsUser')
-                                    ->distinct()
-                                    ->count();
+        $count['rattery_total'] = $rattery_messages->count();
+        $count['rattery_sub_total'] = $ratteries_in_need->count();
 
         $litters_model = $this->fetchModel('Litters');
         $litter_delay = $litters_model->behaviors()->get('State')->config['neglection_delay'];
@@ -379,10 +403,9 @@ class UsersController extends AppController
             $litter_message_delay = $date_limit;
         }
 
-        $litters = $litters_model
-            ->find('entitledBy', ['user_id' => $user->id]);
-
-        $query = $this->fetchModel('LitterMessages')
+        // all litters I'm concerned with, corresponding notifications, and those to be highlighted
+        $litters = $litters_model->find('entitledBy', ['user_id' => $user->id]);
+        $litter_messages = $this->fetchModel('LitterMessages')
             ->find('latest', [
                 'litters' => $litters,
                 'litter_message_delay' => $litter_message_delay
@@ -395,21 +418,29 @@ class UsersController extends AppController
                 'Litters.Users',
                 'Litters.States',
                 'Users',
-            ]);
+            ])
+            ->order(['LitterMessages.created' => 'DESC'])
+            ->all();
 
-        $litter_messages = $query->all();
-        $litter_last_messages_ids = $query
-            ->where(['is_automatically_generated' => false])
-            ->limit(1)->all()->extract('id')->toList();
+        $litter_last_messages_ids = $this->fetchModel('LitterMessages')
+            ->find('latest', [
+                'litters' => $litters,
+                'litter_message_delay' => $litter_message_delay
+            ])
+            ->where(['is_automatically_generated' => false, 'is_staff_request' => true])
+            ->all()->extract('id')->toList();
 
-        $count['litter_total'] = $query->count();
-        $count['litter_sub_total'] = $litters
+        $count['litter_total'] = $litter_messages->count();
+
+        $litters_in_need_ids =  $litters_model->find('entitledBy', ['user_id' => $user->id]);
+        $litters_in_need = $this->fetchModel('Litters')
             ->find('needsUser')
-            ->distinct()
-            ->count();
+            ->where(['Litters.id in' => $litters_in_need_ids]);
 
-        $count['total'] = $count['rat_total'] + $count['litter_total'] + $count['rattery_total'];
+        $count['litter_sub_total'] = $litters_in_need->count();
+
         // some sheets need user action without being associated to a non-automatic recent notification
+        $count['total'] = $count['rat_total'] + $count['litter_total'] + $count['rattery_total'];
         $count['sheet_sub_total'] = $count['rat_sub_total'] + $count['litter_sub_total'] + $count['rattery_sub_total'];
         $count['message_sub_total'] = count($rat_last_messages_ids) + count($litter_last_messages_ids) + count($rattery_last_messages_ids);
 

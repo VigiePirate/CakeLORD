@@ -77,8 +77,13 @@ class RatteriesController extends AppController
                 'States.needs_user_action' => true
             ]);
 
-        if(! empty($pending->first())) {
-            $this->Flash->error(__('You have {0, plural, =1 {<strong>one sheet</strong>} other{<strong># sheets</strong>}} to correct. Please check below and take action soon.', [$pending->count()]));
+        $count = $pending->count();
+
+        if ($count) {
+            $this->Flash->error(
+                __('You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to correct. Please check below and take action soon.', [$count]),
+                ['escape' => false]
+            );
         }
 
         $users = $this->fetchModel('Users');
@@ -210,7 +215,7 @@ class RatteriesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
             if ($this->Ratteries->save($rattery)) {
-                $this->Flash->warning(__('The rattery has been saved. Modifications still have to be validated by staff.'));
+                $this->Flash->success(__('The rattery has been saved.'));
                 return $this->redirect(['action' => 'view', $rattery->id]);
             }
             $this->Flash->error(__('The rattery could not be saved. Please, try again.'));
