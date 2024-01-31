@@ -15,6 +15,7 @@
             'exceptions' => [
                 'full_name',
                 'pups_number_stillborn',
+                'actions'
             ],
         ]) ?>
 </div>

@@ -292,7 +292,7 @@
 
             <h1 class="link-title">
                 <?=
-                    $this->Html->link(h($rat->usual_name), ['controller' => 'Rats', 'action' => 'view', $rat->id])
+                    $this->Html->link(h($rat->usual_name), ['controller' => 'Rats', 'action' => 'view', $rat->id], ['escape' => false])
                     . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>'
                 ?>
             </h1>

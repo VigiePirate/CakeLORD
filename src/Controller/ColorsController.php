@@ -29,7 +29,7 @@ class ColorsController extends AppController
         $colors = $this->paginate($this->Colors);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
-        $show_staff = !is_null($user) && $user->can('add', $this->Colors);
+        $show_staff = ! is_null($user) && $user->can('add', $this->Colors);
         $this->set(compact('colors', 'user', 'show_staff'));
     }
 
