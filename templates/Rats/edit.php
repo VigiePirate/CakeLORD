@@ -59,7 +59,12 @@
                         ?>
                     </div>
                     <div class="column-responsive column-30">
-                        <?= $this->Form->control('birth_date', ['type' => 'date', 'value' => $rat->birth_date, 'readonly' => true]); ?>
+                        <!-- birth date must be edited through birth litter if there is one -->
+                        <?php if ($user->can('staffEdit', $rat) && ! isset($rat->litter_id)) : ?>
+                            <?= $this->Form->control('birth_date', ['type' => 'date', 'value' => $rat->birth_date, 'label' => ['class' => 'staff']]); ?>
+                        <?php else : ?>
+                            <?= $this->Form->control('birth_date', ['type' => 'date', 'value' => $rat->birth_date, 'readonly' => true]); ?>
+                        <?php endif ; ?>
                     </div>
                     <div class="column-responsive column-50">
                         <?php

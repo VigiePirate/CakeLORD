@@ -455,8 +455,6 @@ class RatsController extends AppController
                 return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
-        } else {
-            $this->Flash->warning( __('For data coherence, modifications of rats are restricted. Please, use the “optional notification” field at the end of this form to request origins or birth date change.'));
         }
 
         $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
@@ -492,6 +490,10 @@ class RatsController extends AppController
 
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('staffEdit', $rat);
+
+        if ($user->can('ownerEdit', $rat) && ! $user->can('staffEdit', $rat)) {
+            $this->Flash->warning( __('For data coherence, modifications of rats are restricted. Please, use the “optional notification” field at the end of this form to request origins or birth date change.'));
+        }
 
         $js_messages = json_encode([
             __('Please, read carefully information that will appear below to check the fitness of your choice.'),
