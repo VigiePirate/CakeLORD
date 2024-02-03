@@ -91,18 +91,14 @@
 
             <?= $this->Form->create($litter, ['type' => 'post', 'url' => ['action' => 'dispute', $litter->id]]) ?>
             <fieldset>
-
-                <?php
-                    echo $this->Form->control('side_message', [
-                        'type' => 'textarea',
-                        'name' => 'side_message',
+                <?=
+                    $this->element('side_message_control', [
+                        'user' => $identity,
+                        'sheet' => $litter,
                         'label' => __('Type here all helpful information'),
-                        'rows' => '5',
                         'required' => true,
                     ]);
                 ?>
-
-                <p class="sub-legend"><?= __('Answer is mandatory. It will be included in a notification visible to all stakeholders.') ?></p>
             </fieldset>
             <?= $this->Form->button(__('Send to back office'), ['name' => 'decision', 'value' => 'blame']) ?>
             <?= $this->Form->end() ?>

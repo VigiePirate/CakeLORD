@@ -305,7 +305,17 @@
 <?php echo $this->Form->create($rattery, ['type' => 'post', 'url' => ['controller' => 'Ratteries', 'action' => 'moderate', $rattery->id]]); ?>
 
 <div class="content">
-    <?= $this->element('side_message_control', ['sheet' => $rattery]) ?>
+    <!-- we cannot use element side_message_control because of restoration option -->
+    <?php
+        echo $this->Form->control('side_message', [
+            'type' => 'textarea',
+            'name' => 'side_message',
+            'label' => __('Explain staff intervention'),
+            'rows' => '5',
+            'required' => false,
+        ]);
+    ?>
+    <p class="sub-legend tight-legend"><?= __('Explanation is optional. If provided, it will be included in a notification visible to all stakeholders.') ?></p>
 </div>
 <div class="spacer"></div>
 

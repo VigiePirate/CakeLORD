@@ -68,7 +68,7 @@
                                     'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['id'] : null
                                 ]);
                             ?>
-                            <?= $this->element('side_message_control', ['sheet' => $litter]) ?>
+                            <?= $this->element('side_message_control', ['sheet' => $litter, 'user' => $user]) ?>
                             <div class="spacer"></div>
                             <h2><?= __('Other contributions') ?></h2>
                         <?php else: ?>
