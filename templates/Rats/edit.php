@@ -266,11 +266,11 @@
                     </div>
                 <?php endif ; ?>
 
-                <legend><?= __('Comments') ?></legend>
+                <legend><?= __('Additional information') ?></legend>
                 <?php
                     echo $this->Form->control('comments', [
                         'name' => 'comments',
-                        'label' => __('Additional information'),
+                        'label' => __('Public comments'),
                         'rows' => '5',
                         "error" => [
                             "escape" => false
@@ -314,21 +314,15 @@
                         </div>
                     </div>
 
-                    <?= $this->element('side_message_control', ['sheet' => $rat]) ?>
-
-                <?php else : ?>
-                    <?php
-                        echo $this->Form->control('side_message', [
-                            'type' => 'textarea',
-                            'name' => 'side_message',
-                            'label' => __('Optional notification'),
-                            'rows' => '5',
-                            'required' => true,
-                        ]);
-                    ?>
-
-                    <p class="sub-legend tight-legend"><?= __('You can add here a request or message. If provided, it will be included in a notification visible to all stakeholders.') ?></p>
                 <?php endif ; ?>
+
+                <?=
+                    $this->element('side_message_control', [
+                        'user' => $user,
+                        'sheet' => $rat,
+                        'required' => false,
+                    ]);
+                ?>
 
             </fieldset>
             <?= $this->Form->button(__('Save changes')) ?>

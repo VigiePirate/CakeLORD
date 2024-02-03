@@ -170,7 +170,6 @@ class RatteriesController extends AppController
         }
 
         $user = $this->request->getAttribute('identity');
-
         $this->set(compact('rattery', 'champion', 'stats', 'snap_diffs', 'user')); // 'offsprings'));
     }
 
@@ -763,7 +762,8 @@ class RatteriesController extends AppController
             }
         }
 
-        $this->set(compact('rattery'));
+        $identity = $this->request->getAttribute('identity');
+        $this->set(compact('rattery', 'identity'));
     }
 
     public function freeze($id)

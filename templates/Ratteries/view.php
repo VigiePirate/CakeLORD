@@ -600,10 +600,10 @@
 
             <?= $this->element('activitybar') ?>
 
-            <?= $this->element('statebar', ['sheet' => $rattery]) ?>
+            <?= $this->element('statebar', ['sheet' => $rattery, 'user' => $user]) ?>
 
             <!-- Show private information to owner and staff only -->
-            <?php if (!is_null($user) && $user->can('seePrivate', $rattery)) : ?>
+            <?php if (! is_null($user) && $user->can('seePrivate', $rattery)) : ?>
                 <div class="spacer"> </div>
                 <div class="rat view content">
                     <h2 class="staff"><?= __('Private information') ?></h2>

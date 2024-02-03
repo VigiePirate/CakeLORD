@@ -1425,7 +1425,8 @@ class RatsController extends AppController
             }
         }
 
-        $this->set(compact('rat'));
+        $identity = $this->request->getAttribute('identity');
+        $this->set(compact('rat', 'identity'));
     }
 
     public function freeze($id)

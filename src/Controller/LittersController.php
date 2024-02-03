@@ -1137,7 +1137,8 @@ class LittersController extends AppController
             }
         }
 
-        $this->set(compact('litter'));
+        $identity = $this->request->getAttribute('identity');
+        $this->set(compact('litter', 'identity'));
     }
 
     public function freeze($id)

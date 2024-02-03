@@ -40,10 +40,16 @@
                     </div>
                 </div>
 
+                <label><?= __('Contributing ratteries') ?></label>
+
+                <p class="helper">
+                    <?= __('Please use the dedicated form to <a href="{0}">edit contributing ratteries</a>.', ['action' => 'manageContributions', $litter->id]) ?> <br/>
+                </p>
+
                 <?php
                     echo $this->Form->control('comments', [
                         'name' => 'comments',
-                        'label' => __('Comments'),
+                        'label' => __('Comments (public)'),
                         'rows' => '5',
                     ]);
                 ?>
@@ -129,20 +135,15 @@
                                 ?>
                         </div>
                     </div>
-                    <?= $this->element('side_message_control', ['sheet' => $litter]) ?>
-                <?php else : ?>
-                    <?php
-                        echo $this->Form->control('side_message', [
-                            'type' => 'textarea',
-                            'name' => 'side_message',
-                            'label' => __('Optional notification'),
-                            'rows' => '5',
-                            'required' => true,
-                        ]);
-                    ?>
-
-                    <p class="sub-legend tight-legend"><?= __('You can add here a request or message. If provided, it will be included in a notification visible to all stakeholders.') ?></p>
                 <?php endif ; ?>
+
+                <?=
+                    $this->element('side_message_control', [
+                        'user' => $user,
+                        'sheet' => $litter,
+                        'required' => false,
+                    ]);
+                ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>

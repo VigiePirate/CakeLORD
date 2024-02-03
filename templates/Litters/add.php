@@ -224,11 +224,11 @@
                     </div>
                 </div>
 
-                <legend><?= __('Comments') ?></legend>
+                <legend><?= __('Additional information') ?></legend>
                 <?php
                     echo $this->Form->control('comments', [
                         'name' => 'comments',
-                        'label' => __('Additional information'),
+                        'label' => __('Comments'),
                         'rows' => '5',
                         "error" => [
                             "escape" => false
