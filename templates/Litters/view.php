@@ -225,7 +225,7 @@
                                 </tr>
                                 <tr>
                                     <th><?= __('Death cause:') ?></th>
-                                    <td><?= h($litter->dam[0]->main_death_cause) ?></td>
+                                    <td><?= h($litter->dam[0]->short_death_cause) ?></td>
                                 </tr>
                             </table>
                         <?php else : ?>
@@ -268,7 +268,7 @@
                                 </tr>
                                 <tr>
                                     <th><?= __('Death cause:') ?></th>
-                                    <td><?= h($litter->sire[0]->main_death_cause) ?></td>
+                                    <td><?= h($litter->sire[0]->short_death_cause) ?></td>
                                 </tr>
                             </table>
                         <?php else : ?>

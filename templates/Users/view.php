@@ -104,6 +104,15 @@
                             <td><?= h($user->localization) ?></td>
                         </tr>
                         <tr>
+                            <th><?= __('Current colony') ?></th>
+                            <td><?=
+                                $alive_rat_count != 0
+                                ? __('{0, plural, =1{1 rat} other{# rats}} (♀: {1} –  ♂: {2})', [$alive_rat_count, $alive_female_count, $alive_male_count])
+                                : __('No rat at the moment')
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
                             <th><?= __('Main rattery') ?></th>
                             <td><?= h($user->main_rattery_name) ?></td>
                         </tr>
@@ -144,7 +153,7 @@
             <div class="related">
                 <details open>
                     <summary><?= __('Ratteries') ?></summary>
-                    <?php if (!empty($user->ratteries)) : ?>
+                    <?php if (! empty($user->ratteries)) : ?>
                         <?= $this->element('simple_ratteries', [ //rats
                             'rubric' => __(''),
                             'ratteries' =>  $user->ratteries,

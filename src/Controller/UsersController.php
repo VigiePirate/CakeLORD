@@ -91,7 +91,7 @@ class UsersController extends AppController
             // check user role: if staff, execute routines (zombie killing, rattery closing, etc.)
             if ($user->role->is_staff) {
 
-                $rat_count = $rats->killZombies();    
+                $rat_count = $rats->killZombies();
                 $rattery_count = $ratteries->pauseZombies();
 
                 if ($rat_count > 0) {
@@ -511,14 +511,21 @@ class UsersController extends AppController
     {
         $user = $this->Users->get($id, [
             'contain' => [
-                'Roles', 'Ratteries', 'Ratteries.States','Ratteries.Countries',
+                'Roles',
+                'Ratteries' => ['sort' => 'modified DESC'], 
+                'Ratteries.States',
+                'Ratteries.Countries',
                 'OwnerRats' => function($q) {
                     return $q
                     ->order('OwnerRats.modified DESC')
                     ->limit(10);
                 },
-                'OwnerRats.States', 'OwnerRats.DeathPrimaryCauses', 'OwnerRats.DeathSecondaryCauses',
-                'OwnerRats.Ratteries', 'OwnerRats.BirthLitters', 'OwnerRats.BirthLitters.Contributions'
+                'OwnerRats.States',
+                'OwnerRats.DeathPrimaryCauses',
+                'OwnerRats.DeathSecondaryCauses',
+                'OwnerRats.Ratteries',
+                'OwnerRats.BirthLitters',
+                'OwnerRats.BirthLitters.Contributions'
             ]
         ]);
         $this->Authorization->authorize($user);
