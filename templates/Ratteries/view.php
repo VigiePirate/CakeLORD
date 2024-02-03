@@ -526,7 +526,7 @@
                     <div class="ratteries view content">
                         <h2><?= __('Related entries') ?></h2>
 
-                        <?php if ($stats['inLitterCount'] + $stats['outLitterCount']) : ?>
+                        <?php if (($stats['inLitterCount'] + $stats['outLitterCount']) || (! is_null($user) && $user->can('changeState', $rattery)) ) : ?>
                             <details open>
                                 <summary><?= __('Last contributed litters') ?></summary>
                                 <div class="button-raised">
