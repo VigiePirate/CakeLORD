@@ -18,6 +18,14 @@
     padding: 1.5rem;
   }
 
+  .tab-icon {
+    display:inline;
+    background-color: transparent;
+    padding: 0.25rem 1.25rem;
+    margin:0 0.75rem;
+    width: 4rem;
+  }
+
   footer {
     display:grid;
     justify-items:center;
