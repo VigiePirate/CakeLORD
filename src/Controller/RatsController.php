@@ -1176,6 +1176,32 @@ class RatsController extends AppController
         $this->set(compact('rat', 'stats'));
     }
 
+    public function legacy($id = null) {
+        $this->Authorization->skipAuthorization();
+
+        $rat = $this->Rats->get($id, [
+            'contain' => [
+                'States',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Ratteries',
+                'BirthLitters.Contributions'
+            ]
+        ]);
+
+        $descendance = [];
+        $rat->computeDescendance($rat->id, $descendance);
+
+        $query = $this->Rats->find()
+            ->where(['Rats.id in' => $descendance, 'Rats.is_alive' => true])
+            ->contain(['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States'])
+            ->order(['Rats.birth_date' => 'DESC']);
+
+        $this->set('rats', $this->paginate($query));
+        $this->set(compact('rat'));
+
+    }
+
     public function print($id = null)
     {
         $this->Authorization->skipAuthorization();

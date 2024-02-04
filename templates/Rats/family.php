@@ -61,7 +61,8 @@
                 </tr>
                 <tr>
                     <th><?= __('Number of alive descendants:') ?></th>
-                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['desc_alive']) ?></td>
+                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['desc_alive']) ?>
+                         <?= $this->Html->link(__('(see all)'), ['action' => 'legacy', $rat->id]) ?></td>
                 </tr>
             </table>
 
