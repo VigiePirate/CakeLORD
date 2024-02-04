@@ -493,10 +493,10 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $this->Authorization->skipAuthorization();
+        $this->Authorization->authorize($this->Users);
         $users = $this->paginate($this->Users->find()->contain(['Roles']));
         $identity = $this->request->getAttribute('identity');
-        $show_staff = ! is_null($identity) && $identity->can('index', $this->Users);
+        $show_staff = ! is_null($identity) && $identity->can('private', $this->Users);
         $this->set(compact('users', 'identity', 'show_staff'));
     }
 
@@ -512,7 +512,7 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => [
                 'Roles',
-                'Ratteries' => ['sort' => 'modified DESC'], 
+                'Ratteries' => ['sort' => 'modified DESC'],
                 'Ratteries.States',
                 'Ratteries.Countries',
                 'OwnerRats' => function($q) {
@@ -1157,8 +1157,13 @@ class UsersController extends AppController
 
     public function private()
     {
-        $names = $this->request->getParam('pass');
-        $this->Authorization->authorize($this->Users, 'index');
+        $this->Authorization->authorize($this->Users, 'private');
+
+        if ($this->request->is('post')) {
+            $names = [$this->request->getData('personal')];
+        } else {
+            $names = $this->request->getParam('pass');
+        }
 
         $users = $this->Users
             ->find('private', [

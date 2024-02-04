@@ -31,7 +31,7 @@
                 <?php foreach ($states as $state): ?>
                 <tr>
                     <td><span class="statecolor_<?= h($state->id) ?>"><?= h($state->symbol) ?></span></td>
-                    <td><?= $this->Number->format($state->id) ?></td>
+                    <td><?= $this->Html->link($state->id, ['action' => 'view', $state->id]) ?></td>
                     <td><?= $state->is_default ? '✓' : '' ?></td>
                     <td><?= $state->needs_user_action ? '✓' : '' ?></td>
                     <td><?= $state->needs_staff_action ? '✓' : '' ?></td>

@@ -1,40 +1,56 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var iterable<\App\Model\Entity\RatteryMessage> $ratteryMessages
+ * @var iterable<\App\Model\Entity\ratteryMessage> $ratteryMessages
  */
 ?>
+
+<?php $this->assign('title', __('Rattery Messages')) ?>
+
 <div class="ratteryMessages index content">
-    <?= $this->Html->link(__('New Rattery Message'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Rattery Messages') ?></h3>
+    <div class="sheet-heading">
+        <div class="sheet-title pretitle"><?= __('Back office') ?></div>
+    </div>
+    <h1><?= __('All Rattery Messages') ?></h1>
     <div class="table-responsive">
-        <table>
+        <table class="summary highlightable">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('rattery_id') ?></th>
-                    <th><?= $this->Paginator->sort('from_user_id') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('is_staff_request') ?></th>
-                    <th><?= $this->Paginator->sort('is_automatically_generated') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('created', __x('message', 'Created')) ?></th>
+                    <th><?= $this->Paginator->sort('Users.username', __x('message', 'Sent by')) ?></th>
+                    <th><?= $this->Paginator->sort('Ratteries.prefix', __x('message', 'About')) ?></th>
+                    <th class="col-head"><?= __x('message', 'Content') ?></th>
+                    <th><?= $this->Paginator->sort('is_staff_request', __('Staff?')) ?></th>
+                    <th><?= $this->Paginator->sort('is_automatically_generated', __('Auto?')) ?></th>
+                    <th class="actions col-head"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($ratteryMessages as $ratteryMessage): ?>
-                <tr>
-                    <td><?= $this->Number->format($ratteryMessage->id) ?></td>
-                    <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
-                    <td><?= $ratteryMessage->has('user') ? $this->Html->link($ratteryMessage->user->username, ['controller' => 'Users', 'action' => 'view', $ratteryMessage->user->id]) : '' ?></td>
-                    <td><?= h($ratteryMessage->created) ?></td>
-                    <td><?= h($ratteryMessage->is_staff_request) ?></td>
-                    <td><?= h($ratteryMessage->is_automatically_generated) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $ratteryMessage->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $ratteryMessage->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $ratteryMessage->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratteryMessage->id)]) ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="nowrap"><?= h($ratteryMessage->created) ?></td>
+                        <td><?= $ratteryMessage->has('user') ? h($ratteryMessage->user->username) : '' ?></td>
+                        <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
+                        <td class="ellipsis" onclick="toggleMessage(this)"><?= h($ratteryMessage->content) ?></td>
+                        <td><?= $ratteryMessage->is_staff_request ? '✓' : '' ?></td>
+                        <td><?= $ratteryMessage->is_automatically_generated ? '✓' : '' ?></td>
+                        <td class="actions">
+                            <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                                'url' => ['action' => 'edit', $ratteryMessage->id],
+                                'class' => 'action-icon',
+                                'alt' => __('Edit')
+                            ])?>
+                            <?= $this->Form->postLink(
+                                    $this->Html->image('/img/icon-delete.svg', [
+                                        'class' => 'action-icon',
+                                        'alt' => __('Delete')
+                                    ]),
+                                    ['action' => 'delete', $ratteryMessage->id],
+                                    ['confirm' => __('Are you sure you want to delete # {0}?', $ratteryMessage->id), 'escape' => false]
+                                )
+                            ?>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>

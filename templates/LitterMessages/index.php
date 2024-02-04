@@ -1,40 +1,58 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var iterable<\App\Model\Entity\LitterMessage> $litterMessages
+ * @var iterable<\App\Model\Entity\litterMessage> $litterMessages
  */
 ?>
+
+<?php $this->assign('title', __('Litter Messages')) ?>
+
 <div class="litterMessages index content">
-    <?= $this->Html->link(__('New Litter Message'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Litter Messages') ?></h3>
+    <div class="sheet-heading">
+        <div class="sheet-title pretitle"><?= __('Back office') ?></div>
+    </div>
+    <h1><?= __('All Litter Messages') ?></h1>
     <div class="table-responsive">
-        <table>
+        <table class="summary highlightable">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('litter_id') ?></th>
-                    <th><?= $this->Paginator->sort('from_user_id') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('is_staff_request') ?></th>
-                    <th><?= $this->Paginator->sort('is_automatically_generated') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('created', __x('message', 'Created')) ?></th>
+                    <th><?= $this->Paginator->sort('Users.username', __x('message', 'Sent by')) ?></th>
+                    <th><?= $this->Paginator->sort('Litters.birth_date', __x('message', 'About')) ?></th>
+                    <th class="col-head"><?= __('Parents') ?></th>
+                    <th class="col-head"><?= __x('message', 'Content') ?></th>
+                    <th><?= $this->Paginator->sort('is_staff_request', __('Staff?')) ?></th>
+                    <th><?= $this->Paginator->sort('is_automatically_generated', __('Auto?')) ?></th>
+                    <th class="actions col-head"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($litterMessages as $litterMessage): ?>
-                <tr>
-                    <td><?= $this->Number->format($litterMessage->id) ?></td>
-                    <td><?= $litterMessage->has('litter') ? $this->Html->link($litterMessage->litter->full_name, ['controller' => 'Litters', 'action' => 'view', $litterMessage->litter->id]) : '' ?></td>
-                    <td><?= $litterMessage->has('user') ? $this->Html->link($litterMessage->user->username, ['controller' => 'Users', 'action' => 'view', $litterMessage->user->id]) : '' ?></td>
-                    <td><?= h($litterMessage->created) ?></td>
-                    <td><?= h($litterMessage->is_staff_request) ?></td>
-                    <td><?= h($litterMessage->is_automatically_generated) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $litterMessage->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $litterMessage->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $litterMessage->id], ['confirm' => __('Are you sure you want to delete # {0}?', $litterMessage->id)]) ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="nowrap"><?= h($litterMessage->created) ?></td>
+                        <td><?= $litterMessage->has('user') ? h($litterMessage->user->username) : '' ?></td>
+                        <td><?= $litterMessage->has('litter') ? $this->Html->link($litterMessage->litter->birth_date, ['controller' => 'litters', 'action' => 'view', $litterMessage->litter->id]) : '' ?></td>
+                        <td><?= $litterMessage->has('litter') ? h($litterMessage->litter->parents_name) : '' ?></td>
+                        <td class="ellipsis" onclick="toggleMessage(this)"><?= h($litterMessage->content) ?></td>
+                        <td><?= $litterMessage->is_staff_request ? '✓' : '' ?></td>
+                        <td><?= $litterMessage->is_automatically_generated ? '✓' : '' ?></td>
+                        <td class="actions">
+                            <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                                'url' => ['action' => 'edit', $litterMessage->id],
+                                'class' => 'action-icon',
+                                'alt' => __('Edit')
+                            ])?>
+                            <?= $this->Form->postLink(
+                                    $this->Html->image('/img/icon-delete.svg', [
+                                        'class' => 'action-icon',
+                                        'alt' => __('Delete')
+                                    ]),
+                                    ['action' => 'delete', $litterMessage->id],
+                                    ['confirm' => __('Are you sure you want to delete # {0}?', $litterMessage->id), 'escape' => false]
+                                )
+                            ?>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>

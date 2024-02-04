@@ -82,7 +82,8 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                                 'url' => ['controller' => 'Lord', 'action' => 'parse'],
                                 'type' => 'post',
                                 'method' => 'post',
-                                'class' => 'searchbar'
+                                'class' => 'searchbar',
+                                'name' => 'searchbar'
                             ],
                         );
                     ?>

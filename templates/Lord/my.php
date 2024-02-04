@@ -153,6 +153,90 @@
             </div>
         <?php endif; ?>
 
+        <?php if ($user->role->is_staff) : ?>
+            <div class="spacer"> </div>
+            <div class="view content">
+                <h2><?= __('Tools') ?></h2>
+
+                <h3><?= __('Messages') ?></h3>
+                <table class="condensed">
+                    <tr>
+                        <th><?= $this->Html->link(__('RatMessages'), ['controller' => 'RatMessages', 'action' => 'index']) ?></th>
+                        <td><?= __('Browse, edit or delete rat messages') ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $this->Html->link(__('RatteryMessages'), ['controller' => 'RatteryMessages', 'action' => 'index']) ?></th>
+                        <td><?= __('Browse, edit or delete rattery messages') ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $this->Html->link(__('LitterMessages'), ['controller' => 'LitterMessages', 'action' => 'index']) ?></th>
+                        <td><?= __('Browse, edit or delete litter messages') ?></td>
+                    </tr>
+                </table>
+
+                <h3><?= __('Sheets by state') ?></h3>
+
+                <?= $this->Form->create(
+                    null,
+                    [
+                        'url' => ['controller' => 'Lord', 'action' => 'inState'],
+                        'type' => 'post',
+                        'method' => 'post',
+                    ],
+                ); ?>
+
+                <div class="row tight-form">
+                    <div class="column-responsive column-25">
+                        <?= $this->Form->control('controller', [
+                            'label' => '',
+                            'type' => 'select',
+                            'options' => $sheet_options,
+                        ]); ?>
+                    </div>
+                    <div class="column-responsive column-50">
+                        <?= $this->Form->control('state_id', [
+                            'label' => '',
+                            'type' => 'select',
+                            'options' => $state_options,
+                        ]); ?>
+                        <?= $this->Form->end(); ?>
+                    </div>
+                    <div class="column-responsive column-25">
+                        <?= $this->Form->button(__('Search'), ['class' => 'personal float-right']); ?>
+                    </div>
+                </div>
+
+
+                <?php if ($user->role->can_access_personal) : ?>
+                    <h3><?= __('Users') ?></h3>
+
+                    <?= $this->Form->create(
+                        null,
+                        [
+                            'url' => ['controller' => 'Users', 'action' => 'private'],
+                            'type' => 'post',
+                            'method' => 'post',
+                        ],
+                    ); ?>
+                    <div class="row tight-form">
+                        <div class="column-responsive column-70">
+                            <?= $this->Form->control('personal', [
+                                'label' => '',
+                                'type' => 'text',
+                                'placeholder' => __('Search user by real name or email address...'),
+                                'class' => 'placeholder'
+                            ]); ?>
+                            <?= $this->Form->end(); ?>
+                        </div>
+                        <div class="column-responsive column-25">
+                            <?= $this->Form->button(__('Search'), ['class' => 'personal float-right']); ?>
+                        </div>
+                    </div>
+                <?php endif ; ?>
+
+            </div>
+        <?php endif ; ?>
+
         <?php if ($user->role->can_configure) : ?>
             <div class="spacer"> </div>
             <div class="view content">
@@ -171,5 +255,3 @@
         <?php endif; ?>
     <div>
 </div>
-
-<?= $this->Html->css('tabs.css') ?>
