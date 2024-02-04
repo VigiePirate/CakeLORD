@@ -68,7 +68,8 @@ $cakeDescription = 'LORD';
                         'url' => ['controller' => 'Lord', 'action' => 'parse'],
                         'type' => 'post',
                         'method' => 'post',
-                        'class' => 'searchbar'
+                        'class' => 'searchbar',
+                        'name' => 'searchbar'
                     ],
                 );
             ?>

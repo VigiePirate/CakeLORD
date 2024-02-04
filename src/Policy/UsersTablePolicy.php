@@ -36,6 +36,18 @@ class UsersTablePolicy implements BeforePolicyInterface
      */
     public function canIndex(IdentityInterface $user, UsersTable $users)
     {
+        return true;
+    }
+
+    /**
+     * Check if $user can see lists of users with personal information
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Table\UsersTable $users The users table.
+     * @return bool
+     */
+    public function canPrivate(IdentityInterface $user, UsersTable $users)
+    {
         return $user->role->can_access_personal;
     }
 }

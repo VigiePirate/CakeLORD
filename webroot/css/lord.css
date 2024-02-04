@@ -258,6 +258,10 @@ input[type='button'], input[type='reset'], input[type='submit'] {
   padding-bottom: 0.5rem;
 }
 
+button.personal {
+  margin-top: 1.1rem !important;
+}
+
 textarea {
   height:auto;
 }
@@ -324,6 +328,11 @@ input:read-only {
 
 .placeholder {
   color: #707e8a;
+}
+
+.tight-form {
+  margin-top: -1.75rem !important;
+  margin-bottom: 0.5rem !important;
 }
 
 /* Tables */
@@ -943,8 +952,13 @@ th {
   width: 3.6rem;
 }
 
+#searchbarname::placeholder {
+  color: #ffffff !important;
+  opacity: 1;
+}
+
 ::placeholder {
-  color: #ffffff;
+  color: #707e8a;
   opacity: 1;
 }
 

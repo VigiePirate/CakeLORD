@@ -79,10 +79,27 @@ class LordController extends AppController
         $count['issues'] = $query->count();
         $issues = $query->limit(5);
 
+        $sheet_options = [
+            'Rats' => __('Rats'),
+            'Ratteries' => __('Ratteries'),
+            'Litters' => __('Litters')
+        ];
+
+        $state_options = $this->fetchModel('States')->find()->all()->combine('id','name');
+
         $user = $this->request->getAttribute('identity');
         $this->Authorization->authorize($lord);
 
-        $this->set(compact('user', 'count', 'rats', 'litters', 'ratteries', 'issues'));
+        $this->set(compact(
+            'user',
+            'count',
+            'rats',
+            'litters',
+            'ratteries',
+            'issues',
+            'sheet_options',
+            'state_options'
+        ));
     }
 
     public function parse() {
@@ -121,6 +138,17 @@ class LordController extends AppController
         $users = $query->limit(10);
 
         $this->set(compact('names', 'count', 'rats', 'ratteries', 'users'));
+    }
+
+    public function inState()
+    {
+        $this->Authorization->skipAuthorization();
+
+        if($this->request->is(['post'])) {
+            $controller = $this->request->getData('controller');
+            $state_id = $this->request->getData('state_id');
+            $this->redirect(['controller' => $controller, 'action' => 'inState', $state_id]);
+        }
     }
 
     public function stats()

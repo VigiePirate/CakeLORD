@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2024-02-04 10:55+0000\n"
-"PO-Revision-Date: 2024-02-04 11:57+0100\n"
+"POT-Creation-Date: 2024-02-04 19:45+0000\n"
+"PO-Revision-Date: 2024-02-04 20:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -291,21 +291,19 @@ msgstr "Le signalement a été supprimé."
 msgid "The issue could not be deleted. Please, try again."
 msgstr "Impossible de supprimer le signalement. Veuillez réessayer."
 
-#: src/Controller/LitterMessagesController.php:53
-#: src/Controller/LitterMessagesController.php:79
+#: src/Controller/LitterMessagesController.php:77
 msgid "The litter message has been saved."
 msgstr "La notification a été enregistrée."
 
-#: src/Controller/LitterMessagesController.php:57
-#: src/Controller/LitterMessagesController.php:83
+#: src/Controller/LitterMessagesController.php:81
 msgid "The litter message could not be saved. Please, try again."
 msgstr "Impossible d’enregistrer la notification. Veuillez réessayer."
 
-#: src/Controller/LitterMessagesController.php:102
+#: src/Controller/LitterMessagesController.php:101
 msgid "The litter message has been deleted."
 msgstr "La notification a été supprimée."
 
-#: src/Controller/LitterMessagesController.php:104
+#: src/Controller/LitterMessagesController.php:103
 msgid "The litter message could not be deleted. Please, try again."
 msgstr "Impossible de supprimer la notification. Veuillez réessayer."
 
@@ -339,17 +337,17 @@ msgstr ""
 "dessous."
 
 #: src/Controller/LittersController.php:172
-#: src/Controller/LordController.php:241
+#: src/Controller/LordController.php:269
 msgid "Survival rate"
 msgstr "Taux de survie"
 
 #: src/Controller/LittersController.php:173
-#: src/Controller/LordController.php:211
+#: src/Controller/LordController.php:239
 msgid "Age (in months)"
 msgstr "Âge (en mois)"
 
 #: src/Controller/LittersController.php:174
-#: src/Controller/LordController.php:242
+#: src/Controller/LordController.php:270
 msgid "Survival rate (%)"
 msgstr "Taux de survie (%)"
 
@@ -684,7 +682,7 @@ msgstr ""
 "administrateur."
 
 #: src/Controller/LittersController.php:177
-#: src/Controller/LordController.php:216
+#: src/Controller/LordController.php:244
 msgctxt "litter statistics"
 msgid "Age: between "
 msgstr "Âge : entre "
@@ -694,7 +692,7 @@ msgctxt "litter statistics"
 msgid " and "
 msgstr " et "
 
-#: src/Controller/LordController.php:217
+#: src/Controller/LordController.php:245
 msgid " and "
 msgstr " et "
 
@@ -703,7 +701,7 @@ msgctxt "litter statistics"
 msgid " months"
 msgstr " mois"
 
-#: src/Controller/LordController.php:219
+#: src/Controller/LordController.php:247
 msgid " months"
 msgstr " mois"
 
@@ -740,49 +738,79 @@ msgstr "Le fichier journal a été supprimé."
 msgid "The log could not be deleted. Please, try again."
 msgstr "Impossible de supprimer le fichier journal. Veuillez réessayer."
 
-#: src/Controller/LordController.php:209
+#: src/Controller/LordController.php:83 src/Controller/LordController.php:309
+#: templates/Lord/my.php:26 templates/Lord/search.php:42
+#: templates/Lord/webstats.php:50 templates/Rats/add.php:31
+#: templates/Rats/dispute.php:28 templates/Rats/edit.php:28
+#: templates/Rats/search.php:19 templates/Ratteries/delete.php:122
+#: templates/Ratteries/dispute.php:28 templates/element/my/messages.php:47
+#: templates/element/my/messages.php:235
+msgid "Rats"
+msgstr "Rats"
+
+#: src/Controller/LordController.php:84 src/Controller/LordController.php:313
+#: templates/LitterSnapshots/diff.php:98 templates/LitterSnapshots/diff.php:249
+#: templates/Litters/view.php:330 templates/Lord/my.php:39
+#: templates/Lord/search.php:66 templates/Lord/webstats.php:34
+#: templates/Ratteries/add.php:30 templates/Ratteries/edit.php:27
+#: templates/Ratteries/locate.php:31 templates/Users/view.php:155
+#: templates/element/my/messages.php:107 templates/element/my/messages.php:302
+msgid "Ratteries"
+msgstr "Rateries"
+
+#: src/Controller/LordController.php:85 templates/Litters/add.php:30
+#: templates/Litters/attach_rat.php:8 templates/Litters/attach_rat.php:30
+#: templates/Litters/dispute.php:28 templates/Litters/edit.php:24
+#: templates/Litters/simulate.php:21 templates/Litters/virtual.php:39
+#: templates/Lord/hall_of_fame.php:24 templates/Lord/my.php:33
+#: templates/Lord/webstats.php:42 templates/Ratteries/delete.php:120
+#: templates/element/my/messages.php:169 templates/element/my/messages.php:369
+msgid "Litters"
+msgstr "Portées"
+
+#: src/Controller/LordController.php:237
 msgid "Females"
 msgstr "Femelles"
 
-#: src/Controller/LordController.php:210
+#: src/Controller/LordController.php:238
 msgid "Males"
 msgstr "Mâles"
 
-#: src/Controller/LordController.php:212
+#: src/Controller/LordController.php:240
 msgid "Number of alive rats"
 msgstr "Nombre de rats vivants"
 
-#: src/Controller/LordController.php:213 templates/RatSnapshots/diff.php:195
+#: src/Controller/LordController.php:241 templates/RatSnapshots/diff.php:195
 #: templates/RatSnapshots/diff.php:198 templates/RatSnapshots/diff.php:476
 #: templates/Rats/view.php:352 templates/element/simple_rats.php:42
 msgid "Age"
 msgstr "Âge"
 
-#: src/Controller/LordController.php:214
+#: src/Controller/LordController.php:242
 msgid "Age pyramid"
 msgstr "Pyramide des âges"
 
-#: src/Controller/LordController.php:215
+#: src/Controller/LordController.php:243
 msgid "(presumed) alive rats"
 msgstr "rats (présumés) en vie"
 
-#: src/Controller/LordController.php:218
+#: src/Controller/LordController.php:246
 msgid "months"
 msgstr "mois"
 
-#: src/Controller/LordController.php:220
+#: src/Controller/LordController.php:248
 msgid "All-time average"
 msgstr "Moyenne (toutes années confondues)"
 
-#: src/Controller/LordController.php:221
+#: src/Controller/LordController.php:249
 msgid "All-time average:"
 msgstr "Moyenne (toutes années confondues):"
 
-#: src/Controller/LordController.php:222
+#: src/Controller/LordController.php:250
 msgid "Average lifespan by birth year"
 msgstr "Par année de naissance"
 
-#: src/Controller/LordController.php:223
+#: src/Controller/LordController.php:251
 msgid "Birth year"
 msgstr "Année de naissance"
 
@@ -791,123 +819,104 @@ msgctxt "rattery"
 msgid "Birth year"
 msgstr "Fondée en"
 
-#: src/Controller/LordController.php:224
+#: src/Controller/LordController.php:252
 msgid "Average lifespan (in days)"
 msgstr "Durée de vie moyenne (en jours)"
 
-#: src/Controller/LordController.php:225 templates/Litters/view.php:400
+#: src/Controller/LordController.php:253 templates/Litters/view.php:400
 msgid "Average lifespan:"
 msgstr "Durée de vie moyenne :"
 
-#: src/Controller/LordController.php:226
+#: src/Controller/LordController.php:254
 msgid "Life expectancy"
 msgstr "Espérance de vie"
 
-#: src/Controller/LordController.php:227
+#: src/Controller/LordController.php:255
 msgid "days"
 msgstr "jours"
 
-#: src/Controller/LordController.php:228
+#: src/Controller/LordController.php:256
 msgid "Rats born in"
 msgstr "Rats nés en"
 
-#: src/Controller/LordController.php:229
+#: src/Controller/LordController.php:257
 msgid "Total litter size"
 msgstr "Taille totale de la portée"
 
-#: src/Controller/LordController.php:230
+#: src/Controller/LordController.php:258
 msgid "Litter size (number of pups)"
 msgstr "Taille de la portée (nombre de ratons)"
 
-#: src/Controller/LordController.php:231
+#: src/Controller/LordController.php:259
 msgid "Proportion of litters (%)"
 msgstr "Proportion des portées (%)"
 
-#: src/Controller/LordController.php:232
+#: src/Controller/LordController.php:260
 msgid "Litter size distribution (% of litters)"
 msgstr "Répartition de la taille des portées (% des portées)"
 
-#: src/Controller/LordController.php:233
+#: src/Controller/LordController.php:261
 msgid "% of litters"
 msgstr "% des portées"
 
-#: src/Controller/LordController.php:234
+#: src/Controller/LordController.php:262
 msgid "pups"
 msgstr "ratons"
 
-#: src/Controller/LordController.php:235
+#: src/Controller/LordController.php:263
 msgid "Number of pups of the given sex"
 msgstr "Nombre de ratons du sexe défini"
 
-#: src/Controller/LordController.php:236
+#: src/Controller/LordController.php:264
 msgid "Litter size distribution by sex (% of litters)"
 msgstr "Répartition du nombre de ratons par sexe (% des portées)"
 
-#: src/Controller/LordController.php:238
+#: src/Controller/LordController.php:266
 msgid "Mortality distribution"
 msgstr "Répartition des décès"
 
-#: src/Controller/LordController.php:239
+#: src/Controller/LordController.php:267
 msgid "Mortality probability"
 msgstr "Probabilité de décès"
 
-#: src/Controller/LordController.php:240
+#: src/Controller/LordController.php:268
 msgid "Death probabilities (%)"
 msgstr "Probabilités de décès (%)"
 
-#: src/Controller/LordController.php:243
+#: src/Controller/LordController.php:271
 msgid "All-time survival and mortality by age"
 msgstr "Survie et mortalité, toutes années confondues, par classe d’âge"
 
-#: src/Controller/LordController.php:244
+#: src/Controller/LordController.php:272
 msgid "% of all rats reach this age"
 msgstr "% de tous les rats atteignent cet âge"
 
-#: src/Controller/LordController.php:245
+#: src/Controller/LordController.php:273
 msgid "% of all deaths occur in rats of this age"
 msgstr "% des décès surviennent chez les rats de cet âge"
 
-#: src/Controller/LordController.php:246
+#: src/Controller/LordController.php:274
 msgid "% of all rats reaching this age die in the following month"
 msgstr "% de tous les rats atteignant cet âge meurent dans les mois suivants"
 
-#: src/Controller/LordController.php:281 templates/Lord/my.php:26
-#: templates/Lord/search.php:42 templates/Lord/webstats.php:50
-#: templates/Rats/add.php:31 templates/Rats/dispute.php:28
-#: templates/Rats/edit.php:28 templates/Rats/search.php:19
-#: templates/Ratteries/delete.php:122 templates/Ratteries/dispute.php:28
-#: templates/element/my/messages.php:47 templates/element/my/messages.php:235
-msgid "Rats"
-msgstr "Rats"
-
-#: src/Controller/LordController.php:282
+#: src/Controller/LordController.php:310
 msgid "Rats by birth year"
 msgstr "Rats par année de naissance"
 
-#: src/Controller/LordController.php:283 templates/Lord/search.php:88
-#: templates/Lord/webstats.php:26
+#: src/Controller/LordController.php:311 templates/Lord/my.php:211
+#: templates/Lord/search.php:88 templates/Lord/webstats.php:26
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: src/Controller/LordController.php:284
+#: src/Controller/LordController.php:312
 msgid "Users by registration year"
 msgstr "Utilisateurs par année d’inscription"
 
-#: src/Controller/LordController.php:285 templates/LitterSnapshots/diff.php:98
-#: templates/LitterSnapshots/diff.php:249 templates/Litters/view.php:330
-#: templates/Lord/my.php:39 templates/Lord/search.php:66
-#: templates/Lord/webstats.php:34 templates/Ratteries/add.php:30
-#: templates/Ratteries/edit.php:27 templates/Ratteries/locate.php:31
-#: templates/Users/view.php:155 templates/element/my/messages.php:107
-#: templates/element/my/messages.php:302
-msgid "Ratteries"
-msgstr "Rateries"
-
-#: src/Controller/LordController.php:286
+#: src/Controller/LordController.php:314
 msgid "Ratteries by registration year"
 msgstr "Rateries par année d’inscription"
 
-#: src/Controller/LordController.php:323
+#: src/Controller/LordController.php:325
 msgid ""
 "\n"
 "                We strongly advised to consider alternative contact means "
@@ -952,13 +961,13 @@ msgstr ""
 "dans les meilleurs délais.\n"
 "                "
 
-#: src/Controller/LordController.php:356
+#: src/Controller/LordController.php:358
 msgid "Error sending email. Please, retry or contact us by another mean."
 msgstr ""
 "Une erreur s’est produite lors de l’envoi du mail. Veuillez réessayer ou "
 "nous contacter par un autre moyen."
 
-#: src/Controller/LordController.php:360
+#: src/Controller/LordController.php:362
 msgid ""
 "This was not the expected answer! Sorry to insist, but we must check that "
 "you are not spam, sausage, spam, spam, bacon, spam, tomato and spam to "
@@ -969,7 +978,7 @@ msgstr ""
 "spam, spam, bacon, spam, tomate et spam afin de protéger notre rie "
 "électronique."
 
-#: src/Controller/LordController.php:237
+#: src/Controller/LordController.php:265
 msgctxt "sex ratio"
 msgid "Litters with"
 msgstr "Portées de"
@@ -1010,21 +1019,19 @@ msgstr "L’opérateur a été supprimé."
 msgid "The operator could not be deleted. Please, try again."
 msgstr "Impossible de supprimer l’opérateur. Veuillez réessayer."
 
-#: src/Controller/RatMessagesController.php:76
-#: src/Controller/RatMessagesController.php:102
+#: src/Controller/RatMessagesController.php:87
 msgid "The rat message has been saved."
 msgstr "La notification a été enregistrée."
 
-#: src/Controller/RatMessagesController.php:80
-#: src/Controller/RatMessagesController.php:106
+#: src/Controller/RatMessagesController.php:91
 msgid "The rat message could not be saved. Please, try again."
 msgstr "Impossible d’enregistrer le message. Veuillez réessayer."
 
-#: src/Controller/RatMessagesController.php:125
+#: src/Controller/RatMessagesController.php:111
 msgid "The rat message has been deleted."
 msgstr "La notification a été supprimée."
 
-#: src/Controller/RatMessagesController.php:127
+#: src/Controller/RatMessagesController.php:113
 msgid "The rat message could not be deleted. Please, try again."
 msgstr "Impossible de supprimer le message. Veuillez réessayer."
 
@@ -1466,21 +1473,19 @@ msgstr "La fiche de cette raterie a été validée."
 msgid "This rattery sheet has been unapproved."
 msgstr "La fiche de cette raterie a été invalidée."
 
-#: src/Controller/RatteryMessagesController.php:56
 #: src/Controller/RatteryMessagesController.php:82
 msgid "The rattery message has been saved."
 msgstr "La notification a été enregistrée."
 
-#: src/Controller/RatteryMessagesController.php:60
 #: src/Controller/RatteryMessagesController.php:86
 msgid "The rattery message could not be saved. Please, try again."
 msgstr "Impossible d’enregistrer le message. Veuillez réessayer."
 
-#: src/Controller/RatteryMessagesController.php:105
+#: src/Controller/RatteryMessagesController.php:106
 msgid "The rattery message has been deleted."
 msgstr "La notification a été supprimée."
 
-#: src/Controller/RatteryMessagesController.php:107
+#: src/Controller/RatteryMessagesController.php:108
 msgid "The rattery message could not be deleted. Please, try again."
 msgstr "Impossible de supprimer le message. Veuillez réessayer."
 
@@ -2552,12 +2557,13 @@ msgctxt "issue"
 msgid "Created"
 msgstr "Créé le"
 
-#: templates/LitterMessages/my.php:16 templates/LitterSnapshots/diff.php:318
-#: templates/Litters/dispute.php:56 templates/Litters/view.php:445
-#: templates/RatMessages/index.php:13 templates/RatMessages/my.php:16
-#: templates/RatSnapshots/diff.php:574 templates/Rats/dispute.php:56
-#: templates/Rats/view.php:447 templates/Ratteries/dispute.php:56
-#: templates/Ratteries/view.php:620 templates/RatteryMessages/my.php:16
+#: templates/LitterMessages/index.php:19 templates/LitterMessages/my.php:16
+#: templates/LitterSnapshots/diff.php:318 templates/Litters/dispute.php:56
+#: templates/Litters/view.php:445 templates/RatMessages/index.php:19
+#: templates/RatMessages/my.php:16 templates/RatSnapshots/diff.php:574
+#: templates/Rats/dispute.php:56 templates/Rats/view.php:447
+#: templates/Ratteries/dispute.php:56 templates/Ratteries/view.php:620
+#: templates/RatteryMessages/index.php:19 templates/RatteryMessages/my.php:16
 #: templates/RatterySnapshots/diff.php:284 templates/element/my/messages.php:60
 #: templates/element/my/messages.php:124 templates/element/my/messages.php:187
 #: templates/element/my/messages.php:260 templates/element/my/messages.php:327
@@ -2613,19 +2619,19 @@ msgstr "Éditer la notice"
 #: templates/DeathSecondaryCauses/index.php:20 templates/Faqs/index.php:17
 #: templates/Issues/all.php:20 templates/Issues/closed.php:20
 #: templates/Issues/index.php:20 templates/LitterMessages/add.php:12
-#: templates/LitterMessages/edit.php:12 templates/LitterMessages/index.php:20
+#: templates/LitterMessages/edit.php:12 templates/LitterMessages/index.php:26
 #: templates/LitterMessages/view.php:10 templates/LitterSnapshots/index.php:18
 #: templates/Litters/delete.php:54 templates/Litters/delete.php:83
 #: templates/Litters/view.php:476 templates/Lord/my.php:61
 #: templates/Operators/index.php:17 templates/Operators/view.php:45
 #: templates/RatMessages/add.php:12 templates/RatMessages/edit.php:12
-#: templates/RatMessages/view.php:10 templates/RatSnapshots/index.php:18
-#: templates/Rats/delete.php:54 templates/Rats/delete.php:83
-#: templates/Rats/view.php:495 templates/Ratteries/delete.php:54
-#: templates/Ratteries/delete.php:83 templates/Ratteries/view.php:544
-#: templates/Ratteries/view.php:651 templates/RatteryMessages/add.php:12
-#: templates/RatteryMessages/edit.php:12 templates/RatteryMessages/index.php:20
-#: templates/RatteryMessages/view.php:10
+#: templates/RatMessages/index.php:26 templates/RatMessages/view.php:10
+#: templates/RatSnapshots/index.php:18 templates/Rats/delete.php:54
+#: templates/Rats/delete.php:83 templates/Rats/view.php:495
+#: templates/Ratteries/delete.php:54 templates/Ratteries/delete.php:83
+#: templates/Ratteries/view.php:544 templates/Ratteries/view.php:651
+#: templates/RatteryMessages/add.php:12 templates/RatteryMessages/edit.php:12
+#: templates/RatteryMessages/index.php:25 templates/RatteryMessages/view.php:10
 #: templates/RatterySnapshots/index.php:18 templates/Roles/index.php:21
 #: templates/Roles/view.php:95 templates/States/index.php:27
 #: templates/Users/index.php:32 templates/element/litters.php:30
@@ -2655,11 +2661,11 @@ msgstr "Supprimer l’article"
 #: templates/DeathPrimaryCauses/index.php:56
 #: templates/DeathSecondaryCauses/index.php:52 templates/Faqs/index.php:49
 #: templates/Issues/all.php:45 templates/Issues/closed.php:45
-#: templates/Issues/index.php:44 templates/LitterMessages/index.php:44
+#: templates/Issues/index.php:44 templates/LitterMessages/index.php:62
 #: templates/LitterMessages/my.php:42 templates/LitterSnapshots/index.php:40
-#: templates/Operators/index.php:49 templates/RatMessages/index.php:61
+#: templates/Operators/index.php:49 templates/RatMessages/index.php:62
 #: templates/RatMessages/my.php:42 templates/RatSnapshots/index.php:40
-#: templates/RatteryMessages/index.php:44 templates/RatteryMessages/my.php:40
+#: templates/RatteryMessages/index.php:60 templates/RatteryMessages/my.php:40
 #: templates/RatterySnapshots/index.php:40 templates/Roles/index.php:94
 #: templates/States/index.php:69 templates/Users/index.php:81
 #: templates/Users/named.php:39 templates/Users/private.php:43
@@ -2679,11 +2685,11 @@ msgstr "début"
 #: templates/DeathPrimaryCauses/index.php:57
 #: templates/DeathSecondaryCauses/index.php:53 templates/Faqs/index.php:50
 #: templates/Issues/all.php:46 templates/Issues/closed.php:46
-#: templates/Issues/index.php:45 templates/LitterMessages/index.php:45
+#: templates/Issues/index.php:45 templates/LitterMessages/index.php:63
 #: templates/LitterMessages/my.php:43 templates/LitterSnapshots/index.php:41
-#: templates/Operators/index.php:50 templates/RatMessages/index.php:62
+#: templates/Operators/index.php:50 templates/RatMessages/index.php:63
 #: templates/RatMessages/my.php:43 templates/RatSnapshots/index.php:41
-#: templates/RatteryMessages/index.php:45 templates/RatteryMessages/my.php:41
+#: templates/RatteryMessages/index.php:61 templates/RatteryMessages/my.php:41
 #: templates/RatterySnapshots/index.php:41 templates/Roles/index.php:95
 #: templates/States/index.php:70 templates/Users/index.php:82
 #: templates/Users/named.php:40 templates/Users/private.php:44
@@ -2703,11 +2709,11 @@ msgstr "précédente"
 #: templates/DeathPrimaryCauses/index.php:59
 #: templates/DeathSecondaryCauses/index.php:55 templates/Faqs/index.php:52
 #: templates/Issues/all.php:48 templates/Issues/closed.php:48
-#: templates/Issues/index.php:47 templates/LitterMessages/index.php:47
+#: templates/Issues/index.php:47 templates/LitterMessages/index.php:65
 #: templates/LitterMessages/my.php:45 templates/LitterSnapshots/index.php:43
-#: templates/Operators/index.php:52 templates/RatMessages/index.php:64
+#: templates/Operators/index.php:52 templates/RatMessages/index.php:65
 #: templates/RatMessages/my.php:45 templates/RatSnapshots/index.php:43
-#: templates/RatteryMessages/index.php:47 templates/RatteryMessages/my.php:43
+#: templates/RatteryMessages/index.php:63 templates/RatteryMessages/my.php:43
 #: templates/RatterySnapshots/index.php:43 templates/Roles/index.php:97
 #: templates/States/index.php:72 templates/Users/index.php:84
 #: templates/Users/named.php:42 templates/Users/private.php:46
@@ -2727,11 +2733,11 @@ msgstr "suivante"
 #: templates/DeathPrimaryCauses/index.php:60
 #: templates/DeathSecondaryCauses/index.php:56 templates/Faqs/index.php:53
 #: templates/Issues/all.php:49 templates/Issues/closed.php:49
-#: templates/Issues/index.php:48 templates/LitterMessages/index.php:48
+#: templates/Issues/index.php:48 templates/LitterMessages/index.php:66
 #: templates/LitterMessages/my.php:46 templates/LitterSnapshots/index.php:44
-#: templates/Operators/index.php:53 templates/RatMessages/index.php:65
+#: templates/Operators/index.php:53 templates/RatMessages/index.php:66
 #: templates/RatMessages/my.php:46 templates/RatSnapshots/index.php:44
-#: templates/RatteryMessages/index.php:48 templates/RatteryMessages/my.php:44
+#: templates/RatteryMessages/index.php:64 templates/RatteryMessages/my.php:44
 #: templates/RatterySnapshots/index.php:44 templates/Roles/index.php:98
 #: templates/States/index.php:73 templates/Users/index.php:85
 #: templates/Users/named.php:43 templates/Users/private.php:47
@@ -2751,11 +2757,11 @@ msgstr "fin"
 #: templates/DeathPrimaryCauses/index.php:62
 #: templates/DeathSecondaryCauses/index.php:58 templates/Faqs/index.php:55
 #: templates/Issues/all.php:51 templates/Issues/closed.php:51
-#: templates/Issues/index.php:50 templates/LitterMessages/index.php:50
+#: templates/Issues/index.php:50 templates/LitterMessages/index.php:68
 #: templates/LitterMessages/my.php:48 templates/LitterSnapshots/index.php:46
-#: templates/Operators/index.php:55 templates/RatMessages/index.php:67
+#: templates/Operators/index.php:55 templates/RatMessages/index.php:68
 #: templates/RatMessages/my.php:48 templates/RatSnapshots/index.php:46
-#: templates/RatteryMessages/index.php:50 templates/RatteryMessages/my.php:46
+#: templates/RatteryMessages/index.php:66 templates/RatteryMessages/my.php:46
 #: templates/RatterySnapshots/index.php:46 templates/Roles/index.php:100
 #: templates/States/index.php:75 templates/Users/index.php:87
 #: templates/Users/named.php:45 templates/Users/private.php:49
@@ -2861,14 +2867,15 @@ msgstr "Éditer la rubrique"
 #: templates/Categories/index.php:43 templates/Compatibilities/edit.php:14
 #: templates/Compatibilities/index.php:31 templates/Compatibilities/view.php:12
 #: templates/Faqs/index.php:38 templates/LitterMessages/edit.php:16
-#: templates/LitterMessages/index.php:35 templates/LitterMessages/view.php:12
+#: templates/LitterMessages/index.php:51 templates/LitterMessages/view.php:12
 #: templates/LitterSnapshots/edit.php:14 templates/LitterSnapshots/index.php:31
 #: templates/LitterSnapshots/view.php:12 templates/Operators/index.php:38
 #: templates/Operators/view.php:57 templates/RatMessages/edit.php:16
-#: templates/RatMessages/view.php:12 templates/RatSnapshots/edit.php:14
-#: templates/RatSnapshots/index.php:31 templates/RatSnapshots/view.php:12
-#: templates/RatteryMessages/edit.php:16 templates/RatteryMessages/index.php:35
-#: templates/RatteryMessages/view.php:12 templates/RatterySnapshots/edit.php:14
+#: templates/RatMessages/index.php:51 templates/RatMessages/view.php:12
+#: templates/RatSnapshots/edit.php:14 templates/RatSnapshots/index.php:31
+#: templates/RatSnapshots/view.php:12 templates/RatteryMessages/edit.php:16
+#: templates/RatteryMessages/index.php:49 templates/RatteryMessages/view.php:12
+#: templates/RatterySnapshots/edit.php:14
 #: templates/RatterySnapshots/index.php:31
 #: templates/RatterySnapshots/view.php:12 templates/Roles/index.php:45
 #: templates/States/index.php:58 templates/Users/delete.php:65
@@ -2935,8 +2942,8 @@ msgid "Back"
 msgstr "Retour"
 
 #: templates/Categories/view.php:28 templates/Faqs/all.php:9
-#: templates/Lord/my.php:93 templates/layout/default.php:114
-#: templates/layout/fullpage.php:129
+#: templates/Lord/my.php:93 templates/layout/default.php:115
+#: templates/layout/fullpage.php:130
 msgid "Guides"
 msgstr "Aide"
 
@@ -2945,8 +2952,8 @@ msgstr "Aide"
 msgid "FAQs"
 msgstr "FAQs"
 
-#: templates/Categories/view.php:47 templates/layout/default.php:116
-#: templates/layout/fullpage.php:131
+#: templates/Categories/view.php:47 templates/layout/default.php:117
+#: templates/layout/fullpage.php:132
 msgid "Full guides"
 msgstr "Notices"
 
@@ -3032,12 +3039,13 @@ msgstr "Ajouter une compatibilité"
 #: templates/Compatibilities/edit.php:12 templates/Compatibilities/index.php:31
 #: templates/ContributionTypes/index.php:35
 #: templates/Contributions/index.php:36 templates/LitterMessages/edit.php:14
-#: templates/LitterMessages/index.php:35 templates/LitterSnapshots/edit.php:12
+#: templates/LitterMessages/index.php:48 templates/LitterSnapshots/edit.php:12
 #: templates/LitterSnapshots/index.php:31 templates/Litters/delete.php:8
 #: templates/Operators/view.php:57 templates/RatMessages/edit.php:14
-#: templates/RatSnapshots/edit.php:12 templates/RatSnapshots/index.php:31
-#: templates/Rats/delete.php:8 templates/Ratteries/delete.php:8
-#: templates/RatteryMessages/edit.php:14 templates/RatteryMessages/index.php:35
+#: templates/RatMessages/index.php:48 templates/RatSnapshots/edit.php:12
+#: templates/RatSnapshots/index.php:31 templates/Rats/delete.php:8
+#: templates/Ratteries/delete.php:8 templates/RatteryMessages/edit.php:14
+#: templates/RatteryMessages/index.php:46
 #: templates/RatterySnapshots/edit.php:12
 #: templates/RatterySnapshots/index.php:31
 #: templates/element/staff_sidebar.php:32
@@ -3060,10 +3068,9 @@ msgstr "Nouvelle compatibilité"
 msgid "All Compatibility Rules"
 msgstr "Toutes les règles de compatibilité"
 
-#: templates/Compatibilities/index.php:29 templates/LitterMessages/index.php:33
+#: templates/Compatibilities/index.php:29
 #: templates/LitterSnapshots/index.php:29 templates/Operators/view.php:55
-#: templates/RatSnapshots/index.php:29 templates/RatteryMessages/index.php:33
-#: templates/RatterySnapshots/index.php:29
+#: templates/RatSnapshots/index.php:29 templates/RatterySnapshots/index.php:29
 #: vendor/cakephp/cakephp/src/View/Helper/PaginatorHelper.php:1260
 msgid "View"
 msgstr "Voir"
@@ -3071,9 +3078,9 @@ msgstr "Voir"
 #: templates/Compatibilities/index.php:30
 #: templates/ContributionTypes/index.php:30
 #: templates/Contributions/index.php:31 templates/Countries/edit.php:36
-#: templates/LitterMessages/index.php:34 templates/LitterSnapshots/index.php:30
-#: templates/Operators/view.php:56 templates/RatSnapshots/index.php:30
-#: templates/RatteryMessages/index.php:34
+#: templates/LitterMessages/index.php:43 templates/LitterSnapshots/index.php:30
+#: templates/Operators/view.php:56 templates/RatMessages/index.php:43
+#: templates/RatSnapshots/index.php:30 templates/RatteryMessages/index.php:41
 #: templates/RatterySnapshots/index.php:30
 #: templates/element/staff_sidebar.php:20 templates/element/variety/edit.php:18
 msgid "Edit"
@@ -3138,9 +3145,9 @@ msgid "All Contributions from {0}"
 msgstr "Toutes les portées de {0}"
 
 #: templates/Contributions/from_rattery.php:16
-#: templates/LitterMessages/my.php:19 templates/LitterSnapshots/diff.php:24
-#: templates/LitterSnapshots/diff.php:176 templates/Litters/view.php:206
-#: templates/element/my/messages.php:181
+#: templates/LitterMessages/index.php:22 templates/LitterMessages/my.php:19
+#: templates/LitterSnapshots/diff.php:24 templates/LitterSnapshots/diff.php:176
+#: templates/Litters/view.php:206 templates/element/my/messages.php:181
 msgid "Parents"
 msgstr "Parents"
 
@@ -3478,8 +3485,8 @@ msgstr "Supprimer la cause de décès"
 #: templates/DeathSecondaryCauses/view.php:52 templates/Litters/view.php:374
 #: templates/Lord/stats.php:1 templates/Lord/webstats.php:1
 #: templates/Ratteries/view.php:192 templates/Ratteries/view.php:318
-#: templates/Users/view.php:275 templates/layout/default.php:130
-#: templates/layout/fullpage.php:145
+#: templates/Users/view.php:275 templates/layout/default.php:131
+#: templates/layout/fullpage.php:146
 msgid "Statistics"
 msgstr "Statistiques"
 
@@ -3849,43 +3856,51 @@ msgstr "Ajouter une notification"
 msgid "Edit Litter Message"
 msgstr "Éditer la notification"
 
-#: templates/LitterMessages/index.php:8 templates/LitterMessages/view.php:14
-msgid "New Litter Message"
-msgstr "Nouvelle notification"
-
-#: templates/LitterMessages/index.php:9 templates/LitterMessages/my.php:8
+#: templates/LitterMessages/index.php:8 templates/LitterMessages/my.php:8
 msgid "Litter Messages"
 msgstr "Notifications portée"
 
-#: templates/LitterMessages/my.php:11
-msgid "Litter Messages History"
-msgstr "Notifications sur mes fiches portée"
+#: templates/LitterMessages/index.php:12 templates/Litters/needs_staff.php:8
+#: templates/Litters/needs_staff.php:12 templates/Lord/my.php:1
+#: templates/RatMessages/index.php:12 templates/Rats/needs_staff.php:8
+#: templates/Rats/needs_staff.php:12 templates/Ratteries/in_state.php:7
+#: templates/Ratteries/needs_staff.php:7 templates/Ratteries/needs_staff.php:11
+#: templates/RatteryMessages/index.php:12
+msgid "Back office"
+msgstr "Service après-vente"
 
-#: templates/LitterMessages/my.php:21 templates/Litters/dispute.php:62
-#: templates/RatMessages/index.php:18 templates/RatMessages/my.php:21
-#: templates/Rats/dispute.php:62 templates/Ratteries/dispute.php:62
+#: templates/LitterMessages/index.php:14
+msgid "All Litter Messages"
+msgstr "Toutes les notifications portée"
+
+#: templates/LitterMessages/index.php:24 templates/LitterMessages/my.php:21
+#: templates/Litters/dispute.php:62 templates/RatMessages/index.php:24
+#: templates/RatMessages/my.php:21 templates/Rats/dispute.php:62
+#: templates/Ratteries/dispute.php:62 templates/RatteryMessages/index.php:23
 #: templates/RatteryMessages/my.php:20 templates/Roles/index.php:20
 #: templates/element/my/messages.php:117 templates/element/my/messages.php:179
 msgid "Staff?"
 msgstr "Staff ?"
 
-#: templates/LitterMessages/my.php:22 templates/LitterSnapshots/diff.php:321
-#: templates/Litters/dispute.php:63 templates/Litters/view.php:448
-#: templates/RatMessages/index.php:19 templates/RatMessages/my.php:22
-#: templates/RatSnapshots/diff.php:577 templates/Rats/dispute.php:63
-#: templates/Rats/view.php:450 templates/Ratteries/dispute.php:63
-#: templates/Ratteries/view.php:623 templates/RatteryMessages/my.php:21
+#: templates/LitterMessages/index.php:25 templates/LitterMessages/my.php:22
+#: templates/LitterSnapshots/diff.php:321 templates/Litters/dispute.php:63
+#: templates/Litters/view.php:448 templates/RatMessages/index.php:25
+#: templates/RatMessages/my.php:22 templates/RatSnapshots/diff.php:577
+#: templates/Rats/dispute.php:63 templates/Rats/view.php:450
+#: templates/Ratteries/dispute.php:63 templates/Ratteries/view.php:623
+#: templates/RatteryMessages/index.php:24 templates/RatteryMessages/my.php:21
 #: templates/RatterySnapshots/diff.php:287
 #: templates/element/my/messages.php:118 templates/element/my/messages.php:180
 msgid "Auto?"
 msgstr "Auto ?"
 
-#: templates/LitterMessages/my.php:17 templates/LitterSnapshots/diff.php:319
-#: templates/Litters/dispute.php:57 templates/Litters/view.php:446
-#: templates/RatMessages/index.php:16 templates/RatMessages/my.php:17
-#: templates/RatSnapshots/diff.php:575 templates/Rats/dispute.php:57
-#: templates/Rats/view.php:448 templates/Ratteries/dispute.php:57
-#: templates/Ratteries/view.php:621 templates/RatteryMessages/my.php:17
+#: templates/LitterMessages/index.php:20 templates/LitterMessages/my.php:17
+#: templates/LitterSnapshots/diff.php:319 templates/Litters/dispute.php:57
+#: templates/Litters/view.php:446 templates/RatMessages/index.php:20
+#: templates/RatMessages/my.php:17 templates/RatSnapshots/diff.php:575
+#: templates/Rats/dispute.php:57 templates/Rats/view.php:448
+#: templates/Ratteries/dispute.php:57 templates/Ratteries/view.php:621
+#: templates/RatteryMessages/index.php:20 templates/RatteryMessages/my.php:17
 #: templates/RatterySnapshots/diff.php:285 templates/element/my/messages.php:59
 #: templates/element/my/messages.php:123 templates/element/my/messages.php:186
 #: templates/element/my/messages.php:265 templates/element/my/messages.php:332
@@ -3894,36 +3909,47 @@ msgctxt "message"
 msgid "Sent by"
 msgstr "Envoyé par"
 
-#: templates/LitterMessages/my.php:18 templates/RatMessages/my.php:18
-#: templates/RatteryMessages/my.php:18 templates/element/my/messages.php:56
-#: templates/element/my/messages.php:116 templates/element/my/messages.php:178
+#: templates/LitterMessages/index.php:21 templates/LitterMessages/my.php:18
+#: templates/RatMessages/index.php:21 templates/RatMessages/my.php:18
+#: templates/RatteryMessages/index.php:21 templates/RatteryMessages/my.php:18
+#: templates/element/my/messages.php:56 templates/element/my/messages.php:116
+#: templates/element/my/messages.php:178
 msgctxt "message"
 msgid "About"
 msgstr "À propos de"
 
 #: templates/Lord/hall_of_fame.php:14 templates/Lord/stats.php:14
-#: templates/Lord/webstats.php:14 templates/layout/default.php:122
-#: templates/layout/fullpage.php:137
+#: templates/Lord/webstats.php:14 templates/layout/default.php:123
+#: templates/layout/fullpage.php:138
 msgid "About"
 msgstr "À propos"
 
-#: templates/LitterMessages/my.php:20 templates/RatMessages/my.php:20
-#: templates/RatteryMessages/my.php:19 templates/element/my/messages.php:58
-#: templates/element/my/messages.php:119 templates/element/my/messages.php:182
-#: templates/element/my/messages.php:278 templates/element/my/messages.php:345
-#: templates/element/my/messages.php:412
+#: templates/LitterMessages/index.php:23 templates/LitterMessages/my.php:20
+#: templates/RatMessages/index.php:23 templates/RatMessages/my.php:20
+#: templates/RatteryMessages/index.php:22 templates/RatteryMessages/my.php:19
+#: templates/element/my/messages.php:58 templates/element/my/messages.php:119
+#: templates/element/my/messages.php:182 templates/element/my/messages.php:278
+#: templates/element/my/messages.php:345 templates/element/my/messages.php:412
 msgctxt "message"
 msgid "Content"
 msgstr "Message"
 
-#: templates/LitterMessages/view.php:47 templates/RatMessages/index.php:20
-#: templates/RatMessages/view.php:47 templates/RatteryMessages/view.php:47
+#: templates/LitterMessages/view.php:47 templates/RatMessages/view.php:47
+#: templates/RatteryMessages/view.php:47
 msgid "Content"
 msgstr "Contenu"
+
+#: templates/LitterMessages/my.php:11
+msgid "Litter Messages History"
+msgstr "Notifications sur mes fiches portée"
 
 #: templates/LitterMessages/view.php:12
 msgid "Delete Litter Message"
 msgstr "Supprimer la notification"
+
+#: templates/LitterMessages/view.php:14
+msgid "New Litter Message"
+msgstr "Nouvelle notification"
 
 #: templates/LitterMessages/view.php:26 templates/RatMessages/view.php:26
 #: templates/RatteryMessages/view.php:26 templates/Users/edit.php:29
@@ -3995,10 +4021,10 @@ msgstr ""
 "nés}}"
 
 #: templates/LitterSnapshots/diff.php:311 templates/Litters/delete.php:43
-#: templates/Litters/view.php:438 templates/RatSnapshots/diff.php:567
-#: templates/Rats/delete.php:43 templates/Rats/view.php:440
-#: templates/Ratteries/delete.php:43 templates/Ratteries/view.php:613
-#: templates/RatterySnapshots/diff.php:277
+#: templates/Litters/view.php:438 templates/Lord/my.php:161
+#: templates/RatSnapshots/diff.php:567 templates/Rats/delete.php:43
+#: templates/Rats/view.php:440 templates/Ratteries/delete.php:43
+#: templates/Ratteries/view.php:613 templates/RatterySnapshots/diff.php:277
 msgid "Messages"
 msgstr "Notifications"
 
@@ -4101,16 +4127,6 @@ msgstr "Données"
 msgid "New Litter"
 msgstr "Nouvelle portée"
 
-#: templates/Litters/add.php:30 templates/Litters/attach_rat.php:8
-#: templates/Litters/attach_rat.php:30 templates/Litters/dispute.php:28
-#: templates/Litters/edit.php:24 templates/Litters/simulate.php:21
-#: templates/Litters/virtual.php:39 templates/Lord/hall_of_fame.php:24
-#: templates/Lord/my.php:33 templates/Lord/webstats.php:42
-#: templates/Ratteries/delete.php:120 templates/element/my/messages.php:169
-#: templates/element/my/messages.php:369
-msgid "Litters"
-msgstr "Portées"
-
 #: templates/Litters/add.php:32
 msgid "Record a new litter"
 msgstr "Déclarer une nouvelle portée"
@@ -4157,7 +4173,6 @@ msgid "None of the above (I will select a registered rattery below)"
 msgstr "Aucune des options précédentes (choisir une raterie ci-dessous)"
 
 #: templates/Litters/add.php:100 templates/Litters/manage_contributions.php:56
-#: templates/Litters/manage_contributions.php:110
 #: templates/Litters/manage_contributions.php:111 templates/Rats/add.php:84
 msgid "Type and select the rattery’s name or prefix here..."
 msgstr "Entrez et sélectionnez le nom de la raterie ici…"
@@ -4549,13 +4564,6 @@ msgstr ""
 "Vous n’avez contribué à aucune portée déclarée. Vous pouvez en simuler ou en "
 "enregistrer une depuis les boutons ci-contre."
 
-#: templates/Litters/needs_staff.php:8 templates/Litters/needs_staff.php:12
-#: templates/Lord/my.php:1 templates/Rats/needs_staff.php:8
-#: templates/Rats/needs_staff.php:12 templates/Ratteries/in_state.php:7
-#: templates/Ratteries/needs_staff.php:7 templates/Ratteries/needs_staff.php:11
-msgid "Back office"
-msgstr "Service après-vente"
-
 #: templates/Litters/needs_staff.php:14
 msgid "Litter sheets needing staff action"
 msgstr "Fiches portée en attente d’une action du staff"
@@ -4858,7 +4866,7 @@ msgid "Pedigree analysis"
 msgstr "Analyse du pedigree"
 
 #: templates/Lord/acknowledge.php:9 templates/Lord/contact.php:7
-#: templates/layout/default.php:136 templates/layout/fullpage.php:151
+#: templates/layout/default.php:137 templates/layout/fullpage.php:152
 msgid "Contact"
 msgstr "Contact"
 
@@ -5053,24 +5061,71 @@ msgid "Manage death causes"
 msgstr "Administrer les causes de décès"
 
 #: templates/Lord/my.php:159
+msgid "Tools"
+msgstr "Outils"
+
+#: templates/Lord/my.php:164
+msgid "RatMessages"
+msgstr "Notifications rat"
+
+#: templates/Lord/my.php:165
+msgid "Browse, edit or delete rat messages"
+msgstr "Parcourir, modifier ou supprimer les notifications rat"
+
+#: templates/Lord/my.php:168
+#, fuzzy
+#| msgid "Rattery Messages"
+msgid "RatteryMessages"
+msgstr "Notifications raterie"
+
+#: templates/Lord/my.php:169
+msgid "Browse, edit or delete rattery messages"
+msgstr "Parcourir, modifier ou supprimer les notifications raterie"
+
+#: templates/Lord/my.php:172
+#, fuzzy
+#| msgid "Litter Messages"
+msgid "LitterMessages"
+msgstr "Notifications portée"
+
+#: templates/Lord/my.php:173
+msgid "Browse, edit or delete litter messages"
+msgstr "Parcourir, modifier ou supprimer les notifications portée"
+
+#: templates/Lord/my.php:177
+msgid "Sheets by state"
+msgstr "Fiches par état"
+
+#: templates/Lord/my.php:205 templates/Lord/my.php:232
+#: templates/Rats/born_after.php:8 templates/Rats/born_before.php:8
+#: templates/Rats/by_owner.php:8 templates/Rats/by_rattery.php:8
+#: templates/Rats/search.php:8 templates/Rats/search.php:184
+msgid "Search"
+msgstr "Rechercher"
+
+#: templates/Lord/my.php:226
+msgid "Search user by real name or email address..."
+msgstr "Chercher un utilisateur par son nom ou son adresse email..."
+
+#: templates/Lord/my.php:243
 msgid "Configuration"
 msgstr "Configuration"
 
-#: templates/Lord/my.php:162 templates/Roles/add.php:20
+#: templates/Lord/my.php:246 templates/Roles/add.php:20
 #: templates/Roles/edit.php:21 templates/Roles/view.php:21
 msgid "Roles"
 msgstr "Rôles"
 
-#: templates/Lord/my.php:163
+#: templates/Lord/my.php:247
 msgid "Configure roles and permissions"
 msgstr "Configurer les rôles et permissions"
 
-#: templates/Lord/my.php:166 templates/States/add.php:20
+#: templates/Lord/my.php:250 templates/States/add.php:20
 #: templates/States/edit.php:21
 msgid "States"
 msgstr "États des fiches"
 
-#: templates/Lord/my.php:167
+#: templates/Lord/my.php:251
 msgid "Configure states and sheet workflow"
 msgstr "Configurer les états des fiches et leur cycle de vie"
 
@@ -5438,8 +5493,8 @@ msgstr "la localisation de la tumeur ne peut être renseignée que depuis 2023"
 msgid "The End of the LORD"
 msgstr "La fin du LORD"
 
-#: templates/Lord/webstats.php:17 templates/layout/default.php:132
-#: templates/layout/fullpage.php:147
+#: templates/Lord/webstats.php:17 templates/layout/default.php:133
+#: templates/layout/fullpage.php:148
 msgid "Site statistics"
 msgstr "Statistiques du site"
 
@@ -5580,28 +5635,15 @@ msgstr "Éditer la notification"
 msgid "Rat Messages"
 msgstr "Notifications rats"
 
-#: templates/RatMessages/index.php:14 templates/RatSnapshots/diff.php:35
-#: templates/RatSnapshots/diff.php:311 templates/Rats/view.php:212
-#: templates/element/rats.php:15 templates/element/simple_rats.php:27
-#: templates/element/simple_staff_rats.php:6 templates/element/staff_rats.php:5
-msgid "Identifier"
-msgstr "Identifiant"
+#: templates/RatMessages/index.php:14
+msgid "All Rat Messages"
+msgstr "Toutes les notifications rat"
 
-#: templates/RatMessages/index.php:15 templates/RatMessages/my.php:19
+#: templates/RatMessages/index.php:22 templates/RatMessages/my.php:19
 #: templates/element/my/messages.php:57
 #: templates/element/simple_staff_rats.php:7 templates/element/staff_rats.php:6
 msgid "Usual name"
 msgstr "Nom d’usage"
-
-#: templates/RatMessages/index.php:21 templates/element/my/messages.php:121
-#: templates/element/my/messages.php:184 templates/element/my/messages.php:274
-#: templates/element/my/messages.php:341 templates/element/my/messages.php:408
-msgid "Sheet"
-msgstr "Fiche"
-
-#: templates/RatMessages/index.php:51
-msgid "See Rat"
-msgstr "Voir le rat"
 
 #: templates/RatMessages/my.php:11
 msgid "Rat Messages History"
@@ -5633,6 +5675,13 @@ msgstr "Snapshot"
 #: templates/Rats/print.php:17 templates/Rats/view.php:209
 msgid "Identity"
 msgstr "Identité"
+
+#: templates/RatSnapshots/diff.php:35 templates/RatSnapshots/diff.php:311
+#: templates/Rats/view.php:212 templates/element/rats.php:15
+#: templates/element/simple_rats.php:27
+#: templates/element/simple_staff_rats.php:6 templates/element/staff_rats.php:5
+msgid "Identifier"
+msgstr "Identifiant"
 
 #: templates/RatSnapshots/diff.php:51 templates/RatSnapshots/diff.php:329
 #: templates/Rats/print.php:37 templates/Rats/view.php:220
@@ -5790,12 +5839,6 @@ msgstr "Le diagnostic a été confirmé par une autopsie ou des analyses"
 #: templates/Rats/add.php:413
 msgid "Record rat"
 msgstr "Enregistrer le rat"
-
-#: templates/Rats/born_after.php:8 templates/Rats/born_before.php:8
-#: templates/Rats/by_owner.php:8 templates/Rats/by_rattery.php:8
-#: templates/Rats/search.php:8 templates/Rats/search.php:184
-msgid "Search"
-msgstr "Rechercher"
 
 #: templates/Rats/born_after.php:14
 msgid "Rats born after"
@@ -6774,13 +6817,13 @@ msgstr "Ajouter une notification"
 msgid "Edit Rattery Message"
 msgstr "Éditer la notification"
 
-#: templates/RatteryMessages/index.php:8 templates/RatteryMessages/view.php:14
-msgid "New Rattery Message"
-msgstr "Nouvelle raterie"
-
-#: templates/RatteryMessages/index.php:9 templates/RatteryMessages/my.php:8
+#: templates/RatteryMessages/index.php:8 templates/RatteryMessages/my.php:8
 msgid "Rattery Messages"
 msgstr "Notifications raterie"
+
+#: templates/RatteryMessages/index.php:14
+msgid "All Rattery Messages"
+msgstr "Toutes les notifications raterie"
 
 #: templates/RatteryMessages/my.php:11
 msgid "Rattery Messages History"
@@ -6789,6 +6832,10 @@ msgstr "Notifications sur mes fiches raterie"
 #: templates/RatteryMessages/view.php:12
 msgid "Delete Rattery Message"
 msgstr "Supprimer la notification"
+
+#: templates/RatteryMessages/view.php:14
+msgid "New Rattery Message"
+msgstr "Nouvelle raterie"
 
 #: templates/RatterySnapshots/add.php:11 templates/RatterySnapshots/edit.php:16
 #: templates/RatterySnapshots/view.php:13
@@ -7268,8 +7315,8 @@ msgid "Edit \"About me\" section of"
 msgstr "Modifier la bio de"
 
 #: templates/Users/home.php:1 templates/element/my/staffbar.php:58
-#: templates/layout/default.php:83 templates/layout/default.php:89
-#: templates/layout/fullpage.php:103
+#: templates/layout/default.php:84 templates/layout/default.php:90
+#: templates/layout/fullpage.php:104
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
@@ -7428,13 +7475,13 @@ msgstr ""
 "J’ai lu les {0} et le {1} du site et j’en accepte tous les termes et "
 "conditions."
 
-#: templates/Users/register.php:33 templates/layout/default.php:127
-#: templates/layout/fullpage.php:142
+#: templates/Users/register.php:33 templates/layout/default.php:128
+#: templates/layout/fullpage.php:143
 msgid "Legal Notice"
 msgstr "Mentions légales"
 
-#: templates/Users/register.php:34 templates/layout/default.php:117
-#: templates/layout/fullpage.php:132
+#: templates/Users/register.php:34 templates/layout/default.php:118
+#: templates/layout/fullpage.php:133
 msgid "Code of conduct"
 msgstr "Code de conduite"
 
@@ -7655,6 +7702,12 @@ msgstr "Aucune notification récente."
 #: templates/element/my/messages.php:92 templates/element/my/messages.php:287
 msgid "All rattery notifications"
 msgstr "Historique rateries"
+
+#: templates/element/my/messages.php:121 templates/element/my/messages.php:184
+#: templates/element/my/messages.php:274 templates/element/my/messages.php:341
+#: templates/element/my/messages.php:408
+msgid "Sheet"
+msgstr "Fiche"
 
 #: templates/element/my/messages.php:154 templates/element/my/messages.php:354
 msgid "All litter notifications"
@@ -8168,77 +8221,80 @@ msgstr ""
 "membres sont bénévoles. Répondre à leurs demandes permet d'assurer la "
 "qualité des données du LORD. Merci de votre compréhension."
 
-#: templates/layout/default.php:75 templates/layout/fullpage.php:89
+#: templates/layout/default.php:76 templates/layout/fullpage.php:90
 msgid "Search..."
 msgstr "Rechercher…"
 
-#: templates/layout/default.php:95 templates/layout/fullpage.php:109
+#: templates/layout/default.php:96 templates/layout/fullpage.php:110
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#: templates/layout/default.php:100 templates/layout/fullpage.php:114
+#: templates/layout/default.php:101 templates/layout/fullpage.php:115
 msgid "Log in"
 msgstr "Se connecter"
 
-#: templates/layout/default.php:115 templates/layout/fullpage.php:130
+#: templates/layout/default.php:116 templates/layout/fullpage.php:131
 msgid "F.A.Q."
 msgstr "F.A.Q."
 
-#: templates/layout/default.php:118 templates/layout/fullpage.php:133
+#: templates/layout/default.php:119 templates/layout/fullpage.php:134
 msgid "Contributing"
 msgstr "Contribuer au LORD"
 
-#: templates/layout/default.php:119 templates/layout/fullpage.php:134
+#: templates/layout/default.php:120 templates/layout/fullpage.php:135
 msgid "I want a LORD"
 msgstr "Adapter le LORD"
 
-#: templates/layout/default.php:123 templates/layout/fullpage.php:138
+#: templates/layout/default.php:124 templates/layout/fullpage.php:139
 msgid "History"
 msgstr "Historique"
 
-#: templates/layout/default.php:124 templates/layout/fullpage.php:139
+#: templates/layout/default.php:125 templates/layout/fullpage.php:140
 msgid "What’s New?"
 msgstr "Nouveautés"
 
-#: templates/layout/default.php:125 templates/layout/fullpage.php:140
+#: templates/layout/default.php:126 templates/layout/fullpage.php:141
 msgid "Staff"
 msgstr "L’équipe"
 
-#: templates/layout/default.php:126 templates/layout/fullpage.php:141
+#: templates/layout/default.php:127 templates/layout/fullpage.php:142
 msgid "Credits"
 msgstr "Remerciements"
 
-#: templates/layout/default.php:133 templates/layout/fullpage.php:148
+#: templates/layout/default.php:134 templates/layout/fullpage.php:149
 msgid "Rat statistics"
 msgstr "Statistiques des rats"
 
-#: templates/layout/default.php:135 templates/layout/fullpage.php:150
+#: templates/layout/default.php:136 templates/layout/fullpage.php:151
 msgid "Rattery map"
 msgstr "Carte des rateries"
 
-#: templates/layout/default.php:146 templates/layout/fullpage.php:161
+#: templates/layout/default.php:147 templates/layout/fullpage.php:162
 msgid "Links"
 msgstr "Liens"
 
-#: templates/layout/default.php:147 templates/layout/fullpage.php:162
+#: templates/layout/default.php:148 templates/layout/fullpage.php:163
 msgid "Websites"
 msgstr "Sites web"
 
-#: templates/layout/default.php:148 templates/layout/fullpage.php:163
+#: templates/layout/default.php:149 templates/layout/fullpage.php:164
 msgid "Forums"
 msgstr "Forums"
 
-#: templates/layout/default.php:149 templates/layout/fullpage.php:164
+#: templates/layout/default.php:150 templates/layout/fullpage.php:165
 msgid "Associations"
 msgstr "Associations"
 
-#: templates/layout/default.php:150 templates/layout/fullpage.php:165
+#: templates/layout/default.php:151 templates/layout/fullpage.php:166
 msgid "Social"
 msgstr "Réseaux sociaux"
 
-#: templates/layout/default.php:151 templates/layout/fullpage.php:166
+#: templates/layout/default.php:152 templates/layout/fullpage.php:167
 msgid "Partners"
 msgstr "Partenaires"
+
+#~ msgid "See Rat"
+#~ msgstr "Voir le rat"
 
 #~ msgid "Additional information (public)"
 #~ msgstr "Commentaires publiques"
