@@ -25,7 +25,7 @@
             <tbody>
                 <?php foreach ($litterMessages as $litterMessage): ?>
                     <tr>
-                        <td><?= h($litterMessage->created) ?></td>
+                        <td class="nowrap"><?= h($litterMessage->created) ?></td>
                         <td><?= $litterMessage->has('user') ? h($litterMessage->user->username) : '' ?></td>
                         <td><?= $litterMessage->has('litter') ? $this->Html->link($litterMessage->litter->birth_date, ['controller' => 'litters', 'action' => 'view', $litterMessage->litter->id]) : '' ?></td>
                         <td><?= $litterMessage->has('litter') ? h($litterMessage->litter->parents_name) : '' ?></td>

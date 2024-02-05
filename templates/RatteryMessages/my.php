@@ -24,7 +24,7 @@
             <tbody>
                 <?php foreach ($ratteryMessages as $ratteryMessage): ?>
                     <tr>
-                        <td><?= h($ratteryMessage->created) ?></td>
+                        <td class="nowrap"><?= h($ratteryMessage->created) ?></td>
                         <td><?= $ratteryMessage->has('user') ? h($ratteryMessage->user->username) : '' ?></td>
                         <td><?= $ratteryMessage->has('rattery') ? $this->Html->link($ratteryMessage->rattery->full_name, ['controller' => 'Ratteries', 'action' => 'view', $ratteryMessage->rattery->id]) : '' ?></td>
                         <td class="ellipsis" onclick="toggleMessage(this)"><?= h($ratteryMessage->content) ?></td>

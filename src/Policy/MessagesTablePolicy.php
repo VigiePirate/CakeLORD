@@ -38,17 +38,23 @@ class MessagesTablePolicy implements BeforePolicyInterface
     // }
 
     /**
-     * Check if $user can see complete list of descriptions
+     * Check if $user can see all messages
      *
      * @param Authorization\IdentityInterface $user The user.
      * @return bool
      */
     public function canIndex(IdentityInterface $user)
     {
-        return true;
+        return $user->role->is_staff;
     }
 
-    public function canAdd(IdentityInterface $user)
+    /**
+     * Check if $user can see messages on rats, ratteries and litters he is entitled with
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @return bool
+     */
+    public function canMy(IdentityInterface $user)
     {
         return true;
     }

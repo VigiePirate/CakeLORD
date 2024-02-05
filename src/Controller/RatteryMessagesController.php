@@ -18,7 +18,31 @@ class RatteryMessagesController extends AppController
      */
     public function index()
     {
-        $ratteryMessages = $this->paginate($this->RatteryMessages->find()->contain(['Ratteries', 'Users']));
+        $this->Authorization->authorize($this->RatteryMessages);
+
+        $query = $this->RatteryMessages
+            ->find()
+            ->contain([
+                'Ratteries',
+                'Ratteries.Users',
+                'Ratteries.States',
+                'Users'
+            ]);
+
+        $settings = [
+            'order' => [
+                'created' => 'desc',
+            ],
+            'sortableFields' => [
+                'created',
+                'is_staff_request',
+                'is_automatically_generated',
+                'Ratteries.prefix',
+                'Users.username',
+            ]
+        ];
+
+        $ratteryMessages = $this->paginate($query, $settings);
         $this->set(compact('ratteryMessages'));
     }
 
@@ -31,33 +55,13 @@ class RatteryMessagesController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
+
         $ratteryMessage = $this->RatteryMessages->get($id, [
             'contain' => ['Ratteries', 'Users'],
         ]);
 
         $this->set(compact('ratteryMessage'));
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $ratteryMessage = $this->RatteryMessages->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $ratteryMessage = $this->RatteryMessages->patchEntity($ratteryMessage, $this->request->getData());
-            if ($this->RatteryMessages->save($ratteryMessage)) {
-                $this->Flash->success(__('The rattery message has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The rattery message could not be saved. Please, try again.'));
-        }
-        $ratteries = $this->RatteryMessages->Ratteries->find('list', ['limit' => 200])->all();
-        $users = $this->RatteryMessages->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('ratteryMessage', 'ratteries', 'users'));
     }
 
     /**
@@ -67,24 +71,29 @@ class RatteryMessagesController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
-        $ratteryMessage = $this->RatteryMessages->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $ratteryMessage = $this->RatteryMessages->patchEntity($ratteryMessage, $this->request->getData());
-            if ($this->RatteryMessages->save($ratteryMessage)) {
-                $this->Flash->success(__('The rattery message has been saved.'));
+     public function edit($id = null)
+     {
+         $ratteryMessage = $this->RatteryMessages->get($id, [
+             'contain' => [
+                 'Users',
+                 'Ratteries'
+             ],
+         ]);
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The rattery message could not be saved. Please, try again.'));
-        }
-        $ratteries = $this->RatteryMessages->Ratteries->find('list', ['limit' => 200])->all();
-        $users = $this->RatteryMessages->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('ratteryMessage', 'ratteries', 'users'));
-    }
+         $this->Authorization->authorize($ratteryMessage);
+
+         if ($this->request->is(['patch', 'post', 'put'])) {
+             $ratteryMessage = $this->RatteryMessages->patchEntity($ratteryMessage, $this->request->getData());
+             if ($this->RatteryMessages->save($ratteryMessage)) {
+                 $this->Flash->success(__('The message has been saved.'));
+
+                 return $this->redirect(['action' => 'index']);
+             }
+             $this->Flash->error(__('The message could not be saved. Please, try again.'));
+         }
+         $identity = $this->request->getAttribute('identity');
+         $this->set(compact('ratteryMessage', 'identity'));
+     }
 
     /**
      * Delete method
@@ -97,6 +106,7 @@ class RatteryMessagesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $ratteryMessage = $this->RatteryMessages->get($id);
+        $this->Authorization->authorize($ratteryMessage);
         if ($this->RatteryMessages->delete($ratteryMessage)) {
             $this->Flash->success(__('The rattery message has been deleted.'));
         } else {
@@ -114,7 +124,17 @@ class RatteryMessagesController extends AppController
     public function my()
     {
         $user = $this->Authentication->getIdentity();
-        $this->Authorization->skipAuthorization();
+        $this->Authorization->authorize($this->RatteryMessages);
+
+        $ratteryMessages = $this->RatteryMessages
+            ->find('entitled', ['user_id' => $user->id])
+            ->contain([
+                'Ratteries',
+                'Ratteries.RatteryMessages' => ['sort' => 'RatteryMessages.created DESC'],
+                'Ratteries.States',
+                'Users',
+            ]);
+
         $settings = [
             'order' => [
                 'created' => 'desc',
@@ -127,14 +147,6 @@ class RatteryMessagesController extends AppController
                 'Users.username',
             ]
         ];
-        $ratteryMessages = $this->RatteryMessages
-            ->find('entitled', ['user_id' => $user->id])
-            ->contain([
-                'Ratteries',
-                'Ratteries.RatteryMessages' => ['sort' => 'RatteryMessages.created DESC'],
-                'Ratteries.States',
-                'Users',
-            ]);
 
         $this->paginate($ratteryMessages, $settings);
 

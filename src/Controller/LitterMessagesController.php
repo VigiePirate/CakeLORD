@@ -19,46 +19,30 @@ class LitterMessagesController extends AppController
     public function index()
     {
         $this->Authorization->authorize($this->LitterMessages);
-        $litterMessages = $this->paginate($this->LitterMessages->find()->contain(['Litters', 'Users']));
+
+        $query = $this->LitterMessages
+            ->find()
+            ->contain([
+                'Litters',
+                'Litters.Sire',
+                'Litters.Dam',
+                'Litters.Users',
+                'Litters.States',
+                'Users'
+            ]);
+
+        $settings = [
+            'sortableFields' => [
+                'created',
+                'is_staff_request',
+                'is_automatically_generated',
+                'Litters.birth_date',
+                'Users.username',
+            ]
+        ];
+
+        $litterMessages = $this->paginate($query, $settings);
         $this->set(compact('litterMessages'));
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Litter Message id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $litterMessage = $this->LitterMessages->get($id, [
-            'contain' => ['Litters', 'Users'],
-        ]);
-
-        $this->set(compact('litterMessage'));
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $litterMessage = $this->LitterMessages->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $litterMessage = $this->LitterMessages->patchEntity($litterMessage, $this->request->getData());
-            if ($this->LitterMessages->save($litterMessage)) {
-                $this->Flash->success(__('The litter message has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The litter message could not be saved. Please, try again.'));
-        }
-        $litters = $this->LitterMessages->Litters->find('list', ['limit' => 200])->all();
-        $users = $this->LitterMessages->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('litterMessage', 'litters', 'users'));
     }
 
     /**
@@ -68,24 +52,31 @@ class LitterMessagesController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
-        $litterMessage = $this->LitterMessages->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $litterMessage = $this->LitterMessages->patchEntity($litterMessage, $this->request->getData());
-            if ($this->LitterMessages->save($litterMessage)) {
-                $this->Flash->success(__('The litter message has been saved.'));
+     public function edit($id = null)
+     {
+         $litterMessage = $this->LitterMessages->get($id, [
+             'contain' => [
+                 'Users',
+                 'Litters',
+                 'Litters.Sire',
+                 'Litters.Dam',
+             ],
+         ]);
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The litter message could not be saved. Please, try again.'));
-        }
-        $litters = $this->LitterMessages->Litters->find('list', ['limit' => 200])->all();
-        $users = $this->LitterMessages->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('litterMessage', 'litters', 'users'));
-    }
+         $this->Authorization->authorize($litterMessage);
+
+         if ($this->request->is(['patch', 'post', 'put'])) {
+             $litterMessage = $this->LitterMessages->patchEntity($litterMessage, $this->request->getData());
+             if ($this->LitterMessages->save($litterMessage)) {
+                 $this->Flash->success(__('The message has been saved.'));
+
+                 return $this->redirect(['action' => 'index']);
+             }
+             $this->Flash->error(__('The message could not be saved. Please, try again.'));
+         }
+         $identity = $this->request->getAttribute('identity');
+         $this->set(compact('litterMessage', 'identity'));
+     }
 
     /**
      * Delete method
@@ -98,6 +89,7 @@ class LitterMessagesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $litterMessage = $this->LitterMessages->get($id);
+        $this->Authorization->authorize($litterMessage);
         if ($this->LitterMessages->delete($litterMessage)) {
             $this->Flash->success(__('The litter message has been deleted.'));
         } else {
@@ -115,7 +107,23 @@ class LitterMessagesController extends AppController
     public function my()
     {
         $user = $this->Authentication->getIdentity();
-        $this->Authorization->skipAuthorization();
+        $this->Authorization->authorize($this->LitterMessages);
+
+        $litters = $this->fetchModel('Litters')->find('entitledBy', ['user_id' => $user->id]);
+        $query = $this->LitterMessages
+            ->find()
+            ->where(['litter_id IN' => $litters])
+            ->contain([
+                'Litters',
+                'Litters.Contributions',
+                'Litters.Sire',
+                'Litters.Sire.BirthLitters.Contributions',
+                'Litters.Dam',
+                'Litters.Dam.BirthLitters.Contributions',
+                'Litters.Users',
+                'Litters.States',
+                'Users',
+            ]);
 
         $settings = [
             'sortableFields' => [
@@ -126,19 +134,6 @@ class LitterMessagesController extends AppController
                 'Users.username',
             ]
         ];
-
-        $query = $this->LitterMessages
-            ->find('entitled', ['user_id' => $user->id])
-            ->contain([
-                'Litters',
-                'Litters.Sire',
-                'Litters.Sire.BirthLitters.Contributions',
-                'Litters.Dam',
-                'Litters.Dam.BirthLitters.Contributions',
-                'Litters.LitterMessages' => ['sort' => 'LitterMessages.created DESC'],
-                'Litters.States',
-                'Users',
-            ]);
 
         $litterMessages = $this->paginate($query, $settings);
         $this->set(compact('litterMessages'));
