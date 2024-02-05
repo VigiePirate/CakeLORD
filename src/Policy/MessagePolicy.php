@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Policy;
 
-use App\Model\Entity\Message;
 use Authorization\IdentityInterface;
+use Cake\Datasource\EntityInterface;
 use Authorization\Policy\BeforePolicyInterface;
 
 /**
@@ -26,48 +26,40 @@ class MessagePolicy implements BeforePolicyInterface
             return true;
         }
     }
-    
-    /**
-     * Check if $user can add Message
-     *
-     * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\Message $message
-     * @return bool
-     */
-    public function canAdd(IdentityInterface $user, Message $message)
-    {
-    }
 
     /**
      * Check if $user can edit Message
      *
      * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\Message $message
+     * @param Cake\Datasource\EntityInterface $entity the entity
      * @return bool
      */
-    public function canEdit(IdentityInterface $user, Message $message)
+    public function canEdit(IdentityInterface $user, EntityInterface $entity)
     {
+        return $user->role->is_staff;
     }
 
     /**
      * Check if $user can delete Message
      *
      * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\Message $message
+     * @param Cake\Datasource\EntityInterface $entity the entity
      * @return bool
      */
-    public function canDelete(IdentityInterface $user, Message $message)
+    public function canDelete(IdentityInterface $user, EntityInterface $entity)
     {
+        return $user->role->can_delete;
     }
 
     /**
      * Check if $user can view Message
      *
      * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\Message $message
+     * @param Cake\Datasource\EntityInterface $entity the entity
      * @return bool
      */
-    public function canView(IdentityInterface $user, Message $message)
+    public function canView(IdentityInterface $user, EntityInterface $entity)
     {
+        return $user->role->is_staff;
     }
 }

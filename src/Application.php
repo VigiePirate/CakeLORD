@@ -248,6 +248,14 @@ class Application extends BaseApplication
         $mapResolver->map(Model\Entity\Role::class, Policy\ConfigurationPolicy::class);
         $mapResolver->map(Model\Entity\State::class, Policy\ConfigurationPolicy::class);
 
+        $mapResolver->map(Model\Entity\RatMessage::class, Policy\MessagePolicy::class);
+        $mapResolver->map(Model\Entity\RatteryMessage::class, Policy\MessagePolicy::class);
+        $mapResolver->map(Model\Entity\LitterMessage::class, Policy\MessagePolicy::class);
+        $mapResolver->map(Model\Table\RatMessagesTable::class, Policy\MessagesTablePolicy::class);
+        $mapResolver->map(Model\Table\RatteryMessagesTable::class, Policy\MessagesTablePolicy::class);
+        $mapResolver->map(Model\Table\LitterMessagesTable::class, Policy\MessagesTablePolicy::class);
+
+
         // default resolver (based on naming conventions)
         $ormResolver = new OrmResolver();
 

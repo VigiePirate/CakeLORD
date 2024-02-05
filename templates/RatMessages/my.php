@@ -25,7 +25,7 @@
             <tbody>
                 <?php foreach ($ratMessages as $ratMessage): ?>
                     <tr>
-                        <td><?= h($ratMessage->created) ?></td>
+                        <td class="nowrap"><?= h($ratMessage->created) ?></td>
                         <td><?= $ratMessage->has('user') ? h($ratMessage->user->username) : '' ?></td>
                         <td><?= $ratMessage->has('rat') ? $this->Html->link($ratMessage->rat->pedigree_identifier, ['controller' => 'Rats', 'action' => 'view', $ratMessage->rat->id]) : '' ?></td>
                         <td><?= h($ratMessage->rat->usual_name) ?></td>

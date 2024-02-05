@@ -18,7 +18,7 @@ class RatMessagesController extends AppController
      */
     public function index()
     {
-        $this->Authorization->skipAuthorization();
+        $this->Authorization->authorize($this->RatMessages);
 
         $query = $this->RatMessages
             ->find()
@@ -29,59 +29,26 @@ class RatMessagesController extends AppController
                 'Rats.OwnerUsers',
                 'Rats.BirthLitters',
                 'Rats.BirthLitters.Contributions',
-                // in order to know if each message is the last one for this rat
-                'Rats.RatMessages' =>  function($q) {
-                    return $q
-                    ->order('RatMessages.created DESC')
-                    ->limit(1);
-                },
                 'Rats.States',
                 'Users'
             ]);
 
-        $ratMessages = $this->paginate($query);
+        $settings = [
+            'order' => [
+                'created' => 'desc',
+            ],
+            'sortableFields' => [
+                'created',
+                'is_staff_request',
+                'is_automatically_generated',
+                'Rats.pedigree_identifier',
+                'Users.username',
+            ]
+        ];
+
+        $ratMessages = $this->paginate($query, $settings);
 
         $this->set(compact('ratMessages'));
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Rat Message id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $this->Authorization->skipAuthorization();
-
-        $ratMessage = $this->RatMessages->get($id, [
-            'contain' => ['Rats', 'Users'],
-        ]);
-
-        $this->set(compact('ratMessage'));
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $ratMessage = $this->RatMessages->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $ratMessage = $this->RatMessages->patchEntity($ratMessage, $this->request->getData());
-            if ($this->RatMessages->save($ratMessage)) {
-                $this->Flash->success(__('The rat message has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The rat message could not be saved. Please, try again.'));
-        }
-        $rats = $this->RatMessages->Rats->find('list', ['limit' => 200])->all();
-        $users = $this->RatMessages->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('ratMessage', 'rats', 'users'));
     }
 
     /**
@@ -94,20 +61,28 @@ class RatMessagesController extends AppController
     public function edit($id = null)
     {
         $ratMessage = $this->RatMessages->get($id, [
-            'contain' => [],
+            'contain' => [
+                'Users',
+                'Rats',
+                'Rats.Ratteries',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Contributions',
+            ],
         ]);
+
+        $this->Authorization->authorize($ratMessage);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $ratMessage = $this->RatMessages->patchEntity($ratMessage, $this->request->getData());
             if ($this->RatMessages->save($ratMessage)) {
-                $this->Flash->success(__('The rat message has been saved.'));
+                $this->Flash->success(__('The message has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The rat message could not be saved. Please, try again.'));
+            $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
-        $rats = $this->RatMessages->Rats->find('list', ['limit' => 200])->all();
-        $users = $this->RatMessages->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('ratMessage', 'rats', 'users'));
+        $identity = $this->request->getAttribute('identity');
+        $this->set(compact('ratMessage', 'identity'));
     }
 
     /**
@@ -121,6 +96,7 @@ class RatMessagesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $ratMessage = $this->RatMessages->get($id);
+        $this->Authorization->authorize($ratMessage);
         if ($this->RatMessages->delete($ratMessage)) {
             $this->Flash->success(__('The rat message has been deleted.'));
         } else {
@@ -138,30 +114,31 @@ class RatMessagesController extends AppController
     public function my()
     {
         $user = $this->Authentication->getIdentity();
-        $this->Authorization->skipAuthorization();
-        $settings = [
-            'order' => [
-                'created' => 'desc',
-            ],
-            'sortableFields' => [
-                'created',
-                'is_staff_request',
-                'is_automatically_generated',
-                'Rats.pedigree_identifier',
-                'Users.username',
-            ]
-        ];
+        $this->Authorization->authorize($this->RatMessages);
 
+        $rats = $this->fetchModel('Rats')->find('entitledBy', ['user_id' => $user->id, 'level' => 2]);
         $query = $this->RatMessages
-            ->find('entitled', ['user_id' => $user->id])
+            ->find()
             ->contain([
-                'Rats',
                 'Rats.Ratteries',
                 'Rats.BirthLitters',
                 'Rats.BirthLitters.Contributions',
                 'Rats.States',
                 'Users',
             ]);
+
+            $settings = [
+                'order' => [
+                    'created' => 'desc',
+                ],
+                'sortableFields' => [
+                    'created',
+                    'is_staff_request',
+                    'is_automatically_generated',
+                    'Rats.pedigree_identifier',
+                    'Users.username',
+                ]
+            ];
 
         $ratMessages = $this->paginate($query, $settings);
 
