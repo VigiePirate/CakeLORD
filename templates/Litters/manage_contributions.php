@@ -107,7 +107,7 @@
                             'label' => $type->name,
                             'type' => 'text',
                             'class' => 'placeholder',
-                            'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['name'] : __('Type and select the rattery’s name or prefix here...'),
+                            'value' => ! empty($previous[$type->id]) ? $previous[$type->id]['name'] : '',
                             'placeholder' => __('Type and select the rattery’s name or prefix here...')
                         ]);
 
@@ -120,7 +120,7 @@
                             ],
                             'class' => 'hide-everywhere',
                             'type' => 'text',
-                            'default' => ! empty($previous[$type->id]) ? $previous[$type->id]['id'] : null
+                            'value' => ! empty($previous[$type->id]) ? $previous[$type->id]['id'] : null
                         ]);
                     }
                     ?>
