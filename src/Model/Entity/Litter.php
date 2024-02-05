@@ -130,6 +130,18 @@ class Litter extends Entity
     protected function _getSireAgeInMonths() // now with litter birth date, should be with mating date?
     {
         if (isset($this->birth_date)) {
+
+            if ($this->sire[0]->id == 1) { // Unknown mother
+                return __x('age', '– ?? –');
+            }
+
+            if ($this->sire_age <= 0) { // Should raise exception
+                return $age = __('Negative age?!');
+            }
+            if ($this->sire_age > RatsTable::MAXIMAL_AGE_MONTHS) {
+                return $age = '– ?? –';
+            }
+
             $agedate = $this->birth_date;
             return __('{0, plural, =1{1 month} other{# months}}', [$agedate->diffInMonths($this->sire[0]->birth_date, true)]);
         } else { // should raise exception
@@ -150,6 +162,18 @@ class Litter extends Entity
     protected function _getDamAgeInMonths() // now with litter birth date, should be with mating date?
     {
         if (isset($this->birth_date)) {
+
+            if ($this->dam[0]->id == 1) { // Unknown mother
+                return __x('age', '– ?? –');
+            }
+
+            if ($this->dam_age <= 0) { // Should raise exception
+                return $age = __('Negative age?!');
+            }
+            if ($this->dam_age > RatsTable::MAXIMAL_AGE_MONTHS) {
+                return $age = '– ?? –';
+            }
+
             $agedate = $this->birth_date;
             return __('{0, plural, =1{1 month} other{# months}}', [$agedate->diffInMonths($this->dam[0]->birth_date, true)]);
         } else { // should raise exception
@@ -357,7 +381,7 @@ class Litter extends Entity
         if(! empty($this->parent_rats)) {
             foreach($this->parent_rats as $parent) {
                 if ($parent['sex'] == 'F') {
-                    return $this->birth_date->gte($parent['birth_date']);
+                    return $this->birth_date->greaterThanOrEquals($parent['birth_date']);
                 }
             }
         }
@@ -368,7 +392,7 @@ class Litter extends Entity
         if(! empty($this->parent_rats)) {
             foreach($this->parent_rats as $parent) {
                 if ($parent['sex'] == 'M') {
-                    return $this->birth_date->gte($parent['birth_date']);
+                    return $this->birth_date->greaterThanOrEquals($parent['birth_date']);
                 }
             }
         }

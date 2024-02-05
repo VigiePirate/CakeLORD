@@ -40,34 +40,34 @@
             </h1>
 
             <h2><?= __('Family size') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Total number of known ancestors:') ?></th>
-                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['ancestors']) ?></td>
+                    <td><?= __('{0, plural, =0{No rat} =1{1 rat} other{# rats}}', $stats['ancestors']) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Number of alive ancestors:') ?></th>
-                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['asc_alive']) ?></td>
+                    <td><?= __('{0, plural, =0{No rat} =1{1 rat} other{# rats}}', $stats['asc_alive']) ?></td>
                 </tr>
             </table>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Number of children:') ?></th>
-                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['children']) ?></td>
+                    <td><?= __('{0, plural, =0{No rat} =1{1 rat} other{# rats}}', $stats['children']) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Total number of descendants:') ?></th>
-                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['descendors']) ?></td>
+                    <td><?= __('{0, plural, =0{No rat} =1{1 rat} other{# rats}}', $stats['descendors']) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Number of alive descendants:') ?></th>
-                    <td><?= __('{0, plural,=0{0 rat} =1{1 rat} other{# rats}}', $stats['desc_alive']) ?>
-                         <?= $this->Html->link(__('(see all)'), ['action' => 'legacy', $rat->id]) ?></td>
+                    <td><?= __('{0, plural, =0{No rat} =1{1 rat} other{# rats}}', $stats['desc_alive']) ?>
+                         <?= $stats['desc_alive'] ? $this->Html->link(__('(see all)'), ['action' => 'legacy', $rat->id]) : '' ?></td>
                 </tr>
             </table>
 
             <h2><?= __('Family health') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Ancestors average lifespan:') ?></th>
                     <td><?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['asc_lifespan'], $stats['asc_female_lifespan'], $stats['asc_male_lifespan']]) ?></td>
@@ -81,7 +81,7 @@
                     <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['asc_not_accident_lifespan'], $stats['asc_female_not_accident_lifespan'], $stats['asc_male_not_accident_lifespan']]) ?></td>
                 </tr>
             </table>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Descendants average lifespan:') ?></th>
                     <td><?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['desc_lifespan'], $stats['desc_female_lifespan'], $stats['desc_male_lifespan']]) ?></td>

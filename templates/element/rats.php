@@ -36,7 +36,7 @@
                 <th><?= $this->Paginator->sort('OwnerUsers.username', __('Owner')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('sex', $exceptions)): ?>
-                <th><?= $this->Paginator->sort('sex','Sex') ?></th>
+                <th><?= $this->Paginator->sort('sex', __('Sex')) ?></th>
             <?php endif; ?>
             <?php if (! in_array('actions', $exceptions)): ?>
                 <th class="actions-title col-head"><?= __('Actions') ?></th>
