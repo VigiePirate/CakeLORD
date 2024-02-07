@@ -266,11 +266,11 @@
                     </div>
                 <?php endif ; ?>
 
-                <legend><?= __('Additional information') ?></legend>
+                <legend><?= __('Comments') ?></legend>
                 <?php
                     echo $this->Form->control('comments', [
                         'name' => 'comments',
-                        'label' => __('Public comments'),
+                        'label' => __('Amend sheet comments'),
                         'rows' => '5',
                         "error" => [
                             "escape" => false
@@ -283,7 +283,7 @@
                         'name' => 'creator_user_id',
                         'value' => $rat->creator_user->username,
                     ]);
-                    ?>
+                ?>
 
                 <?php if ($user->can('staffEdit', $rat)) : ?>
                     <h2 class="staff"><?= __('Staff-only') ?></h2>
@@ -314,10 +314,13 @@
                         </div>
                     </div>
 
+                <?php else : ?>
+                    <legend><?= __('Private information') ?></legend>
                 <?php endif ; ?>
 
                 <?=
                     $this->element('side_message_control', [
+                        'ignore_staff' => ! $user->can('staffEdit', $rat),
                         'user' => $user,
                         'sheet' => $rat,
                         'required' => false,
