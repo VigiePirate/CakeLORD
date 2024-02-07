@@ -68,7 +68,7 @@
                         'type' => 'textarea',
                         'id' => 'comments',
                         'name' => 'comments',
-                        'label' => __('Append comments if needed'),
+                        'label' => __('Amend sheet comments'),
                         'value' => $rat->comments,
                         'rows' => '5',
                     ]);

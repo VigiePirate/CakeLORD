@@ -426,6 +426,7 @@ class RatsController extends AppController
                 'Ratteries',
                 'DeathPrimaryCauses',
                 'DeathSecondaryCauses',
+                'BirthLitters.Contributions.Ratteries',
                 'BredLitters',
                 'States'
             ],
@@ -1238,7 +1239,6 @@ class RatsController extends AppController
      */
     public function changePicture($id = null)
     {
-
         $rat = $this->Rats->get($id, [
             'contain' => ['States', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions'],
         ]);
@@ -1282,7 +1282,7 @@ class RatsController extends AppController
     {
         $rat = $this->Rats->get($id, [
             'contain' => ['CreatorUsers', 'OwnerUsers', 'States', 'Ratteries',
-            'BirthLitters', 'BirthLitters.Contributions'],
+            'BirthLitters', 'BirthLitters.Contributions', 'BirthLitters.Contributions.Ratteries',],
         ]);
         $this->Authorization->authorize($rat, 'microEdit');
 
@@ -1318,6 +1318,7 @@ class RatsController extends AppController
                 'Ratteries',
                 'BirthLitters',
                 'BirthLitters.Contributions',
+                'BirthLitters.Contributions.Ratteries',
                 'DeathPrimaryCauses',
                 'DeathSecondaryCauses',
             ],
@@ -1370,8 +1371,15 @@ class RatsController extends AppController
     {
         $rat = $this->Rats->get($id, [
             'contain' => [
-                'CreatorUsers','OwnerUsers','States','Ratteries','BirthLitters','BirthLitters.Contributions',
-                'DeathPrimaryCauses','DeathSecondaryCauses',
+                'CreatorUsers',
+                'OwnerUsers',
+                'States',
+                'Ratteries',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'BirthLitters.Contributions.Ratteries',
+                'DeathPrimaryCauses',
+                'DeathSecondaryCauses',
             ],
         ]);
 
@@ -1430,8 +1438,11 @@ class RatsController extends AppController
         $rat = $this->Rats->get($id, [
             'contain' => [
                 'States',
+                'BirthLitters',
+                'BirthLitters.Contributions',
+                'BirthLitters.Contributions.Ratteries',
+                'Ratteries',
                 'RatMessages' => ['sort' => 'RatMessages.created DESC'],
-                'RatMessages.Rats.States',
                 'RatMessages.Users'
             ],
         ]);

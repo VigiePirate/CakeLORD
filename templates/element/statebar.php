@@ -26,6 +26,7 @@
                         $this->element('side_message_control', [
                             'user' => $user,
                             'sheet' => $sheet,
+                            'required' => false,
                         ]);
                     ?>
                 </div>

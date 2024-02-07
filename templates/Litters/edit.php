@@ -26,9 +26,9 @@
             <h1><?=__('Edit litter #') . $litter->id ?></h1>
             <?= $this->Form->setValueSources(['context', 'data'])->create($litter) ?>
 
-            <?= $this->Flash->render() ?>
-
+            <?= $this->Flash->render() ?>    
             <fieldset>
+                <legend><?= __('Public information') ?></legend>
                 <?= $this->Form->control('mating_date', ['label' => __('Mating date'), 'empty' => true]) ?>
 
                 <div class="row">
@@ -49,7 +49,7 @@
                 <?php
                     echo $this->Form->control('comments', [
                         'name' => 'comments',
-                        'label' => __('Comments (public)'),
+                        'label' => __('Comments'),
                         'rows' => '5',
                     ]);
                 ?>
@@ -135,8 +135,11 @@
                                 ?>
                         </div>
                     </div>
+                <?php else : ?>
+
                 <?php endif ; ?>
 
+                <legend><?= __('Private information') ?></legend>
                 <?=
                     $this->element('side_message_control', [
                         'user' => $user,
