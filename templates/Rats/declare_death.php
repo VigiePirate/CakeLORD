@@ -90,7 +90,7 @@
                         <?php endif ; ?>
                     </div>
                 </div>
-                
+
                 <legend><?= __('Complementary information') ?></legend>
                 <?php
                     echo $this->Form->control('death_euthanized', ['label' => __('The rat was euthanized')]); //,'Was the rat euthanized?');
@@ -108,7 +108,7 @@
                         'rows' => '5',
                     ]);
                 ?>
-                <?= $this->element('side_message_control', ['sheet' => $rat]) ?>
+                <?= $this->element('side_message_control', ['sheet' => $rat, 'ignore_staff' => true, 'required' => false]) ?>
             </fieldset>
             <?= $this->Form->button(__('Declare Death')); ?>
             <?= $this->Form->end(); ?>

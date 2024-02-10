@@ -32,6 +32,7 @@
             <?= $this->Flash->render() ?>
 
             <?= $this->Form->setValueSources(['context', 'data'])->create($rat, ['type' => 'file']) ?>
+
             <fieldset>
                 <legend><?= __('Identity') ?></legend>
 
@@ -131,14 +132,26 @@
                 <div class="spacer"></div>
 
                 <?php
+                    $this->Form->setTemplates([
+                        'checkboxContainer' => '<div class="input checkbox special-check">{{content}}</div>',
+                        'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
+                    ]);
+
                     echo $this->Form->control('is_dead', [
                         'type' => 'checkbox',
                         'value' => $rat->is_alive,
                         'label' => [
+                            'id' => 'dead_label',
                             'class' => 'legend',
-                            'text' => __('Click here to declare death or edit death information')
+                            'text' => $rat->is_alive ? __('Click here to declare death') : __('Uncheck this box if death was declared erroneously'),
                         ],
                     ]);
+
+                    $this->Form->setTemplates([
+                        'checkboxContainer' => '<div class="input checkbox">{{content}}</div>',
+                        'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
+                    ]);
+
                 ?>
 
                 <?php if (isset($rat->is_alive) && ! $rat->is_alive) :?>
@@ -313,9 +326,6 @@
                             </div>
                         </div>
                     </div>
-
-                <?php else : ?>
-                    <legend><?= __('Private information') ?></legend>
                 <?php endif ; ?>
 
                 <?=
@@ -339,6 +349,7 @@
     <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" /> -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.default.css" />
 <?php $this->end();?>
+
 <?= $this->Html->css('ajax.css') ?>
 <?= $this->Html->css('selectize.milligram.css') ?>
 
@@ -455,6 +466,10 @@
     <!-- death -->
     <script>
     var jsMessages = <?php echo $js_messages; ?>;
+    var boxLabels = [
+        <?= '"' . __('Click here to declare death') . '"' ?>,
+        <?= '"' . __('Uncheck this box if death was declared erroneously') . '"' ?>
+    ];
 
     $(function() {
         $('#is-dead').on('change', function() {
@@ -463,10 +478,13 @@
                 $('#death_div').removeClass("hide-everywhere");
                 $('#death_date').prop('required', true);
                 $('#primaries').prop('required', true);
+                $('#dead_label').html(boxLabels[1]);
+                //console.log($('#dead_label').next());
             } else {
                 $('#death_div').addClass("hide-everywhere");
                 $('#death_date').prop('required', false);
                 $('#primaries').prop('required', false);
+                $('#dead_label').html(boxLabels[0]);
             };
         });
 

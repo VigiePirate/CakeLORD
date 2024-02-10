@@ -1306,6 +1306,16 @@ footer {
   font-size: 1.7rem;
 }
 
+.input.checkbox.special-check {
+  margin-bottom: 2.0rem;
+  display: flex;
+  align-items: center;
+}
+
+.input.checkbox.special-check label {
+  padding-left: 1rem;
+}
+
 /* Paginator */
 .paginator {
   text-align: right;
