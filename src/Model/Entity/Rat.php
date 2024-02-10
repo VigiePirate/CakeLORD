@@ -403,6 +403,31 @@ class Rat extends Entity
         return $cause;
     }
 
+    protected function _getDeathEuthanizedString()
+    {
+        return $this->deathBooleanString($this->death_euthanized);
+    }
+
+    protected function _getDeathDiagnosedString()
+    {
+        return $this->deathBooleanString($this->death_diagnosed);
+    }
+
+    protected function _getDeathNecropsiedString()
+    {
+        return $this->deathBooleanString($this->death_necropsied);
+    }
+
+    protected function deathBooleanString($death_boolean)
+    {
+        $legacy_date = FrozenTime::createFromFormat('Y-m-d', '2023-12-31');
+        if ($death_boolean) {
+            return __('Yes');
+        } else {
+            return ($this->modified->lessThan($legacy_date) ? __x('legacy', 'Not Available') : __('No'));
+        }
+    }
+
     protected function _getVariety()
     {
 

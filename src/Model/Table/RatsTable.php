@@ -342,6 +342,16 @@ class RatsTable extends Table
                 $entity->death_secondary_cause = \Cake\Datasource\FactoryLocator::get('Table')->get('DeathSecondaryCauses')->get($entity->death_secondary_cause_id);
             }
 
+        } else {
+            // resurrection
+            if (isset($data['is_dead']) && ! $data['is_dead']) {
+                $entity->death_date = null;
+                $entity->death_primary_cause_id = null;
+                $entity->death_secondary_cause_id = null;
+                $entity->death_diagnosed = false;
+                $entity->death_necropsied = false;
+                $entity->death_euthanized = false;
+            }
         }
     }
 

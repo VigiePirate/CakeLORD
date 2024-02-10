@@ -228,25 +228,25 @@
                 <tr>
                     <th><?= __('Euthanized?') ?></th>
                     <?php if (in_array('death_euthanized', $diff_list)) : ?>
-                        <td class="minus"><?= $snap_rat->death_euthanized ? __('Yes') : __('No'); ?></td>
+                        <td class="minus"><?= $snap_rat->death_euthanized_string ?></td>
                     <?php else : ?>
-                        <td><?= $rat->death_euthanized ? __('Yes') : __('No'); ?></td>
+                        <td><?= $rat->death_euthanized_string ?></td>
                     <?php endif ; ?>
                 </tr>
                 <tr>
                     <th><?= __('Diagnosed by vet?') ?></th>
                     <?php if (in_array('death_diagnosed', $diff_list)) : ?>
-                        <td class="minus"><?= $snap_rat->death_diagnosed ? __('Yes') : __('No'); ?></td>
+                        <td class="minus"><?= $snap_rat->death_diagnosed_string ?></td>
                     <?php else : ?>
-                        <td><?= $rat->death_diagnosed ? __('Yes') : __('No'); ?></td>
+                        <td><?= $rat->death_diagnosed_string ?></td>
                     <?php endif ; ?>
                     </tr>
                 <tr>
                     <th><?= __('Post-mortem analyses?') ?></th>
                     <?php if (in_array('death_necropsied', $diff_list)) : ?>
-                        <td class="minus"><?= $snap_rat->death_necropsied ? __('Yes') : __('No'); ?></td>
+                        <td class="minus"><?= $snap_rat->death_necropsied_string ?></td>
                     <?php else : ?>
-                        <td><?= $rat->death_necropsied ? __('Yes') : __('No'); ?></td>
+                        <td><?= $rat->death_necropsied_string ?></td>
                     <?php endif ; ?>
                 </tr>
             </table>
@@ -517,7 +517,7 @@
                     <?php else : ?>
                         <td>
                     <?php endif ; ?>
-                    <?= $rat->death_euthanized ? __('Yes') : __('No'); ?></td>
+                    <?= $rat->death_euthanized_string ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Diagnosed by vet?') ?></th>
@@ -526,7 +526,7 @@
                     <?php else : ?>
                         <td>
                     <?php endif ; ?>
-                    <?= $rat->death_diagnosed ? __('Yes') : __('No'); ?></td>
+                    <?= $rat->death_diagnosed_string ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Post-mortem analyses?') ?></th>
@@ -535,7 +535,7 @@
                     <?php else : ?>
                         <td>
                     <?php endif ; ?>
-                    <?= $rat->death_necropsied ? __('Yes') : __('No'); ?></td>
+                    <?= $rat->death_necropsied_string ?></td>
                 </tr>
             </table>
 
