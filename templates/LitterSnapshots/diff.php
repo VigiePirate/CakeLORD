@@ -22,7 +22,7 @@
             </h1>
 
             <h2><?= __('Parents') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Dam') ?></th>
                     <?php if ($snap_litter->dam[0]->id != $litter->dam[0]->id) : ?>
@@ -52,7 +52,7 @@
             </table>
 
             <h2><?= __('Litter summary') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Mating date') ?></th>
                     <?php if (in_array('mating_date', $diff_list)) : ?>
@@ -98,7 +98,7 @@
             <h2><?= __('Ratteries') ?></h2>
             <?php if (! empty($snap_litter->contributions)) : ?>
                 <div class="table-responsive">
-                    <table class="condensed stats">
+                    <table class="condensed stats unfold">
                         <?php foreach ($types as $type) : ?>
                             <?php if (in_array($type->id, array_keys($snap_ratteries)) || in_array($type->id, array_keys($litter_ratteries))) : ?>
                                 <tr>
@@ -153,8 +153,11 @@
                     </blockquote>
                 </div>
             <?php endif ; ?>
-
+            <div class="signature">
+                &mdash; <?= __('Created on {0} by {1}.', [$litter->created->i18nFormat('dd/MM/yyyy'), $litter->user->username]) ?>
+            </div>
         </div>
+        <div class="spacer show-on-mobile"></div>
     </div>
 
     <div class="column-responsive column-50">
@@ -174,7 +177,7 @@
             </h1>
 
             <h2><?= __('Parents') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Dam') ?></th>
                     <?php if ($snap_litter->dam[0]->id != $litter->dam[0]->id) : ?>
@@ -204,7 +207,7 @@
             </table>
 
             <h2><?= __('Litter summary') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
 
                 <tr>
                     <th><?= __('Mating date') ?></th>
@@ -249,7 +252,7 @@
             <h2><?= __('Ratteries') ?></h2>
             <?php if (! empty($litter->contributions)) : ?>
                 <div class="table-responsive">
-                    <table class="condensed stats">
+                    <table class="condensed stats unfold">
                         <?php foreach ($types as $type) : ?>
                             <?php if (in_array($type->id, array_keys($snap_ratteries)) || in_array($type->id, array_keys($litter_ratteries))) : ?>
                                 <tr>
@@ -299,6 +302,9 @@
                 </blockquote>
             </div>
 
+            <div class="signature">
+                &mdash; <?= ($litter->modified != $litter->created) ? __('Last modified on {0}.', [$litter->modified->i18nFormat('dd/MM/yyyy')]) : '' ?>
+            </div>
         </div>
     </div>
 </div>
@@ -353,7 +359,7 @@
 </div>
 <div class="spacer"></div>
 
-<div class="row">
+<div class="row hide-on-mobile">
     <div class="column-responsive column-50">
         <div class="tooltip-staff">
             <?= $this->Html->image('/img/icon-restore.svg', [
@@ -368,6 +374,20 @@
         <div class="sheet-markers float-right mini-statebar">
             <?= $this->element('simple_statebar', ['controller' => 'Litters', 'sheet' => $litter, 'user' => $user]) ?>
         </div>
+    </div>
+</div>
+
+<div class="show-on-mobile">
+    <div class="sheet-markers float-right mini-statebar">
+        <?= $this->element('simple_statebar', ['controller' => 'Litters', 'sheet' => $litter, 'user' => $user]) ?>
+    </div>
+
+    <div class="tooltip-staff">
+        <?= $this->Html->image('/img/icon-restore.svg', [
+            'url' => ['controller' => 'Litters', 'action' => 'restore', $litter->id, $snapshot->id],
+            'class' => 'side-nav-icon mini-restore-icon',
+            'alt' => __('Restore')]) ?>
+        <span class="tooltiptext-staff"><?= __('Restore') ?></span>
     </div>
 </div>
 

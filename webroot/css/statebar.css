@@ -156,6 +156,11 @@ h1.half {
   padding: 1.5rem;
 }
 
+.mini-restore-icon {
+  width: 5.5rem !important;
+  padding: 1.25rem;
+}
+
 @media screen and (max-width: 640px) {
   .staff-action-symbol {
     padding: 0rem;

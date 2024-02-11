@@ -130,8 +130,8 @@
                     </div>
                 </blockquote>
             </div>
-
         </div>
+        <div class="spacer show-on-mobile"></div>
     </div>
 
     <div class="column-responsive column-50">
@@ -319,7 +319,7 @@
 </div>
 <div class="spacer"></div>
 
-<div class="row">
+<div class="row hide-on-mobile">
     <div class="column-responsive column-50">
         <div class="tooltip-staff">
             <?= $this->Html->image('/img/icon-restore.svg', [
@@ -334,6 +334,20 @@
         <div class="sheet-markers float-right mini-statebar">
             <?= $this->element('simple_statebar', ['controller' => 'Ratteries', 'sheet' => $rattery, 'user' => $user]) ?>
         </div>
+    </div>
+</div>
+
+<div class="show-on-mobile">
+    <div class="sheet-markers float-right mini-statebar">
+        <?= $this->element('simple_statebar', ['controller' => 'Ratteries', 'sheet' => $rattery, 'user' => $user]) ?>
+    </div>
+
+    <div class="tooltip-staff">
+        <?= $this->Html->image('/img/icon-restore.svg', [
+            'url' => ['controller' => 'ratteries', 'action' => 'restore', $rattery->id, $snapshot->id],
+            'class' => 'side-nav-icon mini-restore-icon',
+            'alt' => __('Restore')]) ?>
+        <span class="tooltiptext-staff"><?= __('Restore') ?></span>
     </div>
 </div>
 
