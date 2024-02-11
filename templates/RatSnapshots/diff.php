@@ -30,7 +30,7 @@
             </div>
 
             <h2><?= __('Identity') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Identifier') ?></th>
                     <?php if (in_array('pedigree_identifier', $diff_list)) : ?>
@@ -82,7 +82,7 @@
             </table>
 
             <h2><?= __('Origins') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Birth place') ?></th>
 
@@ -103,7 +103,7 @@
             </table>
 
             <h2><?= __('Description') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Color') ?></th>
                     <?php if (in_array('color_id', $diff_list)) : ?>
@@ -181,7 +181,7 @@
             </table>
 
             <h2><?= __('Health') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Is alive?') ?></th>
                     <?php if (in_array('is_alive', $diff_list)) : ?>
@@ -275,7 +275,7 @@
                 &mdash; <?= __('Created on {0} by {1}.', [$rat->created->i18nFormat('dd/MM/yyyy'), $rat->creator_user->username]) ?>
             </div>
         </div>
-
+        <div class="spacer show-on-mobile"></div>
     </div>
 
     <div class="column-responsive column-50">
@@ -306,7 +306,7 @@
             </div>
 
             <h2><?= __('Identity') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Identifier') ?></th>
                     <?php if (in_array('pedigree_identifier', $diff_list)) : ?>
@@ -364,7 +364,7 @@
             </table>
 
             <h2><?= __('Origins') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Birth place') ?></th>
                     <?php if (in_array('rattery_id', $diff_list)) : ?>
@@ -386,7 +386,7 @@
             </table>
 
             <h2><?= __('Description') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Color') ?></th>
                     <?php if (in_array('color_id', $diff_list)) : ?>
@@ -462,7 +462,7 @@
             </table>
 
             <h2><?= __('Health') ?></h2>
-            <table class="condensed stats">
+            <table class="condensed stats unfold">
                 <tr>
                     <th><?= __('Is alive?') ?></th>
                     <?php if (in_array('is_alive', $diff_list)) : ?>
@@ -609,7 +609,7 @@
 </div>
 <div class="spacer"></div>
 
-<div class="row">
+<div class="row hide-on-mobile">
     <div class="column-responsive column-50">
         <div class="tooltip-staff">
             <?= $this->Html->image('/img/icon-restore.svg', [
@@ -624,6 +624,20 @@
         <div class="sheet-markers float-right mini-statebar">
             <?= $this->element('simple_statebar', ['controller' => 'Rats', 'sheet' => $rat, 'user' => $user]) ?>
         </div>
+    </div>
+</div>
+
+<div class="show-on-mobile">
+    <div class="sheet-markers float-right mini-statebar">
+        <?= $this->element('simple_statebar', ['controller' => 'Rats', 'sheet' => $rat, 'user' => $user]) ?>
+    </div>
+
+    <div class="tooltip-staff">
+        <?= $this->Html->image('/img/icon-restore.svg', [
+            'url' => ['controller' => 'rats', 'action' => 'restore', $rat->id, $snapshot->id],
+            'class' => 'side-nav-icon mini-restore-icon',
+            'alt' => __('Restore')]) ?>
+        <span class="tooltiptext-staff"><?= __('Restore') ?></span>
     </div>
 </div>
 
