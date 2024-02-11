@@ -34,7 +34,6 @@ class RatsController extends AppController
             'pedigree',
             'parentsTree',
             'childrenTree',
-            'print',
         ]);
 
         $identity = $this->request->getAttribute('identity');
