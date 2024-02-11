@@ -193,16 +193,6 @@
                     </div>
                 <?php endif ;?>
 
-                <?php if ($litter->comments) : ?>
-                    <div class="text">
-                        <blockquote>
-                            <div class="markdown">
-                                <?= $this->Commonmark->sanitize($litter->comments); ?>
-                            </div>
-                        </blockquote>
-                    </div>
-                <?php endif; ?>
-
                 <h2><?= __('Parents') ?></h2>
                 <div class="row">
                     <div class="column-responsive column-50 parent">
@@ -355,6 +345,17 @@
                         </tbody>
                     </table>
                 </div>
+                <?php endif; ?>
+
+                <?php if ($litter->comments) : ?>
+                    <h2><?= __('Comments') ?></h2>
+                    <div class="text">
+                        <blockquote>
+                            <div class="markdown">
+                                <?= $this->Commonmark->sanitize($litter->comments); ?>
+                            </div>
+                        </blockquote>
+                    </div>
                 <?php endif; ?>
 
                 <h2><?= __('Offspring') ?></h2>

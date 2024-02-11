@@ -273,15 +273,15 @@
                                 </tr>
                                 <tr>
                                     <th><?= __('Localization') ?></th>
-                                    <td><?= h($rattery->district) ?></td>
+                                    <td><?= $rattery->district == '' ? __x('localization', 'Not Available') : h($rattery->district) ?></td>
                                 </tr>
                                 <tr>
                                     <th><?= __('Zip Code') ?></th>
-                                    <td><?= $rattery->zip_code == '' ? '' : $this->Number->format(h($rattery->zip_code)) ?></td>
+                                    <td><?= $rattery->zip_code == '' ? __x('zipcode', 'Not Available') : $this->Number->format(h($rattery->zip_code)) ?></td>
                                 </tr>
                                 <tr>
                                     <th><?= __('Website') ?></th>
-                                    <td><?= $rattery->website ? $this->Html->link(h($rattery->website)) : '' ?></td>
+                                    <td><?= $rattery->website ? $this->Html->link(h($rattery->website)) : __x('website', 'Not Available') ?></td>
                                 </tr>
                             </table>
                         </div>
@@ -306,6 +306,7 @@
                     </div>
 
                     <?php if (! empty($rattery->comments)) : ?>
+                        <h2><?= __('About') ?></h2>
                         <div class="text">
                             <blockquote>
                                 <div class="markdown">

@@ -164,7 +164,7 @@
                             ],
                         ]) ?>
                     <?php else : ?>
-                        <div class="message" onclick="this.classList.add('hidden')"><?= __('This user doesn’t have any rattery.') ?></div>
+                        <div class="message"><?= __('This user doesn’t have any rattery.') ?></div>
                     <?php endif; ?>
                 </details>
             </div>
