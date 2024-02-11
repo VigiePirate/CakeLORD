@@ -28,50 +28,6 @@ class RatSnapshotPolicy implements BeforePolicyInterface
     }
 
     /**
-     * Check if $user can add RatSnapshot
-     *
-     * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\RatSnapshot $ratSnapshot
-     * @return bool
-     */
-    public function canAdd(IdentityInterface $user, RatSnapshot $ratSnapshot)
-    {
-    }
-
-    /**
-     * Check if $user can edit RatSnapshot
-     *
-     * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\RatSnapshot $ratSnapshot
-     * @return bool
-     */
-    public function canEdit(IdentityInterface $user, RatSnapshot $ratSnapshot)
-    {
-    }
-
-    /**
-     * Check if $user can delete RatSnapshot
-     *
-     * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\RatSnapshot $ratSnapshot
-     * @return bool
-     */
-    public function canDelete(IdentityInterface $user, RatSnapshot $ratSnapshot)
-    {
-    }
-
-    /**
-     * Check if $user can view RatSnapshot
-     *
-     * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\RatSnapshot $ratSnapshot
-     * @return bool
-     */
-    public function canView(IdentityInterface $user, RatSnapshot $ratSnapshot)
-    {
-    }
-
-    /**
      * Check if $user can view RatSnapshot
      *
      * @param \Authorization\IdentityInterface $user The user.
