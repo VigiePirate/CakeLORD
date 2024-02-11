@@ -601,7 +601,7 @@ class RatsController extends AppController
 
          $options = $this->request->getQueryParams();
 
-         if( empty($options) ) {
+         if (empty($options)) {
             $new_search = true;
          } else {
             $new_search = false;

@@ -26,7 +26,7 @@ class SingularitiesController extends AppController
      */
     public function index()
     {
-        $singularities = $this->paginate($this->Singularities);
+        $singularities = $this->paginate($this->Singularities, ['order' => ['name' => 'asc']]);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Singularities);

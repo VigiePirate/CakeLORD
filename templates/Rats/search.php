@@ -21,7 +21,7 @@
 
             <h1><?= __('Advanced search') ?></h1>
 
-            <?php if( $new_search ) : ?>
+            <?php if ($new_search) : ?>
                 <div class="message default">
                     <?= __('Please fill in your search criteria below. You can leave empty the criteria you do not want to use.') ?>
                 </div>

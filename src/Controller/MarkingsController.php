@@ -26,7 +26,7 @@ class MarkingsController extends AppController
      */
     public function index()
     {
-        $markings = $this->paginate($this->Markings);
+        $markings = $this->paginate($this->Markings, ['order' => ['name' => 'asc']]);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Markings);

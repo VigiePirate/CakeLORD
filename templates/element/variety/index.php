@@ -24,11 +24,22 @@
                         <td><?= substr(h($variety->description), 0, strpos(h($variety->description), ".")) ?></td>
                         <td><?= $variety->is_picture_mandatory ? '✓' : '' ?></td>
                         <td class="actions">
-                            <?= $this->Html->image('/img/icon-view.svg', [
-                                'url' => ['controller' => $Varieties, 'action' => 'view', $variety->id],
-                                'class' => 'action-icon',
-                                'alt' => $texts['alt_view']
-                            ])?>
+                            <?= $this->Html->link(
+                                $this->Html->image('/img/icon-rat.svg', ['class' => 'action-icon']),
+                                $this->Url->build([
+                                    'controller' => 'Rats',
+                                    'action' => 'search',
+                                    '?' => [
+                                            'sex_f' => '1',
+                                            'sex_m' => '1',
+                                            'alive' => '1',
+                                            'deceased' => '1',
+                                            strtolower($Variety) . '_id' => $variety->id
+                                    ]
+                                ]),
+                                ['escape' => false,'alt' => $texts['alt_view']]
+                            ) ?>
+
                             <?php if (!is_null($user) && $user->can('edit', $variety)) :?>
                                 <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
                                     'url' => ['controller' => $Varieties, 'action' => 'edit', $variety->id],

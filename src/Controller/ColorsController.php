@@ -26,7 +26,7 @@ class ColorsController extends AppController
      */
     public function index()
     {
-        $colors = $this->paginate($this->Colors);
+        $colors = $this->paginate($this->Colors, ['order' => ['name' => 'asc']]);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('add', $this->Colors);
