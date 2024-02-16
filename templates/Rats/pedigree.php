@@ -41,7 +41,7 @@
                 </h1>
 
                 <div class="message error">
-                    <?= __('Due to its state in back-office, this sheet can only be entirely viewed by its owner and by staff members.') ?>
+                    <?= __('Due to its state in back-office, this sheet can only be entirely viewed by authorized people.') ?>
                 </div>
 
                 <div class="signature">

@@ -194,7 +194,7 @@
                         </div>
                         <p>
                             <?=
-                                __('Please take action to comply with staff requirements. You can <a href={0} class="flash">edit the sheet</a> or <a href={1} class="flash">answer and send it back to staff</a>.',
+                                __('Please take action to comply with staff requirements. You may use the most appropriate action from the action bar to modify the sheet. If you are not sure, you can <a href={0} class="flash">edit the full sheet</a>, or <a href={1} class="flash">answer and send the sheet back to staff</a>.',
                                 [
                                     $this->Url->build(['controller' => 'Rats', 'action' => 'edit', $rat->id]),
                                     $this->Url->build(['controller' => 'Rats', 'action' => 'dispute', $rat->id])
