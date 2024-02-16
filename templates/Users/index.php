@@ -45,7 +45,7 @@
                         <td><?= h($user->email) ?></td>
                         <td><?= $user->locked_symbol ?></td>
                         <td><?= $user->created->i18nFormat('dd/MM/yyyy') ?></td>
-                        <td><?= $user->modified->i18nFormat('dd/MM/yyyy') ?></td>
+                        <td><?= ! is_null($user->modified) ? $user->modified->i18nFormat('dd/MM/yyyy') : __('N/A') ?></td>
                         <td><?= is_null($user->successful_login_last_date) ? __('N/A') : $user->successful_login_last_date->i18nFormat('dd/MM/yyyy') ?></td>
                     <?php endif ?>
                     <?php if ($show_staff) : ?>
