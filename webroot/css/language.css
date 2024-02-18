@@ -1,0 +1,70 @@
+.flag{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.flag img, .flag a {
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+.language-icon {
+  width:2.2rem;
+}
+
+.dropdown {
+  position: relative;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #8C4600;
+    color: white;
+    padding: 0;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 0;
+    line-height: 1.1;
+    height: 1.4rem;
+}
+
+.dropbtn:hover, .dropbtn:active, .dropbtn:focus {
+    background-color: #a65400;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: -1.5rem;
+    background-color: #ffffff;
+    min-width: 2ch;
+    border-radius: 0.4rem;
+    box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1),
+    0 3px 6px 0 rgba(0, 0, 0, 0.07);
+    line-height: 0.6;
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    font-family: "Roboto Condensed"; /* "Alegreya", serif; */
+    color: #663300;
+    padding: 1rem;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    color: #a65400;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content, .dropdown:focus .dropdown-content {
+    display: block;
+}

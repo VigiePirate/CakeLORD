@@ -4,6 +4,10 @@ body {
   font-family: "Imprima","Lucida Sans Unicode", sans-serif;
 }
 
+a {
+  font-family: "Roboto Condensed";
+}
+
 h1 {
   font-family: "Alegreya", serif;
   font-weight: 700;
@@ -66,7 +70,7 @@ p {
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
     background: #663300;
     border-color: #663300;
-    font-family: "Alegreya", serif;
+    font-family: "Roboto Condensed", serif;
     font-size: 1.6rem;
   }
 

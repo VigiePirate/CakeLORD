@@ -41,13 +41,14 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
     <?= $this->Html->meta('icon') ?>
 
     <link href="https://fonts.googleapis.com/css?family=Alegreya:400,400i,500,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Imprima:400" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
 
     <?= $this->Html->css('milligram.min.css') ?>
     <?= $this->Html->css('cake.css') ?>
     <?= $this->Html->css('homepage.css') ?>
+    <?= $this->Html->css('language.css') ?>
     <?= $this->Html->css('mobile.css') ?>
 
     <?= $this->fetch('meta') ?>
@@ -116,6 +117,17 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                             ['controller' => 'Users', 'action' => 'login'],
                             ['escape' => false])
                     ?>
+                    <div class="flag">
+                        <?= $this->Html->image('/img/icon-i18n.svg', ["class" => "language-icon"]) ?>
+                        <!-- <a><?= $this->getSessionLocaleIso639() ?></a> -->
+                        <div class="dropdown">
+                            <button class="dropbtn"><?= $this->getSessionLocaleIso639() ?></button>
+                            <div class="dropdown-content">
+                                <?= $this->Html->link('Français', ['controller' => 'Lord', 'action' => 'switchLanguage', 'fr_FR']) ?>
+                                <?= $this->Html->link('English', ['controller' => 'Lord', 'action' => 'switchLanguage', 'en_US']) ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>
