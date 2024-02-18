@@ -34,6 +34,7 @@ $cakeDescription = 'LORD';
 
     <?= $this->Html->css('milligram.min.css') ?>
     <?= $this->Html->css('lord.css') ?>
+    <?= $this->Html->css('language.css') ?>
     <?= $this->Html->css('mobile.css') ?>
     <?= $this->Html->css('from-md.css') ?>
     <?= $this->Html->script("messages") ?>
@@ -102,6 +103,17 @@ $cakeDescription = 'LORD';
                     ['controller' => 'Users', 'action' => 'login', '?' => ['redirect' => $this->getRequest()->getAttribute('here')]],
                     ['escape' => false])
             ?>
+            <div class="flag">
+                <?= $this->Html->image('/img/icon-i18n.svg', ["class" => "language-icon"]) ?>
+                <!-- <a><?= $this->getSessionLocaleIso639() ?></a> -->
+                <div class="dropdown">
+                    <button class="dropbtn"><?= $this->getSessionLocaleIso639() ?></button>
+                    <div class="dropdown-content">
+                        <?= $this->Html->link('Français', ['controller' => 'Lord', 'action' => 'switchLanguage', 'fr_FR']) ?>
+                        <?= $this->Html->link('English', ['controller' => 'Lord', 'action' => 'switchLanguage', 'en_US']) ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
     <main class="main">

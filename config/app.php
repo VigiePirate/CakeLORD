@@ -52,6 +52,7 @@ return [
         'encoding' => env('APP_ENCODING', 'UTF-8'),
         'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
         'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'UTC'),
+        'supportedLocales' => env('APP_SUPPORTED_LOCALES', ['en_US', 'fr_FR']),
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
@@ -210,7 +211,7 @@ return [
             /*
              * The keys host, port, timeout, username, password, client and tls
              * are used in SMTP transports
-             */        
+             */
             'host' => 'localhost',
             'port' => 25,
             'timeout' => 30,

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Chronos\Chronos;
+use Cake\I18n\I18n;
 use Cake\Mailer\Mailer;
 use Cake\Mailer\MailerAwareTrait;
 use App\Model\Entity\Lord;
@@ -21,7 +22,14 @@ class LordController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['parse', 'search', 'webstats', 'contact', 'acknowledge']);
+        $this->Authentication->addUnauthenticatedActions([
+            'parse',
+            'search',
+            'webstats',
+            'contact',
+            'acknowledge',
+            'switch-language',
+        ]);
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }
 
@@ -366,5 +374,25 @@ class LordController extends AppController
         } else {
             return $this->redirect(['action' => 'contact']);
         }
+    }
+
+    // public function changeLanguage()
+    // {
+    //     $this->Authorization->skipAuthorization();
+    //     $locale = $this->request->getParam('pass');
+    //     $this->LanguageSwitcher->switchLanguage($locale);
+    //     I18n::setLocale(implode($locale));
+    //     return $this->redirect($this->request->referer());
+    // }
+
+    public function switchLanguage($lang)
+    {
+        $this->Authorization->skipAuthorization();
+
+        // Set the language preference in the session
+        $this->request->getSession()->write('Config.locale', $lang);
+
+        // Redirect back to the referring page or any other desired page
+        return $this->redirect($this->referer());
     }
 }

@@ -57,6 +57,7 @@ class AppController extends Controller
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         $this->loadComponent('FormProtection');
+        // $this->loadComponent('LanguageSwitcher');
     }
 
     // /**
@@ -74,6 +75,22 @@ class AppController extends Controller
     //
     //     #parent::beforeRender($event);
     // }
+
+    // /**
+    //  * beforeRender callback.
+    //  *
+    //  * @param \Cake\Event\EventInterface $event Event.
+    //  * @return \Cake\Http\Response|null|void
+    //  */
+    // public function beforeRender(EventInterface $event)
+    // {
+    //     parent::beforeRender($event);
+    //     /* i18n */
+    //     $locale = $this->request->getSession()->read('Config.locale');
+    //     I18n::setLocale(implode($locale));
+    // }
+
+
 
     public function isAuthorized($user) {
         // Root can access anything anywhere

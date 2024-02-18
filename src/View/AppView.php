@@ -17,6 +17,7 @@ namespace App\View;
 
 use Cake\View\View;
 use Cake\Core\Configure;
+use Cake\I18n\I18n;
 
 /**
  * Application View
@@ -50,5 +51,15 @@ class AppView extends View
          */
         $this->loadHelper('Geo.GoogleMap', Configure::read('GoogleMap'));
         $this->loadHelper('CommonMark');
+    }
+
+    public function getSessionLocale()
+    {
+        return $this->getRequest()->getSession()->read('Config.locale') ?? I18n::getDefaultLocale();
+    }
+
+    public function getSessionLocaleIso639()
+    {
+        return strtoupper(substr($this->getSessionLocale(), 0, 2));
     }
 }

@@ -38,7 +38,8 @@ use Authorization\Policy\OrmResolver;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-use Cake\I18n\Middleware\LocaleSelectorMiddleware;
+//use Cake\I18n\Middleware\LocaleSelectorMiddleware;
+use App\Middleware\LocaleSelectorMiddleware;
 
 /**
  * Application setup class.
@@ -91,6 +92,10 @@ class Application extends BaseApplication
             // and make an error page/response
             ->add(new ErrorHandlerMiddleware(Configure::read('Error')))
 
+            // Add Locale selection Middleware
+            //->add(new LocaleSelectorMiddleware(['*']))
+            ->add(new LocaleSelectorMiddleware(Configure::read('App.supportedLocales')))
+
             // Handle plugin/theme assets like CakePHP normally does.
             ->add(new AssetMiddleware([
                 'cacheTime' => Configure::read('Asset.cacheTime'),
@@ -103,8 +108,7 @@ class Application extends BaseApplication
             // using it's second constructor argument:
             // `new RoutingMiddleware($this, '_cake_routes_')`
             ->add(new RoutingMiddleware($this))
-            // Add Locale selection Middleware
-            ->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']))
+
             // add Authentication after RoutingMiddleware
             //->add(new AuthenticationMiddleware($this->configAuth()));
             ->add(new AuthenticationMiddleware($this))
