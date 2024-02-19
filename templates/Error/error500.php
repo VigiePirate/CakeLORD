@@ -47,7 +47,7 @@ else :
 
                 <div class="column-responsive">
                     <div class="oopsie__text">
-                        <h1><?= __('Oh') ?> <span><?= __('noes!') ?></span></h1>
+                        <h1><span><?= __('Oh') ?></span><span><?= __('noes!') ?></span></h1>
 
                         <p class="error">
                             <strong><?= __d('cake', 'Error code') ?>: </strong><?= h($code) ?>
