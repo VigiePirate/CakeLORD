@@ -47,7 +47,7 @@ else :
 
                 <div class="column-responsive">
                     <div class="oopsie__text">
-                        <h1><span><?= __('Oh') ?></span><span><?= __('noes!') ?></span></h1>
+                        <h1><span><?= __('Oh') ?></span> <span><?= __('noes!') ?></span></h1>
 
                         <p class="error">
                             <strong><?= __d('cake', 'Error code') ?>: </strong><?= h($code) ?>
@@ -56,7 +56,7 @@ else :
                             </p>
                         </p>
                     </div>
-                    <div class="btn__center hero__text">
+                    <div class="btn__center hero__btn">
                         <p>
                             <?= $this->Html->link(__('Go Back'), 'javascript:history.back()', ['class' => 'button']) ?>
                             <?= $this->Html->link(__('Get Help'), ['controller' => 'Faqs', 'action' => 'all'], ['class' => 'button']) ?>
