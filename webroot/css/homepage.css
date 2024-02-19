@@ -26,6 +26,10 @@ h1 span:nth-of-type(odd) {
   padding-left: 8.5rem;
 }
 
+.oopsie_text h1 span:nth-of-type(odd) {
+  padding-left: 0;
+}
+
 h1 span:nth-of-type(even) {
   color: #6076bf;
   font-size: 4.4rem;
