@@ -28,7 +28,7 @@ class LordController extends AppController
             'webstats',
             'contact',
             'acknowledge',
-            'switch-language',
+            'switchLanguage',
         ]);
         /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
     }

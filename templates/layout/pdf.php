@@ -60,35 +60,5 @@ $cakeDescription = 'LORD';
             <?= $this->fetch('content') ?>
         </div>
     </main>
-    <!--     <footer>
-    <div class="footer_section">
-
-        </div>
-        <div class="footer_section">
-
-        </div>
-        <div class="footer_section">
-
-        </div>
-        <div class="footer_center hide-on-tablet">
-            <img src="/img/lord.shield.clean.svg" width="110"/>
-            <div class="shieldline">Livre des Origines<br>du <span>Rat</span> Domestique</div>
-            <div class="versionline">Version 2.2 – “Cake”</div>
-        </div>
-        <div class="footer_section">
-
-        </div>
-        <div class="footer_largersection">
-            <div class="logoblock">
-                <div class="hide-on-tablet"></div><a href="https://cakephp.org/"><img src="/img/logo-cake.svg" width="100"/></a><a href="https://github.com/VigiePirate/CakeLORD"><img src="/img/logo-github.svg" width="60"/></a><a href="https://www.srfa.info"><img src="/img/logo-srfa.svg" width="80"/></a>
-            </div>
-        <div class="creditline">
-            © <?= h(date("Y")) ?> – Tous droits réservés<br>
-            Textes et images non libres de droits<br>
-            Code de l'application distribué sous licence GPL<br>
-            Service gratuit hébergé et maintenu par l'association SRFA
-        </div>
-    </div>
-</footer>  -->
 </body>
 </html>

@@ -1,21 +1,34 @@
 /** Typography **/
 
 body {
-  font-family: "Imprima","Lucida Sans Unicode", sans-serif;
+  font-family: "Imprima", "Lucida Sans Unicode", sans-serif;
 }
 
 a {
-  font-family: "Roboto Condensed";
+  font-family: "Roboto Condensed", serif;
 }
 
 h1 {
   font-family: "Alegreya", serif;
   font-weight: 700;
   color: #663300;
+  font-size: 2.8rem;
+  letter-spacing: 0;
+  line-height: 1;
+  overflow: visible;
 }
 
-h1 span {
+h1 span:nth-of-type(odd) {
+  font-family: "Alegreya", serif;
+  font-weight: 700;
+  color: #663300;
+  font-size: 4.4rem;
+  padding-left: 8.5rem;
+}
+
+h1 span:nth-of-type(even) {
   color: #6076bf;
+  font-size: 4.4rem;
 }
 
 h2 {
@@ -181,10 +194,25 @@ main {
 
 .hero {
 }
+
+.hero__left {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-content:space-evenly;
+  align-items: center;
+}
+
 .hero__text {
+  text-align:left;
+  padding-bottom:4rem;
+}
+
+.hero__btn {
   text-align:center;
   padding-bottom:2rem;
 }
+
 .row__hero {
   align-items:center;
   text-align:center;
@@ -434,5 +462,17 @@ footer {
     .postit {
       padding: 1em;
       margin: 2.5em 0em;
+    }
+    h1 {
+      font-size: 4.2rem;
+    }
+
+    h1 span:nth-of-type(odd) {
+      font-size: 6.6rem;
+      padding-left: 8.5rem;
+    }
+
+    h1 span:nth-of-type(even) {
+      font-size: 6.6rem;
     }
   }
