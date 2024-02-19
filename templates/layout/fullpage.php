@@ -22,12 +22,6 @@ use Cake\Http\Exception\NotFoundException;
 
 $this->disableAutoLayout();
 
-// if (!Configure::read('debug')) :
-//     throw new NotFoundException(
-//         'Please replace templates/Pages/home.php with your own version or re-enable debug mode.'
-//     );
-// endif;
-
 $cakeDescription = 'Livre des Origines du Rat Domestique';
 ?>
 <!DOCTYPE html>
@@ -40,8 +34,8 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <link href="https://fonts.googleapis.com/css?family=Alegreya:400,400i,500,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya:400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Imprima:400" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
 
@@ -133,7 +127,6 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
         </div>
     </header>
 
-    <!-- <?= $this->Flash->render() ?> -->
     <?= $this->fetch('content') ?>
 
     <div class="footer_container">
@@ -185,10 +178,10 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                     <div class="hide-on-tablet"></div><a href="https://cakephp.org/"><img src="/img/logo-cake.svg" width="100"/></a><a href="https://github.com/VigiePirate/CakeLORD"><img src="/img/logo-github.svg" width="60"/></a><a href="https://www.srfa.info"><img src="/img/logo-srfa.svg" width="80"/></a>
                 </div>
             <div class="creditline">
-                © <?= h(date("Y")) ?> – Tous droits réservés<br>
-                Textes et images non libres de droits<br>
-                Code de l'application distribué sous licence GPL<br>
-                Service gratuit hébergé et maintenu par l'association SRFA
+                © <?= h(date("Y")) ?> – <?= __('All rights reserved') ?><br>
+                <?= __('Texts and images are not free of right') ?> <br>
+                <?= __('Source code is open and distributed under GPL license') ?> <br>
+                <?= __('Service is free of charge, hosted and maintained by SRFA') ?>
             </div>
         </footer>
     </div>
