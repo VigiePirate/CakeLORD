@@ -276,7 +276,37 @@
     padding: 0em 1em 0em 0.5em;
   }
 
-  /* table:not(.unfold) tbody  {
-    white-space: nowrap;
-  } */
+  .colum-30 {
+    padding-bottom:3em;
+  }
+  .hide-on-mobile {
+    display:none;
+  }
+  .top-nav {
+    margin: 0 auto;
+  }
+  .spacer{
+      width: 2rem;
+  }
+  .postit {
+    padding: 1em;
+    margin: 2.5em 0em;
+  }
+
+  .hero__text {
+    margin-top: 4rem;
+  }
+
+  .hero__text h1 {
+    font-size: 3.8rem;
+  }
+
+  .hero__text h1 span:nth-of-type(odd) {
+    font-size: 5.4rem;
+    padding-left: 6.5rem;
+  }
+
+  .hero__text h1 span:nth-of-type(even) {
+    font-size: 5.4rem;
+  }
 }
