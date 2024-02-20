@@ -118,7 +118,7 @@ class RatMessagesController extends AppController
 
         $rats = $this->fetchModel('Rats')->find('entitledBy', ['user_id' => $user->id, 'level' => 2]);
         $query = $this->RatMessages
-            ->find()
+            ->find('latest', ['rats' => $rats])
             ->contain([
                 'Rats.Ratteries',
                 'Rats.BirthLitters',
