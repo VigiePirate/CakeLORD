@@ -207,7 +207,7 @@ class LordController extends AppController
         $not_accident_male_lifespan = $lord->roundLifespan(['sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false, 'birth_date <=' => Chronos::today()->modify('-3 years')]);
 
         $champion = $lord->findChampion();
-        $champion = $rats->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
+        $champion = $rats->get($champion->id, ['contain' => ['Ratteries', 'BirthLitters']]);
 
         $distribution = $lord->computeMortalityDistribution()->enableHydration(false)->toArray();
         $survival = $lord->computeSurvivalRate($distribution);

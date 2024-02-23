@@ -1,3 +1,8 @@
+header {
+  position: relative;
+  z-index: 99;
+}
+
 .flag{
   display: flex;
   flex-direction: column;
@@ -21,7 +26,7 @@
 
 /* Dropdown Button */
 .dropbtn {
-    background-color: #8C4600;
+    background-color: transparent;
     color: white;
     padding: 0;
     font-size: 1.2rem;
@@ -33,7 +38,7 @@
 }
 
 .dropbtn:hover, .dropbtn:active, .dropbtn:focus {
-    background-color: #a65400;
+    background-color: transparent;
 }
 
 /* Dropdown Content (Hidden by Default) */

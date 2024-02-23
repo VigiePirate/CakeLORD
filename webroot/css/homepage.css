@@ -26,7 +26,7 @@ h1 span:nth-of-type(odd) {
   padding-left: 8.5rem;
 }
 
-.oopsie_text h1 span:nth-of-type(odd) {
+h1.oopsie span:nth-of-type(odd) {
   padding-left: 0;
 }
 
