@@ -14,7 +14,7 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('name') ?></th>
+                    <th><?= $this->Paginator->sort($sort_fields['name'], __('Name')) ?></th>
                     <th><?= $this->Paginator->sort('is_root', __('Root?')) ?></th>
                     <th><?= $this->Paginator->sort('is_admin', __('Admin?')) ?></th>
                     <th><?= $this->Paginator->sort('is_staff', __('Staff?')) ?></th>

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Chronos\Chronos;
+use Cake\I18n\I18n;
 
 /**
  * Coats Controller
@@ -28,11 +29,14 @@ class CoatsController extends AppController
 
     public function index()
     {
-        $coats = $this->paginate($this->Coats);
+        $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
+            ? ['name' => 'name', 'genotype' => 'genotype', 'description' => 'description']
+            : ['name' => 'CoatsTranslation.name', 'genotype' => 'CoatsTranslation.genotype', 'description' => 'CoatsTranslation.description'];
+        $coats = $this->paginate($this->Coats, ['order' => ['id' => 'asc'], 'sortableFields' => array_values($sort_fields)]);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Coats);
-        $this->set(compact('coats', 'user', 'show_staff'));
+        $this->set(compact('coats', 'sort_fields', 'user', 'show_staff'));
     }
 
     /**

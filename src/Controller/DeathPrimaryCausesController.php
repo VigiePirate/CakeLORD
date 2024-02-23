@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\I18n\I18n;
 
 /**
  * DeathPrimaryCauses Controller
@@ -18,10 +19,18 @@ class DeathPrimaryCausesController extends AppController
      */
     public function index()
     {
-        $deathPrimaryCauses = $this->paginate($this->DeathPrimaryCauses);
+        $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
+            ? ['name' => 'name']
+            : ['name' => 'DeathPrimaryCausesTranslation.name'];
+
+        $deathPrimaryCauses = $this->paginate($this->DeathPrimaryCauses, [
+            'order' => ['id' => 'asc'],
+            'sortableFields' => [$sort_fields['name'], 'is_infant', 'is_accident', 'is_oldster']
+        ]);
+
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
-        $this->set(compact('deathPrimaryCauses', 'user'));
+        $this->set(compact('deathPrimaryCauses', 'sort_fields', 'user'));
     }
 
     /**

@@ -48,6 +48,10 @@ class StatesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Translate', [
+            'fields' => ['name'],
+        ]);
+
         $this->belongsTo('NextOkStates', [
             'className' => 'States',
             'foreignKey' => 'next_ok_state_id',

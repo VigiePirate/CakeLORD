@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Chronos\Chronos;
+use Cake\I18n\I18n;
 
 /**
  * Eyecolors Controller
@@ -26,11 +27,15 @@ class EyecolorsController extends AppController
      */
     public function index()
     {
-        $eyecolors = $this->paginate($this->Eyecolors);
+        $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
+            ? ['name' => 'name', 'genotype' => 'genotype', 'description' => 'description']
+            : ['name' => 'EyecolorsTranslation.name', 'genotype' => 'EyecolorsTranslation.genotype', 'description' => 'EyecolorsTranslation.description'];
+
+        $eyecolors = $this->paginate($this->Eyecolors, ['order' => ['id' => 'asc'], 'sortableFields' => array_values($sort_fields)]);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('add', $this->Eyecolors);
-        $this->set(compact('eyecolors', 'user', 'show_staff'));
+        $this->set(compact('eyecolors', 'sort_fields', 'user', 'show_staff'));
     }
 
     /**

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\I18n\I18n;
 
 /**
  * Countries Controller
@@ -26,10 +27,18 @@ class CountriesController extends AppController
      */
     public function index()
     {
-        $countries = $this->paginate($this->Countries);
+        $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
+            ? ['name' => ['name']]
+            : ['name' => 'CountriesTranslation.name'];
+
+        $countries = $this->paginate($this->Countries, [
+            'order' => [$sort_fields['name'] => 'asc'],
+            'sortableFields' => ['id', $sort_fields['name'], 'iso3166'],
+        ]);
+
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
-        $this->set(compact('countries', 'user'));
+        $this->set(compact('countries', 'sort_fields', 'user'));
     }
 
     /**
