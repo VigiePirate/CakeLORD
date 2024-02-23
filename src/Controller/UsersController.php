@@ -307,7 +307,7 @@ class UsersController extends AppController
         $not_accident_male_lifespan = $user->roundLifespan(['owner_user_id' => $user->id, 'sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false,'DeathPrimaryCauses.is_accident IS' => false]);
 
         $champion = $user->findChampion(['Rats.owner_user_id' => $user->id]);
-        if(!empty($champion)) {
+        if (! empty($champion)) {
             $champion = $this->fetchModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
         }
 

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\I18n\I18n;
 
 /**
  * Roles Controller
@@ -18,9 +19,32 @@ class RolesController extends AppController
      */
     public function index()
     {
-        $roles = $this->paginate($this->Roles);
-        $this->Authorization->skipAuthorization();
-        $this->set(compact('roles'));
+        $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
+            ? ['name' => 'name']
+            : ['name' => 'RolesTranslation.name'];
+
+        $roles = $this->paginate($this->Roles, [
+            'order' => ['id' => 'asc'],
+            'sortableFields' => [
+                'id',
+                $sort_fields['name'],
+                'is_root',
+                'is_admin',
+                'is_staff',
+                'can_delete',
+                'can_restore',
+                'can_describe',
+                'can_document',
+                'can_configure',
+                'can_edit_frozen',
+                'can_edit_others',
+                'can_change_state',
+                'can_access_personal'
+            ],
+        ]);
+
+        $this->Authorization->Authorize($this->Roles);
+        $this->set(compact('roles', 'sort_fields'));
     }
 
     /**

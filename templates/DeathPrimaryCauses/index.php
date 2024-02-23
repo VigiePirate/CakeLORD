@@ -14,7 +14,7 @@
             <thead>
                 <tr>
                     <!-- <th><?= $this->Paginator->sort('id') ?></th> -->
-                    <th><?= $this->Paginator->sort('name') ?></th>
+                    <th><?= $this->Paginator->sort($sort_fields['name'], __('Name')) ?></th>
                     <th><?= $this->Paginator->sort('is_infant', __('Infant?')) ?></th>
                     <th><?= $this->Paginator->sort('is_accident', __('Accidental?')) ?></th>
                     <th><?= $this->Paginator->sort('is_oldster', __('Old age?')) ?></th>

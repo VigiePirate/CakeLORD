@@ -8,9 +8,9 @@
                 <thead>
                     <tr>
                         <!-- <th><?= $this->Paginator->sort('id') ?></th> -->
-                        <th><?= $this->Paginator->sort('name') ?></th>
-                        <th><?= $this->Paginator->sort('genotype') ?></th>
-                        <th><?= $this->Paginator->sort('description') ?></th>
+                        <th><?= $this->Paginator->sort($sort_fields['name'], __('Name')) ?></th>
+                        <th><?= $this->Paginator->sort($sort_fields['genotype'], __('Genotype')) ?></th>
+                        <th><?= $this->Paginator->sort($sort_fields['description'], __('Description')) ?></th>
                         <th><?= $this->Paginator->sort('is_picture_mandatory', __('Photo?')) ?></th>
                         <th class="actions col-head"><?= __('Actions') ?></th>
                     </tr>

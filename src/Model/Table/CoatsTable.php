@@ -46,6 +46,10 @@ class CoatsTable extends Table
 
         $this->addBehavior('Picture');
 
+        $this->addBehavior('Translate', [
+            'fields' => ['name', 'genotype', 'description'],
+        ]);
+
         $this->hasMany('Rats', [
             'foreignKey' => 'coat_id',
         ]);

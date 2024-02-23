@@ -44,6 +44,9 @@ class DilutionsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Picture');
+        $this->addBehavior('Translate', [
+            'fields' => ['name', 'genotype', 'description'],
+        ]);
 
         $this->hasMany('Rats', [
             'foreignKey' => 'dilution_id',

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Chronos\Chronos;
+use Cake\I18n\I18n;
 
 /**
  * Earsets Controller
@@ -26,11 +27,15 @@ class EarsetsController extends AppController
      */
     public function index()
     {
-        $earsets = $this->paginate($this->Earsets);
+        $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
+            ? ['name' => 'name', 'genotype' => 'genotype', 'description' => 'description']
+            : ['name' => 'EarsetsTranslation.name', 'genotype' => 'EarsetsTranslation.genotype', 'description' => 'EarsetsTranslation.description'];
+
+        $earsets = $this->paginate($this->Earsets, ['order' => ['id' => 'asc'], 'sortableFields' => array_values($sort_fields)]);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Earsets);
-        $this->set(compact('earsets', 'user', 'show_staff'));
+        $this->set(compact('earsets', 'sort_fields', 'user', 'show_staff'));
     }
 
     /**

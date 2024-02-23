@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Chronos\Chronos;
+use Cake\I18n\I18n;
 
 /**
  * Dilutions Controller
@@ -26,11 +27,15 @@ class DilutionsController extends AppController
      */
     public function index()
     {
-        $dilutions = $this->paginate($this->Dilutions);
+        $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
+            ? ['name' => 'name', 'genotype' => 'genotype', 'description' => 'description']
+            : ['name' => 'DilutionsTranslation.name', 'genotype' => 'DilutionsTranslation.genotype', 'description' => 'DilutionsTranslation.description'];
+
+        $dilutions = $this->paginate($this->Dilutions, ['order' => ['id' => 'asc'], 'sortableFields' => array_values($sort_fields)]);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Dilutions);
-        $this->set(compact('dilutions', 'user', 'show_staff'));
+        $this->set(compact('dilutions', 'sort_fields', 'user', 'show_staff'));
     }
 
     /**

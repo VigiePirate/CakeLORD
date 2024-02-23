@@ -23,6 +23,8 @@ use Cake\Http\BaseApplication;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Cake\ORM\Behavior\TranslateBehavior;
+use Cake\ORM\Behavior\Translate\ShadowTableStrategy;
 
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
@@ -77,6 +79,10 @@ class Application extends BaseApplication
         $this->addPlugin('Authorization');
         $this->addPlugin('Ajax', ['bootstrap' => true]);
         $this->addPlugin('Geo', ['bootstrap' => true]);
+
+        // Setup default strategy for translations
+        TranslateBehavior::setDefaultStrategyClass(ShadowTableStrategy::class);
+
     }
 
     /**
@@ -251,6 +257,7 @@ class Application extends BaseApplication
         $mapResolver->map(Model\Entity\ContributionType::class, Policy\ConfigurationPolicy::class);
         $mapResolver->map(Model\Entity\Role::class, Policy\ConfigurationPolicy::class);
         $mapResolver->map(Model\Entity\State::class, Policy\ConfigurationPolicy::class);
+        $mapResolver->map(Model\Table\RolesTable::class, Policy\ConfigurationsTablePolicy::class);
 
         $mapResolver->map(Model\Entity\RatMessage::class, Policy\MessagePolicy::class);
         $mapResolver->map(Model\Entity\RatteryMessage::class, Policy\MessagePolicy::class);

@@ -13,8 +13,8 @@
         <table class="condensed">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('name') ?></th>
+                    <!-- <th><?= $this->Paginator->sort('id') ?></th> -->
+                    <th><?= $this->Paginator->sort($sort_fields['name'], __('Name')) ?></th>
                     <th><?= $this->Paginator->sort('iso3166') ?></th>
                     <th class="actions col-head"><?= __('Actions') ?></th>
                 </tr>
@@ -22,7 +22,7 @@
             <tbody>
                 <?php foreach ($countries as $country): ?>
                 <tr>
-                    <td><?= $this->Number->format($country->id) ?></td>
+                    <!-- <td><?= $this->Number->format($country->id) ?></td> -->
                     <td><?= $this->Html->link(h($country->name), ['action' => 'view', $country->id]) ?></td>
                     <td><?= h($country->iso3166) ?></td>
                     <?php if (! is_null($user) && $user->is_staff) : ?>

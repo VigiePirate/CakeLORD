@@ -43,6 +43,10 @@ class RolesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Translate', [
+            'fields' => ['name', 'description'],
+        ]);
+
         $this->hasMany('Users', [
             'foreignKey' => 'role_id',
         ]);
