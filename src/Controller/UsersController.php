@@ -285,6 +285,7 @@ class UsersController extends AppController
         $this->Authorization->authorize($user);
 
         //FIXME: place in a wrapStatistics method in User entity
+        $this->fetchModel('States')->removeBehavior('Translate');
         $rat_count = $user->countRats(['owner_user_id' => $user->id]);
         $female_count = $user->countRats(['owner_user_id' => $user->id, 'sex' => 'F']);
         $male_count = $user->countRats(['owner_user_id' => $user->id, 'sex' => 'M']);

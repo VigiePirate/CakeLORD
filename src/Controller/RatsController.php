@@ -1171,6 +1171,7 @@ class RatsController extends AppController
             ]
         ]);
 
+        $this->Rats->States->removeBehavior('Translate');
         $stats = $rat->wrapFamilyStatistics();
 
         $this->set(compact('rat', 'stats'));

@@ -136,6 +136,8 @@ class RatteriesController extends AppController
             ],
         ]);
 
+        /* statistics */
+        $this->fetchModel('States')->removeBehavior('Translate');
         $stats = $rattery->wrapStatistics();
 
         if (! $rattery->is_generic && $stats['deadRatCount'] > 0) {

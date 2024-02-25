@@ -163,6 +163,7 @@ class LordController extends AppController
     {
         $lord = new Lord();
         $this->Authorization->skipAuthorization();
+        $this->fetchModel('States')->removeBehavior('Translate');
         $rats = $this->fetchModel('Rats');
 
         $rat_count = $lord->countAll('Rats');
