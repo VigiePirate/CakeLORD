@@ -424,7 +424,6 @@ class LittersController extends AppController
             ]);
             if ($this->Litters->save($litter, ['contain' => ['ParentRats' => function ($q) {return $q->select(['id']);}]])) {
                 $this->Flash->success(__('The litter has been saved. If parents were edited, you might have to manually correct contributions.'));
-
                 return $this->redirect(['action' => 'view', $litter->id]);
             }
             $this->Flash->error(__('The litter could not be saved. Please, try again.'));
@@ -440,7 +439,9 @@ class LittersController extends AppController
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('staffEdit', $litter);
 
-        $this->Flash->warning( __('For data coherence, modifications of litters are restricted. Please, contact a staff member to change parents or birth date.'));
+        if (! $show_staff) {
+            $this->Flash->warning( __('For data coherence, modifications of litters are restricted. Please, contact a staff member to change parents or birth date.'));
+        }
         $this->set(compact('litter', 'mother', 'father', 'user', 'show_staff'));
     }
 
@@ -1098,17 +1099,19 @@ class LittersController extends AppController
         ]);
 
         $this->Authorization->authorize($litter, 'changeState');
-
         $litter = $this->Litters->patchEntity($litter, $this->request->getData());
+
         if ($this->Litters->save($litter, ['checkRules' => false])) {
             // state_id is up to date but not $rat->state entity; reload for updated flash message
             $this->Flash->success(__('This litter sheet is now in state: {0}.', [$this->fetchModel('States')->get($litter->state_id)->name]));
+
             if (! empty($this->request->getData('side_message'))) {
                 $this->Flash->default(__('The following custom moderation message has been sent: {0}', [$this->request->getData('side_message')]));
             }
         } else {
             $this->Flash->error(__('We could not moderate the sheet. Please retry or contact an administrator.'));
         };
+        
         return $this->redirect(['action' => 'view', $litter->id]);
     }
 

@@ -13,7 +13,7 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('position') ?></th>
-                    <th><?= $this->Paginator->sort('name') ?></th>
+                    <th><?= $this->Paginator->sort($name_sort_field, __('Name')) ?></th>
                     <th class="actions col-head"><?= __('Actions') ?></th>
                 </tr>
             </thead>

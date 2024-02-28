@@ -232,7 +232,7 @@
                     <td><?= __('{0, number} rats ({1, number} % of rats with known death cause)', [$tumour_dead_count, round($tumour_dead_count/$knowingly_dead_rat_count,4)*100]) ?></td>
                 </tr>
                 <tr><th><?= __('By decreasing frequency:') ?></th>
-                    <td><span class="comment">* <?= __('please note that tumour localization could not recorded before 2023') ?></span></td>
+                    <td><span class="comment">* <?= __('please note that tumour localization could not be recorded before 2023') ?></span></td>
             </tr>
             </table>
             <table class="condensed stats histogram">
