@@ -240,6 +240,7 @@ trait StatisticsTrait
         }
     }
 
+    // FIXME rewrite from DeathPrimaryCausesTable or get translated alias 'name' directly in select
     public function countRatsByPrimaryDeath($options = []) {
         $model = FactoryLocator::get('Table')->get('Rats');
 
@@ -261,20 +262,34 @@ trait StatisticsTrait
             ->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
             })
-            ->contain(['DeathPrimaryCauses', 'DeathSecondaryCauses'])
+            ->contain([
+                'DeathPrimaryCauses',
+                //'DeathPrimaryCauses.DeathPrimaryCausesTranslations',
+                'DeathSecondaryCauses',
+            ])
             ->select([
                 'id' => 'Rats.death_primary_cause_id',
-                'name' => 'DeathPrimaryCauses.name',
-                'count' => 'COUNT(Rats.id)'])
+                'count' => 'COUNT(Rats.id)',
+                'Rats__state_id' => 'Rats.state_id',
+                'DeathPrimaryCauses__id' => 'Rats.death_primary_cause_id',
+            ])
             ->group('id')
             ->order(['count' => 'DESC'])
-            ->enableHydration(false);
+            ->toArray();
+
+        // add name in array (not done in select query because of translations)
+        $causes = FactoryLocator::get('Table')->get('DeathPrimaryCauses');
+        foreach ($histogram as $idx => $cause) {
+            $histogram[$idx]['name'] = $causes->get($cause->death_primary_cause->id)->name;
+        }
+
         return $histogram;
     }
 
+    // FIXME rewrite from Death(Primary|Secondary)CausesTable or get translated alias 'name' directly in select
     // uses 2 queries in order to deal with 'null' secondary deaths
     public function countRatsBySecondaryDeath($options = []) {
-        $model = FactoryLocator::get('Table')->get('Rats')->find();
+        $model = FactoryLocator::get('Table')->get('Rats');
 
         $filter_1 = [
             'birth_date !=' => '1981-08-01',
@@ -287,17 +302,28 @@ trait StatisticsTrait
         }
 
         $histogram_1 = $model
+            ->find()
             ->where($filter_1)
             ->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
             })
             ->contain(['DeathSecondaryCauses'])
             ->select([
-                'name' => 'DeathSecondaryCauses.name',
-                'count' => 'COUNT(Rats.id)'])
-            ->group('name')
+                'id' => 'DeathSecondaryCauses.id',
+                //'name' => 'DeathSecondaryCauses.name',
+                'Rats__state_id' => 'Rats.id',
+                'Rats__death_secondary_cause_id' => 'DeathSecondaryCauses.id',
+                'count' => 'COUNT(Rats.id)'
+            ])
+            ->group('id')
             ->order(['count' => 'DESC'])
-            ->enableHydration(false);
+            ->toArray();
+
+        // add name in array (not done in select query because of translations)
+        $causes = FactoryLocator::get('Table')->get('DeathSecondaryCauses');
+        foreach ($histogram_1 as $idx => $cause) {
+            $histogram_1[$idx]['name'] = $causes->get($cause->id)->name;
+        }
 
         $filter_2 = [
             'birth_date !=' => '1981-08-01',
@@ -309,20 +335,32 @@ trait StatisticsTrait
             $filter_2 = array_merge($filter_2,$options);
         }
 
-        $histogram_2 = FactoryLocator::get('Table')->get('Rats')->find()
+        $histogram_2 = $model
+            ->find()
             ->where($filter_2)
             ->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
             })
             ->contain(['DeathSecondaryCauses','DeathPrimaryCauses'])
             ->select([
-                'name' => 'concat("*", DeathPrimaryCauses.name)',
-                'count' => 'COUNT(Rats.id)'])
-            ->group('name')
+                'id' => 'DeathPrimaryCauses.id',
+                //'name' => 'concat("*", DeathPrimaryCauses.name)',
+                'count' => 'COUNT(Rats.id)',
+                'Rats__state_id' => 'Rats.id',
+                'Rats__death_primary_cause_id' => 'DeathPrimaryCauses.id',
+                'Rats__death_secondary_cause_id' => 'DeathSecondaryCauses.id',
+            ])
+            ->group('id')
             ->order(['count' => 'DESC'])
-            ->enableHydration(false);
+            ->toArray();
 
-        $causes = array_merge($histogram_1->toArray(),$histogram_2->toArray());
+        // add name in array (not done in select query because of translations)
+        $causes = FactoryLocator::get('Table')->get('DeathPrimaryCauses');
+        foreach ($histogram_2 as $idx => $cause) {
+            $histogram_2[$idx]['name'] = "*" . $causes->get($cause->id)->name;
+        }
+
+        $causes = array_merge($histogram_1, $histogram_2);
         usort($causes, function ($cause1, $cause2) {
             return $cause2['count'] <=> $cause1['count'];
         });
@@ -351,11 +389,22 @@ trait StatisticsTrait
             })
             ->contain(['DeathSecondaryCauses'])
             ->select([
-                'name' => 'DeathSecondaryCauses.name',
-                'count' => 'COUNT(Rats.id)'])
-            ->group('name')
+                // 'name' => 'DeathSecondaryCauses.name',
+                'id' => 'DeathSecondaryCauses.id',
+                'count' => 'COUNT(Rats.id)',
+                'Rats__state_id' => 'Rats.state_id',
+                'Rats__death_secondary_cause_id' => 'DeathSecondaryCauses.id',
+            ])
+            ->group('id')
             ->order(['count' => 'DESC'])
-            ->enableHydration(false);
+            ->toArray();
+
+        // add name in array (not done in select query because of translations)
+        $causes = FactoryLocator::get('Table')->get('DeathSecondaryCauses');
+        foreach ($histogram as $idx => $cause) {
+            $histogram[$idx]['name'] = $causes->get($cause->death_secondary_cause_id)->name;
+        }
+
         return $histogram;
     }
 
@@ -407,7 +456,11 @@ trait StatisticsTrait
     public function countPups($options = []) {
         $model = FactoryLocator::get('Table')->get('Contributions');
         $pups = $model->find()
-            ->select(['sum' => 'SUM(Litters.pups_number)'])
+            ->select([
+                //'Litters__state_id' => 'Litters.state_id',
+                'Contributions__litter_id' => 'Contributions.litter_id',
+                'sum' => 'SUM(Litters.pups_number)'
+            ])
             ->where($options)
             ->innerJoinWith('Litters.States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
@@ -428,7 +481,9 @@ trait StatisticsTrait
 
         $lifetimes = $model->find()
             ->select([
-                'rattery_id' => 'rattery_id',
+                'Litters__id' => 'Litters.id',
+                'Ratteries__id' => 'Ratteries.id',
+                'Contributions__rattery_id' => 'Contributions.rattery_id',
                 'lifetime' => 'DATEDIFF(MAX(Litters.birth_date),MIN(Litters.birth_date))'
             ])
             ->innerJoinWith('Litters')
@@ -438,8 +493,6 @@ trait StatisticsTrait
                 })->where(['Ratteries.is_generic IS' => false]);
             })
             ->group('rattery_id')
-            ->enableAutoFields(true) // should be replaced by selecting only useful fields
-            ->enableHydration(false)
             ->toArray();
 
         $lifetime = array_column($lifetimes, 'lifetime');
@@ -474,7 +527,9 @@ trait StatisticsTrait
 
         $avg = $model->find()
             ->select([
-                'avg' => 'AVG(DATEDIFF(Litters.birth_date, Dam.birth_date))'
+                'avg' => 'AVG(DATEDIFF(Litters.birth_date, Dam.birth_date))',
+                'Litters__id' => 'Litters.id',
+                'Litters__state_id' => 'Litters.state_id',
                 ])
             ->where($filter)
             ->leftJoinWith('Dam')
@@ -482,7 +537,6 @@ trait StatisticsTrait
             ->innerJoinWith('States', function ($q) {
                 return $q->where(['is_reliable IS' => true]);
             })
-            ->enableAutoFields(true)
             ->first();
         return $avg['avg'];
     }
@@ -503,15 +557,16 @@ trait StatisticsTrait
 
         $avg = $model->find()
             ->select([
-                'avg' => 'AVG(DATEDIFF(Litters.birth_date, Sire.birth_date))'
-                ])
+                'avg' => 'AVG(DATEDIFF(Litters.birth_date, Sire.birth_date))',
+                'Litters__id' => 'Litters.id',
+                'Litters__state_id' => 'Litters.state_id',
+            ])
             ->where($filter)
             ->leftJoinWith('Sire')
             ->leftJoinWith('Contributions')
             ->innerJoinWith('States', function ($q) {
                 return $q->where(['is_reliable IS' => true]);
             })
-            ->enableAutoFields(true)
             ->first();
         return $avg['avg'];
     }
@@ -525,7 +580,11 @@ trait StatisticsTrait
         }
 
         $avg = $model->find()
-            ->select(['avg' => 'AVG(pups_number)'])
+            ->select([
+                'avg' => 'AVG(pups_number)',
+                'Litters__id' => 'Litters.id',
+                'Litters__state_id' => 'Litters.state_id',
+            ])
             ->leftJoinWith('Contributions')
             ->innerJoinWith('Contributions.Ratteries', function ($q) {
                 return $q->where(['Ratteries.is_generic IS' => false]);
@@ -533,7 +592,6 @@ trait StatisticsTrait
             ->innerJoinWith('States', function ($q) {
                 return $q->where(['is_reliable IS' => true]);
             })
-            ->enableAutoFields(true)
             ->where($filter)
             ->first();
 
@@ -563,6 +621,7 @@ trait StatisticsTrait
         $query = $query
             ->select([
                 'litter_id' => 'OffspringRats.litter_id',
+                'Litters__state_id' => 'Litters.state_id',
                 'F' => $query->func()->count($females),
                 'M' => $query->func()->count($males)
             ])
@@ -642,6 +701,7 @@ trait StatisticsTrait
             ->select([
                 'size' => 'pups_number',
                 'count' => 'COUNT(Litters.id)',
+                'Litters__state_id' => 'Litters.state_id',
             ])
             ->innerJoinWith('Contributions.Ratteries', function ($q) {
                 return $q->where(['Ratteries.is_generic IS' => false]);
@@ -649,8 +709,6 @@ trait StatisticsTrait
             ->innerJoinWith('States', function ($q) {
                 return $q->where(['is_reliable IS' => true]);
             })
-            ->enableAutoFields(true)
-            ->enableHydration(false)
             ->group('size')
             ->order(['size' => 'ASC']);
 
@@ -689,7 +747,10 @@ trait StatisticsTrait
         }
 
         $lifespan = $lifespan
-            ->select(['lifespan' => 'ROUND(AVG(DATEDIFF(death_date,birth_date)))'])
+            ->select([
+                'Rats__state_id' => 'Rats.state_id',
+                'lifespan' => 'ROUND(AVG(DATEDIFF(death_date,birth_date)))'
+            ])
             ->where(['DATEDIFF(death_date,birth_date) <' => RatsTable::MAXIMAL_AGE]);
         return $lifespan;
     }
@@ -737,8 +798,15 @@ trait StatisticsTrait
             });
 
         $pyramid = $pyramid
-            ->select(['months' => 'FLOOR(DATEDIFF(NOW(),birth_date)/30.5)', 'count' => 'COUNT(Rats.id)'])
-            ->where(['DATEDIFF(NOW(),birth_date) >=' => '0', 'DATEDIFF(NOW(),birth_date) <' => RatsTable::MAXIMAL_AGE])
+            ->select([
+                'Rats__state_id' => 'Rats.state_id',
+                'months' => 'FLOOR(DATEDIFF(NOW(),birth_date)/30.5)',
+                'count' => 'COUNT(Rats.id)'
+            ])
+            ->where([
+                'DATEDIFF(NOW(),birth_date) >=' => '0',
+                'DATEDIFF(NOW(),birth_date) <' => RatsTable::MAXIMAL_AGE
+            ])
             ->group('months')
             ->order(['months' => 'ASC']);
 
@@ -774,8 +842,15 @@ trait StatisticsTrait
             });
 
         $mortality = $mortality
-            ->select(['months' => 'FLOOR(DATEDIFF(death_date,birth_date)/30.5)', 'count' => 'COUNT(Rats.id)'])
-            ->where(['DATEDIFF(death_date,birth_date) >=' => '0', 'DATEDIFF(death_date,birth_date) <' => RatsTable::MAXIMAL_AGE])
+            ->select([
+                'Rats__state_id' => 'Rats.id',
+                'months' => 'FLOOR(DATEDIFF(death_date,birth_date)/30.5)',
+                'count' => 'COUNT(Rats.id)'
+            ])
+            ->where([
+                'DATEDIFF(death_date,birth_date) >=' => '0',
+                'DATEDIFF(death_date,birth_date) <' => RatsTable::MAXIMAL_AGE
+            ])
             ->group('months')
             ->order(['months' => 'ASC']);
 
@@ -906,7 +981,8 @@ trait StatisticsTrait
         if (! is_null($max)) {
             $champion = $model->find()
                 ->select([
-                    'id' => 'Rats.id'
+                    'id' => 'Rats.id',
+                    'Rats__state_id' => 'Rats.state_id'
                 ])
                 ->where(array_merge($filter,['DATEDIFF(Rats.death_date,Rats.birth_date) =' => $max]))
                 ->innerJoinWith('Ratteries', function ($q) {

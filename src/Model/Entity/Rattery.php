@@ -240,9 +240,9 @@ class Rattery extends Entity
                     'Rats.rattery_id' => $this->id // for rats with rattery_id but no litter_id
                 ]], 12);
 
-            $stats['primaries'] = $this->countRatsByPrimaryDeath(['rattery_id' => $this->id])->toArray();
+            $stats['primaries'] = $this->countRatsByPrimaryDeath(['rattery_id' => $this->id]);
             $stats['secondaries'] = $this->countRatsBySecondaryDeath(['rattery_id' => $this->id]);
-            $stats['tumours'] = $this->countRatsByTumour()->toArray(['rattery_id' => $this->id]);
+            $stats['tumours'] = $this->countRatsByTumour(['rattery_id' => $this->id])->toArray();
         }
 
         return $stats;
