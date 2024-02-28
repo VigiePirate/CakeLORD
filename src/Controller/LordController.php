@@ -93,7 +93,8 @@ class LordController extends AppController
             'Litters' => __('Litters')
         ];
 
-        $state_options = $this->fetchModel('States')->find()->all()->combine('id','name');
+        $states = $this->fetchModel('States');
+        $state_options = $states->find()->all()->combine('id','name');
 
         $user = $this->request->getAttribute('identity');
         $this->Authorization->authorize($lord);
@@ -163,7 +164,6 @@ class LordController extends AppController
     {
         $lord = new Lord();
         $this->Authorization->skipAuthorization();
-        $this->fetchModel('States')->removeBehavior('Translate');
         $rats = $this->fetchModel('Rats');
 
         $rat_count = $lord->countAll('Rats');
@@ -191,7 +191,7 @@ class LordController extends AppController
 
         $rattery_count = $lord->countRatteries(['is_generic IS' => false]);
         $active_count = $lord->countRatteries(['is_alive IS' => true, 'is_generic IS' => false]);
-        $active_frequency = round(100 * $active_count / $rattery_count,2);
+        $active_frequency = round(100 * $active_count / $rattery_count, 2);
         $rattery_lifetime = $lord->computeAvgRatteryLifetime();
 
         $offset_option =  ['birth_date <=' => Chronos::today()->modify('-3 years')];
@@ -220,9 +220,9 @@ class LordController extends AppController
         $mortality = json_encode($distribution);
         $survival = json_encode($survival);
 
-        $primaries = $lord->countRatsByPrimaryDeath()->toArray();
+        $primaries = $lord->countRatsByPrimaryDeath();
         $secondaries = $lord->countRatsBySecondaryDeath();
-        $tumours = $lord->countRatsByTumour()->toArray();
+        $tumours = $lord->countRatsByTumour();
         $tumour_dead_count = array_sum(array_column($tumours,'count'));
 
         $avg_mother_age = $lord->computeAvgMotherAge();
