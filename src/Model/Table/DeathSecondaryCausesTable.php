@@ -44,6 +44,10 @@ class DeathSecondaryCausesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Translate', [
+            'fields' => ['name', 'description'],
+        ]);
+
         $this->belongsTo('DeathPrimaryCauses', [
             'foreignKey' => 'death_primary_cause_id',
             'joinType' => 'INNER',

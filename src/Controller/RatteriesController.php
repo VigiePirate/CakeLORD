@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Collection\Collection;
 
 /**
  * Ratteries Controller
@@ -58,24 +59,28 @@ class RatteriesController extends AppController
         $this->Authorization->skipAuthorization();
         $user = $this->Authentication->getIdentity();
 
-        $alive_ratteries = $this->paginate($this->Ratteries->find()->where([
-                'owner_user_id' => $user->id,
-                'is_alive' => true,
-            ])
-            ->contain(['Contributions', 'Users', 'Users.Ratteries', 'Countries', 'States'])
-            ->order('Ratteries.created DESC')
-        );
-        $closed_ratteries = $this->paginate($this->Ratteries->find()->where([
-                'owner_user_id' => $user->id,
-                'is_alive' => false,
-            ])
-            ->contain(['Contributions', 'Users', 'Users.Ratteries', 'Countries', 'States'])
-            ->order('Ratteries.created DESC')
-        );
-        $pending = $this->Ratteries->find()->contain(['States'])->where([
-                'owner_user_id' => $user->id,
-                'States.needs_user_action' => true
+        $users = $this->fetchModel('Users');
+        $user = $users->get($user->id, [
+            'contain' => [
+                'Ratteries' => function($q) {
+                    return $q->order('created DESC');
+                },
+                'Ratteries.States',
+                'Ratteries.Contributions',
+                'Ratteries.States'
+                ]
             ]);
+
+        $ratteries = new Collection($user->ratteries);
+        $alive_ratteries = $ratteries->filter(function ($rattery, $key) {
+            return $rattery->is_alive === true;
+        });
+        $closed_ratteries = $ratteries->filter(function ($rattery, $key) {
+            return $rattery->is_alive === false;
+        });
+        $pending = $ratteries->filter(function ($rattery, $key) {
+            return $rattery->state->needs_user_action === true;
+        });
 
         $count = $pending->count();
 
@@ -137,7 +142,6 @@ class RatteriesController extends AppController
         ]);
 
         /* statistics */
-        $this->fetchModel('States')->removeBehavior('Translate');
         $stats = $rattery->wrapStatistics();
 
         if (! $rattery->is_generic && $stats['deadRatCount'] > 0) {
@@ -729,7 +733,8 @@ class RatteriesController extends AppController
         $rattery = $this->Ratteries->patchEntity($rattery, $this->request->getData());
         if ($this->Ratteries->save($rattery, ['checkRules' => false])) {
             // state_id is up to date but not $rat->state entity, reload for updated flash message
-            $this->Flash->success(__('This rattery sheet is now in state: {0}.', [$this->fetchModel('States')->get($rattery->state_id)->name]));
+            $states = $this->fetchModel('States');
+            $this->Flash->success(__('This rattery sheet is now in state: {0}.', [$states->get($rattery->state_id)->name]));
             if (! empty($this->request->getData('side_message'))) {
                 $this->Flash->default(__('The following custom moderation message has been sent: {0}', [$this->request->getData('side_message')]));
             }

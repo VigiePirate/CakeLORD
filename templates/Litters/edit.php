@@ -26,7 +26,7 @@
             <h1><?=__('Edit litter #') . $litter->id ?></h1>
             <?= $this->Form->setValueSources(['context', 'data'])->create($litter) ?>
 
-            <?= $this->Flash->render() ?>    
+            <?= $this->Flash->render() ?>
             <fieldset>
                 <legend><?= __('Public information') ?></legend>
                 <?= $this->Form->control('mating_date', ['label' => __('Mating date'), 'empty' => true]) ?>
@@ -135,8 +135,6 @@
                                 ?>
                         </div>
                     </div>
-                <?php else : ?>
-
                 <?php endif ; ?>
 
                 <legend><?= __('Private information') ?></legend>
@@ -158,6 +156,7 @@
 	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
 <?php $this->end();?>
 <?= $this->Html->css('ajax.css') ?>
+<?= $this->Html->css('selectize.milligram.css') ?>
 
 <?php $this->append('script');?>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
