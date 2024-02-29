@@ -50,7 +50,10 @@ class DeathPrimaryCausesController extends AppController
                     ->order('Rats.modified DESC')
                     ->limit(10);
                 },
-                'Rats.States','Rats.Ratteries', 'Rats.BirthLitters', 'Rats.BirthLitters.Contributions'
+                'Rats.States',
+                'Rats.Ratteries',
+                'Rats.BirthLitters',
+                'Rats.BirthLitters.Contributions'
             ],
         ]);
 
@@ -81,12 +84,16 @@ class DeathPrimaryCausesController extends AppController
         $deathPrimaryCause = $this->DeathPrimaryCauses->newEmptyEntity();
         $this->Authorization->authorize($deathPrimaryCause);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $deathPrimaryCause = $this->DeathPrimaryCauses->patchEntity($deathPrimaryCause, $this->request->getData());
             if ($this->DeathPrimaryCauses->save($deathPrimaryCause)) {
-                $this->Flash->success(__('The death category has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new death category has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The death category could not be saved. Please, try again.'));
         }
         $this->set(compact('deathPrimaryCause'));

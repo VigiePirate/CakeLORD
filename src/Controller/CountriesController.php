@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Core\Configure;
 use Cake\I18n\I18n;
 
 /**
@@ -28,7 +29,7 @@ class CountriesController extends AppController
     public function index()
     {
         $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
-            ? ['name' => ['name']]
+            ? ['name' => 'name']
             : ['name' => 'CountriesTranslation.name'];
 
         $countries = $this->paginate($this->Countries, [
@@ -77,13 +78,18 @@ class CountriesController extends AppController
         $country = $this->Countries->newEmptyEntity();
         $this->Authorization->authorize($country);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $country = $this->Countries->patchEntity($country, $this->request->getData());
             if ($this->Countries->save($country)) {
-                $this->Flash->success(__('The country has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new country has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.')); 
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The country could not be saved. Please, try again.'));
+
         }
         $user = $this->request->getAttribute('identity');
         $this->set(compact('country', 'user'));

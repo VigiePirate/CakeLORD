@@ -74,12 +74,16 @@ class DeathSecondaryCausesController extends AppController
         $deathSecondaryCause = $this->DeathSecondaryCauses->newEmptyEntity();
         $this->Authorization->authorize($deathSecondaryCause);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $deathSecondaryCause = $this->DeathSecondaryCauses->patchEntity($deathSecondaryCause, $this->request->getData());
             if ($this->DeathSecondaryCauses->save($deathSecondaryCause)) {
-                $this->Flash->success(__('The death cause has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new death secondary has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The death cause could not be saved. Please, try again.'));
         }
         $deathPrimaryCauses = $this->DeathSecondaryCauses->DeathPrimaryCauses->find('list', ['limit' => 200])->order('id');

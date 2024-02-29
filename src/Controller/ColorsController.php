@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Chronos\Chronos;
+use Cake\I18n\I18n;
 
 /**
  * Colors Controller
@@ -26,11 +27,14 @@ class ColorsController extends AppController
      */
     public function index()
     {
-        $colors = $this->paginate($this->Colors, ['order' => ['name' => 'asc']]);
+        $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
+            ? ['name' => 'name', 'genotype' => 'genotype', 'description' => 'description']
+            : ['name' => 'ColorsTranslation.name', 'genotype' => 'ColorsTranslation.genotype', 'description' => 'ColorsTranslation.description'];
+        $colors = $this->paginate($this->Colors, ['order' => ['id' => 'asc'], 'sortableFields' => array_values($sort_fields)]);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
         $show_staff = ! is_null($user) && $user->can('add', $this->Colors);
-        $this->set(compact('colors', 'user', 'show_staff'));
+        $this->set(compact('colors', 'sort_fields', 'user', 'show_staff'));
     }
 
     /**
@@ -76,12 +80,16 @@ class ColorsController extends AppController
         $color = $this->Colors->newEmptyEntity();
         $this->Authorization->authorize($color);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $color = $this->Colors->patchEntity($color, $this->request->getData());
             if ($this->Colors->save($color)) {
-                $this->Flash->success(__('The color has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new color has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The color could not be saved. Please, try again.'));
         }
         $user = $this->request->getAttribute('identity');

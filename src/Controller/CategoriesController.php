@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\I18n\I18n;
 
 /**
  * Categories Controller
@@ -18,9 +19,13 @@ class CategoriesController extends AppController
      */
     public function index()
     {
-        $categories = $this->paginate($this->Categories);
-        $this->Authorization->skipAuthorization();
-        $this->set(compact('categories'));
+        $name_sort_field = (I18n::getLocale() == I18n::getDefaultLocale()) ? 'name' : 'CategoriesTranslation.name';
+        $categories = $this->paginate($this->Categories, [
+            'order' => ['id' => 'asc'],
+            'sortableFields' => ['id', $name_sort_field],
+        ]);
+        $this->Authorization->authorize($this->Categories);
+        $this->set(compact('categories', 'name_sort_field'));
     }
 
     /**
@@ -67,12 +72,16 @@ class CategoriesController extends AppController
         $category = $this->Categories->newEmptyEntity();
         $this->Authorization->authorize($category);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $category = $this->Categories->patchEntity($category, $this->request->getData());
             if ($this->Categories->save($category)) {
-                $this->Flash->success(__('The category has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new category has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The category could not be saved. Please, try again.'));
         }
         $this->set(compact('category'));

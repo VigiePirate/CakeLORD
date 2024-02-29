@@ -79,12 +79,16 @@ class SingularitiesController extends AppController
         $singularity = $this->Singularities->newEmptyEntity();
         $this->Authorization->authorize($singularity);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $singularity = $this->Singularities->patchEntity($singularity, $this->request->getData());
             if ($this->Singularities->save($singularity)) {
-                $this->Flash->success(__('The singularity has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new singularity has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The singularity could not be saved. Please, try again.'));
         }
         $rats = $this->Singularities->Rats->find('list', ['limit' => 200]);

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Chronos\Chronos;
+use Cake\I18n\I18n;
 
 /**
  * Markings Controller
@@ -26,11 +27,15 @@ class MarkingsController extends AppController
      */
     public function index()
     {
-        $markings = $this->paginate($this->Markings, ['order' => ['name' => 'asc']]);
+        $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
+            ? ['name' => 'name', 'genotype' => 'genotype', 'description' => 'description']
+            : ['name' => 'MarkingsTranslation.name', 'genotype' => 'MarkingsTranslation.genotype', 'description' => 'MarkingsTranslation.description'];
+
+        $markings = $this->paginate($this->Markings, ['order' => ['id' => 'asc'], 'sortableFields' => array_values($sort_fields)]);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Markings);
-        $this->set(compact('markings', 'user', 'show_staff'));
+        $this->set(compact('markings', 'sort_fields', 'user', 'show_staff'));
     }
 
     /**
@@ -76,12 +81,16 @@ class MarkingsController extends AppController
         $marking = $this->Markings->newEmptyEntity();
         $this->Authorization->authorize($marking);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $marking = $this->Markings->patchEntity($marking, $this->request->getData());
             if ($this->Markings->save($marking)) {
-                $this->Flash->success(__('The marking has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new marking has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The marking could not be saved. Please, try again.'));
         }
 

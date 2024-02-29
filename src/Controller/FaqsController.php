@@ -66,12 +66,16 @@ class FaqsController extends AppController
         $faq = $this->Faqs->newEmptyEntity();
         $this->Authorization->authorize($faq);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $faq = $this->Faqs->patchEntity($faq, $this->request->getData());
             if ($this->Faqs->save($faq)) {
-                $this->Flash->success(__('The FAQ has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new FAQ has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The FAQ could not be saved. Please, try again.'));
         }
         $categories = $this->Faqs->Categories->find('list', ['limit' => 200]);
