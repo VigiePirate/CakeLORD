@@ -44,6 +44,10 @@ class CategoriesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Translate', [
+            'fields' => ['name'],
+        ]);
+
         $this->hasMany('Articles', [
             'foreignKey' => 'category_id',
         ]);

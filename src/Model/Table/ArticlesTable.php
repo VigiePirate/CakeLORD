@@ -44,6 +44,9 @@ class ArticlesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Translate', [
+            'fields' => ['title', 'subtitle', 'content'],
+        ]);
 
         $this->belongsTo('Categories', [
             'foreignKey' => 'category_id',
