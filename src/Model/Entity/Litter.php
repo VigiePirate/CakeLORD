@@ -138,7 +138,7 @@ class Litter extends Entity
             if ($this->sire_age <= 0) { // Should raise exception
                 return $age = __('Negative age?!');
             }
-            if ($this->sire_age > RatsTable::MAXIMAL_AGE_MONTHS) {
+            if ($this->sire_age > RatsTable::MAXIMAL_AGE) {
                 return $age = '– ?? –';
             }
 
@@ -162,15 +162,13 @@ class Litter extends Entity
     protected function _getDamAgeInMonths() // now with litter birth date, should be with mating date?
     {
         if (isset($this->birth_date)) {
-
             if ($this->dam[0]->id == 1) { // Unknown mother
                 return __x('age', '– ?? –');
             }
-
             if ($this->dam_age <= 0) { // Should raise exception
                 return $age = __('Negative age?!');
             }
-            if ($this->dam_age > RatsTable::MAXIMAL_AGE_MONTHS) {
+            if ($this->dam_age > RatsTable::MAXIMAL_AGE) {
                 return $age = '– ?? –';
             }
 

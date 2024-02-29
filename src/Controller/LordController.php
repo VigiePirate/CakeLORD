@@ -237,7 +237,7 @@ class LordController extends AppController
 
         //FIXME: use $rattery->is_generic property
         $nongeneric_litter_count = $lord->countLitters([], true);
-        $littersize_distribution = json_encode($lord->computeLitterSizeDistribution()->toArray());
+        $littersize_distribution = json_encode($lord->computeLitterSizeDistribution());
         $females_in_litter_distribution = json_encode($lord->computeLitterSexDistribution(['sex' => 'F']));
         $males_in_litter_distribution = json_encode($lord->computeLitterSexDistribution(['sex' => 'M']));
 

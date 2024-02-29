@@ -1238,8 +1238,8 @@ footer {
   display: none;
 }
 .message.warning{
-  background: #fff7f0; /* #fff2e6; */
-  color: #ed6700; /* #f86c00; */
+  background: #fff4eb;  /* #fff7f0; */
+  color: #ed6700;
   border-color: #f88131;
 }
 .message.success {

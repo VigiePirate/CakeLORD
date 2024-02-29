@@ -89,12 +89,17 @@ trait StatisticsTrait
         $histogram = $model->find()->where($filter);
 
         if ($model->associations()->has('States')) {
-            $histogram = $histogram->innerJoinWith('States', function ($q) {
-                return $q->where(['States.is_reliable IS' => true]);
-            });
+            $histogram = $histogram
+                ->innerJoinWith('States', function ($q) {
+                    return $q->where(['States.is_reliable IS' => true]);
+                })
+                ->select([$name.'__state_id' => $name.'.state_id']);
         }
 
-        $histogram->select(['year' => 'YEAR(created)', 'count' => 'COUNT('.$name.'.id)'])
+        $histogram->select([
+            'year' => 'YEAR(created)',
+            'count' => 'COUNT('.$name.'.id)'
+        ])
             ->group('year')
             ->order(['year' => 'ASC']);
         return $histogram;
@@ -177,7 +182,11 @@ trait StatisticsTrait
             ->innerJoinWith('States', function ($q) {
                 return $q->where(['States.is_reliable IS' => true]);
             })
-            ->select(['year' => 'YEAR(birth_date)', 'count' => 'COUNT(Rats.id)'])
+            ->select([
+                'Rats__state_id' => 'Rats.state_id',
+                'year' => 'YEAR(birth_date)',
+                'count' => 'COUNT(Rats.id)'
+            ])
             ->group('year')
             ->order(['year' => 'ASC']);
         return $histogram;
@@ -701,6 +710,7 @@ trait StatisticsTrait
             ->select([
                 'size' => 'pups_number',
                 'count' => 'COUNT(Litters.id)',
+                'Litters__id' => 'Litters.id',
                 'Litters__state_id' => 'Litters.state_id',
             ])
             ->innerJoinWith('Contributions.Ratteries', function ($q) {

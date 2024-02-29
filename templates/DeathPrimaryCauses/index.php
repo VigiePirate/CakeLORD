@@ -42,7 +42,7 @@
                                     'alt' => __('Delete Death Category')
                                 ]),
                                 ['action' => 'delete', $deathPrimaryCause->id],
-                                ['confirm' => __('Are you sure you want to delete country # {0}?', $deathPrimaryCause->id), 'escape' => false]
+                                ['confirm' => __('Are you sure you want to delete # {0}?', $deathPrimaryCause->id), 'escape' => false]
                             )
                         ?>
                     </td>

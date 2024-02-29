@@ -201,7 +201,7 @@
             </div>
 
             <div class="signature">
-                &mdash; <?= __('Created on {0}.', [$user->created->i18nFormat('dd/MM/yyyy'), ]) ?>  <?= ($user->modified != $user->created) ? __('Last modified on {0}.', [$user->modified->i18nFormat('dd/MM/yyyy')]) : '' ?>
+                &mdash; <?= __('Created on {0}.', [$user->created->i18nFormat('dd/MM/yyyy'), ]) ?>  <?= (! is_null($user->modified) && $user->modified != $user->created) ? __('Last modified on {0}.', [$user->modified->i18nFormat('dd/MM/yyyy')]) : '' ?>
             </div>
 
         </div>

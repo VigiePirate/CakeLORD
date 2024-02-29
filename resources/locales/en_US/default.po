@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-02-19 11:37+0000\n"
-"PO-Revision-Date: 2024-02-19 15:32+0100\n"
+"POT-Creation-Date: 2024-02-29 19:42+0000\n"
+"PO-Revision-Date: 2024-02-29 20:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -15,73 +15,108 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: src/Controller/ArticlesController.php:86
-#: src/Controller/ArticlesController.php:112
-msgid "The article has been saved."
-msgstr "The article has been saved."
+#: src/Controller/ArticlesController.php:90
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new article has been saved, but only in English. "
+msgstr "The new article has been saved, but only in English. "
 
-#: src/Controller/ArticlesController.php:89
-#: src/Controller/ArticlesController.php:116
+#: src/Controller/ArticlesController.php:90
+#: src/Controller/CategoriesController.php:81
+#: src/Controller/CoatsController.php:93 src/Controller/ColorsController.php:89
+#: src/Controller/CountriesController.php:87
+#: src/Controller/DeathPrimaryCausesController.php:93
+#: src/Controller/DeathSecondaryCausesController.php:83
+#: src/Controller/DilutionsController.php:90
+#: src/Controller/EarsetsController.php:90
+#: src/Controller/EyecolorsController.php:90
+#: src/Controller/FaqsController.php:75
+#: src/Controller/MarkingsController.php:90
+#: src/Controller/RolesController.php:85
+#: src/Controller/SingularitiesController.php:88
+#: src/Controller/StatesController.php:75
+msgid "Change your preferred language and edit the sheet to add a translation."
+msgstr ""
+"Change your preferred language and edit the sheet to add a translation."
+
+#: src/Controller/ArticlesController.php:94
+#: src/Controller/ArticlesController.php:121
 msgid "The article could not be saved. Please, try again."
 msgstr "The article could not be saved. Please, try again."
 
-#: src/Controller/ArticlesController.php:137
+#: src/Controller/ArticlesController.php:117
+msgid "The article has been saved."
+msgstr "The article has been saved."
+
+#: src/Controller/ArticlesController.php:142
 msgid "The article has been deleted."
 msgstr "The article has been deleted."
 
-#: src/Controller/ArticlesController.php:140
+#: src/Controller/ArticlesController.php:145
 msgid "The article could not be deleted. Please, try again."
 msgstr "The article could not be deleted. Please, try again."
 
-#: src/Controller/CategoriesController.php:72
-#: src/Controller/CategoriesController.php:97
-msgid "The category has been saved."
-msgstr "The category has been saved."
+#: src/Controller/CategoriesController.php:81
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new category has been saved, but only in English. "
+msgstr "The new category has been saved, but only in English. "
 
-#: src/Controller/CategoriesController.php:76
-#: src/Controller/CategoriesController.php:101
+#: src/Controller/CategoriesController.php:85
+#: src/Controller/CategoriesController.php:110
 msgid "The category could not be saved. Please, try again."
 msgstr "The category could not be saved. Please, try again."
 
-#: src/Controller/CategoriesController.php:120
+#: src/Controller/CategoriesController.php:106
+msgid "The category has been saved."
+msgstr "The category has been saved."
+
+#: src/Controller/CategoriesController.php:129
 msgid "The category has been deleted."
 msgstr "The category has been deleted."
 
-#: src/Controller/CategoriesController.php:122
+#: src/Controller/CategoriesController.php:131
 msgid "The category could not be deleted. Please, try again."
 msgstr "The category could not be deleted. Please, try again."
 
-#: src/Controller/CoatsController.php:85 src/Controller/CoatsController.php:108
-msgid "The coat has been saved."
-msgstr "The coat has been saved."
+#: src/Controller/CoatsController.php:93
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new coat has been saved, but only in English. "
+msgstr "The new coat has been saved, but only in English. "
 
-#: src/Controller/CoatsController.php:89 src/Controller/CoatsController.php:112
+#: src/Controller/CoatsController.php:97 src/Controller/CoatsController.php:120
 msgid "The coat could not be saved. Please, try again."
 msgstr "The coat could not be saved. Please, try again."
 
-#: src/Controller/CoatsController.php:131
+#: src/Controller/CoatsController.php:116
+msgid "The coat has been saved."
+msgstr "The coat has been saved."
+
+#: src/Controller/CoatsController.php:139
 msgid "The coat has been deleted."
 msgstr "The coat has been deleted."
 
-#: src/Controller/CoatsController.php:133
+#: src/Controller/CoatsController.php:141
 msgid "The coat could not be deleted. Please, try again."
 msgstr "The coat could not be deleted. Please, try again."
 
-#: src/Controller/ColorsController.php:81
-#: src/Controller/ColorsController.php:105
-msgid "The color has been saved."
-msgstr "The color has been saved."
+#: src/Controller/ColorsController.php:89
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new color has been saved, but only in English. "
+msgstr "The new color has been saved, but only in English. "
 
-#: src/Controller/ColorsController.php:85
-#: src/Controller/ColorsController.php:109
+#: src/Controller/ColorsController.php:93
+#: src/Controller/ColorsController.php:117
 msgid "The color could not be saved. Please, try again."
 msgstr "The color could not be saved. Please, try again."
 
-#: src/Controller/ColorsController.php:128
+#: src/Controller/ColorsController.php:113
+msgid "The color has been saved."
+msgstr "The color has been saved."
+
+#: src/Controller/ColorsController.php:136
 msgid "The color has been deleted."
 msgstr "The color has been deleted."
 
-#: src/Controller/ColorsController.php:130
+#: src/Controller/ColorsController.php:138
 msgid "The color could not be deleted. Please, try again."
 msgstr "The color could not be deleted. Please, try again."
 
@@ -129,33 +164,36 @@ msgstr "The contribution has been deleted."
 msgid "The contribution could not be deleted. Please, try again."
 msgstr "The contribution could not be deleted. Please, try again."
 
-#: src/Controller/CountriesController.php:73
-#: src/Controller/CountriesController.php:99
-msgid "The country has been saved."
-msgstr "The country has been saved."
+#: src/Controller/CountriesController.php:87
+msgid "The new country has been saved, but only in English. "
+msgstr "The new country has been saved, but only in English. "
 
-#: src/Controller/CountriesController.php:77
-#: src/Controller/CountriesController.php:103
+#: src/Controller/CountriesController.php:91
+#: src/Controller/CountriesController.php:118
 msgid "The country could not be saved. Please, try again."
 msgstr "The country could not be saved. Please, try again."
 
-#: src/Controller/CountriesController.php:122
+#: src/Controller/CountriesController.php:114
+msgid "The country has been saved."
+msgstr "The country has been saved."
+
+#: src/Controller/CountriesController.php:137
 msgid "The country has been deleted."
 msgstr "The country has been deleted."
 
-#: src/Controller/CountriesController.php:124
+#: src/Controller/CountriesController.php:139
 msgid "The country could not be deleted. Please, try again."
 msgstr "The country could not be deleted. Please, try again."
 
-#: src/Controller/DeathPrimaryCausesController.php:56
-#: src/Controller/DeathPrimaryCausesController.php:57
+#: src/Controller/DeathPrimaryCausesController.php:68
+#: src/Controller/DeathPrimaryCausesController.php:69
 #: src/Controller/DeathSecondaryCausesController.php:58
 #: src/Controller/DeathSecondaryCausesController.php:59
-#: src/Controller/LittersController.php:855
-#: src/Controller/LittersController.php:856 src/Model/Entity/Rattery.php:216
+#: src/Controller/LittersController.php:856
+#: src/Controller/LittersController.php:857 src/Model/Entity/Rattery.php:216
 #: src/Model/Entity/Rattery.php:217 src/Model/Entity/Rattery.php:276
-#: src/Model/Entity/StatisticsTrait.php:609
-#: src/Model/Entity/StatisticsTrait.php:716 templates/RatSnapshots/diff.php:205
+#: src/Model/Entity/StatisticsTrait.php:677
+#: src/Model/Entity/StatisticsTrait.php:787 templates/RatSnapshots/diff.php:205
 #: templates/RatSnapshots/diff.php:207 templates/RatSnapshots/diff.php:214
 #: templates/RatSnapshots/diff.php:216 templates/RatSnapshots/diff.php:222
 #: templates/RatSnapshots/diff.php:224 templates/RatSnapshots/diff.php:491
@@ -168,109 +206,134 @@ msgstr "The country could not be deleted. Please, try again."
 msgid "N/A"
 msgstr "N/A"
 
-#: src/Controller/DeathPrimaryCausesController.php:77
-#: src/Controller/DeathPrimaryCausesController.php:100
-msgid "The death category has been saved."
-msgstr "The death category has been saved."
+#: src/Controller/DeathPrimaryCausesController.php:93
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new death category has been saved, but only in English. "
+msgstr "The new death category has been saved, but only in English. "
 
-#: src/Controller/DeathPrimaryCausesController.php:81
-#: src/Controller/DeathPrimaryCausesController.php:104
+#: src/Controller/DeathPrimaryCausesController.php:97
+#: src/Controller/DeathPrimaryCausesController.php:120
 msgid "The death category could not be saved. Please, try again."
 msgstr "The death category could not be saved. Please, try again."
 
-#: src/Controller/DeathPrimaryCausesController.php:124
+#: src/Controller/DeathPrimaryCausesController.php:116
+msgid "The death category has been saved."
+msgstr "The death category has been saved."
+
+#: src/Controller/DeathPrimaryCausesController.php:140
 msgid "The death category has been deleted."
 msgstr "The death category has been deleted."
 
-#: src/Controller/DeathPrimaryCausesController.php:126
+#: src/Controller/DeathPrimaryCausesController.php:142
 msgid "The death category could not be deleted. Please, try again."
 msgstr "The death category could not be deleted. Please, try again."
 
-#: src/Controller/DeathSecondaryCausesController.php:79
-#: src/Controller/DeathSecondaryCausesController.php:103
-msgid "The death cause has been saved."
-msgstr "The death cause has been saved."
-
 #: src/Controller/DeathSecondaryCausesController.php:83
-#: src/Controller/DeathSecondaryCausesController.php:107
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new death secondary has been saved, but only in English. "
+msgstr "The new death secondary has been saved, but only in English. "
+
+#: src/Controller/DeathSecondaryCausesController.php:87
+#: src/Controller/DeathSecondaryCausesController.php:111
 msgid "The death cause could not be saved. Please, try again."
 msgstr "The death cause could not be saved. Please, try again."
 
-#: src/Controller/DeathSecondaryCausesController.php:127
+#: src/Controller/DeathSecondaryCausesController.php:107
+msgid "The death cause has been saved."
+msgstr "The death cause has been saved."
+
+#: src/Controller/DeathSecondaryCausesController.php:131
 msgid "The death cause has been deleted."
 msgstr "The death cause has been deleted."
 
-#: src/Controller/DeathSecondaryCausesController.php:129
+#: src/Controller/DeathSecondaryCausesController.php:133
 msgid "The death cause could not be deleted. Please, try again."
 msgstr "The death cause could not be deleted. Please, try again."
 
-#: src/Controller/DilutionsController.php:81
-#: src/Controller/DilutionsController.php:105
-msgid "The dilution has been saved."
-msgstr "The dilution has been saved."
+#: src/Controller/DilutionsController.php:90
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new dilution has been saved, but only in English. "
+msgstr "The new dilution has been saved, but only in English. "
 
-#: src/Controller/DilutionsController.php:85
-#: src/Controller/DilutionsController.php:109
+#: src/Controller/DilutionsController.php:94
+#: src/Controller/DilutionsController.php:118
 msgid "The dilution could not be saved. Please, try again."
 msgstr "The dilution could not be saved. Please, try again."
 
-#: src/Controller/DilutionsController.php:128
+#: src/Controller/DilutionsController.php:114
+msgid "The dilution has been saved."
+msgstr "The dilution has been saved."
+
+#: src/Controller/DilutionsController.php:137
 msgid "The dilution has been deleted."
 msgstr "The dilution has been deleted."
 
-#: src/Controller/DilutionsController.php:130
+#: src/Controller/DilutionsController.php:139
 msgid "The dilution could not be deleted. Please, try again."
 msgstr "The dilution could not be deleted. Please, try again."
 
-#: src/Controller/EarsetsController.php:81
-#: src/Controller/EarsetsController.php:105
-msgid "The earset has been saved."
-msgstr "The earset has been saved."
+#: src/Controller/EarsetsController.php:90
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new earset has been saved, but only in English. "
+msgstr "The new earset has been saved, but only in English. "
 
-#: src/Controller/EarsetsController.php:85
-#: src/Controller/EarsetsController.php:109
+#: src/Controller/EarsetsController.php:94
+#: src/Controller/EarsetsController.php:118
 msgid "The earset could not be saved. Please, try again."
 msgstr "The earset could not be saved. Please, try again."
 
-#: src/Controller/EarsetsController.php:128
+#: src/Controller/EarsetsController.php:114
+msgid "The earset has been saved."
+msgstr "The earset has been saved."
+
+#: src/Controller/EarsetsController.php:137
 msgid "The earset has been deleted."
 msgstr "The earset has been deleted."
 
-#: src/Controller/EarsetsController.php:130
+#: src/Controller/EarsetsController.php:139
 msgid "The earset could not be deleted. Please, try again."
 msgstr "The earset could not be deleted. Please, try again."
 
-#: src/Controller/EyecolorsController.php:81
-#: src/Controller/EyecolorsController.php:105
-msgid "The eyecolor has been saved."
-msgstr "The eyecolor has been saved."
+#: src/Controller/EyecolorsController.php:90
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new eyecolor has been saved, but only in English. "
+msgstr "The new eyecolor has been saved, but only in English. "
 
-#: src/Controller/EyecolorsController.php:85
-#: src/Controller/EyecolorsController.php:109
+#: src/Controller/EyecolorsController.php:94
+#: src/Controller/EyecolorsController.php:118
 msgid "The eyecolor could not be saved. Please, try again."
 msgstr "The eyecolor could not be saved. Please, try again."
 
-#: src/Controller/EyecolorsController.php:128
+#: src/Controller/EyecolorsController.php:114
+msgid "The eyecolor has been saved."
+msgstr "The eyecolor has been saved."
+
+#: src/Controller/EyecolorsController.php:137
 msgid "The eyecolor has been deleted."
 msgstr "The eyecolor has been deleted."
 
-#: src/Controller/EyecolorsController.php:130
+#: src/Controller/EyecolorsController.php:139
 msgid "The eyecolor could not be deleted. Please, try again."
 msgstr "The eyecolor could not be deleted. Please, try again."
 
-#: src/Controller/FaqsController.php:71 src/Controller/FaqsController.php:97
-msgid "The FAQ has been saved."
-msgstr "The FAQ has been saved."
+#: src/Controller/FaqsController.php:75
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new FAQ has been saved, but only in English. "
+msgstr "The new FAQ has been saved, but only in English. "
 
-#: src/Controller/FaqsController.php:75 src/Controller/FaqsController.php:101
+#: src/Controller/FaqsController.php:79 src/Controller/FaqsController.php:105
 msgid "The FAQ could not be saved. Please, try again."
 msgstr "The FAQ could not be saved. Please, try again."
 
-#: src/Controller/FaqsController.php:121
+#: src/Controller/FaqsController.php:101
+msgid "The FAQ has been saved."
+msgstr "The FAQ has been saved."
+
+#: src/Controller/FaqsController.php:125
 msgid "The FAQ has been deleted."
 msgstr "The FAQ has been deleted."
 
-#: src/Controller/FaqsController.php:123
+#: src/Controller/FaqsController.php:127
 msgid "The FAQ could not be deleted. Please, try again."
 msgstr "The FAQ could not be deleted. Please, try again."
 
@@ -313,7 +376,7 @@ msgstr "The litter message could not be deleted. Please, try again."
 
 #: src/Controller/LittersController.php:64
 #: src/Controller/RatsController.php:116
-#: src/Controller/RatteriesController.php:84
+#: src/Controller/RatteriesController.php:89
 msgid ""
 "You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to "
 "correct. Please check below and take action soon."
@@ -322,17 +385,17 @@ msgstr ""
 "correct. Please check below and take action soon."
 
 #: src/Controller/LittersController.php:172
-#: src/Controller/LordController.php:277
+#: src/Controller/LordController.php:278
 msgid "Survival rate"
 msgstr "Survival rate"
 
 #: src/Controller/LittersController.php:173
-#: src/Controller/LordController.php:247
+#: src/Controller/LordController.php:248
 msgid "Age (in months)"
 msgstr "Age (in months)"
 
 #: src/Controller/LittersController.php:174
-#: src/Controller/LordController.php:278
+#: src/Controller/LordController.php:279
 msgid "Survival rate (%)"
 msgstr "Survival rate (%)"
 
@@ -401,51 +464,51 @@ msgid "Mating window: "
 msgstr "Mating window: "
 
 #: src/Controller/LittersController.php:382
-#: src/Controller/LittersController.php:1071
+#: src/Controller/LittersController.php:1072
 msgid "Easy peasy."
 msgstr "Easy peasy."
 
 #: src/Controller/LittersController.php:383
-#: src/Controller/LittersController.php:1072
+#: src/Controller/LittersController.php:1073
 msgid "Quite a lot, but I have seen worse."
 msgstr "Quite a lot, but I have seen worse."
 
 #: src/Controller/LittersController.php:384
-#: src/Controller/LittersController.php:1073
+#: src/Controller/LittersController.php:1074
 msgid "Wow, that was pretty intense!"
 msgstr "Wow, that was pretty intense!"
 
 #: src/Controller/LittersController.php:385
-#: src/Controller/LittersController.php:1074
+#: src/Controller/LittersController.php:1075
 msgid "Oops, we hope your device is not smoking."
 msgstr "Oops, we hope your device is not smoking."
 
 #: src/Controller/LittersController.php:386
-#: src/Controller/LittersController.php:1075
+#: src/Controller/LittersController.php:1076
 msgid "You know some LORD’s developers in person, don’t you?"
 msgstr "You know some LORD’s developers in person, don’t you?"
 
 #: src/Controller/LittersController.php:387
-#: src/Controller/LittersController.php:1076
+#: src/Controller/LittersController.php:1077
 #: templates/Litters/inbreeding_approx.php:39
 #: templates/Litters/inbreeding_approx.php:44
 msgid "generation"
 msgstr "generation"
 
 #: src/Controller/LittersController.php:388
-#: src/Controller/LittersController.php:1077
+#: src/Controller/LittersController.php:1078
 #: templates/Litters/inbreeding_approx.php:39
 #: templates/Litters/inbreeding_approx.php:44
 msgid "generations"
 msgstr "generations"
 
 #: src/Controller/LittersController.php:389
-#: src/Controller/LittersController.php:1078
+#: src/Controller/LittersController.php:1079
 msgid "rat"
 msgstr "rat"
 
 #: src/Controller/LittersController.php:390
-#: src/Controller/LittersController.php:1079
+#: src/Controller/LittersController.php:1080
 msgid "rats"
 msgstr "rats"
 
@@ -457,7 +520,7 @@ msgstr ""
 "The litter has been saved. If parents were edited, you might have to "
 "manually correct contributions."
 
-#: src/Controller/LittersController.php:430
+#: src/Controller/LittersController.php:429
 msgid "The litter could not be saved. Please, try again."
 msgstr "The litter could not be saved. Please, try again."
 
@@ -469,7 +532,7 @@ msgstr ""
 "For data coherence, modifications of litters are restricted. Please, contact "
 "a staff member to change parents or birth date."
 
-#: src/Controller/LittersController.php:489
+#: src/Controller/LittersController.php:490
 msgid ""
 "The litter sheet has been deleted. You can inform its creator by mail from "
 "their sheet below."
@@ -477,11 +540,11 @@ msgstr ""
 "The litter sheet has been deleted. You can inform its creator by mail from "
 "their sheet below."
 
-#: src/Controller/LittersController.php:492
+#: src/Controller/LittersController.php:493
 msgid "The litter sheet could not be deleted. It was not its time."
 msgstr "The litter sheet could not be deleted. It was not its time."
 
-#: src/Controller/LittersController.php:499
+#: src/Controller/LittersController.php:500
 msgid ""
 "This litter can be deleted. Related messages and snapshots will be deleted. "
 "This operation is irreversible!"
@@ -489,7 +552,7 @@ msgstr ""
 "This litter can be deleted. Related messages and snapshots will be deleted. "
 "This operation is irreversible!"
 
-#: src/Controller/LittersController.php:502
+#: src/Controller/LittersController.php:503
 msgid ""
 "Some rats are attached to this litter. You must edit their birth litters "
 "before being allowed to delete the litter sheet."
@@ -497,27 +560,27 @@ msgstr ""
 "Some rats are attached to this litter. You must edit their birth litters "
 "before being allowed to delete the litter sheet."
 
-#: src/Controller/LittersController.php:540
+#: src/Controller/LittersController.php:541
 msgid "Your new comment about the litter has been saved."
 msgstr "Your new comment about the litter has been saved."
 
-#: src/Controller/LittersController.php:543
+#: src/Controller/LittersController.php:544
 msgid ""
 "Your new comment about the litter could not be saved. Please, try again."
 msgstr ""
 "Your new comment about the litter could not be saved. Please, try again."
 
-#: src/Controller/LittersController.php:606
+#: src/Controller/LittersController.php:607
 msgid "The litter’s contributing ratteries have been updated."
 msgstr "The litter’s contributing ratteries have been updated."
 
-#: src/Controller/LittersController.php:614
+#: src/Controller/LittersController.php:615
 msgid ""
 "The litter’s contributing ratteries could not be updated. Please, try again."
 msgstr ""
 "The litter’s contributing ratteries could not be updated. Please, try again."
 
-#: src/Controller/LittersController.php:616
+#: src/Controller/LittersController.php:617
 msgid ""
 "You can add, edit or delete contributing ratteries below. Please, contact a "
 "staff member to edit the birth place."
@@ -525,7 +588,7 @@ msgstr ""
 "You can add, edit or delete contributing ratteries below. Please, contact a "
 "staff member to edit the birth place."
 
-#: src/Controller/LittersController.php:677
+#: src/Controller/LittersController.php:678
 msgid ""
 "This rat has been successfully attached to the requested birth litter. Pups "
 "number might have to be checked."
@@ -533,23 +596,23 @@ msgstr ""
 "This rat has been successfully attached to the requested birth litter. Pups "
 "number might have to be checked."
 
-#: src/Controller/LittersController.php:685
+#: src/Controller/LittersController.php:686
 msgid "We could not attach the selected rat to this litter."
 msgstr "We could not attach the selected rat to this litter."
 
-#: src/Controller/LittersController.php:713
+#: src/Controller/LittersController.php:714
 #: src/Controller/RatsController.php:691
-#: src/Controller/RatteriesController.php:316
+#: src/Controller/RatteriesController.php:322
 msgid "The snapshot has been restored."
 msgstr "The snapshot has been restored."
 
-#: src/Controller/LittersController.php:715
+#: src/Controller/LittersController.php:716
 #: src/Controller/RatsController.php:693
-#: src/Controller/RatteriesController.php:318
+#: src/Controller/RatteriesController.php:324
 msgid "The snapshot could not be loaded. Please, try again."
 msgstr "The snapshot could not be loaded. Please, try again."
 
-#: src/Controller/LittersController.php:1043
+#: src/Controller/LittersController.php:1044
 msgid ""
 "This litter has a long or complicated family tree. We had to truncate it in "
 "order to compute (reasonably) approximate results."
@@ -557,7 +620,7 @@ msgstr ""
 "This litter has a long or complicated family tree. We had to truncate it in "
 "order to compute (reasonably) approximate results."
 
-#: src/Controller/LittersController.php:1045
+#: src/Controller/LittersController.php:1046
 msgid ""
 "Good news! This litter’s family tree is simple enough and we managed to "
 "compute exact results."
@@ -565,90 +628,90 @@ msgstr ""
 "Good news! This litter’s family tree is simple enough and we managed to "
 "compute exact results."
 
-#: src/Controller/LittersController.php:1105
+#: src/Controller/LittersController.php:1106
 msgid "This litter sheet is now in state: {0}."
 msgstr "This litter sheet is now in state: {0}."
 
-#: src/Controller/LittersController.php:1107
-#: src/Controller/RatsController.php:1428
-#: src/Controller/RatteriesController.php:732
+#: src/Controller/LittersController.php:1109
+#: src/Controller/RatsController.php:1429
+#: src/Controller/RatteriesController.php:739
 msgid "The following custom moderation message has been sent: {0}"
 msgstr "The following custom moderation message has been sent: {0}"
 
-#: src/Controller/LittersController.php:1110
-#: src/Controller/RatsController.php:1431
-#: src/Controller/RatteriesController.php:735
+#: src/Controller/LittersController.php:1112
+#: src/Controller/RatsController.php:1432
+#: src/Controller/RatteriesController.php:742
 msgid ""
 "We could not moderate the sheet. Please retry or contact an administrator."
 msgstr ""
 "We could not moderate the sheet. Please retry or contact an administrator."
 
-#: src/Controller/LittersController.php:1132
-#: src/Controller/RatsController.php:1456
-#: src/Controller/RatteriesController.php:757
+#: src/Controller/LittersController.php:1135
+#: src/Controller/RatsController.php:1457
+#: src/Controller/RatteriesController.php:764
 msgid "The sheet has been sent back to staff with your message."
 msgstr "The sheet has been sent back to staff with your message."
 
-#: src/Controller/LittersController.php:1135
-#: src/Controller/RatsController.php:1459
-#: src/Controller/RatteriesController.php:760
+#: src/Controller/LittersController.php:1138
+#: src/Controller/RatsController.php:1460
+#: src/Controller/RatteriesController.php:767
 #: src/Controller/UsersController.php:225
 #: src/Controller/UsersController.php:265
-#: src/Controller/UsersController.php:994
-#: src/Controller/UsersController.php:1041
+#: src/Controller/UsersController.php:995
+#: src/Controller/UsersController.php:1042
 msgid "Something went wrong. Please, try again or contact an administrator."
 msgstr "Something went wrong. Please, try again or contact an administrator."
 
-#: src/Controller/LittersController.php:1150
+#: src/Controller/LittersController.php:1153
 msgid "This litter sheet is now frozen."
 msgstr "This litter sheet is now frozen."
 
-#: src/Controller/LittersController.php:1152
-#: src/Controller/RatsController.php:1477
-#: src/Controller/RatteriesController.php:777
+#: src/Controller/LittersController.php:1155
+#: src/Controller/RatsController.php:1478
+#: src/Controller/RatteriesController.php:784
 msgid ""
 "We could not freeze the sheet. Please retry or contact an administrator."
 msgstr ""
 "We could not freeze the sheet. Please retry or contact an administrator."
 
-#: src/Controller/LittersController.php:1164
+#: src/Controller/LittersController.php:1167
 msgid "This litter sheet is now unfrozen."
 msgstr "This litter sheet is now unfrozen."
 
-#: src/Controller/LittersController.php:1166
-#: src/Controller/RatsController.php:1491
-#: src/Controller/RatteriesController.php:790
+#: src/Controller/LittersController.php:1169
+#: src/Controller/RatsController.php:1492
+#: src/Controller/RatteriesController.php:797
 msgid "We could not thaw the sheet. Please retry or contact an administrator."
 msgstr "We could not thaw the sheet. Please retry or contact an administrator."
 
-#: src/Controller/LittersController.php:1177
-#: src/Controller/RatsController.php:1503
+#: src/Controller/LittersController.php:1180
+#: src/Controller/RatsController.php:1504
 msgid "This rat sheet has been approved."
 msgstr "This rat sheet has been approved."
 
-#: src/Controller/LittersController.php:1179
-#: src/Controller/RatsController.php:1505
-#: src/Controller/RatteriesController.php:803
+#: src/Controller/LittersController.php:1182
+#: src/Controller/RatsController.php:1506
+#: src/Controller/RatteriesController.php:810
 msgid ""
 "We could not approve the sheet. Please retry or contact an administrator."
 msgstr ""
 "We could not approve the sheet. Please retry or contact an administrator."
 
-#: src/Controller/LittersController.php:1190
-#: src/Controller/RatsController.php:1517
+#: src/Controller/LittersController.php:1193
+#: src/Controller/RatsController.php:1518
 msgid "This rat sheet has been unapproved."
 msgstr "This rat sheet has been unapproved."
 
-#: src/Controller/LittersController.php:1192
-#: src/Controller/RatsController.php:1519
-#: src/Controller/RatteriesController.php:816
+#: src/Controller/LittersController.php:1195
+#: src/Controller/RatsController.php:1520
+#: src/Controller/RatteriesController.php:823
 msgid ""
 "We could not unapprove the sheet. Please retry or contact an administrator."
 msgstr ""
 "We could not unapprove the sheet. Please retry or contact an administrator."
 
 #: src/Controller/LittersController.php:177
-#: src/Controller/LordController.php:252
+#: src/Controller/LordController.php:253
 msgctxt "litter statistics"
 msgid "Age: between "
 msgstr "Age: between "
@@ -658,7 +721,7 @@ msgctxt "litter statistics"
 msgid " and "
 msgstr " and "
 
-#: src/Controller/LordController.php:253
+#: src/Controller/LordController.php:254
 msgid " and "
 msgstr " and "
 
@@ -667,12 +730,12 @@ msgctxt "litter statistics"
 msgid " months"
 msgstr " months"
 
-#: src/Controller/LordController.php:255
+#: src/Controller/LordController.php:256
 msgid " months"
 msgstr " months"
 
 #: src/Controller/LittersController.php:391
-#: src/Controller/LittersController.php:1080
+#: src/Controller/LittersController.php:1081
 msgctxt "ancestor"
 msgid "None"
 msgstr "None"
@@ -704,7 +767,7 @@ msgstr "The log has been deleted."
 msgid "The log could not be deleted. Please, try again."
 msgstr "The log could not be deleted. Please, try again."
 
-#: src/Controller/LordController.php:91 src/Controller/LordController.php:317
+#: src/Controller/LordController.php:91 src/Controller/LordController.php:318
 #: templates/Lord/my.php:26 templates/Lord/search.php:42
 #: templates/Lord/webstats.php:50 templates/Rats/add.php:31
 #: templates/Rats/dispute.php:28 templates/Rats/edit.php:28
@@ -714,7 +777,7 @@ msgstr "The log could not be deleted. Please, try again."
 msgid "Rats"
 msgstr "Rats"
 
-#: src/Controller/LordController.php:92 src/Controller/LordController.php:321
+#: src/Controller/LordController.php:92 src/Controller/LordController.php:322
 #: templates/LitterSnapshots/diff.php:98 templates/LitterSnapshots/diff.php:252
 #: templates/Litters/view.php:320 templates/Lord/my.php:39
 #: templates/Lord/search.php:66 templates/Lord/webstats.php:34
@@ -734,49 +797,49 @@ msgstr "Ratteries"
 msgid "Litters"
 msgstr "Litters"
 
-#: src/Controller/LordController.php:245
+#: src/Controller/LordController.php:246
 msgid "Females"
 msgstr "Females"
 
-#: src/Controller/LordController.php:246
+#: src/Controller/LordController.php:247
 msgid "Males"
 msgstr "Males"
 
-#: src/Controller/LordController.php:248
+#: src/Controller/LordController.php:249
 msgid "Number of alive rats"
 msgstr "Number of alive rats"
 
-#: src/Controller/LordController.php:249 templates/RatSnapshots/diff.php:195
+#: src/Controller/LordController.php:250 templates/RatSnapshots/diff.php:195
 #: templates/RatSnapshots/diff.php:198 templates/RatSnapshots/diff.php:476
 #: templates/Rats/view.php:352 templates/element/simple_rats.php:42
 msgid "Age"
 msgstr "Age"
 
-#: src/Controller/LordController.php:250
+#: src/Controller/LordController.php:251
 msgid "Age pyramid"
 msgstr "Age pyramid"
 
-#: src/Controller/LordController.php:251
+#: src/Controller/LordController.php:252
 msgid "(presumed) alive rats"
 msgstr "(presumed) alive rats"
 
-#: src/Controller/LordController.php:254
+#: src/Controller/LordController.php:255
 msgid "months"
 msgstr "months"
 
-#: src/Controller/LordController.php:256
+#: src/Controller/LordController.php:257
 msgid "All-time average"
 msgstr "All-time average"
 
-#: src/Controller/LordController.php:257
+#: src/Controller/LordController.php:258
 msgid "All-time average:"
 msgstr "All-time average:"
 
-#: src/Controller/LordController.php:258
+#: src/Controller/LordController.php:259
 msgid "Average lifespan by birth year"
 msgstr "Average lifespan by birth year"
 
-#: src/Controller/LordController.php:259
+#: src/Controller/LordController.php:260
 msgid "Birth year"
 msgstr "Birth year"
 
@@ -785,104 +848,104 @@ msgctxt "rattery"
 msgid "Birth year"
 msgstr "Birth year"
 
-#: src/Controller/LordController.php:260
+#: src/Controller/LordController.php:261
 msgid "Average lifespan (in days)"
 msgstr "Average lifespan (in days)"
 
-#: src/Controller/LordController.php:261 templates/Litters/view.php:401
+#: src/Controller/LordController.php:262 templates/Litters/view.php:401
 msgid "Average lifespan:"
 msgstr "Average lifespan:"
 
-#: src/Controller/LordController.php:262
+#: src/Controller/LordController.php:263
 msgid "Life expectancy"
 msgstr "Life expectancy"
 
-#: src/Controller/LordController.php:263
+#: src/Controller/LordController.php:264
 msgid "days"
 msgstr "days"
 
-#: src/Controller/LordController.php:264
+#: src/Controller/LordController.php:265
 msgid "Rats born in"
 msgstr "Rats born in"
 
-#: src/Controller/LordController.php:265
+#: src/Controller/LordController.php:266
 msgid "Total litter size"
 msgstr "Total litter size"
 
-#: src/Controller/LordController.php:266
+#: src/Controller/LordController.php:267
 msgid "Litter size (number of pups)"
 msgstr "Litter size (number of pups)"
 
-#: src/Controller/LordController.php:267
+#: src/Controller/LordController.php:268
 msgid "Proportion of litters (%)"
 msgstr "Proportion of litters (%)"
 
-#: src/Controller/LordController.php:268
+#: src/Controller/LordController.php:269
 msgid "Litter size distribution (% of litters)"
 msgstr "Litter size distribution (% of litters)"
 
-#: src/Controller/LordController.php:269
+#: src/Controller/LordController.php:270
 msgid "% of litters"
 msgstr "% of litters"
 
-#: src/Controller/LordController.php:270
+#: src/Controller/LordController.php:271
 msgid "pups"
 msgstr "pups"
 
-#: src/Controller/LordController.php:271
+#: src/Controller/LordController.php:272
 msgid "Number of pups of the given sex"
 msgstr "Number of pups of the given sex"
 
-#: src/Controller/LordController.php:272
+#: src/Controller/LordController.php:273
 msgid "Litter size distribution by sex (% of litters)"
 msgstr "Litter size distribution by sex (% of litters)"
 
-#: src/Controller/LordController.php:274
+#: src/Controller/LordController.php:275
 msgid "Mortality distribution"
 msgstr "Mortality distribution"
 
-#: src/Controller/LordController.php:275
+#: src/Controller/LordController.php:276
 msgid "Mortality probability"
 msgstr "Mortality probability"
 
-#: src/Controller/LordController.php:276
+#: src/Controller/LordController.php:277
 msgid "Death probabilities (%)"
 msgstr "Death probabilities (%)"
 
-#: src/Controller/LordController.php:279
+#: src/Controller/LordController.php:280
 msgid "All-time survival and mortality by age"
 msgstr "All-time survival and mortality by age"
 
-#: src/Controller/LordController.php:280
+#: src/Controller/LordController.php:281
 msgid "% of all rats reach this age"
 msgstr "% of all rats reach this age"
 
-#: src/Controller/LordController.php:281
+#: src/Controller/LordController.php:282
 msgid "% of all deaths occur in rats of this age"
 msgstr "% of all deaths occur in rats of this age"
 
-#: src/Controller/LordController.php:282
+#: src/Controller/LordController.php:283
 msgid "% of all rats reaching this age die in the following month"
 msgstr "% of all rats reaching this age die in the following month"
 
-#: src/Controller/LordController.php:318
+#: src/Controller/LordController.php:319
 msgid "Rats by birth year"
 msgstr "Rats by birth year"
 
-#: src/Controller/LordController.php:319 templates/Lord/my.php:211
+#: src/Controller/LordController.php:320 templates/Lord/my.php:211
 #: templates/Lord/search.php:88 templates/Lord/webstats.php:26
 msgid "Users"
 msgstr "Users"
 
-#: src/Controller/LordController.php:320
+#: src/Controller/LordController.php:321
 msgid "Users by registration year"
 msgstr "Users by registration year"
 
-#: src/Controller/LordController.php:322
+#: src/Controller/LordController.php:323
 msgid "Ratteries by registration year"
 msgstr "Ratteries by registration year"
 
-#: src/Controller/LordController.php:333
+#: src/Controller/LordController.php:334
 msgid ""
 "\n"
 "                We strongly advised to consider alternative contact means "
@@ -926,11 +989,11 @@ msgstr ""
 "manner.\n"
 "                "
 
-#: src/Controller/LordController.php:366
+#: src/Controller/LordController.php:367
 msgid "Error sending email. Please, retry or contact us by another mean."
 msgstr "Error sending email. Please, retry or contact us by another mean."
 
-#: src/Controller/LordController.php:370
+#: src/Controller/LordController.php:371
 msgid ""
 "This was not the expected answer! Sorry to insist, but we must check that "
 "you are not spam, sausage, spam, spam, bacon, spam, tomato and spam to "
@@ -940,26 +1003,30 @@ msgstr ""
 "you are not spam, sausage, spam, spam, bacon, spam, tomato and spam to "
 "protect our mailbox."
 
-#: src/Controller/LordController.php:273
+#: src/Controller/LordController.php:274
 msgctxt "sex ratio"
 msgid "Litters with"
 msgstr "Litters with"
 
-#: src/Controller/MarkingsController.php:81
-#: src/Controller/MarkingsController.php:108
-msgid "The marking has been saved."
-msgstr "The marking has been saved."
+#: src/Controller/MarkingsController.php:90
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new marking has been saved, but only in English. "
+msgstr "The new marking has been saved, but only in English. "
 
-#: src/Controller/MarkingsController.php:85
-#: src/Controller/MarkingsController.php:112
+#: src/Controller/MarkingsController.php:94
+#: src/Controller/MarkingsController.php:121
 msgid "The marking could not be saved. Please, try again."
 msgstr "The marking could not be saved. Please, try again."
 
-#: src/Controller/MarkingsController.php:131
+#: src/Controller/MarkingsController.php:117
+msgid "The marking has been saved."
+msgstr "The marking has been saved."
+
+#: src/Controller/MarkingsController.php:140
 msgid "The marking has been deleted."
 msgstr "The marking has been deleted."
 
-#: src/Controller/MarkingsController.php:133
+#: src/Controller/MarkingsController.php:142
 msgid "The marking could not be deleted. Please, try again."
 msgstr "The marking could not be deleted. Please, try again."
 
@@ -1032,7 +1099,7 @@ msgstr ""
 "documentation before entering data."
 
 #: src/Controller/RatsController.php:380 src/Controller/RatsController.php:499
-#: src/Controller/RatsController.php:1355 templates/Rats/add.php:291
+#: src/Controller/RatsController.php:1356 templates/Rats/add.php:291
 #: templates/Rats/add.php:311 templates/Rats/add.php:352
 #: templates/Rats/add.php:371 templates/Rats/declare_death.php:69
 #: templates/Rats/declare_death.php:89 templates/Rats/edit.php:181
@@ -1046,7 +1113,7 @@ msgstr ""
 "fitness of your choice."
 
 #: src/Controller/RatsController.php:381 src/Controller/RatsController.php:500
-#: src/Controller/RatsController.php:1356
+#: src/Controller/RatsController.php:1357
 msgid ""
 "Please answer the following questions about euthanasia, diagnostics and "
 "analyses."
@@ -1131,15 +1198,15 @@ msgstr ""
 "This rat has offspring. You must edit or delete their bred litters before "
 "being allowed to delete the sheet."
 
-#: src/Controller/RatsController.php:1253
+#: src/Controller/RatsController.php:1254
 msgid "The rat’s picture has been deleted."
 msgstr "The rat’s picture has been deleted."
 
-#: src/Controller/RatsController.php:1256
+#: src/Controller/RatsController.php:1257
 msgid "The rat’s picture could not be deleted. Please, try again."
 msgstr "The rat’s picture could not be deleted. Please, try again."
 
-#: src/Controller/RatsController.php:1261
+#: src/Controller/RatsController.php:1262
 msgid ""
 "The rat’s new picture has been saved. A staff member still has to validate "
 "it."
@@ -1147,33 +1214,33 @@ msgstr ""
 "The rat’s new picture has been saved. A staff member still has to validate "
 "it."
 
-#: src/Controller/RatsController.php:1264
+#: src/Controller/RatsController.php:1265
 msgid "The rat’s new picture could not be saved. Please, try again."
 msgstr "The rat’s new picture could not be saved. Please, try again."
 
-#: src/Controller/RatsController.php:1267
-#: src/Controller/RatteriesController.php:481
-#: src/Controller/UsersController.php:656
+#: src/Controller/RatsController.php:1268
+#: src/Controller/RatteriesController.php:487
+#: src/Controller/UsersController.php:657
 msgid "Pictures must be in jpeg, gif or png format and less than 8 MB."
 msgstr "Pictures must be in jpeg, gif or png format and less than 8 MB."
 
-#: src/Controller/RatsController.php:1294
+#: src/Controller/RatsController.php:1295
 msgid "The rat has been transferred to its new owner."
 msgstr "The rat has been transferred to its new owner."
 
-#: src/Controller/RatsController.php:1297
+#: src/Controller/RatsController.php:1298
 msgid "The rat ownership could not be changed. Please, try again."
 msgstr "The rat ownership could not be changed. Please, try again."
 
-#: src/Controller/RatsController.php:1335
+#: src/Controller/RatsController.php:1336
 msgid "Sorry for your loss. Your rat’s death has been recorded."
 msgstr "Sorry for your loss. Your rat’s death has been recorded."
 
-#: src/Controller/RatsController.php:1338
+#: src/Controller/RatsController.php:1339
 msgid "Your rat’s death could not be recorded. Please, try again."
 msgstr "Your rat’s death could not be recorded. Please, try again."
 
-#: src/Controller/RatsController.php:1340
+#: src/Controller/RatsController.php:1341
 msgid ""
 "We are sorry for your loss. Please fill the information below to record the "
 "rat death. Date and primary cause are mandatory."
@@ -1181,45 +1248,45 @@ msgstr ""
 "We are sorry for your loss. Please fill the information below to record the "
 "rat death. Date and primary cause are mandatory."
 
-#: src/Controller/RatsController.php:1402
+#: src/Controller/RatsController.php:1403
 msgid "Your new comment about the rat has been saved."
 msgstr "Your new comment about the rat has been saved."
 
-#: src/Controller/RatsController.php:1405
+#: src/Controller/RatsController.php:1406
 msgid "Your new comment about the rat could not be saved. Please, try again."
 msgstr "Your new comment about the rat could not be saved. Please, try again."
 
-#: src/Controller/RatsController.php:1426
+#: src/Controller/RatsController.php:1427
 msgid "This rat sheet is now in state: {0}."
 msgstr "This rat sheet is now in state: {0}."
 
-#: src/Controller/RatsController.php:1475
+#: src/Controller/RatsController.php:1476
 msgid "This rat sheet is now frozen."
 msgstr "This rat sheet is now frozen."
 
-#: src/Controller/RatsController.php:1489
+#: src/Controller/RatsController.php:1490
 msgid "This rat sheet is now unfrozen."
 msgstr "This rat sheet is now unfrozen."
 
-#: src/Controller/RatsController.php:1267
-#: src/Controller/RatteriesController.php:481
-#: src/Controller/UsersController.php:656
+#: src/Controller/RatsController.php:1268
+#: src/Controller/RatteriesController.php:487
+#: src/Controller/UsersController.php:657
 msgctxt "pictures"
 msgid "Large images will be automatically resized."
 msgstr "Large images will be automatically resized."
 
-#: src/Controller/RatteriesController.php:188
-#: src/Controller/RatteriesController.php:217
+#: src/Controller/RatteriesController.php:194
+#: src/Controller/RatteriesController.php:223
 msgid "The rattery has been saved."
 msgstr "The rattery has been saved."
 
-#: src/Controller/RatteriesController.php:192
-#: src/Controller/RatteriesController.php:220
-#: src/Controller/RatteriesController.php:359
+#: src/Controller/RatteriesController.php:198
+#: src/Controller/RatteriesController.php:226
+#: src/Controller/RatteriesController.php:365
 msgid "The rattery could not be saved. Please, try again."
 msgstr "The rattery could not be saved. Please, try again."
 
-#: src/Controller/RatteriesController.php:275
+#: src/Controller/RatteriesController.php:281
 msgid ""
 "The rattery sheet has been deleted. You can inform its creator by mail from "
 "their sheet below."
@@ -1227,11 +1294,11 @@ msgstr ""
 "The rattery sheet has been deleted. You can inform its creator by mail from "
 "their sheet below."
 
-#: src/Controller/RatteriesController.php:278
+#: src/Controller/RatteriesController.php:284
 msgid "The rattery sheet could not be deleted. Some are tougher than others."
 msgstr "The rattery sheet could not be deleted. Some are tougher than others."
 
-#: src/Controller/RatteriesController.php:285
+#: src/Controller/RatteriesController.php:291
 msgid ""
 "This rattery can be deleted. Related messages and snapshots will be deleted. "
 "This operation is irreversible!"
@@ -1239,7 +1306,7 @@ msgstr ""
 "This rattery can be deleted. Related messages and snapshots will be deleted. "
 "This operation is irreversible!"
 
-#: src/Controller/RatteriesController.php:287
+#: src/Controller/RatteriesController.php:293
 msgid ""
 "This rattery contributed to some litters or gave its prefix to some rats. It "
 "cannot be deleted, except if you manually reaffect all properties below to "
@@ -1249,7 +1316,7 @@ msgstr ""
 "cannot be deleted, except if you manually reaffect all properties below to "
 "another rattery. This is not recommended."
 
-#: src/Controller/RatteriesController.php:339
+#: src/Controller/RatteriesController.php:345
 msgid ""
 "You already have an active rattery. Declare your previous ratteries as "
 "inactive if you want to register a new one."
@@ -1257,7 +1324,7 @@ msgstr ""
 "You already have an active rattery. Declare your previous ratteries as "
 "inactive if you want to register a new one."
 
-#: src/Controller/RatteriesController.php:356
+#: src/Controller/RatteriesController.php:362
 msgid ""
 "The rattery has been saved. Please note it will be validated only once you "
 "have recorded a rat, a litter, or a litter contribution under this prefix."
@@ -1265,7 +1332,7 @@ msgstr ""
 "The rattery has been saved. Please note it will be validated only once you "
 "have recorded a rat, a litter, or a litter contribution under this prefix."
 
-#: src/Controller/RatteriesController.php:366
+#: src/Controller/RatteriesController.php:372
 msgid ""
 "Only registered users are allowed to register a new rattery. Please sign in "
 "or sign up before proceeding."
@@ -1273,19 +1340,19 @@ msgstr ""
 "Only registered users are allowed to register a new rattery. Please sign in "
 "or sign up before proceeding."
 
-#: src/Controller/RatteriesController.php:377
+#: src/Controller/RatteriesController.php:383
 msgid "This rattery was already inactive."
 msgstr "This rattery was already inactive."
 
-#: src/Controller/RatteriesController.php:381
+#: src/Controller/RatteriesController.php:387
 msgid "This rattery is now officially inactive."
 msgstr "This rattery is now officially inactive."
 
-#: src/Controller/RatteriesController.php:383
+#: src/Controller/RatteriesController.php:389
 msgid "This rattery could not be declared inactive. Please try again."
 msgstr "This rattery could not be declared inactive. Please try again."
 
-#: src/Controller/RatteriesController.php:408
+#: src/Controller/RatteriesController.php:414
 msgid ""
 "You already have an active rattery. If you want to open another, you first "
 "have to pause your current rattery below."
@@ -1293,7 +1360,7 @@ msgstr ""
 "You already have an active rattery. If you want to open another, you first "
 "have to pause your current rattery below."
 
-#: src/Controller/RatteriesController.php:412
+#: src/Controller/RatteriesController.php:418
 msgid ""
 "This rattery is definitely closed, since you opened another rattery "
 "inbetween. You cannot reopen it."
@@ -1301,7 +1368,7 @@ msgstr ""
 "This rattery is definitely closed, since you opened another rattery "
 "inbetween. You cannot reopen it."
 
-#: src/Controller/RatteriesController.php:419
+#: src/Controller/RatteriesController.php:425
 msgid ""
 "Ratteries without recently recorded litters cannot be manually opened. "
 "Record a litter with it, it will be automatically reopened."
@@ -1309,57 +1376,57 @@ msgstr ""
 "Ratteries without recently recorded litters cannot be manually opened. "
 "Record a litter with it, it will be automatically reopened."
 
-#: src/Controller/RatteriesController.php:423
+#: src/Controller/RatteriesController.php:429
 msgid "This rattery is now officially active."
 msgstr "This rattery is now officially active."
 
-#: src/Controller/RatteriesController.php:425
+#: src/Controller/RatteriesController.php:431
 msgid "This rattery could not be declared active. Please try again."
 msgstr "This rattery could not be declared active. Please try again."
 
-#: src/Controller/RatteriesController.php:440
+#: src/Controller/RatteriesController.php:446
 msgid "Your statistics settings have been updated."
 msgstr "Your statistics settings have been updated."
 
-#: src/Controller/RatteriesController.php:442
+#: src/Controller/RatteriesController.php:448
 msgid "We could not update your statistics preferences. Please try again."
 msgstr "We could not update your statistics preferences. Please try again."
 
-#: src/Controller/RatteriesController.php:467
+#: src/Controller/RatteriesController.php:473
 msgid "The rattery’s picture has been deleted."
 msgstr "The rattery’s picture has been deleted."
 
-#: src/Controller/RatteriesController.php:470
+#: src/Controller/RatteriesController.php:476
 msgid "The rattery’s picture could not be deleted. Please, try again."
 msgstr "The rattery’s picture could not be deleted. Please, try again."
 
-#: src/Controller/RatteriesController.php:475
+#: src/Controller/RatteriesController.php:481
 msgid "The rattery’s new picture has been saved."
 msgstr "The rattery’s new picture has been saved."
 
-#: src/Controller/RatteriesController.php:478
+#: src/Controller/RatteriesController.php:484
 msgid "The rattery’s new picture could not be saved. Please, try again."
 msgstr "The rattery’s new picture could not be saved. Please, try again."
 
-#: src/Controller/RatteriesController.php:504
+#: src/Controller/RatteriesController.php:510
 msgid "Your new comment about the rattery has been saved."
 msgstr "Your new comment about the rattery has been saved."
 
-#: src/Controller/RatteriesController.php:507
+#: src/Controller/RatteriesController.php:513
 msgid ""
 "Your new comment about the rattery could not be saved. Please, try again."
 msgstr ""
 "Your new comment about the rattery could not be saved. Please, try again."
 
-#: src/Controller/RatteriesController.php:564
+#: src/Controller/RatteriesController.php:570
 msgid "The new location of your rattery has been recorded."
 msgstr "The new location of your rattery has been recorded."
 
-#: src/Controller/RatteriesController.php:567
+#: src/Controller/RatteriesController.php:573
 msgid "Your rattery’s new location could not be recorded. Please, try again."
 msgstr "Your rattery’s new location could not be recorded. Please, try again."
 
-#: src/Controller/RatteriesController.php:569
+#: src/Controller/RatteriesController.php:575
 msgid ""
 "Please fill the information below to record your rattery new location. "
 "Country is mandatory.\n"
@@ -1371,23 +1438,23 @@ msgstr ""
 "            If you do not live in France and wish to appear on the map, it "
 "is recommended that you add optional localization information."
 
-#: src/Controller/RatteriesController.php:730
+#: src/Controller/RatteriesController.php:737
 msgid "This rattery sheet is now in state: {0}."
 msgstr "This rattery sheet is now in state: {0}."
 
-#: src/Controller/RatteriesController.php:775
+#: src/Controller/RatteriesController.php:782
 msgid "This rattery sheet is now frozen."
 msgstr "This rattery sheet is now frozen."
 
-#: src/Controller/RatteriesController.php:788
+#: src/Controller/RatteriesController.php:795
 msgid "This rattery sheet is now unfrozen."
 msgstr "This rattery sheet is now unfrozen."
 
-#: src/Controller/RatteriesController.php:801
+#: src/Controller/RatteriesController.php:808
 msgid "This rattery sheet has been approved."
 msgstr "This rattery sheet has been approved."
 
-#: src/Controller/RatteriesController.php:814
+#: src/Controller/RatteriesController.php:821
 msgid "This rattery sheet has been unapproved."
 msgstr "This rattery sheet has been unapproved."
 
@@ -1399,55 +1466,68 @@ msgstr "The rattery message has been deleted."
 msgid "The rattery message could not be deleted. Please, try again."
 msgstr "The rattery message could not be deleted. Please, try again."
 
-#: src/Controller/RolesController.php:57 src/Controller/RolesController.php:80
-msgid "The role has been saved."
-msgstr "The role has been saved."
+#: src/Controller/RolesController.php:85
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new role has been saved, but only in English. "
+msgstr "The new role has been saved, but only in English. "
 
-#: src/Controller/RolesController.php:61 src/Controller/RolesController.php:84
+#: src/Controller/RolesController.php:89 src/Controller/RolesController.php:112
 msgid "The role could not be saved. Please, try again."
 msgstr "The role could not be saved. Please, try again."
 
-#: src/Controller/RolesController.php:102
+#: src/Controller/RolesController.php:108
+msgid "The role has been saved."
+msgstr "The role has been saved."
+
+#: src/Controller/RolesController.php:130
 msgid "The role has been deleted."
 msgstr "The role has been deleted."
 
-#: src/Controller/RolesController.php:104
+#: src/Controller/RolesController.php:132
 msgid "The role could not be deleted. Please, try again."
 msgstr "The role could not be deleted. Please, try again."
 
-#: src/Controller/SingularitiesController.php:84
-#: src/Controller/SingularitiesController.php:108
-msgid "The singularity has been saved."
-msgstr "The singularity has been saved."
-
 #: src/Controller/SingularitiesController.php:88
-#: src/Controller/SingularitiesController.php:112
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new singularity has been saved, but only in English. "
+msgstr "The new singularity has been saved, but only in English. "
+
+#: src/Controller/SingularitiesController.php:92
+#: src/Controller/SingularitiesController.php:116
 msgid "The singularity could not be saved. Please, try again."
 msgstr "The singularity could not be saved. Please, try again."
 
-#: src/Controller/SingularitiesController.php:132
+#: src/Controller/SingularitiesController.php:112
+msgid "The singularity has been saved."
+msgstr "The singularity has been saved."
+
+#: src/Controller/SingularitiesController.php:136
 msgid "The singularity has been deleted."
 msgstr "The singularity has been deleted."
 
-#: src/Controller/SingularitiesController.php:134
+#: src/Controller/SingularitiesController.php:138
 msgid "The singularity could not be deleted. Please, try again."
 msgstr "The singularity could not be deleted. Please, try again."
 
-#: src/Controller/StatesController.php:71
-#: src/Controller/StatesController.php:99
-msgid "The state has been saved."
-msgstr "The state has been saved."
-
 #: src/Controller/StatesController.php:75
-#: src/Controller/StatesController.php:103
+#| msgid "The new country has been saved, but only in English. "
+msgid "The new state has been saved, but only in English. "
+msgstr "The new state has been saved, but only in English. "
+
+#: src/Controller/StatesController.php:79
+#: src/Controller/StatesController.php:107
 msgid "The state could not be saved. Please, try again."
 msgstr "The state could not be saved. Please, try again."
 
-#: src/Controller/StatesController.php:127
+#: src/Controller/StatesController.php:103
+msgid "The state has been saved."
+msgstr "The state has been saved."
+
+#: src/Controller/StatesController.php:131
 msgid "The state has been deleted."
 msgstr "The state has been deleted."
 
-#: src/Controller/StatesController.php:129
+#: src/Controller/StatesController.php:133
 msgid "The state could not be deleted. Please, try again."
 msgstr "The state could not be deleted. Please, try again."
 
@@ -1527,8 +1607,8 @@ msgstr ""
 "can’t find it!"
 
 #: src/Controller/UsersController.php:220
-#: src/Controller/UsersController.php:989
-#: src/Controller/UsersController.php:1114
+#: src/Controller/UsersController.php:990
+#: src/Controller/UsersController.php:1115
 msgid "Error sending email. Please, contact an administrator."
 msgstr "Error sending email. Please, contact an administrator."
 
@@ -1540,7 +1620,7 @@ msgstr ""
 
 #: src/Controller/UsersController.php:240
 #: src/Controller/UsersController.php:247
-#: src/Controller/UsersController.php:1011
+#: src/Controller/UsersController.php:1012
 msgid "Invalid activation link. Please check your email or try again."
 msgstr "Invalid activation link. Please check your email or try again."
 
@@ -1560,57 +1640,57 @@ msgstr ""
 "Your account has been activated. You can now log in and complete your "
 "profile. Welcome on LORD!"
 
-#: src/Controller/UsersController.php:585
-#: src/Controller/UsersController.php:611
+#: src/Controller/UsersController.php:586
+#: src/Controller/UsersController.php:612
 msgid "The user has been saved."
 msgstr "The user has been saved."
 
-#: src/Controller/UsersController.php:589
-#: src/Controller/UsersController.php:614
+#: src/Controller/UsersController.php:590
+#: src/Controller/UsersController.php:615
 msgid "The user could not be saved. Please, try again."
 msgstr "The user could not be saved. Please, try again."
 
-#: src/Controller/UsersController.php:642
+#: src/Controller/UsersController.php:643
 msgid "The user’s avatar has been deleted."
 msgstr "The user’s avatar has been deleted."
 
-#: src/Controller/UsersController.php:645
+#: src/Controller/UsersController.php:646
 msgid "The user’s new avatar could not be deleted. Please, try again."
 msgstr "The user’s new avatar could not be deleted. Please, try again."
 
-#: src/Controller/UsersController.php:650
+#: src/Controller/UsersController.php:651
 msgid "The user’s new avatar has been saved."
 msgstr "The user’s new avatar has been saved."
 
-#: src/Controller/UsersController.php:653
+#: src/Controller/UsersController.php:654
 msgid "The user’s new picture could not be saved. Please, try again."
 msgstr "The user’s new picture could not be saved. Please, try again."
 
-#: src/Controller/UsersController.php:675
+#: src/Controller/UsersController.php:676
 msgid "Your new comment about yourself has been saved."
 msgstr "Your new comment about yourself has been saved."
 
-#: src/Controller/UsersController.php:678
+#: src/Controller/UsersController.php:679
 msgid "Your new comment about yourself could not be saved. Please, try again."
 msgstr "Your new comment about yourself could not be saved. Please, try again."
 
-#: src/Controller/UsersController.php:694
+#: src/Controller/UsersController.php:695
 msgid "Your newsletter preferences have been updated."
 msgstr "Your newsletter preferences have been updated."
 
-#: src/Controller/UsersController.php:696
+#: src/Controller/UsersController.php:697
 msgid "We could not update your newsletter preferences. Please try again."
 msgstr "We could not update your newsletter preferences. Please try again."
 
-#: src/Controller/UsersController.php:733
+#: src/Controller/UsersController.php:734
 msgid "The user has been deleted."
 msgstr "The user has been deleted."
 
-#: src/Controller/UsersController.php:736
+#: src/Controller/UsersController.php:737
 msgid "The user could not be deleted. Too many strings attached."
 msgstr "The user could not be deleted. Too many strings attached."
 
-#: src/Controller/UsersController.php:759
+#: src/Controller/UsersController.php:760
 msgid ""
 "The user’s associated entries could not be transferred to the new user. "
 "Please, try again."
@@ -1618,7 +1698,7 @@ msgstr ""
 "The user’s associated entries could not be transferred to the new user. "
 "Please, try again."
 
-#: src/Controller/UsersController.php:769
+#: src/Controller/UsersController.php:770
 msgid ""
 "The user has been deleted. All associated entries were transferred to the "
 "user below."
@@ -1626,15 +1706,15 @@ msgstr ""
 "The user has been deleted. All associated entries were transferred to the "
 "user below."
 
-#: src/Controller/UsersController.php:773
+#: src/Controller/UsersController.php:774
 msgid "The user could not be deleted. Please, try again."
 msgstr "The user could not be deleted. Please, try again."
 
-#: src/Controller/UsersController.php:778
+#: src/Controller/UsersController.php:779
 msgid "The user’s heir could not be found. Please, try again."
 msgstr "The user’s heir could not be found. Please, try again."
 
-#: src/Controller/UsersController.php:785
+#: src/Controller/UsersController.php:786
 msgid ""
 "This user is related to existing database entries. You MUST specify below an "
 "existing user to inherit these entries."
@@ -1642,7 +1722,7 @@ msgstr ""
 "This user is related to existing database entries. You MUST specify below an "
 "existing user to inherit these entries."
 
-#: src/Controller/UsersController.php:787
+#: src/Controller/UsersController.php:788
 msgid ""
 "This user is not related to any existing database entries and can be safely "
 "deleted. Beware, this operation is irreversible!"
@@ -1650,57 +1730,57 @@ msgstr ""
 "This user is not related to any existing database entries and can be safely "
 "deleted. Beware, this operation is irreversible!"
 
-#: src/Controller/UsersController.php:810
-#: src/Controller/UsersController.php:857
+#: src/Controller/UsersController.php:811
+#: src/Controller/UsersController.php:858
 msgid "You are logged in, you can change your password directly from here."
 msgstr "You are logged in, you can change your password directly from here."
 
-#: src/Controller/UsersController.php:823
+#: src/Controller/UsersController.php:824
 msgid "Your account is locked. Please activate it or contact an administrator."
 msgstr ""
 "Your account is locked. Please activate it or contact an administrator."
 
-#: src/Controller/UsersController.php:839
+#: src/Controller/UsersController.php:840
 msgid "Check your email for your reset password link."
 msgstr "Check your email for your reset password link."
 
-#: src/Controller/UsersController.php:841
+#: src/Controller/UsersController.php:842
 msgid "Error sending email. Please, retry or contact an administrator."
 msgstr "Error sending email. Please, retry or contact an administrator."
 
-#: src/Controller/UsersController.php:862
-#: src/Controller/UsersController.php:871
+#: src/Controller/UsersController.php:863
+#: src/Controller/UsersController.php:872
 msgid "Invalid passkey. Please check your email or try again."
 msgstr "Invalid passkey. Please check your email or try again."
 
-#: src/Controller/UsersController.php:876
+#: src/Controller/UsersController.php:877
 msgid "Your account is locked. Please contact an administrator."
 msgstr "Your account is locked. Please contact an administrator."
 
-#: src/Controller/UsersController.php:881
+#: src/Controller/UsersController.php:882
 msgid ""
 "Expired passkey. Please generate a new one, check your email and try again."
 msgstr ""
 "Expired passkey. Please generate a new one, check your email and try again."
 
-#: src/Controller/UsersController.php:891
-#: src/Controller/UsersController.php:925
+#: src/Controller/UsersController.php:892
+#: src/Controller/UsersController.php:926
 msgid "Passwords are different. Please retry."
 msgstr "Passwords are different. Please retry."
 
-#: src/Controller/UsersController.php:897
-#: src/Controller/UsersController.php:931
+#: src/Controller/UsersController.php:898
+#: src/Controller/UsersController.php:932
 msgid "Your password has been updated."
 msgstr "Your password has been updated."
 
-#: src/Controller/UsersController.php:920
-#: src/Controller/UsersController.php:965
+#: src/Controller/UsersController.php:921
+#: src/Controller/UsersController.php:966
 msgid ""
 "We could not confirm your identity (incorrect old password). Please retry."
 msgstr ""
 "We could not confirm your identity (incorrect old password). Please retry."
 
-#: src/Controller/UsersController.php:934
+#: src/Controller/UsersController.php:935
 msgid ""
 "Your password could not be updated. Please, retry or contact an "
 "administrator."
@@ -1708,16 +1788,16 @@ msgstr ""
 "Your password could not be updated. Please, retry or contact an "
 "administrator."
 
-#: src/Controller/UsersController.php:942
-#: src/Controller/UsersController.php:1002
+#: src/Controller/UsersController.php:943
+#: src/Controller/UsersController.php:1003
 msgid "You must be logged in to use this feature."
 msgstr "You must be logged in to use this feature."
 
-#: src/Controller/UsersController.php:971
+#: src/Controller/UsersController.php:972
 msgid "Emails are different. Please, check your entry and retry."
 msgstr "Emails are different. Please, check your entry and retry."
 
-#: src/Controller/UsersController.php:986
+#: src/Controller/UsersController.php:987
 msgid ""
 "Your email has been modified. Your accound must now be reactivated. Please, "
 "check your new email for your confirmation link."
@@ -1725,7 +1805,7 @@ msgstr ""
 "Your email has been modified. Your accound must now be reactivated. Please, "
 "check your new email for your confirmation link."
 
-#: src/Controller/UsersController.php:1020
+#: src/Controller/UsersController.php:1021
 msgid ""
 "Invalid confirmation link. Please, check your email inbox or contact an "
 "administrator."
@@ -1733,7 +1813,7 @@ msgstr ""
 "Invalid confirmation link. Please, check your email inbox or contact an "
 "administrator."
 
-#: src/Controller/UsersController.php:1026
+#: src/Controller/UsersController.php:1027
 msgid ""
 "Expired confirmation link. Please, contact an administrator to unlock your "
 "account."
@@ -1741,7 +1821,7 @@ msgstr ""
 "Expired confirmation link. Please, contact an administrator to unlock your "
 "account."
 
-#: src/Controller/UsersController.php:1038
+#: src/Controller/UsersController.php:1039
 msgid ""
 "Your email change has been confirmed. You can now log in with your new "
 "credentials."
@@ -1749,31 +1829,31 @@ msgstr ""
 "Your email change has been confirmed. You can now log in with your new "
 "credentials."
 
-#: src/Controller/UsersController.php:1062
+#: src/Controller/UsersController.php:1063
 msgid "This user was already locked."
 msgstr "This user was already locked."
 
-#: src/Controller/UsersController.php:1066
+#: src/Controller/UsersController.php:1067
 msgid "This user is now locked."
 msgstr "This user is now locked."
 
-#: src/Controller/UsersController.php:1068
+#: src/Controller/UsersController.php:1069
 msgid "This user could not be locked. Please try again."
 msgstr "This user could not be locked. Please try again."
 
-#: src/Controller/UsersController.php:1088
+#: src/Controller/UsersController.php:1089
 msgid "This user was already unlocked."
 msgstr "This user was already unlocked."
 
-#: src/Controller/UsersController.php:1094
+#: src/Controller/UsersController.php:1095
 msgid "This user is now unlocked."
 msgstr "This user is now unlocked."
 
-#: src/Controller/UsersController.php:1096
+#: src/Controller/UsersController.php:1097
 msgid "This user could not be unlocked. Please try again."
 msgstr "This user could not be unlocked. Please try again."
 
-#: src/Controller/UsersController.php:1111
+#: src/Controller/UsersController.php:1112
 msgid "The email was sent to the user."
 msgstr "The email was sent to the user."
 
@@ -2056,20 +2136,20 @@ msgstr "Not Available"
 msgid " (one-shot rattery)"
 msgstr " (one-shot rattery)"
 
-#: src/Model/Entity/StatisticsTrait.php:217
+#: src/Model/Entity/StatisticsTrait.php:226
 msgid "Male-only"
 msgstr "Male-only"
 
-#: src/Model/Entity/StatisticsTrait.php:223
+#: src/Model/Entity/StatisticsTrait.php:232
 msgid "Female-only"
 msgstr "Female-only"
 
-#: src/Model/Entity/StatisticsTrait.php:229
+#: src/Model/Entity/StatisticsTrait.php:238
 msgid "Balanced (1 male for 1 female)"
 msgstr "Balanced (1 male for 1 female)"
 
-#: src/Model/Entity/StatisticsTrait.php:235
-#: src/Model/Entity/StatisticsTrait.php:618
+#: src/Model/Entity/StatisticsTrait.php:244
+#: src/Model/Entity/StatisticsTrait.php:686
 msgid ""
 "{0, number} (about {1, plural, =1{1 male} other{# males}} for {2, plural, "
 "=1{1 female} other{# females}})"
@@ -2077,8 +2157,8 @@ msgstr ""
 "{0, number} (about {1, plural, =1{1 male} other{# males}} for {2, plural, "
 "=1{1 female} other{# females}})"
 
-#: src/Model/Entity/StatisticsTrait.php:239
-#: src/Model/Entity/StatisticsTrait.php:622
+#: src/Model/Entity/StatisticsTrait.php:248
+#: src/Model/Entity/StatisticsTrait.php:690
 msgid ""
 "{0, number} (about {1, plural, =1{1 female} other{# females}} for {2, "
 "plural, =1{1 male} other{# males}})"
@@ -2086,11 +2166,11 @@ msgstr ""
 "{0, number} (about {1, plural, =1{1 female} other{# females}} for {2, "
 "plural, =1{1 male} other{# males}})"
 
-#: src/Model/Entity/StatisticsTrait.php:605
+#: src/Model/Entity/StatisticsTrait.php:673
 msgid "Only females"
 msgstr "Only females"
 
-#: src/Model/Entity/StatisticsTrait.php:613
+#: src/Model/Entity/StatisticsTrait.php:681
 msgid "Only males"
 msgstr "Only males"
 
@@ -2431,7 +2511,7 @@ msgstr "Overtitle"
 #: templates/Categories/add.php:39 templates/Categories/edit.php:32
 #: templates/Compatibilities/add.php:33 templates/Compatibilities/edit.php:31
 #: templates/ContributionTypes/add.php:30
-#: templates/ContributionTypes/edit.php:31 templates/Countries/add.php:37
+#: templates/ContributionTypes/edit.php:31 templates/Countries/add.php:35
 #: templates/Countries/edit.php:44 templates/DeathPrimaryCauses/add.php:33
 #: templates/DeathPrimaryCauses/edit.php:34
 #: templates/DeathSecondaryCauses/add.php:32
@@ -2439,7 +2519,7 @@ msgstr "Overtitle"
 #: templates/Faqs/edit.php:33 templates/Issues/solve.php:71
 #: templates/LitterMessages/add.php:29 templates/LitterSnapshots/add.php:25
 #: templates/LitterSnapshots/edit.php:30 templates/Litters/add.php:239
-#: templates/Litters/attach_rat.php:67 templates/Litters/edit.php:151
+#: templates/Litters/attach_rat.php:67 templates/Litters/edit.php:149
 #: templates/Operators/add.php:31 templates/Operators/edit.php:27
 #: templates/RatMessages/add.php:29 templates/RatSnapshots/add.php:25
 #: templates/RatSnapshots/edit.php:30 templates/Ratteries/add.php:88
@@ -2786,17 +2866,20 @@ msgstr "Id"
 msgid "Position"
 msgstr "Position"
 
-#: templates/Categories/admin.php:38 templates/Countries/view.php:53
+#: templates/Categories/admin.php:38 templates/Categories/index.php:16
+#: templates/Countries/index.php:17 templates/Countries/view.php:53
+#: templates/DeathPrimaryCauses/index.php:17
 #: templates/DeathPrimaryCauses/view.php:64 templates/RatSnapshots/diff.php:43
 #: templates/RatSnapshots/diff.php:320 templates/Rats/print.php:31
 #: templates/Rats/search.php:42 templates/Rats/view.php:216
 #: templates/RatterySnapshots/diff.php:40
-#: templates/RatterySnapshots/diff.php:175 templates/Roles/view.php:31
-#: templates/States/view.php:36 templates/element/simple_rats.php:33
+#: templates/RatterySnapshots/diff.php:175 templates/Roles/index.php:17
+#: templates/Roles/view.php:31 templates/States/view.php:36
+#: templates/element/simple_rats.php:33
 #: templates/element/simple_ratteries.php:20
 #: templates/element/simple_staff_ratteries.php:7
 #: templates/element/staff_ratteries.php:6
-#: templates/element/variety/view.php:37
+#: templates/element/variety/index.php:11 templates/element/variety/view.php:37
 msgid "Name"
 msgstr "Name"
 
@@ -3325,7 +3408,8 @@ msgstr "Happens only to elderly rats?"
 #: templates/RatSnapshots/diff.php:105 templates/RatSnapshots/diff.php:388
 #: templates/Rats/add.php:219 templates/Rats/edit.php:97
 #: templates/Rats/print.php:19 templates/Rats/view.php:300
-#: templates/States/view.php:29 templates/element/variety/view.php:65
+#: templates/States/view.php:29 templates/element/variety/index.php:13
+#: templates/element/variety/view.php:65
 msgid "Description"
 msgstr "Description"
 
@@ -4294,7 +4378,7 @@ msgstr ""
 msgid "Staff-only"
 msgstr "Staff-only"
 
-#: templates/Litters/edit.php:142 templates/Litters/view.php:436
+#: templates/Litters/edit.php:140 templates/Litters/view.php:436
 #: templates/Rats/view.php:436 templates/Ratteries/view.php:610
 #: templates/Users/edit.php:64 templates/Users/my.php:72
 #: templates/Users/view.php:215
@@ -5370,8 +5454,9 @@ msgid "{0, number} rats ({1, number} % of rats with known death cause)"
 msgstr "{0, number} rats ({1, number} % of rats with known death cause)"
 
 #: templates/Lord/stats.php:235
-msgid "please note that tumour localization could not recorded before 2023"
-msgstr "please note that tumour localization could not recorded before 2023"
+#| msgid "please note that tumour localization could not recorded before 2023"
+msgid "please note that tumour localization could not be recorded before 2023"
+msgstr "please note that tumour localization could not be recorded before 2023"
 
 #: templates/Lord/the_end.php:7
 msgid "The End of the LORD"
@@ -7932,8 +8017,8 @@ msgid "No matching Lab-o-rats entry available"
 msgstr "No matching Lab-o-rats entry available"
 
 #: templates/element/variety/add.php:16
-msgid "Add"
-msgstr "Add"
+msgid "Add a new "
+msgstr "Add a new "
 
 #: templates/element/variety/add.php:22 templates/element/variety/edit.php:24
 msgid "Reference picture"
@@ -7947,6 +8032,10 @@ msgstr "Require picture from user?"
 msgid "Mandatory picture?"
 msgstr "Mandatory picture?"
 
+#: templates/element/variety/index.php:12 templates/element/variety/view.php:41
+msgid "Genotype"
+msgstr "Genotype"
+
 #: templates/element/variety/index.php:14
 msgid "Photo?"
 msgstr "Photo?"
@@ -7958,10 +8047,6 @@ msgstr "Are you sure you want to delete #{0}?"
 #: templates/element/variety/view.php:31
 msgid "$Variety"
 msgstr "$Variety"
-
-#: templates/element/variety/view.php:41
-msgid "Genotype"
-msgstr "Genotype"
 
 #: templates/element/variety/view.php:49
 msgid "Frequency (all time)"
@@ -8290,3 +8375,6 @@ msgstr "Source code is open and distributed under GPL license"
 #: templates/layout/default.php:176 templates/layout/fullpage.php:184
 msgid "Service is free of charge, hosted and maintained by SRFA"
 msgstr "Service is free of charge, hosted and maintained by SRFA"
+
+#~ msgid "Add"
+#~ msgstr "Add"
