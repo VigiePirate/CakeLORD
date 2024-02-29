@@ -45,6 +45,10 @@ class SingularitiesTable extends Table
 
         $this->addBehavior('Picture');
 
+        // $this->addBehavior('Translate', [
+        //     'fields' => ['name', 'genotype', 'description'],
+        // ]);
+
         $this->belongsToMany('Rats', [
             'foreignKey' => 'singularity_id',
             'targetForeignKey' => 'rat_id',

@@ -45,6 +45,10 @@ class ColorsTable extends Table
 
         $this->addBehavior('Picture');
 
+        $this->addBehavior('Translate', [
+            'fields' => ['name', 'genotype', 'description'],
+        ]);
+
         $this->hasMany('Rats', [
             'foreignKey' => 'color_id',
         ]);

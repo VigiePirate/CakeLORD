@@ -45,6 +45,10 @@ class MarkingsTable extends Table
 
         $this->addBehavior('Picture');
 
+        $this->addBehavior('Translate', [
+            'fields' => ['name', 'genotype', 'description'],
+        ]);
+
         $this->hasMany('Rats', [
             'foreignKey' => 'marking_id',
         ]);
