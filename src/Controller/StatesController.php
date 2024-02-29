@@ -66,12 +66,16 @@ class StatesController extends AppController
         $state = $this->States->newEmptyEntity();
         $this->Authorization->authorize($state, 'act');
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $state = $this->States->patchEntity($state, $this->request->getData());
             if ($this->States->save($state)) {
-                $this->Flash->success(__('The state has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new state has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The state could not be saved. Please, try again.'));
         }
         $nextOkStates = $this->States->NextOkStates->find('list', ['limit' => 200]);

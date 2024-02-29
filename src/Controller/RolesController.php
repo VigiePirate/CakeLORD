@@ -76,12 +76,16 @@ class RolesController extends AppController
         $role = $this->Roles->newEmptyEntity();
         $this->Authorization->authorize($role, 'configure');
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $role = $this->Roles->patchEntity($role, $this->request->getData());
             if ($this->Roles->save($role)) {
-                $this->Flash->success(__('The role has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new role has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The role could not be saved. Please, try again.'));
         }
         $this->set(compact('role'));

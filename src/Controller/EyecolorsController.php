@@ -81,12 +81,16 @@ class EyecolorsController extends AppController
         $eyecolor = $this->Eyecolors->newEmptyEntity();
         $this->Authorization->authorize($eyecolor);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $eyecolor = $this->Eyecolors->patchEntity($eyecolor, $this->request->getData());
             if ($this->Eyecolors->save($eyecolor)) {
-                $this->Flash->success(__('The eyecolor has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new eyecolor has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The eyecolor could not be saved. Please, try again.'));
         }
         $user = $this->request->getAttribute('identity');

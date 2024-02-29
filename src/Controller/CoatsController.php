@@ -84,12 +84,16 @@ class CoatsController extends AppController
         $coat = $this->Coats->newEmptyEntity();
         $this->Authorization->authorize($coat);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $coat = $this->Coats->patchEntity($coat, $this->request->getData());
             if ($this->Coats->save($coat)) {
-                $this->Flash->success(__('The coat has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new coat has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The coat could not be saved. Please, try again.'));
         }
         $this->set(compact('coat'));

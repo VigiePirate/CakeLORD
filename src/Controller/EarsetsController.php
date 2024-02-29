@@ -81,12 +81,16 @@ class EarsetsController extends AppController
         $earset = $this->Earsets->newEmptyEntity();
         $this->Authorization->authorize($earset);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $earset = $this->Earsets->patchEntity($earset, $this->request->getData());
             if ($this->Earsets->save($earset)) {
-                $this->Flash->success(__('The earset has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new earset has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The earset could not be saved. Please, try again.'));
         }
         $user = $this->request->getAttribute('identity');

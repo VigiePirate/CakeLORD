@@ -81,11 +81,16 @@ class ArticlesController extends AppController
         $this->Authorization->authorize($article);
 
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
-                $this->Flash->success(__('The article has been saved.'));
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new article has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
 

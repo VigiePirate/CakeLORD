@@ -81,12 +81,16 @@ class DilutionsController extends AppController
         $dilution = $this->Dilutions->newEmptyEntity();
         $this->Authorization->authorize($dilution);
         if ($this->request->is('post')) {
+            $locale = I18n::getLocale();
+            $default = I18n::getDefaultLocale();
+            I18n::setLocale($default);
             $dilution = $this->Dilutions->patchEntity($dilution, $this->request->getData());
             if ($this->Dilutions->save($dilution)) {
-                $this->Flash->success(__('The dilution has been saved.'));
-
+                I18n::setLocale($locale);
+                $this->Flash->warning(__('The new dilution has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
+            I18n::setLocale($locale);
             $this->Flash->error(__('The dilution could not be saved. Please, try again.'));
         }
         $user = $this->request->getAttribute('identity');
