@@ -13,7 +13,7 @@
             <div class="sheet-heading">
                 <div class="sheet-title pretitle"><?= __('Varieties') ?></div>
             </div>
-            <h1><?= __('Add') . ' ' . $Variety ?></h1>
+            <h1><?= __('Add a new ') . __($Variety) ?></h1>
             <?= $this->Form->create($variety, ['type' => 'file']) ?>
             <fieldset>
                 <?php
@@ -24,7 +24,7 @@
                         'type'=> 'textarea',
                         'id' => 'description',
                         'name' => 'description',
-                        'default' => ' '
+                        'default' => '.'
                     ]);
                     echo $this->Form->control('is_picture_mandatory', ['label' => __('Require picture from user?')]);
                 ?>
