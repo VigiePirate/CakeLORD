@@ -81,7 +81,7 @@ class CoatsTable extends Table
 
         $validator
             ->scalar('genotype')
-            ->maxLength('genotype', 70)
+            ->maxLength('genotype', 255)
             ->requirePresence('genotype', 'create')
             ->notEmptyString('genotype');
 
