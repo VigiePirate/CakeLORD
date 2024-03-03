@@ -242,7 +242,7 @@ class Rattery extends Entity
 
             $stats['primaries'] = $this->countRatsByPrimaryDeath(['rattery_id' => $this->id]);
             $stats['secondaries'] = $this->countRatsBySecondaryDeath(['rattery_id' => $this->id]);
-            $stats['tumours'] = $this->countRatsByTumour(['rattery_id' => $this->id])->toArray();
+            $stats['tumours'] = $this->countRatsByTumour(['rattery_id' => $this->id]);
         }
 
         return $stats;
