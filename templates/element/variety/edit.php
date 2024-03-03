@@ -13,7 +13,7 @@
     <div class="column-responsive column-90">
         <div class="form content">
             <div class="sheet-heading">
-                <div class="sheet-title pretitle"><?= $Varieties ?></div>
+                <div class="sheet-title pretitle"><?= __($Variety) ?></div>
             </div>
             <h1><?= __('Edit') . ' ' . $Variety ?></h1>
             <?= $this->Form->create($variety, ['type' => 'file']) ?>

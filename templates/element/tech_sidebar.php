@@ -56,7 +56,7 @@
                                     'sex_m' => '1',
                                     'alive' => '1',
                                     'deceased' => '1',
-                                    strtolower($Variety) . '_id' => $variety->id,
+                                    Cake\Utility\Inflector::singularize(strtolower($controller)) . '_id' => $object->id,
                                 ]
                             ]),
                             ['escape' => false]

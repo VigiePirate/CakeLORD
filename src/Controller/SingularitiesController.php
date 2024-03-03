@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 use Cake\Chronos\Chronos;
+use Cake\I18n\I18n;
 
 /**
  * Singularities Controller
@@ -26,11 +27,14 @@ class SingularitiesController extends AppController
      */
     public function index()
     {
-        $singularities = $this->paginate($this->Singularities, ['order' => ['name' => 'asc']]);
+        $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
+            ? ['name' => 'name', 'genotype' => 'genotype', 'description' => 'description']
+            : ['name' => 'SingularitiesTranslation.name', 'genotype' => 'SingularitiesTranslation.genotype', 'description' => 'SingularitiesTranslation.description'];
+        $singularities = $this->paginate($this->Singularities, ['order' => ['id' => 'asc'], 'sortableFields' => array_values($sort_fields)]);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Singularities);
-        $this->set(compact('singularities', 'user', 'show_staff'));
+        $this->set(compact('singularities', 'sort_fields', 'user', 'show_staff'));
     }
 
     /**
