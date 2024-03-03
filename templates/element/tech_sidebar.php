@@ -18,14 +18,54 @@
                     <span class="tooltiptext"><?= __('Cancel and go back') ?></span>
                 </div>
             <?php endif; ?>
+
             <div class="tooltip">
                 <?= $this->Html->image('/img/icon-list.svg', [
-                    'url' => ['controller' => $controller, 'action' => in_array($controller, ['Articles', 'Faqs']) ? 'all' : 'index'],
+                    'url' => ['controller' => $controller, 'action' => 'index'],
                     'class' => 'side-nav-icon',
                     'alt' => __('List')]) ?>
                     <span class="tooltiptext"><?= $tooltip ?></span>
             </div>
             <?php if (isset($is_labo) && $is_labo) : ?>
+                <div class="tooltip">
+                    <!-- multisearch allows several color keys but only one search key for other traits -->
+                    <?php if ($controller == 'Colors') {
+                        echo $this->Html->link(
+                            $this->Html->image('/img/icon-search-rats.svg', ['class' => 'side-nav-icon']),
+                            $this->Url->build([
+                                'controller' => 'Rats',
+                                'action' => 'search',
+                                '?' => [
+                                    'sex_f' => '1',
+                                    'sex_m' => '1',
+                                    'alive' => '1',
+                                    'deceased' => '1',
+                                    'colors' => [$object->id],
+                                ]
+                            ]),
+                            ['escape' => false]
+                        );
+                    } else {
+                        echo $this->Html->link(
+                            $this->Html->image('/img/icon-search-rats.svg', ['class' => 'side-nav-icon']),
+                            $this->Url->build([
+                                'controller' => 'Rats',
+                                'action' => 'search',
+                                '?' => [
+                                    'sex_f' => '1',
+                                    'sex_m' => '1',
+                                    'alive' => '1',
+                                    'deceased' => '1',
+                                    strtolower($Variety) . '_id' => $variety->id,
+                                ]
+                            ]),
+                            ['escape' => false]
+                        );
+                    }
+                    ?>
+                    <span class="tooltiptext"><?= __('Search rats') ?></span>
+                </div>
+
                 <?php if (@get_headers($labo)['0'] != 'HTTP/1.1 404 Not Found'
                     && @get_headers($labo)['0'] != 'HTTP/1.1 400 Bad Request')
                 : ?>
@@ -44,7 +84,7 @@
                         <?= $this->Html->image('/img/icon-laborats.svg', [
                             'url' => [],
                             'class' => 'side-nav-icon',
-                            'alt' => __('Modify Rat')
+                            'alt' => __('Laborats')
                         ]) ?>
                         <span class="tooltiptext"><?= __('No matching Lab-o-rats entry available') ?></span>
                     </div>

@@ -24,21 +24,42 @@
                         <td><?= substr(h($variety->description), 0, strpos(h($variety->description), ".")) ?></td>
                         <td><?= $variety->is_picture_mandatory ? '✓' : '' ?></td>
                         <td class="actions">
-                            <?= $this->Html->link(
-                                $this->Html->image('/img/icon-rat.svg', ['class' => 'action-icon']),
-                                $this->Url->build([
-                                    'controller' => 'Rats',
-                                    'action' => 'search',
-                                    '?' => [
+                            <!-- multisearch allows several color keys but only one search key for other traits -->
+                            <?php if ($Variety == 'Color') {
+                                echo $this->Html->link(
+                                    $this->Html->image('/img/icon-rat.svg', ['class' => 'action-icon']),
+                                    $this->Url->build([
+                                        'controller' => 'Rats',
+                                        'action' => 'search',
+                                        '?' => [
                                             'sex_f' => '1',
                                             'sex_m' => '1',
                                             'alive' => '1',
                                             'deceased' => '1',
-                                            strtolower($Variety) . '_id' => $variety->id
-                                    ]
-                                ]),
-                                ['escape' => false,'alt' => $texts['alt_view']]
-                            ) ?>
+                                            'colors' => [$variety->id],
+
+                                        ]
+                                    ]),
+                                    ['escape' => false,'alt' => $texts['alt_view']]
+                                );
+                            } else {
+                                echo $this->Html->link(
+                                    $this->Html->image('/img/icon-rat.svg', ['class' => 'action-icon']),
+                                    $this->Url->build([
+                                        'controller' => 'Rats',
+                                        'action' => 'search',
+                                        '?' => [
+                                            'sex_f' => '1',
+                                            'sex_m' => '1',
+                                            'alive' => '1',
+                                            'deceased' => '1',
+                                            strtolower($Variety) . '_id' => $variety->id,
+                                        ]
+                                    ]),
+                                    ['escape' => false,'alt' => $texts['alt_view']]
+                                );
+                            }
+                            ?>
 
                             <?php if (!is_null($user) && $user->can('edit', $variety)) :?>
                                 <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
@@ -47,7 +68,8 @@
                                     'alt' => $texts['alt_edit']
                                 ])?>
                             <?php endif; ?>
-                            <?php if (!is_null($user) && $user->can('delete', $variety)) :?>
+
+                            <?php if (! is_null($user) && $user->can('delete', $variety)) :?>
                                 <?= $this->Form->postLink(
                                         $this->Html->image('/img/icon-delete.svg', [
                                             'class' => 'action-icon',
