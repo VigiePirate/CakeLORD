@@ -377,15 +377,6 @@ class LordController extends AppController
         }
     }
 
-    // public function changeLanguage()
-    // {
-    //     $this->Authorization->skipAuthorization();
-    //     $locale = $this->request->getParam('pass');
-    //     $this->LanguageSwitcher->switchLanguage($locale);
-    //     I18n::setLocale(implode($locale));
-    //     return $this->redirect($this->request->referer());
-    // }
-
     public function switchLanguage($lang)
     {
         $this->Authorization->skipAuthorization();

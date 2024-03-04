@@ -40,6 +40,7 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
 
         // Set the locale
         I18n::setLocale($locale);
+        $request->getSession()->write('Config.locale', $locale);
 
         // Continue handling the request
         return $handler->handle($request);
@@ -53,8 +54,17 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
         $languages = explode(',', $acceptLanguage);
         foreach ($languages as $language) {
             $locale = strtolower(trim($language));
-            if (! is_null($this->supportedLocales) && in_array($locale, $this->supportedLocales)) {
-                return $locale;
+            if (! is_null($this->supportedLocales)) {
+                // try respecting cultural variant if possible
+                if (in_array($locale, $this->supportedLocales)) {
+                    return $locale;
+                }
+                // if not, try to fallback to another supported culture of the same language
+                foreach ($this->supportedLocales as $supportedLocale) {
+                    if (substr($locale, 0, 2) == substr($supportedLocale, 0, 2)) {
+                        return $supportedLocale;
+                    }
+                }
             }
         }
         return null;
