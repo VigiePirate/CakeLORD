@@ -137,7 +137,7 @@
                         'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
                     ]);
 
-                    echo $this->Form->control('is_dead', [
+                    echo $this->Form->control('death_toggle', [
                         'type' => 'checkbox',
                         'value' => $rat->is_alive,
                         'label' => [
@@ -472,7 +472,7 @@
     ];
 
     $(function() {
-        $('#is-dead').on('change', function() {
+        $('#death-toggle').on('change', function() {
             var show_death = $(this).is(':checked');
             if (show_death === true) {
                 $('#death_div').removeClass("hide-everywhere");
