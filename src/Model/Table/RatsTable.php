@@ -306,10 +306,6 @@ class RatsTable extends Table
         // check if death was recorded at creation
         if (isset($data['is_dead'])) {
             $data['is_alive'] = ! $data['is_dead'];
-            if ($data['is_alive']) {
-                unset($data['death_primary_cause_id']);
-                unset($data['death_secondary_cause_id']);
-            }
         }
     }
 
@@ -344,7 +340,8 @@ class RatsTable extends Table
 
         } else {
             // resurrection
-            if (isset($data['is_dead']) && ! $data['is_dead']) {
+            if (isset($data['death_toggle']) && $data['death_toggle'] == 0) {
+                $entity->is_alive = true;
                 $entity->death_date = null;
                 $entity->death_primary_cause_id = null;
                 $entity->death_secondary_cause_id = null;
