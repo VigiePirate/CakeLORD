@@ -136,15 +136,26 @@ class DeathSecondaryCausesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    // uses several get() instead of a single find() to manage translations
     public function findByPrimary() {
         if ($this->request->is(['ajax'])) {
             $this->Authorization->skipAuthorization();
-            $items = $this->DeathSecondaryCauses->find('all')
-                ->select(['id' => 'id', 'value' => 'name'])
-                ->where([
-                            'death_primary_cause_id IS' => $this->request->getQuery('deathprimarykey'),
-                        ])
-                ->order(['id' => 'ASC']);
+            $causes_id = $this->DeathSecondaryCauses
+                    ->find()
+                    ->where(['death_primary_cause_id IS' => $this->request->getQuery('deathprimarykey')])
+                    ->all()
+                    ->extract('id');
+
+            $items = [];
+            foreach ($causes_id as $cause_id) {
+                $cause = $this->DeathSecondaryCauses->get($cause_id);
+                $item = ['id' => $cause->id, 'value' => $cause->name];
+                array_push($items, $item);
+            }
+            usort($items, function ($a, $b) {
+                return strcmp($a['value'], $b['value']);
+            });
+
             $this->set('items', $items);
             $this->viewBuilder()->setOption('serialize', ['items']);
         }
@@ -153,10 +164,8 @@ class DeathSecondaryCausesController extends AppController
     public function description() {
         if ($this->request->is(['ajax'])) {
             $this->Authorization->skipAuthorization();
-            $items = $this->DeathSecondaryCauses
-                ->find('all')
-                ->select(['id' => 'id', 'value' => 'description'])
-                ->where(['id IS' => $this->request->getQuery('id')]);
+            $cause = $this->DeathSecondaryCauses->get($this->request->getQuery('id'));
+            $items = ['0' => ['id' => $cause['id'], 'value' => $cause['description']]];
             $this->set('items', $items);
             $this->viewBuilder()->setOption('serialize', ['items']);
         }

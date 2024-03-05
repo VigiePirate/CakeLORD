@@ -616,8 +616,8 @@ class UsersController extends AppController
         }
         $identity = $this->request->getAttribute('identity');
         $roles = $this->Users->Roles->find('list')
-            ->where(['id >=' => $identity->getRoleId()])
-            ->order('id ASC');
+            ->where(['Roles.id >=' => $identity->getRoleId()])
+            ->order('Roles.id ASC');
 
         $this->set(compact('user', 'roles', 'identity'));
     }

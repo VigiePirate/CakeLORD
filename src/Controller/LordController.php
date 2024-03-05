@@ -94,7 +94,7 @@ class LordController extends AppController
         ];
 
         $states = $this->fetchModel('States');
-        $state_options = $states->find()->all()->combine('id','name');
+        $state_options = $states->find()->all()->combine('id', 'name');
 
         $user = $this->request->getAttribute('identity');
         $this->Authorization->authorize($lord);

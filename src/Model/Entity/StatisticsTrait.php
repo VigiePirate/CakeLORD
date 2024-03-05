@@ -273,7 +273,6 @@ trait StatisticsTrait
             })
             ->contain([
                 'DeathPrimaryCauses',
-                //'DeathPrimaryCauses.DeathPrimaryCausesTranslations',
                 'DeathSecondaryCauses',
             ])
             ->select([
