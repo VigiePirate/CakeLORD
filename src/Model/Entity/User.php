@@ -227,7 +227,7 @@ class User extends Entity implements IdentityInterface
             return '<b>' . __('Happy birthday to you!') . '</b>';
         }
 
-        if ($this->created->wasWithinLast('1 month')) {
+        if ($this->created->modify('-1 day')->wasWithinLast('1 month')) {
             $rookie = __(
                 'Recent member? Need for a guided tour? Read our <b><a href="{0}"> ▶ LORD STARTER KIT ◀</a></b>',
                 [\Cake\Routing\Router::Url(['controller' => 'Articles', 'action' => 'view', 1])]
