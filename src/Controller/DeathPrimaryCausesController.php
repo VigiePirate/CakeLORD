@@ -148,10 +148,8 @@ class DeathPrimaryCausesController extends AppController
     public function description() {
         if ($this->request->is(['ajax'])) {
             $this->Authorization->skipAuthorization();
-            $items = $this->DeathPrimaryCauses
-                ->find('all')
-                ->select(['id' => 'id', 'value' => 'description'])
-                ->where(['id IS' => $this->request->getQuery('id')]);
+            $cause = $this->DeathPrimaryCauses->get($this->request->getQuery('id'));
+            $items = ['0' => ['id' => $cause['id'], 'value' => $cause['description']]];
             $this->set('items', $items);
             $this->viewBuilder()->setOption('serialize', ['items']);
         }

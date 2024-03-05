@@ -34,7 +34,7 @@ class DilutionsController extends AppController
         $dilutions = $this->paginate($this->Dilutions, ['order' => ['id' => 'asc'], 'sortableFields' => array_values($sort_fields)]);
         $this->Authorization->skipAuthorization();
         $user = $this->request->getAttribute('identity');
-        $show_staff = !is_null($user) && $user->can('add', $this->Dilutions);
+        $show_staff = ! is_null($user) && $user->can('add', $this->Dilutions);
         $this->set(compact('dilutions', 'sort_fields', 'user', 'show_staff'));
     }
 

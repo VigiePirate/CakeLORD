@@ -64,9 +64,9 @@
 
                 <div id="primary-desc" class="sub-legend">
                     <?php if (! is_null($rat->death_primary_cause_id) && is_null($rat->death_secondary_cause_id)) : ?>
-                        <div><?= $rat->death_primary_cause->description ?></div>
+                        <?= $rat->death_primary_cause->description ?>
                     <?php else : ?>
-                        <div><?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?></div>
+                        <?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?>
                     <?php endif ; ?>
                 </div>
 
@@ -82,13 +82,11 @@
                 ?>
 
                 <div id="secondary-desc" class="sub-legend">
-                    <div class="markdown">
-                        <?php if (! is_null($rat->death_secondary_cause_id)) : ?>
-                            <?= $rat->death_secondary_cause->description ?>
-                        <?php else : ?>
-                            <?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?>
-                        <?php endif ; ?>
-                    </div>
+                    <?php if (! is_null($rat->death_secondary_cause_id)) : ?>
+                        <?= $rat->death_secondary_cause->description ?>
+                    <?php else : ?>
+                        <?= __('Please, read carefully information that will appear below to check the fitness of your choice.') ?>
+                    <?php endif ; ?>
                 </div>
 
                 <legend><?= __('Complementary information') ?></legend>
@@ -169,15 +167,20 @@
                     },
                     success: function(data) {
                         var p = document.getElementById("primary-desc");
-                        var comment = data.items['0'].value;
-                        if (comment == "-") {
-                            p.innerHTML = jsMessages[1];
-                        } else {
-                            p.innerHTML = comment;
+                        if (data.items.length != 0) {
+                            var comment = data.items['0'].value;
+                            if (comment == "-") {
+                                p.innerHTML = jsMessages[1];
+                            } else {
+                                p.innerHTML = comment;
+                            }
                         }
-                    },
-                });
+                    else {
+                        p.innerHTML = jsMessages[1];
+                    }
+                },
             });
+        });
     });
     </script>
 
@@ -193,11 +196,15 @@
                     },
                     success: function(data) {
                         var p = document.getElementById("secondary-desc");
-                        var comment = data.items['0'].value;
-                        if (comment == "-") {
-                            p.innerHTML = jsMessages[1];
+                        if (data.items.length != 0) {
+                            var comment = data.items['0'].value;
+                            if (comment == "-") {
+                                p.innerHTML = jsMessages[1];
+                            } else {
+                                p.innerHTML = comment;
+                            }
                         } else {
-                            p.innerHTML = comment;
+                            p.innerHTML = jsMessages[1];
                         }
                     },
                 });
