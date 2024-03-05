@@ -571,6 +571,8 @@ class LittersTable extends Table
         $now = FrozenTime::today();
         if (is_string($entity->birth_date)) {
             $birth_date = FrozenTime::createFromFormat('Y-m-d', $entity->birth_date);
+        } else {
+            $birth_date = $entity->birth_date;
         }
         foreach ($entity->contributions as $contribution) {
             $rattery = $ratteries->get($contribution->rattery_id, ['contain' => ['Countries', 'Users']]);

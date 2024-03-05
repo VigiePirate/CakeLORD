@@ -315,43 +315,43 @@ class RatsController extends AppController
         $colors = $this->Rats->Colors->find('list', [
             'limit' => 200,
             'order' => [
-                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'name ASC' // then sort by name
+                'CASE WHEN Colors__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Colors__name ASC' // then sort by name
             ]
         ]);
         $eyecolors = $this->Rats->Eyecolors->find('list', [
             'limit' => 200,
             'order' => [
-                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'name ASC' // then sort by name
+                'CASE WHEN Eyecolors__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Eyecolors__name ASC' // then sort by name
             ]
         ]);
         $dilutions = $this->Rats->Dilutions->find('list', [
             'limit' => 200,
             'order' => [
-                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'name ASC' // then sort by name
+                'CASE WHEN Dilutions__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Dilutions__name ASC' // then sort by name
             ]
         ]);
         $markings = $this->Rats->Markings->find('list', [
             'limit' => 200,
             'order' => [
-                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'name ASC' // then sort by name
+                'CASE WHEN Markings__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Markings__name ASC' // then sort by name
             ]
         ]);
         $earsets = $this->Rats->Earsets->find('list', [
             'limit' => 200,
             'order' => [
-                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'name ASC' // then sort by name
+                'CASE WHEN Earsets__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Earsets__name ASC' // then sort by name
             ]
         ]);
         $coats = $this->Rats->Coats->find('list', [
             'limit' => 200,
             'order' => [
-                'CASE WHEN id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'name ASC' // then sort by name
+                'CASE WHEN Coats__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Coats__name ASC' // then sort by name
             ]
         ]);
         $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
