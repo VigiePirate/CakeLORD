@@ -1409,7 +1409,17 @@ class RatsController extends AppController
         } else {
             $this->Flash->default(__('We are sorry for your loss. Please fill the information below to record the rat death. Date and primary cause are mandatory.'));
         }
-        $deathPrimaryCauses = $death_primary_causes_model->find('list')->order(['id' => 'ASC']);
+
+        // keeps "Unknown" as first cause and "Other" as last, sort the rest alphabetically
+        // collation explicitly added to manage French character "Œ"
+        $translate = (I18n::getLocale() == I18n::getDefaultLocale()) ? '' : 'Translation';
+        $lastId = $this->Rats->DeathPrimaryCauses->find()->count();
+        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')
+            ->order([
+                'CASE WHEN DeathPrimaryCauses__id = 1 THEN 0 WHEN DeathPrimaryCauses__id = ' . $lastId . ' THEN 2 ELSE 1 END', // first sort by id=1
+                'DeathPrimaryCauses'.$translate.'__name COLLATE utf8mb4_unicode_ci ASC' // then sort by name
+            ]);
+
         if (! $rat->is_alive && ! is_null($rat->death_primary_cause_id)) {
             $death_secondary_causes_model = $this->fetchModel('DeathSecondaryCauses');
             $deathSecondaryCauses = $death_secondary_causes_model
