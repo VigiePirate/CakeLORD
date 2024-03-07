@@ -340,14 +340,18 @@ class RatsTable extends Table
 
         } else {
             // resurrection
-            if (isset($data['death_toggle']) && $data['death_toggle'] == 0) {
-                $entity->is_alive = true;
-                $entity->death_date = null;
-                $entity->death_primary_cause_id = null;
-                $entity->death_secondary_cause_id = null;
-                $entity->death_diagnosed = false;
-                $entity->death_necropsied = false;
-                $entity->death_euthanized = false;
+            if (isset($data['death_toggle'])) {
+                if ($data['death_toggle'] == 0) {
+                    $entity->is_alive = true;
+                    $entity->death_date = null;
+                    $entity->death_primary_cause_id = null;
+                    $entity->death_secondary_cause_id = null;
+                    $entity->death_diagnosed = false;
+                    $entity->death_necropsied = false;
+                    $entity->death_euthanized = false;
+                } else {
+                    $entity->is_alive = false;
+                }
             }
         }
     }

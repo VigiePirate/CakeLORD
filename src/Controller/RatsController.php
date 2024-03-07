@@ -2,7 +2,10 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+
 use Cake\Chronos\Chronos;
+use Cake\Collection\Collection;
+use Cake\I18n\I18n;
 use Cake\Routing\Router;
 
 /**
@@ -296,7 +299,7 @@ class RatsController extends AppController
                 }
             }
 
-        // update death information for form
+        // update death information for form reloading (in case of error elsewhere)
         if (! $rat->is_alive && ! is_null($rat->death_primary_cause_id)) {
             $death_secondary_causes_model = $this->fetchModel('DeathSecondaryCauses');
             $deathSecondaryCauses = $death_secondary_causes_model
@@ -312,49 +315,56 @@ class RatsController extends AppController
         } else {
             $this->Flash->default(__('Please record the rat’s information below. When in doubt, please check documentation before entering data.'));
         }
+
+        $translate = (I18n::getLocale() == I18n::getDefaultLocale()) ? '' : 'Translation';
+        $coats = $this->Rats->Coats->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN Coats__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Coats'.$translate.'__name ASC' // then sort by name
+            ]
+        ]);
         $colors = $this->Rats->Colors->find('list', [
             'limit' => 200,
             'order' => [
                 'CASE WHEN Colors__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'Colors__name ASC' // then sort by name
+                'Colors'.$translate.'__name ASC' // then sort by name
             ]
         ]);
         $eyecolors = $this->Rats->Eyecolors->find('list', [
             'limit' => 200,
             'order' => [
                 'CASE WHEN Eyecolors__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'Eyecolors__name ASC' // then sort by name
+                'Eyecolors'.$translate.'__name ASC' // then sort by name
             ]
         ]);
         $dilutions = $this->Rats->Dilutions->find('list', [
             'limit' => 200,
             'order' => [
                 'CASE WHEN Dilutions__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'Dilutions__name ASC' // then sort by name
+                'Dilutions'.$translate.'__name ASC' // then sort by name
             ]
         ]);
         $markings = $this->Rats->Markings->find('list', [
             'limit' => 200,
             'order' => [
                 'CASE WHEN Markings__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'Markings__name ASC' // then sort by name
+                'Markings'.$translate.'__name ASC' // then sort by name
             ]
         ]);
         $earsets = $this->Rats->Earsets->find('list', [
             'limit' => 200,
             'order' => [
                 'CASE WHEN Earsets__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'Earsets__name ASC' // then sort by name
+                'Earsets'.$translate.'__name ASC' // then sort by name
             ]
         ]);
-        $coats = $this->Rats->Coats->find('list', [
+        $singularities = $this->Rats->Singularities->find('list', [
             'limit' => 200,
             'order' => [
-                'CASE WHEN Coats__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
-                'Coats__name ASC' // then sort by name
+                'Singularities'.$translate.'__name ASC' // sort by name
             ]
         ]);
-        $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
         $states = $this->Rats->States->find('list', ['limit' => 200]);
         $creator_id = $this->Authentication->getIdentity()->get('id');
 
@@ -374,7 +384,14 @@ class RatsController extends AppController
             $this->set(compact('from_litter', 'litter'));
         }
 
-        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')->order(['id' => 'ASC']);
+        // keeps "Unknown" as first cause and "Other" as last, sort the rest alphabetically
+        // collation explicitly added to manage French character "Œ"
+        $lastId = $this->Rats->DeathPrimaryCauses->find()->count();
+        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')
+            ->order([
+                'CASE WHEN DeathPrimaryCauses__id = 1 THEN 0 WHEN DeathPrimaryCauses__id = ' . $lastId . ' THEN 2 ELSE 1 END', // first sort by id=1
+                'DeathPrimaryCauses'.$translate.'__name COLLATE utf8mb4_unicode_ci ASC' // then sort by name
+            ]);
 
         $js_messages = json_encode([
             __('Please, read carefully information that will appear below to check the fitness of your choice.'),
@@ -457,16 +474,68 @@ class RatsController extends AppController
             $this->Flash->error(__('The rat could not be saved. Please, try again.'));
         }
 
-        $colors = $this->Rats->Colors->find('list', ['limit' => 200]);
-        $eyecolors = $this->Rats->Eyecolors->find('list', ['limit' => 200]);
-        $dilutions = $this->Rats->Dilutions->find('list', ['limit' => 200]);
-        $markings = $this->Rats->Markings->find('list', ['limit' => 200]);
-        $earsets = $this->Rats->Earsets->find('list', ['limit' => 200]);
-        $coats = $this->Rats->Coats->find('list', ['limit' => 200]);
-        $singularities = $this->Rats->Singularities->find('list', ['limit' => 200]);
+        // get and sort all descriptive traits properly
+        $translate = (I18n::getLocale() == I18n::getDefaultLocale()) ? '' : 'Translation';
+        $coats = $this->Rats->Coats->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN Coats__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Coats'.$translate.'__name ASC' // then sort by name
+            ]
+        ]);
+        $colors = $this->Rats->Colors->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN Colors__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Colors'.$translate.'__name ASC' // then sort by name
+            ]
+        ]);
+        $eyecolors = $this->Rats->Eyecolors->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN Eyecolors__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Eyecolors'.$translate.'__name ASC' // then sort by name
+            ]
+        ]);
+        $dilutions = $this->Rats->Dilutions->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN Dilutions__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Dilutions'.$translate.'__name ASC' // then sort by name
+            ]
+        ]);
+        $markings = $this->Rats->Markings->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN Markings__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Markings'.$translate.'__name ASC' // then sort by name
+            ]
+        ]);
+        $earsets = $this->Rats->Earsets->find('list', [
+            'limit' => 200,
+            'order' => [
+                'CASE WHEN Earsets__id = 1 THEN 0 ELSE 1 END', // first sort by id=1
+                'Earsets'.$translate.'__name ASC' // then sort by name
+            ]
+        ]);
+        $singularities = $this->Rats->Singularities->find('list', [
+            'limit' => 200,
+            'order' => [
+                'Singularities'.$translate.'__name ASC' // sort by name
+            ]
+        ]);
+
         $generic = $this->Rats->Ratteries->find()->where(['is_generic IS' => true])->all()->combine('id', 'full_name');
 
-        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')->order(['id' => 'ASC']);
+        // keeps "Unknown" as first cause and "Other" as last, sort the rest alphabetically
+        // collation explicitly added to manage French character "Œ"
+        $lastId = $this->Rats->DeathPrimaryCauses->find()->count();
+        $deathPrimaryCauses = $this->Rats->DeathPrimaryCauses->find('list')
+            ->order([
+                'CASE WHEN DeathPrimaryCauses__id = 1 THEN 0 WHEN DeathPrimaryCauses__id = ' . $lastId . ' THEN 2 ELSE 1 END', // first sort by id=1
+                'DeathPrimaryCauses'.$translate.'__name COLLATE utf8mb4_unicode_ci ASC' // then sort by name
+            ]);
+
         if (! $rat->is_alive && ! is_null($rat->death_primary_cause_id)) {
             $death_secondary_causes_model = $this->fetchModel('DeathSecondaryCauses');
             $deathSecondaryCauses = $death_secondary_causes_model
@@ -1524,5 +1593,27 @@ class RatsController extends AppController
 
     public function blameNeglected() {
         return $this->Rats->blameNeglected($this->Rats);
+    }
+
+    // utils
+    public function sortTailByName($collection)
+    {
+        $head = $collection->filter(function ($item) {
+            return $item['id'] == 1;
+        });
+
+        $tail = $collection->reject(function ($item) {
+            return $item['id'] == 1;
+        });
+
+        $sortedTail = $tail->sortBy('name', SORT_ASC, SORT_STRING);
+        $sortedCollection = (new Collection([$head]))->append($sortedTail->toList());
+        //$sortedCollection = (new Collection($sortedTail))->prepend($head->toList());
+        //$sortedCollection = new Collection($sortedTail->prepend($head));
+        //$sortedCollection = (new Collection($sortedTail->toList()))->prepend($head->toList());
+        dd($sortedCollection->toArray());
+        return $sortedCollection;
+        //$sortedList = (new Collection($sortedCollection))->combine('id', 'name');
+        //return $sortedList;
     }
 }
