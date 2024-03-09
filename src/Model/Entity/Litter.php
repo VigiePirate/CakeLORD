@@ -329,8 +329,7 @@ class Litter extends Entity
 
     public function hasValidOrigins()
     {
-
-        if (empty($this->contributions)) {
+        if (is_null($this->contributions) || empty($this->contributions)) {
             return false;
         }
 
@@ -351,6 +350,9 @@ class Litter extends Entity
     public function hasTooCloseSiblings()
     {
         $dam = (new Collection($this->parent_rats))->match(['sex' => 'F'])->toList();
+        if (empty($dam)) {
+            return false;
+        }
 
         $concurrents = FactoryLocator::get('Table')->get('Litters')->find('fromBirthRange', [
             'birth_date' => $this->birth_date,

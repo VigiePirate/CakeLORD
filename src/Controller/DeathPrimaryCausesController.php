@@ -42,9 +42,17 @@ class DeathPrimaryCausesController extends AppController
      */
     public function view($id = null)
     {
+        $lastId = $this->DeathPrimaryCauses->DeathSecondaryCauses->findByDeathPrimaryCauseId($id)->all()->last()->id;
         $deathPrimaryCause = $this->DeathPrimaryCauses->get($id, [
             'contain' => [
-                'DeathSecondaryCauses',
+                'DeathSecondaryCauses' => function($q) use ($lastId) {
+                    $translate = (I18n::getLocale() == I18n::getDefaultLocale()) ? '' : 'Translation';
+                    return $q
+                        ->order([
+                            'CASE WHEN DeathSecondaryCauses__id = '. $lastId .' THEN 1 ELSE 0 END', // first sort by id=1
+                            'DeathSecondaryCauses'.$translate.'__name COLLATE utf8mb4_unicode_ci ASC' // then sort by name
+                        ]);
+                },
                 'Rats' => function($q) {
                     return $q
                     ->order('Rats.modified DESC')

@@ -228,7 +228,10 @@ class LittersTable extends Table
         }
 
         // litter creation case: first contribution must be created
-        if (! isset($data['side_message']) && ! isset($data['rattery_name_contribution_1'])) {
+        if (! isset($data['side_message'])
+            && ! isset($data['rattery_name_contribution_1'])
+            && isset($data['rattery_id'])
+        ) {
             $data['contributions'] = [
                 [
                     'contribution_type_id' => '1',
@@ -680,7 +683,7 @@ class LittersTable extends Table
             ->distinct();
 
         $birth_date = $options['birth_date'];
-        $mother_id = $options['mother_id'];
+        $mother_id = $options['mother_id']; // FIXME: check existence
         $query = $query
             ->matching('ParentRats', function ($q) use ($mother_id) {
                 return $q->where(['ParentRats.id' => $mother_id]);
