@@ -267,7 +267,7 @@ class RatsController extends AppController
                         'accessibleFields' => ['pups_number' => true],
                     ];
                     $data['pups_number'] = 0;
-                    $litter = $litters->newEntity($data, $litter_options);
+                    $litter = $litters->newEntity($data, $litter_options); //FIXME check contributions[0] has a rattery
                     if ($litters->save($litter, $litter_options)) {
                         $data['litter_id'] = $litter->id;
                         $data['rattery_id'] = $litter->contributions[0]->rattery_id;
