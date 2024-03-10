@@ -7,8 +7,10 @@ use Cake\Routing\Router;
 use Cake\Mailer\Mailer;
 use Cake\Mailer\MailerAwareTrait;
 use Cake\Chronos\Chronos;
+use Cake\I18n\I18n;
 use Cake\Utility\Inflector;
 use Cake\Collection\Collection;
+use Cake\Core\Configure;
 
 /**
 * Users Controller
@@ -67,6 +69,11 @@ class UsersController extends AppController
 
             // get user
             $user = $this->Users->get($this->Authentication->getIdentityData('id'), ['contain' => 'Roles']);
+
+            // update session locale if preferred language was set
+            if (! is_null($user->locale)) {
+                $this->request->getSession()->write('Config.locale', $locale);
+            }
 
             // update last login fields
             $user->successful_login_previous_date = is_null($user->successful_login_last_date) ? $this->created : $user->successful_login_last_date;
@@ -483,8 +490,11 @@ class UsersController extends AppController
             'contain' => ['Roles', 'Ratteries'],
         ]);
         $this->Authorization->authorize($user);
-
-        $this->set('user', $user);
+        $locales = Configure::read('App.supportedLocales');
+        $locale = ! is_null($user->locale) && isset($locales[$user->locale])
+            ? $locales[$user->locale]
+            : null;
+        $this->set(compact('user', 'locale'));
     }
 
     /**
@@ -557,10 +567,14 @@ class UsersController extends AppController
             $champion = $this->fetchModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
         }
 
+        $locale = ! is_null($user->locale) && isset($locales[$user->locale])
+            ? $locales[$user->locale]
+            : null;
+
         $identity = $this->request->getAttribute('identity');
         $show_staff = ! is_null($identity) && $identity->can('edit', $user);
 
-        $this->set(compact('user',
+        $this->set(compact('user', 'locale',
             'rat_count', 'female_count', 'male_count',
             'alive_rat_count', 'alive_female_count', 'alive_male_count',
             'managed_rat_count', 'alive_managed_rat_count',
@@ -580,6 +594,7 @@ class UsersController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $user = $this->Users->newEmptyEntity();
+
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
@@ -589,7 +604,12 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $roles = $this->Users->Roles->find('list', ['limit' => 200]);
+
+        $roles = $this->Users->Roles->find('list')
+            ->where(['Roles.id >=' => $identity->getRoleId()])
+            ->order('Roles.id ASC');
+
+        $this->Flash->warning(__('This is a second-line tool for cases where normal user registration is not possible. No email activation will be required. Use sparingly.'));
         $this->set(compact('user', 'roles'));
     }
 
@@ -606,20 +626,26 @@ class UsersController extends AppController
             'contain' => ['Roles'],
         ]);
         $this->Authorization->authorize($user);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
+                if (! is_null($user->locale)) {
+                    $this->request->getSession()->write('Config.locale', $user->locale);
+                    I18n::setLocale($user->locale);
+                }
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'view', $user->id]);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
+
         $identity = $this->request->getAttribute('identity');
         $roles = $this->Users->Roles->find('list')
             ->where(['Roles.id >=' => $identity->getRoleId()])
             ->order('Roles.id ASC');
-
-        $this->set(compact('user', 'roles', 'identity'));
+        $locales = Configure::read('App.supportedLocales');
+        $this->set(compact('user', 'locales', 'roles', 'identity'));
     }
 
     /**

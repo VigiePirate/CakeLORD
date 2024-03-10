@@ -84,6 +84,16 @@
                         </div>
                     </div>
 
+                    <?=
+                        $this->Form->control('locale', [
+                            'type' => 'select',
+                            'label' => __('Preferred language'),
+                            'options' => $locales,
+                            'empty' => true,
+                            'required' => false,
+                        ]);
+                    ?>
+
                     <div class="spacer"></div>
                     <?= $this->Form->control('wants_newsletter', ['label' => __('I accept to receive casual newsletters and other information by email')]); ?>
 

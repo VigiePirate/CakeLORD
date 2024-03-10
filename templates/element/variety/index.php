@@ -1,3 +1,5 @@
+<?php $this->assign('title', __($Varieties)) ?>
+
 <div class="coats index content">
     <?php if ($show_staff) : ?>
         <?= $this->Html->link($texts['add'], ['action' => 'add'], ['class' => 'button button-staff float-right']) ?>

@@ -134,6 +134,11 @@ class UsersTable extends Table
             ->allowEmptyString('sex');
 
         $validator
+            ->scalar('locale')
+            ->maxLength('locale', 5)
+            ->allowEmptyString('localization');
+
+        $validator
             ->scalar('localization')
             ->maxLength('localization', 255)
             ->allowEmptyString('localization');
