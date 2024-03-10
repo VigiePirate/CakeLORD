@@ -17,7 +17,7 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
 
     public function __construct($supportedLocales)
     {
-        $this->supportedLocales = $supportedLocales;
+        $this->supportedLocales = array_keys($supportedLocales);
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
