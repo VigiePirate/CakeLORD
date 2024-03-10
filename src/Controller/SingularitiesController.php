@@ -67,10 +67,18 @@ class SingularitiesController extends AppController
         $recent_count = $singularity->countHaving('rats', 'Singularities', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
         $recent_frequency = $singularity->frequencyOfHaving('rats', 'Singularities', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
 
+        $age['all'] = $count ? $singularity->roundLifespan([], 1) : __('N/A');
+        $age['female'] = $count ? $singularity->roundLifespan(['sex' => 'F'], ['singularity' => $singularity->id]) : __('N/A');
+        $age['male'] = $count ? $singularity->roundLifespan(['sex' => 'M'], ['singularity' => $singularity->id]) : __('N/A');
+
+        // $age['all'] = __('N/A');
+        // $age['female'] = __('N/A');
+        // $age['male'] = __('N/A');
+
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Singularities);
 
-        $this->set(compact('singularity', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
+        $this->set(compact('singularity', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'age', 'user', 'show_staff'));
     }
 
     /**

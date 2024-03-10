@@ -68,10 +68,14 @@ class CoatsController extends AppController
         $recent_count = $coat->countMy('rats', 'coat', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
         $recent_frequency = $coat->frequencyOfMy('rats', 'coat', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
 
+        $age['all'] = $count ? $coat->roundLifespan(['coat_id' => $coat->id]) : __('N/A');
+        $age['female'] = $count ? $coat->roundLifespan(['coat_id' => $coat->id, 'sex' => 'F']) : __('N/A');
+        $age['male'] = $count ? $coat->roundLifespan(['coat_id' => $coat->id, 'sex' => 'M']) : __('N/A');
+
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Coats);
 
-        $this->set(compact('coat', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
+        $this->set(compact('coat', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'age', 'user', 'show_staff'));
     }
 
     /**

@@ -64,10 +64,14 @@ class ColorsController extends AppController
         $recent_count = $color->countMy('rats', 'color', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
         $recent_frequency = $color->frequencyOfMy('rats', 'color', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
 
-        $user = $this->request->getAttribute('identity');
-        $show_staff = !is_null($user) && $user->can('add', $this->Colors);
+        $age['all'] = $count ? $color->roundLifespan(['color_id' => $color->id]) : __('N/A');
+        $age['female'] = $count ? $color->roundLifespan(['color_id' => $color->id, 'sex' => 'F']) : __('N/A');
+        $age['male'] = $count ? $color->roundLifespan(['color_id' => $color->id, 'sex' => 'M']) : __('N/A');
 
-        $this->set(compact('color', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
+        $user = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($user) && $user->can('add', $this->Colors);
+
+        $this->set(compact('color', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'age', 'user', 'show_staff'));
     }
 
     /**
