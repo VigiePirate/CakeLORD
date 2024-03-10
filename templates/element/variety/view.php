@@ -24,14 +24,14 @@
                     </div>
                     <h1><?= h($variety->name) ?></h1>
                     <h2><?= __('Reference information') ?></h2>
-                    <table class="condensed stats">
+                    <table class="condensed stats unfold">
             <?php else : ?>
                 <div class="column-responsive column-100">
                     <div class="sheet-heading">
-                        <div class="sheet-title pretitle"><?= __('$Variety') ?></div>
+                        <div class="sheet-title pretitle"><?= __($Variety) ?></div>
                     </div>
                     <h1><?= h($variety->name) ?></h1>
-                    <table class="condensed unfold">
+                    <table class="condensed stats unfold">
             <?php endif ?>
                         <tr>
                             <th><?= __('Name') ?></th>
@@ -53,10 +53,14 @@
                             <th><?= __('Frequency (in the last 2 years)') ?></th>
                             <td><?= __('{0, number} % ({1, plural, =0{no rat} =1{1 rat} other{# rats}})',  [$recent_frequency, $recent_count]) ?></td>
                         </tr>
+                        <tr>
+                            <th><?= __('Average lifespan (all causes included)') ?></th>
+                            <td><?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$age['all'], $age['female'], $age['male']]) ?></td>
+                        </tr>
                     </table>
                 </div>
                 <?php if ($variety->picture != '') : ?>
-                    <div class="column footer-center">
+                    <div class="column footer-center hide-on-mobile">
                         <?= $this->Html->image(UPLOADS . $variety->picture, ['alt' => $variety->name]) ?>
                     </div>
                 <?php endif ?>

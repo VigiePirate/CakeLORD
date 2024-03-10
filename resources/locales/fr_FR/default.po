@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2024-02-29 19:42+0000\n"
-"PO-Revision-Date: 2024-02-29 20:46+0100\n"
+"POT-Creation-Date: 2024-03-09 19:00+0000\n"
+"PO-Revision-Date: 2024-03-09 20:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -21,9 +21,9 @@ msgstr "L’article a été enregistré, mais seulement en anglais. "
 
 #: src/Controller/ArticlesController.php:90
 #: src/Controller/CategoriesController.php:81
-#: src/Controller/CoatsController.php:93 src/Controller/ColorsController.php:89
+#: src/Controller/CoatsController.php:93 src/Controller/ColorsController.php:93
 #: src/Controller/CountriesController.php:87
-#: src/Controller/DeathPrimaryCausesController.php:93
+#: src/Controller/DeathPrimaryCausesController.php:101
 #: src/Controller/DeathSecondaryCausesController.php:83
 #: src/Controller/DilutionsController.php:90
 #: src/Controller/EarsetsController.php:90
@@ -31,7 +31,7 @@ msgstr "L’article a été enregistré, mais seulement en anglais. "
 #: src/Controller/FaqsController.php:75
 #: src/Controller/MarkingsController.php:90
 #: src/Controller/RolesController.php:85
-#: src/Controller/SingularitiesController.php:88
+#: src/Controller/SingularitiesController.php:92
 #: src/Controller/StatesController.php:75
 msgid "Change your preferred language and edit the sheet to add a translation."
 msgstr ""
@@ -96,24 +96,48 @@ msgstr "Le type de poil a été supprimé."
 msgid "The coat could not be deleted. Please, try again."
 msgstr "Impossible de supprimer le type de poil. Veuillez réessayer."
 
-#: src/Controller/ColorsController.php:89
+#: src/Controller/ColorsController.php:67
+#: src/Controller/ColorsController.php:68
+#: src/Controller/ColorsController.php:69
+#: src/Controller/DeathPrimaryCausesController.php:76
+#: src/Controller/DeathPrimaryCausesController.php:77
+#: src/Controller/DeathSecondaryCausesController.php:58
+#: src/Controller/DeathSecondaryCausesController.php:59
+#: src/Controller/LittersController.php:856
+#: src/Controller/LittersController.php:857 src/Model/Entity/Rattery.php:216
+#: src/Model/Entity/Rattery.php:217 src/Model/Entity/Rattery.php:276
+#: src/Model/Entity/StatisticsTrait.php:676
+#: src/Model/Entity/StatisticsTrait.php:786 templates/RatSnapshots/diff.php:205
+#: templates/RatSnapshots/diff.php:207 templates/RatSnapshots/diff.php:214
+#: templates/RatSnapshots/diff.php:216 templates/RatSnapshots/diff.php:222
+#: templates/RatSnapshots/diff.php:224 templates/RatSnapshots/diff.php:491
+#: templates/RatSnapshots/diff.php:501 templates/RatSnapshots/diff.php:510
+#: templates/Ratteries/view.php:375 templates/Ratteries/view.php:383
+#: templates/Ratteries/view.php:391 templates/Users/index.php:48
+#: templates/Users/index.php:49 templates/Users/private.php:34
+#: templates/element/litters.php:40 templates/element/ratteries.php:62
+#: templates/element/ratteries.php:65 templates/element/ratteries.php:68
+msgid "N/A"
+msgstr "ND"
+
+#: src/Controller/ColorsController.php:93
 msgid "The new color has been saved, but only in English. "
 msgstr "La couleur a été enregistré, mais seulement en anglais. "
 
-#: src/Controller/ColorsController.php:93
-#: src/Controller/ColorsController.php:117
+#: src/Controller/ColorsController.php:97
+#: src/Controller/ColorsController.php:121
 msgid "The color could not be saved. Please, try again."
 msgstr "Impossible d’enregistrer la couleur. Veuillez réessayer."
 
-#: src/Controller/ColorsController.php:113
+#: src/Controller/ColorsController.php:117
 msgid "The color has been saved."
 msgstr "La couleur a été enregistrée."
 
-#: src/Controller/ColorsController.php:136
+#: src/Controller/ColorsController.php:140
 msgid "The color has been deleted."
 msgstr "La couleur a été supprimée."
 
-#: src/Controller/ColorsController.php:138
+#: src/Controller/ColorsController.php:142
 msgid "The color could not be deleted. Please, try again."
 msgstr "Impossible de supprimer. Veuillez réessayer."
 
@@ -182,45 +206,24 @@ msgstr "Le pays a été supprimé."
 msgid "The country could not be deleted. Please, try again."
 msgstr "Impossible de supprimer le pays. Veuillez réessayer."
 
-#: src/Controller/DeathPrimaryCausesController.php:68
-#: src/Controller/DeathPrimaryCausesController.php:69
-#: src/Controller/DeathSecondaryCausesController.php:58
-#: src/Controller/DeathSecondaryCausesController.php:59
-#: src/Controller/LittersController.php:856
-#: src/Controller/LittersController.php:857 src/Model/Entity/Rattery.php:216
-#: src/Model/Entity/Rattery.php:217 src/Model/Entity/Rattery.php:276
-#: src/Model/Entity/StatisticsTrait.php:677
-#: src/Model/Entity/StatisticsTrait.php:787 templates/RatSnapshots/diff.php:205
-#: templates/RatSnapshots/diff.php:207 templates/RatSnapshots/diff.php:214
-#: templates/RatSnapshots/diff.php:216 templates/RatSnapshots/diff.php:222
-#: templates/RatSnapshots/diff.php:224 templates/RatSnapshots/diff.php:491
-#: templates/RatSnapshots/diff.php:501 templates/RatSnapshots/diff.php:510
-#: templates/Ratteries/view.php:375 templates/Ratteries/view.php:383
-#: templates/Ratteries/view.php:391 templates/Users/index.php:48
-#: templates/Users/index.php:49 templates/Users/private.php:34
-#: templates/element/litters.php:40 templates/element/ratteries.php:62
-#: templates/element/ratteries.php:65 templates/element/ratteries.php:68
-msgid "N/A"
-msgstr "ND"
-
-#: src/Controller/DeathPrimaryCausesController.php:93
+#: src/Controller/DeathPrimaryCausesController.php:101
 msgid "The new death category has been saved, but only in English. "
 msgstr "La catégorie de décès a été enregistrée, mais seulement en anglais. "
 
-#: src/Controller/DeathPrimaryCausesController.php:97
-#: src/Controller/DeathPrimaryCausesController.php:120
+#: src/Controller/DeathPrimaryCausesController.php:105
+#: src/Controller/DeathPrimaryCausesController.php:128
 msgid "The death category could not be saved. Please, try again."
 msgstr "Impossible d’enregistrer la catégorie de décès. Veuillez réessayer."
 
-#: src/Controller/DeathPrimaryCausesController.php:116
+#: src/Controller/DeathPrimaryCausesController.php:124
 msgid "The death category has been saved."
 msgstr "La catégorie de décès a été enregistrée."
 
-#: src/Controller/DeathPrimaryCausesController.php:140
+#: src/Controller/DeathPrimaryCausesController.php:148
 msgid "The death category has been deleted."
 msgstr "La catégorie de décès a été supprimée."
 
-#: src/Controller/DeathPrimaryCausesController.php:142
+#: src/Controller/DeathPrimaryCausesController.php:150
 msgid "The death category could not be deleted. Please, try again."
 msgstr "Impossible de supprimer la catégorie de décès. Veuillez réessayer."
 
@@ -366,7 +369,7 @@ msgid "The litter message could not be deleted. Please, try again."
 msgstr "Impossible de supprimer la notification. Veuillez réessayer."
 
 #: src/Controller/LittersController.php:64
-#: src/Controller/RatsController.php:116
+#: src/Controller/RatsController.php:119
 #: src/Controller/RatteriesController.php:89
 msgid ""
 "You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to "
@@ -603,13 +606,13 @@ msgid "We could not attach the selected rat to this litter."
 msgstr "Nous n’avons pas réussi à rattacher le rat sélectionné à cette portée."
 
 #: src/Controller/LittersController.php:714
-#: src/Controller/RatsController.php:691
+#: src/Controller/RatsController.php:760
 #: src/Controller/RatteriesController.php:322
 msgid "The snapshot has been restored."
 msgstr "La sauvegarde a été restaurée."
 
 #: src/Controller/LittersController.php:716
-#: src/Controller/RatsController.php:693
+#: src/Controller/RatsController.php:762
 #: src/Controller/RatteriesController.php:324
 msgid "The snapshot could not be loaded. Please, try again."
 msgstr "Nous n’avons pas pu charger cette sauvegarde. Veuillez réessayer."
@@ -636,13 +639,13 @@ msgid "This litter sheet is now in state: {0}."
 msgstr "L’état de cette fiche est passé à : {0}."
 
 #: src/Controller/LittersController.php:1109
-#: src/Controller/RatsController.php:1429
+#: src/Controller/RatsController.php:1508
 #: src/Controller/RatteriesController.php:739
 msgid "The following custom moderation message has been sent: {0}"
 msgstr "Le message explicatif suivant a été notifié : {0}"
 
 #: src/Controller/LittersController.php:1112
-#: src/Controller/RatsController.php:1432
+#: src/Controller/RatsController.php:1511
 #: src/Controller/RatteriesController.php:742
 msgid ""
 "We could not moderate the sheet. Please retry or contact an administrator."
@@ -651,13 +654,13 @@ msgstr ""
 "administrateur."
 
 #: src/Controller/LittersController.php:1135
-#: src/Controller/RatsController.php:1457
+#: src/Controller/RatsController.php:1536
 #: src/Controller/RatteriesController.php:764
 msgid "The sheet has been sent back to staff with your message."
 msgstr "La fiche a été renvoyée au service après-vente avec votre message."
 
 #: src/Controller/LittersController.php:1138
-#: src/Controller/RatsController.php:1460
+#: src/Controller/RatsController.php:1539
 #: src/Controller/RatteriesController.php:767
 #: src/Controller/UsersController.php:225
 #: src/Controller/UsersController.php:265
@@ -673,7 +676,7 @@ msgid "This litter sheet is now frozen."
 msgstr "La fiche de cette portée est verrouillée."
 
 #: src/Controller/LittersController.php:1155
-#: src/Controller/RatsController.php:1478
+#: src/Controller/RatsController.php:1557
 #: src/Controller/RatteriesController.php:784
 msgid ""
 "We could not freeze the sheet. Please retry or contact an administrator."
@@ -686,7 +689,7 @@ msgid "This litter sheet is now unfrozen."
 msgstr "La fiche de cette portée est déverrouillée."
 
 #: src/Controller/LittersController.php:1169
-#: src/Controller/RatsController.php:1492
+#: src/Controller/RatsController.php:1571
 #: src/Controller/RatteriesController.php:797
 msgid "We could not thaw the sheet. Please retry or contact an administrator."
 msgstr ""
@@ -694,12 +697,12 @@ msgstr ""
 "un administrateur."
 
 #: src/Controller/LittersController.php:1180
-#: src/Controller/RatsController.php:1504
+#: src/Controller/RatsController.php:1583
 msgid "This rat sheet has been approved."
 msgstr "La fiche de ce rat a été validée."
 
 #: src/Controller/LittersController.php:1182
-#: src/Controller/RatsController.php:1506
+#: src/Controller/RatsController.php:1585
 #: src/Controller/RatteriesController.php:810
 msgid ""
 "We could not approve the sheet. Please retry or contact an administrator."
@@ -708,12 +711,12 @@ msgstr ""
 "administrateur."
 
 #: src/Controller/LittersController.php:1193
-#: src/Controller/RatsController.php:1518
+#: src/Controller/RatsController.php:1597
 msgid "This rat sheet has been unapproved."
 msgstr "Cette fiche a été invalidée."
 
 #: src/Controller/LittersController.php:1195
-#: src/Controller/RatsController.php:1520
+#: src/Controller/RatsController.php:1599
 #: src/Controller/RatteriesController.php:823
 msgid ""
 "We could not unapprove the sheet. Please retry or contact an administrator."
@@ -1070,12 +1073,12 @@ msgstr "La notification a été supprimée."
 msgid "The rat message could not be deleted. Please, try again."
 msgstr "Impossible de supprimer le message. Veuillez réessayer."
 
-#: src/Controller/RatsController.php:255
+#: src/Controller/RatsController.php:258
 msgid "The rat has been saved and attached to the litter below."
 msgstr "Le rat a été enregistré et rattaché à la portée ci-dessous."
 
-#: src/Controller/RatsController.php:258 src/Controller/RatsController.php:276
-#: src/Controller/RatsController.php:295
+#: src/Controller/RatsController.php:261 src/Controller/RatsController.php:279
+#: src/Controller/RatsController.php:298
 msgid ""
 "The rat could not be saved. Please, read explanatory messages in the form, "
 "check and correct your entry, and try again."
@@ -1083,15 +1086,15 @@ msgstr ""
 "Impossible d’enregistrer le rat. Veuillez lire les messages explicatifs sur "
 "le formulaire, corrigez les informations puis réessayez."
 
-#: src/Controller/RatsController.php:273
+#: src/Controller/RatsController.php:276
 msgid "The rat has been saved as well as its birth litter, and attached to it."
 msgstr "Le rat a été enregistré, ainsi que sa portée de rattachement."
 
-#: src/Controller/RatsController.php:281
+#: src/Controller/RatsController.php:284
 msgid "The rat has been saved, but could not be attached to any litter."
 msgstr "Le rat a été enregistré mais n’a pu être rattaché à aucune portée."
 
-#: src/Controller/RatsController.php:285
+#: src/Controller/RatsController.php:288
 msgid ""
 "The rat and its birth litter could not be saved. Please, read explanatory "
 "messages below and try again."
@@ -1099,11 +1102,11 @@ msgstr ""
 "Impossible d’enregistrer ce rat et sa portée de rattachement. Veuillez lire "
 "les explications ci-dessous et réessayer."
 
-#: src/Controller/RatsController.php:292 src/Controller/RatsController.php:454
+#: src/Controller/RatsController.php:295 src/Controller/RatsController.php:471
 msgid "The rat has been saved."
 msgstr "Le rat a été enregistré."
 
-#: src/Controller/RatsController.php:313
+#: src/Controller/RatsController.php:316
 msgid ""
 "Please record the rat’s information below. When in doubt, please check "
 "documentation before entering data."
@@ -1111,11 +1114,11 @@ msgstr ""
 "Veuillez compléter les informations ci-dessous. En cas de doute, merci de "
 "consulter la documentation avant toute chose."
 
-#: src/Controller/RatsController.php:380 src/Controller/RatsController.php:499
-#: src/Controller/RatsController.php:1356 templates/Rats/add.php:291
+#: src/Controller/RatsController.php:397 src/Controller/RatsController.php:568
+#: src/Controller/RatsController.php:1435 templates/Rats/add.php:291
 #: templates/Rats/add.php:311 templates/Rats/add.php:352
 #: templates/Rats/add.php:371 templates/Rats/declare_death.php:69
-#: templates/Rats/declare_death.php:89 templates/Rats/edit.php:181
+#: templates/Rats/declare_death.php:88 templates/Rats/edit.php:181
 #: templates/Rats/edit.php:201 templates/Rats/edit.php:242
 #: templates/Rats/edit.php:261
 msgid ""
@@ -1125,8 +1128,8 @@ msgstr ""
 "Veuillez lire attentivement les informations qui apparaîtront ici afin de "
 "vérifier votre choix."
 
-#: src/Controller/RatsController.php:381 src/Controller/RatsController.php:500
-#: src/Controller/RatsController.php:1357
+#: src/Controller/RatsController.php:398 src/Controller/RatsController.php:569
+#: src/Controller/RatsController.php:1436
 msgid ""
 "Please answer the following questions about euthanasia, diagnostics and "
 "analyses."
@@ -1134,46 +1137,46 @@ msgstr ""
 "Veuillez répondre aux questions suivantes (euthanasie, diagnostic "
 "vétérinaire, réalisation d’analyses)."
 
-#: src/Controller/RatsController.php:385 src/Controller/RatsController.php:482
-#: src/Controller/RatsController.php:649
+#: src/Controller/RatsController.php:402 src/Controller/RatsController.php:551
+#: src/Controller/RatsController.php:718
 msgid "Type here to filter colors..."
 msgstr "Tapez ici pour filtrer la liste des couleurs…"
 
-#: src/Controller/RatsController.php:386 src/Controller/RatsController.php:483
-#: src/Controller/RatsController.php:650
+#: src/Controller/RatsController.php:403 src/Controller/RatsController.php:552
+#: src/Controller/RatsController.php:719
 msgid "Type here to filter eyecolors..."
 msgstr "Tapez ici pour filtrer la liste des couleurs d’yeux…"
 
-#: src/Controller/RatsController.php:387 src/Controller/RatsController.php:484
-#: src/Controller/RatsController.php:651
+#: src/Controller/RatsController.php:404 src/Controller/RatsController.php:553
+#: src/Controller/RatsController.php:720
 msgid "Type here to filter coats..."
 msgstr "Tapez ici pour filtrer la liste des types de poils…"
 
-#: src/Controller/RatsController.php:388 src/Controller/RatsController.php:485
-#: src/Controller/RatsController.php:652
+#: src/Controller/RatsController.php:405 src/Controller/RatsController.php:554
+#: src/Controller/RatsController.php:721
 msgid "Type here to filter dilutions..."
 msgstr "Tapez ici pour filtrer la liste des dilutions…"
 
-#: src/Controller/RatsController.php:389 src/Controller/RatsController.php:486
-#: src/Controller/RatsController.php:653
+#: src/Controller/RatsController.php:406 src/Controller/RatsController.php:555
+#: src/Controller/RatsController.php:722
 msgid "Type here to filter earsets..."
 msgstr "Tapez ici pour filtrer la liste des types d’oreilles…"
 
-#: src/Controller/RatsController.php:390 src/Controller/RatsController.php:487
-#: src/Controller/RatsController.php:654
+#: src/Controller/RatsController.php:407 src/Controller/RatsController.php:556
+#: src/Controller/RatsController.php:723
 msgid "Type here to filter markings..."
 msgstr "Tapez ici pour filtrer la liste des marquages…"
 
-#: src/Controller/RatsController.php:391 src/Controller/RatsController.php:488
-#: src/Controller/RatsController.php:655
+#: src/Controller/RatsController.php:408 src/Controller/RatsController.php:557
+#: src/Controller/RatsController.php:724
 msgid "Type here to filter singularities..."
 msgstr "Tapez ici pour filtrer la liste des particularités…"
 
-#: src/Controller/RatsController.php:457
+#: src/Controller/RatsController.php:474
 msgid "The rat could not be saved. Please, try again."
 msgstr "Impossible d’enregistrer le rat. Veuillez réessayer."
 
-#: src/Controller/RatsController.php:495
+#: src/Controller/RatsController.php:564
 msgid ""
 "For data coherence, modifications of rats are restricted. Please, use the "
 "“optional notification” field at the end of this form to request origins or "
@@ -1184,7 +1187,7 @@ msgstr ""
 "de ce formulaire pour demander un changement d’origines ou de date de "
 "naissance."
 
-#: src/Controller/RatsController.php:558
+#: src/Controller/RatsController.php:627
 msgid ""
 "The rat sheet has been deleted. You can inform its creator by mail from "
 "their sheet below."
@@ -1192,11 +1195,11 @@ msgstr ""
 "La fiche du rat a été supprimée. Vous pouvez en informer son propriétaire "
 "par mail depuis sa fiche ci-dessous."
 
-#: src/Controller/RatsController.php:561
+#: src/Controller/RatsController.php:630
 msgid "The rat sheet could not be deleted. It still wanted to live."
 msgstr "Impossible de supprimer la fiche du rat. Elle voulait encore vivre."
 
-#: src/Controller/RatsController.php:568
+#: src/Controller/RatsController.php:637
 msgid ""
 "This rat has no offspring and can be deleted. Related messages and snapshots "
 "will be deleted. This operation is irreversible!"
@@ -1205,7 +1208,7 @@ msgstr ""
 "notifications et sauvegardes liées seront supprimées aussi. Cette opération "
 "est irréversible !"
 
-#: src/Controller/RatsController.php:571
+#: src/Controller/RatsController.php:640
 msgid ""
 "This rat has offspring. You must edit or delete their bred litters before "
 "being allowed to delete the sheet."
@@ -1213,15 +1216,15 @@ msgstr ""
 "Ce rat a une descendance enregistrée. Vous devez modifier ou supprimer ses "
 "portées avant de pouvoir supprimer sa fiche."
 
-#: src/Controller/RatsController.php:1254
+#: src/Controller/RatsController.php:1323
 msgid "The rat’s picture has been deleted."
 msgstr "La photo de ce rat a été est supprimé."
 
-#: src/Controller/RatsController.php:1257
+#: src/Controller/RatsController.php:1326
 msgid "The rat’s picture could not be deleted. Please, try again."
 msgstr "Impossible de supprimer cette photo. Veuillez réessayer."
 
-#: src/Controller/RatsController.php:1262
+#: src/Controller/RatsController.php:1331
 msgid ""
 "The rat’s new picture has been saved. A staff member still has to validate "
 "it."
@@ -1229,34 +1232,34 @@ msgstr ""
 "La nouvelle photo du rat a été enregistrée. Elle passera par l’approbation "
 "d’un membre du staff."
 
-#: src/Controller/RatsController.php:1265
+#: src/Controller/RatsController.php:1334
 msgid "The rat’s new picture could not be saved. Please, try again."
 msgstr "Impossible d’enregistrer la nouvelle photo. Veuillez réessayer."
 
-#: src/Controller/RatsController.php:1268
+#: src/Controller/RatsController.php:1337
 #: src/Controller/RatteriesController.php:487
 #: src/Controller/UsersController.php:657
 msgid "Pictures must be in jpeg, gif or png format and less than 8 MB."
 msgstr ""
 "Les photos doivent être au format jpeg, gif ou png et peser moins de 8 Mo."
 
-#: src/Controller/RatsController.php:1295
+#: src/Controller/RatsController.php:1364
 msgid "The rat has been transferred to its new owner."
 msgstr "La fiche du rat a été transférée à son nouveau propriétaire."
 
-#: src/Controller/RatsController.php:1298
+#: src/Controller/RatsController.php:1367
 msgid "The rat ownership could not be changed. Please, try again."
 msgstr "Impossible de changer le propriétaire du rat. Veuillez réessayer."
 
-#: src/Controller/RatsController.php:1336
+#: src/Controller/RatsController.php:1405
 msgid "Sorry for your loss. Your rat’s death has been recorded."
 msgstr "Toutes nos condoléances. Le décès de votre rat a bien été enregistré."
 
-#: src/Controller/RatsController.php:1339
+#: src/Controller/RatsController.php:1408
 msgid "Your rat’s death could not be recorded. Please, try again."
 msgstr "Impossible d’enregistrer le décès de votre rat. Veuillez réessayer."
 
-#: src/Controller/RatsController.php:1341
+#: src/Controller/RatsController.php:1410
 msgid ""
 "We are sorry for your loss. Please fill the information below to record the "
 "rat death. Date and primary cause are mandatory."
@@ -1265,29 +1268,29 @@ msgstr ""
 "enregistrer le décès de votre rat. La date et la catégorie de décès sont "
 "obligatoires."
 
-#: src/Controller/RatsController.php:1403
+#: src/Controller/RatsController.php:1482
 msgid "Your new comment about the rat has been saved."
 msgstr "Votre commentaire a été enregistré."
 
-#: src/Controller/RatsController.php:1406
+#: src/Controller/RatsController.php:1485
 msgid "Your new comment about the rat could not be saved. Please, try again."
 msgstr ""
 "Impossible d’enregistrer votre nouveau commentaire à propos de ce rat. "
 "Veuillez réessayer."
 
-#: src/Controller/RatsController.php:1427
+#: src/Controller/RatsController.php:1506
 msgid "This rat sheet is now in state: {0}."
 msgstr "L’état de cette fiche est passé à : {0}."
 
-#: src/Controller/RatsController.php:1476
+#: src/Controller/RatsController.php:1555
 msgid "This rat sheet is now frozen."
 msgstr "La fiche de ce rat est désormais gelée."
 
-#: src/Controller/RatsController.php:1490
+#: src/Controller/RatsController.php:1569
 msgid "This rat sheet is now unfrozen."
 msgstr "La fiche de ce rat est désormais déverrouillée."
 
-#: src/Controller/RatsController.php:1268
+#: src/Controller/RatsController.php:1337
 #: src/Controller/RatteriesController.php:487
 #: src/Controller/UsersController.php:657
 msgctxt "pictures"
@@ -1517,24 +1520,24 @@ msgstr "Le rôle a été supprimé."
 msgid "The role could not be deleted. Please, try again."
 msgstr "Impossible de supprimer le rôle. Merci de réessayer."
 
-#: src/Controller/SingularitiesController.php:88
+#: src/Controller/SingularitiesController.php:92
 msgid "The new singularity has been saved, but only in English. "
 msgstr "La particularité a été enregistrée, mais seulement en anglais. "
 
-#: src/Controller/SingularitiesController.php:92
-#: src/Controller/SingularitiesController.php:116
+#: src/Controller/SingularitiesController.php:96
+#: src/Controller/SingularitiesController.php:120
 msgid "The singularity could not be saved. Please, try again."
 msgstr "Impossible de sauvegarder la particularité. Merci de réessayer."
 
-#: src/Controller/SingularitiesController.php:112
+#: src/Controller/SingularitiesController.php:116
 msgid "The singularity has been saved."
 msgstr "La particularité a été sauvegardée."
 
-#: src/Controller/SingularitiesController.php:136
+#: src/Controller/SingularitiesController.php:140
 msgid "The singularity has been deleted."
 msgstr "La particularité a été supprimée."
 
-#: src/Controller/SingularitiesController.php:138
+#: src/Controller/SingularitiesController.php:142
 msgid "The singularity could not be deleted. Please, try again."
 msgstr "Impossible de supprimer la particularité. Merci de réessayer."
 
@@ -1989,25 +1992,25 @@ msgstr " (mère inconnue)"
 msgid " (unknown father)"
 msgstr " (père inconnu)"
 
-#: src/Model/Entity/Litter.php:139 src/Model/Entity/Litter.php:171
+#: src/Model/Entity/Litter.php:139 src/Model/Entity/Litter.php:169
 #: src/Model/Entity/Rat.php:233 src/Model/Entity/Rat.php:262
 msgid "Negative age?!"
 msgstr "Âge négatif ?!"
 
-#: src/Model/Entity/Litter.php:146 src/Model/Entity/Litter.php:178
+#: src/Model/Entity/Litter.php:146 src/Model/Entity/Litter.php:176
 #: src/Model/Entity/Rat.php:248 templates/DeathPrimaryCauses/view.php:108
 #: templates/DeathSecondaryCauses/view.php:64
 msgid "{0, plural, =1{1 month} other{# months}}"
 msgstr "{0, plural, =1{1 mois} other{# mois}}"
 
-#: src/Model/Entity/Litter.php:135 src/Model/Entity/Litter.php:167
+#: src/Model/Entity/Litter.php:135 src/Model/Entity/Litter.php:166
 #: src/Model/Entity/Rat.php:258 src/Model/Entity/Rat.php:270
 msgctxt "age"
 msgid "– ?? –"
 msgstr "– ?? –"
 
-#: src/Model/Entity/Litter.php:148 src/Model/Entity/Litter.php:180
-#: src/Model/Entity/Litter.php:203 src/Model/Entity/Rat.php:242
+#: src/Model/Entity/Litter.php:148 src/Model/Entity/Litter.php:178
+#: src/Model/Entity/Litter.php:201 src/Model/Entity/Rat.php:242
 #: templates/Litters/view.php:228 templates/Litters/view.php:232
 #: templates/Litters/view.php:271 templates/Litters/view.php:275
 msgctxt "age"
@@ -2197,7 +2200,7 @@ msgid "Balanced (1 male for 1 female)"
 msgstr "Équilibrée (1 mâle pour 1 femelle)"
 
 #: src/Model/Entity/StatisticsTrait.php:244
-#: src/Model/Entity/StatisticsTrait.php:686
+#: src/Model/Entity/StatisticsTrait.php:685
 msgid ""
 "{0, number} (about {1, plural, =1{1 male} other{# males}} for {2, plural, "
 "=1{1 female} other{# females}})"
@@ -2206,7 +2209,7 @@ msgstr ""
 "=1{1 femelle} other{# femelles}})"
 
 #: src/Model/Entity/StatisticsTrait.php:248
-#: src/Model/Entity/StatisticsTrait.php:690
+#: src/Model/Entity/StatisticsTrait.php:689
 msgid ""
 "{0, number} (about {1, plural, =1{1 female} other{# females}} for {2, "
 "plural, =1{1 male} other{# males}})"
@@ -2214,11 +2217,11 @@ msgstr ""
 "{0, number} (environ {1, plural, =1{1 femelle} other{# femelles}} pour {2, "
 "plural, =1{1 mâle} other{# mâles}})"
 
-#: src/Model/Entity/StatisticsTrait.php:673
+#: src/Model/Entity/StatisticsTrait.php:672
 msgid "Only females"
 msgstr "Uniquement des femelles"
 
-#: src/Model/Entity/StatisticsTrait.php:681
+#: src/Model/Entity/StatisticsTrait.php:680
 msgid "Only males"
 msgstr "Uniquement des mâles"
 
@@ -2285,7 +2288,7 @@ msgctxt "grammar"
 msgid "Custom"
 msgstr "Personnalisé"
 
-#: src/Model/Table/LittersTable.php:280
+#: src/Model/Table/LittersTable.php:283
 msgid ""
 "We could not find the mother. Please, select it in the list or type its "
 "complete pedigree identifier."
@@ -2293,7 +2296,7 @@ msgstr ""
 "Impossible de trouver la mère indiquée. Veuillez la sélectionner dans la "
 "liste ou entrez son numéro de pedigree complet."
 
-#: src/Model/Table/LittersTable.php:291
+#: src/Model/Table/LittersTable.php:294
 msgid ""
 "We could not find the father. Please, select it in the list or type its "
 "complete pedigree identifier."
@@ -2301,7 +2304,7 @@ msgstr ""
 "Impossible de trouver le père indiqué. Veuillez le sélectionner dans la "
 "liste ou entrez son numéro de pedigree complet."
 
-#: src/Model/Table/LittersTable.php:302 src/Model/Table/RatsTable.php:423
+#: src/Model/Table/LittersTable.php:305 src/Model/Table/RatsTable.php:424
 msgid ""
 "We could not find this rattery. Please, select it in the list or type an "
 "existing prefix."
@@ -2309,7 +2312,7 @@ msgstr ""
 "Impossible de trouver la raterie indiquée. Veuillez la sélectionner dans la "
 "liste ou d’entrer un affixe existant."
 
-#: src/Model/Table/LittersTable.php:313
+#: src/Model/Table/LittersTable.php:316
 msgid ""
 "This rattery has been definitely closed. Please, select an eligible rattery "
 "(either active, or the last active rattery of its owner)."
@@ -2318,7 +2321,7 @@ msgstr ""
 "éligible (soit une raterie active, soit la dernière raterie en date de son "
 "propriétaire)."
 
-#: src/Model/Table/LittersTable.php:324 src/Model/Table/RatsTable.php:433
+#: src/Model/Table/LittersTable.php:327 src/Model/Table/RatsTable.php:434
 msgid ""
 "Incomplete: mandatory information about origins are missing.\n"
 "                <ul><li>For a generic origin (any origin but registered "
@@ -2336,63 +2339,63 @@ msgstr ""
 "après avoir créé sa fiche si nécessaire. Si elle n’est pas connue, vous "
 "devez choisir une origine générique.</li></ul>"
 
-#: src/Model/Table/LittersTable.php:337 src/Model/Table/RatsTable.php:411
+#: src/Model/Table/LittersTable.php:340 src/Model/Table/RatsTable.php:412
 msgid "Impossible: this date is in the future."
 msgstr "Erreur : cette date n'est pas encore passée."
 
-#: src/Model/Table/LittersTable.php:348
+#: src/Model/Table/LittersTable.php:351
 msgid ""
 "Impossible: the date is too close from the birth of another litter with the "
 "same mother."
 msgstr "Erreur : la mère a une autre portée trop proche de cette date."
 
-#: src/Model/Table/LittersTable.php:359
+#: src/Model/Table/LittersTable.php:362
 msgid ""
 "Impossible: mating happens at least {0} days and at most {1} days before "
 "birth."
 msgstr "Erreur : les saillies ont lieu {0} à {1} jours avant la naissance."
 
-#: src/Model/Table/LittersTable.php:372
+#: src/Model/Table/LittersTable.php:375
 msgid "Impossible: mother had not been born at this date."
 msgstr "Erreur : la mère n’était pas née à cette date."
 
-#: src/Model/Table/LittersTable.php:382
+#: src/Model/Table/LittersTable.php:385
 msgid "Impossible: father had not been born at this date."
 msgstr "Erreur : le père n’était pas né à cette date."
 
-#: src/Model/Table/LittersTable.php:393
+#: src/Model/Table/LittersTable.php:396
 msgid "Impossible: mother was dead at this date."
 msgstr "Erreur : la mère était décédée à cette date."
 
-#: src/Model/Table/LittersTable.php:403
+#: src/Model/Table/LittersTable.php:406
 msgid "Impossible: father was dead too long before this date."
 msgstr "Erreur : le père est décédé trop longtemps avant cette date."
 
-#: src/Model/Table/LittersTable.php:413
+#: src/Model/Table/LittersTable.php:416
 msgid "Impossible: father and mother were never alive at the same time."
 msgstr "Erreur : le père et la mère n’ont jamais été vivants en même temps."
 
-#: src/Model/Table/LittersTable.php:424
+#: src/Model/Table/LittersTable.php:427
 msgid "Something went wrong when updating offspring birth dates."
 msgstr ""
 "Une erreur s’est produite lors de la mise à jour des dates de naissance des "
 "ratons de la portée."
 
-#: src/Model/Table/LittersTable.php:434
+#: src/Model/Table/LittersTable.php:437
 msgid "Something went wrong when updating offspring prefixes."
 msgstr ""
 "Une erreur s’est produite lors de la mise à jour des affixes des ratons de "
 "la portée."
 
-#: src/Model/Table/LittersTable.php:445
+#: src/Model/Table/LittersTable.php:448
 msgid "Impossible: lower than the number of recorded pups."
 msgstr "Erreur : c'est moins que le nombre de ratons déjà enregistrés."
 
-#: src/Model/Table/LittersTable.php:455
+#: src/Model/Table/LittersTable.php:458
 msgid "Impossible: larger than the total number of pups."
 msgstr "Erreur : c'est plus que le nombre total de ratons."
 
-#: src/Model/Table/LittersTable.php:465 src/Model/Table/LittersTable.php:475
+#: src/Model/Table/LittersTable.php:468 src/Model/Table/LittersTable.php:478
 msgid "Impossible: rats do not have such large litters."
 msgstr "Erreur : il n’y a pas autant de petits dans une portée de rats."
 
@@ -2400,11 +2403,11 @@ msgstr "Erreur : il n’y a pas autant de petits dans une portée de rats."
 msgid "Sex must be either M or F"
 msgstr "Merci de choisir entre M (mâle) ou F (femelle) pour le sexe"
 
-#: src/Model/Table/RatsTable.php:400
+#: src/Model/Table/RatsTable.php:401
 msgid "Forbidden: names such as “F1” or “M4” are not allowed."
 msgstr "Attention : les noms tels que « F1 » ou « M4 » ne sont pas autorisés."
 
-#: src/Model/Table/RatsTable.php:446
+#: src/Model/Table/RatsTable.php:447
 msgid ""
 "Please select a color. If you don’t know what to chose, read documentation, "
 "or chose “Unknown” and add a picture for help."
@@ -2412,27 +2415,27 @@ msgstr ""
 "Veuillez choisir une couleur. En cas de doute, veuillez consulter les "
 "notices, ou choisir « Inconnue » et ajouter une photo pour obtenir de l’aide."
 
-#: src/Model/Table/RatsTable.php:456
+#: src/Model/Table/RatsTable.php:457
 msgid "Please select a coat type."
 msgstr "Veuillez choisir un type de poil."
 
-#: src/Model/Table/RatsTable.php:466
+#: src/Model/Table/RatsTable.php:467
 msgid "Please select a dilution type."
 msgstr "Veuillez de choisir une dilution."
 
-#: src/Model/Table/RatsTable.php:476
+#: src/Model/Table/RatsTable.php:477
 msgid "Please select an earset."
 msgstr "Veuillez choisir un type d'oreille."
 
-#: src/Model/Table/RatsTable.php:486
+#: src/Model/Table/RatsTable.php:487
 msgid "Please select an eyecolor."
 msgstr "Veuillez choisir la couleur des yeux."
 
-#: src/Model/Table/RatsTable.php:496
+#: src/Model/Table/RatsTable.php:497
 msgid "Please select a marking type."
 msgstr "Veuillez choisir un marquage."
 
-#: src/Model/Table/RatsTable.php:507
+#: src/Model/Table/RatsTable.php:508
 msgid ""
 "This rat’s variety is rare or often misidentified. Please upload a good "
 "quality picture for verification."
@@ -2440,14 +2443,14 @@ msgstr ""
 "Le type de ce rat est rare ou souvent mal identifié. Merci de télécharger "
 "une photo de bonne qualité pour vérification."
 
-#: src/Model/Table/RatsTable.php:519
+#: src/Model/Table/RatsTable.php:520
 msgid ""
 "Death date is mandatory. If not known, please enter a best effort estimate."
 msgstr ""
 "La date du décès est obligatoire. Si celle-ci est inconnue, merci "
 "d’enregistrer une estimation au plus juste."
 
-#: src/Model/Table/RatsTable.php:529
+#: src/Model/Table/RatsTable.php:530
 msgid ""
 "Impossible: chosen death date is anterior to birth date. Please check and "
 "correct your entry."
@@ -2455,14 +2458,14 @@ msgstr ""
 "Erreur : la date de décès enregistrée est antérieure à la date de naissance. "
 "Merci de vérifier et corriger vos données."
 
-#: src/Model/Table/RatsTable.php:539
+#: src/Model/Table/RatsTable.php:540
 msgid ""
 "Impossible: this date is in the future. Please check and correct your entry."
 msgstr ""
 "Erreur : cette date n'est pas encore passée. Merci de vérifier et corriger "
 "vos données."
 
-#: src/Model/Table/RatsTable.php:548
+#: src/Model/Table/RatsTable.php:549
 msgid ""
 "Impossible: it means that your rat would have lived more than {age} months, "
 "but rats do not live this long."
@@ -2470,26 +2473,26 @@ msgstr ""
 "Impossible : cela voudrait dire que votre rat aurait vécu plus de {age} "
 "mois ; les rats ne vivent pas si vieux."
 
-#: src/Model/Table/RatsTable.php:558
+#: src/Model/Table/RatsTable.php:559
 msgid ""
 "Impossible: your rat was too old at this date to die of “infant mortality”."
 msgstr ""
 "Impossible : votre rat était déjà trop vieux pour mourir de « mortalité "
 "infantile »."
 
-#: src/Model/Table/RatsTable.php:568
+#: src/Model/Table/RatsTable.php:569
 msgid "Impossible: your rat was too young at this date to die “from old age”."
 msgstr "Impossible : votre rat était trop jeune pour mourir de vieillesse."
 
-#: src/Model/Table/RatsTable.php:580
+#: src/Model/Table/RatsTable.php:581
 msgid "The sex of rats with registered offspring cannot be changed."
 msgstr "Changement de sexe interdit chez les rats ayant reproduit."
 
-#: src/Model/Table/RatsTable.php:655
+#: src/Model/Table/RatsTable.php:656
 msgid "{0} declared the death of this rat."
 msgstr "Le décès de ce rat a été déclaré ou modifié par {0}."
 
-#: src/Model/Table/RatsTable.php:1145
+#: src/Model/Table/RatsTable.php:1146
 msgid ""
 "**This sheet was automatically updated to set the rat as dead, as it was too "
 "old to be still alive.**"
@@ -2754,7 +2757,7 @@ msgstr "Supprimer l’article"
 #: templates/element/rats.php:123 templates/element/ratteries.php:92
 #: templates/element/staff_litters.php:57 templates/element/staff_rats.php:55
 #: templates/element/staff_ratteries.php:55
-#: templates/element/variety/index.php:69
+#: templates/element/variety/index.php:91
 msgid "first"
 msgstr "début"
 
@@ -2778,7 +2781,7 @@ msgstr "début"
 #: templates/element/rats.php:124 templates/element/ratteries.php:93
 #: templates/element/staff_litters.php:58 templates/element/staff_rats.php:56
 #: templates/element/staff_ratteries.php:56
-#: templates/element/variety/index.php:70
+#: templates/element/variety/index.php:92
 msgid "previous"
 msgstr "précédente"
 
@@ -2802,7 +2805,7 @@ msgstr "précédente"
 #: templates/element/rats.php:126 templates/element/ratteries.php:95
 #: templates/element/staff_litters.php:60 templates/element/staff_rats.php:58
 #: templates/element/staff_ratteries.php:58
-#: templates/element/variety/index.php:72
+#: templates/element/variety/index.php:94
 msgid "next"
 msgstr "suivante"
 
@@ -2826,7 +2829,7 @@ msgstr "suivante"
 #: templates/element/rats.php:127 templates/element/ratteries.php:96
 #: templates/element/staff_litters.php:61 templates/element/staff_rats.php:59
 #: templates/element/staff_ratteries.php:59
-#: templates/element/variety/index.php:73
+#: templates/element/variety/index.php:95
 msgid "last"
 msgstr "fin"
 
@@ -2850,7 +2853,7 @@ msgstr "fin"
 #: templates/element/rats.php:129 templates/element/ratteries.php:98
 #: templates/element/staff_litters.php:63 templates/element/staff_rats.php:61
 #: templates/element/staff_ratteries.php:61
-#: templates/element/variety/index.php:75
+#: templates/element/variety/index.php:97
 msgid ""
 "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} "
 "total"
@@ -2951,14 +2954,17 @@ msgstr "Éditer la rubrique"
 #: templates/Categories/admin.php:77 templates/Categories/admin.php:121
 #: templates/Categories/index.php:43 templates/Compatibilities/edit.php:14
 #: templates/Compatibilities/index.php:31 templates/Compatibilities/view.php:12
-#: templates/Faqs/index.php:38 templates/LitterMessages/index.php:51
-#: templates/LitterMessages/view.php:12 templates/LitterSnapshots/edit.php:14
-#: templates/LitterSnapshots/index.php:31 templates/LitterSnapshots/view.php:12
-#: templates/Operators/index.php:38 templates/Operators/view.php:57
-#: templates/RatMessages/index.php:51 templates/RatMessages/view.php:12
-#: templates/RatSnapshots/edit.php:14 templates/RatSnapshots/index.php:31
-#: templates/RatSnapshots/view.php:12 templates/RatteryMessages/index.php:49
-#: templates/RatteryMessages/view.php:12 templates/RatterySnapshots/edit.php:14
+#: templates/DeathPrimaryCauses/index.php:45
+#: templates/DeathPrimaryCauses/view.php:85
+#: templates/DeathSecondaryCauses/index.php:41 templates/Faqs/index.php:38
+#: templates/LitterMessages/index.php:51 templates/LitterMessages/view.php:12
+#: templates/LitterSnapshots/edit.php:14 templates/LitterSnapshots/index.php:31
+#: templates/LitterSnapshots/view.php:12 templates/Operators/index.php:38
+#: templates/Operators/view.php:57 templates/RatMessages/index.php:51
+#: templates/RatMessages/view.php:12 templates/RatSnapshots/edit.php:14
+#: templates/RatSnapshots/index.php:31 templates/RatSnapshots/view.php:12
+#: templates/RatteryMessages/index.php:49 templates/RatteryMessages/view.php:12
+#: templates/RatterySnapshots/edit.php:14
 #: templates/RatterySnapshots/index.php:31
 #: templates/RatterySnapshots/view.php:12 templates/Roles/index.php:45
 #: templates/States/index.php:58 templates/Users/delete.php:65
@@ -3152,7 +3158,6 @@ msgstr "Toutes les règles de compatibilité"
 #: templates/Compatibilities/index.php:29
 #: templates/LitterSnapshots/index.php:29 templates/Operators/view.php:55
 #: templates/RatSnapshots/index.php:29 templates/RatterySnapshots/index.php:29
-#: vendor/cakephp/cakephp/src/View/Helper/PaginatorHelper.php:1260
 msgid "View"
 msgstr "Voir"
 
@@ -3188,7 +3193,7 @@ msgstr "Génotype 2"
 #: templates/Litters/edit.php:52 templates/Litters/view.php:351
 #: templates/Operators/view.php:44 templates/RatSnapshots/diff.php:254
 #: templates/RatSnapshots/diff.php:542 templates/Rats/add.php:398
-#: templates/Rats/declare_death.php:100 templates/Rats/edit.php:282
+#: templates/Rats/declare_death.php:98 templates/Rats/edit.php:282
 #: templates/Rats/view.php:388 templates/Ratteries/add.php:70
 #: templates/Ratteries/edit.php:71 templates/Ratteries/register.php:38
 msgid "Comments"
@@ -3347,9 +3352,7 @@ msgstr "Modifier le pays"
 msgid "Delete Country"
 msgstr "Supprimer le pays"
 
-#: templates/Countries/index.php:41 templates/DeathPrimaryCauses/index.php:45
-#: templates/DeathPrimaryCauses/view.php:85
-#: templates/DeathSecondaryCauses/index.php:41
+#: templates/Countries/index.php:41
 msgid "Are you sure you want to delete country # {0}?"
 msgstr "Êtes-vous sûr de vouloir supprimer le pays n°{0} ?"
 
@@ -3465,7 +3468,7 @@ msgstr "Cause réservée aux rats âgés ?"
 #: templates/Rats/add.php:219 templates/Rats/edit.php:97
 #: templates/Rats/print.php:19 templates/Rats/view.php:300
 #: templates/States/view.php:29 templates/element/variety/index.php:13
-#: templates/element/variety/view.php:65
+#: templates/element/variety/view.php:69
 msgid "Description"
 msgstr "Description"
 
@@ -3792,7 +3795,7 @@ msgstr "Voir le signalement"
 #: templates/Issues/edit.php:25 templates/Issues/solve.php:18
 #: templates/Issues/view.php:18 templates/LitterMessages/edit.php:21
 #: templates/RatMessages/edit.php:21 templates/RatteryMessages/edit.php:21
-#: templates/element/tech_sidebar.php:25
+#: templates/element/tech_sidebar.php:26
 msgid "List"
 msgstr "Liste"
 
@@ -4731,15 +4734,19 @@ msgstr ""
 "Cette fiche est en attente d’une correction. Voici le dernier message "
 "explicatif envoyé par l’équipe."
 
-#: templates/Litters/view.php:186 templates/Ratteries/view.php:180
+#: templates/Litters/view.php:186 templates/Rats/view.php:197
+#: templates/Ratteries/view.php:180
 msgid ""
-"Please take action to comply with staff requirements. You can <a href={0} "
-"class=\"flash\">edit the sheet</a> or <a href={1} class=\"flash\">answer and "
-"send it back to staff</a>."
+"Please take action to comply with staff requirements. You may use the most "
+"appropriate action from the action bar to modify the sheet. If you are not "
+"sure, you can <a href={0} class=\"flash\">edit the full sheet</a>, or <a "
+"href={1} class=\"flash\">answer and send the sheet back to staff</a>."
 msgstr ""
-"Veuillez <a href={0} class=\"flash\">éditer la fiche</a> pour répondre aux "
-"demandes de l’équipe, ou <a href={1} class=\"flash\">appuyez ici pour la "
-"renvoyer au service après-vente</a>."
+"Veuillez utiliser la barre d'action pour modifier la fiche et répondre aux "
+"demandes de l’équipe. En cas de doute sur l’action à mener, vous pouvez "
+"toujours <a href={0} class=\"flash\">utiliser le formulaire d’édition "
+"complète</a>, ou <a href={1} class=\"flash\">appuyer ici pour renvoyer la "
+"fiche au service après-vente</a>."
 
 #: templates/Litters/view.php:200 templates/Litters/view.php:222
 msgid "Dam: "
@@ -4836,7 +4843,7 @@ msgstr "(à {0})"
 #: templates/Users/view.php:305 templates/Users/view.php:309
 #: templates/element/my/statistics.php:29
 #: templates/element/my/statistics.php:32
-#: templates/element/my/statistics.php:36
+#: templates/element/my/statistics.php:36 templates/element/variety/view.php:58
 msgid ""
 "{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} "
 "=1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# "
@@ -5969,19 +5976,19 @@ msgid "Select the precise cause of death, if known"
 msgstr "Sélectionner la cause précise du décès (si connue)"
 
 #: templates/Rats/add.php:318 templates/Rats/add.php:378
-#: templates/Rats/declare_death.php:96 templates/Rats/edit.php:208
+#: templates/Rats/declare_death.php:94 templates/Rats/edit.php:208
 #: templates/Rats/edit.php:268
 msgid "The rat was euthanized"
 msgstr "Le rat a été euthanasié"
 
 #: templates/Rats/add.php:322 templates/Rats/add.php:382
-#: templates/Rats/declare_death.php:97 templates/Rats/edit.php:212
+#: templates/Rats/declare_death.php:95 templates/Rats/edit.php:212
 #: templates/Rats/edit.php:272
 msgid "The diagnosis was confirmed by a veterinary"
 msgstr "Le diagnostic a été confirmé par un vétérinaire"
 
 #: templates/Rats/add.php:326 templates/Rats/add.php:386
-#: templates/Rats/declare_death.php:98 templates/Rats/edit.php:216
+#: templates/Rats/declare_death.php:96 templates/Rats/edit.php:216
 #: templates/Rats/edit.php:276
 msgid "The diagnosis was confirmed by an autopsy or analyses"
 msgstr "Le diagnostic a été confirmé par une autopsie ou des analyses"
@@ -6039,16 +6046,16 @@ msgstr "Déclarer le décès de "
 msgid "Main information"
 msgstr "Informations principales sur le décès"
 
-#: templates/Rats/declare_death.php:94
+#: templates/Rats/declare_death.php:92
 msgid "Complementary information"
 msgstr "Informations complémentaires sur le décès"
 
-#: templates/Rats/declare_death.php:106 templates/Rats/edit.php:286
+#: templates/Rats/declare_death.php:104 templates/Rats/edit.php:286
 #: templates/Rats/transfer_ownership.php:71
 msgid "Amend sheet comments"
 msgstr "Compléter les commentaires de la fiche"
 
-#: templates/Rats/declare_death.php:113 templates/element/rats.php:102
+#: templates/Rats/declare_death.php:111 templates/element/rats.php:102
 #: templates/element/rats.php:109 templates/element/simple_rats.php:115
 #: templates/element/simple_rats.php:122
 msgid "Declare Death"
@@ -6390,19 +6397,6 @@ msgstr "Imprimer"
 #: templates/Rats/view.php:154
 msgid "Print pedigree"
 msgstr "Imprimer le pedigree"
-
-#: templates/Rats/view.php:197
-msgid ""
-"Please take action to comply with staff requirements. You may use the most "
-"appropriate action from the action bar to modify the sheet. If you are not "
-"sure, you can <a href={0} class=\"flash\">edit the full sheet</a>, or <a "
-"href={1} class=\"flash\">answer and send the sheet back to staff</a>."
-msgstr ""
-"Veuillez utiliser la barre d'action pour modifier la fiche et répondre aux "
-"demandes de l’équipe. En cas de doute sur l’action à mener, vous pouvez "
-"toujours <a href={0} class=\"flash\">utiliser le formulaire d’édition "
-"complète</a>, ou <a href={1} class=\"flash\">appuyer ici pour renvoyer la "
-"fiche au service après-vente</a>."
 
 #: templates/Rats/view.php:288
 msgid "See birth litter sheet"
@@ -8083,19 +8077,19 @@ msgstr "Vous ne pouvez pas supprimer cette fiche"
 msgid "Change state"
 msgstr "Modération"
 
-#: templates/element/tech_sidebar.php:36
+#: templates/element/tech_sidebar.php:66
+msgid "Search rats"
+msgstr "Chercher les rats de ce type"
+
+#: templates/element/tech_sidebar.php:76 templates/element/tech_sidebar.php:87
 msgid "Laborats"
 msgstr "Lab-o-rats"
 
-#: templates/element/tech_sidebar.php:40
+#: templates/element/tech_sidebar.php:80
 msgid "See matching Lab-o-rats entry"
 msgstr "Voir la page Lab-o-rats correspondante"
 
-#: templates/element/tech_sidebar.php:47
-msgid "Modify Rat"
-msgstr "Modifier le rat"
-
-#: templates/element/tech_sidebar.php:49
+#: templates/element/tech_sidebar.php:89
 msgid "No matching Lab-o-rats entry available"
 msgstr "Pas de correspondance trouvée sur le Lab-o-rats"
 
@@ -8123,7 +8117,7 @@ msgstr "Génotype"
 msgid "Photo?"
 msgstr "Photo?"
 
-#: templates/element/variety/index.php:57
+#: templates/element/variety/index.php:79
 msgid "Are you sure you want to delete #{0}?"
 msgstr "Êtes-vous sûr de vouloir supprimer #{0} ?"
 
@@ -8139,7 +8133,11 @@ msgstr "Fréquence (toutes années confondues)"
 msgid "Frequency (in the last 2 years)"
 msgstr "Fréquence (dans les deux dernières années)"
 
-#: templates/element/variety/view.php:70
+#: templates/element/variety/view.php:57
+msgid "Average lifespan (all causes included)"
+msgstr "Durée de vie moyenne (toutes causes)"
+
+#: templates/element/variety/view.php:74
 msgid "Random gallery"
 msgstr "Quelques photos"
 
@@ -8464,6 +8462,18 @@ msgstr "Code de l'application distribué sous licence GPL"
 #: templates/layout/default.php:176 templates/layout/fullpage.php:184
 msgid "Service is free of charge, hosted and maintained by SRFA"
 msgstr "Service gratuit hébergé et maintenu par l’association SRFA"
+
+#~ msgid ""
+#~ "Please take action to comply with staff requirements. You can <a href={0} "
+#~ "class=\"flash\">edit the sheet</a> or <a href={1} class=\"flash\">answer "
+#~ "and send it back to staff</a>."
+#~ msgstr ""
+#~ "Veuillez <a href={0} class=\"flash\">éditer la fiche</a> pour répondre "
+#~ "aux demandes de l’équipe, ou <a href={1} class=\"flash\">appuyez ici pour "
+#~ "la renvoyer au service après-vente</a>."
+
+#~ msgid "Modify Rat"
+#~ msgstr "Modifier le rat"
 
 #~ msgid "Add"
 #~ msgstr "Ajouter"

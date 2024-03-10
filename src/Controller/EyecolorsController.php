@@ -65,10 +65,14 @@ class EyecolorsController extends AppController
         $recent_count = $eyecolor->countMy('rats', 'eyecolor', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
         $recent_frequency = $eyecolor->frequencyOfMy('rats', 'eyecolor', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
 
+        $age['all'] = $count ? $eyecolor->roundLifespan(['eyecolor_id' => $eyecolor->id]) : __('N/A');
+        $age['female'] = $count ? $eyecolor->roundLifespan(['eyecolor_id' => $eyecolor->id, 'sex' => 'F']) : __('N/A');
+        $age['male'] = $count ? $eyecolor->roundLifespan(['eyecolor_id' => $eyecolor->id, 'sex' => 'M']) : __('N/A');
+
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Eyecolors);
 
-        $this->set(compact('eyecolor', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
+        $this->set(compact('eyecolor', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'age', 'user', 'show_staff'));
     }
 
     /**

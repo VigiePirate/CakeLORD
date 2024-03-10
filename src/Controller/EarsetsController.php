@@ -65,10 +65,14 @@ class EarsetsController extends AppController
         $recent_count = $earset->countMy('rats', 'earset', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
         $recent_frequency = $earset->frequencyOfMy('rats', 'earset', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
 
+        $age['all'] = $count ? $earset->roundLifespan(['earset_id' => $earset->id]) : __('N/A');
+        $age['female'] = $count ? $earset->roundLifespan(['earset_id' => $earset->id, 'sex' => 'F']) : __('N/A');
+        $age['male'] = $count ? $earset->roundLifespan(['earset_id' => $earset->id, 'sex' => 'M']) : __('N/A');
+
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Earsets);
 
-        $this->set(compact('earset', 'examples' ,'count' , 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
+        $this->set(compact('earset', 'examples' ,'count' , 'frequency', 'recent_count', 'recent_frequency', 'age', 'user', 'show_staff'));
     }
 
     /**

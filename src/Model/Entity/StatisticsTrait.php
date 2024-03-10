@@ -724,7 +724,7 @@ trait StatisticsTrait
         return $histogram->all()->combine('size', 'count');
     }
 
-    public function computeLifespan($options = []) {
+    public function computeLifespan($options = [], $having = null) {
         $model = FactoryLocator::get('Table')->get('Rats');
 
         $filter = [
@@ -748,6 +748,15 @@ trait StatisticsTrait
             ->contain(['DeathPrimaryCauses'])
             ->where($filter);
 
+        // for singularities (many to many associations, cannot be filtered through where(options))
+        if (! is_null($having) && isset($having['singularity'])) {
+            $value = $having['singularity']; // singularity->id
+            $lifespan
+                ->matching('Singularities', function ($q) use ($value) {
+                    return $q->where(['Singularities.id' => $value]);
+                });
+        }
+
         // exclude unreliable sheets everywhere but on user personal stats
         if (! isset($options['owner_user_id']) && ! isset($options['Rats.litter_id'])) {
             $lifespan->innerJoinWith('States', function ($q) {
@@ -757,10 +766,14 @@ trait StatisticsTrait
 
         $lifespan = $lifespan
             ->select([
+                'Rats__id' => 'Rats.id',
                 'Rats__state_id' => 'Rats.state_id',
                 'lifespan' => 'ROUND(AVG(DATEDIFF(death_date,birth_date)))'
             ])
-            ->where(['DATEDIFF(death_date,birth_date) <' => RatsTable::MAXIMAL_AGE]);
+            ->where([
+                'DATEDIFF(death_date,birth_date) >=' => 0, // legacy data with negative age
+                'DATEDIFF(death_date,birth_date) <' => RatsTable::MAXIMAL_AGE,
+            ]);
         return $lifespan;
     }
 
@@ -781,8 +794,8 @@ trait StatisticsTrait
         return $expectancy;
     }
 
-    public function roundLifespan($options = []) {
-        $lifespan = $this->computeLifespan($options)->first();
+    public function roundLifespan($options = [], $having = null) {
+        $lifespan = $this->computeLifespan($options, $having)->first();
         return $lifespan['lifespan'] == 0 ? __('N/A') : round($lifespan['lifespan']/30.5,1);
     }
 

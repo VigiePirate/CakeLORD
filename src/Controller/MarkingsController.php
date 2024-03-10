@@ -65,10 +65,14 @@ class MarkingsController extends AppController
         $recent_count = $marking->countMy('rats', 'marking', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
         $recent_frequency = $marking->frequencyOfMy('rats', 'marking', ['birth_date >=' => Chronos::today()->modify('-2 years')]);
 
+        $age['all'] = $count ? $marking->roundLifespan(['marking_id' => $marking->id]) : __('N/A');
+        $age['female'] = $count ? $marking->roundLifespan(['marking_id' => $marking->id, 'sex' => 'F']) : __('N/A');
+        $age['male'] = $count ? $marking->roundLifespan(['marking_id' => $marking->id, 'sex' => 'M']) : __('N/A');
+
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Markings);
 
-        $this->set(compact('marking', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'user', 'show_staff'));
+        $this->set(compact('marking', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'age', 'user', 'show_staff'));
     }
 
     /**
