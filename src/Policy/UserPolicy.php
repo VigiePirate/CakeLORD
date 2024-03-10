@@ -49,8 +49,8 @@ class UserPolicy implements BeforePolicyInterface
      */
     public function canAdd(IdentityInterface $user, User $resource)
     {
-        // User can't add new users
-        return false;
+        // Only admin can by-pass normal user registration
+        return $user->role->can_configure;
     }
 
     /**

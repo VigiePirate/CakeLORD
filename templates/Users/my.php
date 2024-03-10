@@ -115,6 +115,16 @@
                     . ' — '
                     . $this->Html->link(__('Change password'), ['action' => 'changePassword']) ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Preferred language') ?></th>
+                    <td>
+                        <?=
+                            is_null($locale)
+                            ? __('Not set') . ' — ' . $this->Html->link(__('Edit your profile to set a preferred language'), ['action' => 'edit', $user->id])
+                            : h($locale) . ' — ' . $this->Html->link(__('Edit your profile to change your preferred language'), ['action' => 'edit', $user->id])
+                        ?>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>

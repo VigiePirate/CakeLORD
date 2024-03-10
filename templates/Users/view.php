@@ -259,6 +259,10 @@
                             <td><?= h($user->failed_login_last_date) ?></td>
                         </tr>
                         <tr>
+                            <th><?= __('Preferred language') ?></th>
+                            <td><?= is_null($locale) ? __('Not set') : h($locale) ?></td>
+                        </tr>
+                        <tr>
                             <th><?= __('Wants Newsletter?') ?></th>
                             <td><?= $user->wants_newsletter ? __('Yes') : __('No'); ?></td>
                         </tr>

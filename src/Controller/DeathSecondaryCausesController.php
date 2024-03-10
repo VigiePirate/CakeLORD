@@ -155,12 +155,14 @@ class DeathSecondaryCausesController extends AppController
 
             // sort all items but last by alphabetical order
             // (last item is "Other" and must always be at the end)
-            $tail = end($items);
-            array_pop($items);
-            usort($items, function ($a, $b) {
-                return strcmp($a['value'], $b['value']);
-            });
-            array_push($items, $tail);
+            if (count($items) > 1) {
+                $tail = end($items);
+                array_pop($items);
+                usort($items, function ($a, $b) {
+                    return strcmp($a['value'], $b['value']);
+                });
+                array_push($items, $tail);
+            }
 
             $this->set('items', $items);
             $this->viewBuilder()->setOption('serialize', ['items']);

@@ -23,6 +23,7 @@ use App\Model\Entity\StatisticsTrait;
  * @property string|null $lastname
  * @property \Cake\I18n\FrozenDate|null $birth_date
  * @property string|null $sex
+ * @property string|null $locale
  * @property string|null $localization
  * @property string $avatar
  * @property string|null $about_me
@@ -62,6 +63,7 @@ class User extends Entity implements IdentityInterface
         'lastname' => true,
         'birth_date' => true,
         'sex' => true,
+        'locale' => true,
         'localization' => true,
         'avatar' => true,
         'about_me' => true,

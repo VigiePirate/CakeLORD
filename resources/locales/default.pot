@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2024-03-09 19:00+0000\n"
+"POT-Creation-Date: 2024-03-10 21:36+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -20,18 +20,18 @@ msgstr ""
 
 #: ./src/Controller/ArticlesController.php:90
 #: ./src/Controller/CategoriesController.php:81
-#: ./src/Controller/CoatsController.php:93
+#: ./src/Controller/CoatsController.php:97
 #: ./src/Controller/ColorsController.php:93
 #: ./src/Controller/CountriesController.php:87
 #: ./src/Controller/DeathPrimaryCausesController.php:101
 #: ./src/Controller/DeathSecondaryCausesController.php:83
-#: ./src/Controller/DilutionsController.php:90
-#: ./src/Controller/EarsetsController.php:90
-#: ./src/Controller/EyecolorsController.php:90
+#: ./src/Controller/DilutionsController.php:94
+#: ./src/Controller/EarsetsController.php:94
+#: ./src/Controller/EyecolorsController.php:94
 #: ./src/Controller/FaqsController.php:75
-#: ./src/Controller/MarkingsController.php:90
+#: ./src/Controller/MarkingsController.php:94
 #: ./src/Controller/RolesController.php:85
-#: ./src/Controller/SingularitiesController.php:92
+#: ./src/Controller/SingularitiesController.php:100
 #: ./src/Controller/StatesController.php:75
 msgid "Change your preferred language and edit the sheet to add a translation."
 msgstr ""
@@ -74,27 +74,9 @@ msgstr ""
 msgid "The category could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/CoatsController.php:93
-msgid "The new coat has been saved, but only in English. "
-msgstr ""
-
-#: ./src/Controller/CoatsController.php:97
-#: ./src/Controller/CoatsController.php:120
-msgid "The coat could not be saved. Please, try again."
-msgstr ""
-
-#: ./src/Controller/CoatsController.php:116
-msgid "The coat has been saved."
-msgstr ""
-
-#: ./src/Controller/CoatsController.php:139
-msgid "The coat has been deleted."
-msgstr ""
-
-#: ./src/Controller/CoatsController.php:141
-msgid "The coat could not be deleted. Please, try again."
-msgstr ""
-
+#: ./src/Controller/CoatsController.php:71
+#: ./src/Controller/CoatsController.php:72
+#: ./src/Controller/CoatsController.php:73
 #: ./src/Controller/ColorsController.php:67
 #: ./src/Controller/ColorsController.php:68
 #: ./src/Controller/ColorsController.php:69
@@ -102,13 +84,28 @@ msgstr ""
 #: ./src/Controller/DeathPrimaryCausesController.php:77
 #: ./src/Controller/DeathSecondaryCausesController.php:58
 #: ./src/Controller/DeathSecondaryCausesController.php:59
+#: ./src/Controller/DilutionsController.php:68
+#: ./src/Controller/DilutionsController.php:69
+#: ./src/Controller/DilutionsController.php:70
+#: ./src/Controller/EarsetsController.php:68
+#: ./src/Controller/EarsetsController.php:69
+#: ./src/Controller/EarsetsController.php:70
+#: ./src/Controller/EyecolorsController.php:68
+#: ./src/Controller/EyecolorsController.php:69
+#: ./src/Controller/EyecolorsController.php:70
 #: ./src/Controller/LittersController.php:856
 #: ./src/Controller/LittersController.php:857
+#: ./src/Controller/MarkingsController.php:68
+#: ./src/Controller/MarkingsController.php:69
+#: ./src/Controller/MarkingsController.php:70
+#: ./src/Controller/SingularitiesController.php:70
+#: ./src/Controller/SingularitiesController.php:71
+#: ./src/Controller/SingularitiesController.php:72
 #: ./src/Model/Entity/Rattery.php:216
 #: ./src/Model/Entity/Rattery.php:217
 #: ./src/Model/Entity/Rattery.php:276
 #: ./src/Model/Entity/StatisticsTrait.php:676
-#: ./src/Model/Entity/StatisticsTrait.php:786
+#: ./src/Model/Entity/StatisticsTrait.php:799
 #: ./templates/RatSnapshots/diff.php:205
 #: ./templates/RatSnapshots/diff.php:207
 #: ./templates/RatSnapshots/diff.php:214
@@ -129,6 +126,27 @@ msgstr ""
 #: ./templates/element/ratteries.php:65
 #: ./templates/element/ratteries.php:68
 msgid "N/A"
+msgstr ""
+
+#: ./src/Controller/CoatsController.php:97
+msgid "The new coat has been saved, but only in English. "
+msgstr ""
+
+#: ./src/Controller/CoatsController.php:101
+#: ./src/Controller/CoatsController.php:124
+msgid "The coat could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/CoatsController.php:120
+msgid "The coat has been saved."
+msgstr ""
+
+#: ./src/Controller/CoatsController.php:143
+msgid "The coat has been deleted."
+msgstr ""
+
+#: ./src/Controller/CoatsController.php:145
+msgid "The coat could not be deleted. Please, try again."
 msgstr ""
 
 #: ./src/Controller/ColorsController.php:93
@@ -259,66 +277,66 @@ msgstr ""
 msgid "The death cause could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/DilutionsController.php:90
+#: ./src/Controller/DilutionsController.php:94
 msgid "The new dilution has been saved, but only in English. "
 msgstr ""
 
-#: ./src/Controller/DilutionsController.php:94
-#: ./src/Controller/DilutionsController.php:118
+#: ./src/Controller/DilutionsController.php:98
+#: ./src/Controller/DilutionsController.php:122
 msgid "The dilution could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/DilutionsController.php:114
+#: ./src/Controller/DilutionsController.php:118
 msgid "The dilution has been saved."
 msgstr ""
 
-#: ./src/Controller/DilutionsController.php:137
+#: ./src/Controller/DilutionsController.php:141
 msgid "The dilution has been deleted."
 msgstr ""
 
-#: ./src/Controller/DilutionsController.php:139
+#: ./src/Controller/DilutionsController.php:143
 msgid "The dilution could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/EarsetsController.php:90
+#: ./src/Controller/EarsetsController.php:94
 msgid "The new earset has been saved, but only in English. "
 msgstr ""
 
-#: ./src/Controller/EarsetsController.php:94
-#: ./src/Controller/EarsetsController.php:118
+#: ./src/Controller/EarsetsController.php:98
+#: ./src/Controller/EarsetsController.php:122
 msgid "The earset could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/EarsetsController.php:114
+#: ./src/Controller/EarsetsController.php:118
 msgid "The earset has been saved."
 msgstr ""
 
-#: ./src/Controller/EarsetsController.php:137
+#: ./src/Controller/EarsetsController.php:141
 msgid "The earset has been deleted."
 msgstr ""
 
-#: ./src/Controller/EarsetsController.php:139
+#: ./src/Controller/EarsetsController.php:143
 msgid "The earset could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/EyecolorsController.php:90
+#: ./src/Controller/EyecolorsController.php:94
 msgid "The new eyecolor has been saved, but only in English. "
 msgstr ""
 
-#: ./src/Controller/EyecolorsController.php:94
-#: ./src/Controller/EyecolorsController.php:118
+#: ./src/Controller/EyecolorsController.php:98
+#: ./src/Controller/EyecolorsController.php:122
 msgid "The eyecolor could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/EyecolorsController.php:114
+#: ./src/Controller/EyecolorsController.php:118
 msgid "The eyecolor has been saved."
 msgstr ""
 
-#: ./src/Controller/EyecolorsController.php:137
+#: ./src/Controller/EyecolorsController.php:141
 msgid "The eyecolor has been deleted."
 msgstr ""
 
-#: ./src/Controller/EyecolorsController.php:139
+#: ./src/Controller/EyecolorsController.php:143
 msgid "The eyecolor could not be deleted. Please, try again."
 msgstr ""
 
@@ -595,10 +613,10 @@ msgstr ""
 #: ./src/Controller/LittersController.php:1138
 #: ./src/Controller/RatsController.php:1539
 #: ./src/Controller/RatteriesController.php:767
-#: ./src/Controller/UsersController.php:225
-#: ./src/Controller/UsersController.php:265
-#: ./src/Controller/UsersController.php:995
-#: ./src/Controller/UsersController.php:1042
+#: ./src/Controller/UsersController.php:232
+#: ./src/Controller/UsersController.php:272
+#: ./src/Controller/UsersController.php:1015
+#: ./src/Controller/UsersController.php:1062
 msgid "Something went wrong. Please, try again or contact an administrator."
 msgstr ""
 
@@ -928,24 +946,24 @@ msgctxt "sex ratio"
 msgid "Litters with"
 msgstr ""
 
-#: ./src/Controller/MarkingsController.php:90
+#: ./src/Controller/MarkingsController.php:94
 msgid "The new marking has been saved, but only in English. "
 msgstr ""
 
-#: ./src/Controller/MarkingsController.php:94
-#: ./src/Controller/MarkingsController.php:121
+#: ./src/Controller/MarkingsController.php:98
+#: ./src/Controller/MarkingsController.php:125
 msgid "The marking could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/MarkingsController.php:117
+#: ./src/Controller/MarkingsController.php:121
 msgid "The marking has been saved."
 msgstr ""
 
-#: ./src/Controller/MarkingsController.php:140
+#: ./src/Controller/MarkingsController.php:144
 msgid "The marking has been deleted."
 msgstr ""
 
-#: ./src/Controller/MarkingsController.php:142
+#: ./src/Controller/MarkingsController.php:146
 msgid "The marking could not be deleted. Please, try again."
 msgstr ""
 
@@ -1112,7 +1130,7 @@ msgstr ""
 
 #: ./src/Controller/RatsController.php:1337
 #: ./src/Controller/RatteriesController.php:487
-#: ./src/Controller/UsersController.php:657
+#: ./src/Controller/UsersController.php:677
 msgid "Pictures must be in jpeg, gif or png format and less than 8 MB."
 msgstr ""
 
@@ -1158,7 +1176,7 @@ msgstr ""
 
 #: ./src/Controller/RatsController.php:1337
 #: ./src/Controller/RatteriesController.php:487
-#: ./src/Controller/UsersController.php:657
+#: ./src/Controller/UsersController.php:677
 msgctxt "pictures"
 msgid "Large images will be automatically resized."
 msgstr ""
@@ -1327,24 +1345,24 @@ msgstr ""
 msgid "The role could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/SingularitiesController.php:92
+#: ./src/Controller/SingularitiesController.php:100
 msgid "The new singularity has been saved, but only in English. "
 msgstr ""
 
-#: ./src/Controller/SingularitiesController.php:96
-#: ./src/Controller/SingularitiesController.php:120
+#: ./src/Controller/SingularitiesController.php:104
+#: ./src/Controller/SingularitiesController.php:128
 msgid "The singularity could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/SingularitiesController.php:116
+#: ./src/Controller/SingularitiesController.php:124
 msgid "The singularity has been saved."
 msgstr ""
 
-#: ./src/Controller/SingularitiesController.php:140
+#: ./src/Controller/SingularitiesController.php:148
 msgid "The singularity has been deleted."
 msgstr ""
 
-#: ./src/Controller/SingularitiesController.php:142
+#: ./src/Controller/SingularitiesController.php:150
 msgid "The singularity could not be deleted. Please, try again."
 msgstr ""
 
@@ -1369,243 +1387,247 @@ msgstr ""
 msgid "The state could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:52
+#: ./src/Controller/UsersController.php:54
 msgid "Your account is locked, please activate it or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:57
+#: ./src/Controller/UsersController.php:59
 msgid "You have failed too many times to log in recently. Please wait 15 minutes before retry."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:82
+#: ./src/Controller/UsersController.php:89
 msgid "Your password has been rehashed."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:98
+#: ./src/Controller/UsersController.php:105
 msgid "{0, plural, =1{1 rat who was too old has just been automatically set as presumably dead.} other{# rats who were too old have just been automatically set as presumably dead.}}"
 msgstr ""
 
-#: ./src/Controller/UsersController.php:102
+#: ./src/Controller/UsersController.php:109
 msgid "{0, plural, =1{1 rattery who has had no litter for a long time has just been automatically set as inactive.} other{# ratteries which had no litter for a long time have just been automatically set as inactive.}}"
 msgstr ""
 
-#: ./src/Controller/UsersController.php:112
+#: ./src/Controller/UsersController.php:119
 msgid "{0, plural, =1{1 sheet neglected by users has just been escalated to back-office.} other{# sheets neglected by users have just been escalated to back-office.}}"
 msgstr ""
 
-#: ./src/Controller/UsersController.php:149
+#: ./src/Controller/UsersController.php:156
 msgid "You have <strong>{0, plural, =1 {one sheet} other{# sheets}}</strong> to correct. Please, check rats, litters and ratteries from your dashboard and take action soon."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:158
+#: ./src/Controller/UsersController.php:165
 msgid "Invalid username or password."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:194
+#: ./src/Controller/UsersController.php:201
 msgid "You already have an account, on which you are logged in."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:216
+#: ./src/Controller/UsersController.php:223
 msgid "Your account has been created, but must be activated before you can log in. Check your email for your activation link, including your spam folder if you can’t find it!"
 msgstr ""
 
-#: ./src/Controller/UsersController.php:220
-#: ./src/Controller/UsersController.php:990
-#: ./src/Controller/UsersController.php:1115
+#: ./src/Controller/UsersController.php:227
+#: ./src/Controller/UsersController.php:1010
+#: ./src/Controller/UsersController.php:1135
 msgid "Error sending email. Please, contact an administrator."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:228
+#: ./src/Controller/UsersController.php:235
 msgid "This was not the expected answer! Please, retry if you are not a Replicant."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:240
 #: ./src/Controller/UsersController.php:247
-#: ./src/Controller/UsersController.php:1012
+#: ./src/Controller/UsersController.php:254
+#: ./src/Controller/UsersController.php:1032
 msgid "Invalid activation link. Please check your email or try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:253
+#: ./src/Controller/UsersController.php:260
 msgid "Expired activation link. Your account has been deleted. Please, register again and check your email right away."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:262
+#: ./src/Controller/UsersController.php:269
 msgid "Your account has been activated. You can now log in and complete your profile. Welcome on LORD!"
 msgstr ""
 
-#: ./src/Controller/UsersController.php:586
-#: ./src/Controller/UsersController.php:612
+#: ./src/Controller/UsersController.php:595
+#: ./src/Controller/UsersController.php:631
 msgid "The user has been saved."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:590
-#: ./src/Controller/UsersController.php:615
+#: ./src/Controller/UsersController.php:599
+#: ./src/Controller/UsersController.php:634
 msgid "The user could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:643
+#: ./src/Controller/UsersController.php:606
+msgid "This is a second-line tool for cases where normal user registration is not possible. No email activation will be required. Use sparingly."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:663
 msgid "The user’s avatar has been deleted."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:646
+#: ./src/Controller/UsersController.php:666
 msgid "The user’s new avatar could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:651
+#: ./src/Controller/UsersController.php:671
 msgid "The user’s new avatar has been saved."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:654
+#: ./src/Controller/UsersController.php:674
 msgid "The user’s new picture could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:676
+#: ./src/Controller/UsersController.php:696
 msgid "Your new comment about yourself has been saved."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:679
+#: ./src/Controller/UsersController.php:699
 msgid "Your new comment about yourself could not be saved. Please, try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:695
+#: ./src/Controller/UsersController.php:715
 msgid "Your newsletter preferences have been updated."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:697
+#: ./src/Controller/UsersController.php:717
 msgid "We could not update your newsletter preferences. Please try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:734
+#: ./src/Controller/UsersController.php:754
 msgid "The user has been deleted."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:737
+#: ./src/Controller/UsersController.php:757
 msgid "The user could not be deleted. Too many strings attached."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:760
+#: ./src/Controller/UsersController.php:780
 msgid "The user’s associated entries could not be transferred to the new user. Please, try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:770
+#: ./src/Controller/UsersController.php:790
 msgid "The user has been deleted. All associated entries were transferred to the user below."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:774
+#: ./src/Controller/UsersController.php:794
 msgid "The user could not be deleted. Please, try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:779
+#: ./src/Controller/UsersController.php:799
 msgid "The user’s heir could not be found. Please, try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:786
+#: ./src/Controller/UsersController.php:806
 msgid "This user is related to existing database entries. You MUST specify below an existing user to inherit these entries."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:788
+#: ./src/Controller/UsersController.php:808
 msgid "This user is not related to any existing database entries and can be safely deleted. Beware, this operation is irreversible!"
 msgstr ""
 
-#: ./src/Controller/UsersController.php:811
-#: ./src/Controller/UsersController.php:858
+#: ./src/Controller/UsersController.php:831
+#: ./src/Controller/UsersController.php:878
 msgid "You are logged in, you can change your password directly from here."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:824
+#: ./src/Controller/UsersController.php:844
 msgid "Your account is locked. Please activate it or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:840
+#: ./src/Controller/UsersController.php:860
 msgid "Check your email for your reset password link."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:842
+#: ./src/Controller/UsersController.php:862
 msgid "Error sending email. Please, retry or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:863
-#: ./src/Controller/UsersController.php:872
+#: ./src/Controller/UsersController.php:883
+#: ./src/Controller/UsersController.php:892
 msgid "Invalid passkey. Please check your email or try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:877
+#: ./src/Controller/UsersController.php:897
 msgid "Your account is locked. Please contact an administrator."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:882
+#: ./src/Controller/UsersController.php:902
 msgid "Expired passkey. Please generate a new one, check your email and try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:892
-#: ./src/Controller/UsersController.php:926
+#: ./src/Controller/UsersController.php:912
+#: ./src/Controller/UsersController.php:946
 msgid "Passwords are different. Please retry."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:898
-#: ./src/Controller/UsersController.php:932
+#: ./src/Controller/UsersController.php:918
+#: ./src/Controller/UsersController.php:952
 msgid "Your password has been updated."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:921
-#: ./src/Controller/UsersController.php:966
+#: ./src/Controller/UsersController.php:941
+#: ./src/Controller/UsersController.php:986
 msgid "We could not confirm your identity (incorrect old password). Please retry."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:935
+#: ./src/Controller/UsersController.php:955
 msgid "Your password could not be updated. Please, retry or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:943
-#: ./src/Controller/UsersController.php:1003
+#: ./src/Controller/UsersController.php:963
+#: ./src/Controller/UsersController.php:1023
 msgid "You must be logged in to use this feature."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:972
+#: ./src/Controller/UsersController.php:992
 msgid "Emails are different. Please, check your entry and retry."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:987
+#: ./src/Controller/UsersController.php:1007
 msgid "Your email has been modified. Your accound must now be reactivated. Please, check your new email for your confirmation link."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:1021
+#: ./src/Controller/UsersController.php:1041
 msgid "Invalid confirmation link. Please, check your email inbox or contact an administrator."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:1027
+#: ./src/Controller/UsersController.php:1047
 msgid "Expired confirmation link. Please, contact an administrator to unlock your account."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:1039
+#: ./src/Controller/UsersController.php:1059
 msgid "Your email change has been confirmed. You can now log in with your new credentials."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:1063
+#: ./src/Controller/UsersController.php:1083
 msgid "This user was already locked."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:1067
+#: ./src/Controller/UsersController.php:1087
 msgid "This user is now locked."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:1069
+#: ./src/Controller/UsersController.php:1089
 msgid "This user could not be locked. Please try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:1089
+#: ./src/Controller/UsersController.php:1109
 msgid "This user was already unlocked."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:1095
+#: ./src/Controller/UsersController.php:1115
 msgid "This user is now unlocked."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:1097
+#: ./src/Controller/UsersController.php:1117
 msgid "This user could not be unlocked. Please try again."
 msgstr ""
 
-#: ./src/Controller/UsersController.php:1112
+#: ./src/Controller/UsersController.php:1132
 msgid "The email was sent to the user."
 msgstr ""
 
@@ -1975,61 +1997,61 @@ msgstr ""
 msgid "Only males"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:227
+#: ./src/Model/Entity/User.php:229
 msgid "Happy birthday to you!"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:231
+#: ./src/Model/Entity/User.php:233
 msgid "Recent member? Need for a guided tour? Read our <b><a href=\"{0}\"> ▶ LORD STARTER KIT ◀</a></b>"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:263
+#: ./src/Model/Entity/User.php:265
 msgid "Happy birthday to "
 msgstr ""
 
-#: ./src/Model/Entity/User.php:282
+#: ./src/Model/Entity/User.php:284
 msgid "You don’t have any rat. Time for adoption?"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:295
+#: ./src/Model/Entity/User.php:297
 msgid "No rat birthday coming soon"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:295
+#: ./src/Model/Entity/User.php:297
 msgid "Rat birthdays coming soon: "
 msgstr ""
 
-#: ./src/Model/Entity/User.php:205
+#: ./src/Model/Entity/User.php:207
 msgctxt "élision"
 msgid "{0}’s dashboard"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:209
+#: ./src/Model/Entity/User.php:211
 msgctxt "contraction (du)"
 msgid "{0}’s dashboard"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:213
+#: ./src/Model/Entity/User.php:215
 msgctxt "contraction (des)"
 msgid "{0}’s dashboard"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:216
+#: ./src/Model/Entity/User.php:218
 msgctxt "pas de flexion"
 msgid "{0}’s dashboard"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:307
+#: ./src/Model/Entity/User.php:309
 msgctxt "grammar"
 msgid "Feminine"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:311
+#: ./src/Model/Entity/User.php:313
 msgctxt "grammar"
 msgid "Masculine"
 msgstr ""
 
-#: ./src/Model/Entity/User.php:315
+#: ./src/Model/Entity/User.php:317
 msgctxt "grammar"
 msgid "Custom"
 msgstr ""
@@ -2194,16 +2216,16 @@ msgstr ""
 msgid "**This sheet was automatically updated to set the rattery as inactive, as it hasn’t bred any litter for several years.**"
 msgstr ""
 
-#: ./src/Model/Table/UsersTable.php:220
+#: ./src/Model/Table/UsersTable.php:225
 msgid "This email is already in use. If you have lost your password, please use the password recovery tool."
 msgstr ""
 
-#: ./src/Model/Table/UsersTable.php:229
+#: ./src/Model/Table/UsersTable.php:234
 msgid "This email is already in use."
 msgstr ""
 
-#: ./src/Model/Table/UsersTable.php:238
-#: ./src/Model/Table/UsersTable.php:247
+#: ./src/Model/Table/UsersTable.php:243
+#: ./src/Model/Table/UsersTable.php:252
 msgid "This username is already in use. Please choose another one."
 msgstr ""
 
@@ -2283,9 +2305,9 @@ msgstr ""
 #: ./templates/Roles/edit.php:42
 #: ./templates/States/add.php:43
 #: ./templates/States/edit.php:44
-#: ./templates/Users/add.php:39
+#: ./templates/Users/add.php:73
 #: ./templates/Users/change_email.php:32
-#: ./templates/Users/edit.php:106
+#: ./templates/Users/edit.php:114
 #: ./templates/Users/lost_password.php:13
 #: ./templates/element/variety/add.php:32
 #: ./templates/element/variety/edit.php:35
@@ -2483,7 +2505,7 @@ msgstr ""
 #: ./templates/element/staff_litters.php:11
 #: ./templates/element/staff_rats.php:10
 #: ./templates/element/staff_ratteries.php:10
-#: ./templates/element/variety/index.php:15
+#: ./templates/element/variety/index.php:17
 msgid "Actions"
 msgstr ""
 
@@ -2528,7 +2550,7 @@ msgstr ""
 #: ./templates/element/staff_litters.php:57
 #: ./templates/element/staff_rats.php:55
 #: ./templates/element/staff_ratteries.php:55
-#: ./templates/element/variety/index.php:91
+#: ./templates/element/variety/index.php:93
 msgid "first"
 msgstr ""
 
@@ -2567,7 +2589,7 @@ msgstr ""
 #: ./templates/element/staff_litters.php:58
 #: ./templates/element/staff_rats.php:56
 #: ./templates/element/staff_ratteries.php:56
-#: ./templates/element/variety/index.php:92
+#: ./templates/element/variety/index.php:94
 msgid "previous"
 msgstr ""
 
@@ -2606,7 +2628,7 @@ msgstr ""
 #: ./templates/element/staff_litters.php:60
 #: ./templates/element/staff_rats.php:58
 #: ./templates/element/staff_ratteries.php:58
-#: ./templates/element/variety/index.php:94
+#: ./templates/element/variety/index.php:96
 msgid "next"
 msgstr ""
 
@@ -2645,7 +2667,7 @@ msgstr ""
 #: ./templates/element/staff_litters.php:61
 #: ./templates/element/staff_rats.php:59
 #: ./templates/element/staff_ratteries.php:59
-#: ./templates/element/variety/index.php:95
+#: ./templates/element/variety/index.php:97
 msgid "last"
 msgstr ""
 
@@ -2684,7 +2706,7 @@ msgstr ""
 #: ./templates/element/staff_litters.php:63
 #: ./templates/element/staff_rats.php:61
 #: ./templates/element/staff_ratteries.php:61
-#: ./templates/element/variety/index.php:97
+#: ./templates/element/variety/index.php:99
 msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
 msgstr ""
 
@@ -2793,7 +2815,7 @@ msgstr ""
 #: ./templates/element/simple_ratteries.php:20
 #: ./templates/element/simple_staff_ratteries.php:7
 #: ./templates/element/staff_ratteries.php:6
-#: ./templates/element/variety/index.php:11
+#: ./templates/element/variety/index.php:13
 #: ./templates/element/variety/view.php:37
 msgid "Name"
 msgstr ""
@@ -2923,7 +2945,7 @@ msgstr ""
 #: ./templates/Faqs/all.php:9
 #: ./templates/Lord/my.php:93
 #: ./templates/layout/default.php:127
-#: ./templates/layout/fullpage.php:135
+#: ./templates/layout/fullpage.php:136
 msgid "Guides"
 msgstr ""
 
@@ -2935,7 +2957,7 @@ msgstr ""
 
 #: ./templates/Categories/view.php:47
 #: ./templates/layout/default.php:129
-#: ./templates/layout/fullpage.php:137
+#: ./templates/layout/fullpage.php:138
 msgid "Full guides"
 msgstr ""
 
@@ -3070,6 +3092,7 @@ msgstr ""
 #: ./templates/Operators/view.php:55
 #: ./templates/RatSnapshots/index.php:29
 #: ./templates/RatterySnapshots/index.php:29
+#: ./vendor/cakephp/cakephp/src/View/Helper/PaginatorHelper.php:1260
 msgid "View"
 msgstr ""
 
@@ -3449,7 +3472,7 @@ msgstr ""
 #: ./templates/Rats/print.php:19
 #: ./templates/Rats/view.php:300
 #: ./templates/States/view.php:29
-#: ./templates/element/variety/index.php:13
+#: ./templates/element/variety/index.php:15
 #: ./templates/element/variety/view.php:69
 msgid "Description"
 msgstr ""
@@ -3488,7 +3511,7 @@ msgstr ""
 #: ./templates/Ratteries/view.php:319
 #: ./templates/Users/view.php:275
 #: ./templates/layout/default.php:143
-#: ./templates/layout/fullpage.php:151
+#: ./templates/layout/fullpage.php:152
 msgid "Statistics"
 msgstr ""
 
@@ -3975,7 +3998,7 @@ msgstr ""
 #: ./templates/Lord/webstats.php:14
 #: ./templates/Ratteries/view.php:309
 #: ./templates/layout/default.php:135
-#: ./templates/layout/fullpage.php:143
+#: ./templates/layout/fullpage.php:144
 msgid "About"
 msgstr ""
 
@@ -4081,6 +4104,7 @@ msgstr ""
 #: ./templates/LitterMessages/view.php:26
 #: ./templates/RatMessages/view.php:26
 #: ./templates/RatteryMessages/view.php:26
+#: ./templates/Users/add.php:20
 #: ./templates/Users/edit.php:29
 msgid "User"
 msgstr ""
@@ -5108,7 +5132,7 @@ msgstr ""
 #: ./templates/Lord/acknowledge.php:9
 #: ./templates/Lord/contact.php:7
 #: ./templates/layout/default.php:149
-#: ./templates/layout/fullpage.php:157
+#: ./templates/layout/fullpage.php:158
 msgid "Contact"
 msgstr ""
 
@@ -5732,7 +5756,7 @@ msgstr ""
 
 #: ./templates/Lord/webstats.php:17
 #: ./templates/layout/default.php:145
-#: ./templates/layout/fullpage.php:153
+#: ./templates/layout/fullpage.php:154
 msgid "Site statistics"
 msgstr ""
 
@@ -6696,6 +6720,7 @@ msgstr ""
 #: ./templates/Ratteries/edit.php:64
 #: ./templates/Ratteries/register.php:31
 #: ./templates/Ratteries/relocate.php:56
+#: ./templates/Users/add.php:45
 #: ./templates/Users/edit.php:52
 msgid "Localization (region, district, city...)"
 msgstr ""
@@ -7561,12 +7586,32 @@ msgstr ""
 msgid "{0, plural, =0{No litter sheet is} =1{<strong>1 litter sheet</strong> is} other{<strong># litter sheets</strong> are}} currently in this state."
 msgstr ""
 
-#: ./templates/Users/add.php:11
-msgid "List Users"
+#: ./templates/Users/add.php:23
+msgid "Add User"
 msgstr ""
 
-#: ./templates/Users/add.php:18
-msgid "Add User"
+#: ./templates/Users/add.php:31
+#: ./templates/Users/register.php:21
+msgid "Password"
+msgstr ""
+
+#: ./templates/Users/add.php:50
+msgid "Public comments"
+msgstr ""
+
+#: ./templates/Users/add.php:59
+#: ./templates/Users/edit.php:108
+msgid "Staff comments"
+msgstr ""
+
+#: ./templates/Users/add.php:65
+msgid "Accepts to receive casual newsletters and other information by email"
+msgstr ""
+
+#: ./templates/Users/add.php:70
+#: ./templates/Users/change_picture.php:39
+#: ./templates/Users/edit.php:53
+msgid "Avatar"
 msgstr ""
 
 #: ./templates/Users/change_email.php:6
@@ -7642,11 +7687,6 @@ msgstr ""
 msgid "Back to user sheet"
 msgstr ""
 
-#: ./templates/Users/change_picture.php:39
-#: ./templates/Users/edit.php:53
-msgid "Avatar"
-msgstr ""
-
 #: ./templates/Users/delete.php:29
 #: ./templates/Users/index.php:61
 #: ./templates/Users/index.php:68
@@ -7685,16 +7725,17 @@ msgstr ""
 msgid "Change password"
 msgstr ""
 
-#: ./templates/Users/edit.php:88
+#: ./templates/Users/edit.php:90
+#: ./templates/Users/my.php:119
+msgid "Preferred language"
+msgstr ""
+
+#: ./templates/Users/edit.php:96
 msgid "I accept to receive casual newsletters and other information by email"
 msgstr ""
 
-#: ./templates/Users/edit.php:93
+#: ./templates/Users/edit.php:101
 msgid "Staff-only information"
-msgstr ""
-
-#: ./templates/Users/edit.php:100
-msgid "Staff comments"
 msgstr ""
 
 #: ./templates/Users/edit_comment.php:29
@@ -7841,6 +7882,18 @@ msgstr ""
 msgid "Credentials"
 msgstr ""
 
+#: ./templates/Users/my.php:123
+msgid "Not set"
+msgstr ""
+
+#: ./templates/Users/my.php:123
+msgid "Edit your profile to set a preferred language"
+msgstr ""
+
+#: ./templates/Users/my.php:124
+msgid "Edit your profile to change your preferred language"
+msgstr ""
+
 #: ./templates/Users/named.php:13
 #: ./templates/Users/usernamed.php:13
 msgid "Users with username like "
@@ -7859,10 +7912,6 @@ msgstr ""
 msgid "In order to create your account, please fill in this form"
 msgstr ""
 
-#: ./templates/Users/register.php:21
-msgid "Password"
-msgstr ""
-
 #: ./templates/Users/register.php:23
 msgid "What is the meaning of the letter \"R\" in the LORD acronym?"
 msgstr ""
@@ -7873,13 +7922,13 @@ msgstr ""
 
 #: ./templates/Users/register.php:33
 #: ./templates/layout/default.php:140
-#: ./templates/layout/fullpage.php:148
+#: ./templates/layout/fullpage.php:149
 msgid "Legal Notice"
 msgstr ""
 
 #: ./templates/Users/register.php:34
 #: ./templates/layout/default.php:130
-#: ./templates/layout/fullpage.php:138
+#: ./templates/layout/fullpage.php:139
 msgid "Code of conduct"
 msgstr ""
 
@@ -8359,21 +8408,17 @@ msgstr ""
 msgid "Mandatory picture?"
 msgstr ""
 
-#: ./templates/element/variety/index.php:12
+#: ./templates/element/variety/index.php:14
 #: ./templates/element/variety/view.php:41
 msgid "Genotype"
 msgstr ""
 
-#: ./templates/element/variety/index.php:14
+#: ./templates/element/variety/index.php:16
 msgid "Photo?"
 msgstr ""
 
-#: ./templates/element/variety/index.php:79
+#: ./templates/element/variety/index.php:81
 msgid "Are you sure you want to delete #{0}?"
-msgstr ""
-
-#: ./templates/element/variety/view.php:31
-msgid "$Variety"
 msgstr ""
 
 #: ./templates/element/variety/view.php:49
@@ -8448,97 +8493,97 @@ msgid "Log in"
 msgstr ""
 
 #: ./templates/layout/default.php:128
-#: ./templates/layout/fullpage.php:136
+#: ./templates/layout/fullpage.php:137
 msgid "F.A.Q."
 msgstr ""
 
 #: ./templates/layout/default.php:131
-#: ./templates/layout/fullpage.php:139
+#: ./templates/layout/fullpage.php:140
 msgid "Contributing"
 msgstr ""
 
 #: ./templates/layout/default.php:132
-#: ./templates/layout/fullpage.php:140
+#: ./templates/layout/fullpage.php:141
 msgid "I want a LORD"
 msgstr ""
 
 #: ./templates/layout/default.php:136
-#: ./templates/layout/fullpage.php:144
+#: ./templates/layout/fullpage.php:145
 msgid "History"
 msgstr ""
 
 #: ./templates/layout/default.php:137
-#: ./templates/layout/fullpage.php:145
+#: ./templates/layout/fullpage.php:146
 msgid "What’s New?"
 msgstr ""
 
 #: ./templates/layout/default.php:138
-#: ./templates/layout/fullpage.php:146
+#: ./templates/layout/fullpage.php:147
 msgid "Staff"
 msgstr ""
 
 #: ./templates/layout/default.php:139
-#: ./templates/layout/fullpage.php:147
+#: ./templates/layout/fullpage.php:148
 msgid "Credits"
 msgstr ""
 
 #: ./templates/layout/default.php:146
-#: ./templates/layout/fullpage.php:154
+#: ./templates/layout/fullpage.php:155
 msgid "Rat statistics"
 msgstr ""
 
 #: ./templates/layout/default.php:148
-#: ./templates/layout/fullpage.php:156
+#: ./templates/layout/fullpage.php:157
 msgid "Rattery map"
 msgstr ""
 
 #: ./templates/layout/default.php:159
-#: ./templates/layout/fullpage.php:167
+#: ./templates/layout/fullpage.php:168
 msgid "Links"
 msgstr ""
 
 #: ./templates/layout/default.php:160
-#: ./templates/layout/fullpage.php:168
+#: ./templates/layout/fullpage.php:169
 msgid "Websites"
 msgstr ""
 
 #: ./templates/layout/default.php:161
-#: ./templates/layout/fullpage.php:169
+#: ./templates/layout/fullpage.php:170
 msgid "Forums"
 msgstr ""
 
 #: ./templates/layout/default.php:162
-#: ./templates/layout/fullpage.php:170
+#: ./templates/layout/fullpage.php:171
 msgid "Associations"
 msgstr ""
 
 #: ./templates/layout/default.php:163
-#: ./templates/layout/fullpage.php:171
+#: ./templates/layout/fullpage.php:172
 msgid "Social"
 msgstr ""
 
 #: ./templates/layout/default.php:164
-#: ./templates/layout/fullpage.php:172
+#: ./templates/layout/fullpage.php:173
 msgid "Partners"
 msgstr ""
 
 #: ./templates/layout/default.php:173
-#: ./templates/layout/fullpage.php:181
+#: ./templates/layout/fullpage.php:182
 msgid "All rights reserved"
 msgstr ""
 
 #: ./templates/layout/default.php:174
-#: ./templates/layout/fullpage.php:182
+#: ./templates/layout/fullpage.php:183
 msgid "Texts and images are not free of right"
 msgstr ""
 
 #: ./templates/layout/default.php:175
-#: ./templates/layout/fullpage.php:183
+#: ./templates/layout/fullpage.php:184
 msgid "Source code is open and distributed under GPL license"
 msgstr ""
 
 #: ./templates/layout/default.php:176
-#: ./templates/layout/fullpage.php:184
+#: ./templates/layout/fullpage.php:185
 msgid "Service is free of charge, hosted and maintained by SRFA"
 msgstr ""
 
