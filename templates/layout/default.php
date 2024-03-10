@@ -105,12 +105,12 @@ $cakeDescription = 'LORD';
             ?>
             <div class="flag">
                 <?= $this->Html->image('/img/icon-i18n.svg', ["class" => "language-icon"]) ?>
-                <!-- <a><?= $this->getSessionLocaleIso639() ?></a> -->
                 <div class="dropdown">
                     <button class="dropbtn"><?= $this->getSessionLocaleIso639() ?></button>
                     <div class="dropdown-content">
-                        <?= $this->Html->link('Français', ['controller' => 'Lord', 'action' => 'switchLanguage', 'fr_FR']) ?>
-                        <?= $this->Html->link('English', ['controller' => 'Lord', 'action' => 'switchLanguage', 'en_US']) ?>
+                        <?php foreach (Cake\Core\Configure::read('App.supportedLocales') as $locale => $lang) : ?>
+                            <?= $this->Html->link($lang, ['controller' => 'Lord', 'action' => 'switchLanguage', $locale]) ?>
+                        <?php endforeach ; ?>
                     </div>
                 </div>
             </div>

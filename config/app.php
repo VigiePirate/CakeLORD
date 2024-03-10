@@ -52,7 +52,7 @@ return [
         'encoding' => env('APP_ENCODING', 'UTF-8'),
         'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
         'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'UTC'),
-        'supportedLocales' => env('APP_SUPPORTED_LOCALES', ['en_US', 'fr_FR']),
+        'supportedLocales' => ['en_US' => 'English'],
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
