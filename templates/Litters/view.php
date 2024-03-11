@@ -206,15 +206,15 @@
                             <p><?= h($litter->dam[0]->variety) ?><p>
                             <table class="caption" align="center">
                                 <tr>
-                                    <th><?= __('Age at litter birth:') ?></th>
+                                    <th><?= __('Age at litter birth') ?></th>
                                     <td><?= h($litter->dam_age_in_months) ?></td>
                                 </tr>
                                 <tr>
-                                    <th><?= $litter->dam[0]->is_alive ? __('Current age:') : __('Age at death:') ?></th>
+                                    <th><?= $litter->dam[0]->is_alive ? __('Current age') : __('Age at death') ?></th>
                                     <td><?= h($litter->dam[0]->age_string) ?></td>
                                 </tr>
                                 <tr>
-                                    <th><?= __('Death cause:') ?></th>
+                                    <th><?= __('Death cause') ?></th>
                                     <td><?= h($litter->dam[0]->short_death_cause) ?></td>
                                 </tr>
                             </table>
@@ -224,15 +224,15 @@
                             <p><?= __('Unknown') ?><p>
                             <table class="caption" align="center">
                                 <tr>
-                                    <th><?= __('Age at litter birth:') ?></th>
+                                    <th><?= __('Age at litter birth') ?></th>
                                     <td><?= __x('age', 'Unknown') ?></td>
                                 </tr>
                                 <tr>
-                                    <th><?= __('Reached age:') ?></th>
+                                    <th><?= __('Reached age') ?></th>
                                     <td><?= __x('age', 'Unknown') ?></td>
                                 </tr>
                                 <tr>
-                                    <th><?= __('Death cause:') ?></th>
+                                    <th><?= __('Death cause') ?></th>
                                     <td><?= __x('death cause', 'Unknown') ?></td>
                                 </tr>
                             </table>
@@ -249,15 +249,15 @@
                             <p><?= h($litter->sire[0]->variety) ?><p>
                             <table class="caption" align="center">
                                 <tr>
-                                    <th><?= __('Age at litter birth:') ?></th>
+                                    <th><?= __('Age at litter birth') ?></th>
                                     <td><?= h($litter->sire_age_in_months) ?></td>
                                 </tr>
                                 <tr>
-                                    <th><?= $litter->sire[0]->is_alive ? __('Current age:') : __('Age at death:') ?></th>
+                                    <th><?= $litter->sire[0]->is_alive ? __('Current age') : __('Age at death') ?></th>
                                     <td><?= h($litter->sire[0]->age_string) ?></td>
                                 </tr>
                                 <tr>
-                                    <th><?= __('Death cause:') ?></th>
+                                    <th><?= __('Death cause') ?></th>
                                     <td><?= h($litter->sire[0]->short_death_cause) ?></td>
                                 </tr>
                             </table>
@@ -267,15 +267,15 @@
                             <p><?= __('Unknown') ?><p>
                             <table class="caption" align="center">
                                 <tr>
-                                    <th><?= __('Age at litter birth:') ?></th>
+                                    <th><?= __('Age at litter birth') ?></th>
                                     <td><?= __x('age', 'Unknown') ?></td>
                                 </tr>
                                 <tr>
-                                    <th><?= __('Reached age:') ?></th>
+                                    <th><?= __('Reached age') ?></th>
                                     <td><?= __x('age', 'Unknown') ?></td>
                                 </tr>
                                 <tr>
-                                    <th><?= __('Death cause:') ?></th>
+                                    <th><?= __('Death cause') ?></th>
                                     <td><?= __x('death cause', 'Unknown') ?></td>
                                 </tr>
                             </table>
@@ -384,7 +384,7 @@
 
                         <table class="condensed unfold">
                             <tr>
-                                <th><?= __('Current survival rate:') ?></th>
+                                <th><?= __('Current survival rate') ?></th>
                                 <td>
                                     <?= __('{0, number} %', [$stats['survivors']]) ?>
                                 <span class="comment">
@@ -398,15 +398,15 @@
                         </table>
                         <table class="condensed unfold">
                             <tr>
-                                <th><?= __('Average lifespan:') ?></th>
+                                <th><?= __('Average lifespan') ?></th>
                                 <td><?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['lifespan'], $stats['female_lifespan'], $stats['male_lifespan']]) ?></td>
                             </tr>
                             <tr>
-                                <th> ⨽ <?= __('infant mortality excluded:') ?></th>
+                                <th> ⨽ <?= __('infant mortality excluded') ?></th>
                                 <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['not_infant_lifespan'], $stats['female_not_infant_lifespan'], $stats['male_not_infant_lifespan']]) ?></td>
                             </tr>
                             <tr>
-                                <th> ⨽ <?= __('accidents excluded:') ?></th>
+                                <th> ⨽ <?= __('accidents excluded') ?></th>
                                 <td> ⨽ <?= __('{0, plural, =0{N/A} =1{1 month} other{# months}} (♀: {1, plural, =0{N/A} =1{1 month} other{# months}} – ♂: {2, plural, =0{N/A} =1{1 month} other{# months}})', [$stats['not_accident_lifespan'], $stats['female_not_accident_lifespan'], $stats['male_not_accident_lifespan']]) ?></td>
                             </tr>
                         </table>

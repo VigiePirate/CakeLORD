@@ -21,7 +21,7 @@
     <?=  __('You can access your notification history from the buttons opposite.') ?>
     <br/>
     <?php if ($count['message_sub_total'] > 0) : ?>
-        <?= __('{0, plural, =1 {<strong>One notification</strong> calls for action and is highlighted below} other{<strong># notification</strong> call for action and are highlighted below}}</strong>. Please pay particular attention to {0, plural, =1{it} other{them}}.', [$count['message_sub_total']]) ?>
+        <?= __('{0, plural, =1 {<strong>One notification</strong> calls for action and is highlighted below} other{<strong># notifications</strong> call for action and are highlighted below}}</strong>. Please pay particular attention to {0, plural, =1{it} other{them}}.', [$count['message_sub_total']]) ?>
     <?php endif ; ?>
 </p>
 <br/>
