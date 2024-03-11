@@ -71,8 +71,8 @@ class UsersController extends AppController
             $user = $this->Users->get($this->Authentication->getIdentityData('id'), ['contain' => 'Roles']);
 
             // update session locale if preferred language was set
-            if (! is_null($user->locale)) {
-                $this->request->getSession()->write('Config.locale', $locale);
+            if (! is_null($user->locale) && ! empty($user->locale)) {
+                $this->request->getSession()->write('Config.locale', $user->locale);
             }
 
             // update last login fields
