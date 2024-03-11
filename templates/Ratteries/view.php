@@ -193,19 +193,19 @@
                     <h3><?= __('Breeding statistics') ?></h3>
                     <table class="condensed stats unfold">
                         <tr>
-                            <th><?= __('Litters recorded under this prefix:') ?></th>
+                            <th><?= __('Litters recorded under this prefix') ?></th>
                             <td><?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['inLitterCount']]) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Rat recorded under this prefix:') ?></th>
+                            <th><?= __('Rat recorded under this prefix') ?></th>
                             <td><?= __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}}', [$stats['ratCount']]) ?>
                         </tr>
                         <tr>
-                            <th> ⨽ <?= __('females:') ?></th>
+                            <th> ⨽ <?= __('females') ?></th>
                             <td> ⨽ <?= __('{0, plural, =0 {No female} =1{1 female} other{# females}} ({1, number} %)', [$stats['femaleCount'], $stats['femaleProportion']]) ?></td>
                         </tr>
                         <tr>
-                            <th> ⨽ <?= __('males:') ?></th>
+                            <th> ⨽ <?= __('males') ?></th>
                             <td> ⨽ <?= __('{0, plural, =0 {No male} =1{1 male} other{# males}} ({1, number} %)', [$stats['maleCount'], $stats['maleProportion']]) ?></td>
                         </tr>
                     </table>
@@ -219,30 +219,30 @@
                         <?php else : ?>
                             <table class="condensed stats unfold">
                                 <tr>
-                                    <th><?= __('Rats recorded as deceased:') ?></th>
+                                    <th><?= __('Rats recorded as deceased') ?></th>
                                     <td><?=  __('{0, plural, =0{No rat} =1{1 rat} other{# rats}} ({1, number} % of recorded rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
                                 </tr>
                                 <tr>
-                                    <th> ⨽ <?= __('declared with known date:') ?></th>
+                                    <th> ⨽ <?= __('declared with known date') ?></th>
                                     <td> ⨽ <?= __('{0, plural, =0{No rat} =1{1 rat} other{# rats}} ({1, number} %)', [$stats['deadRatCount'], $stats['followedRatProportion']]) ?></td>
                                 </tr>
                                 <tr>
-                                    <th> ⨽ <?= __('presumed dead:') ?></th>
+                                    <th> ⨽ <?= __('presumed dead') ?></th>
                                     <td> ⨽ <?= __('{0, plural, =0{No rat} =1{1 rat} other{# rats}} ({1, number} %)', [$stats['lostRatCount'], $stats['lostRatProportion']]) ?></td>
                                 </tr>
                             </table>
                             <?php if ($stats['deadRatCount'] > 9) : ?>
                                 <table class="condensed stats unfold">
                                     <tr>
-                                        <th><?= __('Average lifespan of rats with this prefix:') ?></th>
+                                        <th><?= __('Average lifespan of rats with this prefix') ?></th>
                                         <td><?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAge'], $stats['deadFemaleAge'], $stats['deadMaleAge']]) ?></td>
                                     </tr>
                                     <tr>
-                                        <th> ⨽ <?= __('infant mortality excluded:') ?></th>
+                                        <th> ⨽ <?= __('infant mortality excluded') ?></th>
                                         <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeAdult'], $stats['deadRatAgeAdult'], $stats['deadRatAgeAdult']]) ?></td>
                                     </tr>
                                     <tr>
-                                        <th> ⨽ <?= __('accidents excluded:') ?></th>
+                                        <th> ⨽ <?= __('accidents excluded') ?></th>
                                         <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeHealthy'], $stats['deadRatAgeHealthy'], $stats['deadRatAgeHealthy']]) ?></td>
                                     </tr>
                                 </table>
@@ -324,23 +324,23 @@
                             <summary><?= __('Breeding statistics') ?></summary>
                             <table class="condensed stats unfold">
                                 <tr>
-                                    <th><?= __('Breeding activity period:') ?></th>
+                                    <th><?= __('Breeding activity period') ?></th>
                                     <td><?= h($stats['activityYears']) ?></td>
                                 </tr>
                             </table>
                             <table class="condensed stats unfold">
                                 <tr>
-                                    <th><?= __('Declared litters:') ?></th>
+                                    <th><?= __('Declared litters') ?></th>
                                     <td><?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['inLitterCount']+$stats['outLitterCount']]) ?>,
                                         <?= __('{0, plural, =0{no pup} =1{1 pup} other{# pups}}', [$stats['inRatCount']+$stats['outRatCount']]) ?>
                                 </tr>
                                 <tr>
-                                    <th> ⨽ <?= __('internal (born in the rattery):') ?></th>
+                                    <th> ⨽ <?= __('internal (born in the rattery)') ?></th>
                                     <td> ⨽ <?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['inLitterCount']]) ?>,
                                             <?= __('{0, plural, =0{no pup} =1{1 pup} other{# pups}}', [$stats['inRatCount']]) ?></td>
                                 </tr>
                                 <tr>
-                                    <th> ⨽ <?= __('external (other contributed litters):') ?></th>
+                                    <th> ⨽ <?= __('external (other contributed litters)') ?></th>
                                     <td> ⨽ <?= __('{0, plural, =0{0 litter} =1{1 litter} other{# litters}}', [$stats['outLitterCount']]) ?>,
                                             <?= __('{0, plural, =0{no pup} =1{1 pup} other{# pups}}', [$stats['outRatCount']]) ?><!--, with xx different partner ratteries--></td>
                                 </tr>
@@ -348,15 +348,15 @@
 
                             <table class="condensed stats unfold">
                                 <tr>
-                                    <th><?= __('All rat records :') ?></th>
+                                    <th><?= __('All rat records') ?></th>
                                     <td><?= __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}}', [$stats['ratCount']]) ?>
                                 </tr>
                                 <tr>
-                                    <th> ⨽ <?= __('females:') ?></th>
+                                    <th> ⨽ <?= __('females') ?></th>
                                     <td> ⨽ <?= __('{0, plural, =0 {No female} =1{1 female} other{# females}} ({1, number} %)', [$stats['femaleCount'], $stats['femaleProportion']]) ?> </td>
                                 </tr>
                                 <tr>
-                                    <th> ⨽ <?= __('males:') ?></th>
+                                    <th> ⨽ <?= __('males') ?></th>
                                     <td> ⨽ <?= __('{0, plural, =0 {No male} =1{1 male} other{# males}} ({1, number} %)', [$stats['maleCount'], $stats['maleProportion']]) ?> </td>
                                 </tr>
                             </table>
@@ -369,7 +369,7 @@
 
                                 <table class="condensed stats unfold">
                                     <tr>
-                                        <th><?= __('Average mother age:') ?></th>
+                                        <th><?= __('Average mother age') ?></th>
                                         <td><?= ($stats['avg_mother_age'] >= 1) ?
                                             __('{0, number} days ({1, number} months)', [round($stats['avg_mother_age']), round($stats['avg_mother_age']/30.5,1)])
                                             : __('N/A')
@@ -377,7 +377,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th><?= __('Average father age:') ?></th>
+                                        <th><?= __('Average father age') ?></th>
                                         <td><?= ($stats['avg_father_age'] >= 1) ?
                                             __('{0, number} days ({1, number} months)', [round($stats['avg_father_age']), round($stats['avg_father_age']/30.5,1)]) :
                                             __('N/A')
@@ -385,7 +385,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th><?= __('Average litter size:') ?></th>
+                                        <th><?= __('Average litter size') ?></th>
                                         <td><?= ($stats['avg_litter_size'] >= 1) ?
                                              __('{0, plural, =0{No pup} =1{1 pup} other{# pups}} per litter', [$stats['avg_litter_size']]) :
                                             __('N/A')
@@ -393,7 +393,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th><?= __('Average sex ratio:') ?></th>
+                                        <th><?= __('Average sex ratio') ?></th>
                                         <td><?= h($stats['avg_sex_ratio']) ?></td>
                                     </tr>
                                 </table>
@@ -410,35 +410,35 @@
                                         <summary><?= __('Lifespan statistics') ?></summary>
                                         <table class="condensed stats unfold">
                                             <tr>
-                                                <th><?= __('Bred rats recorded as deceased:') ?></th>
+                                                <th><?= __('Bred rats recorded as deceased') ?></th>
                                                 <td><?=  __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}} ({1, number} % of recorded bred rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
                                             </tr>
                                             <tr>
-                                                <th> ⨽ <?= __('declared with known date:') ?></th>
+                                                <th> ⨽ <?= __('declared with known date') ?></th>
                                                 <td> ⨽ <?= __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}} ({1, number} %)', [$stats['deadRatCount'], $stats['followedRatProportion']]) ?></td>
                                             </tr>
                                             <tr>
-                                                <th> ⨽ <?= __('presumed dead:') ?></th>
+                                                <th> ⨽ <?= __('presumed dead') ?></th>
                                                 <td> ⨽ <?= __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}} ({1, number} %)', [$stats['lostRatCount'], $stats['lostRatProportion']]) ?></td>
                                             </tr>
                                         </table>
                                         <table class="condensed stats unfold">
                                             <tr>
-                                                <th><?= __('Average lifespan of bred rats:') ?></th>
+                                                <th><?= __('Average lifespan of bred rats') ?></th>
                                                 <td><?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAge'], $stats['deadFemaleAge'], $stats['deadMaleAge']]) ?></td>
                                             </tr>
                                             <tr>
-                                                <th> ⨽ <?= __('infant mortality excluded:') ?></th>
+                                                <th> ⨽ <?= __('infant mortality excluded') ?></th>
                                                 <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeAdult'], $stats['deadRatAgeAdult'], $stats['deadRatAgeAdult']]) ?></td>
                                             </tr>
                                             <tr>
-                                                <th> ⨽ <?= __('accidents excluded:') ?></th>
+                                                <th> ⨽ <?= __('accidents excluded') ?></th>
                                                 <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeHealthy'], $stats['deadRatAgeHealthy'], $stats['deadRatAgeHealthy']]) ?></td>
                                             </tr>
                                         </table>
                                         <table class="condensed stats unfold">
                                             <tr>
-                                                <th><?= __('Oldest bred rat:') ?></th>
+                                                <th><?= __('Oldest bred rat') ?></th>
                                                 <td><?= ! is_null($champion)
                                                     ? $this->Html->link(h($champion->usual_name), ['controller' => 'Rats', 'action' => 'view', $champion->id]) . __(' (deceased at {0})', [$champion->champion_age_string])
                                                     : __('No eligible champion')
@@ -451,7 +451,7 @@
                                         <summary><?= __('Death causes statistics') ?></summary>
                                         <table class="condensed stats">
                                             <tr>
-                                                <th><?= __('Primary death causes by decreasing frequency:') ?></th>
+                                                <th><?= __('Primary death causes by decreasing frequency') ?></th>
                                             </tr>
                                         </table>
                                         <table class="condensed stats histogram">
@@ -469,7 +469,7 @@
                                         </table>
                                         <table class="condensed stats">
                                             <tr>
-                                                <th><?= __('Secondary death causes by decreasing frequency:') ?></th>
+                                                <th><?= __('Secondary death causes by decreasing frequency') ?></th>
                                             </tr>
                                         </table>
                                         <table class="condensed stats histogram">
@@ -492,15 +492,15 @@
                                         <summary><?= __('Lifespan statistics') ?></summary>
                                         <table class="condensed stats unfold">
                                             <tr>
-                                                <th><?= __('Bred rats recorded as deceased:') ?></th>
+                                                <th><?= __('Bred rats recorded as deceased') ?></th>
                                                 <td><?=  __('{0, plural, =0 {No rat} =1{1 rat} other{# rats}} ({1, number} % of recorded bred rats)', [$stats['presumedDeadRatCount'], $stats['deadRatProportion']]) ?></td>
                                             </tr>
                                             <tr>
-                                                <th> ⨽ <?= __('declared with known date:') ?></th>
+                                                <th> ⨽ <?= __('declared with known date') ?></th>
                                                 <td> ⨽ <?= __('{0, number} rats ({1, number} %)', [$stats['deadRatCount'], $stats['followedRatProportion']]) ?></td>
                                             </tr>
                                             <tr>
-                                                <th> ⨽ <?= __('presumed dead:') ?></th>
+                                                <th> ⨽ <?= __('presumed dead') ?></th>
                                                 <td> ⨽ <?= __('{0, number} rats ({1, number} %)', [$stats['lostRatCount'], $stats['lostRatProportion']]) ?></td>
                                             </tr>
                                         </table>
