@@ -22,6 +22,7 @@ use App\Model\Table\RatsTable;
  * @property string|null $birth_year
  * @property bool $is_alive
  * @property bool $is_generic
+ * @property bool $is_dam_required
  * @property string|null $district
  * @property string|null $zip_code
  * @property int $country_id
@@ -62,6 +63,7 @@ class Rattery extends Entity
         'birth_year' => true,
         'is_alive' => true,
         'is_generic' => true,
+        'is_dam_required' => true,
         'district' => true,
         'zip_code' => true,
         'country_id' => true,
@@ -338,15 +340,6 @@ class Rattery extends Entity
                 }
             }
         }
-
-        // // recast dates from string to dates
-        // if (in_array('birth_date', array_keys($snap_diffs)) && $snap_rat->has('birth_date')) {
-        //     $snap_rat->set('birth_date', FrozenTime::createFromFormat('Y-m-d', $snap_rat->birth_date));
-        // }
-        //
-        // if (in_array('death_date', array_keys($snap_diffs)) && $snap_rat->has('death_date')) {
-        //     $snap_rat->set('death_date', FrozenTime::createFromFormat('Y-m-d', $snap_rat->death_date));
-        // }
 
         return $snap_rattery;
     }

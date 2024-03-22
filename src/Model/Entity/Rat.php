@@ -660,6 +660,7 @@ class Rat extends Entity
         }
 
         return ($this->rattery->is_generic && (! empty($this->comments) || ! empty($this->litter_id)))
+            || (! $this->rattery->is_dam_required && ! empty($this->comments))
             || (! $this->rattery->is_generic && ! empty($this->litter_id));
     }
 

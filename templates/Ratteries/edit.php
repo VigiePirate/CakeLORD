@@ -76,9 +76,16 @@
                     ]);
 
                     echo $this->Form->control('wants_statistic', ['label' => __('Check this box if you want to see and publish your statistics')]);
-                    echo $this->Form->control('wants_statistic', ['label' => __('Check this box if the rattery is active, uncheck it to declare it inactive')]);
-                    echo $this->Form->control('is_generic', ['label' => __('Check this box to declare the rattery as generic')]);
+                    echo $this->Form->control('is_alive', ['label' => __('Check this box if the rattery is active, uncheck it to declare it inactive')]);
 
+                ?>
+
+                <?php if ($show_staff) {
+                    echo $this->Form->control('is_generic', ['label' => __('Check this box to declare the rattery as generic')]);
+                    echo $this->Form->control('is_dam_required', ['label' => __('Check this box if rats with this prefix must have a declared mother')]);
+                } ?>
+
+                <?php
                     echo $this->Form->control('picture_file', [
                         'type' => 'file',
                         'label' => __('Logotype')

@@ -339,6 +339,7 @@ class Litter extends Entity
         }
 
         return ($this->contributions[0]->rattery->is_generic && ! empty($this->comments))
+            || (! $this->contributions[0]->rattery->is_dam_required && ! empty($this->comments))
             || (! $this->contributions[0]->rattery->is_generic && ! empty($this->parent_rats));
     }
 

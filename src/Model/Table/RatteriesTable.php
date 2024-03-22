@@ -171,6 +171,10 @@ class RatteriesTable extends Table
             ->notEmptyString('is_generic');
 
         $validator
+            ->boolean('is_dam_required')
+            ->notEmptyString('is_dam_required');
+
+        $validator
             ->scalar('district')
             ->maxLength('district', 70)
             ->allowEmptyString('district');
