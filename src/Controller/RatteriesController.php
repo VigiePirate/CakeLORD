@@ -231,7 +231,7 @@ class RatteriesController extends AppController
         $litters = $this->Ratteries->Litters->find('list', ['limit' => 500, 'contain' => ['Dam', 'Sire']]);
 
         $user = $this->request->getAttribute('identity');
-        $show_staff = !is_null($user) && $user->can('staffEdit', $rattery);
+        $show_staff = ! is_null($user) && $user->can('staffEdit', $rattery);
         $this->set(compact('rattery', 'users', 'countries', 'states', 'litters', 'user', 'show_staff'));
     }
 
