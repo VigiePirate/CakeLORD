@@ -440,7 +440,7 @@
                                             <tr>
                                                 <th><?= __('Oldest bred rat') ?></th>
                                                 <td><?= ! is_null($champion)
-                                                    ? $this->Html->link(h($champion->usual_name), ['controller' => 'Rats', 'action' => 'view', $champion->id]) . __(' (deceased at {0})', [$champion->champion_age_string])
+                                                    ? $this->Html->link(h($champion->full_name), ['controller' => 'Rats', 'action' => 'view', $champion->id]) . __(' (deceased at {0})', [$champion->champion_age_string])
                                                     : __('No eligible champion')
                                                 ?></td>
                                             </tr>

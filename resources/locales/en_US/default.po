@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-03-11 19:59+0000\n"
-"PO-Revision-Date: 2024-03-11 21:05+0100\n"
+"POT-Creation-Date: 2024-03-23 19:40+0000\n"
+"PO-Revision-Date: 2024-03-23 20:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -100,8 +100,8 @@ msgstr "The category could not be deleted. Please, try again."
 #: src/Controller/SingularitiesController.php:70
 #: src/Controller/SingularitiesController.php:71
 #: src/Controller/SingularitiesController.php:72
-#: src/Model/Entity/Rattery.php:216 src/Model/Entity/Rattery.php:217
-#: src/Model/Entity/Rattery.php:276 src/Model/Entity/StatisticsTrait.php:676
+#: src/Model/Entity/Rattery.php:218 src/Model/Entity/Rattery.php:219
+#: src/Model/Entity/Rattery.php:280 src/Model/Entity/StatisticsTrait.php:676
 #: src/Model/Entity/StatisticsTrait.php:799 templates/RatSnapshots/diff.php:205
 #: templates/RatSnapshots/diff.php:207 templates/RatSnapshots/diff.php:214
 #: templates/RatSnapshots/diff.php:216 templates/RatSnapshots/diff.php:222
@@ -395,17 +395,17 @@ msgstr ""
 "correct. Please check below and take action soon."
 
 #: src/Controller/LittersController.php:172
-#: src/Controller/LordController.php:278
+#: src/Controller/LordController.php:279
 msgid "Survival rate"
 msgstr "Survival rate"
 
 #: src/Controller/LittersController.php:173
-#: src/Controller/LordController.php:248
+#: src/Controller/LordController.php:249
 msgid "Age (in months)"
 msgstr "Age (in months)"
 
 #: src/Controller/LittersController.php:174
-#: src/Controller/LordController.php:279
+#: src/Controller/LordController.php:280
 msgid "Survival rate (%)"
 msgstr "Survival rate (%)"
 
@@ -721,7 +721,7 @@ msgstr ""
 "We could not unapprove the sheet. Please retry or contact an administrator."
 
 #: src/Controller/LittersController.php:177
-#: src/Controller/LordController.php:253
+#: src/Controller/LordController.php:254
 msgctxt "litter statistics"
 msgid "Age: between "
 msgstr "Age: between "
@@ -731,7 +731,7 @@ msgctxt "litter statistics"
 msgid " and "
 msgstr " and "
 
-#: src/Controller/LordController.php:254
+#: src/Controller/LordController.php:255
 msgid " and "
 msgstr " and "
 
@@ -740,7 +740,7 @@ msgctxt "litter statistics"
 msgid " months"
 msgstr " months"
 
-#: src/Controller/LordController.php:256
+#: src/Controller/LordController.php:257
 msgid " months"
 msgstr " months"
 
@@ -777,17 +777,17 @@ msgstr "The log has been deleted."
 msgid "The log could not be deleted. Please, try again."
 msgstr "The log could not be deleted. Please, try again."
 
-#: src/Controller/LordController.php:91 src/Controller/LordController.php:318
-#: templates/Lord/my.php:26 templates/Lord/search.php:42
-#: templates/Lord/webstats.php:50 templates/Rats/add.php:31
-#: templates/Rats/dispute.php:28 templates/Rats/edit.php:28
-#: templates/Rats/search.php:19 templates/Ratteries/delete.php:122
-#: templates/Ratteries/dispute.php:28 templates/element/my/messages.php:47
-#: templates/element/my/messages.php:235
+#: src/Controller/LordController.php:92 src/Controller/LordController.php:319
+#: templates/Lord/hall_of_fame.php:91 templates/Lord/my.php:26
+#: templates/Lord/search.php:42 templates/Lord/webstats.php:50
+#: templates/Rats/add.php:31 templates/Rats/dispute.php:28
+#: templates/Rats/edit.php:28 templates/Rats/search.php:19
+#: templates/Ratteries/delete.php:122 templates/Ratteries/dispute.php:28
+#: templates/element/my/messages.php:47 templates/element/my/messages.php:235
 msgid "Rats"
 msgstr "Rats"
 
-#: src/Controller/LordController.php:92 src/Controller/LordController.php:322
+#: src/Controller/LordController.php:93 src/Controller/LordController.php:323
 #: templates/LitterSnapshots/diff.php:98 templates/LitterSnapshots/diff.php:252
 #: templates/Litters/view.php:320 templates/Lord/my.php:39
 #: templates/Lord/search.php:66 templates/Lord/webstats.php:34
@@ -797,59 +797,60 @@ msgstr "Rats"
 msgid "Ratteries"
 msgstr "Ratteries"
 
-#: src/Controller/LordController.php:93 templates/Litters/add.php:30
+#: src/Controller/LordController.php:94 templates/Litters/add.php:30
 #: templates/Litters/attach_rat.php:8 templates/Litters/attach_rat.php:30
 #: templates/Litters/dispute.php:28 templates/Litters/edit.php:24
 #: templates/Litters/simulate.php:21 templates/Litters/virtual.php:39
-#: templates/Lord/hall_of_fame.php:24 templates/Lord/my.php:33
+#: templates/Lord/hall_of_fame.php:118 templates/Lord/my.php:33
 #: templates/Lord/webstats.php:42 templates/Ratteries/delete.php:120
 #: templates/element/my/messages.php:169 templates/element/my/messages.php:369
 msgid "Litters"
 msgstr "Litters"
 
-#: src/Controller/LordController.php:246
+#: src/Controller/LordController.php:247
 msgid "Females"
 msgstr "Females"
 
-#: src/Controller/LordController.php:247
+#: src/Controller/LordController.php:248
 msgid "Males"
 msgstr "Males"
 
-#: src/Controller/LordController.php:249
+#: src/Controller/LordController.php:250
 msgid "Number of alive rats"
 msgstr "Number of alive rats"
 
-#: src/Controller/LordController.php:250 templates/RatSnapshots/diff.php:195
-#: templates/RatSnapshots/diff.php:198 templates/RatSnapshots/diff.php:476
-#: templates/Rats/view.php:352 templates/element/simple_rats.php:42
+#: src/Controller/LordController.php:251 templates/Lord/hall_of_fame.php:33
+#: templates/RatSnapshots/diff.php:195 templates/RatSnapshots/diff.php:198
+#: templates/RatSnapshots/diff.php:476 templates/Rats/view.php:352
+#: templates/element/simple_rats.php:42
 msgid "Age"
 msgstr "Age"
 
-#: src/Controller/LordController.php:251
+#: src/Controller/LordController.php:252
 msgid "Age pyramid"
 msgstr "Age pyramid"
 
-#: src/Controller/LordController.php:252
+#: src/Controller/LordController.php:253
 msgid "(presumed) alive rats"
 msgstr "(presumed) alive rats"
 
-#: src/Controller/LordController.php:255
+#: src/Controller/LordController.php:256
 msgid "months"
 msgstr "months"
 
-#: src/Controller/LordController.php:257
+#: src/Controller/LordController.php:258
 msgid "All-time average"
 msgstr "All-time average"
 
-#: src/Controller/LordController.php:258
+#: src/Controller/LordController.php:259
 msgid "All-time average:"
 msgstr "All-time average:"
 
-#: src/Controller/LordController.php:259
+#: src/Controller/LordController.php:260
 msgid "Average lifespan by birth year"
 msgstr "Average lifespan by birth year"
 
-#: src/Controller/LordController.php:260
+#: src/Controller/LordController.php:261
 msgid "Birth year"
 msgstr "Birth year"
 
@@ -858,104 +859,112 @@ msgctxt "rattery"
 msgid "Birth year"
 msgstr "Birth year"
 
-#: src/Controller/LordController.php:261
+#: src/Controller/LordController.php:262
 msgid "Average lifespan (in days)"
 msgstr "Average lifespan (in days)"
 
-#: src/Controller/LordController.php:262
+#: src/Controller/LordController.php:263
 msgid "Average lifespan:"
 msgstr "Average lifespan:"
 
-#: src/Controller/LordController.php:263
+#: src/Controller/LordController.php:264
 msgid "Life expectancy"
 msgstr "Life expectancy"
 
-#: src/Controller/LordController.php:264
+#: src/Controller/LordController.php:265
 msgid "days"
 msgstr "days"
 
-#: src/Controller/LordController.php:265
+#: src/Controller/LordController.php:266
 msgid "Rats born in"
 msgstr "Rats born in"
 
-#: src/Controller/LordController.php:266
+#: src/Controller/LordController.php:267
 msgid "Total litter size"
 msgstr "Total litter size"
 
-#: src/Controller/LordController.php:267
+#: src/Controller/LordController.php:268
 msgid "Litter size (number of pups)"
 msgstr "Litter size (number of pups)"
 
-#: src/Controller/LordController.php:268
+#: src/Controller/LordController.php:269
 msgid "Proportion of litters (%)"
 msgstr "Proportion of litters (%)"
 
-#: src/Controller/LordController.php:269
+#: src/Controller/LordController.php:270
 msgid "Litter size distribution (% of litters)"
 msgstr "Litter size distribution (% of litters)"
 
-#: src/Controller/LordController.php:270
+#: src/Controller/LordController.php:271
 msgid "% of litters"
 msgstr "% of litters"
 
-#: src/Controller/LordController.php:271
+#: src/Controller/LordController.php:272
 msgid "pups"
 msgstr "pups"
 
-#: src/Controller/LordController.php:272
+#: src/Controller/LordController.php:273
 msgid "Number of pups of the given sex"
 msgstr "Number of pups of the given sex"
 
-#: src/Controller/LordController.php:273
+#: src/Controller/LordController.php:274
 msgid "Litter size distribution by sex (% of litters)"
 msgstr "Litter size distribution by sex (% of litters)"
 
-#: src/Controller/LordController.php:275
+#: src/Controller/LordController.php:276
 msgid "Mortality distribution"
 msgstr "Mortality distribution"
 
-#: src/Controller/LordController.php:276
+#: src/Controller/LordController.php:277
 msgid "Mortality probability"
 msgstr "Mortality probability"
 
-#: src/Controller/LordController.php:277
+#: src/Controller/LordController.php:278
 msgid "Death probabilities (%)"
 msgstr "Death probabilities (%)"
 
-#: src/Controller/LordController.php:280
+#: src/Controller/LordController.php:281
 msgid "All-time survival and mortality by age"
 msgstr "All-time survival and mortality by age"
 
-#: src/Controller/LordController.php:281
+#: src/Controller/LordController.php:282
 msgid "% of all rats reach this age"
 msgstr "% of all rats reach this age"
 
-#: src/Controller/LordController.php:282
+#: src/Controller/LordController.php:283
 msgid "% of all deaths occur in rats of this age"
 msgstr "% of all deaths occur in rats of this age"
 
-#: src/Controller/LordController.php:283
+#: src/Controller/LordController.php:284
 msgid "% of all rats reaching this age die in the following month"
 msgstr "% of all rats reaching this age die in the following month"
 
-#: src/Controller/LordController.php:319
+#: src/Controller/LordController.php:320
 msgid "Rats by birth year"
 msgstr "Rats by birth year"
 
-#: src/Controller/LordController.php:320 templates/Lord/my.php:211
+#: src/Controller/LordController.php:321 templates/Lord/my.php:211
 #: templates/Lord/search.php:88 templates/Lord/webstats.php:26
 msgid "Users"
 msgstr "Users"
 
-#: src/Controller/LordController.php:321
+#: src/Controller/LordController.php:322
 msgid "Users by registration year"
 msgstr "Users by registration year"
 
-#: src/Controller/LordController.php:323
+#: src/Controller/LordController.php:324
 msgid "Ratteries by registration year"
 msgstr "Ratteries by registration year"
 
-#: src/Controller/LordController.php:334
+#: src/Controller/LordController.php:347
+msgid ""
+"Game over! Thanks for playing with us. Oh, by the way, it’s been {0} that "
+"Artefact has quit smoking."
+msgstr ""
+"Game over! Thanks for playing with us. Oh, by the way, it’s been {0} that "
+"Artefact has quit smoking."
+
+#: src/Controller/LordController.php:434
 msgid ""
 "\n"
 "                We strongly advised to consider alternative contact means "
@@ -999,11 +1008,11 @@ msgstr ""
 "manner.\n"
 "                "
 
-#: src/Controller/LordController.php:367
+#: src/Controller/LordController.php:467
 msgid "Error sending email. Please, retry or contact us by another mean."
 msgstr "Error sending email. Please, retry or contact us by another mean."
 
-#: src/Controller/LordController.php:371
+#: src/Controller/LordController.php:471
 msgid ""
 "This was not the expected answer! Sorry to insist, but we must check that "
 "you are not spam, sausage, spam, spam, bacon, spam, tomato and spam to "
@@ -1013,7 +1022,7 @@ msgstr ""
 "you are not spam, sausage, spam, spam, bacon, spam, tomato and spam to "
 "protect our mailbox."
 
-#: src/Controller/LordController.php:274
+#: src/Controller/LordController.php:275
 msgctxt "sex ratio"
 msgid "Litters with"
 msgstr "Litters with"
@@ -1956,31 +1965,31 @@ msgid " (unknown father)"
 msgstr " (unknown father)"
 
 #: src/Model/Entity/Litter.php:139 src/Model/Entity/Litter.php:169
-#: src/Model/Entity/Rat.php:233 src/Model/Entity/Rat.php:262
+#: src/Model/Entity/Rat.php:243 src/Model/Entity/Rat.php:272
 msgid "Negative age?!"
 msgstr "Negative age?!"
 
 #: src/Model/Entity/Litter.php:146 src/Model/Entity/Litter.php:176
-#: src/Model/Entity/Rat.php:248 templates/DeathPrimaryCauses/view.php:108
+#: src/Model/Entity/Rat.php:258 templates/DeathPrimaryCauses/view.php:108
 #: templates/DeathSecondaryCauses/view.php:64
 msgid "{0, plural, =1{1 month} other{# months}}"
 msgstr "{0, plural, =1{1 month} other{# months}}"
 
 #: src/Model/Entity/Litter.php:135 src/Model/Entity/Litter.php:166
-#: src/Model/Entity/Rat.php:258 src/Model/Entity/Rat.php:270
+#: src/Model/Entity/Rat.php:268 src/Model/Entity/Rat.php:280
 msgctxt "age"
 msgid "– ?? –"
 msgstr "– ?? –"
 
 #: src/Model/Entity/Litter.php:148 src/Model/Entity/Litter.php:178
-#: src/Model/Entity/Litter.php:201 src/Model/Entity/Rat.php:242
+#: src/Model/Entity/Litter.php:201 src/Model/Entity/Rat.php:252
 #: templates/Litters/view.php:228 templates/Litters/view.php:232
 #: templates/Litters/view.php:271 templates/Litters/view.php:275
 msgctxt "age"
 msgid "Unknown"
 msgstr "Unknown"
 
-#: src/Model/Entity/Rat.php:357 src/Model/Entity/Rat.php:383
+#: src/Model/Entity/Rat.php:375 src/Model/Entity/Rat.php:401
 #: templates/Litters/view.php:236 templates/Litters/view.php:279
 msgctxt "death cause"
 msgid "Unknown"
@@ -2013,42 +2022,42 @@ msgctxt "zipcode"
 msgid "Unknown"
 msgstr "Unknown"
 
-#: src/Model/Entity/Rat.php:171 templates/Rats/add.php:183
+#: src/Model/Entity/Rat.php:181 templates/Rats/add.php:183
 #: templates/Rats/edit.php:58 templates/Rats/search.php:62
 msgid "Male"
 msgstr "Male"
 
-#: src/Model/Entity/Rat.php:171 templates/Rats/add.php:183
+#: src/Model/Entity/Rat.php:181 templates/Rats/add.php:183
 #: templates/Rats/edit.php:58 templates/Rats/search.php:54
 msgid "Female"
 msgstr "Female"
 
-#: src/Model/Entity/Rat.php:241
+#: src/Model/Entity/Rat.php:251
 msgid "{0, plural, =0{< 1 month} =1{1 month} other{# months}}"
 msgstr "{0, plural, =0{< 1 month} =1{1 month} other{# months}}"
 
-#: src/Model/Entity/Rat.php:246
+#: src/Model/Entity/Rat.php:256
 msgid "{0, plural, =0{1 day} =1{1 day} other{# days}}"
 msgstr "{0, plural, =0{1 day} =1{1 day} other{# days}}"
 
-#: src/Model/Entity/Rat.php:352 src/Model/Entity/Rat.php:378
-#: src/Model/Entity/Rat.php:435
+#: src/Model/Entity/Rat.php:370 src/Model/Entity/Rat.php:396
+#: src/Model/Entity/Rat.php:453
 msgid "No information"
 msgstr "No information"
 
-#: src/Model/Entity/Rat.php:368 templates/Rats/search.php:128
+#: src/Model/Entity/Rat.php:386 templates/Rats/search.php:128
 msgid "Alive"
 msgstr "Alive"
 
-#: src/Model/Entity/Rat.php:398 templates/Lord/stats.php:49
+#: src/Model/Entity/Rat.php:416 templates/Lord/stats.php:49
 msgid "presumably dead"
 msgstr "presumably dead"
 
-#: src/Model/Entity/Rat.php:400
+#: src/Model/Entity/Rat.php:418
 msgid "alive"
 msgstr "alive"
 
-#: src/Model/Entity/Rat.php:425 templates/DeathPrimaryCauses/view.php:38
+#: src/Model/Entity/Rat.php:443 templates/DeathPrimaryCauses/view.php:38
 #: templates/DeathPrimaryCauses/view.php:42
 #: templates/DeathPrimaryCauses/view.php:46
 #: templates/DeathSecondaryCauses/view.php:41
@@ -2077,7 +2086,7 @@ msgstr "alive"
 msgid "Yes"
 msgstr "Yes"
 
-#: src/Model/Entity/Rat.php:427 templates/DeathPrimaryCauses/view.php:38
+#: src/Model/Entity/Rat.php:445 templates/DeathPrimaryCauses/view.php:38
 #: templates/DeathPrimaryCauses/view.php:42
 #: templates/DeathPrimaryCauses/view.php:46
 #: templates/DeathSecondaryCauses/view.php:41
@@ -2106,22 +2115,22 @@ msgstr "Yes"
 msgid "No"
 msgstr "No"
 
-#: src/Model/Entity/Rat.php:269 src/Model/Entity/Rat.php:276
+#: src/Model/Entity/Rat.php:279 src/Model/Entity/Rat.php:286
 msgctxt "age in short form"
 msgid "{0} mo"
 msgstr "{0} mo"
 
-#: src/Model/Entity/Rat.php:274
+#: src/Model/Entity/Rat.php:284
 msgctxt "age in short form"
 msgid "{0} d"
 msgstr "{0} d"
 
-#: src/Model/Entity/Rat.php:366
+#: src/Model/Entity/Rat.php:384
 msgctxt "death cause"
 msgid "Unknown (presumably dead)"
 msgstr "Unknown (presumably dead)"
 
-#: src/Model/Entity/Rat.php:427
+#: src/Model/Entity/Rat.php:445
 msgctxt "legacy"
 msgid "Not Available"
 msgstr "Not Available"
@@ -2146,7 +2155,7 @@ msgctxt "website"
 msgid "Not Available"
 msgstr "Not Available"
 
-#: src/Model/Entity/Rattery.php:282
+#: src/Model/Entity/Rattery.php:286
 msgid " (one-shot rattery)"
 msgstr " (one-shot rattery)"
 
@@ -2465,7 +2474,7 @@ msgstr "This prefix is already in use. Please choose another one."
 msgid "This rattery name is already in use. Please choose another one."
 msgstr "This rattery name is already in use. Please choose another one."
 
-#: src/Model/Table/RatteriesTable.php:457
+#: src/Model/Table/RatteriesTable.php:461
 msgid ""
 "**This sheet was automatically updated to set the rattery as inactive, as it "
 "hasn’t bred any litter for several years.**"
@@ -2537,7 +2546,7 @@ msgstr "Overtitle"
 #: templates/Operators/add.php:31 templates/Operators/edit.php:27
 #: templates/RatMessages/add.php:29 templates/RatSnapshots/add.php:25
 #: templates/RatSnapshots/edit.php:30 templates/Ratteries/add.php:88
-#: templates/Ratteries/edit.php:90 templates/Ratteries/register.php:49
+#: templates/Ratteries/edit.php:97 templates/Ratteries/register.php:49
 #: templates/RatteryMessages/add.php:29 templates/RatterySnapshots/add.php:25
 #: templates/RatterySnapshots/edit.php:30 templates/Roles/add.php:41
 #: templates/Roles/edit.php:42 templates/States/add.php:43
@@ -2680,7 +2689,7 @@ msgstr "Edit Article"
 #: templates/element/simple_staff_litters.php:11
 #: templates/element/simple_staff_rats.php:11
 #: templates/element/simple_staff_ratteries.php:11
-#: templates/element/staff_litters.php:11 templates/element/staff_rats.php:10
+#: templates/element/staff_litters.php:11 templates/element/staff_rats.php:11
 #: templates/element/staff_ratteries.php:10
 #: templates/element/variety/index.php:17
 msgid "Actions"
@@ -2709,7 +2718,7 @@ msgstr "Delete Article"
 #: templates/Users/named.php:39 templates/Users/private.php:43
 #: templates/Users/usernamed.php:39 templates/element/litters.php:82
 #: templates/element/rats.php:123 templates/element/ratteries.php:92
-#: templates/element/staff_litters.php:57 templates/element/staff_rats.php:55
+#: templates/element/staff_litters.php:57 templates/element/staff_rats.php:57
 #: templates/element/staff_ratteries.php:55
 #: templates/element/variety/index.php:93
 msgid "first"
@@ -2733,7 +2742,7 @@ msgstr "first"
 #: templates/Users/named.php:40 templates/Users/private.php:44
 #: templates/Users/usernamed.php:40 templates/element/litters.php:83
 #: templates/element/rats.php:124 templates/element/ratteries.php:93
-#: templates/element/staff_litters.php:58 templates/element/staff_rats.php:56
+#: templates/element/staff_litters.php:58 templates/element/staff_rats.php:58
 #: templates/element/staff_ratteries.php:56
 #: templates/element/variety/index.php:94
 msgid "previous"
@@ -2757,7 +2766,7 @@ msgstr "previous"
 #: templates/Users/named.php:42 templates/Users/private.php:46
 #: templates/Users/usernamed.php:42 templates/element/litters.php:85
 #: templates/element/rats.php:126 templates/element/ratteries.php:95
-#: templates/element/staff_litters.php:60 templates/element/staff_rats.php:58
+#: templates/element/staff_litters.php:60 templates/element/staff_rats.php:60
 #: templates/element/staff_ratteries.php:58
 #: templates/element/variety/index.php:96
 msgid "next"
@@ -2781,7 +2790,7 @@ msgstr "next"
 #: templates/Users/named.php:43 templates/Users/private.php:47
 #: templates/Users/usernamed.php:43 templates/element/litters.php:86
 #: templates/element/rats.php:127 templates/element/ratteries.php:96
-#: templates/element/staff_litters.php:61 templates/element/staff_rats.php:59
+#: templates/element/staff_litters.php:61 templates/element/staff_rats.php:61
 #: templates/element/staff_ratteries.php:59
 #: templates/element/variety/index.php:97
 msgid "last"
@@ -2805,7 +2814,7 @@ msgstr "last"
 #: templates/Users/named.php:45 templates/Users/private.php:49
 #: templates/Users/usernamed.php:45 templates/element/litters.php:88
 #: templates/element/rats.php:129 templates/element/ratteries.php:98
-#: templates/element/staff_litters.php:63 templates/element/staff_rats.php:61
+#: templates/element/staff_litters.php:63 templates/element/staff_rats.php:63
 #: templates/element/staff_ratteries.php:61
 #: templates/element/variety/index.php:99
 msgid ""
@@ -2883,7 +2892,8 @@ msgstr "Position"
 #: templates/Categories/admin.php:38 templates/Categories/index.php:16
 #: templates/Countries/index.php:17 templates/Countries/view.php:53
 #: templates/DeathPrimaryCauses/index.php:17
-#: templates/DeathPrimaryCauses/view.php:64 templates/RatSnapshots/diff.php:43
+#: templates/DeathPrimaryCauses/view.php:64 templates/Lord/hall_of_fame.php:58
+#: templates/Lord/hall_of_fame.php:117 templates/RatSnapshots/diff.php:43
 #: templates/RatSnapshots/diff.php:320 templates/Rats/print.php:31
 #: templates/Rats/search.php:42 templates/Rats/view.php:216
 #: templates/RatterySnapshots/diff.php:40
@@ -3246,9 +3256,9 @@ msgstr "Contributions"
 msgid "Contribution"
 msgstr "Contribution"
 
-#: templates/Contributions/view.php:30 templates/Lord/hall_of_fame.php:23
-#: templates/Lord/search.php:99 templates/Ratteries/view.php:32
-#: templates/Ratteries/view.php:159 templates/RatteryMessages/view.php:22
+#: templates/Contributions/view.php:30 templates/Lord/search.php:99
+#: templates/Ratteries/view.php:32 templates/Ratteries/view.php:159
+#: templates/RatteryMessages/view.php:22
 #: templates/RatterySnapshots/diff.php:140
 #: templates/RatterySnapshots/view.php:22 templates/Users/named.php:19
 #: templates/Users/usernamed.php:19
@@ -4243,9 +4253,10 @@ msgstr "Attach rat to litter: #{0}"
 msgid "The rat you will select will be attached to the following litter: "
 msgstr "The rat you will select will be attached to the following litter: "
 
-#: templates/Litters/attach_rat.php:45 templates/RatMessages/view.php:22
-#: templates/RatSnapshots/diff.php:285 templates/RatSnapshots/view.php:22
-#: templates/Rats/view.php:32 templates/Rats/view.php:175
+#: templates/Litters/attach_rat.php:45 templates/Lord/hall_of_fame.php:32
+#: templates/RatMessages/view.php:22 templates/RatSnapshots/diff.php:285
+#: templates/RatSnapshots/view.php:22 templates/Rats/view.php:32
+#: templates/Rats/view.php:175
 msgid "Rat"
 msgstr "Rat"
 
@@ -4705,12 +4716,10 @@ msgstr "Dam: "
 
 #: templates/Litters/view.php:209 templates/Litters/view.php:227
 #: templates/Litters/view.php:252 templates/Litters/view.php:270
-#| msgid "Age at litter birth:"
 msgid "Age at litter birth"
 msgstr "Age at litter birth"
 
 #: templates/Litters/view.php:213 templates/Litters/view.php:256
-#| msgid "Current age:"
 msgid "Current age"
 msgstr "Current age"
 
@@ -4729,7 +4738,6 @@ msgid "Death cause"
 msgstr "Death cause"
 
 #: templates/Litters/view.php:231 templates/Litters/view.php:274
-#| msgid "Reached age:"
 msgid "Reached age"
 msgstr "Reached age"
 
@@ -4738,6 +4746,7 @@ msgid "Sire: "
 msgstr "Sire: "
 
 #: templates/Litters/view.php:289 templates/Litters/view.php:326
+#: templates/Lord/hall_of_fame.php:57 templates/Lord/hall_of_fame.php:116
 #: templates/Rats/print.php:24 templates/RatterySnapshots/diff.php:31
 #: templates/RatterySnapshots/diff.php:166 templates/element/rats.php:18
 #: templates/element/simple_rats.php:30
@@ -4777,7 +4786,6 @@ msgstr ""
 "statistics will be accurate only after the last survivor’s death."
 
 #: templates/Litters/view.php:387
-#| msgid "Current survival rate:"
 msgid "Current survival rate"
 msgstr "Current survival rate"
 
@@ -4795,7 +4803,6 @@ msgid "(at {0})"
 msgstr "(at {0})"
 
 #: templates/Litters/view.php:401
-#| msgid "Average lifespan:"
 msgid "Average lifespan"
 msgstr "Average lifespan"
 
@@ -4820,14 +4827,12 @@ msgstr ""
 #: templates/Litters/view.php:405 templates/Rats/family.php:76
 #: templates/Rats/family.php:90 templates/Ratteries/view.php:241
 #: templates/Ratteries/view.php:431
-#| msgid "infant mortality excluded:"
 msgid "infant mortality excluded"
 msgstr "infant mortality excluded"
 
 #: templates/Litters/view.php:409 templates/Rats/family.php:80
 #: templates/Rats/family.php:94 templates/Ratteries/view.php:245
 #: templates/Ratteries/view.php:435
-#| msgid "accidents excluded:"
 msgid "accidents excluded"
 msgstr "accidents excluded"
 
@@ -4945,15 +4950,51 @@ msgstr "Send email"
 msgid "Send email"
 msgstr "Send email"
 
-#: templates/Lord/hall_of_fame.php:1 templates/Lord/hall_of_fame.php:17
+#: templates/Lord/hall_of_fame.php:1 templates/Lord/hall_of_fame.php:18
 msgid "Hall of Fame"
 msgstr "Hall of Fame"
 
-#: templates/Lord/hall_of_fame.php:19
-msgid "Baby Factory Award"
-msgstr "Baby Factory Award"
+#: templates/Lord/hall_of_fame.php:17
+msgid "Show me more"
+msgstr "Show me more"
 
-#: templates/Lord/hall_of_fame.php:33 templates/Ratteries/view.php:197
+#: templates/Lord/hall_of_fame.php:28
+msgid "Jeanne Calment Award"
+msgstr "Jeanne Calment Award"
+
+#: templates/Lord/hall_of_fame.php:34
+msgid "In Days"
+msgstr "In Days"
+
+#: templates/Lord/hall_of_fame.php:53
+msgid "It’s Been 84 Years Award"
+msgstr "It’s Been 84 Years Award"
+
+#: templates/Lord/hall_of_fame.php:59
+#| msgid "Active?"
+msgid "Active during"
+msgstr "Active during"
+
+#: templates/Lord/hall_of_fame.php:85
+msgid "When We Love We Don’t Count Award"
+msgstr "When We Love We Don’t Count Award"
+
+#: templates/Lord/hall_of_fame.php:90 templates/Lord/search.php:98
+#: templates/Roles/view.php:92 templates/Users/my.php:31
+#: templates/Users/register.php:12 templates/Users/view.php:95
+msgid "Username"
+msgstr "Username"
+
+#: templates/Lord/hall_of_fame.php:102
+#| msgid "{0, plural, =0{No rat} =1{1 rat} other{# rats}}"
+msgid "{0, plural, =0{0 rat} =1{1 rat} other{# rats}}"
+msgstr "{0, plural, =0{0 rat} =1{1 rat} other{# rats}}"
+
+#: templates/Lord/hall_of_fame.php:111
+msgid "Demographic Rearmement Award"
+msgstr "Demographic Rearmement Award"
+
+#: templates/Lord/hall_of_fame.php:130 templates/Ratteries/view.php:197
 #: templates/Ratteries/view.php:334 templates/Ratteries/view.php:339
 #: templates/Ratteries/view.php:344
 msgid "{0, plural, =0{0 litter} =1{1 litter} other{# litters}}"
@@ -5196,12 +5237,6 @@ msgstr ""
 msgid "See all results"
 msgstr "See all results"
 
-#: templates/Lord/search.php:98 templates/Roles/view.php:92
-#: templates/Users/my.php:31 templates/Users/register.php:12
-#: templates/Users/view.php:95
-msgid "Username"
-msgstr "Username"
-
 #: templates/Lord/search.php:100 templates/Ratteries/my.php:67
 #: templates/Ratteries/view.php:275 templates/RatterySnapshots/diff.php:76
 #: templates/RatterySnapshots/diff.php:210 templates/Users/my.php:39
@@ -5236,7 +5271,6 @@ msgid "Demography"
 msgstr "Demography"
 
 #: templates/Lord/stats.php:26
-#| msgid "Total number of rats:"
 msgid "Total number of rats"
 msgstr "Total number of rats"
 
@@ -5246,7 +5280,6 @@ msgstr "{0, number} rats"
 
 #: templates/Lord/stats.php:30 templates/Ratteries/view.php:204
 #: templates/Ratteries/view.php:355
-#| msgid "females:"
 msgid "females"
 msgstr "females"
 
@@ -5256,7 +5289,6 @@ msgstr "{0, number} females ({1, number} %)"
 
 #: templates/Lord/stats.php:34 templates/Ratteries/view.php:208
 #: templates/Ratteries/view.php:359
-#| msgid "males:"
 msgid "males"
 msgstr "males"
 
@@ -5265,7 +5297,6 @@ msgid "{0, number} males ({1, number} %)"
 msgstr "{0, number} males ({1, number} %)"
 
 #: templates/Lord/stats.php:41
-#| msgid "Rats considered as deceased:"
 msgid "Rats considered as deceased"
 msgstr "Rats considered as deceased"
 
@@ -5275,7 +5306,6 @@ msgstr "{0, number} rats ({1, number} % of all rats)"
 
 #: templates/Lord/stats.php:45 templates/Ratteries/view.php:226
 #: templates/Ratteries/view.php:417 templates/Ratteries/view.php:499
-#| msgid "declared with known date:"
 msgid "declared with known date"
 msgstr "declared with known date"
 
@@ -5284,12 +5314,10 @@ msgid "{0, number} rats ({1, number} % of deceased rats)"
 msgstr "{0, number} rats ({1, number} % of deceased rats)"
 
 #: templates/Lord/stats.php:57
-#| msgid "Lifespan:"
 msgid "Lifespan"
 msgstr "Lifespan"
 
 #: templates/Lord/stats.php:61
-#| msgid "average:"
 msgid "average"
 msgstr "average"
 
@@ -5303,18 +5331,15 @@ msgstr "{0, number} months (♀: {1, number} months – ♂: {2, number} mon
 
 #: templates/Lord/stats.php:65 templates/Users/view.php:308
 #: templates/element/my/statistics.php:31
-#| msgid "average, infant mortality excluded:"
 msgid "average, infant mortality excluded"
 msgstr "average, infant mortality excluded"
 
 #: templates/Lord/stats.php:69 templates/Users/view.php:312
 #: templates/element/my/statistics.php:35
-#| msgid "average, accidents also excluded:"
 msgid "average, accidents also excluded"
 msgstr "average, accidents also excluded"
 
 #: templates/Lord/stats.php:73
-#| msgid "maximum:"
 msgid "maximum"
 msgstr "maximum"
 
@@ -5323,7 +5348,6 @@ msgid "Breeding"
 msgstr "Breeding"
 
 #: templates/Lord/stats.php:91
-#| msgid "Total number of ratteries:"
 msgid "Total number of ratteries"
 msgstr "Total number of ratteries"
 
@@ -5332,7 +5356,6 @@ msgid "{0, number} ratteries"
 msgstr "{0, number} ratteries"
 
 #: templates/Lord/stats.php:95
-#| msgid "active in the last 2 years:"
 msgid "active in the last 2 years"
 msgstr "active in the last 2 years"
 
@@ -5341,7 +5364,6 @@ msgid "{0, number} ratteries ({1, number} %)"
 msgstr "{0, number} ratteries ({1, number} %)"
 
 #: templates/Lord/stats.php:102
-#| msgid "Average rattery lifetime:"
 msgid "Average rattery lifetime"
 msgstr "Average rattery lifetime"
 
@@ -5350,7 +5372,6 @@ msgid "{0, number} days ({1, number} years)"
 msgstr "{0, number} days ({1, number} years)"
 
 #: templates/Lord/stats.php:108
-#| msgid "Average rattery productivity:"
 msgid "Average rattery productivity"
 msgstr "Average rattery productivity"
 
@@ -5359,7 +5380,6 @@ msgid "{0, number} litters ({1, number} rats)"
 msgstr "{0, number} litters ({1, number} rats)"
 
 #: templates/Lord/stats.php:112
-#| msgid "as birth place:"
 msgid "as birth place"
 msgstr "as birth place"
 
@@ -5368,7 +5388,6 @@ msgid "{0, number} internal litters"
 msgstr "{0, number} internal litters"
 
 #: templates/Lord/stats.php:116
-#| msgid "as other contributor:"
 msgid "as other contributor"
 msgstr "as other contributor"
 
@@ -5377,7 +5396,6 @@ msgid "{0, number} external litters"
 msgstr "{0, number} external litters"
 
 #: templates/Lord/stats.php:123 templates/Ratteries/view.php:372
-#| msgid "Average mother age:"
 msgid "Average mother age"
 msgstr "Average mother age"
 
@@ -5387,12 +5405,10 @@ msgid "{0, number} days ({1, number} months)"
 msgstr "{0, number} days ({1, number} months)"
 
 #: templates/Lord/stats.php:127 templates/Ratteries/view.php:380
-#| msgid "Average father age:"
 msgid "Average father age"
 msgstr "Average father age"
 
 #: templates/Lord/stats.php:131 templates/Ratteries/view.php:388
-#| msgid "Average litter size:"
 msgid "Average litter size"
 msgstr "Average litter size"
 
@@ -5401,7 +5417,6 @@ msgid "{0, number} pups (debiased estimation: {1, number} pups)"
 msgstr "{0, number} pups (debiased estimation: {1, number} pups)"
 
 #: templates/Lord/stats.php:135 templates/Ratteries/view.php:396
-#| msgid "Average sex ratio:"
 msgid "Average sex ratio"
 msgstr "Average sex ratio"
 
@@ -5410,7 +5425,6 @@ msgid "Mortality"
 msgstr "Mortality"
 
 #: templates/Lord/stats.php:153
-#| msgid "Median death age:"
 msgid "Median death age"
 msgstr "Median death age"
 
@@ -5423,7 +5437,6 @@ msgid "(50 % of rats die before this age, 50 % after)"
 msgstr "(50 % of rats die before this age, 50 % after)"
 
 #: templates/Lord/stats.php:157
-#| msgid "Death peak:"
 msgid "Death peak"
 msgstr "Death peak"
 
@@ -5432,7 +5445,6 @@ msgid "(death occurs more often at this age than any other)"
 msgstr "(death occurs more often at this age than any other)"
 
 #: templates/Lord/stats.php:161
-#| msgid "Interquartile interval:"
 msgid "Interquartile interval"
 msgstr "Interquartile interval"
 
@@ -5445,7 +5457,6 @@ msgid "(50 % of rats die in this age interval)"
 msgstr "(50 % of rats die in this age interval)"
 
 #: templates/Lord/stats.php:165
-#| msgid "Leading death category:"
 msgid "Leading death category"
 msgstr "Leading death category"
 
@@ -5454,7 +5465,6 @@ msgid "({0} % of declared deaths)"
 msgstr "({0} % of declared deaths)"
 
 #: templates/Lord/stats.php:169
-#| msgid "Leading death cause:"
 msgid "Leading death cause"
 msgstr "Leading death cause"
 
@@ -5463,7 +5473,6 @@ msgid "Death categories"
 msgstr "Death categories"
 
 #: templates/Lord/stats.php:180
-#| msgid "Number of recorded deaths:"
 msgid "Number of recorded deaths"
 msgstr "Number of recorded deaths"
 
@@ -5473,7 +5482,6 @@ msgstr "{0, number} rats ({1, number} % of rats considered as dead)"
 
 #: templates/Lord/stats.php:183 templates/Lord/stats.php:209
 #: templates/Lord/stats.php:234
-#| msgid "By decreasing frequency:"
 msgid "By decreasing frequency"
 msgstr "By decreasing frequency"
 
@@ -5488,14 +5496,10 @@ msgid "Most frequent death causes"
 msgstr "Most frequent death causes"
 
 #: templates/Lord/stats.php:205
-#| msgid "Number of deaths with recorded cause:"
 msgid "Number of deaths with recorded cause"
 msgstr "Number of deaths with recorded cause"
 
 #: templates/Lord/stats.php:210
-#| msgid ""
-#| "for rats recorded as dead without precise cause, recorded death category "
-#| "is used instead"
 msgid ""
 "for rats recorded as dead without precise cause, death category is used "
 "instead"
@@ -5508,7 +5512,6 @@ msgid "Most frequent tumours"
 msgstr "Most frequent tumours"
 
 #: templates/Lord/stats.php:231
-#| msgid "Number of tumour-related deaths:"
 msgid "Number of tumour-related deaths"
 msgstr "Number of tumour-related deaths"
 
@@ -5519,6 +5522,14 @@ msgstr "{0, number} rats ({1, number} % of rats with known death cause)"
 #: templates/Lord/stats.php:235
 msgid "please note that tumour localization could not be recorded before 2023"
 msgstr "please note that tumour localization could not be recorded before 2023"
+
+#: templates/Lord/stats.php:253
+msgid ""
+"Tell me more, tell me more... check our <a href={0} class=\"discrete-"
+"link\">hall of fame</a>!"
+msgstr ""
+"Tell me more, tell me more... check our <a href={0} class=\"discrete-"
+"link\">hall of fame</a>!"
 
 #: templates/Lord/the_end.php:7
 msgid "The End of the LORD"
@@ -6095,7 +6106,6 @@ msgid "Family size"
 msgstr "Family size"
 
 #: templates/Rats/family.php:45
-#| msgid "Total number of known ancestors:"
 msgid "Total number of known ancestors"
 msgstr "Total number of known ancestors"
 
@@ -6107,22 +6117,18 @@ msgid "{0, plural, =0{No rat} =1{1 rat} other{# rats}}"
 msgstr "{0, plural, =0{No rat} =1{1 rat} other{# rats}}"
 
 #: templates/Rats/family.php:49
-#| msgid "Number of alive ancestors:"
 msgid "Number of alive ancestors"
 msgstr "Number of alive ancestors"
 
 #: templates/Rats/family.php:55
-#| msgid "Number of children:"
 msgid "Number of children"
 msgstr "Number of children"
 
 #: templates/Rats/family.php:59
-#| msgid "Total number of descendants:"
 msgid "Total number of descendants"
 msgstr "Total number of descendants"
 
 #: templates/Rats/family.php:63
-#| msgid "Number of alive descendants:"
 msgid "Number of alive descendants"
 msgstr "Number of alive descendants"
 
@@ -6135,12 +6141,10 @@ msgid "Family health"
 msgstr "Family health"
 
 #: templates/Rats/family.php:72
-#| msgid "Ancestors average lifespan:"
 msgid "Ancestors average lifespan"
 msgstr "Ancestors average lifespan"
 
 #: templates/Rats/family.php:86
-#| msgid "Descendants average lifespan:"
 msgid "Descendants average lifespan"
 msgstr "Descendants average lifespan"
 
@@ -6452,12 +6456,12 @@ msgid ""
 msgstr ""
 "Check this box if the rattery is active, uncheck it to declare it inactive"
 
-#: templates/Ratteries/add.php:79 templates/Ratteries/edit.php:80
+#: templates/Ratteries/add.php:79 templates/Ratteries/edit.php:84
 msgid "Check this box to declare the rattery as generic"
 msgstr "Check this box to declare the rattery as generic"
 
 #: templates/Ratteries/add.php:83 templates/Ratteries/change_picture.php:43
-#: templates/Ratteries/edit.php:84 templates/Ratteries/register.php:46
+#: templates/Ratteries/edit.php:91 templates/Ratteries/register.php:46
 msgid "Logotype"
 msgstr "Logotype"
 
@@ -6505,6 +6509,12 @@ msgstr "Review litters and rats before the rattery sheet can be deleted"
 #: templates/Ratteries/relocate.php:57
 msgid "Zipcode (will be used in rattery map)"
 msgstr "Zipcode (will be used in rattery map)"
+
+#: templates/Ratteries/edit.php:85
+#| msgid ""
+#| "Check this box if the rattery is active, uncheck it to declare it inactive"
+msgid "Check this box if rats with this prefix must have a declared mother"
+msgstr "Check this box if rats with this prefix must have a declared mother"
 
 #: templates/Ratteries/in_state.php:13
 msgid "Ratteries in state {0}"
@@ -6733,12 +6743,10 @@ msgid "Breeding statistics"
 msgstr "Breeding statistics"
 
 #: templates/Ratteries/view.php:196
-#| msgid "Litters recorded under this prefix:"
 msgid "Litters recorded under this prefix"
 msgstr "Litters recorded under this prefix"
 
 #: templates/Ratteries/view.php:200
-#| msgid "Rat recorded under this prefix:"
 msgid "Rat recorded under this prefix"
 msgstr "Rat recorded under this prefix"
 
@@ -6770,7 +6778,6 @@ msgid "No recorded rat is associated with this origin."
 msgstr "No recorded rat is associated with this origin."
 
 #: templates/Ratteries/view.php:222
-#| msgid "Rats recorded as deceased:"
 msgid "Rats recorded as deceased"
 msgstr "Rats recorded as deceased"
 
@@ -6788,12 +6795,10 @@ msgstr "{0, plural, =0{No rat} =1{1 rat} other{# rats}} ({1, number} %)"
 
 #: templates/Ratteries/view.php:230 templates/Ratteries/view.php:421
 #: templates/Ratteries/view.php:503
-#| msgid "presumed dead:"
 msgid "presumed dead"
 msgstr "presumed dead"
 
 #: templates/Ratteries/view.php:237
-#| msgid "Average lifespan of rats with this prefix:"
 msgid "Average lifespan of rats with this prefix"
 msgstr "Average lifespan of rats with this prefix"
 
@@ -6810,12 +6815,10 @@ msgstr ""
 "validated sheet."
 
 #: templates/Ratteries/view.php:327
-#| msgid "Breeding activity period:"
 msgid "Breeding activity period"
 msgstr "Breeding activity period"
 
 #: templates/Ratteries/view.php:333
-#| msgid "Declared litters:"
 msgid "Declared litters"
 msgstr "Declared litters"
 
@@ -6825,17 +6828,14 @@ msgid "{0, plural, =0{no pup} =1{1 pup} other{# pups}}"
 msgstr "{0, plural, =0{no pup} =1{1 pup} other{# pups}}"
 
 #: templates/Ratteries/view.php:338
-#| msgid "internal (born in the rattery):"
 msgid "internal (born in the rattery)"
 msgstr "internal (born in the rattery)"
 
 #: templates/Ratteries/view.php:343
-#| msgid "external (other contributed litters):"
 msgid "external (other contributed litters)"
 msgstr "external (other contributed litters)"
 
 #: templates/Ratteries/view.php:351
-#| msgid "All rat records :"
 msgid "All rat records"
 msgstr "All rat records"
 
@@ -6852,7 +6852,6 @@ msgstr ""
 "on each of their contributed litter sheets."
 
 #: templates/Ratteries/view.php:413 templates/Ratteries/view.php:495
-#| msgid "Bred rats recorded as deceased:"
 msgid "Bred rats recorded as deceased"
 msgstr "Bred rats recorded as deceased"
 
@@ -6869,12 +6868,10 @@ msgid "{0, plural, =0 {No rat} =1{1 rat} other{# rats}} ({1, number} %)"
 msgstr "{0, plural, =0 {No rat} =1{1 rat} other{# rats}} ({1, number} %)"
 
 #: templates/Ratteries/view.php:427
-#| msgid "Average lifespan of bred rats:"
 msgid "Average lifespan of bred rats"
 msgstr "Average lifespan of bred rats"
 
 #: templates/Ratteries/view.php:441
-#| msgid "Oldest bred rat:"
 msgid "Oldest bred rat"
 msgstr "Oldest bred rat"
 
@@ -6891,12 +6888,10 @@ msgid "Death causes statistics"
 msgstr "Death causes statistics"
 
 #: templates/Ratteries/view.php:454
-#| msgid "Primary death causes by decreasing frequency:"
 msgid "Primary death causes by decreasing frequency"
 msgstr "Primary death causes by decreasing frequency"
 
 #: templates/Ratteries/view.php:472
-#| msgid "Secondary death causes by decreasing frequency:"
 msgid "Secondary death causes by decreasing frequency"
 msgstr "Secondary death causes by decreasing frequency"
 
@@ -7704,12 +7699,10 @@ msgid "Is Locked"
 msgstr "Is Locked"
 
 #: templates/Users/view.php:282
-#| msgid "Current number of rats:"
 msgid "Current number of rats"
 msgstr "Current number of rats"
 
 #: templates/Users/view.php:291
-#| msgid "Total number of owned rats:"
 msgid "Total number of owned rats"
 msgstr "Total number of owned rats"
 
@@ -7718,7 +7711,6 @@ msgid "{0, plural, =0{No rat} =1{1 rat} other{# rats}} (♀: {1} –  ♂: {2}
 msgstr "{0, plural, =0{No rat} =1{1 rat} other{# rats}} (♀: {1} –  ♂: {2})"
 
 #: templates/Users/view.php:295
-#| msgid "Managed sheets (as owner or creator):"
 msgid "Managed sheets (as owner or creator)"
 msgstr "Managed sheets (as owner or creator)"
 
@@ -7727,12 +7719,10 @@ msgid "(alive: {0})"
 msgstr "(alive: {0})"
 
 #: templates/Users/view.php:305
-#| msgid "Average lifespan of their rats:"
 msgid "Average lifespan of their rats"
 msgstr "Average lifespan of their rats"
 
 #: templates/Users/view.php:320
-#| msgid "Their champion:"
 msgid "Their champion"
 msgstr "Their champion"
 
@@ -7835,11 +7825,6 @@ msgid "You can access your notification history from the buttons opposite."
 msgstr "You can access your notification history from the buttons opposite."
 
 #: templates/element/my/messages.php:24
-#| msgid ""
-#| "{0, plural, =1 {<strong>One notification</strong> calls for action and is "
-#| "highlighted below} other{<strong># notification</strong> call for action "
-#| "and are highlighted below}}</strong>. Please pay particular attention to "
-#| "{0, plural, =1{it} other{them}}."
 msgid ""
 "{0, plural, =1 {<strong>One notification</strong> calls for action and is "
 "highlighted below} other{<strong># notifications</strong> call for action "
@@ -7956,27 +7941,22 @@ msgid "My Statistics"
 msgstr "My Statistics"
 
 #: templates/element/my/statistics.php:5
-#| msgid "I currently live with:"
 msgid "I currently live with"
 msgstr "I currently live with"
 
 #: templates/element/my/statistics.php:14
-#| msgid "In total, I have hosted:"
 msgid "In total, I have hosted"
 msgstr "In total, I have hosted"
 
 #: templates/element/my/statistics.php:18
-#| msgid "As owner or creator, I manage the sheets of:"
 msgid "As owner or creator, I manage the sheets of"
 msgstr "As owner or creator, I manage the sheets of"
 
 #: templates/element/my/statistics.php:28
-#| msgid "Average lifespan of my rats:"
 msgid "Average lifespan of my rats"
 msgstr "Average lifespan of my rats"
 
 #: templates/element/my/statistics.php:43
-#| msgid "My champion:"
 msgid "My champion"
 msgstr "My champion"
 
@@ -8064,8 +8044,8 @@ msgstr "Last message"
 #: templates/element/simple_staff_rats.php:35
 #: templates/element/simple_staff_rats.php:42
 #: templates/element/staff_litters.php:37
-#: templates/element/staff_litters.php:44 templates/element/staff_rats.php:34
-#: templates/element/staff_rats.php:41
+#: templates/element/staff_litters.php:44 templates/element/staff_rats.php:36
+#: templates/element/staff_rats.php:43
 msgid "Delete Litter"
 msgstr "Delete Litter"
 
@@ -8076,7 +8056,11 @@ msgstr "Delete Litter"
 msgid "Delete Rattery"
 msgstr "Delete Rattery"
 
-#: templates/element/staff_rats.php:27 templates/element/staff_ratteries.php:27
+#: templates/element/staff_rats.php:10
+msgid "Followed by"
+msgstr "Followed by"
+
+#: templates/element/staff_rats.php:29 templates/element/staff_ratteries.php:27
 msgid "Compare with last snapshot"
 msgstr "Compare with last snapshot"
 
@@ -8473,6 +8457,9 @@ msgstr "Source code is open and distributed under GPL license"
 #: templates/layout/default.php:176 templates/layout/fullpage.php:185
 msgid "Service is free of charge, hosted and maintained by SRFA"
 msgstr "Service is free of charge, hosted and maintained by SRFA"
+
+#~ msgid "Baby Factory Award"
+#~ msgstr "Baby Factory Award"
 
 #~ msgid "Age at death:"
 #~ msgstr "Age at death:"
