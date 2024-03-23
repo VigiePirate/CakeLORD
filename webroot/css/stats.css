@@ -30,6 +30,13 @@
   text-align:center;
 }
 
+.discrete-link {
+  font-family:"Alegreya",serif;
+  font-size: revert;
+  font-style:italic;
+  margin-bottom: 1.5rem;
+}
+
 #user-chart, #rattery-chart, #rat-chart {
   margin-bottom: 1.5em;
 }

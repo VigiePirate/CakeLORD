@@ -248,6 +248,12 @@
                     </tr>
                 <?php endforeach ?>
             </table>
+
+            <div class="signature">
+                &mdash; <?= __('Tell me more, tell me more... check our <a href={0} class="discrete-link">hall of fame</a>!',
+                    [$this->Url->build(['controller' => 'Lord', 'action' => 'hallOfFame'])]) ?> </span>
+            </div>
+
         </div>
     </div>
 </div>

@@ -253,11 +253,10 @@ class Rattery extends Entity
     public function lifetimeInWords($options = [], $productivity = []) {
         $model = FactoryLocator::get('Table')->get('Contributions');
 
-        //FIXME: use $rattery->is_generic
-        $filter = ['rattery_id >' => 6, 'rattery_id' => $this->id];
+        $filter = ['rattery_id' => $this->id];
 
         if(!empty($options)) {
-            $filter = array_merge($filter,$options);
+            $filter = array_merge($filter, $options);
         }
 
         $lifetimes = $model->find()
@@ -266,6 +265,9 @@ class Rattery extends Entity
                 'last_birth' => 'MAX(Litters.birth_date)',
             ])
             ->innerJoinWith('Litters')
+            ->innerJoinWith('Ratteries', function ($q) {
+                return $q->where(['is_generic IS' => false]);
+            })
             ->where($filter)
             ->enableAutoFields(true) // should be replaced by selecting only useful fields
             ->first();
@@ -284,6 +286,7 @@ class Rattery extends Entity
                 $lifetime = $first_birth->year . __(' (one-shot rattery)');
             } else {
                 $duration = $last_birth->timeAgoInWords(['from' => $first_birth, 'accuracy' => ['year' => 'month', 'month => week', 'week' => 'week']]);
+
                 if($first_birth->year == $last_birth->year) {
                     $lifetime = $first_birth->year . ' (' . $duration . ')';
                 } else {

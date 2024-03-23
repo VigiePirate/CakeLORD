@@ -1021,6 +1021,54 @@ trait StatisticsTrait
         return $champion;
     }
 
+    public function findChampions($options = [], $n = 1) {
+        $model = FactoryLocator::get('Table')->get('Rats');
+
+        $filter = [
+            'Rats.is_alive IS' => false,
+            'Rats.birth_date IS NOT' => null,
+            'Rats.death_date IS NOT' => null,
+            'Rats.birth_date !=' => '1981-08-01',
+            'Rats.death_date !=' => '1981-08-01',
+            'OR' => [
+                'death_secondary_cause_id !=' => '1',
+                'death_secondary_cause_id IS' => null
+            ],
+            'States.is_reliable IS' => true,
+            'DATEDIFF(Rats.death_date,Rats.birth_date) <' => RatsTable::MAXIMAL_AGE
+        ];
+
+        if (! empty($options)) {
+            $filter = array_merge($filter,$options);
+        }
+
+        $champions = $model->find()
+            ->select([
+                'id' => 'Rats.id',
+                'rat_id' => 'Rats.id',
+                'rat_age' => 'DATEDIFF(Rats.death_date,Rats.birth_date)',
+                'birth_date' => 'Rats.birth_date',
+                'death_date' => 'Rats.death_date',
+                'name' => 'Rats.name',
+                'Rats__litter_id' => 'BirthLitters.id',
+                'BirthLitters__id' => 'BirthLitters.id',
+                'Rats__rattery_id' => 'Rats.rattery_id',
+                'Rats__state_id' => 'Rats.state_id',
+            ])
+            ->where($filter)
+            ->innerJoinWith('Ratteries', function ($q) {
+                return $q->where(['Ratteries.is_generic IS' => false]);
+                })
+            ->contain(['States', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions'])
+            ->group('rat_id')
+            ->order(['rat_age' => 'desc'])
+            ->limit($n)
+            ->all()
+            ->toArray();
+
+        return $champions;
+    }
+
     public function findBornToday($options = []) {
         $model = FactoryLocator::get('Table')->get('Rats');
 

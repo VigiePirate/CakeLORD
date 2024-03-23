@@ -131,6 +131,16 @@ class Rat extends Entity
     {
         $doublePrefix = $this->rattery->prefix;
 
+        if (isset($this->birth_litter) && ! isset($this->birth_litter->contributions)) {
+            $this->birth_litter->contributions = \Cake\Datasource\FactoryLocator::get('Table')
+                ->get('Contributions')
+                ->find()
+                ->where(['litter_id' => $this->birth_litter->id])
+                ->order(['contribution_type_id' => 'asc'])
+                ->all()
+                ->toArray();
+        }
+
         if (isset($this->birth_litter)
             && ! empty($this->birth_litter->contributions[1])
             && ! $this->birth_litter->contributions[1]->rattery->is_generic
@@ -300,9 +310,17 @@ class Rat extends Entity
         // timeAgoInWords? diffForHumans?
         $birthdate = $this->birth_date;
         $deathdate = $this->death_date;
+
         /* call to timeAgoInWords in the "wrong" date order to avoid "ago" to be added to the string */
         /* could be improved with option "relativeString" to skip number of weeks and convert them to days */
-        return $ageInWords =  $deathdate->timeAgoInWords(['from' => $birthdate, 'accuracy' => ['year' => 'day']]);
+        //return $ageInWords =  $deathdate->timeAgoInWords(['from' => $birthdate, 'accuracy' => ['year' => 'day']]);
+
+        $interval = $birthdate->diff($deathdate);
+        $years = __dn('cake', '{0} year', '{0} years', $interval->y, $interval->y);
+        $months = __dn('cake', '{0} month', '{0} months', $interval->m, $interval->m);
+        $days = __dn('cake', '{0} day', '{0} days', $interval->d, $interval->d);
+
+        return trim(implode(', ', array_filter([$years, $months, $days], function ($val) {return ! str_starts_with($val, '0 ');})));
     }
 
     public function childbearingAge()

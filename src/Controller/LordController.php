@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 use Cake\Chronos\Chronos;
 use Cake\I18n\I18n;
+use Cake\I18n\FrozenTime;
 use Cake\Mailer\Mailer;
 use Cake\Mailer\MailerAwareTrait;
 use App\Model\Entity\Lord;
@@ -331,9 +332,82 @@ class LordController extends AppController
         $this->Authorization->skipAuthorization();
         $lord = new Lord();
 
+        $depth = implode($this->request->getParam('pass'));
+        if (empty($depth)) {
+            $depth=10;
+        }
+
+        if ($depth > 100) {
+            $date = FrozenTime::createFromFormat('Y-m-d', '2020-03-19');
+            $interval = FrozenTime::today()->diff($date);
+            $years = __dn('cake', '{0} year', '{0} years', $interval->y, $interval->y);
+            $months = __dn('cake', '{0} month', '{0} months', $interval->m, $interval->m);
+            $days = __dn('cake', '{0} day', '{0} days', $interval->d, $interval->d);
+            $egg = trim(implode(', ', array_filter([$years, $months, $days], function ($val) {return ! str_starts_with($val, '0 ');})));
+            $this->Flash->error(__('Game over! Thanks for playing with us. Oh, by the way, it’s been {0} that Artefact has quit smoking.', [$egg]));
+            $this->redirect(['action' => 'hallOfFame']);
+            $depth=10;
+        }
+
+        // rats by lifespan
+        $champions = $lord->findChampions([], $depth);
+
+        // ratteries by activity
+        $lifetimes = $this->fetchModel('Contributions')
+            ->find()
+            ->select([
+                'rattery_id' => 'Contributions.rattery_id',
+                'rattery_prefix' => 'Ratteries.prefix',
+                'rattery_name' => 'Ratteries.name',
+                'Litters__id' => 'Litters.id',
+                'Ratteries__id' => 'Ratteries.id',
+                'Contributions__rattery_id' => 'Contributions.rattery_id',
+                'lifetime' => 'DATEDIFF(MAX(Litters.birth_date), MIN(Litters.birth_date))',
+                'first_birth' => 'MIN(Litters.birth_date)',
+                'last_birth' => 'MAX(Litters.birth_date)',
+            ])
+            ->innerJoinWith('Litters')
+            ->innerJoinWith('Ratteries', function ($q) {
+                return $q->innerJoinWith('States', function ($q) {
+                    return $q->where(['States.is_reliable IS' => true]);
+                })->where(['Ratteries.is_generic IS' => false]);
+            })
+            ->group('rattery_id')
+            ->order(['lifetime' => 'desc'])
+            ->limit($depth)
+            ->all()
+            ->toArray();
+
+        foreach ($lifetimes as &$lifetime) {
+            $first_birth = FrozenTime::createFromFormat('Y-m-d', $lifetime['first_birth']);
+            $last_birth = FrozenTime::createFromFormat('Y-m-d', $lifetime['last_birth']);
+            $interval = $first_birth->diff($last_birth);
+            $years = __dn('cake', '{0} year', '{0} years', $interval->y, $interval->y);
+            $months = __dn('cake', '{0} month', '{0} months', $interval->m, $interval->m);
+            //$days = __dn('cake', '{0} day', '{0} days', $interval->d, $interval->d);
+            $lifetime['lifetime'] = trim(implode(', ', array_filter([$years, $months], function ($val) {return ! str_starts_with($val, '0 ');})));
+        }
+
+        // users by number of owned rats
+        $rats = $this->fetchModel('Rats')->find();
+        $users = $rats->select([
+                'user_id' => 'owner_user_id',
+                'user_email' => 'OwnerUsers.email',
+                'user_name' => 'OwnerUsers.username',
+                'count' => $rats->func()->count('*')
+            ])
+            ->contain('OwnerUsers')
+            ->where(['OwnerUsers.email NOT LIKE' => '%@lord-rat.org%'])
+            ->group('user_id')
+            ->order(['count' => 'desc'])
+            ->limit($depth)
+            ->all()
+            ->toArray();
+
         // ratteries by number of litters
         $contributions = $this->fetchModel('Contributions')->find();
-        $ratteries = $contributions->select([
+        $ratteries = $contributions
+            ->select([
                 'rattery_id' => 'rattery_id',
                 'rattery_prefix' => 'Ratteries.prefix',
                 'rattery_name' => 'Ratteries.name',
@@ -346,11 +420,11 @@ class LordController extends AppController
             ])
             ->group('rattery_id')
             ->order(['count' => 'desc'])
-            ->limit(10)
+            ->limit($depth)
             ->all()
             ->toArray();
 
-        $this->set(compact('ratteries'));
+        $this->set(compact('champions', 'lifetimes', 'ratteries', 'users', 'depth'));
 }
 
     public function contact() {
