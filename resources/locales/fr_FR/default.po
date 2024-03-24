@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2024-03-23 19:40+0000\n"
-"PO-Revision-Date: 2024-03-23 20:50+0100\n"
+"POT-Creation-Date: 2024-03-24 17:46+0000\n"
+"PO-Revision-Date: 2024-03-24 18:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: fr_FR\n"
@@ -103,7 +103,7 @@ msgstr "Impossible de supprimer la rubrique. Veuillez réessayer."
 #: src/Controller/SingularitiesController.php:72
 #: src/Model/Entity/Rattery.php:218 src/Model/Entity/Rattery.php:219
 #: src/Model/Entity/Rattery.php:280 src/Model/Entity/StatisticsTrait.php:676
-#: src/Model/Entity/StatisticsTrait.php:799 templates/RatSnapshots/diff.php:205
+#: src/Model/Entity/StatisticsTrait.php:811 templates/RatSnapshots/diff.php:205
 #: templates/RatSnapshots/diff.php:207 templates/RatSnapshots/diff.php:214
 #: templates/RatSnapshots/diff.php:216 templates/RatSnapshots/diff.php:222
 #: templates/RatSnapshots/diff.php:224 templates/RatSnapshots/diff.php:491
@@ -397,7 +397,7 @@ msgstr ""
 "dessous."
 
 #: src/Controller/LittersController.php:172
-#: src/Controller/LordController.php:279
+#: src/Controller/LordController.php:288
 msgid "Survival rate"
 msgstr "Taux de survie"
 
@@ -407,7 +407,7 @@ msgid "Age (in months)"
 msgstr "Âge (en mois)"
 
 #: src/Controller/LittersController.php:174
-#: src/Controller/LordController.php:280
+#: src/Controller/LordController.php:289
 msgid "Survival rate (%)"
 msgstr "Taux de survie (%)"
 
@@ -798,8 +798,8 @@ msgstr "Le fichier journal a été supprimé."
 msgid "The log could not be deleted. Please, try again."
 msgstr "Impossible de supprimer le fichier journal. Veuillez réessayer."
 
-#: src/Controller/LordController.php:92 src/Controller/LordController.php:319
-#: templates/Lord/hall_of_fame.php:91 templates/Lord/my.php:26
+#: src/Controller/LordController.php:92 src/Controller/LordController.php:328
+#: templates/Lord/hall_of_fame.php:82 templates/Lord/my.php:26
 #: templates/Lord/search.php:42 templates/Lord/webstats.php:50
 #: templates/Rats/add.php:31 templates/Rats/dispute.php:28
 #: templates/Rats/edit.php:28 templates/Rats/search.php:19
@@ -808,7 +808,7 @@ msgstr "Impossible de supprimer le fichier journal. Veuillez réessayer."
 msgid "Rats"
 msgstr "Rats"
 
-#: src/Controller/LordController.php:93 src/Controller/LordController.php:323
+#: src/Controller/LordController.php:93 src/Controller/LordController.php:332
 #: templates/LitterSnapshots/diff.php:98 templates/LitterSnapshots/diff.php:252
 #: templates/Litters/view.php:320 templates/Lord/my.php:39
 #: templates/Lord/search.php:66 templates/Lord/webstats.php:34
@@ -822,7 +822,7 @@ msgstr "Rateries"
 #: templates/Litters/attach_rat.php:8 templates/Litters/attach_rat.php:30
 #: templates/Litters/dispute.php:28 templates/Litters/edit.php:24
 #: templates/Litters/simulate.php:21 templates/Litters/virtual.php:39
-#: templates/Lord/hall_of_fame.php:118 templates/Lord/my.php:33
+#: templates/Lord/hall_of_fame.php:109 templates/Lord/my.php:33
 #: templates/Lord/webstats.php:42 templates/Ratteries/delete.php:120
 #: templates/element/my/messages.php:169 templates/element/my/messages.php:369
 msgid "Litters"
@@ -840,7 +840,7 @@ msgstr "Mâles"
 msgid "Number of alive rats"
 msgstr "Nombre de rats vivants"
 
-#: src/Controller/LordController.php:251 templates/Lord/hall_of_fame.php:33
+#: src/Controller/LordController.php:251 templates/Lord/hall_of_fame.php:24
 #: templates/RatSnapshots/diff.php:195 templates/RatSnapshots/diff.php:198
 #: templates/RatSnapshots/diff.php:476 templates/Rats/view.php:352
 #: templates/element/simple_rats.php:42
@@ -859,19 +859,23 @@ msgstr "rats (présumés) en vie"
 msgid "months"
 msgstr "mois"
 
-#: src/Controller/LordController.php:258
+#: src/Controller/LordController.php:259
+msgid "and"
+msgstr "et"
+
+#: src/Controller/LordController.php:260
 msgid "All-time average"
 msgstr "Moyenne (toutes années confondues)"
 
-#: src/Controller/LordController.php:259
+#: src/Controller/LordController.php:261
 msgid "All-time average:"
 msgstr "Moyenne (toutes années confondues):"
 
-#: src/Controller/LordController.php:260
+#: src/Controller/LordController.php:262
 msgid "Average lifespan by birth year"
 msgstr "Par année de naissance"
 
-#: src/Controller/LordController.php:261
+#: src/Controller/LordController.php:263
 msgid "Birth year"
 msgstr "Année de naissance"
 
@@ -880,112 +884,144 @@ msgctxt "rattery"
 msgid "Birth year"
 msgstr "Fondée en"
 
-#: src/Controller/LordController.php:262
+#: src/Controller/LordController.php:264
 msgid "Average lifespan (in days)"
 msgstr "Durée de vie moyenne (en jours)"
 
-#: src/Controller/LordController.php:263
+#: src/Controller/LordController.php:265
 msgid "Average lifespan:"
 msgstr "Durée de vie moyenne :"
 
-#: src/Controller/LordController.php:264
+#: src/Controller/LordController.php:266
 msgid "Life expectancy"
 msgstr "Espérance de vie"
 
-#: src/Controller/LordController.php:265
+#: src/Controller/LordController.php:267
 msgid "days"
 msgstr "jours"
 
-#: src/Controller/LordController.php:266
+#: src/Controller/LordController.php:268
 msgid "Rats born in"
 msgstr "Rats nés en"
 
-#: src/Controller/LordController.php:267
+#: src/Controller/LordController.php:269
 msgid "Total litter size"
 msgstr "Taille totale de la portée"
 
-#: src/Controller/LordController.php:268
+#: src/Controller/LordController.php:270
 msgid "Litter size (number of pups)"
 msgstr "Taille de la portée (nombre de ratons)"
 
-#: src/Controller/LordController.php:269
+#: src/Controller/LordController.php:271
 msgid "Proportion of litters (%)"
 msgstr "Proportion des portées (%)"
 
-#: src/Controller/LordController.php:270
+#: src/Controller/LordController.php:272
 msgid "Litter size distribution (% of litters)"
 msgstr "Répartition de la taille des portées (% des portées)"
 
-#: src/Controller/LordController.php:271
+#: src/Controller/LordController.php:273
 msgid "% of litters"
 msgstr "% des portées"
 
-#: src/Controller/LordController.php:272
+#: src/Controller/LordController.php:274
 msgid "pups"
 msgstr "ratons"
 
-#: src/Controller/LordController.php:273
-msgid "Number of pups of the given sex"
-msgstr "Nombre de ratons du sexe défini"
-
-#: src/Controller/LordController.php:274
-msgid "Litter size distribution by sex (% of litters)"
-msgstr "Répartition du nombre de ratons par sexe (% des portées)"
+#: src/Controller/LordController.php:275
+msgid "Sex gap (males minus females)"
+msgstr "Balance des sexes (nombre de mâles moins nombre de femelles)"
 
 #: src/Controller/LordController.php:276
+msgid "Sex gap distribution among litters (% of litters)"
+msgstr "Répartition de la balance des sexes dans les portées (% des portées)"
+
+#: src/Controller/LordController.php:277
+msgid "More females"
+msgstr "Plus de femelles"
+
+#: src/Controller/LordController.php:278
+msgid "Sex-balanced"
+msgstr "Équilibrée"
+
+#: src/Controller/LordController.php:279
+msgid "More males"
+msgstr "Plus de mâles"
+
+#: src/Controller/LordController.php:280
+msgid " more female than males"
+msgstr " femelle de plus que de mâles"
+
+#: src/Controller/LordController.php:281
+msgid " more females than males"
+msgstr " femelles de plus que de mâles"
+
+#: src/Controller/LordController.php:282
+msgid "As many females as males"
+msgstr "Autant de femelles que de mâles"
+
+#: src/Controller/LordController.php:283
+msgid " more male than females"
+msgstr " mâle de plus que de femelles"
+
+#: src/Controller/LordController.php:284
+msgid " more males than females"
+msgstr " mâles de plus que de femelles"
+
+#: src/Controller/LordController.php:285
 msgid "Mortality distribution"
 msgstr "Répartition des décès"
 
-#: src/Controller/LordController.php:277
+#: src/Controller/LordController.php:286
 msgid "Mortality probability"
 msgstr "Probabilité de décès"
 
-#: src/Controller/LordController.php:278
+#: src/Controller/LordController.php:287
 msgid "Death probabilities (%)"
 msgstr "Probabilités de décès (%)"
 
-#: src/Controller/LordController.php:281
+#: src/Controller/LordController.php:290
 msgid "All-time survival and mortality by age"
 msgstr "Survie et mortalité, toutes années confondues, par classe d’âge"
 
-#: src/Controller/LordController.php:282
+#: src/Controller/LordController.php:291
 msgid "% of all rats reach this age"
 msgstr "% de tous les rats atteignent cet âge"
 
-#: src/Controller/LordController.php:283
+#: src/Controller/LordController.php:292
 msgid "% of all deaths occur in rats of this age"
 msgstr "% des décès surviennent chez les rats de cet âge"
 
-#: src/Controller/LordController.php:284
+#: src/Controller/LordController.php:293
 msgid "% of all rats reaching this age die in the following month"
-msgstr "% de tous les rats atteignant cet âge meurent dans les mois suivants"
+msgstr "% de tous les rats atteignant cet âge meurent dans le mois suivant"
 
-#: src/Controller/LordController.php:320
+#: src/Controller/LordController.php:329
 msgid "Rats by birth year"
 msgstr "Rats par année de naissance"
 
-#: src/Controller/LordController.php:321 templates/Lord/my.php:211
+#: src/Controller/LordController.php:330 templates/Lord/my.php:211
 #: templates/Lord/search.php:88 templates/Lord/webstats.php:26
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: src/Controller/LordController.php:322
+#: src/Controller/LordController.php:331
 msgid "Users by registration year"
 msgstr "Utilisateurs par année d’inscription"
 
-#: src/Controller/LordController.php:324
+#: src/Controller/LordController.php:333
 msgid "Ratteries by registration year"
 msgstr "Rateries par année d’inscription"
 
-#: src/Controller/LordController.php:347
+#: src/Controller/LordController.php:356
 msgid ""
 "Game over! Thanks for playing with us. Oh, by the way, it’s been {0} that "
-"Artefact has quit smoking."
+"our lead dev has quit smoking."
 msgstr ""
 "Perdu ! Merci d’avoir joué avec nous. Au fait, puisque vous êtes là, ça fait "
-"{0} qu’Artefact a arrêté de fumer."
+"{0} que notre lead dev a arrêté de fumer."
 
-#: src/Controller/LordController.php:434
+#: src/Controller/LordController.php:443
 msgid ""
 "\n"
 "                We strongly advised to consider alternative contact means "
@@ -1030,13 +1066,13 @@ msgstr ""
 "dans les meilleurs délais.\n"
 "                "
 
-#: src/Controller/LordController.php:467
+#: src/Controller/LordController.php:476
 msgid "Error sending email. Please, retry or contact us by another mean."
 msgstr ""
 "Une erreur s’est produite lors de l’envoi du mail. Veuillez réessayer ou "
 "nous contacter par un autre moyen."
 
-#: src/Controller/LordController.php:471
+#: src/Controller/LordController.php:480
 msgid ""
 "This was not the expected answer! Sorry to insist, but we must check that "
 "you are not spam, sausage, spam, spam, bacon, spam, tomato and spam to "
@@ -1047,10 +1083,10 @@ msgstr ""
 "spam, spam, bacon, spam, tomate et spam afin de protéger notre messagerie "
 "électronique."
 
-#: src/Controller/LordController.php:275
-msgctxt "sex ratio"
-msgid "Litters with"
-msgstr "Portées de"
+#: src/Controller/LordController.php:258
+msgctxt "litter statistics"
+msgid "Age: between"
+msgstr "Âge : entre"
 
 #: src/Controller/MarkingsController.php:94
 msgid "The new marking has been saved, but only in English. "
@@ -2963,8 +2999,8 @@ msgstr "Position"
 #: templates/Categories/admin.php:38 templates/Categories/index.php:16
 #: templates/Countries/index.php:17 templates/Countries/view.php:53
 #: templates/DeathPrimaryCauses/index.php:17
-#: templates/DeathPrimaryCauses/view.php:64 templates/Lord/hall_of_fame.php:58
-#: templates/Lord/hall_of_fame.php:117 templates/RatSnapshots/diff.php:43
+#: templates/DeathPrimaryCauses/view.php:64 templates/Lord/hall_of_fame.php:49
+#: templates/Lord/hall_of_fame.php:108 templates/RatSnapshots/diff.php:43
 #: templates/RatSnapshots/diff.php:320 templates/Rats/print.php:31
 #: templates/Rats/search.php:42 templates/Rats/view.php:216
 #: templates/RatterySnapshots/diff.php:40
@@ -3952,7 +3988,7 @@ msgctxt "message"
 msgid "About"
 msgstr "À propos de"
 
-#: templates/Lord/hall_of_fame.php:14 templates/Lord/stats.php:14
+#: templates/Lord/hall_of_fame.php:5 templates/Lord/stats.php:14
 #: templates/Lord/webstats.php:14 templates/Ratteries/view.php:309
 #: templates/layout/default.php:135 templates/layout/fullpage.php:144
 msgid "About"
@@ -4326,7 +4362,7 @@ msgstr "Rattacher le rat à la portée n°{0}"
 msgid "The rat you will select will be attached to the following litter: "
 msgstr "Le rat sélectionné sera rattaché à la portée suivante : "
 
-#: templates/Litters/attach_rat.php:45 templates/Lord/hall_of_fame.php:32
+#: templates/Litters/attach_rat.php:45 templates/Lord/hall_of_fame.php:23
 #: templates/RatMessages/view.php:22 templates/RatSnapshots/diff.php:285
 #: templates/RatSnapshots/view.php:22 templates/Rats/view.php:32
 #: templates/Rats/view.php:175
@@ -4823,7 +4859,7 @@ msgid "Sire: "
 msgstr "Père : "
 
 #: templates/Litters/view.php:289 templates/Litters/view.php:326
-#: templates/Lord/hall_of_fame.php:57 templates/Lord/hall_of_fame.php:116
+#: templates/Lord/hall_of_fame.php:48 templates/Lord/hall_of_fame.php:107
 #: templates/Rats/print.php:24 templates/RatterySnapshots/diff.php:31
 #: templates/RatterySnapshots/diff.php:166 templates/element/rats.php:18
 #: templates/element/simple_rats.php:30
@@ -5030,49 +5066,49 @@ msgstr "Envoyer le mail"
 msgid "Send email"
 msgstr "Envoyer un mail"
 
-#: templates/Lord/hall_of_fame.php:1 templates/Lord/hall_of_fame.php:18
+#: templates/Lord/hall_of_fame.php:1 templates/Lord/hall_of_fame.php:9
 msgid "Hall of Fame"
 msgstr "Temple de la renommée"
 
-#: templates/Lord/hall_of_fame.php:17
+#: templates/Lord/hall_of_fame.php:8
 msgid "Show me more"
 msgstr "J’en veux encore"
 
-#: templates/Lord/hall_of_fame.php:28
+#: templates/Lord/hall_of_fame.php:19
 msgid "Jeanne Calment Award"
 msgstr "Trophée Jeanne Calment"
 
-#: templates/Lord/hall_of_fame.php:34
+#: templates/Lord/hall_of_fame.php:25
 msgid "In Days"
 msgstr "En jours"
 
-#: templates/Lord/hall_of_fame.php:53
+#: templates/Lord/hall_of_fame.php:44
 msgid "It’s Been 84 Years Award"
 msgstr "Trophée Ça s'est passé il y a 84 ans"
 
-#: templates/Lord/hall_of_fame.php:59
+#: templates/Lord/hall_of_fame.php:50
 msgid "Active during"
 msgstr "En activité pendant"
 
-#: templates/Lord/hall_of_fame.php:85
+#: templates/Lord/hall_of_fame.php:76
 msgid "When We Love We Don’t Count Award"
 msgstr "Trophée Quand on aime on compte pas"
 
-#: templates/Lord/hall_of_fame.php:90 templates/Lord/search.php:98
+#: templates/Lord/hall_of_fame.php:81 templates/Lord/search.php:98
 #: templates/Roles/view.php:92 templates/Users/my.php:31
 #: templates/Users/register.php:12 templates/Users/view.php:95
 msgid "Username"
 msgstr "Pseudonyme"
 
-#: templates/Lord/hall_of_fame.php:102
+#: templates/Lord/hall_of_fame.php:93
 msgid "{0, plural, =0{0 rat} =1{1 rat} other{# rats}}"
 msgstr "{0, plural,=0{0 rat} =1{1 rat} other{# rats}}"
 
-#: templates/Lord/hall_of_fame.php:111
+#: templates/Lord/hall_of_fame.php:102
 msgid "Demographic Rearmement Award"
 msgstr "Trophée Réarmement démographique"
 
-#: templates/Lord/hall_of_fame.php:130 templates/Ratteries/view.php:197
+#: templates/Lord/hall_of_fame.php:121 templates/Ratteries/view.php:197
 #: templates/Ratteries/view.php:334 templates/Ratteries/view.php:339
 #: templates/Ratteries/view.php:344
 msgid "{0, plural, =0{0 litter} =1{1 litter} other{# litters}}"
@@ -8559,6 +8595,13 @@ msgstr "Code de l'application distribué sous licence GPL"
 #: templates/layout/default.php:176 templates/layout/fullpage.php:185
 msgid "Service is free of charge, hosted and maintained by SRFA"
 msgstr "Service gratuit hébergé et maintenu par l’association SRFA"
+
+#~ msgid "Number of pups of the given sex"
+#~ msgstr "Nombre de ratons du sexe défini"
+
+#~ msgctxt "sex ratio"
+#~ msgid "Litters with"
+#~ msgstr "Portées de"
 
 #~ msgid "Baby Factory Award"
 #~ msgstr "Usines à bébés"

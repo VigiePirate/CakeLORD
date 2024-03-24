@@ -697,6 +697,18 @@ trait StatisticsTrait
         return $histogram;
     }
 
+    public function computeLitterSexDifferenceDistribution() {
+        $histogram = $this->computeLitterSexes()->toArray();
+
+        foreach ($histogram as &$entry) {
+            $entry['diff'] = $entry['M'] - $entry['F'];
+        }
+
+        $histogram = array_count_values(array_column($histogram, 'diff'));
+        ksort($histogram);
+        return $histogram;
+    }
+
     public function computeLitterSizeDistribution($options = []) {
         $model = FactoryLocator::get('Table')->get('Litters');
 

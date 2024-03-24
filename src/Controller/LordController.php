@@ -236,11 +236,9 @@ class LordController extends AppController
         $pups_by_rattery = $lord->computePupsByRattery();
         $avg_sex_ratio = $lord->computeLitterSexRatioInWords([], 100);
 
-        //FIXME: use $rattery->is_generic property
         $nongeneric_litter_count = $lord->countLitters([], true);
         $littersize_distribution = json_encode($lord->computeLitterSizeDistribution());
-        $females_in_litter_distribution = json_encode($lord->computeLitterSexDistribution(['sex' => 'F']));
-        $males_in_litter_distribution = json_encode($lord->computeLitterSexDistribution(['sex' => 'M']));
+        $sex_difference_in_litter_distribution = json_encode($lord->computeLitterSexDifferenceDistribution());
 
         // translations for javascript chart
         $js_legends = json_encode([
@@ -255,6 +253,8 @@ class LordController extends AppController
             ' and ' => __(' and '),
             'months' => __('months'),
             ' months' => __(' months'),
+            'Age: between' => __x('litter statistics', 'Age: between'),
+            'and' => __('and'),
             'All-time average' => __('All-time average'),
             'All-time average:' => __('All-time average:'),
             'Average lifespan by birth year' => __('Average lifespan by birth year'),
@@ -270,9 +270,16 @@ class LordController extends AppController
             'Litter size distribution (% of litters)' => __('Litter size distribution (% of litters)'),
             '% of litters' => __('% of litters'),
             'pups' => __('pups'),
-            'Number of pups of the given sex' => __('Number of pups of the given sex'),
-            'Litter size distribution by sex (% of litters)' => __('Litter size distribution by sex (% of litters)'),
-            'Litters with' => __x('sex ratio', 'Litters with'),
+            'Sex gap (males minus females)' => __('Sex gap (males minus females)'),
+            'Sex gap distribution among litters (% of litters)' => __('Sex gap distribution among litters (% of litters)'),
+            'Litters with more females' => __('More females'),
+            'Sex-balanced litters' => __('Sex-balanced'),
+            'Litters with more males' => __('More males'),
+            ' more female than males' => __(' more female than males'),
+            ' more females than males' => __(' more females than males'),
+            'As many females as males' => __('As many females as males'),
+            ' more male than females' => __(' more male than females'),
+            ' more males than females' => __(' more males than females'),
             'Mortality distribution' => __('Mortality distribution'),
             'Mortality probability' => __('Mortality probability'),
             'Death probabilities (%)' => __('Death probabilities (%)'),
@@ -293,7 +300,7 @@ class LordController extends AppController
             'avg_mother_age', 'avg_father_age', 'avg_litter_size', 'debiased_avg_litter_size',
             'litters_by_rattery', 'litters_by_birthplace', 'litters_by_contributor',
             'pups_by_rattery', 'avg_sex_ratio',
-            'nongeneric_litter_count', 'littersize_distribution', 'females_in_litter_distribution', 'males_in_litter_distribution',
+            'nongeneric_litter_count', 'littersize_distribution', 'sex_difference_in_litter_distribution',
             'lifespan', 'female_lifespan', 'male_lifespan',
             'not_infant_lifespan', 'not_infant_female_lifespan', 'not_infant_male_lifespan',
             'not_accident_lifespan', 'not_accident_female_lifespan', 'not_accident_male_lifespan',
@@ -344,7 +351,7 @@ class LordController extends AppController
             $months = __dn('cake', '{0} month', '{0} months', $interval->m, $interval->m);
             $days = __dn('cake', '{0} day', '{0} days', $interval->d, $interval->d);
             $egg = trim(implode(', ', array_filter([$years, $months, $days], function ($val) {return ! str_starts_with($val, '0 ');})));
-            $this->Flash->error(__('Game over! Thanks for playing with us. Oh, by the way, it’s been {0} that Artefact has quit smoking.', [$egg]));
+            $this->Flash->error(__('Game over! Thanks for playing with us. Oh, by the way, it’s been {0} that our lead dev has quit smoking.', [$egg]));
             $this->redirect(['action' => 'hallOfFame']);
             $depth=10;
         }

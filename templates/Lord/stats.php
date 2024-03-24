@@ -553,44 +553,84 @@
     }
     var littersize_chart = new Chart(littersize_ctx, littersize_config);
 
-    // distribution by sexes
+    // sex balance distribution 
     var littersex_norm = <?= $nongeneric_litter_count ?>;
+    var littersex_json = <?php echo $sex_difference_in_litter_distribution; ?>;
 
-    var littersex_M_json = <?php echo $males_in_litter_distribution; ?>;
+    var littersex_M_json = Object.entries(littersex_json).reduce((acc, [key, value]) => {
+          if (parseInt(key) > 0) {
+            acc[key] = value;
+          }
+          return acc;
+        }, {});
+
+    var littersex_X_json = Object.entries(littersex_json).reduce((acc, [key, value]) => {
+          if (parseInt(key) == 0) {
+            acc[key] = value;
+          }
+          return acc;
+        }, {});
+
+    var littersex_F_json = Object.entries(littersex_json).reduce((acc, [key, value]) => {
+          if (parseInt(key) < 0) {
+            acc[key] = value;
+          }
+          return acc;
+        }, {});
+
     var littersex_M_labels = Object.keys(littersex_M_json);
     var littersex_M_data = (Object.values(littersex_M_json)).map(function (e) {
         return 100*e/littersex_norm;
     });
     var littersex_M_max = Math.max(...littersex_M_data);
     var littersex_M_colors = littersex_M_data.map(function(e) {
-        return 'rgba(153,204,255,'+(0.25+0.75*(e/littersex_M_max)).toString()+')';
+        return 'rgba(153,204,255,'+(0.5+0.5*(e/littersex_M_max)).toString()+')';
     });
 
-    var littersex_F_json = <?php echo $females_in_litter_distribution; ?>;
+    var littersex_X_labels = Object.keys(littersex_X_json);
+    var littersex_X_data = (Object.values(littersex_X_json)).map(function (e) {
+        return 100*e/littersex_norm;
+    });
+    var littersex_X_max = Math.max(...littersex_X_data);
+    var littersex_X_colors = littersex_X_data.map(function(e) {
+        return 'rgba(61, 75, 153, '+(0.25+0.5*(e/littersex_X_max)).toString()+')';
+    });
+
     var littersex_F_labels = Object.keys(littersex_F_json);
     var littersex_F_data = (Object.values(littersex_F_json)).map(function (e) {
         return 100*e/littersex_norm;
     });
     var littersex_F_max = Math.max(...littersex_F_data);
     var littersex_F_colors = littersex_F_data.map(function(e) {
-        return 'rgba(255,153,204, '+(0.25+0.75*(e/littersex_F_max)).toString()+')';
+        return 'rgba(255,153,204, '+(0.5+0.5*(e/littersex_F_max)).toString()+')';
     });
+
+    var littersex_labels = (littersex_F_labels.concat(littersex_X_labels)).concat(littersex_M_labels);
 
     var littersex_ctx = document.getElementById('littersex-chart').getContext('2d');
     var littersex_config = {
         type: 'bar',
         data: {
-            labels: littersex_M_labels,
+            labels: littersex_labels,
             datasets: [
                 {
-                    label: jsLegends["Females"],
-                    data: littersex_F_data,
+                    label: jsLegends["Litters with more females"],
+                    //data: littersex_F_data,
+                    data: Object.values(littersex_F_data).concat(new Array(Object.keys(littersex_X_data).length).fill(0)).concat(new Array(Object.keys(littersex_M_data).length).fill(0)),
                     backgroundColor: littersex_F_colors,
                     hoverBackgroundColor: 'rgba(102,51,0,1)',
                 },
                 {
-                    label: jsLegends["Males"],
-                    data: littersex_M_data,
+                    label: jsLegends["Sex-balanced litters"],
+                    //data: littersex_X_data,
+                    data: new Array(Object.keys(littersex_F_data).length).fill(0).concat(Object.values(littersex_X_data)).concat(new Array(Object.keys(littersex_M_data).length).fill(0)),
+                    backgroundColor: littersex_X_colors,
+                    hoverBackgroundColor: 'rgba(102,51,0,1)',
+                },
+                {
+                    label: jsLegends["Litters with more males"],
+                    //data: littersex_M_data,
+                    data: new Array(Object.keys(littersex_F_data).length + Object.keys(littersex_X_data).length).fill(0).concat(Object.values(littersex_M_data)),
                     backgroundColor: littersex_M_colors,
                     hoverBackgroundColor: 'rgba(102,51,0,1)',
                 }
@@ -600,12 +640,16 @@
             aspectRatio:1.5,
             scales: {
                 x: {
+                    stacked: true,
                     title: {
                         display: true,
-                        text: jsLegends["Number of pups of the given sex"],
-                    }
+                        text: jsLegends["Sex gap (males minus females)"],
+                    },
+                    min: littersex_F_labels.length - 9,
+                    max: littersex_F_labels.length + 9,
                 },
                 y: {
+                    stacked: false,
                     beginAtZero: true,
                     title: {
                         display: true,
@@ -621,25 +665,41 @@
                 },
                 title: {
                     display: true,
-                    text: jsLegends["Litter size distribution by sex (% of litters)"],
+                    text: jsLegends["Sex gap distribution among litters (% of litters)"],
                 },
                 tooltip: {
                     caretPadding: 12,
                     displayColors: false,
                     callbacks: {
                         label: function(context) {
-                            //var label = context.dataset.label || '';
-                            //if (label) {
-                            //    label += ': ';
-                            //}
                             if (context.parsed.y !== null) {
                                 label = Math.round(100*context.parsed.y)/100 + " " + jsLegends["% of litters"];
                             }
                             return label;
                         },
                         title: function(context) {
-                            //var title = 'Rats between '+(parseInt(context[0].parsed.x)-0.5).toString()+' and '+ (parseInt(context[0].parsed.x)+0.5).toString()+' months ';
-                            var title = jsLegends["Litters with"] + " " + context[0].label + " " +  (context[0].dataset.label).toLowerCase();
+                            var gap = context[0].label;
+
+                            if (gap < -1) {
+                                var title = Math.abs(context[0].label) + jsLegends[" more females than males"];
+                            }
+
+                            if (gap == -1) {
+                                var title = Math.abs(context[0].label) + jsLegends[" more female than males"];
+                            }
+
+                            if (gap == 0) {
+                                var title = jsLegends["As many females as males"];
+                            }
+
+                            if (gap == 1) {
+                                var title = context[0].label + jsLegends[" more male than females"];
+                            }
+
+                            if (gap > 1) {
+                                var title = context[0].label + jsLegends[" more males than females"];
+                            }
+
                             return title;
                         }
                     }
