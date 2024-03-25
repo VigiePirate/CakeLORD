@@ -714,8 +714,12 @@ class RatteriesController extends AppController
         if ($this->request->is(['ajax'])) {
             $searchkey = $this->request->getQuery('searchkey');
             $items = $this->Ratteries->find('named', ['names' => [$searchkey]] )
-                ->select(['id', 'value' => "concat(prefix,' – ',name)", 'label' => "concat(prefix,' – ',name)"])
-            ;
+                ->select([
+                    'id' => 'Ratteries.id',
+                    'Ratteries__state_id' => 'Ratteries.state_id', 
+                    'value' => "concat(prefix,' – ',name)",
+                    'label' => "concat(prefix,' – ',name)"
+                ]);
             $this->set('items', $items);
             $this->viewBuilder()->setOption('serialize', ['items']);
         }

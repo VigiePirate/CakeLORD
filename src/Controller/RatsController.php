@@ -1126,12 +1126,12 @@ class RatsController extends AppController
             if (! is_null($sex)) {
                 $items = $this->Rats->find('incipit', ['names' => [$searchkey], 'searchable_only' => $this->searchable_only])
                     ->where(['sex IS' => $sex])
-                    ->select(['id',
+                    ->select(['id' => 'Rats.id', 'Rats__state_id' => 'Rats.state_id',
                         'label' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')"
                     ]);
             } else {
                 $items = $this->Rats->find('identified', ['names' => [$searchkey], 'searchable_only' => $this->searchable_only])
-                    ->select(['id',
+                    ->select(['id' => 'Rats.id', 'Rats__state_id' => 'Rats.state_id',
                         'label' => "concat(Rats.name, ' (', Rats.pedigree_identifier, ')')"
                     ]);
             }
