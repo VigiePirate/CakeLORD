@@ -134,12 +134,9 @@
     </div>
 </div>
 
+<div id="json-genealogy" data-json="<?= htmlspecialchars($genealogy_json) ?>"></div>
+<div id="json-index" data-json="<?= htmlspecialchars($index_json) ?>"></div>
+<div id="json-messages" data-json="<?= htmlspecialchars($js_messages) ?>"></div>
+
 <?= $this->Html->css('loading'); ?>
 <?= $this->Html->script('inbreeding'); ?>
-
-<script>
-    var partialTree = <?php echo $genealogy_json; ?>;
-    var ancestorIndex = <?php echo $index_json; ?>;
-    var jsMessages = <?php echo $js_messages; ?>;
-    window.onload = setTimeout(init(partialTree, ancestorIndex, jsMessages), 250); // a small timeout to let debugkit loading
-</script>

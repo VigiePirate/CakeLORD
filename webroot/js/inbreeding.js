@@ -1,18 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-      var jsonDataElement = document.getElementById('json-data');
-      var json = JSON.parse(jsonDataElement.getAttribute('data-json'));
+      var partialTreeElement = document.getElementById('json-genealogy');
+      var partialTree = JSON.parse(partialTreeElement.getAttribute('data-json'));
 
-      jsonDataElement = document.getElementById('genealogy-data');
-      var partialTree = JSON.parse(jsonDataElement.getAttribute('data-json'));
+      var ancestorIndexElement = document.getElementById('json-index');
+      var ancestorIndex = JSON.parse(ancestorIndexElement.getAttribute('data-json'));
 
-      jsonDataElement = document.getElementById('index-data');
-      var ancestorIndex = JSON.parse(jsonDataElement.getAttribute('data-json'));
+      var jsMessagesElement = document.getElementById('json-messages');
+      var jsMessages = JSON.parse(jsMessagesElement.getAttribute('data-json'));
 
-      jsonDataElement = document.getElementById('messages-data');
-      var jsMessages = JSON.parse(jsonDataElement.getAttribute('data-json'));
-
-      setTimeout(init(partialTree, ancestorIndex, jsMessages), 250);
-
+      init(partialTree, ancestorIndex, jsMessages);
   });
 
 function showFeedback(cost, jsMessages) {
