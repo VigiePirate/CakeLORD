@@ -3,9 +3,21 @@
  * For the sake of the examples, I want the setup code to be at the top.
  * However, since it uses a class (Tree) which is defined later, I wrap
  * the setup code in a function at call it at the end of the example.
- * Normally you would extract the entire Tree class defintion into a
+ * Normally you would extract the entire Tree class definition into a
  * separate file and include it before this script tag.
  */
+
+ // box sizes variables; should probably be in rem
+ var boxWidth = 222,
+  boxHeight = 60,
+  nodeWidth = 93,
+  nodeHeight = 248,
+  // duration of transitions in ms
+  duration = 440, //500 is fine, 3000 for debug
+  // d3 multiplies the node size by this value
+  // to calculate the distance between nodes
+  sibling_separation = 0.75,
+  cousin_separation = 1;
 
 var labels = []
 var labelsF = [];
@@ -19,7 +31,13 @@ var colorScaleM = d3.scale.ordinal()
 var strokeScaleM = d3.scale.ordinal()
   .range(['#6666ff', '#78d956', '#af66ff', '#56d88d', '#52ccb8', '#9aff33', '#0f7799']);
 
-function setup() {
+document.addEventListener('DOMContentLoaded', function() {
+      var jsonDataElement = document.getElementById('json-data');
+      var json = JSON.parse(jsonDataElement.getAttribute('data-json'));
+      setup(json);
+  });
+
+function setup(json) {
 
   // local dimensions variables - could be computed from box/node width/height
   w = 1000;
@@ -71,11 +89,6 @@ function setup() {
         })
     });
 
-    // ChatGPT suggestion to avoid double scrolling
-    // .on("touchmove", function() {
-    //   d3.event.preventDefault();
-    // });
-
   // One tree to display the ancestors
   var ancestorTree = new Tree(svg, 'ancestor', 1);
   ancestorTree.children(function(person){
@@ -98,25 +111,12 @@ function setup() {
     }
   });
 
-  // loading data when they are written in a json file
-  // d3.json(file, function(error, json){
-  //  if(error) {
-  //    return console.error(error);
-  //  }
-
   // D3 modifies the objects by setting properties such as
   // coordinates, parent, and children. Thus the same node
   // node can't exist in two trees. But we need the root to
   // be in both so we create proxy nodes for the root only.
   var ancestorRoot = rootProxy(json);
   var descendantRoot = rootProxy(json);
-
-  // Start with only the first few generations of ancestors showing
-  // ancestorRoot._parents.forEach(function(parents){
-  //   parents._parents.forEach(collapse);
-  // });
-  // Start with only one generation of descendants showing
-  // descendantRoot._children.forEach(collapse);
 
   // Set the root nodes
   ancestorTree.data(ancestorRoot);
@@ -684,13 +684,3 @@ function truncate(text, width) {
     }
   });
 }
-/*
-* Some unused code snippet to adapt font size of long texts
-*/
-// .style("font-size", function(d) {
-//  if (this.getComputedTextLength() > boxWidth) {
-//    return Math.min(2 * boxWidth/2, (2 * boxWidth/2 - 8) / this.getComputedTextLength() * 14) + "px";
-//  } else {
-//    return "14px";
-//  }
-// })

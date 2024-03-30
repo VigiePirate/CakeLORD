@@ -1,3 +1,20 @@
+document.addEventListener('DOMContentLoaded', function() {
+      var jsonDataElement = document.getElementById('json-data');
+      var json = JSON.parse(jsonDataElement.getAttribute('data-json'));
+
+      jsonDataElement = document.getElementById('genealogy-data');
+      var partialTree = JSON.parse(jsonDataElement.getAttribute('data-json'));
+
+      jsonDataElement = document.getElementById('index-data');
+      var ancestorIndex = JSON.parse(jsonDataElement.getAttribute('data-json'));
+
+      jsonDataElement = document.getElementById('messages-data');
+      var jsMessages = JSON.parse(jsonDataElement.getAttribute('data-json'));
+
+      setTimeout(init(partialTree, ancestorIndex, jsMessages), 250);
+
+  });
+
 function showFeedback(cost, jsMessages) {
   document.getElementById('waiting-message').style.display = 'none';
   document.getElementById('cost').innerHTML = i18n.format(Math.trunc(cost)/1000);

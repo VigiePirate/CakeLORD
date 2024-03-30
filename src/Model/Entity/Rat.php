@@ -136,6 +136,7 @@ class Rat extends Entity
                 ->get('Contributions')
                 ->find()
                 ->where(['litter_id' => $this->birth_litter->id])
+                ->contain(['Ratteries'])
                 ->order(['contribution_type_id' => 'asc'])
                 ->all()
                 ->toArray();
