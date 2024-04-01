@@ -37,3 +37,8 @@
         </div>
     </div>
 </div>
+
+<!-- Easy MDE -->
+<?= $this->Html->css('easymde.css') ?>
+<?= $this->Html->script('easymde.min.js') ?>
+<?= $this->Html->script('easymde-staff.js') ?>
