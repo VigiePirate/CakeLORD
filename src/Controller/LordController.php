@@ -117,7 +117,7 @@ class LordController extends AppController
         $this->Authorization->skipAuthorization();
 
         if($this->request->is(['post'])) {
-            $key = $this->request->getData('key');
+            $key = trim($this->request->getData('key'));
             $this->redirect(['action' => 'search', $key]);
         }
     }
