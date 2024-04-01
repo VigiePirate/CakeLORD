@@ -77,7 +77,7 @@
                     echo $this->Form->control('wants_statistic', ['label' => __('Check this box if you want to see and publish your statistics')]);
                     echo $this->Form->control('wants_statistic', ['label' => __('Check this box if the rattery is active, uncheck it to declare it inactive')]);
                     echo $this->Form->control('is_generic', ['label' => __('Check this box to declare the rattery as generic')]);
-                
+
                     echo $this->Form->control('picture_file', [
                         'type' => 'file',
                         'label' => __('Logotype')
@@ -151,24 +151,5 @@
 
 <!-- Easy MDE -->
 <?= $this->Html->css('easymde.css') ?>
-<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
-
-<script>
-    var easyMDE = new EasyMDE({
-        minHeight: "20rem",
-        spellChecker: false,
-        inputStyle: "contenteditable",
-        nativeSpellcheck: true,
-        previewImagesInEditor: true,
-        promptURLs: true,
-        sideBySideFullscreen: false,
-        toolbar: [
-            "bold", "italic", "strikethrough", "|",
-            "unordered-list", "ordered-list", "table", "|",
-            "link", "|",
-            "side-by-side", "fullscreen", "preview", "|",
-            "guide"
-        ]
-    });
-    easyMDE.toggleSideBySide();
-</script>
+<?= $this->Html->script('easymde.min.js') ?>
+<?= $this->Html->script('easymde-light.js') ?>
