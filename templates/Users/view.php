@@ -11,7 +11,7 @@
     <aside class="column">
         <div class="side-nav">
             <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
+                <?= $this->element('default_sidebar', ['help_url' => ['controller' => 'Categories', 'action' => 'view', 5]]) ?>
             </div>
             <?php if (! is_null($identity)) : ?>
                 <?php if ($identity->can('edit', $user)) : ?>
