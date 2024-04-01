@@ -16,16 +16,23 @@ function showFeedback(cost, jsMessages) {
   document.getElementById('cost').innerHTML = i18n.format(Math.trunc(cost)/1000);
   var costComment;
 
-  if (cost <= 2500) {
-    costComment = jsMessages[0];
-  } else if (cost <= 10000) {
-    costComment = jsMessages[1];
-  } else if (cost <= 40000) {
-    costComment = jsMessages[2];
-  } else if (cost <= 160000) {
-    costComment = jsMessages[3];
+  // only show comment episodically to avoid boredom!
+  var dice = Math.floor(6 * Math.random() + 1);
+
+  if (dice == 6) {
+    if (cost <= 2500) {
+      costComment = jsMessages[0];
+    } else if (cost <= 10000) {
+      costComment = jsMessages[1];
+    } else if (cost <= 40000) {
+      costComment = jsMessages[2];
+    } else if (cost <= 160000) {
+      costComment = jsMessages[3];
+    } else {
+      costComment = jsMessages[4];
+    }
   } else {
-    costComment = jsMessages[4];
+    costComment = '';
   }
 
   document.getElementById('cost-comment').innerHTML += costComment;
