@@ -10,7 +10,7 @@
     <aside class="column">
         <div class="side-nav">
             <div class="side-nav-group">
-                <?= $this->element('default_sidebar', isset($help_url) ? $help_url : ['controller' => 'Faqs', 'action' => 'all']) ?>
+                <?= $this->element('default_sidebar', ['help_url' => ['controller' => 'Articles', 'action' => 'view', 23]]) ?>
             </div>
             <div class="side-nav-group">
                 <div class="tooltip">

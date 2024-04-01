@@ -12,7 +12,7 @@
         <aside class="column">
             <div class="side-nav">
                 <div class="side-nav-group">
-                    <?= $this->element('default_sidebar', ['help_url' => ['controller' => 'Categories', 'action' => 'view', 6]]) ?>
+                    <?= $this->element('default_sidebar', ['help_url' => ['controller' => 'Categories', 'action' => 'view', 8]]) ?>
                 </div>
                 <div class="side-nav-group">
                     <div class="tooltip">
@@ -57,7 +57,7 @@
         <aside class="column">
             <div class="side-nav">
                 <div class="side-nav-group">
-                    <?= $this->element('default_sidebar') ?>
+                    <?= $this->element('default_sidebar', ['help_url' => ['controller' => 'Categories', 'action' => 'view', 8]]) ?>
                 </div>
                 <?php if (!is_null($user)) : ?>
                     <div class="side-nav-group">

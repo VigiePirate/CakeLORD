@@ -11,7 +11,7 @@
     <aside class="column">
         <div class="side-nav">
             <div class="side-nav-group">
-                <?= $this->element('default_sidebar') ?>
+                <?= $this->element('default_sidebar', ['help_url' => ['controller' => 'Articles', 'action' => 'view', 32]]) ?>
             </div>
             <div class="side-nav-group">
                 <div class="tooltip">
