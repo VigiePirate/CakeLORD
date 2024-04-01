@@ -1,4 +1,4 @@
-![GitHub License](https://img.shields.io/github/license/:user/:repo)
+![GitHub License](https://img.shields.io/github/license/VigiePirate/CakeLORD)
 
 # Livre des Origines du Rat Domestique
 
