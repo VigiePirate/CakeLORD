@@ -15,7 +15,7 @@ class LittersController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['view']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
     }
 
     /**
@@ -1111,7 +1111,7 @@ class LittersController extends AppController
         } else {
             $this->Flash->error(__('We could not moderate the sheet. Please retry or contact an administrator.'));
         };
-        
+
         return $this->redirect(['action' => 'view', $litter->id]);
     }
 
