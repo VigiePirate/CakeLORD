@@ -26,6 +26,7 @@ class LordController extends AppController
         $this->Authentication->addUnauthenticatedActions([
             'parse',
             'search',
+            'stats',
             'webstats',
             'contact',
             'acknowledge',
