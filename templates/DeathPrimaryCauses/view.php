@@ -54,7 +54,7 @@
             </div>
 
             <h2><?= __('Related Information') ?>
-            <?php if (!empty($deathPrimaryCause->death_secondary_causes)) : ?>
+            <?php if (! empty($deathPrimaryCause->death_secondary_causes)) : ?>
             <h3><?= __('Related Death Causes') ?></h3>
             <div class="table-responsive">
                 <table class="summary">

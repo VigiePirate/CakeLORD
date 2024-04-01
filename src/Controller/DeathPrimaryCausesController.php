@@ -42,7 +42,14 @@ class DeathPrimaryCausesController extends AppController
      */
     public function view($id = null)
     {
-        $lastId = $this->DeathPrimaryCauses->DeathSecondaryCauses->findByDeathPrimaryCauseId($id)->all()->last()->id;
+        $lastId = $this->DeathPrimaryCauses->DeathSecondaryCauses->findByDeathPrimaryCauseId($id)->all()->last();
+
+        if (is_null($lastId)) {
+            $lastId = 1;
+        } else {
+            $lastId = $lastId->id;
+        }
+
         $deathPrimaryCause = $this->DeathPrimaryCauses->get($id, [
             'contain' => [
                 'DeathSecondaryCauses' => function($q) use ($lastId) {
