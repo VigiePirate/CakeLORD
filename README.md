@@ -1,6 +1,6 @@
-[![Release](https://img.shields.io/github/v/release/VigiePirate/CakeLORD)](https://github.com/VigiePirate/CakeLORD/releases/tag/latest)
+[![GitHub Release](https://img.shields.io/github/v/release/VigiePirate/CakeLORD)](https://github.com/VigiePirate/CakeLORD/releases/v2.3)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.2-8892BF.svg)](https://php.net/)
-[![GitHub License](https://img.shields.io/github/license/VigiePirate/CakeLORD)](https://github.com/VigiePirate/CakeLORD?tab=GPL-3.0-1-ov-file#readme)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
 # CakeLORD
 
