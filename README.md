@@ -2,11 +2,11 @@
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.2-8892BF.svg)](https://php.net/)
 [![GitHub License](https://img.shields.io/github/license/VigiePirate/CakeLORD)](https://github.com/VigiePirate/CakeLORD?tab=GPL-3.0-1-ov-file#readme)
 
-# CakeLORD - a multilingual "Livre des Origines du Rat Domestique" in CakePHP
+# CakeLORD
 
 ## Description
 
-The **"Livre des Origines du Rat Domestique"** (abbreviated as *LORD*) is the French translation for ***"Book of Pet Rat Origins"***. It is an open breed registry dedicated to pet rats. Its purpose is to keep track of pedigrees, to record ratteries, to monitor pet rat population especially by means of statistics, and to help breeders and owners to keep track of their rats and their families.
+**"Livre des Origines du Rat Domestique"** (abbreviated as *LORD*) is the French translation for **"Book of Pet Rat Origins"**. It is an open breed registry dedicated to pet rats. Its purpose is to keep track of pedigrees, to record ratteries, to monitor pet rat population especially by means of statistics, and to help breeders and owners to keep track of their rats and their families.
 
 To give a few examples, collected information about animal origins allows: to avoid unwanted inbreeding, to prevent hereditary disease, to generate complete and fully accessible family trees, to compute coefficients of inbreeding from them, to derive all kind of statistics (lifespan, death causes, varieties...) so as to monitor the livestock.
 
@@ -36,7 +36,7 @@ CakeLORD project is named after the CakePHP framework, with which LORD was devel
 
 ## Documentation
 
-
+Specifications, database schema and a minimal working example are provided (as is) in the [docs](https://github.com/VigiePirate/CakeLORD/tree/master/docs) folder. Specifications must be compiled with LaTeX.
 
 ## Support
 
