@@ -131,16 +131,6 @@ worker.onmessage = function(evt) {
     document.getElementById('avk5').innerHTML = '<span class="pulse">AVK<sub>5</sub>' + op + i18n.format(evt.data.avk5) + ' %';
   }
 
-  // if (evt.data.avk10 != undefined) {
-  //   if (evt.data.known < 2) {
-  //     unit = evt.data.jsMessages[7];
-  //   } else {
-  //     unit = evt.data.jsMessages[8];
-  //   }
-  //   op = evt.data.approx ? ' ≃ ' : ' = ';
-  //   document.getElementById('avk10').innerHTML = '<span class="pulse">AVK<sub>10</sub>' + op + i18n.format(evt.data.avk10) + ' %';
-  // }
-
   if (evt.data.coi5 != undefined) {
     document.getElementById('coi5').innerHTML = '<span class="pulse">COI<sub>5</sub> = ' + i18n.format((100*evt.data.coi5).toPrecision(3)) + ' %';
   }
