@@ -63,7 +63,9 @@
                             <th><?= __('Id') ?></th>
                             <th><?= __('Name') ?></th>
                             <th><?= __('Tumor?') ?></th>
-                            <th class="actions-icon col-head"><?= __('Actions') ?></th>
+                            <?php if ($show_staff) : ?>
+                                <th class="actions-icon col-head"><?= __('Actions') ?></th>
+                            <?php endif ; ?>
                         </tr>
                     </thead>
                     <?php foreach ($deathPrimaryCause->death_secondary_causes as $deathSecondaryCause) : ?>
@@ -71,21 +73,23 @@
                         <td><?= h($deathSecondaryCause->id) ?></td>
                         <td><?= $this->Html->link(h($deathSecondaryCause->name), ['controller' => 'DeathSecondaryCauses', 'action' => 'view', $deathSecondaryCause->id]) ?></td>
                         <td><?= $deathSecondaryCause->is_tumor ? '✓' : '' ?></td>
-                        <td class="actions">
-                            <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
-                                'url' => ['controller' => 'DeathSecondaryCauses', 'action' => 'edit', $deathSecondaryCause->id],
-                                'class' => 'action-icon',
-                                'alt' => __('Edit Death Cause')]) ?>
-                            <?= $this->Form->postLink(
-                                    $this->Html->image('/img/icon-delete.svg', [
-                                        'class' => 'action-icon',
-                                        'alt' => __('Delete Death Cause')
-                                    ]),
-                                    ['action' => 'delete', $deathSecondaryCause->id],
-                                    ['confirm' => __('Are you sure you want to delete # {0}?', $deathSecondaryCause->id), 'escape' => false]
-                                )
-                            ?>
-                        </td>
+                        <?php if ($show_staff) : ?>
+                            <td class="actions">
+                                <?= $this->Html->image('/img/icon-edit-as-staff-mini.svg', [
+                                    'url' => ['controller' => 'DeathSecondaryCauses', 'action' => 'edit', $deathSecondaryCause->id],
+                                    'class' => 'action-icon',
+                                    'alt' => __('Edit Death Cause')]) ?>
+                                <?= $this->Form->postLink(
+                                        $this->Html->image('/img/icon-delete.svg', [
+                                            'class' => 'action-icon',
+                                            'alt' => __('Delete Death Cause')
+                                        ]),
+                                        ['action' => 'delete', $deathSecondaryCause->id],
+                                        ['confirm' => __('Are you sure you want to delete # {0}?', $deathSecondaryCause->id), 'escape' => false]
+                                    )
+                                ?>
+                            </td>
+                        <?php endif ; ?>
                     </tr>
 
                     <?php endforeach; ?>
