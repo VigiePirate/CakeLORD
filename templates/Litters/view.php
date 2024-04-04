@@ -510,7 +510,7 @@
 <?php endif ; ?>
 
 <?= $this->Html->css('statebar.css') ?>
-<?= $this->Html->script('https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js') ?>
+<?= $this->Html->script('chart.min.js') ?>
 <script>
     Chart.defaults.font.family = "Imprima";
     Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(102,51,0,1)';

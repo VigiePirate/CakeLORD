@@ -70,62 +70,8 @@
     </div>
 </div>
 
-<?php $this->append('css');?>
-	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-<?php $this->end();?>
+<?= $this->Html->css('jquery.ui.css') ?>
 <?= $this->Html->css('ajax.css') ?>
-
-<?php $this->append('script');?>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-    <script>
-    $(function() {
-        $(window).on('load', function() {
-            if (! $("#jquery-rat-input").val() == '') {
-                $("#jquery-rat-input").addClass("autocompleted");
-            }
-        });
-    });
-    </script>
-
-    <script>
-    // autocomplete for rat
-    $(function () {
-        $('#jquery-rat-input')
-            .on('input', function() {
-                $("#jquery-rat-id").val('');
-                if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
-                    $(this).removeClass('autocompleted');
-                }
-            })
-
-            .autocomplete({
-                minLength: 4,
-                source: function (request, response) {
-                    $.ajax({
-                        url: '/rats/autocomplete.json',
-                        dataType: 'json',
-                        data: {
-                            'searchkey': $('#jquery-rat-input').val(),
-                        },
-                        success: function (data) {
-                            response(data.items);
-                        },
-                        open: function () {
-                            $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-                        },
-                        close: function () {
-                            $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-                        }
-                    });
-                },
-                select: function (event, ui) {
-                    $("#jquery-rat-input").val(ui.item.value); // display the selected text
-                    $("#jquery-rat-input").addClass("autocompleted"); // apply style
-                    $("#jquery-rat-id").val(ui.item.id); // save selected id to hidden input
-                }
-            });
-    });
-    </script>
-<?php $this->end(); ?>
+<?= $this->Html->script('jquery.min.js') ?>
+<?= $this->Html->script('jquery.ui.min.js') ?>
+<?= $this->Html->script('rat.js') ?>
