@@ -76,7 +76,7 @@
 </div>
 
 <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'); ?>
-<?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'); ?>
+<?= $this->Html->script('jquery.min.js'); ?>
 <?= $this->Html->script('simpletree'); ?>
 <script>
 // box sizes variables; should probably be in rem

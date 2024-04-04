@@ -274,5 +274,5 @@
 <div id="json-rate" data-json="<?= htmlspecialchars($rate) ?>"></div>
 
 <?= $this->Html->css('stats.css') ?>
-<?= $this->Html->script('https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js') ?>
+<?= $this->Html->script('chart.min.js') ?>
 <?= $this->Html->script('stats.js') ?>

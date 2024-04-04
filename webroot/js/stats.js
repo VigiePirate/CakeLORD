@@ -93,7 +93,7 @@ function drawPyramid(pyramid_M_json, pyramid_F_json, pyramid_norm, jsLegends, sm
           ]
       },
       options: {
-          aspectRatio: smartphone ? 1 : 1.5,
+          aspectRatio: smartphone ? 1.1 : 1.5,
           scales: {
               x: {
                   stacked:true,
@@ -142,7 +142,7 @@ function drawPyramid(pyramid_M_json, pyramid_F_json, pyramid_norm, jsLegends, sm
                           return label;
                       },
                       title: function(context) {
-                          var title = jsLegends["Age: between"]+ " "+ context[0].label+ jsLegends["and"]+ " " + (parseInt(context[0].label)+1).toString() + " " + jsLegends["months"];
+                          var title = jsLegends["Age: between"]+ " " + context[0].label + " " + jsLegends["and"] + " " + (parseInt(context[0].label)+1).toString() + " " + jsLegends["months"];
                           return title;
                       }
                   }
@@ -197,7 +197,7 @@ function drawLifespan(expectancy_json, global_lifespan, jsLegends, smartphone) {
           ]
       },
       options: {
-          aspectRatio: smartphone ? 1 : 1.5,
+          aspectRatio: smartphone ? 1.1 : 1.5,
           scales: {
               x: {
                   title: {
@@ -280,7 +280,7 @@ function drawLitterSize(littersize_json, littersize_norm, jsLegends, smartphone)
           }]
       },
       options: {
-          aspectRatio: smartphone ? 1 : 1.5,
+          aspectRatio: smartphone ? 1.2 : 1.5,
           scales: {
               x: {
                   title: {
@@ -415,7 +415,7 @@ function drawSexBalance(littersex_json, littersex_norm, jsLegends, smartphone) {
           ]
       },
       options: {
-          aspectRatio: smartphone ? 1 : 1.5,
+          aspectRatio: smartphone ? 1.1 : 1.5,
           scales: {
               x: {
                   stacked: true,
