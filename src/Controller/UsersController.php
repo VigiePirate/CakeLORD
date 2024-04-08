@@ -351,6 +351,7 @@ class UsersController extends AppController
                 'Users',
             ])
             ->order(['RatMessages.created' => 'DESC'])
+            ->limit(200) // safety limit for memory exhaustion
             ->all();
 
         $rat_last_messages_ids = $this->fetchModel('RatMessages')
@@ -390,6 +391,7 @@ class UsersController extends AppController
                 'Users'
             ])
             ->order(['RatteryMessages.created' => 'DESC'])
+            ->limit(200)
             ->all();
 
         $rattery_last_messages_ids = $this->fetchModel('RatteryMessages')
@@ -428,6 +430,7 @@ class UsersController extends AppController
                 'Users',
             ])
             ->order(['LitterMessages.created' => 'DESC'])
+            ->limit(200)
             ->all();
 
         $litter_last_messages_ids = $this->fetchModel('LitterMessages')
@@ -567,6 +570,7 @@ class UsersController extends AppController
             $champion = $this->fetchModel('Rats')->get($champion->id, ['contain' => ['Ratteries','BirthLitters']]);
         }
 
+        $locales = Configure::read('App.supportedLocales');
         $locale = ! is_null($user->locale) && isset($locales[$user->locale])
             ? $locales[$user->locale]
             : null;
