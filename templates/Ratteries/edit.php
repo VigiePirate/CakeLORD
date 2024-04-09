@@ -103,7 +103,7 @@
 <?= $this->Html->css('jquery.ui.css') ?>
 <?= $this->Html->css('ajax.css') ?>
 <?= $this->Html->script('jquery.min.js') ?>
-<?= $this->Html->script('jquery-ui.min.js') ?>
+<?= $this->Html->script('jquery.ui.min.js') ?>
 
 <script>
 $(function() {
