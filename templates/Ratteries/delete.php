@@ -42,7 +42,7 @@
                     <summary class="staff">
                         <?= __('Messages') ?>
                     </summary>
-                    <?php if (!empty($rattery->rattery_messages)) : ?>
+                    <?php if (! empty($rattery->rattery_messages)) : ?>
 
                     <div class="table-responsive">
                         <table class="summary">
@@ -118,9 +118,9 @@
             <?php else : ?>
                 <h2 class="staff"><?= __('Review litters and rats before the rattery sheet can be deleted') ?></h2>
                 <h3 class="staff"><?= __('Litters') ?></h3>
-                <?= $this->element('simple_staff_litters', ['litters' => $rattery->litters, 'identity' => $user]) ?>
+                <?= $this->element('simple_staff_litters', ['litters' => $rattery->litters, 'identity' => $user, 'show_thead' => true]) ?>
                 <h3 class="staff"><?= __('Rats') ?></h3>
-                <?= $this->element('simple_staff_rats', ['rats' => $rattery->rats]) ?>
+                <?= $this->element('simple_staff_rats', ['rats' => $rattery->rats, 'show_thead' => true]) ?>
             <?php endif ; ?>
         </div>
     </div>

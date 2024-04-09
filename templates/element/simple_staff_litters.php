@@ -1,4 +1,4 @@
-<?php if ($litters->count()) : ?>
+<?php if (isset($show_thead) || (! isset($show_thead) && $litters->count())) : ?>
     <div class="table-responsive">
         <table class="summary">
           <thead>

@@ -1,4 +1,4 @@
-<?php if ($rats->count()) : ?>
+<?php if (isset($show_thead) || (! isset($show_thead) && $rats->count())) : ?>
     <div class="table-responsive">
         <table class="summary">
             <thead>
