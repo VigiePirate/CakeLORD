@@ -99,9 +99,28 @@ class LitterPolicy implements BeforePolicyInterface
         return $litter->state->needs_staff_action && $user->role->can_edit_others;
     }
 
+    /**
+     * Check if $user can add a new rat to the litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
     public function canAddRat(IdentityInterface $user, Litter $litter)
     {
         return true;
+    }
+
+    /**
+     * Check if $user can attach an existing rat to the litter
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @param App\Model\Entity\Litter $litter
+     * @return bool
+     */
+    public function canAttachRat(IdentityInterface $user, Litter $litter)
+    {
+        return $user->role->can_change_state;
     }
 
     public function canManageContributions(IdentityInterface $user, Litter $litter)

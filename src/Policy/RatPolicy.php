@@ -189,7 +189,7 @@ class RatPolicy implements BeforePolicyInterface
     public function canDispute(IdentityInterface $user, Rat $rat)
     {
         return (! $rat->state->needs_staff_action && $user->can_change_state)
-            || ($rat->state->needs_user_action && ($this->isOwner($user, $rat) || $this->isCreator($user, $rat)));
+            || ($rat->state->needs_user_action && ($this->isOwner($user, $rat) || $this->isCreator($user, $rat) || $this->isBreeder($user, $rat)));
     }
 
     /**
