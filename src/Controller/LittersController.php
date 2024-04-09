@@ -656,7 +656,7 @@ class LittersController extends AppController
             ],
         ]);
 
-        $this->Authorization->authorize($litter, 'staffEdit');
+        $this->Authorization->authorize($litter, 'attachRat');
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rats = $this->fetchModel('Rats');
