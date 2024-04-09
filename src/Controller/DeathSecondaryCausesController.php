@@ -110,7 +110,7 @@ class DeathSecondaryCausesController extends AppController
             }
             $this->Flash->error(__('The death cause could not be saved. Please, try again.'));
         }
-        $deathPrimaryCauses = $this->DeathSecondaryCauses->DeathPrimaryCauses->find('list', ['limit' => 200])->order('id');
+        $deathPrimaryCauses = $this->DeathSecondaryCauses->DeathPrimaryCauses->find('list', ['limit' => 200])->order('DeathPrimaryCauses.id');
         $user = $this->request->getAttribute('identity');
         $this->set(compact('deathSecondaryCause', 'deathPrimaryCauses', 'user'));
     }
