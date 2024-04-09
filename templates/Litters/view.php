@@ -132,7 +132,7 @@
                     </div>
                     <?php if ($user->is_staff) : ?>
                         <div class="side-nav-group">
-                            <?php if (! is_null($user) && $user->can('staffEdit', $litter)) : ?>
+                            <?php if (! is_null($user) && $user->can('attachRat', $litter)) : ?>
                                 <div class="tooltip-staff">
                                     <?= $this->Html->image('/img/icon-attach-rat.svg', [
                                         'url' => ['controller' => 'Litters', 'action' => 'attachRat', $litter->id],
