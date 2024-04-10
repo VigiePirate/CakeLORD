@@ -43,7 +43,7 @@
                 <label><?= __('Contributing ratteries') ?></label>
 
                 <p class="helper">
-                    <?= __('Please use the dedicated form to <a href="{0}">edit contributing ratteries</a>.', ['action' => 'manageContributions', $litter->id]) ?> <br/>
+                    <?= __('Please use the dedicated form to <a href="{0}">edit contributing ratteries</a>.', [$this->Url->build(['controller' => 'Litters', 'action' => 'manageContributions', $litter->id])]) ?> <br/>
                 </p>
 
                 <?php
