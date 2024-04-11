@@ -143,6 +143,7 @@
                         'user' => $user,
                         'sheet' => $litter,
                         'required' => false,
+                        'ignore_staff' => ! $user->can('staffEdit', $litter),
                     ]);
                 ?>
             </fieldset>
