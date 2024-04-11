@@ -283,7 +283,11 @@ class Rattery extends Entity
             $last_birth = FrozenTime::createFromFormat('Y-m-d', $lifetimes['last_birth']);
 
             if($productivity==1) {
-                $lifetime = $first_birth->year . __(' (one-shot rattery)');
+                if ($first_birth < FrozenTime::now()->subYears(2)) {
+                    $lifetime = $first_birth->year . __(' (one-shot rattery)');
+                } else {
+                    $lifetime = $first_birth->year . __(' (beginning rattery)');
+                }
             } else {
                 $duration = $last_birth->timeAgoInWords(['from' => $first_birth, 'accuracy' => ['year' => 'month', 'month => week', 'week' => 'week']]);
 
