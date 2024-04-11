@@ -1178,7 +1178,7 @@ class UsersController extends AppController
         ]);
 
         // Pass variables into the view template context.
-        $users = $this->paginate($users->find()->contain(['Ratteries', 'Roles']));
+        $users = $this->paginate($users->contain(['Ratteries', 'Roles']));
 
         $this->set([
             'users' => $users,
