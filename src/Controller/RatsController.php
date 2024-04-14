@@ -458,6 +458,9 @@ class RatsController extends AppController
                     $prefix = $ratteries->get($data['generic_rattery_id'])->prefix;
                     $rat->pedigree_identifier =  $prefix . $rat->id . $rat->sex;
                     $rat->is_pedigree_custom = false;
+                    if ($data['detach_from_birthlitter']) {
+                        $rat->litter_id = null;
+                    }
                 }
                 else {
                     // sex change only
