@@ -61,6 +61,7 @@ class UserMailer extends Mailer
     ->setFrom($options['from'])
     ->setSender($options['sender_mail'], $options['sender_name'])
     ->setTo($user->email)
+    ->setBcc('lord@srfa.info')
     ->setSubject(__('A Staff Member Sent You a Message'))
     ->setViewVars(['message' => $message, 'username' => $user->username])
     ->setEmailFormat('both')
