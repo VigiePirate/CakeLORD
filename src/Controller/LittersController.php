@@ -687,7 +687,6 @@ class LittersController extends AppController
                 return $this->redirect(['controller' => 'litters', 'action' => 'attachRat', $litter->id]);
             }
             $rats->addBehavior('State');
-
         }
 
         $user = $this->request->getAttribute('identity');

@@ -312,6 +312,12 @@
                                     'empty' => false,
                                 ]);
 
+                                echo $this->Form->control('detach_from_birthlitter', [
+                                    'label' => ['text' => __('Detach from its birth litter?')],
+                                    'type' => 'checkbox',
+                                    'default' => false,
+                                ]);
+
                                 echo $this->Form->control('update_identifier', [
                                     'label' => ['text' => __('Update pedigree identifier?')],
                                     'type' => 'checkbox',
@@ -344,224 +350,215 @@
     </div>
 </div>
 
-<?php $this->append('css');?>
-	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" /> -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.default.css" />
-<?php $this->end();?>
-
+<?= $this->Html->css('jquery.ui.css') ?>
+<?= $this->Html->css('selectize.default.css') ?>
 <?= $this->Html->css('ajax.css') ?>
 <?= $this->Html->css('selectize.milligram.css') ?>
 
-<?php $this->append('script');?>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <!-- general select2 ; French version at: cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.min.js -->
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" type="text/javascript"></script> -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.js"></script>
+<?= $this->Html->script('jquery.min.js') ?>
+<?= $this->Html->script('jquery.ui.min.js') ?>
+<?= $this->Html->script('selectize.js') ?>
 
-    <script>
-    $(function() {
-        $(window).on('load', function() {
-            if (! $("#jquery-owner-id").val() == '') {
-                $("#jquery-owner-input").addClass("autocompleted");
-            }
-        });
+<script>
+$(function() {
+    $(window).on('load', function() {
+        if (! $("#jquery-owner-id").val() == '') {
+            $("#jquery-owner-input").addClass("autocompleted");
+        }
     });
-    </script>
+});
+</script>
 
-    <script>
+<script>
+$(function () {
+    $('#jquery-owner-input')
+        .on('input', function() {
+            $("#jquery-mother-id").val('');
+            if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
+                $(this).removeClass('autocompleted');
+            }
+        })
+        .autocomplete({
+            minLength: 3,
+            source: function (request, response) {
+                $.ajax({
+                    /*url: $('#jquery-owner-form').attr('action') + '.json',*/
+                    url: '/users/autocomplete.json',
+                    dataType: 'json',
+                    data: {
+                        'searchkey': $('#jquery-owner-input').val(),
+                    },
+                    success: function (data) {
+                        response(data.items);
+                    },
+                    open: function () {
+                        $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
+                    },
+                    close: function () {
+                        $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $("#jquery-owner-input").val(ui.item.value); // display the selected text
+                $("#jquery-owner-input").addClass("autocompleted"); // display the selected text
+                $("#jquery-owner-id").val(ui.item.id); // save selected id to hidden input
+            }
+        }
+    );
+});
+</script>
+
+<script>
+var placeholders = <?= $placeholders ?>;
     $(function () {
-        $('#jquery-owner-input')
-            .on('input', function() {
-                $("#jquery-mother-id").val('');
-                if ($(this).val() === '' || $(this).val() === $(this).attr('placeholder')) {
-                    $(this).removeClass('autocompleted');
-                }
-            })
-            .autocomplete({
-                minLength: 3,
-                source: function (request, response) {
-                    $.ajax({
-                        /*url: $('#jquery-owner-form').attr('action') + '.json',*/
-                        url: '/users/autocomplete.json',
-                        dataType: 'json',
-                        data: {
-                            'searchkey': $('#jquery-owner-input').val(),
-                        },
-                        success: function (data) {
-                            response(data.items);
-                        },
-                        open: function () {
-                            $(this).removeClass('ui-corner-all').addClass('ui-corner-top');
-                        },
-                        close: function () {
-                            $(this).removeClass('ui-corner-top').addClass('ui-corner-all');
-                        }
-                    });
-                },
-                select: function (event, ui) {
-                    $("#jquery-owner-input").val(ui.item.value); // display the selected text
-                    $("#jquery-owner-input").addClass("autocompleted"); // display the selected text
-                    $("#jquery-owner-id").val(ui.item.id); // save selected id to hidden input
-                }
-            }
-        );
+        $("#jquery-color-select").selectize( {
+            placeholder: placeholders['colors'],
+            maxItems: 1,
+            plugins: ['remove_button']
+        });
     });
-    </script>
+    $(function () {
+        $("#jquery-eyecolor-select").selectize( {
+            placeholder: placeholders['eyecolors'],
+            maxItems: 1,
+            plugins: ['remove_button']
+        });
+    });
+    $(function () {
+        $("#jquery-coat-select").selectize( {
+            placeholder: placeholders['coats'],
+            maxItems: 1,
+            plugins: ['remove_button']
+        });
+    });
+    $(function () {
+        $("#jquery-dilution-select").selectize( {
+            placeholder: placeholders['dilutions'],
+            maxItems: 1,
+            plugins: ['remove_button']
+        });
+    });
+    $(function () {
+        $("#jquery-earset-select").selectize( {
+            placeholder: placeholders['earsets'],
+            maxItems: 1,
+            plugins: ['remove_button']
+        });
+    });
+    $(function () {
+        $("#jquery-marking-select").selectize( {
+            placeholder: placeholders['markings'],
+            maxItems: 1,
+            plugins: ['remove_button']
+        });
+    });
+    $(function () {
+        $("#jquery-singularity-select").selectize( {
+            placeholder: placeholders['singularities'],
+            maxItems: 8,
+            plugins: ['remove_button']
+        });
+    });
+</script>
 
-    <script>
-    var placeholders = <?= $placeholders ?>;
-        $(function () {
-            $("#jquery-color-select").selectize( {
-                placeholder: placeholders['colors'],
-                maxItems: 1,
-                plugins: ['remove_button']
-            });
-        });
-        $(function () {
-            $("#jquery-eyecolor-select").selectize( {
-                placeholder: placeholders['eyecolors'],
-                maxItems: 1,
-                plugins: ['remove_button']
-            });
-        });
-        $(function () {
-            $("#jquery-coat-select").selectize( {
-                placeholder: placeholders['coats'],
-                maxItems: 1,
-                plugins: ['remove_button']
-            });
-        });
-        $(function () {
-            $("#jquery-dilution-select").selectize( {
-                placeholder: placeholders['dilutions'],
-                maxItems: 1,
-                plugins: ['remove_button']
-            });
-        });
-        $(function () {
-            $("#jquery-earset-select").selectize( {
-                placeholder: placeholders['earsets'],
-                maxItems: 1,
-                plugins: ['remove_button']
-            });
-        });
-        $(function () {
-            $("#jquery-marking-select").selectize( {
-                placeholder: placeholders['markings'],
-                maxItems: 1,
-                plugins: ['remove_button']
-            });
-        });
-        $(function () {
-            $("#jquery-singularity-select").selectize( {
-                placeholder: placeholders['singularities'],
-                maxItems: 8,
-                plugins: ['remove_button']
-            });
-        });
-    </script>
+<!-- death -->
+<script>
+var jsMessages = <?php echo $js_messages; ?>;
+var boxLabels = [
+    <?= '"' . __('Click here to declare death') . '"' ?>,
+    <?= '"' . __('Uncheck this box if death was declared erroneously') . '"' ?>
+];
 
-    <!-- death -->
-    <script>
-    var jsMessages = <?php echo $js_messages; ?>;
-    var boxLabels = [
-        <?= '"' . __('Click here to declare death') . '"' ?>,
-        <?= '"' . __('Uncheck this box if death was declared erroneously') . '"' ?>
-    ];
+$(function() {
+    $('#death-toggle').on('change', function() {
+        var show_death = $(this).is(':checked');
+        if (show_death === true) {
+            $('#death_div').removeClass("hide-everywhere");
+            $('#death_date').prop('required', true);
+            $('#primaries').prop('required', true);
+            $('#dead_label').html(boxLabels[1]);
+            //console.log($('#dead_label').next());
+        } else {
+            $('#death_div').addClass("hide-everywhere");
+            $('#death_date').prop('required', false);
+            $('#primaries').prop('required', false);
+            $('#dead_label').html(boxLabels[0]);
+        };
+    });
 
-    $(function() {
-        $('#death-toggle').on('change', function() {
-            var show_death = $(this).is(':checked');
-            if (show_death === true) {
-                $('#death_div').removeClass("hide-everywhere");
-                $('#death_date').prop('required', true);
-                $('#primaries').prop('required', true);
-                $('#dead_label').html(boxLabels[1]);
-                //console.log($('#dead_label').next());
-            } else {
-                $('#death_div').addClass("hide-everywhere");
-                $('#death_date').prop('required', false);
-                $('#primaries').prop('required', false);
-                $('#dead_label').html(boxLabels[0]);
-            };
+	$('#primaries').change(function() {
+		$.ajax({
+            url: '/death-secondary-causes/find-by-primary.json',
+            dataType: 'json',
+            data: {
+                'deathprimarykey': $('#primaries').val(),
+            },
+			success: function(data) {
+                $("#secondaries option").remove();
+                $('#secondaries').append($("<option></option>").attr("value","").text(""));
+                $('#secondary-desc').empty();
+                $('#secondary-desc').append(jsMessages[0]);
+                for (var item in data.items) {
+                    var x = document.getElementById("secondaries");
+                    var option = document.createElement("option");
+                    option.value = data.items[item].id;
+                    option.text = data.items[item].value;
+                    x.add(option);
+                }
+            },
         });
+	});
+});
+</script>
 
-    	$('#primaries').change(function() {
+<script>
+$(function() {
+    $('#primaries')
+        .change(function() {
     		$.ajax({
-                url: '/death-secondary-causes/find-by-primary.json',
+                url: '/death-primary-causes/description.json',
                 dataType: 'json',
                 data: {
-                    'deathprimarykey': $('#primaries').val(),
+                    'id': $('#primaries').val(),
                 },
-    			success: function(data) {
-                    $("#secondaries option").remove();
-                    $('#secondaries').append($("<option></option>").attr("value","").text(""));
-                    $('#secondary-desc').empty();
-                    $('#secondary-desc').append(jsMessages[0]);
-                    for (var item in data.items) {
-                        var x = document.getElementById("secondaries");
-                        var option = document.createElement("option");
-                        option.value = data.items[item].id;
-                        option.text = data.items[item].value;
-                        x.add(option);
+                success: function(data) {
+                    var p = document.getElementById("primary-desc");
+                    var comment = data.items['0'].value;
+                    if (comment == "-") {
+                        p.innerHTML = jsMessages[1];
+                    } else {
+                        p.innerHTML = comment;
                     }
                 },
             });
-    	});
-    });
-    </script>
+        });
+});
+</script>
 
-    <script>
-    $(function() {
-        $('#primaries')
-            .change(function() {
-        		$.ajax({
-                    url: '/death-primary-causes/description.json',
-                    dataType: 'json',
-                    data: {
-                        'id': $('#primaries').val(),
-                    },
-                    success: function(data) {
-                        var p = document.getElementById("primary-desc");
-                        var comment = data.items['0'].value;
-                        if (comment == "-") {
-                            p.innerHTML = jsMessages[1];
-                        } else {
-                            p.innerHTML = comment;
-                        }
-                    },
-                });
+<script>
+$(function() {
+    $('#secondaries')
+        .change(function() {
+    		$.ajax({
+                url: '/death-secondary-causes/description.json',
+                dataType: 'json',
+                data: {
+                    'id': $('#secondaries').val(),
+                },
+                success: function(data) {
+                    var p = document.getElementById("secondary-desc");
+                    var comment = data.items['0'].value;
+                    if (comment == "-") {
+                        p.innerHTML = jsMessages[1];
+                    } else {
+                        p.innerHTML = comment;
+                    }
+                },
             });
-    });
-    </script>
-
-    <script>
-    $(function() {
-        $('#secondaries')
-            .change(function() {
-        		$.ajax({
-                    url: '/death-secondary-causes/description.json',
-                    dataType: 'json',
-                    data: {
-                        'id': $('#secondaries').val(),
-                    },
-                    success: function(data) {
-                        var p = document.getElementById("secondary-desc");
-                        var comment = data.items['0'].value;
-                        if (comment == "-") {
-                            p.innerHTML = jsMessages[1];
-                        } else {
-                            p.innerHTML = comment;
-                        }
-                    },
-                });
-            });
-    });
-    </script>
-
-<?php $this->end(); ?>
+        });
+});
+</script>
 
 <!-- Easy MDE -->
 <?= $this->Html->css('easymde.css') ?>
