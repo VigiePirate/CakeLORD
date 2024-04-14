@@ -781,7 +781,7 @@ class Rat extends Entity
     /* check if rat is young enough to be eligible to infant mortality */
     public function canDieInfant()
     {
-        if (! $this->is_alive && ! isset($this->death_primary_cause)) {
+        if (! $this->is_alive) {
             $causes = \Cake\Datasource\FactoryLocator::get('Table')->get('DeathPrimaryCauses');
             if (! isset($this->death_primary_cause_id)) {
                 return true;
@@ -799,7 +799,7 @@ class Rat extends Entity
     /* check if rat is old enough to die of old age */
     public function canDieOldster()
     {
-        if (! $this->is_alive && ! isset($this->death_primary_cause)) {
+        if (! $this->is_alive) {
             $causes = \Cake\Datasource\FactoryLocator::get('Table')->get('DeathPrimaryCauses');
             if (! isset($this->death_primary_cause_id)) {
                 return true;
