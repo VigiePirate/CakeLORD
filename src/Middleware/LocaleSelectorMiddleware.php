@@ -20,6 +20,13 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
         $this->supportedLocales = array_keys($supportedLocales);
     }
 
+    /**
+     * Set locale based on user preferred language, session, or request headers.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
+     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
+     * @return \Psr\Http\Message\ResponseInterface A response.
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $session = $request->getSession();
@@ -30,7 +37,9 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
         if (! $locale) {
             // If Config.locale is not set, use Accept-Language header
             $acceptLanguage = $request->getHeaderLine('Accept-Language');
-            $locale = $this->parseAcceptLanguage($acceptLanguage);
+            if (! is_null($acceptLanguage)) {
+                $locale = $this->parseAcceptLanguage($acceptLanguage);
+            }
         }
 
         // If no locale is set, use the default locale
@@ -40,7 +49,7 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
 
         // Set the locale
         I18n::setLocale($locale);
-        $request->getSession()->write('Config.locale', $locale);
+        $session->write('Config.locale', $locale);
 
         // Continue handling the request
         return $handler->handle($request);
