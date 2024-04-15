@@ -239,11 +239,11 @@
                                     </tr>
                                     <tr>
                                         <th> ⨽ <?= __('infant mortality excluded') ?></th>
-                                        <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeAdult'], $stats['deadRatAgeAdult'], $stats['deadRatAgeAdult']]) ?></td>
+                                        <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeAdult'], $stats['deadFemaleAgeAdult'], $stats['deadMaleAgeAdult']]) ?></td>
                                     </tr>
                                     <tr>
                                         <th> ⨽ <?= __('accidents excluded') ?></th>
-                                        <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeHealthy'], $stats['deadRatAgeHealthy'], $stats['deadRatAgeHealthy']]) ?></td>
+                                        <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeHealthy'], $stats['deadFemaleAgeHealthy'], $stats['deadMaleAgeHealthy']]) ?></td>
                                     </tr>
                                 </table>
                             <?php else : ?>
@@ -429,11 +429,11 @@
                                             </tr>
                                             <tr>
                                                 <th> ⨽ <?= __('infant mortality excluded') ?></th>
-                                                <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeAdult'], $stats['deadRatAgeAdult'], $stats['deadRatAgeAdult']]) ?></td>
+                                                <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeAdult'], $stats['deadFemaleAgeAdult'], $stats['deadMaleAgeAdult']]) ?></td>
                                             </tr>
                                             <tr>
                                                 <th> ⨽ <?= __('accidents excluded') ?></th>
-                                                <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeHealthy'], $stats['deadRatAgeHealthy'], $stats['deadRatAgeHealthy']]) ?></td>
+                                                <td> ⨽ <?= __('{0, number} months (♀: {1, number} months – ♂: {2, number} months)', [$stats['deadRatAgeHealthy'], $stats['deadFemaleAgeHealthy'], $stats['deadMaleAgeHealthy']]) ?></td>
                                             </tr>
                                         </table>
                                         <table class="condensed stats unfold">
