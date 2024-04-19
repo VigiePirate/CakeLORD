@@ -451,25 +451,31 @@ class RatsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
             $rat = $this->Rats->patchEntity($rat, $data);
-            if ($data['update_identifier']) {
-                if (isset($data['generic_rattery_id'])  && $data['generic_rattery_id'] != "") {
+
+            if (isset($data['generic_rattery_id'])  && $data['generic_rattery_id'] != "") {
+                // remove birth litter
+                if ($data['detach_from_birthlitter']) {
+                    $rat->litter_id = null;
+                }
+                if ($data['update_identifier']) {
                     // prefix change
                     $ratteries = $this->fetchModel('Ratteries');
                     $prefix = $ratteries->get($data['generic_rattery_id'])->prefix;
                     $rat->pedigree_identifier =  $prefix . $rat->id . $rat->sex;
                     $rat->is_pedigree_custom = false;
-                    if ($data['detach_from_birthlitter']) {
-                        $rat->litter_id = null;
-                    }
+                } else {
+                    $rat->is_pedigree_custom = true;
                 }
-                else {
+            } else {
+                if ($data['update_identifier']) {
                     // sex change only
                     $old_identifier = $rat->pedigree_identifier;
                     $rat->pedigree_identifier =  substr($old_identifier, 0, -1) . $rat->sex;
+                } else {
+                    $rat->is_pedigree_custom = true;
                 }
-            } else {
-                $rat->is_pedigree_custom = true;
             }
+
             if ($this->Rats->save($rat, ['contain' => ['Singularities' => function ($q) {return $q->select(['id']);}]])) {
                 $this->Flash->success(__('The rat has been saved.'));
                 return $this->redirect(['action' => 'view', $id]);
