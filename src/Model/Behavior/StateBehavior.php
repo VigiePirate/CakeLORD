@@ -137,8 +137,11 @@ class StateBehavior extends Behavior
             'previous_state' => $this->previous_state,
             'new_state' => $this->new_state,
             'emitted' => $this->now,
-            'messages' => $this->messages,
+            'messages' => array_unique($this->messages), // FIXME: dirty fix for duplicate messages on blameNeglected calls
         ]);
+        if (count($state_event->getData('messages')) > 1) {
+            dd($state_event);
+        }
         $this->table()->getEventManager()->dispatch($state_event);
     }
 
@@ -175,7 +178,6 @@ class StateBehavior extends Behavior
                 'content' => $content,
                 'is_automatically_generated' => true,
             ];
-
             return true;
         }
         return false;
@@ -269,6 +271,7 @@ class StateBehavior extends Behavior
             $this->blame($value, true);
             return $value;
         });
+
         if ($table->saveMany($entities, ['checkRules' => false, 'associated' => []])) {
             return $entities->count();
         } else {
