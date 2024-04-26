@@ -22,7 +22,7 @@ class StateBehavior extends Behavior
         'decision_form_field' => 'decision',
         #'explanation_form_field' => 'content',
         'explanation_form_field' => 'side_message',
-        'neglection_delay' => '15 days',
+        'neglection_delay' => '30 days',
     ];
 
     /**
