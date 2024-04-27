@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Core\Configure;
 use Cake\Chronos\Chronos;
 use Cake\I18n\I18n;
 
@@ -87,13 +88,31 @@ class CoatsController extends AppController
     {
         $coat = $this->Coats->newEmptyEntity();
         $this->Authorization->authorize($coat);
+
         if ($this->request->is('post')) {
             $locale = I18n::getLocale();
             $default = I18n::getDefaultLocale();
             I18n::setLocale($default);
             $coat = $this->Coats->patchEntity($coat, $this->request->getData());
+
             if ($this->Coats->save($coat)) {
                 I18n::setLocale($locale);
+
+                //FIXME Create translation entries. Could be in model or behavior
+                $locales = Configure::read('App.supportedLocales');
+                $translations = $this->fetchModel('CoatsTranslations');
+                foreach ($locales as $loc => $value) {
+                    if ($loc != $locale) {
+                        $coatTranslation = $translations->newEmptyEntity();
+                        $coatTranslation->id = $coat->id;
+                        $coatTranslation->locale = $loc;
+                        $coatTranslation->name = $coat->name;
+                        $coatTranslation->genotype = $coat->genotype;
+                        $coatTranslation->description = $coat->description;
+                        $translations->save($coatTranslation);
+                    }
+                }
+
                 $this->Flash->warning(__('The new coat has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
