@@ -2,7 +2,9 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Core\Configure;
 use Cake\Chronos\Chronos;
+use Cake\Http\Client;
 use Cake\I18n\I18n;
 
 /**
@@ -69,10 +71,15 @@ class MarkingsController extends AppController
         $age['female'] = $count ? $marking->roundLifespan(['marking_id' => $marking->id, 'sex' => 'F']) : __('N/A');
         $age['male'] = $count ? $marking->roundLifespan(['marking_id' => $marking->id, 'sex' => 'M']) : __('N/A');
 
+        $labo = 'http://laborats.weebly.com/' . h(preg_replace('/\s+/', '-', str_replace('é', 'eacute', mb_strtolower($marking->name)))) . '.html';
+        $client = new Client();
+        $response = $client->get($labo);
+        $is_labo = ($response->getStatusCode() != 404);
+
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Markings);
 
-        $this->set(compact('marking', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'age', 'user', 'show_staff'));
+        $this->set(compact('marking', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'age', 'is_labo', 'labo', 'user', 'show_staff'));
     }
 
     /**
@@ -89,7 +96,22 @@ class MarkingsController extends AppController
             $default = I18n::getDefaultLocale();
             I18n::setLocale($default);
             $marking = $this->Markings->patchEntity($marking, $this->request->getData());
+
             if ($this->Markings->save($marking)) {
+                //FIXME Create translation entries. Could be in model or behavior
+                $locales = Configure::read('App.supportedLocales');
+                $translations = $this->fetchModel('MarkingsTranslations');
+                foreach ($locales as $loc => $value) {
+                    if ($loc != $default) {
+                        $markingTranslation = $translations->newEmptyEntity();
+                        $markingTranslation->id = $marking->id;
+                        $markingTranslation->locale = $loc;
+                        $markingTranslation->name = $marking->name;
+                        $markingTranslation->genotype = $marking->genotype;
+                        $markingTranslation->description = $marking->description;
+                        $translations->save($markingTranslation);
+                    }
+                }
                 I18n::setLocale($locale);
                 $this->Flash->warning(__('The new marking has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);

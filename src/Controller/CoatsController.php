@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 use Cake\Core\Configure;
 use Cake\Chronos\Chronos;
+use Cake\Http\Client;
 use Cake\I18n\I18n;
 
 /**
@@ -15,7 +16,6 @@ use Cake\I18n\I18n;
  */
 class CoatsController extends AppController
 {
-
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -27,7 +27,6 @@ class CoatsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-
     public function index()
     {
         $sort_fields = (I18n::getLocale() == I18n::getDefaultLocale())
@@ -73,10 +72,15 @@ class CoatsController extends AppController
         $age['female'] = $count ? $coat->roundLifespan(['coat_id' => $coat->id, 'sex' => 'F']) : __('N/A');
         $age['male'] = $count ? $coat->roundLifespan(['coat_id' => $coat->id, 'sex' => 'M']) : __('N/A');
 
-        $user = $this->request->getAttribute('identity');
-        $show_staff = !is_null($user) && $user->can('add', $this->Coats);
+        $labo = 'http://laborats.weebly.com/' . h(preg_replace('/\s+/', '-', str_replace('é', 'eacute', mb_strtolower($coat->name)))) . '.html';
+        $client = new Client();
+        $response = $client->get($labo);
+        $is_labo = ($response->getStatusCode() != 404);
 
-        $this->set(compact('coat', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'age', 'user', 'show_staff'));
+        $user = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($user) && $user->can('add', $this->Coats);
+
+        $this->set(compact('coat', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'age', 'is_labo', 'labo', 'user', 'show_staff'));
     }
 
     /**
@@ -96,8 +100,6 @@ class CoatsController extends AppController
             $coat = $this->Coats->patchEntity($coat, $this->request->getData());
 
             if ($this->Coats->save($coat)) {
-                I18n::setLocale($locale);
-
                 //FIXME Create translation entries. Could be in model or behavior
                 $locales = Configure::read('App.supportedLocales');
                 $translations = $this->fetchModel('CoatsTranslations');
@@ -112,7 +114,7 @@ class CoatsController extends AppController
                         $translations->save($coatTranslation);
                     }
                 }
-
+                I18n::setLocale($locale);
                 $this->Flash->warning(__('The new coat has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);
             }
