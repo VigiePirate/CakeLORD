@@ -257,7 +257,7 @@
                     <div class="row row-reverse row-with-photo">
                         <div class="column-responsive column-60">
                             <h2><?= __('Information') ?></h2>
-                            <table class="aside-photo">
+                            <table class="aside-photo unfold">
                                 <tr>
                                     <!-- add user first and last name if not anonymous ? -->
                                     <th><?= __('Owner') ?></th>
