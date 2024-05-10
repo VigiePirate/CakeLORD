@@ -155,7 +155,7 @@ class RatMessagesTable extends Table
                 ]);
         }
 
-        return $query->group(['RatMessages.id']);
+        return $query; //->group(['RatMessages.id']);
     }
 
     public function findLatest(Query $query, array $options)
@@ -165,7 +165,7 @@ class RatMessagesTable extends Table
             ->distinct();
 
         if (empty($options['rats'])) {
-            return $query;
+            return $query->order(['RatMessages.created' => 'DESC']);
         } else {
             $rats = $options['rats'];
             $query

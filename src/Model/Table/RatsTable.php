@@ -1003,7 +1003,6 @@ class RatsTable extends Table
                 $query = $query1;
             }
         }
-
         return $query->group(['Rats.id']);
     }
 
