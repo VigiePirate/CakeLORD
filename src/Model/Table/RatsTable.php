@@ -964,7 +964,7 @@ class RatsTable extends Table
     public function findEntitledBy(Query $query, array $options)
     {
         $query = $query
-            ->select('id')
+            ->select() //FIXME: was ->select('id') but creates union issues on level 2
             ->distinct();
 
         if (isset($options['level']) && $options['level'] == 2) {
@@ -981,13 +981,13 @@ class RatsTable extends Table
         } else {
             // owner or creator
             $query1 = $query->innerJoinWith('OwnerUsers')
-                  ->innerJoinWith('CreatorUsers')
-                  ->contain('States')
-                  ->where(['OR' => [
-                      'CreatorUsers.id' => $options['user_id'],
-                      'OwnerUsers.id' => $options['user_id'],
-                  ],
-                ]);
+                      ->innerJoinWith('CreatorUsers')
+                      ->contain('States')
+                      ->where(['OR' => [
+                          'CreatorUsers.id' => $options['user_id'],
+                          'OwnerUsers.id' => $options['user_id'],
+                      ],
+                    ]);
 
             // owner of a contributing rattery in birth litter
             if (isset($options['level']) && $options['level'] == 2) {
@@ -1003,7 +1003,7 @@ class RatsTable extends Table
                 $query = $query1;
             }
         }
-        return $query->group(['Rats.id']);
+        return $query; //->group(['Rats.id']);
     }
 
     public function findSex(Query $query, array $options)

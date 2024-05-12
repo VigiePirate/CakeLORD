@@ -165,19 +165,32 @@ class RatMessagesTable extends Table
             ->distinct();
 
         if (empty($options['rats'])) {
-            return $query->order(['RatMessages.created' => 'DESC']);
-        } else {
-            $rats = $options['rats'];
-            $query
-                ->innerJoinWith('Rats', function ($q) use ($rats) {
-                   return $q->where(['Rats.id IN' => $rats]);
-               });
+            return $query; //->order(['RatMessages.created' => 'DESC']);
         }
+
+        $rats = $options['rats']->all()->extract('id')->toList();
+        $query = $query
+                    ->innerJoinWith('Rats', function ($q) use ($rats) {
+                        return $q->where(['Rats.id IN' => $rats]);
+                    });
 
         if (! empty($options['rat_message_delay'])) {
-            $query->where(['RatMessages.created >=' => $options['rat_message_delay']]);
+            $query = $query->where(['RatMessages.created >=' => $options['rat_message_delay']]);
         }
 
-        return $query->order(['RatMessages.created' => 'DESC']);
+        if (! empty($options['message_per_rat'])) {
+            $query
+                ->select([
+                    'id' => 'RatMessages.id',
+                    //'rat_id' => 'Rats.id',
+                    'RatMessages__created' => 'RatMessages.created',
+                    'max_date' => $query->func()->max('RatMessages.created')
+                ])
+                ->order(['max_date' => 'DESC'])
+                //->order(['RatMessages.created' => 'DESC'])
+                ->group(['Rats.id']);
+        }
+
+        return $query;
     }
 }

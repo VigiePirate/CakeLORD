@@ -373,15 +373,26 @@ class UsersController extends AppController
             ->find('entitledBy', ['user_id' => $user->id, 'level' => 2])
             ->find('needsUser');
 
-        $rat_last_messages_ids = $this->fetchModel('RatMessages')
-            ->find('latest', [
-                'rats' => $more_rats_in_need,
-                'rat_message_delay' => $rat_message_delay
-            ])
-            ->where(['is_automatically_generated' => false, 'is_staff_request' => true])
-            ->order(['RatMessages.created' => 'DESC'])
-            ->group(['Rats.id'])
-            ->all()->extract('id')->toList();
+        // notifications to highlight
+        // $rat_last_messages_ids = $this->fetchModel('RatMessages')
+        //     ->find('latest', [
+        //         'rats' => $more_rats_in_need,
+        //         'rat_message_delay' => $rat_message_delay,
+        //         'message_per_rat' => 1,
+        //     ])
+        //     ->where(['is_automatically_generated' => false, 'is_staff_request' => true])
+        //     ->all()->extract('id')->toList();
+
+        // with partition
+        $query = $more_rats_in_need;
+        $query->select([
+            'Rats.id',
+            'last_message_id' => $query->func()
+                ->max('RatMessages.created')
+                ->partition('RatMessages.rat_id'),
+        ])
+        ->innerJoinWith('RatMessages');
+        dd($query->all());
 
         $ratteries_model = $this->fetchModel('Ratteries');
         $rattery_delay = $ratteries_model->behaviors()->get('State')->config['neglection_delay'];
