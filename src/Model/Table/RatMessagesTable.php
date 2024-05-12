@@ -178,19 +178,6 @@ class RatMessagesTable extends Table
             $query = $query->where(['RatMessages.created >=' => $options['rat_message_delay']]);
         }
 
-        if (! empty($options['message_per_rat'])) {
-            $query
-                ->select([
-                    'id' => 'RatMessages.id',
-                    //'rat_id' => 'Rats.id',
-                    'RatMessages__created' => 'RatMessages.created',
-                    'max_date' => $query->func()->max('RatMessages.created')
-                ])
-                ->order(['max_date' => 'DESC'])
-                //->order(['RatMessages.created' => 'DESC'])
-                ->group(['Rats.id']);
-        }
-
         return $query;
     }
 }

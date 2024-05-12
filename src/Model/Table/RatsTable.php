@@ -964,7 +964,7 @@ class RatsTable extends Table
     public function findEntitledBy(Query $query, array $options)
     {
         $query = $query
-            ->select() //FIXME: was ->select('id') but creates union issues on level 2
+            ->select('id') //FIXME: was ->select('id') but creates union issues on level 2
             ->distinct();
 
         if (isset($options['level']) && $options['level'] == 2) {

@@ -374,25 +374,17 @@ class UsersController extends AppController
             ->find('needsUser');
 
         // notifications to highlight
-        // $rat_last_messages_ids = $this->fetchModel('RatMessages')
-        //     ->find('latest', [
-        //         'rats' => $more_rats_in_need,
-        //         'rat_message_delay' => $rat_message_delay,
-        //         'message_per_rat' => 1,
-        //     ])
-        //     ->where(['is_automatically_generated' => false, 'is_staff_request' => true])
-        //     ->all()->extract('id')->toList();
-
-        // with partition
-        $query = $more_rats_in_need;
-        $query->select([
-            'Rats.id',
-            'last_message_id' => $query->func()
-                ->max('RatMessages.created')
-                ->partition('RatMessages.rat_id'),
-        ])
-        ->innerJoinWith('RatMessages');
-        dd($query->all());
+        $rat_last_messages_ids = $this->fetchModel('RatMessages')
+            ->find('latest', [
+                'rats' => $more_rats_in_need,
+                'rat_message_delay' => $rat_message_delay,
+            ])
+            ->where(['is_automatically_generated' => false, 'is_staff_request' => true])
+            ->all()
+            ->sortBy('id', SORT_ASC)
+            ->indexBy('rat_id')
+            ->extract('id')
+            ->toList();
 
         $ratteries_model = $this->fetchModel('Ratteries');
         $rattery_delay = $ratteries_model->behaviors()->get('State')->config['neglection_delay'];
@@ -426,9 +418,11 @@ class UsersController extends AppController
                 'rattery_message_delay' => $rattery_message_delay
             ])
             ->where(['is_automatically_generated' => false, 'is_staff_request' => true])
-            ->order(['RatteryMessages.created' => 'DESC'])
-            ->group(['Ratteries.id'])
-            ->all()->extract('id')->toList();
+            ->all()
+            ->sortBy('id', SORT_ASC)
+            ->indexBy('rattery_id')
+            ->extract('id')
+            ->toList();
 
         $count['rattery_total'] = $rattery_messages->count();
         $count['rattery_sub_total'] = $ratteries_in_need->count();
@@ -467,9 +461,11 @@ class UsersController extends AppController
                 'litter_message_delay' => $litter_message_delay
             ])
             ->where(['is_automatically_generated' => false, 'is_staff_request' => true])
-            ->order(['LitterMessages.created' => 'DESC'])
-            ->group(['Litters.id'])
-            ->all()->extract('id')->toList();
+            ->all()
+            ->sortBy('id', SORT_ASC)
+            ->indexBy('litter_id')
+            ->extract('id')
+            ->toList();
 
         $count['litter_total'] = $litter_messages->count();
 
