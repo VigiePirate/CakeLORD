@@ -168,7 +168,7 @@ class RatMessagesTable extends Table
             return $query; //->order(['RatMessages.created' => 'DESC']);
         }
 
-        $rats = $options['rats']->all()->extract('id')->toList();
+        $rats = $options['rats'];
         $query = $query
                     ->innerJoinWith('Rats', function ($q) use ($rats) {
                         return $q->where(['Rats.id IN' => $rats]);
