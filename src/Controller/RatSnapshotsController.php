@@ -49,18 +49,22 @@ class RatSnapshotsController extends AppController
         ]);
 
         $this->Authorization->authorize($snapshot);
-
         $rat = $snapshot->rat;
-
         $states = $this->fetchModel('States');
-        if($rat->state->is_frozen) {
+
+        if ($rat->state->is_frozen) {
+            if (! is_null($rat->state->next_frozen_state_id)) {
+                $next_frozen_state = $states->get($rat->state->next_frozen_state_id);
+            } else {
+                $next_frozen_state = null;
+            }
             $next_thawed_state = $states->get($rat->state->next_thawed_state_id);
-            $this->set(compact('next_thawed_state'));
+            $this->set(compact('next_thawed_state', 'next_frozen_state'));
         }
         else {
             $next_ko_state = $states->get($rat->state->next_ko_state_id);
             $next_ok_state = $states->get($rat->state->next_ok_state_id);
-            if( !empty($rat->state->next_frozen_state_id) ) {
+            if (! empty($rat->state->next_frozen_state_id)) {
                 $next_frozen_state = $states->get($rat->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }

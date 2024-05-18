@@ -692,6 +692,11 @@ blockquote:before {
   color: #343740 !important;
   font-weight: bold !important;
 }
+
+.statecolor_7 {
+  color: #343740 !important;
+  font-weight: bold !important;
+}
 /* end of states color */
 
 /* diff colors */

@@ -258,6 +258,7 @@ class Application extends BaseApplication
         $mapResolver->map(Model\Entity\Role::class, Policy\ConfigurationPolicy::class);
         $mapResolver->map(Model\Entity\State::class, Policy\ConfigurationPolicy::class);
         $mapResolver->map(Model\Table\RolesTable::class, Policy\ConfigurationsTablePolicy::class);
+        $mapResolver->map(Model\Table\StatesTable::class, Policy\ConfigurationsTablePolicy::class);
 
         $mapResolver->map(Model\Entity\RatMessage::class, Policy\MessagePolicy::class);
         $mapResolver->map(Model\Entity\RatteryMessage::class, Policy\MessagePolicy::class);

@@ -156,14 +156,19 @@ class RatteriesController extends AppController
 
         /* statebar */
         $states = $this->fetchModel('States');
-        if($rattery->state->is_frozen) {
+        if ($rattery->state->is_frozen) {
+            if (! is_null($rattery->state->next_frozen_state_id)) {
+                $next_frozen_state = $states->get($rattery->state->next_frozen_state_id);
+            } else {
+                $next_frozen_state = null;
+            }
             $next_thawed_state = $states->get($rattery->state->next_thawed_state_id);
-            $this->set(compact('next_thawed_state'));
+            $this->set(compact('next_thawed_state', 'next_frozen_state'));
         }
         else {
             $next_ko_state = $states->get($rattery->state->next_ko_state_id);
             $next_ok_state = $states->get($rattery->state->next_ok_state_id);
-            if( !empty($rattery->state->next_frozen_state_id) ) {
+            if (! empty($rattery->state->next_frozen_state_id)) {
                 $next_frozen_state = $states->get($rattery->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }
@@ -716,7 +721,7 @@ class RatteriesController extends AppController
             $items = $this->Ratteries->find('named', ['names' => [$searchkey]] )
                 ->select([
                     'id' => 'Ratteries.id',
-                    'Ratteries__state_id' => 'Ratteries.state_id', 
+                    'Ratteries__state_id' => 'Ratteries.state_id',
                     'value' => "concat(prefix,' – ',name)",
                     'label' => "concat(prefix,' – ',name)"
                 ]);

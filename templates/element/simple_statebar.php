@@ -5,9 +5,9 @@
 ?>
 
 <?php if (! $sheet->state->is_frozen ) : ?>
-    <!-- if state needs staff action: show newt frozen, next ko, next ok -->
+    <!-- if state needs staff action: show next frozen, next ko, next ok -->
     <?php if ($sheet->state->needs_staff_action) : ?>
-        <?php if( !empty($sheet->state->next_frozen_state_id) ) : ?>
+        <?php if (! empty($sheet->state->next_frozen_state_id) ) : ?>
             <div class="statemark">
                 <?=
                     $this->Form->button(
@@ -82,6 +82,18 @@
             <?= h($sheet->state->symbol) ?>
         </div>
     <?php else : ?>
+        <?php if (! empty($sheet->state->next_frozen_state_id) ) : ?>
+            <div class="statemark">
+                <?= 
+                    $this->Form->button(
+                        $next_frozen_state->symbol,
+                        ['name' => 'decision', 'value' =>  'freeze', 'class' => 'statecolor_' . $sheet->state->next_frozen_state_id]
+                    )
+                ?>
+            </div>
+            <div class="staff-action-symbol"><?= $this->Html->image('arrow-left.svg') ?>&numsp;</div>
+        <?php endif; ?>
+
         <div class="current-statemark statecolor_<?php echo h($sheet->state_id) ?>">
             <?= h($sheet->state->symbol) ?>
         </div>

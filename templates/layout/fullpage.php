@@ -83,6 +83,7 @@ $cakeDescription = 'Livre des Origines du Rat Domestique';
                         );
                     ?>
                     <?= $this->Form->control('key', ['type' => 'text', 'label' => false, 'placeholder' => __('Search...')]); ?>
+                    <?= $this->Form->hidden('_csrfToken', ['value' => $this->request->getAttribute('csrfToken')]) ?>
                     <?= $this->Form->submit(); ?>
                     <?= $this->Form->end(); ?>
 

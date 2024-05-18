@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\I18n\I18n;
 
 /**
  * States Controller
@@ -25,10 +26,12 @@ class StatesController extends AppController
      */
     public function index()
     {
-        $this->Authorization->skipAuthorization();
-        $query = $this->States->find()
-            ->contain(['NextOkStates', 'NextKoStates', 'NextFrozenStates', 'NextThawedStates']);
+        $this->Authorization->authorize($this->States);
+        $query = $this->States->find()->contain(['NextOkStates', 'NextKoStates', 'NextFrozenStates', 'NextThawedStates']);
+        $user = $this->request->getAttribute('identity');
+        $show_staff = ! is_null($user) && $user->can('add', $this->States);
         $this->set('states', $this->paginate($query));
+        $this->set(compact('user', 'show_staff'));
     }
 
     /**

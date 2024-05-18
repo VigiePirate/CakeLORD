@@ -43,7 +43,7 @@ class RolesController extends AppController
             ],
         ]);
 
-        $this->Authorization->Authorize($this->Roles);
+        $this->Authorization->authorize($this->Roles);
         $this->set(compact('roles', 'sort_fields'));
     }
 

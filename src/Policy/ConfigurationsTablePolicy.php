@@ -28,12 +28,23 @@ class ConfigurationsTablePolicy implements BeforePolicyInterface
     }
 
     /**
-     * Check if $user can see complete list of articles, categories or FAQs
+     * Check if $user can see complete list of roles or states
      *
      * @param Authorization\IdentityInterface $user The user.
      * @return bool
      */
     public function canIndex(IdentityInterface $user)
+    {
+        return $user->role->can_configure;
+    }
+
+    /**
+     * Check if $user can add a role or state
+     *
+     * @param Authorization\IdentityInterface $user The user.
+     * @return bool
+     */
+    public function canAdd(IdentityInterface $user)
     {
         return $user->role->can_configure;
     }
