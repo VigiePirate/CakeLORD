@@ -180,8 +180,15 @@ class RatteriesController extends AppController
             $snap_diffs[$snapshot->id] = $this->Ratteries->snapDiffListAsString($rattery, $snapshot->id);
         }
 
+        $last_staff_message = (new Collection($rattery->rattery_messages))
+            ->filter(function ($message) {
+                return ! $message->is_automatically_generated;
+            })
+            ->sortBy('id', SORT_DESC)
+            ->first();
+
         $user = $this->request->getAttribute('identity');
-        $this->set(compact('rattery', 'champion', 'stats', 'snap_diffs', 'user')); // 'offsprings'));
+        $this->set(compact('rattery', 'champion', 'stats', 'snap_diffs', 'last_staff_message', 'user')); // 'offsprings'));
     }
 
     /**

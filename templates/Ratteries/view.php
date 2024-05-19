@@ -7,7 +7,7 @@
 
 <?php $this->assign('title', h($rattery->full_name)) ?>
 
-<?php if (! $rattery->state->is_visible && (is_null($user) || (! is_null($user) && ! $user->can('seePrivate', $rattery)))) : ?>
+<?php if (! $rattery->state->is_visible && (is_null($user) || (! is_null($user) && ! $user->role->is_staff))) : ?>
     <div class="row">
         <aside class="column">
             <div class="side-nav">
@@ -167,17 +167,18 @@
 
                 <h1><?= h($rattery->full_name) . '<span class="rotate"> ' . h($rattery->is_inactive_symbol) . '</span>'?></h1> <!-- -->
 
+                <!-- special highlighted subtitle if the sheet needs user action -->
                 <?php if ($rattery->state->needs_user_action && ! is_null($user) && $user->can('ownerEdit', $rattery)) : ?>
                     <div class="message error">
                         <p><?= __('This sheet needs correction. Here is the latest message staff sent you about it.') ?></p>
                         <div class="text">
                             <blockquote>
-                                <?= ! empty($rattery->rattery_messages) ? nl2br($rattery->rattery_messages[0]->content) : '' ?>
+                                <?= ! empty($last_staff_message) ? nl2br($last_staff_message->content) : __('No explaining notification available.') ?>
                             </blockquote>
                         </div>
                         <p>
                             <?=
-                            __('Please take action to comply with staff requirements. You may use the most appropriate action from the action bar to modify the sheet. If you are not sure, you can <a href={0} class="flash">edit the full sheet</a>, or <a href={1} class="flash">answer and send the sheet back to staff</a>.',
+                                __('Please take action to comply with staff requirements. You may use the most appropriate action from the action bar to modify the sheet. If you are not sure, you can <a href={0} class="flash">edit the full sheet</a>, or <a href={1} class="flash">answer and send the sheet back to staff</a>.',
                                 [
                                     $this->Url->build(['controller' => 'Ratteries', 'action' => 'edit', $rattery->id]),
                                     $this->Url->build(['controller' => 'Ratteries', 'action' => 'dispute', $rattery->id])
@@ -185,6 +186,25 @@
                             ?>
                         </p>
                     </div>
+                <?php endif ;?>
+
+                <!-- special highlighted subtitle if the sheet is not reliable -->
+                <?php if (! $rattery->state->needs_user_action && $rattery->state->is_frozen && ! $rattery->state->is_reliable) : ?>
+                    <?php if ($rattery->state->is_visible) : ?>
+                        <div class="message error">
+                            <p><?= __('This sheet contains incomplete, incoherent or dubious information. Find the staff explanation below.') ?></p>
+                            <div class="text">
+                                <blockquote>
+                                    <?= ! is_null($last_staff_message) ? nl2br($last_staff_message->content) : __('No explaining notification available.') ?>
+                                </blockquote>
+                            </div>
+                            <p><?= __('The sheet is displayed “as is” for transparency purpose, but it cannot be considered as reliable.') ?></p>
+                        </div>
+                    <?php else :?>
+                        <div class="message error">
+                            <?= __('This sheet contains incomplete, incoherent or dubious information. It is only visible to staff members.') ?>
+                        </div>
+                    <?php endif ; ?>
                 <?php endif ;?>
 
                 <?php if($rattery->is_generic) : ?>

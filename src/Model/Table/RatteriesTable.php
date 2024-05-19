@@ -3,10 +3,14 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use ArrayObject;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\Event;
+use Cake\Event\EventInterface;
+use Cake\Event\EventManager;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 use Geo\Geocoder\Geocoder;
@@ -204,6 +208,21 @@ class RatteriesTable extends Table
             ->notEmptyString('picture');
 
         return $validator;
+    }
+
+    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    {
+        if (isset($options['searchable_only']) && $options['searchable_only']) {
+            $query->innerJoinWith('States', function ($q) {
+                return $q->where(['is_searchable' => true]);
+            });
+        }
+
+        if (isset($options['visible_only']) && $options['visible_only']) {
+            $query->innerJoinWith('States', function ($q) {
+                return $q->where(['is_visible' => true]);
+            });
+        }
     }
 
     /**

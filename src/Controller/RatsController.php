@@ -59,7 +59,7 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $query = $this->Rats->find('all', ['searchable_only' => $this->searchable_only])
             ->contain(['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States']);
-        $this->set('rats', $this->paginate($query));
+        $this->set('rats', $this->paginate($query, ['sort' => ['id' => 'ASC']]));
     }
 
     /**
@@ -83,31 +83,31 @@ class RatsController extends AppController
             'BirthLitters.Ratteries'
         ];
 
-        $females = $this->Rats->find()
+        $females = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'F'])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $males = $this->Rats->find()
+        $males = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'M'])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $alive = $this->Rats->find()
+        $alive = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => true])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $departed = $this->Rats->find()
+        $departed = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => false])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $pending = $this->Rats->find()
+        $pending = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'States.needs_user_action' => true])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $waiting = $this->Rats->find()
+        $waiting = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'States.needs_staff_action' => true])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $okrats = $this->Rats->find()
+        $okrats = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'States.needs_user_action' => false, 'States.needs_staff_action' => false])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
@@ -212,9 +212,16 @@ class RatsController extends AppController
             $snap_diffs[$snapshot->id] = $this->Rats->snapDiffListAsString($rat, $snapshot->id, ['contain' => ['Singularities' => function ($q) {return $q->select(['id']);}]]);
         }
 
+        $last_staff_message = (new Collection($rat->rat_messages))
+            ->filter(function ($message) {
+                return ! $message->is_automatically_generated;
+            })
+            ->sortBy('id', SORT_DESC)
+            ->first();
+
         $user = $this->request->getAttribute('identity');
 
-        $this->set(compact('rat', 'snap_diffs', 'user'));
+        $this->set(compact('rat', 'snap_diffs', 'last_staff_message', 'user'));
     }
 
     /**

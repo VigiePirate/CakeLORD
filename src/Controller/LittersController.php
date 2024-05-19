@@ -128,9 +128,13 @@ class LittersController extends AppController
         ]);
 
         $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
 
         $offspringsQuery = $this->Litters->OffspringRats
-                                ->find('all', ['contain' => ['States', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'OwnerUsers', 'Ratteries']])
+                                ->find('all', [
+                                    'contain' => ['States', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'OwnerUsers', 'Ratteries'],
+                                    'visible_only' => ! is_null($user) && ! $user->is_staff,
+                                ])
                                 ->matching('BirthLitters', function (\Cake\ORM\Query $query) use ($litter) {
                                     return $query->where([
                                         'BirthLitters.id' => $litter->id
@@ -140,11 +144,14 @@ class LittersController extends AppController
 
         $offsprings = $this->paginate($offspringsQuery);
 
-        // exclude lost rats from statistics
-        $stats_offsprings = $offspringsQuery->where(['OR' => [
-            'death_secondary_cause_id !=' => '1',
-            'death_secondary_cause_id IS' => null,
-        ]]);
+        // exclude lost rats and invisibles from statistics
+        $stats_offsprings = $offspringsQuery->where([
+            'OR' => [
+                'death_secondary_cause_id !=' => '1',
+                'death_secondary_cause_id IS' => null,
+            ],
+            'States.is_visible' => true,
+            ]);
 
         $stats = $litter->wrapStatistics($stats_offsprings);
 
@@ -173,6 +180,13 @@ class LittersController extends AppController
             $snap_diffs[$snapshot->id] = $this->Litters->snapCompareAsString($litter, $snapshot->id, ['contain' => ['ParentRats' => function ($q) {return $q->select(['id']);}]]);
         }
 
+        $last_staff_message = (new Collection($litter->litter_messages))
+            ->filter(function ($message) {
+                return ! $message->is_automatically_generated;
+            })
+            ->sortBy('id', SORT_DESC)
+            ->first();
+
         $js_legends = json_encode([
             __('Survival rate'),
             __('Age (in months)'),
@@ -185,9 +199,9 @@ class LittersController extends AppController
 
         ]);
 
-        $user = $this->request->getAttribute('identity');
 
-        $this->set(compact('litter', 'offsprings', 'stats', 'snap_diffs', 'user', 'js_legends'));
+
+        $this->set(compact('litter', 'offsprings', 'stats', 'snap_diffs', 'last_staff_message', 'user', 'js_legends'));
     }
 
     /**

@@ -9,8 +9,8 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Datasource\EntityInterface;
 use Cake\Validation\Validator;
-use Cake\Event\EventInterface;
 use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Cake\Event\EventManager;
 use Cake\Collection\Collection;
 use Cake\Routing\Router;
@@ -361,6 +361,12 @@ class RatsTable extends Table
         if (isset($options['searchable_only']) && $options['searchable_only']) {
             $query->innerJoinWith('States', function ($q) {
                 return $q->where(['is_searchable' => true]);
+            });
+        }
+
+        if (isset($options['visible_only']) && $options['visible_only']) {
+            $query->innerJoinWith('States', function ($q) {
+                return $q->where(['is_visible' => true]);
             });
         }
     }
