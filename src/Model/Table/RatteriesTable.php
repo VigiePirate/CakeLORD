@@ -364,7 +364,20 @@ class RatteriesTable extends Table
                   ->where(['Users.id IS' => null]);
         } else {
             $query->innerJoinWith('Users')
-                  ->where(['Users.id' => $options['user_id']]);
+                  ->where([
+                      'Users.id' => $options['user_id'],
+                  ]);
+
+            if (isset($options['in_need'])) {
+              $query = $query->innerJoinWith('States', function ($q) {
+                  return $q->where(['States.is_visible' => true, 'States.needs_user_action' => true]);
+              });
+            } else {
+              $query = $query->innerJoinWith('States', function ($q) {
+                  return $q->where(['States.is_visible' => true]);
+              });
+            }
+
         }
         return $query->group(['Ratteries.id']);
     }

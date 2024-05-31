@@ -358,20 +358,11 @@ class UsersController extends AppController
         $count['rat_total'] = $rat_messages->count();
 
         // rats I'm primarily responsible for, and how many of them need attention
-        $rats_in_need = $rats_model
-            ->find('entitledBy', ['user_id' => $user->id, 'level' => 1])
-            ->find('needsUser');
-
-        if ($rats_in_need->count()) {
-            $count['rat_sub_total'] = $rats_in_need->count();
-        } else {
-            $count['rat_sub_total'] = 0;
-        }
+        $rats_in_need = $rats_model->find('entitledBy', ['user_id' => $user->id, 'level' => 1, 'in_need' => true]);
+        $count['rat_sub_total'] = $rats_in_need->count();
 
         // all rats I could be concerned with
-        $more_rats_in_need = $rats_model
-            ->find('entitledBy', ['user_id' => $user->id, 'level' => 2])
-            ->find('needsUser');
+        $more_rats_in_need = $rats_model->find('entitledBy', ['user_id' => $user->id, 'level' => 2, 'in_need' => true]);
 
         // notifications to highlight
         $rat_last_messages_ids = $this->fetchModel('RatMessages')
@@ -395,7 +386,7 @@ class UsersController extends AppController
         }
 
         $ratteries = $ratteries_model->find('entitledBy', ['user_id' => $user->id]);
-        $ratteries_in_need = $ratteries_model->find('entitledBy', ['user_id' => $user->id])->find('needsUser');
+        $ratteries_in_need = $ratteries_model->find('entitledBy', ['user_id' => $user->id, 'in_need' => true]);
 
     	$rattery_messages = $this->fetchModel('RatteryMessages')
             ->find('latest', [
@@ -436,7 +427,7 @@ class UsersController extends AppController
         }
 
         // all litters I'm concerned with, corresponding notifications, and those to be highlighted
-        $litters = $litters_model->find('entitledBy', ['user_id' => $user->id]);
+        $litters = $litters_model->find('entitledBy', ['user_id' => $user->id, 'visible_only' => true, 'in_need' => true]);
         $litter_messages = $this->fetchModel('LitterMessages')
             ->find('latest', [
                 'litters' => $litters,
@@ -455,9 +446,12 @@ class UsersController extends AppController
             ->limit(200)
             ->all();
 
+
+        $litters_in_need = $litters_model->find('entitledBy', ['user_id' => $user->id, 'in_need' => true]);
+
         $litter_last_messages_ids = $this->fetchModel('LitterMessages')
             ->find('latest', [
-                'litters' => $litters,
+                'litters' => $litters_in_need,
                 'litter_message_delay' => $litter_message_delay
             ])
             ->where(['is_automatically_generated' => false, 'is_staff_request' => true])
@@ -468,12 +462,6 @@ class UsersController extends AppController
             ->toList();
 
         $count['litter_total'] = $litter_messages->count();
-
-        $litters_in_need_ids =  $litters_model->find('entitledBy', ['user_id' => $user->id]);
-        $litters_in_need = $this->fetchModel('Litters')
-            ->find('needsUser')
-            ->where(['Litters.id in' => $litters_in_need_ids]);
-
         $count['litter_sub_total'] = $litters_in_need->count();
 
         // some sheets need user action without being associated to a non-automatic recent notification

@@ -970,7 +970,7 @@ class RatsTable extends Table
     public function findEntitledBy(Query $query, array $options)
     {
         $query = $query
-            ->select('id') //FIXME: was ->select('id') but creates union issues on level 2
+            ->select('id')
             ->distinct();
 
         if (isset($options['level']) && $options['level'] == 2) {
@@ -988,20 +988,40 @@ class RatsTable extends Table
             // owner or creator
             $query1 = $query->innerJoinWith('OwnerUsers')
                       ->innerJoinWith('CreatorUsers')
-                      ->contain('States')
-                      ->where(['OR' => [
-                          'CreatorUsers.id' => $options['user_id'],
-                          'OwnerUsers.id' => $options['user_id'],
-                      ],
-                    ]);
+                      ->where([
+                          'OR' => [
+                              'CreatorUsers.id' => $options['user_id'],
+                              'OwnerUsers.id' => $options['user_id'],
+                          ],
+                      ]);
+
+            if (isset($options['in_need'])) {
+                $query1 = $query1->innerJoinWith('States', function ($q) {
+                    return $q->where(['States.is_visible' => true, 'States.needs_user_action' => true]);
+                });
+            } else {
+                $query1 = $query1->innerJoinWith('States', function ($q) {
+                    return $q->where(['States.is_visible' => true]);
+                });
+            }
 
             // owner of a contributing rattery in birth litter
             if (isset($options['level']) && $options['level'] == 2) {
                 $user_id = $options['user_id'];
                 $litters = \Cake\Datasource\FactoryLocator::get('Table')->get('Litters')
                     ->find('entitledBy', ['user_id' => $user_id]);
-                $query2->contain('States')
-                    ->where(['litter_id IN' => $litters, 'States.needs_user_action' => true]);
+
+                if (isset($options['in_need'])) {
+                    $query2 = $query2->innerJoinWith('States', function ($q) {
+                        return $q->where(['States.is_visible' => true, 'States.needs_user_action' => true]);
+                    });
+                } else {
+                    $query2 = $query2->innerJoinWith('States', function ($q) {
+                        return $q->where(['States.is_visible' => true]);
+                    });
+                }
+
+                $query2 = $query2->where(['litter_id IN' => $litters]);
 
                 // join results
                 $query = $query1->union($query2);
@@ -1009,7 +1029,7 @@ class RatsTable extends Table
                 $query = $query1;
             }
         }
-        return $query; //->group(['Rats.id']);
+        return $query->group(['Rats.id']);
     }
 
     public function findSex(Query $query, array $options)
@@ -1110,8 +1130,8 @@ class RatsTable extends Table
         return $query
             ->select()
             ->distinct()
-            ->where(['States.needs_user_action IS' => true])
             ->contain(['States', 'DeathPrimaryCauses', 'DeathSecondaryCauses'])
+            ->where(['States.needs_user_action IS' => true])
             ->group(['Rats.id']);
     }
 

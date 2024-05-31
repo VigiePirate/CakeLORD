@@ -43,7 +43,7 @@ class LittersController extends AppController
         $litter_ids = $this->Litters->find('entitledBy', ['user_id' => $user->id]);
         $query = $this->Litters
             ->find()
-            ->where(['Litters.id IN' => $litter_ids])
+            ->where(['Litters.id IN' => $litter_ids, 'States.is_visible' => true])
             ->contain(['Users', 'States', 'Sire', 'Dam', 'Contributions']);
 
         $settings = [
@@ -55,7 +55,7 @@ class LittersController extends AppController
 
         $pending = $this->Litters
             ->find('needsUser')
-            ->where(['Litters.id in' => $litter_ids]);
+            ->where(['Litters.id in' => $litter_ids, 'States.is_visible' => true]);
 
         $count = $pending->count();
 

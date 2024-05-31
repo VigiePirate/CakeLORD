@@ -621,7 +621,19 @@ class LittersTable extends Table
             $query1 = $query
                 ->innerJoinWith('Users')
                 ->contain('States')
-                ->where(['Users.id' => $options['user_id']]);
+                ->where([
+                    'Users.id' => $options['user_id'],
+                ]);
+
+            if (isset($options['in_need'])) {
+                $query1 = $query1->innerJoinWith('States', function ($q) {
+                    return $q->where(['States.is_visible' => true, 'States.needs_user_action' => true]);
+                });
+            } else {
+                $query1 = $query1->innerJoinWith('States', function ($q) {
+                    return $q->where(['States.is_visible' => true]);
+                });
+            }
 
             $query2 = $query2
                 ->contain(['Contributions', 'States'])
@@ -629,11 +641,21 @@ class LittersTable extends Table
                   return $q->where([
                       'Ratteries.owner_user_id' => $user_id,
                   ]);
+            });
+
+            if (isset($options['in_need'])) {
+              $query2 = $query2->innerJoinWith('States', function ($q) {
+                  return $q->where(['States.is_visible' => true, 'States.needs_user_action' => true]);
               });
+            } else {
+              $query2 = $query2->innerJoinWith('States', function ($q) {
+                  return $q->where(['States.is_visible' => true]);
+              });
+            }
 
             $query = $query1->union($query2);
         }
-        return $query->group(['Litters.id']);
+        return $query; //->group(['Litters.id']);
     }
 
     public function findInState(Query $query, array $options)
