@@ -1622,10 +1622,6 @@ class RatsController extends AppController
         return $this->redirect(['action' => 'view', $rat->id]);
     }
 
-    public function blameNeglected() {
-        return $this->Rats->blameNeglected($this->Rats);
-    }
-
     // utils
     public function sortTailByName($collection)
     {

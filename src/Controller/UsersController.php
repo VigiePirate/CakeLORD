@@ -110,10 +110,22 @@ class UsersController extends AppController
                 }
 
                 // blame sheets in needs_user_action state for too long
+                $neglected_rats = $rats->blameNeglected();
+                $neglected_ratteries = $ratteries->blameNeglected();
+                $neglected_litters = $litters->blameNeglected();
+                $neglected_count = 0;
 
-                $neglected_count = $rats->blameNeglected($rats)
-                    + $ratteries->blameNeglected($ratteries)
-                    + $litters->blameNeglected($litters);
+                if ($rats->saveMany($neglected_rats, ['checkRules' => false])) {
+                    $neglected_count += $neglected_rats->count();
+                }
+
+                if ($ratteries->saveMany($neglected_ratteries, ['checkRules' => false])) {
+                    $neglected_count += $neglected_ratteries->count();
+                }
+
+                if ($litters->saveMany($neglected_litters, ['checkRules' => false])) {
+                    $neglected_count += $neglected_litters->count();
+                }
 
                 if ($neglected_count > 0) {
                     $this->Flash->warning(__('{0, plural, =1{1 sheet neglected by users has just been escalated to back-office.} other{# sheets neglected by users have just been escalated to back-office.}}', [$neglected_count]));

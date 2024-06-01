@@ -840,8 +840,4 @@ class RatteriesController extends AppController
         }
         return $this->redirect(['action' => 'view', $rattery->id]);
     }
-
-    public function blameNeglected() {
-        return $this->Ratteries->blameNeglected($this->Ratteries);
-    }
 }

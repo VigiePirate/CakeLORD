@@ -58,19 +58,22 @@ class MessageBehavior extends Behavior
         $messages = [];
 
         foreach ($data['messages'] as $entry) {
-            $messages[] = $this->MessagesTable->newEntity([
+            $message = $this->MessagesTable->newEntity([
                 $this->config['entityField'] => $entity->id,
                 'from_user_id' => $identity->id,
                 'created' => $data['emitted'],
                 'content' => $entry['content'],
-                'is_staff_request' => $identity->role->is_staff && $data['new_state']->needs_user_action,
+                'is_staff_request' => $identity->is_staff && $data['new_state']->needs_user_action,
                 'is_automatically_generated' => $entry['is_automatically_generated'],
             ]);
+            $messages[] = $message;
+            $this->MessagesTable->save($message); // we don't actually use the queue mechanism so far
         }
 
         $user_name = $identity->username;
-        $user_is_staff = $identity->role->is_staff;
-        $this->MessagesTable->saveMany($messages);
+        $user_is_staff = $identity->is_staff;
+        // $this->MessagesTable->saveMany($messages);
+
         return;
     }
 

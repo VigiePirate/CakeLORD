@@ -41,7 +41,6 @@ class StateBehavior extends Behavior
             $config = $this->_defaultConfig;
         }
         $this->config = $this->getConfig();
-        $this->States = FactoryLocator::get('Table')->get($this->config['repository']);
         $this->Identity = Router::getRequest()->getAttribute('identity');
         $this->previous_state = null;
         $this->new_state = null;
@@ -137,11 +136,8 @@ class StateBehavior extends Behavior
             'previous_state' => $this->previous_state,
             'new_state' => $this->new_state,
             'emitted' => $this->now,
-            'messages' => array_unique($this->messages), // FIXME: dirty fix for duplicate messages on blameNeglected calls
+            'messages' => $this->messages
         ]);
-        if (count($state_event->getData('messages')) > 1) {
-            dd($state_event);
-        }
         $this->table()->getEventManager()->dispatch($state_event);
     }
 
@@ -161,7 +157,7 @@ class StateBehavior extends Behavior
         if ($entity->has('state') && isset($new_state_id)) {
             $this->previous_state = $entity->state;
             $entity->state_id = $new_state_id;
-            $this->new_state = $this->States->get($entity->state_id);
+            $this->new_state = FactoryLocator::get('Table')->get('States')->get($new_state_id);
 
             if ($context['negligence']) {
                 $content = __("The sheet was not corrected as required in due time and escalated to back-office.");
@@ -261,22 +257,24 @@ class StateBehavior extends Behavior
      * Blame all objects for which user action is needed, yet nothing happened
      * after $this->config['neglection_delay'].
      *
-     * @param Table $table
      * @return boolean
      */
-    public function blameNeglected(Table $table) {
-        $query = $table->find('needsUser')->contain('States');
+    public function blameNeglected() {
+        $query = $this->_table->find('needsUser')->contain('States');
         $query = $query->where(['modified <= ' => \Cake\Chronos\Chronos::today()->modify('-'.$this->config['neglection_delay'])]);
-        $entities = $query->all()->map(function ($value, $key) {
-            $this->blame($value, true);
-            return $value;
-        });
 
-        if ($table->saveMany($entities, ['checkRules' => false, 'associated' => []])) {
-            return $entities->count();
-        } else {
-            return -1; //FIXME should raise exception
+        // this version creates 1 message for first record, 2 messages for the second etc... N messages for last record
+        // $entities = $query->all()->map(function ($value, $key) {
+        //     $this->blame($value, true);
+        //     return $value;
+        // });
+
+        // this version creates N messages for each of the N records to blame
+        $entities = $query->all();
+        foreach ($entities as $entity) {
+            $this->blame($entity, true);
         }
-    }
 
+        return $entities;
+    }
 }
