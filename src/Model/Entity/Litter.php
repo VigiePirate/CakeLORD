@@ -529,8 +529,8 @@ class Litter extends Entity
         // we avoid using: $this->computeLitterSexes(['litter_id' => $this->id])->toArray();
         // so that we can filter out rats which state is not "visible"
         $stats['sexes'] = [[
-            'F' => $offsprings->where(['OffspringRats.sex' => 'F'])->count(),
-            'M' => $offsprings->where(['OffspringRats.sex' => 'M'])->count(),
+            'F' => $offsprings->cleanCopy()->where(['OffspringRats.sex' => 'F'])->count(),
+            'M' => $offsprings->cleanCopy()->where(['OffspringRats.sex' => 'M'])->count(),
         ]];
 
         $stats['max_age'] = $this->max_age_in_words;
