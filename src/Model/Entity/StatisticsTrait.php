@@ -622,10 +622,6 @@ trait StatisticsTrait
                     return $q->where(['is_reliable IS' => true]);
                 });
         }
-        // always exclude non visible, even on litter sheet?
-        // else { // FIXME use is_visible instead
-        //     $query = $query->where(['OffspringRats.state_id !=' => 7]);
-        // }
 
         $females = $query->newExpr()->case()->when(['sex' => 'F'])->then(1, 'integer');
         $males = $query->newExpr()->case()->when(['sex' => 'M'])->then(1, 'integer');

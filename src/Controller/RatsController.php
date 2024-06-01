@@ -172,7 +172,9 @@ class RatsController extends AppController
                 'BredLitters.Dam',
                 'BredLitters.Dam.BirthLitters',
                 'BredLitters.Dam.BirthLitters.Contributions',
-                'BredLitters.OffspringRats',
+                'BredLitters.OffspringRats' => function ($q) {
+                    return $q->where(['States.is_visible' => true]);
+                },
                 'BredLitters.OffspringRats.Ratteries',
                 'BredLitters.OffspringRats.BirthLitters',
                 'BredLitters.OffspringRats.BirthLitters.Contributions',

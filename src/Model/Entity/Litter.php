@@ -525,9 +525,13 @@ class Litter extends Entity
     }
 
     public function wrapStatistics($offsprings) {
-        // survival: could be cheaper if called on $litter->offsprings with trait in RatsTable?
-        // or pass offsprings as optional argument?
-        $stats['sexes'] = $this->computeLitterSexes(['litter_id' => $this->id])->toArray();
+
+        // we avoid using: $this->computeLitterSexes(['litter_id' => $this->id])->toArray();
+        // so that we can filter out rats which state is not "visible"
+        $stats['sexes'] = [[
+            'F' => $offsprings->where(['OffspringRats.sex' => 'F'])->count(),
+            'M' => $offsprings->where(['OffspringRats.sex' => 'M'])->count(),
+        ]];
 
         $stats['max_age'] = $this->max_age_in_words;
 
@@ -543,6 +547,7 @@ class Litter extends Entity
         $stats['female_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'F', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
         $stats['male_not_accident_lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id, 'Rats.sex' => 'M', 'DeathPrimaryCauses.is_infant IS' => false, 'DeathPrimaryCauses.is_accident IS' => false]);
 
+        // survival: could be cheaper if called on $litter->offsprings with trait in RatsTable?
         $stats['survivors'] = $this->reliable_pups_number == 0
             ? 0
             : 100 * round($this->countMy('rats', 'litter', [

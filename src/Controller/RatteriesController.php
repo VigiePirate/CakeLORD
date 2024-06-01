@@ -109,6 +109,7 @@ class RatteriesController extends AppController
                 'States',
                 'Litters' => function($q) {
                     return $q
+                    ->where(['States.is_visible' => true])
                     ->order('birth_date DESC')
                     ->limit(10);
                 },
@@ -120,6 +121,7 @@ class RatteriesController extends AppController
                 'Litters.Dam.BirthLitters.Contributions',
                 'Rats' => function($q) {
                     return $q
+                    ->where(['States.is_visible' => true])
                     ->order('Rats.modified DESC')
                     ->limit(10);
                 },

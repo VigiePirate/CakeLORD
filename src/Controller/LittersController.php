@@ -140,6 +140,9 @@ class LittersController extends AppController
                                         'BirthLitters.id' => $litter->id
                                     ]);
                                 })
+                                ->innerJoinWith('States', function ($q) {
+                                    return $q->where(['is_visible' => true]);
+                                })
                                 ->order(['OffspringRats.name' => 'asc']);
 
         $offsprings = $this->paginate($offspringsQuery);
@@ -149,9 +152,8 @@ class LittersController extends AppController
             'OR' => [
                 'death_secondary_cause_id !=' => '1',
                 'death_secondary_cause_id IS' => null,
-            ],
-            'States.is_visible' => true,
-            ]);
+            ]
+        ]);
 
         $stats = $litter->wrapStatistics($stats_offsprings);
 

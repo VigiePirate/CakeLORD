@@ -552,11 +552,17 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => [
                 'Roles',
-                'Ratteries' => ['sort' => 'modified DESC'],
+                'Ratteries' => function($q) {
+                    return $q
+                    ->where(['States.is_visible' => true])
+                    ->order('Ratteries.modified DESC')
+                    ->limit(10);
+                },
                 'Ratteries.States',
                 'Ratteries.Countries',
                 'OwnerRats' => function($q) {
                     return $q
+                    ->where(['States.is_visible' => true])
                     ->order('OwnerRats.modified DESC')
                     ->limit(10);
                 },
