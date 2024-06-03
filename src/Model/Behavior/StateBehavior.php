@@ -138,6 +138,7 @@ class StateBehavior extends Behavior
             'new_state' => $this->new_state,
             'emitted' => $this->now,
             'messages' => $this->messages
+            //'messages' => array_unique($this->messages)
         ]);
         $this->table()->getEventManager()->dispatch($state_event);
     }
@@ -171,10 +172,14 @@ class StateBehavior extends Behavior
                             );
             }
 
-            $this->messages[] = [
+            // $this->messages[] = [
+            //     'content' => $content,
+            //     'is_automatically_generated' => true,
+            // ];
+            $this->messages = [[
                 'content' => $content,
                 'is_automatically_generated' => true,
-            ];
+            ]];
             return true;
         }
         return false;
@@ -264,17 +269,10 @@ class StateBehavior extends Behavior
         $query = $this->_table->find('needsUser')->contain('States');
         $query = $query->where(['modified <= ' => \Cake\Chronos\Chronos::today()->modify('-'.$this->config['neglection_delay'])]);
 
-        // this version creates 1 message for first record, 2 messages for the second etc... N messages for last record
-        // $entities = $query->all()->map(function ($value, $key) {
-        //     $this->blame($value, true);
-        //     return $value;
-        // });
-
-        // this version creates N messages for each of the N records to blame
-        $entities = $query->all();
-        foreach ($entities as $entity) {
-            $this->blame($entity, true);
-        }
+        $entities = $query->all()->map(function ($value, $key) {
+            $this->blame($value, true);
+            return $value;
+        });
 
         return $entities;
     }

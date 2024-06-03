@@ -155,8 +155,6 @@ class UsersController extends AppController
             }
 
             $action_needed = $rats_in_need + $ratteries_in_need + $litters_in_need;
-            //// DEBUG:
-            $this->set(compact('rats_in_need', 'ratteries_in_need', 'litters_in_need'));
 
             $target = $this->Authentication->getLoginRedirect();
             if (! $target) {
