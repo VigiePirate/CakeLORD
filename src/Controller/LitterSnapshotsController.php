@@ -54,7 +54,6 @@ class LitterSnapshotsController extends AppController
             $next_thawed_state = $states->get($litter->state->next_thawed_state_id);
             $this->set(compact('next_thawed_state', 'next_frozen_state'));
         }
-        }
         else {
             $next_ko_state = $states->get($litter->state->next_ko_state_id);
             $next_ok_state = $states->get($litter->state->next_ok_state_id);

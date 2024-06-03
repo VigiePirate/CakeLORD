@@ -41,6 +41,7 @@ class StateBehavior extends Behavior
             $config = $this->_defaultConfig;
         }
         $this->config = $this->getConfig();
+        $this->States = FactoryLocator::get('Table')->get($this->config['repository']);
         $this->Identity = Router::getRequest()->getAttribute('identity');
         $this->previous_state = null;
         $this->new_state = null;
