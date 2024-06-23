@@ -25,13 +25,14 @@
             </div>
             <h3><?= __('Rats') ?> (<?= $count['rats'] ?>)</h3>
             <?= $this->element('simple_staff_rats') ?>
-
+            <div class="show-on-mobile spacer"></div>
 
             <div class="button-small">
                 <?= $this->Html->link(__('See all pending litters'), ['controller' => 'Litters', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
             </div>
             <h3><?= __('Litters') ?> (<?= $count['litters'] ?>)</h3>
             <?= $this->element('simple_staff_litters', ['identity' => $user]) ?>
+            <div class="show-on-mobile spacer"></div>
 
             <div class="button-small">
                 <?= $this->Html->link(__('See all pending ratteries'), ['controller' => 'Ratteries', 'action' => 'needs_staff'], ['class' => 'button button-staff float-right']) ?>
