@@ -32,7 +32,16 @@ class LordController extends AppController
             'acknowledge',
             'switchLanguage',
         ]);
-        /* $this->Security->setConfig('unlockedActions', ['transferOwnership, declareDeath']); */
+
+        $identity = $this->request->getAttribute('identity');
+        $this->searchable_only = is_null($identity) || ! $identity->can('filterByState', $this->fetchModel('Rats'));
+
+        /* FIXME
+         * The previous call to "can" counts as an authorization check
+         * Methods which don't perform their authorization check own won't raise an issue!!
+         * This problem can be avoided by patching the Authorization plugin with an uncheckAuthorization() method
+        */
+        //$this->Authorization->uncheckAuthorization();
     }
 
     public function my() {
@@ -128,7 +137,7 @@ class LordController extends AppController
         $names = $this->request->getParam('pass');
 
         $model = $this->fetchModel('Rats');
-        $query = $model->find('identified', ['names' => $names])
+        $query = $model->find('identified', ['names' => $names, 'searchable_only' => $this->searchable_only])
             ->order('Rats.modified DESC')
             ->contain(['States', 'OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions']);
         $count['rats'] = $query->count();

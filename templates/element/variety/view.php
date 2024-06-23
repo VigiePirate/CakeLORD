@@ -9,7 +9,7 @@
                 'help_url' =>  ['controller' => 'Articles', 'action' => 'view', 19],
                 'show_staff' => $show_staff,
                 'user' => $user,
-                'is_labo' => true
+                'is_labo' => isset($is_labo) ? $is_labo : false,
             ])
         ?>
     </aside>
@@ -69,7 +69,7 @@
             <h2><?= __('Description') ?></h2>
             <div class="markdown"><?= $this->Commonmark->parse($variety->description); ?></div>
 
-            <?php if (!empty($examples)) : ?>
+            <?php if (! empty($examples)) : ?>
                 <div class="related">
                     <h2><?= __('Random gallery') ?></h2>
                     <section id="gallery">

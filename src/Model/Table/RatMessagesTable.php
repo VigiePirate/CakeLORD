@@ -155,7 +155,7 @@ class RatMessagesTable extends Table
                 ]);
         }
 
-        return $query->group(['RatMessages.id']);
+        return $query; //->group(['RatMessages.id']);
     }
 
     public function findLatest(Query $query, array $options)
@@ -165,19 +165,19 @@ class RatMessagesTable extends Table
             ->distinct();
 
         if (empty($options['rats'])) {
-            return $query;
-        } else {
-            $rats = $options['rats'];
-            $query
-                ->innerJoinWith('Rats', function ($q) use ($rats) {
-                   return $q->where(['Rats.id IN' => $rats]);
-               });
+            return $query; //->order(['RatMessages.created' => 'DESC']);
         }
+
+        $rats = $options['rats'];
+        $query = $query
+                    ->innerJoinWith('Rats', function ($q) use ($rats) {
+                        return $q->where(['Rats.id IN' => $rats]);
+                    });
 
         if (! empty($options['rat_message_delay'])) {
-            $query->where(['RatMessages.created >=' => $options['rat_message_delay']]);
+            $query = $query->where(['RatMessages.created >=' => $options['rat_message_delay']]);
         }
 
-        return $query->order(['RatMessages.created' => 'DESC']);
+        return $query;
     }
 }

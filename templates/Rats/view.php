@@ -7,7 +7,7 @@
 
 <?php $this->assign('title', h($rat->usual_name)) ?>
 
-<?php if (! $rat->state->is_visible && (is_null($user) || (! is_null($user) && ! $user->can('seePrivate', $rat)))) : ?>
+<?php if (! $rat->state->is_visible && (is_null($user) || (! is_null($user) && ! $user->role->is_staff))) : ?>
     <div class="row">
         <aside class="column">
             <div class="side-nav">
@@ -144,15 +144,26 @@
                             </div>
                         <?php endif; ?>
 
-                        <div class="tooltip">
-                            <?= $this->Html->link(
-                                    $this->Html->image('/img/icon-print.svg', ['class' => 'side-nav-icon', 'alt' => __('Print')]),
-                                    ['controller' => 'Rats', 'action' => 'print', $rat->id],
-                                    ['target' => '_blank', 'escape' => false, 'class' => "hide-on-mobile"]
-                                )
-                            ?>
-                            <span class="tooltiptext"><?= __('Print pedigree') ?></span>
-                        </div>
+                        <?php if ($rat->state->is_reliable) : ?>
+                            <div class="tooltip">
+                                <?= $this->Html->link(
+                                        $this->Html->image('/img/icon-print.svg', ['class' => 'side-nav-icon', 'alt' => __('Print')]),
+                                        ['controller' => 'Rats', 'action' => 'print', $rat->id],
+                                        ['target' => '_blank', 'escape' => false, 'class' => "hide-on-mobile"]
+                                    )
+                                ?>
+                                <span class="tooltiptext"><?= __('Print pedigree') ?></span>
+                            </div>
+                        <?php else : ?>
+                            <div class="tooltip disabled">
+                                <?= $this->Html->image('/img/icon-print.svg', [
+                                    'url' => [],
+                                    'class' => 'side-nav-icon',
+                                    'alt' => __('Print pedigree')
+                                ]) ?>
+                                <span class="tooltiptext"><?= __('You cannot print a pedigree for this rat') ?></span>
+                            </div>
+                        <?php endif ;?>
                     </div>
 
                     <?php if ($user->is_staff) : ?>
@@ -184,12 +195,13 @@
                     <?= h($rat->usual_name) . '<span class="sexcolor_' . h($rat->sex) . '"> ' . h($rat->sex_symbol) . '</span><span>' . h($rat->is_alive_symbol) . '</span>' ?>
                 </h1>
 
+                <!-- special highlighted subtitle if the sheet needs user action -->
                 <?php if ($rat->state->needs_user_action && ! is_null($user) && $user->can('ownerEdit', $rat)) : ?>
                     <div class="message error">
                         <p><?= __('This sheet needs correction. Here is the latest message staff sent you about it.') ?></p>
                         <div class="text">
                             <blockquote>
-                                <?= ! empty($rat->rat_messages) ? nl2br($rat->rat_messages[0]->content) : '' ?>
+                                <?= ! empty($last_staff_message) ? nl2br($last_staff_message->content) : __('No explaining notification available.') ?>
                             </blockquote>
                         </div>
                         <p>
@@ -202,6 +214,25 @@
                             ?>
                         </p>
                     </div>
+                <?php endif ;?>
+
+                <!-- special highlighted subtitle if the sheet is not reliable -->
+                <?php if (! $rat->state->needs_user_action && $rat->state->is_frozen && ! $rat->state->is_reliable) : ?>
+                    <?php if ($rat->state->is_visible) : ?>
+                        <div class="message error">
+                            <p><?= __('This sheet contains incomplete, incoherent or dubious information. Find the staff explanation below.') ?></p>
+                            <div class="text">
+                                <blockquote>
+                                    <?= ! is_null($last_staff_message) ? nl2br($last_staff_message->content) : __('No explaining notification available.') ?>
+                                </blockquote>
+                            </div>
+                            <p><?= __('The sheet is displayed “as is” for transparency purpose, but it cannot be considered as reliable.') ?></p>
+                        </div>
+                    <?php else :?>
+                        <div class="message error">
+                            <?= __('This sheet contains incomplete, incoherent or dubious information. It is only visible to staff members.') ?>
+                        </div>
+                    <?php endif ; ?>
                 <?php endif ;?>
 
                 <div class="row row-reverse row-with-photo">

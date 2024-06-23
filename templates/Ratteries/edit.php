@@ -29,12 +29,12 @@
             <h1><?=__('Edit {0}', [h($rattery->full_name)]) ?></h1>
             <?= $this->Form->setValueSources(['context', 'data'])->create($rattery, ['type' => 'file']) ?>
             <fieldset>
-                <?php
-                    echo $this->Form->control('prefix', [
-                        'readonly' => true
-                    ]);
+                <?php if ($user->can('staffEdit', $rattery)) : ?>
+                    <?= $this->Form->control('prefix'); ?>
+                <?php else : ?>
+                    <?= $this->Form->control('prefix', ['readonly' => true]); ?>
+                <?php endif ;?>
 
-                ?>
                 <?php
                     echo $this->Form->control('name');
 

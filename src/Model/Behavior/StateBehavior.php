@@ -137,7 +137,8 @@ class StateBehavior extends Behavior
             'previous_state' => $this->previous_state,
             'new_state' => $this->new_state,
             'emitted' => $this->now,
-            'messages' => $this->messages,
+            'messages' => $this->messages
+            //'messages' => array_unique($this->messages)
         ]);
         $this->table()->getEventManager()->dispatch($state_event);
     }
@@ -158,10 +159,15 @@ class StateBehavior extends Behavior
         if ($entity->has('state') && isset($new_state_id)) {
             $this->previous_state = $entity->state;
             $entity->state_id = $new_state_id;
-            $this->new_state = $this->States->get($entity->state_id);
+            $this->new_state = FactoryLocator::get('Table')->get('States')->get($new_state_id);
 
             if ($context['negligence']) {
-                $content = __("The sheet was not corrected as required in due time and escalated to back-office.");
+                // in negligence context (mass save), we don't use the queue to avoid multiple messages
+                $this->messages = [[
+                    'content' => __("The sheet was not corrected as required in due time and escalated to back-office."),
+                    'is_automatically_generated' => true,
+                ]];
+
             } else {
                 $content = __("The sheet was {0} as a result of an action by {1}.",
                                 [
@@ -169,13 +175,12 @@ class StateBehavior extends Behavior
                                     $this->Identity->username
                                 ]
                             );
+
+                $this->messages[] = [
+                    'content' => $content,
+                    'is_automatically_generated' => true,
+                ];
             }
-
-            $this->messages[] = [
-                'content' => $content,
-                'is_automatically_generated' => true,
-            ];
-
             return true;
         }
         return false;
@@ -259,21 +264,17 @@ class StateBehavior extends Behavior
      * Blame all objects for which user action is needed, yet nothing happened
      * after $this->config['neglection_delay'].
      *
-     * @param Table $table
      * @return boolean
      */
-    public function blameNeglected(Table $table) {
-        $query = $table->find('needsUser')->contain('States');
+    public function blameNeglected() {
+        $query = $this->_table->find('needsUser')->contain('States');
         $query = $query->where(['modified <= ' => \Cake\Chronos\Chronos::today()->modify('-'.$this->config['neglection_delay'])]);
+
         $entities = $query->all()->map(function ($value, $key) {
             $this->blame($value, true);
             return $value;
         });
-        if ($table->saveMany($entities, ['checkRules' => false, 'associated' => []])) {
-            return $entities->count();
-        } else {
-            return -1; //FIXME should raise exception
-        }
-    }
 
+        return $entities;
+    }
 }

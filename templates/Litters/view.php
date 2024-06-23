@@ -7,7 +7,7 @@
 
 <?php $this->assign('title', h($litter->full_name)) ?>
 
-<?php if (! $litter->state->is_visible && (is_null($user) || (! is_null($user) && ! $user->can('seePrivate', $litter)))) : ?>
+<?php if (! $litter->state->is_visible && (is_null($user) || (! is_null($user) && ! $user->role->is_staff))) : ?>
     <div class="row">
         <aside class="column">
             <div class="side-nav">
@@ -173,12 +173,13 @@
 
                 <h1><?= h($litter->full_name) ?></h1>
 
+                <!-- special highlighted subtitle if the sheet needs user action -->
                 <?php if ($litter->state->needs_user_action && ! is_null($user) && $user->can('ownerEdit', $litter)) : ?>
                     <div class="message error">
                         <p><?= __('This sheet needs correction. Here is the latest message staff sent you about it.') ?></p>
                         <div class="text">
                             <blockquote>
-                                <?= ! empty($litter->litter_messages) ? nl2br($litter->litter_messages[0]->content) : '' ?>
+                                <?= ! empty($last_staff_message) ? nl2br($last_staff_message->content) : __('No explaining notification available.') ?>
                             </blockquote>
                         </div>
                         <p>
@@ -191,6 +192,25 @@
                             ?>
                         </p>
                     </div>
+                <?php endif ;?>
+
+                <!-- special highlighted subtitle if the sheet is not reliable -->
+                <?php if (! $litter->state->needs_user_action && $litter->state->is_frozen && ! $litter->state->is_reliable) : ?>
+                    <?php if ($litter->state->is_visible) : ?>
+                        <div class="message error">
+                            <p><?= __('This sheet contains incomplete, incoherent or dubious information. Find the staff explanation below.') ?></p>
+                            <div class="text">
+                                <blockquote>
+                                    <?= ! is_null($last_staff_message) ? nl2br($last_staff_message->content) : __('No explaining notification available.') ?>
+                                </blockquote>
+                            </div>
+                            <p><?= __('The sheet is displayed “as is” for transparency purpose, but it cannot be considered as reliable.') ?></p>
+                        </div>
+                    <?php else :?>
+                        <div class="message error">
+                            <?= __('This sheet contains incomplete, incoherent or dubious information. It is only visible to staff members.') ?>
+                        </div>
+                    <?php endif ; ?>
                 <?php endif ;?>
 
                 <h2><?= __('Parents') ?></h2>

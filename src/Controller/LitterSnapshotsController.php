@@ -42,13 +42,17 @@ class LitterSnapshotsController extends AppController
         ]);
 
         $this->Authorization->authorize($snapshot);
-
         $litter = $snapshot->litter;
-
         $states = $this->fetchModel('States');
+
         if($litter->state->is_frozen) {
+            if (! is_null($litter->state->next_frozen_state_id)) {
+                $next_frozen_state = $states->get($litter->state->next_frozen_state_id);
+            } else {
+                $next_frozen_state = null;
+            }
             $next_thawed_state = $states->get($litter->state->next_thawed_state_id);
-            $this->set(compact('next_thawed_state'));
+            $this->set(compact('next_thawed_state', 'next_frozen_state'));
         }
         else {
             $next_ko_state = $states->get($litter->state->next_ko_state_id);

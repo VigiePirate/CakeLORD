@@ -3,10 +3,14 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use ArrayObject;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\Event;
+use Cake\Event\EventInterface;
+use Cake\Event\EventManager;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 use Geo\Geocoder\Geocoder;
@@ -140,6 +144,7 @@ class RatteriesTable extends Table
 
         $validator
             ->scalar('prefix')
+            ->minLength('prefix', 3)
             ->maxLength('prefix', 4)
             ->requirePresence('prefix', 'create')
             ->notEmptyString('prefix')
@@ -203,6 +208,21 @@ class RatteriesTable extends Table
             ->notEmptyString('picture');
 
         return $validator;
+    }
+
+    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    {
+        if (isset($options['searchable_only']) && $options['searchable_only']) {
+            $query->innerJoinWith('States', function ($q) {
+                return $q->where(['is_searchable' => true]);
+            });
+        }
+
+        if (isset($options['visible_only']) && $options['visible_only']) {
+            $query->innerJoinWith('States', function ($q) {
+                return $q->where(['is_visible' => true]);
+            });
+        }
     }
 
     /**
@@ -344,7 +364,20 @@ class RatteriesTable extends Table
                   ->where(['Users.id IS' => null]);
         } else {
             $query->innerJoinWith('Users')
-                  ->where(['Users.id' => $options['user_id']]);
+                  ->where([
+                      'Users.id' => $options['user_id'],
+                  ]);
+
+            if (isset($options['in_need'])) {
+              $query = $query->innerJoinWith('States', function ($q) {
+                  return $q->where(['States.is_visible' => true, 'States.needs_user_action' => true]);
+              });
+            } else {
+              $query = $query->innerJoinWith('States', function ($q) {
+                  return $q->where(['States.is_visible' => true]);
+              });
+            }
+
         }
         return $query->group(['Ratteries.id']);
     }

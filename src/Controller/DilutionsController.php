@@ -2,7 +2,9 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Core\Configure;
 use Cake\Chronos\Chronos;
+use Cake\Http\Client;
 use Cake\I18n\I18n;
 
 /**
@@ -69,10 +71,15 @@ class DilutionsController extends AppController
         $age['female'] = $count ? $dilution->roundLifespan(['dilution_id' => $dilution->id, 'sex' => 'F']) : __('N/A');
         $age['male'] = $count ? $dilution->roundLifespan(['dilution_id' => $dilution->id, 'sex' => 'M']) : __('N/A');
 
+        $labo = 'http://laborats.weebly.com/' . h(preg_replace('/\s+/', '-', str_replace('é', 'eacute', mb_strtolower($dilution->name)))) . '.html';
+        $client = new Client();
+        $response = $client->get($labo);
+        $is_labo = ($response->getStatusCode() != 404);
+
         $user = $this->request->getAttribute('identity');
         $show_staff = !is_null($user) && $user->can('add', $this->Dilutions);
 
-        $this->set(compact('dilution', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'age', 'user', 'show_staff'));
+        $this->set(compact('dilution', 'examples', 'count', 'frequency', 'recent_count', 'recent_frequency', 'age', 'is_labo', 'labo', 'user', 'show_staff'));
     }
 
     /**
@@ -90,6 +97,20 @@ class DilutionsController extends AppController
             I18n::setLocale($default);
             $dilution = $this->Dilutions->patchEntity($dilution, $this->request->getData());
             if ($this->Dilutions->save($dilution)) {
+                //FIXME Create translation entries. Could be in model or behavior
+                $locales = Configure::read('App.supportedLocales');
+                $translations = $this->fetchModel('DilutionsTranslations');
+                foreach ($locales as $loc => $value) {
+                    if ($loc != $default) {
+                        $dilutionTranslation = $translations->newEmptyEntity();
+                        $dilutionTranslation->id = $dilution->id;
+                        $dilutionTranslation->locale = $loc;
+                        $dilutionTranslation->name = $dilution->name;
+                        $dilutionTranslation->genotype = $dilution->genotype;
+                        $dilutionTranslation->description = $dilution->description;
+                        $translations->save($dilutionTranslation);
+                    }
+                }
                 I18n::setLocale($locale);
                 $this->Flash->warning(__('The new dilution has been saved, but only in English. ') . __('Change your preferred language and edit the sheet to add a translation.'));
                 return $this->redirect(['action' => 'index']);

@@ -8,7 +8,9 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Datasource\EntityInterface;
+use Cake\Event\Event;
 use Cake\Event\EventInterface;
+use Cake\Event\EventManager;
 use Cake\Validation\Validator;
 use Cake\Collection\Collection;
 use Cake\I18n\FrozenTime;
@@ -258,6 +260,21 @@ class LittersTable extends Table
         }
 
         return;
+    }
+
+    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    {
+        if (isset($options['searchable_only']) && $options['searchable_only']) {
+            $query->innerJoinWith('States', function ($q) {
+                return $q->where(['is_searchable' => true]);
+            });
+        }
+
+        if (isset($options['visible_only']) && $options['visible_only']) {
+            $query->innerJoinWith('States', function ($q) {
+                return $q->where(['is_visible' => true]);
+            });
+        }
     }
 
     /**
@@ -604,7 +621,19 @@ class LittersTable extends Table
             $query1 = $query
                 ->innerJoinWith('Users')
                 ->contain('States')
-                ->where(['Users.id' => $options['user_id']]);
+                ->where([
+                    'Users.id' => $options['user_id'],
+                ]);
+
+            if (isset($options['in_need'])) {
+                $query1 = $query1->innerJoinWith('States', function ($q) {
+                    return $q->where(['States.is_visible' => true, 'States.needs_user_action' => true]);
+                });
+            } else {
+                $query1 = $query1->innerJoinWith('States', function ($q) {
+                    return $q->where(['States.is_visible' => true]);
+                });
+            }
 
             $query2 = $query2
                 ->contain(['Contributions', 'States'])
@@ -612,11 +641,21 @@ class LittersTable extends Table
                   return $q->where([
                       'Ratteries.owner_user_id' => $user_id,
                   ]);
+            });
+
+            if (isset($options['in_need'])) {
+              $query2 = $query2->innerJoinWith('States', function ($q) {
+                  return $q->where(['States.is_visible' => true, 'States.needs_user_action' => true]);
               });
+            } else {
+              $query2 = $query2->innerJoinWith('States', function ($q) {
+                  return $q->where(['States.is_visible' => true]);
+              });
+            }
 
             $query = $query1->union($query2);
         }
-        return $query->group(['Litters.id']);
+        return $query; //->group(['Litters.id']);
     }
 
     public function findInState(Query $query, array $options)

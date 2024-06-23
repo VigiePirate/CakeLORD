@@ -43,7 +43,7 @@ class LittersController extends AppController
         $litter_ids = $this->Litters->find('entitledBy', ['user_id' => $user->id]);
         $query = $this->Litters
             ->find()
-            ->where(['Litters.id IN' => $litter_ids])
+            ->where(['Litters.id IN' => $litter_ids, 'States.is_visible' => true])
             ->contain(['Users', 'States', 'Sire', 'Dam', 'Contributions']);
 
         $settings = [
@@ -55,7 +55,7 @@ class LittersController extends AppController
 
         $pending = $this->Litters
             ->find('needsUser')
-            ->where(['Litters.id in' => $litter_ids]);
+            ->where(['Litters.id in' => $litter_ids, 'States.is_visible' => true]);
 
         $count = $pending->count();
 
@@ -128,35 +128,49 @@ class LittersController extends AppController
         ]);
 
         $this->Authorization->skipAuthorization();
+        $user = $this->request->getAttribute('identity');
 
         $offspringsQuery = $this->Litters->OffspringRats
-                                ->find('all', ['contain' => ['States', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'OwnerUsers', 'Ratteries']])
+                                ->find('all', [
+                                    'contain' => ['States', 'DeathPrimaryCauses', 'DeathSecondaryCauses', 'OwnerUsers', 'Ratteries'],
+                                    'visible_only' => ! is_null($user) && ! $user->is_staff,
+                                ])
                                 ->matching('BirthLitters', function (\Cake\ORM\Query $query) use ($litter) {
                                     return $query->where([
                                         'BirthLitters.id' => $litter->id
                                     ]);
                                 })
+                                ->innerJoinWith('States', function ($q) {
+                                    return $q->where(['is_visible' => true]);
+                                })
                                 ->order(['OffspringRats.name' => 'asc']);
 
         $offsprings = $this->paginate($offspringsQuery);
 
-        // exclude lost rats from statistics
-        $stats_offsprings = $offspringsQuery->where(['OR' => [
-            'death_secondary_cause_id !=' => '1',
-            'death_secondary_cause_id IS' => null,
-        ]]);
+        // exclude lost rats and invisibles from statistics
+        $stats_offsprings = $offspringsQuery->where([
+            'OR' => [
+                'death_secondary_cause_id !=' => '1',
+                'death_secondary_cause_id IS' => null,
+            ]
+        ]);
 
         $stats = $litter->wrapStatistics($stats_offsprings);
 
         $states = $this->fetchModel('States');
-        if($litter->state->is_frozen) {
+        if ($litter->state->is_frozen) {
+            if (! is_null($litter->state->next_frozen_state_id)) {
+                $next_frozen_state = $states->get($litter->state->next_frozen_state_id);
+            } else {
+                $next_frozen_state = null;
+            }
             $next_thawed_state = $states->get($litter->state->next_thawed_state_id);
-            $this->set(compact('next_thawed_state'));
+            $this->set(compact('next_thawed_state', 'next_frozen_state'));
         }
         else {
             $next_ko_state = $states->get($litter->state->next_ko_state_id);
             $next_ok_state = $states->get($litter->state->next_ok_state_id);
-            if( !empty($litter->state->next_frozen_state_id) ) {
+            if (! empty($litter->state->next_frozen_state_id)) {
                 $next_frozen_state = $states->get($litter->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }
@@ -167,6 +181,13 @@ class LittersController extends AppController
         foreach ($litter->litter_snapshots as $snapshot) {
             $snap_diffs[$snapshot->id] = $this->Litters->snapCompareAsString($litter, $snapshot->id, ['contain' => ['ParentRats' => function ($q) {return $q->select(['id']);}]]);
         }
+
+        $last_staff_message = (new Collection($litter->litter_messages))
+            ->filter(function ($message) {
+                return ! $message->is_automatically_generated;
+            })
+            ->sortBy('id', SORT_DESC)
+            ->first();
 
         $js_legends = json_encode([
             __('Survival rate'),
@@ -180,9 +201,9 @@ class LittersController extends AppController
 
         ]);
 
-        $user = $this->request->getAttribute('identity');
 
-        $this->set(compact('litter', 'offsprings', 'stats', 'snap_diffs', 'user', 'js_legends'));
+
+        $this->set(compact('litter', 'offsprings', 'stats', 'snap_diffs', 'last_staff_message', 'user', 'js_legends'));
     }
 
     /**
@@ -1194,9 +1215,5 @@ class LittersController extends AppController
             $this->Flash->error(__('We could not unapprove the sheet. Please retry or contact an administrator.'));
         }
         return $this->redirect(['action' => 'view', $litter->id]);
-    }
-
-    public function blameNeglected() {
-        return $this->Litters->blameNeglected($this->Litters);
     }
 }

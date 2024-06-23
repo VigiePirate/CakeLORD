@@ -59,7 +59,7 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $query = $this->Rats->find('all', ['searchable_only' => $this->searchable_only])
             ->contain(['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States']);
-        $this->set('rats', $this->paginate($query));
+        $this->set('rats', $this->paginate($query, ['sort' => ['id' => 'ASC']]));
     }
 
     /**
@@ -83,31 +83,31 @@ class RatsController extends AppController
             'BirthLitters.Ratteries'
         ];
 
-        $females = $this->Rats->find()
+        $females = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'F'])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $males = $this->Rats->find()
+        $males = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.sex' => 'M'])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $alive = $this->Rats->find()
+        $alive = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => true])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $departed = $this->Rats->find()
+        $departed = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'Rats.is_alive' => false])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $pending = $this->Rats->find()
+        $pending = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'States.needs_user_action' => true])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $waiting = $this->Rats->find()
+        $waiting = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'States.needs_staff_action' => true])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
-        $okrats = $this->Rats->find()
+        $okrats = $this->Rats->find('all', ['visible_only' => true])
             ->where(['Rats.owner_user_id' => $user->id, 'States.needs_user_action' => false, 'States.needs_staff_action' => false])
             ->order('Rats.birth_date DESC')
             ->contain($contain);
@@ -172,7 +172,9 @@ class RatsController extends AppController
                 'BredLitters.Dam',
                 'BredLitters.Dam.BirthLitters',
                 'BredLitters.Dam.BirthLitters.Contributions',
-                'BredLitters.OffspringRats',
+                'BredLitters.OffspringRats' => function ($q) {
+                    return $q->where(['States.is_visible' => true]);
+                },
                 'BredLitters.OffspringRats.Ratteries',
                 'BredLitters.OffspringRats.BirthLitters',
                 'BredLitters.OffspringRats.BirthLitters.Contributions',
@@ -188,14 +190,19 @@ class RatsController extends AppController
         ]);
 
         $states = $this->fetchModel('States');
-        if($rat->state->is_frozen) {
+        if ($rat->state->is_frozen) {
+            if (! is_null($rat->state->next_frozen_state_id)) {
+                $next_frozen_state = $states->get($rat->state->next_frozen_state_id);
+            } else {
+                $next_frozen_state = null;
+            }
             $next_thawed_state = $states->get($rat->state->next_thawed_state_id);
-            $this->set(compact('next_thawed_state'));
+            $this->set(compact('next_thawed_state', 'next_frozen_state'));
         }
         else {
             $next_ko_state = $states->get($rat->state->next_ko_state_id);
             $next_ok_state = $states->get($rat->state->next_ok_state_id);
-            if( !empty($rat->state->next_frozen_state_id) ) {
+            if (! empty($rat->state->next_frozen_state_id)) {
                 $next_frozen_state = $states->get($rat->state->next_frozen_state_id);
                 $this->set(compact('next_frozen_state'));
             }
@@ -207,9 +214,16 @@ class RatsController extends AppController
             $snap_diffs[$snapshot->id] = $this->Rats->snapDiffListAsString($rat, $snapshot->id, ['contain' => ['Singularities' => function ($q) {return $q->select(['id']);}]]);
         }
 
+        $last_staff_message = (new Collection($rat->rat_messages))
+            ->filter(function ($message) {
+                return ! $message->is_automatically_generated;
+            })
+            ->sortBy('id', SORT_DESC)
+            ->first();
+
         $user = $this->request->getAttribute('identity');
 
-        $this->set(compact('rat', 'snap_diffs', 'user'));
+        $this->set(compact('rat', 'snap_diffs', 'last_staff_message', 'user'));
     }
 
     /**
@@ -451,25 +465,31 @@ class RatsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
             $rat = $this->Rats->patchEntity($rat, $data);
-            if ($data['update_identifier']) {
-                if (isset($data['generic_rattery_id'])  && $data['generic_rattery_id'] != "") {
+
+            if (isset($data['generic_rattery_id'])  && $data['generic_rattery_id'] != "") {
+                // remove birth litter
+                if ($data['detach_from_birthlitter']) {
+                    $rat->litter_id = null;
+                }
+                if ($data['update_identifier']) {
                     // prefix change
                     $ratteries = $this->fetchModel('Ratteries');
                     $prefix = $ratteries->get($data['generic_rattery_id'])->prefix;
                     $rat->pedigree_identifier =  $prefix . $rat->id . $rat->sex;
                     $rat->is_pedigree_custom = false;
-                    if ($data['detach_from_birthlitter']) {
-                        $rat->litter_id = null;
-                    }
+                } else {
+                    $rat->is_pedigree_custom = true;
                 }
-                else {
+            } else {
+                if ($data['update_identifier']) {
                     // sex change only
                     $old_identifier = $rat->pedigree_identifier;
                     $rat->pedigree_identifier =  substr($old_identifier, 0, -1) . $rat->sex;
+                } else {
+                    $rat->is_pedigree_custom = true;
                 }
-            } else {
-                $rat->is_pedigree_custom = true;
             }
+
             if ($this->Rats->save($rat, ['contain' => ['Singularities' => function ($q) {return $q->select(['id']);}]])) {
                 $this->Flash->success(__('The rat has been saved.'));
                 return $this->redirect(['action' => 'view', $id]);
@@ -1602,10 +1622,6 @@ class RatsController extends AppController
             $this->Flash->error(__('We could not unapprove the sheet. Please retry or contact an administrator.'));
         }
         return $this->redirect(['action' => 'view', $rat->id]);
-    }
-
-    public function blameNeglected() {
-        return $this->Rats->blameNeglected($this->Rats);
     }
 
     // utils

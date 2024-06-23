@@ -34,7 +34,7 @@ if (Configure::read('debug')) :
 <?php else :
     $this->layout = 'fullpage';
     $cakeDescription = 'Livre des Origines du Rat Domestique';
-    ?>
+?>
     <main class="main">
         <div class="container">
             <div class="row row__oopsie">
