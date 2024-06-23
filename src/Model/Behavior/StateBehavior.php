@@ -22,7 +22,7 @@ class StateBehavior extends Behavior
         'decision_form_field' => 'decision',
         #'explanation_form_field' => 'content',
         'explanation_form_field' => 'side_message',
-        'neglection_delay' => '30 days',
+        'neglection_delay' => '15 days',
     ];
 
     /**
@@ -162,7 +162,12 @@ class StateBehavior extends Behavior
             $this->new_state = FactoryLocator::get('Table')->get('States')->get($new_state_id);
 
             if ($context['negligence']) {
-                $content = __("The sheet was not corrected as required in due time and escalated to back-office.");
+                // in negligence context (mass save), we don't use the queue to avoid multiple messages
+                $this->messages = [[
+                    'content' => __("The sheet was not corrected as required in due time and escalated to back-office."),
+                    'is_automatically_generated' => true,
+                ]];
+
             } else {
                 $content = __("The sheet was {0} as a result of an action by {1}.",
                                 [
@@ -170,16 +175,12 @@ class StateBehavior extends Behavior
                                     $this->Identity->username
                                 ]
                             );
-            }
 
-            // $this->messages[] = [
-            //     'content' => $content,
-            //     'is_automatically_generated' => true,
-            // ];
-            $this->messages = [[
-                'content' => $content,
-                'is_automatically_generated' => true,
-            ]];
+                $this->messages[] = [
+                    'content' => $content,
+                    'is_automatically_generated' => true,
+                ];
+            }
             return true;
         }
         return false;
