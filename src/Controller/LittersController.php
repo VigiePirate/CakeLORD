@@ -1130,7 +1130,8 @@ class LittersController extends AppController
                 'States',
                 'LitterMessages' => ['sort' => 'LitterMessages.created DESC'],
                 'LitterMessages.Litters.States',
-                'LitterMessages.Users'
+                'LitterMessages.Users',
+                'Contributions',
             ],
         ]);
 
