@@ -146,16 +146,7 @@ class LittersController extends AppController
                                 ->order(['OffspringRats.name' => 'asc']);
 
         $offsprings = $this->paginate($offspringsQuery);
-
-        // exclude lost rats and invisibles from statistics
-        $stats_offsprings = $offspringsQuery->where([
-            'OR' => [
-                'death_secondary_cause_id !=' => '1',
-                'death_secondary_cause_id IS' => null,
-            ]
-        ]);
-
-        $stats = $litter->wrapStatistics($stats_offsprings);
+        $stats = $litter->wrapStatistics($offspringsQuery);
 
         $states = $this->fetchModel('States');
         if ($litter->state->is_frozen) {
@@ -200,8 +191,6 @@ class LittersController extends AppController
             __x('litter statistics', ' months'),
 
         ]);
-
-
 
         $this->set(compact('litter', 'offsprings', 'stats', 'snap_diffs', 'last_staff_message', 'user', 'js_legends'));
     }

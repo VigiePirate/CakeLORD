@@ -533,6 +533,14 @@ class Litter extends Entity
             'M' => $offsprings->cleanCopy()->where(['OffspringRats.sex' => 'M'])->count(),
         ]];
 
+        // exclude lost rats from statistics
+        $offsprings = $offsprings->where([
+            'OR' => [
+                'death_secondary_cause_id !=' => '1',
+                'death_secondary_cause_id IS' => null,
+            ]
+        ]);
+
         $stats['max_age'] = $this->max_age_in_words;
 
         $stats['lifespan'] = $this->roundLifespan(['Rats.litter_id' => $this->id]);
