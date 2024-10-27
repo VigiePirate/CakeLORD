@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CakePHP 4.5.2\n"
-"POT-Creation-Date: 2024-04-11 19:54+0000\n"
+"POT-Creation-Date: 2024-10-27 16:29+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ./src/Controller/LordController.php:351
-#: ./src/Controller/LordController.php:393
+#: ./src/Controller/LordController.php:360
+#: ./src/Controller/LordController.php:402
 #: ./src/Model/Entity/Rat.php:320
 #: ./vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:53
 #: ./vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:132
@@ -25,8 +25,8 @@ msgid_plural "{0} years"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./src/Controller/LordController.php:352
-#: ./src/Controller/LordController.php:394
+#: ./src/Controller/LordController.php:361
+#: ./src/Controller/LordController.php:403
 #: ./src/Model/Entity/Rat.php:321
 #: ./vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:57
 #: ./vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:135
@@ -36,7 +36,7 @@ msgid_plural "{0} months"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./src/Controller/LordController.php:353
+#: ./src/Controller/LordController.php:362
 #: ./src/Model/Entity/Rat.php:322
 #: ./templates/Lord/hall_of_fame.php:33
 #: ./vendor/cakephp/cakephp/src/I18n/RelativeTimeFormatter.php:65
