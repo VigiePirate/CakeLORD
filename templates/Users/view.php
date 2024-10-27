@@ -259,6 +259,10 @@
                             <td><?= h($user->failed_login_last_date) ?></td>
                         </tr>
                         <tr>
+                            <th><?= __('Successful Login Last Date') ?></th>
+                            <td><?= h($user->successful_login_last_date) ?></td>
+                        </tr>
+                        <tr>
                             <th><?= __('Preferred language') ?></th>
                             <td><?= is_null($locale) ? __('Not set') : h($locale) ?></td>
                         </tr>
