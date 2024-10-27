@@ -161,8 +161,9 @@ class RatsController extends AppController
                 'States',
                 'BredLitters' => function($q) {
                     return $q
-                    ->order('birth_date DESC')
-                    ->limit(10);
+                        //->where(['States.is_visible' => true])
+                        ->order('birth_date DESC')
+                        ->limit(10);
                 },
                 'BredLitters.Contributions',
                 'BredLitters.Ratteries',
@@ -182,6 +183,7 @@ class RatsController extends AppController
                 'BredLitters.OffspringRats.States',
                 'BredLitters.OffspringRats.DeathPrimaryCauses',
                 'BredLitters.OffspringRats.DeathSecondaryCauses',
+                'BredLitters.States',
                 'RatSnapshots' => ['sort' => ['RatSnapshots.created' => 'DESC']],
                 'RatSnapshots.States',
                 'RatMessages' => ['sort' => ['RatMessages.created' => 'DESC']],
@@ -222,6 +224,13 @@ class RatsController extends AppController
             ->first();
 
         $user = $this->request->getAttribute('identity');
+
+        // filter out invisible bred litters if user is not allowed to see them
+        if (is_null($user) || ! $user->is_staff) {
+            $rat->bred_litters = (new Collection($rat->bred_litters))->filter(function ($litter, $key) {
+                return $litter->state->is_visible == true;
+            })->toArray();
+        }; 
 
         $this->set(compact('rat', 'snap_diffs', 'last_staff_message', 'user'));
     }
