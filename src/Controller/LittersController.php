@@ -671,7 +671,11 @@ class LittersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rats = $this->fetchModel('Rats');
             $data = $this->request->getData();
-            $rat = $rats->get($data['rat_id']);
+
+            if ($data['rat_id'] == '') {
+                $this->Flash->success(__('We could not find the rat. Please, select it in the list or type its complete pedigree identifier.'));
+                return $this->redirect(['controller' => 'Litters', 'action' => 'attach-rat', $id]);
+            };
 
             $rat->litter_id = $id;
             $rat->birth_date = $litter->birth_date;
@@ -700,7 +704,7 @@ class LittersController extends AppController
         }
 
         $user = $this->request->getAttribute('identity');
-        $show_staff = !is_null($user) && $user->can('staffEdit', $litter);
+        $show_staff = ! is_null($user) && $user->can('staffEdit', $litter);
 
         $this->set(compact('litter', 'user', 'show_staff'));
     }
