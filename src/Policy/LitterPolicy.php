@@ -209,7 +209,7 @@ class LitterPolicy implements BeforePolicyInterface
     public function canDispute(IdentityInterface $user, Litter $litter)
     {
         return (! $litter->state->needs_staff_action && $user->can_change_state)
-            || ($litter->state->needs_user_action && ($this->isCreator($user, $litter) || $this->isContributor($user, $rat)));
+            || ($litter->state->needs_user_action && ($this->isCreator($user, $litter) || $this->isContributor($user, $litter)));
     }
 
     /**
