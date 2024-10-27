@@ -297,7 +297,7 @@
                                 </tr>
                                 <tr>
                                     <th><?= __('Zip Code') ?></th>
-                                    <td><?= $rattery->zip_code == '' ? __x('zipcode', 'Not Available') : $this->Number->format(h($rattery->zip_code)) ?></td>
+                                    <td><?= $rattery->zip_code == '' ? __x('zipcode', 'Not Available') : h($rattery->zip_code) ?></td>
                                 </tr>
                                 <tr>
                                     <th><?= __('Website') ?></th>
