@@ -117,7 +117,11 @@
                 ?>
             <?php else : ?>
                 <h2 class="staff"><?= __('Review offspring before the litter sheet can be deleted') ?></h2>
-                <?= $this->element('simple_staff_rats', ['rats' => $litter->offspring_rats, 'user' => $identity]) ?>
+                <?= $this->element('simple_staff_rats', [
+                    'rats' => $litter->offspring_rats,
+                    'user' => $identity,
+                    'show_thead' => true,
+                    ]) ?>
             <?php endif ; ?>
         </div>
     </div>
