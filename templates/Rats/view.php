@@ -427,7 +427,7 @@
                     <div class="spacer"> </div>
                 <?php endif; ?>
 
-                <?php if (!empty($rat->bred_litters)) : ?>
+                <?php if (count($rat->bred_litters) > 0) : ?>
                     <h2><?= __('Bred litters') ?></h2>
 
                     <div class="related">
