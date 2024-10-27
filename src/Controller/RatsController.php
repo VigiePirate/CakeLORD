@@ -59,7 +59,7 @@ class RatsController extends AppController
         $this->Authorization->skipAuthorization();
         $query = $this->Rats->find('all', ['searchable_only' => $this->searchable_only])
             ->contain(['OwnerUsers', 'Ratteries', 'BirthLitters', 'BirthLitters.Contributions', 'States']);
-        $this->set('rats', $this->paginate($query, ['sort' => ['id' => 'ASC']]));
+        $this->set('rats', $this->paginate($query));
     }
 
     /**
