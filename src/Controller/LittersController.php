@@ -677,6 +677,7 @@ class LittersController extends AppController
                 return $this->redirect(['controller' => 'Litters', 'action' => 'attach-rat', $id]);
             };
 
+            $rat = $rats->get($data['rat_id']);
             $rat->litter_id = $id;
             $rat->birth_date = $litter->birth_date;
             $rat->rattery_id = $litter->contributions['0']->rattery_id;
