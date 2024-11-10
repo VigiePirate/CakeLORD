@@ -11,7 +11,8 @@
                 'object' => $article,
                 'tooltip' => __('Browse article list'),
                 'show_staff' => true,
-                'user' => $user
+                'user' => $user,
+                'can_cancel' => true
             ])
         ?>
     </aside>
