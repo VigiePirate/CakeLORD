@@ -73,6 +73,7 @@ class LittersTable extends Table
             'entityField' => 'litter_id',
         ]);
         $this->addBehavior('State', [
+            'neglection_delay' => '42 days',
             'safe_properties' => [
                 'modified',
                 'state_id',

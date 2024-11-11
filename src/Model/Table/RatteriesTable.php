@@ -71,6 +71,7 @@ class RatteriesTable extends Table
             'entityField' => 'rattery_id',
         ]);
         $this->addBehavior('State', [
+            'neglection_delay' => '180 days',
             'safe_properties' => [
                 'modified',
                 'state_id',
