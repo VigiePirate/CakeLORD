@@ -209,6 +209,18 @@
 
                 <?php if($rattery->is_generic) : ?>
                     <div class="message"><?= __('This is a generic prefix. It does not correspond to an actual rattery. Therefore, only limited information is shown.') ?></div>
+
+                    <?php if (! empty($rattery->comments)) : ?>
+                        <h2><?= __('About') ?></h2>
+                        <div class="text">
+                            <blockquote>
+                                <div class="markdown">
+                                    <?= $this->Commonmark->sanitize($rattery->comments); ?>
+                                </div>
+                            </blockquote>
+                        </div>
+                    <?php endif; ?>
+
                     <h2><?= __('Statistics') ?></h2>
                     <h3><?= __('Breeding statistics') ?></h3>
                     <table class="condensed stats unfold">
